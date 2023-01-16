@@ -1,38 +1,27 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Recruiters.rip.
 
-## Getting Started
+This is the Next JS app and official branch for the <a href="recruiters.rip">Recruiters.rip</a> platform.
 
-First, run the development server:
+## Configuration
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+In this repsoitory, we utlize a variety of tools for the application, which includes:
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- React.
+- Yarn, for package management.
+- React Storybook.
+- The Next JS Framework.
+- TypeScript
+- ESlint for Linting.
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+## Contributing
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+This repository houses two branches which are:
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+Development.
+Master.
+Production.
+Please read through carefully, as so to prevent accidents of any sorts.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+The Development Branch is where you should work and make commits to. Then open up a pull request to the Master branch, before it is shipped off to the Production Branch, that is currently deployed. This is to avoid deploying errors, or bugs into the application without automated tests, checks and reviews being done. Please do not push to any other branch, except Development.
 
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+Preferably, you should create a custom branch, named after the completed task and merge/create a PR to development.
