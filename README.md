@@ -15,7 +15,7 @@ In this repsoitory, we utlize a variety of tools for the application, which incl
 
 ## Contributing
 
-This repository houses two branches which are:
+This repository houses three branches which are:
 
 Development.
 Master.
