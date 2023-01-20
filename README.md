@@ -13,9 +13,9 @@ This section contains the step needed to run the application locally on your mac
 5. Install Yarn: `npm install --global yarn` and verify: `yarn --version`.
 6. Install dependencies: `cd app/ && yarn`
 7. Create a new `env.local` paste from `.env.example.` and append keys/uris.
-8. To start the application in development, run the following command: `yarn dev`.
+8. To start the application in development, run the following command: `yarn dev:css`.
 9. Go to the `http://localhost:3000` port.
-10. To run the React Storybook: `yarn storybook`.
+10. To run the React Storybook: `yarn storybook:dev`.
 11. Open `http://localhost:6006` to view the Storybook in the browser.
 
 ## Features

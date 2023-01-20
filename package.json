@@ -5,6 +5,7 @@
   "scripts": {
     "coverage": "vitest run --coverage",
     "dev": "next dev",
+    "dev:css": "concurrently \"yarn start:css\" \"next dev\"",
     "dev:turbo": "next dev --turbo",
     "prepare": "husky install",
     "test": "vitest",
