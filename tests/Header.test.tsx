@@ -7,7 +7,7 @@ import Header from '../components/Header';
  * @jest-environment jsdom
  */
 describe('Header component', () => {
-    test('should render header', () => {
-        render(<Header links={[]} />);
-    });
+  test('should render header', () => {
+    render(<Header links={[]} />);
+  });
 });
