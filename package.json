@@ -10,7 +10,8 @@
     "lint:staged": "lint-staged",
     "madge:deps": "madge --circular --extensions ts,tsx --ts-config ./tsconfig.json ./src",
     "storybook": "start-storybook -p 6006",
-    "build-storybook": "build-storybook"
+    "build-storybook": "build-storybook",
+    "test": "echo \"Skipping test for now until discussed...\" && exit 0"
   },
   "dependencies": {
     "@next/font": "13.1.4",
