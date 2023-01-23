@@ -1,8 +1,8 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-# run lint
-yarn lint
+# run lint on staged files
+yarn lint:staged
 
 # check circular deps
 yarn madge:deps;
