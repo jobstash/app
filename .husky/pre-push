@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+
+# run tests
+yarn test -- --coverage --maxWorkers=8
+
+# run build
+yarn build
