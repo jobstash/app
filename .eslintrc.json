@@ -13,7 +13,7 @@
     "unused-imports",
     "testing-library",
     "prefer-arrow",
-    // "tailwindcss",
+    "tailwindcss",
     "simple-import-sort"
   ],
   "overrides": [
@@ -47,14 +47,14 @@
           "always",
           { "methodsIgnorePattern": "." }
         ],
-        // // enforce tailwind rules
-        // "tailwindcss/classnames-order": "error",
-        // "tailwindcss/enforces-negative-arbitrary-values": "error",
-        // "tailwindcss/enforces-shorthand": "error",
-        // "tailwindcss/migration-from-tailwind-2": "error",
-        // "tailwindcss/no-arbitrary-value": "warn",
-        // "tailwindcss/no-custom-classname": "error",
-        // "tailwindcss/no-contradicting-classname": "error",
+        // enforce tailwind rules
+        "tailwindcss/classnames-order": "error",
+        "tailwindcss/enforces-negative-arbitrary-values": "error",
+        "tailwindcss/enforces-shorthand": "error",
+        "tailwindcss/migration-from-tailwind-2": "error",
+        "tailwindcss/no-arbitrary-value": "warn",
+        "tailwindcss/no-custom-classname": "error",
+        "tailwindcss/no-contradicting-classname": "error",
         // enforce arrow functions
         "prefer-arrow/prefer-arrow-functions": [
           "error",
