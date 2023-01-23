@@ -3,3 +3,6 @@
 
 # run lint
 yarn lint
+
+# check circular deps
+yarn madge:deps;
