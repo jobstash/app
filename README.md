@@ -1,6 +1,6 @@
 # App
 
-Web app for `recruiters.rip`.
+Super minimal setup for `recruiters.rip` webapp.
 
 ## Tech Stack
 
