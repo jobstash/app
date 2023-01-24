@@ -2,7 +2,7 @@
 . "$(dirname -- "$0")/_/husky.sh"
 
 # run tests
-yarn test -- --coverage --maxWorkers=8
+yarn test
 
 # run build
 yarn build

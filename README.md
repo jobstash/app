@@ -4,7 +4,7 @@ This project is a Next.js application with integrated Storybook for component de
 
 ## Required System Setup
 
-This section contains the steps needed set up your system. 
+This section contains the steps needed set up your system.
 _The key takeaway is you need NodeJS LTS (18.x.x) installed._
 
 1. Have Node.js and Npm installed firstly by running: `brew install nodejs`
