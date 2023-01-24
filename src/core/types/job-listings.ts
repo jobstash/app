@@ -1,6 +1,6 @@
 import type { MinMax } from './common';
 
-export type Job = {
+export interface Job {
   id: number; // ??? need backend info
   title: string;
   role: string;
@@ -11,9 +11,9 @@ export type Job = {
   created: string; // ??? backend formatted?
   tags: { name: string; isChecked: boolean }[];
   companyId: number; // ?? need backend info
-};
+}
 
-export type Company = {
+export interface Company {
   id: number; // ??? need backend info
   name: string;
   avatar: string;
@@ -28,9 +28,9 @@ export type Company = {
 
   /** Company id of competitors */
   competitors: number[];
-};
+}
 
-export type JobListingsQuery = {
+export interface JobListingsQuery {
   /** All (page-limit) available jobs */
   jobs: Job[];
 
@@ -39,4 +39,4 @@ export type JobListingsQuery = {
 
   /** Provide total count incase we use pagination */
   totalCount: number; // ??? need backend info
-};
+}
