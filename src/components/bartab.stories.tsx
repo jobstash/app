@@ -17,13 +17,13 @@ Link.args = {
 };
 
 export const Tab = () => (
-  <Bartab label="" variant="link" leftSection={undefined}>
+  <Bartab variant="link" leftSection={undefined}>
     hello
   </Bartab>
 );
 
 export const Profile = () => (
-  <Bartab label="" variant="link" leftSection={undefined}>
+  <Bartab variant="link" leftSection={undefined}>
     hello
   </Bartab>
 );
