@@ -1,27 +1,29 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import React from 'react';
 
-import Bartab from './bartab';
+import { Story } from '@storybook/react';
+
+import { Bartab, BartabProps } from '../components/bartab';
 
 export default {
-  title: 'components/bartab',
-  argTypes: { onClick: { action: 'clicked' } },
-} as ComponentMeta<typeof Bartab>;
-
-const Template: ComponentStory<typeof Bartab> = (args) => (
-  <Bartab {...args}>Jobs</Bartab>
-);
-
-export const Tab = Template.bind({});
-Tab.args = {
-  kind: 'tab',
+  title: 'Components/Bartab',
+  component: Bartab,
 };
 
-export const Profile = Template.bind({});
-Profile.args = {
-  kind: 'profile',
-};
+const Template: Story<BartabProps> = (args) => <Bartab {...args} />;
 
 export const Link = Template.bind({});
 Link.args = {
-  kind: 'link',
+  children: 'Bartab component',
 };
+
+export const Tab = () => (
+  <Bartab label="" variant="link" leftSection={undefined} onClick={undefined}>
+    hello
+  </Bartab>
+);
+
+export const Profile = () => (
+  <Bartab label="" variant="link" leftSection={undefined} onClick={undefined}>
+    hello
+  </Bartab>
+);
