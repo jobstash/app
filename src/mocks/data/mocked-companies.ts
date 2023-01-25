@@ -1,4 +1,4 @@
-import type { Company } from '~/core/types';
+import type { Company } from '~/core/interfaces';
 
 export const mockedCompanies: Company[] = [
   {

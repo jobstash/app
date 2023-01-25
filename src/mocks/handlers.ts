@@ -1,6 +1,6 @@
 import { graphql } from 'msw';
 
-import { JobListingsQuery } from '~/core/types';
+import type { JobListingsQuery } from '~/core/interfaces';
 
 import { mockedCompanies } from './data/mocked-companies';
 import { mockedJobs } from './data/mocked-jobs';
