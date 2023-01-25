@@ -4,8 +4,7 @@ export interface BartabProps extends React.HTMLAttributes<HTMLButtonElement> {
   label: string;
   variant: 'link' | 'tab' | 'profile';
   leftSection: ReactNode;
-  // eslint-disable-next-line no-undef
-  onClick: VoidFunction;
+  onClick?: React.MouseEventHandler
 }
 
 export const Bartab = ({ children, leftSection, ...props }: BartabProps) => {
