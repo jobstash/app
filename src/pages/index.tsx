@@ -1,6 +1,6 @@
 import { gql, useQuery } from '@apollo/client';
 
-import { JobListingsQuery } from '~/core/types';
+import { JobListingsQuery } from '~/core/interfaces';
 
 const QUERY_JOB_LISTINGS = gql`
   query JobListings {

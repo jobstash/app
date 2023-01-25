@@ -1,4 +1,4 @@
-import { Job } from '~/core/types';
+import type { Job } from '~/core/interfaces';
 
 export const mockedJobs: Job[] = [
   {
