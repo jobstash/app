@@ -1,10 +1,9 @@
 import React, { ReactNode } from 'react';
 
 export interface BartabProps extends React.HTMLAttributes<HTMLButtonElement> {
-  label: string;
   variant: 'link' | 'tab' | 'profile';
   leftSection: ReactNode;
-  onClick?: React.MouseEventHandler
+  onClick?: React.MouseEventHandler;
 }
 
 export const Bartab = ({ children, leftSection, ...props }: BartabProps) => {
