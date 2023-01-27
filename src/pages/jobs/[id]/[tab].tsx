@@ -2,9 +2,9 @@ import { GetServerSideProps } from 'next';
 import { useEffect, useLayoutEffect } from 'react';
 
 import { JobListing } from '~/core/interfaces';
-import RightPanel from '~/features/right-panel';
+import { JobListingUi } from '~/features/job-listing-ui';
+import { RightPanel } from '~/features/right-panel';
 import { SideBar } from '~/features/sidebar';
-import { JobListingUi } from '~/features/unstyled-ui/job-listing-ui';
 import { useRootContext } from '~/hooks/use-root-context';
 import { useRouteSegments } from '~/hooks/use-route-segments';
 import { GenericLayout } from '~/layouts/generic-layout';
