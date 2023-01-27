@@ -1,4 +1,5 @@
 /* eslint-disable no-alert */
+import { ActiveSectionIds } from '~/core/interfaces';
 import { RouterPush } from '~/core/types';
 
 import { BarTab } from '../unstyled-ui/bartab';
@@ -15,7 +16,7 @@ const Brand = () => (
 /** UNSTYLED */
 export const DiscoverTabs = (props: {
   section: string;
-  idSegment: string;
+  activeIds: ActiveSectionIds;
   push: RouterPush;
 }) => (
   <div className="space-y-4">
@@ -26,9 +27,20 @@ export const DiscoverTabs = (props: {
           <BarTab
             isActive={`/${props.section}` === nav.baseHref}
             leftSection={nav.left}
-            // * If not specified, default tab would be "company" (still need to confirm this)
             onClick={() =>
-              props.push(`${nav.baseHref}/${props.idSegment}`, true)
+              nav.label === 'Jobs' // Jobs route for now
+                ? props.push(
+                    `${nav.baseHref}/${
+                      props.activeIds[
+                        nav.label.toLowerCase() as keyof typeof props.activeIds
+                      ]
+                    }`,
+                    {
+                      shouldScroll: true,
+                      shallow: true,
+                    },
+                  )
+                : alert('TODO')
             }
           >
             {nav.label}
@@ -64,26 +76,24 @@ const UserTab = () => (
 );
 
 interface Props {
-  pathname: string;
+  section: string;
   push: RouterPush;
+  activeIds: ActiveSectionIds;
 }
 
 /** UNSTYLED */
-export const SideBar = ({ pathname, push }: Props) => {
-  const [section, idSegment] = pathname.slice(1).split('/');
-
-  return (
-    <nav className="sticky top-0 flex min-h-screen flex-col justify-between bg-black/5 px-6">
-      <div className="space-y-4 ">
-        <Brand />
-        <DiscoverTabs section={section} idSegment={idSegment} push={push} />
-      </div>
-      <div className="flex-1 pt-8">
-        <BookmarkedTab />
-      </div>
-      <div>
-        <UserTab />
-      </div>
-    </nav>
-  );
-};
+export const SideBar = ({ section, push, activeIds }: Props) => (
+  <nav className="sticky top-0 flex min-h-screen flex-col justify-between bg-black/5 px-6">
+    <div className="space-y-4 ">
+      <p>{JSON.stringify(activeIds)}</p>
+      <Brand />
+      <DiscoverTabs section={section} push={push} activeIds={activeIds} />
+    </div>
+    <div className="flex-1 pt-8">
+      <BookmarkedTab />
+    </div>
+    <div>
+      <UserTab />
+    </div>
+  </nav>
+);
