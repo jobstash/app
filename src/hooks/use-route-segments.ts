@@ -7,7 +7,7 @@ import { RouterPush } from '~/core/types';
  */
 export const useRouteSegments = () => {
   const router = useRouter();
-  const { id: idSegment, tab: tabSegment } = router.query as {
+  const { id, tab } = router.query as {
     id: string;
     tab: string;
   };
@@ -15,18 +15,22 @@ export const useRouteSegments = () => {
   const pathname = router.asPath;
   const section = pathname.slice(1).split('/')[0];
 
-  const push: RouterPush = (url: string, shouldScroll = false) => {
+  const push: RouterPush = (url, options) => {
     // * Need pathname guard since nextjs throws runtime error on router.push to same url
     // * Need window guard since this might also run in server
     if (url !== pathname && typeof window !== 'undefined')
-      router.push(url, undefined, { scroll: shouldScroll });
+      router.push(url, undefined, {
+        scroll: options?.shouldScroll,
+        shallow: options?.shallow,
+      });
   };
 
   return {
-    pathname,
-    idSegment,
-    tabSegment,
-    section,
+    segments: {
+      section,
+      id,
+      tab,
+    },
     push,
   };
 };
