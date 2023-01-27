@@ -27,7 +27,12 @@ export const fakeSkill = (): Skill => ({
 const getSkillSubset = (skills: Skill[]) =>
   skills.slice(0, faker.datatype.number({ min: 1, max: 2 }));
 
-export const fakeSkills = () => {
+export const fakeSkills = (min = 1, max = 4): Skill[] =>
+  Array.from({ length: faker.datatype.number({ min, max }) })
+    .fill(0)
+    .map(() => fakeSkill());
+
+export const fakeJobSkills = () => {
   // There are 12 skills total (fake pool)
   const allSkills = faker.helpers
     .shuffle(poolSkills)

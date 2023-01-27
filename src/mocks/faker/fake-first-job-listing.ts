@@ -3,6 +3,7 @@ import { JobListing, Org } from '~/core/interfaces';
 
 import { fakeJob } from './fake-job';
 import { fakeOrg, getOrgLocation } from './fake-org';
+import { fakeProject } from './fake-project';
 
 export const fakeFirstJobListing = (): JobListing => {
   const org: Org = {
@@ -12,18 +13,18 @@ export const fakeFirstJobListing = (): JobListing => {
     location: getOrgLocation(ORG_UNISWAP_LABS),
   };
 
+  const job = fakeJob(org, {
+    role: 'Senior',
+    scope: 'Frontend',
+    suffix: 'Engineer',
+    hash: '12345',
+  });
+
+  const project = fakeProject();
+
   return {
     org,
-    job: fakeJob(org, {
-      role: 'Senior',
-      scope: 'Frontend',
-      suffix: 'Engineer',
-      hash: '12345',
-    }),
+    job,
+    project,
   };
 };
-
-// Expose generated data available throughout server-lifetime
-// So that we don't generate fake data on every page refresh
-// Data lives throught server-lifetime (until next server restart)
-export const generatedFirstJobListing = fakeFirstJobListing();

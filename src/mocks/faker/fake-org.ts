@@ -11,7 +11,7 @@ import {
 } from '~/core/constants';
 
 import { fakeDesc } from './fake-desc';
-import { fakeTag } from './fake-tag';
+import { fakeTag, fakeTags } from './fake-tag';
 
 /**
  * List of orgs to choose from.
@@ -65,12 +65,9 @@ export const fakeOrg = () => {
   const year = faker.datatype.number({ min: 2016, max: 2022 });
   const fundingDate = `${dayNum} ${month}, ${year}`;
 
-  const description = fakeDesc();
+  const description = fakeDesc(3, 5);
 
-  const tagLength = faker.datatype.number({ min: 1, max: 8 });
-  const tags = Array.from({ length: tagLength })
-    .fill(0)
-    .map(() => fakeTag());
+  const tags = fakeTags();
 
   return {
     name: selected,
