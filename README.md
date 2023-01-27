@@ -24,9 +24,9 @@ _The key takeaway is you need NodeJS LTS (18.x.x) installed._
 
 This section contains the step needed to run the application locally on your machine.
 
-1. To start the application in development, run the following command: `yarn dev:css`.
+1. To start the application in development, run the following command: `yarn dev`.
 2. Go to the `http://localhost:3000` port.
-3. To run the React Storybook: `yarn storybook:dev`.
+3. To run the React Storybook: `yarn storybook`.
 4. Open `http://localhost:6006` to view the Storybook in the browser.
 
 ## Features
@@ -49,3 +49,11 @@ This section contains the step needed to run the application locally on your mac
 ## Versioning
 
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/recruitersrip/app/tags).
+
+## Important Notes
+
+### On mocked data
+
+- When using mock data for Server-side rendering (SSR), accessing specific items, such as active cards, can be difficult because the mock data is generated randomly. If you try to access an item that is not defined in the mock data, you will get a 404 error just like you would in production. Here are the list of cards guaranteed to exist (one per section):
+
+  - `/jobs/uniswap-labs-senior-frontend-engineer-12345/details`
