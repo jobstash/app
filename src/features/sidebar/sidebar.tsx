@@ -1,5 +1,5 @@
 /* eslint-disable no-alert */
-import { ActiveSectionIds } from '~/core/interfaces';
+import { ActiveSectionCards } from '~/contexts/root-context';
 import { RouterPush } from '~/core/types';
 
 import { BarTab } from '../unstyled-ui/bartab';
@@ -16,7 +16,7 @@ const Brand = () => (
 /** UNSTYLED */
 export const DiscoverTabs = (props: {
   section: string;
-  activeIds: ActiveSectionIds;
+  activeCards: ActiveSectionCards;
   push: RouterPush;
 }) => (
   <div className="space-y-4">
@@ -31,8 +31,8 @@ export const DiscoverTabs = (props: {
               nav.label === 'Jobs' // Jobs route for now
                 ? props.push(
                     `${nav.baseHref}/${
-                      props.activeIds[
-                        nav.label.toLowerCase() as keyof typeof props.activeIds
+                      props.activeCards[
+                        nav.label.toLowerCase() as keyof typeof props.activeCards
                       ]
                     }`,
                     {
@@ -78,16 +78,15 @@ const UserTab = () => (
 interface Props {
   section: string;
   push: RouterPush;
-  activeIds: ActiveSectionIds;
+  activeCards: ActiveSectionCards;
 }
 
 /** UNSTYLED */
-export const SideBar = ({ section, push, activeIds }: Props) => (
+export const SideBar = ({ section, push, activeCards }: Props) => (
   <nav className="sticky top-0 flex min-h-screen flex-col justify-between bg-black/5 px-6">
     <div className="space-y-4 ">
-      <p>{JSON.stringify(activeIds)}</p>
       <Brand />
-      <DiscoverTabs section={section} push={push} activeIds={activeIds} />
+      <DiscoverTabs section={section} push={push} activeCards={activeCards} />
     </div>
     <div className="flex-1 pt-8">
       <BookmarkedTab />

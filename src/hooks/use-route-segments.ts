@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 
+import { RouteSegments } from '~/core/interfaces';
 import { RouterPush } from '~/core/types';
 
 /**
@@ -25,12 +26,14 @@ export const useRouteSegments = () => {
       });
   };
 
+  const segments: RouteSegments = {
+    section,
+    id,
+    tab,
+  };
+
   return {
-    segments: {
-      section,
-      id,
-      tab,
-    },
+    segments,
     push,
   };
 };

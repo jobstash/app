@@ -1,37 +1,45 @@
 import { createContext, ReactNode, useMemo, useState } from 'react';
 
-import { ActiveSectionIds } from '~/core/interfaces';
+import { JobListing } from '~/core/interfaces';
+
+/** Represents current active cards for each section */
+export interface ActiveSectionCards {
+  jobs: JobListing | null;
+  organizations: null; // TODO
+  projects: null; // TODO
+  repositories: null; // TODO
+}
 
 interface RootContext {
-  activeIds: ActiveSectionIds;
-  setActiveJobId: (id: string) => void;
+  activeCards: ActiveSectionCards;
+  setActiveJobCard: (card: JobListing) => void;
 }
 
 // *** Temporary: to match with generated data from fakers
-const defaultActiveIds: ActiveSectionIds = {
-  jobs: 'uniswap-labs-senior-frontend-engineer-12345',
-  organizations: 'todo',
-  projects: 'todo',
-  repositories: 'todo',
+const defaultActiveCards: ActiveSectionCards = {
+  jobs: null,
+  organizations: null,
+  projects: null,
+  repositories: null,
 };
 
 export const RootCtx = createContext<RootContext>({} as RootContext);
 
 export const RootProvider = ({ children }: { children: ReactNode }) => {
   // Active ids state
-  const [activeIds, setActiveIds] =
-    useState<ActiveSectionIds>(defaultActiveIds);
+  const [activeCards, setActiveCards] =
+    useState<ActiveSectionCards>(defaultActiveCards);
 
   // Update current active job id
-  const setActiveJobId = (id: string) =>
-    setActiveIds((prev) => ({ ...prev, jobs: id }));
+  const setActiveJobCard = (card: JobListing) =>
+    setActiveCards((prev) => ({ ...prev, jobs: card }));
 
   const memoed = useMemo(
     () => ({
-      activeIds,
-      setActiveJobId,
+      activeCards,
+      setActiveJobCard,
     }),
-    [activeIds],
+    [activeCards],
   );
 
   return <RootCtx.Provider value={memoed}>{children}</RootCtx.Provider>;
