@@ -10,7 +10,6 @@
   ],
   "plugins": [
     "unicorn",
-    "unused-imports",
     "testing-library",
     "prefer-arrow",
     "tailwindcss",
@@ -78,6 +77,7 @@
             "unnamedComponents": "arrow-function"
           }
         ],
+        "no-unused-vars": "off",
         "no-unused-expressions": [
           "error",
           {
@@ -101,17 +101,7 @@
           }
         ],
         "unicorn/prevent-abbreviations": "off",
-        "unicorn/no-null": "off",
-        "unused-imports/no-unused-imports": "error",
-        "unused-imports/no-unused-vars": [
-          "error",
-          {
-            "vars": "all",
-            "varsIgnorePattern": "^_",
-            "args": "after-used",
-            "argsIgnorePattern": "^_"
-          }
-        ]
+        "unicorn/no-null": "off"
       }
     }
   ],
