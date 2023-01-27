@@ -1,9 +1,8 @@
-/** Represents current active section ids */
-export interface ActiveSectionIds {
-  jobs: string;
-  organizations: string;
-  projects: string;
-  repositories: string;
+/** Represents `/{section}/{id}/{tab}` route pathname segments */
+export interface RouteSegments {
+  section: string;
+  id: string; // In the form `{org}--{job-title}-{hash}
+  tab: string;
 }
 
 /** Anything that can be represented as range */
