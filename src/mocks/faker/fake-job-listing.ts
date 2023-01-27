@@ -4,13 +4,17 @@ import { JobListing } from '~/core/interfaces';
 
 import { fakeJob } from './fake-job';
 import { fakeOrg } from './fake-org';
+import { fakeProject } from './fake-project';
 
 export const fakeJobListing = (): JobListing => {
   const org = fakeOrg();
+  const job = fakeJob(org);
+  const project = fakeProject();
 
   return {
     org,
-    job: fakeJob(org),
+    job,
+    project,
   };
 };
 
@@ -24,8 +28,3 @@ export const fakeJobListings = (min = 3, max = 6): JobListing[] => {
     .fill(0)
     .map(() => fakeJobListing());
 };
-
-// Expose generated data available throughout server-lifetime
-// So that we don't generate fake data on every page refresh
-// Data lives throught server-lifetime (until next server restart)
-export const generatedJobListings = fakeJobListings(12, 24);

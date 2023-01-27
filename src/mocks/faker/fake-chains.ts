@@ -71,10 +71,17 @@ const poolChains = [
   CHAIN_YEARN,
 ];
 
+export const fakeChain = (): Chain => {
+  const name = faker.helpers.arrayElement(poolChains);
+  const avatar = `/chains/${name}.svg`;
+  return { name, avatar };
+};
+
 export const fakeChains = (): Chain[] =>
   faker.helpers.arrayElements(
     poolChains.map((filename) => ({
       name: filename,
       avatar: `/chains/${filename}.svg`,
     })),
+    faker.datatype.number({ min: 3, max: 12 }),
   );

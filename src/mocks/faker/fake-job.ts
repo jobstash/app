@@ -1,11 +1,17 @@
 import { faker } from '@faker-js/faker';
 import { uid } from 'uid';
 
+import {
+  LABEL_BENEFITS,
+  LABEL_INTERVIEW,
+  LABEL_ROLE,
+  LABEL_TEAM,
+} from '~/core/constants';
 import { Job, Org } from '~/core/interfaces';
 
 import { fakeDesc } from './fake-desc';
 import { getOrgLocation, OrgName } from './fake-org';
-import { fakeSkills } from './fake-skill';
+import { fakeJobSkills, fakeSkills } from './fake-skill';
 import { fakeTz } from './fake-tz';
 
 const poolRoles = ['Junior', 'Senior', 'Lead'];
@@ -21,6 +27,7 @@ interface FakeJobOptions {
   suffix?: string;
   hash?: string;
 }
+
 export const fakeJob = (org: Org, options?: FakeJobOptions): Job => {
   const roleStr = options?.role ?? faker.helpers.arrayElement(poolRoles);
   const scopeStr = options?.scope ?? faker.helpers.arrayElement(poolScopes);
@@ -49,21 +56,25 @@ export const fakeJob = (org: Org, options?: FakeJobOptions): Job => {
   const details = {
     role: {
       name: roleStr,
+      label: LABEL_ROLE,
       desc: fakeDesc(),
     },
     team: {
+      label: LABEL_TEAM,
       desc: fakeDesc(),
       size: faker.datatype.number({ min: 6, max: 16 }),
     },
     benefits: {
+      label: LABEL_BENEFITS,
       desc: fakeDesc(),
     },
     interview: {
+      label: LABEL_INTERVIEW,
       desc: fakeDesc(),
     },
   };
 
-  const skills = fakeSkills();
+  const skills = fakeJobSkills();
 
   return {
     id,

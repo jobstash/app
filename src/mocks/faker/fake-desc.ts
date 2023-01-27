@@ -8,5 +8,5 @@ import { faker } from '@faker-js/faker';
  */
 export const fakeDesc = (min?: number, max?: number) =>
   faker.lorem.sentences(
-    faker.datatype.number({ min: min ?? 1, max: max ?? 3 }),
+    faker.datatype.number({ min: min ?? 3, max: max ?? 6 }),
   );
