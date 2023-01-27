@@ -3,21 +3,25 @@ import type { Range, Skill } from './common';
 interface Role {
   name: string;
   desc: string;
+  label: string;
 }
 
 interface Team {
   desc: string;
   size: number;
+  label: string;
 }
 
 /** Only description for now (might change in the future) */
 interface Benefits {
   desc: string;
+  label: string;
 }
 
 /** Only description for now (might change in the future) */
 interface Interview {
   desc: string;
+  label: string;
 }
 
 interface Details {

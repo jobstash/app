@@ -6,7 +6,3 @@ The folder contains components handling state/fetch and business logic.
 
 These components are just placeholders for the actual fully-designed component.  
 It should be replaced with the final designs from `dev` branch.
-These components are:
-
-- marked with `UNSTYLED` comment or
-- located inside `unstyled-ui` folder
