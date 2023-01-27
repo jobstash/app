@@ -1,80 +1,45 @@
-import clsx from 'clsx';
+import { rightPanelTabs, TEXT_DETAILS } from '~/core/constants';
+import { RouteSegments } from '~/core/interfaces';
+import { RouterPush } from '~/core/types';
+import { useRootContext } from '~/hooks/use-root-context';
 
-import { RouterPush, VoidFn } from '~/core/types';
+import { RightPanelHeader } from './right-panel-header';
+import { JobDetails } from './right-panel-job-details';
+import { RightPanelTab } from './right-panel-tab';
 
-const rightPanelTabs = [
-  {
-    label: 'Job Details',
-  },
-  {
-    label: 'Organization',
-    segment: 'organization',
-  },
-  {
-    label: 'Project',
-    segment: 'project',
-  },
-  {
-    label: 'Repositories',
-    segment: 'repositories',
-  },
-  {
-    label: 'Competitors',
-    segment: 'competitors',
-  },
-];
-
-/** UNSTYLED */
-const RightPanelTab = ({
-  text,
-  isActive,
-  onClick,
-}: {
-  text: string;
-  isActive: boolean;
-  onClick: VoidFn;
-}) => (
-  <button
-    className={clsx(
-      'rounded-lg border border-zinc-500 py-2 px-4 hover:bg-zinc-800',
-      { 'bg-zinc-700': isActive },
-    )}
-    onClick={onClick}
-  >
-    {text}
-  </button>
-);
-
-/** UNSTYLED */
-export const RightPanel = ({
-  section,
-  idSegment,
-  tabSegment,
-  push,
-}: {
-  section: string;
-  idSegment: string;
-  tabSegment: string;
+interface Props {
+  segments: RouteSegments;
   push: RouterPush;
-}) => (
-  <div className="px-6">
-    <div className="py-12">
-      <h1 className="text-3xl">Uniswap Labs</h1>
-      <h3>(TODO)</h3>
-    </div>
-    <div className="py-8">
+}
+
+/** UNSTYLED */
+export const RightPanel = ({ segments, push }: Props) => {
+  const { activeCards } = useRootContext();
+
+  const sectionDetailsMap = {
+    details: <JobDetails job={activeCards.jobs?.job} />,
+  };
+
+  return (
+    <div className="hide-scrollbar sticky top-0 max-h-screen overflow-y-scroll px-6">
+      {activeCards.jobs?.org && (
+        <RightPanelHeader org={activeCards.jobs?.org} />
+      )}
+
       <hr className="h-px border-0 bg-neutral-500" />
+
+      <div className="flex space-x-4 py-10">
+        {rightPanelTabs.map((tab) => (
+          <RightPanelTab
+            key={tab}
+            label={tab}
+            segments={segments}
+            push={push}
+          />
+        ))}
+      </div>
+
+      {sectionDetailsMap[segments.tab as keyof typeof sectionDetailsMap]}
     </div>
-    <div className="flex space-x-4 py-12">
-      {rightPanelTabs.map((tab) => (
-        <RightPanelTab
-          key={tab.label}
-          text={tab.label}
-          isActive={tabSegment === tab.segment}
-          onClick={() => push(`/${section}/${idSegment}/${tab.segment ?? ''}`)}
-        />
-      ))}
-    </div>
-    <h1>Details</h1>
-  </div>
-);
+  );
+};

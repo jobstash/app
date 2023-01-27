@@ -1,1 +1,1 @@
-export { RightPanel as default } from './right-panel';
+export { RightPanel } from './right-panel';
