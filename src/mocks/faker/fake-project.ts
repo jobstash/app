@@ -7,7 +7,7 @@ import { fakeDesc } from './fake-desc';
 import { fakeSkills } from './fake-skill';
 import { fakeTags } from './fake-tag';
 
-export const fakeProject = (): Project | null => {
+export const fakeProject = (hasProbability = true): Project | null => {
   // Project is based on chains for now
   const { name, avatar } = fakeChain();
   const description = fakeDesc(5, 10);
@@ -21,12 +21,14 @@ export const fakeProject = (): Project | null => {
 
   const skills = fakeSkills(3, 5);
 
-  // Probability a job has a project
-  const probability = 0.6;
-  const sample = faker.datatype.float({ min: 0, max: 1, precision: 0.01 });
+  if (hasProbability) {
+    // Probability a job has a project
+    const probability = 0.6;
+    const sample = faker.datatype.float({ min: 0, max: 1, precision: 0.01 });
 
-  // We need to void, nextjs cannot serialize undefined like wtf
-  if (sample > probability) return null;
+    // We need to void, nextjs cannot serialize undefined like wtf
+    if (sample > probability) return null;
+  }
 
   return {
     name,

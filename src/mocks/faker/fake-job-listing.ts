@@ -2,6 +2,7 @@ import { faker } from '@faker-js/faker';
 
 import { JobListing } from '~/core/interfaces';
 
+import { fakeCompetitors } from './fake-competitors';
 import { fakeJob } from './fake-job';
 import { fakeOrg } from './fake-org';
 import { fakeProject } from './fake-project';
@@ -12,12 +13,13 @@ export const fakeJobListing = (): JobListing => {
   const job = fakeJob(org);
   const project = fakeProject();
   const repositories = fakeRepos(org, 2, 5);
+  const competitors = fakeCompetitors();
 
   return {
     org,
     job,
     project,
-    competitors: null,
+    competitors,
     repositories,
   };
 };
