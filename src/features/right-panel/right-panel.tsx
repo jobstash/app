@@ -14,6 +14,7 @@ import { RightPanelHeader } from './right-panel-header';
 import { RightPanelJobDetails } from './right-panel-job-details';
 import { RightPanelOrgDetails } from './right-panel-org-details';
 import { RightPanelProjectDetails } from './right-panel-project-details';
+import { RightPanelRepoDetails } from './right-panel-repo-details';
 import { RightPanelTab } from './right-panel-tab';
 
 interface Props {
@@ -53,6 +54,11 @@ export const RightPanel = ({ segments, push }: Props) => {
           project: activeCards.jobs.project ? (
             <RightPanelProjectDetails project={activeCards.jobs.project} />
           ) : null,
+          repositories:
+            activeCards.jobs.repositories &&
+            activeCards.jobs.repositories.length > 0 ? (
+              <RightPanelRepoDetails repos={activeCards.jobs.repositories} />
+            ) : null,
         }
       : emptyJobsSectionDetails,
   };
@@ -62,10 +68,11 @@ export const RightPanel = ({ segments, push }: Props) => {
   const checkShouldRenderTab = (tab: string) => {
     // Check for optional job tabs: Projects, Competitors, Repositories
     if (segments.section === 'jobs') {
-      if (tab === LABEL_PROJECT && !activeCards.jobs?.project) return false;
-      if (tab === LABEL_COMPETITORS && !activeCards.jobs?.competitors)
+      if (tab === LABEL_PROJECT && !sectionDetailsMap.jobs.project)
         return false;
-      if (tab === LABEL_REPOSITORIES && !activeCards.jobs?.repositories)
+      if (tab === LABEL_COMPETITORS && !sectionDetailsMap.jobs.competitors)
+        return false;
+      if (tab === LABEL_REPOSITORIES && !sectionDetailsMap.jobs.repositories)
         return false;
     }
 
