@@ -2,6 +2,8 @@ import { faker } from '@faker-js/faker';
 
 import type { Tag } from '~/core/interfaces';
 
+import { fakeArrayFromFaker } from './fake-array-from-faker';
+
 export const fakeTag = (): Tag => {
   const text = faker.company.name();
   const link = faker.helpers.maybe(() => 'google.com');
@@ -16,7 +18,5 @@ export const fakeTag = (): Tag => {
   };
 };
 
-export const fakeTags = (min = 1, max = 4): Tag[] =>
-  Array.from({ length: faker.datatype.number({ min, max }) })
-    .fill(0)
-    .map(() => fakeTag());
+export const fakeTags = (min = 2, max = 4): Tag[] =>
+  fakeArrayFromFaker(fakeTag, min, max);
