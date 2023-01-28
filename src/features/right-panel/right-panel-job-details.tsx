@@ -10,12 +10,11 @@ const hardSkillTitles = [
   'You share responsibility with others about',
 ];
 
-/** Inner props has job defined */
-interface InnerProps {
+interface Props {
   job: Job;
 }
 
-export const Description = ({ job }: InnerProps) => {
+export const Description = ({ job }: Props) => {
   const {
     details: { role, team, benefits, interview },
   } = job;
@@ -37,7 +36,7 @@ export const Description = ({ job }: InnerProps) => {
   );
 };
 
-export const Header = ({ job }: InnerProps) => {
+export const Header = ({ job }: Props) => {
   const {
     title,
     details: { role, team },
@@ -76,7 +75,7 @@ export const Header = ({ job }: InnerProps) => {
   );
 };
 
-export const HardSkills = ({ job: { skills } }: InnerProps) => (
+export const HardSkills = ({ job: { skills } }: Props) => (
   <div className="flex flex-col space-y-6">
     <div className="flex flex-col space-y-2">
       <span className="text-xl font-bold">Hard Skills</span>
@@ -110,12 +109,7 @@ export const HardSkills = ({ job: { skills } }: InnerProps) => (
   </div>
 );
 
-/** Parent element needs conditional render on optional job */
-interface Props {
-  job?: Job;
-}
-
-export const JobDetails = ({ job }: Props) => {
+export const RightPanelJobDetails = ({ job }: Props) => {
   // It's possible job is undefined in which case we don't display panel
   if (!job) return null;
 

@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 import {
   LABEL_COMPETITORS,
   LABEL_PROJECT,
@@ -9,7 +11,8 @@ import { RouterPush } from '~/core/types';
 import { useRootContext } from '~/hooks/use-root-context';
 
 import { RightPanelHeader } from './right-panel-header';
-import { JobDetails } from './right-panel-job-details';
+import { RightPanelJobDetails } from './right-panel-job-details';
+import { RightPanelOrgDetails } from './right-panel-org-details';
 import { RightPanelTab } from './right-panel-tab';
 
 interface Props {
@@ -17,12 +20,36 @@ interface Props {
   push: RouterPush;
 }
 
+interface SectionDetailsMap {
+  jobs: {
+    details: ReactNode;
+    organization: ReactNode;
+    project: ReactNode;
+    competitors: ReactNode;
+    repositories: ReactNode;
+  };
+}
+
+const emptyJobsSectionDetails = {
+  details: null,
+  organization: null,
+  project: null,
+  competitors: null,
+  repositories: null,
+};
+
 /** UNSTYLED */
 export const RightPanel = ({ segments, push }: Props) => {
   const { activeCards } = useRootContext();
 
-  const sectionDetailsMap = {
-    details: <JobDetails job={activeCards.jobs?.job} />,
+  const sectionDetailsMap: SectionDetailsMap = {
+    // Do not render details if no job present (SSR page waits for first element from server)
+    jobs: activeCards.jobs?.job
+      ? {
+          ...emptyJobsSectionDetails,
+          details: <RightPanelJobDetails job={activeCards.jobs.job} />,
+        }
+      : emptyJobsSectionDetails,
   };
 
   // ? Way of checking tabs for each section: jobs, orgs, projects, repositories
@@ -62,7 +89,7 @@ export const RightPanel = ({ segments, push }: Props) => {
         )}
       </div>
 
-      {sectionDetailsMap[segments.tab as keyof typeof sectionDetailsMap]}
+      {sectionDetailsMap[segments.section][segments.tab]}
     </div>
   );
 };
