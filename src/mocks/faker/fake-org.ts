@@ -9,9 +9,10 @@ import {
   ORG_UNISWAP_LABS,
   ORG_VERSA_GAMES,
 } from '~/core/constants';
+import type { Org } from '~/core/interfaces';
 
 import { fakeDesc } from './fake-desc';
-import { fakeTag, fakeTags } from './fake-tag';
+import { fakeTags } from './fake-tag';
 
 /**
  * List of orgs to choose from.
@@ -52,7 +53,7 @@ const locationMap: Record<OrgName, string> = {
 // Exported for fakers allowing 'Remote' locations
 export const getOrgLocation = (org: OrgName) => locationMap[org];
 
-export const fakeOrg = () => {
+export const fakeOrg = (): Org => {
   const selected = faker.helpers.arrayElement(poolOrgs) as OrgName;
   const avatar = `/org/${selected}.svg`;
 
@@ -65,7 +66,8 @@ export const fakeOrg = () => {
   const year = faker.datatype.number({ min: 2016, max: 2022 });
   const fundingDate = `${dayNum} ${month}, ${year}`;
 
-  const description = fakeDesc(3, 5);
+  const summary = fakeDesc(2, 4);
+  const description = fakeDesc(8, 12);
 
   const tags = fakeTags();
 
@@ -75,6 +77,7 @@ export const fakeOrg = () => {
     location,
     teamSize,
     fundingDate,
+    summary,
     description,
     tags,
   };
