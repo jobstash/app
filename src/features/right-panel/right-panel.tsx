@@ -1,6 +1,8 @@
-import { ReactNode } from 'react';
+import { ReactNode, useEffect } from 'react';
 
 import {
+  EVENT_CARD_CLICK,
+  ID_TOP_RIGHT_PANEL,
   LABEL_COMPETITORS,
   LABEL_PROJECT,
   LABEL_REPOSITORIES,
@@ -70,8 +72,6 @@ export const RightPanel = ({ segments, push }: Props) => {
       : emptyJobsSectionDetails,
   };
 
-  // ? Way of checking tabs for each section: jobs, orgs, projects, repositories
-
   const checkShouldRenderTab = (tab: string) => {
     // Check for optional job tabs: Projects, Competitors, Repositories
     if (segments.section === 'jobs') {
@@ -86,8 +86,23 @@ export const RightPanel = ({ segments, push }: Props) => {
     return true;
   };
 
+  // Whenever a card is clicked, scroll right-panel to top
+  useEffect(() => {
+    const scrollListener = () => {
+      const el = document.querySelector('#asdf-asdf');
+      if (el) {
+        el.scrollIntoView({ behavior: 'auto', block: 'start' });
+      }
+    };
+
+    document.addEventListener(EVENT_CARD_CLICK, scrollListener);
+
+    return () => document.removeEventListener(EVENT_CARD_CLICK, scrollListener);
+  }, []);
+
   return (
     <div className="hide-scrollbar sticky top-0 max-h-screen overflow-y-scroll px-6">
+      <div className="top-0" id={ID_TOP_RIGHT_PANEL} />
       {activeCards.jobs?.org && (
         <RightPanelHeader org={activeCards.jobs?.org} />
       )}

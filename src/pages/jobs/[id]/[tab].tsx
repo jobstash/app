@@ -1,6 +1,7 @@
 import { GetServerSideProps } from 'next';
-import { useEffect, useLayoutEffect } from 'react';
+import { useEffect } from 'react';
 
+import { EVENT_CARD_CLICK } from '~/core/constants';
 import { JobListing } from '~/core/interfaces';
 import { JobListingUi } from '~/features/job-listing-ui';
 import { RightPanel } from '~/features/right-panel';
@@ -32,6 +33,7 @@ const JobsPage = ({ data }: Props) => {
   const jobOnClick = (jobListing: JobListing) => {
     push(`/jobs/${jobListing.job.id}/details`, { shallow: true });
     setActiveJobCard(jobListing);
+    document.dispatchEvent(new Event(EVENT_CARD_CLICK));
   };
 
   return (
