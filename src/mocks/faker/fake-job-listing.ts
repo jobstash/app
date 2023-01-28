@@ -15,6 +15,8 @@ export const fakeJobListing = (): JobListing => {
     org,
     job,
     project,
+    competitors: null,
+    repositories: null,
   };
 };
 

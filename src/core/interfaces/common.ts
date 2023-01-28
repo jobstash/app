@@ -1,8 +1,8 @@
 /** Represents `/{section}/{id}/{tab}` route pathname segments */
 export interface RouteSegments {
-  section: string;
+  section: 'jobs'; // TODO: add other sections
   id: string; // In the form `{org}--{job-title}-{hash}
-  tab: string;
+  tab: 'details' | 'organization' | 'project' | 'competitors' | 'repositories';
 }
 
 /** Anything that can be represented as range */

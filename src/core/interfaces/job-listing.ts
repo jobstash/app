@@ -22,11 +22,11 @@ export interface JobListing {
   org: Org;
 
   /** Optional since some project might not expose the project  */
-  project?: Project;
+  project: Project | null;
 
   /** Optional since projects are optional, so are the competitors of a project */
-  competitors?: Project[];
+  competitors: Project[] | null;
 
   /** Optional since some orgs might not expose their repositories */
-  repositories?: Repository[];
+  repositories: Repository[] | null;
 }

@@ -6,10 +6,7 @@ import type { RouterPush } from '~/core/types';
 import { capitalize } from '~/utils/capitalize';
 
 /**
- * If on details tab:
- * 	- omits "s" on section,
- * 	- then capitalize section and
- * 	- finally appends "Details" text
+ * If on details tab: omit "s" in section, capitalize then append "Details"
  * Else return label
  * */
 const getTabText = (label: string, section: string) =>

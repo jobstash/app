@@ -6,6 +6,7 @@ export interface Org {
   location: string;
   teamSize: number;
   fundingDate: string;
+  summary: string;
   description: string;
   tags: Tag[];
 }

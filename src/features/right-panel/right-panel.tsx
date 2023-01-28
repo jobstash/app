@@ -48,6 +48,7 @@ export const RightPanel = ({ segments, push }: Props) => {
       ? {
           ...emptyJobsSectionDetails,
           details: <RightPanelJobDetails job={activeCards.jobs.job} />,
+          organization: <RightPanelOrgDetails org={activeCards.jobs.org} />,
         }
       : emptyJobsSectionDetails,
   };

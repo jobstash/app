@@ -9,11 +9,11 @@ interface Props {
 }
 
 export const RightPanelHeader = ({
-  org: { name, avatar, location, teamSize, fundingDate, description, tags },
+  org: { name, avatar, location, teamSize, fundingDate, summary, tags },
 }: Props) => (
   <div className="space-y-4 py-12">
     <div className="flex items-center space-x-4">
-      <Image src={`/org/${name}.svg`} width="40" height="40" alt="test" />
+      <Image src={avatar} width="40" height="40" alt="test" />
       <h1 className="text-2xl font-bold">{name}</h1>
     </div>
     <div className="flex space-x-4">
@@ -22,7 +22,7 @@ export const RightPanelHeader = ({
       <span className="text-sm">Funding: {fundingDate}</span>
     </div>
     <div className="max-w-xl">
-      <span className="text-sm text-zinc-500">{description}</span>
+      <span className="text-sm text-zinc-500">{summary}</span>
     </div>
     <div className="flex space-x-4 py-2">
       {tags.map((tag) => (
