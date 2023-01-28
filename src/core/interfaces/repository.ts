@@ -11,10 +11,10 @@ interface DevInfo {
 export interface Repository {
   /** Repository name */
   name: string;
-  /** Repository host e.g. Github, Gitlab, etc */
-  host: string;
+  /** Repository description */
+  desc: string;
   /** Tags enumerated as info in details */
   tags: Tag[];
   /** Provides info about devs (and their skills) working on a repo */
-  devInfo: DevInfo;
+  devInfos: DevInfo[];
 }

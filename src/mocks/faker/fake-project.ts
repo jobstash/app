@@ -22,7 +22,7 @@ export const fakeProject = (): Project | null => {
   const skills = fakeSkills(3, 5);
 
   // Probability a job has a project
-  const probability = 0.4;
+  const probability = 0.6;
   const sample = faker.datatype.float({ min: 0, max: 1, precision: 0.01 });
 
   // We need to void, nextjs cannot serialize undefined like wtf
