@@ -18,6 +18,10 @@ export const LABEL_ORGANIZATION = capitalize(TEXT_ORGANIZATION);
 export const LABEL_PROJECT = capitalize(TEXT_PROJECT);
 export const LABEL_REPOSITORIES = capitalize(TEXT_REPOSITORIES);
 export const LABEL_COMPETITORS = capitalize(TEXT_COMPETITORS);
+export const EVENT_CARD_CLICK = 'card-click';
+
+// Attributes
+export const ID_TOP_RIGHT_PANEL = 'top-right-panel';
 
 /** Right panel tabs */
 export const rightPanelTabs = [

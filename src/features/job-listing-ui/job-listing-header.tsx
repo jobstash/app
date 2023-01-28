@@ -6,7 +6,7 @@ interface Props {
 }
 
 export const JobListingHeader = ({ job }: Props) => {
-  const { title, salary, location, tz, created, details, skills } = job;
+  const { title, salary, location, tz, created, details } = job;
 
   const strSalary = formatSalary(salary);
 
