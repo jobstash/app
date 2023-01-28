@@ -10,6 +10,7 @@ import { RouteSegments } from '~/core/interfaces';
 import { RouterPush } from '~/core/types';
 import { useRootContext } from '~/hooks/use-root-context';
 
+import { RightPanelCompetitorsDetails } from './right-panel-competitors-details';
 import { RightPanelHeader } from './right-panel-header';
 import { RightPanelJobDetails } from './right-panel-job-details';
 import { RightPanelOrgDetails } from './right-panel-org-details';
@@ -48,7 +49,6 @@ export const RightPanel = ({ segments, push }: Props) => {
     // Do not render details if no job present (SSR page waits for first element from server)
     jobs: activeCards.jobs?.job
       ? {
-          ...emptyJobsSectionDetails,
           details: <RightPanelJobDetails job={activeCards.jobs.job} />,
           organization: <RightPanelOrgDetails org={activeCards.jobs.org} />,
           project: activeCards.jobs.project ? (
@@ -58,6 +58,13 @@ export const RightPanel = ({ segments, push }: Props) => {
             activeCards.jobs.repositories &&
             activeCards.jobs.repositories.length > 0 ? (
               <RightPanelRepoDetails repos={activeCards.jobs.repositories} />
+            ) : null,
+          competitors:
+            activeCards.jobs.competitors &&
+            activeCards.jobs.competitors.length > 0 ? (
+              <RightPanelCompetitorsDetails
+                competitors={activeCards.jobs.competitors}
+              />
             ) : null,
         }
       : emptyJobsSectionDetails,
