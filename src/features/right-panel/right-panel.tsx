@@ -13,6 +13,7 @@ import { useRootContext } from '~/hooks/use-root-context';
 import { RightPanelHeader } from './right-panel-header';
 import { RightPanelJobDetails } from './right-panel-job-details';
 import { RightPanelOrgDetails } from './right-panel-org-details';
+import { RightPanelProjectDetails } from './right-panel-project-details';
 import { RightPanelTab } from './right-panel-tab';
 
 interface Props {
@@ -49,6 +50,9 @@ export const RightPanel = ({ segments, push }: Props) => {
           ...emptyJobsSectionDetails,
           details: <RightPanelJobDetails job={activeCards.jobs.job} />,
           organization: <RightPanelOrgDetails org={activeCards.jobs.org} />,
+          project: activeCards.jobs.project ? (
+            <RightPanelProjectDetails project={activeCards.jobs.project} />
+          ) : null,
         }
       : emptyJobsSectionDetails,
   };
