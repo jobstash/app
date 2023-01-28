@@ -20,3 +20,6 @@ export type TabsSegment =
   | 'project'
   | 'competitors'
   | 'repositories';
+
+/** Tailwind sizes */
+export type ComponentSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl';
