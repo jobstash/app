@@ -13,6 +13,7 @@ module.exports = {
       },
     },
     'storybook-addon-next',
+    'storybook-dark-mode',
   ],
   framework: '@storybook/react',
   core: {
