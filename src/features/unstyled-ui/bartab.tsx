@@ -1,23 +1,59 @@
-import type { MouseEventHandler, ReactNode } from 'react';
+import type { ButtonHTMLAttributes, MouseEventHandler, ReactNode } from 'react';
 
-import clsx from 'clsx';
+import { type VariantProps, cva } from 'class-variance-authority';
 
-interface Props {
-  leftSection: ReactNode;
-  children: ReactNode;
+import { Text } from './base/text';
+import { RightCaretIcon } from './icons';
+
+const cvaBartab = cva(
+  ['bg-white/5 h-10 px-4 rounded-md flex justify-between w-full items-center'],
+  {
+    variants: {
+      isActive: {
+        true: 'bg-gradient-to-l from-primary to-secondary',
+      },
+    },
+  },
+);
+
+// Cva type alias
+type BartabVariantProps = VariantProps<typeof cvaBartab>;
+
+interface BartabProps
+  extends ButtonHTMLAttributes<HTMLButtonElement>,
+    BartabVariantProps {
+  /** Text inside bartab */
+  text: string;
+
+  /** Left Element */
+  left?: ReactNode;
+
+  /** If section is current active */
   isActive?: boolean;
+
+  /** Click handler */
   onClick: MouseEventHandler;
 }
 
-export const BarTab = ({ isActive, leftSection, children, onClick }: Props) => (
+export const Bartab = ({
+  text,
+  left,
+  isActive,
+  onClick,
+  ...props
+}: BartabProps) => (
   <button
-    className={clsx(
-      'flex h-16 w-full items-center rounded-2xl border border-zinc-700 hover:bg-zinc-700',
-      { 'bg-zinc-700': isActive },
-    )}
+    type="button"
+    className={cvaBartab({ isActive })}
+    {...props}
     onClick={onClick}
   >
-    <div className="w-12">{leftSection}</div>
-    {children}
+    <div className="flex items-center space-x-3">
+      {left}
+      <Text size="sm" fw="semibold">
+        {text}
+      </Text>
+    </div>
+    <RightCaretIcon />
   </button>
 );
