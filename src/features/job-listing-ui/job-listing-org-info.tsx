@@ -15,7 +15,6 @@ export const JobListingOrgInfo = ({ org }: Props) => (
       kind="subtle"
       left={<FundingTagIcon />}
       textProps={{ fw: 'regular' }}
-      onClick={(e) => e.stopPropagation()}
     >
       Funding: {org.fundingDate}
     </Button>

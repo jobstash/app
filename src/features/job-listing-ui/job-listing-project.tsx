@@ -49,7 +49,6 @@ const ProjectHeaderTags = ({ project }: Props) => (
         kind={tag.link ? undefined : 'subtle'}
         textProps={{ fw: 'regular' }}
         left={getTagIcon(tag.iconKey)}
-        onClick={(e) => e.stopPropagation()}
       >
         {tag.text}
       </Button>
@@ -69,7 +68,6 @@ export const ProjectTags = ({ project }: Props) => {
           size="sm"
           textProps={{ fw: 'regular' }}
           left={getTagIcon(tag.iconKey)}
-          onClick={(e) => e.stopPropagation()}
         >
           {tag.text}
         </Button>
