@@ -2,25 +2,26 @@ import clsx from 'clsx';
 
 import type { Skill } from '~/core/interfaces';
 
+import { TechWrapper } from '../unstyled-ui/tech-wrapper';
+
 interface Props {
   skills: Skill[];
+  isParentActive: boolean;
 }
 
-export const JobListingSkills = ({ skills }: Props) => (
+export const JobListingSkills = ({ skills, isParentActive }: Props) => (
   <>
     <div className="flex space-x-4">
       {skills.map((skill) => (
-        <div
+        <TechWrapper
           key={skill.name}
-          className={clsx('border border-zinc-500 py-2 px-4', {
-            'border-red-700': skill.isChecked,
-          })}
-        >
-          <h3 className="text-xs">{skill.name}</h3>
-        </div>
+          text={skill.name}
+          isChecked={skill.isChecked}
+          isParentActive={isParentActive}
+        />
       ))}
     </div>
 
-    <hr className="h-px border-0 bg-neutral-600" />
+    <hr className="h-px border-0 bg-white/30" />
   </>
 );

@@ -89,7 +89,7 @@ export const RightPanel = ({ segments, push }: Props) => {
   // Whenever a card is clicked, scroll right-panel to top
   useEffect(() => {
     const scrollListener = () => {
-      const el = document.querySelector('#asdf-asdf');
+      const el = document.querySelector('#' + ID_TOP_RIGHT_PANEL);
       if (el) {
         el.scrollIntoView({ behavior: 'auto', block: 'start' });
       }
@@ -101,15 +101,17 @@ export const RightPanel = ({ segments, push }: Props) => {
   }, []);
 
   return (
-    <div className="hide-scrollbar sticky top-0 max-h-screen overflow-y-scroll px-6">
+    <div className="hide-scrollbar sticky top-0 max-h-screen space-y-6 overflow-y-scroll px-6">
       <div className="top-0" id={ID_TOP_RIGHT_PANEL} />
       {activeCards.jobs?.org && (
         <RightPanelHeader org={activeCards.jobs?.org} />
       )}
 
-      <hr className="h-px border-0 bg-neutral-500" />
+      <div className="">
+        <hr className="h-px border-0 bg-white/20" />
+      </div>
 
-      <div className="flex space-x-4 py-10">
+      <div className="flex space-x-4">
         {rightPanelTabs.map(
           (tab) =>
             checkShouldRenderTab(tab) && (
@@ -123,7 +125,9 @@ export const RightPanel = ({ segments, push }: Props) => {
         )}
       </div>
 
-      {sectionDetailsMap[segments.section][segments.tab]}
+      <div className="">
+        {sectionDetailsMap[segments.section][segments.tab]}
+      </div>
     </div>
   );
 };

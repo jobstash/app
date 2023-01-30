@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 /** Represents `/{section}/{id}/{tab}` route pathname segments */
 export interface RouteSegments {
   section: 'jobs'; // TODO: add other sections
@@ -18,6 +20,9 @@ export interface Range {
 export interface Tag {
   text: string;
   link?: string;
+
+  /** TEMPORARY: solution to randomize tag icon */
+  iconKey: string;
 }
 
 /** Any technical skills in relation to a project/job and developer */

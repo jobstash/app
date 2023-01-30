@@ -1,3 +1,11 @@
+import {
+  BookmarkSidebarIcon,
+  CodeSidebarIcon,
+  HandbagSidebarIcon,
+  ProjectsSidebarIcon,
+  RepoSidebarIcon,
+} from '../unstyled-ui/icons';
+
 /**
  * These navs are common to anon/devs/orgs
  * 		anon -> anonymous users (not logged in)
@@ -8,22 +16,22 @@
  */
 export const discoverTabs = [
   {
-    left: null,
+    left: <CodeSidebarIcon />,
     label: 'Jobs',
     baseHref: '/jobs',
   },
   {
-    left: null,
+    left: <HandbagSidebarIcon />,
     label: 'Organizations',
     baseHref: '/organizations',
   },
   {
-    left: null,
+    left: <ProjectsSidebarIcon />,
     label: 'Projects',
     baseHref: '/projects',
   },
   {
-    left: null,
+    left: <RepoSidebarIcon />,
     label: 'Repositories',
     baseHref: '/repositories',
   },
@@ -36,13 +44,13 @@ export const discoverTabs = [
  */
 export const bookmarkedTabs = [
   {
-    left: null,
+    left: <BookmarkSidebarIcon />,
     label: 'Saved Jobs',
     baseHref: '/bookmark/jobs',
   },
   {
-    left: null,
-    label: 'Companies',
-    baseHref: '/bookmark/companies',
+    left: <BookmarkSidebarIcon />,
+    label: 'Saved Orgs',
+    baseHref: '/bookmark/orgs',
   },
 ];

@@ -2,7 +2,15 @@ import Image from 'next/image';
 
 import clsx from 'clsx';
 
+import { getTagIcon } from '~/core/constants';
 import type { Project } from '~/core/interfaces';
+
+import { Avatar } from '../unstyled-ui/base/avatar';
+import { Button } from '../unstyled-ui/base/button';
+import { Text } from '../unstyled-ui/base/text';
+import { ChainTagIcon } from '../unstyled-ui/icons';
+import { LogoTitle } from '../unstyled-ui/logo-title';
+import { TechWrapper } from '../unstyled-ui/tech-wrapper';
 
 interface Props {
   project: Project;
@@ -12,94 +20,103 @@ const TEXT_TECHNOLOGIES_DESC =
   'Uncover the technical skills and tools employed by the company, and gain insight into the technologies that dive their success.';
 
 export const RightPanelProjectDetails = ({ project }: Props) => (
-  <div className="flex flex-col space-y-6 rounded-2xl border border-zinc-600 p-6">
-    <div className="flex items-center space-x-4">
-      <Image src={project.avatar} width="48" height="48" alt="test" />
-      <h1 className="text-2xl font-bold">{project.name}</h1>
-    </div>
+  <div className="flex items-center justify-center rounded-2xl bg-gradient-to-l from-primary to-secondary p-1">
+    <div className="flex flex-col space-y-6 rounded-2xl bg-card p-6">
+      <LogoTitle
+        name={project.name}
+        avatar={project.avatar}
+        size="xl"
+        avatarSize="md"
+      />
 
-    <hr className="h-px border-0 bg-zinc-700" />
+      <hr className="h-px border-0 bg-white/20" />
 
-    <div className="flex flex-col space-y-4">
-      <h2 className="font-bold">Description</h2>
-      <div className="max-w-xl">
-        <span className="text-sm text-zinc-500">{project.description}</span>
+      <div className="flex flex-col space-y-4">
+        <Text size="lg" fw="bold">
+          Description
+        </Text>
+        <Text size="sm" fw="regular" className="text-white/60">
+          {project.description}
+        </Text>
       </div>
-    </div>
 
-    <hr className="h-px border-0 bg-zinc-700" />
+      <hr className="h-px border-0 bg-white/20" />
 
-    <div className="flex items-center space-x-4">
-      {project.tags.top.map((tag) => (
-        <div
-          key={tag.text}
-          className={clsx(
-            'rounded-md border border-zinc-500 bg-zinc-700 px-1',
-            { 'cursor-pointer': Boolean(tag.link) },
-          )}
-          // eslint-disable-next-line no-alert
-          onClick={tag.link ? () => alert('External link') : undefined}
-        >
-          <span className="text-xs text-zinc-300">{tag.text}</span>
-        </div>
-      ))}
-    </div>
-
-    <hr className="h-px border-0 bg-zinc-700" />
-
-    <div className="flex items-center space-x-4">
-      {project.tags.bottom.map((tag) => (
-        <div
-          key={tag.text}
-          className={clsx('rounded-sm px-1', {
-            'cursor-pointer': Boolean(tag.link),
-          })}
-          // eslint-disable-next-line no-alert
-          onClick={tag.link ? () => alert('External link') : undefined}
-        >
-          <span className="text-xs text-zinc-300">{tag.text}</span>
-        </div>
-      ))}
-    </div>
-
-    <hr className="h-px border-0 bg-zinc-700" />
-
-    <div className="flex flex-col space-y-4">
       <div className="flex items-center space-x-4">
-        <h3 className="text-sm">Chains:</h3>
-        <div className="flex items-center space-x-2">
-          {project.chains.map((chain) => (
-            <div key={chain.name}>
-              <Image
+        {project.tags.top.map((tag) => (
+          <Button
+            key={tag.text}
+            size="xs"
+            kind={tag.link ? undefined : 'subtle'}
+            textProps={{ fw: 'regular', size: 'sm' }}
+            left={getTagIcon(tag.iconKey)}
+            // eslint-disable-next-line no-alert
+            onClick={tag.link ? () => alert('External link') : undefined}
+          >
+            {tag.text}
+          </Button>
+        ))}
+      </div>
+
+      <hr className="h-px border-0 bg-white/20" />
+
+      <div className="flex items-center space-x-4">
+        {project.tags.bottom.map((tag) => (
+          <Button
+            key={tag.text}
+            size="xs"
+            kind={tag.link ? undefined : 'subtle'}
+            textProps={{ fw: 'regular', size: 'sm' }}
+            left={getTagIcon(tag.iconKey)}
+            // eslint-disable-next-line no-alert
+            onClick={tag.link ? () => alert('External link') : undefined}
+          >
+            {tag.text}
+          </Button>
+        ))}
+      </div>
+
+      <hr className="h-px border-0 bg-white/20" />
+
+      <div className="flex flex-col space-y-4">
+        <div className="flex items-center space-x-4">
+          <Button size="xs" left={<ChainTagIcon />} kind="subtle">
+            Chains:
+          </Button>
+          <div className="flex items-center space-x-1">
+            {project.chains.map((chain) => (
+              <Avatar
+                key={chain.name}
+                size="xs"
                 src={`/chains/${chain.name}.svg`}
-                width="26"
-                height="26"
                 alt={chain.name}
               />
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
-    </div>
 
-    <hr className="h-px border-0 bg-zinc-700" />
+      <hr className="h-px border-0 bg-white/20" />
 
-    <div className="flex flex-col space-y-4">
-      <h2 className="font-bold">Technologies</h2>
-      <div className="max-w-xl">
-        <span className="text-sm text-zinc-500">{TEXT_TECHNOLOGIES_DESC}</span>
-      </div>
-      <div className="flex space-x-4">
-        {project.skills.map((skill) => (
-          <div
-            key={skill.name}
-            className={clsx('border border-zinc-500 py-2 px-4', {
-              'border-red-700': skill.isChecked,
-            })}
-          >
-            <h3 className="text-xs">{skill.name}</h3>
-          </div>
-        ))}
+      <div className="flex flex-col space-y-4">
+        <Text size="lg" fw="bold">
+          Technologies
+        </Text>
+        <div className="max-w-xl">
+          <Text size="sm" fw="regular" className="text-white/60">
+            {TEXT_TECHNOLOGIES_DESC}
+          </Text>
+        </div>
+        <div className="flex space-x-4">
+          {project.skills.map((skill) => (
+            <TechWrapper
+              key={skill.name}
+              text={skill.name}
+              isChecked={skill.isChecked}
+              isParentActive={false}
+            />
+          ))}
+        </div>
       </div>
     </div>
   </div>
