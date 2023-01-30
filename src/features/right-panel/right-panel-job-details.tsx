@@ -3,6 +3,17 @@ import clsx from 'clsx';
 import type { Job, Skill } from '~/core/interfaces';
 import { formatSalary } from '~/utils/format-salary';
 
+import { Button } from '../unstyled-ui/base/button';
+import { Text } from '../unstyled-ui/base/text';
+import {
+  LocationTagIcon,
+  SalaryTagIcon,
+  SeniorTagIcon,
+  TeamSizeTagIcon,
+} from '../unstyled-ui/icons';
+import { UtcTagIcon } from '../unstyled-ui/icons/utc-tag-icon';
+import { TechWrapper } from '../unstyled-ui/tech-wrapper';
+
 /** Titles used in hard skills */
 const hardSkillTitles = [
   'You will be the main contributor for',
@@ -25,8 +36,12 @@ export const Description = ({ job }: Props) => {
       <div className="flex flex-col space-y-6">
         {descriptions.map((details) => (
           <div key={details.label} className="flex max-w-xl flex-col space-y-2">
-            <span className="font-semibold">{details.label}</span>
-            <span className="text-xs text-zinc-500">{details.desc}</span>
+            <Text size="md" fw="bold">
+              {details.label}
+            </Text>
+            <Text size="sm" fw="regular" className="text-white/60">
+              {details.desc}
+            </Text>
           </div>
         ))}
       </div>
@@ -48,29 +63,92 @@ export const Header = ({ job }: Props) => {
   const strSalary = formatSalary(salary);
   return (
     <>
-      <div>
-        <h1 className="text-xl font-semibold">{title}</h1>
+      <Text htmlTag="h1" size="2xl" fw="bold" className="text-white/90">
+        {title}
+      </Text>
+
+      <div className="flex items-center">
+        <Button
+          size="sm"
+          kind="subtle"
+          textProps={{
+            fw: 'regular',
+            size: 'md',
+            className: 'text-white/90',
+            htmlTag: 'h3',
+          }}
+          left={<SeniorTagIcon />}
+        >
+          {role.name}
+        </Button>
+        <Button
+          size="sm"
+          kind="subtle"
+          textProps={{
+            fw: 'regular',
+            size: 'md',
+            className: 'text-white/90',
+            htmlTag: 'h3',
+          }}
+          left={<SalaryTagIcon />}
+        >
+          {strSalary}
+        </Button>
+        <Button
+          size="sm"
+          kind="subtle"
+          textProps={{
+            fw: 'regular',
+            size: 'md',
+            className: 'text-white/90',
+            htmlTag: 'h3',
+          }}
+          left={<LocationTagIcon />}
+        >
+          {location}
+        </Button>
+        <Button
+          size="sm"
+          kind="subtle"
+          textProps={{
+            fw: 'regular',
+            size: 'md',
+            className: 'text-white/90',
+            htmlTag: 'h3',
+          }}
+          left={<TeamSizeTagIcon />}
+        >
+          Team Size: {team.size}
+        </Button>
+        <Button
+          size="sm"
+          kind="subtle"
+          textProps={{
+            fw: 'regular',
+            size: 'md',
+            className: 'text-white/90',
+            htmlTag: 'h3',
+          }}
+          left={<UtcTagIcon />}
+        >
+          {tz}
+        </Button>
       </div>
 
-      <div className="flex space-x-4">
-        <span className="text-sm">{role.name}</span>
-        <span className="text-sm">{strSalary}</span>
-        <span className="text-sm">{location}</span>
-        <span className="text-sm">Team Size: {team.size}</span>
-        <span className="text-sm">{tz}</span>
-      </div>
-
       <div>
-        <button
-          className="rounded-xl border border-zinc-600 px-8 py-3"
+        <Button
+          size="lg"
+          kind="primary"
           // eslint-disable-next-line no-alert
           onClick={() => alert('TODO')}
         >
-          <span className="text-sm">Apply for this job</span>
-        </button>
+          Apply for this job
+        </Button>
       </div>
 
-      <hr className="h-px border-0 bg-neutral-500" />
+      <div className="py-2">
+        <hr className="h-px border-0 bg-white/20" />
+      </div>
     </>
   );
 };
@@ -78,10 +156,12 @@ export const Header = ({ job }: Props) => {
 export const HardSkills = ({ job: { skills } }: Props) => (
   <div className="flex flex-col space-y-6">
     <div className="flex flex-col space-y-2">
-      <span className="text-xl font-bold">Hard Skills</span>
-      <span className="text-sm text-zinc-400">
-        These are skills required for the job
-      </span>
+      <Text size="lg" fw="bold">
+        Hard Skills
+      </Text>
+      <Text size="md" fw="regular" className="text-white/60">
+        These are technical skills required for the job
+      </Text>
     </div>
 
     {
@@ -93,14 +173,12 @@ export const HardSkills = ({ job: { skills } }: Props) => (
           <span className="text-sm text-zinc-400">{hardSkillTitles[i]}</span>
           <div className="flex space-x-4">
             {v.map((skill: Skill) => (
-              <div
+              <TechWrapper
                 key={skill.name}
-                className={clsx('border border-zinc-800 p-2', {
-                  'border-red-500': skill.isChecked,
-                })}
-              >
-                <h3 className="text-xs">{skill.name}</h3>
-              </div>
+                text={skill.name}
+                isChecked={skill.isChecked}
+                isParentActive={false}
+              />
             ))}
           </div>
         </div>
@@ -114,10 +192,12 @@ export const RightPanelJobDetails = ({ job }: Props) => {
   if (!job) return null;
 
   return (
-    <div className="flex flex-col space-y-8 rounded-2xl border border-zinc-600 p-6">
-      <Header job={job} />
-      <Description job={job} />
-      <HardSkills job={job} />
+    <div className="flex items-center justify-center rounded-2xl bg-gradient-to-l from-primary to-secondary p-1">
+      <div className="flex flex-col space-y-4 rounded-2xl bg-card p-6">
+        <Header job={job} />
+        <Description job={job} />
+        <HardSkills job={job} />
+      </div>
     </div>
   );
 };

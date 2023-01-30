@@ -2,16 +2,12 @@
 import { ActiveSectionCards } from '~/contexts/root-context';
 import { RouterPush } from '~/core/types';
 
-import { BarTab } from '../unstyled-ui/bartab';
+import { Bartab } from '../unstyled-ui/bartab';
+import { Avatar } from '../unstyled-ui/base/avatar';
+import { Brand } from '../unstyled-ui/base/brand';
+import { Text } from '../unstyled-ui/base/text';
 
 import { bookmarkedTabs, discoverTabs } from './constants';
-
-/** UNSTYLED */
-const Brand = () => (
-  <div className="py-4">
-    <h2>recruiters.rip</h2>
-  </div>
-);
 
 /** UNSTYLED */
 export const DiscoverTabs = (props: {
@@ -20,13 +16,16 @@ export const DiscoverTabs = (props: {
   push: RouterPush;
 }) => (
   <div className="space-y-4">
-    <h2 className="text-zinc-400">Discover</h2>
+    <Text htmlTag="h2" size="md" className="text-white/60">
+      Discover
+    </Text>
     <div className="space-y-4">
       {discoverTabs.map((nav) => (
         <div key={nav.label}>
-          <BarTab
+          <Bartab
             isActive={`/${props.section}` === nav.baseHref}
-            leftSection={nav.left}
+            left={nav.left}
+            text={nav.label}
             onClick={() =>
               nav.label === 'Jobs' // Jobs route for now
                 ? props.push(
@@ -42,9 +41,7 @@ export const DiscoverTabs = (props: {
                   )
                 : alert('TODO')
             }
-          >
-            {nav.label}
-          </BarTab>
+          />
         </div>
       ))}
     </div>
@@ -54,12 +51,16 @@ export const DiscoverTabs = (props: {
 /** UNSTYLED */
 const BookmarkedTab = () => (
   <div className="space-y-4">
-    <h2 className="text-zinc-400">Bookmarked</h2>
+    <Text htmlTag="h2" size="sm" className="text-white/60">
+      Bookmarked
+    </Text>
     {bookmarkedTabs.map((nav) => (
       <div key={nav.label}>
-        <BarTab leftSection={nav.left} onClick={() => alert('TODO')}>
-          {nav.label}
-        </BarTab>
+        <Bartab
+          left={nav.left}
+          text={nav.label}
+          onClick={() => alert('TODO')}
+        />
       </div>
     ))}
   </div>
@@ -67,11 +68,17 @@ const BookmarkedTab = () => (
 
 /** UNSTYLED */
 const UserTab = () => (
-  <div className="space-y-8">
-    <hr className="h-px border-0 bg-neutral-500" />
-    <BarTab leftSection={null} onClick={() => alert('TODO')}>
-      Laura Tyson
-    </BarTab>
+  <div className="space-y-4">
+    <Text htmlTag="h2" size="sm" className="text-white/60">
+      Your Profile
+    </Text>
+    <Bartab left={null} text="My Repositories" onClick={() => alert('TODO')} />
+    <hr className="h-px border-0 bg-white/20" />
+    <Bartab
+      left={<Avatar src="/user/@OxDevoor.svg" alt="LoggedIn User" size="sm" />}
+      text="@OxDevoor"
+      onClick={() => alert('TODO')}
+    />
   </div>
 );
 
@@ -83,7 +90,7 @@ interface Props {
 
 /** UNSTYLED */
 export const SideBar = ({ section, push, activeCards }: Props) => (
-  <nav className="sticky top-0 flex min-h-screen flex-col justify-between bg-black/5 px-6">
+  <nav className="sticky top-0 flex min-h-screen flex-col justify-between bg-black/5 px-6 pb-6">
     <div className="space-y-4 ">
       <Brand />
       <DiscoverTabs section={section} push={push} activeCards={activeCards} />

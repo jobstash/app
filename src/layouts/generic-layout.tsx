@@ -1,3 +1,5 @@
+/* eslint-disable tailwindcss/no-arbitrary-value */
+
 import { ReactNode } from 'react';
 
 interface Props {
@@ -8,13 +10,15 @@ interface Props {
 
 export const GenericLayout = ({ sideBar, children, rightPanel }: Props) => (
   <div className="flex">
-    <section className="relative basis-2/12 flex-col border-r border-r-zinc-800">
+    <section className="relative w-[14%] flex-col border-r border-r-zinc-800">
       {sideBar}
     </section>
-    <div className="min-h-[4000px] flex-1 px-8">
-      <div className="flex flex-col justify-center">{children}</div>
+    <div className="flex grow justify-center">
+      <div className="flex w-[95%] max-w-3xl flex-col items-center">
+        {children}
+      </div>
     </div>
-    <aside className="basis-[8/24] border-l border-zinc-800">
+    <aside className="w-[40%] max-w-2xl border-l border-zinc-800">
       {rightPanel}
     </aside>
   </div>

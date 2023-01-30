@@ -16,8 +16,8 @@ export const fakeProject = (hasProbability = true): Project | null => {
   const chains = fakeChains();
 
   const tags = {
-    top: fakeTags(2, 4),
-    bottom: fakeTags(2, 3),
+    top: fakeTags(3, 5),
+    bottom: fakeTags(3, 5),
   };
 
   const skills = fakeSkills(3, 5);

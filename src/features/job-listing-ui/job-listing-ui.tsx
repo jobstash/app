@@ -25,9 +25,9 @@ export const JobListingUi = ({ jobListing, isActive, onClick }: Props) => {
   return (
     <JobListingWrapper isActive={isActive} onClick={onClick}>
       <JobListingHeader job={job} />
-      <JobListingSkills skills={skills} />
+      <JobListingSkills skills={skills} isParentActive={isActive} />
       <JobListingOrgInfo org={org} />
-      {project && <JobListingProject project={project} />}
+      <div>{project && <JobListingProject project={project} />}</div>
     </JobListingWrapper>
   );
 };

@@ -54,7 +54,7 @@ const JobsPage = ({ data }: Props) => {
           </span>
         </div>
 
-        <div className="flex flex-col space-y-12">
+        <div className="flex w-full flex-col space-y-12">
           {data.jobListings.map((jobListing) => (
             <JobListingUi
               key={jobListing.job.id}
@@ -81,7 +81,13 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   );
 
   if (!currentJob)
-    return { redirect: { permanent: false, destination: '/404' } };
+    return {
+      redirect: {
+        permanent: false,
+        destination:
+          '/jobs/uniswap-labs-senior-frontend-engineer-12345/details',
+      },
+    };
 
   return {
     props: {

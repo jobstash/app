@@ -5,6 +5,8 @@ import { RouteSegments } from '~/core/interfaces';
 import type { RouterPush } from '~/core/types';
 import { capitalize } from '~/utils/capitalize';
 
+import { Button } from '../unstyled-ui/base/button';
+
 /**
  * If on details tab: omit "s" in section, capitalize then append "Details"
  * Else return label
@@ -34,14 +36,13 @@ export const RightPanelTab = ({ label, segments, push }: Props) => {
     push(`/${section}/${id}/${lowLabel}`, { shouldScroll: false });
 
   return (
-    <button
-      className={clsx(
-        'rounded-lg border border-zinc-500 py-2 px-4 hover:bg-zinc-800',
-        { 'bg-zinc-700': isActive },
-      )}
+    <Button
+      isActive={isActive}
+      size="md"
+      textProps={{ size: 'sm', fw: 'regular' }}
       onClick={onClick}
     >
-      <span className="text-sm">{text}</span>
-    </button>
+      {text}
+    </Button>
   );
 };

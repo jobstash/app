@@ -2,7 +2,14 @@ import Image from 'next/image';
 
 import clsx from 'clsx';
 
+import { getTagIcon } from '~/core/constants';
 import type { Org } from '~/core/interfaces';
+
+import { Button } from '../unstyled-ui/base/button';
+import { Text } from '../unstyled-ui/base/text';
+import { FundingTagIcon, LocationTagIcon } from '../unstyled-ui/icons';
+import { TeamSizeTagIcon } from '../unstyled-ui/icons';
+import { LogoTitle } from '../unstyled-ui/logo-title';
 
 interface Props {
   org: Org;
@@ -11,32 +18,68 @@ interface Props {
 export const RightPanelHeader = ({
   org: { name, avatar, location, teamSize, fundingDate, summary, tags },
 }: Props) => (
-  <div className="space-y-4 py-12">
-    <div className="flex items-center space-x-4">
-      <Image src={avatar} width="40" height="40" alt="test" />
-      <h1 className="text-2xl font-bold">{name}</h1>
-    </div>
-    <div className="flex space-x-4">
-      <span className="text-sm">{location}</span>
-      <span className="text-sm">Team Size: {teamSize}</span>
-      <span className="text-sm">Funding: {fundingDate}</span>
+  <div className="space-y-4 pt-6">
+    <LogoTitle name={name} avatar={avatar} size="xl" avatarSize="md" />
+
+    <div className="flex items-center">
+      <Button
+        size="sm"
+        kind="subtle"
+        textProps={{
+          fw: 'regular',
+          size: 'md',
+          className: 'text-white/90',
+          htmlTag: 'h3',
+        }}
+        left={<LocationTagIcon />}
+      >
+        {location}
+      </Button>
+      <Button
+        size="sm"
+        kind="subtle"
+        textProps={{
+          fw: 'regular',
+          size: 'md',
+          className: 'text-white/90',
+          htmlTag: 'h3',
+        }}
+        left={<TeamSizeTagIcon />}
+      >
+        Team Size: {teamSize}
+      </Button>
+
+      <Button
+        size="sm"
+        kind="subtle"
+        textProps={{
+          fw: 'regular',
+          size: 'md',
+          className: 'text-white/90',
+          htmlTag: 'h3',
+        }}
+        left={<FundingTagIcon />}
+      >
+        Funding: {fundingDate}
+      </Button>
     </div>
     <div className="max-w-xl">
-      <span className="text-sm text-zinc-500">{summary}</span>
+      <Text size="md" fw="regular" className="text-white/70">
+        {summary}
+      </Text>
     </div>
-    <div className="flex space-x-4 py-2">
+    <div className="flex items-center space-x-4 pt-2">
       {tags.map((tag) => (
-        <div
+        <Button
           key={tag.text}
-          className={clsx(
-            'rounded-md border border-zinc-500 bg-zinc-700 px-1',
-            { 'cursor-pointer': Boolean(tag.link) },
-          )}
+          size="sm"
+          textProps={{ fw: 'regular' }}
+          left={getTagIcon(tag.iconKey)}
           // eslint-disable-next-line no-alert
           onClick={tag.link ? () => alert('External link') : undefined}
         >
-          <span className="text-xs">{tag.text}</span>
-        </div>
+          {tag.text}
+        </Button>
       ))}
     </div>
   </div>

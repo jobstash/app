@@ -2,6 +2,7 @@ import { capitalize } from '~/utils/capitalize';
 
 export * from './chain';
 export * from './org';
+export * from './tag';
 
 // String literals
 export const TEXT_DETAILS = 'details';
