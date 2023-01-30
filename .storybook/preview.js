@@ -1,4 +1,5 @@
-import 'tailwindcss/tailwind.css';
+// Import 'tailwindcss/tailwind.css';
+import '../src/styles/globals.css';
 
 import { themes } from '@storybook/theming';
 
