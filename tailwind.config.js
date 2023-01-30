@@ -12,6 +12,7 @@ module.exports = {
         black: 'rgb(var(--color-black) / <alpha-value>)',
         white: 'rgb(var(--color-white) / <alpha-value>)',
         tech: 'var(--color-tech)',
+        card: 'var(--color-card)',
       },
     },
     /*
