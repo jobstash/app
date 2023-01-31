@@ -1,7 +1,7 @@
 import type { JobListing } from '~/core/interfaces';
 import type { VoidFn } from '~/core/types';
 
-import { SkillMapper } from '../unstyled-ui/skill-mapper';
+import { TechMapper } from '../unstyled-ui/tech-mapper';
 
 import { JobListingHeader } from './job-listing-header';
 import { JobListingOrgInfo } from './job-listing-org-info';
@@ -26,7 +26,7 @@ export const JobListingUi = ({ jobListing, isActive, onClick }: Props) => {
     <JobListingWrapper isActive={isActive} onClick={onClick}>
       <JobListingHeader job={job} />
 
-      <SkillMapper skills={skills} isParentActive={isActive} />
+      <TechMapper techs={skills} isParentActive={isActive} />
       <hr className="h-px border-0 bg-white/30" />
 
       <JobListingOrgInfo org={org} />

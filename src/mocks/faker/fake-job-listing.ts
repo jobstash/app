@@ -25,9 +25,6 @@ export const fakeJobListing = (): JobListing => {
 };
 
 export const fakeJobListings = (min = 3, max = 6): JobListing[] => {
-  // // Always generate the same sets of job-listings
-  // // to avoid regenerating new data on refresh
-  // faker.seed(69);
   const length = faker.datatype.number({ min, max });
 
   return Array.from({ length })

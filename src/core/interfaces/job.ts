@@ -1,4 +1,5 @@
-import type { Range, Skill } from './common';
+import type { Range } from './common';
+import { Tech } from './tech';
 
 interface Role {
   name: string;
@@ -33,11 +34,11 @@ interface Details {
 
 interface Skills {
   /** Skill you will be the main contributor */
-  main: Skill[];
+  main: Tech[];
   /** Skill a team member can mentor you about */
-  hasMentor: Skill[];
+  hasMentor: Tech[];
   /** Skill you share responsibility with others */
-  shared: Skill[];
+  shared: Tech[];
 }
 
 export interface Job {

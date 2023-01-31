@@ -4,8 +4,8 @@ import type { Org, Repository } from '~/core/interfaces';
 
 import { fakeArrayFromFaker } from './fake-array-from-faker';
 import { fakeDesc } from './fake-desc';
-import { fakeSkills } from './fake-skill';
 import { fakeTags } from './fake-tag';
+import { fakeTechs } from './fake-tech';
 import { nullProbability } from './null-probability';
 
 export const fakeRepo = (
@@ -24,7 +24,7 @@ export const fakeRepo = (
     .fill(0)
     .map(() => ({
       devCount: faker.datatype.number({ min: 2, max: 8 }),
-      skills: fakeSkills(2, 4),
+      techs: fakeTechs(2, 4),
     }));
 
   const value = { name, desc, tags, devInfos };

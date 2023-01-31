@@ -11,7 +11,7 @@ import type { Job, Org } from '~/core/interfaces';
 
 import { fakeDesc } from './fake-desc';
 import { getOrgLocation, OrgName } from './fake-org';
-import { fakeJobSkills } from './fake-skill';
+import { fakeSkills } from './fake-skills';
 import { fakeTz } from './fake-tz';
 
 const poolRoles = ['Junior', 'Senior', 'Lead'];
@@ -74,7 +74,7 @@ export const fakeJob = (org: Org, options?: FakeJobOptions): Job => {
     },
   };
 
-  const skills = fakeJobSkills();
+  const skills = fakeSkills();
 
   return {
     id,
