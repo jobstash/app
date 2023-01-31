@@ -13,18 +13,20 @@ export const fakeFirstJobListing = (): JobListing => {
     location: getOrgLocation(ORG_UNISWAP_LABS),
   };
 
-  const job = fakeJob(org, {
-    role: 'Senior',
-    scope: 'Frontend',
-    suffix: 'Engineer',
-    hash: '12345',
-  });
+  const jobs = [
+    fakeJob(org, {
+      role: 'Senior',
+      scope: 'Frontend',
+      suffix: 'Engineer',
+      hash: '12345',
+    }),
+  ];
 
   const project = fakeProject();
 
   return {
     org,
-    job,
+    jobs,
     project,
     competitors: null,
     repositories: null,

@@ -49,7 +49,8 @@ const getJobsRightPanelDetails = (
 ): SectionDetailsMap['jobs'] => {
   if (!jobs) return emptyJobsSectionDetails;
 
-  const { job, org, project, repositories, competitors } = jobs;
+  const { jobs: listingJobs, org, project, repositories, competitors } = jobs;
+  const job = listingJobs![0];
 
   const hasRepos = repositories && repositories.length > 0;
   const hasCompetitors = competitors && competitors.length > 0;

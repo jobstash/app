@@ -80,7 +80,7 @@ export const RightPanelRepo = ({ repos }: Props) => (
                   <Text htmlTag="h3">Devs: {devInfo.devCount}</Text>
                 </div>
 
-                <TechMapper techs={devInfo.techs} isParentActive={false} />
+                <TechMapper techs={devInfo.techs} />
               </div>
             ))}
           </div>

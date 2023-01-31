@@ -21,15 +21,11 @@ interface TechWrapperProps
 
   /** Techs can either be */
   isChecked: boolean;
-
-  /** Temporary since text-tech is not visible when card is active */
-  isParentActive?: boolean;
 }
 
 export const TechWrapper = ({
   text,
   isChecked,
-  isParentActive = false,
   ...props
 }: TechWrapperProps) => {
   const [isCheckedState, setIsCheckedState] = useState(isChecked);
@@ -52,13 +48,7 @@ export const TechWrapper = ({
       onMouseLeave={() => setIsHovering(false)}
       {...props}
     >
-      <Text
-        className={clsx('text-tech', {
-          'text-white/80': isParentActive,
-        })}
-      >
-        {text.toUpperCase()}
-      </Text>
+      <Text className="text-tech">{text.toUpperCase()}</Text>
       {displayIndicator && (
         <div className="absolute -top-2 -right-3 h-5 w-5 items-center justify-center">
           <div className="relative">

@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 
 import { EVENT_CARD_CLICK } from '~/core/constants';
 import { JobListing } from '~/core/interfaces';
-import { JobListingUi } from '~/features/job-listing-ui';
+import { ListingCardJob } from '~/features/listing';
 import { RightPanel } from '~/features/right-panel';
 import { SideBar } from '~/features/sidebar';
 import { useRootContext } from '~/hooks/use-root-context';
@@ -30,8 +30,11 @@ const JobsPage = ({ data }: Props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
+  // If for some reason jobListings data is empty, return appropriate page
+  if (data.jobListings.length === 0) return <h1>EMPTY</h1>;
+
   const jobOnClick = (jobListing: JobListing) => {
-    push(`/jobs/${jobListing.job.id}/details`, { shallow: true });
+    push(`/jobs/${jobListing.jobs![0].id}/details`, { shallow: true });
     setActiveJobCard(jobListing);
     document.dispatchEvent(new Event(EVENT_CARD_CLICK));
   };
@@ -56,10 +59,10 @@ const JobsPage = ({ data }: Props) => {
 
         <div className="flex w-full flex-col space-y-12">
           {data.jobListings.map((jobListing) => (
-            <JobListingUi
-              key={jobListing.job.id}
-              jobListing={jobListing}
-              isActive={segments.id === jobListing.job.id}
+            <ListingCardJob
+              key={jobListing.jobs![0].id}
+              listing={jobListing}
+              isActive={segments.id === jobListing.jobs![0].id}
               onClick={() => jobOnClick(jobListing)}
             />
           ))}
@@ -77,7 +80,7 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
   const jobListings = [mockFirstJobListing, ...mockedJobListings];
 
   const currentJob = jobListings.find(
-    (jobListing) => jobListing.job.id === ctx.query.id,
+    (jobListing) => jobListing.jobs![0].id === ctx.query.id,
   );
 
   if (!currentJob)
