@@ -5,3 +5,4 @@ export * from './job-listing';
 export * from './org';
 export * from './project';
 export * from './repository';
+export * from './tag';

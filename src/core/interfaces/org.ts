@@ -1,4 +1,4 @@
-import type { Tag } from './common';
+import type { Tag } from './tag';
 
 export interface Org {
   name: string;

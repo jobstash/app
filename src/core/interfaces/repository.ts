@@ -1,4 +1,5 @@
-import type { Skill, Tag } from './common';
+import type { Skill } from './common';
+import type { Tag } from './tag';
 
 interface DevInfo {
   /** How many devs working on a set of skills */
