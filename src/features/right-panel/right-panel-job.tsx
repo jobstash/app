@@ -1,8 +1,9 @@
 import type { Job, Tech } from '~/core/interfaces';
+import { createJobTags } from '~/utils/create-job-tags';
 
 import { Button } from '../unstyled-ui/base/button';
 import { Text } from '../unstyled-ui/base/text';
-import { JobTagMapper } from '../unstyled-ui/job-tag-mapper';
+import { TagMapper } from '../unstyled-ui/tag-mapper';
 import { TechWrapper } from '../unstyled-ui/tech-wrapper';
 
 /** Titles used in hard skills */
@@ -51,7 +52,7 @@ export const Header = ({ job }: Props) => {
         {title}
       </Text>
 
-      <JobTagMapper job={job} />
+      <TagMapper tags={createJobTags(job)} />
 
       <div>
         <Button
@@ -95,7 +96,6 @@ export const HardSkills = ({ job: { skills } }: Props) => (
                 key={skill.name}
                 text={skill.name}
                 isChecked={skill.isChecked}
-                isParentActive={false}
               />
             ))}
           </div>

@@ -3,6 +3,7 @@ import type { Project } from '~/core/interfaces';
 import { Avatar } from '../unstyled-ui/base/avatar';
 import { Button } from '../unstyled-ui/base/button';
 import { Text } from '../unstyled-ui/base/text';
+import { ChainMapper } from '../unstyled-ui/chain-mapper';
 import { ChainTagIcon } from '../unstyled-ui/icons';
 import { LogoTitle } from '../unstyled-ui/logo-title';
 import { ProjectTagMapper } from '../unstyled-ui/project-tag-mapper';
@@ -51,16 +52,7 @@ export const RightPanelProject = ({ project }: Props) => (
           <Button size="xs" left={<ChainTagIcon />} kind="subtle">
             Chains:
           </Button>
-          <div className="flex items-center space-x-1">
-            {project.chains.map((chain) => (
-              <Avatar
-                key={chain.name}
-                size="xs"
-                src={`/chains/${chain.name}.svg`}
-                alt={chain.name}
-              />
-            ))}
-          </div>
+          <ChainMapper chains={project.chains} />
         </div>
       </div>
 
@@ -76,7 +68,7 @@ export const RightPanelProject = ({ project }: Props) => (
           </Text>
         </div>
 
-        <TechMapper techs={project.techs} isParentActive={false} />
+        <TechMapper techs={project.techs} />
       </div>
     </div>
   </div>
