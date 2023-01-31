@@ -1,5 +1,6 @@
 import type { Chain } from './chain';
-import type { Skill, Tag } from './common';
+import type { Skill } from './common';
+import type { Tag } from './tag';
 
 /**
  * At the time of this writing, project details has lots of tabs.
