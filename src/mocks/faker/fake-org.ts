@@ -13,6 +13,7 @@ import type { Org } from '~/core/interfaces';
 
 import { fakeDesc } from './fake-desc';
 import { fakeTags } from './fake-tag';
+import { fakeTechs } from './fake-tech';
 
 /**
  * List of orgs to choose from.
@@ -56,20 +57,17 @@ export const getOrgLocation = (org: OrgName) => locationMap[org];
 export const fakeOrg = (): Org => {
   const selected = faker.helpers.arrayElement(poolOrgs) as OrgName;
   const avatar = `/org/${selected}.svg`;
-
   const location = getOrgLocation(selected);
-
   const teamSize = faker.datatype.number({ min: 6, max: 16 });
-
   const dayNum = faker.datatype.number({ min: 1, max: 27 });
   const month = faker.date.month({ abbr: true });
   const year = faker.datatype.number({ min: 2016, max: 2022 });
   const fundingDate = `${dayNum} ${month}, ${year}`;
-
   const summary = fakeDesc(2, 4);
   const description = fakeDesc(8, 12);
-
   const tags = fakeTags();
+  const techs = fakeTechs(3, 8);
+  const recent = `${faker.datatype.number({ min: 2, max: 6 })} days ago`;
 
   return {
     name: selected,
@@ -80,5 +78,7 @@ export const fakeOrg = (): Org => {
     summary,
     description,
     tags,
+    techs,
+    recent,
   };
 };

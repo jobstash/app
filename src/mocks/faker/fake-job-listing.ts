@@ -10,14 +10,14 @@ import { fakeRepos } from './fake-repo';
 
 export const fakeJobListing = (): JobListing => {
   const org = fakeOrg();
-  const job = fakeJob(org);
+  const jobs = [fakeJob(org)]; // One element for job-listing
   const project = fakeProject();
   const repositories = fakeRepos(org, 2, 5);
   const competitors = fakeCompetitors();
 
   return {
     org,
-    job,
+    jobs,
     project,
     competitors,
     repositories,
