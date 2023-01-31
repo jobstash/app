@@ -6,7 +6,7 @@ import { Text } from '../unstyled-ui/base/text';
 import { ChainTagIcon } from '../unstyled-ui/icons';
 import { LogoTitle } from '../unstyled-ui/logo-title';
 import { ProjectTagMapper } from '../unstyled-ui/project-tag-mapper';
-import { SkillMapper } from '../unstyled-ui/skill-mapper';
+import { TechMapper } from '../unstyled-ui/tech-mapper';
 
 interface Props {
   project: Project;
@@ -76,7 +76,7 @@ export const RightPanelProject = ({ project }: Props) => (
           </Text>
         </div>
 
-        <SkillMapper skills={project.skills} isParentActive={false} />
+        <TechMapper techs={project.techs} isParentActive={false} />
       </div>
     </div>
   </div>

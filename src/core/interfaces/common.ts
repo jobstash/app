@@ -10,9 +10,3 @@ export interface Range {
   min: number;
   max: number;
 }
-
-/** Any technical skills in relation to a project/job and developer */
-export interface Skill {
-  name: string;
-  isChecked: boolean;
-}

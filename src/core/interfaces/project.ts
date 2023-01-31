@@ -1,6 +1,6 @@
 import type { Chain } from './chain';
-import type { Skill } from './common';
 import type { Tag } from './tag';
+import type { Tech } from './tech';
 
 /**
  * At the time of this writing, project details has lots of tabs.
@@ -21,8 +21,8 @@ export interface Project {
   chains: Chain[];
   /** List of tags displayed as info for the project */
   tags: ProjectTags;
-  /** List of skills displayed on project/competitors tab */
-  skills: Skill[];
+  /** List of techs displayed on project/competitors tab */
+  techs: Tech[];
   /** Description displayed in right-panel details tab */
   description: string;
 }

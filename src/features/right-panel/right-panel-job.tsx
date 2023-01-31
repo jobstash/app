@@ -1,4 +1,4 @@
-import type { Job, Skill } from '~/core/interfaces';
+import type { Job, Tech } from '~/core/interfaces';
 
 import { Button } from '../unstyled-ui/base/button';
 import { Text } from '../unstyled-ui/base/text';
@@ -90,7 +90,7 @@ export const HardSkills = ({ job: { skills } }: Props) => (
         <div key={k} className="flex flex-col space-y-4">
           <span className="text-sm text-zinc-400">{hardSkillTitles[i]}</span>
           <div className="flex space-x-4">
-            {v.map((skill: Skill) => (
+            {v.map((skill: Tech) => (
               <TechWrapper
                 key={skill.name}
                 text={skill.name}

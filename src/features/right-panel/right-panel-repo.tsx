@@ -5,7 +5,7 @@ import { Button } from '../unstyled-ui/base/button';
 import { Text } from '../unstyled-ui/base/text';
 import { BookmarkButton } from '../unstyled-ui/bookmark-button';
 import { DevRepoIcon, GithubRepoIcon } from '../unstyled-ui/icons';
-import { SkillMapper } from '../unstyled-ui/skill-mapper';
+import { TechMapper } from '../unstyled-ui/tech-mapper';
 
 interface InnerProps {
   repo: Repository;
@@ -69,8 +69,8 @@ export const RightPanelRepo = ({ repos }: Props) => (
           <div className="space-y-4">
             {repo.devInfos.map((devInfo) => (
               <div
-                // We just concat all skill name as key xD
-                key={devInfo.skills.map((skill) => skill.name).join('')}
+                // We just concat all tech name as key xD
+                key={devInfo.techs.map((tech) => tech.name).join('')}
                 className="flex w-fit items-center space-x-6 rounded-xl border border-white/20 py-2 px-4"
               >
                 <div className="-ml-3 flex items-center">
@@ -80,7 +80,7 @@ export const RightPanelRepo = ({ repos }: Props) => (
                   <Text htmlTag="h3">Devs: {devInfo.devCount}</Text>
                 </div>
 
-                <SkillMapper skills={devInfo.skills} isParentActive={false} />
+                <TechMapper techs={devInfo.techs} isParentActive={false} />
               </div>
             ))}
           </div>
