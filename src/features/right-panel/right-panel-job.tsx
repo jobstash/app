@@ -1,17 +1,8 @@
-import clsx from 'clsx';
-
 import type { Job, Skill } from '~/core/interfaces';
-import { formatSalary } from '~/utils/format-salary';
 
 import { Button } from '../unstyled-ui/base/button';
 import { Text } from '../unstyled-ui/base/text';
-import {
-  LocationTagIcon,
-  SalaryTagIcon,
-  SeniorTagIcon,
-  TeamSizeTagIcon,
-} from '../unstyled-ui/icons';
-import { UtcTagIcon } from '../unstyled-ui/icons/utc-tag-icon';
+import { JobTagMapper } from '../unstyled-ui/job-tag-mapper';
 import { TechWrapper } from '../unstyled-ui/tech-wrapper';
 
 /** Titles used in hard skills */
@@ -52,88 +43,15 @@ export const Description = ({ job }: Props) => {
 };
 
 export const Header = ({ job }: Props) => {
-  const {
-    title,
-    details: { role, team },
-    salary,
-    location,
-    tz,
-  } = job;
+  const { title } = job;
 
-  const strSalary = formatSalary(salary);
   return (
     <>
       <Text htmlTag="h1" size="2xl" fw="bold" className="text-white/90">
         {title}
       </Text>
 
-      <div className="flex items-center">
-        <Button
-          size="sm"
-          kind="subtle"
-          textProps={{
-            fw: 'regular',
-            size: 'md',
-            className: 'text-white/90',
-            htmlTag: 'h3',
-          }}
-          left={<SeniorTagIcon />}
-        >
-          {role.name}
-        </Button>
-        <Button
-          size="sm"
-          kind="subtle"
-          textProps={{
-            fw: 'regular',
-            size: 'md',
-            className: 'text-white/90',
-            htmlTag: 'h3',
-          }}
-          left={<SalaryTagIcon />}
-        >
-          {strSalary}
-        </Button>
-        <Button
-          size="sm"
-          kind="subtle"
-          textProps={{
-            fw: 'regular',
-            size: 'md',
-            className: 'text-white/90',
-            htmlTag: 'h3',
-          }}
-          left={<LocationTagIcon />}
-        >
-          {location}
-        </Button>
-        <Button
-          size="sm"
-          kind="subtle"
-          textProps={{
-            fw: 'regular',
-            size: 'md',
-            className: 'text-white/90',
-            htmlTag: 'h3',
-          }}
-          left={<TeamSizeTagIcon />}
-        >
-          Team Size: {team.size}
-        </Button>
-        <Button
-          size="sm"
-          kind="subtle"
-          textProps={{
-            fw: 'regular',
-            size: 'md',
-            className: 'text-white/90',
-            htmlTag: 'h3',
-          }}
-          left={<UtcTagIcon />}
-        >
-          {tz}
-        </Button>
-      </div>
+      <JobTagMapper job={job} />
 
       <div>
         <Button
@@ -187,7 +105,7 @@ export const HardSkills = ({ job: { skills } }: Props) => (
   </div>
 );
 
-export const RightPanelJobDetails = ({ job }: Props) => {
+export const RightPanelJob = ({ job }: Props) => {
   // It's possible job is undefined in which case we don't display panel
   if (!job) return null;
 

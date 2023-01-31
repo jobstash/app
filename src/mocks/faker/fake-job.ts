@@ -7,11 +7,11 @@ import {
   LABEL_ROLE,
   LABEL_TEAM,
 } from '~/core/constants';
-import { Job, Org } from '~/core/interfaces';
+import type { Job, Org } from '~/core/interfaces';
 
 import { fakeDesc } from './fake-desc';
 import { getOrgLocation, OrgName } from './fake-org';
-import { fakeJobSkills, fakeSkills } from './fake-skill';
+import { fakeJobSkills } from './fake-skill';
 import { fakeTz } from './fake-tz';
 
 const poolRoles = ['Junior', 'Senior', 'Lead'];

@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
 
-import { Org, Repository } from '~/core/interfaces';
+import type { Org, Repository } from '~/core/interfaces';
 
 import { fakeArrayFromFaker } from './fake-array-from-faker';
 import { fakeDesc } from './fake-desc';

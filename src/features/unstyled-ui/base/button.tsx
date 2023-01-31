@@ -88,7 +88,7 @@ type ButtonHTMLProps = Omit<
 >;
 
 /** `Note`: left/right element is not part of button styles */
-interface ButtonProps extends ButtonHTMLProps, ButtonVariantProps {
+export interface ButtonProps extends ButtonHTMLProps, ButtonVariantProps {
   /** Text inside button */
   children: ReactNode;
 
@@ -145,25 +145,7 @@ export const Button = ({
 
   return (
     <div className="flex items-center justify-center rounded-md bg-gradient-to-l from-primary to-secondary p-0.5">
-      <button
-        type="button"
-        disabled={isDisabled}
-        className={cvaButton({
-          kind,
-          isActive,
-          isDisabled,
-          size,
-          hasLeft: Boolean(left),
-          hasRight: Boolean(right),
-        })}
-        {...props}
-      >
-        {left}
-        <Text size={textProps?.size ?? 'md'} {...textProps}>
-          {children}
-        </Text>
-        {right}
-      </button>
+      {btn}
     </div>
   );
 };

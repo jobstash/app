@@ -1,5 +1,3 @@
-import { ReactNode } from 'react';
-
 /** Represents `/{section}/{id}/{tab}` route pathname segments */
 export interface RouteSegments {
   section: 'jobs'; // TODO: add other sections

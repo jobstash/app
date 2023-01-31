@@ -1,7 +1,7 @@
 import type { Job } from './job';
 import type { Org } from './org';
 import type { Project } from './project';
-import { Repository } from './repository';
+import type { Repository } from './repository';
 
 /**
  * Job listings are mapped as the main content of the page.

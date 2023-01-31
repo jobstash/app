@@ -1,5 +1,3 @@
-import { faker } from '@faker-js/faker';
-
 import type { Project } from '~/core/interfaces';
 
 import { fakeChain, fakeChains } from './fake-chains';

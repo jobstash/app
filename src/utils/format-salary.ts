@@ -1,4 +1,4 @@
-import { Range } from '~/core/interfaces';
+import type { Range } from '~/core/interfaces';
 import { numFormatter } from '~/core/misc';
 
 export const formatSalary = (range: Range) =>
