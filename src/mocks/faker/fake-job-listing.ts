@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
 
-import { JobListing } from '~/core/interfaces';
+import type { JobListing } from '~/core/interfaces';
 
 import { fakeCompetitors } from './fake-competitors';
 import { fakeJob } from './fake-job';

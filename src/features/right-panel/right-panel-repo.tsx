@@ -1,38 +1,15 @@
-import { useState } from 'react';
-
-import clsx from 'clsx';
-import { uid } from 'uid';
-
 import { getTagIcon } from '~/core/constants';
 import type { Repository } from '~/core/interfaces';
 
 import { Button } from '../unstyled-ui/base/button';
 import { Text } from '../unstyled-ui/base/text';
-import {
-  BookmarkActiveButtonIcon,
-  BookmarkButtonIcon,
-  DevRepoIcon,
-  GithubRepoIcon,
-} from '../unstyled-ui/icons';
-import { TechWrapper } from '../unstyled-ui/tech-wrapper';
+import { BookmarkButton } from '../unstyled-ui/bookmark-button';
+import { DevRepoIcon, GithubRepoIcon } from '../unstyled-ui/icons';
+import { SkillMapper } from '../unstyled-ui/skill-mapper';
 
 interface InnerProps {
   repo: Repository;
 }
-
-const BookmarkButton = () => {
-  const [isActive, setIsActive] = useState(false);
-
-  const onClick = () => {
-    setIsActive((prev) => !prev);
-  };
-
-  return (
-    <Button onClick={onClick}>
-      {isActive ? <BookmarkActiveButtonIcon /> : <BookmarkButtonIcon />}
-    </Button>
-  );
-};
 
 const Header = ({ repo }: InnerProps) => (
   <>
@@ -55,7 +32,7 @@ interface Props {
   repos: Repository[];
 }
 
-export const RightPanelRepoDetails = ({ repos }: Props) => (
+export const RightPanelRepo = ({ repos }: Props) => (
   <div className="flex flex-col space-y-4">
     {repos.map((repo) => (
       <div
@@ -103,16 +80,7 @@ export const RightPanelRepoDetails = ({ repos }: Props) => (
                   <Text htmlTag="h3">Devs: {devInfo.devCount}</Text>
                 </div>
 
-                <div className="flex space-x-4 ">
-                  {devInfo.skills.map((skill) => (
-                    <TechWrapper
-                      key={skill.name}
-                      text={skill.name}
-                      isChecked={skill.isChecked}
-                      isParentActive={false}
-                    />
-                  ))}
-                </div>
+                <SkillMapper skills={devInfo.skills} isParentActive={false} />
               </div>
             ))}
           </div>

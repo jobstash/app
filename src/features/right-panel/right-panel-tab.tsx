@@ -1,5 +1,3 @@
-import clsx from 'clsx';
-
 import { TEXT_DETAILS } from '~/core/constants';
 import { RouteSegments } from '~/core/interfaces';
 import type { RouterPush } from '~/core/types';

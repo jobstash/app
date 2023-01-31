@@ -6,7 +6,7 @@ import { CodeSidebarIcon } from './icons';
 
 export default {
   component: Bartab,
-  title: 'UNSTYLED/base/Bartab',
+  title: 'UNSTYLED/ui/Bartab',
   // Default Args
   args: {
     text: 'Continue with Github',

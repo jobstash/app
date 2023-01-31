@@ -1,8 +1,3 @@
-import Image from 'next/image';
-
-import clsx from 'clsx';
-
-import { getTagIcon } from '~/core/constants';
 import type { Project } from '~/core/interfaces';
 
 import { Avatar } from '../unstyled-ui/base/avatar';
@@ -10,7 +5,8 @@ import { Button } from '../unstyled-ui/base/button';
 import { Text } from '../unstyled-ui/base/text';
 import { ChainTagIcon } from '../unstyled-ui/icons';
 import { LogoTitle } from '../unstyled-ui/logo-title';
-import { TechWrapper } from '../unstyled-ui/tech-wrapper';
+import { ProjectTagMapper } from '../unstyled-ui/project-tag-mapper';
+import { SkillMapper } from '../unstyled-ui/skill-mapper';
 
 interface Props {
   project: Project;
@@ -19,7 +15,7 @@ interface Props {
 const TEXT_TECHNOLOGIES_DESC =
   'Uncover the technical skills and tools employed by the company, and gain insight into the technologies that dive their success.';
 
-export const RightPanelProjectDetails = ({ project }: Props) => (
+export const RightPanelProject = ({ project }: Props) => (
   <div className="flex items-center justify-center rounded-2xl bg-gradient-to-l from-primary to-secondary p-1">
     <div className="flex flex-col space-y-6 rounded-2xl bg-card p-6">
       <LogoTitle
@@ -42,39 +38,11 @@ export const RightPanelProjectDetails = ({ project }: Props) => (
 
       <hr className="h-px border-0 bg-white/20" />
 
-      <div className="flex items-center space-x-4">
-        {project.tags.top.map((tag) => (
-          <Button
-            key={tag.text}
-            size="xs"
-            kind={tag.link ? undefined : 'subtle'}
-            textProps={{ fw: 'regular', size: 'sm' }}
-            left={getTagIcon(tag.iconKey)}
-            // eslint-disable-next-line no-alert
-            onClick={tag.link ? () => alert('External link') : undefined}
-          >
-            {tag.text}
-          </Button>
-        ))}
-      </div>
+      <ProjectTagMapper tags={project.tags.top} />
 
       <hr className="h-px border-0 bg-white/20" />
 
-      <div className="flex items-center space-x-4">
-        {project.tags.bottom.map((tag) => (
-          <Button
-            key={tag.text}
-            size="xs"
-            kind={tag.link ? undefined : 'subtle'}
-            textProps={{ fw: 'regular', size: 'sm' }}
-            left={getTagIcon(tag.iconKey)}
-            // eslint-disable-next-line no-alert
-            onClick={tag.link ? () => alert('External link') : undefined}
-          >
-            {tag.text}
-          </Button>
-        ))}
-      </div>
+      <ProjectTagMapper tags={project.tags.bottom} />
 
       <hr className="h-px border-0 bg-white/20" />
 
@@ -107,16 +75,8 @@ export const RightPanelProjectDetails = ({ project }: Props) => (
             {TEXT_TECHNOLOGIES_DESC}
           </Text>
         </div>
-        <div className="flex space-x-4">
-          {project.skills.map((skill) => (
-            <TechWrapper
-              key={skill.name}
-              text={skill.name}
-              isChecked={skill.isChecked}
-              isParentActive={false}
-            />
-          ))}
-        </div>
+
+        <SkillMapper skills={project.skills} isParentActive={false} />
       </div>
     </div>
   </div>

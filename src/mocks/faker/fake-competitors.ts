@@ -1,4 +1,4 @@
-import { Project } from '~/core/interfaces';
+import type { Project } from '~/core/interfaces';
 
 import { fakeArrayFromFaker } from './fake-array-from-faker';
 import { fakeProject } from './fake-project';

@@ -1,42 +1,15 @@
-import { MouseEventHandler, useReducer, useState } from 'react';
-
 import type { Job } from '~/core/interfaces';
-import { formatSalary } from '~/utils/format-salary';
 
-import { Button } from '../unstyled-ui/base/button';
 import { Text } from '../unstyled-ui/base/text';
-import {
-  BookmarkActiveButtonIcon,
-  BookmarkButtonIcon,
-  LocationTagIcon,
-  SalaryTagIcon,
-  SeniorTagIcon,
-} from '../unstyled-ui/icons';
-import { TeamSizeTagIcon } from '../unstyled-ui/icons';
-import { UtcTagIcon } from '../unstyled-ui/icons/utc-tag-icon';
+import { BookmarkButton } from '../unstyled-ui/bookmark-button';
+import { JobTagMapper } from '../unstyled-ui/job-tag-mapper';
 
 interface Props {
   job: Job;
 }
 
-const BookmarkButton = () => {
-  const [isActive, setIsActive] = useState(false);
-
-  const onClick = () => {
-    setIsActive((prev) => !prev);
-  };
-
-  return (
-    <Button onClick={onClick}>
-      {isActive ? <BookmarkActiveButtonIcon /> : <BookmarkButtonIcon />}
-    </Button>
-  );
-};
-
 export const JobListingHeader = ({ job }: Props) => {
-  const { title, salary, location, tz, created, details } = job;
-
-  const strSalary = formatSalary(salary);
+  const { title, created } = job;
 
   return (
     <>
@@ -53,73 +26,7 @@ export const JobListingHeader = ({ job }: Props) => {
         </div>
       </div>
 
-      <div className="flex items-center">
-        <Button
-          size="sm"
-          kind="subtle"
-          textProps={{
-            fw: 'regular',
-            size: 'md',
-            className: 'text-white/90',
-            htmlTag: 'h3',
-          }}
-          left={<SeniorTagIcon />}
-        >
-          {details.role.name}
-        </Button>
-        <Button
-          size="sm"
-          kind="subtle"
-          textProps={{
-            fw: 'regular',
-            size: 'md',
-            className: 'text-white/90',
-            htmlTag: 'h3',
-          }}
-          left={<SalaryTagIcon />}
-        >
-          {strSalary}
-        </Button>
-        <Button
-          size="sm"
-          kind="subtle"
-          textProps={{
-            fw: 'regular',
-            size: 'md',
-            className: 'text-white/90',
-            htmlTag: 'h3',
-          }}
-          left={<LocationTagIcon />}
-        >
-          {location}
-        </Button>
-        <Button
-          size="sm"
-          kind="subtle"
-          textProps={{
-            fw: 'regular',
-            size: 'md',
-            className: 'text-white/90',
-            htmlTag: 'h3',
-          }}
-          left={<TeamSizeTagIcon />}
-        >
-          Team Size: {details.team.size}
-        </Button>
-        <Button
-          size="sm"
-          kind="subtle"
-          textProps={{
-            fw: 'regular',
-            size: 'md',
-            className: 'text-white/90',
-            htmlTag: 'h3',
-          }}
-          left={<UtcTagIcon />}
-        >
-          {tz}
-        </Button>
-      </div>
+      <JobTagMapper job={job} />
 
       <hr className="h-px border-0 bg-white/30" />
     </>

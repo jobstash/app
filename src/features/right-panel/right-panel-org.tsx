@@ -1,6 +1,3 @@
-import clsx from 'clsx';
-
-import { getTagIcon } from '~/core/constants';
 import type { Org } from '~/core/interfaces';
 
 import { Button } from '../unstyled-ui/base/button';
@@ -12,7 +9,6 @@ import {
   TwitterTagIcon,
   WebsiteTagIcon,
 } from '../unstyled-ui/icons';
-import { LogoTitle } from '../unstyled-ui/logo-title';
 
 interface Props {
   org: Org;
@@ -62,7 +58,7 @@ const tags = [
   },
 ];
 
-export const RightPanelOrgDetails = ({ org }: Props) => (
+export const RightPanelOrg = ({ org }: Props) => (
   <div className="flex items-center justify-center rounded-2xl bg-gradient-to-l from-primary to-secondary p-1">
     <div className="flex flex-col space-y-6 rounded-2xl bg-card p-6 ">
       <Header org={org} />

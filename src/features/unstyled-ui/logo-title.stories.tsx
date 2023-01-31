@@ -4,7 +4,7 @@ import { LogoTitle } from './logo-title';
 
 export default {
   component: LogoTitle,
-  title: 'UNSTYLED/base/LogoTitle',
+  title: 'UNSTYLED/ui/LogoTitle',
   // Default Args
   args: {
     name: 'Hello World',

@@ -6,7 +6,7 @@ import type { Skill, Tag } from './common';
  * For now, tags will be grouped as top and bottom sections temporarily.
  * We'll finalize this in the future.
  *  */
-interface ProjectTags {
+export interface ProjectTags {
   top: Tag[];
   bottom: Tag[];
 }

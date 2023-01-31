@@ -1,5 +1,5 @@
 import { ORG_UNISWAP_LABS } from '~/core/constants';
-import { JobListing, Org } from '~/core/interfaces';
+import type { JobListing, Org } from '~/core/interfaces';
 
 import { fakeJob } from './fake-job';
 import { fakeOrg, getOrgLocation } from './fake-org';

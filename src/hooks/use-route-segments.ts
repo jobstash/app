@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 
-import { RouteSegments } from '~/core/interfaces';
-import { RouterPush, SectionSegment, TabsSegment } from '~/core/types';
+import type { RouteSegments } from '~/core/interfaces';
+import type { RouterPush, SectionSegment, TabsSegment } from '~/core/types';
 
 /**
  * `useRouteSegment` returns info needed for routes involving `/{section}/{org}-{job-title}`

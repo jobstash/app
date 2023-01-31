@@ -1,11 +1,11 @@
 import type { JobListing } from '~/core/interfaces';
 import type { VoidFn } from '~/core/types';
-import { formatSalary } from '~/utils/format-salary';
+
+import { SkillMapper } from '../unstyled-ui/skill-mapper';
 
 import { JobListingHeader } from './job-listing-header';
 import { JobListingOrgInfo } from './job-listing-org-info';
 import { JobListingProject } from './job-listing-project';
-import { JobListingSkills } from './job-listing-skills';
 import { JobListingWrapper } from './job-listing-wrapper';
 
 interface Props {
@@ -25,8 +25,12 @@ export const JobListingUi = ({ jobListing, isActive, onClick }: Props) => {
   return (
     <JobListingWrapper isActive={isActive} onClick={onClick}>
       <JobListingHeader job={job} />
-      <JobListingSkills skills={skills} isParentActive={isActive} />
+
+      <SkillMapper skills={skills} isParentActive={isActive} />
+      <hr className="h-px border-0 bg-white/30" />
+
       <JobListingOrgInfo org={org} />
+
       <div>{project && <JobListingProject project={project} />}</div>
     </JobListingWrapper>
   );

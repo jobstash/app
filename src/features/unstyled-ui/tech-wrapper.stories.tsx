@@ -4,7 +4,7 @@ import { TechWrapper } from './tech-wrapper';
 
 export default {
   component: TechWrapper,
-  title: 'UNSTYLED/base/TechWrapper',
+  title: 'UNSTYLED/ui/TechWrapper',
   // Default args
   args: {
     text: 'webgl',

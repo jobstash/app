@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import { MouseEventHandler } from 'react';
 
 import { getTagIcon } from '~/core/constants';
 import type { Project } from '~/core/interfaces';
