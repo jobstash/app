@@ -9,7 +9,7 @@ export const LinkTagIcon = () => (
     <path
       d="M11.375 7C11.375 9.69239 9.19239 11.875 6.5 11.875C3.80761 11.875 1.625 9.69239 1.625 7C1.625 4.30761 3.80761 2.125 6.5 2.125C9.19239 2.125 11.375 4.30761 11.375 7Z"
       fill="white"
-      fill-opacity="0.05"
+      fillOpacity="0.05"
     />
     <path
       fillRule="evenodd"
