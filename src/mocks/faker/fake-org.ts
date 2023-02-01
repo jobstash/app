@@ -21,7 +21,7 @@ import { fakeTechs } from './fake-tech';
  * *			 These are just mainly used to map the svgs in public dir.
  * *       Ideally, backend should provide the link for uploaded images.
  * */
-const poolOrgs = [
+export const poolOrgs = [
   ORG_AAVE,
   ORG_BALANCER,
   ORG_CURVE,

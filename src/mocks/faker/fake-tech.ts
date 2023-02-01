@@ -25,5 +25,16 @@ export const fakeTech = (): Tech => ({
   isChecked: Boolean(faker.helpers.maybe(() => '_', { probability: 0.25 })),
 });
 
-export const fakeTechs = (min = 2, max = 4): Tech[] =>
-  fakeArrayFromFaker(fakeTech, min, max);
+export const fakeTechs = (min = 2, max = 4): Tech[] => {
+  // There are 12 skills total (fake pool)
+  const allTechs = faker.helpers.shuffle(poolTechs).map((name) => ({
+    name,
+    // Adjust checkmark probability to 25%
+    isChecked: Boolean(faker.helpers.maybe(() => '_', { probability: 0.25 })),
+  }));
+
+  return faker.helpers.arrayElements(
+    allTechs,
+    faker.datatype.number({ min, max }),
+  );
+};
