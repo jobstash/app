@@ -25,7 +25,7 @@ export const DiscoverTabs = (props: {
             isActive={`/${props.section}` === nav.baseHref}
             left={nav.left}
             text={nav.label}
-            intent={nav.intent}
+            intent="secondary"
             onClick={() =>
               nav.label === 'Jobs' // Jobs route for now
                 ? props.push(
@@ -59,7 +59,7 @@ const BookmarkedTab = () => (
             <Bartab
             left={nav.left}
             text={nav.label}
-            intent={nav.intent}
+            intent="secondary"
             onClick={() => alert('TODO')}
             />
         </div>
@@ -77,7 +77,7 @@ const UserTab = () => (
     <hr className="my-5 h-px border-0 bg-white/20" />
     <Bartab
       intent="secondary"
-      left={<Avatar src="/user/@OxDevoor.svg" alt="LoggedIn User" size="sm" />}
+      left={<Avatar src="https://via.placeholder.com/150" alt="LoggedIn User" size="xs" />}
       text="@OxDevoor"
       onClick={() => alert('TODO')}
     />
