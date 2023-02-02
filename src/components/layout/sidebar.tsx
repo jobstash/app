@@ -43,9 +43,7 @@ export const DiscoverTabs = (props: {
             left={nav.left}
             text={nav.label}
             intent="secondary"
-            onClick={() =>
-              null
-            }
+            onClick={() => alert('TODO')}
           />
         </div>
       ))}
@@ -91,17 +89,17 @@ const UserTab = () => (
 
 interface Props {
   section: string;
-  push: RouterPush;
-  listing: Listing;
+  // Push: RouterPush;
+  // listing: Listing;
 }
 
-export const SideBar = ({ section, push, listing }: Props) => (
+export const SideBar = ({ section }: Props) => (
   <nav className="fixed inset-y-0 flex min-h-screen flex-col p-4">
-    <div className="">
+    <div>
       <Brand />
-      <DiscoverTabs section={section} push={push} listing={listing} />
+      <DiscoverTabs section={section} />
     </div>
-    <div className="">
+    <div>
       <BookmarkedTab />
     </div>
     <div>
