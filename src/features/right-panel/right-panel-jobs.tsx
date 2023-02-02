@@ -13,11 +13,11 @@ const hardSkillTitles = [
   'You share responsibility with others about',
 ];
 
-interface Props {
+interface InnerProps {
   job: Job;
 }
 
-export const Description = ({ job }: Props) => {
+export const Description = ({ job }: InnerProps) => {
   const {
     details: { role, team, benefits, interview },
   } = job;
@@ -43,7 +43,7 @@ export const Description = ({ job }: Props) => {
   );
 };
 
-export const Header = ({ job }: Props) => {
+export const Header = ({ job }: InnerProps) => {
   const { title } = job;
 
   return (
@@ -72,7 +72,7 @@ export const Header = ({ job }: Props) => {
   );
 };
 
-export const HardSkills = ({ job: { skills } }: Props) => (
+export const HardSkills = ({ job: { skills } }: InnerProps) => (
   <div className="flex flex-col space-y-6">
     <div className="flex flex-col space-y-2">
       <Text size="lg" fw="bold">
@@ -105,7 +105,7 @@ export const HardSkills = ({ job: { skills } }: Props) => (
   </div>
 );
 
-export const RightPanelJob = ({ job }: Props) => {
+export const RightPanelJob = ({ job }: InnerProps) => {
   // It's possible job is undefined in which case we don't display panel
   if (!job) return null;
 
@@ -119,3 +119,15 @@ export const RightPanelJob = ({ job }: Props) => {
     </div>
   );
 };
+
+interface Props {
+  jobs: Job[];
+}
+
+export const RightPanelJobs = ({ jobs }: Props) => (
+  <div className="space-y-4">
+    {jobs.map((job) => (
+      <RightPanelJob key={job.id} job={job} />
+    ))}
+  </div>
+);

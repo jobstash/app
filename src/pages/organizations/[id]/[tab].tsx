@@ -1,41 +1,41 @@
-import { GetServerSideProps } from 'next';
+import type { GetServerSideProps } from 'next';
 import { useEffect } from 'react';
 
 import { EVENT_CARD_CLICK } from '~/core/constants';
-import { OrgListing } from '~/core/interfaces';
+import type { Listing } from '~/core/interfaces';
 import { ListingCardOrg } from '~/features/listing/listing-card-org';
 import { RightPanel } from '~/features/right-panel';
 import { SideBar } from '~/features/sidebar';
 import { useRootContext } from '~/hooks/use-root-context';
 import { useRouteSegments } from '~/hooks/use-route-segments';
 import { GenericLayout } from '~/layouts/generic-layout';
-import { mockOrgListings } from '~/mocks/data/mocked-org-listing';
+import { mockGuaranteedListing } from '~/mocks/data/mocked-guaranteed-listing';
 import { slugify } from '~/utils/slugify';
 
-interface PageProps {
+interface Props {
   data: {
-    listings: OrgListing[];
+    activeListing: Listing;
   };
 }
 
-const OrgsPage = ({ data }: PageProps) => {
+const JobsPage = ({ data }: Props) => {
   const { segments, push } = useRouteSegments();
-  const { activeCards, setActiveOrgCard } = useRootContext();
+  const { activeListing, setActiveListing } = useRootContext();
 
-  // Set first element as active job card
+  // Set SSR data active listing
   useEffect(() => {
-    setActiveOrgCard(data.listings[0]);
+    setActiveListing(data.activeListing);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // If for some reason jobListings data is empty, return appropriate page
-  if (data.listings.length === 0) return <h1>EMPTY</h1>;
+  if (data.activeListing.jobs.length === 0) return <h1>EMPTY</h1>;
 
-  const cardOnClick = (listing: OrgListing) => {
+  const listingOnClick = (listing: Listing) => {
     push(`/organizations/${slugify(listing.org.name)}/details`, {
       shallow: true,
     });
-    setActiveOrgCard(listing);
+    setActiveListing(listing);
     document.dispatchEvent(new Event(EVENT_CARD_CLICK));
   };
 
@@ -46,7 +46,7 @@ const OrgsPage = ({ data }: PageProps) => {
           <SideBar
             section={segments.section}
             push={push}
-            activeCards={activeCards}
+            listing={activeListing}
           />
         }
         rightPanel={<RightPanel segments={segments} push={push} />}
@@ -58,48 +58,28 @@ const OrgsPage = ({ data }: PageProps) => {
         </div>
 
         <div className="flex w-full flex-col space-y-12">
-          {data.listings.map((listing) => (
+          {[data.activeListing].map((listing) => (
             <ListingCardOrg
               key={listing.org.name}
               listing={listing}
               isActive={segments.id === slugify(listing.org.name)}
-              onClick={() => cardOnClick(listing)}
+              onClick={() => listingOnClick(listing)}
             />
           ))}
+          {/** TODO: FETCH OTHER JOB LISTINGS, SHOW SKELETON WHILE LOADING */}
         </div>
       </GenericLayout>
     </div>
   );
 };
 
-export default OrgsPage;
+export default JobsPage;
 
-export const getServerSideProps: GetServerSideProps<PageProps> = async (
-  ctx,
-) => {
-  // Use `/organizations/uniswap-labs/details` key
-  // if you want to access a job-listing that certainly exists within generated data
-  const listings = mockOrgListings;
-
-  // ActiveListing is the listing that matches the url query
-  const activeListing = listings.find(
-    (listings) => slugify(listings.org.name) === ctx.query.id,
-  );
-
-  // !!! Note: TEMPORARY TO AVOID 404 during dev
-  if (!activeListing)
-    return {
-      redirect: {
-        permanent: false,
-        destination: '/organizations/uniswap-labs/details',
-      },
-    };
-
-  return {
-    props: {
-      data: {
-        listings,
-      },
+export const getServerSideProps: GetServerSideProps = async () => ({
+  props: {
+    data: {
+      // Guaranteed `/organizations/uniswap-labs/details` route
+      activeListing: mockGuaranteedListing,
     },
-  };
-};
+  },
+});

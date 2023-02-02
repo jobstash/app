@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 
 import type { RouteSegments } from '~/core/interfaces';
-import type { RouterPush, SectionSegment, TabsSegment } from '~/core/types';
+import type { RouterPush } from '~/core/types';
 
 /**
  * `useRouteSegment` returns info needed for routes involving `/{section}/{org}-{job-title}`
@@ -10,11 +10,11 @@ export const useRouteSegments = () => {
   const router = useRouter();
   const { id, tab } = router.query as {
     id: string;
-    tab: TabsSegment;
+    tab: RouteSegments['tab'];
   };
 
   const pathname = router.asPath;
-  const section = pathname.slice(1).split('/')[0] as SectionSegment;
+  const section = pathname.slice(1).split('/')[0] as RouteSegments['section'];
 
   const push: RouterPush = (url, options) => {
     // * Need pathname guard since nextjs throws runtime error on router.push to same url

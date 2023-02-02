@@ -1,4 +1,4 @@
-import type { ListingProps, OrgListing } from '~/core/interfaces';
+import type { Listing, ListingProps } from '~/core/interfaces';
 
 import { Divider } from '../unstyled-ui/base/divider';
 
@@ -9,7 +9,7 @@ import { ListingWrapper } from './listing-wrapper';
 
 /** Override listing field as OrgListing */
 interface Props extends ListingProps {
-  listing: OrgListing;
+  listing: Listing;
 }
 
 /** UI for org-listing card */
