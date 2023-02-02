@@ -1,7 +1,6 @@
 import { faker } from '@faker-js/faker';
 
-import { ORG_UNISWAP_LABS } from '~/core/constants';
-import type { Org, OrgListing } from '~/core/interfaces';
+import type { Listing } from '~/core/interfaces';
 
 import { fakeCompetitors } from './fake-competitors';
 import { fakeDesc } from './fake-desc';
@@ -12,25 +11,25 @@ import { fakeRepos } from './fake-repo';
 import { fakeTags } from './fake-tag';
 import { fakeTechs } from './fake-tech';
 
-export const fakeOrgListing = (): OrgListing => {
+export const fakeListing = (): Listing => {
   const org = fakeOrg();
   const jobs = fakeJobs();
-  const project = fakeProject();
+  const projects = fakeProject();
   const competitors = fakeCompetitors();
   const repositories = fakeRepos(org);
 
   return {
     org,
     jobs,
-    project,
+    projects,
     competitors,
     repositories,
   };
 };
 
 /** We only list all available orgs (based on those with location) */
-export const fakeOrgListings = (): OrgListing[] => {
-  const orgListings: OrgListing[] = [];
+export const fakeListings = (): Listing[] => {
+  const orgListings: Listing[] = [];
 
   for (const name of poolOrgs) {
     // We skip Uniswap Labs since we inject it,
@@ -48,7 +47,7 @@ export const fakeOrgListings = (): OrgListing[] => {
     const recent = `${faker.datatype.number({ min: 2, max: 6 })} days ago`;
 
     orgListings.push({
-      ...fakeOrgListing(),
+      ...fakeListing(),
       org: {
         name,
         avatar,

@@ -4,9 +4,9 @@ import { fakeChain, fakeChains } from './fake-chains';
 import { fakeDesc } from './fake-desc';
 import { fakeTags } from './fake-tag';
 import { fakeTechs } from './fake-tech';
-import { nullProbability } from './null-probability';
+import { returnChance } from './return-chance';
 
-export const fakeProject = (hasProbability = true): Project | null => {
+export const fakeProject = (hasProbability = true): Project[] => {
   // Project is based on chains for now
   const { name, avatar } = fakeChain();
   const description = fakeDesc(5, 10);
@@ -20,14 +20,16 @@ export const fakeProject = (hasProbability = true): Project | null => {
 
   const techs = fakeTechs(3, 5);
 
-  const value = {
-    name,
-    avatar,
-    description,
-    chains,
-    tags,
-    techs,
-  };
+  const value = [
+    {
+      name,
+      avatar,
+      description,
+      chains,
+      tags,
+      techs,
+    },
+  ];
 
-  return nullProbability(value, hasProbability);
+  return returnChance(value, [], hasProbability);
 };

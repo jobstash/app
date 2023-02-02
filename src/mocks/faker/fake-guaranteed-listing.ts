@@ -1,5 +1,5 @@
 import { ORG_UNISWAP_LABS } from '~/core/constants';
-import type { JobListing, Org } from '~/core/interfaces';
+import type { Listing, Org } from '~/core/interfaces';
 
 import { fakeCompetitors } from './fake-competitors';
 import { fakeJob } from './fake-job';
@@ -7,7 +7,8 @@ import { fakeOrg, getOrgLocation } from './fake-org';
 import { fakeProject } from './fake-project';
 import { fakeRepos } from './fake-repo';
 
-export const fakeFirstJobListing = (): JobListing => {
+// This listing contains all info needed for guaranteed routes across '/jobs', '/orgs', '/repo', etc
+export const fakeGuaranteedListing = (): Listing => {
   const org: Org = {
     ...fakeOrg(),
     name: ORG_UNISWAP_LABS,
@@ -24,14 +25,14 @@ export const fakeFirstJobListing = (): JobListing => {
     }),
   ];
 
-  const project = fakeProject();
+  const projects = fakeProject(false);
   const competitors = fakeCompetitors();
   const repositories = fakeRepos(org);
 
   return {
     org,
     jobs,
-    project,
+    projects,
     competitors,
     repositories,
   };
