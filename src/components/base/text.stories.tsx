@@ -4,7 +4,7 @@ import { Text } from './text';
 
 export default {
   component: Text,
-  title: 'UNSTYLED/base/Text',
+  title: 'Components/Base/Text',
 } as ComponentMeta<typeof Text>;
 
 const Template: ComponentStory<typeof Text> = (args) => (

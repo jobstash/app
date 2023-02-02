@@ -4,7 +4,7 @@ import { Avatar } from './avatar';
 
 export default {
   component: Avatar,
-  title: 'UNSTYLED/base/Avatar',
+  title: 'Components/Base/Avatar',
   // Default Args
   args: {
     src: `https://api.dicebear.com/5.x/bottts/svg?seed=${Date.now()}`,

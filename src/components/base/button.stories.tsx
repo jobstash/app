@@ -6,7 +6,7 @@ import { Button } from './button';
 
 export default {
   component: Button,
-  title: 'UNSTYLED/base/Button',
+  title: 'Components/Base/Button',
   // Default args
   args: {
     children: 'Button',

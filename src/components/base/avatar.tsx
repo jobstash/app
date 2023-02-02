@@ -29,5 +29,5 @@ export interface AvatarProps extends RequiredVariantProps {
 export const Avatar = ({ src, alt, size = 'md' }: AvatarProps) => {
   const imageSize = sizeMap[size as AvatarSizes] as `${number}`;
 
-  return <Image src={src} alt={alt} width={imageSize} height={imageSize} />;
+  return <Image src={src} alt={alt} width={imageSize} height={imageSize} className="rounded-full" />;
 };
