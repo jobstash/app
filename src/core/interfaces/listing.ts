@@ -22,16 +22,16 @@ export interface Listing {
    * `/jobs` route contains exactly one element
    * Optional since some repos/project might have no job openings
    * */
-  readonly jobs: Job[] | null;
+  readonly jobs: Job[];
 
-  /** Optional since some project might not expose the project  */
-  readonly project: Project | null;
+  /** Optional since some projects might not be exposed  */
+  readonly projects: Project[];
 
   /** Optional since projects are optional, so are the competitors of a project */
-  readonly competitors: Project[] | null;
+  readonly competitors: Project[];
 
   /** Optional since some orgs might not expose their repositories */
-  readonly repositories: Repository[] | null;
+  readonly repositories: Repository[];
 }
 
 /** All listing ui (e.g. jobs, orgs, etc) should conform this props interface */

@@ -1,41 +1,38 @@
-import { GetServerSideProps } from 'next';
+import type { GetServerSideProps } from 'next';
 import { useEffect } from 'react';
 
 import { EVENT_CARD_CLICK } from '~/core/constants';
-import { JobListing } from '~/core/interfaces';
+import type { Listing } from '~/core/interfaces';
 import { ListingCardJob } from '~/features/listing';
 import { RightPanel } from '~/features/right-panel';
 import { SideBar } from '~/features/sidebar';
 import { useRootContext } from '~/hooks/use-root-context';
 import { useRouteSegments } from '~/hooks/use-route-segments';
 import { GenericLayout } from '~/layouts/generic-layout';
-import {
-  mockedJobListings,
-  mockFirstJobListing,
-} from '~/mocks/data/mocked-job-listing';
+import { mockGuaranteedListing } from '~/mocks/data/mocked-guaranteed-listing';
 
 interface Props {
   data: {
-    jobListings: JobListing[];
+    activeListing: Listing;
   };
 }
 
 const JobsPage = ({ data }: Props) => {
   const { segments, push } = useRouteSegments();
-  const { activeCards, setActiveJobCard } = useRootContext();
+  const { activeListing, setActiveListing } = useRootContext();
 
-  // Set first element as active job card
+  // Sync SSR data active listing
   useEffect(() => {
-    setActiveJobCard(data.jobListings[0]);
+    setActiveListing(data.activeListing);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   // If for some reason jobListings data is empty, return appropriate page
-  if (data.jobListings.length === 0) return <h1>EMPTY</h1>;
+  if (data.activeListing.jobs.length === 0) return <h1>EMPTY</h1>;
 
-  const jobOnClick = (jobListing: JobListing) => {
-    push(`/jobs/${jobListing.jobs![0].id}/details`, { shallow: true });
-    setActiveJobCard(jobListing);
+  const listingOnClick = (listing: Listing) => {
+    push(`/jobs/${listing.jobs[0].id}/details`, { shallow: true });
+    setActiveListing(listing);
     document.dispatchEvent(new Event(EVENT_CARD_CLICK));
   };
 
@@ -46,7 +43,7 @@ const JobsPage = ({ data }: Props) => {
           <SideBar
             section={segments.section}
             push={push}
-            activeCards={activeCards}
+            listing={activeListing}
           />
         }
         rightPanel={<RightPanel segments={segments} push={push} />}
@@ -58,14 +55,13 @@ const JobsPage = ({ data }: Props) => {
         </div>
 
         <div className="flex w-full flex-col space-y-12">
-          {data.jobListings.map((jobListing) => (
-            <ListingCardJob
-              key={jobListing.jobs![0].id}
-              listing={jobListing}
-              isActive={segments.id === jobListing.jobs![0].id}
-              onClick={() => jobOnClick(jobListing)}
-            />
-          ))}
+          <ListingCardJob
+            key={data.activeListing.jobs[0].id}
+            listing={data.activeListing}
+            isActive={segments.id === data.activeListing.jobs[0].id}
+            onClick={() => listingOnClick(data.activeListing)}
+          />
+          {/** TODO: FETCH OTHER JOB LISTINGS, SHOW SKELETON WHILE LOADING */}
         </div>
       </GenericLayout>
     </div>
@@ -74,29 +70,11 @@ const JobsPage = ({ data }: Props) => {
 
 export default JobsPage;
 
-export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  // Use `/jobs/uniswap-labs-senior-frontend-engineer-12345` key
-  // if you want to access a job-listing that certainly exists within generated data
-  const jobListings = [mockFirstJobListing, ...mockedJobListings];
-
-  const currentJob = jobListings.find(
-    (jobListing) => jobListing.jobs![0].id === ctx.query.id,
-  );
-
-  if (!currentJob)
-    return {
-      redirect: {
-        permanent: false,
-        destination:
-          '/jobs/uniswap-labs-senior-frontend-engineer-12345/details',
-      },
-    };
-
-  return {
-    props: {
-      data: {
-        jobListings,
-      },
+export const getServerSideProps: GetServerSideProps = async () => ({
+  props: {
+    data: {
+      // Guaranteed `/jobs/uniswap-labs-senior-frontend-engineer-12345/details` route
+      activeListing: mockGuaranteedListing,
     },
-  };
-};
+  },
+});

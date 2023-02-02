@@ -1,95 +1,39 @@
-import { type ReactNode, useEffect } from 'react';
+import { useEffect } from 'react';
 
-import { ActiveSectionCards } from '~/contexts/root-context';
 import {
   EVENT_CARD_CLICK,
   ID_TOP_RIGHT_PANEL,
   LABEL_COMPETITORS,
-  LABEL_PROJECT,
+  LABEL_JOBS,
+  LABEL_PROJECTS,
   LABEL_REPOSITORIES,
   rightPanelTabs,
 } from '~/core/constants';
 import type { RouteSegments } from '~/core/interfaces';
-import { RouterPush } from '~/core/types';
+import type { RouterPush } from '~/core/types';
 import { useRootContext } from '~/hooks/use-root-context';
 
-import { RightPanelCompetitors } from './right-panel-competitors';
+import { RightPanelCard } from './right-panel-card';
 import { RightPanelHeader } from './right-panel-header';
-import { RightPanelJob } from './right-panel-job';
-import { RightPanelOrg } from './right-panel-org';
-import { RightPanelProject } from './right-panel-project';
-import { RightPanelRepo } from './right-panel-repo';
 import { RightPanelTab } from './right-panel-tab';
+import type { RightPanelTabLabel } from './types';
 
 interface Props {
   segments: RouteSegments;
   push: RouterPush;
 }
 
-interface SectionDetailsMap {
-  jobs: {
-    details: ReactNode;
-    organization: ReactNode;
-    project: ReactNode;
-    competitors: ReactNode;
-    repositories: ReactNode;
-  };
-}
-
-const emptyJobsSectionDetails: SectionDetailsMap['jobs'] = {
-  details: null,
-  organization: null,
-  project: null,
-  competitors: null,
-  repositories: null,
-};
-
-const getJobsRightPanelDetails = (
-  jobs: ActiveSectionCards['jobs'],
-): SectionDetailsMap['jobs'] => {
-  if (!jobs) return emptyJobsSectionDetails;
-
-  const { jobs: listingJobs, org, project, repositories, competitors } = jobs;
-  const job = listingJobs![0];
-
-  const hasRepos = repositories && repositories.length > 0;
-  const hasCompetitors = competitors && competitors.length > 0;
-
-  return jobs
-    ? {
-        details: <RightPanelJob job={job} />,
-        organization: <RightPanelOrg org={org} />,
-        project: project ? <RightPanelProject project={project} /> : null,
-        repositories: hasRepos ? <RightPanelRepo repos={repositories} /> : null,
-        competitors: hasCompetitors ? (
-          <RightPanelCompetitors competitors={competitors} />
-        ) : null,
-      }
-    : emptyJobsSectionDetails;
+const isEmptyTab = <T,>(
+  tab: RightPanelTabLabel,
+  label: RightPanelTabLabel,
+  arr: T[],
+) => {
+  if (tab === label && arr.length === 0) return true;
 };
 
 /** UNSTYLED */
 export const RightPanel = ({ segments, push }: Props) => {
-  const {
-    activeCards: { jobs },
-  } = useRootContext();
-
-  const sectionDetailsMap: SectionDetailsMap = {
-    jobs: getJobsRightPanelDetails(jobs),
-  };
-
-  const checkShouldRenderTab = (tab: string) => {
-    const { project, competitors, repositories } = sectionDetailsMap.jobs;
-
-    // Check for optional job tabs: Projects, Competitors, Repositories
-    if (segments.section === 'jobs') {
-      if (tab === LABEL_PROJECT && !project) return false;
-      if (tab === LABEL_COMPETITORS && !competitors) return false;
-      if (tab === LABEL_REPOSITORIES && !repositories) return false;
-    }
-
-    return true;
-  };
+  const { activeListing } = useRootContext();
 
   // Whenever a card is clicked, scroll right-panel to top
   useEffect(() => {
@@ -105,13 +49,29 @@ export const RightPanel = ({ segments, push }: Props) => {
     return () => document.removeEventListener(EVENT_CARD_CLICK, scrollListener);
   }, []);
 
-  // Note: Server rendered pages wait for first element from server
-  if (!jobs) return null;
+  const checkShouldRenderTab = (tab: RightPanelTabLabel) => {
+    const { jobs, projects, competitors, repositories } = activeListing;
+
+    // If section-segment matches tab, omit (should be inside details tab)
+    if ((tab as string).toLowerCase() === segments.section) return false;
+
+    // Organization section
+    if (tab === 'Organization' && segments.section === 'organizations')
+      return false;
+
+    // Check array lengths
+    if (isEmptyTab(tab, LABEL_JOBS, jobs)) return false;
+    if (isEmptyTab(tab, LABEL_PROJECTS, projects)) return false;
+    if (isEmptyTab(tab, LABEL_COMPETITORS, competitors)) return false;
+    if (isEmptyTab(tab, LABEL_REPOSITORIES, repositories)) return false;
+
+    return true;
+  };
 
   return (
     <div className="hide-scrollbar sticky top-0 max-h-screen space-y-6 overflow-y-scroll px-6">
       <div className="top-0" id={ID_TOP_RIGHT_PANEL} />
-      {jobs?.org && <RightPanelHeader org={jobs?.org} />}
+      <RightPanelHeader org={activeListing.org} />
 
       <div className="">
         <hr className="h-px border-0 bg-white/20" />
@@ -126,14 +86,17 @@ export const RightPanel = ({ segments, push }: Props) => {
                 label={tab}
                 segments={segments}
                 push={push}
+                activeListing={activeListing}
               />
             ),
         )}
       </div>
 
-      <div className="">
-        {sectionDetailsMap[segments.section][segments.tab]}
-      </div>
+      <RightPanelCard
+        activeListing={activeListing}
+        section={segments.section}
+        tabSegment={segments.tab}
+      />
     </div>
   );
 };

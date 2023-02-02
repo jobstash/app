@@ -1,24 +1,23 @@
-import type { JobListing, ListingProps, Tag } from '~/core/interfaces';
+import type { Listing, ListingProps } from '~/core/interfaces';
 import { createJobTags } from '~/utils/create-job-tags';
-import { formatSalary } from '~/utils/format-salary';
 
 import { Divider } from '../unstyled-ui/base/divider';
 
 import { ListingHeader } from './listing-header';
 import { ListingOrg } from './listing-org';
-import { ListingProject } from './listing-project';
+import { ListingProject } from './listing-projects';
 import { ListingTags } from './listing-tags';
 import { ListingTechs } from './listing-techs';
 import { ListingWrapper } from './listing-wrapper';
 
 /** Override listing field as JobListing */
 interface Props extends ListingProps {
-  listing: JobListing;
+  listing: Listing;
 }
 
 /** UI for job-listing card */
 export const ListingCardJob = ({ listing, isActive, onClick }: Props) => {
-  const { jobs, org, project } = listing;
+  const { jobs, org, projects } = listing;
 
   // This state should be very unlikely
   // We put this guard due to how the interface was defined
@@ -43,7 +42,7 @@ export const ListingCardJob = ({ listing, isActive, onClick }: Props) => {
       <ListingTechs techs={skills} />
       <Divider />
       <ListingOrg org={org} />
-      {project && <ListingProject project={project} />}
+      {projects.length > 0 && <ListingProject projects={projects} />}
     </ListingWrapper>
   );
 };
