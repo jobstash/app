@@ -6,12 +6,9 @@ import { fakeArrayFromFaker } from './fake-array-from-faker';
 import { fakeDesc } from './fake-desc';
 import { fakeTags } from './fake-tag';
 import { fakeTechs } from './fake-tech';
-import { nullProbability } from './null-probability';
+import { returnChance } from './return-chance';
 
-export const fakeRepo = (
-  org: Org,
-  hasProbability = true,
-): Repository | null => {
+export const fakeRepo = (org: Org, hasProbability = true): Repository | [] => {
   const name = `${faker.helpers.slugify(
     org.name.toLowerCase(),
   )}/${faker.internet.domainWord()}`;
@@ -29,7 +26,7 @@ export const fakeRepo = (
 
   const value = { name, desc, tags, devInfos };
 
-  return nullProbability(value, hasProbability);
+  return returnChance(value, [], hasProbability);
 };
 
 export const fakeRepos = (org: Org, min = 1, max = 4) =>

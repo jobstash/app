@@ -65,7 +65,7 @@ export const fakeOrg = (): Org => {
   const fundingDate = `${dayNum} ${month}, ${year}`;
   const summary = fakeDesc(2, 4);
   const description = fakeDesc(8, 12);
-  const tags = fakeTags();
+  const tags = fakeTags(4, 6);
   const techs = fakeTechs(3, 8);
   const recent = `${faker.datatype.number({ min: 2, max: 6 })} days ago`;
 
