@@ -45,7 +45,10 @@ export const RightPanelTab = ({
 
   // Clicking a tab updates to correct route
   const onClick = () =>
-    push(`/${section}/${id}/${lowLabel}`, { shouldScroll: false });
+    push(`/${section}/${id}/${lowLabel}`, {
+      shouldScroll: false,
+      shallow: true,
+    });
 
   return (
     <Button

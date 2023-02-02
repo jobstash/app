@@ -25,9 +25,11 @@ export const fakeJobListing = (): Listing => {
 };
 
 export const fakeJobListings = (min = 3, max = 6): Listing[] => {
-  const length = faker.datatype.number({ min, max });
+  const jobListings: Listing[] = [];
 
-  return Array.from({ length })
-    .fill(0)
-    .map(() => fakeJobListing());
+  for (let i = 0; i < faker.datatype.number({ min, max }); i++) {
+    jobListings.push(fakeJobListing());
+  }
+
+  return jobListings;
 };
