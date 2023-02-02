@@ -2,8 +2,9 @@ import type { ButtonHTMLAttributes, MouseEventHandler, ReactNode } from 'react';
 
 import { type VariantProps, cva } from 'class-variance-authority';
 
-import { Text } from './base/text';
-import { RightCaretIcon } from './icons';
+import { RightCaretIcon } from '../icons';
+
+import { Text } from './text';
 
 const cvaBartab = cva(
   ['h-10 px-4 rounded-lg flex justify-between w-full items-center hover:bg-white/10 active:bg-white/20 focus:border focus:border-white'],
@@ -36,6 +37,9 @@ interface BartabProps
 
   /** Click handler */
   onClick: MouseEventHandler;
+  
+  /** Declare button variant */
+  intent?: string;
 }
 
 export const Bartab = ({

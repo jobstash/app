@@ -13,6 +13,7 @@ module.exports = {
         white: 'rgb(var(--color-white) / <alpha-value>)',
         tech: 'var(--color-tech)',
         card: 'var(--color-card)',
+        sidebarTitle: 'var(--color-sidebarTitle)',
       },
     },
     /*

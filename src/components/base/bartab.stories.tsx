@@ -1,12 +1,13 @@
 import type { ComponentMeta, ComponentStory } from '@storybook/react';
 
-import { Avatar } from './base/avatar';
+import { CodeSidebarIcon } from '../icons';
+
+import { Avatar } from './avatar';
 import { Bartab } from './bartab';
-import { CodeSidebarIcon } from './icons';
 
 export default {
   component: Bartab,
-  title: 'components/base/Bartab',
+  title: 'Components/UI/Bartab',
   // Default Args
   args: {
     text: 'Continue with Github',
