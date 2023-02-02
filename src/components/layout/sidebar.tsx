@@ -44,7 +44,7 @@ export const DiscoverTabs = (props: {
             text={nav.label}
             intent="secondary"
             onClick={() =>
-              props.push()
+              null
             }
           />
         </div>
