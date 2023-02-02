@@ -9,9 +9,10 @@ import {
 } from '~/core/constants';
 import type { Job, Org } from '~/core/interfaces';
 
+import { fakeArrayFromFaker } from './fake-array-from-faker';
 import { fakeDesc } from './fake-desc';
-import { getOrgLocation, OrgName } from './fake-org';
-import { fakeJobSkills } from './fake-skill';
+import { fakeOrg, getOrgLocation, OrgName } from './fake-org';
+import { fakeSkills } from './fake-skills';
 import { fakeTz } from './fake-tz';
 
 const poolRoles = ['Junior', 'Senior', 'Lead'];
@@ -74,7 +75,7 @@ export const fakeJob = (org: Org, options?: FakeJobOptions): Job => {
     },
   };
 
-  const skills = fakeJobSkills();
+  const skills = fakeSkills();
 
   return {
     id,
@@ -87,3 +88,6 @@ export const fakeJob = (org: Org, options?: FakeJobOptions): Job => {
     skills,
   };
 };
+
+export const fakeJobs = (min = 6, max = 12): Job[] =>
+  fakeArrayFromFaker(() => fakeJob(fakeOrg()), min, max);

@@ -1,38 +1,44 @@
-import { GetServerSideProps } from 'next';
+import type { GetServerSideProps } from 'next';
 import { useEffect } from 'react';
 
+import { dehydrate, DehydratedState, QueryClient } from '@tanstack/react-query';
+
 import { EVENT_CARD_CLICK } from '~/core/constants';
-import { JobListing } from '~/core/interfaces';
-import { JobListingUi } from '~/features/job-listing-ui';
+import type { Listing } from '~/core/interfaces';
+import { ListingCardJob } from '~/features/listing';
 import { RightPanel } from '~/features/right-panel';
 import { SideBar } from '~/features/sidebar';
+import { Text } from '~/features/unstyled-ui/base/text';
+import { useJobListingQuery } from '~/hooks/use-job-listing-query';
 import { useRootContext } from '~/hooks/use-root-context';
 import { useRouteSegments } from '~/hooks/use-route-segments';
 import { GenericLayout } from '~/layouts/generic-layout';
-import {
-  mockedJobListings,
-  mockFirstJobListing,
-} from '~/mocks/data/mocked-job-listing';
+import { mockGuaranteedListing } from '~/mocks/data/mocked-guaranteed-listing';
 
 interface Props {
   data: {
-    jobListings: JobListing[];
+    activeListing: Listing;
   };
 }
 
 const JobsPage = ({ data }: Props) => {
   const { segments, push } = useRouteSegments();
-  const { activeCards, setActiveJobCard } = useRootContext();
+  const { activeListing, setActiveListing } = useRootContext();
 
-  // Set first element as active job card
+  // Sync SSR data active listing
   useEffect(() => {
-    setActiveJobCard(data.jobListings[0]);
+    setActiveListing(data.activeListing);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const jobOnClick = (jobListing: JobListing) => {
-    push(`/jobs/${jobListing.job.id}/details`, { shallow: true });
-    setActiveJobCard(jobListing);
+  const { isLoading, data: otherListings } = useJobListingQuery();
+
+  // If for some reason jobListings data is empty, return appropriate page
+  if (data.activeListing.jobs.length === 0) return <h1>EMPTY</h1>;
+
+  const listingOnClick = (listing: Listing) => {
+    push(`/jobs/${listing.jobs[0].id}/details`, { shallow: true });
+    setActiveListing(listing);
     document.dispatchEvent(new Event(EVENT_CARD_CLICK));
   };
 
@@ -43,7 +49,7 @@ const JobsPage = ({ data }: Props) => {
           <SideBar
             section={segments.section}
             push={push}
-            activeCards={activeCards}
+            listing={activeListing}
           />
         }
         rightPanel={<RightPanel segments={segments} push={push} />}
@@ -55,14 +61,27 @@ const JobsPage = ({ data }: Props) => {
         </div>
 
         <div className="flex w-full flex-col space-y-12">
-          {data.jobListings.map((jobListing) => (
-            <JobListingUi
-              key={jobListing.job.id}
-              jobListing={jobListing}
-              isActive={segments.id === jobListing.job.id}
-              onClick={() => jobOnClick(jobListing)}
-            />
-          ))}
+          <ListingCardJob
+            key={data.activeListing.jobs[0].id}
+            listing={data.activeListing}
+            isActive={segments.id === data.activeListing.jobs[0].id}
+            onClick={() => listingOnClick(data.activeListing)}
+          />
+          {isLoading && (
+            <div className="flex flex-col space-y-4">
+              <Text size="2xl">Loading other listings (fake 2sec delay)</Text>
+              <Text size="xl">TODO: {'<ListingsSkeleton />'} component</Text>
+            </div>
+          )}
+          {otherListings &&
+            otherListings.listings.map((listing) => (
+              <ListingCardJob
+                key={listing.jobs[0].id}
+                listing={listing}
+                isActive={segments.id === listing.jobs[0].id}
+                onClick={() => listingOnClick(listing)}
+              />
+            ))}
         </div>
       </GenericLayout>
     </div>
@@ -72,15 +91,8 @@ const JobsPage = ({ data }: Props) => {
 export default JobsPage;
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  // Use `/jobs/uniswap-labs-senior-frontend-engineer-12345` key
-  // if you want to access a job-listing that certainly exists within generated data
-  const jobListings = [mockFirstJobListing, ...mockedJobListings];
-
-  const currentJob = jobListings.find(
-    (jobListing) => jobListing.job.id === ctx.query.id,
-  );
-
-  if (!currentJob)
+  // !!! [TEMPORARY] redirect users to guaranteed job-lising when using address bar
+  if (ctx.query.id !== 'uniswap-labs-senior-frontend-engineer-12345') {
     return {
       redirect: {
         permanent: false,
@@ -88,11 +100,13 @@ export const getServerSideProps: GetServerSideProps = async (ctx) => {
           '/jobs/uniswap-labs-senior-frontend-engineer-12345/details',
       },
     };
+  }
 
   return {
     props: {
       data: {
-        jobListings,
+        // Guaranteed `/jobs/uniswap-labs-senior-frontend-engineer-12345/details` route
+        activeListing: mockGuaranteedListing,
       },
     },
   };

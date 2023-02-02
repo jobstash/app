@@ -2,11 +2,11 @@ import type { Project } from '~/core/interfaces';
 
 import { fakeChain, fakeChains } from './fake-chains';
 import { fakeDesc } from './fake-desc';
-import { fakeSkills } from './fake-skill';
 import { fakeTags } from './fake-tag';
-import { nullProbability } from './null-probability';
+import { fakeTechs } from './fake-tech';
+import { returnChance } from './return-chance';
 
-export const fakeProject = (hasProbability = true): Project | null => {
+export const fakeProject = (hasProbability = true): Project[] => {
   // Project is based on chains for now
   const { name, avatar } = fakeChain();
   const description = fakeDesc(5, 10);
@@ -18,16 +18,18 @@ export const fakeProject = (hasProbability = true): Project | null => {
     bottom: fakeTags(3, 5),
   };
 
-  const skills = fakeSkills(3, 5);
+  const techs = fakeTechs(3, 5);
 
-  const value = {
-    name,
-    avatar,
-    description,
-    chains,
-    tags,
-    skills,
-  };
+  const value = [
+    {
+      name,
+      avatar,
+      description,
+      chains,
+      tags,
+      techs,
+    },
+  ];
 
-  return nullProbability(value, hasProbability);
+  return returnChance(value, [], hasProbability);
 };

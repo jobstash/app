@@ -1,21 +1,17 @@
 import type { Project } from '~/core/interfaces';
 
-import { Avatar } from '../unstyled-ui/base/avatar';
 import { Button } from '../unstyled-ui/base/button';
 import { Text } from '../unstyled-ui/base/text';
+import { ChainMapper } from '../unstyled-ui/chain-mapper';
 import { ChainTagIcon } from '../unstyled-ui/icons';
 import { LogoTitle } from '../unstyled-ui/logo-title';
 import { ProjectTagMapper } from '../unstyled-ui/project-tag-mapper';
-import { SkillMapper } from '../unstyled-ui/skill-mapper';
-
-interface Props {
-  project: Project;
-}
+import { TechMapper } from '../unstyled-ui/tech-mapper';
 
 const TEXT_TECHNOLOGIES_DESC =
   'Uncover the technical skills and tools employed by the company, and gain insight into the technologies that dive their success.';
 
-export const RightPanelProject = ({ project }: Props) => (
+export const RightPanelProject = ({ project }: { project: Project }) => (
   <div className="flex items-center justify-center rounded-2xl bg-gradient-to-l from-primary to-secondary p-1">
     <div className="flex flex-col space-y-6 rounded-2xl bg-card p-6">
       <LogoTitle
@@ -51,16 +47,7 @@ export const RightPanelProject = ({ project }: Props) => (
           <Button size="xs" left={<ChainTagIcon />} kind="subtle">
             Chains:
           </Button>
-          <div className="flex items-center space-x-1">
-            {project.chains.map((chain) => (
-              <Avatar
-                key={chain.name}
-                size="xs"
-                src={`/chains/${chain.name}.svg`}
-                alt={chain.name}
-              />
-            ))}
-          </div>
+          <ChainMapper chains={project.chains} />
         </div>
       </div>
 
@@ -76,8 +63,20 @@ export const RightPanelProject = ({ project }: Props) => (
           </Text>
         </div>
 
-        <SkillMapper skills={project.skills} isParentActive={false} />
+        <TechMapper techs={project.techs} />
       </div>
     </div>
+  </div>
+);
+
+interface Props {
+  projects: Project[];
+}
+
+export const RightPanelProjects = ({ projects }: Props) => (
+  <div className="space-y-4">
+    {projects.map((project) => (
+      <RightPanelProject key={project.name} project={project} />
+    ))}
   </div>
 );

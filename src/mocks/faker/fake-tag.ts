@@ -12,7 +12,9 @@ export const fakeTag = (): Tag => {
     faker.datatype.number({ min: 1, max: 10 })
   }`;
   const link = faker.helpers.maybe(() => 'google.com');
-  const iconKey = faker.helpers.arrayElement(Object.keys(tagIconMap));
+  const iconKey = faker.helpers.arrayElement(
+    Object.keys(tagIconMap),
+  ) as keyof typeof tagIconMap;
 
   // We need to omit link entirely, otherwise nextjs will throw runtime error
   // Since it cannot serialize 'undefined' values 🤷🏻

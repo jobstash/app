@@ -1,45 +1,51 @@
 import { createContext, ReactNode, useMemo, useState } from 'react';
 
-import { JobListing } from '~/core/interfaces';
-
-/** Represents current active cards for each section */
-export interface ActiveSectionCards {
-  jobs: JobListing | null;
-  organizations: null; // TODO
-  projects: null; // TODO
-  repositories: null; // TODO
-}
+import type { Listing, Org } from '~/core/interfaces';
 
 interface RootContext {
-  activeCards: ActiveSectionCards;
-  setActiveJobCard: (card: JobListing) => void;
+  activeListing: Listing;
+  setActiveListing: (card: Listing) => void;
 }
 
-// *** Temporary: to match with generated data from fakers
-const defaultActiveCards: ActiveSectionCards = {
-  jobs: null,
-  organizations: null,
-  projects: null,
-  repositories: null,
+/**
+ * We need to define this to handle SSR use case so that
+ * the Listing interface don't have to define org as "Org | null"
+ * type of org could simply be just "Org"
+ * If we don't do this, NextJS will throw rendered-HTML mismatch during SSR hydration
+ * */
+const defaultOrg: Org = {
+  name: '',
+  avatar: '',
+  location: '',
+  teamSize: 0,
+  fundingDate: '',
+  summary: '',
+  description: '',
+  tags: [],
+  techs: [],
+  recent: '',
+};
+
+const defaultListing: Listing = {
+  org: defaultOrg,
+  jobs: [],
+  projects: [],
+  competitors: [],
+  repositories: [],
 };
 
 export const RootCtx = createContext<RootContext>({} as RootContext);
 
 export const RootProvider = ({ children }: { children: ReactNode }) => {
   // Active ids state
-  const [activeCards, setActiveCards] =
-    useState<ActiveSectionCards>(defaultActiveCards);
-
-  // Update current active job id
-  const setActiveJobCard = (card: JobListing) =>
-    setActiveCards((prev) => ({ ...prev, jobs: card }));
+  const [activeListing, setActiveListing] = useState<Listing>(defaultListing);
 
   const memoed = useMemo(
     () => ({
-      activeCards,
-      setActiveJobCard,
+      activeListing,
+      setActiveListing,
     }),
-    [activeCards],
+    [activeListing],
   );
 
   return <RootCtx.Provider value={memoed}>{children}</RootCtx.Provider>;

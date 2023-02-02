@@ -1,8 +1,9 @@
-import type { Job, Skill } from '~/core/interfaces';
+import type { Job, Tech } from '~/core/interfaces';
+import { createJobTags } from '~/utils/create-job-tags';
 
 import { Button } from '../unstyled-ui/base/button';
 import { Text } from '../unstyled-ui/base/text';
-import { JobTagMapper } from '../unstyled-ui/job-tag-mapper';
+import { TagMapper } from '../unstyled-ui/tag-mapper';
 import { TechWrapper } from '../unstyled-ui/tech-wrapper';
 
 /** Titles used in hard skills */
@@ -12,11 +13,11 @@ const hardSkillTitles = [
   'You share responsibility with others about',
 ];
 
-interface Props {
+interface InnerProps {
   job: Job;
 }
 
-export const Description = ({ job }: Props) => {
+export const Description = ({ job }: InnerProps) => {
   const {
     details: { role, team, benefits, interview },
   } = job;
@@ -42,7 +43,7 @@ export const Description = ({ job }: Props) => {
   );
 };
 
-export const Header = ({ job }: Props) => {
+export const Header = ({ job }: InnerProps) => {
   const { title } = job;
 
   return (
@@ -51,7 +52,7 @@ export const Header = ({ job }: Props) => {
         {title}
       </Text>
 
-      <JobTagMapper job={job} />
+      <TagMapper tags={createJobTags(job)} />
 
       <div>
         <Button
@@ -71,7 +72,7 @@ export const Header = ({ job }: Props) => {
   );
 };
 
-export const HardSkills = ({ job: { skills } }: Props) => (
+export const HardSkills = ({ job: { skills } }: InnerProps) => (
   <div className="flex flex-col space-y-6">
     <div className="flex flex-col space-y-2">
       <Text size="lg" fw="bold">
@@ -90,12 +91,11 @@ export const HardSkills = ({ job: { skills } }: Props) => (
         <div key={k} className="flex flex-col space-y-4">
           <span className="text-sm text-zinc-400">{hardSkillTitles[i]}</span>
           <div className="flex space-x-4">
-            {v.map((skill: Skill) => (
+            {v.map((skill: Tech) => (
               <TechWrapper
                 key={skill.name}
                 text={skill.name}
                 isChecked={skill.isChecked}
-                isParentActive={false}
               />
             ))}
           </div>
@@ -105,7 +105,7 @@ export const HardSkills = ({ job: { skills } }: Props) => (
   </div>
 );
 
-export const RightPanelJob = ({ job }: Props) => {
+export const RightPanelJob = ({ job }: InnerProps) => {
   // It's possible job is undefined in which case we don't display panel
   if (!job) return null;
 
@@ -119,3 +119,15 @@ export const RightPanelJob = ({ job }: Props) => {
     </div>
   );
 };
+
+interface Props {
+  jobs: Job[];
+}
+
+export const RightPanelJobs = ({ jobs }: Props) => (
+  <div className="space-y-4">
+    {jobs.map((job) => (
+      <RightPanelJob key={job.id} job={job} />
+    ))}
+  </div>
+);

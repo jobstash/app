@@ -6,6 +6,7 @@ import {
   RepoSidebarIcon,
 } from '../unstyled-ui/icons';
 
+import type { SidebarTabs } from './types';
 /**
  * These navs are common to anon/devs/orgs
  * 		anon -> anonymous users (not logged in)
@@ -14,7 +15,7 @@ import {
  * Notes:
  *   - left section is null for now (offset space for icon/avatar)
  */
-export const discoverTabs = [
+export const discoverTabs: SidebarTabs[] = [
   {
     left: <CodeSidebarIcon />,
     label: 'Jobs',
@@ -42,15 +43,15 @@ export const discoverTabs = [
  *  - left section is null for now (offset space for icon/avatar)
  * 	- baseHref is placeholder atm (will be discussed in the future)
  */
-export const bookmarkedTabs = [
+export const bookmarkedTabs: SidebarTabs[] = [
   {
     left: <BookmarkSidebarIcon />,
     label: 'Saved Jobs',
-    baseHref: '/bookmark/jobs',
+    baseHref: '/bookmarks/jobs',
   },
   {
     left: <BookmarkSidebarIcon />,
     label: 'Saved Orgs',
-    baseHref: '/bookmark/orgs',
+    baseHref: '/bookmarks/orgs',
   },
 ];

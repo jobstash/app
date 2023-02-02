@@ -1,10 +1,14 @@
 const colors = require('tailwindcss/colors');
+const { fontFamily } = require('tailwindcss/defaultTheme');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./src/**/*.{js,ts,jsx,tsx}'],
   theme: {
     extend: {
+      fontFamily: {
+        sans: ['var(--font-lato)', ...fontFamily.sans],
+      },
       colors: {
         // Allow opacity e.g. text-primary/50, text-white/50
         primary: 'rgb(var(--color-primary) / <alpha-value>)',
