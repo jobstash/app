@@ -1,6 +1,7 @@
 /* eslint-disable no-alert */
-import { ActiveSectionCards } from '~/contexts/root-context';
-import { RouterPush } from '~/core/types';
+import type { Listing } from '~/core/interfaces';
+import type { RouterPush } from '~/core/types';
+import { slugify } from '~/utils/slugify';
 
 import { Avatar } from '../base/avatar';
 import { Bartab } from '../base/bartab';
@@ -8,11 +9,27 @@ import { Brand } from '../base/brand';
 import { Text } from '../base/text';
 
 import { bookmarkedTabs, discoverTabs } from './constants';
+import type { SidebarTabs } from './types';
+
+const getRouteId = (baseHref: SidebarTabs['baseHref'], listing: Listing) => {
+  const routeMap: Record<SidebarTabs['baseHref'], string> = {
+    '/jobs': listing.jobs[0].id,
+    '/organizations': slugify(listing.org.name),
+    '/projects': 'TODO',
+    '/repositories': 'TODO',
+    '/bookmarks/jobs': 'TODO',
+    '/bookmarks/orgs': 'TODO',
+  };
+
+  return routeMap[baseHref];
+};
+
 
 export const DiscoverTabs = (props: {
   section: string;
-  activeCards: ActiveSectionCards;
-  push: RouterPush;
+  // Comment unused props
+  // listing: Listing;
+  // push: RouterPush;
 }) => (
   <div className="mt-12">
     <Text htmlTag="h2" size="sm" fw="regular" className="text-sidebarTitle">
@@ -27,19 +44,7 @@ export const DiscoverTabs = (props: {
             text={nav.label}
             intent="secondary"
             onClick={() =>
-              nav.label === 'Jobs' // Jobs route for now
-                ? props.push(
-                    `${nav.baseHref}/${
-                      props.activeCards[
-                        nav.label.toLowerCase() as keyof typeof props.activeCards
-                      ]
-                    }`,
-                    {
-                      shouldScroll: true,
-                      shallow: true,
-                    },
-                  )
-                : alert('TODO')
+              props.push()
             }
           />
         </div>
@@ -87,14 +92,14 @@ const UserTab = () => (
 interface Props {
   section: string;
   push: RouterPush;
-  activeCards: ActiveSectionCards;
+  listing: Listing;
 }
 
-export const SideBar = ({ section, push, activeCards }: Props) => (
+export const SideBar = ({ section, push, listing }: Props) => (
   <nav className="fixed inset-y-0 flex min-h-screen flex-col p-4">
     <div className="">
       <Brand />
-      <DiscoverTabs section={section} push={push} activeCards={activeCards} />
+      <DiscoverTabs section={section} push={push} listing={listing} />
     </div>
     <div className="">
       <BookmarkedTab />
