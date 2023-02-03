@@ -1,25 +1,25 @@
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import { LogoTitle } from './logo-title';
 
-export default {
+const meta: Meta<typeof LogoTitle> = {
   component: LogoTitle,
   title: 'UNSTYLED/ui/LogoTitle',
-  // Default Args
   args: {
     name: 'Hello World',
     avatar: `https://api.dicebear.com/5.x/bottts/svg?seed=${Date.now()}`,
     size: 'lg',
   },
-} as ComponentMeta<typeof LogoTitle>;
+};
 
-const Template: ComponentStory<typeof LogoTitle> = (args) => (
-  <LogoTitle {...args} />
-);
+export default meta;
 
-export const Default = Template.bind({});
+type Story = StoryObj<typeof LogoTitle>;
 
-export const WithLocation = Template.bind({});
-WithLocation.args = {
-  location: 'Somewhere, Earth',
+export const Default: Story = {};
+
+export const WithLocation: Story = {
+  args: {
+    location: 'Somewhere, Earth',
+  },
 };

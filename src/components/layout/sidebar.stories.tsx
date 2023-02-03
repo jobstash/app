@@ -1,20 +1,14 @@
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import { SideBar } from './sidebar';
 
-export default {
+const meta: Meta<typeof SideBar> = {
   component: SideBar,
   title: 'Components/Layout/Sidebar',
-  // Default Args
-  args: {
-    text: 'Continue with Github',
-  },
-} as ComponentMeta<typeof SideBar>;
+};
 
-const Template: ComponentStory<typeof SideBar> = (args) => (
-  <div className="w-full">
-    <SideBar {...args} />
-  </div>
-);
+export default meta;
 
-export const Default = Template.bind({});
+type Story = StoryObj<typeof SideBar>;
+
+export const Default: Story = {};

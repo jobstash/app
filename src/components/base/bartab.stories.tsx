@@ -1,48 +1,53 @@
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import { CodeSidebarIcon } from '../icons';
 
 import { Avatar } from './avatar';
 import { Bartab } from './bartab';
 
-export default {
+const meta: Meta<typeof Bartab> = {
   component: Bartab,
   title: 'Components/UI/Bartab',
-  // Default Args
+  render: (args) => (
+    <div className="w-full">
+      <Bartab {...args} />
+    </div>
+  ),
   args: {
     text: 'Continue with Github',
   },
-} as ComponentMeta<typeof Bartab>;
-
-const Template: ComponentStory<typeof Bartab> = (args) => (
-  <div className="w-full">
-    <Bartab {...args} />
-  </div>
-);
-
-export const Default = Template.bind({});
-
-export const IsActive = Template.bind({});
-IsActive.args = {
-  isActive: true,
 };
 
-export const HasLeft = Template.bind({});
-HasLeft.args = {
-  text: 'Jobs',
-  intent: "secondary",
-  left: <CodeSidebarIcon />,
+export default meta;
+
+type Story = StoryObj<typeof Bartab>;
+
+export const Default: Story = {};
+
+export const IsActive: Story = {
+  args: {
+    isActive: true,
+  },
 };
 
-export const HasAvatar = Template.bind({});
-HasAvatar.args = {
-  text: '@0xDevoor',
-  intent: "secondary",
-  left: (
-    <Avatar
-      src={`https://api.dicebear.com/5.x/bottts/svg?seed=${Date.now()}`}
-      size="xs"
-      alt="Test"
-    />
-  ),
+export const HasLeft: Story = {
+  args: {
+    text: 'Jobs',
+    intent: 'secondary',
+    left: <CodeSidebarIcon />,
+  },
+};
+
+export const HasAvatar: Story = {
+  args: {
+    text: '@0xDevoor',
+    intent: 'secondary',
+    left: (
+      <Avatar
+        src={`https://api.dicebear.com/5.x/bottts/svg?seed=${Date.now()}`}
+        size="xs"
+        alt="Test"
+      />
+    ),
+  },
 };

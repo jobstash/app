@@ -1,40 +1,42 @@
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import { DollarTagIcon, WebsiteTagIcon } from './icons';
 import { TagButton } from './tag-button';
 
-export default {
+const meta: Meta<typeof TagButton> = {
   title: 'UNSTYLED/ui/TagButton',
   component: TagButton,
-  // Default args
   args: {
     text: 'Tag Button',
   },
-} as ComponentMeta<typeof TagButton>;
+};
 
-const Template: ComponentStory<typeof TagButton> = (args) => (
-  <TagButton {...args} />
-);
+export default meta;
 
-export const Default = Template.bind({});
+type Story = StoryObj<typeof TagButton>;
 
-export const WithIcon = Template.bind({});
-WithIcon.args = {
-  icon: <WebsiteTagIcon />,
-  text: '6 Jobs',
+export const Default: Story = {};
+
+export const WithIcon: Story = {
+  args: {
+    icon: <WebsiteTagIcon />,
+    text: '6 Jobs',
+  },
 };
 
 const SAMPLE_LINK = 'google.com';
 
-export const Link = Template.bind({});
-Link.args = {
-  link: SAMPLE_LINK,
-  text: 'uniswap.org',
+export const Link: Story = {
+  args: {
+    link: SAMPLE_LINK,
+    text: 'uniswap.org',
+  },
 };
 
-export const LinkWithIcon = Template.bind({});
-LinkWithIcon.args = {
-  link: SAMPLE_LINK,
-  icon: <DollarTagIcon />,
-  text: '$UNI',
+export const LinkWithIcon: Story = {
+  args: {
+    link: SAMPLE_LINK,
+    icon: <DollarTagIcon />,
+    text: '$UNI',
+  },
 };

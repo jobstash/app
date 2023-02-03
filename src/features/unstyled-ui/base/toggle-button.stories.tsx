@@ -1,21 +1,18 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
-
-import { BookmarkActiveButtonIcon, BookmarkButtonIcon } from '../icons';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import { ToggleButton } from './toggle-button';
 
-export default {
+const meta: Meta<typeof ToggleButton> = {
   title: 'UNSTYLED/base/ToggleButton',
   component: ToggleButton,
-  // Default args
   args: {
     children: 'Toggle OFF',
     activeEl: 'Toggle ON',
   },
-} as ComponentMeta<typeof ToggleButton>;
+};
 
-const Template: ComponentStory<typeof ToggleButton> = (args) => (
-  <ToggleButton {...args} />
-);
+export default meta;
 
-export const Default = Template.bind({});
+type Story = StoryObj<typeof ToggleButton>;
+
+export const Default: Story = {};
