@@ -16,8 +16,8 @@ export const fakeProject = (hasProbability = true): Project[] => {
   const chains = fakeChains();
 
   const tags = {
-    top: fakeTags(3, 5),
-    bottom: fakeTags(3, 5),
+    top: fakeTags(3, 4),
+    bottom: fakeTags(3, 4),
   };
 
   const techs = fakeTechs(3, 5);
