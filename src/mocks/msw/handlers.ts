@@ -3,6 +3,7 @@ import { rest } from 'msw';
 import { fakeJobListings } from '../faker/fake-job-listing';
 import { fakeOrgListings } from '../faker/fake-org-listings';
 import { fakeProjectListings } from '../faker/fake-project-listings';
+import { fakeRepoListings } from '../faker/fake-repo-listings';
 
 export const handlers = [
   // GET jobs listings
@@ -51,6 +52,23 @@ export const handlers = [
         ctx.status(200),
         ctx.json({
           listings: fakeProjectListings(),
+        }),
+      );
+    },
+  ),
+
+  // GET repo listings
+  rest.get(
+    'http://localhost:3000/mocked-bff/listings/repos',
+    async (_req, res, ctx) => {
+      // Artificial delay
+      // eslint-disable-next-line no-promise-executor-return
+      await new Promise((r) => setTimeout(r, 1000));
+
+      return res(
+        ctx.status(200),
+        ctx.json({
+          listings: fakeRepoListings(),
         }),
       );
     },

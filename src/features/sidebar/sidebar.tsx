@@ -16,7 +16,7 @@ const getRouteId = (baseHref: SidebarTabs['baseHref'], listing: Listing) => {
     '/jobs': listing.jobs[0].id,
     '/organizations': slugify(listing.org.name),
     '/projects': slugify(listing.projects[0].name),
-    '/repositories': 'TODO',
+    '/repositories': slugify(listing.repositories[0].name),
     '/bookmarks/jobs': 'TODO',
     '/bookmarks/orgs': 'TODO',
   };
