@@ -1,14 +1,17 @@
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import { Text } from './text';
 
-export default {
+const meta: Meta<typeof Text> = {
   component: Text,
   title: 'UNSTYLED/base/Text',
-} as ComponentMeta<typeof Text>;
+  args: {
+    children: 'Hello World',
+  },
+};
 
-const Template: ComponentStory<typeof Text> = (args) => (
-  <Text {...args}>Hello World</Text>
-);
+export default meta;
 
-export const Default = Template.bind({});
+type Story = StoryObj<typeof Text>;
+
+export const Default: Story = {};

@@ -1,54 +1,66 @@
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import { BookmarkSidebarIcon, CaretDown } from '../icons';
 
 import { Button } from './button';
 
-export default {
+const meta: Meta<typeof Button> = {
   component: Button,
   title: 'UNSTYLED/base/Button',
-  // Default args
+  render: (args) => (
+    <div className="w-16">
+      <Button {...args} />
+    </div>
+  ),
   args: {
     children: 'Button',
-    variant: 'default',
   },
-} as ComponentMeta<typeof Button>;
-
-const Template: ComponentStory<typeof Button> = (args) => <Button {...args} />;
-
-export const Default = Template.bind({});
-
-export const Primary = Template.bind({});
-Primary.args = {
-  kind: 'primary',
 };
 
-export const Outlined = Template.bind({});
-Outlined.args = {
-  kind: 'outlined',
+export default meta;
+
+type Story = StoryObj<typeof Button>;
+
+export const Default: Story = {};
+
+export const Primary: Story = {
+  args: {
+    kind: 'primary',
+  },
 };
 
-export const IsActive = Template.bind({});
-IsActive.args = {
-  isActive: true,
+export const Outlined: Story = {
+  args: {
+    kind: 'outlined',
+  },
 };
 
-export const IsDisabled = Template.bind({});
-IsDisabled.args = {
-  isDisabled: true,
+export const IsActive: Story = {
+  args: {
+    isActive: true,
+  },
 };
 
-export const HasLeft = Template.bind({});
-HasLeft.args = {
-  left: <CaretDown />,
+export const IsDisabled: Story = {
+  args: {
+    isDisabled: true,
+  },
 };
 
-export const HasRight = Template.bind({});
-HasRight.args = {
-  right: <CaretDown />,
+export const HasLeft: Story = {
+  args: {
+    left: <CaretDown />,
+  },
 };
 
-export const IconButton = Template.bind({});
-IconButton.args = {
-  children: <BookmarkSidebarIcon />,
+export const HasRight: Story = {
+  args: {
+    right: <CaretDown />,
+  },
+};
+
+export const IconButton: Story = {
+  args: {
+    children: <BookmarkSidebarIcon />,
+  },
 };

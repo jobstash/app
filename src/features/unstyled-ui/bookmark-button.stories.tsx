@@ -1,14 +1,14 @@
-import { ComponentMeta, ComponentStory } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
 import { BookmarkButton } from './bookmark-button';
 
-export default {
+const meta: Meta<typeof BookmarkButton> = {
   title: 'UNSTYLED/ui/BookmarkButton',
   component: BookmarkButton,
-} as ComponentMeta<typeof BookmarkButton>;
+};
 
-const Template: ComponentStory<typeof BookmarkButton> = () => (
-  <BookmarkButton />
-);
+export default meta;
 
-export const Default = Template.bind({});
+type Story = StoryObj<typeof BookmarkButton>;
+
+export const Default: Story = {};

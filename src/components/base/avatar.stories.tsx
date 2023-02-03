@@ -1,18 +1,19 @@
-import type { ComponentMeta, ComponentStory } from '@storybook/react';
+import type { Meta, StoryObj } from '@storybook/react';
 
 import { Avatar } from './avatar';
 
-export default {
+const meta: Meta<typeof Avatar> = {
   component: Avatar,
   title: 'Components/Base/Avatar',
-  // Default Args
   args: {
     src: `https://api.dicebear.com/5.x/bottts/svg?seed=${Date.now()}`,
     size: 'md',
     alt: 'Test Avatar',
   },
-} as ComponentMeta<typeof Avatar>;
+};
 
-const Template: ComponentStory<typeof Avatar> = (args) => <Avatar {...args} />;
+export default meta;
 
-export const Default = Template.bind({});
+type Story = StoryObj<typeof Avatar>;
+
+export const Default: Story = {};
