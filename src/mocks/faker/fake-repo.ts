@@ -24,7 +24,16 @@ export const fakeRepo = (org: Org, hasProbability = true): Repository | [] => {
       techs: fakeTechs(2, 4),
     }));
 
-  const value = { name, desc, tags, devInfos };
+  const orgInfo = {
+    name: org.name,
+    avatar: org.avatar,
+  };
+
+  const techs = fakeTechs(3, 5);
+
+  const recent = `${faker.datatype.number({ min: 2, max: 6 })} days ago`;
+
+  const value = { name, desc, tags, devInfos, orgInfo, techs, recent };
 
   return returnChance(value, [], hasProbability);
 };
