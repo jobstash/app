@@ -1,6 +1,7 @@
 // Import 'tailwindcss/tailwind.css';
 import '../src/styles/globals.css';
 
+import { Lato } from '@next/font/google';
 import { themes } from '@storybook/theming';
 
 export const parameters = {
@@ -24,3 +25,17 @@ export const parameters = {
     },
   },
 };
+
+const lato = Lato({
+  weight: ['400', '700'],
+  subsets: ['latin'],
+  variable: '--font-lato',
+});
+
+export const decorators = [
+  (Story) => (
+    <div className={`${lato.variable} font-sans`}>
+      <Story />
+    </div>
+  ),
+];
