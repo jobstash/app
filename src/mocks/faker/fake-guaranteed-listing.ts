@@ -1,4 +1,4 @@
-import { ORG_UNISWAP_LABS } from '~/core/constants';
+import { CHAIN_UNISWAP_UNI, ORG_UNISWAP_LABS } from '~/core/constants';
 import type { Listing, Org } from '~/core/interfaces';
 
 import { fakeCompetitors } from './fake-competitors';
@@ -11,12 +11,14 @@ import { fakeRepos } from './fake-repo';
 export const fakeGuaranteedListing = (): Listing => {
   const org: Org = {
     ...fakeOrg(),
+    // Guaranteed org
     name: ORG_UNISWAP_LABS,
     avatar: `/org/${ORG_UNISWAP_LABS}.svg`,
     location: getOrgLocation(ORG_UNISWAP_LABS),
   };
 
   const jobs = [
+    // Guaranteed job
     fakeJob(org, {
       role: 'Senior',
       scope: 'Frontend',
@@ -26,6 +28,11 @@ export const fakeGuaranteedListing = (): Listing => {
   ];
 
   const projects = fakeProject(false);
+
+  // Guaranteed project
+  projects[0].name = CHAIN_UNISWAP_UNI;
+  projects[0].avatar = `/chains/${CHAIN_UNISWAP_UNI}.svg`;
+
   const competitors = fakeCompetitors();
   const repositories = fakeRepos(org);
 

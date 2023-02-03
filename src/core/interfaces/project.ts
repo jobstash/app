@@ -25,4 +25,7 @@ export interface Project {
   techs: Tech[];
   /** Description displayed in right-panel details tab */
   description: string;
+
+  /** Most recent date aggregated from org e.g. any activity from proj like new job-listing etc */
+  recent: string;
 }

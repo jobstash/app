@@ -3,30 +3,11 @@ import { faker } from '@faker-js/faker';
 import { ORG_UNISWAP_LABS } from '~/core/constants';
 import type { Listing } from '~/core/interfaces';
 
-import { fakeCompetitors } from './fake-competitors';
 import { fakeDesc } from './fake-desc';
-import { fakeJobs } from './fake-job';
-import { fakeOrg, getOrgLocation, OrgName, poolOrgs } from './fake-org';
-import { fakeProject } from './fake-project';
-import { fakeRepos } from './fake-repo';
+import { fakeListing } from './fake-listing';
+import { getOrgLocation, OrgName, poolOrgs } from './fake-org';
 import { fakeTags } from './fake-tag';
 import { fakeTechs } from './fake-tech';
-
-export const fakeListing = (): Listing => {
-  const org = fakeOrg();
-  const jobs = fakeJobs();
-  const projects = fakeProject();
-  const competitors = fakeCompetitors();
-  const repositories = fakeRepos(org);
-
-  return {
-    org,
-    jobs,
-    projects,
-    competitors,
-    repositories,
-  };
-};
 
 /** We only list all available orgs (based on those with location) */
 export const fakeOrgListings = (): Listing[] => {

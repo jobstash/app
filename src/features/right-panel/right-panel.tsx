@@ -35,6 +35,9 @@ const isEmptyTab = <T,>(
 export const RightPanel = ({ segments, push }: Props) => {
   const { activeListing } = useRootContext();
 
+  // Check if not empty (might be empty due to SSR)
+  const hasActiveListing = activeListing.org.name.length > 0;
+
   // Whenever a card is clicked, scroll right-panel to top
   useEffect(() => {
     const scrollListener = () => {
@@ -92,11 +95,13 @@ export const RightPanel = ({ segments, push }: Props) => {
         )}
       </div>
 
-      <RightPanelCard
-        activeListing={activeListing}
-        section={segments.section}
-        tabSegment={segments.tab}
-      />
+      {hasActiveListing && (
+        <RightPanelCard
+          activeListing={activeListing}
+          section={segments.section}
+          tabSegment={segments.tab}
+        />
+      )}
     </div>
   );
 };
