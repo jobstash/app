@@ -3,11 +3,11 @@ import { useEffect } from 'react';
 
 import { EVENT_CARD_CLICK } from '~/core/constants';
 import type { Listing } from '~/core/interfaces';
-import { ListingCardOrg } from '~/features/listing/listing-card-org';
+import { ListingCardProject } from '~/features/listing/listing-card-project';
 import { RightPanel } from '~/features/right-panel';
 import { SideBar } from '~/features/sidebar';
 import { Text } from '~/features/unstyled-ui/base/text';
-import { useOrgListingQuery } from '~/hooks/use-org-listing-query';
+import { useProjectListingQuery } from '~/hooks/use-project-listing-query';
 import { useRootContext } from '~/hooks/use-root-context';
 import { useRouteSegments } from '~/hooks/use-route-segments';
 import { GenericLayout } from '~/layouts/generic-layout';
@@ -20,7 +20,7 @@ interface Props {
   };
 }
 
-const OrganizationsPage = ({ data }: Props) => {
+const ProjectsPage = ({ data }: Props) => {
   const { segments, push } = useRouteSegments();
   const { activeListing, setActiveListing } = useRootContext();
 
@@ -30,13 +30,13 @@ const OrganizationsPage = ({ data }: Props) => {
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  const { isLoading, data: otherListings } = useOrgListingQuery();
+  const { isLoading, data: otherListings } = useProjectListingQuery();
 
-  // If for some reason jobListings data is empty, return appropriate page
-  if (data.activeListing.jobs.length === 0) return <h1>EMPTY</h1>;
+  // If for some reason project-listing data is empty, return appropriate page
+  if (data.activeListing.projects.length === 0) return <h1>EMPTY</h1>;
 
   const listingOnClick = (listing: Listing) => {
-    push(`/organizations/${slugify(listing.org.name)}/details`, {
+    push(`/projects/${slugify(listing.projects[0].name)}/details`, {
       shallow: true,
     });
     setActiveListing(listing);
@@ -54,6 +54,7 @@ const OrganizationsPage = ({ data }: Props) => {
           />
         }
         rightPanel={<RightPanel segments={segments} push={push} />}
+        // RightPanel={null}
       >
         <div className="flex w-full justify-center py-12">
           <span className="text-2xl font-bold">
@@ -63,10 +64,10 @@ const OrganizationsPage = ({ data }: Props) => {
 
         <div className="flex w-full flex-col space-y-12">
           {[data.activeListing].map((listing) => (
-            <ListingCardOrg
-              key={listing.org.name}
+            <ListingCardProject
+              key={listing.projects[0].name}
               listing={listing}
-              isActive={segments.id === slugify(listing.org.name)}
+              isActive={segments.id === slugify(listing.projects[0].name)}
               onClick={() => listingOnClick(listing)}
             />
           ))}
@@ -78,10 +79,10 @@ const OrganizationsPage = ({ data }: Props) => {
           )}
           {otherListings &&
             otherListings.listings.map((listing) => (
-              <ListingCardOrg
-                key={listing.org.name}
+              <ListingCardProject
+                key={listing.projects[0].name}
                 listing={listing}
-                isActive={segments.id === slugify(listing.org.name)}
+                isActive={segments.id === slugify(listing.projects[0].name)}
                 onClick={() => listingOnClick(listing)}
               />
             ))}
@@ -92,15 +93,15 @@ const OrganizationsPage = ({ data }: Props) => {
   );
 };
 
-export default OrganizationsPage;
+export default ProjectsPage;
 
 export const getServerSideProps: GetServerSideProps = async (ctx) => {
-  // !!! [TEMPORARY] redirect users to guaranteed org-lising when using address bar
-  if (ctx.query.id !== 'uniswap-labs') {
+  // !!! [TEMPORARY] redirect users to guaranteed project-lising when using address bar
+  if (ctx.query.id !== 'uniswap-uni') {
     return {
       redirect: {
         permanent: false,
-        destination: '/organizations/uniswap-labs/details',
+        destination: '/projects/uniswap-uni/details',
       },
     };
   }
