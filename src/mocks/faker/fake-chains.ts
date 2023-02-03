@@ -39,7 +39,7 @@ import type { Chain } from '~/core/interfaces';
  * *			 These are just mainly used to map the svgs in public dir.
  * *       Ideally, backend should provide the link for uploaded images.
  * */
-const poolChains = [
+export const poolChains = [
   CHAIN_1INC,
   CHAIN_APESWAP,
   CHAIN_AVALANCHE_AVAX,

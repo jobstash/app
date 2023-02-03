@@ -1,3 +1,5 @@
+import { faker } from '@faker-js/faker';
+
 import type { Project } from '~/core/interfaces';
 
 import { fakeChain, fakeChains } from './fake-chains';
@@ -20,6 +22,8 @@ export const fakeProject = (hasProbability = true): Project[] => {
 
   const techs = fakeTechs(3, 5);
 
+  const recent = `${faker.datatype.number({ min: 2, max: 6 })} days ago`;
+
   const value = [
     {
       name,
@@ -28,6 +32,7 @@ export const fakeProject = (hasProbability = true): Project[] => {
       chains,
       tags,
       techs,
+      recent,
     },
   ];
 
