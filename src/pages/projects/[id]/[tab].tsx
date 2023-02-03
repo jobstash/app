@@ -78,14 +78,17 @@ const ProjectsPage = ({ data }: Props) => {
             </div>
           )}
           {otherListings &&
-            otherListings.listings.map((listing) => (
-              <ListingCardProject
-                key={listing.projects[0].name}
-                listing={listing}
-                isActive={segments.id === slugify(listing.projects[0].name)}
-                onClick={() => listingOnClick(listing)}
-              />
-            ))}
+            otherListings.listings.map(
+              (listing) =>
+                listing.projects.length > 0 && (
+                  <ListingCardProject
+                    key={listing.projects[0].name}
+                    listing={listing}
+                    isActive={segments.id === slugify(listing.projects[0].name)}
+                    onClick={() => listingOnClick(listing)}
+                  />
+                ),
+            )}
           {/** TODO: FETCH OTHER JOB LISTINGS, SHOW SKELETON WHILE LOADING */}
         </div>
       </GenericLayout>
