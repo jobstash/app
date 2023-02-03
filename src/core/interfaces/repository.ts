@@ -8,6 +8,11 @@ interface DevInfo {
   techs: Tech[];
 }
 
+interface OrgInfo {
+  name: string;
+  avatar: string;
+}
+
 /** Repositories exposed by an org */
 export interface Repository {
   /** Repository name */
@@ -18,4 +23,13 @@ export interface Repository {
   tags: Tag[];
   /** Provides info about devs (and their techs) working on a repo */
   devInfos: DevInfo[];
+
+  /** Org related to repo */
+  orgInfo: OrgInfo;
+
+  /** Tech skills related to repo */
+  techs: Tech[];
+
+  /** Most recent date aggregated from org e.g. any activity from repo like new job-listing etc */
+  recent: string;
 }
