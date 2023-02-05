@@ -2,8 +2,6 @@ import { faker } from '@faker-js/faker';
 
 import type { Tech } from '~/core/interfaces';
 
-import { fakeArrayFromFaker } from './fake-array-from-faker';
-
 export const poolTechs = [
   'REACT',
   'JEST',
@@ -17,19 +15,17 @@ export const poolTechs = [
   'STACKS.JS',
   'WEB3.JS',
   'ETHER.JS',
+  'HARDHAT',
 ];
 
 export const fakeTech = (): Tech => ({
   name: faker.helpers.arrayElement(poolTechs),
-  // Adjust checkmark probability to 25%
   isChecked: Boolean(faker.helpers.maybe(() => '_', { probability: 0.25 })),
 });
 
-export const fakeTechs = (min = 2, max = 4): Tech[] => {
-  // There are 12 skills total (fake pool)
+export const fakeTechs = (min = 2, max = 13): Tech[] => {
   const allTechs = faker.helpers.shuffle(poolTechs).map((name) => ({
     name,
-    // Adjust checkmark probability to 25%
     isChecked: Boolean(faker.helpers.maybe(() => '_', { probability: 0.25 })),
   }));
 
