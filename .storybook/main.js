@@ -12,6 +12,7 @@ const config = {
     name: '@storybook/nextjs',
     options: {},
   },
+  staticDirs: ['../public'],
   webpackFinal: (config) => {
     config.module.rules.push({
       test: /\.css$/,
