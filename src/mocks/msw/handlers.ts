@@ -1,9 +1,9 @@
 import { rest } from 'msw';
 
-import { fakeJobListings } from '../faker/fake-job-listing';
-import { fakeOrgListings } from '../faker/fake-org-listings';
-import { fakeProjectListings } from '../faker/fake-project-listings';
-import { fakeRepoListings } from '../faker/fake-repo-listings';
+import { fakeJobListings } from '../fakers/fake-job-listing';
+import { fakeOrgListings } from '../fakers/fake-org-listing';
+import { fakeProjectListings } from '../fakers/fake-project-listing';
+import { fakeRepoListings } from '../fakers/fake-repo-listing';
 
 export const handlers = [
   // GET jobs listings
