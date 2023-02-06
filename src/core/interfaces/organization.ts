@@ -1,4 +1,5 @@
 import type { Tag } from './tag';
+import type { Tech } from './tech';
 
 export interface Organization {
   id: number;
@@ -14,6 +15,7 @@ export interface Organization {
   twitter: Tag;
   linkedIn: Tag;
   discord: Tag;
+  techs: Tech[];
 }
 
 interface OrgFunding {

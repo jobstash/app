@@ -7,7 +7,12 @@ import { fakeChain, fakeChains } from './fake-chains';
 import { fakeDesc } from './fake-desc';
 import { fakeTechs } from './fake-tech';
 
-export const fakeProject = (): Project => {
+export const fakeProject = (canBeNull = false): Project | null => {
+  const chance = faker.datatype.number({ min: 1, max: 100 });
+  if (canBeNull && chance > 85) {
+    return null;
+  }
+
   const id = faker.datatype.number();
   const { name, avatar } = fakeChain();
   const description = fakeDesc();
@@ -24,7 +29,7 @@ export const fakeProject = (): Project => {
   const hacks = [{ text: 'Big Hack costing all TVL', link: '#' }];
   const chains = fakeChains().filter((chain) => chain.name !== name);
   const token = { text: 'XYZ', link: '#' };
-  const techs = fakeTechs();
+  const techs = fakeTechs(4, 6);
 
   return {
     id,
@@ -51,4 +56,4 @@ export const fakeProject = (): Project => {
 export const fakeProjects = (min = 1, max = 4) =>
   Array.from({ length: faker.datatype.number({ min, max }) })
     .fill(0)
-    .map(() => fakeProject());
+    .map(() => fakeProject()) as Project[];

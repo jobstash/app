@@ -10,17 +10,25 @@ import { fakeRepos } from './fake-repo';
 export const fakeJobListing = (): JobListing => {
   const details = fakeJob();
   const org = fakeOrg();
-  const project = fakeProject();
+  const project = fakeProject(true);
+  const projects = project ? [project] : [];
   const repos = fakeRepos();
   const competitors = fakeProjects().filter(
-    (competitor) => competitor.name !== project.name,
+    (competitor) => competitor.name !== projects[0]?.name,
   );
-  const created = `${faker.datatype.number({ min: 1, max: 6 })} days ago`;
+  const created = `${faker.datatype.number({ min: 2, max: 6 })} days ago`;
 
-  return { details, org, project, repos, competitors, created };
+  return {
+    details,
+    org,
+    projects,
+    repos,
+    competitors,
+    created,
+  };
 };
 
-export const fakeJobListings = (guaranteed = false, min = 4, max = 8) => {
+export const fakeJobListings = (guaranteed = false, min = 6, max = 12) => {
   const listings = Array.from({ length: faker.datatype.number({ min, max }) })
     .fill(0)
     .map(() => fakeJobListing());
@@ -32,10 +40,12 @@ export const fakeJobListings = (guaranteed = false, min = 4, max = 8) => {
   );
 
   jobListings[0].org.name = 'Uniswap Labs';
-  jobListings[0].org.avatar = `/orgs/Uniswap Labs.png`;
+  jobListings[0].org.avatar = '/orgs/Uniswap Labs.png';
+  jobListings[0].org.website = { text: 'uniswap.org', link: '#' };
+  jobListings[0].org.location = `NYC, USA`;
   jobListings[0].details.id = 12_345;
   jobListings[0].details.role.name = 'Senior';
-  jobListings[0].details.title = 'Senior Frontend Engineer 12345';
+  jobListings[0].details.title = 'Senior Frontend Engineer';
 
   return jobListings;
 };

@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
 
-import type { Job, Tech } from '~/core/interfaces';
+import type { Job } from '~/core/interfaces';
 
 import { fakeDesc } from './fake-desc';
 import { poolTechs } from './fake-tech';
@@ -17,33 +17,35 @@ const poolSuffix = ['Engineer', 'Developer'];
 
 export const fakeJob = (): Job => {
   const id = faker.datatype.number();
-  const role: Job['role'] = {
+  const role = {
     name: faker.helpers.arrayElement(poolRoles),
     description: fakeDesc(),
   };
   const scope = faker.helpers.arrayElement(poolScopes);
   const suffix = faker.helpers.arrayElement(poolSuffix);
   const title = `${role.name} ${scope} ${suffix}`;
-  const minSalary = faker.datatype.number({ min: 30, max: 60 });
-  const maxSalary = faker.datatype.number({ min: 80, max: 100 });
+  const minSalary =
+    Math.round(faker.datatype.number({ min: 60, max: 80 }) / 10) * 10;
+  const maxSalary =
+    Math.round(faker.datatype.number({ min: 90, max: 120 }) / 10) * 10;
   const salary = `$${minSalary}-${maxSalary}k/year`;
   const location = 'Remote';
-  const team: Job['team'] = {
+  const team = {
     size: faker.datatype.number({ min: 4, max: 16 }),
     description: fakeDesc(),
   };
   const benefits = fakeDesc();
   const interview = fakeDesc();
-  const allTechs: Tech[] = faker.helpers
+  const allTechs = faker.helpers
     .shuffle(poolTechs)
     .map((tech) => ({ name: tech, isChecked: faker.datatype.boolean() }));
-  const main = allTechs.slice(0, faker.datatype.number({ min: 1, max: 4 }));
+  const main = allTechs.slice(0, faker.datatype.number({ min: 1, max: 2 }));
   const hasMentor = allTechs.slice(
-    4,
-    faker.datatype.number({ min: 4, max: 8 }),
+    3,
+    faker.datatype.number({ min: 4, max: 5 }),
   );
-  const shared = allTechs.slice(4, faker.datatype.number({ min: 4, max: 13 }));
-  const skills: Job['skills'] = { main, hasMentor, shared };
+  const shared = allTechs.slice(6, faker.datatype.number({ min: 7, max: 8 }));
+  const skills = { main, hasMentor, shared };
 
   return {
     id,
