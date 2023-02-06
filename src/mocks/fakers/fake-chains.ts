@@ -21,11 +21,11 @@ export const poolChains = [
 
 export const fakeChain = (): Chain => {
   const name = faker.helpers.arrayElement(poolChains);
-  const avatar = `/chains/${name}.svg`;
+  const avatar = `/chains/${name}.png`;
   return { name, avatar };
 };
 
-export const fakeChains = (min = 3, max = 9): Chain[] =>
+export const fakeChains = (min = 5, max = 9): Chain[] =>
   faker.helpers.arrayElements(
     poolChains.map((filename) => ({
       name: filename,

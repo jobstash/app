@@ -12,5 +12,5 @@ const poolAudits = [
 
 export const fakeAudits = (): Tag[] =>
   faker.helpers
-    .arrayElements(poolAudits)
+    .arrayElements(poolAudits, faker.datatype.number({ min: 1, max: 3 }))
     .map((name) => ({ text: name, link: '#' }));
