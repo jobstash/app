@@ -1,5 +1,6 @@
 import { faker } from '@faker-js/faker';
 
+import { KIND_LISTING_JOB } from '~/core/constants';
 import type { JobListing } from '~/core/interfaces';
 
 import { fakeJob } from './fake-job';
@@ -8,6 +9,7 @@ import { fakeProject, fakeProjects } from './fake-project';
 import { fakeRepos } from './fake-repo';
 
 export const fakeJobListing = (): JobListing => {
+  const kind = KIND_LISTING_JOB;
   const details = fakeJob();
   const org = fakeOrg();
   const project = fakeProject(true);
@@ -19,8 +21,10 @@ export const fakeJobListing = (): JobListing => {
   const created = `${faker.datatype.number({ min: 2, max: 6 })} days ago`;
 
   return {
+    kind,
     details,
     org,
+    jobs: null,
     projects,
     repos,
     competitors,
