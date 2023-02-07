@@ -17,7 +17,7 @@ interface Props {
 export const SidebarIcon = ({ filename }: Props) => (
   <Image
     priority
-    src={`/icons/tags/${filename}.png`}
+    src={`/icons/sidebar/${filename}.png`}
     width="16"
     height="16"
     alt={filename}
