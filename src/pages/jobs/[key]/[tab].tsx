@@ -1,18 +1,15 @@
 import type { GetServerSideProps } from 'next';
 import { useEffect } from 'react';
 
-import { useAtom } from 'jotai';
+import { useSetAtom } from 'jotai';
 
-import { EVENT_CARD_CLICK } from '~/core/constants';
 import type { JobListing } from '~/core/interfaces';
-import { JobCard } from '~/features/jobs/components';
-import { checkJobIsActive, createJobKey } from '~/features/jobs/utils';
+import { JobCardList } from '~/features/jobs/components';
 import { RightPanel } from '~/features/right-panel';
 import { mockJobListings } from '~/mocks/data/mock-listings';
 import { activeListingAtom } from '~/shared/atoms';
 import { ToBeReplacedLayout } from '~/shared/components';
 import { SideBar } from '~/shared/components/layout/sidebar';
-import { useRouteSegments } from '~/shared/hooks';
 
 interface Props {
   data: {
@@ -21,8 +18,7 @@ interface Props {
 }
 
 const JobsPage = ({ data }: Props) => {
-  const { segments, push } = useRouteSegments();
-  const [, setActiveListing] = useAtom(activeListingAtom);
+  const setActiveListing = useSetAtom(activeListingAtom);
 
   // Sync SSR data active listing
   useEffect(() => {
@@ -32,22 +28,9 @@ const JobsPage = ({ data }: Props) => {
 
   if (data.listings.length === 0) return <h1>EMPTY</h1>;
 
-  const onClickListing = (listing: JobListing) => {
-    push(`/jobs/${createJobKey(listing)}/details`, { shallow: true });
-    setActiveListing(listing);
-    document.dispatchEvent(new Event(EVENT_CARD_CLICK));
-  };
-
   return (
     <ToBeReplacedLayout sidebar={<SideBar />} rightPanel={<RightPanel />}>
-      {data.listings.map((listing) => (
-        <JobCard
-          key={listing.details.id}
-          listing={listing}
-          isActive={checkJobIsActive(segments.key, listing)}
-          onClick={() => onClickListing(listing)}
-        />
-      ))}
+      <JobCardList initListings={data.listings} />
     </ToBeReplacedLayout>
   );
 };
