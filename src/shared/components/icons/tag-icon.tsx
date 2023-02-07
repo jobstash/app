@@ -18,6 +18,7 @@ const tagIcons = [
   'location',
   'money',
   'monthly-volume',
+  'project',
   'revenue',
   'suitcase',
   'token',
