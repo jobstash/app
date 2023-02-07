@@ -17,6 +17,7 @@ module.exports = {
         white: 'rgb(var(--color-white) / <alpha-value>)',
         tech: 'var(--color-tech)',
         card: 'var(--color-card)',
+        ivory: 'var(--color-ivory)',
         sidebarTitle: 'var(--color-sidebarTitle)',
       },
     },
