@@ -37,26 +37,28 @@ export const JobCard = ({ listing, isActive, onClick }: Props) => {
   const projectTags = [...top, ...mid, ...bottom];
 
   return (
-    <div onClick={onClick}>
-      <div>
-        <p>{title}</p>
-        <p>{created}</p>
-        <Button>bookmark</Button>
+    <div className="w-full space-y-4 overflow-hidden rounded-3xl bg-white/5 p-5 text-ivory" onClick={onClick}>
+      <div className='flex items-center justify-between'>
+        <h2 className='text-xl font-medium'>{title}</h2>
+        <div className='flex items-center space-x-2'>
+          <span className='text-sm'>{created}</span>
+          <Button>bookmark</Button>
+        </div>
       </div>
 
-      {tags.map((tag) => (
-        <div key={tag.text}>
-          {tag.icon}
-          <p>{tag.text}</p>
-          <p>{tag.link}</p>
-        </div>
-      ))}
+      <div className='flex space-x-8 border-b border-white/5 text-sm'>
+        {tags.map((tag) => (
+          <div key={tag.text} className='flex items-center'>
+            <div className='mr-2'>{tag.icon}</div>
+            <p>{tag.text}</p>
+            <p>{tag.link}</p>
+          </div>
+        ))}
+      </div>
 
-      <hr />
-
-      <div>
+      <div className='flex border-b border-white/5'>
         {skills.map((tech) => (
-          <div key={tech.name}>
+          <div key={tech.name} className='flex'>
             <p>{tech.name}</p>
             <p>{tech.isChecked}</p>
           </div>
@@ -64,25 +66,21 @@ export const JobCard = ({ listing, isActive, onClick }: Props) => {
         <Button>Sign Up to See Matches</Button>
       </div>
 
-      <hr />
-
-      <div>
+      <div className='flex border-b border-white/5'>
         <p>{org.name}</p>
         <p>{org.avatar}</p>
         <p>Funding: {org.funding.date}</p>
       </div>
 
-      <hr />
-
       {project && (
-        <div>
-          <div>
+        <div className='flex border-b border-white/5'>
+          <div className='flex'>
             <p>{project.name}</p>
             <p>{project.avatar}</p>
           </div>
-          <div>
+          <div className='flex'>
             {project.chains.map((chain) => (
-              <div key={chain.name}>
+              <div key={chain.name} className='flex'>
                 <p>{chain.name}</p>
                 <p>{chain.avatar}</p>
               </div>
@@ -90,7 +88,7 @@ export const JobCard = ({ listing, isActive, onClick }: Props) => {
           </div>
           {projectTags.length > 0 &&
             projectTags.map((tag) => (
-              <div key={tag.text}>
+              <div key={tag.text} className='flex'>
                 {tag.icon}
                 <p>{tag.text}</p>
                 <p>{tag.link}</p>
