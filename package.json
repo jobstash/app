@@ -22,6 +22,7 @@
     "@types/react-dom": "18.0.10",
     "class-variance-authority": "^0.4.0",
     "clsx": "^1.2.1",
+    "jotai": "^2.0.0",
     "next": "13.1.4",
     "postcss-loader": "^7.0.2",
     "react": "18.2.0",
