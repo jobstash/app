@@ -1,1 +1,1 @@
-export { RightPanel } from './right-panel';
+export * from './components/right-panel';
