@@ -1,2 +1,2 @@
-export * from './org-card';
+export * from './org-card-list';
 export * from './org-right-panel';
