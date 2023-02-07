@@ -1,9 +1,9 @@
 import type { ListingKind } from '~/core/types/listing';
 
-import type { Job } from './job';
-import type { Organization } from './organization';
-import type { Project } from './project';
-import type { Repository } from './repository';
+import type { Job } from '../job/job';
+import type { Organization } from '../org/organization';
+import type { Project } from '../project/project';
+import type { Repository } from '../repo/repository';
 
 export interface Listing {
   created: string;

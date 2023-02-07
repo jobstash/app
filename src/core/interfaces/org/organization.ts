@@ -1,5 +1,4 @@
-import type { Tag } from './tag';
-import type { Tech } from './tech';
+import type { Tag, Tech } from '../common';
 
 export interface Organization {
   id: number;
