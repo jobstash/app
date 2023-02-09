@@ -14,6 +14,7 @@ export interface Project {
   monthlyVolume: string;
   activeUsers: string;
   revenue: string;
+  deployedToMainnet: boolean;
   audits: Tag[];
   hacks: Tag[];
   chains: Chain[];
