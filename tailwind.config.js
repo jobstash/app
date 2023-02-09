@@ -15,9 +15,11 @@ module.exports = {
         secondary: 'rgb(var(--color-secondary) / <alpha-value>)',
         black: 'rgb(var(--color-black) / <alpha-value>)',
         white: 'rgb(var(--color-white) / <alpha-value>)',
+        grey: 'var(--color-grey)',
         tech: 'var(--color-tech)',
         card: 'var(--color-card)',
         ivory: 'var(--color-ivory)',
+        // Need a better and more generic name
         sidebarTitle: 'var(--color-sidebarTitle)',
       },
       backgroundImage: {

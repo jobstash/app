@@ -17,7 +17,7 @@ export const ToBeReplacedLayout = ({
       <div className="w-full space-y-8">{children}</div>
     </div>
     <aside className="w-1/3 grow">
-      <div className="hide-scrollbar sticky top-0 max-h-screen space-y-6 overflow-y-scroll bg-white/5 p-6">
+      <div className="hide-scrollbar sticky top-0 h-screen space-y-6 overflow-y-scroll bg-white/5 p-6">
         {rightPanel}
       </div>
     </aside>

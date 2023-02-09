@@ -39,24 +39,20 @@ export const OrgRightPanel = ({ org }: Props) => {
   const { name, description } = org;
 
   return (
-    <div>
-      <div>
-        <p>{name}</p>
-      </div>
-
-      <hr />
-
-      <div>
+    <div className='p-6'>
+      <h2 className='text-xl font-medium'>{name}</h2>
+      <div className='mt-4 border-t border-white/5 pt-4'>
         <p>{description}</p>
       </div>
-
-      {tags.map((tag) => (
-        <div key={tag.text}>
-          {tag.icon}
-          <p>{tag.text}</p>
-          <p>{tag.link}</p>
-        </div>
-      ))}
+      <div className='flex space-x-4 pt-8 text-sm'>
+        {tags.map((tag) => (
+          <div key={tag.text} className="flex items-center">
+            <div className='mr-2'>{tag.icon}</div>
+            <p>{tag.text}</p>
+            <p>{tag.link}</p>
+          </div>
+        ))}
+      </div>
     </div>
   );
 };
