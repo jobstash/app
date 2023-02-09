@@ -59,7 +59,7 @@ export const JobCardList = ({ initListings }: Props) => {
   }, [fetchNextPage, inView, isFetchingNextPage]);
 
   return (
-    <div>
+    <div className='space-y-8'>
       {initListings.map((post) => (
         <JobCard
           key={post.details.id}
@@ -97,13 +97,13 @@ export const JobCardList = ({ initListings }: Props) => {
 
       {isLoading && (
         <div>
-          <p>Fetching job posts ...</p>
+          <p className='w-full pb-8 text-center'>Fetching job posts ...</p>
         </div>
       )}
 
       {isFetchingNextPage && (
         <div>
-          <p>Loading more job posts ...</p>
+          <p className='w-full pb-8 text-center'>Loading more job posts ...</p>
         </div>
       )}
 
