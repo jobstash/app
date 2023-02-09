@@ -3,56 +3,34 @@ import { useEffect } from 'react';
 
 import { useAtom } from 'jotai';
 
-import { EVENT_CARD_CLICK } from '~/core/constants';
-import type { OrgListing } from '~/core/interfaces';
-import { OrgCard } from '~/features/organizations/components';
+import type { OrgPost } from '~/core/interfaces';
+import { OrgCardList } from '~/features/organizations/components';
 import { RightPanel } from '~/features/right-panel';
-import { mockOrgListings } from '~/mocks/data/mock-listings';
-import { activeListingAtom } from '~/shared/atoms';
+import { mockOrgPosts } from '~/mocks/data/mock-posts';
+import { activePostAtom } from '~/shared/atoms';
 import { SideBar } from '~/shared/components';
 import { ToBeReplacedLayout } from '~/shared/components';
-import { useRouteSegments } from '~/shared/hooks';
-import { slugify } from '~/shared/utils';
 
 interface Props {
   data: {
-    listings: OrgListing[];
+    posts: OrgPost[];
   };
 }
 
 const OrganizationsPage = ({ data }: Props) => {
-  const {
-    segments: { key },
-    push,
-  } = useRouteSegments();
-  const [, setActiveListing] = useAtom(activeListingAtom);
+  const [, setActiveListing] = useAtom(activePostAtom);
 
-  // Sync SSR data active listing
+  // Sync SSR data active post
   useEffect(() => {
-    setActiveListing(data.listings.length > 0 ? data.listings[0] : null);
+    setActiveListing(data.posts.length > 0 ? data.posts[0] : null);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (data.listings.length === 0) return <h1>EMPTY</h1>;
-
-  const onClickListing = (listing: OrgListing) => {
-    push(`/organizations/${slugify(listing.details.name)}/details`, {
-      shallow: true,
-    });
-    setActiveListing(listing);
-    document.dispatchEvent(new Event(EVENT_CARD_CLICK));
-  };
+  if (data.posts.length === 0) return <h1>EMPTY</h1>;
 
   return (
     <ToBeReplacedLayout sidebar={<SideBar />} rightPanel={<RightPanel />}>
-      {data.listings.map((listing) => (
-        <OrgCard
-          key={listing.details.id}
-          listing={listing}
-          isActive={key === slugify(listing.details.name)}
-          onClick={() => onClickListing(listing)}
-        />
-      ))}
+      <OrgCardList initListings={data.posts} />
     </ToBeReplacedLayout>
   );
 };
@@ -72,7 +50,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (ctx) => {
   return {
     props: {
       data: {
-        listings: mockOrgListings,
+        posts: mockOrgPosts,
       },
     },
   };

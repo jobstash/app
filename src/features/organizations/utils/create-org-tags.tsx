@@ -1,8 +1,8 @@
-import type { OrgListing, TagElement } from '~/core/interfaces';
+import type { OrgPost, TagElement } from '~/core/interfaces';
 import { TagIcon } from '~/shared/components';
 
-export const createOrgTags = (listing: OrgListing): TagElement[] => {
-  const { jobs, projects, details } = listing;
+export const createOrgTags = (post: OrgPost): TagElement[] => {
+  const { jobs, projects, details } = post;
 
   const { teamSize, funding } = details;
 

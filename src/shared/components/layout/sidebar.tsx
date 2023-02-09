@@ -11,7 +11,7 @@ import { bookmarkedTabs, discoverTabs } from './constants';
 import type { SidebarTab } from './types';
 
 // * NOTE: replace the routes with data from bff
-// * (or probably from most recent active listing per section)
+// * (or probably from most recent active post per section)
 const guaranteedSectionRoutesMap: Record<SidebarTab['baseHref'], string> = {
   '/jobs': '/jobs/uniswap-labs-senior-frontend-engineer-12345/details',
   '/organizations': '/organizations/uniswap-labs/details',

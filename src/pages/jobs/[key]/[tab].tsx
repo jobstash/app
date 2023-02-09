@@ -1,53 +1,36 @@
 import type { GetServerSideProps } from 'next';
 import { useEffect } from 'react';
 
-import { useAtom } from 'jotai';
+import { useSetAtom } from 'jotai';
 
-import { EVENT_CARD_CLICK } from '~/core/constants';
-import type { JobListing } from '~/core/interfaces';
-import { JobCard } from '~/features/jobs/components';
-import { checkJobIsActive, createJobKey } from '~/features/jobs/utils';
+import type { JobPost } from '~/core/interfaces';
+import { JobCardList } from '~/features/jobs/components';
 import { RightPanel } from '~/features/right-panel';
-import { mockJobListings } from '~/mocks/data/mock-listings';
-import { activeListingAtom } from '~/shared/atoms';
+import { mockJobPosts } from '~/mocks/data/mock-posts';
+import { activePostAtom } from '~/shared/atoms';
 import { ToBeReplacedLayout } from '~/shared/components';
 import { SideBar } from '~/shared/components/layout/sidebar';
-import { useRouteSegments } from '~/shared/hooks';
 
 interface Props {
   data: {
-    listings: JobListing[];
+    posts: JobPost[];
   };
 }
 
 const JobsPage = ({ data }: Props) => {
-  const { segments, push } = useRouteSegments();
-  const [, setActiveListing] = useAtom(activeListingAtom);
+  const setActiveListing = useSetAtom(activePostAtom);
 
-  // Sync SSR data active listing
+  // Sync SSR data active post
   useEffect(() => {
-    setActiveListing(data.listings.length > 0 ? data.listings[0] : null);
+    setActiveListing(data.posts.length > 0 ? data.posts[0] : null);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (data.listings.length === 0) return <h1>EMPTY</h1>;
-
-  const onClickListing = (listing: JobListing) => {
-    push(`/jobs/${createJobKey(listing)}/details`, { shallow: true });
-    setActiveListing(listing);
-    document.dispatchEvent(new Event(EVENT_CARD_CLICK));
-  };
+  if (data.posts.length === 0) return <h1>EMPTY</h1>;
 
   return (
     <ToBeReplacedLayout sidebar={<SideBar />} rightPanel={<RightPanel />}>
-      {data.listings.map((listing) => (
-        <JobCard
-          key={listing.details.id}
-          listing={listing}
-          isActive={checkJobIsActive(segments.key, listing)}
-          onClick={() => onClickListing(listing)}
-        />
-      ))}
+      <JobCardList initListings={data.posts} />
     </ToBeReplacedLayout>
   );
 };
@@ -68,7 +51,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (ctx) => {
   return {
     props: {
       data: {
-        listings: mockJobListings,
+        posts: mockJobPosts,
       },
     },
   };

@@ -1,18 +1,18 @@
 import type { MouseEventHandler } from 'react';
 
-import type { RepoListing } from '~/core/interfaces';
+import type { RepoPost } from '~/core/interfaces';
 import { Button } from '~/shared/components';
 
 import { createRepoTags, getRepoTechs } from '../utils';
 
 interface Props {
-  listing: RepoListing;
+  post: RepoPost;
   isActive: boolean;
   onClick: MouseEventHandler;
 }
 
-export const RepoCard = ({ listing, isActive, onClick }: Props) => {
-  const { details, created, org } = listing;
+export const RepoCard = ({ post, isActive, onClick }: Props) => {
+  const { details, created, org } = post;
 
   const { name, description } = details;
 

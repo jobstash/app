@@ -1,22 +1,22 @@
 import type { MouseEventHandler } from 'react';
 
-import type { OrgListing } from '~/core/interfaces';
+import type { OrgPost } from '~/core/interfaces';
 import { Button } from '~/shared/components';
 
 import { createOrgTags } from '../utils';
 
 interface Props {
-  listing: OrgListing;
+  post: OrgPost;
   isActive: boolean;
   onClick: MouseEventHandler;
 }
 
 // *** UNSTYLED ***
-export const OrgCard = ({ listing, isActive, onClick }: Props) => {
-  const { details, created } = listing;
+export const OrgCard = ({ post, isActive, onClick }: Props) => {
+  const { details, created } = post;
 
   const { name, avatar, location, techs } = details;
-  const tags = createOrgTags(listing);
+  const tags = createOrgTags(post);
 
   return (
     <div onClick={onClick}>

@@ -16,15 +16,24 @@ const lato = Lato({
   variable: '--font-lato',
 });
 
-//
-// if (
-//   process.env.NODE_ENV === 'development' &&
-//   typeof window !== 'undefined' &&
-//   process.env.NEXT_PUBLIC_API_MOCKING === 'yes'
-// ) {
-//   const { worker } = require('~/mocks/msw/browser');
-//   worker.start();
-// }
+if (
+  process.env.NODE_ENV === 'development' &&
+  typeof window !== 'undefined' &&
+  process.env.NEXT_PUBLIC_API_MOCKING === 'yes'
+) {
+  const { worker } = require('~/mocks/msw/browser');
+  worker.start({
+    onUnhandledRequest: (req: any, print: any) => {
+      // Ignore nextjs image msw warnings
+      if (req.url.pathname.startsWith('/_next')) {
+        return;
+      }
+
+      // Print other warnings
+      print.warning();
+    },
+  });
+}
 
 const queryClient = new QueryClient();
 

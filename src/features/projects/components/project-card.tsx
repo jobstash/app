@@ -1,19 +1,19 @@
 import type { MouseEventHandler } from 'react';
 
-import type { ProjectListing } from '~/core/interfaces';
+import type { ProjectPost } from '~/core/interfaces';
 import { Button } from '~/shared/components';
 
 import { createProjectTags } from '../utils';
 
 interface Props {
-  listing: ProjectListing;
+  post: ProjectPost;
   isActive: boolean;
   onClick: MouseEventHandler;
 }
 
 // *** UNSTYLED ***
-export const ProjectCard = ({ listing, isActive, onClick }: Props) => {
-  const { details, created } = listing;
+export const ProjectCard = ({ post, isActive, onClick }: Props) => {
+  const { details, created } = post;
 
   const { name, avatar, techs, chains, token } = details;
 

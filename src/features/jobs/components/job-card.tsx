@@ -1,20 +1,20 @@
 import type { MouseEventHandler } from 'react';
 
-import type { JobListing } from '~/core/interfaces';
+import type { JobPost } from '~/core/interfaces';
 import { createProjectTags } from '~/features/projects/utils';
 import { Button } from '~/shared/components';
 
 import { createJobTags } from '../utils';
 
 interface Props {
-  listing: JobListing;
+  post: JobPost;
   isActive: boolean;
   onClick: MouseEventHandler;
 }
 
 // *** UNSTYLED ***
-export const JobCard = ({ listing, isActive, onClick }: Props) => {
-  const { details: job, created, org, projects } = listing;
+export const JobCard = ({ post, isActive, onClick }: Props) => {
+  const { details: job, created, org, projects } = post;
 
   if (!job) return null;
 
