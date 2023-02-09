@@ -1,2 +1,2 @@
-export * from './org-listing';
+export * from './org-post';
 export * from './organization';

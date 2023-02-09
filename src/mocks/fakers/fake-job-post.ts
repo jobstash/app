@@ -1,15 +1,15 @@
 import { faker } from '@faker-js/faker';
 
-import { KIND_LISTING_JOB } from '~/core/constants';
-import type { JobListing } from '~/core/interfaces';
+import { KIND_POST_JOB } from '~/core/constants';
+import type { JobPost } from '~/core/interfaces';
 
 import { fakeJob } from './fake-job';
 import { fakeOrg } from './fake-org';
 import { fakeProject, fakeProjects } from './fake-project';
 import { fakeRepos } from './fake-repo';
 
-export const fakeJobListing = (): JobListing => {
-  const kind = KIND_LISTING_JOB;
+export const fakeJobPost = (): JobPost => {
+  const kind = KIND_POST_JOB;
   const details = fakeJob();
   const org = fakeOrg();
   const project = fakeProject(true);
@@ -32,16 +32,14 @@ export const fakeJobListing = (): JobListing => {
   };
 };
 
-export const fakeJobListings = (guaranteed = false, min = 3, max = 6) => {
-  const listings = Array.from({ length: faker.datatype.number({ min, max }) })
+export const fakeJobPosts = (guaranteed = false, min = 3, max = 6) => {
+  const posts = Array.from({ length: faker.datatype.number({ min, max }) })
     .fill(0)
-    .map(() => fakeJobListing());
+    .map(() => fakeJobPost());
 
-  if (!guaranteed) return listings;
+  if (!guaranteed) return posts;
 
-  const jobListings = listings.filter(
-    (listing) => listing.org.name !== 'Uniswap Labs',
-  );
+  const jobListings = posts.filter((post) => post.org.name !== 'Uniswap Labs');
 
   jobListings[0].org.name = 'Uniswap Labs';
   jobListings[0].org.avatar = '/orgs/Uniswap Labs.png';

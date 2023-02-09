@@ -1,2 +1,2 @@
 export * from './job';
-export * from './job-listing';
+export * from './job-post';

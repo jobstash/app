@@ -1,1 +1,1 @@
-export * from './use-org-listing-inf-query';
+export * from './use-org-post-inf-query';

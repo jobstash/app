@@ -1,15 +1,15 @@
 import { faker } from '@faker-js/faker';
 
-import { KIND_LISTING_REPO } from '~/core/constants';
-import type { Project, RepoListing } from '~/core/interfaces';
+import { KIND_POST_REPO } from '~/core/constants';
+import type { Project, RepoPost } from '~/core/interfaces';
 
 import { fakeJobs } from './fake-job';
 import { fakeOrg } from './fake-org';
 import { fakeProject } from './fake-project';
 import { fakeRepo } from './fake-repo';
 
-export const fakeRepoListing = (): RepoListing => {
-  const kind = KIND_LISTING_REPO;
+export const fakeRepoPost = (): RepoPost => {
+  const kind = KIND_POST_REPO;
   const org = fakeOrg();
   const details = fakeRepo();
   const projects = [fakeProject() as Project];
@@ -28,17 +28,17 @@ export const fakeRepoListing = (): RepoListing => {
   };
 };
 
-export const fakeRepoListings = (guaranteed = false, min = 4, max = 8) => {
-  const listings = Array.from({ length: faker.datatype.number({ min, max }) })
+export const fakeRepoPosts = (guaranteed = false, min = 4, max = 8) => {
+  const posts = Array.from({ length: faker.datatype.number({ min, max }) })
     .fill(0)
-    .map(() => fakeRepoListing());
+    .map(() => fakeRepoPost());
 
-  if (!guaranteed) return listings;
+  if (!guaranteed) return posts;
 
   const guaranteedRepo = 'uniswap/interface';
 
-  const repoListings = listings.filter(
-    (listing) => listing.details.name !== guaranteedRepo,
+  const repoListings = posts.filter(
+    (post) => post.details.name !== guaranteedRepo,
   );
 
   repoListings[0].details.name = guaranteedRepo;

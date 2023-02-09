@@ -8,8 +8,8 @@ import {
   TEXT_ROUTE_SECTION_REPOSITORIES,
   TEXT_ROUTE_TAB_DETAILS,
 } from '~/core/constants';
-import type { RepoListing } from '~/core/interfaces';
-import { activeListingAtom } from '~/shared/atoms';
+import type { RepoPost } from '~/core/interfaces';
+import { activePostAtom } from '~/shared/atoms';
 import { useRouteSegments } from '~/shared/hooks';
 import { createRouteString, slugify } from '~/shared/utils';
 
@@ -18,22 +18,22 @@ import { useRepoListingInfQuery } from '../hooks';
 import { RepoCard } from './repo-card';
 
 interface Props {
-  initListings: RepoListing[];
+  initListings: RepoPost[];
 }
 export const RepoCardList = ({ initListings }: Props) => {
   const {
     segments: { key },
     push,
   } = useRouteSegments();
-  const setActiveListing = useSetAtom(activeListingAtom);
+  const setActiveListing = useSetAtom(activePostAtom);
 
-  const onClickListing = (listing: RepoListing) => {
-    setActiveListing(listing);
+  const onClickListing = (post: RepoPost) => {
+    setActiveListing(post);
     document.dispatchEvent(new Event(EVENT_CARD_CLICK));
 
     const route = createRouteString(
       TEXT_ROUTE_SECTION_REPOSITORIES,
-      slugify(listing.details.name),
+      slugify(post.details.name),
       TEXT_ROUTE_TAB_DETAILS,
     );
 
@@ -61,31 +61,31 @@ export const RepoCardList = ({ initListings }: Props) => {
 
   return (
     <div>
-      {initListings.map((listing) => (
+      {initListings.map((post) => (
         <RepoCard
-          key={listing.details.id}
-          listing={listing}
-          isActive={key === slugify(listing.details.name)}
-          onClick={() => onClickListing(listing)}
+          key={post.details.id}
+          post={post}
+          isActive={key === slugify(post.details.name)}
+          onClick={() => onClickListing(post)}
         />
       ))}
 
       {data &&
         data.pages.map((page, i) =>
-          page.listings.map((listing, j) => (
+          page.posts.map((post, j) => (
             <div
-              key={listing.details.id}
+              key={post.details.id}
               ref={
-                i === data.pages.length - 1 && j === page.listings.length - 1
+                i === data.pages.length - 1 && j === page.posts.length - 1
                   ? ref
                   : undefined
               }
             >
               <RepoCard
-                key={listing.details.id}
-                listing={listing}
-                isActive={key === slugify(listing.details.name)}
-                onClick={() => onClickListing(listing)}
+                key={post.details.id}
+                post={post}
+                isActive={key === slugify(post.details.name)}
+                onClick={() => onClickListing(post)}
               />
             </div>
           )),
@@ -99,17 +99,17 @@ export const RepoCardList = ({ initListings }: Props) => {
 
       {isLoading && (
         <div>
-          <p>Fetching repo lists ...</p>
+          <p>Fetching repos ...</p>
         </div>
       )}
 
       {isFetchingNextPage && (
         <div>
-          <p>Loading more repo listings ...</p>
+          <p>Loading more repo posts ...</p>
         </div>
       )}
 
-      {data && !hasNextPage && <p>No more repo listings to load</p>}
+      {data && !hasNextPage && <p>No more repo posts to load</p>}
     </div>
   );
 };

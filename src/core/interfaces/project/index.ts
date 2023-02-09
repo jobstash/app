@@ -1,2 +1,2 @@
 export * from './project';
-export * from './project-listing';
+export * from './project-post';

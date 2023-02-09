@@ -1,1 +1,1 @@
-export * from './use-job-listing-inf-query';
+export * from './use-job-post-inf-query';
