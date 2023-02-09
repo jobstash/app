@@ -1,4 +1,4 @@
-import type { Tech } from './tech';
+import type { Tech } from '../common';
 
 export interface Job {
   id: number;

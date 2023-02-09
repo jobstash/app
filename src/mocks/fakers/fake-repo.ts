@@ -20,14 +20,17 @@ export const fakeRepo = (): Repository => {
     'DevOps',
   ]);
   const committers = faker.datatype.number({ min: 3, max: 15 });
-  const devInfos = Array.from({
-    length: faker.datatype.number({ min: 1, max: 3 }),
-  })
-    .fill(0)
-    .map(() => ({
+  const allTechs = fakeTechs(6, 8);
+  const devInfos = [
+    {
       devCount: faker.datatype.number({ min: 2, max: 8 }),
-      techs: fakeTechs(2, 4),
-    }));
+      techs: allTechs.slice(0, 3),
+    },
+    {
+      devCount: faker.datatype.number({ min: 2, max: 8 }),
+      techs: allTechs.slice(3, -1),
+    },
+  ];
 
   return { id, name, description, project, type, committers, devInfos };
 };

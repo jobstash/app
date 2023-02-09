@@ -5,10 +5,10 @@ import { useAtom } from 'jotai';
 import {
   EVENT_CARD_CLICK,
   ID_TOP_RIGHT_PANEL,
-  KIND_LISTING_JOB,
-  KIND_LISTING_ORG,
-  KIND_LISTING_PROJECT,
-  KIND_LISTING_REPO,
+  KIND_POST_JOB,
+  KIND_POST_ORG,
+  KIND_POST_PROJECT,
+  KIND_POST_REPO,
   TEXT_ROUTE_SECTION_JOBS,
   TEXT_ROUTE_SECTION_ORGANIZATION,
   TEXT_ROUTE_SECTION_PROJECTS,
@@ -22,14 +22,14 @@ import {
 } from '~/core/constants';
 import type {
   Job,
-  JobListing,
-  Listing,
+  JobPost,
   Organization,
-  OrgListing,
-  ProjectListing,
-  RepoListing,
+  OrgPost,
+  Post,
+  ProjectPost,
+  RepoPost,
 } from '~/core/interfaces';
-import { ListingKind, RouteSection, RouteTab } from '~/core/types';
+import { PostKind, RouteSection, RouteTab } from '~/core/types';
 import { JobRightPanel, JobsRightPanel } from '~/features/jobs/components';
 import { OrgRightPanel } from '~/features/organizations/components';
 import {
@@ -37,7 +37,7 @@ import {
   ProjectsRightPanel,
 } from '~/features/projects/components';
 import { RepoRightPanel, ReposRightPanel } from '~/features/repos/components';
-import { activeListingAtom } from '~/shared/atoms';
+import { activePostAtom } from '~/shared/atoms';
 import { Button, TagIcon } from '~/shared/components';
 import { useRouteSegments } from '~/shared/hooks';
 
@@ -45,27 +45,27 @@ import { getPanelTabs } from '../utils/get-panel-tabs';
 
 type TabPanelMap = Record<RouteTab, ReactNode>;
 
-const getListingDetails = (section: RouteSection, listing: Listing) => {
-  if (section === TEXT_ROUTE_SECTION_JOBS && listing.kind === KIND_LISTING_JOB)
-    return <JobRightPanel job={(listing as JobListing).details} />;
+const getListingDetails = (section: RouteSection, post: Post) => {
+  if (section === TEXT_ROUTE_SECTION_JOBS && post.kind === KIND_POST_JOB)
+    return <JobRightPanel job={(post as JobPost).details} />;
 
   if (
     section === TEXT_ROUTE_SECTION_ORGANIZATION &&
-    listing.kind === KIND_LISTING_ORG
+    post.kind === KIND_POST_ORG
   )
-    return <OrgRightPanel org={(listing as OrgListing).details} />;
+    return <OrgRightPanel org={(post as OrgPost).details} />;
 
   if (
     section === TEXT_ROUTE_SECTION_PROJECTS &&
-    listing.kind === KIND_LISTING_PROJECT
+    post.kind === KIND_POST_PROJECT
   )
-    return <ProjectRightPanel project={(listing as ProjectListing).details} />;
+    return <ProjectRightPanel project={(post as ProjectPost).details} />;
 
   if (
     section === TEXT_ROUTE_SECTION_REPOSITORIES &&
-    listing.kind === KIND_LISTING_REPO
+    post.kind === KIND_POST_REPO
   )
-    return <RepoRightPanel repo={(listing as RepoListing).details} />;
+    return <RepoRightPanel repo={(post as RepoPost).details} />;
 
   return null;
 };
@@ -88,7 +88,7 @@ export const RightPanel = () => {
   const { segments, push } = useRouteSegments();
   const { section, tab } = segments;
 
-  const [activeListing] = useAtom(activeListingAtom);
+  const [activeListing] = useAtom(activePostAtom);
   if (!activeListing) return null;
 
   const { details, jobs, projects, repos, competitors } = activeListing;

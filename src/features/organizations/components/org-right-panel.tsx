@@ -1,4 +1,4 @@
-import type { Listing } from '~/core/interfaces';
+import type { Post } from '~/core/interfaces';
 import { TagIcon } from '~/shared/components/icons';
 
 const tags = [
@@ -30,7 +30,7 @@ const tags = [
 ];
 
 interface Props {
-  org: Listing['org'];
+  org: Post['org'];
 }
 
 export const OrgRightPanel = ({ org }: Props) => {

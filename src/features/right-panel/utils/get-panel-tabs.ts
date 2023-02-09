@@ -12,24 +12,24 @@ import {
   TEXT_ROUTE_TAB_PROJECTS,
   TEXT_ROUTE_TAB_REPOSITORIES,
 } from '~/core/constants';
-import type { Listing, RightPanelTab, RouteSegments } from '~/core/interfaces';
+import type { Post, RightPanelTab, RouteSegments } from '~/core/interfaces';
 import { createRouteString } from '~/shared/utils';
 
 export const getPanelTabs = (
-  listing: Listing,
+  post: Post,
   segments: RouteSegments,
 ): RightPanelTab[] => {
   const { section, key, tab } = segments;
 
   const tabs: RightPanelTab[] = [
     {
-      label: `${listing.kind} ${TEXT_RIGHT_TAB_DETAILS}`,
+      label: `${post.kind} ${TEXT_RIGHT_TAB_DETAILS}`,
       route: createRouteString(section, key, TEXT_ROUTE_TAB_DETAILS),
       isActive: tab === TEXT_ROUTE_TAB_DETAILS,
     },
   ];
 
-  if (listing.org) {
+  if (post.org) {
     tabs.push({
       label: TEXT_RIGHT_TAB_ORGANIZATION,
       route: createRouteString(section, key, TEXT_ROUTE_TAB_ORGANIZATION),
@@ -37,7 +37,7 @@ export const getPanelTabs = (
     });
   }
 
-  const lenJobs = listing.jobs?.length ?? 0;
+  const lenJobs = post.jobs?.length ?? 0;
   if (lenJobs > 0) {
     tabs.push({
       label: `${TEXT_RIGHT_TAB_JOBS} (${lenJobs})`,
@@ -46,7 +46,7 @@ export const getPanelTabs = (
     });
   }
 
-  const lenProjects = listing.projects?.length ?? 0;
+  const lenProjects = post.projects?.length ?? 0;
   if (lenProjects > 0) {
     tabs.push({
       label: `${TEXT_RIGHT_TAB_PROJECTS} (${lenProjects})`,
@@ -55,7 +55,7 @@ export const getPanelTabs = (
     });
   }
 
-  const lenRepos = listing.repos?.length ?? 0;
+  const lenRepos = post.repos?.length ?? 0;
   if (lenRepos > 0) {
     tabs.push({
       label: `${TEXT_RIGHT_TAB_REPOSITORIES} (${lenRepos})`,
@@ -64,7 +64,7 @@ export const getPanelTabs = (
     });
   }
 
-  const lenCompetitors = listing.competitors?.length ?? 0;
+  const lenCompetitors = post.competitors?.length ?? 0;
   if (lenCompetitors > 0) {
     tabs.push({
       label: `${TEXT_RIGHT_TAB_COMPETITORS} (${lenRepos})`,

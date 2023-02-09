@@ -1,3 +1,3 @@
 export * from './common';
-export * from './listing';
+export * from './post';
 export * from './routes';

@@ -25,6 +25,7 @@ export const fakeProject = (canBeNull = false): Project | null => {
   const monthlyVolume = `$${faker.datatype.number({ min: 90, max: 350 })}k`;
   const activeUsers = `${faker.datatype.number({ min: 5, max: 100 })}k`;
   const revenue = `${faker.datatype.number({ min: 80, max: 500 })}k`;
+  const deployedToMainnet = faker.datatype.boolean();
   const audits = fakeAudits();
   const hacks = [{ text: 'Big Hack costing all TVL', link: '#' }];
   const chains = fakeChains().filter((chain) => chain.name !== name);
@@ -45,6 +46,7 @@ export const fakeProject = (canBeNull = false): Project | null => {
     monthlyVolume,
     activeUsers,
     revenue,
+    deployedToMainnet,
     audits,
     hacks,
     chains,

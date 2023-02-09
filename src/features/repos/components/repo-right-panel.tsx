@@ -1,9 +1,9 @@
-import type { RepoListing } from '~/core/interfaces';
+import type { RepoPost } from '~/core/interfaces';
 import { createRepoTags } from '~/features/repos/utils';
 import { Button, IconDevs, IconGithub } from '~/shared/components';
 
 interface Props {
-  repo: RepoListing['details'];
+  repo: RepoPost['details'];
 }
 
 export const RepoRightPanel = ({ repo }: Props) => {

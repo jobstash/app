@@ -1,9 +1,9 @@
-import type { Listing } from '~/core/interfaces';
+import type { Post } from '~/core/interfaces';
 
 import { RepoRightPanel } from './repo-right-panel';
 
 interface Props {
-  repos?: Listing['repos'];
+  repos?: Post['repos'];
 }
 
 export const ReposRightPanel = ({ repos }: Props) => {

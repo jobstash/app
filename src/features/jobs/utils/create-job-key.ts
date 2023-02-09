@@ -1,5 +1,5 @@
-import type { JobListing } from '~/core/interfaces';
+import type { JobPost } from '~/core/interfaces';
 import { slugify } from '~/shared/utils';
 
-export const createJobKey = (listing: JobListing) =>
-  slugify(`${listing.org.name} ${listing.details.title} ${listing.details.id}`);
+export const createJobKey = (post: JobPost) =>
+  slugify(`${post.org.name} ${post.details.title} ${post.details.id}`);

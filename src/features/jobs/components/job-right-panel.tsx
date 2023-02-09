@@ -1,4 +1,4 @@
-import type { JobListing } from '~/core/interfaces';
+import type { JobPost } from '~/core/interfaces';
 import { Button } from '~/shared/components';
 
 import { createJobTags } from '../utils';
@@ -10,7 +10,7 @@ const hardSkillTitles = [
 ];
 
 interface Props {
-  job: JobListing['details'];
+  job: JobPost['details'];
 }
 
 export const JobRightPanel = ({ job }: Props) => {
