@@ -20,6 +20,9 @@ module.exports = {
         ivory: 'var(--color-ivory)',
         sidebarTitle: 'var(--color-sidebarTitle)',
       },
+      backgroundImage: {
+        app: 'linear-gradient(116.16deg, #141317 3.32%, rgba(18, 18, 22, 0.7) 96.7%)'
+      }
     },
     /*
 		 	UNOFFICIAL:
