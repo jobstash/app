@@ -8,17 +8,17 @@ import {
   TEXT_ROUTE_SECTION_ORGANIZATION,
   TEXT_ROUTE_TAB_DETAILS,
 } from '~/core/constants';
-import type { OrgListing } from '~/core/interfaces';
-import { activeListingAtom } from '~/shared/atoms';
+import type { OrgPost } from '~/core/interfaces';
+import { activePostAtom } from '~/shared/atoms';
 import { useRouteSegments } from '~/shared/hooks';
 import { createRouteString, slugify } from '~/shared/utils';
 
-import { useOrgListingInfQuery } from '../hooks';
+import { useOrgPostInfQuery } from '../hooks';
 
 import { OrgCard } from './org-card';
 
 interface Props {
-  initListings: OrgListing[];
+  initListings: OrgPost[];
 }
 
 export const OrgCardList = ({ initListings }: Props) => {
@@ -26,15 +26,15 @@ export const OrgCardList = ({ initListings }: Props) => {
     segments: { key },
     push,
   } = useRouteSegments();
-  const setActiveListing = useSetAtom(activeListingAtom);
+  const setActiveListing = useSetAtom(activePostAtom);
 
-  const onClickListing = (listing: OrgListing) => {
-    setActiveListing(listing);
+  const onClickListing = (post: OrgPost) => {
+    setActiveListing(post);
     document.dispatchEvent(new Event(EVENT_CARD_CLICK));
 
     const route = createRouteString(
       TEXT_ROUTE_SECTION_ORGANIZATION,
-      slugify(listing.details.name),
+      slugify(post.details.name),
       TEXT_ROUTE_TAB_DETAILS,
     );
 
@@ -50,7 +50,7 @@ export const OrgCardList = ({ initListings }: Props) => {
     isFetchingNextPage,
     fetchNextPage,
     hasNextPage,
-  } = useOrgListingInfQuery();
+  } = useOrgPostInfQuery();
 
   const { ref, inView } = useInView();
 
@@ -62,30 +62,30 @@ export const OrgCardList = ({ initListings }: Props) => {
 
   return (
     <div>
-      {initListings.map((listing) => (
+      {initListings.map((post) => (
         <OrgCard
-          key={listing.details.id}
-          listing={listing}
-          isActive={key === slugify(listing.details.name)}
-          onClick={() => onClickListing(listing)}
+          key={post.details.id}
+          post={post}
+          isActive={key === slugify(post.details.name)}
+          onClick={() => onClickListing(post)}
         />
       ))}
 
       {data &&
         data.pages.map((page, i) =>
-          page.listings.map((listing, j) => (
+          page.posts.map((post, j) => (
             <div
-              key={listing.details.id}
+              key={post.details.id}
               ref={
-                i === data.pages.length - 1 && j === page.listings.length - 1
+                i === data.pages.length - 1 && j === page.posts.length - 1
                   ? ref
                   : undefined
               }
             >
               <OrgCard
-                listing={listing}
-                isActive={key === slugify(listing.details.name)}
-                onClick={() => onClickListing(listing)}
+                post={post}
+                isActive={key === slugify(post.details.name)}
+                onClick={() => onClickListing(post)}
               />
             </div>
           )),
@@ -99,17 +99,17 @@ export const OrgCardList = ({ initListings }: Props) => {
 
       {isLoading && (
         <div>
-          <p>Fetching org lists ...</p>
+          <p>Fetching org posts ...</p>
         </div>
       )}
 
       {isFetchingNextPage && (
         <div>
-          <p>Loading more org listings ...</p>
+          <p>Loading more org posts ...</p>
         </div>
       )}
 
-      {data && !hasNextPage && <p>No more org listings to load</p>}
+      {data && !hasNextPage && <p>No more org posts to load</p>}
     </div>
   );
 };

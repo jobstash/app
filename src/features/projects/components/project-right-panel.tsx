@@ -1,4 +1,4 @@
-import type { ProjectListing } from '~/core/interfaces';
+import type { ProjectPost } from '~/core/interfaces';
 import { createProjectTags } from '~/features/projects/utils';
 import { TagIcon } from '~/shared/components/icons';
 
@@ -6,7 +6,7 @@ const TEXT_TECHNOLOGIES_DESC =
   'Uncover the technical skills and tools employed by the company, and gain insight into the technologies that dive their success.';
 
 interface Props {
-  project: ProjectListing['details'];
+  project: ProjectPost['details'];
 }
 
 export const ProjectRightPanel = ({ project }: Props) => {

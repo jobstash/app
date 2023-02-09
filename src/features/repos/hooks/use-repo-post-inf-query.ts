@@ -1,10 +1,10 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 
-import type { RepoListing } from '~/core/interfaces';
+import type { RepoPost } from '~/core/interfaces';
 
 const fetchRepoListings = async ({ pageParam = 0 }) => {
   const res = await fetch(
-    `http://localhost:3000/mocked-bff/listings/repos?cursor=${pageParam}`,
+    `http://localhost:3000/mocked-bff/posts/repos?cursor=${pageParam}`,
   );
   const data = await res.json();
 
@@ -13,12 +13,12 @@ const fetchRepoListings = async ({ pageParam = 0 }) => {
 
 interface RepoListingsInfQueryPage {
   nextCursor: number;
-  listings: RepoListing[];
+  posts: RepoPost[];
 }
 
 export const useRepoListingInfQuery = () =>
   useInfiniteQuery<RepoListingsInfQueryPage>(
-    ['repo-listings'],
+    ['repo-posts'],
     fetchRepoListings,
     {
       getNextPageParam: (page) => page.nextCursor,

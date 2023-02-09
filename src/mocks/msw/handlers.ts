@@ -1,14 +1,14 @@
 import { rest } from 'msw';
 
-import { fakeJobListings } from '../fakers/fake-job-listing';
-import { fakeOrgListings } from '../fakers/fake-org-listing';
-import { fakeProjectListings } from '../fakers/fake-project-listing';
-import { fakeRepoListings } from '../fakers/fake-repo-listing';
+import { fakeJobPosts } from '../fakers/fake-job-post';
+import { fakeOrgPosts } from '../fakers/fake-org-post';
+import { fakeProjectPosts } from '../fakers/fake-project-post';
+import { fakeRepoPosts } from '../fakers/fake-repo-post';
 
 export const handlers = [
-  // GET jobs listings
+  // GET jobs posts
   rest.get(
-    'http://localhost:3000/mocked-bff/listings/jobs',
+    'http://localhost:3000/mocked-bff/posts/jobs',
     async (req, res, ctx) => {
       // Artificial delay
       // eslint-disable-next-line no-promise-executor-return
@@ -23,15 +23,15 @@ export const handlers = [
         ctx.status(200),
         ctx.json({
           nextCursor: cursor < maxCursor ? cursor + 1 : undefined,
-          listings: cursor < maxCursor ? fakeJobListings() : [],
+          posts: cursor < maxCursor ? fakeJobPosts() : [],
         }),
       );
     },
   ),
 
-  // GET org listings
+  // GET org posts
   rest.get(
-    'http://localhost:3000/mocked-bff/listings/orgs',
+    'http://localhost:3000/mocked-bff/posts/orgs',
     async (req, res, ctx) => {
       // Artificial delay
       // eslint-disable-next-line no-promise-executor-return
@@ -46,15 +46,15 @@ export const handlers = [
         ctx.status(200),
         ctx.json({
           nextCursor: cursor < maxCursor ? cursor + 1 : undefined,
-          listings: cursor < maxCursor ? fakeOrgListings() : [],
+          posts: cursor < maxCursor ? fakeOrgPosts() : [],
         }),
       );
     },
   ),
 
-  // GET project listings
+  // GET project posts
   rest.get(
-    'http://localhost:3000/mocked-bff/listings/projects',
+    'http://localhost:3000/mocked-bff/posts/projects',
     async (req, res, ctx) => {
       // Artificial delay
       // eslint-disable-next-line no-promise-executor-return
@@ -69,15 +69,15 @@ export const handlers = [
         ctx.status(200),
         ctx.json({
           nextCursor: cursor < maxCursor ? cursor + 1 : undefined,
-          listings: cursor < maxCursor ? fakeProjectListings() : [],
+          posts: cursor < maxCursor ? fakeProjectPosts() : [],
         }),
       );
     },
   ),
 
-  // GET repo listings
+  // GET repo posts
   rest.get(
-    'http://localhost:3000/mocked-bff/listings/repos',
+    'http://localhost:3000/mocked-bff/posts/repos',
     async (req, res, ctx) => {
       // Artificial delay
       // eslint-disable-next-line no-promise-executor-return
@@ -92,7 +92,7 @@ export const handlers = [
         ctx.status(200),
         ctx.json({
           nextCursor: cursor < maxCursor ? cursor + 1 : undefined,
-          listings: cursor < maxCursor ? fakeRepoListings() : [],
+          posts: cursor < maxCursor ? fakeRepoPosts() : [],
         }),
       );
     },

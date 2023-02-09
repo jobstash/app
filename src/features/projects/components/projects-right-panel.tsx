@@ -1,9 +1,9 @@
-import type { Listing } from '~/core/interfaces';
+import type { Post } from '~/core/interfaces';
 
 import { ProjectRightPanel } from './project-right-panel';
 
 interface Props {
-  projects: Listing['projects'];
+  projects: Post['projects'];
 }
 
 export const ProjectsRightPanel = ({ projects }: Props) => {

@@ -1,13 +1,13 @@
-import type { ListingKind } from '~/core/types/listing';
+import type { PostKind } from '~/core/types';
 
 import type { Job } from '../job/job';
 import type { Organization } from '../org/organization';
 import type { Project } from '../project/project';
 import type { Repository } from '../repo/repository';
 
-export interface Listing {
+export interface Post {
   created: string;
-  kind: ListingKind;
+  kind: PostKind;
   details: Job | Organization | Project | Repository;
   org: Organization | null;
   jobs: Job[] | null;

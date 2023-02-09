@@ -8,8 +8,8 @@ import {
   TEXT_ROUTE_SECTION_JOBS,
   TEXT_ROUTE_TAB_DETAILS,
 } from '~/core/constants';
-import type { JobListing } from '~/core/interfaces';
-import { activeListingAtom } from '~/shared/atoms';
+import type { JobPost } from '~/core/interfaces';
+import { activePostAtom } from '~/shared/atoms';
 import { useRouteSegments } from '~/shared/hooks';
 import { createRouteString } from '~/shared/utils';
 
@@ -19,20 +19,20 @@ import { checkJobIsActive, createJobKey } from '../utils';
 import { JobCard } from './job-card';
 
 interface Props {
-  initListings: JobListing[];
+  initListings: JobPost[];
 }
 
 export const JobCardList = ({ initListings }: Props) => {
   const { segments, push } = useRouteSegments();
-  const setActiveListing = useSetAtom(activeListingAtom);
+  const setActiveListing = useSetAtom(activePostAtom);
 
-  const onClickListing = (listing: JobListing) => {
-    setActiveListing(listing);
+  const onClickListing = (post: JobPost) => {
+    setActiveListing(post);
     document.dispatchEvent(new Event(EVENT_CARD_CLICK));
 
     const route = createRouteString(
       TEXT_ROUTE_SECTION_JOBS,
-      createJobKey(listing),
+      createJobKey(post),
       TEXT_ROUTE_TAB_DETAILS,
     );
 
@@ -60,30 +60,30 @@ export const JobCardList = ({ initListings }: Props) => {
 
   return (
     <div>
-      {initListings.map((listing) => (
+      {initListings.map((post) => (
         <JobCard
-          key={listing.details.id}
-          listing={listing}
-          isActive={checkJobIsActive(segments.key, listing)}
-          onClick={() => onClickListing(listing)}
+          key={post.details.id}
+          post={post}
+          isActive={checkJobIsActive(segments.key, post)}
+          onClick={() => onClickListing(post)}
         />
       ))}
 
       {data &&
         data.pages.map((page, i) =>
-          page.listings.map((listing, j) => (
+          page.posts.map((post, j) => (
             <div
-              key={listing.details.id}
+              key={post.details.id}
               ref={
-                i === data.pages.length - 1 && j === page.listings.length - 1
+                i === data.pages.length - 1 && j === page.posts.length - 1
                   ? ref
                   : undefined
               }
             >
               <JobCard
-                listing={listing}
-                isActive={checkJobIsActive(segments.key, listing)}
-                onClick={() => onClickListing(listing)}
+                post={post}
+                isActive={checkJobIsActive(segments.key, post)}
+                onClick={() => onClickListing(post)}
               />
             </div>
           )),
@@ -97,17 +97,17 @@ export const JobCardList = ({ initListings }: Props) => {
 
       {isLoading && (
         <div>
-          <p>Fetching job lists ...</p>
+          <p>Fetching job posts ...</p>
         </div>
       )}
 
       {isFetchingNextPage && (
         <div>
-          <p>Loading more job listings ...</p>
+          <p>Loading more job posts ...</p>
         </div>
       )}
 
-      {data && !hasNextPage && <p>No more job listings to load</p>}
+      {data && !hasNextPage && <p>No more job posts to load</p>}
     </div>
   );
 };

@@ -8,17 +8,17 @@ import {
   TEXT_ROUTE_SECTION_PROJECTS,
   TEXT_ROUTE_TAB_DETAILS,
 } from '~/core/constants';
-import type { ProjectListing } from '~/core/interfaces';
-import { activeListingAtom } from '~/shared/atoms';
+import type { ProjectPost } from '~/core/interfaces';
+import { activePostAtom } from '~/shared/atoms';
 import { useRouteSegments } from '~/shared/hooks';
 import { createRouteString, slugify } from '~/shared/utils';
 
-import { useProjectListingInfQuery } from '../hooks';
+import { useProjectPostInfQuery } from '../hooks';
 
 import { ProjectCard } from './project-card';
 
 interface Props {
-  initListings: ProjectListing[];
+  initListings: ProjectPost[];
 }
 
 export const ProjectCardList = ({ initListings }: Props) => {
@@ -26,15 +26,15 @@ export const ProjectCardList = ({ initListings }: Props) => {
     segments: { key },
     push,
   } = useRouteSegments();
-  const setActiveListing = useSetAtom(activeListingAtom);
+  const setActiveListing = useSetAtom(activePostAtom);
 
-  const onClickListing = (listing: ProjectListing) => {
-    setActiveListing(listing);
+  const onClickListing = (post: ProjectPost) => {
+    setActiveListing(post);
     document.dispatchEvent(new Event(EVENT_CARD_CLICK));
 
     const route = createRouteString(
       TEXT_ROUTE_SECTION_PROJECTS,
-      slugify(listing.details.name),
+      slugify(post.details.name),
       TEXT_ROUTE_TAB_DETAILS,
     );
 
@@ -50,7 +50,7 @@ export const ProjectCardList = ({ initListings }: Props) => {
     isFetchingNextPage,
     fetchNextPage,
     hasNextPage,
-  } = useProjectListingInfQuery();
+  } = useProjectPostInfQuery();
 
   const { ref, inView } = useInView();
 
@@ -62,31 +62,31 @@ export const ProjectCardList = ({ initListings }: Props) => {
 
   return (
     <div>
-      {initListings.map((listing) => (
+      {initListings.map((post) => (
         <ProjectCard
-          key={listing.details.id}
-          listing={listing}
-          isActive={key === slugify(listing.details.name)}
-          onClick={() => onClickListing(listing)}
+          key={post.details.id}
+          post={post}
+          isActive={key === slugify(post.details.name)}
+          onClick={() => onClickListing(post)}
         />
       ))}
 
       {data &&
         data.pages.map((page, i) =>
-          page.listings.map((listing, j) => (
+          page.posts.map((post, j) => (
             <div
-              key={listing.details.id}
+              key={post.details.id}
               ref={
-                i === data.pages.length - 1 && j === page.listings.length - 1
+                i === data.pages.length - 1 && j === page.posts.length - 1
                   ? ref
                   : undefined
               }
             >
               <ProjectCard
-                key={listing.details.id}
-                listing={listing}
-                isActive={key === slugify(listing.details.name)}
-                onClick={() => onClickListing(listing)}
+                key={post.details.id}
+                post={post}
+                isActive={key === slugify(post.details.name)}
+                onClick={() => onClickListing(post)}
               />
             </div>
           )),
@@ -100,17 +100,17 @@ export const ProjectCardList = ({ initListings }: Props) => {
 
       {isLoading && (
         <div>
-          <p>Fetching project lists ...</p>
+          <p>Fetching project posts ...</p>
         </div>
       )}
 
       {isFetchingNextPage && (
         <div>
-          <p>Loading more project listings ...</p>
+          <p>Loading more project posts ...</p>
         </div>
       )}
 
-      {data && !hasNextPage && <p>No more project listings to load</p>}
+      {data && !hasNextPage && <p>No more project posts to load</p>}
     </div>
   );
 };

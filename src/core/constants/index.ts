@@ -1,4 +1,4 @@
 export * from './common';
-export * from './listing';
+export * from './post';
 export * from './right-panel';
 export * from './routes';
