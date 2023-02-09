@@ -9,15 +9,21 @@ export const handlers = [
   // GET jobs listings
   rest.get(
     'http://localhost:3000/mocked-bff/listings/jobs',
-    async (_req, res, ctx) => {
+    async (req, res, ctx) => {
       // Artificial delay
       // eslint-disable-next-line no-promise-executor-return
       await new Promise((r) => setTimeout(r, 1000));
 
+      const cursor = Number(req.url.searchParams.get('cursor'));
+
+      // Limit only to 10 fetches
+      const maxCursor = 10;
+
       return res(
         ctx.status(200),
         ctx.json({
-          listings: fakeJobListings(),
+          nextCursor: cursor < maxCursor ? cursor + 1 : undefined,
+          listings: cursor < maxCursor ? fakeJobListings() : [],
         }),
       );
     },
@@ -26,15 +32,21 @@ export const handlers = [
   // GET org listings
   rest.get(
     'http://localhost:3000/mocked-bff/listings/orgs',
-    async (_req, res, ctx) => {
+    async (req, res, ctx) => {
       // Artificial delay
       // eslint-disable-next-line no-promise-executor-return
       await new Promise((r) => setTimeout(r, 1000));
 
+      const cursor = Number(req.url.searchParams.get('cursor'));
+
+      // Limit only to 10 fetches
+      const maxCursor = 10;
+
       return res(
         ctx.status(200),
         ctx.json({
-          listings: fakeOrgListings(),
+          nextCursor: cursor < maxCursor ? cursor + 1 : undefined,
+          listings: cursor < maxCursor ? fakeOrgListings() : [],
         }),
       );
     },
@@ -43,15 +55,21 @@ export const handlers = [
   // GET project listings
   rest.get(
     'http://localhost:3000/mocked-bff/listings/projects',
-    async (_req, res, ctx) => {
+    async (req, res, ctx) => {
       // Artificial delay
       // eslint-disable-next-line no-promise-executor-return
       await new Promise((r) => setTimeout(r, 1000));
 
+      const cursor = Number(req.url.searchParams.get('cursor'));
+
+      // Limit only to 10 fetches
+      const maxCursor = 10;
+
       return res(
         ctx.status(200),
         ctx.json({
-          listings: fakeProjectListings(),
+          nextCursor: cursor < maxCursor ? cursor + 1 : undefined,
+          listings: cursor < maxCursor ? fakeProjectListings() : [],
         }),
       );
     },
@@ -60,15 +78,21 @@ export const handlers = [
   // GET repo listings
   rest.get(
     'http://localhost:3000/mocked-bff/listings/repos',
-    async (_req, res, ctx) => {
+    async (req, res, ctx) => {
       // Artificial delay
       // eslint-disable-next-line no-promise-executor-return
       await new Promise((r) => setTimeout(r, 1000));
 
+      const cursor = Number(req.url.searchParams.get('cursor'));
+
+      // Limit only to 10 fetches
+      const maxCursor = 10;
+
       return res(
         ctx.status(200),
         ctx.json({
-          listings: fakeRepoListings(),
+          nextCursor: cursor < maxCursor ? cursor + 1 : undefined,
+          listings: cursor < maxCursor ? fakeRepoListings() : [],
         }),
       );
     },

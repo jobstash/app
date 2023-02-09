@@ -3,7 +3,7 @@ import {
   KIND_LISTING_ORG,
   KIND_LISTING_PROJECT,
   KIND_LISTING_REPO,
-} from '~/core/constants/listing';
+} from '~/core/constants';
 
 export type ListingKind =
   | typeof KIND_LISTING_JOB

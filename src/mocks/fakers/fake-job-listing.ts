@@ -32,7 +32,7 @@ export const fakeJobListing = (): JobListing => {
   };
 };
 
-export const fakeJobListings = (guaranteed = false, min = 6, max = 12) => {
+export const fakeJobListings = (guaranteed = false, min = 3, max = 6) => {
   const listings = Array.from({ length: faker.datatype.number({ min, max }) })
     .fill(0)
     .map(() => fakeJobListing());

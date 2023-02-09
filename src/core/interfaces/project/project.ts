@@ -1,6 +1,4 @@
-import type { Chain } from './chain';
-import type { Tag } from './tag';
-import type { Tech } from './tech';
+import type { Chain, Tag, Tech } from '../common';
 
 export interface Project {
   id: number;
