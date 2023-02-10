@@ -19,7 +19,6 @@ module.exports = {
         tech: 'var(--color-tech)',
         card: 'var(--color-card)',
         ivory: 'var(--color-ivory)',
-        // Need a better and more generic name
         sidebarTitle: 'var(--color-sidebarTitle)',
       },
       backgroundImage: {
