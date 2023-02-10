@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 import type { ProjectPost } from '~/core/interfaces';
 import { createProjectTags } from '~/features/projects/utils';
 import { TagIcon } from '~/shared/components/icons';
@@ -17,22 +19,28 @@ export const ProjectRightPanel = ({ project }: Props) => {
   const tags = createProjectTags(project);
 
   return (
-    <div>
-      <div>
+    <div className='p-6'>
+      <div className='flex'>
+        <Image
+            src={avatar}
+            width="32"
+            height="32"
+            alt={name}
+            className="mr-2"
+          />
+          <h3 className='font-semibold'>{name}</h3>
         <p>{name}</p>
         <p>{avatar}</p>
       </div>
 
-      <hr />
 
-      <div>
+      <div className='flex items-center border-t border-white/5'>
         <p>Description</p>
         <p>{description}</p>
       </div>
 
-      <hr />
 
-      <div>
+      <div className='flex items-center border-t border-white/5'>
         {tags.top.map((tag) => (
           <div key={tag.text}>
             {tag.icon}
@@ -42,9 +50,8 @@ export const ProjectRightPanel = ({ project }: Props) => {
         ))}
       </div>
 
-      <hr />
 
-      <div>
+      <div className='flex items-center border-t border-white/5'>
         {tags.mid.map((tag) => (
           <div key={tag.text}>
             {tag.icon}
@@ -54,9 +61,8 @@ export const ProjectRightPanel = ({ project }: Props) => {
         ))}
       </div>
 
-      <hr />
 
-      <div>
+      <div className='flex items-center border-t border-white/5'>
         {tags.bottom.map((tag) => (
           <div key={tag.text}>
             {tag.icon}
@@ -66,11 +72,9 @@ export const ProjectRightPanel = ({ project }: Props) => {
         ))}
       </div>
 
-      <hr />
 
-      <div>
-        <div>
-          <div>
+      <div className='flex items-center border-t border-white/5'>
+
             <TagIcon filename="chain" />
             <p>Chains: </p>
             {chains.map((chain) => (
@@ -79,13 +83,10 @@ export const ProjectRightPanel = ({ project }: Props) => {
                 <p>{chain.avatar}</p>
               </div>
             ))}
-          </div>
-        </div>
       </div>
 
-      <hr />
 
-      <div>
+      <div className='flex items-center border-t border-white/5'>
         <p>Technologies</p>
         <div>
           <p>{TEXT_TECHNOLOGIES_DESC}</p>

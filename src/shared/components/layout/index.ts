@@ -1,2 +1,2 @@
+export * from './generic-layout';
 export * from './sidebar';
-export * from './to-be-replaced-layout';

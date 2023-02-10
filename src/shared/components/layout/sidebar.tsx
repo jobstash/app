@@ -100,7 +100,7 @@ const UserTab = () => (
 );
 
 export const SideBar = () => (
-  <nav className="fixed inset-y-0 flex min-h-screen flex-col p-4">
+  <nav className="fixed inset-y-0 left-0 flex min-h-screen w-52 flex-col border-r border-white/5 p-4">
     <div>
       <Brand />
       <DiscoverTabs />

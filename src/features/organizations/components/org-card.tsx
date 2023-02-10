@@ -11,7 +11,6 @@ interface Props {
   onClick: MouseEventHandler;
 }
 
-// *** UNSTYLED ***
 export const OrgCard = ({ post, isActive, onClick }: Props) => {
   const { details, created } = post;
 

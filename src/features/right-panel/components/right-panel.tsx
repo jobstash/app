@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { ReactNode, useEffect } from 'react';
 
 import { useAtom } from 'jotai';
@@ -43,6 +44,7 @@ import { useRouteSegments } from '~/shared/hooks';
 
 import { getPanelTabs } from '../utils/get-panel-tabs';
 
+
 type TabPanelMap = Record<RouteTab, ReactNode>;
 
 const getListingDetails = (section: RouteSection, post: Post) => {
@@ -70,7 +72,6 @@ const getListingDetails = (section: RouteSection, post: Post) => {
   return null;
 };
 
-// *** UNSTYLED ***
 export const RightPanel = () => {
   // Whenever a card is clicked, scroll right-panel to top
   useEffect(() => {
@@ -120,32 +121,37 @@ export const RightPanel = () => {
   return (
     <div>
       {/* NOTE: This component needs to be always on top */}
-      <div className="top-0" id={ID_TOP_RIGHT_PANEL} />
+      <div className="text-ivory" id={ID_TOP_RIGHT_PANEL} />
       <div>
-        <div>
-          <p>{org.name}</p>
-          <p>{org.avatar}</p>
+        <div className='flex items-center space-x-3'>
+          <Image
+            src={org.avatar}
+            width="32"
+            height="32"
+            alt={org.name}
+          />
+          <h3 className='font-semibold'>{org.name}</h3>
         </div>
-        {orgTags.map((tag) => (
-          <div key={tag.text}>
-            {tag.icon}
-            <p>{tag.text}</p>
-          </div>
-        ))}
-        <div>
-          <p>{org.summary}</p>
+        <div className='flex space-x-5 py-4 text-sm'>
+          {orgTags.map((tag) => (
+            <div key={tag.text} className="flex items-center">
+              <div className='mr-2'>{tag.icon}</div>
+              <p>{tag.text}</p>
+            </div>
+          ))}
         </div>
+        <p className='text-sm text-sidebarTitle'>{org.summary}</p>
         <div>
-          <p>{JSON.stringify(org.website)}</p>
+          {/* NOTE: button?,link? */}
+          <p className='inline-block rounded-sm bg-sidebarTitle text-md'>{JSON.stringify(org.website)}</p>
         </div>
       </div>
-
-      <hr />
-
-      <div>
+      <div className='mt-8 flex flex-wrap space-x-2 border-t border-white/20 pt-8'>
         {tabs.map((tab) => (
           <Button
             key={tab.label}
+            kind="outlined"
+            size="md"
             onClick={() =>
               push(tab.route, { shouldScroll: false, shallow: true })
             }
@@ -155,7 +161,11 @@ export const RightPanel = () => {
         ))}
       </div>
 
-      <div>{cardMap[tab]}</div>
+      <div className='mt-8 rounded-3xl bg-gradient-to-l from-primary to-secondary p-1'>
+        <div className='rounded-3xl bg-grey'>
+          {cardMap[tab]}
+        </div>
+      </div>
     </div>
   );
 };
