@@ -15,6 +15,7 @@ module.exports = {
         secondary: 'rgb(var(--color-secondary) / <alpha-value>)',
         black: 'rgb(var(--color-black) / <alpha-value>)',
         white: 'rgb(var(--color-white) / <alpha-value>)',
+        grey: 'var(--color-grey)',
         tech: 'var(--color-tech)',
         card: 'var(--color-card)',
         ivory: 'var(--color-ivory)',

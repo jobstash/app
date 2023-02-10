@@ -14,7 +14,7 @@ export const RepoRightPanel = ({ repo }: Props) => {
   const tags = createRepoTags(repo);
 
   return (
-    <div>
+    <div className='p-6'>
       <div>
         <div>
           <IconGithub />

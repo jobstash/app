@@ -120,7 +120,7 @@ export const Button = ({
       {...props}
     >
       {left}
-      <Text size={textProps?.size ?? 'md'} {...textProps}>
+      <Text size={textProps?.size ?? 'sm'} {...textProps}>
         {children}
       </Text>
       {right}
