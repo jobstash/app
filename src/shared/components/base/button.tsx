@@ -1,4 +1,4 @@
-import type { ButtonHTMLAttributes, ReactNode } from 'react';
+import { ButtonHTMLAttributes, forwardRef, ReactNode } from 'react';
 
 import { type VariantProps, cva } from 'class-variance-authority';
 
@@ -94,44 +94,52 @@ export interface ButtonProps extends ButtonHTMLProps, ButtonVariantProps {
   textProps?: Omit<TextProps, 'children'>;
 }
 
-export const Button = ({
-  kind = 'default',
-  isActive = false,
-  isDisabled = false,
-  size = 'md',
-  children,
-  left,
-  right,
-  textProps,
-  ...props
-}: ButtonProps) => {
-  const btn = (
-    <button
-      type="button"
-      disabled={isDisabled}
-      className={cvaButton({
-        kind,
-        isActive,
-        isDisabled,
-        size,
-        hasLeft: Boolean(left),
-        hasRight: Boolean(right),
-      })}
-      {...props}
-    >
-      {left}
-      <Text size={textProps?.size ?? 'sm'} {...textProps}>
-        {children}
-      </Text>
-      {right}
-    </button>
-  );
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  (
+    {
+      kind = 'default',
+      isActive = false,
+      isDisabled = false,
+      size = 'md',
+      children,
+      left,
+      right,
+      textProps,
+      ...props
+    }: ButtonProps,
+    ref,
+  ) => {
+    const btn = (
+      <button
+        ref={ref}
+        type="button"
+        disabled={isDisabled}
+        className={cvaButton({
+          kind,
+          isActive,
+          isDisabled,
+          size,
+          hasLeft: Boolean(left),
+          hasRight: Boolean(right),
+        })}
+        {...props}
+      >
+        {left}
+        <Text size={textProps?.size ?? 'sm'} {...textProps}>
+          {children}
+        </Text>
+        {right}
+      </button>
+    );
 
-  if (!isActive) return btn;
+    if (!isActive) return btn;
 
-  return (
-    <div className="flex items-center justify-center rounded-md bg-gradient-to-l from-primary to-secondary p-0.5">
-      {btn}
-    </div>
-  );
-};
+    return (
+      <div className="flex items-center justify-center rounded-md bg-gradient-to-l from-primary to-secondary p-0.5">
+        {btn}
+      </div>
+    );
+  },
+);
+
+Button.displayName = 'Button';

@@ -19,6 +19,8 @@
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
       "rules": {
+        // remove default-props since we're using typescript
+        "react/require-default-props": "off",
         // sort rules
         "simple-import-sort/exports": "error",
         "simple-import-sort/imports": [
