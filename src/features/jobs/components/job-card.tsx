@@ -72,7 +72,7 @@ export const JobCard = ({ post, isActive, onClick }: Props) => {
         ))}
       </div>
 
-      <div className='flex space-x-5 border-b border-white/5 pb-4'>
+      <div className='flex space-x-4 border-b border-white/5 pb-4'>
         {skills.map((tech) => (
           <div key={tech.name} className='relative flex self-start rounded-sm border border-white	p-1'>
             <span className='text-sm font-semibold'>{tech.name}</span>
@@ -82,7 +82,7 @@ export const JobCard = ({ post, isActive, onClick }: Props) => {
         <Button>Sign Up to See Matches</Button>
       </div>
 
-      <div className='flex items-center space-x-5 border-b border-white/5 pb-4'>
+      <div className='flex items-center space-x-4 border-b border-white/5 pb-4'>
         <Image
           src={org.avatar}
           width="32"
@@ -95,7 +95,7 @@ export const JobCard = ({ post, isActive, onClick }: Props) => {
 
       {project && (
         <div className=''>
-          <div className='flex items-center space-x-5'>
+          <div className='flex items-center space-x-4'>
             <Image
               src={project.avatar}
               width="32"

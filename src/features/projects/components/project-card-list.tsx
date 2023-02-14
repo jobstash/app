@@ -61,7 +61,7 @@ export const ProjectCardList = ({ initListings }: Props) => {
   }, [fetchNextPage, inView, isFetchingNextPage]);
 
   return (
-    <div>
+    <div className='space-y-8'>
       {initListings.map((post) => (
         <ProjectCard
           key={post.details.id}

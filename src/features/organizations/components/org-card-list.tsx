@@ -61,7 +61,7 @@ export const OrgCardList = ({ initListings }: Props) => {
   }, [fetchNextPage, inView, isFetchingNextPage]);
 
   return (
-    <div>
+    <div className='space-y-8'>
       {initListings.map((post) => (
         <OrgCard
           key={post.details.id}
