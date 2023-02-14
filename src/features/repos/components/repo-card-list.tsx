@@ -60,7 +60,7 @@ export const RepoCardList = ({ initListings }: Props) => {
   }, [fetchNextPage, inView, isFetchingNextPage]);
 
   return (
-    <div>
+    <div className='space-y-8'>
       {initListings.map((post) => (
         <RepoCard
           key={post.details.id}
