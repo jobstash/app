@@ -132,7 +132,7 @@ export const RightPanel = () => {
           />
           <h3 className='font-semibold'>{org.name}</h3>
         </div>
-        <div className='flex space-x-5 py-4 text-sm'>
+        <div className='flex space-x-4 py-4 text-sm'>
           {orgTags.map((tag) => (
             <div key={tag.text} className="flex items-center">
               <div className='mr-2'>{tag.icon}</div>
