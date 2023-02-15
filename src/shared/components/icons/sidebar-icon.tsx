@@ -21,5 +21,6 @@ export const SidebarIcon = ({ filename }: Props) => (
     width="16"
     height="16"
     alt={filename}
+    className="self-center"
   />
 );
