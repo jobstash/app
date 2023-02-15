@@ -13,6 +13,8 @@ module.exports = {
         // Allow opacity e.g. text-primary/50, text-white/50
         primary: 'rgb(var(--color-primary) / <alpha-value>)',
         secondary: 'rgb(var(--color-secondary) / <alpha-value>)',
+        tertiary: 'rgb(var(--color-tertiary))',
+        quaternary:'rgb(var(--color-quaternary))',
         black: 'rgb(var(--color-black) / <alpha-value>)',
         white: 'rgb(var(--color-white) / <alpha-value>)',
         grey: 'var(--color-grey)',
@@ -20,6 +22,9 @@ module.exports = {
         card: 'var(--color-card)',
         ivory: 'var(--color-ivory)',
         sidebarTitle: 'var(--color-sidebarTitle)',
+        greyMedium: 'rgb(var(--color-medium-grey) / <alpha-value>)',
+        darkGrey: 'rgb(var(--color-dark-grey) / <alpha-value>)',
+        darkerGrey: 'rgb(var(--color-darker-grey) / <alpha-value>)',
       },
       backgroundImage: {
         app: 'linear-gradient(116.16deg, #141317 3.32%, rgba(18, 18, 22, 0.7) 96.7%)'

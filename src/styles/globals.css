@@ -6,9 +6,14 @@
 	:root {
 		--color-white: 255 255 255;
 		--color-black: 0 0 0;
+		--color-darker-grey: 30 30 30;
+		--color-dark-grey: 41 41 41;
+		--color-medium-grey: 52 52 52;
 		--color-ivory: #F9FAFB; /* TEMPORARY */
 		--color-primary: 135 67 255;  /* #8743FF */
 		--color-secondary: 65 54 241;/* #4136F1 */
+		--color-tertiary: 135 67 255;/* #4136F1 */
+		--color-quaternary: 214 136 0;/* #4136F1 */
 		--color-tech: #A6A0FF; /* TEMPORARY */
 		--color-card: #222224;
 		--color-sidebarTitle: #9CA3AF; /* TEMPORARY */

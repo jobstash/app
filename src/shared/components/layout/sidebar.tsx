@@ -72,12 +72,12 @@ const BookmarkedTab = () => (
 );
 
 const UserTab = () => (
-  <div className="absolute bottom-0 pb-4">
+  <div className="absolute inset-x-0 bottom-0 space-y-4 p-4">
     <Text
       htmlTag="h2"
       size="sm"
       fw="regular"
-      className="pb-3 text-sidebarTitle"
+      className="text-sidebarTitle"
     >
       Your Profile
     </Text>

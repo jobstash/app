@@ -22,12 +22,10 @@ export default meta;
 
 type Story = StoryObj<typeof Bartab>;
 
-export const Default: Story = {};
-
-export const IsActive: Story = {
+export const Default: Story = {
   args: {
-    isActive: true,
-  },
+    intent: 'primary',
+  }
 };
 
 export const HasLeft: Story = {
@@ -43,5 +41,27 @@ export const HasAvatar: Story = {
     text: '@0xDevoor',
     intent: 'secondary',
     left: <Avatar src="/user/@OxDevoor.png" size="xs" alt="Test" />,
+  },
+};
+
+export const IsActive: Story = {
+  args: {
+    intent: 'primary',
+    isActive: true,
+  },
+};
+
+export const Wallet: Story = {
+  args: {
+    text: '@0xDevoor',
+    intent: 'wallet',
+  },
+};
+
+export const WalletIsActive: Story = {
+  args: {
+    text: '@0xDevoor',
+    intent: 'wallet',
+    isActive: true,
   },
 };
