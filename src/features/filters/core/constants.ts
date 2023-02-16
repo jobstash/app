@@ -1,0 +1,8 @@
+export const enum FilterKind {
+  DATE,
+  RANGE,
+  BOOLEAN,
+  SINGLESELECT,
+  MULTISELECT,
+  MULTISELECT_SEARCH,
+}
