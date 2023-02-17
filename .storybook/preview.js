@@ -1,5 +1,6 @@
 // Import 'tailwindcss/tailwind.css';
 import '../src/styles/globals.css';
+import 'joi/dist/joi-browser.min.js';
 
 import { Lato, Roboto } from '@next/font/google';
 import { themes } from '@storybook/theming';
