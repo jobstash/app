@@ -7,13 +7,15 @@
     "xo-react/space",
     "next/core-web-vitals",
     "prettier",
-    "plugin:storybook/recommended"
+    "plugin:storybook/recommended",
+    "plugin:@tanstack/eslint-plugin-query/recommended"
   ],
   "plugins": [
     "unicorn",
     "testing-library",
     "prefer-arrow",
-    "simple-import-sort"
+    "simple-import-sort",
+    "@tanstack/query"
   ],
   "overrides": [
     {
