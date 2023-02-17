@@ -1,5 +1,6 @@
 const colors = require('tailwindcss/colors');
-const { fontFamily } = require('tailwindcss/defaultTheme');
+
+// Const { fontFamily } = require('tailwindcss/defaultTheme');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
@@ -7,7 +8,8 @@ module.exports = {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['var(--font-lato)', ...fontFamily.sans],
+        sans: ['var(--font-lato)'],
+        roboto: ['var(--font-roboto)'],
       },
       colors: {
         // Allow opacity e.g. text-primary/50, text-white/50
