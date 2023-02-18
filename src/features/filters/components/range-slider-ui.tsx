@@ -1,7 +1,7 @@
 import * as SliderPrimitive from '@radix-ui/react-slider';
 import { clsx } from 'clsx';
 
-import type { RangePayload, RangeSliderProps } from '../core/types';
+import type { RangeSliderProps, RangeValue } from '../core/types';
 
 /**
  * This props are required by radix-ui react-slider
@@ -9,7 +9,7 @@ import type { RangePayload, RangeSliderProps } from '../core/types';
  */
 interface Props {
   range: RangeSliderProps;
-  onChange: (_: RangePayload) => void;
+  onChange: (_: RangeValue) => void;
 }
 
 const Thumb = () => (

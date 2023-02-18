@@ -6,42 +6,28 @@ import { clsx } from 'clsx';
 
 import { Button, Text } from '~/shared/components';
 
-import type { Action, ConfigLabeledValue } from '../core/types';
+import type { FilterAction, FilterState } from '../core/types';
 
-/**
- * We need to use generics since underlying value type might differ for different cases
- * For example in FilterKind.DATE, values would be number for unix timestamps,
- * There might be a usecase in the future where underlying values might be different than numbers
- * Hence generics:
- * 	`C` = filter config e.g. `JobsFilterConfig`
- * 	`P` = type of filter param e.g. `number` for FilterKind.DATE
- */
-interface Props<C extends Object, P> {
+interface Props {
   text: string;
   ariaLabel: string;
-  items: ConfigLabeledValue<P>[];
-  type: keyof C;
-  dispatch: Dispatch<Action<C, P>>;
+  labels: string[];
+  type: keyof FilterState;
+  dispatch: Dispatch<FilterAction>;
 }
 
-/**
- * Dropdown where users can select a single item
- * Each item has an associated label and value to it
- * `label` is what's displayed in the ui
- * `value` will be the filter param for the final url query
- */
-export const SingleSelectFilter = <C extends Object, P>({
+export const SingleSelectFilter = ({
   text,
-  items,
+  labels,
   ariaLabel,
   type,
   dispatch,
-}: Props<C, P>) => {
-  const dispatchFn = (label: string) => {
-    const item = items.find((item) => item.label === label);
-    if (!item) return;
+}: Props) => {
+  const dispatchFn = (clickedLabel: string) => {
+    const payload = labels.find((label) => label === clickedLabel);
+    if (!payload) return;
 
-    dispatch({ type, payload: item.value });
+    dispatch({ type, payload });
   };
 
   return (
@@ -64,7 +50,7 @@ export const SingleSelectFilter = <C extends Object, P>({
       <SelectPrimitive.Content position="popper" sideOffset={5}>
         <SelectPrimitive.Viewport className="animate-slide-down cursor-pointer rounded-lg bg-zinc-800 p-2 shadow-lg">
           <SelectPrimitive.Group>
-            {items.map(({ label }) => (
+            {labels.map((label) => (
               <SelectPrimitive.Item
                 key={label}
                 value={label}
