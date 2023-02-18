@@ -38,7 +38,7 @@ export const DropdownUi = ({ text, children }: Props) => (
         sideOffset={5}
         className={clsx(
           'radix-side-bottom:animate-slide-down radix-side-top:animate-slide-up',
-          'w-48 rounded-lg px-1.5 py-1 shadow-md',
+          'min-w-[180px] rounded-lg px-1.5 py-1 shadow-md',
           'bg-zinc-800',
         )}
       >
