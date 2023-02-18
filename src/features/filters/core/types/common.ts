@@ -7,8 +7,3 @@ export type RangeSliderProps = {
   value: RangeValue;
   defaultValue: RangeValue;
 };
-
-export type MultiSelectItem = {
-  isChecked: boolean;
-  label: string;
-};

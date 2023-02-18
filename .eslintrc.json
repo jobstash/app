@@ -21,6 +21,8 @@
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
       "rules": {
+        // prefer spread
+        "unicorn/prefer-spread": "off",
         // camelcase
         "camelcase": "off",
         // remove default-props since we're using typescript

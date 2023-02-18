@@ -2,7 +2,6 @@ import {
   ChangeEventHandler,
   Dispatch,
   KeyboardEventHandler,
-  useRef,
   useState,
 } from 'react';
 
@@ -12,8 +11,7 @@ import clsx from 'clsx';
 
 import { Button, Text } from '~/shared/components';
 
-import { FilterAction, FilterState, MultiSelectItem } from '../core/types';
-import { toggleMultiSelectItem } from '../utils';
+import type { FilterAction, FilterState } from '../core/types';
 
 import { CloseSvgIcon } from './close-svg-icon';
 import { DropdownUi } from './dropdown-ui';
@@ -27,16 +25,18 @@ const lato = Lato({
 
 type Props = {
   text: string;
-  items: MultiSelectItem[];
   type: keyof FilterState;
   dispatch: Dispatch<FilterAction>;
+  items: string[];
+  selectedItems?: Set<string>;
 };
 
 export const MultiSelectSearchFilter = ({
   text,
-  items,
   type,
   dispatch,
+  items,
+  selectedItems,
 }: Props) => {
   const [inputValue, setInputValue] = useState<string>('');
 
@@ -45,35 +45,42 @@ export const MultiSelectSearchFilter = ({
 
   const clearInput = () => setInputValue('');
 
-  const toggleItem = (selected: MultiSelectItem) => {
-    toggleMultiSelectItem(selected, items, type, dispatch);
+  const toggleItem = (checked: boolean, label: string) => {
+    const payload = new Set(selectedItems ?? []);
+    checked ? payload.add(label) : payload.delete(label);
+    dispatch({ type, payload });
     clearInput();
   };
 
-  const selectedItems = items.filter((item) => item.isChecked);
-
   const availableItems = items.filter(
     (item) =>
-      !item.isChecked &&
-      item.label.toLowerCase().includes(inputValue.toLowerCase()),
+      !selectedItems?.has(item) &&
+      item.toLowerCase().includes(inputValue.toLowerCase()),
   );
 
   const onInputKeyDown: KeyboardEventHandler<HTMLInputElement> = (e) => {
     if (e.key === 'Enter' && availableItems.length > 0) {
-      toggleItem({ label: availableItems[0].label, isChecked: true });
+      const payload = new Set(selectedItems ?? []);
+      payload.add(availableItems[0]);
+      dispatch({ type, payload });
+      clearInput();
     }
   };
 
   const clearItems = () => {
     dispatch({
       type,
-      payload: items.map(({ label }) => ({ label, isChecked: false })),
+      payload: new Set([]),
     });
   };
 
+  const numSelectedItems = selectedItems?.size ?? 0;
+  const hasSelectedItems = numSelectedItems > 0;
+  const displaySearchInput = numSelectedItems !== items.length;
+
   return (
     <DropdownUi text={text}>
-      {selectedItems.length === items.length ? null : (
+      {displaySearchInput && (
         <div className="relative flex items-center justify-between space-x-2 py-2">
           <Dropdown.Item asChild onSelect={(e) => e.preventDefault()}>
             <input
@@ -96,29 +103,39 @@ export const MultiSelectSearchFilter = ({
           </Button>
         </div>
       )}
+
       <div className="my-2 pl-2">
-        {availableItems.map(({ label, isChecked }) => (
-          <Dropdown.Item
-            key={label}
-            className={clsx(
-              'flex cursor-pointer select-none items-center gap-x-2 rounded-md p-2 text-xs outline-none',
-              'hover:bg-zinc-600',
-              { 'bg-zinc-500': isChecked },
-              { 'focus:bg-zinc-700': !isChecked },
-            )}
-            onClick={() => toggleItem({ label, isChecked: !isChecked })}
-            onSelect={(e) => e.preventDefault()}
-          >
-            <Dropdown.ItemIndicator>
-              <UnCheckedIcon />
-            </Dropdown.ItemIndicator>
-            <Text className={`font-sans ${lato.variable}`}>{label}</Text>
-          </Dropdown.Item>
-        ))}
+        {availableItems.map((label) => {
+          const isChecked = selectedItems?.has(label);
+          return (
+            <Dropdown.Item
+              key={label}
+              className={clsx(
+                'flex cursor-pointer select-none items-center gap-x-2 rounded-md p-2 text-xs outline-none',
+                'hover:bg-zinc-600',
+                { 'bg-zinc-500': isChecked },
+                { 'focus:bg-zinc-700': !isChecked },
+              )}
+              // Disable typeahead (messes with search focus)
+              textValue=""
+              onClick={() => toggleItem(!isChecked, label)}
+              onSelect={(e) => e.preventDefault()}
+            >
+              <Dropdown.ItemIndicator>
+                <UnCheckedIcon />
+              </Dropdown.ItemIndicator>
+              <Text className={`font-sans ${lato.variable}`}>{label}</Text>
+            </Dropdown.Item>
+          );
+        })}
       </div>
-      {selectedItems.length > 0 && (
+
+      {displaySearchInput && hasSelectedItems && (
+        <Dropdown.Separator className="my-1 h-px bg-zinc-700" />
+      )}
+
+      {hasSelectedItems && (
         <div className="pl-2">
-          <Dropdown.Separator className="my-1 h-px bg-zinc-700" />
           <Dropdown.Label
             className={clsx({ 'my-2': availableItems.length > 0 })}
           >
@@ -130,7 +147,7 @@ export const MultiSelectSearchFilter = ({
             </Text>
           </Dropdown.Label>
           <div className="my-3 flex w-full gap-x-2">
-            {selectedItems.map(({ label }) => (
+            {Array.from(selectedItems ?? []).map((label) => (
               <Button
                 key={label}
                 size="sm"
@@ -138,7 +155,7 @@ export const MultiSelectSearchFilter = ({
                   className: `font-sans ${lato.variable}`,
                 }}
                 right={<CloseSvgIcon />}
-                onClick={() => toggleItem({ label, isChecked: false })}
+                onClick={() => toggleItem(false, label)}
               >
                 {label}
               </Button>

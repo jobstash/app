@@ -1,4 +1,4 @@
-import { MultiSelectItem, RangeValue } from './common';
+import { RangeValue } from './common';
 
 // State -> contains ui select-options, isChecked etc
 export type FilterState = {
@@ -13,13 +13,13 @@ export type FilterState = {
   monthly_revenue?: RangeValue;
   audits?: RangeValue;
   hacks?: RangeValue;
-  location?: MultiSelectItem[];
+  location?: Set<string>;
+  tech?: Set<string>;
+  organizations?: Set<string>;
+  chains?: Set<string>;
+  projects?: Set<string>;
+  categories?: Set<string>;
   //
-  // tech?: string;
-  // organizations?: string;
-  // chains?: string;
-  // projects?: string;
-  // categories?: string;
   // mainnet?: boolean;
   // token?: boolean;
 };
@@ -32,7 +32,9 @@ export type Action<P> = {
 export type LevelAction = Action<string>;
 export type DateAction = Action<number>;
 export type RangeAction = Action<RangeValue>;
-export type MultiSelectAction = Action<MultiSelectItem[]>;
+//
+// export type MultiSelectAction = Action<MultiSelectItem[]>;
+export type MultiSelectAction = Action<Set<string>>;
 export type FilterAction =
   | LevelAction
   | DateAction
@@ -52,4 +54,10 @@ export type FilterStateRangeKey =
   | 'hacks';
 
 // Multiselect filter-state keys
-export type FilterStateMultiSelectKey = 'location';
+export type FilterStateMultiSelectKey =
+  | 'location'
+  | 'tech'
+  | 'organizations'
+  | 'chains'
+  | 'projects'
+  | 'categories';
