@@ -26,3 +26,5 @@ export const KEY_PROJECTS = 'projects';
 export const KEY_CATEGORIES = 'categories';
 export const KEY_MAINNET = 'mainnet';
 export const KEY_TOKEN = 'token';
+
+export const API_URL_JOBS_FILTER_CONFIG = '/jobs/filter-config';
