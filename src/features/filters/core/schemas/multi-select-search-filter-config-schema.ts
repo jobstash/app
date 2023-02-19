@@ -1,13 +1,13 @@
 import Joi from 'joi';
 
 import { FilterKind } from '../constants';
-import type { ConfigMultiSelectSearchFilter } from '../types';
+import type { MultiSelectSearchFilterConfig } from '../types';
 
-import { ConfigSharedPropertiesSchema } from './config-shared-properties-schema';
+import { FilterConfigSharedPropertiesSchema } from './filter-config-shared-properties-schema';
 import { ParamKeySchema } from './param-key-schema';
 
-export const MultiSelectSearchFilterSchema =
-  ConfigSharedPropertiesSchema.append<ConfigMultiSelectSearchFilter>({
+export const MultiSelectSearchFilterConfigSchema =
+  FilterConfigSharedPropertiesSchema.append<MultiSelectSearchFilterConfig>({
     kind: Joi.number().valid(FilterKind.MULTISELECT_SEARCH).required(),
     param_key: ParamKeySchema,
     value: Joi.array()

@@ -3,11 +3,11 @@ import { rest } from 'msw';
 import type { GenericResponse } from '~/shared/core/interfaces';
 
 import { API_URL_JOBS_FILTER_CONFIG } from '../core/constants';
-import type { JobsFilterConfig } from '../core/types';
+import type { FilterConfig } from '../core/types';
 
-export const mockJobsFilterConfigResponse = (
+export const mockFilterConfigResponse = (
   status: number,
-  body: JobsFilterConfig | GenericResponse,
+  body: FilterConfig | GenericResponse,
   delay = 0,
   networkError = false,
 ) => {

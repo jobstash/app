@@ -1,7 +1,7 @@
 import { FilterKind } from '../core/constants';
-import { JobsFilterConfig } from '../core/types';
+import { FilterConfig } from '../core/types';
 
-export const sampleFilterConfig: JobsFilterConfig = {
+export const sampleFilterConfig: FilterConfig = {
   publication_date: {
     position: 1,
     label: 'Publication Date',

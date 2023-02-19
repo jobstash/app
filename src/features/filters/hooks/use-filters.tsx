@@ -5,11 +5,7 @@ import { MultiSelectSearchFilter } from '../components/multi-select-search-filte
 import { RangeFilter } from '../components/range-filter';
 import { SingleSelectFilter } from '../components/single-select-filter';
 import { FilterKind } from '../core/constants';
-import type {
-  FilterAction,
-  FilterState,
-  JobsFilterConfig,
-} from '../core/types';
+import type { FilterAction, FilterConfig, FilterState } from '../core/types';
 import { filterReducer } from '../reducers';
 import {
   getMultiSelectProps,
@@ -19,10 +15,10 @@ import {
 
 type ShownSortedConfig = {
   key: keyof FilterState;
-  config: JobsFilterConfig[keyof JobsFilterConfig];
+  config: FilterConfig[keyof FilterConfig];
 };
 
-export const useJobsFilter = (fetchedConfig?: JobsFilterConfig) => {
+export const useFilters = (fetchedConfig?: FilterConfig) => {
   // Filter only shown configs then sort - `useMemo` for perf
   const shownSortedConfigs: ShownSortedConfig[] = useMemo(
     () =>
@@ -44,7 +40,7 @@ export const useJobsFilter = (fetchedConfig?: JobsFilterConfig) => {
   );
 
   // Maps config to appropriate component - `useMemo` for perf
-  const filterComponents: { key: keyof JobsFilterConfig; ui: ReactNode }[] =
+  const filterComponents: { key: keyof FilterConfig; ui: ReactNode }[] =
     useMemo(
       () =>
         fetchedConfig

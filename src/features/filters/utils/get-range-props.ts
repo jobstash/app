@@ -1,7 +1,7 @@
 import type {
-  ConfigRangeFilter,
   FilterState,
   FilterStateRangeKey,
+  RangeFilterConfig,
   RangeSliderProps,
 } from '../core/types';
 
@@ -10,7 +10,7 @@ import { formatRangeFilterText } from './format-range-filter-text';
 export const getRangeProps = (
   filters: FilterState,
   key: keyof FilterState,
-  config: ConfigRangeFilter,
+  config: RangeFilterConfig,
 ) => {
   const {
     label,

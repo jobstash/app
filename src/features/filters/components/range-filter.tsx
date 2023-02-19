@@ -11,7 +11,7 @@ import type {
 } from '../core/types';
 
 import { DropdownUi } from './dropdown-ui';
-import { RangeSliderUi } from './range-slider-ui';
+import { RangeSlider } from './range-slider';
 
 interface Props {
   text: string;
@@ -28,7 +28,7 @@ export const RangeFilter = ({ text, range, type, dispatch }: Props) => (
       )}
       onSelect={(e) => e.preventDefault()} // Prevent dropdown from closing onClick
     >
-      <RangeSliderUi
+      <RangeSlider
         range={range}
         onChange={(payload) => dispatch({ type, payload })}
       />

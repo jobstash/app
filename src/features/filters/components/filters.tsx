@@ -1,12 +1,16 @@
 import { Button } from '~/shared/components';
 
-import { useJobsFilter, useJobsFilterConfigQuery } from '../hooks';
-import { getJobsUrlParams } from '../utils';
+import { useFilterConfigQuery, useFilters } from '../hooks';
+import { getFilterUrlParams } from '../utils';
 
-export const JobsFilter = () => {
-  const { data, error, isLoading } = useJobsFilterConfigQuery();
+type Props = {
+  url: string;
+};
 
-  const { filters, filterComponents, clearFilters } = useJobsFilter(data);
+export const Filters = ({ url }: Props) => {
+  const { data, error, isLoading } = useFilterConfigQuery(url);
+
+  const { filters, filterComponents, clearFilters } = useFilters(data);
 
   if (error)
     return (
@@ -16,7 +20,7 @@ export const JobsFilter = () => {
     return <h1 className="text-white">LOADING JOBS FILTER ...</h1>;
 
   const applyFilter = () => {
-    const urlParams = getJobsUrlParams(filters, data);
+    const urlParams = getFilterUrlParams(filters, data);
 
     // eslint-disable-next-line no-alert
     alert(urlParams ? `/jobs/list?${urlParams}` : 'EMPTY FILTER');
@@ -30,7 +34,9 @@ export const JobsFilter = () => {
             {ui}
           </div>
         ))}
-        <Button onClick={applyFilter}>Apply Filter</Button>
+        <Button kind="primary" onClick={applyFilter}>
+          Apply Filter
+        </Button>
         <Button onClick={clearFilters}>Clear All Filters</Button>
       </div>
     </div>

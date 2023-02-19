@@ -1,13 +1,13 @@
 import Joi from 'joi';
 
 import { FilterKind } from '../constants';
-import type { ConfigBooleanFilter } from '../types';
+import type { BooleanFilterConfig } from '../types';
 
-import { ConfigSharedPropertiesSchema } from './config-shared-properties-schema';
+import { FilterConfigSharedPropertiesSchema } from './filter-config-shared-properties-schema';
 import { ParamKeySchema } from './param-key-schema';
 
-export const BooleanFilterSchema =
-  ConfigSharedPropertiesSchema.append<ConfigBooleanFilter>({
+export const BooleanFilterConfigSchema =
+  FilterConfigSharedPropertiesSchema.append<BooleanFilterConfig>({
     kind: Joi.number().valid(FilterKind.BOOLEAN).required(),
     param_key: ParamKeySchema,
     value: Joi.array()

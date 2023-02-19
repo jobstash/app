@@ -1,1 +1,1 @@
-export * from './jobs-filter-schema';
+export * from './filter-config-schema';

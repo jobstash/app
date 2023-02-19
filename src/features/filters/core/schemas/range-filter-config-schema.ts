@@ -1,13 +1,13 @@
 import Joi from 'joi';
 
 import { FilterKind } from '../constants';
-import type { ConfigRangeFilter } from '../types';
+import type { RangeFilterConfig } from '../types';
 
-import { ConfigSharedPropertiesSchema } from './config-shared-properties-schema';
+import { FilterConfigSharedPropertiesSchema } from './filter-config-shared-properties-schema';
 import { ParamKeySchema } from './param-key-schema';
 
-export const RangeFilterSchema =
-  ConfigSharedPropertiesSchema.append<ConfigRangeFilter>({
+export const RangeFilterConfigSchema =
+  FilterConfigSharedPropertiesSchema.append<RangeFilterConfig>({
     kind: Joi.number().valid(FilterKind.RANGE).required(),
     step_size: Joi.number().positive().required(),
     value: Joi.object({

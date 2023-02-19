@@ -21,7 +21,7 @@ const Thumb = () => (
   />
 );
 
-export const RangeSliderUi = ({
+export const RangeSlider = ({
   range: { min, max, step, value, defaultValue },
   onChange,
 }: Props) => (

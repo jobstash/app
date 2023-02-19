@@ -1,13 +1,13 @@
 import type {
-  ConfigBooleanFilter,
-  ConfigDateFilter,
-  ConfigSingleSelectFilter,
+  BooleanFilterConfig,
+  DateFilterConfig,
+  SingleSelectFilterConfig,
 } from '../core/types';
 
 export const getSingleSelectProps = (
-  config: ConfigSingleSelectFilter | ConfigDateFilter | ConfigBooleanFilter,
+  config: SingleSelectFilterConfig | DateFilterConfig | BooleanFilterConfig,
 ) => {
-  const { label, value } = config as ConfigSingleSelectFilter;
+  const { label, value } = config as SingleSelectFilterConfig;
   const labels = value.map((v) => v.label);
   const ariaLabel = `Filter by ${label}`;
 

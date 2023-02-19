@@ -1,29 +1,35 @@
 import { FilterKind } from '../constants';
 
-export type ConfigSharedProperties = {
+export type FilterConfigSharedProperties = {
   position: number;
   label: string;
   show: boolean;
 };
 
-export type ConfigLabeledValue<T> = {
+export type FilterConfigLabeledValue<T> = {
   label: string;
   value: T;
 };
 
-type ConfigGenericFields<K, V> = {
+type FilterConfigGenericFields<K, V> = {
   kind: K;
   value: V;
   param_key: string;
 };
 
-export type ConfigDateFilter = ConfigSharedProperties &
-  ConfigGenericFields<FilterKind.DATE, ConfigLabeledValue<number>[]>;
+export type DateFilterConfig = FilterConfigSharedProperties &
+  FilterConfigGenericFields<
+    FilterKind.DATE,
+    FilterConfigLabeledValue<number>[]
+  >;
 
-export type ConfigBooleanFilter = ConfigSharedProperties &
-  ConfigGenericFields<FilterKind.BOOLEAN, ConfigLabeledValue<boolean>[]>;
+export type BooleanFilterConfig = FilterConfigSharedProperties &
+  FilterConfigGenericFields<
+    FilterKind.BOOLEAN,
+    FilterConfigLabeledValue<boolean>[]
+  >;
 
-export type ConfigRangeFilter = {
+export type RangeFilterConfig = {
   kind: FilterKind.RANGE;
   step_size: number;
   value: {
@@ -36,35 +42,46 @@ export type ConfigRangeFilter = {
       value: number;
     };
   };
-} & ConfigSharedProperties;
+} & FilterConfigSharedProperties;
 
-export type ConfigSingleSelectFilter<T = string> = ConfigSharedProperties &
-  ConfigGenericFields<FilterKind.SINGLESELECT, ConfigLabeledValue<T>[]>;
+export type SingleSelectFilterConfig<T = string> =
+  FilterConfigSharedProperties &
+    FilterConfigGenericFields<
+      FilterKind.SINGLESELECT,
+      FilterConfigLabeledValue<T>[]
+    >;
 
-export type ConfigMultiSelectFilter<T = string> = ConfigSharedProperties &
-  ConfigGenericFields<FilterKind.MULTISELECT, ConfigLabeledValue<T>[]>;
+export type MultiSelectFilterConfig<T = string> = FilterConfigSharedProperties &
+  FilterConfigGenericFields<
+    FilterKind.MULTISELECT,
+    FilterConfigLabeledValue<T>[]
+  >;
 
-export type ConfigMultiSelectSearchFilter<T = string> = ConfigSharedProperties &
-  ConfigGenericFields<FilterKind.MULTISELECT_SEARCH, ConfigLabeledValue<T>[]>;
+export type MultiSelectSearchFilterConfig<T = string> =
+  FilterConfigSharedProperties &
+    FilterConfigGenericFields<
+      FilterKind.MULTISELECT_SEARCH,
+      FilterConfigLabeledValue<T>[]
+    >;
 
-export type JobsFilterConfig = {
-  publication_date: ConfigDateFilter;
-  level: ConfigSingleSelectFilter;
-  location: ConfigMultiSelectFilter;
-  salary: ConfigRangeFilter;
-  team_size: ConfigRangeFilter;
-  employee_count: ConfigRangeFilter;
-  tvl: ConfigRangeFilter;
-  monthly_volume: ConfigRangeFilter;
-  monthly_active_users: ConfigRangeFilter;
-  monthly_revenue: ConfigRangeFilter;
-  audits: ConfigRangeFilter;
-  hacks: ConfigRangeFilter;
-  tech: ConfigMultiSelectSearchFilter;
-  organizations: ConfigMultiSelectSearchFilter;
-  chains: ConfigMultiSelectSearchFilter;
-  projects: ConfigMultiSelectSearchFilter;
-  categories: ConfigMultiSelectSearchFilter;
-  mainnet: ConfigBooleanFilter;
-  token: ConfigBooleanFilter;
+export type FilterConfig = {
+  publication_date: DateFilterConfig;
+  level: SingleSelectFilterConfig;
+  location: MultiSelectFilterConfig;
+  salary: RangeFilterConfig;
+  team_size: RangeFilterConfig;
+  employee_count: RangeFilterConfig;
+  tvl: RangeFilterConfig;
+  monthly_volume: RangeFilterConfig;
+  monthly_active_users: RangeFilterConfig;
+  monthly_revenue: RangeFilterConfig;
+  audits: RangeFilterConfig;
+  hacks: RangeFilterConfig;
+  tech: MultiSelectSearchFilterConfig;
+  organizations: MultiSelectSearchFilterConfig;
+  chains: MultiSelectSearchFilterConfig;
+  projects: MultiSelectSearchFilterConfig;
+  categories: MultiSelectSearchFilterConfig;
+  mainnet: BooleanFilterConfig;
+  token: BooleanFilterConfig;
 };

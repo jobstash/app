@@ -1,17 +1,17 @@
 /* eslint-disable unicorn/consistent-destructuring */
 
 import { FilterKind } from '../core/constants';
-import { FilterState, JobsFilterConfig, RangeValue } from '../core/types';
+import { FilterConfig, FilterState, RangeValue } from '../core/types';
 
-export const getJobsUrlParams = (
+export const getFilterUrlParams = (
   filters: FilterState,
-  filterConfig: JobsFilterConfig,
+  filterConfig: FilterConfig,
 ) =>
   Object.entries(filters)
     .map(([k, v]) => {
       const [_, config] = Object.entries(filterConfig).find(
         ([configKey]) => k === configKey,
-      ) as [string, JobsFilterConfig[keyof JobsFilterConfig]];
+      ) as [string, FilterConfig[keyof FilterConfig]];
 
       const { kind, value } = config;
       switch (kind) {
