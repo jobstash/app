@@ -130,5 +130,7 @@ export const useJobsFilter = (fetchedConfig?: JobsFilterConfig) => {
       [fetchedConfig, filters, shownSortedConfigs],
     );
 
-  return { filters, filterComponents };
+  const clearFilters = () => dispatch({ type: null, payload: undefined });
+
+  return { filters, filterComponents, clearFilters };
 };

@@ -1,6 +1,5 @@
 import { RangeValue } from './common';
 
-// State -> contains ui select-options, isChecked etc
 export type FilterState = {
   level?: string;
   publication_date?: string;
@@ -19,29 +18,27 @@ export type FilterState = {
   chains?: Set<string>;
   projects?: Set<string>;
   categories?: Set<string>;
-  //
-  // mainnet?: boolean;
-  // token?: boolean;
+  mainnet?: boolean;
+  token?: boolean;
 };
 
-// Actions
 export type Action<P> = {
-  type: keyof FilterState;
+  type: keyof FilterState | null;
   payload: P;
 };
 export type LevelAction = Action<string>;
 export type DateAction = Action<number>;
 export type RangeAction = Action<RangeValue>;
-//
-// export type MultiSelectAction = Action<MultiSelectItem[]>;
+export type ClearAction = Action<undefined>;
+
 export type MultiSelectAction = Action<Set<string>>;
 export type FilterAction =
   | LevelAction
   | DateAction
   | RangeAction
-  | MultiSelectAction;
+  | MultiSelectAction
+  | ClearAction;
 
-// Range filter-state keys
 export type FilterStateRangeKey =
   | 'salary'
   | 'team_size'
@@ -53,7 +50,6 @@ export type FilterStateRangeKey =
   | 'audits'
   | 'hacks';
 
-// Multiselect filter-state keys
 export type FilterStateMultiSelectKey =
   | 'location'
   | 'tech'

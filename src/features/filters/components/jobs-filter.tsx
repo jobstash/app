@@ -6,7 +6,7 @@ import { getJobsUrlParams } from '../utils';
 export const JobsFilter = () => {
   const { data, error, isLoading } = useJobsFilterConfigQuery();
 
-  const { filters, filterComponents } = useJobsFilter(data);
+  const { filters, filterComponents, clearFilters } = useJobsFilter(data);
 
   if (error)
     return (
@@ -31,6 +31,7 @@ export const JobsFilter = () => {
           </div>
         ))}
         <Button onClick={applyFilter}>Apply Filter</Button>
+        <Button onClick={clearFilters}>Clear All Filters</Button>
       </div>
     </div>
   );
