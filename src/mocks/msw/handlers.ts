@@ -1,5 +1,7 @@
 import { rest } from 'msw';
 
+import { sampleFilterConfig } from '~/features/filters/testutils';
+
 import { fakeJobPosts } from '../fakers/fake-job-post';
 import { fakeOrgPosts } from '../fakers/fake-org-post';
 import { fakeProjectPosts } from '../fakers/fake-project-post';
@@ -95,6 +97,18 @@ export const handlers = [
           posts: cursor < maxCursor ? fakeRepoPosts() : [],
         }),
       );
+    },
+  ),
+
+  // GET jobs filter config
+  rest.get(
+    'http://localhost:3000/jobs/filter-config',
+    async (req, res, ctx) => {
+      // Artificial delay
+      // eslint-disable-next-line no-promise-executor-return
+      await new Promise((r) => setTimeout(r, 1000));
+
+      return res(ctx.status(200), ctx.json(sampleFilterConfig));
     },
   ),
 ];

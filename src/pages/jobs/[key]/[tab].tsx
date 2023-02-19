@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { useSetAtom } from 'jotai';
 
 import type { JobPost } from '~/core/interfaces';
+import { JobsFilter } from '~/features/filters/components';
 import { JobCardList } from '~/features/jobs/components';
 import { RightPanel } from '~/features/right-panel';
 import { mockJobPosts } from '~/mocks/data/mock-posts';
@@ -30,6 +31,7 @@ const JobsPage = ({ data }: Props) => {
 
   return (
     <ToBeReplacedLayout sidebar={<SideBar />} rightPanel={<RightPanel />}>
+      <JobsFilter />
       <JobCardList initListings={data.posts} />
     </ToBeReplacedLayout>
   );
