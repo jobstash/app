@@ -1,24 +1,32 @@
 {
   "extends": [
+    "plugin:tailwindcss/recommended",
     "plugin:unicorn/recommended",
     "plugin:testing-library/react",
     "xo",
     "xo-react/space",
     "next/core-web-vitals",
     "prettier",
-    "plugin:storybook/recommended"
+    "plugin:storybook/recommended",
+    "plugin:@tanstack/eslint-plugin-query/recommended"
   ],
   "plugins": [
     "unicorn",
     "testing-library",
     "prefer-arrow",
-    "tailwindcss",
-    "simple-import-sort"
+    "simple-import-sort",
+    "@tanstack/query"
   ],
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
       "rules": {
+        // prefer spread
+        "unicorn/prefer-spread": "off",
+        // camelcase
+        "camelcase": "off",
+        // remove default-props since we're using typescript
+        "react/require-default-props": "off",
         // sort rules
         "simple-import-sort/exports": "error",
         "simple-import-sort/imports": [
@@ -46,14 +54,6 @@
           "always",
           { "methodsIgnorePattern": "." }
         ],
-        // enforce tailwind rules
-        "tailwindcss/classnames-order": "error",
-        "tailwindcss/enforces-negative-arbitrary-values": "error",
-        "tailwindcss/enforces-shorthand": "error",
-        "tailwindcss/migration-from-tailwind-2": "error",
-        "tailwindcss/no-arbitrary-value": "warn",
-        "tailwindcss/no-custom-classname": "error",
-        "tailwindcss/no-contradicting-classname": "error",
         // enforce arrow functions
         "prefer-arrow/prefer-arrow-functions": [
           "error",
@@ -105,6 +105,11 @@
       }
     }
   ],
+  "settings": {
+    "tailwindcss": {
+      "config": "tailwind.config.js"
+    }
+  },
   "globals": {
     "JSX": true
   },
