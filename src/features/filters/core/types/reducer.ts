@@ -20,21 +20,23 @@ export type FilterState = {
   categories?: Set<string>;
   mainnet?: boolean;
   token?: boolean;
+  order?: string;
+  order_by?: string;
 };
 
 export type Action<P> = {
   type: keyof FilterState | null;
   payload: P;
 };
-export type LevelAction = Action<string>;
-export type DateAction = Action<number>;
+export type StringAction = Action<string>;
+export type NumberAction = Action<number>;
 export type RangeAction = Action<RangeValue>;
 export type ClearAction = Action<undefined>;
 
 export type MultiSelectAction = Action<Set<string>>;
 export type FilterAction =
-  | LevelAction
-  | DateAction
+  | StringAction
+  | NumberAction
   | RangeAction
   | MultiSelectAction
   | ClearAction;

@@ -84,4 +84,6 @@ export type FilterConfig = {
   categories: MultiSelectSearchFilterConfig;
   mainnet: BooleanFilterConfig;
   token: BooleanFilterConfig;
+  order: SingleSelectFilterConfig;
+  order_by: SingleSelectFilterConfig;
 };

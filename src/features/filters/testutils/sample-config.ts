@@ -381,4 +381,74 @@ export const sampleFilterConfig: FilterConfig = {
       },
     ],
   },
+  order: {
+    position: 20,
+    label: 'Order',
+    show: true,
+    param_key: 'order',
+    kind: FilterKind.SINGLESELECT,
+    value: [
+      {
+        label: 'Ascending',
+        value: 'asc',
+      },
+      {
+        label: 'Descending',
+        value: 'desc',
+      },
+    ],
+  },
+  order_by: {
+    position: 21,
+    label: 'Sort By',
+    show: true,
+    param_key: 'order_by',
+    kind: FilterKind.SINGLESELECT,
+    value: [
+      {
+        label: 'Publication Date',
+        value: 'publication_date',
+      },
+      {
+        label: 'TVL',
+        value: 'tvl',
+      },
+      {
+        label: 'Salary',
+        value: 'salary',
+      },
+      {
+        label: 'Funding Date',
+        value: 'funding_date',
+      },
+      {
+        label: 'Monthly Volume',
+        value: 'monthly_volume',
+      },
+      {
+        label: 'Monthly Active Users',
+        value: 'monthly_active_users',
+      },
+      {
+        label: 'Monthly Revenue',
+        value: 'monthly_revenue',
+      },
+      {
+        label: 'Audits',
+        value: 'audits',
+      },
+      {
+        label: 'Hacks',
+        value: 'hacks',
+      },
+      {
+        label: 'Chains',
+        value: 'chains',
+      },
+      {
+        label: 'Team Size',
+        value: 'team_size',
+      },
+    ],
+  },
 };

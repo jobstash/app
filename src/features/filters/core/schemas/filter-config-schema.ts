@@ -12,6 +12,8 @@ import {
   KEY_MONTHLY_ACTIVE_USERS,
   KEY_MONTHLY_REVENUE,
   KEY_MONTHLY_VOLUME,
+  KEY_ORDER,
+  KEY_ORDER_BY,
   KEY_ORGANIZATIONS,
   KEY_PROJECTS,
   KEY_PUBLICATION_DATE,
@@ -50,4 +52,6 @@ export const FilterConfigSchema = Joi.object<FilterConfig>({
   [KEY_CATEGORIES]: MultiSelectSearchFilterConfigSchema,
   [KEY_MAINNET]: BooleanFilterConfigSchema,
   [KEY_TOKEN]: BooleanFilterConfigSchema,
+  [KEY_ORDER]: SingleSelectFilterConfigSchema,
+  [KEY_ORDER_BY]: SingleSelectFilterConfigSchema,
 });
