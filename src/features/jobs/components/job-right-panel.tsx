@@ -28,26 +28,26 @@ export const JobRightPanel = ({ job }: Props) => {
   const tags = createJobTags(job);
 
   return (
-    <div className='p-6'>
-      <h2 className='text-xl font-medium'>{title}</h2>
-      <div className='flex space-x-8 pt-6 pb-4 text-sm'>
+    <div className="p-6">
+      <h2 className="text-xl font-medium">{title}</h2>
+      <div className="flex space-x-8 pt-6 pb-4 text-sm">
         {tags.map((tag) => (
-          <div key={tag.text} className='flex items-center'>
-            <div className='mr-2'>{tag.icon}</div>
+          <div key={tag.text} className="flex items-center">
+            <div className="relative mr-2 h-3 w-3">{tag.icon}</div>
             <p>{tag.text}</p>
             <p>{tag.link}</p>
           </div>
         ))}
       </div>
 
-      <div className='flex flex-wrap space-x-2 border-b border-white/20 pb-6'>
+      <div className="flex flex-wrap space-x-2 border-b border-white/20 pb-6">
         <Button>Apply for this job</Button>
       </div>
-      <div className='space-y-4 pt-4'>
+      <div className="space-y-4 pt-4">
         {descriptions.map((d) => (
           <div key={d.label} className="">
-            <p className='text-md text-white'>{d.label}</p>
-            <p className='text-sm text-sidebarTitle'>{d.desc}</p>
+            <p className="text-md text-white">{d.label}</p>
+            <p className="text-sm text-sidebarTitle">{d.desc}</p>
           </div>
         ))}
       </div>

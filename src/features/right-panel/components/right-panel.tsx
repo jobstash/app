@@ -44,7 +44,6 @@ import { useRouteSegments } from '~/shared/hooks';
 
 import { getPanelTabs } from '../utils/get-panel-tabs';
 
-
 type TabPanelMap = Record<RouteTab, ReactNode>;
 
 const getListingDetails = (section: RouteSection, post: Post) => {
@@ -123,30 +122,27 @@ export const RightPanel = () => {
       {/* NOTE: This component needs to be always on top */}
       <div className="text-ivory" id={ID_TOP_RIGHT_PANEL} />
       <div>
-        <div className='flex items-center space-x-3'>
-          <Image
-            src={org.avatar}
-            width="32"
-            height="32"
-            alt={org.name}
-          />
-          <h3 className='font-semibold'>{org.name}</h3>
+        <div className="flex items-center space-x-3">
+          <Image src={org.avatar} width="32" height="32" alt={org.name} />
+          <h3 className="font-semibold">{org.name}</h3>
         </div>
-        <div className='flex space-x-4 py-4 text-sm'>
+        <div className="flex space-x-4 py-4 text-sm">
           {orgTags.map((tag) => (
             <div key={tag.text} className="flex items-center">
-              <div className='mr-2'>{tag.icon}</div>
+              <div className="relative mr-2 h-3 w-3">{tag.icon}</div>
               <p>{tag.text}</p>
             </div>
           ))}
         </div>
-        <p className='text-sm text-sidebarTitle'>{org.summary}</p>
+        <p className="text-sm text-sidebarTitle">{org.summary}</p>
         <div>
           {/* NOTE: button?,link? */}
-          <p className='inline-block rounded-sm bg-sidebarTitle text-md'>{JSON.stringify(org.website)}</p>
+          <p className="inline-block rounded-sm bg-sidebarTitle text-md">
+            {JSON.stringify(org.website)}
+          </p>
         </div>
       </div>
-      <div className='mt-8 flex flex-wrap space-x-2 border-t border-white/20 pt-8'>
+      <div className="mt-8 flex flex-wrap space-x-2 border-t border-white/20 pt-8">
         {tabs.map((tab) => (
           <Button
             key={tab.label}
@@ -161,10 +157,8 @@ export const RightPanel = () => {
         ))}
       </div>
 
-      <div className='mt-8 rounded-3xl bg-gradient-to-l from-primary to-secondary p-1'>
-        <div className='rounded-3xl bg-grey'>
-          {cardMap[tab]}
-        </div>
+      <div className="mt-8 rounded-3xl bg-gradient-to-l from-primary to-secondary p-1">
+        <div className="rounded-3xl bg-grey">{cardMap[tab]}</div>
       </div>
     </div>
   );

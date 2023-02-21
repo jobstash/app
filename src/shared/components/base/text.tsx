@@ -6,9 +6,9 @@ const cvaText = cva([], {
   variants: {
     fw: {
       regular: 'font-regular',
-      medium: 'font-medium',
-      semibold: 'font-semibold',
-      bold: 'font-bold',
+      medium: 'font-medium antialiased',
+      semibold: 'font-semibold antialiased',
+      bold: 'font-bold antialiased',
     },
     size: {
       xs: 'text-xs',
@@ -23,6 +23,7 @@ const cvaText = cva([], {
       '6xl': 'text-6xl',
     },
     color: {
+      white: 'text-white',
       normal: 'text-white/90',
       dimmed: 'text-white/70',
     },

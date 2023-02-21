@@ -5,10 +5,7 @@ import { type VariantProps, cva } from 'class-variance-authority';
 import { type TextProps, Text } from './text';
 
 const cvaButton = cva(
-  [
-    'rounded-md flex items-center transition duration-150 ease-in-out space-x-1',
-    'hover:opacity-95 focus:opacity-85 active:opacity-75 active:scale-[.95]',
-  ],
+  ['rounded-md flex items-center transition duration-150 ease-in-out', ''],
   {
     variants: {
       kind: {
