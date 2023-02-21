@@ -9,7 +9,6 @@ import { Button } from '~/shared/components';
 
 import { createJobTags } from '../utils';
 
-
 const cvaJobCard = cva(
   [
     'w-full space-y-4 overflow-hidden rounded-3xl bg-white/5 p-5 text-ivory cursor-pointer',
@@ -54,59 +53,66 @@ export const JobCard = ({ post, isActive, onClick }: Props) => {
 
   return (
     <div className={cvaJobCard({ isActive })} onClick={onClick}>
-      <div className='flex items-center justify-between'>
-        <h2 className='text-xl font-medium'>{title}</h2>
-        <div className='flex items-center space-x-2'>
-          <span className='text-sm'>{created}</span>
-          <Button>bookmark</Button>
+      <div className="flex items-center justify-between">
+        <h2 className="text-xl font-medium">{title}</h2>
+        <div className="flex items-center space-x-2">
+          <span className="text-sm">{created}</span>
+          <Button size="sm">
+            <Image
+              src="/icons/bookmark.svg"
+              width="16"
+              height="16"
+              alt="bookmark"
+            />
+          </Button>
         </div>
       </div>
 
-      <div className='flex space-x-8 border-b border-white/5 pb-4 text-sm'>
+      <div className="flex space-x-8 border-b border-white/5 pb-4 text-sm">
         {tags.map((tag) => (
-          <div key={tag.text} className='flex items-center'>
-            <div className='mr-2'>{tag.icon}</div>
+          <div key={tag.text} className="flex items-center">
+            <div className="mr-2">{tag.icon}</div>
             <p>{tag.text}</p>
             <p>{tag.link}</p>
           </div>
         ))}
       </div>
 
-      <div className='flex space-x-4 border-b border-white/5 pb-4'>
+      <div className="flex space-x-4 border-b border-white/5 pb-4">
         {skills.map((tech) => (
-          <div key={tech.name} className='relative flex self-start rounded-sm border border-white	p-1'>
-            <span className='text-sm font-semibold'>{tech.name}</span>
-            <div className='absolute right-0 top-0 -mt-2 -mr-2 h-4 w-4 rounded-full bg-white'>{tech.isChecked}</div>
+          <div
+            key={tech.name}
+            className="relative flex self-start rounded-sm border border-white	p-1"
+          >
+            <span className="text-sm font-semibold">{tech.name}</span>
+            <div className="absolute right-0 top-0 -mt-2 -mr-2 h-4 w-4 rounded-full bg-white">
+              {tech.isChecked}
+            </div>
           </div>
         ))}
         <Button>Sign Up to See Matches</Button>
       </div>
 
-      <div className='flex items-center space-x-4 border-b border-white/5 pb-4'>
-        <Image
-          src={org.avatar}
-          width="32"
-          height="32"
-          alt={org.name}
-        />
-        <h3 className='font-semibold'>{org.name}</h3>
-        <div className='text-sm'>Funding: {org.funding.date}</div>
+      <div className="flex items-center space-x-4 border-b border-white/5 pb-4">
+        <Image src={org.avatar} width="32" height="32" alt={org.name} />
+        <h3 className="font-semibold">{org.name}</h3>
+        <div className="text-sm">Funding: {org.funding.date}</div>
       </div>
 
       {project && (
-        <div className=''>
-          <div className='flex items-center space-x-4'>
+        <div className="">
+          <div className="flex items-center space-x-4">
             <Image
               src={project.avatar}
               width="32"
               height="32"
               alt={project.name}
             />
-            <h3 className='font-semibold'>{project.name}</h3>
+            <h3 className="font-semibold">{project.name}</h3>
           </div>
-          <div className='flex pt-4 text-sm'>
+          <div className="flex pt-4 text-sm">
             {project.chains.map((chain) => (
-              <div key={chain.name} className='flex'>
+              <div key={chain.name} className="flex">
                 <Image
                   src={chain.avatar}
                   width="32"
@@ -117,11 +123,11 @@ export const JobCard = ({ post, isActive, onClick }: Props) => {
               </div>
             ))}
           </div>
-          <div className='flex flex-wrap pt-4 text-sm'>
+          <div className="flex flex-wrap pt-4 text-sm">
             {projectTags.length > 0 &&
               projectTags.map((tag) => (
-                <div key={tag.text} className='mr-4 mb-2 flex items-center'>
-                  <div className='pr-2'>{tag.icon}</div>
+                <div key={tag.text} className="mr-4 mb-2 flex items-center">
+                  <div className="pr-2">{tag.icon}</div>
                   <p>{tag.text}</p>
                   <p>{tag.link}</p>
                 </div>
