@@ -12,8 +12,8 @@ import { createJobTags } from '../utils';
 
 const cvaJobCard = cva(
   [
-    'w-full overflow-hidden rounded-3xl bg-white/5 p-6 text-ivory cursor-pointer relative',
-    'hover:bg-white/20 after:content-[""] after:hidden after:h-full after:border after:border-white after:rounded-3xl after:w-full after:absolute after:inset-0 hover:after:block after:z-20',
+    'w-full overflow-hidden rounded-3xl bg-white/5 p-6 text-ivory cursor-pointer relative transition-all',
+    'hover:bg-white/20 after:transition-all	 after:content-[""] after:hidden after:h-full after:border after:border-white after:rounded-3xl after:w-full after:absolute after:inset-0 hover:after:block after:z-20',
   ],
   {
     variants: {
