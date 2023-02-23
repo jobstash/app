@@ -24,7 +24,7 @@ const tagIcons = [
   'token',
   'tvl',
   'twitter',
-  'typeof-work',
+  'type-of-work',
   'users-three',
   'users',
   'utc',
@@ -36,10 +36,5 @@ interface Props {
 }
 
 export const TagIcon = ({ filename }: Props) => (
-  <Image
-    src={`/icons/tags/${filename}.png`}
-    width="13"
-    height="13"
-    alt={filename}
-  />
+  <Image fill src={`/icons/tags/${filename}.svg`} alt={filename} />
 );

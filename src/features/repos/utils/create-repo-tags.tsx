@@ -6,7 +6,7 @@ export const createRepoTags = (repo: Repository): TagElement[] => {
 
   return [
     { text: `Project: ${project}`, icon: <TagIcon filename="project" /> },
-    { text: `Type: ${type}`, icon: <TagIcon filename="typeof-work" /> },
+    { text: `Type: ${type}`, icon: <TagIcon filename="project" /> },
     {
       text: `Committers: ${committers}`,
       icon: <TagIcon filename="git-branch" />,
