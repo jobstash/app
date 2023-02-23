@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import type { MouseEventHandler } from 'react';
+import { Children, MouseEventHandler } from 'react';
 
 import { cva } from 'class-variance-authority';
 
@@ -7,6 +7,8 @@ import type { JobPost } from '~/core/interfaces';
 import { createProjectTags } from '~/features/projects/utils';
 import { Button } from '~/shared/components';
 import { CardHeading } from '~/shared/components';
+import { SkillHolder } from '~/shared/components';
+import { IconHolder } from '~/shared/components';
 
 import { createJobTags } from '../utils';
 
@@ -72,35 +74,18 @@ export const JobCard = ({ post, isActive, onClick }: Props) => {
 
       <div className="flex space-x-8 border-b border-white/5 pt-3 pb-4 text-sm">
         {tags.map((tag) => (
-          <div key={tag.text} className="flex items-center">
-            <div className="relative mr-2 h-3 w-3 object-contain">
-              {tag.icon}
-            </div>
-            <a href={tag.link}>
-              <span>{tag.text}</span>
-            </a>
-          </div>
+          <IconHolder key={tag.text} link={tag.link} icon={tag.icon}>
+            {tag.text}
+          </IconHolder>
         ))}
       </div>
 
       <div className="flex justify-between space-x-4 border-b border-white/5 py-4">
         <div className="-mb-3 flex grow flex-wrap">
           {skills.map((tech) => (
-            <div
-              key={tech.name}
-              className="relative mb-3 mr-3 flex self-start rounded-sm border border-white p-1"
-            >
-              <span className="text-sm font-semibold">{tech.name}</span>
-              {tech.isChecked}
-              <div className="absolute right-0 top-0 -mt-2 -mr-2 flex h-4 w-4 items-center justify-center rounded-full bg-white">
-                <Image
-                  src="/icons/check.svg"
-                  width="9"
-                  height="6"
-                  alt="bookmark"
-                />
-              </div>
-            </div>
+            <SkillHolder key={tech.name} isChecked className="mr-4">
+              {tech.name}
+            </SkillHolder>
           ))}
         </div>
         <Button>Sign Up to See Matches</Button>
@@ -157,11 +142,14 @@ export const JobCard = ({ post, isActive, onClick }: Props) => {
           <div className="-mb-2 flex flex-wrap pt-4 text-sm">
             {projectTags.length > 0 &&
               projectTags.map((tag) => (
-                <div key={tag.text} className="mr-6 mb-2 flex items-center">
-                  <div className="relative mr-2 h-3 w-3">{tag.icon}</div>
-                  <p>{tag.text}</p>
-                  <p>{tag.link}</p>
-                </div>
+                <IconHolder
+                  key={tag.text}
+                  className="mr-6 mb-2"
+                  link={tag.link}
+                  icon={tag.icon}
+                >
+                  {tag.text}
+                </IconHolder>
               ))}
           </div>
         </div>

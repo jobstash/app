@@ -3,30 +3,44 @@
 @tailwind utilities;
 
 @layer base {
-	:root {
-		--color-white: 255 255 255;
-		--color-black: 0 0 0;
-		--color-darker-grey: 30 30 30;
-		--color-dark-grey: 41 41 41;
-		--color-medium-grey: 52 52 52;
-		--color-ivory: #F9FAFB; /* TEMPORARY */
-		--color-primary: 135 67 255;  /* #8743FF */
-		--color-secondary: 65 54 241;/* #4136F1 */
-		--color-tertiary: 135 67 255;/* #4136F1 */
-		--color-quaternary: 214 136 0;/* #4136F1 */
-		--color-tech: #A6A0FF; /* TEMPORARY */
-		--color-card: #222224;
-		--color-sidebarTitle: #9CA3AF; /* TEMPORARY */
-		--color-text: #F9FAFB;
-		--color-grey: #2c2c2f;
-	}
+  :root {
+    --color-white: 255 255 255;
+    --color-black: 0 0 0;
+    --color-darker-grey: 30 30 30;
+    --color-dark-grey: 41 41 41;
+    --color-medium-grey: 52 52 52;
+    --color-ivory: #f9fafb; /* TEMPORARY */
+    --color-primary: 135 67 255; /* #8743FF */
+    --color-secondary: 65 54 241; /* #4136F1 */
+    --color-tertiary: 135 67 255; /* #4136F1 */
+    --color-quaternary: 214 136 0; /* #4136F1 */
+    --color-tech: #a6a0ff; /* TEMPORARY */
+    --color-card: #222224;
+    --color-sidebarTitle: #9ca3af; /* TEMPORARY */
+    --color-text: #f9fafb;
+    --color-grey: #2c2c2f;
+    /* Color SkillHolder */
+    --color-react: 247 253 54;
+    --color-jest: 202 228 2;
+    --color-html: 226 191 43;
+    --color-cplus: 255 226 173;
+    --color-webgl: 255 230 226;
+    --color-css: 222 248 238;
+    --color-typescript: 119 203 190;
+    --color-docker: 247 154 126;
+    --color-solidity: 178 142 12;
+    --color-python: 36 198 247;
+    --color-php: 236 198 247;
+    --color-chashtag: 243 165 242;
+    --color-javascript: 236 136 225;
+  }
 }
 
 .hide-scrollbar {
-	-ms-overflow-style: none;
-	scrollbar-width: none;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 }
 
 .hide-scrollbar::-webkit-scrollbar {
-	display: none;
+  display: none;
 }
