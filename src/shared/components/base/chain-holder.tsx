@@ -1,14 +1,13 @@
 import Image from 'next/image';
 import { type ReactNode } from 'react';
 
-export interface ChainHolderProps {
-  project?: ReactNode;
-}
+export interface ChainHolderProps {}
 
 export const ChainHolder = ({ project }: ChainHolderProps) => (
   <div className="flex text-sm">
+    {/* needs to be reworked /finished */}
     {project?.chains.map((chain) => (
-      <div key={chain.name} className="flex">
+      <div key={chain.name} className="-ml-2 flex">
         <Image
           src={chain.avatar}
           width="32"
