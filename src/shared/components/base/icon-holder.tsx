@@ -12,7 +12,7 @@ type IconHolderVariantProps = VariantProps<typeof cvaIconHolder>;
 
 export interface IconHolderProps extends IconHolderVariantProps {
   children: ReactNode;
-  icon: ReactNode;
+  icon?: ReactNode;
   className?: string;
   link?: string;
 }

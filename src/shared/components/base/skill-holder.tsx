@@ -44,6 +44,7 @@ export const SkillHolder = ({
   ...props
 }: SkillHolderProps) => (
   <div className={`${cvaSkillHolder({ type })} ${className}`} {...props}>
+    {/* how to pass the right type?? based on the content of the skillholder I guess */}
     <span className="font-sans text-sm font-semibold">{children}</span>
     {isChecked}
     <div className="absolute right-0 top-0 -mt-2 -mr-2 flex h-4 w-4 items-center justify-center rounded-full bg-white">

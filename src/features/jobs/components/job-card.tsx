@@ -5,7 +5,7 @@ import { cva } from 'class-variance-authority';
 
 import type { JobPost } from '~/core/interfaces';
 import { createProjectTags } from '~/features/projects/utils';
-import { Button } from '~/shared/components';
+import { Button, ChainHeading, ChainHolder } from '~/shared/components';
 import { CardHeading } from '~/shared/components';
 import { SkillHolder } from '~/shared/components';
 import { IconHolder } from '~/shared/components';
@@ -92,14 +92,9 @@ export const JobCard = ({ post, isActive, onClick }: Props) => {
       </div>
 
       <div className="flex items-center py-4 last:pb-0">
-        <Image
-          src={org.avatar}
-          width="32"
-          height="32"
-          alt={org.name}
-          className="mr-3"
-        />
-        <h3 className="mr-8 font-sans font-semibold">{org.name}</h3>
+        <ChainHeading avatar={org.avatar} alt={org.name}>
+          {org.name}
+        </ChainHeading>
         <div className="flex items-center text-sm">
           <Image
             src="/icons/funding.svg"
@@ -115,17 +110,11 @@ export const JobCard = ({ post, isActive, onClick }: Props) => {
       {project && (
         <div className="border-t border-white/5 pt-4">
           <div className="flex">
-            <div className="mr-8 flex items-center">
-              <Image
-                src={project.avatar}
-                width="32"
-                height="32"
-                alt={project.name}
-                className="mr-3"
-              />
-              <h3 className="font-sans font-semibold">{project.name}</h3>
-            </div>
-            <div className="flex text-sm">
+            <ChainHeading avatar={project.avatar} alt={project.name}>
+              {project.name}
+            </ChainHeading>
+            <ChainHolder project={project} />
+            {/* <div className="flex text-sm">
               {project.chains.map((chain) => (
                 <div key={chain.name} className="flex">
                   <Image
@@ -137,7 +126,7 @@ export const JobCard = ({ post, isActive, onClick }: Props) => {
                   <p className="sr-only">{chain.name}</p>
                 </div>
               ))}
-            </div>
+            </div> */}
           </div>
           <div className="-mb-2 flex flex-wrap pt-4 text-sm">
             {projectTags.length > 0 &&
