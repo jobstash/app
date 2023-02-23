@@ -113,7 +113,8 @@ export const JobCard = ({ post, isActive, onClick }: Props) => {
             <ChainHeading avatar={project.avatar} alt={project.name}>
               {project.name}
             </ChainHeading>
-            <ChainHolder project={project} />
+            <ChainHolder />
+            {/* to be done */}
             {/* <div className="flex text-sm">
               {project.chains.map((chain) => (
                 <div key={chain.name} className="flex">
