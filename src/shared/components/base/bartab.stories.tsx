@@ -25,7 +25,7 @@ type Story = StoryObj<typeof Bartab>;
 export const Default: Story = {
   args: {
     intent: 'primary',
-  }
+  },
 };
 
 export const HasLeft: Story = {
@@ -53,8 +53,9 @@ export const IsActive: Story = {
 
 export const Wallet: Story = {
   args: {
-    text: '@0xDevoor',
+    text: 'Connect Wallet',
     intent: 'wallet',
+    isConnected: false,
   },
 };
 
@@ -63,5 +64,16 @@ export const WalletIsActive: Story = {
     text: '@0xDevoor',
     intent: 'wallet',
     isActive: true,
+    isConnected: true,
+    left: <Avatar src="/user/@OxDevoor.png" size="xs" alt="Test" />,
+  },
+};
+
+export const WalletIsConnected: Story = {
+  args: {
+    text: '@0xDevoor',
+    intent: 'wallet',
+    isConnected: true,
+    left: <Avatar src="/user/@OxDevoor.png" size="xs" alt="Test" />,
   },
 };

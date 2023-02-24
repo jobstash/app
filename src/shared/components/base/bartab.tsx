@@ -13,18 +13,40 @@ const cvaBartab = cva(
   {
     variants: {
       intent: {
-        primary: ['px-2 bg-darkerGrey border border-darkerGrey focus:border-white hover:bg-greyMedium'],
-        secondary: ['bg-white/5 px-2 bg-darkGrey border border-darkGrey focus:border-white hover:bg-greyMedium'],
-        wallet:['bg-gradient-to-l from-quaternary to-tertiary focus:from-white focus:to-white [&>span]:bg-darkGrey [&>span]:rounded-lg [&>span]:mx-[2px] [&>span]:h-9 [&>span]:px-2 hover:[&>span]:bg-greyMedium']
+        primary: [
+          'px-2 bg-darkerGrey border border-darkerGrey focus:border-white hover:bg-greyMedium',
+        ],
+        secondary: [
+          'bg-white/5 px-2 bg-darkGrey border border-darkGrey focus:border-white hover:bg-greyMedium',
+        ],
+        wallet: [
+          'bg-gradient-to-l from-quaternary to-tertiary focus:from-white focus:to-white [&>span]:bg-darkGrey [&>span]:rounded-lg [&>span]:mx-[2px] [&>span]:h-9 [&>span]:px-2 hover:[&>span]:bg-greyMedium',
+        ],
       },
       isActive: {
         true: '',
       },
+      isConnected: {
+        false: '[&>span>img]:hidden [&>span]:justify-center',
+      },
     },
     compoundVariants: [
-      { intent: "primary", isActive: true, class: "bg-gradient-to-l from-primary to-secondary" },
-      { intent: "secondary", isActive: true, class: "bg-gradient-to-l from-primary to-secondary" },
-      { intent: "wallet", isActive: true, class: "[&>span]:bg-gradient-to-l [&>span]:from-quaternary [&>span]:to-tertiary hover:[&>span]:bg-transparent" },
+      {
+        intent: 'primary',
+        isActive: true,
+        class: 'bg-gradient-to-l from-primary to-secondary',
+      },
+      {
+        intent: 'secondary',
+        isActive: true,
+        class: 'bg-gradient-to-l from-primary to-secondary',
+      },
+      {
+        intent: 'wallet',
+        isActive: true,
+        class:
+          '[&>span]:bg-gradient-to-l [&>span]:from-quaternary [&>span]:to-tertiary hover:[&>span]:bg-transparent',
+      },
     ],
   },
 );
@@ -35,8 +57,9 @@ interface BartabProps
   extends ButtonHTMLAttributes<HTMLButtonElement>,
     BartabVariantProps {
   text: string;
-  left?: ReactNode;
+  isConnected?: boolean;
   isActive?: boolean;
+  left?: ReactNode;
   onClick: MouseEventHandler;
 }
 
@@ -44,17 +67,18 @@ export const Bartab = ({
   text,
   left,
   isActive,
+  isConnected,
   intent,
   onClick,
   ...props
 }: BartabProps) => (
   <button
     type="button"
-    className={cvaBartab({ intent, isActive })}
+    className={cvaBartab({ intent, isActive, isConnected })}
     {...props}
     onClick={onClick}
   >
-    <span className='flex w-full justify-between'>
+    <span className="flex w-full justify-between">
       <span className="flex items-center space-x-3">
         {left}
         <Text size="sm" fw="semibold">
