@@ -73,12 +73,7 @@ const BookmarkedTab = () => (
 
 const UserTab = () => (
   <div className="absolute inset-x-0 bottom-0 space-y-4 p-4">
-    <Text
-      htmlTag="h2"
-      size="sm"
-      fw="regular"
-      className="text-sidebarTitle"
-    >
+    <Text htmlTag="h2" size="sm" fw="regular" className="text-sidebarTitle">
       Your Profile
     </Text>
     <Bartab
@@ -88,12 +83,12 @@ const UserTab = () => (
       onClick={() => alert('TODO')}
     />
 
-    <hr />
+    <hr className="border-t border-white/20" />
 
     <Bartab
-      intent="secondary"
-      left={<Avatar src="/user/@OxDevoor.png" alt="LoggedIn User" size="xs" />}
-      text="@OxDevoor"
+      intent="wallet"
+      isConnected={false}
+      text="Connect Wallet"
       onClick={() => alert('TODO')}
     />
   </div>
