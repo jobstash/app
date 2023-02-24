@@ -4,7 +4,14 @@ import type { MouseEventHandler } from 'react';
 import { cva } from 'class-variance-authority';
 
 import type { ProjectPost } from '~/core/interfaces';
-import { Button } from '~/shared/components';
+import {
+  Button,
+  CardHeading,
+  ChainHeading,
+  ChainHolder,
+  IconHolder,
+  SkillHolder,
+} from '~/shared/components';
 
 import { createProjectTags } from '../utils';
 
@@ -37,57 +44,76 @@ export const ProjectCard = ({ post, isActive, onClick }: Props) => {
   return (
     <div className={cvaProjectCard({ isActive })} onClick={onClick}>
       <div className="flex items-center justify-between">
-        <h2 className="text-xl font-medium">{name}</h2>
+        <CardHeading>{name}</CardHeading>
         <div className="flex items-center space-x-2">
           <span className="text-sm">{created}</span>
-          <Button>bookmark</Button>
+          <Button size="sm">
+            <Image
+              src="/icons/bookmark.svg"
+              width="13"
+              height="18"
+              alt="bookmark"
+            />
+          </Button>
         </div>
       </div>
-      <div className="flex flex-wrap border-b border-white/5 pb-4 text-sm">
+      <div className="flex flex-wrap border-b border-white/5 pb-2 text-sm">
         {[...top, ...mid].map((tag) => (
-          <div key={tag.text} className="mb-2 mr-4 flex items-center">
-            <div className="relative mr-2 h-3 w-3">{tag.icon}</div>
-            <p>{tag.text}</p>
-            <p>{tag.link}</p>
-          </div>
+          <IconHolder
+            key={tag.text}
+            className="mr-6 mb-2"
+            link={tag.link}
+            icon={tag.icon}
+          >
+            {tag.text}
+          </IconHolder>
         ))}
       </div>
-      <div className="flex flex-wrap border-b border-white/5 pb-4 text-sm">
+      <div className="flex flex-wrap border-b border-white/5 pb-2 text-sm">
         {[...bottom].map((tag) => (
-          <div key={tag.text} className="mb-2 mr-4 flex items-center">
-            <div className="relative mr-2 h-3 w-3">{tag.icon}</div>
-            <p>{tag.text}</p>
-            <p>{tag.link}</p>
-          </div>
+          <IconHolder
+            key={tag.text}
+            className="mr-6 mb-2"
+            link={tag.link}
+            icon={tag.icon}
+          >
+            {tag.text}
+          </IconHolder>
         ))}
       </div>
 
       <div className="flex space-x-4 border-b border-white/5 pb-4">
-        {techs.map((tech) => (
-          <div
-            key={tech.name}
-            className="relative flex self-start rounded-sm border border-white	p-1"
-          >
-            <span className="text-sm font-semibold">{tech.name}</span>
-            <div className="absolute right-0 top-0 -mt-2 -mr-2 h-4 w-4 rounded-full bg-white">
-              {tech.isChecked}
-            </div>
-          </div>
-        ))}
+        <div className="-mb-3 flex grow flex-wrap">
+          {techs.map((tech) => (
+            <SkillHolder key={tech.name} isChecked className="mr-4">
+              {tech.name}
+            </SkillHolder>
+          ))}
+        </div>
         <Button>Sign Up to See Matches</Button>
       </div>
 
-      <div className="flex space-x-4 border-b border-white/5 pb-4">
-        <div className="flex items-center space-x-4">
-          <Image src={avatar} width="40" height="40" alt={name} />
-          <p>{name}</p>
+      <div className="flex flex-wrap space-x-4">
+        <ChainHeading avatar={avatar} alt={name} iconSize="32">
+          {name}
+        </ChainHeading>
+        {/* Here we should use the ChainHolder compoenent */}
+        {/* Need to understand how to structure ChainHolder Component and how to pass the right prop to it  */}
+        <div className="flex text-sm">
+          {chains.map((chain) => (
+            <div key={chain.name} className="-ml-2 flex">
+              <Image
+                src={chain.avatar}
+                width="32"
+                height="32"
+                alt={chain.name}
+                className="h-6 w-6 overflow-hidden rounded-full object-cover object-center"
+              />
+              <p className="sr-only">{chain.name}</p>
+            </div>
+          ))}
         </div>
-        {chains.map((chain) => (
-          <div key={chain.name}>
-            <Image src={chain.avatar} width="40" height="40" alt={chain.name} />
-            {/* <p>{chain.name}</p> */}
-          </div>
-        ))}
+        {/* Need more infos on this and about the styling  */}
         <p>{JSON.stringify(token)}</p>
       </div>
     </div>

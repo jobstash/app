@@ -6,9 +6,7 @@ import { cva } from 'class-variance-authority';
 import type { OrgPost } from '~/core/interfaces';
 import {
   Button,
-  CardHeading,
   ChainHeading,
-  ChainHolder,
   IconHolder,
   SkillHolder,
 } from '~/shared/components';
@@ -44,7 +42,6 @@ export const OrgCard = ({ post, isActive, onClick }: Props) => {
   return (
     <div className={cvaOrgCard({ isActive })} onClick={onClick}>
       <div className="flex items-center justify-between">
-        {/* <CardHeading>{name}</CardHeading> */}
         <ChainHeading
           avatar={avatar}
           alt={name}

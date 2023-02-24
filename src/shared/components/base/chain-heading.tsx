@@ -23,7 +23,7 @@ export const ChainHeading = ({
       width={iconSize}
       height={iconSize}
       alt={alt}
-      className="mr-3"
+      className="mr-3 shrink-0"
     />
     <div className="leading-tight">
       <Text
@@ -31,7 +31,7 @@ export const ChainHeading = ({
         size="lg"
         htmlTag="h3"
         color="white"
-        className="mr-8 font-sans"
+        className="mr-8 whitespace-nowrap font-sans"
       >
         {children}
       </Text>
