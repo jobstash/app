@@ -18,12 +18,13 @@ import { createJobTags } from '../utils';
 
 const cvaJobCard = cva(
   [
-    'w-full space-y-4 overflow-hidden rounded-3xl bg-white/5 p-5 text-ivory cursor-pointer',
+    'w-full overflow-hidden rounded-3xl bg-white/5 p-6 text-ivory cursor-pointer relative transition-all',
+    'hover:bg-white/20 after:transition-all	 after:content-[""] after:hidden after:h-full after:border after:border-white after:rounded-3xl after:w-full after:absolute after:inset-0 hover:after:block after:z-20',
   ],
   {
     variants: {
       isActive: {
-        true: 'bg-gradient-to-l from-primary to-secondary',
+        true: 'bg-gradient-to-l from-primary to-secondary hover:after:hidden cursor-default',
       },
     },
   },
@@ -75,7 +76,7 @@ export const JobCard = ({ post, isActive, onClick }: Props) => {
         </div>
       </div>
 
-      <div className="flex space-x-8 border-b border-white/5 pb-4 text-sm">
+      <div className="flex space-x-8 border-b border-white/5 py-4 text-sm">
         {tags.map((tag) => (
           <IconHolder
             key={tag.text}
@@ -88,7 +89,7 @@ export const JobCard = ({ post, isActive, onClick }: Props) => {
         ))}
       </div>
 
-      <div className="flex justify-between space-x-4 border-b border-white/5 pb-4">
+      <div className="flex justify-between space-x-4 border-b border-white/5 py-4">
         <div className="-mb-3 flex grow flex-wrap">
           {skills.map((tech) => (
             <SkillHolder key={tech.name} isChecked className="mr-4">
@@ -99,7 +100,7 @@ export const JobCard = ({ post, isActive, onClick }: Props) => {
         <Button>Sign Up to See Matches</Button>
       </div>
 
-      <div className="flex items-center">
+      <div className="flex items-center py-4">
         <ChainHeading avatar={org.avatar} alt={org.name}>
           {org.name}
         </ChainHeading>
