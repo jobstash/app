@@ -6,19 +6,36 @@ export interface ChainHeadingProps {
   children: string;
   avatar: string;
   alt: string;
+  location?: string;
+  iconSize?: '32' | '40';
 }
 
-export const ChainHeading = ({ children, avatar, alt }: ChainHeadingProps) => (
+export const ChainHeading = ({
+  children,
+  avatar,
+  alt,
+  location,
+  iconSize = '32',
+}: ChainHeadingProps) => (
   <div className="flex items-center">
-    <Image src={avatar} width="32" height="32" alt={alt} className="mr-3" />
-    <Text
-      fw="semibold"
-      size="lg"
-      htmlTag="h3"
-      color="white"
-      className="mr-8 font-sans"
-    >
-      {children}
-    </Text>
+    <Image
+      src={avatar}
+      width={iconSize}
+      height={iconSize}
+      alt={alt}
+      className="mr-3 shrink-0"
+    />
+    <div className="leading-tight">
+      <Text
+        fw="semibold"
+        size="lg"
+        htmlTag="h3"
+        color="white"
+        className="mr-8 whitespace-nowrap font-sans"
+      >
+        {children}
+      </Text>
+      <span className="text-sm">{location}</span>
+    </div>
   </div>
 );

@@ -7,7 +7,7 @@ export interface CardHeadingProps {
 }
 
 export const CardHeading = ({ children }: CardHeadingProps) => (
-  <Text fw="bold" size="xl" htmlTag="h2" color="white" className="">
+  <Text fw="bold" size="xl" htmlTag="h2" color="white" className="font-sans">
     {children}
   </Text>
 );

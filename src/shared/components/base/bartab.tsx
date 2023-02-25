@@ -81,7 +81,7 @@ export const Bartab = ({
     <span className="flex w-full justify-between">
       <span className="flex items-center space-x-3">
         {left}
-        <Text size="sm" fw="semibold">
+        <Text size="md" fw="semibold">
           {text}
         </Text>
       </span>
