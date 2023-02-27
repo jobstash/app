@@ -1,5 +1,8 @@
-import type { JobPost } from '~/shared/core/interfaces';
 import { slugify } from '~/shared/utils';
 
-export const createJobKey = (post: JobPost) =>
-  slugify(`${post.org.name} ${post.details.title} ${post.details.id}`);
+import { JobPost } from '../core/interfaces';
+
+export const createJobKey = ({
+  organization: { name: orgName },
+  jobpost: { id, jobTitle },
+}: JobPost) => slugify(`${orgName} ${jobTitle} ${id}`);

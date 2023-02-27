@@ -1,9 +1,7 @@
 import { faker } from '@faker-js/faker';
 
 import { JobPost } from '~/features/jobs/core/interfaces';
-import { fakeOrg, fakeProject } from '~/shared/testutils/fakers';
-
-import { fakeJob } from '../../../shared/testutils/fakers/fake-job';
+import { fakeJob, fakeOrg, fakeProject } from '~/shared/testutils/fakers';
 
 export const fakeJobPost = (): JobPost => ({
   organization: fakeOrg(),
