@@ -1,7 +1,8 @@
 import * as SliderPrimitive from '@radix-ui/react-slider';
 import { clsx } from 'clsx';
 
-import type { RangeSliderProps, RangeValue } from '../core/types';
+import type { RangeSliderProps } from '../core/interfaces';
+import type { RangeValue } from '../core/types';
 
 /**
  * This props are required by radix-ui react-slider
