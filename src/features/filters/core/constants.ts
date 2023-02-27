@@ -23,5 +23,3 @@ export const KEY_MAINNET = 'mainNet';
 export const KEY_TOKEN = 'token';
 export const KEY_ORDER = 'order';
 export const KEY_ORDER_BY = 'orderBy';
-
-export const API_URL_JOBS_FILTER_CONFIG = '/jobs/filter-config';

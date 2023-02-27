@@ -4,7 +4,6 @@ import { useEffect } from 'react';
 import { useSetAtom } from 'jotai';
 
 import { Filters } from '~/features/filters/components';
-import { API_URL_JOBS_FILTER_CONFIG } from '~/features/filters/core/constants';
 import { activeJobPostAtom } from '~/features/jobs/atoms';
 import { JobCardList, JobRightPanel } from '~/features/jobs/components';
 import { JobPost } from '~/features/jobs/core/interfaces';
@@ -34,7 +33,7 @@ const JobsPage = ({ data }: Props) => {
       sidebar={<SideBar />}
       rightPanel={<JobRightPanel listing={data.listings[0]} />}
     >
-      <Filters url={API_URL_JOBS_FILTER_CONFIG} />
+      <Filters />
       <JobCardList initListings={data.listings} />
     </ToBeReplacedLayout>
   );

@@ -1,6 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 
 import {
+  API_MW_AUTH_TOKEN,
+  API_MW_URL,
   ERR_INTERNAL,
   SENTRY_MW_EMPTY_RESPONSE,
   SENTRY_MW_INVALID_RESPONSE,
@@ -15,8 +17,15 @@ import { FilterConfigSchema } from '../core/schemas';
 
 const SENTRY_LABEL = `getQueryFn`;
 
-const getQueryFn = (url: string) => async (): Promise<FilterConfig> => {
-  const res = await fetch(url);
+const getQueryFn = async (): Promise<FilterConfig> => {
+  const res = await fetch(`${API_MW_URL}/jobs/filters`, {
+    method: 'GET',
+    credentials: 'include',
+    headers: {
+      Authorization: `Bearer ${API_MW_AUTH_TOKEN}`,
+      'Content-Type': 'application/json',
+    },
+  });
 
   // Query to mw should work - 500 otherwise
   if (!res.ok) {
@@ -50,8 +59,8 @@ const getQueryFn = (url: string) => async (): Promise<FilterConfig> => {
   return value;
 };
 
-export const useFilterConfigQuery = (url: string) =>
+export const useFilterConfigQuery = () =>
   useQuery<FilterConfig, GenericResponse>({
-    queryKey: ['filter-config', url],
-    queryFn: getQueryFn(url),
+    queryKey: ['filter-config'],
+    queryFn: getQueryFn,
   });

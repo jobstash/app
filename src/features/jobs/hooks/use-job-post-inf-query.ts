@@ -14,14 +14,17 @@ const SENTRY_LABEL = `fetchJobListings`;
 const fetchJobListings = async ({
   pageParam = 0,
 }): Promise<JobListingsInfQueryPage> => {
-  const res = await fetch(`${API_MW_URL}/jobs/list?page=${pageParam}`, {
-    method: 'GET',
-    credentials: 'include',
-    headers: {
-      Authorization: `Bearer ${API_MW_AUTH_TOKEN}`,
-      'Content-Type': 'application/json',
+  const res = await fetch(
+    `${API_MW_URL}/jobs/list?page=${pageParam}?limit=10`,
+    {
+      method: 'GET',
+      credentials: 'include',
+      headers: {
+        Authorization: `Bearer ${API_MW_AUTH_TOKEN}`,
+        'Content-Type': 'application/json',
+      },
     },
-  });
+  );
 
   // Query to mw should work - 500 otherwise
   if (!res.ok) {
