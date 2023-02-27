@@ -62,7 +62,7 @@ export const JobCard = ({ listing, isActive, onClick }: Props) => {
 
       <div className="flex space-x-8 border-b border-white/5 pt-3 pb-4 text-sm">
         {tags.map(({ text, link, iconText }) => (
-          <IconHolder key={text} link={link} icon={iconText}>
+          <IconHolder key={text} link={link} iconText={iconText}>
             {text}
           </IconHolder>
         ))}
@@ -80,8 +80,8 @@ export const JobCard = ({ listing, isActive, onClick }: Props) => {
       </div>
 
       <div className="flex items-center py-4 last:pb-0">
-        {/** Note: waiting for backend/middleware to provide org avatars (Uniswap labs for now)  */}
-        <ChainHeading avatar="/orgs/Uniswap Labs.png" alt={org.name}>
+        {/** Note: waiting for backend/middleware to provide org avatars  */}
+        <ChainHeading avatar="" alt={org.name}>
           {org.name}
         </ChainHeading>
         <div className="flex items-center text-sm">
@@ -126,7 +126,7 @@ export const JobCard = ({ listing, isActive, onClick }: Props) => {
                     key={text}
                     className="mr-6 mb-2"
                     link={link}
-                    icon={iconText}
+                    iconText={iconText}
                   >
                     {text}
                   </IconHolder>

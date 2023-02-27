@@ -162,7 +162,7 @@ export const JobRightPanel = ({
         </div>
         <div className="flex space-x-4 py-4 text-sm">
           {orgTags.map(({ text, iconText, link }) => (
-            <IconHolder key={text} link={link} icon={iconText}>
+            <IconHolder key={text} link={link} iconText={iconText}>
               {text}
             </IconHolder>
           ))}
@@ -170,7 +170,7 @@ export const JobRightPanel = ({
         <p className="text-sm text-sidebarTitle">{org.summary}</p>
         <div className="flex space-x-4 py-4 text-sm">
           {orgSocials.map(({ text, iconText, link }) => (
-            <IconHolder key={text} link={link} icon={iconText}>
+            <IconHolder key={text} link={link} iconText={iconText}>
               {text}
             </IconHolder>
           ))}
@@ -200,7 +200,7 @@ export const JobRightPanel = ({
 
             <div className="flex space-x-8 border-b border-white/5 pt-3 pb-4 text-sm">
               {tags.map(({ text, link, iconText }) => (
-                <IconHolder key={text} link={link} icon={iconText}>
+                <IconHolder key={text} link={link} iconText={iconText}>
                   {text}
                 </IconHolder>
               ))}
