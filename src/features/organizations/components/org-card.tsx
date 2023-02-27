@@ -3,13 +3,13 @@ import type { MouseEventHandler } from 'react';
 
 import { cva } from 'class-variance-authority';
 
-import type { OrgPost } from '~/core/interfaces';
 import {
   Button,
   ChainHeading,
   IconHolder,
   SkillHolder,
 } from '~/shared/components';
+import type { OrgPost } from '~/shared/core/interfaces';
 
 import { createOrgTags } from '../utils';
 

@@ -1,11 +1,11 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 
-import type { RepoPost } from '~/core/interfaces';
 import {
   ERR_INTERNAL,
   SENTRY_MW_NON_200_RESPONSE,
   SENTRY_MW_NON_JSON_RESPONSE,
 } from '~/shared/core/constants';
+import type { RepoPost } from '~/shared/core/interfaces';
 import { sentryMessage } from '~/shared/utils';
 
 const SENTRY_LABEL = `fetchRepoListings`;

@@ -1,6 +1,6 @@
-import type { RepoPost } from '~/core/interfaces';
 import { createRepoTags } from '~/features/repos/utils';
 import { Button, IconDevs, IconGithub } from '~/shared/components';
+import type { RepoPost } from '~/shared/core/interfaces';
 
 interface Props {
   repo: RepoPost['details'];
@@ -14,7 +14,7 @@ export const RepoRightPanel = ({ repo }: Props) => {
   const tags = createRepoTags(repo);
 
   return (
-    <div className='p-6'>
+    <div className="p-6">
       <div>
         <div>
           <IconGithub />

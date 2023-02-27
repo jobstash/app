@@ -1,4 +1,4 @@
-import type { RouteSection, RouteTab } from '~/core/types';
+import type { RouteSection, RouteTab } from '~/shared/core/types';
 
 export interface RouteSegments {
   section: RouteSection;

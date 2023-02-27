@@ -1,5 +1,5 @@
-import type { Project, TagElement } from '~/core/interfaces';
 import { TagIcon } from '~/shared/components';
+import type { Project, TagElement } from '~/shared/core/interfaces';
 
 export const createProjectTags = (project: Project) => {
   const {

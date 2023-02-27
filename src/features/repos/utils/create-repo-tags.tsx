@@ -1,5 +1,5 @@
-import type { Repository, TagElement } from '~/core/interfaces';
 import { TagIcon } from '~/shared/components';
+import type { Repository, TagElement } from '~/shared/core/interfaces';
 
 export const createRepoTags = (repo: Repository): TagElement[] => {
   const { project, type, committers } = repo;

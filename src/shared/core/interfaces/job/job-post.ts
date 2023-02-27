@@ -1,4 +1,4 @@
-import { KIND_POST_JOB } from '~/core/constants';
+import { KIND_POST_JOB } from '~/shared/core/constants';
 
 import type { Organization } from '../org/organization';
 import type { Post } from '../post/post';

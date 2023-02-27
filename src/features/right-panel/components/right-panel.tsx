@@ -3,6 +3,15 @@ import { ReactNode, useEffect } from 'react';
 
 import { useAtom } from 'jotai';
 
+import { JobRightPanel, JobsRightPanel } from '~/features/jobs/components';
+import { OrgRightPanel } from '~/features/organizations/components';
+import {
+  ProjectRightPanel,
+  ProjectsRightPanel,
+} from '~/features/projects/components';
+import { RepoRightPanel, ReposRightPanel } from '~/features/repos/components';
+import { activePostAtom } from '~/shared/atoms';
+import { Button, TagIcon } from '~/shared/components';
 import {
   EVENT_CARD_CLICK,
   ID_TOP_RIGHT_PANEL,
@@ -20,7 +29,7 @@ import {
   TEXT_ROUTE_TAB_ORGANIZATION,
   TEXT_ROUTE_TAB_PROJECTS,
   TEXT_ROUTE_TAB_REPOSITORIES,
-} from '~/core/constants';
+} from '~/shared/core/constants';
 import type {
   Job,
   JobPost,
@@ -29,17 +38,8 @@ import type {
   Post,
   ProjectPost,
   RepoPost,
-} from '~/core/interfaces';
-import { PostKind, RouteSection, RouteTab } from '~/core/types';
-import { JobRightPanel, JobsRightPanel } from '~/features/jobs/components';
-import { OrgRightPanel } from '~/features/organizations/components';
-import {
-  ProjectRightPanel,
-  ProjectsRightPanel,
-} from '~/features/projects/components';
-import { RepoRightPanel, ReposRightPanel } from '~/features/repos/components';
-import { activePostAtom } from '~/shared/atoms';
-import { Button, TagIcon } from '~/shared/components';
+} from '~/shared/core/interfaces';
+import { PostKind, RouteSection, RouteTab } from '~/shared/core/types';
 import { useRouteSegments } from '~/shared/hooks';
 
 import { getPanelTabs } from '../utils/get-panel-tabs';

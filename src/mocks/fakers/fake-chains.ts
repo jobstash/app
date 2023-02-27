@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
 
-import type { Chain } from '~/core/interfaces';
+import type { Chain } from '~/shared/core/interfaces';
 
 export const poolChains = [
   'Cardano ADA',

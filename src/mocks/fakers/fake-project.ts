@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
 
-import type { Project } from '~/core/interfaces';
+import type { Project } from '~/shared/core/interfaces';
 
 import { fakeAudits } from './fake-audits';
 import { fakeChain, fakeChains } from './fake-chains';

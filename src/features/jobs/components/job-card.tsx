@@ -3,7 +3,6 @@ import { Children, MouseEventHandler } from 'react';
 
 import { cva } from 'class-variance-authority';
 
-import type { JobPost } from '~/core/interfaces';
 import { createProjectTags } from '~/features/projects/utils';
 import {
   Button,
@@ -13,6 +12,7 @@ import {
   IconHolder,
   SkillHolder,
 } from '~/shared/components';
+import type { JobPost } from '~/shared/core/interfaces';
 
 import { createJobTags } from '../utils';
 

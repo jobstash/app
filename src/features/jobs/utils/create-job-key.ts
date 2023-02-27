@@ -1,4 +1,4 @@
-import type { JobPost } from '~/core/interfaces';
+import type { JobPost } from '~/shared/core/interfaces';
 import { slugify } from '~/shared/utils';
 
 export const createJobKey = (post: JobPost) =>

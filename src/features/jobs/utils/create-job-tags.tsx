@@ -1,5 +1,5 @@
-import type { Job, TagElement } from '~/core/interfaces';
 import { TagIcon } from '~/shared/components/icons';
+import type { Job, TagElement } from '~/shared/core/interfaces';
 
 export const createJobTags = (job: Job): TagElement[] => [
   { text: job.role.name, icon: <TagIcon filename="level" /> },

@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 
-import type { RouteSegments } from '~/core/interfaces';
-import type { RouterPush, RouteSection, RouteTab } from '~/core/types';
+import type { RouteSegments } from '~/shared/core/interfaces';
+import type { RouterPush, RouteSection, RouteTab } from '~/shared/core/types';
 
 export const useRouteSegments = () => {
   const router = useRouter();

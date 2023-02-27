@@ -3,7 +3,6 @@ import type { MouseEventHandler } from 'react';
 
 import { cva } from 'class-variance-authority';
 
-import type { ProjectPost } from '~/core/interfaces';
 import {
   Button,
   CardHeading,
@@ -12,6 +11,7 @@ import {
   IconHolder,
   SkillHolder,
 } from '~/shared/components';
+import type { ProjectPost } from '~/shared/core/interfaces';
 
 import { createProjectTags } from '../utils';
 

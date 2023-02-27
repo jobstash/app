@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
 
-import type { Organization } from '~/core/interfaces';
+import type { Organization } from '~/shared/core/interfaces';
 
 import { fakeDesc } from './fake-desc';
 import { fakeTechs } from './fake-tech';

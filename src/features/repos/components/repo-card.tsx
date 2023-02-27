@@ -1,17 +1,15 @@
-import Image from 'next/image';
 import type { MouseEventHandler } from 'react';
 
 import { cva } from 'class-variance-authority';
 
-import type { RepoPost } from '~/core/interfaces';
 import {
   Button,
   CardHeading,
   ChainHeading,
-  ChainHolder,
   IconHolder,
   SkillHolder,
 } from '~/shared/components';
+import type { RepoPost } from '~/shared/core/interfaces';
 
 import { createRepoTags, getRepoTechs } from '../utils';
 

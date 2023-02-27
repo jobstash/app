@@ -3,13 +3,13 @@ import { useEffect } from 'react';
 
 import { useAtom } from 'jotai';
 
-import type { OrgPost } from '~/core/interfaces';
 import { OrgCardList } from '~/features/organizations/components';
 import { RightPanel } from '~/features/right-panel';
 import { mockOrgPosts } from '~/mocks/data/mock-posts';
 import { activePostAtom } from '~/shared/atoms';
 import { SideBar } from '~/shared/components';
 import { ToBeReplacedLayout } from '~/shared/components';
+import type { OrgPost } from '~/shared/core/interfaces';
 
 interface Props {
   data: {

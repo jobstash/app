@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker';
 
-import { KIND_POST_JOB } from '~/core/constants';
-import type { JobPost } from '~/core/interfaces';
+import { KIND_POST_JOB } from '~/shared/core/constants';
+import type { JobPost } from '~/shared/core/interfaces';
 
 import { fakeJob } from './fake-job';
 import { fakeOrg } from './fake-org';

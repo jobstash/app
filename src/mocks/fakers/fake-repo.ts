@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
 
-import type { Repository } from '~/core/interfaces';
+import type { Repository } from '~/shared/core/interfaces';
 
 import { poolChains } from './fake-chains';
 import { fakeDesc } from './fake-desc';

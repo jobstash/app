@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
 
-import type { Tech } from '~/core/interfaces';
+import type { Tech } from '~/shared/core/interfaces';
 
 export const poolTechs = [
   'REACT',

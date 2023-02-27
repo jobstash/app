@@ -3,13 +3,13 @@ import { useInView } from 'react-intersection-observer';
 
 import { useSetAtom } from 'jotai';
 
+import { activePostAtom } from '~/shared/atoms';
 import {
   EVENT_CARD_CLICK,
   TEXT_ROUTE_SECTION_ORGANIZATION,
   TEXT_ROUTE_TAB_DETAILS,
-} from '~/core/constants';
-import type { OrgPost } from '~/core/interfaces';
-import { activePostAtom } from '~/shared/atoms';
+} from '~/shared/core/constants';
+import type { OrgPost } from '~/shared/core/interfaces';
 import { useRouteSegments } from '~/shared/hooks';
 import { createRouteString, slugify } from '~/shared/utils';
 
@@ -61,7 +61,7 @@ export const OrgCardList = ({ initListings }: Props) => {
   }, [fetchNextPage, inView, isFetchingNextPage]);
 
   return (
-    <div className='space-y-8'>
+    <div className="space-y-8">
       {initListings.map((post) => (
         <OrgCard
           key={post.details.id}

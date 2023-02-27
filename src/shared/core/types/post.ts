@@ -3,7 +3,7 @@ import {
   KIND_POST_ORG,
   KIND_POST_PROJECT,
   KIND_POST_REPO,
-} from '~/core/constants';
+} from '~/shared/core/constants';
 
 export type PostKind =
   | typeof KIND_POST_JOB

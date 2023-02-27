@@ -147,19 +147,22 @@ export const MultiSelectSearchFilter = ({
             </Text>
           </Dropdown.Label>
           <div className="my-3 flex w-full gap-x-2">
-            {Array.from(selectedItems ?? []).map((label) => (
-              <Button
-                key={label}
-                size="sm"
-                textProps={{
-                  className: `font-sans ${lato.variable}`,
-                }}
-                right={<CloseSvgIcon />}
-                onClick={() => toggleItem(false, label)}
-              >
-                {label}
-              </Button>
-            ))}
+            {
+              // eslint-disable-next-line unicorn/prefer-spread
+              Array.from(selectedItems ?? []).map((label) => (
+                <Button
+                  key={label}
+                  size="sm"
+                  textProps={{
+                    className: `font-sans ${lato.variable}`,
+                  }}
+                  right={<CloseSvgIcon />}
+                  onClick={() => toggleItem(false, label)}
+                >
+                  {label}
+                </Button>
+              ))
+            }
           </div>
         </div>
       )}

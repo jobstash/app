@@ -1,4 +1,4 @@
-import type { Repository, Tech } from '~/core/interfaces';
+import type { Repository, Tech } from '~/shared/core/interfaces';
 
 export const getRepoTechs = (repo: Repository): Tech[] => {
   const techs: Tech[] = [];

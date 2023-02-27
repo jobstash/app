@@ -1,6 +1,3 @@
-// Common Errors
-export const ERR_INTERNAL = 'Something went wrong :(';
-
 // Sentry MSG
 export const SENTRY_MW_NON_200_RESPONSE = 'Non-200 middleware response';
 export const SENTRY_MW_NON_JSON_RESPONSE = 'Non-JSON middleware response';

@@ -3,12 +3,12 @@ import { useEffect } from 'react';
 
 import { useAtom } from 'jotai';
 
-import type { ProjectPost } from '~/core/interfaces';
 import { ProjectCardList } from '~/features/projects/components';
 import { RightPanel } from '~/features/right-panel';
 import { mockProjectPosts } from '~/mocks/data/mock-posts';
 import { activePostAtom } from '~/shared/atoms';
 import { SideBar, ToBeReplacedLayout } from '~/shared/components';
+import type { ProjectPost } from '~/shared/core/interfaces';
 
 interface Props {
   data: {

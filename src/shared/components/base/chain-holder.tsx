@@ -1,6 +1,6 @@
 import Image from 'next/image';
 
-import { Project } from '~/core/interfaces';
+import { Project } from '~/shared/core/interfaces';
 export interface ChainHolderProps {
   project: Project;
 }

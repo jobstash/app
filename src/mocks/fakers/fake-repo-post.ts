@@ -1,7 +1,7 @@
 import { faker } from '@faker-js/faker';
 
-import { KIND_POST_REPO } from '~/core/constants';
-import type { Project, RepoPost } from '~/core/interfaces';
+import { KIND_POST_REPO } from '~/shared/core/constants';
+import type { Project, RepoPost } from '~/shared/core/interfaces';
 
 import { fakeJobs } from './fake-job';
 import { fakeOrg } from './fake-org';

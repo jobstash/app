@@ -1,4 +1,4 @@
-import type { Post } from '~/core/interfaces';
+import type { Post } from '~/shared/core/interfaces';
 
 import { RepoRightPanel } from './repo-right-panel';
 

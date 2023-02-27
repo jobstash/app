@@ -9,7 +9,7 @@ import {
   TEXT_ROUTE_TAB_ORGANIZATION,
   TEXT_ROUTE_TAB_PROJECTS,
   TEXT_ROUTE_TAB_REPOSITORIES,
-} from '~/core/constants';
+} from '~/shared/core/constants';
 
 export type RouterPush = (
   url: string,

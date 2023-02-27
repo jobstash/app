@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
 
-import type { Tag } from '~/core/interfaces';
+import type { Tag } from '~/shared/core/interfaces';
 
 const poolAudits = [
   'SigmaPrime',

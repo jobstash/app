@@ -11,8 +11,12 @@ import {
   TEXT_ROUTE_TAB_ORGANIZATION,
   TEXT_ROUTE_TAB_PROJECTS,
   TEXT_ROUTE_TAB_REPOSITORIES,
-} from '~/core/constants';
-import type { Post, RightPanelTab, RouteSegments } from '~/core/interfaces';
+} from '~/shared/core/constants';
+import type {
+  Post,
+  RightPanelTab,
+  RouteSegments,
+} from '~/shared/core/interfaces';
 import { createRouteString } from '~/shared/utils';
 
 export const getPanelTabs = (

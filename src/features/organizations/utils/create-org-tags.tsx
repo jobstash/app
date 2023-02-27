@@ -1,5 +1,5 @@
-import type { OrgPost, TagElement } from '~/core/interfaces';
 import { TagIcon } from '~/shared/components';
+import type { OrgPost, TagElement } from '~/shared/core/interfaces';
 
 export const createOrgTags = (post: OrgPost): TagElement[] => {
   const { jobs, projects, details } = post;

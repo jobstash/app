@@ -1,5 +1,5 @@
-import type { Post } from '~/core/interfaces';
 import { TagIcon } from '~/shared/components/icons';
+import type { Post } from '~/shared/core/interfaces';
 
 const tags = [
   {

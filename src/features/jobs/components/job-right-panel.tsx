@@ -1,5 +1,5 @@
-import type { JobPost } from '~/core/interfaces';
 import { Button } from '~/shared/components';
+import type { JobPost } from '~/shared/core/interfaces';
 
 import { createJobTags } from '../utils';
 

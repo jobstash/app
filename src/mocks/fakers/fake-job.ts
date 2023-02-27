@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
 
-import type { Job } from '~/core/interfaces';
+import type { Job } from '~/shared/core/interfaces';
 
 import { fakeDesc } from './fake-desc';
 import { poolTechs } from './fake-tech';

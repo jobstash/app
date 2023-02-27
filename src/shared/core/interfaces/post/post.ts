@@ -1,4 +1,4 @@
-import type { PostKind } from '~/core/types';
+import type { PostKind } from '~/shared/core/types';
 
 import type { Job } from '../job/job';
 import type { Organization } from '../org/organization';

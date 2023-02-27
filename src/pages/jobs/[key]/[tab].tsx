@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 
 import { useSetAtom } from 'jotai';
 
-import type { JobPost } from '~/core/interfaces';
 import { Filters } from '~/features/filters/components';
 import { API_URL_JOBS_FILTER_CONFIG } from '~/features/filters/core/constants';
 import { JobCardList } from '~/features/jobs/components';
@@ -12,6 +11,7 @@ import { mockJobPosts } from '~/mocks/data/mock-posts';
 import { activePostAtom } from '~/shared/atoms';
 import { ToBeReplacedLayout } from '~/shared/components';
 import { SideBar } from '~/shared/components/layout/sidebar';
+import type { JobPost } from '~/shared/core/interfaces';
 
 interface Props {
   data: {

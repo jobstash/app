@@ -3,13 +3,13 @@ import { useInView } from 'react-intersection-observer';
 
 import { useSetAtom } from 'jotai';
 
+import { activePostAtom } from '~/shared/atoms';
 import {
   EVENT_CARD_CLICK,
   TEXT_ROUTE_SECTION_JOBS,
   TEXT_ROUTE_TAB_DETAILS,
-} from '~/core/constants';
-import type { JobPost } from '~/core/interfaces';
-import { activePostAtom } from '~/shared/atoms';
+} from '~/shared/core/constants';
+import { JobPost } from '~/shared/core/interfaces';
 import { useRouteSegments } from '~/shared/hooks';
 import { createRouteString } from '~/shared/utils';
 
