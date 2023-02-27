@@ -1,10 +1,10 @@
-import type { ReactNode } from 'react';
+import type { TagIconFilename } from '../../types';
 
-export interface Tag {
+export interface TagElement {
+  /** Main tag text content */
   text: string;
+  /** Svg icon filename used for ` */
+  iconText?: TagIconFilename;
+  /** External url used when clicked */
   link?: string;
-}
-
-export interface TagElement extends Tag {
-  icon?: ReactNode;
 }
