@@ -10,8 +10,8 @@ import {
 import type { GenericResponse } from '~/shared/core/interfaces';
 import { sentryMessage } from '~/shared/utils';
 
+import type { FilterConfig } from '../core/interfaces';
 import { FilterConfigSchema } from '../core/schemas';
-import type { FilterConfig } from '../core/types';
 
 const SENTRY_LABEL = `getQueryFn`;
 
