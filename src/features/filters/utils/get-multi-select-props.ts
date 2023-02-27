@@ -1,17 +1,13 @@
-import type {
-  FilterState,
-  FilterStateMultiSelectKey,
-  MultiSelectFilterConfig,
-  MultiSelectSearchFilterConfig,
-} from '../core/types';
+import type { MultiSelectSearchFilterConfig } from '../core/interfaces';
+import type { FilterState, FilterStateMultiSelectKey } from '../core/types';
 
 export const getMultiSelectProps = (
   filters: FilterState,
   key: keyof FilterState,
-  config: MultiSelectFilterConfig | MultiSelectSearchFilterConfig,
+  config: MultiSelectSearchFilterConfig,
 ) => {
-  const { label, value } = config as MultiSelectFilterConfig;
-  const items = value.map(({ label }) => label);
+  const { label, options } = config as MultiSelectSearchFilterConfig;
+  const items = options.map(({ label }) => label);
   const selectedItems = filters[key as FilterStateMultiSelectKey];
   const numSelected = selectedItems?.size ?? 0;
   const text = `${label}${numSelected > 0 ? `: ${numSelected} selected` : ''}`;

@@ -1,19 +1,22 @@
-import type { Post } from '~/core/interfaces';
+export const ReposRightPanel = () => <div>ReposRightPanel</div>;
 
-import { RepoRightPanel } from './repo-right-panel';
+//
+// import type { Post } from '~/shared/core/interfaces';
 
-interface Props {
-  repos?: Post['repos'];
-}
+// import { RepoRightPanel } from './repo-right-panel';
 
-export const ReposRightPanel = ({ repos }: Props) => {
-  if (!repos || repos.length === 0) return null;
+// interface Props {
+//   repos?: Post['repos'];
+// }
 
-  return (
-    <div>
-      {repos.map((repo) => (
-        <RepoRightPanel key={repo.name} repo={repo} />
-      ))}
-    </div>
-  );
-};
+// export const ReposRightPanel = ({ repos }: Props) => {
+//   if (!repos || repos.length === 0) return null;
+
+//   return (
+//     <div>
+//       {repos.map((repo) => (
+//         <RepoRightPanel key={repo.name} repo={repo} />
+//       ))}
+//     </div>
+//   );
+// };

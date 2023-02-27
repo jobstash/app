@@ -1,19 +1,22 @@
-import type { Post } from '~/core/interfaces';
+export const ProjectsRightPanel = () => <div>ProjectsRightPanel</div>;
 
-import { ProjectRightPanel } from './project-right-panel';
+//
+// import type { Post } from '~/shared/core/interfaces';
 
-interface Props {
-  projects: Post['projects'];
-}
+// import { ProjectRightPanel } from './project-right-panel';
 
-export const ProjectsRightPanel = ({ projects }: Props) => {
-  if (!projects || projects.length === 0) return null;
+// interface Props {
+//   projects: Post['projects'];
+// }
 
-  return (
-    <div className="">
-      {projects.map((project) => (
-        <ProjectRightPanel key={project.name} project={project} />
-      ))}
-    </div>
-  );
-};
+// export const ProjectsRightPanel = ({ projects }: Props) => {
+//   if (!projects || projects.length === 0) return null;
+
+//   return (
+//     <div className="">
+//       {projects.map((project) => (
+//         <ProjectRightPanel key={project.name} project={project} />
+//       ))}
+//     </div>
+//   );
+// };

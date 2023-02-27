@@ -1,20 +1,27 @@
 import Image from 'next/image';
-import { Children, MouseEventHandler } from 'react';
+import { MouseEventHandler } from 'react';
 
 import { cva } from 'class-variance-authority';
 
-import type { JobPost } from '~/core/interfaces';
-import { createProjectTags } from '~/features/projects/utils';
 import {
   Button,
   CardHeading,
   ChainHeading,
-  ChainHolder,
   IconHolder,
   SkillHolder,
+  TagIcon,
 } from '~/shared/components';
+import { prettyUnix } from '~/shared/utils';
 
+import { JobPost } from '../core/interfaces';
 import { createJobTags } from '../utils';
+import { createProjectTags } from '../utils/create-project-tags';
+
+interface Props {
+  listing: JobPost;
+  isActive: boolean;
+  onClick: MouseEventHandler;
+}
 
 const cvaJobCard = cva(
   [
@@ -30,41 +37,20 @@ const cvaJobCard = cva(
   },
 );
 
-interface Props {
-  post: JobPost;
-  isActive: boolean;
-  onClick: MouseEventHandler;
-}
+export const JobCard = ({ listing, isActive, onClick }: Props) => {
+  const { jobpost, organization: org, technologies, project } = listing;
 
-export const JobCard = ({ post, isActive, onClick }: Props) => {
-  const { details: job, created, org, projects } = post;
+  const { jobTitle, jobCreatedTimestamp } = jobpost;
 
-  if (!job) return null;
-
-  const { title } = job;
-
-  const tags = createJobTags(job);
-
-  const skills = [
-    ...job.skills.main,
-    ...job.skills.hasMentor,
-    ...job.skills.shared,
-  ];
-
-  const project = projects.length > 0 ? projects[0] : null;
-
-  const { top, mid, bottom } = project
-    ? createProjectTags(project)
-    : { top: [], mid: [], bottom: [] };
-
-  const projectTags = [...top, ...mid, ...bottom];
+  const tags = createJobTags(jobpost);
+  const projectTags = createProjectTags(project);
 
   return (
     <div className={cvaJobCard({ isActive })} onClick={onClick}>
       <div className="flex items-center justify-between">
-        <CardHeading>{title}</CardHeading>
+        <CardHeading>{jobTitle}</CardHeading>
         <div className="flex items-center space-x-3">
-          <span className="text-sm">{created}</span>
+          <span className="text-sm">{prettyUnix(jobCreatedTimestamp)}</span>
           <Button size="sm">
             <Image
               src="/icons/bookmark.svg"
@@ -76,67 +62,67 @@ export const JobCard = ({ post, isActive, onClick }: Props) => {
         </div>
       </div>
 
-      <div className="flex space-x-8 border-b border-white/5 py-4 text-sm">
-        {tags.map((tag) => (
-          <IconHolder
-            key={tag.text}
-            className=""
-            link={tag.link}
-            icon={tag.icon}
-          >
-            {tag.text}
+      <div className="flex space-x-8 border-b border-white/5 pt-3 pb-4 text-sm">
+        {tags.map(({ text, link, iconText }) => (
+          <IconHolder key={text} link={link} iconText={iconText}>
+            {text}
           </IconHolder>
         ))}
       </div>
 
       <div className="flex justify-between space-x-4 border-b border-white/5 py-4">
         <div className="-mb-3 flex grow flex-wrap">
-          {skills.map((tech) => (
-            <SkillHolder key={tech.name} isChecked className="mr-4">
-              {tech.name}
+          {technologies.map((tech) => (
+            <SkillHolder key={tech} isChecked={false} className="mr-4">
+              {tech}
             </SkillHolder>
           ))}
         </div>
         <Button>Sign Up to See Matches</Button>
       </div>
 
-      <div className="flex items-center py-4">
-        <ChainHeading avatar={org.avatar} alt={org.name}>
+      <div className="flex items-center py-4 last:pb-0">
+        {/** Note: waiting for backend/middleware to provide org avatars  */}
+        <ChainHeading avatar="" alt={org.name}>
           {org.name}
         </ChainHeading>
         <div className="flex items-center text-sm">
-          <Image
-            src="/icons/funding.svg"
-            width="13"
-            height="13"
-            alt="funding"
-            className="mr-2"
-          />
-          Funding: {org.funding.date}
+          <TagIcon filename="funding" />
+          {/** Note: waiting for backend/middleware to provide last_funding_data  */}
+          Last Funding: TBD
+        </div>
+        <div className="flex items-center text-sm">
+          <TagIcon filename="funding" />
+          {/** Note: waiting for backend/middleware to provide funding_data  */}
+          Funding: TBD
         </div>
       </div>
 
       {project && (
         <div className="border-t border-white/5 pt-4">
           <div className="flex">
-            <ChainHeading avatar={project.avatar} alt={project.name}>
+            <ChainHeading avatar={project.logo} alt={project.name}>
               {project.name}
             </ChainHeading>
-            <ChainHolder project={project} />
+            {/** Note: waiting for backend/middleware to provide the chains */}
+            {/* <ChainHolder /> */}
           </div>
-          <div className="-mb-2 flex flex-wrap pt-4 text-sm">
-            {projectTags.length > 0 &&
-              projectTags.map((tag) => (
-                <IconHolder
-                  key={tag.text}
-                  className="mr-6 mb-2"
-                  link={tag.link}
-                  icon={tag.icon}
-                >
-                  {tag.text}
-                </IconHolder>
-              ))}
-          </div>
+
+          {projectTags.length > 0 && (
+            <div className="-mb-2 flex flex-wrap pt-4 text-sm">
+              {projectTags.length > 0 &&
+                projectTags.map(({ text, iconText, link }) => (
+                  <IconHolder
+                    key={text}
+                    className="mr-6 mb-2"
+                    link={link}
+                    iconText={iconText}
+                  >
+                    {text}
+                  </IconHolder>
+                ))}
+            </div>
+          )}
         </div>
       )}
     </div>

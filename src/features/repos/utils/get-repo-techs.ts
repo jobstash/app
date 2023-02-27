@@ -1,11 +1,14 @@
-import type { Repository, Tech } from '~/core/interfaces';
+export const getRepoTechs = () => {};
 
-export const getRepoTechs = (repo: Repository): Tech[] => {
-  const techs: Tech[] = [];
+//
+// import type { Repository, Tech } from '~/shared/core/interfaces';
 
-  for (const devInfo of repo.devInfos) {
-    techs.push(...devInfo.techs);
-  }
+// export const getRepoTechs = (repo: Repository): Tech[] => {
+//   const techs: Tech[] = [];
 
-  return techs;
-};
+//   for (const devInfo of repo.devInfos) {
+//     techs.push(...devInfo.techs);
+//   }
+
+//   return techs;
+// };

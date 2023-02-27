@@ -1,1 +1,1 @@
-export * from './right-panel';
+export * from './job-right-panel';

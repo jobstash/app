@@ -3,12 +3,8 @@ import { Dispatch } from 'react';
 import * as Dropdown from '@radix-ui/react-dropdown-menu';
 import clsx from 'clsx';
 
-import type {
-  Action,
-  FilterAction,
-  FilterState,
-  RangeSliderProps,
-} from '../core/types';
+import type { RangeSliderProps } from '../core/interfaces';
+import type { FilterAction, FilterState } from '../core/types';
 
 import { DropdownUi } from './dropdown-ui';
 import { RangeSlider } from './range-slider';

@@ -1,11 +1,15 @@
 import { type ReactNode, type Reducer, useMemo, useReducer } from 'react';
 
-import { MultiSelectFilter } from '../components/multi-select-filter';
 import { MultiSelectSearchFilter } from '../components/multi-select-search-filter';
 import { RangeFilter } from '../components/range-filter';
 import { SingleSelectFilter } from '../components/single-select-filter';
-import { FilterKind } from '../core/constants';
-import type { FilterAction, FilterConfig, FilterState } from '../core/types';
+import {
+  FILTER_KIND_MULTISELECT_WITH_SEARCH,
+  FILTER_KIND_RANGE,
+  FILTER_KIND_SINGLESELECT,
+} from '../core/constants';
+import type { FilterConfig } from '../core/interfaces';
+import type { FilterAction, FilterState } from '../core/types';
 import { filterReducer } from '../reducers';
 import {
   getMultiSelectProps,
@@ -48,9 +52,7 @@ export const useFilters = (fetchedConfig?: FilterConfig) => {
               const { kind } = config;
 
               switch (kind) {
-                case FilterKind.DATE:
-                case FilterKind.BOOLEAN:
-                case FilterKind.SINGLESELECT: {
+                case FILTER_KIND_SINGLESELECT: {
                   const { text, labels, ariaLabel } =
                     getSingleSelectProps(config);
 
@@ -68,7 +70,7 @@ export const useFilters = (fetchedConfig?: FilterConfig) => {
                   };
                 }
 
-                case FilterKind.RANGE: {
+                case FILTER_KIND_RANGE: {
                   const { text, range } = getRangeProps(filters, key, config);
 
                   return {
@@ -84,27 +86,17 @@ export const useFilters = (fetchedConfig?: FilterConfig) => {
                   };
                 }
 
-                case FilterKind.MULTISELECT:
-                case FilterKind.MULTISELECT_SEARCH: {
+                case FILTER_KIND_MULTISELECT_WITH_SEARCH: {
                   const { text, items, selectedItems } = getMultiSelectProps(
                     filters,
                     key,
                     config,
                   );
-                  const hasSearch = kind === FilterKind.MULTISELECT_SEARCH;
 
                   return {
                     key,
-                    ui: hasSearch ? (
+                    ui: (
                       <MultiSelectSearchFilter
-                        type={key}
-                        dispatch={dispatch}
-                        text={text}
-                        items={items}
-                        selectedItems={selectedItems}
-                      />
-                    ) : (
-                      <MultiSelectFilter
                         type={key}
                         dispatch={dispatch}
                         text={text}

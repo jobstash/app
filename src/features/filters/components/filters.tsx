@@ -3,18 +3,16 @@ import { Button } from '~/shared/components';
 import { useFilterConfigQuery, useFilters } from '../hooks';
 import { getFilterUrlParams } from '../utils';
 
-type Props = {
-  url: string;
-};
-
-export const Filters = ({ url }: Props) => {
-  const { data, error, isLoading } = useFilterConfigQuery(url);
+export const Filters = () => {
+  const { data, error, isLoading } = useFilterConfigQuery();
 
   const { filters, filterComponents, clearFilters } = useFilters(data);
 
   if (error)
     return (
-      <h1 className="text-white">Error = {JSON.stringify(error.message)}</h1>
+      <h1 className="text-white">
+        Failed fetching filter-config: {error.message}
+      </h1>
     );
   if (isLoading || !data)
     return <h1 className="text-white">LOADING JOBS FILTER ...</h1>;

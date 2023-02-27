@@ -1,86 +1,87 @@
-import Image from 'next/image';
-import type { MouseEventHandler } from 'react';
+export const RepoCard = () => <div>RepoCard</div>;
 
-import { cva } from 'class-variance-authority';
+//
+// import type { MouseEventHandler } from 'react';
 
-import type { RepoPost } from '~/core/interfaces';
-import {
-  Button,
-  CardHeading,
-  ChainHeading,
-  ChainHolder,
-  IconHolder,
-  SkillHolder,
-} from '~/shared/components';
+// import { cva } from 'class-variance-authority';
 
-import { createRepoTags, getRepoTechs } from '../utils';
+// import {
+//   Button,
+//   CardHeading,
+//   ChainHeading,
+//   IconHolder,
+//   SkillHolder,
+// } from '~/shared/components';
+// import type { RepoPost } from '~/shared/core/interfaces';
 
-const cvaRepoCard = cva(
-  [
-    'w-full overflow-hidden rounded-3xl bg-white/5 p-6 text-ivory cursor-pointer relative transition-all',
-    'hover:bg-white/20 after:transition-all	 after:content-[""] after:hidden after:h-full after:border after:border-white after:rounded-3xl after:w-full after:absolute after:inset-0 hover:after:block after:z-20',
-  ],
-  {
-    variants: {
-      isActive: {
-        true: 'bg-gradient-to-l from-primary to-secondary hover:after:hidden cursor-default',
-      },
-    },
-  },
-);
+// import { createRepoTags, getRepoTechs } from '../utils';
 
-interface Props {
-  post: RepoPost;
-  isActive: boolean;
-  onClick: MouseEventHandler;
-}
+// const cvaRepoCard = cva(
+//   [
+//     'w-full overflow-hidden rounded-3xl bg-white/5 p-6 text-ivory cursor-pointer relative transition-all',
+//     'hover:bg-white/20 after:transition-all	 after:content-[""] after:hidden after:h-full after:border after:border-white after:rounded-3xl after:w-full after:absolute after:inset-0 hover:after:block after:z-20',
+//   ],
+//   {
+//     variants: {
+//       isActive: {
+//         true: 'bg-gradient-to-l from-primary to-secondary hover:after:hidden cursor-default',
+//       },
+//     },
+//   },
+// );
 
-export const RepoCard = ({ post, isActive, onClick }: Props) => {
-  const { details, created, org } = post;
+// interface Props {
+//   post: RepoPost;
+//   isActive: boolean;
+//   onClick: MouseEventHandler;
+// }
 
-  const { name, description } = details;
+// export const RepoCard = ({ post, isActive, onClick }: Props) => {
+//   const { details, created, org } = post;
 
-  const tags = createRepoTags(details);
-  const techs = getRepoTechs(details);
+//   const { name, description } = details;
 
-  return (
-    <div className={cvaRepoCard({ isActive })} onClick={onClick}>
-      <div className="flex items-center justify-between">
-        <CardHeading>{name}</CardHeading>
-        <div className="flex items-center space-x-2">
-          <span className="text-sm">{created}</span>
-          <Button>bookmark</Button>
-        </div>
-      </div>
-      <p className="mt-2 mb-3 text-sm">{description}</p>
-      <div className="flex space-x-8 border-b border-white/5 pb-4 text-sm">
-        {tags.map((tag) => (
-          <IconHolder
-            key={tag.text}
-            className=""
-            link={tag.link}
-            icon={tag.icon}
-          >
-            {tag.text}
-          </IconHolder>
-        ))}
-      </div>
+//   const tags = createRepoTags(details);
+//   const techs = getRepoTechs(details);
 
-      <div className="flex py-4">
-        <div className="-mb-3 flex grow flex-wrap">
-          {techs.map((tech) => (
-            <SkillHolder key={tech.name} isChecked className="mr-4">
-              {tech.name}
-            </SkillHolder>
-          ))}
-        </div>
-      </div>
+//   return (
+//     <div className={cvaRepoCard({ isActive })} onClick={onClick}>
+//       <div className="flex items-center justify-between">
+//         <CardHeading>{name}</CardHeading>
+//         <div className="flex items-center space-x-2">
+//           <span className="text-sm">{created}</span>
+//           <Button>bookmark</Button>
+//         </div>
+//       </div>
+//       <p className="mt-2 mb-3 text-sm">{description}</p>
+//       <div className="flex space-x-8 border-b border-white/5 pb-4 text-sm">
+//         {tags.map((tag) => (
+//           <IconHolder
+//             key={tag.text}
+//             className=""
+//             link={tag.link}
+//             icon={tag.icon}
+//           >
+//             {tag.text}
+//           </IconHolder>
+//         ))}
+//       </div>
 
-      <div className="flex items-center space-x-4 border-t border-white/5 pt-4">
-        <ChainHeading avatar={org.avatar} alt={org.name}>
-          {org.name}
-        </ChainHeading>
-      </div>
-    </div>
-  );
-};
+//       <div className="flex py-4">
+//         <div className="-mb-3 flex grow flex-wrap">
+//           {techs.map((tech) => (
+//             <SkillHolder key={tech.name} isChecked className="mr-4">
+//               {tech.name}
+//             </SkillHolder>
+//           ))}
+//         </div>
+//       </div>
+
+//       <div className="flex items-center space-x-4 border-t border-white/5 pt-4">
+//         <ChainHeading avatar={org.avatar} alt={org.name}>
+//           {org.name}
+//         </ChainHeading>
+//       </div>
+//     </div>
+//   );
+// };

@@ -1,9 +1,5 @@
-import type {
-  FilterState,
-  FilterStateRangeKey,
-  RangeFilterConfig,
-  RangeSliderProps,
-} from '../core/types';
+import type { RangeFilterConfig, RangeSliderProps } from '../core/interfaces';
+import type { FilterState, FilterStateRangeKey } from '../core/types';
 
 import { formatRangeFilterText } from './format-range-filter-text';
 
@@ -18,7 +14,7 @@ export const getRangeProps = (
       lowest: { value: min },
       highest: { value: max },
     },
-    step_size,
+    stepSize,
   } = config;
 
   const currentValue = filters[key as FilterStateRangeKey];
@@ -27,7 +23,7 @@ export const getRangeProps = (
   const range: RangeSliderProps = {
     min,
     max,
-    step: step_size,
+    step: stepSize,
     value: currentValue ?? defaultValue,
     defaultValue,
   };

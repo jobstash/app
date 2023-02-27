@@ -1,51 +1,54 @@
-import { useInfiniteQuery } from '@tanstack/react-query';
+export const useRepoPostInfQuery = () => {};
 
-import type { RepoPost } from '~/core/interfaces';
-import {
-  ERR_INTERNAL,
-  SENTRY_MW_NON_200_RESPONSE,
-  SENTRY_MW_NON_JSON_RESPONSE,
-} from '~/shared/core/constants';
-import { sentryMessage } from '~/shared/utils';
+//
+// import { useInfiniteQuery } from '@tanstack/react-query';
 
-const SENTRY_LABEL = `fetchRepoListings`;
+// import {
+//   ERR_INTERNAL,
+//   SENTRY_MW_NON_200_RESPONSE,
+//   SENTRY_MW_NON_JSON_RESPONSE,
+// } from '~/shared/core/constants';
+// import type { RepoPost } from '~/shared/core/interfaces';
+// import { sentryMessage } from '~/shared/utils';
 
-const fetchRepoListings = async ({
-  pageParam = 0,
-}): Promise<RepoListingsInfQueryPage> => {
-  const res = await fetch(
-    `http://localhost:3000/mocked-bff/posts/repos?cursor=${pageParam}`,
-  );
+// const SENTRY_LABEL = `fetchRepoListings`;
 
-  // Query to mw should work - 500 otherwise
-  if (!res.ok) {
-    sentryMessage(SENTRY_LABEL, SENTRY_MW_NON_200_RESPONSE);
-    throw new Error(ERR_INTERNAL);
-  }
+// const fetchRepoListings = async ({
+//   pageParam = 0,
+// }): Promise<RepoListingsInfQueryPage> => {
+//   const res = await fetch(
+//     `http://localhost:3000/mocked-bff/posts/repos?cursor=${pageParam}`,
+//   );
 
-  let data: RepoListingsInfQueryPage;
+//   // Query to mw should work - 500 otherwise
+//   if (!res.ok) {
+//     sentryMessage(SENTRY_LABEL, SENTRY_MW_NON_200_RESPONSE);
+//     throw new Error(ERR_INTERNAL);
+//   }
 
-  // Data should be json - 500 otherwise
-  try {
-    data = await res.json();
-  } catch {
-    sentryMessage(SENTRY_LABEL, SENTRY_MW_NON_JSON_RESPONSE);
-    throw new Error(ERR_INTERNAL);
-  }
+//   let data: RepoListingsInfQueryPage;
 
-  return data;
-};
+//   // Data should be json - 500 otherwise
+//   try {
+//     data = await res.json();
+//   } catch {
+//     sentryMessage(SENTRY_LABEL, SENTRY_MW_NON_JSON_RESPONSE);
+//     throw new Error(ERR_INTERNAL);
+//   }
 
-interface RepoListingsInfQueryPage {
-  nextCursor: number;
-  posts: RepoPost[];
-}
+//   return data;
+// };
 
-export const useRepoListingInfQuery = () =>
-  useInfiniteQuery<RepoListingsInfQueryPage>(
-    ['repo-posts'],
-    fetchRepoListings,
-    {
-      getNextPageParam: (page) => page.nextCursor,
-    },
-  );
+// interface RepoListingsInfQueryPage {
+//   nextCursor: number;
+//   posts: RepoPost[];
+// }
+
+// export const useRepoListingInfQuery = () =>
+//   useInfiniteQuery<RepoListingsInfQueryPage>(
+//     ['repo-posts'],
+//     fetchRepoListings,
+//     {
+//       getNextPageParam: (page) => page.nextCursor,
+//     },
+//   );

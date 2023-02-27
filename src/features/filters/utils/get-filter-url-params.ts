@@ -1,7 +1,12 @@
 /* eslint-disable unicorn/consistent-destructuring */
 
-import { FilterKind } from '../core/constants';
-import { FilterConfig, FilterState, RangeValue } from '../core/types';
+import {
+  FILTER_KIND_MULTISELECT_WITH_SEARCH,
+  FILTER_KIND_RANGE,
+  FILTER_KIND_SINGLESELECT,
+} from '../core/constants';
+import { FilterConfig } from '../core/interfaces';
+import { FilterState, RangeValue } from '../core/types';
 
 export const getFilterUrlParams = (
   filters: FilterState,
@@ -13,35 +18,26 @@ export const getFilterUrlParams = (
         ([configKey]) => k === configKey,
       ) as [string, FilterConfig[keyof FilterConfig]];
 
-      const { kind, value } = config;
+      const { kind } = config;
       switch (kind) {
-        case FilterKind.DATE: {
-          const paramValue = value.find(({ label }) => v === label)!.value;
-          return `${config.param_key}=${paramValue}`;
+        case FILTER_KIND_SINGLESELECT: {
+          const paramValue = config.options.find(
+            ({ label }) => v === label,
+          )!.value;
+          return `${config.paramKey}=${paramValue}`;
         }
 
-        case FilterKind.BOOLEAN: {
-          const paramValue = value.find(({ label }) => v === label)!.value;
-          return `${config.param_key}=${paramValue}`;
-        }
-
-        case FilterKind.SINGLESELECT: {
-          const paramValue = value.find(({ label }) => v === label)!.value;
-          return `${config.param_key}=${paramValue}`;
-        }
-
-        case FilterKind.MULTISELECT_SEARCH:
-        case FilterKind.MULTISELECT: {
-          const values = value
+        case FILTER_KIND_MULTISELECT_WITH_SEARCH: {
+          const values = config.options
             .filter(({ label }) => (v as Set<string>).has(label))
             .map(({ value }) => value);
-          return `${config.param_key}=${values.join(',')}`;
+          return `${config.paramKey}=${values.join(',')}`;
         }
 
-        case FilterKind.RANGE: {
+        case FILTER_KIND_RANGE: {
           const [min, max] = v as RangeValue;
-          const { lowest, highest } = value;
-          return `${lowest.param_key}=${min}&${highest.param_key}=${max}`;
+          const { lowest, highest } = config.value;
+          return `${lowest.paramKey}=${min}&${highest.paramKey}=${max}`;
         }
 
         default: {

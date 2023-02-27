@@ -1,60 +1,63 @@
-import type { RepoPost } from '~/core/interfaces';
-import { createRepoTags } from '~/features/repos/utils';
-import { Button, IconDevs, IconGithub } from '~/shared/components';
+export const RepoRightPanel = () => <div>RepoRightPanel</div>;
 
-interface Props {
-  repo: RepoPost['details'];
-}
+//
+// import { createRepoTags } from '~/features/repos/utils';
+// import { Button, IconDevs, IconGithub } from '~/shared/components';
+// import type { RepoPost } from '~/shared/core/interfaces';
 
-export const RepoRightPanel = ({ repo }: Props) => {
-  if (!repo) return null;
+// interface Props {
+//   repo: RepoPost['details'];
+// }
 
-  const { name, description, devInfos } = repo;
+// export const RepoRightPanel = ({ repo }: Props) => {
+//   if (!repo) return null;
 
-  const tags = createRepoTags(repo);
+//   const { name, description, devInfos } = repo;
 
-  return (
-    <div className='p-6'>
-      <div>
-        <div>
-          <IconGithub />
-          <p>{name}</p>
-        </div>
-        <Button>bookmark</Button>
-      </div>
+//   const tags = createRepoTags(repo);
 
-      <hr />
+//   return (
+//     <div className="p-6">
+//       <div>
+//         <div>
+//           <IconGithub />
+//           <p>{name}</p>
+//         </div>
+//         <Button>bookmark</Button>
+//       </div>
 
-      <div>
-        {tags.map((tag) => (
-          <div key={tag.text}>
-            {tag.icon}
-            <p>{tag.text}</p>
-            <p>{tag.link}</p>
-          </div>
-        ))}
-      </div>
+//       <hr />
 
-      <div>
-        <p>{description}</p>
-      </div>
+//       <div>
+//         {tags.map((tag) => (
+//           <div key={tag.text}>
+//             {tag.icon}
+//             <p>{tag.text}</p>
+//             <p>{tag.link}</p>
+//           </div>
+//         ))}
+//       </div>
 
-      <div>
-        {devInfos.map((devInfo) => (
-          <div key={devInfo.techs.map((tech) => tech.name).join('')}>
-            <div>
-              <IconDevs />
-              <p>Devs: {devInfo.devCount}</p>
-            </div>
-            {devInfo.techs.map((tech) => (
-              <div key={tech.name}>
-                <p>{tech.name}</p>
-                <p>{tech.isChecked}</p>
-              </div>
-            ))}
-          </div>
-        ))}
-      </div>
-    </div>
-  );
-};
+//       <div>
+//         <p>{description}</p>
+//       </div>
+
+//       <div>
+//         {devInfos.map((devInfo) => (
+//           <div key={devInfo.techs.map((tech) => tech.name).join('')}>
+//             <div>
+//               <IconDevs />
+//               <p>Devs: {devInfo.devCount}</p>
+//             </div>
+//             {devInfo.techs.map((tech) => (
+//               <div key={tech.name}>
+//                 <p>{tech.name}</p>
+//                 <p>{tech.isChecked}</p>
+//               </div>
+//             ))}
+//           </div>
+//         ))}
+//       </div>
+//     </div>
+//   );
+// };

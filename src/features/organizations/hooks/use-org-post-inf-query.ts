@@ -1,45 +1,48 @@
-import { useInfiniteQuery } from '@tanstack/react-query';
+export const useOrgPostInfQuery = () => {};
 
-import type { OrgPost } from '~/core/interfaces';
-import {
-  ERR_INTERNAL,
-  SENTRY_MW_NON_200_RESPONSE,
-  SENTRY_MW_NON_JSON_RESPONSE,
-} from '~/shared/core/constants';
-import { sentryMessage } from '~/shared/utils';
+//
+// import { useInfiniteQuery } from '@tanstack/react-query';
 
-const SENTRY_LABEL = `fetchOrgListings`;
+// import {
+//   ERR_INTERNAL,
+//   SENTRY_MW_NON_200_RESPONSE,
+//   SENTRY_MW_NON_JSON_RESPONSE,
+// } from '~/shared/core/constants';
+// import type { OrgPost } from '~/shared/core/interfaces';
+// import { sentryMessage } from '~/shared/utils';
 
-const fetchOrgListings = async ({ pageParam = 0 }) => {
-  const res = await fetch(
-    `http://localhost:3000/mocked-bff/posts/orgs?cursor=${pageParam}`,
-  );
+// const SENTRY_LABEL = `fetchOrgListings`;
 
-  // Query to mw should work - 500 otherwise
-  if (!res.ok) {
-    sentryMessage(SENTRY_LABEL, SENTRY_MW_NON_200_RESPONSE);
-    throw new Error(ERR_INTERNAL);
-  }
+// const fetchOrgListings = async ({ pageParam = 0 }) => {
+//   const res = await fetch(
+//     `http://localhost:3000/mocked-bff/posts/orgs?cursor=${pageParam}`,
+//   );
 
-  let data: OrgListingsInfQueryPage;
+//   // Query to mw should work - 500 otherwise
+//   if (!res.ok) {
+//     sentryMessage(SENTRY_LABEL, SENTRY_MW_NON_200_RESPONSE);
+//     throw new Error(ERR_INTERNAL);
+//   }
 
-  // Data should be json - 500 otherwise
-  try {
-    data = await res.json();
-  } catch {
-    sentryMessage(SENTRY_LABEL, SENTRY_MW_NON_JSON_RESPONSE);
-    throw new Error(ERR_INTERNAL);
-  }
+//   let data: OrgListingsInfQueryPage;
 
-  return data;
-};
+//   // Data should be json - 500 otherwise
+//   try {
+//     data = await res.json();
+//   } catch {
+//     sentryMessage(SENTRY_LABEL, SENTRY_MW_NON_JSON_RESPONSE);
+//     throw new Error(ERR_INTERNAL);
+//   }
 
-interface OrgListingsInfQueryPage {
-  nextCursor: number;
-  posts: OrgPost[];
-}
+//   return data;
+// };
 
-export const useOrgPostInfQuery = () =>
-  useInfiniteQuery<OrgListingsInfQueryPage>(['org-posts'], fetchOrgListings, {
-    getNextPageParam: (page) => page.nextCursor,
-  });
+// interface OrgListingsInfQueryPage {
+//   nextCursor: number;
+//   posts: OrgPost[];
+// }
+
+// export const useOrgPostInfQuery = () =>
+//   useInfiniteQuery<OrgListingsInfQueryPage>(['org-posts'], fetchOrgListings, {
+//     getNextPageParam: (page) => page.nextCursor,
+//   });

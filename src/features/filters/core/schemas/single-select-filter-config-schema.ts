@@ -1,16 +1,16 @@
 import Joi from 'joi';
 
-import { FilterKind } from '../constants';
-import type { SingleSelectFilterConfig } from '../types';
+import { FILTER_KIND_SINGLESELECT } from '../constants';
+import type { SingleSelectFilterConfig } from '../interfaces';
 
 import { FilterConfigSharedPropertiesSchema } from './filter-config-shared-properties-schema';
 import { ParamKeySchema } from './param-key-schema';
 
 export const SingleSelectFilterConfigSchema =
   FilterConfigSharedPropertiesSchema.append<SingleSelectFilterConfig>({
-    kind: Joi.number().valid(FilterKind.SINGLESELECT).required(),
-    param_key: ParamKeySchema,
-    value: Joi.array()
+    kind: Joi.string().valid(FILTER_KIND_SINGLESELECT).required(),
+    paramKey: ParamKeySchema,
+    options: Joi.array()
       .items(
         Joi.object({
           label: Joi.string().required(),

@@ -1,115 +1,118 @@
-import { useEffect } from 'react';
-import { useInView } from 'react-intersection-observer';
+export const RepoCardList = () => <div>RepoCardList</div>;
 
-import { useSetAtom } from 'jotai';
+//
+// import { useEffect } from 'react';
+// import { useInView } from 'react-intersection-observer';
 
-import {
-  EVENT_CARD_CLICK,
-  TEXT_ROUTE_SECTION_REPOSITORIES,
-  TEXT_ROUTE_TAB_DETAILS,
-} from '~/core/constants';
-import type { RepoPost } from '~/core/interfaces';
-import { activePostAtom } from '~/shared/atoms';
-import { useRouteSegments } from '~/shared/hooks';
-import { createRouteString, slugify } from '~/shared/utils';
+// import { useSetAtom } from 'jotai';
 
-import { useRepoListingInfQuery } from '../hooks';
+// import { activePostAtom } from '~/shared/atoms';
+// import {
+//   EVENT_CARD_CLICK,
+//   TEXT_ROUTE_SECTION_REPOSITORIES,
+//   TEXT_ROUTE_TAB_DETAILS,
+// } from '~/shared/core/constants';
+// import type { RepoPost } from '~/shared/core/interfaces';
+// import { useRouteSegments } from '~/shared/hooks';
+// import { createRouteString, slugify } from '~/shared/utils';
 
-import { RepoCard } from './repo-card';
+// import { useRepoListingInfQuery } from '../hooks';
 
-interface Props {
-  initListings: RepoPost[];
-}
-export const RepoCardList = ({ initListings }: Props) => {
-  const {
-    segments: { key },
-    push,
-  } = useRouteSegments();
-  const setActiveListing = useSetAtom(activePostAtom);
+// import { RepoCard } from './repo-card';
 
-  const onClickListing = (post: RepoPost) => {
-    setActiveListing(post);
-    document.dispatchEvent(new Event(EVENT_CARD_CLICK));
+// interface Props {
+//   initListings: RepoPost[];
+// }
+// export const RepoCardList = ({ initListings }: Props) => {
+//   const {
+//     segments: { key },
+//     push,
+//   } = useRouteSegments();
+//   const setActiveListing = useSetAtom(activePostAtom);
 
-    const route = createRouteString(
-      TEXT_ROUTE_SECTION_REPOSITORIES,
-      slugify(post.details.name),
-      TEXT_ROUTE_TAB_DETAILS,
-    );
+//   const onClickListing = (post: RepoPost) => {
+//     setActiveListing(post);
+//     document.dispatchEvent(new Event(EVENT_CARD_CLICK));
 
-    push(route, {
-      shallow: true,
-    });
-  };
+//     const route = createRouteString(
+//       TEXT_ROUTE_SECTION_REPOSITORIES,
+//       slugify(post.details.name),
+//       TEXT_ROUTE_TAB_DETAILS,
+//     );
 
-  const {
-    data,
-    error,
-    isLoading,
-    isFetchingNextPage,
-    fetchNextPage,
-    hasNextPage,
-  } = useRepoListingInfQuery();
+//     push(route, {
+//       shallow: true,
+//     });
+//   };
 
-  const { ref, inView } = useInView();
+//   const {
+//     data,
+//     error,
+//     isLoading,
+//     isFetchingNextPage,
+//     fetchNextPage,
+//     hasNextPage,
+//   } = useRepoListingInfQuery();
 
-  useEffect(() => {
-    if (inView) {
-      fetchNextPage();
-    }
-  }, [fetchNextPage, inView, isFetchingNextPage]);
+//   const { ref, inView } = useInView();
 
-  return (
-    <div className='space-y-8'>
-      {initListings.map((post) => (
-        <RepoCard
-          key={post.details.id}
-          post={post}
-          isActive={key === slugify(post.details.name)}
-          onClick={() => onClickListing(post)}
-        />
-      ))}
+//   useEffect(() => {
+//     if (inView) {
+//       fetchNextPage();
+//     }
+//   }, [fetchNextPage, inView, isFetchingNextPage]);
 
-      {data &&
-        data.pages.map((page, i) =>
-          page.posts.map((post, j) => (
-            <div
-              key={post.details.id}
-              ref={
-                i === data.pages.length - 1 && j === page.posts.length - 1
-                  ? ref
-                  : undefined
-              }
-            >
-              <RepoCard
-                key={post.details.id}
-                post={post}
-                isActive={key === slugify(post.details.name)}
-                onClick={() => onClickListing(post)}
-              />
-            </div>
-          )),
-        )}
+//   return (
+//     <div className="space-y-8">
+//       {initListings.map((post) => (
+//         <RepoCard
+//           key={post.details.id}
+//           post={post}
+//           isActive={key === slugify(post.details.name)}
+//           onClick={() => onClickListing(post)}
+//         />
+//       ))}
 
-      {Boolean(error) && (
-        <div>
-          <p>error = {JSON.stringify(error)}</p>
-        </div>
-      )}
+//       {data &&
+//         data.pages.map((page, i) =>
+//           page.posts.map((post, j) => (
+//             <div
+//               key={post.details.id}
+//               ref={
+//                 i === data.pages.length - 1 && j === page.posts.length - 1
+//                   ? ref
+//                   : undefined
+//               }
+//             >
+//               <RepoCard
+//                 key={post.details.id}
+//                 post={post}
+//                 isActive={key === slugify(post.details.name)}
+//                 onClick={() => onClickListing(post)}
+//               />
+//             </div>
+//           )),
+//         )}
 
-      {isLoading && (
-        <div>
-          <p>Fetching repos ...</p>
-        </div>
-      )}
+//       {Boolean(error) && (
+//         <div>
+//           <p>error = {JSON.stringify(error)}</p>
+//         </div>
+//       )}
 
-      {isFetchingNextPage && (
-        <div>
-          <p>Loading more repo posts ...</p>
-        </div>
-      )}
+//       {isLoading && (
+//         <div>
+//           <p>Fetching repos ...</p>
+//         </div>
+//       )}
 
-      {data && !hasNextPage && <p>No more repo posts to load</p>}
-    </div>
-  );
-};
+//       {isFetchingNextPage && (
+//         <div>
+//           <p>Loading more repo posts ...</p>
+//         </div>
+//       )}
+
+//       {data && !hasNextPage && <p>No more repo posts to load</p>}
+//     </div>
+//   );
+// };

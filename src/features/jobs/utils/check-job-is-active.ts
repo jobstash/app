@@ -1,4 +1,4 @@
-import type { JobPost } from '~/core/interfaces';
+import { JobPost } from '../core/interfaces';
 
 import { createJobKey } from './create-job-key';
 
