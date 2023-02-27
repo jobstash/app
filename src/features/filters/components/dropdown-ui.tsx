@@ -22,7 +22,7 @@ export const DropdownUi = ({ text, children }: Props) => (
         right={
           <Image
             priority
-            src="/icons/caret-down.png"
+            src="/icons/caret-down.svg"
             width="20"
             height="20"
             alt="Dropdown icon"
