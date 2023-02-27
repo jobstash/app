@@ -5,35 +5,37 @@ import { useSetAtom } from 'jotai';
 
 import { Filters } from '~/features/filters/components';
 import { API_URL_JOBS_FILTER_CONFIG } from '~/features/filters/core/constants';
-import { JobCardList } from '~/features/jobs/components';
-import { RightPanel } from '~/features/right-panel';
-import { mockJobPosts } from '~/mocks/data/mock-posts';
-import { activePostAtom } from '~/shared/atoms';
+import { activeJobPostAtom } from '~/features/jobs/atoms';
+import { JobCardList, JobRightPanel } from '~/features/jobs/components';
+import { JobPost } from '~/features/jobs/core/interfaces';
+import { fakeJobPost } from '~/features/jobs/testutils';
 import { ToBeReplacedLayout } from '~/shared/components';
 import { SideBar } from '~/shared/components/layout/sidebar';
-import type { JobPost } from '~/shared/core/interfaces';
 
 interface Props {
   data: {
-    posts: JobPost[];
+    listings: JobPost[];
   };
 }
 
 const JobsPage = ({ data }: Props) => {
-  const setActiveListing = useSetAtom(activePostAtom);
+  const setActiveListing = useSetAtom(activeJobPostAtom);
 
   // Sync SSR data active post
   useEffect(() => {
-    setActiveListing(data.posts.length > 0 ? data.posts[0] : null);
+    setActiveListing(data.listings.length > 0 ? data.listings[0] : null);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (data.posts.length === 0) return <h1>EMPTY</h1>;
+  if (data.listings.length === 0) return <h1>EMPTY</h1>;
 
   return (
-    <ToBeReplacedLayout sidebar={<SideBar />} rightPanel={<RightPanel />}>
+    <ToBeReplacedLayout
+      sidebar={<SideBar />}
+      rightPanel={<JobRightPanel listing={data.listings[0]} />}
+    >
       <Filters url={API_URL_JOBS_FILTER_CONFIG} />
-      <JobCardList initListings={data.posts} />
+      <JobCardList initListings={data.listings} />
     </ToBeReplacedLayout>
   );
 };
@@ -54,7 +56,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (ctx) => {
   return {
     props: {
       data: {
-        posts: mockJobPosts,
+        listings: [fakeJobPost()],
       },
     },
   };

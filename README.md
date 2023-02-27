@@ -49,14 +49,3 @@ This section contains the step needed to run the application locally on your mac
 ## Versioning
 
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/recruitersrip/app/tags).
-
-## Important Notes
-
-### On mocked data
-
-- When using mock data for Server-side rendering (SSR), accessing specific items, such as active cards, can be difficult because the mock data is generated randomly. If you try to access an item that is not defined in the mock data, you will get a 404 error just like you would in production. Here are the list of cards guaranteed to exist (one per section):
-
-  - `/jobs/uniswap-labs-senior-frontend-engineer-12345/details`
-  - `/organizations/uniswap-labs/details`
-  - `/projects/uniswap-uni/details`
-  - `/repositories/uniswap-interface/details`

@@ -1,116 +1,119 @@
-import { useEffect } from 'react';
-import { useInView } from 'react-intersection-observer';
+export const ProjectCardList = () => <div>ProjectCardList</div>;
 
-import { useSetAtom } from 'jotai';
+//
+// import { useEffect } from 'react';
+// import { useInView } from 'react-intersection-observer';
 
-import { activePostAtom } from '~/shared/atoms';
-import {
-  EVENT_CARD_CLICK,
-  TEXT_ROUTE_SECTION_PROJECTS,
-  TEXT_ROUTE_TAB_DETAILS,
-} from '~/shared/core/constants';
-import type { ProjectPost } from '~/shared/core/interfaces';
-import { useRouteSegments } from '~/shared/hooks';
-import { createRouteString, slugify } from '~/shared/utils';
+// import { useSetAtom } from 'jotai';
 
-import { useProjectPostInfQuery } from '../hooks';
+// import { activePostAtom } from '~/shared/atoms';
+// import {
+//   EVENT_CARD_CLICK,
+//   TEXT_ROUTE_SECTION_PROJECTS,
+//   TEXT_ROUTE_TAB_DETAILS,
+// } from '~/shared/core/constants';
+// import type { ProjectPost } from '~/shared/core/interfaces';
+// import { useRouteSegments } from '~/shared/hooks';
+// import { createRouteString, slugify } from '~/shared/utils';
 
-import { ProjectCard } from './project-card';
+// import { useProjectPostInfQuery } from '../hooks';
 
-interface Props {
-  initListings: ProjectPost[];
-}
+// import { ProjectCard } from './project-card';
 
-export const ProjectCardList = ({ initListings }: Props) => {
-  const {
-    segments: { key },
-    push,
-  } = useRouteSegments();
-  const setActiveListing = useSetAtom(activePostAtom);
+// interface Props {
+//   initListings: ProjectPost[];
+// }
 
-  const onClickListing = (post: ProjectPost) => {
-    setActiveListing(post);
-    document.dispatchEvent(new Event(EVENT_CARD_CLICK));
+// export const ProjectCardList = ({ initListings }: Props) => {
+//   const {
+//     segments: { key },
+//     push,
+//   } = useRouteSegments();
+//   const setActiveListing = useSetAtom(activePostAtom);
 
-    const route = createRouteString(
-      TEXT_ROUTE_SECTION_PROJECTS,
-      slugify(post.details.name),
-      TEXT_ROUTE_TAB_DETAILS,
-    );
+//   const onClickListing = (post: ProjectPost) => {
+//     setActiveListing(post);
+//     document.dispatchEvent(new Event(EVENT_CARD_CLICK));
 
-    push(route, {
-      shallow: true,
-    });
-  };
+//     const route = createRouteString(
+//       TEXT_ROUTE_SECTION_PROJECTS,
+//       slugify(post.details.name),
+//       TEXT_ROUTE_TAB_DETAILS,
+//     );
 
-  const {
-    data,
-    error,
-    isLoading,
-    isFetchingNextPage,
-    fetchNextPage,
-    hasNextPage,
-  } = useProjectPostInfQuery();
+//     push(route, {
+//       shallow: true,
+//     });
+//   };
 
-  const { ref, inView } = useInView();
+//   const {
+//     data,
+//     error,
+//     isLoading,
+//     isFetchingNextPage,
+//     fetchNextPage,
+//     hasNextPage,
+//   } = useProjectPostInfQuery();
 
-  useEffect(() => {
-    if (inView) {
-      fetchNextPage();
-    }
-  }, [fetchNextPage, inView, isFetchingNextPage]);
+//   const { ref, inView } = useInView();
 
-  return (
-    <div className="space-y-8">
-      {initListings.map((post) => (
-        <ProjectCard
-          key={post.details.id}
-          post={post}
-          isActive={key === slugify(post.details.name)}
-          onClick={() => onClickListing(post)}
-        />
-      ))}
+//   useEffect(() => {
+//     if (inView) {
+//       fetchNextPage();
+//     }
+//   }, [fetchNextPage, inView, isFetchingNextPage]);
 
-      {data &&
-        data.pages.map((page, i) =>
-          page.posts.map((post, j) => (
-            <div
-              key={post.details.id}
-              ref={
-                i === data.pages.length - 1 && j === page.posts.length - 1
-                  ? ref
-                  : undefined
-              }
-            >
-              <ProjectCard
-                key={post.details.id}
-                post={post}
-                isActive={key === slugify(post.details.name)}
-                onClick={() => onClickListing(post)}
-              />
-            </div>
-          )),
-        )}
+//   return (
+//     <div className="space-y-8">
+//       {initListings.map((post) => (
+//         <ProjectCard
+//           key={post.details.id}
+//           post={post}
+//           isActive={key === slugify(post.details.name)}
+//           onClick={() => onClickListing(post)}
+//         />
+//       ))}
 
-      {Boolean(error) && (
-        <div>
-          <p>error = {JSON.stringify(error)}</p>
-        </div>
-      )}
+//       {data &&
+//         data.pages.map((page, i) =>
+//           page.posts.map((post, j) => (
+//             <div
+//               key={post.details.id}
+//               ref={
+//                 i === data.pages.length - 1 && j === page.posts.length - 1
+//                   ? ref
+//                   : undefined
+//               }
+//             >
+//               <ProjectCard
+//                 key={post.details.id}
+//                 post={post}
+//                 isActive={key === slugify(post.details.name)}
+//                 onClick={() => onClickListing(post)}
+//               />
+//             </div>
+//           )),
+//         )}
 
-      {isLoading && (
-        <div>
-          <p>Fetching project posts ...</p>
-        </div>
-      )}
+//       {Boolean(error) && (
+//         <div>
+//           <p>error = {JSON.stringify(error)}</p>
+//         </div>
+//       )}
 
-      {isFetchingNextPage && (
-        <div>
-          <p>Loading more project posts ...</p>
-        </div>
-      )}
+//       {isLoading && (
+//         <div>
+//           <p>Fetching project posts ...</p>
+//         </div>
+//       )}
 
-      {data && !hasNextPage && <p>No more project posts to load</p>}
-    </div>
-  );
-};
+//       {isFetchingNextPage && (
+//         <div>
+//           <p>Loading more project posts ...</p>
+//         </div>
+//       )}
+
+//       {data && !hasNextPage && <p>No more project posts to load</p>}
+//     </div>
+//   );
+// };

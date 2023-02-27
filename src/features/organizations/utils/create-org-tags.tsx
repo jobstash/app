@@ -1,35 +1,38 @@
-import { TagIcon } from '~/shared/components';
-import type { OrgPost, TagElement } from '~/shared/core/interfaces';
+export const createOrgTags = () => {};
 
-export const createOrgTags = (post: OrgPost): TagElement[] => {
-  const { jobs, projects, details } = post;
+//
+// import { TagIcon } from '~/shared/components';
+// import type { OrgPost, TagElement } from '~/shared/core/interfaces';
 
-  const { teamSize, funding } = details;
+// export const createOrgTags = (post: OrgPost): TagElement[] => {
+//   const { jobs, projects, details } = post;
 
-  const tags: TagElement[] = [
-    {
-      text: `Team Size: ${teamSize}`,
-      icon: <TagIcon filename="users-three" />,
-    },
-    {
-      text: `Funding: ${funding.date}`,
-      icon: <TagIcon filename="funding" />,
-    },
-  ];
+//   const { teamSize, funding } = details;
 
-  if (projects.length > 0) {
-    tags.unshift({
-      text: `Projects: ${projects.length}`,
-      icon: <TagIcon filename="code" />,
-    });
-  }
+//   const tags: TagElement[] = [
+//     {
+//       text: `Team Size: ${teamSize}`,
+//       icon: <TagIcon filename="users-three" />,
+//     },
+//     {
+//       text: `Funding: ${funding.date}`,
+//       icon: <TagIcon filename="funding" />,
+//     },
+//   ];
 
-  if (jobs.length > 0) {
-    tags.unshift({
-      text: `Jobs: ${jobs.length}`,
-      icon: <TagIcon filename="suitcase" />,
-    });
-  }
+//   if (projects.length > 0) {
+//     tags.unshift({
+//       text: `Projects: ${projects.length}`,
+//       icon: <TagIcon filename="code" />,
+//     });
+//   }
 
-  return tags;
-};
+//   if (jobs.length > 0) {
+//     tags.unshift({
+//       text: `Jobs: ${jobs.length}`,
+//       icon: <TagIcon filename="suitcase" />,
+//     });
+//   }
+
+//   return tags;
+// };

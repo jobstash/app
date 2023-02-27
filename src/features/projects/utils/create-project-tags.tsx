@@ -1,61 +1,64 @@
-import { TagIcon } from '~/shared/components';
-import type { Project, TagElement } from '~/shared/core/interfaces';
+export const createProjectTags = () => {};
 
-export const createProjectTags = (project: Project) => {
-  const {
-    numJobs,
-    numRepos,
-    website,
-    category,
-    teamSize,
-    tvl,
-    monthlyVolume,
-    activeUsers,
-    revenue,
-    audits,
-    hacks,
-  } = project;
+//
+// import { TagIcon } from '~/shared/components';
+// import type { Project, TagElement } from '~/shared/core/interfaces';
 
-  const top: TagElement[] = [
-    { text: `Jobs: ${numJobs}`, icon: <TagIcon filename="suitcase" /> },
-    {
-      text: `Relevant Repos: ${numRepos}`,
-      icon: <TagIcon filename="github" />,
-    },
-    website,
-    { text: `Category: ${category}`, icon: <TagIcon filename="category" /> },
-    { text: `Team Size: ${teamSize}`, icon: <TagIcon filename="category" /> },
-  ];
+// export const createProjectTags = (project: Project) => {
+//   const {
+//     numJobs,
+//     numRepos,
+//     website,
+//     category,
+//     teamSize,
+//     tvl,
+//     monthlyVolume,
+//     activeUsers,
+//     revenue,
+//     audits,
+//     hacks,
+//   } = project;
 
-  const mid: TagElement[] = [
-    { text: `TVL: ${tvl}`, icon: <TagIcon filename="tvl" /> },
-    {
-      text: `Monthly Volume: ${monthlyVolume}`,
-      icon: <TagIcon filename="monthly-volume" />,
-    },
-    {
-      text: `Active Users: ${activeUsers}`,
-      icon: <TagIcon filename="active-user" />,
-    },
-    { text: `Revenue: ${revenue}`, icon: <TagIcon filename="revenue" /> },
-  ];
+//   const top: TagElement[] = [
+//     { text: `Jobs: ${numJobs}`, icon: <TagIcon filename="suitcase" /> },
+//     {
+//       text: `Relevant Repos: ${numRepos}`,
+//       icon: <TagIcon filename="github" />,
+//     },
+//     website,
+//     { text: `Category: ${category}`, icon: <TagIcon filename="category" /> },
+//     { text: `Team Size: ${teamSize}`, icon: <TagIcon filename="category" /> },
+//   ];
 
-  const bottom: TagElement[] = [
-    ...audits.map((audit) => ({
-      text: `Audit: ${audit.text}`,
-      icon: <TagIcon filename="audit" />,
-      link: audit.link,
-    })),
-    ...hacks.map((hack) => ({
-      text: `Hack: ${hack.text}`,
-      icon: <TagIcon filename="hacks" />,
-      link: hack.link,
-    })),
-  ];
+//   const mid: TagElement[] = [
+//     { text: `TVL: ${tvl}`, icon: <TagIcon filename="tvl" /> },
+//     {
+//       text: `Monthly Volume: ${monthlyVolume}`,
+//       icon: <TagIcon filename="monthly-volume" />,
+//     },
+//     {
+//       text: `Active Users: ${activeUsers}`,
+//       icon: <TagIcon filename="active-user" />,
+//     },
+//     { text: `Revenue: ${revenue}`, icon: <TagIcon filename="revenue" /> },
+//   ];
 
-  return {
-    top,
-    mid,
-    bottom,
-  };
-};
+//   const bottom: TagElement[] = [
+//     ...audits.map((audit) => ({
+//       text: `Audit: ${audit.text}`,
+//       icon: <TagIcon filename="audit" />,
+//       link: audit.link,
+//     })),
+//     ...hacks.map((hack) => ({
+//       text: `Hack: ${hack.text}`,
+//       icon: <TagIcon filename="hacks" />,
+//       link: hack.link,
+//     })),
+//   ];
+
+//   return {
+//     top,
+//     mid,
+//     bottom,
+//   };
+// };

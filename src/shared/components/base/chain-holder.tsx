@@ -7,7 +7,8 @@ export interface ChainHolderProps {
 
 export const ChainHolder = ({ project }: ChainHolderProps) => (
   <div className="flex text-sm">
-    {project?.chains.map((chain) => (
+    {/** Still waiting for backend/middleware implementation of chains */}
+    {/* {project?.chains.map((chain) => (
       <div key={chain.name} className="-ml-2 flex">
         <Image
           src={chain.avatar}
@@ -18,6 +19,6 @@ export const ChainHolder = ({ project }: ChainHolderProps) => (
         />
         <p className="sr-only">{chain.name}</p>
       </div>
-    ))}
+    ))} */}
   </div>
 );
