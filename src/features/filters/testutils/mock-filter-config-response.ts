@@ -1,8 +1,8 @@
 import { rest } from 'msw';
 
+import { API_MW_URL } from '~/shared/core/constants';
 import type { GenericResponse } from '~/shared/core/interfaces';
 
-import { API_URL_JOBS_FILTER_CONFIG } from '../core/constants';
 import type { FilterConfig } from '../core/interfaces';
 
 export const mockFilterConfigResponse = (
@@ -11,7 +11,7 @@ export const mockFilterConfigResponse = (
   delay = 0,
   networkError = false,
 ) => {
-  rest.get(API_URL_JOBS_FILTER_CONFIG, (_req, res, ctx) => {
+  rest.get(`${API_MW_URL}/jobs/filters`, (_req, res, ctx) => {
     if (networkError) {
       return res.networkError('network error');
     }

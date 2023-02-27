@@ -1,6 +1,6 @@
 import { Job } from '~/shared/core/interfaces';
 
-export const createJobRightPanelDescriptions = ({
+export const createRightPanelJobDescriptions = ({
   role,
   team,
   benefits,

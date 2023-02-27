@@ -31,7 +31,11 @@ if (
   worker.start({
     onUnhandledRequest: (req: any, print: any) => {
       // Ignore nextjs image msw warnings
-      if (req.url.pathname.startsWith('/_next')) {
+      if (
+        req.url.pathname.startsWith('/_next') ||
+        req.url.pathname.startsWith('/icons') ||
+        req.url.hostname.includes('middleware-dev')
+      ) {
         return;
       }
 

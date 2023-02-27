@@ -43,7 +43,9 @@ export const IconHolder = ({
         {link ? (
           <a href={link} className="flex items-center">
             {content}
-            <TagIcon filename="external-link" />
+            <div className="ml-1">
+              <TagIcon filename="external-link" />
+            </div>
           </a>
         ) : (
           content

@@ -5,9 +5,10 @@ import { useSetAtom } from 'jotai';
 
 import { Filters } from '~/features/filters/components';
 import { activeJobPostAtom } from '~/features/jobs/atoms';
-import { JobCardList, JobRightPanel } from '~/features/jobs/components';
+import { JobCardList } from '~/features/jobs/components';
 import { JobPost } from '~/features/jobs/core/interfaces';
 import { fakeJobPost } from '~/features/jobs/testutils';
+import { JobRightPanel } from '~/features/right-panel/components';
 import { ToBeReplacedLayout } from '~/shared/components';
 import { SideBar } from '~/shared/components/layout/sidebar';
 

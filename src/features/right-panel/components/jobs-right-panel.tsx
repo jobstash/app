@@ -1,4 +1,4 @@
-import { JobPost } from '../core/interfaces';
+import { JobPost } from '~/features/jobs/core/interfaces';
 
 import { JobRightPanel } from './job-right-panel';
 

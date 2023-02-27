@@ -12,5 +12,6 @@ export const TagIcon = ({ filename }: Props) => (
     alt={filename}
     width="13"
     height="13"
+    className="mr-1"
   />
 );

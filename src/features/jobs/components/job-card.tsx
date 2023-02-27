@@ -9,6 +9,7 @@ import {
   ChainHeading,
   IconHolder,
   SkillHolder,
+  TagIcon,
 } from '~/shared/components';
 
 import { JobPost } from '../core/interfaces';
@@ -85,26 +86,14 @@ export const JobCard = ({ listing, isActive, onClick }: Props) => {
           {org.name}
         </ChainHeading>
         <div className="flex items-center text-sm">
-          <Image
-            src="/icons/funding.svg"
-            width="13"
-            height="13"
-            alt="funding"
-            className="mr-2"
-          />
+          <TagIcon filename="funding" />
           {/** Note: waiting for backend/middleware to provide last_funding_data  */}
-          Last Funding: last_funding_data
+          Last Funding: TBD
         </div>
         <div className="flex items-center text-sm">
-          <Image
-            src="/icons/funding.svg"
-            width="13"
-            height="13"
-            alt="funding"
-            className="mr-2"
-          />
+          <TagIcon filename="funding" />
           {/** Note: waiting for backend/middleware to provide funding_data  */}
-          Funding: funding_data
+          Funding: TBD
         </div>
       </div>
 

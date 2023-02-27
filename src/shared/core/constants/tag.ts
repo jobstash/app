@@ -21,4 +21,5 @@ export const tagIcons = [
   'telegram',
   'users-three',
   'website',
+  'funding',
 ] as const;
