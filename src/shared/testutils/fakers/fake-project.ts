@@ -7,17 +7,17 @@ import { fakeDesc } from './fake-desc';
 export const fakeProject = (): Project => {
   const id = faker.datatype.uuid();
 
-  const name = faker.helpers.arrayElement([
+  const name = `[FAKE] ${faker.helpers.arrayElement([
     'Uniswap V3',
     'Pancake Swap',
     'Balancer V2 Protocol',
-  ]);
+  ])}`;
 
   const description = fakeDesc();
 
   const url = faker.internet.url();
 
-  const logo = faker.image.business(32, 32, true);
+  const logo = '';
 
   const tokenAddress =
     faker.helpers.maybe(() => faker.datatype.uuid()) ?? (null as any);

@@ -8,7 +8,7 @@ export const fakeOrg = (): Organization => {
   const id = faker.datatype.uuid();
   const orgId = faker.datatype.uuid();
 
-  const name = faker.helpers.arrayElement([
+  const name = `[FAKE] ${faker.helpers.arrayElement([
     'Uniswap Labs',
     'Aave',
     'Balancer',
@@ -16,7 +16,7 @@ export const fakeOrg = (): Organization => {
     'Pancake Swap',
     'Polygon',
     'Versa Games',
-  ]);
+  ])}`;
 
   const description = fakeDesc();
 

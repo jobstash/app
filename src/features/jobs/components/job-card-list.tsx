@@ -60,11 +60,6 @@ export const JobCardList = ({ initListings }: Props) => {
 
   return (
     <div className="space-y-8">
-      <p>data = {JSON.stringify(data)}</p>
-      <p>error = {JSON.stringify(error)}</p>
-      <p>isLoading = {JSON.stringify(isLoading)}</p>
-      <p>hasNextPage = {JSON.stringify(hasNextPage)}</p>
-
       {initListings.map((listing) => (
         <JobCard
           key={listing.jobpost.id}
@@ -96,7 +91,7 @@ export const JobCardList = ({ initListings }: Props) => {
 
       {Boolean(error) && (
         <div>
-          <p>error = {JSON.stringify(error)}</p>
+          <p>Failed fetching job-list: {(error as Error).message}</p>
         </div>
       )}
 
