@@ -1,18 +1,18 @@
-import type { Post } from '~/shared/core/interfaces';
+import { JobPost } from '../core/interfaces';
 
 import { JobRightPanel } from './job-right-panel';
 
 interface Props {
-  jobs: Post['jobs'];
+  listings: JobPost[] | null;
 }
 
-export const JobsRightPanel = ({ jobs }: Props) => {
-  if (!jobs || jobs.length === 0) return null;
+export const JobsRightPanel = ({ listings }: Props) => {
+  if (!listings || listings.length === 0) return null;
 
   return (
     <div className="">
-      {jobs.map((job) => (
-        <JobRightPanel key={job.id} job={job} />
+      {listings.map((listing) => (
+        <JobRightPanel key={listing.jobpost.id} listing={listing} />
       ))}
     </div>
   );

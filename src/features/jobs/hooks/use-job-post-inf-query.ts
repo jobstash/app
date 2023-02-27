@@ -1,21 +1,27 @@
 import { useInfiniteQuery } from '@tanstack/react-query';
 
+import { API_MW_AUTH_TOKEN, API_MW_URL } from '~/shared/core/constants';
 import {
   ERR_INTERNAL,
   SENTRY_MW_NON_200_RESPONSE,
   SENTRY_MW_NON_JSON_RESPONSE,
 } from '~/shared/core/constants';
-import type { JobPost } from '~/shared/core/interfaces';
 import { sentryMessage } from '~/shared/utils';
 
-const SENTRY_LABEL = `fetchJobListings`;
+import { JobPost } from '../core/interfaces';
 
+const SENTRY_LABEL = `fetchJobListings`;
 const fetchJobListings = async ({
   pageParam = 0,
 }): Promise<JobListingsInfQueryPage> => {
-  const res = await fetch(
-    `http://localhost:3000/mocked-bff/posts/jobs?cursor=${pageParam}`,
-  );
+  const res = await fetch(`${API_MW_URL}/jobs/list?page=${pageParam}`, {
+    method: 'GET',
+    credentials: 'include',
+    headers: {
+      Authorization: `Bearer ${API_MW_AUTH_TOKEN}`,
+      'Content-Type': 'application/json',
+    },
+  });
 
   // Query to mw should work - 500 otherwise
   if (!res.ok) {
@@ -37,11 +43,12 @@ const fetchJobListings = async ({
 };
 
 interface JobListingsInfQueryPage {
-  nextCursor: number;
-  posts: JobPost[];
+  page: number;
+  count: number;
+  data: JobPost[];
 }
 
 export const useJobListingInfQuery = () =>
   useInfiniteQuery<JobListingsInfQueryPage>(['job-posts'], fetchJobListings, {
-    getNextPageParam: (page) => page.nextCursor,
+    getNextPageParam: ({ page }) => page,
   });

@@ -3,16 +3,16 @@ import { useInView } from 'react-intersection-observer';
 
 import { useSetAtom } from 'jotai';
 
-import { activePostAtom } from '~/shared/atoms';
 import {
   EVENT_CARD_CLICK,
   TEXT_ROUTE_SECTION_JOBS,
   TEXT_ROUTE_TAB_DETAILS,
 } from '~/shared/core/constants';
-import { JobPost } from '~/shared/core/interfaces';
 import { useRouteSegments } from '~/shared/hooks';
 import { createRouteString } from '~/shared/utils';
 
+import { activeJobPostAtom } from '../atoms';
+import { JobPost } from '../core/interfaces';
 import { useJobListingInfQuery } from '../hooks';
 import { checkJobIsActive, createJobKey } from '../utils';
 
@@ -24,15 +24,15 @@ interface Props {
 
 export const JobCardList = ({ initListings }: Props) => {
   const { segments, push } = useRouteSegments();
-  const setActiveListing = useSetAtom(activePostAtom);
+  const setActiveListing = useSetAtom(activeJobPostAtom);
 
-  const onClickListing = (post: JobPost) => {
-    setActiveListing(post);
+  const onClickListing = (listing: JobPost) => {
+    setActiveListing(listing);
     document.dispatchEvent(new Event(EVENT_CARD_CLICK));
 
     const route = createRouteString(
       TEXT_ROUTE_SECTION_JOBS,
-      createJobKey(post),
+      createJobKey(listing),
       TEXT_ROUTE_TAB_DETAILS,
     );
 
@@ -60,30 +60,35 @@ export const JobCardList = ({ initListings }: Props) => {
 
   return (
     <div className="space-y-8">
-      {initListings.map((post) => (
+      <p>data = {JSON.stringify(data)}</p>
+      <p>error = {JSON.stringify(error)}</p>
+      <p>isLoading = {JSON.stringify(isLoading)}</p>
+      <p>hasNextPage = {JSON.stringify(hasNextPage)}</p>
+
+      {initListings.map((listing) => (
         <JobCard
-          key={post.details.id}
-          post={post}
-          isActive={checkJobIsActive(segments.key, post)}
-          onClick={() => onClickListing(post)}
+          key={listing.jobpost.id}
+          listing={listing}
+          isActive={checkJobIsActive(segments.key, listing)}
+          onClick={() => onClickListing(listing)}
         />
       ))}
 
       {data &&
         data.pages.map((page, i) =>
-          page.posts.map((post, j) => (
+          page.data.map((listing, j) => (
             <div
-              key={post.details.id}
+              key={listing.jobpost.id}
               ref={
-                i === data.pages.length - 1 && j === page.posts.length - 1
+                i === data.pages.length - 1 && j === page.data.length - 1
                   ? ref
                   : undefined
               }
             >
               <JobCard
-                post={post}
-                isActive={checkJobIsActive(segments.key, post)}
-                onClick={() => onClickListing(post)}
+                listing={listing}
+                isActive={checkJobIsActive(segments.key, listing)}
+                onClick={() => onClickListing(listing)}
               />
             </div>
           )),
