@@ -23,9 +23,9 @@ export const fakeJob = (): Job => {
     'Cloud',
   ])} Engineer`;
 
-  const jobCreatedTimestamp = Date.now();
-  const jobFoundTimestamp = Date.now();
-  const extractedTimestamp = Date.now();
+  const jobCreatedTimestamp = faker.date.recent(60).valueOf() / 1000;
+  const jobFoundTimestamp = faker.date.recent(60).valueOf() / 1000;
+  const extractedTimestamp = faker.date.recent(60).valueOf() / 1000;
 
   const minSalary = faker.datatype.number({ min: 60_000, max: 80_000 });
   const maxSalary = faker.datatype.number({ min: 90_000, max: 120_000 });
