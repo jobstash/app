@@ -6,7 +6,7 @@ import {
   KEY_SALARY,
   KEY_TVL,
 } from '../core/constants';
-import { RangeSliderProps } from '../core/types';
+import { RangeSliderProps } from '../core/interfaces';
 
 const currencyKeys = new Set([
   KEY_SALARY,
