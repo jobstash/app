@@ -12,7 +12,7 @@ export const JobsRightPanel = ({ listings }: Props) => {
   return (
     <div className="">
       {listings.map((listing) => (
-        <JobRightPanel key={listing.jobpost.id} listing={listing} />
+        <JobRightPanel key={listing.jobpost.id} />
       ))}
     </div>
   );

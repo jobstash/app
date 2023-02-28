@@ -11,7 +11,7 @@ import {
   SkillHolder,
   TagIcon,
 } from '~/shared/components';
-import { prettyUnix } from '~/shared/utils';
+import { capitalize, prettyUnix } from '~/shared/utils';
 
 import { JobPost } from '../core/interfaces';
 import { createJobTags } from '../utils';
@@ -65,16 +65,16 @@ export const JobCard = ({ listing, isActive, onClick }: Props) => {
       <div className="flex space-x-8 border-b border-white/5 pt-3 pb-4 text-sm">
         {tags.map(({ text, link, iconText }) => (
           <IconHolder key={text} link={link} iconText={iconText}>
-            {text}
+            {capitalize(text)}
           </IconHolder>
         ))}
       </div>
 
       <div className="flex justify-between space-x-4 border-b border-white/5 py-4">
         <div className="-mb-3 flex grow flex-wrap">
-          {technologies.map((tech) => (
-            <SkillHolder key={tech} isChecked={false} className="mr-4">
-              {tech}
+          {technologies.map(({ id, name }) => (
+            <SkillHolder key={id} isChecked={false} className="mr-4">
+              {name}
             </SkillHolder>
           ))}
         </div>
@@ -98,7 +98,7 @@ export const JobCard = ({ listing, isActive, onClick }: Props) => {
         </div>
       </div>
 
-      {project && (
+      {project ? (
         <div className="border-t border-white/5 pt-4">
           <div className="flex">
             <ChainHeading avatar={project.logo} alt={project.name}>
@@ -124,7 +124,7 @@ export const JobCard = ({ listing, isActive, onClick }: Props) => {
             </div>
           )}
         </div>
-      )}
+      ) : null}
     </div>
   );
 };

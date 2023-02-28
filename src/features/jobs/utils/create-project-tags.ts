@@ -4,8 +4,14 @@ import { numFormatter } from '~/shared/utils';
 export const createProjectTags = (project?: Project): TagElement[] => {
   if (!project) return [];
 
-  const { tokenSymbol, tvl, monthlyVolume, monthlyFees, monthlyRevenue } =
-    project;
+  const {
+    tokenSymbol,
+    tvl,
+    monthlyVolume,
+    monthlyFees,
+    monthlyRevenue,
+    hacks,
+  } = project;
 
   const tags: TagElement[] = [];
 
@@ -34,12 +40,18 @@ export const createProjectTags = (project?: Project): TagElement[] => {
       iconText: 'revenue',
     });
 
+  if (hacks.length > 0) {
+    tags.push({
+      text: `Hacks: ${hacks.length}`,
+      iconText: 'hacks',
+    });
+  }
+
   /**
    * Still waiting for backend/middleware implementation of the following:
    * 	- category
    *  - active users
    *  - audits
-   * 	- hacks
    */
 
   return tags;

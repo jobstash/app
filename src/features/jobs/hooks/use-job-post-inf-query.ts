@@ -12,10 +12,10 @@ import { JobPost } from '../core/interfaces';
 
 const SENTRY_LABEL = `fetchJobListings`;
 const fetchJobListings = async ({
-  pageParam = 0,
+  pageParam = 1,
 }): Promise<JobListingsInfQueryPage> => {
   const res = await fetch(
-    `${API_MW_URL}/jobs/list?page=${pageParam}?limit=10`,
+    `${API_MW_URL}/jobs/list?page=${pageParam}&limit=10`,
     {
       method: 'GET',
       credentials: 'include',
@@ -52,6 +52,10 @@ interface JobListingsInfQueryPage {
 }
 
 export const useJobListingInfQuery = () =>
-  useInfiniteQuery<JobListingsInfQueryPage>(['job-posts'], fetchJobListings, {
-    getNextPageParam: ({ page }) => page,
-  });
+  useInfiniteQuery<JobListingsInfQueryPage>(
+    ['job-posts'],
+    async ({ pageParam }) => fetchJobListings({ pageParam }),
+    {
+      getNextPageParam: ({ page }) => (page > 0 ? page + 1 : undefined),
+    },
+  );

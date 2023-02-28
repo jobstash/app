@@ -14,8 +14,8 @@ export interface Job {
   seniority?: string; // Refinement: receive formatted string, must be required
 
   // Salaries
-  minSalary: number; // Refinement: receive formatted string
-  maxSalary: number; // Refinement: receive formatted string
+  minSalaryRange: number; // Refinement: receive formatted string
+  maxSalaryRange: number; // Refinement: receive formatted string
 
   /** Location tag for job-post card */
   jobLocation: string;
@@ -36,12 +36,9 @@ export interface Job {
   /** Benefits section for right-panel */
   benefits: string;
 
-  /** Interview section for right-panel */
-  interview: string;
+  /** Culture section for right-panel */
+  culture: string;
 
-  aiGeneratedGrammarCorrectedSummary: string; // Refinement: unused
-  aiGeneratedTeamDescription: string; // Refinement: unused
-  aiGeneratedEducationFreeSkills: string; // Refinement: unused
-  aiGeneratedSplitTechnologiesSkills: string; // Refinement: unused
-  aiGeneratedHardSkillsString: string; // Refinement: unused
+  /** Hard sklls to be displayed */
+  hardSkills: string[];
 }

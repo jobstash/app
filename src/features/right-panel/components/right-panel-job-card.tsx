@@ -1,6 +1,7 @@
 import { createJobTags } from '~/features/jobs/utils';
 import { Button, IconHolder } from '~/shared/components';
 import { Job } from '~/shared/core/interfaces';
+import { capitalize } from '~/shared/utils';
 
 import { createRightPanelJobDescriptions } from '../utils';
 
@@ -21,7 +22,7 @@ export const RightPanelJobCard = ({ job }: Props) => {
       <div className="flex space-x-8 border-b border-white/5 pt-3 pb-4 text-sm">
         {tags.map(({ text, link, iconText }) => (
           <IconHolder key={text} link={link} iconText={iconText}>
-            {text}
+            {capitalize(text)}
           </IconHolder>
         ))}
       </div>

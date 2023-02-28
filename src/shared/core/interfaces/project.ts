@@ -1,3 +1,5 @@
+import { Hack } from './common';
+
 export interface Project {
   /** Project unique identifier */
   id: string;
@@ -41,7 +43,7 @@ export interface Project {
   /** Most recent project timestamp */
   updatedTimestamp?: number; // Refinement: unused
 
-  hacks: string[];
+  hacks: Hack[];
   audits: string[];
   chains: string[];
 

@@ -8,6 +8,7 @@ import { activeJobPostAtom } from '~/features/jobs/atoms';
 import { JobCardList } from '~/features/jobs/components';
 import { JobPost } from '~/features/jobs/core/interfaces';
 import { fakeJobPost } from '~/features/jobs/testutils';
+import { createJobKey } from '~/features/jobs/utils';
 import { JobRightPanel } from '~/features/right-panel/components';
 import { ToBeReplacedLayout } from '~/shared/components';
 import { SideBar } from '~/shared/components/layout/sidebar';
@@ -30,10 +31,7 @@ const JobsPage = ({ data }: Props) => {
   if (data.listings.length === 0) return <h1>EMPTY</h1>;
 
   return (
-    <ToBeReplacedLayout
-      sidebar={<SideBar />}
-      rightPanel={<JobRightPanel listing={data.listings[0]} />}
-    >
+    <ToBeReplacedLayout sidebar={<SideBar />} rightPanel={<JobRightPanel />}>
       <Filters />
       <JobCardList initListings={data.listings} />
     </ToBeReplacedLayout>
@@ -42,13 +40,15 @@ const JobsPage = ({ data }: Props) => {
 
 export default JobsPage;
 
+const mockPost = fakeJobPost();
+const qKey = createJobKey(mockPost);
+
 export const getServerSideProps: GetServerSideProps<Props> = async (ctx) => {
-  if (ctx.query.key !== 'uniswap-labs-senior-frontend-engineer-12345') {
+  if (ctx.query.key !== qKey) {
     return {
       redirect: {
         permanent: false,
-        destination:
-          '/jobs/uniswap-labs-senior-frontend-engineer-12345/details',
+        destination: `/jobs/${qKey}/details`,
       },
     };
   }
@@ -56,7 +56,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (ctx) => {
   return {
     props: {
       data: {
-        listings: [fakeJobPost()],
+        listings: [mockPost],
       },
     },
   };

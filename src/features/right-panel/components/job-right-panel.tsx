@@ -1,6 +1,9 @@
 import Image from 'next/image';
 import { useEffect } from 'react';
 
+import { useAtomValue } from 'jotai';
+
+import { activeJobPostAtom } from '~/features/jobs/atoms';
 import { JobPost } from '~/features/jobs/core/interfaces';
 import { ProjectRightPanel } from '~/features/projects/components';
 import { Button, ChainHeading, IconHolder } from '~/shared/components';
@@ -20,13 +23,7 @@ import { RightPanelJobCard } from './right-panel-job-card';
 import { RightPanelOrgCard } from './right-panel-org-card';
 import { RightPanelProjectCard } from './right-panel-project-card';
 
-interface Props {
-  listing: JobPost;
-}
-
-export const JobRightPanel = ({
-  listing: { jobpost, organization: org, technologies, categories, project },
-}: Props) => {
+export const JobRightPanel = () => {
   // Whenever a card is clicked, scroll right-panel to top
   useEffect(() => {
     const scrollListener = () => {
@@ -41,6 +38,12 @@ export const JobRightPanel = ({
   }, []);
 
   const { segments, push } = useRouteSegments();
+
+  const listing = useAtomValue(activeJobPostAtom);
+
+  if (!listing) return null;
+
+  const { jobpost, organization: org, project } = listing;
 
   const { orgTags, orgSocials } = createRightPanelOrgTags(org);
   const rightPanelTabs = createRightPanelJobTabs(segments);
