@@ -50,21 +50,20 @@ const getDayStr = (_: Date, ms: number) => {
 const getYearStr = (ts: Date, ms: number, shorthand: boolean) => {
   const interval = Math.floor(ms / YEAR_MS);
   const dateOptions = {
-    month: 'short',
-    day: '2-digit',
+    month: 'long',
+    day: undefined,
     year: interval < 2 ? undefined : 'numeric',
   } as Intl.DateTimeFormatOptions;
 
   if (interval < 2) {
-    return ts.toLocaleDateString('en-US', dateOptions);
+    return `Last ${ts.toLocaleDateString('en-US', dateOptions)}`;
   }
 
   return prettyDate(interval, 'year');
 };
 
 export const prettyUnix = (unix: number, shorthand = true): string => {
-  const ts = getTimeStamp(new Date(unix * 1000));
-  const now = Date.now();
+  const ts = getTimeStamp(new Date(unix));
   const ms = Date.now() - ts.getTime();
 
   const fnArr = [

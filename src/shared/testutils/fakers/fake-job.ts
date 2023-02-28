@@ -16,7 +16,7 @@ export const fakeJob = (): Job => {
     'Intern',
   ]);
 
-  const jobTitle = `[FAKE] ${seniority} ${faker.helpers.arrayElement([
+  const jobTitle = `FAKE ${seniority} ${faker.helpers.arrayElement([
     'Backend',
     'Frontend',
     'dApp',
