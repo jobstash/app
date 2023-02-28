@@ -1,9 +1,15 @@
-import { Job, Organization, Project } from '~/shared/core/interfaces';
+import type {
+  Category,
+  Job,
+  Organization,
+  Project,
+  Technology,
+} from '~/shared/core/interfaces';
 
 export interface JobPost {
   organization: Organization;
   project?: Project;
   jobpost: Job;
-  technologies: string[];
-  categories: string[]; // Refinement: unused
+  technologies: Technology[];
+  categories: Category[]; // Refinement: unused
 }

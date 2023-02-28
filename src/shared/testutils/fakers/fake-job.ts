@@ -23,9 +23,9 @@ export const fakeJob = (): Job => {
     'Cloud',
   ])} Engineer`;
 
-  const jobCreatedTimestamp = faker.date.recent(60).valueOf() / 1000;
-  const jobFoundTimestamp = faker.date.recent(60).valueOf() / 1000;
-  const extractedTimestamp = faker.date.recent(60).valueOf() / 1000;
+  const jobCreatedTimestamp = faker.date.recent(60).valueOf();
+  const jobFoundTimestamp = faker.date.recent(60).valueOf();
+  const extractedTimestamp = faker.date.recent(60).valueOf();
 
   const minSalary = faker.datatype.number({ min: 60_000, max: 80_000 });
   const maxSalary = faker.datatype.number({ min: 90_000, max: 120_000 });
@@ -39,13 +39,12 @@ export const fakeJob = (): Job => {
   const role = fakeDesc();
   const team = fakeDesc();
   const benefits = fakeDesc();
-  const interview = fakeDesc();
-
-  const aiGeneratedGrammarCorrectedSummary = fakeDesc();
-  const aiGeneratedTeamDescription = fakeDesc();
-  const aiGeneratedEducationFreeSkills = fakeDesc();
-  const aiGeneratedSplitTechnologiesSkills = fakeDesc();
-  const aiGeneratedHardSkillsString = fakeDesc();
+  const culture = fakeDesc();
+  const hardSkills = Array.from({
+    length: faker.datatype.number({ min: 3, max: 6 }),
+  })
+    .fill(0)
+    .map(() => faker.lorem.word());
 
   return {
     id,
@@ -53,8 +52,8 @@ export const fakeJob = (): Job => {
     jobCreatedTimestamp,
     jobFoundTimestamp,
     extractedTimestamp,
-    minSalary,
-    maxSalary,
+    minSalaryRange: minSalary,
+    maxSalaryRange: maxSalary,
     jobLocation,
     jobCommitment,
     jobApplyPageUrl,
@@ -62,11 +61,7 @@ export const fakeJob = (): Job => {
     role,
     team,
     benefits,
-    interview,
-    aiGeneratedGrammarCorrectedSummary,
-    aiGeneratedTeamDescription,
-    aiGeneratedEducationFreeSkills,
-    aiGeneratedSplitTechnologiesSkills,
-    aiGeneratedHardSkillsString,
+    culture,
+    hardSkills,
   };
 };

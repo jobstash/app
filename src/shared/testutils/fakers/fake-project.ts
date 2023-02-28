@@ -1,6 +1,7 @@
 import { faker } from '@faker-js/faker';
 
 import { Project } from '~/shared/core/interfaces';
+import { capitalize } from '~/shared/utils';
 
 import { fakeDesc } from './fake-desc';
 
@@ -49,10 +50,16 @@ export const fakeProject = (): Project => {
   const updatedTimestamp = Date.now();
 
   const hacks = Array.from({
-    length: faker.datatype.number({ min: 3, max: 8 }),
+    length: faker.datatype.number({ min: 1, max: 8 }),
   })
     .fill(0)
-    .map(() => faker.lorem.word({ length: { min: 4, max: 10 } }));
+    .map(() => ({
+      id: faker.datatype.uuid(),
+      link: faker.internet.url(),
+      classification: capitalize(faker.word.verb()),
+      fundsLost: faker.datatype.number({ min: 1000, max: 5_000_000 }),
+      date: Date.now() / 1000,
+    }));
 
   const audits = Array.from({
     length: faker.datatype.number({ min: 3, max: 8 }),
