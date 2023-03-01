@@ -38,9 +38,9 @@ const cvaJobCard = cva(
 );
 
 export const JobCard = ({ listing, isActive, onClick }: Props) => {
-  const { jobpost, organization: org, technologies, project } = listing;
+  const { jobpost, organization: org, project } = listing;
 
-  const { jobTitle, jobCreatedTimestamp } = jobpost;
+  const { jobTitle, jobCreatedTimestamp, hardSkills } = jobpost;
 
   const tags = createJobTags(jobpost);
   const projectTags = createProjectTags(project);
@@ -72,16 +72,18 @@ export const JobCard = ({ listing, isActive, onClick }: Props) => {
         ))}
       </div>
 
-      <div className="flex justify-between space-x-4 border-b border-white/5 py-4">
-        <div className="-mb-3 flex grow flex-wrap">
-          {technologies.map(({ id, name }) => (
-            <SkillHolder key={id} isChecked={false} className="mr-4">
-              {name}
-            </SkillHolder>
-          ))}
+      {hardSkills.length > 0 && (
+        <div className="flex justify-between space-x-4 border-b border-white/5 py-4">
+          <div className="-mb-3 flex grow flex-wrap">
+            {hardSkills.map((skill) => (
+              <SkillHolder key={skill} isChecked={false} className="mr-4">
+                {skill}
+              </SkillHolder>
+            ))}
+          </div>
+          <Button>Sign Up to See Matches</Button>
         </div>
-        <Button>Sign Up to See Matches</Button>
-      </div>
+      )}
 
       <div className="flex items-center py-4 last:pb-0">
         {/** Note: waiting for backend/middleware to provide org avatars  */}
