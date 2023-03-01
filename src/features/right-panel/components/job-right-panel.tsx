@@ -57,7 +57,7 @@ export const JobRightPanel = () => {
   return (
     <div>
       {/* NOTE: This component needs to be always on top */}
-      <div className="text-ivory" id={ID_TOP_RIGHT_PANEL} />
+      <div className="absolute top-0 text-ivory" id={ID_TOP_RIGHT_PANEL} />
 
       {/** RIGHT PANEL HEADER */}
       <div>
