@@ -11,7 +11,7 @@ import {
   SkillHolder,
   TagIcon,
 } from '~/shared/components';
-import { capitalize, prettyUnix } from '~/shared/utils';
+import { capitalize, prettyTimestamp } from '~/shared/utils';
 
 import { JobPost } from '../core/interfaces';
 import { createJobTags } from '../utils';
@@ -50,7 +50,9 @@ export const JobCard = ({ listing, isActive, onClick }: Props) => {
       <div className="flex items-center justify-between">
         <CardHeading>{jobTitle}</CardHeading>
         <div className="flex items-center space-x-3">
-          <span className="text-sm">{prettyUnix(jobCreatedTimestamp)}</span>
+          <span className="text-sm">
+            {prettyTimestamp(jobCreatedTimestamp)}
+          </span>
           <Button size="sm">
             <Image
               src="/icons/bookmark.svg"
