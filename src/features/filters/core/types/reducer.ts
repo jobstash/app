@@ -4,15 +4,15 @@ export type FilterState = {
   publicationDate?: string;
   seniority?: string;
   salary?: RangeValue;
-  locations?: Set<string>;
+  locations?: Set<string> | null;
   teamSize?: RangeValue;
   headCount?: RangeValue;
   tvl?: RangeValue;
-  tech?: Set<string>;
-  organizations?: Set<string>;
-  chains?: Set<string>;
-  projects?: Set<string>;
-  categories?: Set<string>;
+  tech?: Set<string> | null;
+  organizations?: Set<string> | null;
+  chains?: Set<string> | null;
+  projects?: Set<string> | null;
+  categories?: Set<string> | null;
   monthlyVolume?: RangeValue;
   monthlyFees?: RangeValue;
   monthlyRevenue?: RangeValue;
@@ -33,7 +33,7 @@ export type StringAction = Action<string>;
 export type RangeAction = Action<RangeValue>;
 export type ClearAction = Action<undefined>;
 
-export type MultiSelectAction = Action<Set<string>>;
+export type MultiSelectAction = Action<Set<string> | null>;
 export type FilterAction =
   | StringAction
   | RangeAction

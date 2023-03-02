@@ -11,20 +11,20 @@ import type { FilterAction, FilterState } from '../core/types';
 interface Props {
   text: string;
   ariaLabel: string;
-  labels: string[];
+  options: string[];
   type: keyof FilterState;
   dispatch: Dispatch<FilterAction>;
 }
 
 export const SingleSelectFilter = ({
   text,
-  labels,
+  options,
   ariaLabel,
   type,
   dispatch,
 }: Props) => {
   const dispatchFn = (clickedLabel: string) => {
-    const payload = labels.find((label) => label === clickedLabel);
+    const payload = options.find((label) => label === clickedLabel);
     if (!payload) return;
 
     dispatch({ type, payload });
@@ -50,7 +50,7 @@ export const SingleSelectFilter = ({
       <SelectPrimitive.Content position="popper" sideOffset={5}>
         <SelectPrimitive.Viewport className="animate-slide-down cursor-pointer rounded-lg bg-zinc-800 p-2 shadow-lg">
           <SelectPrimitive.Group>
-            {labels.map((label) => (
+            {options.map((label) => (
               <SelectPrimitive.Item
                 key={label}
                 value={label}

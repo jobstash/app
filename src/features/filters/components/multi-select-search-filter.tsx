@@ -2,6 +2,7 @@ import {
   ChangeEventHandler,
   Dispatch,
   KeyboardEventHandler,
+  useMemo,
   useState,
 } from 'react';
 
@@ -27,15 +28,15 @@ type Props = {
   text: string;
   type: keyof FilterState;
   dispatch: Dispatch<FilterAction>;
-  items: string[];
-  selectedItems?: Set<string>;
+  options: string[];
+  selectedItems?: Set<string> | null;
 };
 
 export const MultiSelectSearchFilter = ({
   text,
   type,
   dispatch,
-  items,
+  options,
   selectedItems,
 }: Props) => {
   const [inputValue, setInputValue] = useState<string>('');
@@ -52,12 +53,21 @@ export const MultiSelectSearchFilter = ({
     clearInput();
   };
 
-  const availableItems = items.filter(
-    (item) =>
-      !selectedItems?.has(item) &&
-      item.toLowerCase().includes(inputValue.toLowerCase()),
+  const availableItems = useMemo(
+    () =>
+      options.filter(
+        (item) =>
+          !selectedItems?.has(item) &&
+          item.toLowerCase().includes(inputValue.toLowerCase()),
+      ),
+    [inputValue, options, selectedItems],
   );
 
+  // Limit displayed list to 10
+  const renderedAvailItems =
+    availableItems.length > 10 ? availableItems.slice(0, 10) : availableItems;
+
+  // When pressing enter add the topmost available item
   const onInputKeyDown: KeyboardEventHandler<HTMLInputElement> = (e) => {
     if (e.key === 'Enter' && availableItems.length > 0) {
       const payload = new Set(selectedItems ?? []);
@@ -70,13 +80,13 @@ export const MultiSelectSearchFilter = ({
   const clearItems = () => {
     dispatch({
       type,
-      payload: new Set([]),
+      payload: null,
     });
   };
 
   const numSelectedItems = selectedItems?.size ?? 0;
   const hasSelectedItems = numSelectedItems > 0;
-  const displaySearchInput = numSelectedItems !== items.length;
+  const displaySearchInput = numSelectedItems !== options.length;
 
   return (
     <DropdownUi text={text}>
@@ -104,30 +114,32 @@ export const MultiSelectSearchFilter = ({
         </div>
       )}
 
-      <div className="my-2 pl-2">
-        {availableItems.map((label) => {
-          const isChecked = selectedItems?.has(label);
-          return (
-            <Dropdown.Item
-              key={label}
-              className={clsx(
-                'flex cursor-pointer select-none items-center gap-x-2 rounded-md p-2 text-xs outline-none',
-                'hover:bg-zinc-600',
-                { 'bg-zinc-500': isChecked },
-                { 'focus:bg-zinc-700': !isChecked },
-              )}
-              // Disable typeahead (messes with search focus)
-              textValue=""
-              onClick={() => toggleItem(!isChecked, label)}
-              onSelect={(e) => e.preventDefault()}
-            >
-              <Dropdown.ItemIndicator>
-                <UnCheckedIcon />
-              </Dropdown.ItemIndicator>
-              <Text className={`font-sans ${lato.variable}`}>{label}</Text>
-            </Dropdown.Item>
-          );
-        })}
+      <div className="my-2 max-h-60 overflow-y-auto pl-2">
+        <div>
+          {renderedAvailItems.map((label) => {
+            const isChecked = selectedItems?.has(label);
+            return (
+              <Dropdown.Item
+                key={label}
+                className={clsx(
+                  'flex cursor-pointer select-none items-center gap-x-2 rounded-md p-2 text-xs outline-none',
+                  'hover:bg-zinc-600',
+                  { 'bg-zinc-500': isChecked },
+                  { 'focus:bg-zinc-700': !isChecked },
+                )}
+                // Disable typeahead (messes with search focus)
+                textValue=""
+                onClick={() => toggleItem(!isChecked, label)}
+                onSelect={(e) => e.preventDefault()}
+              >
+                <Dropdown.ItemIndicator>
+                  <UnCheckedIcon />
+                </Dropdown.ItemIndicator>
+                <Text className={`font-sans ${lato.variable}`}>{label}</Text>
+              </Dropdown.Item>
+            );
+          })}
+        </div>
       </div>
 
       {displaySearchInput && hasSelectedItems && (
@@ -146,7 +158,7 @@ export const MultiSelectSearchFilter = ({
               Selected Items:
             </Text>
           </Dropdown.Label>
-          <div className="my-3 flex w-full gap-x-2">
+          <div className="my-3 flex w-full max-w-xs flex-wrap gap-2">
             {
               // eslint-disable-next-line unicorn/prefer-spread
               Array.from(selectedItems ?? []).map((label) => (
