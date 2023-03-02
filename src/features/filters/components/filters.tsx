@@ -1,12 +1,17 @@
+import { useSetAtom } from 'jotai';
+
 import { Button } from '~/shared/components';
 
+import { filterParamsAtom } from '../atoms';
 import { useFilterConfigQuery, useFilters } from '../hooks';
 import { getFilterUrlParams } from '../utils';
 
 export const Filters = () => {
   const { data, error, isLoading } = useFilterConfigQuery();
 
-  const { filters, filterComponents, clearFilters } = useFilters(data);
+  const { filters, filterComponents, clearFilterState } = useFilters(data);
+
+  const setFilterParams = useSetAtom(filterParamsAtom);
 
   if (error)
     return (
@@ -18,11 +23,15 @@ export const Filters = () => {
     return <h1 className="text-white">LOADING JOBS FILTER ...</h1>;
 
   const applyFilter = () => {
-    const urlParams = getFilterUrlParams(filters, data);
-
-    // eslint-disable-next-line no-alert
-    alert(urlParams ? `/jobs/list?${urlParams}` : 'EMPTY FILTER');
+    setFilterParams(getFilterUrlParams(filters, data));
   };
+
+  const clear = () => {
+    clearFilterState();
+    setFilterParams(null);
+  };
+
+  const disabledSubmit = Object.keys(filters).length === 0;
 
   return (
     <div className="text-white">
@@ -32,10 +41,16 @@ export const Filters = () => {
             {ui}
           </div>
         ))}
-        <Button kind="primary" onClick={applyFilter}>
+        <Button
+          kind="primary"
+          isDisabled={disabledSubmit}
+          onClick={applyFilter}
+        >
           Apply Filter
         </Button>
-        <Button onClick={clearFilters}>Clear All Filters</Button>
+        <Button isDisabled={disabledSubmit} onClick={clear}>
+          Clear All Filters
+        </Button>
       </div>
     </div>
   );

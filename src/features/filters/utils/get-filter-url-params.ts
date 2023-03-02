@@ -1,6 +1,7 @@
 /* eslint-disable unicorn/consistent-destructuring */
 
 import {
+  FILTER_KIND_MULTISELECT,
   FILTER_KIND_MULTISELECT_WITH_SEARCH,
   FILTER_KIND_RANGE,
   FILTER_KIND_SINGLESELECT,
@@ -24,6 +25,7 @@ export const getFilterUrlParams = (
           return `${config.paramKey}=${encodeURI(v as string)}`;
         }
 
+        case FILTER_KIND_MULTISELECT:
         case FILTER_KIND_MULTISELECT_WITH_SEARCH: {
           const values = config.options.filter((option) =>
             (v as Set<string>).has(option),

@@ -1,8 +1,9 @@
 import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 
-import { useSetAtom } from 'jotai';
+import { useAtomValue, useSetAtom } from 'jotai';
 
+import { filterParamsAtom } from '~/features/filters/atoms';
 import {
   EVENT_CARD_CLICK,
   TEXT_ROUTE_SECTION_JOBS,
@@ -12,7 +13,7 @@ import { useRouteSegments } from '~/shared/hooks';
 import { createRouteString } from '~/shared/utils';
 
 import { activeJobPostAtom } from '../atoms';
-import { JobPost } from '../core/interfaces';
+import type { JobPost } from '../core/interfaces';
 import { useJobListingInfQuery } from '../hooks';
 import { checkJobIsActive, createJobKey } from '../utils';
 
@@ -23,6 +24,8 @@ interface Props {
 }
 
 export const JobCardList = ({ initListings }: Props) => {
+  const filterParams = useAtomValue(filterParamsAtom);
+
   const { segments, push } = useRouteSegments();
   const setActiveListing = useSetAtom(activeJobPostAtom);
 
@@ -48,7 +51,8 @@ export const JobCardList = ({ initListings }: Props) => {
     isFetchingNextPage,
     fetchNextPage,
     hasNextPage,
-  } = useJobListingInfQuery();
+    refetch,
+  } = useJobListingInfQuery(filterParams);
 
   const { ref, inView } = useInView();
 

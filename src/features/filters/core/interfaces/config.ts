@@ -1,4 +1,5 @@
 import {
+  FILTER_KIND_MULTISELECT,
   FILTER_KIND_MULTISELECT_WITH_SEARCH,
   FILTER_KIND_RANGE,
   FILTER_KIND_SINGLESELECT,
@@ -35,7 +36,9 @@ export interface SingleSelectFilterConfig extends FilterConfigSharedProperties {
 
 export interface MultiSelectSearchFilterConfig
   extends FilterConfigSharedProperties {
-  kind: typeof FILTER_KIND_MULTISELECT_WITH_SEARCH;
+  kind:
+    | typeof FILTER_KIND_MULTISELECT_WITH_SEARCH
+    | typeof FILTER_KIND_MULTISELECT;
   paramKey: string;
   options: string[];
 }
@@ -43,7 +46,7 @@ export interface MultiSelectSearchFilterConfig
 export interface FilterConfig {
   publicationDate: SingleSelectFilterConfig;
   salary: RangeFilterConfig;
-  seniority: SingleSelectFilterConfig;
+  seniority: MultiSelectSearchFilterConfig;
   locations: MultiSelectSearchFilterConfig;
   teamSize: RangeFilterConfig;
   headCount: RangeFilterConfig;

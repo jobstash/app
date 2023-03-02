@@ -13,26 +13,12 @@ export const fakeFilterConfig = (): FilterConfig => ({
     paramKey: 'publication_date',
     kind: FILTER_KIND_SINGLESELECT,
     options: [
-      {
-        label: 'Today',
-        value: 'today',
-      },
-      {
-        label: 'Last week',
-        value: 'last week',
-      },
-      {
-        label: 'Last month',
-        value: 'last month',
-      },
-      {
-        label: 'Last quarter',
-        value: 'last quarter',
-      },
-      {
-        label: 'Last year',
-        value: 'last year',
-      },
+      'Current week',
+      'Current month',
+      'Last 3 months',
+      'Last 6 months',
+      'Last year',
+      'Last 3 years',
     ],
   },
   salary: {
@@ -54,36 +40,11 @@ export const fakeFilterConfig = (): FilterConfig => ({
   },
   seniority: {
     position: 2,
-    label: 'Level',
+    label: 'Seniority',
     show: true,
-    paramKey: 'level',
-    kind: FILTER_KIND_SINGLESELECT,
-    options: [
-      {
-        label: 'Intern',
-        value: '1',
-      },
-      {
-        label: 'Junior',
-        value: '2',
-      },
-      {
-        label: 'Mid Level',
-        value: '3',
-      },
-      {
-        label: 'Senior',
-        value: '4',
-      },
-      {
-        label: 'Lead',
-        value: '5',
-      },
-      {
-        label: 'Staff',
-        value: '6',
-      },
-    ],
+    paramKey: 'seniority',
+    kind: FILTER_KIND_MULTISELECT_WITH_SEARCH,
+    options: ['Intern', 'Junior', 'Mid Level', 'Senior', 'Lead', 'Staff'],
   },
   locations: {
     position: 3,
@@ -91,16 +52,7 @@ export const fakeFilterConfig = (): FilterConfig => ({
     show: true,
     paramKey: 'location',
     kind: FILTER_KIND_MULTISELECT_WITH_SEARCH,
-    options: [
-      {
-        label: 'Remote',
-        value: 'remote',
-      },
-      {
-        label: 'Onsite',
-        value: 'onsite',
-      },
-    ],
+    options: ['Remote', 'Onsite'],
   },
   teamSize: {
     position: 5,
@@ -142,28 +94,7 @@ export const fakeFilterConfig = (): FilterConfig => ({
     show: true,
     paramKey: 'tech',
     kind: FILTER_KIND_MULTISELECT_WITH_SEARCH,
-    options: [
-      {
-        label: 'REACT',
-        value: 'react',
-      },
-      {
-        label: 'JEST',
-        value: 'jest',
-      },
-      {
-        label: 'GoLang',
-        value: 'golang',
-      },
-      {
-        label: 'Solidity',
-        value: 'solidity',
-      },
-      {
-        label: 'Cypress',
-        value: 'cypress',
-      },
-    ],
+    options: ['React', 'Jest', 'GoLang', 'Solidity', 'Cypress'],
   },
   organizations: {
     position: 14,
@@ -171,24 +102,7 @@ export const fakeFilterConfig = (): FilterConfig => ({
     show: true,
     paramKey: 'organiations',
     kind: FILTER_KIND_MULTISELECT_WITH_SEARCH,
-    options: [
-      {
-        label: 'Uniswap Labs',
-        value: 'uniswap-labs',
-      },
-      {
-        label: 'Curve',
-        value: 'curve',
-      },
-      {
-        label: 'Pancake Swap',
-        value: 'pancake-swap',
-      },
-      {
-        label: 'Balancer',
-        value: 'balancer',
-      },
-    ],
+    options: ['Uniswap Labs', 'Curve', 'Pancake Swap', 'Balancer'],
   },
   chains: {
     position: 15,
@@ -196,20 +110,7 @@ export const fakeFilterConfig = (): FilterConfig => ({
     show: true,
     paramKey: 'chains',
     kind: FILTER_KIND_MULTISELECT_WITH_SEARCH,
-    options: [
-      {
-        label: 'Uniswap UNI',
-        value: 'uniswap-uni',
-      },
-      {
-        label: 'Pancake Swap',
-        value: 'pancake-swap',
-      },
-      {
-        label: 'Ethereum ETH',
-        value: 'ethereum',
-      },
-    ],
+    options: ['Uniswap UNI', 'Pancake Swap', 'Ethereum ETH'],
   },
   projects: {
     position: 16,
@@ -217,20 +118,7 @@ export const fakeFilterConfig = (): FilterConfig => ({
     show: true,
     paramKey: 'projects',
     kind: FILTER_KIND_MULTISELECT_WITH_SEARCH,
-    options: [
-      {
-        label: 'Uniswap V3 dApp',
-        value: 'uniswap-v3-dapp',
-      },
-      {
-        label: 'Pancake Swap',
-        value: 'pancake-swap',
-      },
-      {
-        label: 'Balancer V2 Protocol',
-        value: 'balancer-v2-protocol',
-      },
-    ],
+    options: ['Uniswap V3 dApp', 'Pancake Swap', 'Balancer V2 Protocol'],
   },
   categories: {
     position: 17,
@@ -238,16 +126,7 @@ export const fakeFilterConfig = (): FilterConfig => ({
     show: true,
     paramKey: 'categories',
     kind: FILTER_KIND_MULTISELECT_WITH_SEARCH,
-    options: [
-      {
-        label: 'Bridge',
-        value: 'bridge',
-      },
-      {
-        label: 'Indexes',
-        value: 'Indexes',
-      },
-    ],
+    options: ['Bridge', 'Indexes', 'Lending'],
   },
   tvl: {
     position: 7,
@@ -357,16 +236,7 @@ export const fakeFilterConfig = (): FilterConfig => ({
     show: true,
     paramKey: 'mainnet',
     kind: FILTER_KIND_SINGLESELECT,
-    options: [
-      {
-        label: 'Deployed to Mainnet',
-        value: 'true',
-      },
-      {
-        label: 'Deployed to Testnet',
-        value: 'false',
-      },
-    ],
+    options: ['Deployed to Mainnet', 'Deployed to Testnet'],
   },
   token: {
     position: 19,
@@ -374,16 +244,7 @@ export const fakeFilterConfig = (): FilterConfig => ({
     show: true,
     paramKey: 'token',
     kind: FILTER_KIND_SINGLESELECT,
-    options: [
-      {
-        label: 'With Token',
-        value: 'true',
-      },
-      {
-        label: 'Without Token',
-        value: 'false',
-      },
-    ],
+    options: ['With Token', 'Without Token'],
   },
   order: {
     position: 20,
@@ -391,16 +252,7 @@ export const fakeFilterConfig = (): FilterConfig => ({
     show: true,
     paramKey: 'order',
     kind: FILTER_KIND_SINGLESELECT,
-    options: [
-      {
-        label: 'Ascending',
-        value: 'asc',
-      },
-      {
-        label: 'Descending',
-        value: 'desc',
-      },
-    ],
+    options: ['Ascending', 'Descending'],
   },
   orderBy: {
     position: 21,
@@ -409,50 +261,17 @@ export const fakeFilterConfig = (): FilterConfig => ({
     paramKey: 'order_by',
     kind: FILTER_KIND_SINGLESELECT,
     options: [
-      {
-        label: 'Publication Date',
-        value: 'publication_date',
-      },
-      {
-        label: 'TVL',
-        value: 'tvl',
-      },
-      {
-        label: 'Salary',
-        value: 'salary',
-      },
-      {
-        label: 'Funding Date',
-        value: 'funding_date',
-      },
-      {
-        label: 'Monthly Volume',
-        value: 'monthly_volume',
-      },
-      {
-        label: 'Monthly Active Users',
-        value: 'monthly_active_users',
-      },
-      {
-        label: 'Monthly Revenue',
-        value: 'monthly_revenue',
-      },
-      {
-        label: 'Audits',
-        value: 'audits',
-      },
-      {
-        label: 'Hacks',
-        value: 'hacks',
-      },
-      {
-        label: 'Chains',
-        value: 'chains',
-      },
-      {
-        label: 'Team Size',
-        value: 'team_size',
-      },
+      'Publication Date',
+      'TVL',
+      'Salary',
+      'Funding Date',
+      'Monthly Volume',
+      'Monthly Active Users',
+      'Monthly Revenue',
+      'Audits',
+      'Hacks',
+      'Chains',
+      'Team Size',
     ],
   },
 });

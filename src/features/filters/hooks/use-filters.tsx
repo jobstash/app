@@ -4,6 +4,7 @@ import { MultiSelectSearchFilter } from '../components/multi-select-search-filte
 import { RangeFilter } from '../components/range-filter';
 import { SingleSelectFilter } from '../components/single-select-filter';
 import {
+  FILTER_KIND_MULTISELECT,
   FILTER_KIND_MULTISELECT_WITH_SEARCH,
   FILTER_KIND_RANGE,
   FILTER_KIND_SINGLESELECT,
@@ -42,7 +43,7 @@ const ignoredFilterConfigs = new Set([
   KEY_HEAD_COUNT, // Range has null values
   KEY_AUDITS, // Weird fields: value.{highest, lowest}.value.{low, high}
   KEY_HACKS, // Weird fields: value.{highest, lowest}.value.{low, high}
-  KEY_SENIORITY, // Need confirmation if multi-select
+  KEY_SENIORITY, // Getting "seniority" must be a postive number error
   KEY_MAINNET, // Should be SINGLESELECT
   KEY_TOKEN, // Should be SINGLESELECT
   KEY_LOCATIONS, // No required "label" field, No "paramKey" field
@@ -127,6 +128,7 @@ export const useFilters = (fetchedConfig?: FilterConfig) => {
                     };
                   }
 
+                  case FILTER_KIND_MULTISELECT:
                   case FILTER_KIND_MULTISELECT_WITH_SEARCH: {
                     if (config.options.length === 0) return { key, ui: null };
 

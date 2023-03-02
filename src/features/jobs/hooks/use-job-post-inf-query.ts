@@ -1,4 +1,4 @@
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { QueryKey, useInfiniteQuery } from '@tanstack/react-query';
 
 import { API_MW_AUTH_TOKEN, API_MW_URL } from '~/shared/core/constants';
 import {
@@ -8,14 +8,23 @@ import {
 } from '~/shared/core/constants';
 import { sentryMessage } from '~/shared/utils';
 
-import { JobPost } from '../core/interfaces';
+import type { JobPost } from '../core/interfaces';
+
+interface FetchJobOptions {
+  pageParam?: number;
+  queryKey: QueryKey;
+}
 
 const SENTRY_LABEL = `fetchJobListings`;
 const fetchJobListings = async ({
   pageParam = 1,
-}): Promise<JobListingsInfQueryPage> => {
+  queryKey,
+}: FetchJobOptions): Promise<JobListingsInfQueryPage> => {
+  const filterParams = queryKey[1] as string | null;
   const res = await fetch(
-    `${API_MW_URL}/jobs/list?page=${pageParam}&limit=10`,
+    `${API_MW_URL}/jobs/list?page=${pageParam}&limit=10${
+      filterParams ? `&${filterParams}` : ''
+    }`,
     {
       method: 'GET',
       credentials: 'include',
@@ -51,10 +60,11 @@ interface JobListingsInfQueryPage {
   data: JobPost[];
 }
 
-export const useJobListingInfQuery = () =>
+export const useJobListingInfQuery = (filterParams: string | null) =>
   useInfiniteQuery<JobListingsInfQueryPage>(
-    ['job-posts'],
-    async ({ pageParam }) => fetchJobListings({ pageParam }),
+    ['job-posts', filterParams],
+    async ({ pageParam, queryKey }) =>
+      fetchJobListings({ pageParam, queryKey }),
     {
       getNextPageParam: ({ page }) => (page > 0 ? page + 1 : undefined),
     },

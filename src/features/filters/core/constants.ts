@@ -1,5 +1,6 @@
 export const FILTER_KIND_RANGE = 'RANGE';
 export const FILTER_KIND_SINGLESELECT = 'SINGLE_SELECT';
+export const FILTER_KIND_MULTISELECT = 'MULTI_SELECT';
 export const FILTER_KIND_MULTISELECT_WITH_SEARCH = 'MULTI_SELECT_WITH_SEARCH';
 
 export const KEY_PUBLICATION_DATE = 'publicationDate';
@@ -32,6 +33,7 @@ export const tempLabelMap = {
   [KEY_CHAINS]: 'Chains',
   [KEY_PROJECTS]: 'Projects',
   [KEY_CATEGORIES]: 'Categories',
+  [KEY_SENIORITY]: 'Seniority',
 };
 
 // TODO: Remove once mw fixed returned values
@@ -42,4 +44,5 @@ export const tempLabelSet = new Set([
   KEY_CHAINS,
   KEY_PROJECTS,
   KEY_CATEGORIES,
+  KEY_SENIORITY,
 ]);
