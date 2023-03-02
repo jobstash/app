@@ -4,8 +4,6 @@ import {
   API_MW_AUTH_TOKEN,
   API_MW_URL,
   ERR_INTERNAL,
-  SENTRY_MW_EMPTY_RESPONSE,
-  SENTRY_MW_INVALID_RESPONSE,
   SENTRY_MW_NON_200_RESPONSE,
   SENTRY_MW_NON_JSON_RESPONSE,
 } from '~/shared/core/constants';
@@ -13,7 +11,6 @@ import type { GenericResponse } from '~/shared/core/interfaces';
 import { sentryMessage } from '~/shared/utils';
 
 import type { FilterConfig } from '../core/interfaces';
-import { FilterConfigSchema } from '../core/schemas';
 
 const SENTRY_LABEL = `getQueryFn`;
 
@@ -43,20 +40,24 @@ const getQueryFn = async (): Promise<FilterConfig> => {
     throw new Error(ERR_INTERNAL);
   }
 
-  const { error, value } = FilterConfigSchema.validate(data);
+  /** TEMPORARY DISABLE VALIDATION UNTIL FILTER-CONFIG MATCHES SCHEMA */
+  // TODO: Uncomment once mw fixed returned values
+  // const { error, value } = FilterConfigSchema.validate(data);
 
-  // Response from mw should be valid - 500 otherwise
-  if (error) {
-    sentryMessage(SENTRY_LABEL, SENTRY_MW_INVALID_RESPONSE);
-    throw new Error(ERR_INTERNAL);
-  }
+  // // Response from mw should be valid - 500 otherwise
+  // if (error) {
+  //   sentryMessage(SENTRY_LABEL, SENTRY_MW_INVALID_RESPONSE);
+  //   throw new Error(ERR_INTERNAL);
+  // }
 
-  if (!value) {
-    sentryMessage(SENTRY_LABEL, SENTRY_MW_EMPTY_RESPONSE);
-    throw new Error(ERR_INTERNAL);
-  }
+  // if (!value) {
+  //   sentryMessage(SENTRY_LABEL, SENTRY_MW_EMPTY_RESPONSE);
+  //   throw new Error(ERR_INTERNAL);
+  // }
 
-  return value;
+  // return value;
+
+  return data;
 };
 
 export const useFilterConfigQuery = () =>

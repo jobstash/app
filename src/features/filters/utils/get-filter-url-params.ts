@@ -5,8 +5,8 @@ import {
   FILTER_KIND_RANGE,
   FILTER_KIND_SINGLESELECT,
 } from '../core/constants';
-import { FilterConfig } from '../core/interfaces';
-import { FilterState, RangeValue } from '../core/types';
+import type { FilterConfig } from '../core/interfaces';
+import type { FilterState, RangeValue } from '../core/types';
 
 export const getFilterUrlParams = (
   filters: FilterState,
@@ -21,17 +21,14 @@ export const getFilterUrlParams = (
       const { kind } = config;
       switch (kind) {
         case FILTER_KIND_SINGLESELECT: {
-          const paramValue = config.options.find(
-            ({ label }) => v === label,
-          )!.value;
-          return `${config.paramKey}=${paramValue}`;
+          return `${config.paramKey}=${encodeURI(v as string)}`;
         }
 
         case FILTER_KIND_MULTISELECT_WITH_SEARCH: {
-          const values = config.options
-            .filter(({ label }) => (v as Set<string>).has(label))
-            .map(({ value }) => value);
-          return `${config.paramKey}=${values.join(',')}`;
+          const values = config.options.filter((option) =>
+            (v as Set<string>).has(option),
+          );
+          return `${config.paramKey}=${encodeURI(values.join(','))}`;
         }
 
         case FILTER_KIND_RANGE: {

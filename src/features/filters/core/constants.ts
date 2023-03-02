@@ -23,3 +23,23 @@ export const KEY_MAINNET = 'mainNet';
 export const KEY_TOKEN = 'token';
 export const KEY_ORDER = 'order';
 export const KEY_ORDER_BY = 'orderBy';
+
+// TODO: Remove once mw fixed returned values
+export const tempLabelMap = {
+  [KEY_LOCATIONS]: 'Locations',
+  [KEY_TECH]: 'Tech',
+  [KEY_ORGANIZATIONS]: 'Organizations',
+  [KEY_CHAINS]: 'Chains',
+  [KEY_PROJECTS]: 'Projects',
+  [KEY_CATEGORIES]: 'Categories',
+};
+
+// TODO: Remove once mw fixed returned values
+export const tempLabelSet = new Set([
+  KEY_LOCATIONS,
+  KEY_TECH,
+  KEY_ORGANIZATIONS,
+  KEY_CHAINS,
+  KEY_PROJECTS,
+  KEY_CATEGORIES,
+]);

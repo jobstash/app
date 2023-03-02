@@ -12,11 +12,6 @@ export interface FilterConfigSharedProperties {
   googleAnalyticsEventId?: string;
 }
 
-export interface FilterConfigLabeledValue {
-  label: string;
-  value: string;
-}
-
 export interface RangeFilterConfig extends FilterConfigSharedProperties {
   kind: typeof FILTER_KIND_RANGE;
   stepSize: number;
@@ -35,14 +30,14 @@ export interface RangeFilterConfig extends FilterConfigSharedProperties {
 export interface SingleSelectFilterConfig extends FilterConfigSharedProperties {
   kind: typeof FILTER_KIND_SINGLESELECT;
   paramKey: string;
-  options: FilterConfigLabeledValue[];
+  options: string[];
 }
 
 export interface MultiSelectSearchFilterConfig
   extends FilterConfigSharedProperties {
   kind: typeof FILTER_KIND_MULTISELECT_WITH_SEARCH;
   paramKey: string;
-  options: FilterConfigLabeledValue[];
+  options: string[];
 }
 
 export interface FilterConfig {
