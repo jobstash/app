@@ -81,11 +81,13 @@ export const JobCard = ({ listing, isActive, onClick }: Props) => {
               </SkillHolder>
             ))}
           </div>
-          <Button>Sign Up to See Matches</Button>
+          <div className="shrink-0 self-start">
+            <Button>Sign Up to See Matches</Button>
+          </div>
         </div>
       )}
 
-      <div className="flex items-center py-4 last:pb-0">
+      <div className="flex items-center space-x-8 py-4 last:pb-0">
         {/** Note: waiting for backend/middleware to provide org avatars  */}
         <ChainHeading avatar="" alt={org.name}>
           {org.name}
