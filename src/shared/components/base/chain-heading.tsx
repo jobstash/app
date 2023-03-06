@@ -31,7 +31,7 @@ export const ChainHeading = ({
         size="lg"
         htmlTag="h3"
         color="white"
-        className="mr-8 whitespace-nowrap font-sans"
+        className="whitespace-nowrap font-sans"
       >
         {children}
       </Text>
