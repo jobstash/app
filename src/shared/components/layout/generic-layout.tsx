@@ -11,13 +11,13 @@ export const ToBeReplacedLayout = ({
   children,
   rightPanel,
 }: Props) => (
-  <div className="bg-app flex flex-wrap pl-52">
+  <div className="flex flex-wrap bg-app pl-52">
     {sidebar}
     <div className="flex w-2/3 max-w-3xl justify-center p-6">
       <div className="w-full space-y-8">{children}</div>
     </div>
     <aside className="w-1/3 grow">
-      <div className="hide-scrollbar sticky top-0 min-h-screen space-y-6 overflow-y-scroll bg-white/5 p-6">
+      <div className="hide-scrollbar sticky top-0 h-screen space-y-6 overflow-y-scroll bg-white/5 p-6">
         {rightPanel}
       </div>
     </aside>
