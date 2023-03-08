@@ -23,7 +23,6 @@ export const JobSchema = Joi.object<Job>({
   team: Joi.string().required(),
   benefits: Joi.string().required(),
   culture: Joi.string().required(),
-  hardSkills: Joi.array().items(Joi.string()).required(),
 
   // Optionals
   seniority: Joi.string(),

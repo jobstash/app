@@ -38,7 +38,4 @@ export interface Job {
 
   /** Culture section for right-panel */
   culture: string;
-
-  /** Hard sklls to be displayed */
-  hardSkills: string[];
 }

@@ -40,7 +40,7 @@ export const RightPanelJobCard = ({ job }: Props) => {
         ))}
       </div>
 
-      {/** Note: Still waiting for backend/middleware to finalize project hardskills */}
+      {/** Note: Still waiting for backend/middleware to finalize project technologies */}
       {/* <div>
               <div>
                 <p>Hard Skills</p>

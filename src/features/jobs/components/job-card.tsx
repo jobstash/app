@@ -38,9 +38,9 @@ const cvaJobCard = cva(
 );
 
 export const JobCard = ({ listing, isActive, onClick }: Props) => {
-  const { jobpost, organization: org, project } = listing;
+  const { jobpost, organization: org, project, technologies } = listing;
 
-  const { jobTitle, jobCreatedTimestamp, hardSkills } = jobpost;
+  const { jobTitle, jobFoundTimestamp } = jobpost;
 
   const tags = createJobTags(jobpost);
   const projectTags = createProjectTags(project);
@@ -50,9 +50,7 @@ export const JobCard = ({ listing, isActive, onClick }: Props) => {
       <div className="flex items-center justify-between">
         <CardHeading>{jobTitle}</CardHeading>
         <div className="flex items-center space-x-3">
-          <span className="text-sm">
-            {prettyTimestamp(jobCreatedTimestamp)}
-          </span>
+          <span className="text-sm">{prettyTimestamp(jobFoundTimestamp)}</span>
           <Button size="sm">
             <Image
               src="/icons/bookmark.svg"
@@ -72,12 +70,12 @@ export const JobCard = ({ listing, isActive, onClick }: Props) => {
         ))}
       </div>
 
-      {hardSkills.length > 0 && (
+      {technologies.length > 0 && (
         <div className="flex justify-between space-x-4 border-b border-white/5 py-4">
           <div className="-mb-3 flex grow flex-wrap">
-            {hardSkills.map((skill) => (
-              <SkillHolder key={skill} isChecked={false} className="mr-4">
-                {skill}
+            {technologies.map(({ name, id }) => (
+              <SkillHolder key={id} isChecked={false} className="mr-4">
+                {name}
               </SkillHolder>
             ))}
           </div>

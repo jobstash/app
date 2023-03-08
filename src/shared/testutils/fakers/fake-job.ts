@@ -40,11 +40,6 @@ export const fakeJob = (): Job => {
   const team = fakeDesc();
   const benefits = fakeDesc();
   const culture = fakeDesc();
-  const hardSkills = Array.from({
-    length: faker.datatype.number({ min: 3, max: 6 }),
-  })
-    .fill(0)
-    .map(() => faker.lorem.word());
 
   return {
     id,
@@ -62,6 +57,5 @@ export const fakeJob = (): Job => {
     team,
     benefits,
     culture,
-    hardSkills,
   };
 };
