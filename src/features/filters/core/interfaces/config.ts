@@ -31,7 +31,7 @@ export interface RangeFilterConfig extends FilterConfigSharedProperties {
 export interface SingleSelectFilterConfig extends FilterConfigSharedProperties {
   kind: typeof FILTER_KIND_SINGLESELECT;
   paramKey: string;
-  options: string[];
+  options: { label: string; value: string }[];
 }
 
 export interface MultiSelectSearchFilterConfig
