@@ -40,7 +40,7 @@ const cvaJobCard = cva(
 export const JobCard = ({ listing, isActive, onClick }: Props) => {
   const { jobpost, organization: org, project, technologies } = listing;
 
-  const { jobTitle, jobFoundTimestamp } = jobpost;
+  const { jobTitle, jobCreatedTimestamp } = jobpost;
 
   const tags = createJobTags(jobpost);
   const projectTags = createProjectTags(project);
@@ -50,7 +50,9 @@ export const JobCard = ({ listing, isActive, onClick }: Props) => {
       <div className="flex items-center justify-between">
         <CardHeading>{jobTitle}</CardHeading>
         <div className="flex items-center space-x-3">
-          <span className="text-sm">{prettyTimestamp(jobFoundTimestamp)}</span>
+          <span className="text-sm">
+            {prettyTimestamp(jobCreatedTimestamp)}
+          </span>
           <Button size="sm">
             <Image
               src="/icons/bookmark.svg"
