@@ -7,7 +7,7 @@ export const createJobTags = (job: Job): TagElement[] => {
   const tags: TagElement[] = [];
 
   // **Note**: remove "Seniority" text when actual label e.g. "Junior" is implemented in backend
-  if (seniority)
+  if (seniority && seniority !== 'undefined')
     tags.push({ text: `Seniority: ${seniority}`, iconText: 'level' });
 
   // **Note**: waiting to finalize salary
@@ -18,7 +18,8 @@ export const createJobTags = (job: Job): TagElement[] => {
     tags.push({ text: `Salary: ${salary}`, iconText: 'money' });
   }
 
-  if (jobLocation) tags.push({ text: jobLocation, iconText: 'location' });
+  if (jobLocation && jobLocation !== 'unspecified')
+    tags.push({ text: jobLocation, iconText: 'location' });
   if (jobCommitment) tags.push({ text: jobCommitment, iconText: 'baggage-2' });
 
   return [...tags];

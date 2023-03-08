@@ -8,20 +8,24 @@ export const createRightPanelProjectCardTags = ({
   monthlyRevenue,
 }: Project): TagElement[] => {
   const tags: TagElement[] = [
-    { text: 'Jobs: TBD', iconText: 'baggage-2', link: '#' },
-    {
-      text: 'Relevant Repos: TBD',
-      iconText: 'github',
-      link: '#',
-    },
-    {
-      text: 'Category: TBD',
-      iconText: 'category',
-    },
-    {
-      text: 'TeamSize: TBD',
-      iconText: 'category',
-    },
+    // Waiting for be/mw implementation of project jobs count
+    // { text: 'Jobs: TBD', iconText: 'baggage-2', link: '#' },
+    // Waiting for be/mw implementation of project github
+    // {
+    //   text: 'Relevant Repos: TBD',
+    //   iconText: 'github',
+    //   link: '#',
+    // },
+    // Waiting for be/mw implementation of project category
+    // {
+    //   text: 'Category: TBD',
+    //   iconText: 'category',
+    // },
+    // Waiting for be/mw implementation of project teamSize
+    // {
+    //   text: 'TeamSize: TBD',
+    //   iconText: 'category',
+    // },
   ];
 
   if (tvl)
@@ -39,10 +43,11 @@ export const createRightPanelProjectCardTags = ({
       iconText: 'monthly-volume',
     });
 
-  tags.push({
-    text: 'Active Users: TBD',
-    iconText: 'active-user',
-  });
+  // Waiting for be/mw implementation of active-users
+  // tags.push({
+  //   text: 'Active Users: TBD',
+  //   iconText: 'active-user',
+  // });
 
   if (monthlyRevenue)
     tags.push({

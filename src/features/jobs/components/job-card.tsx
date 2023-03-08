@@ -92,16 +92,15 @@ export const JobCard = ({ listing, isActive, onClick }: Props) => {
         <ChainHeading avatar="" alt={org.name}>
           {org.name}
         </ChainHeading>
-        <div className="flex items-center text-sm">
+        {/** Note: waiting for backend/middleware to provide funding data  */}
+        {/* <div className="flex items-center text-sm">
           <TagIcon filename="funding" />
-          {/** Note: waiting for backend/middleware to provide last_funding_data  */}
           Last Funding: TBD
         </div>
         <div className="flex items-center text-sm">
           <TagIcon filename="funding" />
-          {/** Note: waiting for backend/middleware to provide funding_data  */}
           Funding: TBD
-        </div>
+        </div> */}
       </div>
 
       {project ? (
