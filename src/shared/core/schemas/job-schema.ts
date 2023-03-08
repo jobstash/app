@@ -9,21 +9,15 @@ export const JobSchema = Joi.object<Job>({
   jobCreatedTimestamp: Joi.number().required().integer().positive(),
   jobFoundTimestamp: Joi.number().required().integer().positive(),
   extractedTimestamp: Joi.number().required().integer().positive(),
-  minSalaryRange: Joi.number()
-    .required()
-    .min(0)
-    .integer()
-    .less(Joi.ref('maxSalary')),
-  maxSalaryRange: Joi.number().required().integer().positive(),
-  jobLocation: Joi.string().required(),
-  jobCommitment: Joi.string().required(),
-  jobApplyPageUrl: Joi.string().required().uri(),
-  jobPageUrl: Joi.string().required().uri(),
-  role: Joi.string().required(),
-  team: Joi.string().required(),
-  benefits: Joi.string().required(),
-  culture: Joi.string().required(),
-
-  // Optionals
   seniority: Joi.string(),
+  minSalary: Joi.number().min(0).integer().less(Joi.ref('maxSalary')),
+  maxSalary: Joi.number().integer().positive(),
+  jobLocation: Joi.string(),
+  jobCommitment: Joi.string(),
+  jobApplyPageUrl: Joi.string().required().uri(),
+  jobPageUrl: Joi.string().uri(),
+  role: Joi.string().required(),
+  team: Joi.string(),
+  benefits: Joi.string(),
+  culture: Joi.string(),
 });

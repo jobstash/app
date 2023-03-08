@@ -14,28 +14,28 @@ export interface Job {
   seniority?: string; // Refinement: receive formatted string, must be required
 
   // Salaries
-  minSalaryRange: number; // Refinement: receive formatted string
-  maxSalaryRange: number; // Refinement: receive formatted string
+  minSalary?: number; // Refinement: receive formatted string
+  maxSalary?: number; // Refinement: receive formatted string
 
   /** Location tag for job-post card */
-  jobLocation: string;
+  jobLocation?: string;
 
   /** Commitment tag for job-post card */
-  jobCommitment: string;
+  jobCommitment?: string;
 
   /** Apply button for right-panel */
   jobApplyPageUrl: string;
-  jobPageUrl: string; // Refinement: unused
+  jobPageUrl?: string; // Refinement: unused
 
   /** Role section for right-panel */
   role: string;
 
   /** Team section for right-panel */
-  team: string;
+  team?: string;
 
   /** Benefits section for right-panel */
-  benefits: string;
+  benefits?: string;
 
   /** Culture section for right-panel */
-  culture: string;
+  culture?: string;
 }
