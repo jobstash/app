@@ -10,21 +10,23 @@ import type { FilterAction, FilterState } from '../core/types';
 
 interface Props {
   text: string;
+  value: string;
   ariaLabel: string;
-  options: string[];
+  options: { label: string; value: string }[];
   type: keyof FilterState;
   dispatch: Dispatch<FilterAction>;
 }
 
 export const SingleSelectFilter = ({
   text,
+  value,
   options,
   ariaLabel,
   type,
   dispatch,
 }: Props) => {
   const dispatchFn = (clickedLabel: string) => {
-    const payload = options.find((label) => label === clickedLabel);
+    const payload = options.find(({ label }) => label === clickedLabel)?.value;
     if (!payload) return;
 
     dispatch({ type, payload });
@@ -47,10 +49,14 @@ export const SingleSelectFilter = ({
           <SelectPrimitive.Value placeholder={<Text>{text}</Text>} />
         </Button>
       </SelectPrimitive.Trigger>
-      <SelectPrimitive.Content position="popper" sideOffset={5}>
+      <SelectPrimitive.Content
+        position="popper"
+        sideOffset={5}
+        className="z-50"
+      >
         <SelectPrimitive.Viewport className="animate-slide-down cursor-pointer rounded-lg bg-zinc-800 p-2 shadow-lg">
           <SelectPrimitive.Group>
-            {options.map((label) => (
+            {options.map(({ label }) => (
               <SelectPrimitive.Item
                 key={label}
                 value={label}

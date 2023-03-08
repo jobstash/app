@@ -95,14 +95,18 @@ export const useFilters = (fetchedConfig?: FilterConfig) => {
 
                 switch (kind) {
                   case FILTER_KIND_SINGLESELECT: {
-                    const { text, options, ariaLabel } =
-                      getSingleSelectProps(config);
+                    const value = filters[key] as string;
+                    const { text, options, ariaLabel } = getSingleSelectProps(
+                      config,
+                      value,
+                    );
 
                     return {
                       key,
                       ui: (
                         <SingleSelectFilter
                           type={key}
+                          value={value}
                           dispatch={dispatch}
                           text={text}
                           options={options}
