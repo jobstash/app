@@ -27,7 +27,7 @@ export const SingleSelectFilter = ({
 }: Props) => {
   const dispatchFn = (clickedLabel: string) => {
     const payload = options.find(({ label }) => label === clickedLabel)?.value;
-    if (!payload) return;
+    if (payload === undefined) return;
 
     dispatch({ type, payload });
   };

@@ -6,7 +6,7 @@ export const filterReducer = (state: FilterState, action: FilterAction) => {
   // Clear action
   if (!type) return {};
 
-  if (!payload) {
+  if (!payload && typeof payload !== 'boolean') {
     const _state = state;
     delete _state[type];
     return { ..._state };
