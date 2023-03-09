@@ -6,11 +6,10 @@ export const getSingleSelectProps = (
 ) => {
   const { label, options } = config as SingleSelectFilterConfig;
 
-  const text = options.find(({ value }) => value === _value)?.label ?? label;
-  const ariaLabel = `Filter by ${text}`;
+  const ariaLabel = `Filter by ${label}`;
 
   return {
-    text,
+    text: label,
     options,
     ariaLabel,
   };

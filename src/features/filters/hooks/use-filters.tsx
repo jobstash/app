@@ -15,11 +15,9 @@ import {
   KEY_MAINNET,
   KEY_ORDER,
   KEY_ORDER_BY,
-  KEY_PUBLICATION_DATE,
   KEY_SALARY,
   KEY_SENIORITY,
   KEY_TEAM_SIZE,
-  KEY_TOKEN,
   tempLabelMap,
   tempLabelSet,
 } from '../core/constants';
