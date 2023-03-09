@@ -1,10 +1,13 @@
+/* eslint-disable react/no-unused-prop-types */
 import {
   ChangeEventHandler,
+  CSSProperties,
   Dispatch,
   KeyboardEventHandler,
   useMemo,
   useState,
 } from 'react';
+import { FixedSizeList as List } from 'react-window';
 
 import { Lato } from '@next/font/google';
 import * as Dropdown from '@radix-ui/react-dropdown-menu';
@@ -63,10 +66,6 @@ export const MultiSelectSearchFilter = ({
     [inputValue, options, selectedItems],
   );
 
-  // Limit displayed list to 10
-  const renderedAvailItems =
-    availableItems.length > 10 ? availableItems.slice(0, 10) : availableItems;
-
   // When pressing enter add the topmost available item
   const onInputKeyDown: KeyboardEventHandler<HTMLInputElement> = (e) => {
     if (e.key === 'Enter' && availableItems.length > 0) {
@@ -114,11 +113,26 @@ export const MultiSelectSearchFilter = ({
         </div>
       )}
 
-      <div className="my-2 max-h-60 overflow-y-auto pl-2">
-        <div>
-          {renderedAvailItems.map((label) => {
-            const isChecked = selectedItems?.has(label);
-            return (
+      <List
+        height={250}
+        width={300}
+        itemSize={35}
+        itemData={availableItems}
+        itemCount={availableItems.length}
+      >
+        {({
+          data,
+          index,
+          style,
+        }: {
+          index: number;
+          style: CSSProperties;
+          data: string[];
+        }) => {
+          const label = data[index];
+          const isChecked = selectedItems?.has(label);
+          return (
+            <div style={style}>
               <Dropdown.Item
                 key={label}
                 className={clsx(
@@ -137,10 +151,10 @@ export const MultiSelectSearchFilter = ({
                 </Dropdown.ItemIndicator>
                 <Text className={`font-sans ${lato.variable}`}>{label}</Text>
               </Dropdown.Item>
-            );
-          })}
-        </div>
-      </div>
+            </div>
+          );
+        }}
+      </List>
 
       {displaySearchInput && hasSelectedItems && (
         <Dropdown.Separator className="my-1 h-px bg-zinc-700" />
