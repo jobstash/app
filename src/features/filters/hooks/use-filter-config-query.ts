@@ -2,7 +2,6 @@ import { useQuery } from '@tanstack/react-query';
 
 import {
   API_MW_AUTH_TOKEN,
-  API_MW_URL,
   ERR_INTERNAL,
   SENTRY_MW_NON_200_RESPONSE,
   SENTRY_MW_NON_JSON_RESPONSE,
@@ -15,7 +14,9 @@ import type { FilterConfig } from '../core/interfaces';
 const SENTRY_LABEL = `getQueryFn`;
 
 const getQueryFn = async (): Promise<FilterConfig> => {
-  const res = await fetch(`${API_MW_URL}/jobs/filters`, {
+  const mwURL = process.env['NEXT_PUBLIC_MW_URL'];
+
+  const res = await fetch(`${mwURL}/jobs/filters`, {
     method: 'GET',
     credentials: 'include',
     headers: {

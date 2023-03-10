@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useMemo, useRef } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { ViewportList } from 'react-viewport-list';
 
@@ -63,7 +63,10 @@ export const JobCardList = ({ initListings }: Props) => {
     }
   }, [fetchNextPage, inView, isFetchingNextPage]);
 
-  const jobposts = data ? data.pages.flatMap((d) => d.data) : [];
+  const jobposts = useMemo(
+    () => (data ? data.pages.flatMap((d) => d.data) : []),
+    [data],
+  );
   const parentScrollRef = useRef<HTMLDivElement | null>(null);
 
   return (
