@@ -41,8 +41,11 @@ export const fakeJob = (): Job => {
   const benefits = fakeDesc();
   const culture = fakeDesc();
 
+  const shortUUID = faker.datatype.string(6);
+
   return {
     id,
+    shortUUID,
     jobTitle,
     jobCreatedTimestamp,
     jobFoundTimestamp,

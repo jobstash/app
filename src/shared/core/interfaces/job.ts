@@ -5,6 +5,9 @@ export interface Job {
   /** Title for job-post card */
   jobTitle: string;
 
+  /** Id slug for url */
+  shortUUID: string;
+
   // Timestamp for job-post card
   jobCreatedTimestamp: number; // Refinement: receive formatted string
   jobFoundTimestamp: number; // Refinement: unused

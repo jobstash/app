@@ -5,6 +5,7 @@ import { Job } from '../interfaces';
 export const JobSchema = Joi.object<Job>({
   // Required
   id: Joi.string().required(),
+  shortUUID: Joi.string().required(),
   jobTitle: Joi.string().required(),
   jobCreatedTimestamp: Joi.number().required().integer().positive(),
   jobFoundTimestamp: Joi.number().required().integer().positive(),
