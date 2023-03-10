@@ -1,6 +1,7 @@
 import { numFormatter } from '~/shared/utils';
 
 import {
+  KEY_MONTHLY_FEES,
   KEY_MONTHLY_REVENUE,
   KEY_MONTHLY_VOLUME,
   KEY_SALARY,
@@ -13,6 +14,7 @@ const currencyKeys = new Set([
   KEY_TVL,
   KEY_MONTHLY_VOLUME,
   KEY_MONTHLY_REVENUE,
+  KEY_MONTHLY_FEES,
 ]);
 
 export const formatRangeFilterText = (

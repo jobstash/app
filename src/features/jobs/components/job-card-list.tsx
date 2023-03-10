@@ -1,5 +1,6 @@
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 import { useInView } from 'react-intersection-observer';
+import { ViewportList } from 'react-viewport-list';
 
 import { useAtomValue, useSetAtom } from 'jotai';
 
@@ -62,8 +63,11 @@ export const JobCardList = ({ initListings }: Props) => {
     }
   }, [fetchNextPage, inView, isFetchingNextPage]);
 
+  const jobposts = data ? data.pages.flatMap((d) => d.data) : [];
+  const parentScrollRef = useRef<HTMLDivElement | null>(null);
+
   return (
-    <div className="space-y-8">
+    <div ref={parentScrollRef} className="space-y-8">
       {initListings.map((listing) => (
         <JobCard
           key={listing.jobpost.id}
@@ -73,25 +77,20 @@ export const JobCardList = ({ initListings }: Props) => {
         />
       ))}
 
-      {data &&
-        data.pages.map((page, i) =>
-          page.data.map((listing, j) => (
-            <div
-              key={listing.jobpost.id}
-              ref={
-                i === data.pages.length - 1 && j === page.data.length - 1
-                  ? ref
-                  : undefined
-              }
-            >
-              <JobCard
-                listing={listing}
-                isActive={checkJobIsActive(segments.key, listing)}
-                onClick={() => onClickListing(listing)}
-              />
-            </div>
-          )),
+      <ViewportList items={jobposts}>
+        {(listing: JobPost, i) => (
+          <div
+            key={listing.jobpost.id}
+            ref={i === jobposts.length - 1 ? ref : undefined}
+          >
+            <JobCard
+              listing={listing}
+              isActive={checkJobIsActive(segments.key, listing)}
+              onClick={() => onClickListing(listing)}
+            />
+          </div>
         )}
+      </ViewportList>
 
       {Boolean(error) && (
         <div>

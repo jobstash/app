@@ -38,9 +38,9 @@ const cvaJobCard = cva(
 );
 
 export const JobCard = ({ listing, isActive, onClick }: Props) => {
-  const { jobpost, organization: org, project } = listing;
+  const { jobpost, organization: org, project, technologies } = listing;
 
-  const { jobTitle, jobCreatedTimestamp, hardSkills } = jobpost;
+  const { jobTitle, jobCreatedTimestamp } = jobpost;
 
   const tags = createJobTags(jobpost);
   const projectTags = createProjectTags(project);
@@ -72,12 +72,12 @@ export const JobCard = ({ listing, isActive, onClick }: Props) => {
         ))}
       </div>
 
-      {hardSkills.length > 0 && (
+      {technologies.length > 0 && (
         <div className="flex justify-between space-x-4 border-b border-white/5 py-4">
           <div className="-mb-3 flex grow flex-wrap">
-            {hardSkills.map((skill) => (
-              <SkillHolder key={skill} isChecked={false} className="mr-4">
-                {skill}
+            {technologies.map(({ name, id }) => (
+              <SkillHolder key={id} isChecked={false} className="mr-4">
+                {name}
               </SkillHolder>
             ))}
           </div>
@@ -92,16 +92,15 @@ export const JobCard = ({ listing, isActive, onClick }: Props) => {
         <ChainHeading avatar="" alt={org.name}>
           {org.name}
         </ChainHeading>
-        <div className="flex items-center text-sm">
+        {/** Note: waiting for backend/middleware to provide funding data  */}
+        {/* <div className="flex items-center text-sm">
           <TagIcon filename="funding" />
-          {/** Note: waiting for backend/middleware to provide last_funding_data  */}
           Last Funding: TBD
         </div>
         <div className="flex items-center text-sm">
           <TagIcon filename="funding" />
-          {/** Note: waiting for backend/middleware to provide funding_data  */}
           Funding: TBD
-        </div>
+        </div> */}
       </div>
 
       {project ? (

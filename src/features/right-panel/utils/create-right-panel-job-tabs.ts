@@ -1,12 +1,16 @@
 import {
   TEXT_RIGHT_TAB_DETAILS,
   TEXT_RIGHT_TAB_ORGANIZATION,
-  TEXT_RIGHT_TAB_PROJECTS,
+  TEXT_RIGHT_TAB_PROJECT,
   TEXT_ROUTE_TAB_DETAILS,
   TEXT_ROUTE_TAB_ORGANIZATION,
-  TEXT_ROUTE_TAB_PROJECTS,
+  TEXT_ROUTE_TAB_PROJECT,
 } from '~/shared/core/constants';
-import type { RightPanelTab, RouteSegments } from '~/shared/core/interfaces';
+import type {
+  Project,
+  RightPanelTab,
+  RouteSegments,
+} from '~/shared/core/interfaces';
 import type { RouteTab } from '~/shared/core/types';
 import { createRouteString } from '~/shared/utils';
 
@@ -29,22 +33,31 @@ const createRightPanelTab = (
 
 export const createRightPanelJobTabs = (
   segments: RouteSegments,
-): RightPanelTab[] => [
-  createRightPanelTab(
-    `Job ${TEXT_RIGHT_TAB_DETAILS}`,
-    TEXT_ROUTE_TAB_DETAILS,
-    segments,
-  ),
-  createRightPanelTab(
-    TEXT_RIGHT_TAB_ORGANIZATION,
-    TEXT_ROUTE_TAB_ORGANIZATION,
-    segments,
-  ),
-  createRightPanelTab(
-    TEXT_RIGHT_TAB_PROJECTS,
-    TEXT_ROUTE_TAB_PROJECTS,
-    segments,
-  ),
-  // **Note**: waiting for backend/middleware to implement "Repositories"
-  // **Note**: waiting for backend/middleware to implement "Competitors"
-];
+  project: Project | undefined,
+): RightPanelTab[] => {
+  const tabs = [
+    createRightPanelTab(
+      `Job ${TEXT_RIGHT_TAB_DETAILS}`,
+      TEXT_ROUTE_TAB_DETAILS,
+      segments,
+    ),
+    createRightPanelTab(
+      TEXT_RIGHT_TAB_ORGANIZATION,
+      TEXT_ROUTE_TAB_ORGANIZATION,
+      segments,
+    ),
+    // **Note**: waiting for backend/middleware to implement "Repositories"
+    // **Note**: waiting for backend/middleware to implement "Competitors"
+  ];
+
+  if (project)
+    tabs.push(
+      createRightPanelTab(
+        TEXT_RIGHT_TAB_PROJECT,
+        TEXT_ROUTE_TAB_PROJECT,
+        segments,
+      ),
+    );
+
+  return tabs;
+};

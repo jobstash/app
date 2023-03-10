@@ -22,11 +22,13 @@ export const createRightPanelOrgTags = (org: Organization) => {
       text: location,
       iconText: 'location',
     },
-    {
+  ];
+
+  if (teamSize && teamSize !== 'undefined')
+    orgTags.push({
       text: `Team Size: ${teamSize}`,
       iconText: 'users-three',
-    },
-  ];
+    });
 
   const orgSocials: TagElement[] = [
     {

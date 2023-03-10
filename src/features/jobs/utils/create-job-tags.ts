@@ -2,34 +2,25 @@ import { Job, TagElement } from '~/shared/core/interfaces';
 import { numFormatter } from '~/shared/utils';
 
 export const createJobTags = (job: Job): TagElement[] => {
-  const {
-    seniority,
-    minSalaryRange,
-    maxSalaryRange,
-    jobLocation,
-    jobCommitment,
-  } = job;
+  const { seniority, minSalary, maxSalary, jobLocation, jobCommitment } = job;
 
   const tags: TagElement[] = [];
 
   // **Note**: remove "Seniority" text when actual label e.g. "Junior" is implemented in backend
-  if (seniority)
+  if (seniority && seniority !== 'undefined')
     tags.push({ text: `Seniority: ${seniority}`, iconText: 'level' });
 
   // **Note**: waiting to finalize salary
-  if (minSalaryRange && maxSalaryRange) {
-    const salary = `$${numFormatter.format(
-      minSalaryRange,
-    )}-$${numFormatter.format(maxSalaryRange)}`;
+  if (minSalary && maxSalary) {
+    const salary = `$${numFormatter.format(minSalary)}-$${numFormatter.format(
+      maxSalary,
+    )}`;
     tags.push({ text: `Salary: ${salary}`, iconText: 'money' });
   }
 
-  return [
-    ...tags,
+  if (jobLocation && jobLocation !== 'unspecified')
+    tags.push({ text: jobLocation, iconText: 'location' });
+  if (jobCommitment) tags.push({ text: jobCommitment, iconText: 'baggage-2' });
 
-    { text: jobLocation, iconText: 'location' },
-    // **NOTE**: add svg icon for job-commitment then replace iconText
-    { text: jobCommitment, iconText: 'baggage-2' },
-    // **NOTE**: still waiting for employee_count data from mw
-  ];
+  return [...tags];
 };

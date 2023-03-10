@@ -5,9 +5,12 @@ export const createRightPanelJobDescriptions = ({
   team,
   benefits,
   culture,
-}: Job) => [
-  { label: 'Role', desc: role },
-  { label: 'Team', desc: team },
-  { label: 'Benefits', desc: benefits },
-  { label: 'Culture', desc: culture },
-];
+}: Job) => {
+  const descriptions = [{ label: 'Role', desc: role }];
+
+  if (team) descriptions.push({ label: 'Team', desc: team });
+  if (benefits) descriptions.push({ label: 'Benefits', desc: benefits });
+  if (culture) descriptions.push({ label: 'Culture', desc: culture });
+
+  return descriptions;
+};

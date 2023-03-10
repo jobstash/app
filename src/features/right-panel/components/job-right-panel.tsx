@@ -12,7 +12,7 @@ import {
   ID_TOP_RIGHT_PANEL,
   TEXT_ROUTE_TAB_DETAILS,
   TEXT_ROUTE_TAB_ORGANIZATION,
-  TEXT_ROUTE_TAB_PROJECTS,
+  TEXT_ROUTE_TAB_PROJECT,
 } from '~/shared/core/constants';
 import { useRouteSegments } from '~/shared/hooks';
 
@@ -46,12 +46,12 @@ export const JobRightPanel = () => {
   const { jobpost, organization: org, project } = listing;
 
   const { orgTags, orgSocials } = createRightPanelOrgTags(org);
-  const rightPanelTabs = createRightPanelJobTabs(segments);
+  const rightPanelTabs = createRightPanelJobTabs(segments, project);
 
   const cardMap = {
     [TEXT_ROUTE_TAB_DETAILS]: <RightPanelJobCard job={jobpost} />,
     [TEXT_ROUTE_TAB_ORGANIZATION]: <RightPanelOrgCard org={org} />,
-    [TEXT_ROUTE_TAB_PROJECTS]: <RightPanelProjectCard project={project} />,
+    [TEXT_ROUTE_TAB_PROJECT]: <RightPanelProjectCard project={project} />,
   };
 
   return (

@@ -27,13 +27,20 @@ export const SingleSelectFilter = ({
 }: Props) => {
   const dispatchFn = (clickedLabel: string) => {
     const payload = options.find(({ label }) => label === clickedLabel)?.value;
-    if (!payload) return;
+    if (payload === undefined) return;
 
     dispatch({ type, payload });
   };
 
+  const { label } = options.find(({ value: _value }) => _value === value) ?? {
+    label: text,
+  };
+
   return (
-    <SelectPrimitive.Root onValueChange={(label) => dispatchFn(label)}>
+    <SelectPrimitive.Root
+      value={value}
+      onValueChange={(label) => dispatchFn(label)}
+    >
       <SelectPrimitive.Trigger asChild aria-label={ariaLabel}>
         <Button
           right={
@@ -46,7 +53,14 @@ export const SingleSelectFilter = ({
             />
           }
         >
-          <SelectPrimitive.Value placeholder={<Text>{text}</Text>} />
+          <SelectPrimitive.Value
+            placeholder={<Text>{text}</Text>}
+            aria-label={value}
+          >
+            <Text>{`${
+              value === undefined ? '' : text.toString() + ': '
+            }${label}`}</Text>
+          </SelectPrimitive.Value>
         </Button>
       </SelectPrimitive.Trigger>
       <SelectPrimitive.Content
