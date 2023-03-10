@@ -1,13 +1,12 @@
-/* eslint-disable react/no-unused-prop-types */
 import {
   ChangeEventHandler,
-  CSSProperties,
   Dispatch,
   KeyboardEventHandler,
   useMemo,
+  useRef,
   useState,
 } from 'react';
-import { FixedSizeList as List } from 'react-window';
+import { ViewportList } from 'react-viewport-list';
 
 import { Lato } from '@next/font/google';
 import * as Dropdown from '@radix-ui/react-dropdown-menu';
@@ -86,6 +85,7 @@ export const MultiSelectSearchFilter = ({
   const numSelectedItems = selectedItems?.size ?? 0;
   const hasSelectedItems = numSelectedItems > 0;
   const displaySearchInput = numSelectedItems !== options.length;
+  const parentScrollRef = useRef<HTMLDivElement | null>(null);
 
   return (
     <DropdownUi text={text}>
@@ -113,48 +113,35 @@ export const MultiSelectSearchFilter = ({
         </div>
       )}
 
-      <List
-        height={250}
-        width={300}
-        itemSize={35}
-        itemData={availableItems}
-        itemCount={availableItems.length}
-      >
-        {({
-          data,
-          index,
-          style,
-        }: {
-          index: number;
-          style: CSSProperties;
-          data: string[];
-        }) => {
-          const label = data[index];
-          const isChecked = selectedItems?.has(label);
-          return (
-            <div style={style}>
-              <Dropdown.Item
-                key={label}
-                className={clsx(
-                  'flex cursor-pointer select-none items-center gap-x-2 rounded-md p-2 text-xs outline-none',
-                  'hover:bg-zinc-600',
-                  { 'bg-zinc-500': isChecked },
-                  { 'focus:bg-zinc-700': !isChecked },
-                )}
-                // Disable typeahead (messes with search focus)
-                textValue=""
-                onClick={() => toggleItem(!isChecked, label)}
-                onSelect={(e) => e.preventDefault()}
-              >
-                <Dropdown.ItemIndicator>
-                  <UnCheckedIcon />
-                </Dropdown.ItemIndicator>
-                <Text className={`font-sans ${lato.variable}`}>{label}</Text>
-              </Dropdown.Item>
-            </div>
-          );
-        }}
-      </List>
+      <div className="my-2 max-h-60 overflow-y-auto pl-2">
+        <div ref={parentScrollRef}>
+          <ViewportList items={availableItems}>
+            {(label) => {
+              const isChecked = selectedItems?.has(label);
+              return (
+                <Dropdown.Item
+                  key={label}
+                  className={clsx(
+                    'flex cursor-pointer select-none items-center gap-x-2 rounded-md p-2 text-xs outline-none',
+                    'hover:bg-zinc-600',
+                    { 'bg-zinc-500': isChecked },
+                    { 'focus:bg-zinc-700': !isChecked },
+                  )}
+                  // Disable typeahead (messes with search focus)
+                  textValue=""
+                  onClick={() => toggleItem(!isChecked, label)}
+                  onSelect={(e) => e.preventDefault()}
+                >
+                  <Dropdown.ItemIndicator>
+                    <UnCheckedIcon />
+                  </Dropdown.ItemIndicator>
+                  <Text className={`font-sans ${lato.variable}`}>{label}</Text>
+                </Dropdown.Item>
+              );
+            }}
+          </ViewportList>
+        </div>
+      </div>
 
       {displaySearchInput && hasSelectedItems && (
         <Dropdown.Separator className="my-1 h-px bg-zinc-700" />
