@@ -1,6 +1,5 @@
 import { QueryKey, useInfiniteQuery } from '@tanstack/react-query';
 
-import { API_MW_AUTH_TOKEN } from '~/shared/core/constants';
 import {
   ERR_INTERNAL,
   SENTRY_MW_NON_200_RESPONSE,
@@ -29,14 +28,6 @@ const fetchJobListings = async ({
     `${mwURL}/jobs/list?page=${pageParam}&limit=${limit}${
       filterParams ? `&${filterParams}` : ''
     }`,
-    {
-      method: 'GET',
-      credentials: 'include',
-      headers: {
-        Authorization: `Bearer ${API_MW_AUTH_TOKEN}`,
-        'Content-Type': 'application/json',
-      },
-    },
   );
 
   // Query to mw should work - 500 otherwise
