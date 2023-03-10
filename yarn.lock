@@ -9508,6 +9508,11 @@ react-style-singleton@^2.2.1:
     invariant "^2.2.4"
     tslib "^2.0.0"
 
+react-viewport-list@^7.0.0-beta.4:
+  version "7.0.0-beta.4"
+  resolved "https://registry.yarnpkg.com/react-viewport-list/-/react-viewport-list-7.0.0-beta.4.tgz#bb1a5ebb6485fc11df1b50af9c9b8a7cf3552501"
+  integrity sha512-6Jv5+CYNl/0X3BQITxSwgfuqK53R2SXENlGjnLkNqrkGDs7RC9ehJRBrJwPRvvRSPLWi1J2AatrndiOxcesdVQ==
+
 react-window@^1.8.8:
   version "1.8.8"
   resolved "https://registry.yarnpkg.com/react-window/-/react-window-1.8.8.tgz#1b52919f009ddf91970cbdb2050a6c7be44df243"
