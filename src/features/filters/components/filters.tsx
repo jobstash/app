@@ -3,7 +3,6 @@ import { useSetAtom } from 'jotai';
 import { Button, Text } from '~/shared/components';
 
 import { filterParamsAtom } from '../atoms';
-import { KEY_ORDER, KEY_ORDER_BY } from '../core/constants';
 import { useFilterConfigQuery, useFilters } from '../hooks';
 import { getFilterUrlParams } from '../utils';
 
@@ -36,7 +35,7 @@ export const Filters = () => {
   const disabledSubmit = Object.keys(filters).length === 0;
 
   return (
-    <div className="text-white">
+    <div className="my-4 text-white">
       <div className="flex justify-between">
         <div className="flex min-w-max pl-2 pr-20">
           <div className="mt-3">

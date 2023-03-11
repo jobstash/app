@@ -1,7 +1,7 @@
 import { useEffect, useMemo, useRef } from 'react';
 import { useInView } from 'react-intersection-observer';
-import { ViewportList } from 'react-viewport-list';
 
+import { useWindowVirtualizer } from '@tanstack/react-virtual';
 import { useAtomValue, useSetAtom } from 'jotai';
 
 import { filterParamsAtom } from '~/features/filters/atoms';
@@ -20,16 +20,49 @@ import { checkJobIsActive, createJobKey } from '../utils';
 
 import { JobCard } from './job-card';
 
-interface Props {
-  initListings: JobPost[];
-}
-
-export const JobCardList = ({ initListings }: Props) => {
+export const JobCardList = () => {
   const filterParams = useAtomValue(filterParamsAtom);
-
-  const { segments, push } = useRouteSegments();
   const setActiveListing = useSetAtom(activeJobPostAtom);
 
+  const {
+    data,
+    error,
+    isLoading,
+    isError,
+    isFetchingNextPage,
+    fetchNextPage,
+    hasNextPage,
+    refetch,
+  } = useJobListingInfQuery(filterParams);
+
+  const jobposts = useMemo(
+    () => (data ? data.pages.flatMap((d) => d.data) : []),
+    [data],
+  );
+
+  const parentRef = useRef<HTMLDivElement>(null);
+  const parentOffsetRef = useRef(0);
+
+  useEffect(() => {
+    parentOffsetRef.current = parentRef.current?.offsetTop ?? 0;
+  }, []);
+
+  const virtualizer = useWindowVirtualizer({
+    count: jobposts.length,
+    estimateSize: () => 300,
+    // ScrollMargin: parentOffsetRef.current,
+  });
+
+  const items = virtualizer.getVirtualItems();
+
+  const { ref: inViewRef, inView } = useInView();
+  useEffect(() => {
+    if (inView) {
+      fetchNextPage();
+    }
+  }, [fetchNextPage, inView, isFetchingNextPage]);
+
+  const { segments, push } = useRouteSegments();
   const onClickListing = (listing: JobPost) => {
     setActiveListing(listing);
     document.dispatchEvent(new Event(EVENT_CARD_CLICK));
@@ -45,75 +78,80 @@ export const JobCardList = ({ initListings }: Props) => {
     });
   };
 
-  const {
-    data,
-    error,
-    isLoading,
-    isFetchingNextPage,
-    fetchNextPage,
-    hasNextPage,
-    refetch,
-  } = useJobListingInfQuery(filterParams);
-
-  const { ref, inView } = useInView();
-
-  useEffect(() => {
-    if (inView) {
-      fetchNextPage();
-    }
-  }, [fetchNextPage, inView, isFetchingNextPage]);
-
-  const jobposts = useMemo(
-    () => (data ? data.pages.flatMap((d) => d.data) : []),
-    [data],
-  );
-  const parentScrollRef = useRef<HTMLDivElement | null>(null);
-
   return (
-    <div ref={parentScrollRef} className="space-y-8">
-      {initListings.map((listing) => (
-        <JobCard
-          key={listing.jobpost.id}
-          listing={listing}
-          isActive={checkJobIsActive(segments.key, listing)}
-          onClick={() => onClickListing(listing)}
-        />
-      ))}
-
-      <ViewportList items={jobposts}>
-        {(listing: JobPost, i) => (
-          <div
-            key={listing.jobpost.id}
-            ref={i === jobposts.length - 1 ? ref : undefined}
-          >
-            <JobCard
-              listing={listing}
-              isActive={checkJobIsActive(segments.key, listing)}
-              onClick={() => onClickListing(listing)}
-            />
-          </div>
-        )}
-      </ViewportList>
-
-      {Boolean(error) && (
-        <div>
-          <p>Failed fetching job-list: {(error as Error).message}</p>
-        </div>
-      )}
-
+    <>
       {isLoading && (
-        <div>
+        <div className="my-8">
           <p className="w-full pb-8 text-center">Fetching job posts ...</p>
         </div>
       )}
 
-      {isFetchingNextPage && (
-        <div>
-          <p className="w-full pb-8 text-center">Loading more job posts ...</p>
-        </div>
-      )}
-
       {data && !hasNextPage && <p>No more job posts to load</p>}
-    </div>
+
+      <div ref={parentRef}>
+        <div
+          style={{
+            height: virtualizer.getTotalSize(),
+            width: '100%',
+            position: 'relative',
+          }}
+        >
+          <div
+            className="flex flex-col items-center gap-y-8"
+            style={{
+              position: 'absolute',
+              top: 0,
+              left: 0,
+              width: '100%',
+              transform: `translateY(${
+                items[0]?.start ?? 0 - virtualizer.options.scrollMargin
+              }px)`,
+            }}
+          >
+            {items.map(({ key, index, start, end }) => {
+              const isLast = index >= jobposts.length - 1;
+              const listing = jobposts[index];
+
+              return (
+                <div
+                  key={key}
+                  ref={virtualizer.measureElement}
+                  data-index={index}
+                  className="w-full max-w-4xl"
+                >
+                  <div ref={isLast ? inViewRef : undefined}>
+                    <JobCard
+                      listing={listing}
+                      isActive={checkJobIsActive(segments.key, listing)}
+                      onClick={() => onClickListing(listing)}
+                    />
+                  </div>
+
+                  {isLast && (
+                    <div className="mt-12">
+                      {Boolean(error) && (
+                        <div>
+                          <p>
+                            Failed fetching job-list: {(error as Error).message}
+                          </p>
+                        </div>
+                      )}
+
+                      {isFetchingNextPage && (
+                        <div>
+                          <p className="w-full pb-8 text-center">
+                            Loading more job posts ...
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  )}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      </div>
+    </>
   );
 };
