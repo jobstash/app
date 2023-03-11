@@ -27,8 +27,8 @@ export const fakeJob = (): Job => {
   const jobFoundTimestamp = faker.date.recent(60).valueOf();
   const extractedTimestamp = faker.date.recent(60).valueOf();
 
-  const minSalary = faker.datatype.number({ min: 60_000, max: 80_000 });
-  const maxSalary = faker.datatype.number({ min: 90_000, max: 120_000 });
+  const minSalaryRange = faker.datatype.number({ min: 60_000, max: 80_000 });
+  const maxSalaryRange = faker.datatype.number({ min: 90_000, max: 120_000 });
 
   const jobLocation = faker.helpers.arrayElement(['Remote', 'NYC, USA']);
   const jobCommitment = faker.helpers.arrayElement(['Full Time', 'Part Time']);
@@ -41,14 +41,17 @@ export const fakeJob = (): Job => {
   const benefits = fakeDesc();
   const culture = fakeDesc();
 
+  const shortUUID = faker.datatype.string(6);
+
   return {
     id,
+    shortUUID,
     jobTitle,
     jobCreatedTimestamp,
     jobFoundTimestamp,
     extractedTimestamp,
-    minSalary,
-    maxSalary,
+    minSalaryRange,
+    maxSalaryRange,
     jobLocation,
     jobCommitment,
     jobApplyPageUrl,

@@ -45,7 +45,15 @@ if (
   });
 }
 
-const queryClient = new QueryClient();
+const queryRetryCount =
+  Number(process.env.NEXT_PUBLIC_QUERY_RETRY_COUNT) || false;
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      retry: queryRetryCount,
+    },
+  },
+});
 
 const App = ({ Component, pageProps }: AppProps) => (
   <QueryClientProvider client={queryClient}>

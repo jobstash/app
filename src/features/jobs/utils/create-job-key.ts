@@ -4,5 +4,5 @@ import { JobPost } from '../core/interfaces';
 
 export const createJobKey = ({
   organization: { name: orgName },
-  jobpost: { id, jobTitle },
-}: JobPost) => slugify(`${orgName} ${jobTitle} ${id}`);
+  jobpost: { shortUUID, jobTitle },
+}: JobPost) => slugify(`${orgName} ${jobTitle} ${shortUUID}`);

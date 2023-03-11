@@ -1,5 +1,5 @@
 import type { GetServerSideProps } from 'next';
-import { useEffect } from 'react';
+import { ReactNode, useEffect } from 'react';
 
 import { useSetAtom } from 'jotai';
 
@@ -10,7 +10,6 @@ import { JobPost } from '~/features/jobs/core/interfaces';
 import { fakeJobPost } from '~/features/jobs/testutils';
 import { createJobKey } from '~/features/jobs/utils';
 import { JobRightPanel } from '~/features/right-panel/components';
-import { ToBeReplacedLayout } from '~/shared/components';
 import { SideBar } from '~/shared/components/layout/sidebar';
 
 interface Props {
@@ -31,10 +30,10 @@ const JobsPage = ({ data }: Props) => {
   if (data.listings.length === 0) return <h1>EMPTY</h1>;
 
   return (
-    <ToBeReplacedLayout sidebar={<SideBar />} rightPanel={<JobRightPanel />}>
+    <Layout>
       <Filters />
-      <JobCardList initListings={data.listings} />
-    </ToBeReplacedLayout>
+      <JobCardList />
+    </Layout>
   );
 };
 
@@ -61,3 +60,17 @@ export const getServerSideProps: GetServerSideProps<Props> = async (ctx) => {
     },
   };
 };
+
+const Layout = ({ children }: { children: ReactNode }) => (
+  <div className="w-full pl-52 pr-[41.67%]">
+    <SideBar />
+
+    <div className="px-8">{children}</div>
+
+    <div className="fixed top-0 right-0 z-10 w-5/12">
+      <div className="hide-scrollbar sticky top-0 min-h-screen space-y-6 overflow-y-scroll bg-white/5 p-6">
+        <JobRightPanel />
+      </div>
+    </div>
+  </div>
+);

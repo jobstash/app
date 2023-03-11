@@ -28,9 +28,6 @@ export const RightPanelProjectCard = ({ project }: Props) => {
             {defillamaSlug ?? 'Website'}
           </IconHolder>
         </div>
-        <div>
-          <Button kind="primary">Explore Competitor</Button>
-        </div>
       </div>
 
       <div className="flex flex-wrap gap-4">
