@@ -86,8 +86,6 @@ export const JobCardList = () => {
         </div>
       )}
 
-      {data && !hasNextPage && <p>No more job posts to load</p>}
-
       <div ref={parentRef}>
         <div
           style={{
@@ -144,6 +142,8 @@ export const JobCardList = () => {
                           </p>
                         </div>
                       )}
+
+                      {data && !hasNextPage && <p>No more job posts to load</p>}
                     </div>
                   )}
                 </div>
