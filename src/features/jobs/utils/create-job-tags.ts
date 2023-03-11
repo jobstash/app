@@ -2,7 +2,13 @@ import { Job, TagElement } from '~/shared/core/interfaces';
 import { numFormatter } from '~/shared/utils';
 
 export const createJobTags = (job: Job): TagElement[] => {
-  const { seniority, minSalary, maxSalary, jobLocation, jobCommitment } = job;
+  const {
+    seniority,
+    minSalaryRange,
+    maxSalaryRange,
+    jobLocation,
+    jobCommitment,
+  } = job;
 
   const tags: TagElement[] = [];
 
@@ -11,10 +17,10 @@ export const createJobTags = (job: Job): TagElement[] => {
     tags.push({ text: `Seniority: ${seniority}`, iconText: 'level' });
 
   // **Note**: waiting to finalize salary
-  if (minSalary && maxSalary) {
-    const salary = `$${numFormatter.format(minSalary)}-$${numFormatter.format(
-      maxSalary,
-    )}`;
+  if (minSalaryRange && maxSalaryRange) {
+    const salary = `$${numFormatter.format(
+      minSalaryRange,
+    )}-$${numFormatter.format(maxSalaryRange)}`;
     tags.push({ text: `Salary: ${salary}`, iconText: 'money' });
   }
 

@@ -17,8 +17,8 @@ export interface Job {
   seniority?: string; // Refinement: receive formatted string, must be required
 
   // Salaries
-  minSalary?: number; // Refinement: receive formatted string
-  maxSalary?: number; // Refinement: receive formatted string
+  minSalaryRange?: number; // Refinement: receive formatted string
+  maxSalaryRange?: number; // Refinement: receive formatted string
 
   /** Location tag for job-post card */
   jobLocation?: string;
