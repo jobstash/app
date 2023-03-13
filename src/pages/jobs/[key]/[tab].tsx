@@ -3,7 +3,6 @@ import { ReactNode, useEffect } from 'react';
 
 import { useSetAtom } from 'jotai';
 
-import { Filters } from '~/features/filters/components';
 import { activeJobPostAtom } from '~/features/jobs/atoms';
 import { JobCardList } from '~/features/jobs/components';
 import { JobPost } from '~/features/jobs/core/interfaces';
@@ -31,7 +30,6 @@ const JobsPage = ({ data }: Props) => {
 
   return (
     <Layout>
-      <Filters />
       <JobCardList />
     </Layout>
   );

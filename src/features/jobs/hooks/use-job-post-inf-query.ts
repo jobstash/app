@@ -52,6 +52,7 @@ const fetchJobListings = async ({
 interface JobListingsInfQueryPage {
   page: number;
   count: number;
+  total: number;
   data: JobPost[];
 }
 
