@@ -6,7 +6,7 @@ import { filterParamsAtom } from '../atoms';
 import { useFilterConfigQuery, useFilters } from '../hooks';
 import { getFilterUrlParams } from '../utils';
 
-export const Filters = () => {
+export const Filters = ({ jobCount }: { jobCount: number }) => {
   const { data, error, isLoading } = useFilterConfigQuery();
 
   const { filters, filterComponents, sortComponents, clearFilterState } =
@@ -54,7 +54,7 @@ export const Filters = () => {
       <div className="flex justify-between pt-6">
         <div className="flex min-w-max pl-2 pr-20">
           <div className="mt-3">
-            <Text>Jobs Listed: TBD</Text>
+            <Text>Jobs Listed: {jobCount}</Text>
           </div>
         </div>
         <div className="flex flex-wrap items-center justify-end gap-x-2">

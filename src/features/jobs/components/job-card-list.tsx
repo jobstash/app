@@ -5,6 +5,7 @@ import { useWindowVirtualizer } from '@tanstack/react-virtual';
 import { useAtomValue, useSetAtom } from 'jotai';
 
 import { filterParamsAtom } from '~/features/filters/atoms';
+import { Filters } from '~/features/filters/components';
 import {
   EVENT_CARD_CLICK,
   TEXT_ROUTE_SECTION_JOBS,
@@ -80,6 +81,8 @@ export const JobCardList = () => {
 
   return (
     <>
+      <Filters jobCount={data?.pages[0].total ?? 0} />
+
       {isLoading && (
         <div className="my-8">
           <p className="w-full pb-8 text-center">Fetching job posts ...</p>
