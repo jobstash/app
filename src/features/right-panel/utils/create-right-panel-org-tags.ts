@@ -30,13 +30,14 @@ export const createRightPanelOrgTags = (org: Organization) => {
       iconText: 'users-three',
     });
 
-  const orgSocials: TagElement[] = [
-    {
+  const orgSocials: TagElement[] = [];
+
+  if (githubOrganization)
+    orgSocials.push({
       text: 'Github',
       iconText: 'github',
       link: githubOrganization,
-    },
-  ];
+    });
 
   if (twitter)
     orgSocials.push({ text: 'Twitter', iconText: 'twitter', link: twitter });

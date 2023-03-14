@@ -76,13 +76,15 @@ export const JobRightPanel = () => {
           ))}
         </div>
         <p className="text-sm text-sidebarTitle">{org.summary}</p>
-        <div className="flex space-x-4 py-4 text-sm">
-          {orgSocials.map(({ text, iconText, link }) => (
-            <IconHolder key={text} link={link} iconText={iconText}>
-              {text}
-            </IconHolder>
-          ))}
-        </div>
+        {orgSocials.length > 0 && (
+          <div className="flex space-x-4 py-4 text-sm">
+            {orgSocials.map(({ text, iconText, link }) => (
+              <IconHolder key={text} link={link} iconText={iconText}>
+                {text}
+              </IconHolder>
+            ))}
+          </div>
+        )}
       </div>
 
       {/** RIGHT PANEL TABS */}
