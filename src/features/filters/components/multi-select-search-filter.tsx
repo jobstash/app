@@ -13,18 +13,13 @@ import * as Dropdown from '@radix-ui/react-dropdown-menu';
 import clsx from 'clsx';
 
 import { Button, Text } from '~/shared/components';
+import { lato } from '~/shared/core/constants';
 
 import type { FilterAction, FilterState } from '../core/types';
 
 import { CloseSvgIcon } from './close-svg-icon';
 import { DropdownUi } from './dropdown-ui';
 import { UnCheckedIcon } from './unchecked-icon';
-
-const lato = Lato({
-  weight: ['400', '700'],
-  subsets: ['latin'],
-  variable: '--font-lato',
-});
 
 type Props = {
   text: string;

@@ -10,17 +10,7 @@ import {
 } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 
-const roboto = Roboto({
-  weight: ['400', '700'],
-  subsets: ['latin'],
-  variable: '--font-roboto',
-});
-
-const lato = Lato({
-  weight: ['400', '700'],
-  subsets: ['latin'],
-  variable: '--font-lato',
-});
+import { lato, roboto } from '~/shared/core/constants';
 
 if (
   process.env.NODE_ENV === 'development' &&
