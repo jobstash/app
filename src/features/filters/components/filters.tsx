@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { useSetAtom } from 'jotai';
 
 import { Button, Text } from '~/shared/components';
@@ -6,8 +7,14 @@ import { filterParamsAtom } from '../atoms';
 import { useFilterConfigQuery, useFilters } from '../hooks';
 import { getFilterUrlParams } from '../utils';
 
-export const Filters = ({ jobCount }: { jobCount: number }) => {
-  const { data, error, isLoading } = useFilterConfigQuery();
+export const Filters = ({
+  jobCount,
+  isLoadingData,
+}: {
+  jobCount: number;
+  isLoadingData: boolean;
+}) => {
+  const { data, error, isLoading, isFetching } = useFilterConfigQuery();
 
   const { filters, filterComponents, sortComponents, clearFilterState } =
     useFilters(data);
@@ -21,7 +28,7 @@ export const Filters = ({ jobCount }: { jobCount: number }) => {
       </h1>
     );
   if (isLoading || !data)
-    return <h1 className="text-white">LOADING JOBS FILTER ...</h1>;
+    return <h1 className="my-12 text-white">LOADING JOBS FILTER ...</h1>;
 
   const applyFilter = () => {
     setFilterParams(getFilterUrlParams(filters, data));
@@ -32,10 +39,14 @@ export const Filters = ({ jobCount }: { jobCount: number }) => {
     setFilterParams(null);
   };
 
-  const disabledSubmit = Object.keys(filters).length === 0;
+  const disabledSubmit = Object.keys(filters).length === 0 || isLoadingData;
 
   return (
-    <div className="my-4 text-white">
+    <div
+      className={clsx('my-4 text-white', {
+        'opacity-40 pointer-events-none': isLoadingData,
+      })}
+    >
       <div className="flex justify-between">
         <div className="flex min-w-max pl-2 pr-20">
           <div className="mt-3">
@@ -54,7 +65,7 @@ export const Filters = ({ jobCount }: { jobCount: number }) => {
       <div className="flex justify-between pt-6">
         <div className="flex min-w-max pl-2 pr-20">
           <div className="mt-3">
-            <Text>Jobs Listed: {jobCount}</Text>
+            <Text>{jobCount > 0 ? `Jobs Listed: ${jobCount}` : 'Loading'}</Text>
           </div>
         </div>
         <div className="flex flex-wrap items-center justify-end gap-x-2">

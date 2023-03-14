@@ -49,3 +49,13 @@ This section contains the step needed to run the application locally on your mac
 ## Versioning
 
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/recruitersrip/app/tags).
+
+## Important Notes
+
+### On jobs data
+
+- When viewing the app for local dev, accessing specific job posts can be tricky since url depends on job-post data.  
+Here are the list of jobs with data:
+  - `/jobs/argent-lead-software-engineer-VKRSXh/details` -> job-post w/o project
+  - `/jobs/tessera-full-stack-engineer-remote-eu-MnKwY1/details` -> job-post with project
+  - `jobs/opensea-senior-software-engineer-full-stack-TnKvW1/details` -> job-post with funding round details

@@ -36,6 +36,10 @@
   }
 }
 
+html {
+	overflow-y: overlay;
+}
+
 .hide-scrollbar {
   -ms-overflow-style: none;
   scrollbar-width: none;

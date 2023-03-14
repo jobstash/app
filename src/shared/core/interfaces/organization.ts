@@ -27,7 +27,7 @@ export interface Organization {
   updatedTimestamp?: number;
 
   /** Github org display text */
-  githubOrganization: string;
+  githubOrganization?: string;
 
   /** Team size tag text */
   teamSize?: string;

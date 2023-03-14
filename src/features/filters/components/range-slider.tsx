@@ -7,6 +7,7 @@ import * as TooltipPrimitive from '@radix-ui/react-tooltip';
 import { clsx } from 'clsx';
 
 import { Text } from '~/shared/components';
+import { lato } from '~/shared/core/constants';
 import { numFormatter } from '~/shared/utils';
 
 import type { RangeSliderProps } from '../core/interfaces';
@@ -20,12 +21,6 @@ interface Props {
   range: RangeSliderProps;
   onChange: (_: RangeValue) => void;
 }
-
-const lato = Lato({
-  weight: ['400', '700'],
-  subsets: ['latin'],
-  variable: '--font-lato',
-});
 
 export const RangeSlider = ({
   range: { min, max, step, value, defaultValue, prefix },
