@@ -96,7 +96,7 @@ export const JobCardList = ({ initListing }: Props) => {
 
   return (
     <>
-      <Filters jobCount={data?.pages[0].total ?? 0} />
+      <Filters jobCount={data?.pages[0].total ?? 0} isLoadingData={isLoading} />
 
       <div ref={parentRef}>
         <div
