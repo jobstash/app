@@ -61,6 +61,7 @@ export interface FilterConfig {
   monthlyRevenue: RangeFilterConfig;
   audits: RangeFilterConfig;
   hacks: RangeFilterConfig;
+  fundingRounds: MultiSelectSearchFilterConfig;
   mainNet: SingleSelectFilterConfig;
   token: SingleSelectFilterConfig;
   order: SingleSelectFilterConfig;

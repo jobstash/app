@@ -21,7 +21,7 @@ export const Filters = ({ jobCount }: { jobCount: number }) => {
       </h1>
     );
   if (isLoading || !data)
-    return <h1 className="text-white">LOADING JOBS FILTER ...</h1>;
+    return <h1 className="my-12 text-white">LOADING JOBS FILTER ...</h1>;
 
   const applyFilter = () => {
     setFilterParams(getFilterUrlParams(filters, data));
