@@ -2,7 +2,7 @@ import { useEffect, useMemo, useRef } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 import { useWindowVirtualizer } from '@tanstack/react-virtual';
-import { useAtomValue, useSetAtom } from 'jotai';
+import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 
 import { filterParamsAtom } from '~/features/filters/atoms';
 import { Filters } from '~/features/filters/components';
@@ -21,9 +21,15 @@ import { checkJobIsActive, createJobKey } from '../utils';
 
 import { JobCard } from './job-card';
 
-export const JobCardList = () => {
+interface Props {
+  initListing: JobPost;
+}
+
+export const JobCardList = ({ initListing }: Props) => {
+  const initShortUUID = initListing.jobpost.shortUUID;
+
   const filterParams = useAtomValue(filterParamsAtom);
-  const setActiveListing = useSetAtom(activeJobPostAtom);
+  const [activeListing, setActiveListing] = useAtom(activeJobPostAtom);
 
   const {
     data,
@@ -37,8 +43,16 @@ export const JobCardList = () => {
   } = useJobListingInfQuery(filterParams);
 
   const jobposts = useMemo(
-    () => (data ? data.pages.flatMap((d) => d.data) : []),
-    [data],
+    () =>
+      data
+        ? [
+            initListing,
+            ...data.pages
+              .flatMap((d) => d.data)
+              .filter((d) => d.jobpost.shortUUID !== initShortUUID),
+          ]
+        : [initListing],
+    [data, initListing, initShortUUID],
   );
 
   const parentRef = useRef<HTMLDivElement>(null);
@@ -50,7 +64,7 @@ export const JobCardList = () => {
 
   const virtualizer = useWindowVirtualizer({
     count: jobposts.length,
-    estimateSize: () => 300,
+    estimateSize: () => 450,
     // ScrollMargin: parentOffsetRef.current,
   });
 
@@ -64,6 +78,7 @@ export const JobCardList = () => {
   }, [fetchNextPage, inView, isFetchingNextPage]);
 
   const { segments, push } = useRouteSegments();
+
   const onClickListing = (listing: JobPost) => {
     setActiveListing(listing);
     document.dispatchEvent(new Event(EVENT_CARD_CLICK));
@@ -82,12 +97,6 @@ export const JobCardList = () => {
   return (
     <>
       <Filters jobCount={data?.pages[0].total ?? 0} />
-
-      {isLoading && (
-        <div className="my-8">
-          <p className="w-full pb-8 text-center">Fetching job posts ...</p>
-        </div>
-      )}
 
       <div ref={parentRef}>
         <div
@@ -155,6 +164,12 @@ export const JobCardList = () => {
           </div>
         </div>
       </div>
+
+      {isLoading && (
+        <div className="my-8">
+          <p className="w-full pb-8 text-center">Fetching job posts ...</p>
+        </div>
+      )}
     </>
   );
 };

@@ -6,54 +6,54 @@ import { useSetAtom } from 'jotai';
 import { activeJobPostAtom } from '~/features/jobs/atoms';
 import { JobCardList } from '~/features/jobs/components';
 import { JobPost } from '~/features/jobs/core/interfaces';
-import { fakeJobPost } from '~/features/jobs/testutils';
-import { createJobKey } from '~/features/jobs/utils';
 import { JobRightPanel } from '~/features/right-panel/components';
 import { SideBar } from '~/shared/components/layout/sidebar';
+import { ERR_INTERNAL } from '~/shared/core/constants';
+import { sentryMessage } from '~/shared/utils';
 
 interface Props {
   data: {
-    listings: JobPost[];
+    activeListing: JobPost;
   };
 }
 
-const JobsPage = ({ data }: Props) => {
+const JobsPage = ({ data: { activeListing } }: Props) => {
   const setActiveListing = useSetAtom(activeJobPostAtom);
 
   // Sync SSR data active post
   useEffect(() => {
-    setActiveListing(data.listings.length > 0 ? data.listings[0] : null);
+    setActiveListing(activeListing);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  if (data.listings.length === 0) return <h1>EMPTY</h1>;
-
   return (
     <Layout>
-      <JobCardList />
+      <JobCardList initListing={activeListing} />
     </Layout>
   );
 };
 
 export default JobsPage;
 
-const mockPost = fakeJobPost();
-const qKey = createJobKey(mockPost);
-
 export const getServerSideProps: GetServerSideProps<Props> = async (ctx) => {
-  if (ctx.query.key !== qKey) {
-    return {
-      redirect: {
-        permanent: false,
-        destination: `/jobs/${qKey}/details`,
-      },
-    };
+  const mwURL = process.env['NEXT_PUBLIC_MW_URL'];
+  if (!mwURL) {
+    sentryMessage('/jobs/{shortUUID} Missing env', 'NEXT_PUBLIC_MW_URL');
+    throw new Error(ERR_INTERNAL);
   }
+
+  const shortUUID = ctx.query.key?.slice(-6);
+  if (!shortUUID) return { notFound: true };
+
+  const res = await fetch(`${mwURL}/jobs/${shortUUID}`);
+  if (!res.ok) return { notFound: true };
+
+  const activeListing = (await res.json()) as JobPost;
 
   return {
     props: {
       data: {
-        listings: [mockPost],
+        activeListing,
       },
     },
   };
