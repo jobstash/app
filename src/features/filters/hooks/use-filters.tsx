@@ -44,9 +44,9 @@ const ignoredFilterConfigs = new Set([
   // KEY_TEAM_SIZE, // Range has 0 min/max values
   // KEY_HEAD_COUNT, // Range has 0 min/max values
   KEY_AUDITS, // Range has 0 min/max values
-  KEY_HACKS, // Not a range -> min = 0, and range = 1, stepSize = 5
+  // KEY_HACKS, // Not a range -> min = 0, and range = 1, stepSize = 5
   // KEY_SENIORITY, // Errors "seniority must be a postive number error", "seniority must be a number conforming to the specified constraints"
-  KEY_MAINNET, // Internal error
+  // KEY_MAINNET, // Internal error
   // KEY_TOKEN, // Should be SINGLESELECT
   // KEY_LOCATIONS, // No required "label" field, No "paramKey" field
   // KEY_TECH, // No required "label" field, empty string in options
