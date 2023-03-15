@@ -8,12 +8,11 @@ import {
   QueryClientProvider,
 } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
-import { ConnectKitProvider, getDefaultClient } from 'connectkit';
+import { ConnectKitProvider, getDefaultClient, SIWEProvider } from 'connectkit';
 import { configureChains, createClient, mainnet, WagmiConfig } from 'wagmi';
 import { publicProvider } from 'wagmi/providers/public';
 
-import { lato, roboto } from '~/shared/core/constants';
-import { siweClient } from '~/shared/utils';
+import { lato, roboto, siweConfig } from '~/shared/core/constants';
 
 if (
   process.env.NODE_ENV === 'development' &&
@@ -65,7 +64,8 @@ const App = ({ Component, pageProps }: AppProps) => (
   <QueryClientProvider client={queryClient}>
     <Hydrate state={pageProps.dehydratedState}>
       <WagmiConfig client={connectkitClient}>
-        <siweClient.Provider
+        <SIWEProvider
+          {...siweConfig}
           onSignIn={(session) => console.log('provider session =', session)}
         >
           <ConnectKitProvider theme="auto" mode="dark">
@@ -73,7 +73,7 @@ const App = ({ Component, pageProps }: AppProps) => (
               <Component {...pageProps} />
             </div>
           </ConnectKitProvider>
-        </siweClient.Provider>
+        </SIWEProvider>
       </WagmiConfig>
       <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
     </Hydrate>
