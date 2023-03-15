@@ -1,8 +1,9 @@
 /* eslint-disable no-alert */
 
+import { Avatar as CkAvatar, ConnectKitButton } from 'connectkit';
+
 import { useRouteSegments } from '~/shared/hooks';
 
-import { Avatar } from '../base/avatar';
 import { Bartab } from '../base/bartab';
 import { Brand } from '../base/brand';
 import { Text } from '../base/text';
@@ -85,12 +86,29 @@ const UserTab = () => (
 
     <hr className="border-t border-white/20" />
 
-    <Bartab
-      intent="wallet"
-      isConnected={false}
-      text="Connect Wallet"
-      onClick={() => alert('TODO')}
-    />
+    <ConnectKitButton.Custom>
+      {({ address, show, isConnecting }) => (
+        <Bartab
+          isConnected
+          intent="wallet"
+          left={<CkAvatar address={address} name="pakyu" size={24} />}
+          text={
+            address ? (
+              <div className="flex items-center gap-x-2">
+                <Text size="sm" fw="bold">
+                  {`${address.slice(0, 6)}...${address.slice(-4)}`}
+                </Text>
+              </div>
+            ) : isConnecting ? (
+              'Connecting'
+            ) : (
+              'Connect Wallet'
+            )
+          }
+          onClick={() => (show ? show() : null)}
+        />
+      )}
+    </ConnectKitButton.Custom>
   </div>
 );
 

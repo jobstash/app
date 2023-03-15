@@ -2,15 +2,18 @@ import '~/styles/globals.css';
 
 import type { AppProps } from 'next/app';
 
-import { Lato, Roboto } from '@next/font/google';
 import {
   Hydrate,
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
+import { ConnectKitProvider, getDefaultClient } from 'connectkit';
+import { configureChains, createClient, mainnet, WagmiConfig } from 'wagmi';
+import { publicProvider } from 'wagmi/providers/public';
 
 import { lato, roboto } from '~/shared/core/constants';
+import { siweClient } from '~/shared/utils';
 
 if (
   process.env.NODE_ENV === 'development' &&
@@ -45,13 +48,34 @@ const queryClient = new QueryClient({
   },
 });
 
+const { provider, webSocketProvider } = configureChains(
+  [mainnet],
+  [publicProvider()],
+);
+
+const connectkitClient = createClient(
+  getDefaultClient({
+    appName: 'Job Stash',
+    provider,
+    webSocketProvider,
+  }),
+);
+
 const App = ({ Component, pageProps }: AppProps) => (
   <QueryClientProvider client={queryClient}>
     <Hydrate state={pageProps.dehydratedState}>
-      <div className={`${lato.variable} ${roboto.variable} font-roboto`}>
-        <Component {...pageProps} />
-      </div>
-      <ReactQueryDevtools initialIsOpen={false} />
+      <WagmiConfig client={connectkitClient}>
+        <siweClient.Provider
+          onSignIn={(session) => console.log('provider session =', session)}
+        >
+          <ConnectKitProvider theme="auto" mode="dark">
+            <div className={`${lato.variable} ${roboto.variable} font-roboto`}>
+              <Component {...pageProps} />
+            </div>
+          </ConnectKitProvider>
+        </siweClient.Provider>
+      </WagmiConfig>
+      <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
     </Hydrate>
   </QueryClientProvider>
 );

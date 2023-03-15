@@ -56,7 +56,7 @@ type BartabVariantProps = VariantProps<typeof cvaBartab>;
 interface BartabProps
   extends ButtonHTMLAttributes<HTMLButtonElement>,
     BartabVariantProps {
-  text: string;
+  text: string | ReactNode;
   isConnected?: boolean;
   isActive?: boolean;
   left?: ReactNode;
@@ -79,11 +79,15 @@ export const Bartab = ({
     onClick={onClick}
   >
     <span className="flex w-full justify-between">
-      <span className="flex items-center space-x-3">
+      <span className="flex items-center space-x-2">
         {left}
-        <Text size="md" fw="semibold">
-          {text}
-        </Text>
+        {typeof text === 'string' ? (
+          <Text size="md" fw="semibold">
+            {text}
+          </Text>
+        ) : (
+          text
+        )}
       </span>
       <SidebarIcon filename="right-caret" />
     </span>
