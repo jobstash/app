@@ -59,3 +59,15 @@ Here are the list of jobs with data:
   - `/jobs/argent-lead-software-engineer-VKRSXh/details` -> job-post w/o project
   - `/jobs/tessera-full-stack-engineer-remote-eu-MnKwY1/details` -> job-post with project
   - `jobs/opensea-senior-software-engineer-full-stack-TnKvW1/details` -> job-post with funding round details
+
+### How to run `app` on local https
+
+1. Create local certs:
+    - Install [mkcert](https://github.com/FiloSottile/mkcert) - `brew install mkcert` or `choco install mkcert`
+    - Run `mkcert -install`
+    - Run `mkcert localhost`
+
+2. Install [local-ssl-proxy](https://github.com/cameronhunter/local-ssl-proxy) - `npm i -g local-ssl-proxy`
+3. Run these commands on separate terminals
+    - `yarn dev:ssl` or `yarn start:ssl`
+    - `yarn proxy:ssl`
