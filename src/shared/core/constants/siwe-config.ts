@@ -17,7 +17,9 @@ export const siweConfig: SIWEConfig = {
       address,
       chainId,
       nonce,
-      statement: 'Sign in With Ethereum.',
+      statement: `I am ${
+        address.slice(0, 4) + '...' + address.slice(-4)
+      } and I want to sign in to ${window.location.host}`,
     }).prepareMessage(),
   verifyMessage: async ({ message, signature }) =>
     fetch(`${API_MW_URL}/siwe/verify`, {
