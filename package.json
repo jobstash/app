@@ -4,14 +4,17 @@
   "private": true,
   "scripts": {
     "dev": "next dev",
+    "dev:ssl": "next dev --port=3001",
     "build": "next build",
     "start": "next start",
+    "start:ssl": "yarn build && next start --port=3001",
     "lint": "eslint .",
     "lint:staged": "lint-staged",
     "madge:deps": "madge --circular --extensions ts,tsx --ts-config ./tsconfig.json ./src",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
-    "test": "echo \"Skipping test for now until discussed...\" && exit 0"
+    "test": "echo \"Skipping test for now until discussed...\" && exit 0",
+    "proxy:ssl": "local-ssl-proxy --source 3000 --target 3001 --key localhost-key.pem --cert localhost.pem"
   },
   "dependencies": {
     "@next/font": "^13.1.6",
