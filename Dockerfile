@@ -1,3 +1,4 @@
+# Builder stage
 FROM debian:bullseye as builder
 
 ARG NODE_VERSION=18.13.0
@@ -9,19 +10,19 @@ ENV VOLTA_HOME /root/.volta
 ENV PATH /root/.volta/bin:$PATH
 RUN volta install node@${NODE_VERSION} yarn@${YARN_VERSION}
 
-#######################################################################
-
 RUN mkdir /app
 WORKDIR /app
 
-COPY . .
-
+# Cache yarn dependencies
+COPY package.json yarn.lock ./
 RUN yarn install
 
+# Copy the rest of the app and build
+COPY . .
 ENV NODE_ENV production
-
 RUN yarn run build
 
+# Production stage
 FROM debian:bullseye
 
 COPY --from=builder /root/.volta /root/.volta
