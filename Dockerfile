@@ -19,7 +19,6 @@ RUN yarn install
 
 # Copy the rest of the app and build
 COPY . .
-ENV NODE_ENV production
 RUN yarn run build
 
 # Production stage
