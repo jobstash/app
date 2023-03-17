@@ -1,11 +1,11 @@
 import type { SIWEConfig } from 'connectkit/build/siwe';
 import { SiweMessage } from 'siwe';
 
-const API_MW_URL = process.env['NEXT_PUBLIC_MW_URL'];
+import { NEXT_PUBLIC_MW_URL } from './envs';
 
 export const siweConfig: SIWEConfig = {
   getNonce: async () =>
-    fetch(`${API_MW_URL}/siwe/nonce`, {
+    fetch(`${NEXT_PUBLIC_MW_URL}/siwe/nonce`, {
       credentials: 'include',
       mode: 'cors',
     }).then((res) => res.text()),
@@ -22,7 +22,7 @@ export const siweConfig: SIWEConfig = {
       } and I want to sign in to ${window.location.host}`,
     }).prepareMessage(),
   verifyMessage: async ({ message, signature }) =>
-    fetch(`${API_MW_URL}/siwe/verify`, {
+    fetch(`${NEXT_PUBLIC_MW_URL}/siwe/verify`, {
       credentials: 'include',
       mode: 'cors',
       method: 'POST',
@@ -32,12 +32,12 @@ export const siweConfig: SIWEConfig = {
       body: JSON.stringify({ message, signature }),
     }).then((res) => res.ok),
   getSession: async () =>
-    fetch(`${API_MW_URL}/siwe/session`, {
+    fetch(`${NEXT_PUBLIC_MW_URL}/siwe/session`, {
       mode: 'cors',
       credentials: 'include',
     }).then((res) => (res.ok ? res.json() : null)),
   signOut: async () =>
-    fetch(`${API_MW_URL}/siwe/logout`, {
+    fetch(`${NEXT_PUBLIC_MW_URL}/siwe/logout`, {
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',

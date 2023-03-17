@@ -1,6 +1,7 @@
 import '~/styles/globals.css';
 
 import type { AppProps } from 'next/app';
+import NextApp from 'next/app';
 
 import {
   Hydrate,
@@ -79,5 +80,12 @@ const App = ({ Component, pageProps }: AppProps) => (
     </Hydrate>
   </QueryClientProvider>
 );
+
+// At the moment all pages from the app requires some data from the server.
+// Therefore, its okay to opt out of the automatic static optimization feature.
+App.getInitialProps = async (ctx: any): Promise<any> => {
+  const appProps = await NextApp.getInitialProps(ctx);
+  return { ...appProps };
+};
 
 export default App;

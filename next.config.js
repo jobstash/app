@@ -19,12 +19,17 @@ const nextConfig = {
       },
     ],
   },
+  publicRuntimeConfig: {
+    publicEnvs: Object.fromEntries(
+      Object.entries(process.env).filter(([key]) =>
+        key.includes('NEXT_PUBLIC_'),
+      ),
+    ),
+  },
 };
 
-module.exports = nextConfig;
-
 module.exports = withSentryConfig(
-  module.exports,
+  nextConfig,
   { silent: true },
   { hideSourcemaps: true },
 );

@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import {
   ERR_INTERNAL,
+  NEXT_PUBLIC_MW_URL,
   SENTRY_MW_NON_200_RESPONSE,
   SENTRY_MW_NON_JSON_RESPONSE,
 } from '~/shared/core/constants';
@@ -13,9 +14,7 @@ import type { FilterConfig } from '../core/interfaces';
 const SENTRY_LABEL = `getQueryFn`;
 
 const getQueryFn = async (): Promise<FilterConfig> => {
-  const mwURL = process.env['NEXT_PUBLIC_MW_URL'];
-
-  const res = await fetch(`${mwURL}/jobs/filters`);
+  const res = await fetch(`${NEXT_PUBLIC_MW_URL}/jobs/filters`);
 
   // Query to mw should work - 500 otherwise
   if (!res.ok) {

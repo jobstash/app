@@ -2,6 +2,8 @@ import { QueryKey, useInfiniteQuery } from '@tanstack/react-query';
 
 import {
   ERR_INTERNAL,
+  NEXT_PUBLIC_MW_URL,
+  NEXT_PUBLIC_PAGE_SIZE,
   SENTRY_MW_NON_200_RESPONSE,
   SENTRY_MW_NON_JSON_RESPONSE,
 } from '~/shared/core/constants';
@@ -21,8 +23,8 @@ const fetchJobListings = async ({
 }: FetchJobOptions): Promise<JobListingsInfQueryPage> => {
   const filterParams = queryKey[1] as string | null;
 
-  const mwURL = process.env['NEXT_PUBLIC_MW_URL'];
-  const limit = process.env['NEXT_PUBLIC_PAGE_SIZE'] ?? 10;
+  const mwURL = NEXT_PUBLIC_MW_URL;
+  const limit = NEXT_PUBLIC_PAGE_SIZE ?? 10;
 
   const res = await fetch(
     `${mwURL}/jobs/list?page=${pageParam}&limit=${limit}${
