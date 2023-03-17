@@ -31,4 +31,4 @@ COPY --from=builder /app /app
 WORKDIR /app
 ENV PATH /root/.volta/bin:$PATH
 
-CMD [ "yarn", "run", "start" ]
+CMD ["node_modules/.bin/next", "start"]
