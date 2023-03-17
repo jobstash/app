@@ -1,33 +1,40 @@
-# Builder stage
-FROM debian:bullseye as builder
+FROM node:18-alpine AS base
 
-ARG NODE_VERSION=18.13.0
-ARG YARN_VERSION=1.22.19
-
-RUN apt-get update; apt install -y curl python-is-python3 pkg-config build-essential
-RUN curl https://get.volta.sh | bash
-ENV VOLTA_HOME /root/.volta
-ENV PATH /root/.volta/bin:$PATH
-RUN volta install node@${NODE_VERSION} yarn@${YARN_VERSION}
-
-RUN mkdir /app
+# Dependencies
+FROM base AS deps
+# Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
+RUN apk add --no-cache libc6-compat
 WORKDIR /app
 
-# Cache yarn dependencies
-COPY package.json yarn.lock ./
-RUN yarn install
+# Install dependencies
+COPY package.json yarn.lock* ./
+RUN yarn --frozen-lockfile
 
-# Copy the rest of the app and build
+# Build
+FROM base AS builder
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
 COPY . .
-RUN yarn run build
+RUN yarn build
 
-# Production stage
-FROM debian:bullseye
-
-COPY --from=builder /root/.volta /root/.volta
-COPY --from=builder /app /app
-
+# Production
+FROM base AS runner
 WORKDIR /app
-ENV PATH /root/.volta/bin:$PATH
+ENV NODE_ENV production
+
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+
+COPY --from=builder /app/public ./public
+
+# Automatically leverage output traces to reduce image size
+# https://nextjs.org/docs/advanced-features/output-file-tracing
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+
+USER nextjs
+
+EXPOSE 3000
+ENV PORT 3000
 
 CMD ["node_modules/.bin/next", "start"]
