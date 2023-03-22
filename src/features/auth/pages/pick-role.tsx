@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 
 import { SideBar, Text } from '~/shared/components';
+import { NEXT_PUBLIC_MW_URL } from '~/shared/core/constants';
 
 import { PickRoleButton, PickRoleSection } from '../components';
 import { CHECK_WALLET_RESULT, CHECK_WALLET_ROUTE } from '../core/constants';
@@ -8,7 +9,7 @@ import { useWalletAuthContext } from '../hooks';
 
 export const PickRolePage = () => {
   const { push } = useRouter();
-  const { isPageEmpty, isSignedIn, isConnected, checkWalletData } =
+  const { isPageEmpty, isSignedIn, checkWalletData, address, refetch } =
     useWalletAuthContext();
 
   if (isPageEmpty) return null;
@@ -25,6 +26,32 @@ export const PickRolePage = () => {
   ) {
     push(CHECK_WALLET_ROUTE[checkWalletData]);
     return null;
+  }
+
+  const onClickDevGithub = () => {
+    push(`${NEXT_PUBLIC_MW_URL}/siwe/gh-login`);
+  };
+
+  const githubAuth = async (code: string, address: string) => {
+    const res = await fetch(`${NEXT_PUBLIC_MW_URL}/siwe/gh-auth`, {
+      method: 'POST',
+      mode: 'cors',
+      credentials: 'include',
+      headers: {
+        'Content-Type': 'application/json',
+      },
+      body: JSON.stringify({ code, address }),
+    });
+
+    if (res.ok) {
+      refetch();
+      push('/jobs');
+    }
+  };
+
+  const codeParam = new URLSearchParams(window.location.search).get('code');
+  if (codeParam && address) {
+    githubAuth(codeParam, address);
   }
 
   return (
@@ -47,7 +74,15 @@ export const PickRolePage = () => {
             </Text>
           </div>
 
-          <PickRoleButton text="Connect with Github" icon="github" />
+          {codeParam ? (
+            <PickRoleButton text="Loading" />
+          ) : (
+            <PickRoleButton
+              text="Connect with Github"
+              icon="github"
+              onClick={onClickDevGithub}
+            />
+          )}
 
           <hr className="border-t border-white/10" />
         </PickRoleSection>

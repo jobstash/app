@@ -7,11 +7,15 @@ interface WalletAuthCtx {
   isSignedIn: boolean;
   isPageEmpty: boolean;
   checkWalletData: CheckWalletData | undefined;
+  address: string | undefined;
+  refetch: () => void;
 }
 
 export const WalletAuthContext = createContext<WalletAuthCtx>({
   isConnected: false,
   isSignedIn: false,
-  checkWalletData: undefined,
   isPageEmpty: false,
+  checkWalletData: undefined,
+  address: undefined,
+  refetch: () => null,
 });

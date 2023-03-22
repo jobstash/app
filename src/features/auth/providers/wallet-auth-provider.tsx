@@ -11,7 +11,7 @@ import { useCheckWallet } from '../hooks';
 
 export const WalletAuthProvider = ({ children }: { children: ReactNode }) => {
   const isMounted = useIsMounted();
-  const { isConnected } = useAccount();
+  const { isConnected, address } = useAccount();
   const { isSignedIn } = useSIWE();
   const { checkWalletData, refetch } = useCheckWallet(
     isConnected && isSignedIn,
@@ -39,8 +39,10 @@ export const WalletAuthProvider = ({ children }: { children: ReactNode }) => {
       isConnected,
       isSignedIn,
       isPageEmpty,
+      address,
+      refetch: () => refetch(),
     }),
-    [checkWalletData, isConnected, isSignedIn, isPageEmpty],
+    [checkWalletData, isConnected, isSignedIn, isPageEmpty, address, refetch],
   );
 
   return (
