@@ -13,6 +13,11 @@ import { ConnectKitProvider, getDefaultClient, SIWEProvider } from 'connectkit';
 import { configureChains, createClient, mainnet, WagmiConfig } from 'wagmi';
 import { publicProvider } from 'wagmi/providers/public';
 
+import { WalletAuthProvider } from '~/features/auth/contexts/wallet-auth-context';
+import {
+  EVENT_SIWE_LOGIN,
+  EVENT_SIWE_LOGOUT,
+} from '~/features/auth/core/constants';
 import {
   siweCreateMessage,
   siweGetNonce,
@@ -55,14 +60,21 @@ const App = ({ Component, pageProps }: AppProps) => (
           createMessage={siweCreateMessage}
           verifyMessage={siweVerifyMessage}
           signOut={siweSignOut}
-          onSignIn={(session) => {
-            console.log('provider session =', session);
+          onSignIn={() => {
+            document.dispatchEvent(new Event(EVENT_SIWE_LOGIN));
+          }}
+          onSignOut={() => {
+            document.dispatchEvent(new Event(EVENT_SIWE_LOGOUT));
           }}
         >
           <ConnectKitProvider theme="auto" mode="dark">
-            <div className={`${lato.variable} ${roboto.variable} font-roboto`}>
-              <Component {...pageProps} />
-            </div>
+            <WalletAuthProvider>
+              <div
+                className={`${lato.variable} ${roboto.variable} font-roboto`}
+              >
+                <Component {...pageProps} />
+              </div>
+            </WalletAuthProvider>
           </ConnectKitProvider>
         </SIWEProvider>
       </WagmiConfig>
