@@ -7,6 +7,7 @@ import { useRouteSegments } from '~/shared/hooks';
 import { Bartab } from '../base/bartab';
 import { Brand } from '../base/brand';
 import { Text } from '../base/text';
+import { ConnectWalletButton } from '../ui';
 
 import { bookmarkedTabs, discoverTabs } from './constants';
 import type { SidebarTab } from './types';
@@ -86,29 +87,7 @@ const UserTab = () => (
 
     <hr className="border-t border-white/20" />
 
-    <ConnectKitButton.Custom>
-      {({ address, show, isConnecting }) => (
-        <Bartab
-          isConnected
-          intent="wallet"
-          left={<CkAvatar address={address} name="pakyu" size={24} />}
-          text={
-            address ? (
-              <div className="flex items-center gap-x-2">
-                <Text size="sm" fw="bold">
-                  {`${address.slice(0, 6)}...${address.slice(-4)}`}
-                </Text>
-              </div>
-            ) : isConnecting ? (
-              'Connecting'
-            ) : (
-              'Connect Wallet'
-            )
-          }
-          onClick={() => (show ? show() : null)}
-        />
-      )}
-    </ConnectKitButton.Custom>
+    <ConnectWalletButton />
   </div>
 );
 
