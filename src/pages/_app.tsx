@@ -13,11 +13,11 @@ import { ConnectKitProvider, getDefaultClient, SIWEProvider } from 'connectkit';
 import { configureChains, createClient, mainnet, WagmiConfig } from 'wagmi';
 import { publicProvider } from 'wagmi/providers/public';
 
-import { WalletAuthProvider } from '~/features/auth/contexts/wallet-auth-context';
 import {
   EVENT_SIWE_LOGIN,
   EVENT_SIWE_LOGOUT,
 } from '~/features/auth/core/constants';
+import { WalletAuthProvider } from '~/features/auth/providers/wallet-auth-provider';
 import {
   siweCreateMessage,
   siweGetNonce,
