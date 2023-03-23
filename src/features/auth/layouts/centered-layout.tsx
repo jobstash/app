@@ -1,6 +1,6 @@
 import { ReactNode } from 'react';
 
-import { SideBar } from '~/shared/components';
+import { SideBar } from '~/features/sidebar/components';
 
 import { JobstashCircleLogo } from '../components';
 

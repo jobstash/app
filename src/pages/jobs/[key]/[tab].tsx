@@ -7,7 +7,7 @@ import { activeJobPostAtom } from '~/features/jobs/atoms';
 import { JobCardList } from '~/features/jobs/components';
 import { JobPost } from '~/features/jobs/core/interfaces';
 import { JobRightPanel } from '~/features/right-panel/components';
-import { SideBar } from '~/shared/components/layout/sidebar';
+import { SideBar } from '~/features/sidebar/components';
 import { ERR_INTERNAL } from '~/shared/core/constants';
 import { sentryMessage } from '~/shared/utils';
 

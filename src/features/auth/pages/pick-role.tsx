@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 
-import { SideBar, Text } from '~/shared/components';
+import { SideBar } from '~/features/sidebar/components';
+import { Text } from '~/shared/components';
 import { NEXT_PUBLIC_MW_URL } from '~/shared/core/constants';
 
 import { PickRoleButton, PickRoleSection } from '../components';

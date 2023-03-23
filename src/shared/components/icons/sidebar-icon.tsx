@@ -2,11 +2,11 @@ import Image from 'next/image';
 
 /** List of tag icon filenames */
 const sidebarIcons = [
-  'bookmark',
   'jobs',
-  'orgs',
+  'organizations',
   'projects',
-  'repos',
+  'repositories',
+  'bookmark',
   'right-caret',
 ] as const;
 
