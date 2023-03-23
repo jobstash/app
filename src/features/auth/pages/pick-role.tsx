@@ -45,7 +45,7 @@ export const PickRolePage = () => {
 
     if (res.ok) {
       refetch();
-      push('/jobs');
+      push('/add-github-account');
     }
   };
 
