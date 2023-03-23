@@ -1,12 +1,12 @@
 import { createContext } from 'react';
 
-import type { CheckWalletData } from '../core/types';
+import { CheckWalletResponse } from '../core/types';
 
 interface WalletAuthCtx {
   isConnected: boolean;
   isSignedIn: boolean;
   isPageEmpty: boolean;
-  checkWalletData: CheckWalletData | undefined;
+  checkWalletData: CheckWalletResponse | undefined;
   address: string | undefined;
   refetch: () => void;
 }

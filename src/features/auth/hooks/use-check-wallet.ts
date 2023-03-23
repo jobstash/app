@@ -2,10 +2,10 @@ import { useQuery } from '@tanstack/react-query';
 
 import { NEXT_PUBLIC_MW_URL } from '~/shared/core/constants';
 
-import type { CheckWalletData } from '../core/types';
+import { CheckWalletResponse } from '../core/types';
 
 export const useCheckWallet = (enabled: boolean) => {
-  const { data, refetch } = useQuery<CheckWalletData>({
+  const { data, refetch } = useQuery<CheckWalletResponse>({
     queryKey: ['check-wallet', NEXT_PUBLIC_MW_URL],
     queryFn: async () => {
       const res = await fetch(`${NEXT_PUBLIC_MW_URL}/siwe/check-wallet`, {

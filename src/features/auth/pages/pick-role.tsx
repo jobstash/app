@@ -5,7 +5,7 @@ import { Text } from '~/shared/components';
 import { NEXT_PUBLIC_MW_URL } from '~/shared/core/constants';
 
 import { PickRoleButton, PickRoleSection } from '../components';
-import { CHECK_WALLET_RESULT, CHECK_WALLET_ROUTE } from '../core/constants';
+import { CHECK_WALLET_FLOWS, CHECK_WALLET_ROUTE } from '../core/constants';
 import { useWalletAuthContext } from '../hooks';
 
 export const PickRolePage = () => {
@@ -23,9 +23,9 @@ export const PickRolePage = () => {
   if (
     isSignedIn &&
     checkWalletData &&
-    checkWalletData !== CHECK_WALLET_RESULT.PICK_ROLE
+    checkWalletData.flow !== CHECK_WALLET_FLOWS.PICK_ROLE
   ) {
-    push(CHECK_WALLET_ROUTE[checkWalletData]);
+    push(CHECK_WALLET_ROUTE[checkWalletData.flow]);
     return null;
   }
 

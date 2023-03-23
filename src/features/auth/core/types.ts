@@ -1,4 +1,6 @@
-import { CHECK_WALLET_RESULT } from './constants';
+import { CHECK_WALLET_FLOWS, CHECK_WALLET_ROLES } from './constants';
 
-export type CheckWalletData =
-  (typeof CHECK_WALLET_RESULT)[keyof typeof CHECK_WALLET_RESULT];
+export interface CheckWalletResponse {
+  role: (typeof CHECK_WALLET_ROLES)[keyof typeof CHECK_WALLET_ROLES];
+  flow: (typeof CHECK_WALLET_FLOWS)[keyof typeof CHECK_WALLET_FLOWS];
+}

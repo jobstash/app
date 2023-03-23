@@ -16,7 +16,7 @@ export const LoginPage = () => {
   if (isPageEmpty) return null;
 
   if (isSignedIn && checkWalletData) {
-    push(CHECK_WALLET_ROUTE[checkWalletData]);
+    push(CHECK_WALLET_ROUTE[checkWalletData.flow]);
     return null;
   }
 
