@@ -3,10 +3,10 @@ import Image from 'next/image';
 export const Brand = () => (
   <Image
     priority
-    src="/Recruiters Rip.png"
-    alt="Recruiters.Rip brand logo"
-    width="100"
-    height="16"
+    src="/JobStash.png"
+    alt="JobStash Logo"
+    width="120"
+    height="32"
     quality={100}
   />
 );
