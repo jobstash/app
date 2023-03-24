@@ -1,6 +1,7 @@
 import { ButtonHTMLAttributes, forwardRef, ReactNode } from 'react';
 
 import { type VariantProps, cva } from 'class-variance-authority';
+import clsx from 'clsx';
 
 import { type TextProps, Text } from './text';
 
@@ -102,6 +103,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       left,
       right,
       textProps,
+      className,
       ...props
     }: ButtonProps,
     ref,
@@ -111,21 +113,21 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         ref={ref}
         type="button"
         disabled={isDisabled}
-        className={cvaButton({
+        className={`${cvaButton({
           kind,
           isActive,
           isDisabled,
           size,
           hasLeft: Boolean(left),
           hasRight: Boolean(right),
-        })}
+        })} ${className}`}
         {...props}
       >
-        {left}
+        <div className={clsx({ 'mr-1': Boolean(left) })}>{left}</div>
         <Text size={textProps?.size ?? 'sm'} {...textProps}>
           {children}
         </Text>
-        {right}
+        <div className={clsx({ 'ml-2': Boolean(right) })}>{right}</div>
       </button>
     );
 

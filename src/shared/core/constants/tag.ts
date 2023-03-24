@@ -4,6 +4,8 @@ export const tagIcons = [
   'audit',
   'baggage-2',
   'category',
+  'code',
+  'draw',
   'external-link',
   'discord',
   'github',
