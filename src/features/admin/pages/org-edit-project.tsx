@@ -1,6 +1,17 @@
-import { Center, Flex, Grid, Paper, Stack, Title } from '@mantine/core';
+import {
+  Center,
+  Checkbox,
+  Flex,
+  Grid,
+  Paper,
+  Stack,
+  Text,
+  TextInput,
+  Title,
+} from '@mantine/core';
 
 import { HandWavingIcon } from '../components/icons/hand-waving-icon';
+import { MegaphoneIcon } from '../components/icons/megaphone-icon';
 import { OrgSideNavs } from '../components/org-side-navs';
 import { AdminLayout } from '../layouts/admin-layout';
 
@@ -24,22 +35,79 @@ export const OrgEditProjectPage = () => (
           border: `1px solid ${theme.colors.violet[9]}`,
         })}
       >
-        <Grid align="end">
-          <Grid.Col span={11}>
-            <Stack>
-              <Title c="violet">Hey!</Title>
-              <Title order={4}>
-                Are you a new project that hasn&#39;t been deployed to mainnet
-                yet?
-              </Title>
-            </Stack>
-          </Grid.Col>
-          <Grid.Col span={1} h="100%">
-            <Flex align="end" direction="column">
-              <HandWavingIcon />
-            </Flex>
-          </Grid.Col>
-        </Grid>
+        <Stack spacing={30}>
+          <Grid align="end">
+            <Grid.Col span={11}>
+              <Stack>
+                <Title c="violet">Hey!</Title>
+                <Title order={4}>
+                  Are you a new project that hasn&#39;t been deployed to mainnet
+                  yet?
+                </Title>
+              </Stack>
+            </Grid.Col>
+            <Grid.Col span={1} h="100%">
+              <Flex align="end" direction="column">
+                <HandWavingIcon />
+              </Flex>
+            </Grid.Col>
+          </Grid>
+          <Checkbox
+            label="Yup, project is still in the making!"
+            radius="md"
+            size="lg"
+            sx={{ cursor: 'pointer' }}
+          />
+        </Stack>
+      </Paper>
+      <Paper p={30} bg="rgba(255, 255, 255, 0.05)" radius="md">
+        <Stack spacing={20}>
+          <Grid align="start">
+            <Grid.Col span={11}>
+              <Flex gap="sm">
+                <Title order={2} c="white">
+                  Quick Setup with
+                </Title>
+                <Title order={2} c="violet">
+                  DefiLlama
+                </Title>
+              </Flex>
+            </Grid.Col>
+            <Grid.Col span={1} h="100%">
+              <Flex align="end" direction="column">
+                <MegaphoneIcon />
+              </Flex>
+            </Grid.Col>
+          </Grid>
+          <Stack spacing={15} w="90%">
+            <Text c="dimmed">
+              Pooling resources can be helpful here. We use data from DefiLiama
+              and Dune to ease up the input work as well as automate the inputs
+              from any possible future changes in the project.
+            </Text>
+            <Text c="dimmed">
+              DefiLiama can provide us with info such as: Project Name,
+              Description, URL, Category, and TVL. and make life easier for
+              everyone.
+            </Text>
+            <Text c="dimmed">
+              Paste the DefiLiama URL in the input field below, and make life
+              easier for everyone.
+            </Text>
+          </Stack>
+          <Grid pt={20} align="center">
+            <Grid.Col span={2}>
+              <Title order={4}>DefiLlama URL</Title>
+            </Grid.Col>
+            <Grid.Col span={9}>
+              <TextInput
+                placeholder="Enter DefiLlama URL here ..."
+                size="lg"
+                radius="lg"
+              />
+            </Grid.Col>
+          </Grid>
+        </Stack>
       </Paper>
     </Stack>
   </AdminLayout>

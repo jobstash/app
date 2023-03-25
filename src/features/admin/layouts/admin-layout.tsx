@@ -29,7 +29,7 @@ export const AdminLayout = ({ breadCrumbs, sideNav, children }: Props) => (
         content="minimum-scale=1, initial-scale=1, width=device-width"
       />
     </Head>
-    <MantineProvider theme={{ colorScheme: 'dark' }}>
+    <MantineProvider theme={{ colorScheme: 'dark', cursorType: 'pointer' }}>
       <Notifications position="top-right" autoClose={4000} />
       <div className="relative w-full pl-52">
         <SideBar />
