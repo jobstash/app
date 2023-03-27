@@ -16,25 +16,6 @@ export const PickRolePage = () => {
     useWalletAuthContext();
 
   if (!isMounted) return null;
-  if (isPageEmpty) return null;
-
-  if (!isSignedIn) {
-    push('/login');
-    return null;
-  }
-
-  if (
-    isSignedIn &&
-    checkWalletData &&
-    checkWalletData.flow !== CHECK_WALLET_FLOWS.PICK_ROLE
-  ) {
-    push(CHECK_WALLET_ROUTE[checkWalletData.flow]);
-    return null;
-  }
-
-  const onClickDevGithub = () => {
-    push(`${NEXT_PUBLIC_MW_URL}/siwe/trigger-github-oauth`);
-  };
 
   const githubAuth = async (code: string, address: string) => {
     const res = await fetch(`${NEXT_PUBLIC_MW_URL}/siwe/github-login`, {
@@ -57,6 +38,26 @@ export const PickRolePage = () => {
   if (codeParam && address) {
     githubAuth(codeParam, address);
   }
+
+  if (isPageEmpty) return null;
+
+  if (!isSignedIn) {
+    push('/login');
+    return null;
+  }
+
+  if (
+    isSignedIn &&
+    checkWalletData &&
+    checkWalletData.flow !== CHECK_WALLET_FLOWS.PICK_ROLE
+  ) {
+    push(CHECK_WALLET_ROUTE[checkWalletData.flow]);
+    return null;
+  }
+
+  const onClickDevGithub = () => {
+    push(`${NEXT_PUBLIC_MW_URL}/siwe/trigger-github-oauth`);
+  };
 
   return (
     <div className="w-full pl-52">
