@@ -2,19 +2,20 @@ export const EVENT_SIWE_LOGIN = 'siwe-login';
 export const EVENT_SIWE_LOGOUT = 'siwe-logout';
 
 export const CHECK_WALLET_ROLES = {
-  ANON: 'anon',
-  ADMIN: 'admin',
-  DEV: 'dev',
-  ORG: 'org',
+  ANON: 'ANON',
+  ADMIN: 'ADMIN',
+  DEV: 'DEV',
+  ORG: 'ORG',
 } as const;
 
 export const CHECK_WALLET_FLOWS = {
-  LOGIN: 'login',
-  PICK_ROLE: 'pick-role',
-  SIGNUP_COMPLETE: 'signup-complete',
-  ONBOARD_REPO: 'onboard-repo',
-  ONBOARD_PROFILE: 'onboard-profile',
-  ADMIN_SYNONYMS: 'synonyms',
+  LOGIN: 'LOGIN',
+  PICK_ROLE: 'PICK-ROLE',
+  ADD_GITHUB_REPO: 'ADD-GITHUB-REPO',
+  ONBOARD_REPO: 'ONBOARD-REPO',
+  ONBOARD_PROFILE: 'ONBOARD-PROFILE',
+  SIGNUP_COMPLETE: 'SIGNUP-COMPLETE',
+  ADMIN_SYNONYMS: 'SYNONYMS',
 } as const;
 
 export const CHECK_WALLET_ROUTE: Record<
@@ -23,8 +24,9 @@ export const CHECK_WALLET_ROUTE: Record<
 > = {
   [CHECK_WALLET_FLOWS.LOGIN]: '/login',
   [CHECK_WALLET_FLOWS.PICK_ROLE]: '/pick-role',
-  [CHECK_WALLET_FLOWS.SIGNUP_COMPLETE]: '/add-github-account',
+  [CHECK_WALLET_FLOWS.ADD_GITHUB_REPO]: '/add-github-account',
   [CHECK_WALLET_FLOWS.ONBOARD_REPO]: '/TODO',
   [CHECK_WALLET_FLOWS.ONBOARD_PROFILE]: '/TODO',
+  [CHECK_WALLET_FLOWS.SIGNUP_COMPLETE]: '/jobs',
   [CHECK_WALLET_FLOWS.ADMIN_SYNONYMS]: '/godmode/synonyms',
 };
