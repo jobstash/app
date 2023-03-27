@@ -3,16 +3,19 @@ import { useRouter } from 'next/router';
 import { SideBar } from '~/features/sidebar/components';
 import { Text } from '~/shared/components';
 import { NEXT_PUBLIC_MW_URL } from '~/shared/core/constants';
+import { useIsMounted } from '~/shared/hooks';
 
 import { PickRoleButton, PickRoleSection } from '../components';
 import { CHECK_WALLET_FLOWS, CHECK_WALLET_ROUTE } from '../core/constants';
 import { useWalletAuthContext } from '../hooks';
 
 export const PickRolePage = () => {
+  const isMounted = useIsMounted();
   const { push } = useRouter();
   const { isPageEmpty, isSignedIn, checkWalletData, address, refetch } =
     useWalletAuthContext();
 
+  if (!isMounted) return null;
   if (isPageEmpty) return null;
 
   if (!isSignedIn) {
@@ -30,18 +33,18 @@ export const PickRolePage = () => {
   }
 
   const onClickDevGithub = () => {
-    push(`${NEXT_PUBLIC_MW_URL}/siwe/gh-login`);
+    push(`${NEXT_PUBLIC_MW_URL}/siwe/trigger-github-oauth`);
   };
 
   const githubAuth = async (code: string, address: string) => {
-    const res = await fetch(`${NEXT_PUBLIC_MW_URL}/siwe/gh-auth`, {
+    const res = await fetch(`${NEXT_PUBLIC_MW_URL}/siwe/github-login`, {
       method: 'POST',
       mode: 'cors',
       credentials: 'include',
       headers: {
         'Content-Type': 'application/json',
       },
-      body: JSON.stringify({ code, address }),
+      body: JSON.stringify({ code, wallet: address }),
     });
 
     if (res.ok) {

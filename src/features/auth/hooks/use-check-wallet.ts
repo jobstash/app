@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 
 import { NEXT_PUBLIC_MW_URL } from '~/shared/core/constants';
 
-import { CHECK_WALLET_ROUTE } from '../core/constants';
+import { CHECK_WALLET_FLOWS, CHECK_WALLET_ROUTE } from '../core/constants';
 import { CheckWalletResponse } from '../core/types';
 
 export const useCheckWallet = (enabled: boolean) => {
@@ -19,7 +19,13 @@ export const useCheckWallet = (enabled: boolean) => {
       });
       const { data } = (await res.json()) as { data: CheckWalletResponse };
 
-      push(CHECK_WALLET_ROUTE[data.flow]);
+      const isPickRoleFlow = data.flow === CHECK_WALLET_FLOWS.PICK_ROLE;
+      const hasCodeParam = Boolean(
+        new URLSearchParams(window.location.search).get('code'),
+      );
+
+      if (!(isPickRoleFlow && hasCodeParam))
+        push(CHECK_WALLET_ROUTE[data.flow]);
 
       return data;
     },

@@ -1,14 +1,15 @@
 import { NextRequest, NextResponse } from 'next/server';
 
-export const config = {
-  matcher: [
-    '/',
-    '/jobs/(.*)',
-    '/organizations/(.*)',
-    '/projects/(.*)',
-    '/repositories/(.*)',
-  ],
-};
+//
+// export const config = {
+//   matcher: [
+//     '/',
+//     '/jobs/(.*)',
+//     '/organizations/(.*)',
+//     '/projects/(.*)',
+//     '/repositories/(.*)',
+//   ],
+// };
 
 export function middleware(req: NextRequest) {
   const basicAuth = req.headers.get('authorization');
