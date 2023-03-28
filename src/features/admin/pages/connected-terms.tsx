@@ -30,7 +30,9 @@ const data = [
   'Playwright',
 ];
 
-const breadCrumbs = [{ title: 'Synonyms', href: '/godmode/synonyms' }];
+const breadCrumbs = [
+  { title: 'Connected Terms', href: '/godmode/connected-terms' },
+];
 
 export const ConnectedTermsPage = () => (
   <AdminLayout breadCrumbs={breadCrumbs} sideNav={null}>
@@ -87,7 +89,7 @@ export const ConnectedTermsPage = () => (
           size={2}
           label={
             <div className="px-8">
-              <Title order={2}>Existing Synonym Bundles</Title>
+              <Title order={2}>Existing Connected Bundles</Title>
             </div>
           }
           labelPosition="center"
