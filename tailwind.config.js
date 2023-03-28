@@ -76,12 +76,32 @@ module.exports = {
         '0%': { opacity: 0, transform: 'translateY(10px)' },
         '100%': { opacity: 1, transform: 'translateY(0)' },
       },
+      pulse: {
+        '0%, 100%': {
+          opacity: 1,
+        },
+        '50%': {
+          opacity: 0.5,
+        },
+      },
+      bounce: {
+        '0%, 100%': {
+          transform: 'translateY(-15%)',
+          'animation-timing-function': 'cubic-bezier(0.8, 0, 1, 1)',
+        },
+        '50%': {
+          transform: 'translateY(0)',
+          'animation-timing-function': 'cubic-bezier(0, 0, 0.2, 1)',
+        },
+      },
     },
     animation: {
       // Dropdown menu
       'scale-in': 'scale-in 0.2s ease-in-out',
       'slide-down': 'slide-down 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
       'slide-up': 'slide-up 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
+      pulse: 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+      bounce: 'bounce 1.5s infinite',
     },
   },
   plugins: [

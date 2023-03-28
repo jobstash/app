@@ -10,6 +10,7 @@ import {
   Title,
 } from '@mantine/core';
 
+import { CHECK_WALLET_ROLES } from '~/features/auth/core/constants';
 import { Avatar, CardHeading } from '~/shared/components';
 
 import { OrgSideNavs } from '../components/org-side-navs';
@@ -20,7 +21,7 @@ const breadCrumbs = [
   { title: 'Edit Organization', href: '/godmode/organizations/edit' },
 ];
 
-export const OrgEditPage = () => (
+const OrgEditPage = () => (
   <AdminLayout
     breadCrumbs={breadCrumbs}
     sideNav={<OrgSideNavs activeLabel="Organization" />}
@@ -101,3 +102,7 @@ export const OrgEditPage = () => (
     </Stack>
   </AdminLayout>
 );
+
+OrgEditPage.requiredRole = CHECK_WALLET_ROLES.ADMIN;
+
+export default OrgEditPage;

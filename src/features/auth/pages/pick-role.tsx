@@ -6,57 +6,19 @@ import { NEXT_PUBLIC_MW_URL } from '~/shared/core/constants';
 import { useIsMounted } from '~/shared/hooks';
 
 import { PickRoleButton, PickRoleSection } from '../components';
-import { CHECK_WALLET_FLOWS, CHECK_WALLET_ROUTE } from '../core/constants';
+import { CHECK_WALLET_FLOWS, CHECK_WALLET_ROLES } from '../core/constants';
 import { useWalletAuthContext } from '../hooks';
 
-export const PickRolePage = () => {
-  const isMounted = useIsMounted();
+import EmptyPage from './empty-page';
+
+const PickRolePage = () => {
   const { push } = useRouter();
-  const { isPageEmpty, isSignedIn, checkWalletData, address, refetch } =
-    useWalletAuthContext();
+  const isMounted = useIsMounted();
 
-  if (!isMounted) return null;
-
-  const githubAuth = async (code: string, address: string) => {
-    const res = await fetch(`${NEXT_PUBLIC_MW_URL}/siwe/github-login`, {
-      method: 'POST',
-      mode: 'cors',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ code, wallet: address }),
-    });
-
-    if (res.ok) {
-      refetch();
-      push('/add-github-account');
-    }
-  };
-
-  const codeParam = new URLSearchParams(window.location.search).get('code');
-  if (codeParam && address) {
-    githubAuth(codeParam, address);
-  }
-
-  if (isPageEmpty) return null;
-
-  if (!isSignedIn) {
-    push('/login');
-    return null;
-  }
-
-  if (
-    isSignedIn &&
-    checkWalletData &&
-    checkWalletData.flow !== CHECK_WALLET_FLOWS.PICK_ROLE
-  ) {
-    push(CHECK_WALLET_ROUTE[checkWalletData.flow]);
-    return null;
-  }
+  if (!isMounted) return <EmptyPage isLoading />;
 
   const onClickDevGithub = () => {
-    push(`${NEXT_PUBLIC_MW_URL}/siwe/trigger-github-oauth`);
+    push(`${NEXT_PUBLIC_MW_URL}/github/trigger-dev-github-oauth`);
   };
 
   return (
@@ -79,16 +41,11 @@ export const PickRolePage = () => {
             </Text>
           </div>
 
-          {codeParam ? (
-            <PickRoleButton text="Loading" />
-          ) : (
-            <PickRoleButton
-              text="Connect with Github"
-              icon="github"
-              onClick={onClickDevGithub}
-            />
-          )}
-
+          <PickRoleButton
+            text="Connect with Github"
+            icon="github"
+            onClick={onClickDevGithub}
+          />
           <hr className="border-t border-white/10" />
         </PickRoleSection>
 
@@ -115,3 +72,8 @@ export const PickRolePage = () => {
     </div>
   );
 };
+
+PickRolePage.requiredRole = CHECK_WALLET_ROLES.ANON;
+PickRolePage.requiredFlow = CHECK_WALLET_FLOWS.PICK_ROLE;
+
+export default PickRolePage;

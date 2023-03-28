@@ -10,6 +10,7 @@ import {
   Title,
 } from '@mantine/core';
 
+import { CHECK_WALLET_ROLES } from '~/features/auth/core/constants';
 import {
   Avatar,
   Button,
@@ -44,7 +45,7 @@ const chains = [
   'USD Coin USDC',
 ];
 
-export const OrgProjectsPage = () => {
+const OrgProjectsPage = () => {
   const { push } = useRouter();
 
   const editOrgProject = (id: string) => {
@@ -207,3 +208,7 @@ export const OrgProjectsPage = () => {
     </AdminLayout>
   );
 };
+
+OrgProjectsPage.requiredRole = CHECK_WALLET_ROLES.ADMIN;
+
+export default OrgProjectsPage;

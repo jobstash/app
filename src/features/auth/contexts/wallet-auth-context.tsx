@@ -1,21 +1,24 @@
 import { createContext } from 'react';
 
-import { CheckWalletResponse } from '../core/types';
+import { CHECK_WALLET_ROLES } from '../core/constants';
+import { CheckWalletFlow, CheckWalletRole } from '../core/types';
 
 interface WalletAuthCtx {
   isConnected: boolean;
   isSignedIn: boolean;
+  isLoading: boolean;
   isPageEmpty: boolean;
-  checkWalletData: CheckWalletResponse | undefined;
+  role: CheckWalletRole;
+  flow: CheckWalletFlow;
   address: string | undefined;
-  refetch: () => void;
 }
 
 export const WalletAuthContext = createContext<WalletAuthCtx>({
   isConnected: false,
   isSignedIn: false,
+  isLoading: false,
   isPageEmpty: false,
-  checkWalletData: undefined,
+  role: CHECK_WALLET_ROLES.ANON,
+  flow: null,
   address: undefined,
-  refetch: () => null,
 });

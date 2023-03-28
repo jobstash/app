@@ -9,6 +9,8 @@ import {
   Text,
 } from '@mantine/core';
 
+import { CHECK_WALLET_ROLES } from '~/features/auth/core/constants';
+
 import { AdminLayout } from '../layouts/admin-layout';
 
 const data = ['Agile', 'Scrum', 'Project Management', 'Design'];
@@ -17,7 +19,7 @@ const breadCrumbs = [
   { title: 'Blocked Terms', href: '/godmode/blocked-terms' },
 ];
 
-export const BlockedTermsPage = () => (
+const BlockedTermsPage = () => (
   <AdminLayout breadCrumbs={breadCrumbs} sideNav={null}>
     <Box w="75%">
       <Paper withBorder radius="lg" p={30} pos="relative">
@@ -63,3 +65,7 @@ export const BlockedTermsPage = () => (
     </Box>
   </AdminLayout>
 );
+
+BlockedTermsPage.requiredRole = CHECK_WALLET_ROLES.ADMIN;
+
+export default BlockedTermsPage;

@@ -1,5 +1,7 @@
 import { ActionIcon, Box, Center, Flex, Table } from '@mantine/core';
 
+import { CHECK_WALLET_ROLES } from '~/features/auth/core/constants';
+
 import { ApprovalsSideNavs } from '../components/approvals-side-navs';
 import { CircleCheckIcon } from '../components/icons/circle-check-icon';
 import { CircleXIcon } from '../components/icons/circle-x-icon';
@@ -53,7 +55,7 @@ const data = [
   },
 ];
 
-export const ApprovalsOrgsPage = () => {
+const ApprovalsOrgsPage = () => {
   const rows = data.map((d, i) => (
     <tr
       key={d.orgName}
@@ -112,3 +114,7 @@ export const ApprovalsOrgsPage = () => {
     </AdminLayout>
   );
 };
+
+ApprovalsOrgsPage.requiredRole = CHECK_WALLET_ROLES.ADMIN;
+
+export default ApprovalsOrgsPage;

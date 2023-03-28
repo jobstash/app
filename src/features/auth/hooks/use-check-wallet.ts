@@ -1,16 +1,18 @@
-import { useRouter } from 'next/router';
-
 import { useQuery } from '@tanstack/react-query';
+import { useSIWE } from 'connectkit';
+import { useAccount } from 'wagmi';
 
 import { NEXT_PUBLIC_MW_URL } from '~/shared/core/constants';
 
-import { CHECK_WALLET_FLOWS, CHECK_WALLET_ROUTE } from '../core/constants';
 import { CheckWalletResponse } from '../core/types';
 
-export const useCheckWallet = (enabled: boolean) => {
-  const { push } = useRouter();
-  const { data, refetch } = useQuery<CheckWalletResponse>({
-    // eslint-disable-next-line @tanstack/query/exhaustive-deps
+export const useCheckWallet = () => {
+  const { isConnected, address } = useAccount();
+  const { isSignedIn } = useSIWE();
+
+  const enabled = isSignedIn; // Only enable check-wallet after signin
+
+  const { data, refetch, isLoading } = useQuery<CheckWalletResponse>({
     queryKey: ['check-wallet', NEXT_PUBLIC_MW_URL],
     queryFn: async () => {
       const res = await fetch(`${NEXT_PUBLIC_MW_URL}/siwe/check-wallet`, {
@@ -19,18 +21,17 @@ export const useCheckWallet = (enabled: boolean) => {
       });
       const { data } = (await res.json()) as { data: CheckWalletResponse };
 
-      const isPickRoleFlow = data.flow === CHECK_WALLET_FLOWS.PICK_ROLE;
-      const hasCodeParam = Boolean(
-        new URLSearchParams(window.location.search).get('code'),
-      );
-
-      if (!(isPickRoleFlow && hasCodeParam))
-        push(CHECK_WALLET_ROUTE[data.flow]);
-
       return data;
     },
     enabled,
   });
 
-  return { checkWalletData: data, refetch };
+  return {
+    checkWalletData: data,
+    refetch,
+    isConnected,
+    isSignedIn,
+    address,
+    isLoading: isLoading && enabled,
+  };
 };

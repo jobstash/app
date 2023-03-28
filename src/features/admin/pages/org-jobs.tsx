@@ -9,6 +9,7 @@ import {
   Title,
 } from '@mantine/core';
 
+import { CHECK_WALLET_ROLES } from '~/features/auth/core/constants';
 import { Button, TagIcon } from '~/shared/components';
 
 import { CircleCheckIcon } from '../components/icons/circle-check-icon';
@@ -22,7 +23,7 @@ const breadCrumbs = [
   { title: 'My Jobs', href: '/godmode/organizations/jobs' },
 ];
 
-export const OrgJobsPage = () => (
+const OrgJobsPage = () => (
   <AdminLayout
     breadCrumbs={breadCrumbs}
     sideNav={<OrgSideNavs activeLabel="Projects" />}
@@ -170,3 +171,7 @@ export const OrgJobsPage = () => (
     </Stack>
   </AdminLayout>
 );
+
+OrgJobsPage.requiredRole = CHECK_WALLET_ROLES.ADMIN;
+
+export default OrgJobsPage;

@@ -1,5 +1,4 @@
 import {
-  Center,
   Checkbox,
   Flex,
   Grid,
@@ -9,6 +8,8 @@ import {
   TextInput,
   Title,
 } from '@mantine/core';
+
+import { CHECK_WALLET_ROLES } from '~/features/auth/core/constants';
 
 import { HandWavingIcon } from '../components/icons/hand-waving-icon';
 import { MegaphoneIcon } from '../components/icons/megaphone-icon';
@@ -21,7 +22,7 @@ const breadCrumbs = [
   { title: 'Edit Project', href: '/godmode/organizations/projects/edit' },
 ];
 
-export const OrgEditProjectPage = () => (
+const OrgEditProjectPage = () => (
   <AdminLayout
     breadCrumbs={breadCrumbs}
     sideNav={<OrgSideNavs activeLabel="Projects" />}
@@ -112,3 +113,7 @@ export const OrgEditProjectPage = () => (
     </Stack>
   </AdminLayout>
 );
+
+OrgEditProjectPage.requiredRole = CHECK_WALLET_ROLES.ADMIN;
+
+export default OrgEditProjectPage;

@@ -2,6 +2,7 @@ import { useRouter } from 'next/router';
 
 import { Flex, Paper, Stack, Title } from '@mantine/core';
 
+import { CHECK_WALLET_ROLES } from '~/features/auth/core/constants';
 import {
   Avatar,
   Button,
@@ -56,7 +57,7 @@ const data = [
   },
 ];
 
-export const OrgListPage = () => {
+const OrgListPage = () => {
   const { push } = useRouter();
 
   const editOrg = (id: string) => {
@@ -162,3 +163,7 @@ export const OrgListPage = () => {
     </AdminLayout>
   );
 };
+
+OrgListPage.requiredRole = CHECK_WALLET_ROLES.ADMIN;
+
+export default OrgListPage;

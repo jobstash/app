@@ -12,6 +12,7 @@ import {
   Title,
 } from '@mantine/core';
 
+import { CHECK_WALLET_ROLES } from '~/features/auth/core/constants';
 import { Text } from '~/shared/components';
 
 import { AdminLayout } from '../layouts/admin-layout';
@@ -32,7 +33,7 @@ const data = [
 
 const breadCrumbs = [{ title: 'Synonyms', href: '/godmode/synonyms' }];
 
-export const SynonymsPage = () => (
+const SynonymsPage = () => (
   <AdminLayout breadCrumbs={breadCrumbs} sideNav={null}>
     <Stack w="70%" spacing={60}>
       <Paper withBorder radius="lg" px={45} pt={45} pb={30} pos="relative">
@@ -154,3 +155,7 @@ export const SynonymsPage = () => (
     </Stack>
   </AdminLayout>
 );
+
+SynonymsPage.requiredRole = CHECK_WALLET_ROLES.ADMIN;
+
+export default SynonymsPage;

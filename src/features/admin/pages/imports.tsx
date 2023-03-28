@@ -10,6 +10,7 @@ import {
 } from '@mantine/core';
 import { Prism } from '@mantine/prism';
 
+import { CHECK_WALLET_ROLES } from '~/features/auth/core/constants';
 import { Button } from '~/shared/components';
 
 import { AdminLayout } from '../layouts/admin-layout';
@@ -169,7 +170,7 @@ const jsonText = `{
   ]
 }`;
 
-export const ImportsPage = () => (
+const ImportsPage = () => (
   <AdminLayout breadCrumbs={breadCrumbs} sideNav={null}>
     <Stack w="60%">
       <Paper radius="xl" p={30} pb={20} bg="rgba(255, 255, 255, 0.05)">
@@ -192,3 +193,7 @@ export const ImportsPage = () => (
     </Stack>
   </AdminLayout>
 );
+
+ImportsPage.requiredRole = CHECK_WALLET_ROLES.ADMIN;
+
+export default ImportsPage;

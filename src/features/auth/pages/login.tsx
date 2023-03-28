@@ -4,20 +4,26 @@ import { ConnectKitButton } from 'connectkit';
 
 import { Text } from '~/shared/components';
 
-import { CHECK_WALLET_ROUTE } from '../core/constants';
+import {
+  CHECK_WALLET_FLOWS,
+  CHECK_WALLET_ROLES,
+  CHECK_WALLET_ROUTE,
+} from '../core/constants';
 import { useWalletAuthContext } from '../hooks';
 import { CenteredLayout } from '../layouts/centered-layout';
 
-export const LoginPage = () => {
+import EmptyPage from './empty-page';
+
+const LoginPage = () => {
   const { push } = useRouter();
-  const { checkWalletData, isConnected, isSignedIn, isPageEmpty } =
-    useWalletAuthContext();
+  const { isConnected, isPageEmpty, flow } = useWalletAuthContext();
 
-  if (isPageEmpty) return null;
+  if (isPageEmpty) return <EmptyPage isLoading />;
 
-  if (isSignedIn && checkWalletData) {
-    push(CHECK_WALLET_ROUTE[checkWalletData.flow]);
-    return null;
+  // Get rid of flicker before redirect
+  if (flow && flow !== CHECK_WALLET_FLOWS.LOGIN) {
+    push(CHECK_WALLET_ROUTE[flow]);
+    return <EmptyPage isLoading />;
   }
 
   const title = `Sign In${isConnected ? ' with Ethereum' : ''}`;
@@ -56,3 +62,7 @@ export const LoginPage = () => {
     </CenteredLayout>
   );
 };
+
+LoginPage.requiredRole = CHECK_WALLET_ROLES.ANON;
+
+export default LoginPage;

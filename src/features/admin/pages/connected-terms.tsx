@@ -12,6 +12,7 @@ import {
   Title,
 } from '@mantine/core';
 
+import { CHECK_WALLET_ROLES } from '~/features/auth/core/constants';
 import { Text } from '~/shared/components';
 
 import { AdminLayout } from '../layouts/admin-layout';
@@ -34,7 +35,7 @@ const breadCrumbs = [
   { title: 'Connected Terms', href: '/godmode/connected-terms' },
 ];
 
-export const ConnectedTermsPage = () => (
+const ConnectedTermsPage = () => (
   <AdminLayout breadCrumbs={breadCrumbs} sideNav={null}>
     <Stack w="70%" spacing={60}>
       <Paper withBorder radius="lg" px={45} pt={45} pb={30} pos="relative">
@@ -156,3 +157,7 @@ export const ConnectedTermsPage = () => (
     </Stack>
   </AdminLayout>
 );
+
+ConnectedTermsPage.requiredRole = CHECK_WALLET_ROLES.ADMIN;
+
+export default ConnectedTermsPage;

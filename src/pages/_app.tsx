@@ -17,6 +17,8 @@ import {
   EVENT_SIWE_LOGIN,
   EVENT_SIWE_LOGOUT,
 } from '~/features/auth/core/constants';
+import { CheckWalletFlow, CheckWalletRole } from '~/features/auth/core/types';
+import { ProtectedLayout } from '~/features/auth/layouts/protected-layout';
 import { WalletAuthProvider } from '~/features/auth/providers/wallet-auth-provider';
 import {
   siweCreateMessage,
@@ -50,7 +52,14 @@ const connectkitClient = createClient(
   }),
 );
 
-const App = ({ Component, pageProps }: AppProps) => (
+type AppPropsWithAuth = AppProps & {
+  Component: {
+    requiredRole?: CheckWalletRole;
+    requiredFlow?: CheckWalletFlow;
+  };
+};
+
+const App = ({ Component, pageProps }: AppPropsWithAuth) => (
   <QueryClientProvider client={queryClient}>
     <Hydrate state={pageProps.dehydratedState}>
       <WagmiConfig client={connectkitClient}>
@@ -72,7 +81,16 @@ const App = ({ Component, pageProps }: AppProps) => (
               <div
                 className={`${lato.variable} ${roboto.variable} font-roboto`}
               >
-                <Component {...pageProps} />
+                {Component.requiredRole ? (
+                  <ProtectedLayout
+                    requiredRole={Component.requiredRole}
+                    requiredFlow={Component.requiredFlow}
+                  >
+                    <Component {...pageProps} />
+                  </ProtectedLayout>
+                ) : (
+                  <Component {...pageProps} />
+                )}
               </div>
             </WalletAuthProvider>
           </ConnectKitProvider>

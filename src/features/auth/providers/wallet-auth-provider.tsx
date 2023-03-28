@@ -1,48 +1,88 @@
+import { useRouter } from 'next/router';
 import { ReactNode, useEffect, useMemo } from 'react';
 
-import { useSIWE } from 'connectkit';
-import { useAccount } from 'wagmi';
+import { useQueryClient } from '@tanstack/react-query';
 
+import { NEXT_PUBLIC_MW_URL } from '~/shared/core/constants';
 import { useIsMounted } from '~/shared/hooks';
 
 import { WalletAuthContext } from '../contexts/wallet-auth-context';
-import { EVENT_SIWE_LOGIN, EVENT_SIWE_LOGOUT } from '../core/constants';
+import {
+  CHECK_WALLET_ROLES,
+  CHECK_WALLET_ROUTE,
+  EVENT_SIWE_LOGIN,
+  EVENT_SIWE_LOGOUT,
+} from '../core/constants';
+import { CheckWalletResponse } from '../core/types';
 import { useCheckWallet } from '../hooks';
 
 export const WalletAuthProvider = ({ children }: { children: ReactNode }) => {
   const isMounted = useIsMounted();
-  const { isConnected, address } = useAccount();
-  const { isSignedIn } = useSIWE();
-  const { checkWalletData, refetch } = useCheckWallet(
-    isConnected && isSignedIn,
-  );
+
+  const { push } = useRouter();
+  const queryClient = useQueryClient();
+  const {
+    checkWalletData,
+    isConnected,
+    isSignedIn,
+    refetch,
+    address,
+    isLoading,
+  } = useCheckWallet();
+
+  const role = checkWalletData ? checkWalletData.role : CHECK_WALLET_ROLES.ANON;
+  const flow = checkWalletData ? checkWalletData.flow : null;
 
   // Used to prevent a page that depends on siwe from rendering its contents
   const isPageEmpty = !isMounted || (!checkWalletData && isSignedIn);
 
   // Refetch checkWallet on login/logout
   useEffect(() => {
-    const cb = () => refetch();
+    const refetchCheckWallet = () => refetch();
+    const loginCb = async () => {
+      console.log('-------------------LOGGED IN!-------------------');
+      const res = await fetch(`${NEXT_PUBLIC_MW_URL}/siwe/check-wallet`, {
+        mode: 'cors',
+        credentials: 'include',
+      });
+      const jsonData = await res.json();
+      console.log('jsonData =', jsonData);
+      const { data } = jsonData.data as { data: CheckWalletResponse };
 
-    document.addEventListener(EVENT_SIWE_LOGIN, cb);
-    document.addEventListener(EVENT_SIWE_LOGOUT, cb);
+      //
+      // if (data && data.flow && flow !== null) {
+      //   push(CHECK_WALLET_ROUTE[flow]);
+
+      //   // No need to fetch data again since we do it here
+      //   queryClient.setQueryData(
+      //     ['check-wallet', NEXT_PUBLIC_MW_URL],
+      //     jsonData,
+      //   );
+      // }
+
+      // refetchCheckWallet();
+    };
+
+    document.addEventListener(EVENT_SIWE_LOGIN, loginCb);
+    document.addEventListener(EVENT_SIWE_LOGOUT, refetchCheckWallet);
 
     return () => {
-      document.removeEventListener(EVENT_SIWE_LOGIN, cb);
-      document.removeEventListener(EVENT_SIWE_LOGOUT, cb);
+      document.removeEventListener(EVENT_SIWE_LOGIN, loginCb);
+      document.removeEventListener(EVENT_SIWE_LOGOUT, refetchCheckWallet);
     };
-  }, [refetch]);
+  }, [push, queryClient, refetch]);
 
   const memoed = useMemo(
     () => ({
-      checkWalletData,
+      role,
+      flow,
       isConnected,
       isSignedIn,
       isPageEmpty,
       address,
-      refetch: () => refetch(),
+      isLoading,
     }),
-    [checkWalletData, isConnected, isSignedIn, isPageEmpty, address, refetch],
+    [role, flow, isConnected, isSignedIn, isPageEmpty, address, isLoading],
   );
 
   return (

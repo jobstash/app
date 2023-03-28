@@ -1,21 +1,17 @@
-import { CHECK_WALLET_ROLES } from '~/features/auth/core/constants';
 import { useWalletAuthContext } from '~/features/auth/hooks';
 import { Brand, ConnectWalletButton } from '~/shared/components';
 
-import {
-  bookmarkBartabs,
-  discoverBartabs,
-  roleSectionMap,
-} from '../core/constants';
+import { bookmarkBartabs, discoverBartabs } from '../core/constants';
 
 import { SidebarSection } from './sidebar-section';
 
 export const SideBar = () => {
-  const { checkWalletData } = useWalletAuthContext();
+  const { role } = useWalletAuthContext();
 
-  const roleSection = checkWalletData?.role
-    ? roleSectionMap[checkWalletData.role]
-    : null;
+  //
+  // const roleSection = checkWalletData?.role
+  //   ? roleSectionMap[checkWalletData.role]
+  //   : null;
 
   return (
     <nav className="fixed inset-y-0 left-0 flex min-h-screen w-52 flex-col border-r border-white/5 p-4">
@@ -29,7 +25,7 @@ export const SideBar = () => {
           isActiveFn={({ icon }, { section }) => `${section}` === `${icon}`}
         />
       </div>
-      {checkWalletData?.role === CHECK_WALLET_ROLES.DEV && (
+      {/* {checkWalletData?.role === CHECK_WALLET_ROLES.DEV && (
         <div>
           <SidebarSection
             title="Bookmarked"
@@ -37,15 +33,15 @@ export const SideBar = () => {
             isActiveFn={() => false}
           />
         </div>
-      )}
+      )} */}
       <div className="absolute inset-x-0 bottom-0 space-y-4 p-4">
-        {roleSection ? (
+        {/* {roleSection ? (
           <SidebarSection
             title={roleSection.title}
             tabs={roleSection.tabs}
             isActiveFn={() => false}
           />
-        ) : null}
+        ) : null} */}
 
         <hr className="border-t border-white/20" />
 

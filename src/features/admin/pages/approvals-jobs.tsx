@@ -18,6 +18,7 @@ import {
 } from '@mantine/core';
 import clsx from 'clsx';
 
+import { CHECK_WALLET_ROLES } from '~/features/auth/core/constants';
 import { TagIcon } from '~/shared/components';
 
 import { ApprovalsSideNavs } from '../components/approvals-side-navs';
@@ -90,7 +91,7 @@ const techs = [
   },
 ];
 
-export const ApprovalsJobsPage = () => (
+const ApprovalsJobsPage = () => (
   <AdminLayout
     breadCrumbs={breadCrumbs}
     sideNav={<ApprovalsSideNavs activeLabel="Jobs" />}
@@ -396,3 +397,7 @@ export const ApprovalsJobsPage = () => (
     </Stack>
   </AdminLayout>
 );
+
+ApprovalsJobsPage.requiredRole = CHECK_WALLET_ROLES.ADMIN;
+
+export default ApprovalsJobsPage;
