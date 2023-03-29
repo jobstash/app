@@ -1,15 +1,6 @@
 import { CHECK_WALLET_ROLES } from '~/features/auth/core/constants';
 
-export interface SidebarTab {
-  icon:
-    | 'jobs'
-    | 'organizations'
-    | 'projects'
-    | 'repositories'
-    | 'bookmark'
-    | null;
-  label: string;
-}
+import { SidebarRoleSection, SidebarTab } from './types';
 
 export const discoverBartabs: SidebarTab[] = [
   {
@@ -75,32 +66,58 @@ export const adminBartabs: SidebarTab[] = [
   {
     icon: null,
     label: 'Synonyms',
+    path: '/godmode/synonyms',
   },
   {
     icon: null,
     label: 'Blocked Terms',
+    path: '/godmode/blocked-terms',
+  },
+  {
+    icon: null,
+    label: 'Connected Terms',
+    path: '/godmode/connected-terms',
   },
   {
     icon: null,
     label: 'Organizations',
+    path: '/godmode/organizations',
   },
   {
     icon: null,
     label: 'Approvals',
+    path: '/godmode/approvals/organizations',
   },
   {
     icon: null,
     label: 'Imports',
+    path: '/godmode/imports',
   },
   {
     icon: null,
     label: 'Sales',
+    path: '/godmode/sales',
   },
 ];
 
-export const roleSectionMap = {
+export const roleSectionMap: Record<
+  keyof typeof CHECK_WALLET_ROLES,
+  SidebarRoleSection
+> = {
   [CHECK_WALLET_ROLES.ANON]: null,
-  [CHECK_WALLET_ROLES.ADMIN]: { title: 'God Mode', tabs: adminBartabs },
-  [CHECK_WALLET_ROLES.DEV]: { title: 'Your Profile', tabs: devBartabs },
-  [CHECK_WALLET_ROLES.ORG]: { title: 'Your Organization', tabs: devBartabs },
+  [CHECK_WALLET_ROLES.ADMIN]: {
+    title: 'God Mode',
+    tabs: adminBartabs,
+    isActiveFn: ({ aspath, tab: { path } }) => path === aspath,
+  },
+  [CHECK_WALLET_ROLES.DEV]: {
+    title: 'Your Profile',
+    tabs: devBartabs,
+    isActiveFn: () => false,
+  },
+  [CHECK_WALLET_ROLES.ORG]: {
+    title: 'Your Organization',
+    tabs: orgBartabs,
+    isActiveFn: () => false,
+  },
 };

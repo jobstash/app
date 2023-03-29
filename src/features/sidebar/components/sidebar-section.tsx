@@ -1,22 +1,16 @@
 import { Bartab, SidebarIcon, Text } from '~/shared/components';
-import { RouteSegments } from '~/shared/core/interfaces';
-import { RouterPush } from '~/shared/core/types';
 import { useRouteSegments } from '~/shared/hooks';
 
-import { type SidebarTab } from '../core/constants';
+import type { IsActiveFn, SidebarTab } from '../core/types';
 
 interface Props {
   title: string;
   tabs: SidebarTab[];
-  isActiveFn: (
-    tabs: SidebarTab,
-    segments: RouteSegments,
-    push: RouterPush,
-  ) => boolean;
+  isActiveFn: IsActiveFn;
 }
 
 export const SidebarSection = ({ title, tabs, isActiveFn }: Props) => {
-  const { segments, push } = useRouteSegments();
+  const { segments, push, aspath } = useRouteSegments();
 
   return (
     <div className="mt-12">
@@ -27,7 +21,7 @@ export const SidebarSection = ({ title, tabs, isActiveFn }: Props) => {
         {tabs.map((tab) => (
           <div key={tab.label}>
             <Bartab
-              isActive={isActiveFn(tab, segments, push)}
+              isActive={isActiveFn({ tab, segments, push, aspath })}
               left={tab.icon ? <SidebarIcon filename={tab.icon} /> : null}
               text={tab.label}
               intent="secondary"
@@ -36,7 +30,7 @@ export const SidebarSection = ({ title, tabs, isActiveFn }: Props) => {
                 // push(__path_here__, { shallow: true });
 
                 // eslint-disable-next-line no-alert
-                alert('TODO');
+                tab.path ? push(tab.path, { shallow: true }) : alert('TODO');
               }}
             />
           </div>

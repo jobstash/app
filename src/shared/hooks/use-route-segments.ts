@@ -32,5 +32,6 @@ export const useRouteSegments = () => {
   return {
     segments,
     push,
+    aspath: router.asPath,
   };
 };
