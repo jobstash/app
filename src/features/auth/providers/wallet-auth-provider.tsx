@@ -8,6 +8,7 @@ import { useIsMounted } from '~/shared/hooks';
 
 import { WalletAuthContext } from '../contexts/wallet-auth-context';
 import {
+  CHECK_WALLET_FLOWS,
   CHECK_WALLET_ROLES,
   CHECK_WALLET_ROUTE,
   EVENT_SIWE_LOGIN,
@@ -39,35 +40,12 @@ export const WalletAuthProvider = ({ children }: { children: ReactNode }) => {
   // Refetch checkWallet on login/logout
   useEffect(() => {
     const refetchCheckWallet = () => refetch();
-    const loginCb = async () => {
-      console.log('-------------------LOGGED IN!-------------------');
-      const res = await fetch(`${NEXT_PUBLIC_MW_URL}/siwe/check-wallet`, {
-        mode: 'cors',
-        credentials: 'include',
-      });
-      const jsonData = await res.json();
-      console.log('jsonData =', jsonData);
-      const { data } = jsonData.data as { data: CheckWalletResponse };
 
-      //
-      // if (data && data.flow && flow !== null) {
-      //   push(CHECK_WALLET_ROUTE[flow]);
-
-      //   // No need to fetch data again since we do it here
-      //   queryClient.setQueryData(
-      //     ['check-wallet', NEXT_PUBLIC_MW_URL],
-      //     jsonData,
-      //   );
-      // }
-
-      // refetchCheckWallet();
-    };
-
-    document.addEventListener(EVENT_SIWE_LOGIN, loginCb);
+    document.addEventListener(EVENT_SIWE_LOGIN, refetchCheckWallet);
     document.addEventListener(EVENT_SIWE_LOGOUT, refetchCheckWallet);
 
     return () => {
-      document.removeEventListener(EVENT_SIWE_LOGIN, loginCb);
+      document.removeEventListener(EVENT_SIWE_LOGIN, refetchCheckWallet);
       document.removeEventListener(EVENT_SIWE_LOGOUT, refetchCheckWallet);
     };
   }, [push, queryClient, refetch]);

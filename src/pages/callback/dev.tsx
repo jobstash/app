@@ -1,5 +1,7 @@
 import { useRef } from 'react';
 
+import { CHECK_WALLET_ROLES } from '~/features/auth/core/constants';
+import { CheckWalletRole } from '~/features/auth/core/types';
 import { useWalletAuthContext } from '~/features/auth/hooks';
 import EmptyPage from '~/features/auth/pages/empty-page';
 import { NEXT_PUBLIC_MW_URL } from '~/shared/core/constants';
@@ -16,7 +18,7 @@ const DevGithubCallbackPage = () => {
   const githubAuth = async (
     code: string,
     address: string,
-    role: 'dev' | 'org',
+    role: CheckWalletRole,
   ) => {
     if (!submittedRef.current) {
       submittedRef.current = true;
@@ -31,14 +33,22 @@ const DevGithubCallbackPage = () => {
       });
 
       const data = await res.json();
-
       console.log('github login data =', data);
+
+      console.log('try fetching check-wallet for info (temp) ...');
+
+      const res2 = await fetch(`${NEXT_PUBLIC_MW_URL}/siwe/check-wallet`, {
+        mode: 'cors',
+        credentials: 'include',
+      });
+      const data2 = await res2.json();
+      console.log('check-wallet new data =', data2);
     }
   };
 
   const codeParam = new URLSearchParams(window.location.search).get('code');
   if (codeParam && address) {
-    githubAuth(codeParam, address, 'dev');
+    githubAuth(codeParam, address, CHECK_WALLET_ROLES.DEV);
   }
 
   return <EmptyPage isLoading />;

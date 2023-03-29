@@ -1,1 +1,1 @@
-export { AddGithubAccountPage as default } from '~/features/auth/pages/add-github-account';
+export { AddGithubAccountPage as default } from '~/features/auth/pages';

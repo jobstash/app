@@ -26,10 +26,7 @@ export const ProtectedLayout = ({
       ? role === requiredRole
       : requiredRole.includes(role);
   const isAdmin = role === CHECK_WALLET_ROLES.ADMIN;
-  const flowOk =
-    asPath === '/login' || isAdmin
-      ? true
-      : Boolean(requiredFlow && requiredFlow === flow);
+  const flowOk = asPath === '/login' || isAdmin ? true : requiredFlow === flow;
 
   useEffect(() => {
     if (isLoading || !isReady) return;
