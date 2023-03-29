@@ -9,7 +9,7 @@ interface WalletAuthCtx {
   isLoading: boolean;
   isPageEmpty: boolean;
   role: CheckWalletRole;
-  flow: CheckWalletFlow;
+  flow: CheckWalletFlow | undefined;
   address: string | undefined;
 }
 
@@ -19,6 +19,6 @@ export const WalletAuthContext = createContext<WalletAuthCtx>({
   isLoading: false,
   isPageEmpty: false,
   role: CHECK_WALLET_ROLES.ANON,
-  flow: null,
+  flow: undefined,
   address: undefined,
 });

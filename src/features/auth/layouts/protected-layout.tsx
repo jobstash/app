@@ -25,11 +25,16 @@ export const ProtectedLayout = ({
     typeof requiredRole === 'string'
       ? role === requiredRole
       : requiredRole.includes(role);
+  const isAdmin = role === CHECK_WALLET_ROLES.ADMIN;
+  const flowOk =
+    asPath === '/login' || isAdmin
+      ? true
+      : Boolean(requiredFlow && requiredFlow === flow);
 
   useEffect(() => {
     if (isLoading || !isReady) return;
 
-    if (role === CHECK_WALLET_ROLES.ADMIN && asPath !== '/godmode/synonyms') {
+    if (isAdmin && !asPath.includes('godmode')) {
       push('/godmode/synonyms');
       return;
     }
@@ -42,12 +47,13 @@ export const ProtectedLayout = ({
 
     // We might want some pages to display only to certain flows
     // If it does not match, redirect to homepage (for now)
-    if (requiredFlow && requiredFlow !== flow) {
-      push('/');
+    if (!flowOk) {
+      push('/login');
     }
-  }, [asPath, authorized, flow, isLoading, isReady, push, requiredFlow, role]);
+  }, [asPath, authorized, flowOk, isAdmin, isLoading, isReady, push]);
 
-  if (isLoading || !authorized || isPageEmpty) return <EmptyPage isLoading />;
+  if (isLoading || !authorized || isPageEmpty || !flowOk)
+    return <EmptyPage isLoading />;
 
   return <div>{children}</div>;
 };

@@ -31,7 +31,7 @@ export const WalletAuthProvider = ({ children }: { children: ReactNode }) => {
   } = useCheckWallet();
 
   const role = checkWalletData ? checkWalletData.role : CHECK_WALLET_ROLES.ANON;
-  const flow = checkWalletData ? checkWalletData.flow : null;
+  const flow = checkWalletData ? checkWalletData.flow : undefined;
 
   // Used to prevent a page that depends on siwe from rendering its contents
   const isPageEmpty = !isMounted || (!checkWalletData && isSignedIn);
