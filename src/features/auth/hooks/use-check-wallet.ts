@@ -33,7 +33,7 @@ export const useCheckWallet = () => {
   const isLoading = (isLoadingQuery && enabled) || !isMounted;
 
   return {
-    role: data ? data.role : CHECK_WALLET_ROLES.TBD,
+    role: data ? data.role : CHECK_WALLET_ROLES.ANON,
     flow: data ? data.flow : CHECK_WALLET_FLOWS.LOGIN,
     refetch: refetchCheckWallet,
     isConnected,

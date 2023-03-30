@@ -13,8 +13,8 @@ interface WalletAuthCtx {
 }
 
 export const WalletAuthContext = createContext<WalletAuthCtx>({
-  role: CHECK_WALLET_ROLES.TBD,
-  flow: CHECK_WALLET_FLOWS.DEFAULT,
+  role: CHECK_WALLET_ROLES.ANON,
+  flow: CHECK_WALLET_FLOWS.LOGIN,
   isConnected: false,
   isSignedIn: false,
   address: undefined,

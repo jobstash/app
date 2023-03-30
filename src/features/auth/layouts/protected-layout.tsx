@@ -29,18 +29,17 @@ export const ProtectedLayout = ({
       ? role === requiredRole
       : requiredRole.includes(role);
   const flowOk = requiredFlow ? requiredFlow === flow : true;
-  const roleTBD = role === CHECK_WALLET_ROLES.TBD && asPath !== '/login';
 
   const ok = authorized && flowOk;
   useEffect(() => {
-    if (isLoading || !isReady || roleTBD) return;
+    if (isLoading || !isReady) return;
 
     if (!ok) {
       push(CHECK_WALLET_ROUTE[flow]);
     }
-  }, [asPath, flow, isLoading, isReady, ok, push, roleTBD]);
+  }, [asPath, flow, isLoading, isReady, ok, push]);
 
-  if (isLoading || !ok || !isMounted || roleTBD) return <EmptyPage isLoading />;
+  if (isLoading || !ok || !isMounted) return <EmptyPage isLoading />;
 
   return <div>{children}</div>;
 };
