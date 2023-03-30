@@ -3,28 +3,20 @@ import { useRouter } from 'next/router';
 import { ConnectKitButton } from 'connectkit';
 
 import { Text } from '~/shared/components';
+import { useIsMounted } from '~/shared/hooks';
 
-import {
-  CHECK_WALLET_FLOWS,
-  CHECK_WALLET_ROLES,
-  CHECK_WALLET_ROUTE,
-} from '../core/constants';
+import { CHECK_WALLET_FLOWS, CHECK_WALLET_ROLES } from '../core/constants';
 import { useWalletAuthContext } from '../hooks';
 import { CenteredLayout } from '../layouts/centered-layout';
 
 import EmptyPage from './empty-page';
 
 const LoginPage = () => {
+  const isMounted = useIsMounted();
   const { push } = useRouter();
-  const { isConnected, isLoading, flow } = useWalletAuthContext();
+  const { isConnected, isLoading } = useWalletAuthContext();
 
-  if (isLoading) return <EmptyPage isLoading />;
-
-  // Get rid of flicker before redirect
-  if (flow && flow !== CHECK_WALLET_FLOWS.LOGIN) {
-    push(CHECK_WALLET_ROUTE[flow]);
-    return <EmptyPage isLoading />;
-  }
+  if (isLoading || !isMounted) return <EmptyPage isLoading />;
 
   const title = `Sign In${isConnected ? ' with Ethereum' : ''}`;
   const message = isConnected

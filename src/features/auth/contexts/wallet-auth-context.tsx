@@ -14,7 +14,7 @@ interface WalletAuthCtx {
 
 export const WalletAuthContext = createContext<WalletAuthCtx>({
   role: CHECK_WALLET_ROLES.ANON,
-  flow: CHECK_WALLET_FLOWS.LOGIN,
+  flow: CHECK_WALLET_FLOWS.DEFAULT,
   isConnected: false,
   isSignedIn: false,
   address: undefined,

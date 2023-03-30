@@ -14,8 +14,6 @@ import { configureChains, createClient, mainnet, WagmiConfig } from 'wagmi';
 import { publicProvider } from 'wagmi/providers/public';
 
 import {
-  CHECK_WALLET_FLOWS,
-  CHECK_WALLET_ROLES,
   EVENT_SIWE_LOGIN,
   EVENT_SIWE_LOGOUT,
 } from '~/features/auth/core/constants';
@@ -65,12 +63,9 @@ type AppPropsWithAuth = AppProps & {
     requiredRole?: CheckWalletRole;
     requiredFlow?: CheckWalletFlow;
   };
-  role: CheckWalletRole;
-  flow: CheckWalletFlow;
-  mwURL: string;
 };
 
-const App = ({ Component, pageProps, role, flow, mwURL }: AppPropsWithAuth) => (
+const App = ({ Component, pageProps }: AppPropsWithAuth) => (
   <QueryClientProvider client={queryClient}>
     <Hydrate state={pageProps.dehydratedState}>
       <WagmiConfig client={connectkitClient}>
@@ -88,10 +83,7 @@ const App = ({ Component, pageProps, role, flow, mwURL }: AppPropsWithAuth) => (
           }}
         >
           <ConnectKitProvider theme="auto" mode="dark">
-            <WalletAuthProvider role={role} flow={flow}>
-              <p>mwURL = {mwURL}</p>
-              <p>role = {role}</p>
-              <p>flow = {flow}</p>
+            <WalletAuthProvider>
               <div
                 className={`${lato.variable} ${roboto.variable} font-roboto`}
               >
@@ -118,25 +110,9 @@ const App = ({ Component, pageProps, role, flow, mwURL }: AppPropsWithAuth) => (
 // At the moment all pages from the app requires some data from the server.
 // Therefore, its okay to opt out of the automatic static optimization feature.
 App.getInitialProps = async (ctx: any): Promise<any> => {
-  const mwURL = NEXT_PUBLIC_MW_URL;
-  if (!mwURL) {
-    throw new Error(ERR_INTERNAL);
-  }
-
   const appProps = await NextApp.getInitialProps(ctx);
 
-  const res = await fetch(`${mwURL}/siwe/check-wallet`, {
-    mode: 'cors',
-    credentials: 'include',
-    headers: {
-      cookie: ctx.ctx.req?.headers.cookie,
-    } as any,
-  });
-  const {
-    data: { role, flow },
-  } = await res.json();
-
-  return { ...appProps, role, flow, mwURL: JSON.stringify(mwURL) };
+  return { ...appProps };
 };
 
 export default App;

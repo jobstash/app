@@ -1,7 +1,9 @@
 import { useRouter } from 'next/router';
 import { ReactNode, useEffect } from 'react';
 
-import { CHECK_WALLET_ROLES, CHECK_WALLET_ROUTE } from '../core/constants';
+import { useIsMounted } from '~/shared/hooks';
+
+import { CHECK_WALLET_ROUTE } from '../core/constants';
 import { CheckWalletFlow, CheckWalletRole } from '../core/types';
 import { useWalletAuthContext } from '../hooks';
 import EmptyPage from '../pages/empty-page';
@@ -17,6 +19,7 @@ export const ProtectedLayout = ({
   requiredFlow,
   children,
 }: Props) => {
+  const isMounted = useIsMounted();
   const { asPath, push, isReady } = useRouter();
 
   const { role, flow, isLoading } = useWalletAuthContext();
@@ -45,7 +48,7 @@ export const ProtectedLayout = ({
     }
   }, [asPath, flow, isLoading, isReady, ok, push]);
 
-  if (isLoading || !ok) return <EmptyPage isLoading />;
+  if (isLoading || !ok || !isMounted) return <EmptyPage isLoading />;
 
   return <div>{children}</div>;
 };
