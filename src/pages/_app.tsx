@@ -29,7 +29,8 @@ import {
   siweSignOut,
   siweVerifyMessage,
 } from '~/features/auth/utils';
-import { lato, roboto } from '~/shared/core/constants';
+import { ERR_INTERNAL, lato, roboto } from '~/shared/core/constants';
+import { sentryMessage } from '~/shared/utils';
 
 const queryRetryCount =
   Number(process.env.NEXT_PUBLIC_QUERY_RETRY_COUNT) || false;
@@ -108,18 +109,20 @@ const App = ({ Component, pageProps, role, flow }: AppPropsWithAuth) => (
 // At the moment all pages from the app requires some data from the server.
 // Therefore, its okay to opt out of the automatic static optimization feature.
 App.getInitialProps = async (ctx: any): Promise<any> => {
+  const mwURL = process.env['NEXT_PUBLIC_MW_URL'];
+  if (!mwURL) {
+    throw new Error(ERR_INTERNAL);
+  }
+
   const appProps = await NextApp.getInitialProps(ctx);
 
-  const res = await fetch(
-    `${process.env['NEXT_PUBLIC_MW_URL']}/siwe/check-wallet`,
-    {
-      mode: 'cors',
-      credentials: 'include',
-      headers: {
-        cookie: ctx.ctx.req?.headers.cookie,
-      } as any,
-    },
-  );
+  const res = await fetch(`${mwURL}/siwe/check-wallet`, {
+    mode: 'cors',
+    credentials: 'include',
+    headers: {
+      cookie: ctx.ctx.req?.headers.cookie,
+    } as any,
+  });
   const {
     data: { role, flow },
   } = await res.json();
