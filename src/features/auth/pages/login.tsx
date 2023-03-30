@@ -16,9 +16,9 @@ import EmptyPage from './empty-page';
 
 const LoginPage = () => {
   const { push } = useRouter();
-  const { isConnected, isPageEmpty, flow } = useWalletAuthContext();
+  const { isConnected, isLoading, flow } = useWalletAuthContext();
 
-  if (isPageEmpty) return <EmptyPage isLoading />;
+  if (isLoading) return <EmptyPage isLoading />;
 
   // Get rid of flicker before redirect
   if (flow && flow !== CHECK_WALLET_FLOWS.LOGIN) {
@@ -64,5 +64,6 @@ const LoginPage = () => {
 };
 
 LoginPage.requiredRole = CHECK_WALLET_ROLES.ANON;
+LoginPage.requiredFlow = CHECK_WALLET_FLOWS.LOGIN;
 
 export default LoginPage;

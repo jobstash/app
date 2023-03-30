@@ -1,5 +1,3 @@
-import { useAccount } from 'wagmi';
-
 import { CHECK_WALLET_ROLES } from '~/features/auth/core/constants';
 import { useWalletAuthContext } from '~/features/auth/hooks';
 import { Brand, ConnectWalletButton } from '~/shared/components';
@@ -18,8 +16,6 @@ export const SideBar = () => {
   const { role } = useWalletAuthContext();
 
   const roleSection = roleSectionMap[role];
-
-  const { isConnecting, isConnected, isReconnecting } = useAccount();
 
   if (!isMounted) return null;
 

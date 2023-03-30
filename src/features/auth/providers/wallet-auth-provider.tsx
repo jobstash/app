@@ -1,54 +1,57 @@
 import { useRouter } from 'next/router';
-import { ReactNode, useEffect, useMemo } from 'react';
+import { ReactNode, useCallback, useEffect, useMemo, useState } from 'react';
 
-import { useQueryClient } from '@tanstack/react-query';
+import { useSIWE } from 'connectkit';
+import { useAccount } from 'wagmi';
 
-import { NEXT_PUBLIC_MW_URL } from '~/shared/core/constants';
 import { useIsMounted } from '~/shared/hooks';
 
+import { fetchCheckWallet } from '../api';
 import { WalletAuthContext } from '../contexts/wallet-auth-context';
 import {
-  CHECK_WALLET_FLOWS,
-  CHECK_WALLET_ROLES,
   CHECK_WALLET_ROUTE,
   EVENT_SIWE_LOGIN,
   EVENT_SIWE_LOGOUT,
 } from '../core/constants';
-import { CheckWalletResponse } from '../core/types';
-import { useCheckWallet } from '../hooks';
+import type { CheckWalletFlow, CheckWalletRole } from '../core/types';
 
-export const WalletAuthProvider = ({ children }: { children: ReactNode }) => {
+interface Props {
+  role: CheckWalletRole;
+  flow: CheckWalletFlow;
+  children: ReactNode;
+}
+
+export const WalletAuthProvider = ({ children, role, flow }: Props) => {
   const isMounted = useIsMounted();
 
   const { push } = useRouter();
-  const queryClient = useQueryClient();
-  const {
-    checkWalletData,
-    isConnected,
-    isSignedIn,
-    refetch,
-    address,
-    isLoading,
-  } = useCheckWallet();
 
-  const role = checkWalletData ? checkWalletData.role : CHECK_WALLET_ROLES.ANON;
-  const flow = checkWalletData ? checkWalletData.flow : undefined;
+  const { isConnected, address, isConnecting } = useAccount();
+  const { isSignedIn, isLoading: siweIsLoading } = useSIWE();
+  const [isNavigating, setIsNavigating] = useState(false);
 
   // Used to prevent a page that depends on siwe from rendering its contents
-  const isPageEmpty = !isMounted || (!checkWalletData && isSignedIn);
+  const isLoading = !isMounted || isConnecting || siweIsLoading || isNavigating;
+
+  const checkWalletRedirect = useCallback(async () => {
+    setIsNavigating(true);
+    const { flow } = await fetchCheckWallet();
+
+    await push(CHECK_WALLET_ROUTE[flow]).then(() => {
+      setIsNavigating(false);
+    });
+  }, [push]);
 
   // Refetch checkWallet on login/logout
   useEffect(() => {
-    const refetchCheckWallet = () => refetch();
-
-    document.addEventListener(EVENT_SIWE_LOGIN, refetchCheckWallet);
-    document.addEventListener(EVENT_SIWE_LOGOUT, refetchCheckWallet);
+    document.addEventListener(EVENT_SIWE_LOGIN, checkWalletRedirect);
+    document.addEventListener(EVENT_SIWE_LOGOUT, checkWalletRedirect);
 
     return () => {
-      document.removeEventListener(EVENT_SIWE_LOGIN, refetchCheckWallet);
-      document.removeEventListener(EVENT_SIWE_LOGOUT, refetchCheckWallet);
+      document.removeEventListener(EVENT_SIWE_LOGIN, checkWalletRedirect);
+      document.removeEventListener(EVENT_SIWE_LOGOUT, checkWalletRedirect);
     };
-  }, [push, queryClient, refetch]);
+  }, [checkWalletRedirect]);
 
   const memoed = useMemo(
     () => ({
@@ -56,11 +59,10 @@ export const WalletAuthProvider = ({ children }: { children: ReactNode }) => {
       flow,
       isConnected,
       isSignedIn,
-      isPageEmpty,
       address,
       isLoading,
     }),
-    [role, flow, isConnected, isSignedIn, isPageEmpty, address, isLoading],
+    [address, flow, isConnected, isLoading, isSignedIn, role],
   );
 
   return (

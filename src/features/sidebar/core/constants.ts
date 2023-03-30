@@ -1,6 +1,6 @@
 import { CHECK_WALLET_ROLES } from '~/features/auth/core/constants';
 
-import { SidebarRoleSection, SidebarTab } from './types';
+import type { SidebarRoleSection, SidebarTab } from './types';
 
 export const discoverBartabs: SidebarTab[] = [
   {
@@ -35,11 +35,8 @@ export const bookmarkBartabs: SidebarTab[] = [
 export const devBartabs: SidebarTab[] = [
   {
     icon: null,
-    label: 'My Profile',
-  },
-  {
-    icon: null,
     label: 'My Repositories',
+    path: '/user/my-repositories',
   },
 ];
 
@@ -113,7 +110,7 @@ export const roleSectionMap: Record<
   [CHECK_WALLET_ROLES.DEV]: {
     title: 'Your Profile',
     tabs: devBartabs,
-    isActiveFn: () => false,
+    isActiveFn: ({ aspath, tab: { path } }) => path === aspath,
   },
   [CHECK_WALLET_ROLES.ORG]: {
     title: 'Your Organization',

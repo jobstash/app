@@ -14,6 +14,8 @@ import { configureChains, createClient, mainnet, WagmiConfig } from 'wagmi';
 import { publicProvider } from 'wagmi/providers/public';
 
 import {
+  CHECK_WALLET_FLOWS,
+  CHECK_WALLET_ROLES,
   EVENT_SIWE_LOGIN,
   EVENT_SIWE_LOGOUT,
 } from '~/features/auth/core/constants';
@@ -57,9 +59,11 @@ type AppPropsWithAuth = AppProps & {
     requiredRole?: CheckWalletRole;
     requiredFlow?: CheckWalletFlow;
   };
+  role: CheckWalletRole;
+  flow: CheckWalletFlow;
 };
 
-const App = ({ Component, pageProps }: AppPropsWithAuth) => (
+const App = ({ Component, pageProps, role, flow }: AppPropsWithAuth) => (
   <QueryClientProvider client={queryClient}>
     <Hydrate state={pageProps.dehydratedState}>
       <WagmiConfig client={connectkitClient}>
@@ -77,7 +81,7 @@ const App = ({ Component, pageProps }: AppPropsWithAuth) => (
           }}
         >
           <ConnectKitProvider theme="auto" mode="dark">
-            <WalletAuthProvider>
+            <WalletAuthProvider role={role} flow={flow}>
               <div
                 className={`${lato.variable} ${roboto.variable} font-roboto`}
               >
@@ -105,7 +109,22 @@ const App = ({ Component, pageProps }: AppPropsWithAuth) => (
 // Therefore, its okay to opt out of the automatic static optimization feature.
 App.getInitialProps = async (ctx: any): Promise<any> => {
   const appProps = await NextApp.getInitialProps(ctx);
-  return { ...appProps };
+
+  const res = await fetch(
+    `${process.env['NEXT_PUBLIC_MW_URL']}/siwe/check-wallet`,
+    {
+      mode: 'cors',
+      credentials: 'include',
+      headers: {
+        cookie: ctx.ctx.req?.headers.cookie,
+      } as any,
+    },
+  );
+  const {
+    data: { role, flow },
+  } = await res.json();
+
+  return { ...appProps, role, flow };
 };
 
 export default App;

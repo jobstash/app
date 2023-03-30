@@ -4,10 +4,9 @@ export type CheckWalletRole =
   (typeof CHECK_WALLET_ROLES)[keyof typeof CHECK_WALLET_ROLES];
 
 export type CheckWalletFlow =
-  | (typeof CHECK_WALLET_FLOWS)[keyof typeof CHECK_WALLET_FLOWS]
-  | null;
+  (typeof CHECK_WALLET_FLOWS)[keyof typeof CHECK_WALLET_FLOWS];
 
-export interface CheckWalletResponse {
+export interface CheckWalletData {
   role: CheckWalletRole;
   flow: CheckWalletFlow;
 }
