@@ -1,6 +1,4 @@
-import * as dotenv from 'dotenv';
-
-dotenv.config();
+require('dotenv').config();
 
 // This file sets a custom webpack configuration to use your Next.js app
 // with Sentry.
