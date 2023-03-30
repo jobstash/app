@@ -90,6 +90,8 @@ const App = ({ Component, pageProps, role, flow, mwURL }: AppPropsWithAuth) => (
           <ConnectKitProvider theme="auto" mode="dark">
             <WalletAuthProvider role={role} flow={flow}>
               <p>mwURL = {mwURL}</p>
+              <p>role = {role}</p>
+              <p>flow = {flow}</p>
               <div
                 className={`${lato.variable} ${roboto.variable} font-roboto`}
               >
