@@ -10,6 +10,7 @@ import {
 } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { ConnectKitProvider, getDefaultClient, SIWEProvider } from 'connectkit';
+import * as dotenv from 'dotenv';
 import { configureChains, createClient, mainnet, WagmiConfig } from 'wagmi';
 import { publicProvider } from 'wagmi/providers/public';
 
@@ -31,6 +32,8 @@ import {
 } from '~/features/auth/utils';
 import { ERR_INTERNAL, lato, roboto } from '~/shared/core/constants';
 import { sentryMessage } from '~/shared/utils';
+
+dotenv.config();
 
 const queryRetryCount =
   Number(process.env.NEXT_PUBLIC_QUERY_RETRY_COUNT) || false;
@@ -62,9 +65,10 @@ type AppPropsWithAuth = AppProps & {
   };
   role: CheckWalletRole;
   flow: CheckWalletFlow;
+  mwURL: string;
 };
 
-const App = ({ Component, pageProps, role, flow }: AppPropsWithAuth) => (
+const App = ({ Component, pageProps, role, flow, mwURL }: AppPropsWithAuth) => (
   <QueryClientProvider client={queryClient}>
     <Hydrate state={pageProps.dehydratedState}>
       <WagmiConfig client={connectkitClient}>
@@ -83,6 +87,7 @@ const App = ({ Component, pageProps, role, flow }: AppPropsWithAuth) => (
         >
           <ConnectKitProvider theme="auto" mode="dark">
             <WalletAuthProvider role={role} flow={flow}>
+              <p>mwURL = {mwURL}</p>
               <div
                 className={`${lato.variable} ${roboto.variable} font-roboto`}
               >
@@ -127,7 +132,7 @@ App.getInitialProps = async (ctx: any): Promise<any> => {
     data: { role, flow },
   } = await res.json();
 
-  return { ...appProps, role, flow };
+  return { ...appProps, role, flow, mwURL: JSON.stringify(mwURL) };
 };
 
 export default App;
