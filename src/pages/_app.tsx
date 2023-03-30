@@ -10,7 +10,6 @@ import {
 } from '@tanstack/react-query';
 import { ReactQueryDevtools } from '@tanstack/react-query-devtools';
 import { ConnectKitProvider, getDefaultClient, SIWEProvider } from 'connectkit';
-import * as dotenv from 'dotenv';
 import { configureChains, createClient, mainnet, WagmiConfig } from 'wagmi';
 import { publicProvider } from 'wagmi/providers/public';
 
@@ -30,10 +29,13 @@ import {
   siweSignOut,
   siweVerifyMessage,
 } from '~/features/auth/utils';
-import { ERR_INTERNAL, lato, roboto } from '~/shared/core/constants';
+import {
+  ERR_INTERNAL,
+  lato,
+  NEXT_PUBLIC_MW_URL,
+  roboto,
+} from '~/shared/core/constants';
 import { sentryMessage } from '~/shared/utils';
-
-dotenv.config();
 
 const queryRetryCount =
   Number(process.env.NEXT_PUBLIC_QUERY_RETRY_COUNT) || false;
@@ -114,7 +116,7 @@ const App = ({ Component, pageProps, role, flow, mwURL }: AppPropsWithAuth) => (
 // At the moment all pages from the app requires some data from the server.
 // Therefore, its okay to opt out of the automatic static optimization feature.
 App.getInitialProps = async (ctx: any): Promise<any> => {
-  const mwURL = process.env['NEXT_PUBLIC_MW_URL'];
+  const mwURL = NEXT_PUBLIC_MW_URL;
   if (!mwURL) {
     throw new Error(ERR_INTERNAL);
   }
