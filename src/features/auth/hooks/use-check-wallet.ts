@@ -11,8 +11,8 @@ import { CheckWalletData } from '../core/types';
 
 export const useCheckWallet = () => {
   const isMounted = useIsMounted();
-  const { isConnected, address, isConnecting } = useAccount();
-  const { isSignedIn, isLoading: isLoadingSiwe } = useSIWE();
+  const { isConnected, address } = useAccount();
+  const { isSignedIn } = useSIWE();
 
   const enabled = isSignedIn; // Only enable check-wallet after signin
 
@@ -30,11 +30,10 @@ export const useCheckWallet = () => {
   const refetchCheckWallet = () => refetch();
 
   // Should only check isLoading when signedIn
-  const isLoading =
-    (isLoadingQuery || isConnecting || isLoadingSiwe || !isMounted) && enabled;
+  const isLoading = (isLoadingQuery && enabled) || !isMounted;
 
   return {
-    role: data ? data.role : CHECK_WALLET_ROLES.ANON,
+    role: data ? data.role : CHECK_WALLET_ROLES.TBD,
     flow: data ? data.flow : CHECK_WALLET_FLOWS.LOGIN,
     refetch: refetchCheckWallet,
     isConnected,

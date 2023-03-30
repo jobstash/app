@@ -3,7 +3,7 @@ import { ReactNode, useEffect } from 'react';
 
 import { useIsMounted } from '~/shared/hooks';
 
-import { CHECK_WALLET_ROUTE } from '../core/constants';
+import { CHECK_WALLET_ROLES, CHECK_WALLET_ROUTE } from '../core/constants';
 import { CheckWalletFlow, CheckWalletRole } from '../core/types';
 import { useWalletAuthContext } from '../hooks';
 import EmptyPage from '../pages/empty-page';
@@ -29,26 +29,18 @@ export const ProtectedLayout = ({
       ? role === requiredRole
       : requiredRole.includes(role);
   const flowOk = requiredFlow ? requiredFlow === flow : true;
-
-  // // Check if can remove this
-  // const isAdmin = role === CHECK_WALLET_ROLES.ADMIN;
+  const roleTBD = role === CHECK_WALLET_ROLES.TBD && asPath !== '/login';
 
   const ok = authorized && flowOk;
   useEffect(() => {
-    if (isLoading || !isReady) return;
-
-    // // Check if can remove this
-    // if (isAdmin && !asPath.includes('godmode')) {
-    //   push('/godmode/synonyms');
-    //   return;
-    // }
+    if (isLoading || !isReady || roleTBD) return;
 
     if (!ok) {
       push(CHECK_WALLET_ROUTE[flow]);
     }
-  }, [asPath, flow, isLoading, isReady, ok, push]);
+  }, [asPath, flow, isLoading, isReady, ok, push, roleTBD]);
 
-  if (isLoading || !ok || !isMounted) return <EmptyPage isLoading />;
+  if (isLoading || !ok || !isMounted || roleTBD) return <EmptyPage isLoading />;
 
   return <div>{children}</div>;
 };

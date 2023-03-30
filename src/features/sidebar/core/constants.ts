@@ -101,6 +101,7 @@ export const roleSectionMap: Record<
   keyof typeof CHECK_WALLET_ROLES,
   SidebarRoleSection
 > = {
+  [CHECK_WALLET_ROLES.TBD]: null,
   [CHECK_WALLET_ROLES.ANON]: null,
   [CHECK_WALLET_ROLES.ADMIN]: {
     title: 'God Mode',

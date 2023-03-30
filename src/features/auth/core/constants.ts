@@ -2,6 +2,7 @@ export const EVENT_SIWE_LOGIN = 'siwe-login';
 export const EVENT_SIWE_LOGOUT = 'siwe-logout';
 
 export const CHECK_WALLET_ROLES = {
+  TBD: 'TBD',
   ANON: 'ANON',
   ADMIN: 'ADMIN',
   DEV: 'DEV',
