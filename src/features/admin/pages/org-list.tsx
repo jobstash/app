@@ -69,7 +69,7 @@ const OrgListPage = () => {
                     size="lg"
                     onClick={() => editOrg(name, id)}
                   >
-                    <Text fw="semibold">View as Organization</Text>
+                    <Text fw="semibold">Edit Organization</Text>
                   </Button>
                 </Flex>
 
