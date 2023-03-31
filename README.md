@@ -69,5 +69,5 @@ Here are the list of jobs with data:
 
 2. Install [local-ssl-proxy](https://github.com/cameronhunter/local-ssl-proxy) - `npm i -g local-ssl-proxy`
 3. Run these commands on separate terminals
-    - `yarn dev:ssl` or `yarn start:ssl`
+    - `NODE_TLS_REJECT_UNAUTHORIZED=0 yarn dev:ssl` or `NODE_TLS_REJECT_UNAUTHORIZED=0 yarn start:ssl`
     - `yarn proxy:ssl`
