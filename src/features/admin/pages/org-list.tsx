@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { Flex, Paper, Stack, Title } from '@mantine/core';
 
 import { CHECK_WALLET_ROLES } from '~/features/auth/core/constants';
+import EmptyPage from '~/features/auth/pages/empty-page';
 import {
   Avatar,
   Button,
@@ -11,59 +12,25 @@ import {
   TagIcon,
   Text,
 } from '~/shared/components';
-import { numFormatter } from '~/shared/utils';
+import { numFormatter, prettyTimestamp, slugify } from '~/shared/utils';
 
+import { useOrgList } from '../hooks/use-org-list';
 import { AdminLayout } from '../layouts/admin-layout';
 
 const breadCrumbs = [
   { title: 'Organizations', href: '/godmode/organizations' },
 ];
 
-const data = [
-  {
-    id: '0',
-    name: 'Uniswap Labs',
-    location: 'NYC, USA',
-    avatar: '/orgs/Uniswap Labs.png',
-    jobs: 2,
-    projects: 1,
-    employees: 9,
-    lastFunding: 300_000,
-    fundingDate: '21 Nov, 2021',
-    ts: '3 days ago',
-    tech: ['REACT', 'WEBGL', 'TYPESCRIPT'],
-  },
-  {
-    id: '1',
-    name: '1inch Network',
-    location: 'Boston, USA',
-    avatar: '/orgs/1Inch Network.png',
-    jobs: 1,
-    projects: 1,
-    employees: 3,
-    ts: '4 days ago',
-    tech: ['DOCKER', 'SOLIDITY', 'HTML', 'TYPESCRIPT', 'WEBGL'],
-  },
-  {
-    id: '2',
-    name: 'Balancer',
-    location: 'Lisbon, Portugal',
-    avatar: '/orgs/Balancer.png',
-    jobs: 3,
-    projects: 1,
-    employees: 10,
-    ts: '5 days ago',
-    tech: ['REACT', 'TYPESCRIPT', 'DOCKER', 'C++', 'PYTHON', 'SOLIDITY'],
-  },
-];
-
 const OrgListPage = () => {
   const { push } = useRouter();
 
-  const editOrg = (id: string) => {
-    console.log('TODO: set as currentOrgEdit:', id);
-    push('/godmode/organizations/edit');
+  const editOrg = (name: string, id: string) => {
+    push(`/godmode/organizations/${slugify(`${name}-${id}`)}/edit`);
   };
+
+  const { data, isLoading } = useOrgList();
+
+  if (isLoading || !data) return <EmptyPage isLoading />;
 
   return (
     <AdminLayout breadCrumbs={breadCrumbs} sideNav={null}>
@@ -72,15 +39,14 @@ const OrgListPage = () => {
           ({
             id,
             name,
-            avatar,
+            logo,
             location,
-            ts,
-            jobs,
-            projects,
-            employees,
-            lastFunding,
-            fundingDate,
-            tech,
+            jobCount,
+            projectCount,
+            headCount,
+            lastFundingAmount,
+            lastFundingDate,
+            technologies,
           }) => (
             <Stack
               key={id}
@@ -94,7 +60,11 @@ const OrgListPage = () => {
             >
               <Flex justify="space-between" align="center">
                 <Title order={4}>{name}</Title>
-                <Button kind="primary" size="lg" onClick={() => editOrg(id)}>
+                <Button
+                  kind="primary"
+                  size="lg"
+                  onClick={() => editOrg(name, id)}
+                >
                   <Text fw="semibold">View as Organization</Text>
                 </Button>
               </Flex>
@@ -102,47 +72,59 @@ const OrgListPage = () => {
                 <Stack spacing={20}>
                   <Flex justify="space-between" align="center">
                     <Flex gap="md">
-                      <Avatar src={avatar} alt={name} size="lg" />
+                      {logo && <Avatar src={logo} alt={name} size="lg" />}
                       <Stack spacing={0}>
                         <CardHeading>{name}</CardHeading>
                         <Text color="dimmed">{location}</Text>
                       </Stack>
                     </Flex>
-                    <Text>{ts}</Text>
+                    <Text>TBD</Text>
                   </Flex>
 
                   <hr className="border-t border-white/10" />
 
-                  <Flex gap="md">
-                    <Button left={<TagIcon filename="baggage-2" />}>
-                      Jobs: {jobs}
+                  <Flex gap="md" wrap="wrap">
+                    <Button
+                      left={<TagIcon filename="baggage-2" />}
+                      kind="subtle"
+                      className="cursor-default"
+                    >
+                      Jobs: {jobCount}
                     </Button>
-                    <Button left={<TagIcon filename="code" />}>
-                      Projects: {projects}
+                    <Button
+                      left={<TagIcon filename="code" />}
+                      kind="subtle"
+                      className="cursor-default"
+                    >
+                      Projects: {projectCount}
                     </Button>
                     <Button
                       left={<TagIcon filename="users-three" />}
                       kind="subtle"
                       className="cursor-default"
                     >
-                      Employees: {employees}
+                      Employees: {headCount}
                     </Button>
-                    {lastFunding && (
+
+                    {lastFundingAmount > 0 && (
                       <Button
                         left={<TagIcon filename="money" />}
                         kind="subtle"
                         className="cursor-default"
                       >
-                        {`Last Funding: $${numFormatter.format(lastFunding)}`}
+                        {`Last Funding: $${numFormatter.format(
+                          lastFundingAmount,
+                        )}`}
                       </Button>
                     )}
-                    {fundingDate && (
+
+                    {lastFundingDate > 0 && (
                       <Button
                         left={<TagIcon filename="funding" />}
                         kind="subtle"
                         className="cursor-default"
                       >
-                        Funding Date: {fundingDate}
+                        Funding Date: {prettyTimestamp(lastFundingDate)}
                       </Button>
                     )}
                   </Flex>
@@ -150,8 +132,8 @@ const OrgListPage = () => {
                   <hr className="border-t border-white/10" />
 
                   <Flex gap="md">
-                    {tech.map((tech) => (
-                      <SkillHolder key={tech}>{tech}</SkillHolder>
+                    {technologies.map(({ id, name }) => (
+                      <SkillHolder key={id}>{name}</SkillHolder>
                     ))}
                   </Flex>
                 </Stack>

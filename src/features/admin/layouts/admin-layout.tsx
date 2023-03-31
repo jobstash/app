@@ -7,6 +7,7 @@ import {
   Center,
   Input,
   MantineProvider,
+  Text,
   Title,
 } from '@mantine/core';
 import { Notifications } from '@mantine/notifications';
@@ -16,7 +17,7 @@ import { SideBar } from '~/features/sidebar/components';
 import { SearchIcon } from '../components/icons/search-icon';
 
 interface Props {
-  breadCrumbs: { title: string; href: string }[];
+  breadCrumbs: { title: string; href?: string }[];
   sideNav: ReactNode;
   children: ReactNode;
 }
@@ -55,11 +56,17 @@ export const AdminLayout = ({ breadCrumbs, sideNav, children }: Props) => (
           <div className="flex items-center justify-between">
             <div>
               <Breadcrumbs>
-                {breadCrumbs.map(({ title, href }) => (
-                  <Anchor key={title} href={href} c="dimmed">
-                    {title}
-                  </Anchor>
-                ))}
+                {breadCrumbs.map(({ title, href }) =>
+                  href ? (
+                    <Anchor key={title} href={href} c="dimmed">
+                      {title}
+                    </Anchor>
+                  ) : (
+                    <Text key={title} c="dimmed" sx={{ pointerEvents: 'none' }}>
+                      {title}
+                    </Text>
+                  ),
+                )}
               </Breadcrumbs>
             </div>
             <div>{sideNav}</div>

@@ -17,6 +17,14 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'icons.llama.fi',
       },
+      {
+        protocol: 'https',
+        hostname: 'frontend.jobstash.xyz',
+      },
+      {
+        protocol: 'https',
+        hostname: 'ipfs.io',
+      },
     ],
   },
   publicRuntimeConfig: {

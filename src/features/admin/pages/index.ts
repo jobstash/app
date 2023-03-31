@@ -3,6 +3,7 @@ export { default as ApprovalsOrgsPage } from './approvals-orgs';
 export { default as BlockedTermsPage } from './blocked-terms';
 export { default as ConnectedTermsPage } from './connected-terms';
 export { default as ImportsPage } from './imports';
+export { default as OrgCreatePage } from './org-create';
 export { default as OrgEditPage } from './org-edit';
 export { default as OrgEditProjectPage } from './org-edit-project';
 export { default as OrgJobsPage } from './org-jobs';
