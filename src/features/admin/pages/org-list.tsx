@@ -48,97 +48,88 @@ const OrgListPage = () => {
             lastFundingDate,
             technologies,
           }) => (
-            <Stack
+            <Paper
               key={id}
-              spacing={30}
+              radius="xl"
               p={30}
-              pos="relative"
-              sx={{
-                border: '2px solid rgba(255, 255, 255, 0.15)',
-                borderRadius: 10,
-              }}
+              pb={20}
+              bg="rgba(255, 255, 255, 0.05)"
             >
-              <Flex justify="space-between" align="center">
-                <Title order={4}>{name}</Title>
-                <Button
-                  kind="primary"
-                  size="lg"
-                  onClick={() => editOrg(name, id)}
-                >
-                  <Text fw="semibold">View as Organization</Text>
-                </Button>
-              </Flex>
-              <Paper radius="xl" p={30} pb={20} bg="rgba(255, 255, 255, 0.05)">
-                <Stack spacing={20}>
-                  <Flex justify="space-between" align="center">
-                    <Flex gap="md">
-                      {logo && <Avatar src={logo} alt={name} size="lg" />}
-                      <Stack spacing={0}>
-                        <CardHeading>{name}</CardHeading>
-                        <Text color="dimmed">{location}</Text>
-                      </Stack>
-                    </Flex>
-                    <Text>TBD</Text>
-                  </Flex>
-
-                  <hr className="border-t border-white/10" />
-
-                  <Flex gap="md" wrap="wrap">
-                    <Button
-                      left={<TagIcon filename="baggage-2" />}
-                      kind="subtle"
-                      className="cursor-default"
-                    >
-                      Jobs: {jobCount}
-                    </Button>
-                    <Button
-                      left={<TagIcon filename="code" />}
-                      kind="subtle"
-                      className="cursor-default"
-                    >
-                      Projects: {projectCount}
-                    </Button>
-                    <Button
-                      left={<TagIcon filename="users-three" />}
-                      kind="subtle"
-                      className="cursor-default"
-                    >
-                      Employees: {headCount}
-                    </Button>
-
-                    {lastFundingAmount > 0 && (
-                      <Button
-                        left={<TagIcon filename="money" />}
-                        kind="subtle"
-                        className="cursor-default"
-                      >
-                        {`Last Funding: $${numFormatter.format(
-                          lastFundingAmount,
-                        )}`}
-                      </Button>
-                    )}
-
-                    {lastFundingDate > 0 && (
-                      <Button
-                        left={<TagIcon filename="funding" />}
-                        kind="subtle"
-                        className="cursor-default"
-                      >
-                        Funding Date: {prettyTimestamp(lastFundingDate)}
-                      </Button>
-                    )}
-                  </Flex>
-
-                  <hr className="border-t border-white/10" />
-
+              <Stack spacing={20}>
+                <Flex justify="space-between" align="center">
                   <Flex gap="md">
-                    {technologies.map(({ id, name }) => (
-                      <SkillHolder key={id}>{name}</SkillHolder>
-                    ))}
+                    {logo && <Avatar src={logo} alt={name} size="lg" />}
+                    <Stack spacing={0}>
+                      <CardHeading>{name}</CardHeading>
+                      <Text color="dimmed">{location}</Text>
+                    </Stack>
                   </Flex>
-                </Stack>
-              </Paper>
-            </Stack>
+                  <Button
+                    kind="primary"
+                    size="lg"
+                    onClick={() => editOrg(name, id)}
+                  >
+                    <Text fw="semibold">View as Organization</Text>
+                  </Button>
+                </Flex>
+
+                <hr className="border-t border-white/10" />
+
+                <Flex gap="md" wrap="wrap">
+                  <Button
+                    left={<TagIcon filename="baggage-2" />}
+                    kind="subtle"
+                    className="cursor-default"
+                  >
+                    Jobs: {jobCount}
+                  </Button>
+                  <Button
+                    left={<TagIcon filename="code" />}
+                    kind="subtle"
+                    className="cursor-default"
+                  >
+                    Projects: {projectCount}
+                  </Button>
+                  <Button
+                    left={<TagIcon filename="users-three" />}
+                    kind="subtle"
+                    className="cursor-default"
+                  >
+                    Employees: {headCount}
+                  </Button>
+
+                  {lastFundingAmount > 0 && (
+                    <Button
+                      left={<TagIcon filename="money" />}
+                      kind="subtle"
+                      className="cursor-default"
+                    >
+                      {`Last Funding: $${numFormatter.format(
+                        lastFundingAmount,
+                      )}`}
+                    </Button>
+                  )}
+
+                  {lastFundingDate > 0 && (
+                    <Button
+                      left={<TagIcon filename="funding" />}
+                      kind="subtle"
+                      className="cursor-default"
+                    >
+                      Funding Date: {prettyTimestamp(lastFundingDate)}
+                    </Button>
+                  )}
+                </Flex>
+
+                <hr className="border-t border-white/10" />
+
+                <Flex gap="md">
+                  {technologies.map(({ id, name }) => (
+                    <SkillHolder key={id}>{name}</SkillHolder>
+                  ))}
+                </Flex>
+              </Stack>
+            </Paper>
           ),
         )}
       </Stack>
