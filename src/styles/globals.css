@@ -38,6 +38,7 @@
 
 html {
 	overflow-y: overlay;
+	color: #FFF;
 }
 
 .hide-scrollbar {

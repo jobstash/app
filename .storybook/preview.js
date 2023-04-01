@@ -2,7 +2,6 @@
 import '../src/styles/globals.css';
 import 'joi/dist/joi-browser.min.js';
 
-import { Lato, Roboto } from '@next/font/google';
 import { themes } from '@storybook/theming';
 
 export const parameters = {
@@ -27,22 +26,4 @@ export const parameters = {
   },
 };
 
-const roboto = Roboto({
-  weight: ['400', '700'],
-  subsets: ['latin'],
-  variable: '--font-roboto',
-});
-
-const lato = Lato({
-  weight: ['400', '700'],
-  subsets: ['latin'],
-  variable: '--font-lato',
-});
-
-export const decorators = [
-  (Story) => (
-    <div className={`${lato.variable} ${roboto.variable} font-roboto`}>
-      <Story />
-    </div>
-  ),
-];
+export const decorators = [(Story) => <Story />];
