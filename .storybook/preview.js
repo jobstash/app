@@ -9,7 +9,7 @@ export const parameters = {
   // Implement figma background (no light theme defined yet, may change in the future)
   backgrounds: {
     default: 'default',
-    values: [{ name: 'default', value: '#131317' }],
+    values: [{ name: 'default', value: '#1E1E1E' }],
   },
   // Unblinding dark Storybook
   darkMode: {
@@ -17,12 +17,6 @@ export const parameters = {
     current: 'dark',
     dark: { ...themes.dark },
     light: { ...themes.light },
-  },
-  controls: {
-    matchers: {
-      color: /(background|color)$/i,
-      date: /Date$/,
-    },
   },
 };
 
