@@ -1,4 +1,4 @@
-import { ButtonHTMLAttributes, forwardRef, ReactNode } from 'react';
+import { forwardRef, ReactNode } from 'react';
 
 import { cva, VariantProps } from 'class-variance-authority';
 
@@ -49,14 +49,13 @@ const wrapper = cva(
   },
 );
 
-const button = cva(['flex items-center justify-center rounded-lg'], {
+const button = cva(['flex items-center justify-center rounded-lg gap-x-1'], {
   variants: {
     variant: {
       primary: '',
       outline: 'ring-1 ring-gray active:ring-0',
       subtle: '',
     },
-    //
     size: {
       sm: 'px-2 py-1',
       md: 'px-4 py-2',
@@ -68,13 +67,42 @@ const button = cva(['flex items-center justify-center rounded-lg'], {
     isDisabled: {
       true: '',
     },
+    hasLeft: {
+      true: '',
+    },
+    hasRight: {
+      true: '',
+    },
+    isIcon: {
+      true: 'w-7 h-7',
+    },
   },
 
   compoundVariants: [
     {
       variant: 'outline',
       isActive: true,
-      className: 'ring-0 ring-transparent',
+      className: 'ring-0 ring-transparent hover:bg-dark-gray',
+    },
+    {
+      hasLeft: true,
+      size: 'md',
+      className: 'pl-2',
+    },
+    {
+      hasLeft: true,
+      size: 'sm',
+      className: 'pl-1',
+    },
+    {
+      hasRight: true,
+      size: 'md',
+      className: 'pr-2',
+    },
+    {
+      hasRight: true,
+      size: 'sm',
+      className: 'pr-1',
     },
   ],
 });
@@ -83,22 +111,46 @@ type ButtonVariantProps = VariantProps<typeof button>;
 
 interface ButtonProps extends ButtonVariantProps {
   children: ReactNode;
+  left?: ReactNode;
+  right?: ReactNode;
 }
 
-export const Button = ({
-  children,
-  size = 'md',
-  isActive = false,
-  isDisabled = false,
-  variant,
-}: ButtonProps) => (
-  // <div>{children}</div>
-  <div className={wrapper({ variant, isActive, isDisabled })}>
-    <button
-      type="button"
-      className={button({ variant, size, isActive, isDisabled })}
-    >
-      <Text size={size}>{children as string}</Text>
-    </button>
-  </div>
+export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+  (
+    {
+      children,
+      size = 'md',
+      isActive = false,
+      isDisabled = false,
+      variant,
+      left,
+      right,
+      isIcon = false,
+      ...props
+    }: ButtonProps,
+    ref,
+  ) => (
+    <div className={wrapper({ variant, isActive, isDisabled })}>
+      <button
+        ref={ref}
+        type="button"
+        className={button({
+          variant,
+          size,
+          isActive,
+          isDisabled,
+          hasLeft: Boolean(left),
+          hasRight: Boolean(right),
+          isIcon,
+        })}
+        {...props}
+      >
+        {left ?? null}
+        <Text size={size}>{children as string}</Text>
+        {right ?? null}
+      </button>
+    </div>
+  ),
 );
+
+Button.displayName = 'Button';
