@@ -76,7 +76,7 @@ export const Filters = ({
           ))}
 
           <Button
-            kind="primary"
+            variant="primary"
             isDisabled={disabledSubmit}
             onClick={applyFilter}
           >

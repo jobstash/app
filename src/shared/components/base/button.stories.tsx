@@ -1,19 +1,21 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
-import { SidebarIcon } from '../icons';
+import { CaretDownIcon, FilterIcon } from '../icons';
 
 import { Button } from './button';
 
 const meta: Meta<typeof Button> = {
   component: Button,
-  title: 'Components/Base/Button',
-  render: (args) => (
-    <div className="w-24">
-      <Button {...args} />
-    </div>
-  ),
+  title: 'components/base/Buttonx',
   args: {
     children: 'Button',
+  },
+  argTypes: {
+    isActive: { type: 'boolean', defaultValue: false },
+    isDisabled: { type: 'boolean', defaultValue: false },
+    left: { type: 'function', defaultValue: null },
+    right: { type: 'function', defaultValue: null },
+    children: { type: 'function', defaultValue: null },
   },
 };
 
@@ -23,49 +25,47 @@ type Story = StoryObj<typeof Button>;
 
 export const Default: Story = {};
 
+//
 export const Primary: Story = {
   args: {
-    kind: 'primary',
+    variant: 'primary',
+    children: 'Apply Filters',
   },
 };
 
-export const Outlined: Story = {
+export const Outline: Story = {
   args: {
-    kind: 'outlined',
+    variant: 'outline',
+    children: 'Clear Filters',
   },
 };
 
-export const IsActive: Story = {
-  render: (args) => (
-    <div className="w-16">
-      <Button {...args} />
-    </div>
-  ),
+export const Subtle: Story = {
   args: {
+    variant: 'subtle',
+  },
+};
+
+export const LeftIcon: Story = {
+  args: {
+    left: <FilterIcon />,
+    variant: 'outline',
     isActive: true,
+    children: 'Filters & Sorting',
   },
 };
 
-export const IsDisabled: Story = {
+export const RightIcon: Story = {
   args: {
-    isDisabled: true,
+    right: <CaretDownIcon />,
+    variant: 'outline',
+    children: 'Sort By',
   },
 };
 
-export const HasLeft: Story = {
+export const IconOnly: Story = {
   args: {
-    left: <SidebarIcon filename="right-caret" />,
-  },
-};
-
-export const HasRight: Story = {
-  args: {
-    right: <SidebarIcon filename="right-caret" />,
-  },
-};
-
-export const IconButton: Story = {
-  args: {
-    children: <SidebarIcon filename="bookmark" />,
+    children: <CaretDownIcon />,
+    isIcon: true,
   },
 };

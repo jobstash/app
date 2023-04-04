@@ -58,17 +58,13 @@ const OrgListPage = () => {
               <Stack spacing={20}>
                 <Flex justify="space-between" align="center">
                   <Flex gap="md">
-                    {logo && <Avatar src={logo} alt={name} size="lg" />}
+                    {logo && <Avatar src={logo} alt={name} />}
                     <Stack spacing={0}>
                       <CardHeading>{name}</CardHeading>
                       <Text color="dimmed">{location}</Text>
                     </Stack>
                   </Flex>
-                  <Button
-                    kind="primary"
-                    size="lg"
-                    onClick={() => editOrg(name, id)}
-                  >
+                  <Button variant="primary" onClick={() => editOrg(name, id)}>
                     <Text fw="semibold">Edit Organization</Text>
                   </Button>
                 </Flex>
@@ -78,21 +74,21 @@ const OrgListPage = () => {
                 <Flex gap="md" wrap="wrap">
                   <Button
                     left={<TagIcon filename="baggage-2" />}
-                    kind="subtle"
+                    variant="subtle"
                     className="cursor-default"
                   >
                     Jobs: {jobCount}
                   </Button>
                   <Button
                     left={<TagIcon filename="code" />}
-                    kind="subtle"
+                    variant="subtle"
                     className="cursor-default"
                   >
                     Projects: {projectCount}
                   </Button>
                   <Button
                     left={<TagIcon filename="users-three" />}
-                    kind="subtle"
+                    variant="subtle"
                     className="cursor-default"
                   >
                     Employees: {headCount}
@@ -101,7 +97,7 @@ const OrgListPage = () => {
                   {lastFundingAmount > 0 && (
                     <Button
                       left={<TagIcon filename="money" />}
-                      kind="subtle"
+                      variant="subtle"
                       className="cursor-default"
                     >
                       {`Last Funding: $${numFormatter.format(
@@ -113,7 +109,7 @@ const OrgListPage = () => {
                   {lastFundingDate > 0 && (
                     <Button
                       left={<TagIcon filename="funding" />}
-                      kind="subtle"
+                      variant="subtle"
                       className="cursor-default"
                     >
                       Funding Date: {prettyTimestamp(lastFundingDate)}

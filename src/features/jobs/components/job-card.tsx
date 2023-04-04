@@ -31,7 +31,7 @@ const cvaJobCard = cva(
   {
     variants: {
       isActive: {
-        true: 'bg-gradient-to-l from-primary to-secondary hover:after:hidden cursor-default',
+        true: 'bg-gradient-to-l from-primary to-tertiary hover:after:hidden cursor-default',
       },
     },
   },

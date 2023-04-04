@@ -88,7 +88,7 @@ const OrgProjectsPage = () => {
               </Flex>
             </Flex>
 
-            <Button left={<TagIcon filename="users-three" />} kind="subtle">
+            <Button left={<TagIcon filename="users-three" />} variant="subtle">
               <Text>Source of Data: DefiLlama</Text>
             </Button>
 
@@ -121,42 +121,42 @@ const OrgProjectsPage = () => {
               <Button
                 left={<TagIcon filename="category" />}
                 className="cursor-default"
-                kind="subtle"
+                variant="subtle"
               >
                 Category: DEX
               </Button>
               <Button
                 left={<TagIcon filename="users-three" />}
                 className="cursor-default"
-                kind="subtle"
+                variant="subtle"
               >
                 Team Size: 12
               </Button>
               <Button
                 left={<TagIcon filename="tvl" />}
                 className="cursor-default"
-                kind="subtle"
+                variant="subtle"
               >
                 TVL: $99M
               </Button>
               <Button
                 left={<TagIcon filename="monthly-volume" />}
                 className="cursor-default"
-                kind="subtle"
+                variant="subtle"
               >
                 Monthly Volume: $14K
               </Button>
               <Button
                 left={<TagIcon filename="active-user" />}
                 className="cursor-default"
-                kind="subtle"
+                variant="subtle"
               >
                 Active Users: 23K
               </Button>
               <Button
                 left={<TagIcon filename="active-user" />}
                 className="cursor-default"
-                kind="subtle"
+                variant="subtle"
               >
                 Revenue: $590K
               </Button>
@@ -191,8 +191,7 @@ const OrgProjectsPage = () => {
 
               <Flex gap="lg" align="center" justify="space-between">
                 <Button
-                  kind="primary"
-                  size="lg"
+                  variant="primary"
                   onClick={() => editOrgProject('some-id')}
                 >
                   <MText fw="bold">Edit Project</MText>

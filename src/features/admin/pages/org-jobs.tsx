@@ -63,28 +63,28 @@ const OrgJobsPage = () => (
             <Button
               left={<TagIcon filename="level" />}
               className="cursor-default"
-              kind="subtle"
+              variant="subtle"
             >
               <Text size="md">Level: Senior</Text>
             </Button>
             <Button
               left={<TagIcon filename="money" />}
               className="cursor-default"
-              kind="subtle"
+              variant="subtle"
             >
               <Text size="md">Salary: $60-90K/Year</Text>
             </Button>
             <Button
               left={<TagIcon filename="location" />}
               className="cursor-default"
-              kind="subtle"
+              variant="subtle"
             >
               <Text size="md">Remote</Text>
             </Button>
             <Button
               left={<TagIcon filename="users-three" />}
               className="cursor-default"
-              kind="subtle"
+              variant="subtle"
             >
               <Text size="md">Team Size: 14</Text>
             </Button>

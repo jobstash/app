@@ -23,7 +23,7 @@ export const ApprovalsSideNavs = ({ activeLabel }: Props) => {
       {sideNavs.map(({ label, href }) => (
         <Button
           key={label}
-          kind={activeLabel === label ? 'primary' : 'outlined'}
+          variant={activeLabel === label ? 'primary' : 'outline'}
           onClick={() => push(href)}
         >
           <Text>{label}</Text>

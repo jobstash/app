@@ -96,13 +96,7 @@ export const MultiSelectSearchFilter = ({
               onKeyDown={onInputKeyDown}
             />
           </Dropdown.Item>
-          <Button
-            size="sm"
-            textProps={{
-              className: `font-sans ${lato.variable}`,
-            }}
-            onClick={clearItems}
-          >
+          <Button size="sm" onClick={clearItems}>
             Clear
           </Button>
         </div>
@@ -147,12 +141,7 @@ export const MultiSelectSearchFilter = ({
           <Dropdown.Label
             className={clsx({ 'my-2': availableItems.length > 0 })}
           >
-            <Text
-              className={`font-sans ${lato.variable} text-gray-400`}
-              size="md"
-            >
-              Selected Items:
-            </Text>
+            <Text size="md">Selected Items:</Text>
           </Dropdown.Label>
           <div className="my-3 flex w-full max-w-xs flex-wrap gap-2">
             {
@@ -161,9 +150,6 @@ export const MultiSelectSearchFilter = ({
                 <Button
                   key={label}
                   size="sm"
-                  textProps={{
-                    className: `font-sans ${lato.variable}`,
-                  }}
                   right={<CloseSvgIcon />}
                   onClick={() => toggleItem(false, label)}
                 >

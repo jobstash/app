@@ -180,7 +180,7 @@ const ImportsPage = () => (
             <Box w="100%">
               <TextInput placeholder="Input ..." size="lg" radius="lg" />
             </Box>
-            <Button kind="primary" size="lg">
+            <Button variant="primary">
               <Text size="md">Execute</Text>
             </Button>
           </Flex>

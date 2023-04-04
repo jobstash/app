@@ -57,7 +57,7 @@ export const JobRightPanel = () => {
   return (
     <div>
       {/* NOTE: This component needs to be always on top */}
-      <div className="absolute top-0 text-ivory" id={ID_TOP_RIGHT_PANEL} />
+      <div className="text-ivory absolute top-0" id={ID_TOP_RIGHT_PANEL} />
 
       {/** RIGHT PANEL HEADER */}
       <div>
@@ -75,7 +75,7 @@ export const JobRightPanel = () => {
             </IconHolder>
           ))}
         </div>
-        <p className="text-sm text-sidebarTitle">{org.summary}</p>
+        <p className="text-sidebarTitle text-sm">{org.summary}</p>
         {orgSocials.length > 0 && (
           <div className="flex space-x-4 py-4 text-sm">
             {orgSocials.map(({ text, iconText, link }) => (
@@ -93,7 +93,7 @@ export const JobRightPanel = () => {
           <Button
             key={label}
             /** NOTE: Need gradient border implementation for isActive ("primary" for now) */
-            kind={isActive ? 'primary' : 'outlined'}
+            variant={isActive ? 'primary' : 'outline'}
             size="md"
             onClick={() => push(route, { shouldScroll: false, shallow: true })}
           >
@@ -104,7 +104,7 @@ export const JobRightPanel = () => {
 
       {/** RIGHT PANEL CARD */}
       <div className="mt-8 rounded-3xl bg-gradient-to-l from-primary to-secondary p-1">
-        <div className="rounded-3xl bg-grey">
+        <div className="bg-grey rounded-3xl">
           {cardMap[segments.tab as keyof typeof cardMap]}
         </div>
       </div>

@@ -52,7 +52,7 @@ const AddGithubAccountPage = () => {
         </div>
 
         <div>
-          <Button size="sm" kind="outlined">
+          <Button size="sm" variant="outline">
             Add another account
           </Button>
         </div>

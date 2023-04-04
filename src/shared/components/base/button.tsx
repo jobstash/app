@@ -1,144 +1,161 @@
 import { ButtonHTMLAttributes, forwardRef, ReactNode } from 'react';
 
-import { type VariantProps, cva } from 'class-variance-authority';
-import clsx from 'clsx';
+import { cva, VariantProps } from 'class-variance-authority';
 
-import { type TextProps, Text } from './text';
+import { Text } from './textx';
 
-const cvaButton = cva(
-  ['rounded-md flex items-center transition duration-150 ease-in-out', ''],
+const wrapper = cva(
+  [
+    'rounded-lg w-fit cursor-pointer border-none p-[1px] active:translate-y-[2px]',
+    'transition-color duration-200 ease-in-out',
+    'bg-dark-gray hover:bg-gray',
+    'active:bg-gradient-to-l active:from-primary active:to-tertiary active:border-transparent [&>*]:active:bg-dark-gray',
+  ],
   {
     variants: {
-      kind: {
-        default: 'bg-white/10',
-        primary: 'bg-gradient-to-l from-primary to-secondary',
-        outlined: 'bg-none border border-white/20',
-        subtle: 'bg-none',
+      variant: {
+        primary:
+          'bg-gradient-to-l from-primary to-tertiary hover:from-[#8743FF_52.6%] hover:to-[#4136F1_84.9%] active:from-secondary active:to-secondary [&>*]:active:bg-secondary',
+        outline: 'bg-dark hover:bg-dark-gray [&>*]:active:bg-dark',
+        subtle: 'bg-dark hover:bg-dark-gray [&>*]:active:bg-dark',
       },
+      //
       isActive: {
-        // Transition-none gets rid of weird blink
-        true: 'transition-none bg-card',
+        true: '',
       },
       isDisabled: {
-        true: 'pointer-events-none select-none opacity-60',
-      },
-      hasLeft: {
-        true: '',
-      },
-      hasRight: {
-        true: '',
-      },
-      size: {
-        xs: 'py-0.5 px-1',
-        sm: 'py-1 px-2',
-        md: 'py-1.5 px-3',
-        lg: 'py-2.5 px-5',
+        true: 'opacity-30 select-none pointer-events-none',
       },
     },
     compoundVariants: [
       {
-        hasLeft: true,
-        size: 'sm',
-        className: 'pl-1',
-      },
-      {
-        hasLeft: true,
-        size: 'md',
-        className: 'pl-2',
-      },
-      {
-        hasLeft: true,
-        size: 'lg',
-        className: 'pl-4',
-      },
-      {
-        hasRight: true,
-        size: 'sm',
-        className: 'pr-1',
-      },
-      {
-        hasRight: true,
-        size: 'md',
-        className: 'pr-2',
-      },
-      {
-        hasRight: true,
-        size: 'lg',
-        className: 'pr-4',
-      },
-      {
-        // Disable active border on primary
-        kind: 'primary',
+        variant: undefined,
         isActive: true,
-        className: 'border-none',
+        className:
+          'bg-gradient-to-l from-primary to-tertiary [&>*]:bg-dark-gray',
+      },
+      {
+        variant: 'outline',
+        isActive: true,
+        className: 'bg-gradient-to-l from-primary to-tertiary [&>*]:bg-dark',
+      },
+      {
+        variant: 'primary',
+        isActive: true,
+        className:
+          'bg-gradient-to-l from-secondary to-secondary [&>*]:bg-secondary',
       },
     ],
   },
 );
 
-type ButtonVariantProps = VariantProps<typeof cvaButton>;
+const button = cva(['flex items-center justify-center rounded-lg gap-x-1'], {
+  variants: {
+    variant: {
+      primary: '',
+      outline: 'ring-1 ring-gray active:ring-0',
+      subtle: '',
+    },
+    size: {
+      sm: 'px-2 py-1',
+      md: 'px-4 py-2',
+    },
+
+    isActive: {
+      true: '',
+    },
+    isDisabled: {
+      true: '',
+    },
+    hasLeft: {
+      true: '',
+    },
+    hasRight: {
+      true: '',
+    },
+    isIcon: {
+      true: 'w-7 h-7',
+    },
+  },
+
+  compoundVariants: [
+    {
+      variant: 'outline',
+      isActive: true,
+      className: 'ring-0 ring-transparent hover:bg-dark-gray',
+    },
+    {
+      hasLeft: true,
+      size: 'md',
+      className: 'pl-2',
+    },
+    {
+      hasLeft: true,
+      size: 'sm',
+      className: 'pl-1',
+    },
+    {
+      hasRight: true,
+      size: 'md',
+      className: 'pr-2',
+    },
+    {
+      hasRight: true,
+      size: 'sm',
+      className: 'pr-1',
+    },
+  ],
+});
+
+type ButtonVariantProps = VariantProps<typeof button>;
 
 type ButtonHTMLProps = Omit<
   ButtonHTMLAttributes<HTMLButtonElement>,
   'disabled'
 >;
 
-export interface ButtonProps extends ButtonHTMLProps, ButtonVariantProps {
+interface ButtonProps extends ButtonHTMLProps, ButtonVariantProps {
   children: ReactNode;
-  isActive?: boolean;
-  isDisabled?: boolean;
   left?: ReactNode;
   right?: ReactNode;
-  textProps?: Omit<TextProps, 'children'>;
 }
 
 export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
-      kind = 'default',
+      children,
+      size = 'md',
       isActive = false,
       isDisabled = false,
-      size = 'md',
-      children,
+      variant,
       left,
       right,
-      textProps,
-      className,
+      isIcon = false,
       ...props
     }: ButtonProps,
     ref,
-  ) => {
-    const btn = (
+  ) => (
+    <div className={wrapper({ variant, isActive, isDisabled })}>
       <button
         ref={ref}
         type="button"
-        disabled={isDisabled}
-        className={`${cvaButton({
-          kind,
+        className={button({
+          variant,
+          size,
           isActive,
           isDisabled,
-          size,
           hasLeft: Boolean(left),
           hasRight: Boolean(right),
-        })} ${className}`}
+          isIcon,
+        })}
         {...props}
       >
-        <div className={clsx({ 'mr-1': Boolean(left) })}>{left}</div>
-        <Text size={textProps?.size ?? 'sm'} {...textProps}>
-          {children}
-        </Text>
-        <div className={clsx({ 'ml-2': Boolean(right) })}>{right}</div>
+        {left ?? null}
+        <Text size={size}>{children as string}</Text>
+        {right ?? null}
       </button>
-    );
-
-    if (!isActive) return btn;
-
-    return (
-      <div className="flex items-center justify-center rounded-md bg-gradient-to-l from-primary to-secondary p-0.5">
-        {btn}
-      </div>
-    );
-  },
+    </div>
+  ),
 );
 
 Button.displayName = 'Button';

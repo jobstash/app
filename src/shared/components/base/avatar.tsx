@@ -20,9 +20,8 @@ const cvaAvatar = cva([], {
 });
 
 type AvatarVariantProps = VariantProps<typeof cvaAvatar>;
-type RequiredVariantProps = Required<Pick<AvatarVariantProps, 'size'>>;
 
-export interface AvatarProps extends RequiredVariantProps {
+export interface AvatarProps extends AvatarVariantProps {
   src: string;
   alt: string;
   isRounded?: boolean;
