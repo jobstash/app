@@ -1,95 +1,89 @@
-import type { ButtonHTMLAttributes, MouseEventHandler, ReactNode } from 'react';
+import { ButtonHTMLAttributes, forwardRef, ReactNode } from 'react';
 
-import { type VariantProps, cva } from 'class-variance-authority';
+import { cva, VariantProps } from 'class-variance-authority';
+import clsx from 'clsx';
 
-import { SidebarIcon } from '../icons';
+import { CaretLeftSidebarIcon } from '../icons';
 
 import { Text } from './text';
 
-const cvaBartab = cva(
+const bartab = cva(['h-10 w-full border-none rounded-lg p-[1px]'], {
+  variants: {
+    variant: {
+      bartab: 'bg-darker-gray hover:bg-dark-gray',
+      wallet:
+        'bg-gradient-to-r from-primary/60 to-quaternary/80 hover:from-primary hover:to-quaternary/80',
+      //
+      // wallet: 'bg-gradient-to-l from-[#8743FF_60%] to-[D68800_80%]',
+    },
+    isActive: {
+      //
+      // true: 'bg-gradient-to-l from-[#8743FF_0%] to-[#4136F1_100%]',
+      true: 'bg-gradient-to-l from-primary to-tertiary hover:brightness-110',
+    },
+  },
+});
+
+const inner = cva(
   [
-    'h-10 rounded-lg flex justify-between w-full items-center  active:bg-white/20  ',
+    'flex items-center justify-center p-2 gap-[10px] rounded-lg h-full',
+    'transition-color duration-200 ease-in-out',
   ],
   {
     variants: {
-      intent: {
-        primary: [
-          'px-2 bg-darkerGrey border border-darkerGrey focus:border-white hover:bg-greyMedium',
-        ],
-        secondary: [
-          'bg-white/5 px-2 bg-darkGrey border border-darkGrey focus:border-white hover:bg-greyMedium',
-        ],
-        wallet: [
-          'bg-gradient-to-l from-quaternary to-tertiary focus:from-white focus:to-white [&>span]:bg-darkGrey [&>span]:rounded-lg [&>span]:mx-[2px] [&>span]:h-9 [&>span]:px-2 hover:[&>span]:bg-greyMedium',
-        ],
-      },
-      isActive: {
-        true: '',
-      },
-      isConnected: {
-        false: '[&>span>img]:hidden [&>span]:justify-center',
+      variant: {
+        bartab: '',
+        wallet: 'bg-dark hover:bg-dark-gray active:bg-transparent',
       },
     },
-    compoundVariants: [
-      {
-        intent: 'primary',
-        isActive: true,
-        class: 'bg-gradient-to-l from-primary to-secondary',
-      },
-      {
-        intent: 'secondary',
-        isActive: true,
-        class: 'bg-gradient-to-l from-primary to-secondary',
-      },
-      {
-        intent: 'wallet',
-        isActive: true,
-        class:
-          '[&>span]:bg-gradient-to-l [&>span]:from-quaternary [&>span]:to-tertiary hover:[&>span]:bg-transparent',
-      },
-    ],
   },
 );
 
-type BartabVariantProps = VariantProps<typeof cvaBartab>;
+type BartabVariantProps = VariantProps<typeof bartab>;
 
-interface BartabProps
-  extends ButtonHTMLAttributes<HTMLButtonElement>,
-    BartabVariantProps {
-  text: string | ReactNode;
-  isConnected?: boolean;
-  isActive?: boolean;
+type ButtonHTMLProps = Omit<
+  ButtonHTMLAttributes<HTMLButtonElement>,
+  'disabled'
+>;
+
+interface BartabProps extends ButtonHTMLProps, BartabVariantProps {
+  text: string;
   left?: ReactNode;
-  onClick: MouseEventHandler;
+  right?: ReactNode;
 }
 
-export const Bartab = ({
-  text,
-  left,
-  isActive,
-  isConnected,
-  intent,
-  onClick,
-  ...props
-}: BartabProps) => (
-  <button
-    type="button"
-    className={cvaBartab({ intent, isActive, isConnected })}
-    {...props}
-    onClick={onClick}
-  >
-    <span className="flex w-full justify-between">
-      <span className="flex items-center space-x-2">
-        {left}
-        {typeof text === 'string' ? (
-          <Text size="md" fw="semibold">
-            {text}
-          </Text>
-        ) : (
-          text
-        )}
-      </span>
-      <SidebarIcon filename="right-caret" />
-    </span>
-  </button>
+export const Bartab = forwardRef<HTMLButtonElement, BartabProps>(
+  (
+    {
+      text,
+      left = null,
+      right = <CaretLeftSidebarIcon />,
+      variant = 'bartab',
+      isActive,
+      ...props
+    }: BartabProps,
+    ref,
+  ) => {
+    const isTextOnly = !left && !right;
+
+    return (
+      <button ref={ref} {...props} className={bartab({ variant, isActive })}>
+        <div className={inner({ variant })}>
+          {left}
+          <div
+            className={clsx(
+              'flex grow items-center',
+              { 'justify-start': !isTextOnly },
+              { 'justify-center': isTextOnly },
+            )}
+          >
+            <Text fw="medium">{text}</Text>
+          </div>
+          {right}
+        </div>
+      </button>
+    );
+  },
 );
+
+Bartab.displayName = 'Bartab';

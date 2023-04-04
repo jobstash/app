@@ -1,4 +1,4 @@
-import { Bartab, Heading, SidebarIcon, Text } from '~/shared/components';
+import { Bartab, Text } from '~/shared/components';
 import { useRouteSegments } from '~/shared/hooks';
 
 import type { IsActiveFn, SidebarTab } from '../core/types';
@@ -20,9 +20,8 @@ export const SidebarSection = ({ title, tabs, isActiveFn }: Props) => {
           <div key={tab.label}>
             <Bartab
               isActive={isActiveFn({ tab, segments, push, aspath })}
-              left={tab.icon ? <SidebarIcon filename={tab.icon} /> : null}
+              left={tab.icon ?? null}
               text={tab.label}
-              intent="secondary"
               onClick={() => {
                 // Replace when discover links endpoint is implemented
                 // push(__path_here__, { shallow: true });

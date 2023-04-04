@@ -54,3 +54,10 @@ export { TypeOfWorkIcon } from './type-of-work-icon';
 export { UsersIcon } from './users-icon';
 export { UsersThreeIcon } from './users-three-icon';
 export { WrenchIcon } from './wrench-icon';
+
+// Sidebar Icons
+export { CaretLeftSidebarIcon } from './caret-left-sidebar-icon';
+export { JobsSidebarIcon } from './jobs-sidebar-icon';
+export { OrgSidebarIcon } from './org-sidebar-icon';
+export { ProjectsSidebarIcon } from './projects-sidebar-icon';
+export { ReposSidebarIcon } from './repos-sidebar-icon';

@@ -1,33 +1,40 @@
 import { CHECK_WALLET_ROLES } from '~/features/auth/core/constants';
+import {
+  JobsSidebarIcon,
+  OrgSidebarIcon,
+  ProjectsSidebarIcon,
+  ReposSidebarIcon,
+} from '~/shared/components';
+import { BookmarksSidebarIcon } from '~/shared/components/icons/bookmarks-sidebar-icon';
 
 import type { SidebarRoleSection, SidebarTab } from './types';
 
 export const discoverBartabs: SidebarTab[] = [
   {
-    icon: 'jobs',
+    icon: <JobsSidebarIcon />,
     label: 'Jobs',
   },
   {
-    icon: 'organizations',
+    icon: <OrgSidebarIcon />,
     label: 'Organizations',
   },
   {
-    icon: 'projects',
+    icon: <ProjectsSidebarIcon />,
     label: 'Projects',
   },
   {
-    icon: 'repositories',
+    icon: <ReposSidebarIcon />,
     label: 'Repositories',
   },
 ];
 
 export const bookmarkBartabs: SidebarTab[] = [
   {
-    icon: 'bookmark',
+    icon: <BookmarksSidebarIcon />,
     label: 'Saved Jobs',
   },
   {
-    icon: 'bookmark',
+    icon: <BookmarksSidebarIcon />,
     label: 'Saved Orgs',
   },
 ];

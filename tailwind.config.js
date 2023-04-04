@@ -18,6 +18,7 @@ module.exports = {
         dark: 'rgb(var(--color-dark) / <alpha-value>)',
         gray: 'rgb(var(--color-gray) / <alpha-value>)',
         'dark-gray': 'rgb(var(--color-dark-gray) / <alpha-value>)',
+        'darker-gray': 'rgb(var(--color-darker-gray) / <alpha-value>)',
       },
       backgroundImage: {
         app: 'linear-gradient(116.16deg, #141317 3.32%, rgba(18, 18, 22, 0.7) 96.7%)',

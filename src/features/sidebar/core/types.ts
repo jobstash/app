@@ -1,14 +1,10 @@
+import { ReactNode } from 'react';
+
 import { RouteSegments } from '~/shared/core/interfaces';
 import { RouterPush } from '~/shared/core/types';
 
 export type SidebarTab = {
-  icon:
-    | 'jobs'
-    | 'organizations'
-    | 'projects'
-    | 'repositories'
-    | 'bookmark'
-    | null;
+  icon: ReactNode;
   label: string;
   path?: string;
 };

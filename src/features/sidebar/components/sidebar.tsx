@@ -28,8 +28,8 @@ export const SideBar = () => {
         <SidebarSection
           title="Discover"
           tabs={discoverBartabs}
-          isActiveFn={({ tab: { icon }, segments: { section } }) =>
-            `${section}` === `${icon}`
+          isActiveFn={({ tab: { label }, segments: { section } }) =>
+            `${section}` === `${label.toLowerCase()}`
           }
         />
       </div>

@@ -1,79 +1,101 @@
-import type { Meta, StoryObj } from '@storybook/react';
+import { Meta, StoryObj } from '@storybook/react';
 
-import { SidebarIcon } from '../icons';
+import {
+  JobsSidebarIcon,
+  OrgSidebarIcon,
+  ProjectsSidebarIcon,
+  ReposSidebarIcon,
+} from '../icons';
+import { BookmarksSidebarIcon } from '../icons/bookmarks-sidebar-icon';
 
 import { Avatar } from './avatar';
 import { Bartab } from './bartab';
 
 const meta: Meta<typeof Bartab> = {
   component: Bartab,
-  title: 'Components/UI/Bartab',
+  title: 'components/base/Bartabx',
+  args: {
+    text: 'Bartab',
+  },
+  argTypes: {
+    left: { type: 'function', defaultValue: null },
+    right: { type: 'function', defaultValue: null },
+    text: { type: 'string', defaultValue: 'Bartab' },
+    isActive: { type: 'boolean', defaultValue: false },
+  },
   render: (args) => (
-    <div className="w-full">
+    <div className="w-[178px]">
       <Bartab {...args} />
     </div>
   ),
-  args: {
-    text: 'Continue with Github',
-  },
 };
 
 export default meta;
 
 type Story = StoryObj<typeof Bartab>;
 
-export const Default: Story = {
-  args: {
-    intent: 'primary',
-  },
-};
-
-export const HasLeft: Story = {
+export const Jobs: Story = {
   args: {
     text: 'Jobs',
-    intent: 'secondary',
-    left: <SidebarIcon filename="jobs" />,
+    left: <JobsSidebarIcon />,
   },
 };
 
-export const HasAvatar: Story = {
+export const Organizations: Story = {
   args: {
-    text: '@0xDevoor',
-    intent: 'secondary',
-    left: <Avatar src="/user/@OxDevoor.png" size="xs" alt="Test" />,
+    text: 'Organizations',
+    left: <OrgSidebarIcon />,
   },
 };
 
-export const IsActive: Story = {
+export const Projects: Story = {
   args: {
-    intent: 'primary',
-    isActive: true,
+    text: 'Projects',
+    left: <ProjectsSidebarIcon />,
   },
 };
 
-export const Wallet: Story = {
+export const Repositories: Story = {
+  args: {
+    text: 'Repositories',
+    left: <ReposSidebarIcon />,
+  },
+};
+
+export const SavedJobs: Story = {
+  args: {
+    text: 'Saved Jobs',
+    left: <BookmarksSidebarIcon />,
+  },
+};
+
+export const ConnectWallet: Story = {
   args: {
     text: 'Connect Wallet',
-    intent: 'wallet',
-    isConnected: false,
+    left: null,
+    right: null,
+    variant: 'wallet',
   },
 };
 
-export const WalletIsActive: Story = {
+export const SignedInWallet: Story = {
   args: {
-    text: '@0xDevoor',
-    intent: 'wallet',
-    isActive: true,
-    isConnected: true,
-    left: <Avatar src="/user/@OxDevoor.png" size="xs" alt="Test" />,
+    text: '0xc37...2192',
+    left: <Avatar src="/user/wallet-user.png" alt="User" size="xs" />,
+    variant: 'wallet',
   },
 };
 
-export const WalletIsConnected: Story = {
+export const Admin: Story = {
   args: {
-    text: '@0xDevoor',
-    intent: 'wallet',
-    isConnected: true,
-    left: <Avatar src="/user/@OxDevoor.png" size="xs" alt="Test" />,
+    text: 'ADMIN',
+    left: <Avatar src="/user/wallet-user.png" alt="User" size="xs" />,
+    variant: 'wallet',
+  },
+};
+
+export const WithoutIcon: Story = {
+  args: {
+    text: 'Without Icon',
   },
 };
