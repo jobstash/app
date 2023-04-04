@@ -1,13 +1,11 @@
 import { type ReactNode } from 'react';
 
-import { Text } from './text';
+import { Heading } from './heading';
 
 export interface CardHeadingProps {
-  children: ReactNode;
+  children: string;
 }
 
 export const CardHeading = ({ children }: CardHeadingProps) => (
-  <Text fw="bold" size="xl" htmlTag="h2" color="white" className="font-sans">
-    {children}
-  </Text>
+  <Heading size="md">{children}</Heading>
 );

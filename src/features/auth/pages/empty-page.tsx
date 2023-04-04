@@ -1,7 +1,3 @@
-import clsx from 'clsx';
-
-import { Text } from '~/shared/components';
-
 import { CenteredLayout } from '../layouts/centered-layout';
 
 interface Props {

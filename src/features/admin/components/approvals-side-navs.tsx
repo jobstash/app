@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 
 import { Flex } from '@mantine/core';
 
-import { Button, Text } from '~/shared/components';
+import { Button } from '~/shared/components';
 
 type SideNavLabels = 'Organizations' | 'Jobs';
 
@@ -26,7 +26,7 @@ export const ApprovalsSideNavs = ({ activeLabel }: Props) => {
           variant={activeLabel === label ? 'primary' : 'outline'}
           onClick={() => push(href)}
         >
-          <Text>{label}</Text>
+          {label}
         </Button>
       ))}
     </Flex>

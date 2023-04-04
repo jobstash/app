@@ -62,10 +62,7 @@ const Thumb = forwardRef<HTMLSpanElement, {}>((_, ref) => (
 Thumb.displayName = 'Thumb';
 
 const RangeInfo = ({ prefix, num }: { prefix: string; num: number }) => (
-  <Text
-    size="sm"
-    className={`${lato.variable} font-sans`}
-  >{`${prefix}${numFormatter.format(num)}`}</Text>
+  <Text size="sm">{`${prefix}${numFormatter.format(num)}`}</Text>
 );
 
 const RangeThumb = ({ value, prefix }: { value: number; prefix: string }) => (

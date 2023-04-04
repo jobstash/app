@@ -124,7 +124,7 @@ export const MultiSelectSearchFilter = ({
                   <Dropdown.ItemIndicator>
                     <UnCheckedIcon />
                   </Dropdown.ItemIndicator>
-                  <Text className={`font-sans ${lato.variable}`}>{label}</Text>
+                  <Text>{label}</Text>
                 </Dropdown.Item>
               );
             }}

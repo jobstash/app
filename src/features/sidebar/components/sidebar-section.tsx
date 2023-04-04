@@ -1,4 +1,4 @@
-import { Bartab, SidebarIcon, Text } from '~/shared/components';
+import { Bartab, Heading, SidebarIcon, Text } from '~/shared/components';
 import { useRouteSegments } from '~/shared/hooks';
 
 import type { IsActiveFn, SidebarTab } from '../core/types';
@@ -14,9 +14,7 @@ export const SidebarSection = ({ title, tabs, isActiveFn }: Props) => {
 
   return (
     <div className="mt-12">
-      <Text htmlTag="h2" size="sm" fw="regular" className="text-sidebarTitle">
-        {title}
-      </Text>
+      <Text color="dimmed">{title}</Text>
       <div className="space-y-3 pt-3">
         {tabs.map((tab) => (
           <div key={tab.label}>

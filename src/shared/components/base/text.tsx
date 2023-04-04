@@ -1,14 +1,14 @@
-import { type ReactNode } from 'react';
-
 import { type VariantProps, cva } from 'class-variance-authority';
 
-const cvaText = cva([], {
+import { roboto } from '~/shared/core/constants';
+
+const text = cva(`${roboto.variable} font-roboto antialiased`, {
   variants: {
     fw: {
-      regular: 'font-regular',
-      medium: 'font-medium antialiased',
-      semibold: 'font-semibold antialiased',
-      bold: 'font-bold antialiased',
+      normal: 'font-normal',
+      medium: 'font-medium',
+      semibold: 'font-bold',
+      bold: 'font-black',
     },
     size: {
       xs: 'text-xs',
@@ -16,45 +16,24 @@ const cvaText = cva([], {
       md: 'text-md',
       lg: 'text-lg',
       xl: 'text-xl',
-      '2xl': 'text-2xl',
-      '3xl': 'text-3xl',
-      '4xl': 'text-4xl',
-      '5xl': 'text-5xl',
-      '6xl': 'text-6xl',
     },
     color: {
       white: 'text-white',
-      normal: 'text-white/90',
-      dimmed: 'text-white/70',
+      dimmed: 'text-white/75',
     },
   },
 });
 
-type TextVariantProps = VariantProps<typeof cvaText>;
+type TextVariantProps = VariantProps<typeof text>;
 
-export interface TextProps extends TextVariantProps {
-  children: ReactNode;
-  htmlTag?: 'h1' | 'h2' | 'h3' | 'span';
-  className?: string;
+interface TextProps extends TextVariantProps {
+  children: string;
 }
 
 export const Text = ({
   children,
-  fw = 'medium',
+  fw = 'normal',
   size = 'md',
-  color = 'normal',
-  htmlTag = 'span',
-  className,
+  color = 'white',
   ...props
-}: TextProps) => {
-  const HtmlTag = htmlTag;
-
-  return (
-    <HtmlTag
-      className={`${cvaText({ fw, size, color })} ${className}`}
-      {...props}
-    >
-      {children}
-    </HtmlTag>
-  );
-};
+}: TextProps) => <span className={text({ fw, size, color })}>{children}</span>;

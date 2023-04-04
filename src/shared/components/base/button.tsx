@@ -2,7 +2,7 @@ import { ButtonHTMLAttributes, forwardRef, ReactNode } from 'react';
 
 import { cva, VariantProps } from 'class-variance-authority';
 
-import { Text } from './textx';
+import { Text } from './text';
 
 const wrapper = cva(
   [
