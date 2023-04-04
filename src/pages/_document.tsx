@@ -11,7 +11,7 @@ export default class _Document extends Document {
     return (
       <Html lang="en">
         <Head />
-        <body className="bg-black/90 text-white/90">
+        <body className="bg-gradient-to-l from-[#141317] to-[#121216]">
           <Main />
           <NextScript />
         </body>

@@ -93,7 +93,8 @@ export const JobRightPanel = () => {
           <Button
             key={label}
             /** NOTE: Need gradient border implementation for isActive ("primary" for now) */
-            variant={isActive ? 'primary' : 'outline'}
+            variant="outline"
+            isActive={isActive}
             size="md"
             onClick={() => push(route, { shouldScroll: false, shallow: true })}
           >

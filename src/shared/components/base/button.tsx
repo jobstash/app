@@ -8,12 +8,12 @@ const wrapper = cva(
   [
     'rounded-lg w-fit cursor-pointer border-none p-[1px] active:translate-y-[2px]',
     'transition-color duration-200 ease-in-out',
-    'bg-dark-gray hover:bg-gray',
-    'active:bg-gradient-to-l active:from-primary active:to-tertiary active:border-transparent [&>*]:active:bg-dark-gray',
   ],
   {
     variants: {
       variant: {
+        default:
+          'bg-dark-gray hover:bg-gray active:bg-gradient-to-l active:from-primary active:to-tertiary active:border-transparent [&>*]:active:bg-dark-gray',
         primary:
           'bg-gradient-to-l from-primary to-tertiary hover:from-[#8743FF_52.6%] hover:to-[#4136F1_84.9%] active:from-secondary active:to-secondary [&>*]:active:bg-secondary',
         outline: 'bg-dark hover:bg-dark-gray [&>*]:active:bg-dark',
@@ -29,7 +29,7 @@ const wrapper = cva(
     },
     compoundVariants: [
       {
-        variant: undefined,
+        variant: 'default',
         isActive: true,
         className:
           'bg-gradient-to-l from-primary to-tertiary [&>*]:bg-dark-gray',
@@ -52,6 +52,7 @@ const wrapper = cva(
 const button = cva(['flex items-center justify-center rounded-lg gap-x-1'], {
   variants: {
     variant: {
+      default: '',
       primary: '',
       outline: 'ring-1 ring-gray active:ring-0',
       subtle: '',
@@ -127,7 +128,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       size = 'md',
       isActive = false,
       isDisabled = false,
-      variant,
+      variant = 'default',
       left,
       right,
       isIcon = false,
