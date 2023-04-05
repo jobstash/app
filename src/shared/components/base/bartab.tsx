@@ -12,14 +12,10 @@ const bartab = cva(['h-10 w-full border-none rounded-lg p-[1px]'], {
     variant: {
       bartab: 'bg-darker-gray hover:bg-dark-gray',
       wallet:
-        'bg-gradient-to-r from-primary/60 to-quaternary/80 hover:from-primary hover:to-quaternary/80',
-      //
-      // wallet: 'bg-gradient-to-l from-[#8743FF_60%] to-[D68800_80%]',
+        'bg-gradient-to-r from-primary to-quaternary hover:via-[#C77B31] hover:to-quaternary',
     },
     isActive: {
-      //
-      // true: 'bg-gradient-to-l from-[#8743FF_0%] to-[#4136F1_100%]',
-      true: 'bg-gradient-to-l from-primary to-tertiary hover:brightness-110',
+      true: '',
     },
   },
 });
@@ -33,9 +29,24 @@ const inner = cva(
     variants: {
       variant: {
         bartab: '',
-        wallet: 'bg-dark hover:bg-dark-gray active:bg-transparent',
+        wallet: '',
+      },
+      isActive: {
+        true: '',
       },
     },
+    compoundVariants: [
+      {
+        variant: 'wallet',
+        isActive: true,
+        className: 'bg-transparent',
+      },
+      {
+        variant: 'wallet',
+        isActive: false,
+        className: 'bg-dark hover:bg-dark-gray active:bg-transparent',
+      },
+    ],
   },
 );
 
@@ -68,7 +79,7 @@ export const Bartab = forwardRef<HTMLButtonElement, BartabProps>(
 
     return (
       <button ref={ref} {...props} className={bartab({ variant, isActive })}>
-        <div className={inner({ variant })}>
+        <div className={inner({ variant, isActive })}>
           {left}
           <div
             className={clsx(

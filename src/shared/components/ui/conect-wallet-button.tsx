@@ -1,12 +1,13 @@
-import { Avatar as CkAvatar, ConnectKitButton } from 'connectkit';
+import { Avatar as CkAvatar, ConnectKitButton, useModal } from 'connectkit';
 
 import { Bartab } from '../base';
 
 export const ConnectWalletButton = () => (
   <div style={{ minHeight: 40 }}>
     <ConnectKitButton.Custom>
-      {({ address, show, isConnecting }) => (
+      {({ address, show, isConnecting, isConnected }) => (
         <Bartab
+          isActive={isConnecting || isConnected}
           variant="wallet"
           left={
             isConnecting ? null : (
