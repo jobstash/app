@@ -8,7 +8,7 @@ import {
   CardSet,
   Heading,
   LogoTitle,
-  SkillHolder,
+  TechWrapper,
 } from '~/shared/components';
 import { capitalize, prettyTimestamp } from '~/shared/utils';
 
@@ -75,11 +75,11 @@ export const JobCard = ({ listing, isActive, onClick }: Props) => {
 
       {technologies.length > 0 && (
         <div className="flex justify-between space-x-4 border-b border-white/5 py-4">
-          <div className="-mb-3 flex grow flex-wrap">
+          <div className="flex flex-wrap gap-4">
             {technologies.map(({ name, id }) => (
-              <SkillHolder key={id} isChecked={false} className="mr-4">
+              <TechWrapper key={id} id={id} isActive={isActive}>
                 {name}
-              </SkillHolder>
+              </TechWrapper>
             ))}
           </div>
           <div className="shrink-0 self-start">

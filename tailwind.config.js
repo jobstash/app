@@ -1,6 +1,11 @@
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ['./src/**/*.{js,ts,jsx,tsx}'],
+  safelist: [
+    {
+      pattern: /(text|border)-skill(1|2|3|4|5|6|7|8|9|10|11|12|13)/,
+    },
+  ],
   theme: {
     extend: {
       fontFamily: {
@@ -19,14 +24,22 @@ module.exports = {
         gray: 'rgb(var(--color-gray) / <alpha-value>)',
         'dark-gray': 'rgb(var(--color-dark-gray) / <alpha-value>)',
         'darker-gray': 'rgb(var(--color-darker-gray) / <alpha-value>)',
+
+        // Tech wrapper skill color pool
+        skill1: '#F7FD36',
+        skill2: '#CAE402',
+        skill3: '#E2BF2B',
+        skill4: '#FFE2AD',
+        skill5: '#FFE6E2',
+        skill6: '#DEF8EE',
+        skill7: '#77CBBE',
+        skill8: '#F79A7E',
+        skill9: '#FB7D43',
+        skill10: '#ECC6F7',
+        skill11: '#F3A5F2',
+        skill12: '#EC88E1',
       },
     },
-    /*
-		 	UNOFFICIAL:
-				- the following tailwind setup is NOT FINAL
-				- these are based on the figma file 
-				- needs to be discussed by the team in the future
-		*/
     fontSize: {
       xs: ['10px', '16px'],
       sm: ['12px', '18px'],

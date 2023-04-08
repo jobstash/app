@@ -11,8 +11,8 @@ import {
   CardHeading,
   CodeIcon,
   MoneyIcon,
-  SkillHolder,
   SuitcaseIcon,
+  TechWrapper,
   Text,
   UsersThreeIcon,
 } from '~/shared/components';
@@ -125,7 +125,9 @@ const OrgListPage = () => {
 
                 <Flex gap="md">
                   {technologies.map(({ id, name }) => (
-                    <SkillHolder key={id}>{name}</SkillHolder>
+                    <TechWrapper key={id} id={id}>
+                      {name}
+                    </TechWrapper>
                   ))}
                 </Flex>
               </Stack>

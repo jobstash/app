@@ -8,5 +8,5 @@ export * from './chain-holder';
 export * from './heading';
 export * from './logo-title';
 export * from './range-slider';
-export * from './skill-holder';
+export * from './tech-wrapper';
 export * from './text';
