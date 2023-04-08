@@ -66,7 +66,7 @@ const Layout = ({ children }: { children: ReactNode }) => (
     <div className="px-8">{children}</div>
 
     <div className="fixed top-0 right-0 z-10 w-5/12">
-      <div className="hide-scrollbar sticky top-0 h-screen space-y-6 overflow-y-scroll bg-dark p-6">
+      <div className="hide-scrollbar sticky top-0 h-screen space-y-6 overflow-y-scroll bg-dark py-8 px-6 pr-10">
         <JobRightPanel />
       </div>
     </div>

@@ -5,8 +5,8 @@ import { cva } from 'class-variance-authority';
 
 import {
   Button,
+  CardSet,
   Heading,
-  IconHolder,
   LogoTitle,
   SkillHolder,
 } from '~/shared/components';
@@ -65,11 +65,11 @@ export const JobCard = ({ listing, isActive, onClick }: Props) => {
         </div>
       </div>
 
-      <div className="flex space-x-8 border-b border-white/5 pt-3 pb-4 text-sm">
-        {tags.map(({ text, link, iconText }) => (
-          <IconHolder key={text} link={link} iconText={iconText}>
+      <div className="flex flex-wrap [&>*]:mr-4">
+        {tags.map(({ text, link, icon }) => (
+          <CardSet key={text} link={link} icon={icon}>
             {capitalize(text)}
-          </IconHolder>
+          </CardSet>
         ))}
       </div>
 
@@ -102,17 +102,12 @@ export const JobCard = ({ listing, isActive, onClick }: Props) => {
           </div>
 
           {projectTags.length > 0 && (
-            <div className="-mb-2 flex flex-wrap pt-4 text-sm">
+            <div className="flex flex-wrap [&>*]:mr-4">
               {projectTags.length > 0 &&
-                projectTags.map(({ text, iconText, link }) => (
-                  <IconHolder
-                    key={text}
-                    className="mr-6 mb-2"
-                    link={link}
-                    iconText={iconText}
-                  >
+                projectTags.map(({ text, icon, link }) => (
+                  <CardSet key={text} link={link} icon={icon}>
                     {text}
-                  </IconHolder>
+                  </CardSet>
                 ))}
             </div>
           )}

@@ -12,11 +12,21 @@ import {
 
 import { CHECK_WALLET_ROLES } from '~/features/auth/core/constants';
 import {
+  ActiveUsersIcon,
+  ArrowCircleUpRightIcon,
   Avatar,
   Button,
   CardHeading,
-  TagIcon,
+  CategoryIcon,
+  CurrencyCircleDollarIcon,
+  GithubLogoIcon,
+  MonthlyVolumeIcon,
+  RevenueIcon,
+  ShieldCheckIcon,
+  SuitcaseIcon,
   Text,
+  TvlIcon,
+  UsersThreeIcon,
 } from '~/shared/components';
 
 import { RefreshIcon } from '../components/icons/refresh-icon';
@@ -88,7 +98,7 @@ const OrgProjectsPage = () => {
               </Flex>
             </Flex>
 
-            <Button left={<TagIcon filename="users-three" />} variant="subtle">
+            <Button left={<UsersThreeIcon />} variant="subtle">
               <Text>Source of Data: DefiLlama</Text>
             </Button>
 
@@ -109,52 +119,50 @@ const OrgProjectsPage = () => {
 
             <Flex gap="lg" wrap="wrap">
               <Button
-                left={<TagIcon filename="token" />}
-                right={<TagIcon filename="external-link" />}
+                left={<CurrencyCircleDollarIcon />}
+                right={<ArrowCircleUpRightIcon />}
               >
                 Token: $UNI
               </Button>
-              <Button left={<TagIcon filename="baggage-2" />}>Jobs: 2</Button>
-              <Button left={<TagIcon filename="github" />}>
-                Relevant Repos: 2
-              </Button>
+              <Button left={<SuitcaseIcon />}>Jobs: 2</Button>
+              <Button left={<GithubLogoIcon />}>Relevant Repos: 2</Button>
               <Button
-                left={<TagIcon filename="category" />}
+                left={<CategoryIcon />}
                 className="cursor-default"
                 variant="subtle"
               >
                 Category: DEX
               </Button>
               <Button
-                left={<TagIcon filename="users-three" />}
+                left={<UsersThreeIcon />}
                 className="cursor-default"
                 variant="subtle"
               >
                 Team Size: 12
               </Button>
               <Button
-                left={<TagIcon filename="tvl" />}
+                left={<TvlIcon />}
                 className="cursor-default"
                 variant="subtle"
               >
                 TVL: $99M
               </Button>
               <Button
-                left={<TagIcon filename="monthly-volume" />}
+                left={<MonthlyVolumeIcon />}
                 className="cursor-default"
                 variant="subtle"
               >
                 Monthly Volume: $14K
               </Button>
               <Button
-                left={<TagIcon filename="active-user" />}
+                left={<ActiveUsersIcon />}
                 className="cursor-default"
                 variant="subtle"
               >
                 Active Users: 23K
               </Button>
               <Button
-                left={<TagIcon filename="active-user" />}
+                left={<RevenueIcon />}
                 className="cursor-default"
                 variant="subtle"
               >
@@ -168,20 +176,20 @@ const OrgProjectsPage = () => {
               <Title order={4}>Audits</Title>
               <Flex gap="lg" wrap="wrap">
                 <Button
-                  left={<TagIcon filename="audit" />}
-                  right={<TagIcon filename="external-link" />}
+                  left={<ShieldCheckIcon />}
+                  right={<ArrowCircleUpRightIcon />}
                 >
                   SigmaPrime
                 </Button>
                 <Button
-                  left={<TagIcon filename="audit" />}
-                  right={<TagIcon filename="external-link" />}
+                  left={<ShieldCheckIcon />}
+                  right={<ArrowCircleUpRightIcon />}
                 >
                   Chainsecurity
                 </Button>
                 <Button
-                  left={<TagIcon filename="audit" />}
-                  right={<TagIcon filename="external-link" />}
+                  left={<ShieldCheckIcon />}
+                  right={<ArrowCircleUpRightIcon />}
                 >
                   Mixbytes
                 </Button>

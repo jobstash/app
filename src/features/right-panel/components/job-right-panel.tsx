@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useAtomValue } from 'jotai';
 
 import { activeJobPostAtom } from '~/features/jobs/atoms';
-import { Button, IconHolder, LogoTitle } from '~/shared/components';
+import { Button, CardSet, LogoTitle, Text } from '~/shared/components';
 import {
   EVENT_CARD_CLICK,
   ID_TOP_RIGHT_PANEL,
@@ -52,43 +52,46 @@ export const JobRightPanel = () => {
   };
 
   return (
-    <div>
+    <div className="">
       {/* NOTE: This component needs to be always on top */}
       <div className="absolute top-0" id={ID_TOP_RIGHT_PANEL} />
 
       {/** RIGHT PANEL HEADER */}
-      <div>
-        <div className="flex items-center space-x-3">
-          <LogoTitle
-            title={org.name}
-            avatarProps={{ src: '', alt: org.name }}
-          />
-        </div>
-        <div className="flex space-x-4 py-4 text-sm">
-          {orgTags.map(({ text, iconText, link }) => (
-            <IconHolder key={text} link={link} iconText={iconText}>
-              {text}
-            </IconHolder>
-          ))}
-        </div>
-        <p className="text-sm">{org.summary}</p>
-        {orgSocials.length > 0 && (
-          <div className="flex space-x-4 py-4 text-sm">
-            {orgSocials.map(({ text, iconText, link }) => (
-              <IconHolder key={text} link={link} iconText={iconText}>
+      <div className="flex flex-col gap-4">
+        <div className="flex flex-col gap-4">
+          <div className="flex h-10 items-center">
+            <LogoTitle
+              title={org.name}
+              avatarProps={{ src: '', alt: org.name }}
+            />
+          </div>
+          <div className="flex h-6 gap-4">
+            {orgTags.map(({ text, icon, link }) => (
+              <CardSet key={text} link={link} icon={icon}>
                 {text}
-              </IconHolder>
+              </CardSet>
+            ))}
+          </div>
+        </div>
+
+        <Text color="dimmed">{org.summary}</Text>
+
+        {orgSocials.length > 0 && (
+          <div className="flex gap-4">
+            {orgSocials.map(({ text, icon, link }) => (
+              <CardSet key={text} link={link} icon={icon}>
+                {text}
+              </CardSet>
             ))}
           </div>
         )}
       </div>
 
       {/** RIGHT PANEL TABS */}
-      <div className="mt-8 flex flex-wrap space-x-2 border-t border-white/20 pt-8">
+      <div className="mt-8 flex flex-wrap space-x-2 border-t border-white/10 pt-8">
         {rightPanelTabs.map(({ label, route, isActive }) => (
           <Button
             key={label}
-            /** NOTE: Need gradient border implementation for isActive ("primary" for now) */
             variant="outline"
             isActive={isActive}
             size="md"

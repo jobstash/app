@@ -1,3 +1,4 @@
+import { MonthlyVolumeIcon, RevenueIcon, TvlIcon } from '~/shared/components';
 import { Project, TagElement } from '~/shared/core/interfaces';
 import { numFormatter } from '~/shared/utils';
 
@@ -29,18 +30,18 @@ export const createRightPanelProjectCardTags = ({
   ];
 
   if (tvl)
-    tags.push({ text: `TVL: $${numFormatter.format(tvl)}`, iconText: 'tvl' });
+    tags.push({ text: `TVL: $${numFormatter.format(tvl)}`, icon: <TvlIcon /> });
 
   if (monthlyVolume)
     tags.push({
       text: `Monthly Volume: $${numFormatter.format(monthlyVolume)}`,
-      iconText: 'monthly-volume',
+      icon: <MonthlyVolumeIcon />,
     });
 
   if (monthlyFees)
     tags.push({
       text: `Monthly Fees: $${numFormatter.format(monthlyFees)}`,
-      iconText: 'monthly-volume',
+      icon: <MonthlyVolumeIcon />,
     });
 
   // Waiting for be/mw implementation of active-users
@@ -52,7 +53,7 @@ export const createRightPanelProjectCardTags = ({
   if (monthlyRevenue)
     tags.push({
       text: `Revenue: $${numFormatter.format(monthlyRevenue)}`,
-      iconText: 'revenue',
+      icon: <RevenueIcon />,
     });
 
   return tags;

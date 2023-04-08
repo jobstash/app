@@ -6,11 +6,15 @@ import { CHECK_WALLET_ROLES } from '~/features/auth/core/constants';
 import EmptyPage from '~/features/auth/pages/empty-page';
 import {
   Avatar,
+  BankIcon,
   Button,
   CardHeading,
+  CodeIcon,
+  MoneyIcon,
   SkillHolder,
-  TagIcon,
+  SuitcaseIcon,
   Text,
+  UsersThreeIcon,
 } from '~/shared/components';
 import { numFormatter, prettyTimestamp, slugify } from '~/shared/utils';
 
@@ -73,21 +77,21 @@ const OrgListPage = () => {
 
                 <Flex gap="md" wrap="wrap">
                   <Button
-                    left={<TagIcon filename="baggage-2" />}
+                    left={<SuitcaseIcon />}
                     variant="subtle"
                     className="cursor-default"
                   >
                     Jobs: {jobCount}
                   </Button>
                   <Button
-                    left={<TagIcon filename="code" />}
+                    left={<CodeIcon />}
                     variant="subtle"
                     className="cursor-default"
                   >
                     Projects: {projectCount}
                   </Button>
                   <Button
-                    left={<TagIcon filename="users-three" />}
+                    left={<UsersThreeIcon />}
                     variant="subtle"
                     className="cursor-default"
                   >
@@ -96,7 +100,7 @@ const OrgListPage = () => {
 
                   {lastFundingAmount > 0 && (
                     <Button
-                      left={<TagIcon filename="money" />}
+                      left={<MoneyIcon />}
                       variant="subtle"
                       className="cursor-default"
                     >
@@ -108,7 +112,7 @@ const OrgListPage = () => {
 
                   {lastFundingDate > 0 && (
                     <Button
-                      left={<TagIcon filename="funding" />}
+                      left={<BankIcon />}
                       variant="subtle"
                       className="cursor-default"
                     >

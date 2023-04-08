@@ -1,3 +1,13 @@
+import {
+  DiscordIcon,
+  GithubLogoOutlineIcon,
+  GlobeSimpleIcon,
+  LinkedinIcon,
+  LocationIcon,
+  TelegramIcon,
+  TwitterIcon,
+  UsersIcon,
+} from '~/shared/components';
 import { Organization, TagElement } from '~/shared/core/interfaces';
 
 export const createRightPanelOrgTags = (org: Organization) => {
@@ -15,19 +25,19 @@ export const createRightPanelOrgTags = (org: Organization) => {
   const orgTags: TagElement[] = [
     {
       text: 'Website',
-      iconText: 'website',
+      icon: <GlobeSimpleIcon />,
       link: url,
     },
     {
       text: location,
-      iconText: 'location',
+      icon: <LocationIcon />,
     },
   ];
 
   if (teamSize && teamSize !== 'undefined')
     orgTags.push({
       text: `Team Size: ${teamSize}`,
-      iconText: 'users-three',
+      icon: <UsersIcon />,
     });
 
   const orgSocials: TagElement[] = [];
@@ -35,23 +45,31 @@ export const createRightPanelOrgTags = (org: Organization) => {
   if (githubOrganization)
     orgSocials.push({
       text: 'Github',
-      iconText: 'github',
+      icon: <GithubLogoOutlineIcon />,
       link: githubOrganization,
     });
 
   if (twitter)
-    orgSocials.push({ text: 'Twitter', iconText: 'twitter', link: twitter });
+    orgSocials.push({ text: 'Twitter', icon: <TwitterIcon />, link: twitter });
 
   if (telegram)
-    orgSocials.push({ text: 'Telegram', iconText: 'telegram', link: telegram });
+    orgSocials.push({
+      text: 'Telegram',
+      icon: <TelegramIcon />,
+      link: telegram,
+    });
 
   // **Note**: waiting for backend/middleware to implement "Docs"
 
   if (discord)
-    orgSocials.push({ text: 'Discord', iconText: 'discord', link: discord });
+    orgSocials.push({ text: 'Discord', icon: <DiscordIcon />, link: discord });
 
   if (linkedin)
-    orgSocials.push({ text: 'LinkedIn', iconText: 'linkedin', link: linkedin });
+    orgSocials.push({
+      text: 'LinkedIn',
+      icon: <LinkedinIcon />,
+      link: linkedin,
+    });
 
   return { orgTags, orgSocials };
 };

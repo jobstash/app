@@ -10,7 +10,13 @@ import {
 } from '@mantine/core';
 
 import { CHECK_WALLET_ROLES } from '~/features/auth/core/constants';
-import { Button, TagIcon } from '~/shared/components';
+import {
+  Button,
+  LevelIcon,
+  LocationIcon,
+  MoneyIcon,
+  UsersThreeIcon,
+} from '~/shared/components';
 
 import { CircleCheckIcon } from '../components/icons/circle-check-icon';
 import { JobDataSourceIcon } from '../components/icons/job-data-source-icon';
@@ -61,28 +67,28 @@ const OrgJobsPage = () => (
 
           <Flex gap="md" align="center">
             <Button
-              left={<TagIcon filename="level" />}
+              left={<LevelIcon />}
               className="cursor-default"
               variant="subtle"
             >
               <Text size="md">Level: Senior</Text>
             </Button>
             <Button
-              left={<TagIcon filename="money" />}
+              left={<MoneyIcon />}
               className="cursor-default"
               variant="subtle"
             >
               <Text size="md">Salary: $60-90K/Year</Text>
             </Button>
             <Button
-              left={<TagIcon filename="location" />}
+              left={<LocationIcon />}
               className="cursor-default"
               variant="subtle"
             >
               <Text size="md">Remote</Text>
             </Button>
             <Button
-              left={<TagIcon filename="users-three" />}
+              left={<UsersThreeIcon />}
               className="cursor-default"
               variant="subtle"
             >

@@ -19,7 +19,6 @@ import {
 import clsx from 'clsx';
 
 import { CHECK_WALLET_ROLES } from '~/features/auth/core/constants';
-import { TagIcon } from '~/shared/components';
 
 import { ApprovalsSideNavs } from '../components/approvals-side-navs';
 import { CircleCheckIcon } from '../components/icons/circle-check-icon';

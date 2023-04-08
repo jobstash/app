@@ -1,3 +1,10 @@
+import {
+  CurrencyCircleDollarIcon,
+  MonthlyVolumeIcon,
+  RevenueIcon,
+  SkullIcon,
+  TvlIcon,
+} from '~/shared/components';
 import { Project, TagElement } from '~/shared/core/interfaces';
 import { numFormatter } from '~/shared/utils';
 
@@ -15,44 +22,36 @@ export const createProjectTags = (project?: Project): TagElement[] => {
 
   const tags: TagElement[] = [];
 
-  // **Note**: waiting for confirmation on how to create external link for project token
-  if (tokenSymbol) tags.push({ text: `$${tokenSymbol}`, iconText: 'token' });
+  if (tokenSymbol)
+    tags.push({ text: `$${tokenSymbol}`, icon: <CurrencyCircleDollarIcon /> });
 
   if (tvl)
-    tags.push({ text: `TVL: $${numFormatter.format(tvl)}`, iconText: 'tvl' });
+    tags.push({ text: `TVL: $${numFormatter.format(tvl)}`, icon: <TvlIcon /> });
 
   if (monthlyVolume)
     tags.push({
       text: `Monthly Volume: $${numFormatter.format(monthlyVolume)}`,
-      iconText: 'monthly-volume',
+      icon: <MonthlyVolumeIcon />,
     });
 
-  // **Note**: waiting for monthly-fees svg icon (update iconText if done)
   if (monthlyFees)
     tags.push({
       text: `Monthly Fees: $${numFormatter.format(monthlyFees)}`,
-      iconText: 'monthly-volume',
+      icon: <MonthlyVolumeIcon />,
     });
 
   if (monthlyRevenue)
     tags.push({
       text: `Monthly Revenue: $${numFormatter.format(monthlyRevenue)}`,
-      iconText: 'revenue',
+      icon: <RevenueIcon />,
     });
 
   if (hacks.length > 0) {
     tags.push({
       text: `Hacks: ${hacks.length}`,
-      iconText: 'hacks',
+      icon: <SkullIcon />,
     });
   }
-
-  /**
-   * Still waiting for backend/middleware implementation of the following:
-   * 	- category
-   *  - active users
-   *  - audits
-   */
 
   return tags;
 };

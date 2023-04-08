@@ -9,7 +9,6 @@ export { IconTechCheck } from './icon-tech-check';
 
 // Util components
 export { SidebarIcon } from './sidebar-icon';
-export { TagIcon } from './tag-icon';
 
 // New Icons
 export { ActiveUsersIcon } from './active-users-icon';
