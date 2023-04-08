@@ -1,4 +1,5 @@
 // Icons (non-uniform dimensions)
+export { BookmarkIcon } from './bookmark-icon';
 export { IconBookmark } from './icon-bookmark';
 export { IconBookmarked } from './icon-bookmarked';
 export { IconDevs } from './icon-devs';

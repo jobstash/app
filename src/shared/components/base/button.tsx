@@ -18,6 +18,7 @@ const wrapper = cva(
           'bg-gradient-to-l from-primary to-tertiary hover:from-[#8743FF_52.6%] hover:to-[#4136F1_84.9%] active:from-secondary active:to-secondary [&>*]:active:bg-secondary',
         outline: 'bg-dark hover:bg-dark-gray [&>*]:active:bg-dark',
         subtle: 'bg-dark hover:bg-dark-gray [&>*]:active:bg-dark',
+        translucent: 'bg-white/10 hover:bg-white/20 active:bg-white/30',
       },
       //
       isActive: {
@@ -56,6 +57,7 @@ const button = cva(['flex items-center justify-center rounded-lg gap-x-1'], {
       primary: '',
       outline: 'ring-1 ring-gray active:ring-0',
       subtle: '',
+      translucent: '',
     },
     size: {
       sm: 'px-2 py-1',

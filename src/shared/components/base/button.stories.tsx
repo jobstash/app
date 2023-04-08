@@ -6,7 +6,7 @@ import { Button } from './button';
 
 const meta: Meta<typeof Button> = {
   component: Button,
-  title: 'components/base/Buttonx',
+  title: 'components/base/Button',
   args: {
     children: 'Button',
   },
@@ -43,6 +43,12 @@ export const Outline: Story = {
 export const Subtle: Story = {
   args: {
     variant: 'subtle',
+  },
+};
+
+export const Translucent: Story = {
+  args: {
+    variant: 'translucent',
   },
 };
 

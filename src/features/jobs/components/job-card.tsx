@@ -4,6 +4,7 @@ import { MouseEventHandler } from 'react';
 import { cva } from 'class-variance-authority';
 
 import {
+  BookmarkIcon,
   Button,
   CardSet,
   Heading,
@@ -54,14 +55,11 @@ export const JobCard = ({ listing, isActive, onClick }: Props) => {
           <span className="text-sm">
             {prettyTimestamp(jobCreatedTimestamp)}
           </span>
-          <Button size="sm">
-            <Image
-              src="/icons/bookmark.svg"
-              width="13"
-              height="18"
-              alt="bookmark"
-            />
-          </Button>
+          <div className="z-30">
+            <Button size="sm" variant="translucent" onClick={onClickBookmark}>
+              <BookmarkIcon />
+            </Button>
+          </div>
         </div>
       </div>
 
@@ -82,8 +80,10 @@ export const JobCard = ({ listing, isActive, onClick }: Props) => {
               </TechWrapper>
             ))}
           </div>
-          <div className="shrink-0 self-start">
-            <Button>Sign Up to See Matches</Button>
+          <div className="z-30 shrink-0 self-start">
+            <Button variant="translucent" onClick={onClickSeeMatches}>
+              Sign Up to See Matches
+            </Button>
           </div>
         </div>
       )}
@@ -115,4 +115,16 @@ export const JobCard = ({ listing, isActive, onClick }: Props) => {
       ) : null}
     </div>
   );
+};
+
+const onClickSeeMatches: MouseEventHandler = (e) => {
+  e.stopPropagation();
+  // eslint-disable-next-line no-alert
+  alert('TODO');
+};
+
+const onClickBookmark: MouseEventHandler = (e) => {
+  e.stopPropagation();
+  // eslint-disable-next-line no-alert
+  alert('TODO');
 };
