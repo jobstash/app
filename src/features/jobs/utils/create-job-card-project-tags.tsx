@@ -1,32 +1,48 @@
 import {
+  CategoryIcon,
   CurrencyCircleDollarIcon,
   MonthlyVolumeIcon,
   RevenueIcon,
+  ShieldCheckIcon,
   SkullIcon,
   TvlIcon,
 } from '~/shared/components';
 import { Project, TagElement } from '~/shared/core/interfaces';
 import { numFormatter } from '~/shared/utils';
 
-export const createProjectTags = (project?: Project): TagElement[] => {
+export const createJobCardProjectTags = (project?: Project) => {
   if (!project) return [];
 
   const {
+    url,
     tokenSymbol,
     tvl,
     monthlyVolume,
     monthlyFees,
     monthlyRevenue,
     hacks,
+    audits,
   } = project;
 
   const tags: TagElement[] = [];
 
   if (tokenSymbol)
-    tags.push({ text: `$${tokenSymbol}`, icon: <CurrencyCircleDollarIcon /> });
+    tags.push({
+      text: `Token: $${tokenSymbol}`,
+      icon: <CurrencyCircleDollarIcon />,
+      link: url,
+    });
+
+  tags.push({
+    text: 'Category: TBD',
+    icon: <CategoryIcon />,
+  });
 
   if (tvl)
-    tags.push({ text: `TVL: $${numFormatter.format(tvl)}`, icon: <TvlIcon /> });
+    tags.push({
+      text: `TVL: $${numFormatter.format(tvl)}`,
+      icon: <TvlIcon />,
+    });
 
   if (monthlyVolume)
     tags.push({
@@ -45,6 +61,13 @@ export const createProjectTags = (project?: Project): TagElement[] => {
       text: `Monthly Revenue: $${numFormatter.format(monthlyRevenue)}`,
       icon: <RevenueIcon />,
     });
+
+  if (audits.length > 0) {
+    tags.push({
+      text: `Audits: ${audits.length}`,
+      icon: <ShieldCheckIcon />,
+    });
+  }
 
   if (hacks.length > 0) {
     tags.push({

@@ -4,18 +4,23 @@ import { MouseEventHandler } from 'react';
 import { cva } from 'class-variance-authority';
 
 import {
+  BankIcon,
   BookmarkIcon,
   Button,
   CardSet,
   Heading,
   LogoTitle,
+  MoneyIcon,
   TechWrapper,
 } from '~/shared/components';
 import { capitalize, prettyTimestamp } from '~/shared/utils';
 
 import { JobPost } from '../core/interfaces';
-import { createJobTags } from '../utils';
-import { createProjectTags } from '../utils/create-project-tags';
+import {
+  createJobCardOrgTags,
+  createJobCardProjectTags,
+  createJobTags,
+} from '../utils';
 
 interface Props {
   listing: JobPost;
@@ -25,13 +30,14 @@ interface Props {
 
 const cvaJobCard = cva(
   [
-    'w-full overflow-hidden rounded-3xl bg-white/5 p-6 text-ivory cursor-pointer relative transition-all',
-    'hover:bg-white/10 after:transition-all	 after:content-[""] after:hidden after:h-full after:border after:border-white/20 after:rounded-3xl after:w-full after:absolute after:inset-0 hover:after:block after:z-20',
+    'flex flex-col p-6 gap-[10px] rounded-3xl bg-white/5',
+    'cursor-pointer hover:bg-white/10',
+    'box-border border border-transparent hover:border-white/20',
   ],
   {
     variants: {
       isActive: {
-        true: 'bg-gradient-to-l from-primary to-tertiary hover:after:hidden cursor-default',
+        true: 'bg-gradient-to-l from-primary to-tertiary hover:after:hidden cursor-default border-none',
       },
     },
   },
@@ -43,7 +49,8 @@ export const JobCard = ({ listing, isActive, onClick }: Props) => {
   const { jobTitle, jobCreatedTimestamp } = jobpost;
 
   const tags = createJobTags(jobpost);
-  const projectTags = createProjectTags(project);
+  const orgTags = createJobCardOrgTags(org);
+  const projectTags = createJobCardProjectTags(project);
 
   return (
     <div className={cvaJobCard({ isActive })} onClick={onClick}>
@@ -72,46 +79,60 @@ export const JobCard = ({ listing, isActive, onClick }: Props) => {
       </div>
 
       {technologies.length > 0 && (
-        <div className="flex justify-between space-x-4 border-b border-white/5 py-4">
-          <div className="flex flex-wrap gap-4">
-            {technologies.map(({ name, id }) => (
-              <TechWrapper key={id} id={id} isActive={isActive}>
-                {name}
-              </TechWrapper>
-            ))}
+        <>
+          <div className="flex h-4 flex-col justify-center">
+            <hr className="border-t border-white/10" />
           </div>
-          <div className="z-30 shrink-0 self-start">
-            <Button variant="translucent" onClick={onClickSeeMatches}>
-              Sign Up to See Matches
-            </Button>
+          <div className="flex items-center justify-between">
+            <div className="flex flex-wrap gap-4">
+              {technologies.map(({ name, id }) => (
+                <TechWrapper key={id} id={id} isActive={isActive}>
+                  {name}
+                </TechWrapper>
+              ))}
+            </div>
+            <div className="z-30 shrink-0 self-center">
+              <Button variant="translucent" onClick={onClickSeeMatches}>
+                Sign Up to See Matches
+              </Button>
+            </div>
           </div>
-        </div>
+        </>
       )}
 
-      <div className="flex items-center space-x-8 py-4 last:pb-0">
+      <div className="flex h-4 flex-col justify-center">
+        <hr className="border-t border-white/10" />
+      </div>
+
+      <div className="flex h-8 items-center gap-x-8">
         <LogoTitle title={org.name} avatarProps={{ src: '', alt: org.name }} />
+        {orgTags.length > 0 &&
+          orgTags.map(({ text, icon, link }) => (
+            <CardSet key={text} link={link} icon={icon}>
+              {text}
+            </CardSet>
+          ))}
       </div>
 
       {project ? (
-        <div className="border-t border-white/5 pt-4">
-          <div className="flex">
+        <>
+          <div className="flex h-4 flex-col justify-center">
+            <hr className="border-t border-white/10" />
+          </div>
+
+          <div className="flex flex-wrap items-center gap-x-8 gap-y-4">
             <LogoTitle
               title={project.name}
               avatarProps={{ src: project.logo, alt: project.name }}
             />
+            {projectTags.length > 0 &&
+              projectTags.map(({ text, icon, link }) => (
+                <CardSet key={text} link={link} icon={icon}>
+                  {text}
+                </CardSet>
+              ))}
           </div>
-
-          {projectTags.length > 0 && (
-            <div className="flex flex-wrap [&>*]:mr-4">
-              {projectTags.length > 0 &&
-                projectTags.map(({ text, icon, link }) => (
-                  <CardSet key={text} link={link} icon={icon}>
-                    {text}
-                  </CardSet>
-                ))}
-            </div>
-          )}
-        </div>
+        </>
       ) : null}
     </div>
   );

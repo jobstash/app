@@ -21,7 +21,11 @@ export const RightPanelProjectCard = ({ project }: Props) => {
 
   return (
     <div className="flex flex-col gap-y-6 p-6">
-      <LogoTitle title={name} avatarProps={{ src: logo, alt: name }} />
+      <LogoTitle
+        size="lg"
+        title={name}
+        avatarProps={{ src: logo, alt: name }}
+      />
 
       <div className="flex flex-col gap-2.5">
         <div>
@@ -35,8 +39,6 @@ export const RightPanelProjectCard = ({ project }: Props) => {
           </CardSet>
         </div>
       </div>
-
-      <Button variant="primary">Explore Competitor</Button>
 
       <div className="flex h-4 flex-col justify-center">
         <hr className="border-t border-white/10" />

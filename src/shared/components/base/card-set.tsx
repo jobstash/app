@@ -15,7 +15,7 @@ const cardset = cva(
   {
     variants: {
       hasLink: {
-        true: 'bg-dark-gray px-2 py-1 hover:bg-gray active:bg-dark-gray cursor-pointer active:translate-y-[2px]',
+        true: 'bg-white/10 px-2 py-1 hover:bg-white/20 active:bg-white/30 cursor-pointer active:translate-y-[2px]',
         false: 'bg-none cursor-default',
       },
     },
@@ -28,13 +28,12 @@ interface CardSetProps extends CardSetVariantProps {
   icon: ReactNode;
   children: string;
   link?: string;
-  isAudit?: boolean;
 }
 
-export const CardSet = ({ icon, children, link, isAudit }: CardSetProps) => (
+export const CardSet = ({ icon, children, link }: CardSetProps) => (
   <button className={cardset({ hasLink: Boolean(link) })}>
     {icon}
     <Text size="sm">{children}</Text>
-    {isAudit && <ArrowCircleUpRightIcon />}
+    {Boolean(link) && <ArrowCircleUpRightIcon />}
   </button>
 );
