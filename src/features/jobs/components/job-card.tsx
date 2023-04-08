@@ -5,11 +5,10 @@ import { cva } from 'class-variance-authority';
 
 import {
   Button,
-  CardHeading,
-  ChainHeading,
+  Heading,
   IconHolder,
+  LogoTitle,
   SkillHolder,
-  TagIcon,
 } from '~/shared/components';
 import { capitalize, prettyTimestamp } from '~/shared/utils';
 
@@ -48,7 +47,9 @@ export const JobCard = ({ listing, isActive, onClick }: Props) => {
   return (
     <div className={cvaJobCard({ isActive })} onClick={onClick}>
       <div className="flex items-center justify-between">
-        <CardHeading>{jobTitle}</CardHeading>
+        <Heading size="md" fw="semibold">
+          {jobTitle}
+        </Heading>
         <div className="flex items-center space-x-3">
           <span className="text-sm">
             {prettyTimestamp(jobCreatedTimestamp)}
@@ -88,29 +89,16 @@ export const JobCard = ({ listing, isActive, onClick }: Props) => {
       )}
 
       <div className="flex items-center space-x-8 py-4 last:pb-0">
-        {/** Note: waiting for backend/middleware to provide org avatars  */}
-        <ChainHeading avatar="" alt={org.name}>
-          {org.name}
-        </ChainHeading>
-        {/** Note: waiting for backend/middleware to provide funding data  */}
-        {/* <div className="flex items-center text-sm">
-          <TagIcon filename="funding" />
-          Last Funding: TBD
-        </div>
-        <div className="flex items-center text-sm">
-          <TagIcon filename="funding" />
-          Funding: TBD
-        </div> */}
+        <LogoTitle title={org.name} avatarProps={{ src: '', alt: org.name }} />
       </div>
 
       {project ? (
         <div className="border-t border-white/5 pt-4">
           <div className="flex">
-            <ChainHeading avatar={project.logo} alt={project.name}>
-              {project.name}
-            </ChainHeading>
-            {/** Note: waiting for backend/middleware to provide the chains */}
-            {/* <ChainHolder /> */}
+            <LogoTitle
+              title={project.name}
+              avatarProps={{ src: project.logo, alt: project.name }}
+            />
           </div>
 
           {projectTags.length > 0 && (

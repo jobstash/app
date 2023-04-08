@@ -1,4 +1,4 @@
-import { Button, ChainHeading, IconHolder, TagIcon } from '~/shared/components';
+import { IconHolder, LogoTitle } from '~/shared/components';
 import { Project } from '~/shared/core/interfaces';
 
 import { createRightPanelProjectCardTags } from '../utils';
@@ -15,9 +15,7 @@ export const RightPanelProjectCard = ({ project }: Props) => {
 
   return (
     <div className="flex flex-col gap-y-6 p-6">
-      <ChainHeading avatar={logo} alt={name}>
-        {name}
-      </ChainHeading>
+      <LogoTitle title={name} avatarProps={{ src: logo, alt: name }} />
 
       <div className="flex flex-col gap-y-6 border-y border-white/10 py-8">
         <div>

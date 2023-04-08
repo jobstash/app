@@ -81,7 +81,7 @@ export const ConnectWallet: Story = {
 export const SignedInWallet: Story = {
   args: {
     text: '0xc37...2192',
-    left: <Avatar src="/user/wallet-user.png" alt="User" size="xs" />,
+    left: <Avatar src="/user/wallet-user.png" alt="User" size="sm" />,
     variant: 'wallet',
   },
 };
@@ -89,7 +89,7 @@ export const SignedInWallet: Story = {
 export const Admin: Story = {
   args: {
     text: 'ADMIN',
-    left: <Avatar src="/user/wallet-user.png" alt="User" size="xs" />,
+    left: <Avatar src="/user/wallet-user.png" alt="User" size="sm" />,
     variant: 'wallet',
   },
 };

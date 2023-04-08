@@ -1,25 +1,19 @@
 import Image from 'next/image';
 
-import { type VariantProps, cva } from 'class-variance-authority';
+import { cva, VariantProps } from 'class-variance-authority';
 import clsx from 'clsx';
 
-const sizeMap = {
-  xs: '24',
-  sm: '32',
-  md: '40',
-  lg: '50',
-  xl: '64',
-};
-
-type AvatarSizes = keyof typeof sizeMap;
-
-const cvaAvatar = cva([], {
+const avatar = cva(['relative rounded-xl object-cover overflow-hidden'], {
   variants: {
-    size: sizeMap,
+    size: {
+      sm: 'h-8 w-8',
+      md: 'h-10 w-10',
+      lg: 'h-[55px] w-[55px]',
+    },
   },
 });
 
-type AvatarVariantProps = VariantProps<typeof cvaAvatar>;
+type AvatarVariantProps = VariantProps<typeof avatar>;
 
 export interface AvatarProps extends AvatarVariantProps {
   src: string;
@@ -27,18 +21,8 @@ export interface AvatarProps extends AvatarVariantProps {
   isRounded?: boolean;
 }
 
-export const Avatar = ({ src, alt, size = 'md', isRounded }: AvatarProps) => {
-  const imageSize = sizeMap[size as AvatarSizes] as `${number}`;
-
-  return (
-    <Image
-      src={src}
-      alt={alt}
-      width={imageSize}
-      height={imageSize}
-      className={clsx({
-        'rounded-full': isRounded,
-      })}
-    />
-  );
-};
+export const Avatar = ({ src, alt, size, isRounded }: AvatarProps) => (
+  <div className={clsx(avatar({ size }), { 'rounded-full': isRounded })}>
+    <Image fill src={src} alt={alt} />
+  </div>
+);

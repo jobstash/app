@@ -1,12 +1,9 @@
-import Image from 'next/image';
 import { useEffect } from 'react';
 
 import { useAtomValue } from 'jotai';
 
 import { activeJobPostAtom } from '~/features/jobs/atoms';
-import { JobPost } from '~/features/jobs/core/interfaces';
-import { ProjectRightPanel } from '~/features/projects/components';
-import { Button, ChainHeading, IconHolder } from '~/shared/components';
+import { Button, IconHolder, LogoTitle } from '~/shared/components';
 import {
   EVENT_CARD_CLICK,
   ID_TOP_RIGHT_PANEL,
@@ -57,16 +54,15 @@ export const JobRightPanel = () => {
   return (
     <div>
       {/* NOTE: This component needs to be always on top */}
-      <div className="text-ivory absolute top-0" id={ID_TOP_RIGHT_PANEL} />
+      <div className="absolute top-0" id={ID_TOP_RIGHT_PANEL} />
 
       {/** RIGHT PANEL HEADER */}
       <div>
         <div className="flex items-center space-x-3">
-          {/** Note: waiting for backend/middleware to provide org avatars */}
-
-          <ChainHeading avatar="" alt={org.name}>
-            {org.name}
-          </ChainHeading>
+          <LogoTitle
+            title={org.name}
+            avatarProps={{ src: '', alt: org.name }}
+          />
         </div>
         <div className="flex space-x-4 py-4 text-sm">
           {orgTags.map(({ text, iconText, link }) => (
@@ -75,7 +71,7 @@ export const JobRightPanel = () => {
             </IconHolder>
           ))}
         </div>
-        <p className="text-sidebarTitle text-sm">{org.summary}</p>
+        <p className="text-sm">{org.summary}</p>
         {orgSocials.length > 0 && (
           <div className="flex space-x-4 py-4 text-sm">
             {orgSocials.map(({ text, iconText, link }) => (
@@ -104,8 +100,8 @@ export const JobRightPanel = () => {
       </div>
 
       {/** RIGHT PANEL CARD */}
-      <div className="mt-8 rounded-3xl bg-gradient-to-l from-primary to-secondary p-1">
-        <div className="bg-grey rounded-3xl">
+      <div className="mt-8 rounded-3xl bg-gradient-to-l from-primary to-tertiary p-0.5">
+        <div className="rounded-3xl bg-darker-gray">
           {cardMap[segments.tab as keyof typeof cardMap]}
         </div>
       </div>

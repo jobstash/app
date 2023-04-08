@@ -4,9 +4,9 @@ import { Avatar } from './avatar';
 
 const meta: Meta<typeof Avatar> = {
   component: Avatar,
-  title: 'Components/Base/Avatar',
+  title: 'components/base/Avatar',
   args: {
-    src: `https://api.dicebear.com/5.x/bottts/svg?seed=${Date.now()}`,
+    src: `/orgs/Uniswap Labs.png`,
     size: 'md',
     alt: 'Test Avatar',
   },
