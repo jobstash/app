@@ -7,4 +7,5 @@ export interface TagElement {
   icon?: ReactNode;
   /** External url used when clicked */
   link?: string;
+  showLinkIcon?: boolean;
 }

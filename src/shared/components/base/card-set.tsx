@@ -1,3 +1,5 @@
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { ReactNode } from 'react';
 
 import { cva, VariantProps } from 'class-variance-authority';
@@ -28,12 +30,28 @@ interface CardSetProps extends CardSetVariantProps {
   icon: ReactNode;
   children: string;
   link?: string;
+  showLinkIcon?: boolean;
 }
 
-export const CardSet = ({ icon, children, link }: CardSetProps) => (
-  <button className={cardset({ hasLink: Boolean(link) })}>
-    {icon}
-    <Text size="sm">{children}</Text>
-    {Boolean(link) && <ArrowCircleUpRightIcon />}
-  </button>
-);
+export const CardSet = ({
+  icon,
+  children,
+  link,
+  showLinkIcon = true,
+}: CardSetProps) => {
+  const btn = (
+    <button className={cardset({ hasLink: Boolean(link) })}>
+      {icon}
+      <Text size="sm">{children}</Text>
+      {Boolean(link) && showLinkIcon && <ArrowCircleUpRightIcon />}
+    </button>
+  );
+
+  if (!link || link === '#') return btn;
+
+  return (
+    <Link href={link} target="_blank" rel="noopener">
+      {btn}
+    </Link>
+  );
+};

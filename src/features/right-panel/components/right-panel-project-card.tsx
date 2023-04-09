@@ -2,7 +2,10 @@ import {
   Button,
   CardSet,
   GlobeSimpleIcon,
+  Heading,
+  LinkIcon,
   LogoTitle,
+  TechWrapper,
   Text,
 } from '~/shared/components';
 import { Project } from '~/shared/core/interfaces';
@@ -17,42 +20,156 @@ export const RightPanelProjectCard = ({ project }: Props) => {
   if (!project) return null;
 
   const { logo, name, description, url, defillamaSlug } = project;
-  const tags = createRightPanelProjectCardTags(project);
+  const { projectSocialTags, projectTags, projectTvlTags, projectAuditTags } =
+    createRightPanelProjectCardTags(project);
 
   return (
-    <div className="flex flex-col gap-y-6 p-6">
-      <LogoTitle
-        size="lg"
-        title={name}
-        avatarProps={{ src: logo, alt: name }}
-      />
+    <div className="flex flex-col gap-5 p-6">
+      <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-5">
+          <div className="flex items-center justify-between">
+            <LogoTitle
+              size="lg"
+              title={name}
+              avatarProps={{ src: logo, alt: name }}
+            />
+            <div className="flex gap-x-4">
+              {/** TODO: Bookmark, Share IconButton here */}
+            </div>
+          </div>
 
-      <div className="flex flex-col gap-2.5">
-        <div>
-          <Text color="dimmed" size="md">
-            {description}
-          </Text>
+          {projectSocialTags.length > 0 && (
+            <div className="flex flex-wrap items-center gap-4">
+              {projectSocialTags.map(({ text, icon, link, showLinkIcon }) => (
+                <CardSet
+                  key={text}
+                  link={link}
+                  icon={icon}
+                  showLinkIcon={showLinkIcon}
+                >
+                  {text}
+                </CardSet>
+              ))}
+            </div>
+          )}
         </div>
-        <div>
-          <CardSet link={url} icon={<GlobeSimpleIcon />}>
-            {defillamaSlug ?? 'Website'}
+
+        <div className="flex h-4 flex-col justify-center">
+          <hr className="border-t border-white/10" />
+        </div>
+
+        <div className="flex flex-col gap-5">
+          <div className="flex flex-col gap-2">
+            <Heading size="sm" fw="semibold">
+              Description
+            </Heading>
+            <Text color="dimmed">{description}</Text>
+          </div>
+        </div>
+
+        {projectTags.length > 0 && (
+          <>
+            <div className="flex h-4 flex-col justify-center">
+              <hr className="border-t border-white/10" />
+            </div>
+
+            <div className="flex flex-wrap items-center gap-4">
+              {projectTags.map(({ text, icon, link, showLinkIcon }) => (
+                <CardSet
+                  key={text}
+                  link={link}
+                  icon={icon}
+                  showLinkIcon={showLinkIcon}
+                >
+                  {text}
+                </CardSet>
+              ))}
+            </div>
+          </>
+        )}
+
+        {projectTvlTags.length > 0 && (
+          <>
+            <div className="flex h-4 flex-col justify-center">
+              <hr className="border-t border-white/10" />
+            </div>
+
+            <div className="flex flex-wrap items-center gap-4">
+              {projectTvlTags.map(({ text, icon, link, showLinkIcon }) => (
+                <CardSet
+                  key={text}
+                  link={link}
+                  icon={icon}
+                  showLinkIcon={showLinkIcon}
+                >
+                  {text}
+                </CardSet>
+              ))}
+            </div>
+          </>
+        )}
+
+        {projectAuditTags.length > 0 && (
+          <>
+            <div className="flex h-4 flex-col justify-center">
+              <hr className="border-t border-white/10" />
+            </div>
+
+            <div className="flex flex-wrap items-center gap-4">
+              {projectAuditTags.map(({ text, icon, link, showLinkIcon }) => (
+                <CardSet
+                  key={text}
+                  link={link}
+                  icon={icon}
+                  showLinkIcon={showLinkIcon}
+                >
+                  {text}
+                </CardSet>
+              ))}
+            </div>
+          </>
+        )}
+
+        <div className="flex h-4 flex-col justify-center">
+          <hr className="border-t border-white/10" />
+        </div>
+
+        <div className="flex flex-col gap-2">
+          <CardSet icon={<LinkIcon />}>Chains: TBD</CardSet>
+          <CardSet icon={<LinkIcon />} link="#">
+            Token: TBD
           </CardSet>
         </div>
-      </div>
 
-      <div className="flex h-4 flex-col justify-center">
-        <hr className="border-t border-white/10" />
-      </div>
-
-      {tags.length > 0 && (
-        <div className="flex gap-x-4 pl-0.5">
-          {tags.map(({ text, link, icon }) => (
-            <CardSet key={text} link={link} icon={icon}>
-              {text}
-            </CardSet>
-          ))}
+        <div className="flex h-4 flex-col justify-center">
+          <hr className="border-t border-white/10" />
         </div>
-      )}
+
+        <div className="flex flex-col gap-5">
+          <div className="flex flex-col gap-2">
+            <Heading size="sm" fw="semibold">
+              Technologies
+            </Heading>
+            <Text color="dimmed">
+              Uncover the technical skills and tools employed by the company,
+              and gain insight into the technologies that drive their success.
+            </Text>
+          </div>
+        </div>
+
+        <div className="flex gap-2.5">
+          <TechWrapper id="0">TBD</TechWrapper>
+          <TechWrapper id="8">TBD</TechWrapper>
+          <TechWrapper id="2">TBD</TechWrapper>
+          <TechWrapper id="3">TBD</TechWrapper>
+          <TechWrapper id="6">TBD</TechWrapper>
+          <TechWrapper id="7">TBD</TechWrapper>
+          <TechWrapper id="5">TBD</TechWrapper>
+          <TechWrapper id="9">TBD</TechWrapper>
+        </div>
+
+        <Button variant="primary">Explore Project</Button>
+      </div>
     </div>
   );
 };
