@@ -11,7 +11,11 @@ import { Project, TagElement } from '~/shared/core/interfaces';
 import { numFormatter } from '~/shared/utils';
 
 export const createJobCardProjectTags = (project?: Project) => {
-  if (!project) return [];
+  const projectInfoTags: TagElement[] = [];
+  const projectTvlTags: TagElement[] = [];
+  const projectAuditTags: TagElement[] = [];
+
+  if (!project) return { projectInfoTags, projectTvlTags, projectAuditTags };
 
   const {
     url,
@@ -24,57 +28,55 @@ export const createJobCardProjectTags = (project?: Project) => {
     audits,
   } = project;
 
-  const tags: TagElement[] = [];
-
   if (tokenSymbol)
-    tags.push({
+    projectInfoTags.push({
       text: `Token: $${tokenSymbol}`,
       icon: <CurrencyCircleDollarIcon />,
       link: url,
     });
 
-  tags.push({
+  projectInfoTags.push({
     text: 'Category: TBD',
     icon: <CategoryIcon />,
   });
 
   if (tvl)
-    tags.push({
+    projectTvlTags.push({
       text: `TVL: $${numFormatter.format(tvl)}`,
       icon: <TvlIcon />,
     });
 
   if (monthlyVolume)
-    tags.push({
+    projectTvlTags.push({
       text: `Monthly Volume: $${numFormatter.format(monthlyVolume)}`,
       icon: <MonthlyVolumeIcon />,
     });
 
   if (monthlyFees)
-    tags.push({
+    projectTvlTags.push({
       text: `Monthly Fees: $${numFormatter.format(monthlyFees)}`,
       icon: <MonthlyVolumeIcon />,
     });
 
   if (monthlyRevenue)
-    tags.push({
+    projectTvlTags.push({
       text: `Monthly Revenue: $${numFormatter.format(monthlyRevenue)}`,
       icon: <RevenueIcon />,
     });
 
   if (audits.length > 0) {
-    tags.push({
+    projectAuditTags.push({
       text: `Audits: ${audits.length}`,
       icon: <ShieldCheckIcon />,
     });
   }
 
   if (hacks.length > 0) {
-    tags.push({
+    projectAuditTags.push({
       text: `Hacks: ${hacks.length}`,
       icon: <SkullIcon />,
     });
   }
 
-  return tags;
+  return { projectInfoTags, projectTvlTags, projectAuditTags };
 };

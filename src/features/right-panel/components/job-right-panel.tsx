@@ -62,7 +62,10 @@ export const JobRightPanel = () => {
           <div className="flex h-10 items-center">
             <LogoTitle
               title={org.name}
-              avatarProps={{ src: '', alt: org.name }}
+              avatarProps={{
+                src: `https://www.google.com/s2/favicons?domain=${org.url}&sz=128`,
+                alt: org.name,
+              }}
             />
           </div>
           <div className="flex h-6 gap-4">
