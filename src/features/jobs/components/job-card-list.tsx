@@ -1,11 +1,12 @@
 import { useEffect, useMemo, useRef } from 'react';
 import { useInView } from 'react-intersection-observer';
 
+import { useDisclosure } from '@mantine/hooks';
 import { useWindowVirtualizer } from '@tanstack/react-virtual';
-import { useAtom, useAtomValue, useSetAtom } from 'jotai';
+import { useAtom, useAtomValue } from 'jotai';
 
 import { filterParamsAtom } from '~/features/filters/atoms';
-import { Filters } from '~/features/filters/components';
+import { Filters } from '~/features/filtersx/components';
 import {
   EVENT_CARD_CLICK,
   TEXT_ROUTE_SECTION_JOBS,
@@ -63,9 +64,9 @@ export const JobCardList = ({ initListing }: Props) => {
   }, []);
 
   const virtualizer = useWindowVirtualizer({
-    count: jobposts.length,
-    estimateSize: () => 450,
-    // ScrollMargin: parentOffsetRef.current,
+    count: jobposts.length + 1,
+    estimateSize: () => 45,
+    scrollMargin: parentOffsetRef.current,
   });
 
   const items = virtualizer.getVirtualItems();
@@ -94,9 +95,11 @@ export const JobCardList = ({ initListing }: Props) => {
     });
   };
 
+  const [isOpenCollapse, { toggle: toggleCollapse }] = useDisclosure();
+
   return (
     <>
-      <Filters jobCount={data?.pages[0].total ?? 0} isLoadingData={isLoading} />
+      {/* <Filters jobCount={data?.pages[0].total ?? 0} isLoadingData={isLoading} /> */}
 
       <div ref={parentRef}>
         <div
@@ -119,14 +122,26 @@ export const JobCardList = ({ initListing }: Props) => {
             }}
           >
             {items.map(({ key, index, start, end }) => {
-              const isLast = index >= jobposts.length - 1;
-              const listing = jobposts[index];
+              if (index === 0)
+                return (
+                  <div
+                    key={key}
+                    ref={virtualizer.measureElement}
+                    data-index={index}
+                    className="w-full max-w-4xl"
+                  >
+                    <Filters isOpen={isOpenCollapse} toggle={toggleCollapse} />
+                  </div>
+                );
+
+              const isLast = index - 1 >= jobposts.length - 1;
+              const listing = jobposts[index - 1];
 
               return (
                 <div
                   key={key}
                   ref={virtualizer.measureElement}
-                  data-index={index}
+                  data-index={index - 1}
                   className="w-full max-w-4xl"
                 >
                   <div ref={isLast ? inViewRef : undefined}>

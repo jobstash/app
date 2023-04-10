@@ -20,12 +20,14 @@ const wrapper = cva(
         subtle: 'bg-dark hover:bg-dark-gray [&>*]:active:bg-dark',
         translucent: 'bg-white/10 hover:bg-white/20 active:bg-white/30',
       },
-      //
       isActive: {
         true: '',
       },
       isDisabled: {
         true: 'opacity-30 select-none pointer-events-none',
+      },
+      isFullWidth: {
+        true: 'w-full',
       },
     },
     compoundVariants: [
@@ -63,7 +65,6 @@ const button = cva(['flex items-center justify-center rounded-lg gap-x-1'], {
       sm: 'px-2 py-1',
       md: 'px-4 py-2',
     },
-
     isActive: {
       true: '',
     },
@@ -78,6 +79,9 @@ const button = cva(['flex items-center justify-center rounded-lg gap-x-1'], {
     },
     isIcon: {
       true: 'w-7 h-7',
+    },
+    isFullWidth: {
+      true: 'w-full justify-between',
     },
   },
 
@@ -134,11 +138,12 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       left,
       right,
       isIcon = false,
+      isFullWidth,
       ...props
     }: ButtonProps,
     ref,
   ) => (
-    <div className={wrapper({ variant, isActive, isDisabled })}>
+    <div className={wrapper({ variant, isActive, isDisabled, isFullWidth })}>
       <button
         ref={ref}
         type="button"
@@ -150,6 +155,7 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           hasLeft: Boolean(left),
           hasRight: Boolean(right),
           isIcon,
+          isFullWidth,
         })}
         {...props}
       >

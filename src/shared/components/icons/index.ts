@@ -7,6 +7,7 @@ export { IconGithub } from './icon-github';
 export { IconShareLink } from './icon-share-link';
 export { IconTechAdd } from './icon-tech-add';
 export { IconTechCheck } from './icon-tech-check';
+export { SearchInputIcon } from './search-input-icon';
 
 // Util components
 export { SidebarIcon } from './sidebar-icon';

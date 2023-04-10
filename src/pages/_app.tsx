@@ -27,13 +27,8 @@ import {
   siweSignOut,
   siweVerifyMessage,
 } from '~/features/auth/utils';
-import {
-  ERR_INTERNAL,
-  lato,
-  NEXT_PUBLIC_MW_URL,
-  roboto,
-} from '~/shared/core/constants';
-import { sentryMessage } from '~/shared/utils';
+import { lato, roboto } from '~/shared/core/constants';
+import { MantineProvider } from '~/shared/mantine';
 
 const queryRetryCount =
   Number(process.env.NEXT_PUBLIC_QUERY_RETRY_COUNT) || false;
@@ -84,20 +79,22 @@ const App = ({ Component, pageProps }: AppPropsWithAuth) => (
         >
           <ConnectKitProvider theme="auto" mode="dark">
             <WalletAuthProvider>
-              <div
-                className={`${lato.variable} ${roboto.variable} font-roboto`}
-              >
-                {Component.requiredRole ? (
-                  <ProtectedLayout
-                    requiredRole={Component.requiredRole}
-                    requiredFlow={Component.requiredFlow}
-                  >
+              <MantineProvider>
+                <div
+                  className={`${lato.variable} ${roboto.variable} font-roboto`}
+                >
+                  {Component.requiredRole ? (
+                    <ProtectedLayout
+                      requiredRole={Component.requiredRole}
+                      requiredFlow={Component.requiredFlow}
+                    >
+                      <Component {...pageProps} />
+                    </ProtectedLayout>
+                  ) : (
                     <Component {...pageProps} />
-                  </ProtectedLayout>
-                ) : (
-                  <Component {...pageProps} />
-                )}
-              </div>
+                  )}
+                </div>
+              </MantineProvider>
             </WalletAuthProvider>
           </ConnectKitProvider>
         </SIWEProvider>
