@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { useEffect, useMemo, useRef } from 'react';
 import { useInView } from 'react-intersection-observer';
 
@@ -6,7 +7,7 @@ import { useWindowVirtualizer } from '@tanstack/react-virtual';
 import { useAtom, useAtomValue } from 'jotai';
 
 import { filterParamsAtom } from '~/features/filters/atoms';
-import { Filters } from '~/features/filtersx/components';
+import { Filters } from '~/features/filtersx/components/filters';
 import {
   EVENT_CARD_CLICK,
   TEXT_ROUTE_SECTION_JOBS,
@@ -41,7 +42,7 @@ export const JobCardList = ({ initListing }: Props) => {
     fetchNextPage,
     hasNextPage,
     refetch,
-  } = useJobListingInfQuery(filterParams);
+  } = useJobListingInfQuery();
 
   const jobposts = useMemo(
     () =>

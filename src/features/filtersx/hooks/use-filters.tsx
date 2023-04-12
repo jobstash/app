@@ -22,12 +22,14 @@ import type {
   ShownSortedConfig,
 } from '../core/types';
 
+import { useUrlFilterParams } from './use-url-filter-params';
+
 const filterReducer = (state: FilterState, { type, payload }: FilterAction) => {
   // Clear
   if (!type) return {};
 
   // Remove
-  if (!payload && typeof payload !== 'boolean') {
+  if (payload === undefined && typeof payload !== 'boolean') {
     const _state = state;
     delete _state[type];
     return { ..._state };
@@ -38,6 +40,7 @@ const filterReducer = (state: FilterState, { type, payload }: FilterAction) => {
 };
 
 export const useFilters = (fetchedConfig?: FilterConfig) => {
+  const { filterQueryParams, filterParams } = useUrlFilterParams();
   const sortedConfigs: ShownSortedConfig[] = useMemo(
     () =>
       fetchedConfig
@@ -68,6 +71,16 @@ export const useFilters = (fetchedConfig?: FilterConfig) => {
                 case FILTER_KIND_SINGLESELECT: {
                   const value = filters[key] as string;
                   const { options, label } = config;
+
+                  const keyInFilterQueryParams = key in filterQueryParams;
+                  const found =
+                    options.find(
+                      (option) =>
+                        option.value.toString() === filterQueryParams[key],
+                    )?.value ?? null;
+                  const paramValue =
+                    keyInFilterQueryParams && value !== null ? found : null;
+
                   const ignoreLabel = label === 'Order' || label === 'Order By';
 
                   if (options.length === 0) {
@@ -79,7 +92,7 @@ export const useFilters = (fetchedConfig?: FilterConfig) => {
                     ui: (
                       <SingleSelectFilter
                         label={ignoreLabel ? undefined : label}
-                        value={value ?? null}
+                        value={value ?? paramValue}
                         placeholder={
                           key === KEY_ORDER_BY
                             ? 'Sort By'
@@ -161,7 +174,7 @@ export const useFilters = (fetchedConfig?: FilterConfig) => {
             })
             .filter(({ ui }) => ui !== null)
         : [],
-    [fetchedConfig, filters, sortedConfigs],
+    [fetchedConfig, filterQueryParams, filters, sortedConfigs],
   );
 
   const { filterComponents, sortComponents } = useMemo(() => {

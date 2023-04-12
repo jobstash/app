@@ -14,6 +14,7 @@ export const createFilterParams = (
 ) =>
   filterConfig
     ? Object.entries(filters)
+        .filter(([_, v]) => v !== null)
         .map(([k, v]) => {
           const [_, config] = Object.entries(filterConfig).find(
             ([configKey]) => k === configKey,

@@ -25,14 +25,20 @@ const _SingleSelectFilter = ({
   placeholder,
 }: Props) => {
   const onChange = (clickedLabelValue: string) => {
-    if (clickedLabelValue === null) {
-      dispatch({ type, payload: null });
-      return;
-    }
-
+    console.log(
+      'clickedLabelValue =',
+      clickedLabelValue,
+      'value =',
+      value,
+      'value === clickedLabelValue =',
+      value === clickedLabelValue,
+    );
     dispatch({
       type,
-      payload: options.find(({ value }) => value === clickedLabelValue)!.value,
+      payload:
+        clickedLabelValue === null
+          ? null
+          : options.find(({ value }) => value === clickedLabelValue)!.value,
     });
   };
 

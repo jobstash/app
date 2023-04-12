@@ -62,7 +62,7 @@ export interface FilterConfig {
   monthlyFees: RangeFilterConfig;
   monthlyRevenue: RangeFilterConfig;
   audits: RangeFilterConfig;
-  hacks: RangeFilterConfig;
+  hacks: SingleSelectFilterConfig;
   fundingRounds: MultiSelectSearchFilterConfig;
   mainNet: SingleSelectFilterConfig;
   token: SingleSelectFilterConfig;
@@ -89,7 +89,7 @@ export interface FilterState {
   monthlyFees?: RangeValue;
   monthlyRevenue?: RangeValue;
   audits?: RangeValue;
-  hacks?: RangeValue;
+  hacks?: string;
   mainNet?: string;
   token?: string;
   order?: string;

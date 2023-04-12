@@ -1,3 +1,5 @@
+import { useRouter } from 'next/router';
+
 import { Collapse, TextInput } from '@mantine/core';
 
 import { Button, FilterIcon, SearchInputIcon, Text } from '~/shared/components';
@@ -11,6 +13,9 @@ interface Props {
 }
 
 export const Filters = ({ isOpen, toggle }: Props) => {
+  const { query, push } = useRouter();
+  const baseRoute = `/jobs/${query.key}/${query.tab}`;
+
   const { data, error, isLoading, isFetching } = useFilterConfigQuery();
 
   const { filters, filterComponents, sortComponents, clearFilterState } =
@@ -18,11 +23,15 @@ export const Filters = ({ isOpen, toggle }: Props) => {
 
   const onClickApply = () => {
     const params = createFilterParams(filters, data);
+    const newRoute = `${baseRoute}${params ? '?' + params : ''}`;
+    push(newRoute, undefined, { shallow: true });
     toggle();
   };
 
   const onClickClear = () => {
     clearFilterState();
+    push(baseRoute, undefined, { shallow: true });
+    toggle();
   };
 
   return (

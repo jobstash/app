@@ -1,5 +1,9 @@
+import { useRouter } from 'next/router';
+
 import { QueryKey, useInfiniteQuery } from '@tanstack/react-query';
 
+import { FILTER_CONFIG_KEY_SET } from '~/features/filtersx/core/constants';
+import { useUrlFilterParams } from '~/features/filtersx/hooks';
 import {
   ERR_INTERNAL,
   NEXT_PUBLIC_MW_URL,
@@ -58,12 +62,16 @@ interface JobListingsInfQueryPage {
   data: JobPost[];
 }
 
-export const useJobListingInfQuery = (filterParams: string | null) =>
-  useInfiniteQuery<JobListingsInfQueryPage>(
+export const useJobListingInfQuery = () => {
+  const { filterParams } = useUrlFilterParams();
+
+  return useInfiniteQuery<JobListingsInfQueryPage>(
     ['job-posts', filterParams],
     async ({ pageParam, queryKey }) =>
       fetchJobListings({ pageParam, queryKey }),
     {
       getNextPageParam: ({ page }) => (page > 0 ? page + 1 : undefined),
+      staleTime: 1000 * 60 * 5, // After 5 mins, refetch
     },
   );
+};
