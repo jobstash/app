@@ -71,7 +71,7 @@ export const useJobListingInfQuery = () => {
       fetchJobListings({ pageParam, queryKey }),
     {
       getNextPageParam: ({ page }) => (page > 0 ? page + 1 : undefined),
-      staleTime: 1000 * 60 * 5, // After 5 mins, refetch
+      staleTime: 1000 * 60 * 60, // 1 hour
     },
   );
 };
