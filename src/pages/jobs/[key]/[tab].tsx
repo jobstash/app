@@ -45,7 +45,7 @@ export const getServerSideProps: GetServerSideProps<Props> = async (ctx) => {
   const shortUUID = ctx.query.key?.slice(-6);
   if (!shortUUID) return { notFound: true };
 
-  const res = await fetch(`${mwURL}/jobs/${shortUUID}`);
+  const res = await fetch(`${mwURL}/jobs/details/${shortUUID}`);
   if (!res.ok) return { notFound: true };
 
   const activeListing = (await res.json()) as JobPost;
