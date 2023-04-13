@@ -1,12 +1,10 @@
-import { useRouter } from 'next/router';
 import { useEffect, useMemo, useRef } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 import { useDisclosure } from '@mantine/hooks';
 import { useWindowVirtualizer } from '@tanstack/react-virtual';
-import { useAtom, useAtomValue } from 'jotai';
+import { useSetAtom } from 'jotai';
 
-import { filterParamsAtom } from '~/features/filters/atoms';
 import { Filters } from '~/features/filtersx/components/filters';
 import {
   EVENT_CARD_CLICK,
@@ -24,38 +22,32 @@ import { checkJobIsActive, createJobKey } from '../utils';
 import { JobCard } from './job-card';
 
 interface Props {
-  initListing: JobPost;
+  initListing?: JobPost;
 }
 
 export const JobCardList = ({ initListing }: Props) => {
-  const initShortUUID = initListing.jobpost.shortUUID;
-
-  const filterParams = useAtomValue(filterParamsAtom);
-  const [activeListing, setActiveListing] = useAtom(activeJobPostAtom);
-
   const {
     data,
     error,
     isLoading,
-    isError,
     isFetchingNextPage,
     fetchNextPage,
     hasNextPage,
-    refetch,
   } = useJobListingInfQuery();
 
-  const jobposts = useMemo(
-    () =>
-      data
-        ? [
-            initListing,
-            ...data.pages
-              .flatMap((d) => d.data)
-              .filter((d) => d.jobpost.shortUUID !== initShortUUID),
-          ]
-        : [initListing],
-    [data, initListing, initShortUUID],
-  );
+  const jobposts = useMemo(() => {
+    let jobListings = data ? data.pages.flatMap((d) => d.data) : [];
+
+    if (initListing) {
+      const initShortUuid = initListing.jobpost.shortUUID;
+      jobListings = jobListings.filter(
+        (d) => d.jobpost.shortUUID !== initShortUuid,
+      );
+      jobListings.unshift(initListing);
+    }
+
+    return jobListings;
+  }, [data, initListing]);
 
   const parentRef = useRef<HTMLDivElement>(null);
   const parentOffsetRef = useRef(0);
@@ -81,6 +73,7 @@ export const JobCardList = ({ initListing }: Props) => {
 
   const { segments, push } = useRouteSegments();
 
+  const setActiveListing = useSetAtom(activeJobPostAtom);
   const onClickListing = (listing: JobPost) => {
     setActiveListing(listing);
     document.dispatchEvent(new Event(EVENT_CARD_CLICK));
