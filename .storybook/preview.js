@@ -3,6 +3,7 @@ import '../src/styles/globals.css';
 import 'joi/dist/joi-browser.min.js';
 
 import { themes } from '@storybook/theming';
+import { initialize, mswDecorator } from 'msw-storybook-addon';
 
 export const parameters = {
   actions: { argTypesRegex: '^on[A-Z].*' },
@@ -20,4 +21,9 @@ export const parameters = {
   },
 };
 
-export const decorators = [(Story) => <Story />];
+// Initialize MSW
+initialize({
+  onUnhandledRequest: 'bypass',
+});
+
+export const decorators = [(Story) => <Story />, mswDecorator];
