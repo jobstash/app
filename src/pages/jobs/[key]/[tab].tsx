@@ -36,6 +36,12 @@ const JobsPage = ({ data: { initJob } }: Props) => {
       <div className="px-8">
         <JobList initJob={initJob} activeJob={activeJob} />
       </div>
+
+      <div className="fixed top-0 right-0 z-10 w-5/12">
+        <div className="hide-scrollbar sticky top-0 h-screen space-y-6 overflow-y-scroll bg-dark py-8 px-6 pr-10">
+          <JobRightPanel activeJob={activeJob} />
+        </div>
+      </div>
     </div>
   );
 };
