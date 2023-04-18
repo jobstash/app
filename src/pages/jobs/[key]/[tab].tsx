@@ -1,11 +1,11 @@
 import type { GetServerSideProps } from 'next';
-import { ReactNode, useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
-import { useSetAtom } from 'jotai';
+import { useAtom } from 'jotai';
 
-import { activeJobPostAtom } from '~/features/jobs/atoms';
-import { JobCardList } from '~/features/jobs/components';
-import { Job } from '~/features/jobs/core/interfaces';
+import { activeJobAtom } from '~/features/jobs/atoms';
+import JobList from '~/features/jobs/components/job-list';
+import { Job } from '~/features/jobs/core/types';
 import { JobRightPanel } from '~/features/right-panel/components';
 import { SideBar } from '~/features/sidebar/components';
 import { ERR_INTERNAL } from '~/shared/core/constants';
@@ -13,23 +13,30 @@ import { sentryMessage } from '~/shared/utils';
 
 interface Props {
   data: {
-    activeListing: Job;
+    initJob: Job;
   };
 }
 
-const JobsPage = ({ data: { activeListing } }: Props) => {
-  const setActiveListing = useSetAtom(activeJobPostAtom);
+const JobsPage = ({ data: { initJob } }: Props) => {
+  const [activeJob, setActiveJob] = useAtom(activeJobAtom);
+  const initRef = useRef(false);
 
   // Sync SSR data active post
   useEffect(() => {
-    setActiveListing(activeListing);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+    if (!initRef.current) {
+      initRef.current = true;
+      setActiveJob(initJob);
+    }
+  }, [initJob, setActiveJob]);
 
   return (
-    <Layout>
-      <JobCardList initListing={activeListing} />
-    </Layout>
+    <div className="w-full pl-52 pr-[41.67%]">
+      <SideBar />
+
+      <div className="px-8">
+        <JobList initJob={initJob} activeJob={activeJob} />
+      </div>
+    </div>
   );
 };
 
@@ -48,27 +55,13 @@ export const getServerSideProps: GetServerSideProps<Props> = async (ctx) => {
   const res = await fetch(`${mwURL}/jobs/details/${shortUUID}`);
   if (!res.ok) return { notFound: true };
 
-  const activeListing = (await res.json()) as Job;
+  const initJob = (await res.json()) as Job;
 
   return {
     props: {
       data: {
-        activeListing,
+        initJob,
       },
     },
   };
 };
-
-const Layout = ({ children }: { children: ReactNode }) => (
-  <div className="w-full pl-52 pr-[41.67%]">
-    <SideBar />
-
-    <div className="px-8">{children}</div>
-
-    <div className="fixed top-0 right-0 z-10 w-5/12">
-      <div className="hide-scrollbar sticky top-0 h-screen space-y-6 overflow-y-scroll bg-dark py-8 px-6 pr-10">
-        <JobRightPanel />
-      </div>
-    </div>
-  </div>
-);

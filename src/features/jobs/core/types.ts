@@ -11,5 +11,12 @@ export interface Job {
   project?: Project;
   jobpost: JobPost;
   technologies: Technology[];
-  categories: Category[]; // Refinement: unused
+  categories: Category[];
+}
+
+export interface JobListQueryPage {
+  page: number;
+  count: number;
+  total: number;
+  data: Job[];
 }

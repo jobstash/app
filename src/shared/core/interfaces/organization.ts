@@ -12,7 +12,7 @@ export interface Organization {
   description: string;
 
   /** Summary text for right-panel-header */
-  summary: string;
+  summary?: string;
 
   /** Url tag for right-panel-header */
   url: string;
@@ -21,7 +21,7 @@ export interface Organization {
   location: string;
 
   /** Timestamp for org */
-  createdTimestamp: number;
+  createdTimestamp?: number;
 
   /** Most recent timestamp related to org */
   updatedTimestamp?: number;
@@ -30,7 +30,7 @@ export interface Organization {
   githubOrganization?: string;
 
   /** Team size tag text */
-  teamSize?: string;
+  teamSize?: string | null;
 
   /** Twitter tag text */
   twitter?: string;

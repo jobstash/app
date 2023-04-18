@@ -22,10 +22,9 @@ const colorPool = [
 interface Props {
   id: string;
   children: string;
-  isActive?: boolean;
 }
 
-const TechWrapper = ({ id, children, isActive }: Props) => {
+const TechWrapper = ({ id, children }: Props) => {
   const colorIndex = getColorIndex(id, colorPool.length);
 
   return (
@@ -34,7 +33,6 @@ const TechWrapper = ({ id, children, isActive }: Props) => {
         `flex items-center justify-center rounded-sm border ${
           'border-' + colorPool[colorIndex]
         } p-1 px-1.5`,
-        { 'brightness-125': Boolean(isActive) },
       )}
     >
       <span

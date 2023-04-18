@@ -1,1 +1,2 @@
-export * from './job-card-list';
+export * from './job-card';
+export { default as JobList } from './job-list';

@@ -1,1 +1,1 @@
-export * from './active-job-post-atom';
+export * from './active-job-atom';

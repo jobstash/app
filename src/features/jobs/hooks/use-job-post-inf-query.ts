@@ -13,7 +13,7 @@ import {
 } from '~/shared/core/constants';
 import { sentryMessage } from '~/shared/utils';
 
-import type { Job } from '../core/interfaces';
+import { Job } from '../core/types';
 
 interface FetchJobOptions {
   pageParam?: number;

@@ -1,7 +1,8 @@
 import { faker } from '@faker-js/faker';
 
-import { Job } from '~/features/jobs/core/interfaces';
 import { fakeJob, fakeOrg, fakeProject } from '~/shared/testutils/fakers';
+
+import { Job } from '../core/types';
 
 const dedupe = (skills: { id: string; name: string }[]) => {
   const set = new Set();

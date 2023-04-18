@@ -1,6 +1,6 @@
 import { slugify } from '~/shared/utils';
 
-import { Job } from '../core/interfaces';
+import { Job } from '../core/types';
 
 export const createJobKey = ({
   organization: { name: orgName },

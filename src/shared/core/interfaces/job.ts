@@ -24,7 +24,7 @@ export interface JobPost {
   jobLocation?: string;
 
   /** Commitment tag for job-post card */
-  jobCommitment?: string;
+  jobCommitment?: string | null;
 
   /** Apply button for right-panel */
   jobApplyPageUrl: string;
@@ -40,5 +40,5 @@ export interface JobPost {
   benefits?: string;
 
   /** Culture section for right-panel */
-  culture?: string;
+  culture?: string | null;
 }

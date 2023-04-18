@@ -39,20 +39,21 @@ const CardSet = ({
   link,
   showLinkIcon = true,
 }: CardSetProps) => {
-  const btn = (
-    <button className={cardset({ hasLink: Boolean(link) })}>
+  const hasLink = Boolean(link) || link !== '#';
+
+  return (
+    <button
+      className={cardset({ hasLink })}
+      onClick={
+        hasLink && typeof window !== 'undefined'
+          ? () => window.open(link, '_blank')
+          : undefined
+      }
+    >
       {icon}
       <Text size="sm">{children}</Text>
       {Boolean(link) && showLinkIcon && <ArrowCircleUpRightIcon />}
     </button>
-  );
-
-  if (!link || link === '#') return btn;
-
-  return (
-    <Link href={link} target="_blank" rel="noopener">
-      {btn}
-    </Link>
   );
 };
 

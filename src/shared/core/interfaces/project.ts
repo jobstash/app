@@ -23,7 +23,7 @@ export interface Project {
   tokenSymbol?: string;
 
   /** Still in construction indicator */
-  isInConstruction: boolean;
+  isInConstruction?: boolean;
 
   /** Tvl tag text */
   tvl?: number;

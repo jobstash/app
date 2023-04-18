@@ -1,4 +1,4 @@
-import { Job } from '../core/interfaces';
+import { Job } from '../core/types';
 
 import { createJobKey } from './create-job-key';
 
