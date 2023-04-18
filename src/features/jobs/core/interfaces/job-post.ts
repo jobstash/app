@@ -1,15 +1,15 @@
 import type {
   Category,
-  Job,
+  JobPost,
   Organization,
   Project,
   Technology,
 } from '~/shared/core/interfaces';
 
-export interface JobPost {
+export interface Job {
   organization: Organization;
   project?: Project;
-  jobpost: Job;
+  jobpost: JobPost;
   technologies: Technology[];
   categories: Category[]; // Refinement: unused
 }

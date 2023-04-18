@@ -1,8 +1,8 @@
 import Joi from 'joi';
 
-import { Job } from '../interfaces';
+import { JobPost } from '../interfaces';
 
-export const JobSchema = Joi.object<Job>({
+export const JobSchema = Joi.object<JobPost>({
   // Required
   id: Joi.string().required(),
   shortUUID: Joi.string().required(),

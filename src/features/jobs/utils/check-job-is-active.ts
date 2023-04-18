@@ -1,6 +1,6 @@
-import { JobPost } from '../core/interfaces';
+import { Job } from '../core/interfaces';
 
 import { createJobKey } from './create-job-key';
 
-export const checkJobIsActive = (segmentKey: string, post: JobPost) =>
+export const checkJobIsActive = (segmentKey: string, post: Job) =>
   segmentKey === createJobKey(post);

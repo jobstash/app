@@ -15,7 +15,7 @@ import {
 } from '~/shared/components';
 import { capitalize, prettyTimestamp } from '~/shared/utils';
 
-import { JobPost } from '../core/interfaces';
+import { Job } from '../core/interfaces';
 import {
   createJobCardOrgTags,
   createJobCardProjectTags,
@@ -23,7 +23,7 @@ import {
 } from '../utils';
 
 interface Props {
-  listing: JobPost;
+  listing: Job;
   isActive: boolean;
   onClick: MouseEventHandler;
 }

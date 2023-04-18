@@ -1,5 +1,5 @@
 import { atom } from 'jotai';
 
-import { JobPost } from '../core/interfaces';
+import { Job } from '../core/interfaces';
 
-export const activeJobPostAtom = atom<JobPost | null>(null);
+export const activeJobPostAtom = atom<Job | null>(null);

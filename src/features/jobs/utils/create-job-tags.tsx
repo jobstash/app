@@ -4,10 +4,10 @@ import {
   MoneyIcon,
   SuitcaseIcon,
 } from '~/shared/components';
-import { Job, TagElement } from '~/shared/core/interfaces';
+import { JobPost, TagElement } from '~/shared/core/interfaces';
 import { numFormatter } from '~/shared/utils';
 
-export const createJobTags = (job: Job): TagElement[] => {
+export const createJobTags = (job: JobPost): TagElement[] => {
   const {
     seniority,
     minSalaryRange,

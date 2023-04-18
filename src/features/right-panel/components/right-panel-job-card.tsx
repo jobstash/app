@@ -1,12 +1,12 @@
 import { createJobTags } from '~/features/jobs/utils';
 import { Button, CardSet, Heading, Text } from '~/shared/components';
-import { Job } from '~/shared/core/interfaces';
+import { JobPost } from '~/shared/core/interfaces';
 import { capitalize } from '~/shared/utils';
 
 import { createRightPanelJobDescriptions } from '../utils';
 
 interface Props {
-  job: Job;
+  job: JobPost;
 }
 
 export const RightPanelJobCard = ({ job }: Props) => {

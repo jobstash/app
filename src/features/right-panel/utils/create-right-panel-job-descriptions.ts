@@ -1,11 +1,11 @@
-import { Job } from '~/shared/core/interfaces';
+import { JobPost } from '~/shared/core/interfaces';
 
 export const createRightPanelJobDescriptions = ({
   role,
   team,
   benefits,
   culture,
-}: Job) => {
+}: JobPost) => {
   const descriptions = [{ label: 'Role', desc: role }];
 
   if (team) descriptions.push({ label: 'Team', desc: team });

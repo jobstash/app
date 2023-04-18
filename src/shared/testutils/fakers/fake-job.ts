@@ -1,10 +1,10 @@
 import { faker } from '@faker-js/faker';
 
-import { Job } from '~/shared/core/interfaces';
+import { JobPost } from '~/shared/core/interfaces';
 
 import { fakeDesc } from './fake-desc';
 
-export const fakeJob = (): Job => {
+export const fakeJob = (): JobPost => {
   const id = faker.datatype.uuid();
 
   const seniority = faker.helpers.arrayElement([

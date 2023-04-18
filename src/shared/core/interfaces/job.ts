@@ -1,4 +1,4 @@
-export interface Job {
+export interface JobPost {
   /** Each job-post has an id */
   id: string;
 

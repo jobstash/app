@@ -1,9 +1,9 @@
-import { JobPost } from '~/features/jobs/core/interfaces';
+import { Job } from '~/features/jobs/core/interfaces';
 
 import { JobRightPanel } from './job-right-panel';
 
 interface Props {
-  listings: JobPost[] | null;
+  listings: Job[] | null;
 }
 
 export const JobsRightPanel = ({ listings }: Props) => {

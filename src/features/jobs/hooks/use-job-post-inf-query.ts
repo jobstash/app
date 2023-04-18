@@ -13,7 +13,7 @@ import {
 } from '~/shared/core/constants';
 import { sentryMessage } from '~/shared/utils';
 
-import type { JobPost } from '../core/interfaces';
+import type { Job } from '../core/interfaces';
 
 interface FetchJobOptions {
   pageParam?: number;
@@ -59,7 +59,7 @@ interface JobListingsInfQueryPage {
   page: number;
   count: number;
   total: number;
-  data: JobPost[];
+  data: Job[];
 }
 
 export const useJobListingInfQuery = () => {

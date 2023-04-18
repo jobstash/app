@@ -15,14 +15,14 @@ import { useRouteSegments } from '~/shared/hooks';
 import { createRouteString } from '~/shared/utils';
 
 import { activeJobPostAtom } from '../atoms';
-import type { JobPost } from '../core/interfaces';
+import type { Job } from '../core/interfaces';
 import { useJobListingInfQuery } from '../hooks';
 import { checkJobIsActive, createJobKey } from '../utils';
 
 import { JobCard } from './job-card';
 
 interface Props {
-  initListing?: JobPost;
+  initListing?: Job;
 }
 
 export const JobCardList = ({ initListing }: Props) => {
@@ -74,7 +74,7 @@ export const JobCardList = ({ initListing }: Props) => {
   const { segments, push } = useRouteSegments();
 
   const setActiveListing = useSetAtom(activeJobPostAtom);
-  const onClickListing = (listing: JobPost) => {
+  const onClickListing = (listing: Job) => {
     setActiveListing(listing);
     document.dispatchEvent(new Event(EVENT_CARD_CLICK));
 

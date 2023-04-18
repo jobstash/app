@@ -8,9 +8,9 @@ import {
   TechnologySchema,
 } from '~/shared/core/schemas';
 
-import type { JobPost } from '../interfaces';
+import type { Job } from '../interfaces';
 
-export const JobPostSchema = Joi.object<JobPost>({
+export const JobPostSchema = Joi.object<Job>({
   jobpost: JobSchema.required(),
   organization: OrganizationSchema.required(),
   technologies: Joi.array().items(TechnologySchema).required().min(1),

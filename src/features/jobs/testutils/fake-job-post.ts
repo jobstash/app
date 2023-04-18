@@ -1,6 +1,6 @@
 import { faker } from '@faker-js/faker';
 
-import { JobPost } from '~/features/jobs/core/interfaces';
+import { Job } from '~/features/jobs/core/interfaces';
 import { fakeJob, fakeOrg, fakeProject } from '~/shared/testutils/fakers';
 
 const dedupe = (skills: { id: string; name: string }[]) => {
@@ -17,7 +17,7 @@ const dedupe = (skills: { id: string; name: string }[]) => {
   return result;
 };
 
-export const fakeJobPost = (): JobPost => ({
+export const fakeJobPost = (): Job => ({
   organization: fakeOrg(),
   project: fakeProject(),
   jobpost: fakeJob(),
