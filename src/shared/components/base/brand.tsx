@@ -4,7 +4,7 @@ import { memo } from 'react';
 const Brand = () => (
   <Image
     priority
-    src="/JobStash.png"
+    src="/JobStash.svg"
     alt="JobStash Logo"
     width="120"
     height="32"
