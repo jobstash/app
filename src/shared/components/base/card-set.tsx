@@ -39,7 +39,7 @@ const CardSet = ({
   link,
   showLinkIcon = true,
 }: CardSetProps) => {
-  const hasLink = Boolean(link) || link !== '#';
+  const hasLink = Boolean(link) && link !== '#';
 
   return (
     <button
