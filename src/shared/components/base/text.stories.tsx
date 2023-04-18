@@ -1,10 +1,10 @@
 import { Meta, StoryObj } from '@storybook/react';
 
-import { Text } from './text';
+import Text from './text';
 
 const meta: Meta<typeof Text> = {
   component: Text,
-  title: 'components/base/Textx',
+  title: 'components/base/Text',
   args: {
     children: 'Hello World',
   },

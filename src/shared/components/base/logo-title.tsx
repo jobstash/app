@@ -1,8 +1,10 @@
+import { memo } from 'react';
+
 import { cva, VariantProps } from 'class-variance-authority';
 
-import { Avatar, AvatarProps } from './avatar';
-import { Heading } from './heading';
-import { Text } from './text';
+import { type AvatarProps, default as Avatar } from './avatar';
+import Heading from './heading';
+import Text from './text';
 
 const logoTitle = cva([], {
   variants: {
@@ -22,7 +24,7 @@ interface LogoTitleProps extends LogoTitleVariantProps {
   location?: string;
 }
 
-export const LogoTitle = ({
+const LogoTitle = ({
   title,
   avatarProps: { src, alt },
   size = 'md',
@@ -40,3 +42,5 @@ export const LogoTitle = ({
     </div>
   </div>
 );
+
+export default memo(LogoTitle);

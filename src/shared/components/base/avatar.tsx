@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import { memo } from 'react';
 
 import { cva, VariantProps } from 'class-variance-authority';
 import clsx from 'clsx';
@@ -21,8 +22,10 @@ export interface AvatarProps extends AvatarVariantProps {
   isRounded?: boolean;
 }
 
-export const Avatar = ({ src, alt, size, isRounded }: AvatarProps) => (
+const Avatar = ({ src, alt, size, isRounded }: AvatarProps) => (
   <div className={clsx(avatar({ size }), { 'rounded-full': isRounded })}>
     <Image fill src={src} alt={alt} />
   </div>
 );
+
+export default memo(Avatar);

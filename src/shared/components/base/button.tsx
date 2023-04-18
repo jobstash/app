@@ -1,8 +1,8 @@
-import { ButtonHTMLAttributes, forwardRef, ReactNode } from 'react';
+import { ButtonHTMLAttributes, forwardRef, memo, ReactNode } from 'react';
 
 import { cva, VariantProps } from 'class-variance-authority';
 
-import { Text } from './text';
+import Text from './text';
 
 const wrapper = cva(
   [
@@ -127,7 +127,7 @@ interface ButtonProps extends ButtonHTMLProps, ButtonVariantProps {
   right?: ReactNode;
 }
 
-export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
+const Button = forwardRef<HTMLButtonElement, ButtonProps>(
   (
     {
       children,
@@ -168,3 +168,5 @@ export const Button = forwardRef<HTMLButtonElement, ButtonProps>(
 );
 
 Button.displayName = 'Button';
+
+export default memo(Button);

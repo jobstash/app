@@ -12,7 +12,7 @@ import {
   UsersThreeIcon,
 } from '../icons';
 
-import { CardSet } from './card-set';
+import CardSet from './card-set';
 
 const meta: Meta<typeof CardSet> = {
   component: CardSet,

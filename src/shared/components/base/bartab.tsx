@@ -5,7 +5,7 @@ import clsx from 'clsx';
 
 import { CaretLeftSidebarIcon } from '../icons';
 
-import { Text } from './text';
+import Text from './text';
 
 const bartab = cva(['h-10 w-full border-none rounded-lg p-[1px]'], {
   variants: {
@@ -63,7 +63,7 @@ interface BartabProps extends ButtonHTMLProps, BartabVariantProps {
   right?: ReactNode;
 }
 
-export const Bartab = forwardRef<HTMLButtonElement, BartabProps>(
+const Bartab = forwardRef<HTMLButtonElement, BartabProps>(
   (
     {
       text,
@@ -98,3 +98,5 @@ export const Bartab = forwardRef<HTMLButtonElement, BartabProps>(
 );
 
 Bartab.displayName = 'Bartab';
+
+export default Bartab;

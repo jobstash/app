@@ -1,6 +1,6 @@
 import { type ReactNode } from 'react';
 
-import { Heading } from './heading';
+import Heading from './heading';
 
 export interface CardHeadingProps {
   children: string;

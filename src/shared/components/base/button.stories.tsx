@@ -2,7 +2,7 @@ import { Meta, StoryObj } from '@storybook/react';
 
 import { CaretDownIcon, FilterIcon } from '../icons';
 
-import { Button } from './button';
+import Button from './button';
 
 const meta: Meta<typeof Button> = {
   component: Button,

@@ -1,6 +1,7 @@
 import Image from 'next/image';
+import { memo } from 'react';
 
-export const Brand = () => (
+const Brand = () => (
   <Image
     priority
     src="/JobStash.png"
@@ -10,3 +11,5 @@ export const Brand = () => (
     quality={100}
   />
 );
+
+export default memo(Brand);

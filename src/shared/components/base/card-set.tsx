@@ -1,12 +1,12 @@
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { ReactNode } from 'react';
+import { memo, ReactNode } from 'react';
 
 import { cva, VariantProps } from 'class-variance-authority';
 
 import { ArrowCircleUpRightIcon } from '../icons';
 
-import { Text } from './text';
+import Text from './text';
 
 const cardset = cva(
   [
@@ -33,7 +33,7 @@ interface CardSetProps extends CardSetVariantProps {
   showLinkIcon?: boolean;
 }
 
-export const CardSet = ({
+const CardSet = ({
   icon,
   children,
   link,
@@ -55,3 +55,5 @@ export const CardSet = ({
     </Link>
   );
 };
+
+export default memo(CardSet);

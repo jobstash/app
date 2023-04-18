@@ -8,12 +8,12 @@ import {
 } from '../icons';
 import { BookmarksSidebarIcon } from '../icons/bookmarks-sidebar-icon';
 
-import { Avatar } from './avatar';
-import { Bartab } from './bartab';
+import Avatar from './avatar';
+import Bartab from './bartab';
 
 const meta: Meta<typeof Bartab> = {
   component: Bartab,
-  title: 'components/base/Bartabx',
+  title: 'components/base/Bartab',
   args: {
     text: 'Bartab',
   },

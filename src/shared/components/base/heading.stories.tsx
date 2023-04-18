@@ -1,10 +1,10 @@
 import { Meta, StoryObj } from '@storybook/react';
 
-import { Heading } from './heading';
+import Heading from './heading';
 
 const meta: Meta<typeof Heading> = {
   component: Heading,
-  title: 'components/base/heading',
+  title: 'components/base/Heading',
   args: {
     children: 'Hello World',
   },

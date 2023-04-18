@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 import { type VariantProps, cva } from 'class-variance-authority';
 
 import { roboto } from '~/shared/core/constants';
@@ -30,10 +32,12 @@ interface TextProps extends TextVariantProps {
   children: string;
 }
 
-export const Text = ({
+const Text = ({
   children,
   fw = 'normal',
   size = 'md',
   color = 'white',
   ...props
 }: TextProps) => <span className={text({ fw, size, color })}>{children}</span>;
+
+export default memo(Text);

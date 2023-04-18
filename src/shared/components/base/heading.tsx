@@ -38,7 +38,7 @@ const sizeHeadingMap: Record<
   sm: 'h4',
 };
 
-export const Heading = ({
+const Heading = ({
   children,
   fw = 'bold',
   size = 'xl',
@@ -54,3 +54,5 @@ export const Heading = ({
     </HeadingTag>
   );
 };
+
+export default Heading;

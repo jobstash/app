@@ -1,3 +1,5 @@
+import { memo } from 'react';
+
 import clsx from 'clsx';
 
 import { lato } from '~/shared/core/constants';
@@ -23,7 +25,7 @@ interface Props {
   isActive?: boolean;
 }
 
-export const TechWrapper = ({ id, children, isActive }: Props) => {
+const TechWrapper = ({ id, children, isActive }: Props) => {
   const colorIndex = getColorIndex(id, colorPool.length);
 
   return (
@@ -61,3 +63,5 @@ function getColorIndex(uuid: string, N: number) {
 
   return accumulator; // Return the result
 }
+
+export default memo(TechWrapper);

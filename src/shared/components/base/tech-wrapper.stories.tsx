@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react';
 
-import { TechWrapper } from './tech-wrapper';
+import TechWrapper from './tech-wrapper';
 
 const meta: Meta<typeof TechWrapper> = {
   component: TechWrapper,
