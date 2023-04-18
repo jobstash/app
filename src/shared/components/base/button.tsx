@@ -6,7 +6,7 @@ import Text from './text';
 
 const wrapper = cva(
   [
-    'rounded-lg w-fit cursor-pointer border-none p-[1px] active:translate-y-[2px]',
+    'rounded-lg w-fit cursor-pointer border-none p-[1px]',
     'transition-color duration-200 ease-in-out',
   ],
   {
