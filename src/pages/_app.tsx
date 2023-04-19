@@ -75,7 +75,7 @@ const App = ({ Component, pageProps }: AppPropsWithAuth) => {
 
   const router = useRouter();
   useEffect(() => {
-    const shouldDisplay = nProgressRoutes.has(router.asPath);
+    const shouldDisplay = nProgressRoutes.has(router.pathname);
     const handleStart = () => {
       if (shouldDisplay) NProgress.start();
     };

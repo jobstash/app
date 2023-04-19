@@ -18,6 +18,7 @@ interface Props {
   job: Job;
   isActive: boolean;
   children: ReactNode;
+  filterParams: string;
   shouldScroll?: boolean;
 }
 
@@ -40,16 +41,17 @@ const JobCardWrapper = ({
   job,
   isActive,
   children,
+  filterParams,
   shouldScroll = false,
 }: Props) => {
   const route = useMemo(
     () =>
-      createRouteString(
+      `${createRouteString(
         TEXT_ROUTE_SECTION_JOBS,
         createJobKey(job),
         TEXT_ROUTE_TAB_DETAILS,
-      ),
-    [job],
+      )}${filterParams ? '?' + filterParams : ''}`,
+    [filterParams, job],
   );
 
   const setActiveJob = useSetAtom(activeJobAtom);

@@ -2,8 +2,10 @@ import { GetServerSideProps } from 'next';
 
 import { dehydrate, QueryClient } from '@tanstack/react-query';
 
-import { getFilterFromQuery } from '~/features/filtersx/utils';
+import { Filters } from '~/features/filters/components';
+import { getFilterFromQuery } from '~/features/filters/utils';
 import { JobList } from '~/features/jobs/components';
+import { Job } from '~/features/jobs/core/types';
 import { fetchJobList } from '~/features/jobs/fetch';
 import { SideBar } from '~/features/sidebar/components';
 import { withCSR } from '~/shared/hocs';
@@ -15,6 +17,7 @@ const JobListPage = () => (
     <SideBar />
 
     <div className="px-8">
+      <Filters />
       <JobList activeJob={null} />
     </div>
   </div>
@@ -34,12 +37,17 @@ export const getServerSideProps: GetServerSideProps<Props> = withCSR(
         fetchJobList({ pageParam, queryKey }),
     });
 
-    // If later you implement a JobPost query, you can iterate on first dehydrate result
-    // and use setQueryData to cache result of individual fetched jobpost
-    // then use a second dehydrate as the final dehydratedState to include cached queries
-    const dehydratedState = dehydrate(queryClient);
+    // Cache individual item from the list
+    const initDehydratedState = dehydrate(queryClient);
+    const jobPosts = (initDehydratedState.queries[0].state.data as any).pages[0]
+      .data as Job[];
+    for (const job of jobPosts) {
+      const jobUuid = job.jobpost.shortUUID;
+      queryClient.setQueryData(['job-post', jobUuid], job);
+    }
 
-    // Need this since pageParams defaults to [undefined] which nextjs cannot serialize
+    // Dehydrate again to include setup'd cached data
+    const dehydratedState = dehydrate(queryClient);
     (dehydratedState.queries[0].state.data as any).pageParams = [null];
 
     return {

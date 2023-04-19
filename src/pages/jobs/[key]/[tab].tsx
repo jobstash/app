@@ -6,7 +6,8 @@ import { dehydrate, QueryClient } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 import NProgress from 'nprogress';
 
-import { getFilterFromQuery } from '~/features/filtersx/utils';
+import { Filters } from '~/features/filters/components';
+import { getFilterFromQuery } from '~/features/filters/utils';
 import { activeJobAtom } from '~/features/jobs/atoms';
 import JobList from '~/features/jobs/components/job-list';
 import { Job } from '~/features/jobs/core/types';
@@ -62,6 +63,7 @@ const JobsPage = ({ data: { initJob, fromSSR } }: Props) => {
       <SideBar />
 
       <div className="px-8">
+        <Filters />
         <JobList initJob={initJob} activeJob={activeJob ?? initJob} />
       </div>
 

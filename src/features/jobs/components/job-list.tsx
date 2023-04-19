@@ -2,6 +2,7 @@ import { memo, useEffect, useMemo } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 import { useJobListingInfQuery } from '~/features/jobs/hooks';
+import { Text } from '~/shared/components';
 
 import type { Job } from '../../jobs/core/types';
 
@@ -13,8 +14,15 @@ interface Props {
 }
 
 const JobList = ({ initJob, activeJob }: Props) => {
-  const { data, isLoading, isFetchingNextPage, fetchNextPage, hasNextPage } =
-    useJobListingInfQuery();
+  const {
+    data,
+    error,
+    isLoading,
+    isFetchingNextPage,
+    fetchNextPage,
+    hasNextPage,
+    filterParams,
+  } = useJobListingInfQuery();
 
   const jobs = useMemo(() => {
     if (!data) return [];
@@ -42,19 +50,34 @@ const JobList = ({ initJob, activeJob }: Props) => {
     return (
       <div>
         {initJob && (
-          <JobCard key={initJob.jobpost.shortUUID} isActive job={initJob} />
+          <JobCard
+            key={initJob.jobpost.shortUUID}
+            isActive
+            job={initJob}
+            filterParams={filterParams}
+          />
         )}
         <p>Loading JobList ...</p>
       </div>
     );
 
+  if (error) {
+    return <p>error = {(error as Error).message}</p>;
+  }
+
   return (
     <div>
+      {data && (
+        <div className="pt-4">
+          <Text color="dimmed">{`Jobs Listed: ${data.pages[0].total}`}</Text>
+        </div>
+      )}
       {jobs.map((job) => (
         <JobCard
           key={job.jobpost.shortUUID}
           job={job}
           isActive={job.jobpost.shortUUID === activeJob?.jobpost.shortUUID}
+          filterParams={filterParams}
         />
       ))}
       {jobs.length > 0 && (
