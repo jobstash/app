@@ -23,7 +23,7 @@ const JobCardTechs = ({ techs }: Props) => {
             </TechWrapper>
           ))}
         </div>
-        <div className="z-30 shrink-0 self-center">
+        <div className="z-30 shrink-0 self-start">
           <Button variant="translucent">Sign Up to See Matches</Button>
         </div>
       </div>
