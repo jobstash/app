@@ -5,18 +5,20 @@ import {
   CardSet,
   Heading,
   ShareIcon,
+  TechWrapper,
   Text,
 } from '~/shared/components';
-import { JobPost } from '~/shared/core/interfaces';
+import { JobPost, Technology } from '~/shared/core/interfaces';
 import { capitalize } from '~/shared/utils';
 
 import { createRightPanelJobDescriptions } from '../utils';
 
 interface Props {
   job: JobPost;
+  technologies: Technology[];
 }
 
-export const RightPanelJobCard = ({ job }: Props) => {
+export const RightPanelJobCard = ({ job, technologies }: Props) => {
   const { jobTitle, jobApplyPageUrl, jobPageUrl } = job;
 
   const tags = createJobTags(job);
@@ -72,6 +74,32 @@ export const RightPanelJobCard = ({ job }: Props) => {
           <Text color="dimmed">{d.desc}</Text>
         </div>
       ))}
+
+      <div className="flex h-8 flex-col justify-center">
+        <hr className="border-t border-white/10" />
+      </div>
+
+      <div className="flex flex-col gap-5">
+        <div className="flex flex-col gap-2">
+          <Heading size="sm" fw="semibold">
+            Technologies
+          </Heading>
+          <Text color="dimmed">
+            Uncover the technical skills and tools employed by the company, and
+            gain insight into the technologies that drive their success.
+          </Text>
+        </div>
+      </div>
+
+      <div className="flex flex-wrap gap-3">
+        {technologies.map((tech) => (
+          <TechWrapper key={tech.id} id={tech.id}>
+            {tech.name}
+          </TechWrapper>
+        ))}
+      </div>
+
+      {/* <Button variant="primary">Explore Project</Button> */}
     </div>
   );
 };
