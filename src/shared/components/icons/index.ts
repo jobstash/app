@@ -44,6 +44,7 @@ export { ProjectIcon } from './project-icon';
 export { RevenueIcon } from './revenue-icon';
 export { RocketIcon } from './rocket-icon';
 export { RocketLaunchIcon } from './rocket-launch-icon';
+export { ShareIcon } from './share-icon';
 export { ShieldCheckIcon } from './shield-check-icon';
 export { SkullIcon } from './skull-icon';
 export { SuitcaseIcon } from './suitcase-icon';

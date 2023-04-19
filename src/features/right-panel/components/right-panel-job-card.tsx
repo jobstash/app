@@ -1,5 +1,12 @@
 import { createJobTags } from '~/features/jobs/utils';
-import { Button, CardSet, Heading, Text } from '~/shared/components';
+import {
+  BookmarkIcon,
+  Button,
+  CardSet,
+  Heading,
+  ShareIcon,
+  Text,
+} from '~/shared/components';
 import { JobPost } from '~/shared/core/interfaces';
 import { capitalize } from '~/shared/utils';
 
@@ -24,10 +31,18 @@ export const RightPanelJobCard = ({ job }: Props) => {
   return (
     <div className="flex flex-col gap-y-4 p-6">
       <div className="flex flex-col items-start justify-center gap-y-4">
-        <div className="h-fit">
+        <div className="flex h-fit w-full justify-between">
           <Heading size="md" fw="semibold">
             {jobTitle}
           </Heading>
+          <div className="flex items-start space-x-4 pl-8">
+            <Button isIcon size="sm" variant="translucent">
+              <BookmarkIcon />
+            </Button>
+            <Button isIcon size="sm" variant="translucent">
+              <ShareIcon />
+            </Button>
+          </div>
         </div>
 
         <div className="flex h-6 gap-x-4 pl-0.5">
