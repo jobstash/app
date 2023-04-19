@@ -16,7 +16,6 @@ interface Props {
 
 const JobRightPanel = ({ activeJob }: Props) => {
   const { segments, push } = useRouteSegments();
-  const org = useMemo(() => activeJob?.organization, [activeJob?.organization]);
 
   const { filterParams } = useUrlFilterParams();
   const [isPending, startTransition] = useTransition();
@@ -35,14 +34,19 @@ const JobRightPanel = ({ activeJob }: Props) => {
 
   if (!activeJob) return <p>Loading right-panel</p>;
 
+  const { organization, project, fundingRounds } = activeJob;
+
   return (
     <JobRightPanelWrapper>
       <div className="absolute top-0" id={ID_TOP_RIGHT_PANEL} />
-      <JobRightPanelHeader organization={org!} />
+      <JobRightPanelHeader
+        organization={organization}
+        funding={fundingRounds[0]}
+      />
       <JobRightPanelTabs
         tab={segments.tab}
         isPending={isPending}
-        hasProject={Boolean(activeJob.project)}
+        hasProject={Boolean(project)}
         onClickTab={onClickTab}
       />
       <JobRightPanelCard

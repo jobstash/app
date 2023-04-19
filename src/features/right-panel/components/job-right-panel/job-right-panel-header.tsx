@@ -1,18 +1,19 @@
 import { memo, useMemo } from 'react';
 
 import { CardSet, LogoTitle, Text } from '~/shared/components';
-import type { Organization } from '~/shared/core/interfaces';
+import type { FundingRound, Organization } from '~/shared/core/interfaces';
 
 import { createRightPanelOrgTags } from '../../utils';
 
 interface Props {
   organization: Organization;
+  funding: FundingRound;
 }
 
-const JobRightPanelHeader = ({ organization }: Props) => {
+const JobRightPanelHeader = ({ organization, funding }: Props) => {
   const { orgTags, orgSocials } = useMemo(
-    () => createRightPanelOrgTags(organization),
-    [organization],
+    () => createRightPanelOrgTags(organization, funding),
+    [funding, organization],
   );
 
   return (

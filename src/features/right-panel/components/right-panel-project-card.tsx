@@ -145,7 +145,7 @@ export const RightPanelProjectCard = ({ project }: Props) => {
           <hr className="border-t border-white/10" />
         </div>
 
-        <div className="flex flex-col gap-5">
+        {/* <div className="flex flex-col gap-5">
           <div className="flex flex-col gap-2">
             <Heading size="sm" fw="semibold">
               Technologies
@@ -168,7 +168,7 @@ export const RightPanelProjectCard = ({ project }: Props) => {
           <TechWrapper id="9">TBD</TechWrapper>
         </div>
 
-        <Button variant="primary">Explore Project</Button>
+        <Button variant="primary">Explore Project</Button> */}
       </div>
     </div>
   );

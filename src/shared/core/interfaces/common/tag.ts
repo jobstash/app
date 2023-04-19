@@ -8,4 +8,5 @@ export interface TagElement {
   /** External url used when clicked */
   link?: string;
   showLinkIcon?: boolean;
+  asLink?: boolean;
 }

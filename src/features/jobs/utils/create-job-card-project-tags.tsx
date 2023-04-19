@@ -1,4 +1,5 @@
 import {
+  ActiveUsersIcon,
   CategoryIcon,
   CurrencyCircleDollarIcon,
   MonthlyVolumeIcon,
@@ -22,10 +23,9 @@ export const createJobCardProjectTags = (project?: Project) => {
     tokenSymbol,
     tvl,
     monthlyVolume,
+    monthlyActiveUsers,
     monthlyFees,
     monthlyRevenue,
-    hacks,
-    audits,
   } = project;
 
   if (tokenSymbol)
@@ -52,6 +52,13 @@ export const createJobCardProjectTags = (project?: Project) => {
       icon: <MonthlyVolumeIcon />,
     });
 
+  if (monthlyActiveUsers) {
+    projectTvlTags.push({
+      text: `Monthly Active Users: $${numFormatter.format(monthlyActiveUsers)}`,
+      icon: <ActiveUsersIcon />,
+    });
+  }
+
   if (monthlyFees)
     projectTvlTags.push({
       text: `Monthly Fees: $${numFormatter.format(monthlyFees)}`,
@@ -63,20 +70,6 @@ export const createJobCardProjectTags = (project?: Project) => {
       text: `Monthly Revenue: $${numFormatter.format(monthlyRevenue)}`,
       icon: <RevenueIcon />,
     });
-
-  if (audits.length > 0) {
-    projectAuditTags.push({
-      text: `Audits: ${audits.length}`,
-      icon: <ShieldCheckIcon />,
-    });
-  }
-
-  if (hacks.length > 0) {
-    projectAuditTags.push({
-      text: `Hacks: ${hacks.length}`,
-      icon: <SkullIcon />,
-    });
-  }
 
   return { projectInfoTags, projectTvlTags, projectAuditTags };
 };
