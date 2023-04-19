@@ -7,10 +7,10 @@ import { CaretLeftSidebarIcon } from '../icons';
 
 import Text from './text';
 
-const bartab = cva(['h-10 w-full border-none rounded-lg p-[1px]'], {
+const bartab = cva(['h-10 w-full border-none rounded-lg p-[2px]'], {
   variants: {
     variant: {
-      bartab: 'bg-darker-gray hover:bg-dark-gray',
+      bartab: 'bg-darker-gray transition-all hover:bg-dark-gray',
       wallet:
         'bg-gradient-to-r from-primary to-quaternary hover:via-[#C77B31] hover:to-quaternary',
     },
@@ -18,6 +18,13 @@ const bartab = cva(['h-10 w-full border-none rounded-lg p-[1px]'], {
       true: '',
     },
   },
+  compoundVariants: [
+    {
+      variant: 'bartab',
+      isActive: true,
+      className: 'bg-gradient-to-l from-primary to-tertiary',
+    },
+  ],
 });
 
 const inner = cva(
