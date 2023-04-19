@@ -35,7 +35,7 @@ export const AdminLayout = ({ breadCrumbs, sideNav, children }: Props) => (
       <div className="relative w-full pl-52">
         <SideBar />
 
-        <div className="sticky top-0 z-50 w-full border-b border-white/10 bg-[#191919] py-8 px-20">
+        <div className="sticky top-0 z-50 w-full border-b border-white/10 bg-[#191919] px-20 py-8">
           <div className="flex items-center justify-between">
             <div className="flex basis-4/12 flex-col space-y-6">
               <Title order={1}>Admin Panel</Title>
