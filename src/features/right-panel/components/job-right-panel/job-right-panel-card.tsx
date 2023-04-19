@@ -22,7 +22,7 @@ interface Props {
 const JobRightPanelCard = ({
   tabSegment,
   isPending,
-  job: { jobpost, organization, project },
+  job: { jobpost, organization, project, technologies },
 }: Props) => (
   <div
     className={clsx(
@@ -32,7 +32,7 @@ const JobRightPanelCard = ({
   >
     <div className="rounded-3xl bg-darker-gray">
       {tabSegment === TEXT_ROUTE_TAB_DETAILS && (
-        <RightPanelJobCard job={jobpost} />
+        <RightPanelJobCard job={jobpost} technologies={technologies} />
       )}
       {tabSegment === TEXT_ROUTE_TAB_ORGANIZATION && (
         <RightPanelOrgCard org={organization} />
