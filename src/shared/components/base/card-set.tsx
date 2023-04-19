@@ -12,12 +12,12 @@ const cardset = cva(
   [
     'flex justify-center items-center gap-x-1',
     'rounded w-fit h-[26px]',
-    'transition-color duration-200 ease-in-out',
+    'transition-color duration-200 ease-in-out transform translate-x-0 translate-y-0',
   ],
   {
     variants: {
       hasLink: {
-        true: 'bg-white/10 px-2 py-1 hover:bg-white/20 active:bg-white/30 cursor-pointer active:translate-y-[2px]',
+        true: 'bg-white/10 px-2 py-1 cursor-pointer hover:bg-white/20 hover:ring-inset hover:ring-1 hover:ring-white/40 active:bg-white/30',
         false: 'bg-none cursor-default',
       },
     },

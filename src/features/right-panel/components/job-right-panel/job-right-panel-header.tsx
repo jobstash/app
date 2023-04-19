@@ -37,7 +37,7 @@ const JobRightPanelHeader = ({ organization, fundingRounds }: Props) => {
             }}
           />
         </div>
-        <div className="flex h-6 gap-4">
+        <div className="flex gap-4">
           {orgTags.map(({ text, icon, link }) => (
             <CardSet key={text} link={link} icon={icon}>
               {text}
