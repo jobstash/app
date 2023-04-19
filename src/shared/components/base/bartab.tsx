@@ -75,14 +75,13 @@ const Bartab = forwardRef<HTMLButtonElement, BartabProps>(
     {
       text,
       left = null,
-      right = <CaretLeftSidebarIcon />,
       variant = 'bartab',
       isActive,
       ...props
     }: BartabProps,
     ref,
   ) => {
-    const isTextOnly = !left && !right;
+    const isTextOnly = !left;
 
     return (
       <button ref={ref} {...props} className={bartab({ variant, isActive })}>
@@ -97,7 +96,6 @@ const Bartab = forwardRef<HTMLButtonElement, BartabProps>(
           >
             <Text fw="medium">{text}</Text>
           </div>
-          {right}
         </div>
       </button>
     );
