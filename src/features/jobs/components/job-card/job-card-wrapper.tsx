@@ -26,7 +26,7 @@ const jobCard = cva(
   [
     'flex flex-col p-6 gap-2.5 rounded-3xl bg-white/5 my-8',
     'cursor-pointer hover:bg-white/10',
-    'border border-transparent hover:border-white/20',
+    'border border-transparent transition-all hover:border-white/20',
   ],
   {
     variants: {
