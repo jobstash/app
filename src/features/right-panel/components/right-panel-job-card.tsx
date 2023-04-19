@@ -10,10 +10,16 @@ interface Props {
 }
 
 export const RightPanelJobCard = ({ job }: Props) => {
-  const { jobTitle } = job;
+  const { jobTitle, jobApplyPageUrl, jobPageUrl } = job;
 
   const tags = createJobTags(job);
   const descriptions = createRightPanelJobDescriptions(job);
+
+  const onClick = () => {
+    if (typeof window !== 'undefined') {
+      window.open(jobApplyPageUrl ?? jobPageUrl, '_blank');
+    }
+  };
 
   return (
     <div className="flex flex-col gap-y-4 p-6">
@@ -33,7 +39,9 @@ export const RightPanelJobCard = ({ job }: Props) => {
         </div>
 
         <div>
-          <Button variant="primary">Apply for this job</Button>
+          <Button variant="primary" onClick={onClick}>
+            Apply for this job
+          </Button>
         </div>
       </div>
 
