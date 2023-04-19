@@ -41,7 +41,7 @@ const JobRightPanel = ({ activeJob }: Props) => {
       <div className="absolute top-0" id={ID_TOP_RIGHT_PANEL} />
       <JobRightPanelHeader
         organization={organization}
-        funding={fundingRounds[0]}
+        fundingRounds={fundingRounds}
       />
       <JobRightPanelTabs
         tab={segments.tab}

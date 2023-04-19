@@ -19,7 +19,7 @@ import { createOrgFundingDateString } from './create-org-funding-date-string';
 
 export const createRightPanelOrgTags = (
   org: Organization,
-  funding: FundingRound,
+  fundingDateTs: number,
 ) => {
   const {
     url,
@@ -50,10 +50,12 @@ export const createRightPanelOrgTags = (
     });
   }
 
-  orgTags.push({
-    text: createOrgFundingDateString(funding.date),
-    icon: <BankIcon />,
-  });
+  if (fundingDateTs !== -1) {
+    orgTags.push({
+      text: createOrgFundingDateString(fundingDateTs),
+      icon: <BankIcon />,
+    });
+  }
 
   const orgSocials: TagElement[] = [];
 

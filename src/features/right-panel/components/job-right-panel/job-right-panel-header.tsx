@@ -7,13 +7,22 @@ import { createRightPanelOrgTags } from '../../utils';
 
 interface Props {
   organization: Organization;
-  funding: FundingRound;
+  fundingRounds: FundingRound[];
 }
 
-const JobRightPanelHeader = ({ organization, funding }: Props) => {
+const JobRightPanelHeader = ({ organization, fundingRounds }: Props) => {
+  const fundingDateTs = useMemo(() => {
+    const fundingDates = fundingRounds
+      .filter((f) => Boolean(f.date))
+      .map((f) => f.date);
+    if (fundingDates.length === 0) return -1;
+
+    return fundingDates[0];
+  }, [fundingRounds]);
+
   const { orgTags, orgSocials } = useMemo(
-    () => createRightPanelOrgTags(organization, funding),
-    [funding, organization],
+    () => createRightPanelOrgTags(organization, fundingDateTs),
+    [fundingDateTs, organization],
   );
 
   return (
