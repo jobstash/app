@@ -11,13 +11,14 @@ import {
 } from '~/shared/core/constants';
 import { createRouteString } from '~/shared/utils';
 
-import { Job } from '../../../jobs/core/types';
+import type { Job } from '../../../jobs/core/types';
 import { activeJobAtom } from '../../atoms';
 
 interface Props {
   job: Job;
   isActive: boolean;
   children: ReactNode;
+  shouldScroll?: boolean;
 }
 
 const jobCard = cva(
@@ -35,7 +36,12 @@ const jobCard = cva(
   },
 );
 
-const JobCardWrapper = ({ job, isActive, children }: Props) => {
+const JobCardWrapper = ({
+  job,
+  isActive,
+  children,
+  shouldScroll = false,
+}: Props) => {
   const route = useMemo(
     () =>
       createRouteString(
@@ -56,7 +62,7 @@ const JobCardWrapper = ({ job, isActive, children }: Props) => {
     <Link
       shallow
       href={route}
-      scroll={false}
+      scroll={shouldScroll}
       prefetch={false}
       onClick={onClick}
     >

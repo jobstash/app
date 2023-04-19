@@ -26,7 +26,7 @@ const JobRightPanel = ({ activeJob }: Props) => {
       }),
     );
 
-  if (!activeJob) return null;
+  if (!activeJob) return <p>Loading right-panel</p>;
 
   return (
     <JobRightPanelWrapper>

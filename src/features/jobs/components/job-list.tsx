@@ -3,12 +3,12 @@ import { useInView } from 'react-intersection-observer';
 
 import { useJobListingInfQuery } from '~/features/jobs/hooks';
 
-import { Job } from '../../jobs/core/types';
+import type { Job } from '../../jobs/core/types';
 
 import { JobCard } from './job-card';
 
 interface Props {
-  initJob: Job;
+  initJob?: Job | null;
   activeJob: Job | null;
 }
 
@@ -18,10 +18,15 @@ const JobList = ({ initJob, activeJob }: Props) => {
 
   const jobs = useMemo(() => {
     if (!data) return [];
-    const result = data.pages
-      .flatMap((d) => d.data)
-      .filter((d) => d.jobpost.shortUUID !== initJob.jobpost.shortUUID);
-    result.unshift(initJob);
+
+    let result = data.pages.flatMap((d) => d.data);
+
+    if (initJob) {
+      result = result.filter(
+        (d) => d.jobpost.shortUUID !== initJob.jobpost.shortUUID,
+      );
+      result.unshift(initJob);
+    }
 
     return result;
   }, [data, initJob]);
@@ -36,7 +41,9 @@ const JobList = ({ initJob, activeJob }: Props) => {
   if (isLoading)
     return (
       <div>
-        <JobCard key={initJob.jobpost.shortUUID} isActive job={initJob} />
+        {initJob && (
+          <JobCard key={initJob.jobpost.shortUUID} isActive job={initJob} />
+        )}
         <p>Loading JobList ...</p>
       </div>
     );

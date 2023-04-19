@@ -1,11 +1,8 @@
-import { useRouter } from 'next/router';
+import { ParsedUrlQuery } from 'node:querystring';
 
 import { FILTER_CONFIG_KEY_SET } from '../core/constants';
-import { getFilterFromQuery } from '../utils';
 
-export const useUrlFilterParams = () => {
-  const { query } = useRouter();
-
+export const getFilterFromQuery = (query: ParsedUrlQuery) => {
   const filterQueryParams: Record<string, string> = {};
   let filterParams = '';
 
@@ -16,5 +13,5 @@ export const useUrlFilterParams = () => {
     }
   }
 
-  return getFilterFromQuery(query);
+  return { filterQueryParams, filterParams };
 };
