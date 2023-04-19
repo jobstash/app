@@ -1,92 +1,100 @@
-import clsx from 'clsx';
-import { useSetAtom } from 'jotai';
+import { useRouter } from 'next/router';
+import { memo, useReducer } from 'react';
 
-import { Button, Text } from '~/shared/components';
+import { Collapse, TextInput } from '@mantine/core';
 
-import { filterParamsAtom } from '../atoms';
+import { Button, FilterIcon, SearchInputIcon } from '~/shared/components';
+
 import { useFilterConfigQuery, useFilters } from '../hooks';
-import { getFilterUrlParams } from '../utils';
+import { createFilterParams } from '../utils';
 
-export const Filters = ({
-  jobCount,
-  isLoadingData,
-}: {
-  jobCount: number;
-  isLoadingData: boolean;
-}) => {
-  const { data, error, isLoading, isFetching } = useFilterConfigQuery();
+const Filters = () => {
+  const { query, push } = useRouter();
+
+  const [isCollapsed, toggle] = useReducer((p) => !p, true);
+
+  const { data } = useFilterConfigQuery();
 
   const { filters, filterComponents, sortComponents, clearFilterState } =
     useFilters(data);
 
-  const setFilterParams = useSetAtom(filterParamsAtom);
-
-  if (error)
-    return (
-      <h1 className="text-white">
-        Failed fetching filter-config: {error.message}
-      </h1>
-    );
-  if (isLoading || !data)
-    return <h1 className="my-12 text-white">LOADING JOBS FILTER ...</h1>;
-
-  const applyFilter = () => {
-    setFilterParams(getFilterUrlParams(filters, data));
+  const onClickApply = () => {
+    toggle();
+    const params = createFilterParams(filters, data);
+    const newRoute = `/jobs${params ? '?' + params : ''}`;
+    push(newRoute, undefined, { shallow: true });
   };
 
-  const clear = () => {
+  const onClickClear = () => {
     clearFilterState();
-    setFilterParams(null);
+    toggle();
+    push('/jobs', undefined, { shallow: true });
   };
-
-  const disabledSubmit = Object.keys(filters).length === 0 || isLoadingData;
 
   return (
-    <div
-      className={clsx('my-4 text-white', {
-        'opacity-40 pointer-events-none': isLoadingData,
-      })}
-    >
-      <div className="flex justify-between">
-        <div className="flex min-w-max pl-2 pr-20">
-          <div className="mt-3">
-            <Text>Filter By</Text>
-          </div>
-        </div>
-        <div className="flex flex-wrap items-center justify-end gap-x-2">
-          {filterComponents.map(({ key, ui }) => (
-            <div key={key} className="my-2">
-              {ui}
-            </div>
-          ))}
-        </div>
+    <div className="flex flex-col gap-y-2 py-8 pb-4">
+      <div>
+        <TextInput
+          icon={<SearchInputIcon />}
+          placeholder="Search Jobs"
+          size="lg"
+          radius="md"
+          //
+          styles={{
+            input: {
+              background: 'rgba(255, 255, 255, 0.1)',
+              fontSize: 16,
+              border: 'transparent',
+            },
+          }}
+          disabled={!data}
+        />
       </div>
 
-      <div className="flex justify-between pt-6">
-        <div className="flex min-w-max pl-2 pr-20">
-          <div className="mt-3">
-            <Text>{jobCount > 0 ? `Jobs Listed: ${jobCount}` : 'Loading'}</Text>
-          </div>
-        </div>
-        <div className="flex flex-wrap items-center justify-end gap-x-2">
-          {sortComponents.map(({ key, ui }) => (
-            <div key={key} className="my-2">
-              {ui}
-            </div>
-          ))}
-
+      <div className="relative min-h-[70px]">
+        <div className="absolute flex items-center pt-4">
           <Button
-            variant="primary"
-            isDisabled={disabledSubmit}
-            onClick={applyFilter}
+            variant="outline"
+            isActive={!isCollapsed}
+            left={<FilterIcon />}
+            isDisabled={!data}
+            onClick={toggle}
           >
-            Apply Filters
-          </Button>
-          <Button isDisabled={disabledSubmit} onClick={clear}>
-            Clear
+            Filters & Sorting
           </Button>
         </div>
+
+        <Collapse
+          in={!isCollapsed}
+          transitionDuration={200}
+          transitionTimingFunction="linear"
+        >
+          <div className="grid grid-cols-5 items-end gap-8 py-4">
+            <div />
+            <div />
+            <div />
+            {sortComponents.map(({ key, ui }) => (
+              <div key={key}>{ui}</div>
+            ))}
+
+            {filterComponents.map(({ key, ui }) => (
+              <div key={key}>{ui}</div>
+            ))}
+          </div>
+
+          <div className="flex flex-wrap gap-6 pt-5">
+            <Button variant="primary" onClick={onClickApply}>
+              Apply Filters
+            </Button>
+            <Button variant="outline" onClick={onClickClear}>
+              Clear Filters
+            </Button>
+            <p>{createFilterParams(filters, data)}</p>
+          </div>
+        </Collapse>
       </div>
     </div>
   );
 };
+
+export default memo(Filters);

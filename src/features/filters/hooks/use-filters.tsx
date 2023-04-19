@@ -1,6 +1,7 @@
-import { type ReactNode, type Reducer, useMemo, useReducer } from 'react';
+/* eslint-disable unicorn/prefer-spread */
+import { Reducer, useMemo, useReducer } from 'react';
 
-import { MultiSelectSearchFilter } from '../components/multi-select-search-filter';
+import { MultiSelectFilter } from '../components/multi-select-filter';
 import { RangeFilter } from '../components/range-filter';
 import { SingleSelectFilter } from '../components/single-select-filter';
 import {
@@ -11,25 +12,36 @@ import {
   KEY_ORDER,
   KEY_ORDER_BY,
 } from '../core/constants';
-import type { FilterConfig } from '../core/interfaces';
-import type { FilterAction, FilterState } from '../core/types';
-import { filterReducer } from '../reducers';
-import {
-  getMultiSelectProps,
-  getRangeProps,
-  getSingleSelectProps,
-} from '../utils';
+import type {
+  FilterAction,
+  FilterConfig,
+  FilterConfigComponent,
+  FilterState,
+  FilterStateMultiSelectKey,
+  RangeValue,
+  ShownSortedConfig,
+} from '../core/types';
 
-type ShownSortedConfig = {
-  key: keyof FilterState;
-  config: FilterConfig[keyof FilterConfig];
+import { useUrlFilterParams } from './use-url-filter-params';
+
+const filterReducer = (state: FilterState, { type, payload }: FilterAction) => {
+  // Clear
+  if (!type) return {};
+
+  // Remove
+  if (payload === undefined && typeof payload !== 'boolean') {
+    const _state = state;
+    delete _state[type];
+    return { ..._state };
+  }
+
+  // The way everything's setup, action `type` maps 1:1 with payload keys
+  return { ...state, [type]: payload };
 };
 
-type ConfigComponent = { key: keyof FilterConfig; ui: ReactNode };
-
 export const useFilters = (fetchedConfig?: FilterConfig) => {
-  // Filter only shown configs then sort - `useMemo` for perf
-  const shownSortedConfigs: ShownSortedConfig[] = useMemo(
+  const { filterQueryParams, filterParams } = useUrlFilterParams();
+  const sortedConfigs: ShownSortedConfig[] = useMemo(
     () =>
       fetchedConfig
         ? Object.entries(fetchedConfig)
@@ -48,46 +60,47 @@ export const useFilters = (fetchedConfig?: FilterConfig) => {
     {},
   );
 
-  // Maps config to appropriate component - `useMemo` for perf
-  const filterConfigComponents: ConfigComponent[] = useMemo(
+  const filterConfigComponents: FilterConfigComponent[] = useMemo(
     () =>
       fetchedConfig
-        ? shownSortedConfigs
+        ? sortedConfigs
             .map(({ key, config }) => {
               const { kind } = config;
 
               switch (kind) {
                 case FILTER_KIND_SINGLESELECT: {
                   const value = filters[key] as string;
-                  const { text, options, ariaLabel } = getSingleSelectProps(
-                    config,
-                    value,
-                  );
+                  const { options, label } = config;
+
+                  const keyInFilterQueryParams = key in filterQueryParams;
+                  const found =
+                    options.find(
+                      (option) =>
+                        option.value.toString() === filterQueryParams[key],
+                    )?.value ?? null;
+                  const paramValue =
+                    keyInFilterQueryParams && value !== null ? found : null;
+
+                  const ignoreLabel = label === 'Order' || label === 'Order By';
+
+                  if (options.length === 0) {
+                    return { ui: null, key: '' as keyof FilterConfig };
+                  }
 
                   return {
                     key,
                     ui: (
                       <SingleSelectFilter
-                        type={key}
-                        value={value}
-                        dispatch={dispatch}
-                        text={text}
+                        label={ignoreLabel ? undefined : label}
+                        value={value ?? paramValue}
+                        placeholder={
+                          key === KEY_ORDER_BY
+                            ? 'Sort By'
+                            : key === KEY_ORDER
+                            ? 'Sort Order'
+                            : 'Select'
+                        }
                         options={options}
-                        ariaLabel={ariaLabel}
-                      />
-                    ),
-                  };
-                }
-
-                case FILTER_KIND_RANGE: {
-                  const { text, range } = getRangeProps(filters, key, config);
-
-                  return {
-                    key,
-                    ui: (
-                      <RangeFilter
-                        text={text}
-                        range={range}
                         type={key}
                         dispatch={dispatch}
                       />
@@ -97,23 +110,56 @@ export const useFilters = (fetchedConfig?: FilterConfig) => {
 
                 case FILTER_KIND_MULTISELECT:
                 case FILTER_KIND_MULTISELECT_WITH_SEARCH: {
-                  if (config.options.length === 0) return { key, ui: null };
+                  const { options, label } = config;
+                  const selectedItems =
+                    filters[key as FilterStateMultiSelectKey];
 
-                  const { text, options, selectedItems } = getMultiSelectProps(
-                    filters,
-                    key,
-                    config,
-                  );
+                  const numSelected = selectedItems?.size ?? 0;
+                  const labelText = `${label}${
+                    numSelected > 0 ? ' (' + numSelected + ')' : ''
+                  }`;
+                  const value =
+                    !selectedItems || selectedItems?.size === 0
+                      ? []
+                      : Array.from(selectedItems);
+
+                  if (options.length === 0) {
+                    return { ui: null, key: '' as keyof FilterConfig };
+                  }
 
                   return {
                     key,
                     ui: (
-                      <MultiSelectSearchFilter
+                      <MultiSelectFilter
+                        options={options}
                         type={key}
                         dispatch={dispatch}
-                        text={text}
-                        options={options}
-                        selectedItems={selectedItems}
+                        value={value}
+                        label={labelText}
+                      />
+                    ),
+                  };
+                }
+
+                case FILTER_KIND_RANGE: {
+                  const {
+                    label,
+                    value: {
+                      lowest: { value: min },
+                      highest: { value: max },
+                    },
+                  } = config;
+                  const value = filters[key] as RangeValue;
+
+                  return {
+                    key,
+                    ui: (
+                      <RangeFilter
+                        minMax={[min, max]}
+                        value={value}
+                        label={label}
+                        type={key}
+                        dispatch={dispatch}
                       />
                     ),
                   };
@@ -128,12 +174,12 @@ export const useFilters = (fetchedConfig?: FilterConfig) => {
             })
             .filter(({ ui }) => ui !== null)
         : [],
-    [fetchedConfig, filters, shownSortedConfigs],
+    [fetchedConfig, filterQueryParams, filters, sortedConfigs],
   );
 
   const { filterComponents, sortComponents } = useMemo(() => {
-    const filterComponents: ConfigComponent[] = [];
-    const sortComponents: ConfigComponent[] = [];
+    const filterComponents: FilterConfigComponent[] = [];
+    const sortComponents: FilterConfigComponent[] = [];
 
     for (const configComponent of filterConfigComponents) {
       configComponent.key !== KEY_ORDER && configComponent.key !== KEY_ORDER_BY

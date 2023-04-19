@@ -1,5 +1,6 @@
 import { memo, useMemo, useTransition } from 'react';
 
+import { useUrlFilterParams } from '~/features/filters/hooks';
 import { Job } from '~/features/jobs/core/types';
 import { ID_TOP_RIGHT_PANEL } from '~/shared/core/constants';
 import { useRouteSegments } from '~/shared/hooks';
@@ -17,16 +18,22 @@ const JobRightPanel = ({ activeJob }: Props) => {
   const { segments, push } = useRouteSegments();
   const org = useMemo(() => activeJob?.organization, [activeJob?.organization]);
 
+  const { filterParams } = useUrlFilterParams();
   const [isPending, startTransition] = useTransition();
   const onClickTab = (tabRoute: string) =>
     startTransition(() =>
-      push(`/jobs/${segments.key}/${tabRoute}`, {
-        shouldScroll: false,
-        shallow: true,
-      }),
+      push(
+        `/jobs/${segments.key}/${tabRoute}${
+          filterParams ? '?' + filterParams : ''
+        }`,
+        {
+          shouldScroll: false,
+          shallow: true,
+        },
+      ),
     );
 
-  if (!activeJob) return null;
+  if (!activeJob) return <p>Loading right-panel</p>;
 
   return (
     <JobRightPanelWrapper>

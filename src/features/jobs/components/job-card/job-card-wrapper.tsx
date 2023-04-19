@@ -11,20 +11,22 @@ import {
 } from '~/shared/core/constants';
 import { createRouteString } from '~/shared/utils';
 
-import { Job } from '../../../jobs/core/types';
+import type { Job } from '../../../jobs/core/types';
 import { activeJobAtom } from '../../atoms';
 
 interface Props {
   job: Job;
   isActive: boolean;
   children: ReactNode;
+  filterParams: string;
+  shouldScroll?: boolean;
 }
 
 const jobCard = cva(
   [
     'flex flex-col p-6 gap-2.5 rounded-3xl bg-white/5 my-8',
     'cursor-pointer hover:bg-white/10',
-    'border border-transparent hover:border-white/20',
+    'border border-transparent transition-all hover:border-white/20',
   ],
   {
     variants: {
@@ -35,15 +37,21 @@ const jobCard = cva(
   },
 );
 
-const JobCardWrapper = ({ job, isActive, children }: Props) => {
+const JobCardWrapper = ({
+  job,
+  isActive,
+  children,
+  filterParams,
+  shouldScroll = false,
+}: Props) => {
   const route = useMemo(
     () =>
-      createRouteString(
+      `${createRouteString(
         TEXT_ROUTE_SECTION_JOBS,
         createJobKey(job),
         TEXT_ROUTE_TAB_DETAILS,
-      ),
-    [job],
+      )}${filterParams ? '?' + filterParams : ''}`,
+    [filterParams, job],
   );
 
   const setActiveJob = useSetAtom(activeJobAtom);
@@ -56,7 +64,7 @@ const JobCardWrapper = ({ job, isActive, children }: Props) => {
     <Link
       shallow
       href={route}
-      scroll={false}
+      scroll={shouldScroll}
       prefetch={false}
       onClick={onClick}
     >

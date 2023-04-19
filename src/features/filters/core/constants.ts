@@ -25,3 +25,36 @@ export const KEY_MAINNET = 'mainNet';
 export const KEY_TOKEN = 'token';
 export const KEY_ORDER = 'order';
 export const KEY_ORDER_BY = 'orderBy';
+
+export const FILTER_CONFIG_KEY_SET = new Set([
+  'publicationDate',
+  'minSalaryRange',
+  'maxSalaryRange',
+  'minTeamSize',
+  'maxTeamSize',
+  'minHeadCount',
+  'maxHeadCount',
+  'minTvl',
+  'maxTvl',
+  'minMonthlyVolume',
+  'maxMonthlyVolume',
+  'minMonthlyFees',
+  'maxMonthlyFees',
+  'minMonthlyRevenue',
+  'maxMonthlyRevenue',
+  'minAudits',
+  'maxAudits',
+  'hacks',
+  'fundingRounds',
+  'tech',
+  'organizations',
+  'chains',
+  'projects',
+  'categories',
+  'seniority',
+  'locations',
+  'mainNet',
+  'token',
+  'order',
+  'orderBy',
+]);
