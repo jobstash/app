@@ -39,6 +39,13 @@ const nextConfig = {
     ),
   },
   output: 'standalone',
+  redirects: async () => [
+    {
+      source: '/',
+      destination: '/jobs',
+      permanent: true,
+    },
+  ],
 };
 
 module.exports = withSentryConfig(
