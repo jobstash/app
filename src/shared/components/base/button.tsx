@@ -40,7 +40,8 @@ const wrapper = cva(
       {
         variant: 'outline',
         isActive: true,
-        className: 'bg-gradient-to-l from-primary to-tertiary [&>*]:bg-dark',
+        className:
+          'bg-gradient-to-l from-primary to-tertiary p-[2px] [&>*]:bg-dark',
       },
       {
         variant: 'primary',
@@ -91,7 +92,7 @@ const button = cva(
       {
         variant: 'outline',
         isActive: true,
-        className: 'ring-0 ring-transparent hover:bg-dark-gray',
+        className: 'py-[7px] ring-0 ring-transparent hover:bg-dark-gray',
       },
       {
         hasLeft: true,
