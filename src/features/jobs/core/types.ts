@@ -1,5 +1,7 @@
 import type {
   Category,
+  FundingRound,
+  Investors,
   JobPost,
   Organization,
   Project,
@@ -12,6 +14,8 @@ export interface Job {
   jobpost: JobPost;
   technologies: Technology[];
   categories: Category[];
+  fundingRounds: FundingRound[];
+  investors: Investors[];
 }
 
 export interface JobListQueryPage {

@@ -11,6 +11,7 @@ import {
   ShieldCheckIcon,
   SkullIcon,
   SuitcaseIcon,
+  TelegramIcon,
   TvlIcon,
   TwitterIcon,
   UsersThreeIcon,
@@ -19,26 +20,70 @@ import { Project, TagElement } from '~/shared/core/interfaces';
 import { numFormatter } from '~/shared/utils';
 
 export const createRightPanelProjectCardTags = (project: Project) => {
-  const { tvl, monthlyVolume, monthlyFees, monthlyRevenue, defillamaSlug } =
-    project;
+  const {
+    url,
+    githubOrganization,
+    twitter,
+    telegram,
+    discord,
+    tvl,
+    monthlyVolume,
+    monthlyActiveUsers,
+    monthlyFees,
+    monthlyRevenue,
+    defillamaSlug,
+    teamSize,
+  } = project;
 
   const projectSocialTags: TagElement[] = [
-    { text: 'Website', icon: <GlobeIcon />, link: '#', showLinkIcon: false },
     {
+      text: 'Website',
+      icon: <GlobeIcon />,
+      link: url,
+      showLinkIcon: false,
+      asLink: true,
+    },
+  ];
+
+  if (githubOrganization) {
+    projectSocialTags.push({
       text: 'Github',
       icon: <GithubLogoIcon />,
-      link: '#',
+      link: githubOrganization,
       showLinkIcon: false,
-    },
-    { text: 'Twitter', icon: <TwitterIcon />, link: '#', showLinkIcon: false },
-    {
-      text: 'Linkedin',
-      icon: <LinkedinIcon />,
-      link: '#',
+      asLink: true,
+    });
+  }
+
+  if (twitter) {
+    projectSocialTags.push({
+      text: 'Twitter',
+      icon: <TwitterIcon />,
+      link: twitter,
       showLinkIcon: false,
-    },
-    { text: 'Discord', icon: <DiscordIcon />, link: '#', showLinkIcon: false },
-  ];
+      asLink: true,
+    });
+  }
+
+  if (telegram) {
+    projectSocialTags.push({
+      text: 'Telegram',
+      icon: <TelegramIcon />,
+      link: telegram,
+      showLinkIcon: false,
+      asLink: true,
+    });
+  }
+
+  if (discord) {
+    projectSocialTags.push({
+      text: 'Discord',
+      icon: <TelegramIcon />,
+      link: discord,
+      showLinkIcon: false,
+      asLink: true,
+    });
+  }
 
   const projectTags: TagElement[] = [
     {
@@ -55,45 +100,60 @@ export const createRightPanelProjectCardTags = (project: Project) => {
     },
   ];
 
-  if (defillamaSlug)
+  if (defillamaSlug) {
     projectTags.push({
       text: defillamaSlug,
       icon: null,
-      link: '#',
+      link: url,
+      asLink: true,
     });
+  }
 
-  projectTags.push(
-    { text: 'Category: TBD', icon: <CategoryIcon /> },
-    { text: 'Team Size: TBD', icon: <UsersThreeIcon /> },
-  );
+  projectTags.push({ text: 'Category: TBD', icon: <CategoryIcon /> });
+
+  if (teamSize) {
+    projectTags.push({
+      text: `Team Size: ${teamSize}`,
+      icon: <UsersThreeIcon />,
+    });
+  }
 
   const projectTvlTags: TagElement[] = [];
 
-  if (tvl)
+  if (tvl) {
     projectTvlTags.push({
       text: `TVL: $${numFormatter.format(tvl)}`,
       icon: <TvlIcon />,
     });
+  }
 
-  if (monthlyVolume)
+  if (monthlyVolume) {
     projectTvlTags.push({
       text: `Monthly Volume: $${numFormatter.format(monthlyVolume)}`,
       icon: <MonthlyVolumeIcon />,
     });
+  }
 
-  if (monthlyFees)
+  if (monthlyActiveUsers) {
+    projectTvlTags.push({
+      text: `Monthly Active Users: ${numFormatter.format(monthlyActiveUsers)}`,
+      icon: <ActiveUsersIcon />,
+    });
+  }
+
+  if (monthlyFees) {
     projectTvlTags.push({
       text: `Monthly Fees: $${numFormatter.format(monthlyFees)}`,
       icon: <MonthlyVolumeIcon />,
     });
+  }
 
-  projectTvlTags.push({ text: 'Active Users: TBD', icon: <ActiveUsersIcon /> });
-
-  if (monthlyRevenue)
+  if (monthlyRevenue) {
     projectTvlTags.push({
       text: `Revenue: $${numFormatter.format(monthlyRevenue)}`,
       icon: <RevenueIcon />,
     });
+  }
 
   const projectAuditTags: TagElement[] = [
     { text: 'Audits: Peckshield', icon: <ShieldCheckIcon />, link: '#' },

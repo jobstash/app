@@ -1,53 +1,42 @@
 import { Hack } from './common';
 
 export interface Project {
-  /** Project unique identifier */
   id: string;
 
-  /** Project display name */
+  defillamaId?: string;
+  defillamaSlug?: string;
+  defillamaParent?: string;
+
   name: string;
-
-  /** Description section for right-panel */
   description: string;
-
-  /** Url tag for right-panel */
   url: string;
-
-  /** Project display logo */
   logo: string;
 
-  /** Token address */
-  tokenAddress?: string; // Refinement: unused
+  githubOrganization?: string;
+  twitter?: string;
+  discord?: string;
+  docs?: string;
+  telegram?: string;
+  teamSize?: number;
 
-  /** Token tag text */
+  isMainNet: boolean;
+  tokenAddress?: string;
   tokenSymbol?: string;
 
-  /** Still in construction indicator */
   isInConstruction?: boolean;
 
-  /** Tvl tag text */
   tvl?: number;
-
-  /** Monthly Volume tag text */
   monthlyVolume?: number;
-
-  /** Monthly Fees tag text */
+  monthlyActiveUsers?: number;
   monthlyFees?: number;
-
-  /** Monthly Revenue tag text */
   monthlyRevenue?: number;
 
-  /** Project created timestamp */
   createdTimestamp: number;
 
-  /** Most recent project timestamp */
-  updatedTimestamp?: number; // Refinement: unused
+  updatedTimestamp?: number;
 
-  hacks: Hack[];
-  audits: string[];
-  chains: string[];
-
-  defillamaId?: string; // Refinement: unused
-  defillamaSlug?: string; // Refinement: unused
-  defillamaParent?: string; // Refinement: unused
+  //
+  // hacks: Hack[];
+  // audits: string[];
+  // chains: string[];
 }

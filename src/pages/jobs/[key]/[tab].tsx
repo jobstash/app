@@ -124,10 +124,10 @@ export const getServerSideProps: GetServerSideProps<Props> = withCSR(
     }
 
     if (!jobInList) {
-      await queryClient.fetchQuery({
-        queryKey: ['job-post', shortUuid],
-        queryFn: () => fetchJob(shortUuid),
-      });
+      queryClient.setQueryData(
+        ['job-post', initJob.jobpost.shortUUID],
+        initJob,
+      );
     }
 
     // Dehydrate again to include setup'd cached data

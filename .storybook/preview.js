@@ -1,6 +1,5 @@
 // Import 'tailwindcss/tailwind.css';
 import '../src/styles/globals.css';
-import 'joi/dist/joi-browser.min.js';
 
 import { themes } from '@storybook/theming';
 import { initialize, mswDecorator } from 'msw-storybook-addon';

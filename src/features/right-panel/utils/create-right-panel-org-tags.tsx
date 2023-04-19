@@ -1,4 +1,5 @@
 import {
+  BankIcon,
   DiscordIcon,
   GithubLogoOutlineIcon,
   GlobeSimpleIcon,
@@ -8,18 +9,26 @@ import {
   TwitterIcon,
   UsersIcon,
 } from '~/shared/components';
-import { Organization, TagElement } from '~/shared/core/interfaces';
+import {
+  FundingRound,
+  Organization,
+  TagElement,
+} from '~/shared/core/interfaces';
 
-export const createRightPanelOrgTags = (org: Organization) => {
+import { createOrgFundingDateString } from './create-org-funding-date-string';
+
+export const createRightPanelOrgTags = (
+  org: Organization,
+  funding: FundingRound,
+) => {
   const {
     url,
     location,
-    teamSize,
+    headCount,
     githubOrganization,
     twitter,
     telegram,
     discord,
-    linkedin,
   } = org;
 
   const orgTags: TagElement[] = [
@@ -34,11 +43,17 @@ export const createRightPanelOrgTags = (org: Organization) => {
     },
   ];
 
-  if (teamSize && teamSize !== 'undefined')
+  if (headCount) {
     orgTags.push({
-      text: `Team Size: ${teamSize}`,
+      text: `Team Size: ${headCount}`,
       icon: <UsersIcon />,
     });
+  }
+
+  orgTags.push({
+    text: createOrgFundingDateString(funding.date),
+    icon: <BankIcon />,
+  });
 
   const orgSocials: TagElement[] = [];
 
@@ -59,17 +74,8 @@ export const createRightPanelOrgTags = (org: Organization) => {
       link: telegram,
     });
 
-  // **Note**: waiting for backend/middleware to implement "Docs"
-
   if (discord)
     orgSocials.push({ text: 'Discord', icon: <DiscordIcon />, link: discord });
-
-  if (linkedin)
-    orgSocials.push({
-      text: 'LinkedIn',
-      icon: <LinkedinIcon />,
-      link: linkedin,
-    });
 
   return { orgTags, orgSocials };
 };
