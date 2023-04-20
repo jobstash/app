@@ -45,20 +45,18 @@ const CardSet = ({
   const hasLink = Boolean(link) && link !== '#';
 
   return (
-    <div className="overflow-hidden rounded">
-      <button
-        className={cardset({ hasLink })}
-        onClick={
-          hasLink && typeof window !== 'undefined'
-            ? () => window.open(link, '_blank')
-            : undefined
-        }
-      >
-        {icon}
-        <Text size="sm">{children}</Text>
-        {Boolean(link) && showLinkIcon && <ArrowCircleUpRightIcon />}
-      </button>
-    </div>
+    <button
+      className={cardset({ hasLink })}
+      onClick={
+        hasLink && typeof window !== 'undefined'
+          ? () => window.open(link, '_blank')
+          : undefined
+      }
+    >
+      {icon}
+      <Text size="sm">{children}</Text>
+      {Boolean(link) && showLinkIcon && <ArrowCircleUpRightIcon />}
+    </button>
   );
 };
 
