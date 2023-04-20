@@ -17,7 +17,7 @@ const JobCardOrg = ({ org }: Props) => {
         <hr className="border-t border-white/10" />
       </div>
 
-      <div className="flex h-8 items-center gap-x-8">
+      <div className="items-center gap-x-8 lg:flex">
         <LogoTitle
           title={org.name}
           avatarProps={{
@@ -25,12 +25,14 @@ const JobCardOrg = ({ org }: Props) => {
             alt: org.name,
           }}
         />
-        {orgTags.length > 0 &&
-          orgTags.map(({ text, icon, link }) => (
-            <CardSet key={text} link={link} icon={icon}>
-              {text}
-            </CardSet>
-          ))}
+        <div className="grow pt-4 lg:flex lg:flex-wrap lg:gap-x-8 lg:pt-0">
+          {orgTags.length > 0 &&
+            orgTags.map(({ text, icon, link }) => (
+              <CardSet key={text} link={link} icon={icon}>
+                {text}
+              </CardSet>
+            ))}
+        </div>
       </div>
     </>
   );

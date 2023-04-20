@@ -13,7 +13,7 @@ export const SidebarSection = ({ title, tabs, isActiveFn }: Props) => {
   const { segments, push, aspath } = useRouteSegments();
 
   return (
-    <div className="mt-12">
+    <div className="mt-12 hidden lg:block">
       <Text color="dimmed">{title}</Text>
       <div className="space-y-3 pt-3">
         {tabs.map((tab) => (
