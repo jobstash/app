@@ -12,7 +12,7 @@ const cardset = cva(
   [
     'flex justify-center items-center gap-x-1',
     'rounded w-fit h-[26px]',
-    'transition-color duration-200 ease-in-out',
+    'transition-color duration-200 ease-in-out transform translate-x-0 translate-y-0',
   ],
   {
     variants: {
