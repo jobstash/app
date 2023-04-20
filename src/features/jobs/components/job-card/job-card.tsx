@@ -13,10 +13,10 @@ interface Props {
   job: Job;
   isActive: boolean;
   shouldScroll?: boolean;
-  filterParams: string;
+  filterParamsObj: Record<string, string>;
 }
 
-const JobCard = ({ job, isActive, shouldScroll, filterParams }: Props) => {
+const JobCard = ({ job, isActive, shouldScroll, filterParamsObj }: Props) => {
   const { jobpost, organization, project, technologies } = job;
   const { jobTitle, jobCreatedTimestamp } = jobpost;
 
@@ -25,7 +25,7 @@ const JobCard = ({ job, isActive, shouldScroll, filterParams }: Props) => {
       job={job}
       isActive={isActive}
       shouldScroll={shouldScroll}
-      filterParams={filterParams}
+      filterParamsObj={filterParamsObj}
     >
       <JobCardHeader title={jobTitle} ts={jobCreatedTimestamp} />
       <JobCardTags jobPost={jobpost} />

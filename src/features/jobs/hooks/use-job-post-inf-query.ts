@@ -6,12 +6,12 @@ import type { JobListQueryPage } from '../core/types';
 import { fetchJobList } from '../fetch';
 
 export const useJobListingInfQuery = () => {
-  const { filterParams } = useUrlFilterParams();
+  const { filterParamsObj } = useUrlFilterParams();
   const queryClient = useQueryClient();
 
   return {
     ...useInfiniteQuery<JobListQueryPage>(
-      ['job-posts', filterParams],
+      ['job-posts', filterParamsObj],
       async ({ pageParam, queryKey }) => fetchJobList({ pageParam, queryKey }),
       {
         getNextPageParam: ({ page }) => (page > 0 ? page + 1 : undefined),
@@ -24,6 +24,6 @@ export const useJobListingInfQuery = () => {
         },
       },
     ),
-    filterParams,
+    filterParamsObj,
   };
 };

@@ -29,10 +29,10 @@ export const getServerSideProps: GetServerSideProps<Props> = withCSR(
   async (ctx) => {
     const queryClient = new QueryClient();
 
-    const { filterParams } = getFilterFromQuery(ctx.query);
+    const { filterParamsObj } = getFilterFromQuery(ctx.query);
 
     await queryClient.fetchInfiniteQuery({
-      queryKey: ['job-posts', filterParams],
+      queryKey: ['job-posts', filterParamsObj],
       queryFn: async ({ pageParam, queryKey }) =>
         fetchJobList({ pageParam, queryKey }),
     });

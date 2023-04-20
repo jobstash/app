@@ -5,11 +5,7 @@ import { cva } from 'class-variance-authority';
 import { useSetAtom } from 'jotai';
 
 import { createJobKey } from '~/features/jobs/utils';
-import {
-  TEXT_ROUTE_SECTION_JOBS,
-  TEXT_ROUTE_TAB_DETAILS,
-} from '~/shared/core/constants';
-import { createRouteString } from '~/shared/utils';
+import { getUrlWithFilters } from '~/shared/utils';
 
 import type { Job } from '../../../jobs/core/types';
 import { activeJobAtom } from '../../atoms';
@@ -18,7 +14,7 @@ interface Props {
   job: Job;
   isActive: boolean;
   children: ReactNode;
-  filterParams: string;
+  filterParamsObj: Record<string, string>;
   shouldScroll?: boolean;
 }
 
@@ -41,18 +37,17 @@ const JobCardWrapper = ({
   job,
   isActive,
   children,
-  filterParams,
+  filterParamsObj,
   shouldScroll = false,
 }: Props) => {
-  const route = useMemo(
-    () =>
-      `${createRouteString(
-        TEXT_ROUTE_SECTION_JOBS,
-        createJobKey(job),
-        TEXT_ROUTE_TAB_DETAILS,
-      )}${filterParams ? '?' + filterParams : ''}`,
-    [filterParams, job],
-  );
+  const route = useMemo(() => {
+    const url = getUrlWithFilters(
+      filterParamsObj,
+      `/jobs/${createJobKey(job)}/details`,
+    );
+
+    return url.toString();
+  }, [filterParamsObj, job]);
 
   const setActiveJob = useSetAtom(activeJobAtom);
 

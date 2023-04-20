@@ -40,7 +40,7 @@ const filterReducer = (state: FilterState, { type, payload }: FilterAction) => {
 };
 
 export const useFilters = (fetchedConfig?: FilterConfig) => {
-  const { filterQueryParams, filterParams } = useUrlFilterParams();
+  const { filterParamsObj } = useUrlFilterParams();
   const sortedConfigs: ShownSortedConfig[] = useMemo(
     () =>
       fetchedConfig
@@ -72,11 +72,11 @@ export const useFilters = (fetchedConfig?: FilterConfig) => {
                   const value = filters[key] as string;
                   const { options, label } = config;
 
-                  const keyInFilterQueryParams = key in filterQueryParams;
+                  const keyInFilterQueryParams = key in filterParamsObj;
                   const found =
                     options.find(
                       (option) =>
-                        option.value.toString() === filterQueryParams[key],
+                        option.value.toString() === filterParamsObj[key],
                     )?.value ?? null;
                   const paramValue =
                     keyInFilterQueryParams && value !== null ? found : null;
@@ -174,7 +174,7 @@ export const useFilters = (fetchedConfig?: FilterConfig) => {
             })
             .filter(({ ui }) => ui !== null)
         : [],
-    [fetchedConfig, filterQueryParams, filters, sortedConfigs],
+    [fetchedConfig, filterParamsObj, filters, sortedConfigs],
   );
 
   const { filterComponents, sortComponents } = useMemo(() => {

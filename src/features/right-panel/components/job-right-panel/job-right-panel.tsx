@@ -4,6 +4,7 @@ import { useUrlFilterParams } from '~/features/filters/hooks';
 import { Job } from '~/features/jobs/core/types';
 import { ID_TOP_RIGHT_PANEL } from '~/shared/core/constants';
 import { useRouteSegments } from '~/shared/hooks';
+import { getUrlWithFilters } from '~/shared/utils';
 
 import JobRightPanelCard from './job-right-panel-card';
 import JobRightPanelHeader from './job-right-panel-header';
@@ -17,20 +18,20 @@ interface Props {
 const JobRightPanel = ({ job }: Props) => {
   const { segments, push } = useRouteSegments();
 
-  const { filterParams } = useUrlFilterParams();
+  const { filterParamsObj } = useUrlFilterParams();
   const [isPending, startTransition] = useTransition();
   const onClickTab = (tabRoute: string) =>
-    startTransition(() =>
-      push(
-        `/jobs/${segments.key}/${tabRoute}${
-          filterParams ? '?' + filterParams : ''
-        }`,
-        {
-          shouldScroll: false,
-          shallow: true,
-        },
-      ),
-    );
+    startTransition(() => {
+      const url = getUrlWithFilters(
+        filterParamsObj,
+        `/jobs/${segments.key}/${tabRoute}`,
+      );
+
+      return push(url.toString(), {
+        shouldScroll: false,
+        shallow: true,
+      });
+    });
 
   if (!job) return <p>Loading right-panel</p>;
 

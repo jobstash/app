@@ -7,7 +7,7 @@ import {
   SENTRY_MW_NON_200_RESPONSE,
   SENTRY_MW_NON_JSON_RESPONSE,
 } from '~/shared/core/constants';
-import { sentryMessage } from '~/shared/utils';
+import { getUrlWithFilters, sentryMessage } from '~/shared/utils';
 
 import type { JobListQueryPage } from '../core/types';
 
@@ -22,16 +22,15 @@ export const fetchJobList = async ({
   pageParam = 1,
   queryKey,
 }: FetchJobOptions): Promise<JobListQueryPage> => {
-  const filterParams = queryKey[1] as string | null;
-
   const mwURL = NEXT_PUBLIC_MW_URL;
   const limit = NEXT_PUBLIC_PAGE_SIZE ?? 10;
 
-  const res = await fetch(
-    `${mwURL}/jobs/list?page=${pageParam}&limit=${limit}${
-      filterParams ? `&${filterParams}` : ''
-    }`,
-  );
+  const filterParamsObj = queryKey[1] as Record<string, string>;
+  filterParamsObj['page'] = pageParam.toString();
+  filterParamsObj['limit'] = limit.toString();
+
+  const url = getUrlWithFilters(filterParamsObj, '/jobs/list', mwURL);
+  const res = await fetch(url);
 
   // Query to mw should work - 500 otherwise
   if (!res.ok) {

@@ -1,16 +1,14 @@
-import { useRouter } from 'next/router';
 import { memo, useReducer } from 'react';
 
 import { Collapse, TextInput } from '@mantine/core';
 
 import { Button, FilterIcon, SearchInputIcon } from '~/shared/components';
 
-import { useFilterConfigQuery, useFilters } from '../hooks';
-import { createFilterParams } from '../utils';
+import { useFilterConfigQuery, useFilters, useUrlFilterParams } from '../hooks';
+import { createAppliedFilterUrl } from '../utils';
 
 const Filters = () => {
-  const { query, push } = useRouter();
-
+  const { push, filterParamsObj } = useUrlFilterParams();
   const [isCollapsed, toggle] = useReducer((p) => !p, true);
 
   const { data } = useFilterConfigQuery();
@@ -20,9 +18,8 @@ const Filters = () => {
 
   const onClickApply = () => {
     toggle();
-    const params = createFilterParams(filters, data);
-    const newRoute = `/jobs${params ? '?' + params : ''}`;
-    push(newRoute, undefined, { shallow: true });
+    const url = createAppliedFilterUrl(filters, filterParamsObj, data);
+    push(url, undefined, { shallow: true });
   };
 
   const onClickClear = () => {
@@ -89,7 +86,7 @@ const Filters = () => {
             <Button variant="outline" onClick={onClickClear}>
               Clear Filters
             </Button>
-            <p>{createFilterParams(filters, data)}</p>
+            <p>{JSON.stringify(filterParamsObj)}</p>
           </div>
         </Collapse>
       </div>

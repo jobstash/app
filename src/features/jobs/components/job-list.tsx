@@ -21,7 +21,7 @@ const JobList = ({ initJob, activeJob }: Props) => {
     isFetchingNextPage,
     fetchNextPage,
     hasNextPage,
-    filterParams,
+    filterParamsObj,
   } = useJobListingInfQuery();
 
   const jobs = useMemo(() => {
@@ -54,7 +54,7 @@ const JobList = ({ initJob, activeJob }: Props) => {
             key={initJob.jobpost.shortUUID}
             isActive
             job={initJob}
-            filterParams={filterParams}
+            filterParamsObj={filterParamsObj}
           />
         )}
         <p>Loading JobList ...</p>
@@ -77,7 +77,7 @@ const JobList = ({ initJob, activeJob }: Props) => {
           key={job.jobpost.shortUUID}
           job={job}
           isActive={job.jobpost.shortUUID === activeJob?.jobpost.shortUUID}
-          filterParams={filterParams}
+          filterParamsObj={filterParamsObj}
         />
       ))}
       {jobs.length > 0 && (
