@@ -17,8 +17,8 @@ export const SideBar = () => {
   const roleSection = roleSectionMap[role];
 
   return (
-    <nav className="fixed inset-y-0 left-0 flex min-h-screen w-52 flex-col border-r border-white/5 p-4">
-      <div className="p-4 pl-1">
+    <nav className="fixed left-0 z-50 flex h-[65px] w-full flex-col bg-gradient-to-l from-[#141317] to-[#121216] p-4 lg:inset-y-0 lg:h-auto lg:min-h-screen lg:w-52 lg:border-r lg:border-white/5 lg:bg-transparent">
+      <div className="lg:p-4 lg:pl-1">
         <Brand />
       </div>
       <div>
@@ -39,7 +39,7 @@ export const SideBar = () => {
           />
         </div>
       )}
-      <div className="absolute inset-x-0 bottom-0 space-y-4 p-4">
+      <div className="inset-x-0 bottom-0 hidden space-y-4 p-4 lg:absolute lg:block">
         {roleSection ? (
           <SidebarSection
             title={roleSection.title}

@@ -38,7 +38,7 @@ const JobRightPanel = ({ job }: Props) => {
 
   return (
     <JobRightPanelWrapper>
-      <div className="absolute top-0" id={ID_TOP_RIGHT_PANEL} />
+      <div className="absolute top-0 h-0" id={ID_TOP_RIGHT_PANEL} />
       <JobRightPanelHeader
         organization={organization}
         fundingRounds={fundingRounds}

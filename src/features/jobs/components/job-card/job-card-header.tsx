@@ -12,7 +12,7 @@ const JobCardHeader = ({ title, ts }: Props) => {
   const timestamp = useMemo(() => prettyTimestamp(ts), [ts]);
 
   return (
-    <div className="flex items-center justify-between">
+    <div className="items-center justify-between space-y-2 lg:flex lg:space-y-0">
       <Heading size="md" fw="semibold">
         {title}
       </Heading>

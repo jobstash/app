@@ -13,10 +13,9 @@ import { withCSR } from '~/shared/hocs';
 interface Props {}
 
 const JobListPage = () => (
-  <div className="w-full pl-52 pr-[41.67%]">
+  <div className="w-full lg:pl-52 lg:pr-[41.67%]">
     <SideBar />
-
-    <div className="px-8">
+    <div className="px-3.5 pt-[65px] lg:px-8 lg:pt-0">
       <Filters />
       <JobList activeJob={null} />
     </div>

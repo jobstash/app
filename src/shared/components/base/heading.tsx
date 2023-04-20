@@ -14,6 +14,7 @@ const heading = cva(`${lato.variable} font-lato antialiased`, {
       md: 'text-xl',
       lg: 'text-2xl',
       xl: 'text-3xl',
+      label: 'text-sm lg:text-md',
     },
     color: {
       white: 'text-white',
@@ -29,13 +30,14 @@ interface HeadingProps extends HeadingVariantProps {
 }
 
 const sizeHeadingMap: Record<
-  'xl' | 'lg' | 'md' | 'sm',
-  'h1' | 'h2' | 'h3' | 'h4'
+  'xl' | 'lg' | 'md' | 'sm' | 'label',
+  'h1' | 'h2' | 'h3' | 'h4' | 'label'
 > = {
   xl: 'h1',
   lg: 'h2',
   md: 'h3',
   sm: 'h4',
+  label: 'label',
 };
 
 const Heading = ({

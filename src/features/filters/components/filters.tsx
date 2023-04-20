@@ -32,7 +32,7 @@ const Filters = () => {
   };
 
   return (
-    <div className="flex flex-col gap-y-2 py-8 pb-4">
+    <div className="flex flex-col gap-y-2 py-8 pb-4 lg:pb-0">
       <div>
         <TextInput
           icon={<SearchInputIcon />}
@@ -52,7 +52,7 @@ const Filters = () => {
       </div>
 
       <div className="relative min-h-[70px]">
-        <div className="absolute flex items-center pt-4">
+        <div className="flex items-center pt-4 md:absolute">
           <Button
             variant="outline"
             isActive={!isCollapsed}
@@ -69,20 +69,43 @@ const Filters = () => {
           transitionDuration={200}
           transitionTimingFunction="linear"
         >
-          <div className="grid grid-cols-5 items-end gap-8 py-4">
-            <div />
-            <div />
-            <div />
+          {/* <div className="-mx-2 flex flex-wrap py-4 lg:-mx-3">
             {sortComponents.map(({ key, ui }) => (
-              <div key={key}>{ui}</div>
+              <div key={key} className="w-1/2 px-2 pb-2 lg:w-1/5 lg:px-3">
+                {ui}
+              </div>
             ))}
 
             {filterComponents.map(({ key, ui }) => (
-              <div key={key}>{ui}</div>
+              <div key={key} className="w-1/2 px-2 pb-2 lg:w-1/5 lg:px-3">
+                {ui}
+              </div>
             ))}
+          </div> */}
+          <div className="relative py-4">
+            <div className="-mx-2 flex flex-wrap pb-4 lg:-mx-3 lg:-mb-4 lg:justify-end">
+              {sortComponents.map(({ key, ui }) => (
+                <div
+                  key={key}
+                  className="w-1/2 px-2 pb-2 lg:w-1/5 lg:px-3 lg:pb-4"
+                >
+                  {ui}
+                </div>
+              ))}
+            </div>
+            <div className="-mx-2 flex flex-wrap lg:-mx-3 lg:-mb-4">
+              {filterComponents.map(({ key, ui }) => (
+                <div
+                  key={key}
+                  className="w-1/2 px-2 pb-2 lg:w-1/5 lg:px-3 lg:pb-4"
+                >
+                  {ui}
+                </div>
+              ))}
+            </div>
           </div>
 
-          <div className="flex flex-wrap gap-6 pt-5">
+          <div className="flex flex-wrap gap-6 lg:py-4">
             <Button variant="primary" onClick={onClickApply}>
               Apply Filters
             </Button>
