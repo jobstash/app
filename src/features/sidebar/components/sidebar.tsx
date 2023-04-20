@@ -12,12 +12,9 @@ import {
 import { SidebarSection } from './sidebar-section';
 
 export const SideBar = () => {
-  const isMounted = useIsMounted();
   const { role } = useWalletAuthContext();
 
   const roleSection = roleSectionMap[role];
-
-  if (!isMounted) return null;
 
   return (
     <nav className="fixed inset-y-0 left-0 flex min-h-screen w-52 flex-col border-r border-white/5 p-4">
