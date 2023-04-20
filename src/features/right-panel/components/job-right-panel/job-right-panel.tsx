@@ -11,10 +11,10 @@ import JobRightPanelTabs from './job-right-panel-tabs';
 import JobRightPanelWrapper from './job-right-panel-wrapper';
 
 interface Props {
-  activeJob: Job | null;
+  job?: Job | null;
 }
 
-const JobRightPanel = ({ activeJob }: Props) => {
+const JobRightPanel = ({ job }: Props) => {
   const { segments, push } = useRouteSegments();
 
   const { filterParams } = useUrlFilterParams();
@@ -32,9 +32,9 @@ const JobRightPanel = ({ activeJob }: Props) => {
       ),
     );
 
-  if (!activeJob) return <p>Loading right-panel</p>;
+  if (!job) return <p>Loading right-panel</p>;
 
-  const { organization, project, fundingRounds } = activeJob;
+  const { organization, project, fundingRounds } = job;
 
   return (
     <JobRightPanelWrapper>
@@ -50,7 +50,7 @@ const JobRightPanel = ({ activeJob }: Props) => {
         onClickTab={onClickTab}
       />
       <JobRightPanelCard
-        job={activeJob}
+        job={job}
         tabSegment={segments.tab}
         isPending={isPending}
       />
