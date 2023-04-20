@@ -12,12 +12,15 @@ const cardset = cva(
   [
     'flex justify-center items-center gap-x-1',
     'rounded w-fit h-[26px]',
-    'transition-color duration-200 ease-in-out transform translate-x-0 translate-y-0',
+    'transition-color duration-200 ease-in-out',
   ],
   {
     variants: {
       hasLink: {
-        true: 'bg-white/10 px-2 py-1 cursor-pointer hover:bg-white/20 hover:ring-inset hover:ring-1 hover:ring-white/40 transform translate-x-0 translate-y-0 active:bg-white/30 ',
+        true: [
+          'bg-white/10 px-2 py-1 cursor-pointer relative',
+          'before:transition-all before:content-[""] before:rounded before:z-20 before:absolute before:inset-0 before:border before:border-white/40 before:opacity-0 hover:before:opacity-100 hover:bg-white/20',
+        ],
         false: 'bg-none cursor-default',
       },
     },
@@ -42,18 +45,20 @@ const CardSet = ({
   const hasLink = Boolean(link) && link !== '#';
 
   return (
-    <button
-      className={cardset({ hasLink })}
-      onClick={
-        hasLink && typeof window !== 'undefined'
-          ? () => window.open(link, '_blank')
-          : undefined
-      }
-    >
-      {icon}
-      <Text size="sm">{children}</Text>
-      {Boolean(link) && showLinkIcon && <ArrowCircleUpRightIcon />}
-    </button>
+    <div className="overflow-hidden rounded">
+      <button
+        className={cardset({ hasLink })}
+        onClick={
+          hasLink && typeof window !== 'undefined'
+            ? () => window.open(link, '_blank')
+            : undefined
+        }
+      >
+        {icon}
+        <Text size="sm">{children}</Text>
+        {Boolean(link) && showLinkIcon && <ArrowCircleUpRightIcon />}
+      </button>
+    </div>
   );
 };
 
