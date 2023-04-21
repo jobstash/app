@@ -53,6 +53,7 @@ export const filterMachine = createMachine(
             actions: 'setSearchFilterValue',
           },
           APPLY_SEARCH_FILTER: {
+            cond: 'hasSearchQuery',
             actions: 'applySearchFilter',
             target: 'ready.idle',
           },
@@ -77,14 +78,12 @@ export const filterMachine = createMachine(
                 actions: 'setRangeFilterValue',
               },
               APPLY_FILTER_VALUES: {
-                cond: (ctx) =>
-                  Object.values(ctx.filterValues).some((v) => v !== null),
+                cond: 'hasFilterValues',
                 actions: 'applyFilterValues',
                 target: 'idle',
               },
               CLEAR_FILTER_VALUES: {
-                cond: (ctx) =>
-                  Object.values(ctx.filterValues).some((v) => v !== null),
+                cond: 'hasFilterValues',
                 actions: 'clearFilterValues',
               },
             },
@@ -142,6 +141,13 @@ export const filterMachine = createMachine(
           return newFilterValues;
         },
       }),
+    },
+    guards: {
+      hasFilterValues: (ctx) =>
+        Object.values(ctx.filterValues).some((v) => v !== null),
+      hasSearchQuery: (ctx) =>
+        ctx.filterValues.query !== null &&
+        (ctx.filterValues.query.trim() ?? '').length > 0,
     },
   },
 );

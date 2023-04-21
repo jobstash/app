@@ -26,7 +26,6 @@ export const fetchJobList = async ({
   const limit = NEXT_PUBLIC_PAGE_SIZE ?? 10;
 
   const filterParamsObj = queryKey[1] as Record<string, string>;
-  console.log('fetchJobList filterParamsObj =', filterParamsObj);
   filterParamsObj['page'] = pageParam.toString() ?? '1';
   filterParamsObj['limit'] = limit.toString();
 

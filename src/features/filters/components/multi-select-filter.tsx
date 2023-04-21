@@ -23,7 +23,6 @@ const MultiSelectFilter = ({
 }: Props) => {
   const onChange = useCallback(
     (selected: string[]) => {
-      console.log('selected =', selected);
       send({
         type: 'SET_FILTER_VALUE',
         paramKey,
