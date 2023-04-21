@@ -54,6 +54,7 @@ export const filterMachine = createMachine(
           },
           APPLY_SEARCH_FILTER: {
             actions: 'applySearchFilter',
+            target: 'ready.idle',
           },
         },
         states: {
@@ -120,10 +121,16 @@ export const filterMachine = createMachine(
         }),
       }),
       setSearchFilterValue: assign({
-        filterValues: (ctx, { payload }) => ({
-          ...ctx.filterValues,
-          query: payload,
-        }),
+        filterValues: (ctx, { payload }) => {
+          const newFilterValues = ctx.filterValues;
+          for (const key of Object.keys(newFilterValues)) {
+            newFilterValues[key] = null;
+          }
+
+          newFilterValues['query'] = payload;
+
+          return newFilterValues;
+        },
       }),
       clearFilterValues: assign({
         filterValues: (ctx) => {

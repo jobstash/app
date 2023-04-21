@@ -10,7 +10,7 @@ import Text from './text';
 
 const cardset = cva(
   [
-    'flex justify-center items-center gap-x-1',
+    'flex justify-center items-center gap-x-1 whitespace-nowrap',
     'rounded w-fit h-[26px]',
     'transition-color duration-200 ease-in-out transform translate-x-0 translate-y-0',
   ],

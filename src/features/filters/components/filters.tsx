@@ -110,7 +110,7 @@ const Filters = () => {
   );
 
   return (
-    <div>
+    <div className="flex flex-col gap-y-2 py-8 pb-4 lg:pb-0">
       {state.matches('error') && (
         <div>
           <p>errorMsg = {state.context.errorMsg}</p>
@@ -146,16 +146,18 @@ const Filters = () => {
         </form>
       </div>
 
-      <div className="py-4">
-        <Button
-          variant="outline"
-          left={<FilterIcon />}
-          isActive={state.matches('ready.editing')}
-          isDisabled={state.matches('loading')}
-          onClick={onClickToggle}
-        >
-          Filters & Sorting
-        </Button>
+      <div className="relative min-h-[70px]">
+        <div className="flex items-center pt-4 md:absolute">
+          <Button
+            variant="outline"
+            left={<FilterIcon />}
+            isActive={state.matches('ready.editing')}
+            isDisabled={state.matches('loading')}
+            onClick={onClickToggle}
+          >
+            Filters & Sorting
+          </Button>
+        </div>
       </div>
 
       <Collapse
@@ -163,55 +165,58 @@ const Filters = () => {
         transitionDuration={100}
         transitionTimingFunction="linear"
       >
-        <div className="grid grid-cols-4 items-center gap-8 py-4">
-          {filterConfigEntries.map(([key, config]) => (
-            <div key={key}>
-              {config.kind === FILTER_KIND.RANGE && (
-                <RangeFilter
-                  label={config.label}
-                  minValue={
-                    state.context.filterValues[
+        <div className="relative py-4">
+          <div className="lg: -mx-2 flex flex-wrap pb-4 lg:-mx-3 lg:-mb-4">
+            {filterConfigEntries.map(([key, config]) => (
+              <div
+                key={key}
+                className="w-1/2 px-2 pb-2 lg:w-1/5 lg:px-3 lg:pb-4"
+              >
+                {config.kind === FILTER_KIND.RANGE && (
+                  <RangeFilter
+                    label={config.label}
+                    minValue={
+                      state.context.filterValues[
+                        (config as RangeFilterConfig).value.lowest.paramKey
+                      ]
+                    }
+                    maxValue={
+                      state.context.filterValues[
+                        (config as RangeFilterConfig).value.highest.paramKey
+                      ]
+                    }
+                    minParamKey={
                       (config as RangeFilterConfig).value.lowest.paramKey
-                    ]
-                  }
-                  maxValue={
-                    state.context.filterValues[
+                    }
+                    maxParamKey={
                       (config as RangeFilterConfig).value.highest.paramKey
-                    ]
-                  }
-                  minParamKey={
-                    (config as RangeFilterConfig).value.lowest.paramKey
-                  }
-                  maxParamKey={
-                    (config as RangeFilterConfig).value.highest.paramKey
-                  }
-                  minConfigValue={
-                    (config as RangeFilterConfig).value.lowest.value
-                  }
-                  maxConfigValue={
-                    (config as RangeFilterConfig).value.highest.value
-                  }
-                  send={send}
-                />
-              )}
+                    }
+                    minConfigValue={
+                      (config as RangeFilterConfig).value.lowest.value
+                    }
+                    maxConfigValue={
+                      (config as RangeFilterConfig).value.highest.value
+                    }
+                    send={send}
+                  />
+                )}
 
-              {config.kind === FILTER_KIND.SINGLE_SELECT && (
-                <SingleSelectFilter
-                  value={
-                    state.context.filterValues[
-                      (config as SingleSelectFilterConfig).paramKey
-                    ]
-                  }
-                  label={config.label}
-                  options={(config as SingleSelectFilterConfig).options}
-                  send={send}
-                  paramKey={(config as SingleSelectFilterConfig).paramKey}
-                />
-              )}
+                {config.kind === FILTER_KIND.SINGLE_SELECT && (
+                  <SingleSelectFilter
+                    value={
+                      state.context.filterValues[
+                        (config as SingleSelectFilterConfig).paramKey
+                      ]
+                    }
+                    label={config.label}
+                    options={(config as SingleSelectFilterConfig).options}
+                    send={send}
+                    paramKey={(config as SingleSelectFilterConfig).paramKey}
+                  />
+                )}
 
-              {(config.kind === FILTER_KIND.MULTI_SELECT ||
-                config.kind === FILTER_KIND.MULTI_SELECT_WITH_SEARCH) && (
-                <div key={key} className="w-60 p-4">
+                {(config.kind === FILTER_KIND.MULTI_SELECT ||
+                  config.kind === FILTER_KIND.MULTI_SELECT_WITH_SEARCH) && (
                   <MultiSelectFilter
                     value={
                       state.context.filterValues[
@@ -225,13 +230,13 @@ const Filters = () => {
                     }
                     send={send}
                   />
-                </div>
-              )}
-            </div>
-          ))}
+                )}
+              </div>
+            ))}
+          </div>
         </div>
 
-        <div className="flex flex-wrap gap-6 pt-5">
+        <div className="flex flex-wrap gap-6 lg:py-4">
           <Button
             variant="primary"
             isDisabled={!state.can({ type: 'APPLY_FILTER_VALUES' })}

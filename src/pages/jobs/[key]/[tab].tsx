@@ -59,18 +59,16 @@ const JobsPage = ({ data: { initJob, fromSSR } }: Props) => {
   }, [jobPost, setActiveJob]);
 
   return (
-    <div className="w-full pl-52 pr-[41.67%]">
+    <div className="w-full lg:pl-52 lg:pr-[41.67%]">
       <SideBar />
 
-      <div className="px-8">
+      <div className="px-3.5 pt-[65px] lg:px-8 lg:pt-0">
         <Filters />
         <JobList initJob={initJob} activeJob={activeJob ?? initJob} />
       </div>
 
-      <div className="fixed right-0 top-0 z-10 w-5/12">
-        <div className="hide-scrollbar sticky top-0 h-screen space-y-6 overflow-y-scroll bg-dark px-6 py-8 pr-10">
-          <JobRightPanel job={jobPost} />
-        </div>
+      <div className="hide-scrollbar fixed -right-full top-0 z-10 h-screen w-5/12 overflow-y-auto bg-dark px-6 py-8 pr-10 lg:right-0 ">
+        <JobRightPanel job={jobPost} />
       </div>
     </div>
   );

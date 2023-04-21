@@ -10,7 +10,7 @@ interface Props {
 const FilterWrapper = ({ label, children }: Props) => (
   <div className="flex flex-col gap-2.5">
     {label && (
-      <Heading size="sm" fw="semibold">
+      <Heading size="label" fw="semibold">
         {label}
       </Heading>
     )}
