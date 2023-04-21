@@ -16,6 +16,7 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 RUN yarn build
+RUN yarn postinstall
 
 # Production
 FROM base AS runner
