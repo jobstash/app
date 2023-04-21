@@ -17,7 +17,10 @@ const cardset = cva(
   {
     variants: {
       hasLink: {
-        true: 'bg-white/10 px-2 py-1 cursor-pointer hover:bg-white/20 hover:ring-inset hover:ring-1 hover:ring-white/40 transform translate-x-0 translate-y-0 active:bg-white/30 ',
+        true: [
+          'bg-white/10 px-2 py-1 cursor-pointer relative',
+          'before:transition-all before:content-[""] before:rounded before:z-20 before:absolute before:inset-0 before:border before:border-white/40 before:opacity-0 hover:before:opacity-100 hover:bg-white/20',
+        ],
         false: 'bg-none cursor-default',
       },
     },
