@@ -22,12 +22,12 @@ const jobCard = cva(
   [
     'flex flex-col p-6 gap-2.5 rounded-3xl bg-white/5 my-8',
     'cursor-pointer hover:bg-white/10',
-    'border border-transparent transition-all hover:border-white/20',
+    'transition-all hover:ring-1 hover:ring-inset hover:ring-white/20',
   ],
   {
     variants: {
       isActive: {
-        true: 'bg-gradient-to-l from-primary to-tertiary hover:after:hidden cursor-default border border-box border-none p-[25px] hover:border-transparent',
+        true: 'bg-gradient-to-l from-primary to-tertiary hover:after:hidden cursor-default hover:ring-0',
       },
     },
   },
