@@ -27,7 +27,7 @@ export const fetchJobList = async ({
 
   const filterParamsObj = queryKey[1] as Record<string, string>;
   console.log('fetchJobList filterParamsObj =', filterParamsObj);
-  filterParamsObj['page'] = pageParam.toString();
+  filterParamsObj['page'] = pageParam.toString() ?? '1';
   filterParamsObj['limit'] = limit.toString();
 
   const url = getUrlWithFilters(filterParamsObj, '/jobs/list', mwURL);

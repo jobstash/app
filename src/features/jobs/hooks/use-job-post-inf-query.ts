@@ -13,7 +13,7 @@ export const useJobListingInfQuery = () => {
     ...useInfiniteQuery<JobListQueryPage>(
       ['job-posts', filterParamsObj],
       async ({ pageParam, queryKey }) =>
-        fetchJobList({ pageParam: pageParam ?? 0, queryKey }),
+        fetchJobList({ pageParam: pageParam ?? 1, queryKey }),
       {
         getNextPageParam: ({ page }) => (page > 0 ? page + 1 : undefined),
         staleTime: 1000 * 60 * 60, // 1 hour
