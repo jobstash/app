@@ -1,42 +1,46 @@
-import { type Dispatch, memo } from 'react';
+import { memo, useCallback, useMemo } from 'react';
 
 import { MultiSelect } from '@mantine/core';
 
-import type { FilterAction, FilterState } from '../core/types';
+import type { SetFilterValueEvent } from '../core/types';
 
-import { FilterWrapper } from './filter-wrapper';
+import FilterWrapper from './filter-wrapper';
 
 interface Props {
+  label: string;
+  value: string | null;
   options: string[];
-  type: keyof FilterState;
-  dispatch: Dispatch<FilterAction>;
-  value?: string[];
-  label?: string;
-  placeholder?: string;
+  paramKey: string;
+  send: (_: SetFilterValueEvent) => void;
 }
 
-const _MultiSelectFilter = ({
-  options,
+const MultiSelectFilter = ({
   label,
-  placeholder,
   value,
-  type,
-  dispatch,
+  options,
+  paramKey,
+  send,
 }: Props) => {
-  const onChange = (selectedItems: string[]) => {
-    dispatch({
-      type,
-      payload: selectedItems.length === 0 ? null : new Set(selectedItems),
-    });
-  };
+  const onChange = useCallback(
+    (selected: string[]) => {
+      console.log('selected =', selected);
+      send({
+        type: 'SET_FILTER_VALUE',
+        paramKey,
+        payload: selected.length > 0 ? selected.join(',') : null,
+      });
+    },
+    [paramKey, send],
+  );
+
+  const inputValue = value?.split(',');
 
   return (
     <FilterWrapper label={label}>
       <MultiSelect
         searchable
-        value={value}
         data={options}
-        placeholder={placeholder ?? 'Select'}
+        placeholder="Select"
         classNames={{
           input:
             'bg-dark rounded-lg border-gray text-white placeholder-white focus-within:border-white/30',
@@ -45,10 +49,13 @@ const _MultiSelectFilter = ({
           item: '[&[data-hovered]]:bg-dark-gray [&[data-selected]]:bg-gray',
           values: 'overflow-hidden flex-nowrap [&>*]:-mr-3',
         }}
+        //
+        // value={['move', 'Rust']}
+        value={inputValue}
         onChange={onChange}
       />
     </FilterWrapper>
   );
 };
 
-export const MultiSelectFilter = memo(_MultiSelectFilter);
+export default memo(MultiSelectFilter);

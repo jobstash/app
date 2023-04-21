@@ -1,95 +1,253 @@
-import { memo, useReducer } from 'react';
+import { useRouter } from 'next/router';
+import {
+  ChangeEventHandler,
+  FormEventHandler,
+  memo,
+  useCallback,
+  useEffect,
+  useMemo,
+} from 'react';
 
 import { Collapse, TextInput } from '@mantine/core';
+import { useMachine } from '@xstate/react';
+import type { Entries } from 'type-fest';
 
-import { Button, FilterIcon, SearchInputIcon } from '~/shared/components';
+import {
+  Button,
+  FilterIcon,
+  RocketLaunchIcon,
+  SearchInputIcon,
+} from '~/shared/components';
+import { getOriginString } from '~/shared/utils';
 
-import { useFilterConfigQuery, useFilters, useUrlFilterParams } from '../hooks';
-import { createAppliedFilterUrl } from '../utils';
+import { FILTER_KIND } from '../core/constants';
+import type {
+  FilterConfig,
+  MultiSelectSearchFilterConfig,
+  RangeFilterConfig,
+  SingleSelectFilterConfig,
+} from '../core/types';
+import { useFilterConfigQuery } from '../hooks';
+import { filterMachine } from '../machines';
+import { initFilterConfigData } from '../utils';
+
+import MultiSelectFilter from './multi-select-filter';
+import RangeFilter from './range-filter';
+import SingleSelectFilter from './single-select-filter';
 
 const Filters = () => {
-  const { push, filterParamsObj } = useUrlFilterParams();
-  const [isCollapsed, toggle] = useReducer((p) => !p, true);
+  const { query, push } = useRouter();
+  const [state, send] = useMachine(filterMachine, {
+    actions: {
+      applyFilterValues: (ctx) => {
+        const url = new URL(`${getOriginString()}/jobs`);
+        for (const [key, value] of Object.entries(ctx.filterValues)) {
+          if (value) url.searchParams.set(key, value);
+        }
 
-  const { data } = useFilterConfigQuery();
+        push(url, undefined, { shallow: true });
+      },
+      applySearchFilter: (ctx) => {
+        push(
+          `${getOriginString()}/jobs?query=${ctx.filterValues.query}`,
+          undefined,
+          { shallow: true },
+        );
+      },
+    },
+  });
+  const { data, error } = useFilterConfigQuery();
 
-  const { filters, filterComponents, sortComponents, clearFilterState } =
-    useFilters(data);
+  useEffect(() => {
+    if (data) {
+      // Init filterConfig to only include show=true, then sort by position
+      const { filterConfig, filterValues } = initFilterConfigData(data, query);
 
-  const onClickApply = () => {
-    toggle();
-    const url = createAppliedFilterUrl(filters, filterParamsObj, data);
-    push(url, undefined, { shallow: true });
-  };
+      send({ type: 'FETCH_OK', filterConfig, filterValues });
+    }
 
-  const onClickClear = () => {
-    clearFilterState();
-    toggle();
-    push('/jobs', undefined, { shallow: true });
-  };
+    if (error) send({ type: 'FETCH_ERROR', msg: 'pakyu' });
+  }, [data, error, query, send]);
+
+  const filterConfigEntries = useMemo(
+    () => Object.entries(state.context.filterConfig) as Entries<FilterConfig>,
+    [state.context.filterConfig],
+  );
+
+  const onClickToggle = useCallback(
+    () => send({ type: 'TOGGLE_FILTER_UI' }),
+    [send],
+  );
+
+  const onChangeSearchInput: ChangeEventHandler<HTMLInputElement> = useCallback(
+    (e) => {
+      send({ type: 'SET_SEARCH_FILTER_VALUE', payload: e.target.value });
+    },
+    [send],
+  );
+
+  const onClickSearchApply = useCallback(
+    () => send({ type: 'APPLY_SEARCH_FILTER' }),
+    [send],
+  );
+
+  const onSubmitSearch: FormEventHandler = useCallback(
+    (e) => {
+      e.preventDefault();
+      send({ type: 'APPLY_SEARCH_FILTER' });
+    },
+    [send],
+  );
+
+  const onClickApply = useCallback(
+    () => send({ type: 'APPLY_FILTER_VALUES' }),
+    [send],
+  );
+
+  const onClickClear = useCallback(
+    () => send({ type: 'CLEAR_FILTER_VALUES' }),
+    [send],
+  );
 
   return (
-    <div className="flex flex-col gap-y-2 py-8 pb-4">
-      <div>
-        <TextInput
-          icon={<SearchInputIcon />}
-          placeholder="Search Jobs"
-          size="lg"
-          radius="md"
-          //
-          styles={{
-            input: {
-              background: 'rgba(255, 255, 255, 0.1)',
-              fontSize: 16,
-              border: 'transparent',
-            },
-          }}
-          disabled={!data}
-        />
-      </div>
-
-      <div className="relative min-h-[70px]">
-        <div className="absolute flex items-center pt-4">
-          <Button
-            variant="outline"
-            isActive={!isCollapsed}
-            left={<FilterIcon />}
-            isDisabled={!data}
-            onClick={toggle}
-          >
-            Filters & Sorting
+    <div>
+      {state.matches('error') && (
+        <div>
+          <p>errorMsg = {state.context.errorMsg}</p>
+          <Button onClick={() => send({ type: 'FETCH_RETRY' })}>
+            Try again
           </Button>
         </div>
+      )}
 
-        <Collapse
-          in={!isCollapsed}
-          transitionDuration={200}
-          transitionTimingFunction="linear"
-        >
-          <div className="grid grid-cols-5 items-end gap-8 py-4">
-            <div />
-            <div />
-            <div />
-            {sortComponents.map(({ key, ui }) => (
-              <div key={key}>{ui}</div>
-            ))}
-
-            {filterComponents.map(({ key, ui }) => (
-              <div key={key}>{ui}</div>
-            ))}
-          </div>
-
-          <div className="flex flex-wrap gap-6 pt-5">
-            <Button variant="primary" onClick={onClickApply}>
-              Apply Filters
-            </Button>
-            <Button variant="outline" onClick={onClickClear}>
-              Clear Filters
-            </Button>
-            <p>{JSON.stringify(filterParamsObj)}</p>
-          </div>
-        </Collapse>
+      <div className="py-4">
+        <form onSubmit={onSubmitSearch}>
+          <TextInput
+            icon={<SearchInputIcon />}
+            placeholder="Search Jobs"
+            size="lg"
+            rightSection={
+              <Button isIcon onClick={onClickSearchApply}>
+                <RocketLaunchIcon />
+              </Button>
+            }
+            value={state.context.filterValues.query ?? ''}
+            disabled={state.matches('loading')}
+            radius="md"
+            styles={{
+              input: {
+                background: 'rgba(255, 255, 255, 0.1)',
+                fontSize: 16,
+                border: 'transparent',
+              },
+            }}
+            onChange={onChangeSearchInput}
+          />
+        </form>
       </div>
+
+      <div className="py-4">
+        <Button
+          variant="outline"
+          left={<FilterIcon />}
+          isActive={state.matches('ready.editing')}
+          isDisabled={state.matches('loading')}
+          onClick={onClickToggle}
+        >
+          Filters & Sorting
+        </Button>
+      </div>
+
+      <Collapse
+        in={state.matches('ready.editing')}
+        transitionDuration={100}
+        transitionTimingFunction="linear"
+      >
+        <div className="grid grid-cols-4 items-center gap-8 py-4">
+          {filterConfigEntries.map(([key, config]) => (
+            <div key={key}>
+              {config.kind === FILTER_KIND.RANGE && (
+                <RangeFilter
+                  label={config.label}
+                  minValue={
+                    state.context.filterValues[
+                      (config as RangeFilterConfig).value.lowest.paramKey
+                    ]
+                  }
+                  maxValue={
+                    state.context.filterValues[
+                      (config as RangeFilterConfig).value.highest.paramKey
+                    ]
+                  }
+                  minParamKey={
+                    (config as RangeFilterConfig).value.lowest.paramKey
+                  }
+                  maxParamKey={
+                    (config as RangeFilterConfig).value.highest.paramKey
+                  }
+                  minConfigValue={
+                    (config as RangeFilterConfig).value.lowest.value
+                  }
+                  maxConfigValue={
+                    (config as RangeFilterConfig).value.highest.value
+                  }
+                  send={send}
+                />
+              )}
+
+              {config.kind === FILTER_KIND.SINGLE_SELECT && (
+                <SingleSelectFilter
+                  value={
+                    state.context.filterValues[
+                      (config as SingleSelectFilterConfig).paramKey
+                    ]
+                  }
+                  label={config.label}
+                  options={(config as SingleSelectFilterConfig).options}
+                  send={send}
+                  paramKey={(config as SingleSelectFilterConfig).paramKey}
+                />
+              )}
+
+              {(config.kind === FILTER_KIND.MULTI_SELECT ||
+                config.kind === FILTER_KIND.MULTI_SELECT_WITH_SEARCH) && (
+                <div key={key} className="w-60 p-4">
+                  <MultiSelectFilter
+                    value={
+                      state.context.filterValues[
+                        (config as MultiSelectSearchFilterConfig).paramKey
+                      ]
+                    }
+                    label={config.label}
+                    options={(config as MultiSelectSearchFilterConfig).options}
+                    paramKey={
+                      (config as MultiSelectSearchFilterConfig).paramKey
+                    }
+                    send={send}
+                  />
+                </div>
+              )}
+            </div>
+          ))}
+        </div>
+
+        <div className="flex flex-wrap gap-6 pt-5">
+          <Button
+            variant="primary"
+            isDisabled={!state.can({ type: 'APPLY_FILTER_VALUES' })}
+            onClick={onClickApply}
+          >
+            Apply Filters
+          </Button>
+          <Button
+            variant="outline"
+            isDisabled={!state.can({ type: 'CLEAR_FILTER_VALUES' })}
+            onClick={onClickClear}
+          >
+            Clear Filters
+          </Button>
+        </div>
+      </Collapse>
     </div>
   );
 };

@@ -1,2 +1,2 @@
-export * from './create-applied-filter-url';
-export * from './get-filter-params-from-query';
+export * from './get-filter-from-query';
+export * from './init-filter-config-data';

@@ -1,4 +1,4 @@
-import { type Dispatch, memo } from 'react';
+import { memo, useCallback, useMemo } from 'react';
 
 import { Popover, RangeSlider } from '@mantine/core';
 
@@ -6,33 +6,87 @@ import { Button, CaretDownIcon } from '~/shared/components';
 import { roboto } from '~/shared/core/constants';
 import { numFormatter } from '~/shared/utils';
 
-import type { FilterAction, FilterState } from '../core/types';
+import type { SetRangeFilterValueEvent } from '../core/types';
 
-import { FilterWrapper } from './filter-wrapper';
+import FilterWrapper from './filter-wrapper';
 
 const NUM_STEPS = 5;
 const SLIDER_STEP = 100 / NUM_STEPS;
 
 interface Props {
-  minMax: [number, number];
-  value: [number, number];
-  type: keyof FilterState;
-  dispatch: Dispatch<FilterAction>;
+  label: string;
+  minValue: string | null;
+  maxValue: string | null;
+  minParamKey: string;
+  maxParamKey: string;
+  minConfigValue: number;
+  maxConfigValue: number;
   prefix?: string;
-  label?: string;
+  send: (_: SetRangeFilterValueEvent) => void;
 }
 
-const _RangeFilter = ({
-  minMax,
-  value,
-  prefix = '$',
+const RangeFilter = ({
   label,
-  type,
-  dispatch,
+  minValue,
+  maxValue,
+  minParamKey,
+  maxParamKey,
+  minConfigValue,
+  maxConfigValue,
+  prefix = '$',
+  send,
 }: Props) => {
-  const [min, max] = minMax;
-  const increment = Math.floor((max - min) / NUM_STEPS);
-  const marks = generateMarks(min, increment, prefix);
+  const increment = Math.floor((maxConfigValue - minConfigValue) / NUM_STEPS);
+
+  const marks = useMemo(
+    () => generateMarks(minConfigValue, increment, prefix),
+    [increment, minConfigValue, prefix],
+  );
+
+  const labelFn = useCallback(
+    (v: number) =>
+      formatNum(v * (increment / SLIDER_STEP) + minConfigValue, prefix),
+    [increment, minConfigValue, prefix],
+  );
+
+  const buttonText = useMemo(() => {
+    if (!minValue || !maxValue) return 'Select';
+
+    return `${formatNum(Number(minValue), prefix)} - ${formatNum(
+      Number(maxValue),
+      prefix,
+    )}`;
+  }, [maxValue, minValue, prefix]);
+
+  const onChange = useCallback(
+    ([minRangeValue, maxRangeValue]: [number, number]) => {
+      const newMinValue = Math.floor(
+        minRangeValue * (increment / SLIDER_STEP) + minConfigValue,
+      ).toString();
+      const newMaxValue = Math.ceil(
+        maxRangeValue * (increment / SLIDER_STEP) + minConfigValue,
+      ).toString();
+      send({
+        type: 'SET_RANGE_FILTER_VALUE',
+        newMinValue,
+        newMaxValue,
+        minParamKey,
+        maxParamKey,
+      });
+    },
+    [increment, maxParamKey, minConfigValue, minParamKey, send],
+  );
+
+  const inputValue = useMemo(() => {
+    const minRangeValue = Math.floor(
+      (Number(minValue ?? minConfigValue) / maxConfigValue) * 100,
+    );
+    const maxRangeValue = Math.floor(
+      (Number(maxValue ?? maxConfigValue) / maxConfigValue) * 100,
+    );
+
+    return [minRangeValue, maxRangeValue] as [number, number];
+  }, [maxConfigValue, maxValue, minConfigValue, minValue]);
 
   return (
     <FilterWrapper label={label}>
@@ -47,22 +101,15 @@ const _RangeFilter = ({
         <Popover.Target>
           <div className="[&>*]:w-full">
             <Button isFullWidth variant="outline" right={<CaretDownIcon />}>
-              {value
-                ? `${marks.find((mark) => mark.value === value[0])?.label} - ${
-                    marks.find((mark) => mark.value === value[1])?.label
-                  }`
-                : 'Select'}
+              {buttonText}
             </Button>
           </div>
         </Popover.Target>
         <Popover.Dropdown>
           <RangeSlider
             labelAlwaysOn
-            value={value}
             step={SLIDER_STEP}
-            label={(v) =>
-              formatNum(v * (increment / SLIDER_STEP) + min, prefix)
-            }
+            label={labelFn}
             marks={marks}
             classNames={{
               root: 'my-10 mx-2',
@@ -73,7 +120,8 @@ const _RangeFilter = ({
               label: `-mt-1 ${roboto.variable} font-roboto bg-dark-gray px-2`,
               markLabel: `text-sm pt-2 ${roboto.variable} font-roboto`,
             }}
-            onChange={(payload) => dispatch({ type, payload })}
+            value={inputValue}
+            onChange={onChange}
           />
         </Popover.Dropdown>
       </Popover>
@@ -81,7 +129,7 @@ const _RangeFilter = ({
   );
 };
 
-export const RangeFilter = memo(_RangeFilter);
+export default memo(RangeFilter);
 
 const formatNum = (num: number, prefix?: string) =>
   `${prefix ?? ''}${numFormatter.format(num)}`;

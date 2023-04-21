@@ -1,66 +1,62 @@
-import { type Dispatch, memo } from 'react';
+import { memo, useCallback, useMemo } from 'react';
 
 import { Select } from '@mantine/core';
 import clsx from 'clsx';
 
-import type { FilterAction, FilterState } from '../core/types';
+import type { SetFilterValueEvent } from '../core/types';
 
-import { FilterWrapper } from './filter-wrapper';
+import FilterWrapper from './filter-wrapper';
 
 interface Props {
-  value: string;
-  options: { value: string; label: string }[];
-  type: keyof FilterState;
-  dispatch: Dispatch<FilterAction>;
-  label?: string;
-  placeholder?: string;
+  label: string;
+  value: string | null;
+  options: { label: string; value: string }[];
+  paramKey: string;
+  send: (_: SetFilterValueEvent) => void;
 }
 
-const _SingleSelectFilter = ({
+const SingleSelectFilter = ({
+  label,
   value,
   options,
-  type,
-  dispatch,
-  label,
-  placeholder,
+  paramKey,
+  send,
 }: Props) => {
-  const onChange = (clickedLabelValue: string) => {
-    console.log(
-      'clickedLabelValue =',
-      clickedLabelValue,
-      'value =',
-      value,
-      'value === clickedLabelValue =',
-      value === clickedLabelValue,
-    );
-    dispatch({
-      type,
-      payload:
-        clickedLabelValue === null
-          ? null
-          : options.find(({ value }) => value === clickedLabelValue)!.value,
-    });
-  };
+  const selections = useMemo(() => options.map((o) => o.label), [options]);
+
+  const inputValue = useMemo(
+    () => options.find((o) => o.value.toString() === value)?.label ?? null,
+    [options, value],
+  );
+
+  const onChange = useCallback(
+    (selectedLabel: string) => {
+      const payload =
+        options.find((o) => o.label === selectedLabel)?.value.toString() ??
+        null;
+      send({ type: 'SET_FILTER_VALUE', payload, paramKey });
+    },
+    [options, paramKey, send],
+  );
 
   return (
     <FilterWrapper label={label}>
       <Select
         clearable
-        value={value}
-        placeholder={placeholder ?? 'Select'}
-        data={options}
+        placeholder="Select"
+        data={selections}
         classNames={{
           input: clsx(
             'rounded-lg bg-dark text-white placeholder:text-white focus:border-white',
-            { 'border-white': value !== undefined && value !== null },
           ),
           itemsWrapper: 'bg-dark',
           item: '[&[data-hovered]]:bg-dark-gray [&[data-selected]]:bg-gray',
         }}
+        value={inputValue}
         onChange={onChange}
       />
     </FilterWrapper>
   );
 };
 
-export const SingleSelectFilter = memo(_SingleSelectFilter);
+export default memo(SingleSelectFilter);

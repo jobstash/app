@@ -11,7 +11,7 @@ import { getFilterFromQuery } from '~/features/filters/utils';
 import { activeJobAtom } from '~/features/jobs/atoms';
 import JobList from '~/features/jobs/components/job-list';
 import { Job } from '~/features/jobs/core/types';
-import { fetchJob, fetchJobList } from '~/features/jobs/fetch';
+import { fetchJobList } from '~/features/jobs/fetch';
 import { useJobQuery } from '~/features/jobs/hooks/use-job-query';
 import { JobRightPanel } from '~/features/right-panel/components';
 import { SideBar } from '~/features/sidebar/components';

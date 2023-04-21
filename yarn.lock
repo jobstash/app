@@ -5614,6 +5614,14 @@
   resolved "https://registry.yarnpkg.com/@xmldom/xmldom/-/xmldom-0.8.6.tgz#8a1524eb5bd5e965c1e3735476f0262469f71440"
   integrity sha512-uRjjusqpoqfmRkTaNuLJ2VohVr67Q5YwDATW3VU7PfzTj6IRaihGrYI7zckGZjxQPBIp63nfvJbM+Yu5ICh0Bg==
 
+"@xstate/react@^3.2.1":
+  version "3.2.1"
+  resolved "https://registry.yarnpkg.com/@xstate/react/-/react-3.2.1.tgz#ac7b78e8c1d6d3802dfb29a6499f18e48b3dfdb3"
+  integrity sha512-L/mqYRxyBWVdIdSaXBHacfvS8NKn3sTKbPb31aRADbE9spsJ1p+tXil0GVQHPlzrmjGeozquLrxuYGiXsFNU7g==
+  dependencies:
+    use-isomorphic-layout-effect "^1.0.0"
+    use-sync-external-store "^1.0.0"
+
 "@xtuc/ieee754@^1.2.0":
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/@xtuc/ieee754/-/ieee754-1.2.0.tgz#eef014a3145ae477a1cbc00cd1e552336dceb790"
@@ -14136,6 +14144,11 @@ type-fest@^2.19.0:
   resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-2.19.0.tgz#88068015bb33036a598b952e55e9311a60fd3a9b"
   integrity sha512-RAH822pAdBgcNMAfWnCBU3CFZcfZ/i1eZjwFU/dsLKumyuuP3niueg2UAukXYF0E2AAoc82ZSSf9J0WQBinzHA==
 
+type-fest@^3.8.0:
+  version "3.8.0"
+  resolved "https://registry.yarnpkg.com/type-fest/-/type-fest-3.8.0.tgz#ce80d1ca7c7d11c5540560999cbd410cb5b3a385"
+  integrity sha512-FVNSzGQz9Th+/9R6Lvv7WIAkstylfHN2/JYxkyhhmKFYh9At2DST8t6L6Lref9eYO8PXFTfG9Sg1Agg0K3vq3Q==
+
 type-is@~1.6.18:
   version "1.6.18"
   resolved "https://registry.yarnpkg.com/type-is/-/type-is-1.6.18.tgz#4e552cd05df09467dcbc4ef739de89f2cf37c131"
@@ -14359,7 +14372,7 @@ use-composed-ref@^1.3.0:
   resolved "https://registry.yarnpkg.com/use-composed-ref/-/use-composed-ref-1.3.0.tgz#3d8104db34b7b264030a9d916c5e94fbe280dbda"
   integrity sha512-GLMG0Jc/jiKov/3Ulid1wbv3r54K9HlMW29IWcDFPEqFkSO2nS0MuefWgMJpeHQ9YJeXDL3ZUF+P3jdXlZX/cQ==
 
-use-isomorphic-layout-effect@^1.1.1:
+use-isomorphic-layout-effect@^1.0.0, use-isomorphic-layout-effect@^1.1.1:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/use-isomorphic-layout-effect/-/use-isomorphic-layout-effect-1.1.2.tgz#497cefb13d863d687b08477d9e5a164ad8c1a6fb"
   integrity sha512-49L8yCO3iGT/ZF9QttjwLF/ZD9Iwto5LnH5LmEdk/6cFmXddqi2ulF0edxTwjj+7mqvpVVGQWvbXZdn32wRSHA==
@@ -14386,7 +14399,7 @@ use-sidecar@^1.1.2:
     detect-node-es "^1.1.0"
     tslib "^2.0.0"
 
-use-sync-external-store@1.2.0, use-sync-external-store@^1.2.0:
+use-sync-external-store@1.2.0, use-sync-external-store@^1.0.0, use-sync-external-store@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/use-sync-external-store/-/use-sync-external-store-1.2.0.tgz#7dbefd6ef3fe4e767a0cf5d7287aacfb5846928a"
   integrity sha512-eEgnFxGQ1Ife9bzYs6VLi8/4X6CObHMw9Qr9tPY43iKwsPw8xE8+EFsf/2cFZ5S3esXgpWgtSCtLNS41F+sKPA==
@@ -14767,6 +14780,11 @@ ws@^8.5.0:
   version "8.13.0"
   resolved "https://registry.yarnpkg.com/ws/-/ws-8.13.0.tgz#9a9fb92f93cf41512a0735c8f4dd09b8a1211cd0"
   integrity sha512-x9vcZYTrFPC7aSIbj7sRCYo7L/Xb8Iy+pW0ng0wt2vCJv7M9HOMy0UoN3rr+IFC7hb7vXoqS+P9ktyLLLhO+LA==
+
+xstate@^4.37.1:
+  version "4.37.1"
+  resolved "https://registry.yarnpkg.com/xstate/-/xstate-4.37.1.tgz#1dd5a8bda179ef6cbb42e0e5fe06c99048a1ce3c"
+  integrity sha512-MuB7s01nV5vG2CzaBg2msXLGz7JuS+x/NBkQuZAwgEYCnWA8iQMiRz2VGxD3pcFjZAOih3fOgDD3kDaFInEx+g==
 
 xtend@^4.0.1, xtend@~4.0.1:
   version "4.0.2"

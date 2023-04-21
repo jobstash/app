@@ -1,4 +1,4 @@
-import type { ReactNode } from 'react';
+import { type ReactNode, memo } from 'react';
 
 import { Heading } from '~/shared/components';
 
@@ -7,7 +7,7 @@ interface Props {
   label?: string;
 }
 
-export const FilterWrapper = ({ label, children }: Props) => (
+const FilterWrapper = ({ label, children }: Props) => (
   <div className="flex flex-col gap-2.5">
     {label && (
       <Heading size="sm" fw="semibold">
@@ -17,3 +17,5 @@ export const FilterWrapper = ({ label, children }: Props) => (
     {children}
   </div>
 );
+
+export default memo(FilterWrapper);
