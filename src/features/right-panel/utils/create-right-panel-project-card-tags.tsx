@@ -1,11 +1,9 @@
 import {
   ActiveUsersIcon,
   CategoryIcon,
-  DiscordIcon,
   GithubLogoIcon,
   GithubLogoOutlineIcon,
   GlobeIcon,
-  LinkedinIcon,
   MonthlyVolumeIcon,
   RevenueIcon,
   ShieldCheckIcon,

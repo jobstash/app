@@ -4,8 +4,6 @@ import {
   CurrencyCircleDollarIcon,
   MonthlyVolumeIcon,
   RevenueIcon,
-  ShieldCheckIcon,
-  SkullIcon,
   TvlIcon,
 } from '~/shared/components';
 import { Project, TagElement } from '~/shared/core/interfaces';

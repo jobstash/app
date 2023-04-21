@@ -1,5 +1,3 @@
-import { Hack } from './common';
-
 export interface Project {
   id: string;
 

@@ -37,7 +37,6 @@ const Text = ({
   fw = 'normal',
   size = 'md',
   color = 'white',
-  ...props
 }: TextProps) => <span className={text({ fw, size, color })}>{children}</span>;
 
 export default memo(Text);

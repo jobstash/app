@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 
-import { Flex, Paper, Stack, Title } from '@mantine/core';
+import { Flex, Paper, Stack } from '@mantine/core';
 
 import { CHECK_WALLET_ROLES } from '~/features/auth/core/constants';
 import EmptyPage from '~/features/auth/pages/empty-page';

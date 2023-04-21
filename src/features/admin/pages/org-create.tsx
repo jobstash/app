@@ -1,5 +1,3 @@
-import { FormEventHandler } from 'react';
-
 import {
   Box,
   Button,

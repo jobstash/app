@@ -1,11 +1,8 @@
 import {
-  Button,
   CardSet,
-  GlobeSimpleIcon,
   Heading,
   LinkIcon,
   LogoTitle,
-  TechWrapper,
   Text,
 } from '~/shared/components';
 import { Project } from '~/shared/core/interfaces';
@@ -19,7 +16,7 @@ interface Props {
 export const RightPanelProjectCard = ({ project }: Props) => {
   if (!project) return null;
 
-  const { logo, name, description, url, defillamaSlug } = project;
+  const { logo, name, description } = project;
   const { projectSocialTags, projectTags, projectTvlTags, projectAuditTags } =
     createRightPanelProjectCardTags(project);
 

@@ -7,7 +7,6 @@ import { useIsMounted } from '~/shared/hooks';
 
 import { PickRoleButton, PickRoleSection } from '../components';
 import { CHECK_WALLET_FLOWS, CHECK_WALLET_ROLES } from '../core/constants';
-import { useWalletAuthContext } from '../hooks';
 
 import EmptyPage from './empty-page';
 

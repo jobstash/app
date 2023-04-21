@@ -1,5 +1,3 @@
-import { useState } from 'react';
-
 import * as SliderPrimitive from '@radix-ui/react-slider';
 import { clsx } from 'clsx';
 

@@ -3,8 +3,6 @@ import { ButtonHTMLAttributes, forwardRef, ReactNode } from 'react';
 import { cva, VariantProps } from 'class-variance-authority';
 import clsx from 'clsx';
 
-import { CaretLeftSidebarIcon } from '../icons';
-
 import Text from './text';
 
 const bartab = cva(['h-10 w-full border-none rounded-lg p-[2px]'], {
@@ -72,13 +70,7 @@ interface BartabProps extends ButtonHTMLProps, BartabVariantProps {
 
 const Bartab = forwardRef<HTMLButtonElement, BartabProps>(
   (
-    {
-      text,
-      left = null,
-      variant = 'bartab',
-      isActive,
-      ...props
-    }: BartabProps,
+    { text, left = null, variant = 'bartab', isActive, ...props }: BartabProps,
     ref,
   ) => {
     const isTextOnly = !left;

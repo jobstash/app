@@ -1,4 +1,4 @@
-import { Avatar as CkAvatar, ConnectKitButton, useModal } from 'connectkit';
+import { Avatar as CkAvatar, ConnectKitButton } from 'connectkit';
 
 import { useIsMounted } from '~/shared/hooks';
 

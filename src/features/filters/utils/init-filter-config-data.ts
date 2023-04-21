@@ -11,7 +11,7 @@ export const initFilterConfigData = (
   const filterConfig = {} as FilterConfig;
 
   const filteredDataEntries = (Object.entries(data) as Entries<FilterConfig>)
-    .filter(([k, config]) => config.show)
+    .filter(([, config]) => config.show)
     .sort(([_k1, v1], [_k2, v2]) => v1.position - v2.position);
 
   for (const [key, config] of filteredDataEntries) {
@@ -25,12 +25,12 @@ export const initFilterConfigData = (
   const multiSelectParamKeys = [];
 
   // Iterate over filterConfig and assign defaults
-  for (const [_, config] of Object.entries(
+  for (const [, config] of Object.entries(
     filterConfig,
   ) as Entries<FilterConfig>) {
     if (config.kind === FILTER_KIND.RANGE) {
-      const { paramKey: minKey, value: minValue } = config.value.lowest;
-      const { paramKey: maxKey, value: maxValue } = config.value.highest;
+      const { paramKey: minKey } = config.value.lowest;
+      const { paramKey: maxKey } = config.value.highest;
       rangeParamKeys.push(minKey, maxKey);
 
       // Default to min/max values

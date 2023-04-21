@@ -3,17 +3,12 @@ import {
   DiscordIcon,
   GithubLogoOutlineIcon,
   GlobeSimpleIcon,
-  LinkedinIcon,
   LocationIcon,
   TelegramIcon,
   TwitterIcon,
   UsersIcon,
 } from '~/shared/components';
-import {
-  FundingRound,
-  Organization,
-  TagElement,
-} from '~/shared/core/interfaces';
+import { Organization, TagElement } from '~/shared/core/interfaces';
 
 import { createOrgFundingDateString } from './create-org-funding-date-string';
 

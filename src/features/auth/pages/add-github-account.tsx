@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import { useRouter } from 'next/router';
 
 import { Avatar, Button, Text } from '~/shared/components';
 import { useIsMounted } from '~/shared/hooks';

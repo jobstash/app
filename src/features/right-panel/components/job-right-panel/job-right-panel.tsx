@@ -1,4 +1,4 @@
-import { memo, useMemo, useTransition } from 'react';
+import { memo, useTransition } from 'react';
 
 import { useUrlFilterParams } from '~/features/filters/hooks';
 import { Job } from '~/features/jobs/core/types';

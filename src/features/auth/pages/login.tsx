@@ -1,5 +1,3 @@
-import { useRouter } from 'next/router';
-
 import { ConnectKitButton } from 'connectkit';
 
 import { Text } from '~/shared/components';
@@ -13,7 +11,6 @@ import EmptyPage from './empty-page';
 
 const LoginPage = () => {
   const isMounted = useIsMounted();
-  const { push } = useRouter();
   const { isConnected, isLoading } = useWalletAuthContext();
 
   if (isLoading || !isMounted) return <EmptyPage isLoading />;

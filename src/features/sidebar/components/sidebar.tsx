@@ -1,7 +1,6 @@
 import { CHECK_WALLET_ROLES } from '~/features/auth/core/constants';
 import { useWalletAuthContext } from '~/features/auth/hooks';
 import { Brand, ConnectWalletButton } from '~/shared/components';
-import { useIsMounted } from '~/shared/hooks';
 
 import {
   bookmarkBartabs,

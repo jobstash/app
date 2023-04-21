@@ -3,7 +3,7 @@ import { ReactNode, useEffect } from 'react';
 
 import { useIsMounted } from '~/shared/hooks';
 
-import { CHECK_WALLET_ROLES, CHECK_WALLET_ROUTE } from '../core/constants';
+import { CHECK_WALLET_ROUTE } from '../core/constants';
 import { CheckWalletFlow, CheckWalletRole } from '../core/types';
 import { useWalletAuthContext } from '../hooks';
 import EmptyPage from '../pages/empty-page';
