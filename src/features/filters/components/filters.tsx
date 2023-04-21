@@ -55,6 +55,9 @@ const Filters = () => {
         );
       },
     },
+    delays: {},
+    guards: {},
+    services: {},
   });
   const { data, error } = useFilterConfigQuery();
 
