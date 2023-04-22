@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, ReactNode } from 'react';
 
 import clsx from 'clsx';
 
@@ -23,18 +23,46 @@ interface Props {
   job: Job;
 }
 
-const JobRightPanelCard = ({
-  tabSegment,
+const Wrapper = ({
+  children,
   isPending,
-  job: { jobpost, organization, project, technologies },
-}: Props) => (
+}: {
+  children: ReactNode;
+  isPending: boolean;
+}) => (
   <div
     className={clsx(
       'mt-8 rounded-3xl bg-gradient-to-l from-primary to-tertiary p-0.5',
       { 'select-none pointer-events-none': isPending },
     )}
   >
-    <div className="rounded-3xl bg-darker-gray">
+    <div className="rounded-3xl bg-darker-gray">{children}</div>
+  </div>
+);
+
+const JobRightPanelCard = ({
+  tabSegment,
+  isPending,
+  job: { jobpost, organization, project, technologies },
+}: Props) => {
+  if (tabSegment === TEXT_ROUTE_TAB_COMPETITORS) {
+    return (
+      <div className="flex flex-col gap-4">
+        <Wrapper isPending={isPending}>
+          <RightPanelCompetitorsCard />
+        </Wrapper>
+        <Wrapper isPending={isPending}>
+          <RightPanelCompetitorsCard />
+        </Wrapper>
+        <Wrapper isPending={isPending}>
+          <RightPanelCompetitorsCard />
+        </Wrapper>
+      </div>
+    );
+  }
+
+  return (
+    <Wrapper isPending={isPending}>
       {tabSegment === TEXT_ROUTE_TAB_DETAILS && (
         <RightPanelJobCard job={jobpost} technologies={technologies} />
       )}
@@ -45,11 +73,8 @@ const JobRightPanelCard = ({
         <RightPanelProjectCard project={project} />
       )}
       {tabSegment === TEXT_ROUTE_TAB_REPOSITORIES && <RightPanelRepoCard />}
-      {tabSegment === TEXT_ROUTE_TAB_COMPETITORS && (
-        <RightPanelCompetitorsCard />
-      )}
-    </div>
-  </div>
-);
+    </Wrapper>
+  );
+};
 
 export default memo(JobRightPanelCard);
