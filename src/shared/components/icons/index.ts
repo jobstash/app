@@ -1,5 +1,6 @@
 // Icons (non-uniform dimensions)
 export { BookmarkIcon } from './bookmark-icon';
+export { CommitersLargerIcon } from './commiters-larger-icon';
 export { IconBookmark } from './icon-bookmark';
 export { IconBookmarked } from './icon-bookmarked';
 export { IconDevs } from './icon-devs';
@@ -7,6 +8,8 @@ export { IconGithub } from './icon-github';
 export { IconShareLink } from './icon-share-link';
 export { IconTechAdd } from './icon-tech-add';
 export { IconTechCheck } from './icon-tech-check';
+export { RepoGithubIcon } from './repo-github-icon';
+export { RepoLinkIcon } from './repo-link-icon';
 export { SearchInputIcon } from './search-input-icon';
 
 // Util components
