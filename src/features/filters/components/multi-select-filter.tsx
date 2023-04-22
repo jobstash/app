@@ -1,17 +1,21 @@
-import { memo, useCallback } from 'react';
+import { Dispatch, memo, useCallback } from 'react';
 
 import { MultiSelect } from '@mantine/core';
 
-import type { SetFilterValueEvent } from '../core/types';
+import {
+  FilterParamKey,
+  FilterValue,
+  SetMultiSelectFilterValueAction,
+} from '../core/types';
 
 import FilterWrapper from './filter-wrapper';
 
 interface Props {
   label: string;
-  value: string | null;
+  value: FilterValue;
+  paramKey: FilterParamKey;
   options: string[];
-  paramKey: string;
-  send: (_: SetFilterValueEvent) => void;
+  dispatch: Dispatch<SetMultiSelectFilterValueAction>;
 }
 
 const MultiSelectFilter = ({
@@ -19,17 +23,19 @@ const MultiSelectFilter = ({
   value,
   options,
   paramKey,
-  send,
+  dispatch,
 }: Props) => {
   const onChange = useCallback(
-    (selected: string[]) => {
-      send({
-        type: 'SET_FILTER_VALUE',
-        paramKey,
-        payload: selected.length > 0 ? selected.join(',') : null,
+    (selectedLabels: string[]) => {
+      dispatch({
+        type: 'SET_MULTISELECT_FILTER_VALUE',
+        payload: {
+          selectedLabels,
+          paramKey,
+        },
       });
     },
-    [paramKey, send],
+    [paramKey, dispatch],
   );
 
   const inputValue = value?.split(',');

@@ -6,10 +6,10 @@ import {
   useCallback,
   useEffect,
   useMemo,
+  useReducer,
 } from 'react';
 
 import { Collapse, TextInput } from '@mantine/core';
-import { useMachine } from '@xstate/react';
 import type { Entries } from 'type-fest';
 
 import {
@@ -20,122 +20,109 @@ import {
 } from '~/shared/components';
 import { getOriginString } from '~/shared/utils';
 
-import { FILTER_KIND } from '../core/constants';
-import type {
-  FilterConfig,
-  MultiSelectSearchFilterConfig,
-  RangeFilterConfig,
-  SingleSelectFilterConfig,
-} from '../core/types';
+import { FILTER_KIND, INIT_FILTER_STATE } from '../core/constants';
+import type { FilterConfig } from '../core/types';
 import { useFilterConfigQuery } from '../hooks';
-import { filterMachine } from '../machines';
-import { initFilterConfigData } from '../utils';
+import { filterReducer } from '../reducers/filter-reducer';
 
 import MultiSelectFilter from './multi-select-filter';
 import RangeFilter from './range-filter';
 import SingleSelectFilter from './single-select-filter';
 
 const Filters = () => {
-  const { query, push } = useRouter();
-  const [state, send] = useMachine(filterMachine, {
-    actions: {
-      applyFilterValues: (ctx) => {
-        const url = new URL(`${getOriginString()}/jobs`);
-        for (const [key, value] of Object.entries(ctx.filterValues)) {
-          if (value) url.searchParams.set(key, value);
-        }
+  const { query: routerQuery, push, isReady } = useRouter();
 
-        push(url, undefined, { shallow: true });
-      },
-      applySearchFilter: (ctx) => {
-        push(
-          `${getOriginString()}/jobs?query=${ctx.filterValues.query}`,
-          undefined,
-          { shallow: true },
-        );
-      },
-    },
-    delays: {},
-    guards: {},
-    services: {},
-  });
-  const { data, error } = useFilterConfigQuery();
+  const [state, dispatch] = useReducer(filterReducer, INIT_FILTER_STATE);
 
+  const { data, isLoading: isLoadingData } = useFilterConfigQuery();
   useEffect(() => {
     if (data) {
-      // Init filterConfig to only include show=true, then sort by position
-      const { filterConfig, filterValues } = initFilterConfigData(data, query);
-
-      send({ type: 'FETCH_OK', filterConfig, filterValues });
+      dispatch({ type: 'UPDATE_DATA', payload: { data, routerQuery } });
     }
+  }, [data, routerQuery]);
 
-    if (error) send({ type: 'FETCH_ERROR', msg: 'pakyu' });
-  }, [data, error, query, send]);
+  const isLoading = isLoadingData || !isReady;
+
+  const toggleFilters = useCallback(
+    () => dispatch({ type: 'TOGGLE_FILTERS', payload: null }),
+    [],
+  );
 
   const filterConfigEntries = useMemo(
-    () => Object.entries(state.context.filterConfig) as Entries<FilterConfig>,
-    [state.context.filterConfig],
+    () => Object.entries(state.filterConfig ?? {}) as Entries<FilterConfig>,
+    [state.filterConfig],
   );
 
-  const onClickToggle = useCallback(
-    () => send({ type: 'TOGGLE_FILTER_UI' }),
-    [send],
+  const hasFilterValues = useMemo(
+    () => Object.values(state.filterValues).some((v) => v !== null),
+    [state.filterValues],
   );
+
+  const hasSearchQuery = useMemo(() => {
+    const searchQuery = state.filterValues.query;
+
+    if (!searchQuery) return null;
+
+    return searchQuery.trim().length > 0;
+  }, [state.filterValues.query]);
 
   const onChangeSearchInput: ChangeEventHandler<HTMLInputElement> = useCallback(
     (e) => {
-      send({ type: 'SET_SEARCH_FILTER_VALUE', payload: e.target.value });
+      dispatch({
+        type: 'SET_SEARCH_FILTER_VALUE',
+        payload: { searchQuery: e.target.value },
+      });
     },
-    [send],
-  );
-
-  const onClickSearchApply = useCallback(
-    () => send({ type: 'APPLY_SEARCH_FILTER' }),
-    [send],
+    [],
   );
 
   const onSubmitSearch: FormEventHandler = useCallback(
     (e) => {
       e.preventDefault();
-      send({ type: 'APPLY_SEARCH_FILTER' });
+      if (hasSearchQuery) {
+        dispatch({ type: 'TOGGLE_FILTERS', payload: { value: false } });
+        setTimeout(() => {
+          push(
+            `${getOriginString()}/jobs?query=${state.filterValues.query}`,
+            undefined,
+            { shallow: true },
+          );
+        }, 100);
+      }
     },
-    [send],
+    [hasSearchQuery, push, state.filterValues.query],
   );
 
-  const onClickApply = useCallback(
-    () => send({ type: 'APPLY_FILTER_VALUES' }),
-    [send],
-  );
+  const applyFilters = useCallback(() => {
+    const url = new URL(`${getOriginString()}/jobs`);
+    for (const [key, value] of Object.entries(state.filterValues)) {
+      if (value) url.searchParams.set(key, value);
+    }
 
-  const onClickClear = useCallback(
-    () => send({ type: 'CLEAR_FILTER_VALUES' }),
-    [send],
+    dispatch({ type: 'TOGGLE_FILTERS', payload: { value: false } });
+    setTimeout(() => push(url, undefined, { shallow: true }), 100);
+  }, [push, state.filterValues]);
+
+  const clearFilters = useCallback(
+    () => dispatch({ type: 'CLEAR_FILTER_VALUES', payload: null }),
+    [],
   );
 
   return (
     <div className="flex flex-col gap-y-2 py-8 pb-4 lg:pb-0">
-      {state.matches('error') && (
-        <div>
-          <p>errorMsg = {state.context.errorMsg}</p>
-          <Button onClick={() => send({ type: 'FETCH_RETRY' })}>
-            Try again
-          </Button>
-        </div>
-      )}
-
       <div className="py-4">
         <form onSubmit={onSubmitSearch}>
           <TextInput
             icon={<SearchInputIcon />}
-            placeholder="Search Jobs"
+            placeholder={(routerQuery.query as string) ?? 'Search Jobs'}
             size="lg"
             rightSection={
-              <Button isIcon onClick={onClickSearchApply}>
+              <Button isIcon type="submit">
                 <RocketLaunchIcon />
               </Button>
             }
-            value={state.context.filterValues.query ?? ''}
-            disabled={state.matches('loading')}
+            value={state.filterValues.query ?? ''}
+            disabled={isLoading}
             radius="md"
             styles={{
               input: {
@@ -154,9 +141,9 @@ const Filters = () => {
           <Button
             variant="outline"
             left={<FilterIcon />}
-            isActive={state.matches('ready.editing')}
-            isDisabled={state.matches('loading')}
-            onClick={onClickToggle}
+            isActive={state.showFilters}
+            isDisabled={isLoading}
+            onClick={toggleFilters}
           >
             Filters & Sorting
           </Button>
@@ -164,93 +151,72 @@ const Filters = () => {
       </div>
 
       <Collapse
-        in={state.matches('ready.editing')}
+        in={state.showFilters}
         transitionDuration={100}
         transitionTimingFunction="linear"
       >
         <div className="relative py-4">
           <div className="lg: -mx-2 flex flex-wrap pb-4 lg:-mx-3 lg:-mb-4">
-            {filterConfigEntries.map(([key, config]) => (
-              <div
-                key={key}
-                className="w-1/2 px-2 pb-2 lg:w-1/5 lg:px-3 lg:pb-4"
-              >
-                {config.kind === FILTER_KIND.RANGE && (
-                  <RangeFilter
-                    label={config.label}
-                    minValue={
-                      state.context.filterValues[
-                        (config as RangeFilterConfig).value.lowest.paramKey
-                      ]
-                    }
-                    maxValue={
-                      state.context.filterValues[
-                        (config as RangeFilterConfig).value.highest.paramKey
-                      ]
-                    }
-                    minParamKey={
-                      (config as RangeFilterConfig).value.lowest.paramKey
-                    }
-                    maxParamKey={
-                      (config as RangeFilterConfig).value.highest.paramKey
-                    }
-                    minConfigValue={
-                      (config as RangeFilterConfig).value.lowest.value
-                    }
-                    maxConfigValue={
-                      (config as RangeFilterConfig).value.highest.value
-                    }
-                    send={send}
-                  />
-                )}
+            {filterConfigEntries.length > 0 &&
+              filterConfigEntries.map(([key, config]) => (
+                <div
+                  key={key}
+                  className="w-1/2 px-2 pb-2 lg:w-1/5 lg:px-3 lg:pb-4"
+                >
+                  {config.kind === FILTER_KIND.RANGE && (
+                    <RangeFilter
+                      label={config.label}
+                      minValue={
+                        state.filterValues[config.value.lowest.paramKey]
+                      }
+                      maxValue={
+                        state.filterValues[config.value.highest.paramKey]
+                      }
+                      minParamKey={config.value.lowest.paramKey}
+                      maxParamKey={config.value.highest.paramKey}
+                      minConfigValue={config.value.lowest.value}
+                      maxConfigValue={config.value.highest.value}
+                      dispatch={dispatch}
+                    />
+                  )}
 
-                {config.kind === FILTER_KIND.SINGLE_SELECT && (
-                  <SingleSelectFilter
-                    value={
-                      state.context.filterValues[
-                        (config as SingleSelectFilterConfig).paramKey
-                      ]
-                    }
-                    label={config.label}
-                    options={(config as SingleSelectFilterConfig).options}
-                    send={send}
-                    paramKey={(config as SingleSelectFilterConfig).paramKey}
-                  />
-                )}
+                  {config.kind === FILTER_KIND.SINGLE_SELECT && (
+                    <SingleSelectFilter
+                      value={state.filterValues[config.paramKey]}
+                      label={config.label}
+                      options={config.options}
+                      paramKey={config.paramKey}
+                      dispatch={dispatch}
+                    />
+                  )}
 
-                {(config.kind === FILTER_KIND.MULTI_SELECT ||
-                  config.kind === FILTER_KIND.MULTI_SELECT_WITH_SEARCH) && (
-                  <MultiSelectFilter
-                    value={
-                      state.context.filterValues[
-                        (config as MultiSelectSearchFilterConfig).paramKey
-                      ]
-                    }
-                    label={config.label}
-                    options={(config as MultiSelectSearchFilterConfig).options}
-                    paramKey={
-                      (config as MultiSelectSearchFilterConfig).paramKey
-                    }
-                    send={send}
-                  />
-                )}
-              </div>
-            ))}
+                  {(config.kind === FILTER_KIND.MULTI_SELECT ||
+                    config.kind === FILTER_KIND.MULTI_SELECT_WITH_SEARCH) && (
+                    <MultiSelectFilter
+                      value={state.filterValues[config.paramKey]}
+                      label={config.label}
+                      options={config.options}
+                      paramKey={config.paramKey}
+                      dispatch={dispatch}
+                    />
+                  )}
+                </div>
+              ))}
           </div>
         </div>
 
         <div className="flex flex-wrap gap-6 lg:py-4">
           <Button
             variant="primary"
-            isDisabled={!state.can({ type: 'APPLY_FILTER_VALUES' })}
-            onClick={onClickApply}
+            isDisabled={!hasFilterValues}
+            onClick={applyFilters}
           >
             Apply Filters
           </Button>
           <Button
             variant="outline"
-            isDisabled={!state.can({ type: 'CLEAR_FILTER_VALUES' })}
-            onClick={onClickClear}
+            isDisabled={!hasFilterValues}
+            onClick={clearFilters}
           >
             Clear Filters
           </Button>

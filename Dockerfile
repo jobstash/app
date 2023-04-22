@@ -9,7 +9,6 @@ WORKDIR /app
 # Install dependencies
 COPY package.json yarn.lock* ./
 RUN yarn --frozen-lockfile
-RUN yarn postinstall
 
 # Build
 FROM base AS builder

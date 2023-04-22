@@ -1,18 +1,22 @@
-import { memo, useCallback, useMemo } from 'react';
+import { Dispatch, memo, useCallback, useMemo } from 'react';
 
 import { Select } from '@mantine/core';
 import clsx from 'clsx';
 
-import type { SetFilterValueEvent } from '../core/types';
+import {
+  FilterParamKey,
+  FilterValue,
+  SetSelectFilterValueAction,
+} from '../core/types';
 
 import FilterWrapper from './filter-wrapper';
 
 interface Props {
   label: string;
-  value: string | null;
+  value: FilterValue;
+  paramKey: FilterParamKey;
   options: { label: string; value: string }[];
-  paramKey: string;
-  send: (_: SetFilterValueEvent) => void;
+  dispatch: Dispatch<SetSelectFilterValueAction>;
 }
 
 const SingleSelectFilter = ({
@@ -20,10 +24,10 @@ const SingleSelectFilter = ({
   value,
   options,
   paramKey,
-  send,
+  dispatch,
 }: Props) => {
+  // Use labels in displaying input
   const selections = useMemo(() => options.map((o) => o.label), [options]);
-
   const inputValue = useMemo(
     () => options.find((o) => o.value.toString() === value)?.label ?? null,
     [options, value],
@@ -31,12 +35,12 @@ const SingleSelectFilter = ({
 
   const onChange = useCallback(
     (selectedLabel: string) => {
-      const payload =
-        options.find((o) => o.label === selectedLabel)?.value.toString() ??
-        null;
-      send({ type: 'SET_FILTER_VALUE', payload, paramKey });
+      dispatch({
+        type: 'SET_SELECT_FILTER_VALUE',
+        payload: { paramKey, selectedLabel, options },
+      });
     },
-    [options, paramKey, send],
+    [options, paramKey, dispatch],
   );
 
   return (

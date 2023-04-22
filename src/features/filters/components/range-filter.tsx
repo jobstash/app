@@ -1,4 +1,4 @@
-import { memo, useCallback, useMemo } from 'react';
+import { Dispatch, memo, useCallback, useMemo } from 'react';
 
 import { Popover, RangeSlider } from '@mantine/core';
 
@@ -6,7 +6,11 @@ import { Button, CaretDownIcon } from '~/shared/components';
 import { roboto } from '~/shared/core/constants';
 import { numFormatter } from '~/shared/utils';
 
-import type { SetRangeFilterValueEvent } from '../core/types';
+import {
+  FilterParamKey,
+  FilterValue,
+  SetRangeFilterValueAction,
+} from '../core/types';
 
 import FilterWrapper from './filter-wrapper';
 
@@ -15,14 +19,14 @@ const SLIDER_STEP = 100 / NUM_STEPS;
 
 interface Props {
   label: string;
-  minValue: string | null;
-  maxValue: string | null;
-  minParamKey: string;
-  maxParamKey: string;
+  minValue: FilterValue;
+  maxValue: FilterValue;
+  minParamKey: FilterParamKey;
+  maxParamKey: FilterParamKey;
   minConfigValue: number;
   maxConfigValue: number;
   prefix?: string;
-  send: (_: SetRangeFilterValueEvent) => void;
+  dispatch: Dispatch<SetRangeFilterValueAction>;
 }
 
 const RangeFilter = ({
@@ -34,7 +38,7 @@ const RangeFilter = ({
   minConfigValue,
   maxConfigValue,
   prefix = '$',
-  send,
+  dispatch,
 }: Props) => {
   const increment = Math.floor((maxConfigValue - minConfigValue) / NUM_STEPS);
 
@@ -60,21 +64,18 @@ const RangeFilter = ({
 
   const onChange = useCallback(
     ([minRangeValue, maxRangeValue]: [number, number]) => {
-      const newMinValue = Math.floor(
+      const min = Math.floor(
         minRangeValue * (increment / SLIDER_STEP) + minConfigValue,
       ).toString();
-      const newMaxValue = Math.ceil(
+      const max = Math.ceil(
         maxRangeValue * (increment / SLIDER_STEP) + minConfigValue,
       ).toString();
-      send({
+      dispatch({
         type: 'SET_RANGE_FILTER_VALUE',
-        newMinValue,
-        newMaxValue,
-        minParamKey,
-        maxParamKey,
+        payload: { min, max, minParamKey, maxParamKey },
       });
     },
-    [increment, maxParamKey, minConfigValue, minParamKey, send],
+    [dispatch, increment, maxParamKey, minConfigValue, minParamKey],
   );
 
   const inputValue = useMemo(() => {

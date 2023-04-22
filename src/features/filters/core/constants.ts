@@ -5,7 +5,7 @@ export const FILTER_KIND = {
   MULTI_SELECT_WITH_SEARCH: 'MULTI_SELECT_WITH_SEARCH',
 } as const;
 
-export const FILTER_CONFIG_KEY_SET = new Set([
+const FILTER_PARAM_KEYS = [
   'publicationDate',
   'minSalaryRange',
   'maxSalaryRange',
@@ -37,4 +37,44 @@ export const FILTER_CONFIG_KEY_SET = new Set([
   'order',
   'orderBy',
   'query',
-]);
+] as const;
+
+export const INIT_FILTER_STATE = {
+  showFilters: false,
+  filterConfig: null,
+  filterValues: {
+    publicationDate: null,
+    minSalaryRange: null,
+    maxSalaryRange: null,
+    minTeamSize: null,
+    maxTeamSize: null,
+    minHeadCount: null,
+    maxHeadCount: null,
+    minTvl: null,
+    maxTvl: null,
+    minMonthlyVolume: null,
+    maxMonthlyVolume: null,
+    minMonthlyFees: null,
+    maxMonthlyFees: null,
+    minMonthlyRevenue: null,
+    maxMonthlyRevenue: null,
+    minAudits: null,
+    maxAudits: null,
+    hacks: null,
+    fundingRounds: null,
+    tech: null,
+    organizations: null,
+    chains: null,
+    projects: null,
+    categories: null,
+    seniority: null,
+    locations: null,
+    mainNet: null,
+    token: null,
+    order: null,
+    orderBy: null,
+    query: null,
+  } as Record<(typeof FILTER_PARAM_KEYS)[number], string | null>,
+};
+
+export const FILTER_CONFIG_KEY_SET = new Set(FILTER_PARAM_KEYS);

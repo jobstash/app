@@ -2,11 +2,11 @@ import { ParsedUrlQuery } from 'node:querystring';
 import { Entries } from 'type-fest';
 
 import { FILTER_KIND } from '../core/constants';
-import type { FilterConfig } from '../core/types';
+import type { FilterConfig, FilterParamKey, FilterValues } from '../core/types';
 
 export const initFilterConfigData = (
   data: FilterConfig,
-  query: ParsedUrlQuery,
+  routerQuery: ParsedUrlQuery,
 ) => {
   const filterConfig = {} as FilterConfig;
 
@@ -18,7 +18,7 @@ export const initFilterConfigData = (
     Object.assign(filterConfig, { [key]: config });
   }
 
-  const filterValues: Record<string, string | null> = {};
+  const filterValues = {} as FilterValues;
 
   const rangeParamKeys = [];
   const singleSelectParamKeys = [];
@@ -31,19 +31,15 @@ export const initFilterConfigData = (
     if (config.kind === FILTER_KIND.RANGE) {
       const { paramKey: minKey } = config.value.lowest;
       const { paramKey: maxKey } = config.value.highest;
-      rangeParamKeys.push(minKey, maxKey);
-
-      // Default to min/max values
-      // filterValues[minKey] = Math.floor(minValue).toString();
-      // filterValues[maxKey] = Math.ceil(maxValue).toString();
       filterValues[minKey] = null;
       filterValues[maxKey] = null;
+      rangeParamKeys.push(minKey, maxKey);
     }
 
     if (config.kind === FILTER_KIND.SINGLE_SELECT) {
       const key = config.paramKey;
-      singleSelectParamKeys.push(key);
       filterValues[key] = null;
+      singleSelectParamKeys.push(key);
     }
 
     if (
@@ -51,8 +47,8 @@ export const initFilterConfigData = (
       config.kind === FILTER_KIND.MULTI_SELECT_WITH_SEARCH
     ) {
       const key = config.paramKey;
-      multiSelectParamKeys.push(key);
       filterValues[key] = null;
+      multiSelectParamKeys.push(key);
     }
   }
 
@@ -63,11 +59,11 @@ export const initFilterConfigData = (
     ...multiSelectParamKeys,
     'query',
   ]);
-  for (const [key, value] of Object.entries(query) as Entries<
+  for (const [key, value] of Object.entries(routerQuery) as Entries<
     Record<string, string>
   >) {
     if (allParamKeys.has(key)) {
-      filterValues[key] = value;
+      filterValues[key as FilterParamKey] = value;
     }
   }
 
