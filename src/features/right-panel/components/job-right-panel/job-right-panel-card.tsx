@@ -1,8 +1,8 @@
-import { memo, ReactNode } from 'react';
+import { memo } from 'react';
 
 import clsx from 'clsx';
 
-import { Job } from '~/features/jobs/core/types';
+import type { Job } from '~/features/jobs/core/types';
 import {
   TEXT_ROUTE_TAB_COMPETITORS,
   TEXT_ROUTE_TAB_DETAILS,
@@ -11,7 +11,7 @@ import {
   TEXT_ROUTE_TAB_REPOSITORIES,
 } from '~/shared/core/constants';
 
-import RightPanelCompetitorsCard from '../right-panel-competitors-card';
+import RightPanelCompetitorsCards from '../right-panel-competitors-cards';
 import { RightPanelJobCard } from '../right-panel-job-card';
 import { RightPanelOrgCard } from '../right-panel-org-card';
 import { RightPanelProjectCard } from '../right-panel-project-card';
@@ -23,57 +23,35 @@ interface Props {
   job: Job;
 }
 
-const Wrapper = ({
-  children,
-  isPending,
-}: {
-  children: ReactNode;
-  isPending: boolean;
-}) => (
-  <div
-    className={clsx(
-      'mt-8 rounded-3xl bg-gradient-to-l from-primary to-tertiary p-0.5',
-      { 'select-none pointer-events-none': isPending },
-    )}
-  >
-    <div className="rounded-3xl bg-darker-gray">{children}</div>
-  </div>
-);
-
 const JobRightPanelCard = ({
   tabSegment,
   isPending,
   job: { jobpost, organization, project, technologies },
 }: Props) => {
   if (tabSegment === TEXT_ROUTE_TAB_COMPETITORS) {
-    return (
-      <div className="flex flex-col gap-4">
-        <Wrapper isPending={isPending}>
-          <RightPanelCompetitorsCard />
-        </Wrapper>
-        <Wrapper isPending={isPending}>
-          <RightPanelCompetitorsCard />
-        </Wrapper>
-        <Wrapper isPending={isPending}>
-          <RightPanelCompetitorsCard />
-        </Wrapper>
-      </div>
-    );
+    return <RightPanelCompetitorsCards isPending={isPending} />;
   }
 
   return (
-    <Wrapper isPending={isPending}>
-      {tabSegment === TEXT_ROUTE_TAB_DETAILS && (
-        <RightPanelJobCard job={jobpost} technologies={technologies} />
+    <div
+      className={clsx(
+        'mt-8 rounded-3xl bg-gradient-to-l from-primary to-tertiary p-0.5',
+        { 'select-none pointer-events-none': isPending },
       )}
-      {tabSegment === TEXT_ROUTE_TAB_ORGANIZATION && (
-        <RightPanelOrgCard org={organization} />
-      )}
-      {project && tabSegment === TEXT_ROUTE_TAB_PROJECT && (
-        <RightPanelProjectCard project={project} />
-      )}
-      {tabSegment === TEXT_ROUTE_TAB_REPOSITORIES && <RightPanelRepoCard />}
-    </Wrapper>
+    >
+      <div className="rounded-3xl bg-darker-gray">
+        {tabSegment === TEXT_ROUTE_TAB_DETAILS && (
+          <RightPanelJobCard job={jobpost} technologies={technologies} />
+        )}
+        {tabSegment === TEXT_ROUTE_TAB_ORGANIZATION && (
+          <RightPanelOrgCard org={organization} />
+        )}
+        {project && tabSegment === TEXT_ROUTE_TAB_PROJECT && (
+          <RightPanelProjectCard project={project} />
+        )}
+        {tabSegment === TEXT_ROUTE_TAB_REPOSITORIES && <RightPanelRepoCard />}
+      </div>
+    </div>
   );
 };
 
