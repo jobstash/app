@@ -1,8 +1,8 @@
-import { memo, useTransition } from 'react';
+import { memo, useEffect, useTransition } from 'react';
 
 import { useUrlFilterParams } from '~/features/filters/hooks';
 import { Job } from '~/features/jobs/core/types';
-import { ID_TOP_RIGHT_PANEL } from '~/shared/core/constants';
+import { EVENT_CARD_CLICK, ID_TOP_RIGHT_PANEL } from '~/shared/core/constants';
 import { useRouteSegments } from '~/shared/hooks';
 import { getUrlWithFilters } from '~/shared/utils';
 
@@ -17,6 +17,18 @@ interface Props {
 
 const JobRightPanel = ({ job }: Props) => {
   const { segments, push } = useRouteSegments();
+
+  useEffect(() => {
+    const scrollListener = () => {
+      const el = document.querySelector('#' + ID_TOP_RIGHT_PANEL);
+      if (el) {
+        el.scrollIntoView({ behavior: 'auto', block: 'start' });
+      }
+    };
+
+    document.addEventListener(EVENT_CARD_CLICK, scrollListener);
+    return () => document.removeEventListener(EVENT_CARD_CLICK, scrollListener);
+  }, []);
 
   const { filterParamsObj } = useUrlFilterParams();
   const [isPending, startTransition] = useTransition();

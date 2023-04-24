@@ -5,6 +5,7 @@ import { cva } from 'class-variance-authority';
 import { useSetAtom } from 'jotai';
 
 import { createJobKey } from '~/features/jobs/utils';
+import { EVENT_CARD_CLICK } from '~/shared/core/constants';
 import { getUrlWithFilters } from '~/shared/utils';
 
 import type { Job } from '../../../jobs/core/types';
@@ -53,6 +54,7 @@ const JobCardWrapper = ({
 
   const onClick = useCallback(() => {
     setActiveJob(job);
+    document.dispatchEvent(new Event(EVENT_CARD_CLICK));
   }, [job, setActiveJob]);
 
   return (
