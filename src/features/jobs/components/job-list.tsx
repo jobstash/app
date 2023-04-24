@@ -1,10 +1,13 @@
+import { useRouter } from 'next/router';
 import { memo, useEffect, useMemo } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 import { useJobListingInfQuery } from '~/features/jobs/hooks';
 import { Text } from '~/shared/components';
+import { getUrlWithFilters } from '~/shared/utils';
 
 import type { Job } from '../../jobs/core/types';
+import { createJobKey } from '../utils';
 
 import { JobCard } from './job-card';
 
@@ -45,6 +48,19 @@ const JobList = ({ initJob, activeJob }: Props) => {
       fetchNextPage();
     }
   }, [fetchNextPage, inView]);
+
+  const { push } = useRouter();
+  useEffect(() => {
+    if (activeJob === null && jobs.length > 0) {
+      const url = getUrlWithFilters(
+        filterParamsObj,
+        `/jobs/${createJobKey(jobs[0])}/details`,
+      );
+      push(url, undefined, {
+        shallow: true,
+      });
+    }
+  }, [activeJob, filterParamsObj, jobs, push]);
 
   if (isLoading)
     return (
