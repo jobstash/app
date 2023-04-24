@@ -11,7 +11,7 @@ export const useRouteSegments = () => {
   };
 
   const pathname = router.asPath;
-  const section = pathname.slice(1).split('/')[0] as RouteSection;
+  const section = pathname.slice(1).split('/')[0].split('?')[0] as RouteSection;
 
   const push: RouterPush = (url, options) => {
     // * Need pathname guard since nextjs throws runtime error on router.push to same url
