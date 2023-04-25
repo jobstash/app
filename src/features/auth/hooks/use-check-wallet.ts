@@ -14,7 +14,7 @@ export const useCheckWallet = () => {
   const { isConnected, address } = useAccount();
   const { isSignedIn } = useSIWE();
 
-  const enabled = isSignedIn; // Only enable check-wallet after signin
+  const enabled = isSignedIn && isConnected; // Only enable check-wallet after signin
 
   const {
     data,
