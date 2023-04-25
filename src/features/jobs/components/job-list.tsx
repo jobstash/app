@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { memo, useEffect, useMemo } from 'react';
+import { memo, useEffect, useMemo, useRef } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 import { useAtom } from 'jotai';
@@ -62,8 +62,10 @@ const JobList = ({ initJob, activeJob }: Props) => {
     }
   }, [fetchNextPage, inView]);
 
+  const isRedirectingRef = useRef(false);
   useEffect(() => {
-    if (activeJob === null && jobs.length > 0) {
+    if (activeJob === null && jobs.length > 0 && !isRedirectingRef.current) {
+      isRedirectingRef.current = true;
       const url = getUrlWithFilters(
         filterParamsObj,
         `/jobs/${createJobKey(jobs[0])}/details`,
