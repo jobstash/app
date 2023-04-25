@@ -28,5 +28,5 @@ export const CHECK_WALLET_ROUTE: Record<
   [CHECK_WALLET_FLOWS.ONBOARD_REPO]: '/user/my-repositories',
   [CHECK_WALLET_FLOWS.ONBOARD_PROFILE]: '/TODO',
   [CHECK_WALLET_FLOWS.SIGNUP_COMPLETE]: '/jobs',
-  [CHECK_WALLET_FLOWS.ADMIN_SYNONYMS]: '/godmode/synonyms',
+  [CHECK_WALLET_FLOWS.ADMIN_SYNONYMS]: '/godmode/technologies/synonyms',
 };
