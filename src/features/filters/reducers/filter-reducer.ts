@@ -7,10 +7,6 @@ export const filterReducer = (
   { type, payload }: FilterAction,
 ): FilterState => {
   switch (type) {
-    case 'CLEAR_FILTER_VALUES': {
-      return { ...state, filterValues: INIT_FILTER_STATE['filterValues'] };
-    }
-
     case 'TOGGLE_FILTERS': {
       const value = payload === null ? !state.showFilters : payload.value;
       return { ...state, showFilters: value };

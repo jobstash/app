@@ -103,10 +103,16 @@ const Filters = () => {
     setTimeout(() => push(url, undefined, { shallow: true }), 100);
   }, [push, state.filterValues]);
 
-  const clearFilters = useCallback(
-    () => dispatch({ type: 'CLEAR_FILTER_VALUES', payload: null }),
-    [],
-  );
+  const clearFilters = useCallback(() => {
+    const url = new URL(`${getOriginString()}/jobs`);
+    const searchQuery = state.filterValues.query;
+    if (searchQuery) {
+      url.searchParams.set('query', searchQuery);
+    }
+
+    dispatch({ type: 'TOGGLE_FILTERS', payload: { value: false } });
+    setTimeout(() => push(url, undefined, { shallow: true }), 100);
+  }, [push, state.filterValues.query]);
 
   return (
     <div className="flex flex-col gap-y-2 py-8 pb-4 lg:pb-0">
