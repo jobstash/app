@@ -9,6 +9,7 @@ import { getUrlWithFilters } from '~/shared/utils';
 import type { Job } from '../../jobs/core/types';
 import { createJobKey } from '../utils';
 
+import EmptyResult from './empty-result';
 import { JobCard } from './job-card';
 
 interface Props {
@@ -79,6 +80,14 @@ const JobList = ({ initJob, activeJob }: Props) => {
 
   if (error) {
     return <p>error = {(error as Error).message}</p>;
+  }
+
+  if (jobs.length === 0) {
+    return (
+      <div className="py-8">
+        <EmptyResult />
+      </div>
+    );
   }
 
   return (

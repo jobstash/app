@@ -2,7 +2,7 @@ import { ButtonHTMLAttributes, forwardRef, memo, ReactNode } from 'react';
 
 import { cva, VariantProps } from 'class-variance-authority';
 
-import Text from './text';
+import Text, { TextProps } from './text';
 
 const wrapper = cva(
   [
@@ -128,6 +128,7 @@ interface ButtonProps extends ButtonHTMLProps, ButtonVariantProps {
   children: ReactNode;
   left?: ReactNode;
   right?: ReactNode;
+  textProps?: Omit<TextProps, 'children'>;
 }
 
 const Button = forwardRef<HTMLButtonElement, ButtonProps>(
@@ -142,6 +143,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       right,
       isIcon = false,
       isFullWidth,
+      textProps,
       ...props
     }: ButtonProps,
     ref,
@@ -163,7 +165,9 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         {...props}
       >
         {left ?? null}
-        <Text size={size}>{children as string}</Text>
+        <Text size={size} {...textProps}>
+          {children as string}
+        </Text>
         {right ?? null}
       </button>
     </div>

@@ -28,7 +28,7 @@ const text = cva(`${roboto.variable} font-roboto antialiased`, {
 
 type TextVariantProps = VariantProps<typeof text>;
 
-interface TextProps extends TextVariantProps {
+export interface TextProps extends TextVariantProps {
   children: string;
 }
 
