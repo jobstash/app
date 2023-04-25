@@ -112,12 +112,14 @@ export const getServerSideProps: GetServerSideProps<Props> = withCSR(
     const jobPosts = (initDehydratedState.queries[0].state.data as any).pages[0]
       .data as Job[];
     let jobInList = false;
-    for (const job of jobPosts) {
-      const jobUuid = job.jobpost.shortUUID;
-      queryClient.setQueryData(['job-post', jobUuid], job);
+    if (jobPosts.length > 0) {
+      for (const job of jobPosts) {
+        const jobUuid = job.jobpost.shortUUID;
+        queryClient.setQueryData(['job-post', jobUuid], job);
 
-      if (jobUuid === shortUuid) {
-        jobInList = true;
+        if (jobUuid === shortUuid) {
+          jobInList = true;
+        }
       }
     }
 
