@@ -64,7 +64,7 @@ const JobList = ({ initJob, activeJob }: Props) => {
 
   const isRedirectingRef = useRef(false);
   useEffect(() => {
-    if (activeJob === null && jobs.length > 0 && !isRedirectingRef.current) {
+    if (jobs.length > 0 && !isRedirectingRef.current) {
       isRedirectingRef.current = true;
       const url = getUrlWithFilters(
         filterParamsObj,

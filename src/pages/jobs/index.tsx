@@ -1,26 +1,34 @@
 import { GetServerSideProps } from 'next';
 
 import { dehydrate, QueryClient } from '@tanstack/react-query';
+import { useHydrateAtoms } from 'jotai/utils';
 
 import { Filters } from '~/features/filters/components';
 import { getFilterFromQuery } from '~/features/filters/utils';
+import { activeJobAtom } from '~/features/jobs/atoms';
 import { JobList } from '~/features/jobs/components';
 import { Job, JobListQueryPage } from '~/features/jobs/core/types';
 import { fetchJobList } from '~/features/jobs/fetch';
 import { SideBar } from '~/features/sidebar/components';
 import { withCSR } from '~/shared/hocs';
 
-interface Props {}
+interface Props {
+  activeJob: Job;
+}
 
-const JobListPage = () => (
-  <div className="w-full lg:pl-52 lg:pr-[41.67%]">
-    <SideBar />
-    <div className="px-3.5 pt-[65px] lg:px-8 lg:pt-0">
-      <Filters />
-      <JobList activeJob={null} />
+const JobListPage = ({ activeJob }: Props) => {
+  useHydrateAtoms([[activeJobAtom, activeJob] as [typeof activeJobAtom, Job]]);
+
+  return (
+    <div className="w-full lg:pl-52 lg:pr-[41.67%]">
+      <SideBar />
+      <div className="px-3.5 pt-[65px] lg:px-8 lg:pt-0">
+        <Filters />
+        <JobList activeJob={activeJob} />
+      </div>
     </div>
-  </div>
-);
+  );
+};
 
 export default JobListPage;
 
@@ -53,6 +61,7 @@ export const getServerSideProps: GetServerSideProps<Props> = withCSR(
     return {
       props: {
         dehydratedState,
+        activeJob: jobPosts[0],
       },
     };
   },

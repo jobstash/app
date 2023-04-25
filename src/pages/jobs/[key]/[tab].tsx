@@ -52,11 +52,11 @@ const JobsPage = ({ data: { initJob, fromSSR } }: Props) => {
 
   // Sync SSR data active post
   useEffect(() => {
-    if (!initRef.current && jobPost) {
+    if (!initRef.current && !initJob && jobPost) {
       initRef.current = true;
       setActiveJob(jobPost);
     }
-  }, [jobPost, setActiveJob]);
+  }, [initJob, jobPost, setActiveJob]);
 
   return (
     <div className="w-full lg:pl-52 lg:pr-[41.67%]">
