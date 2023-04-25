@@ -10,4 +10,7 @@ export { default as OrgJobsPage } from './org-jobs';
 export { default as OrgListPage } from './org-list';
 export { default as OrgProjectsPage } from './org-projects';
 export { default as SalesPage } from './sales';
-export { default as SynonymsPage } from './synonyms';
+export { default as TechApprovalsPage } from './technologies/tech-approvals-page';
+export { default as TechBlockedTermsPage } from './technologies/tech-blocked-terms-page';
+export { default as TechPairedTermsPage } from './technologies/tech-paired-terms-page';
+export { default as TechSynonymsPage } from './technologies/tech-synonyms-page';
