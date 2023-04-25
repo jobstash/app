@@ -58,14 +58,6 @@ const Filters = () => {
     [state.filterValues],
   );
 
-  const hasSearchQuery = useMemo(() => {
-    const searchQuery = state.filterValues.query;
-
-    if (!searchQuery) return null;
-
-    return searchQuery.trim().length > 0;
-  }, [state.filterValues.query]);
-
   const onChangeSearchInput: ChangeEventHandler<HTMLInputElement> = useCallback(
     (e) => {
       dispatch({
@@ -74,23 +66,6 @@ const Filters = () => {
       });
     },
     [],
-  );
-
-  const onSubmitSearch: FormEventHandler = useCallback(
-    (e) => {
-      e.preventDefault();
-      if (hasSearchQuery) {
-        dispatch({ type: 'TOGGLE_FILTERS', payload: { value: false } });
-        setTimeout(() => {
-          push(
-            `${getOriginString()}/jobs?query=${state.filterValues.query}`,
-            undefined,
-            { shallow: true },
-          );
-        }, 100);
-      }
-    },
-    [hasSearchQuery, push, state.filterValues.query],
   );
 
   const applyFilters = useCallback(() => {
@@ -113,6 +88,25 @@ const Filters = () => {
     dispatch({ type: 'TOGGLE_FILTERS', payload: { value: false } });
     setTimeout(() => push(url, undefined, { shallow: true }), 100);
   }, [push, state.filterValues.query]);
+
+  const hasSearchQuery = useMemo(() => {
+    const searchQuery = state.filterValues.query;
+
+    if (!searchQuery) return null;
+
+    return searchQuery.trim().length > 0;
+  }, [state.filterValues.query]);
+
+  const onSubmitSearch: FormEventHandler = useCallback(
+    (e) => {
+      e.preventDefault();
+
+      if (hasSearchQuery) {
+        applyFilters();
+      }
+    },
+    [applyFilters, hasSearchQuery],
+  );
 
   return (
     <div className="flex flex-col gap-y-2 py-8 pb-4 lg:pb-0">
