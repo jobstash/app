@@ -1,8 +1,8 @@
-import { Dispatch, memo, useCallback } from 'react';
+import { Dispatch, memo, useCallback, useMemo } from 'react';
 
 import { MultiSelect } from '@mantine/core';
 
-import {
+import type {
   FilterParamKey,
   FilterValue,
   SetMultiSelectFilterValueAction,
@@ -38,10 +38,18 @@ const MultiSelectFilter = ({
     [paramKey, dispatch],
   );
 
-  const inputValue = value?.split(',');
+  const { inputValue, inputLabel } = useMemo(() => {
+    const inputValue = value?.split(',');
+    const inputValueLength = inputValue?.length ?? 0;
+    const inputLabel = `${label}${
+      inputValueLength > 0 ? ' (' + inputValueLength + ')' : ''
+    }`;
+
+    return { inputValue, inputLabel };
+  }, [label, value]);
 
   return (
-    <FilterWrapper label={label}>
+    <FilterWrapper label={inputLabel}>
       <MultiSelect
         searchable
         data={options}
