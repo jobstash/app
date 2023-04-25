@@ -5,7 +5,7 @@ import { dehydrate, QueryClient } from '@tanstack/react-query';
 import { Filters } from '~/features/filters/components';
 import { getFilterFromQuery } from '~/features/filters/utils';
 import { JobList } from '~/features/jobs/components';
-import { Job } from '~/features/jobs/core/types';
+import { Job, JobListQueryPage } from '~/features/jobs/core/types';
 import { fetchJobList } from '~/features/jobs/fetch';
 import { SideBar } from '~/features/sidebar/components';
 import { withCSR } from '~/shared/hocs';
@@ -38,8 +38,9 @@ export const getServerSideProps: GetServerSideProps<Props> = withCSR(
 
     // Cache individual item from the list
     const initDehydratedState = dehydrate(queryClient);
-    const jobPosts = (initDehydratedState.queries[0].state.data as any).pages[0]
-      .data as Job[];
+    const jobPosts = (
+      initDehydratedState.queries[0].state.data as any
+    ).pages.flatMap((d: JobListQueryPage) => d.data);
     for (const job of jobPosts) {
       const jobUuid = job.jobpost.shortUUID;
       queryClient.setQueryData(['job-post', jobUuid], job);
