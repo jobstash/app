@@ -2,11 +2,14 @@ import { useRouter } from 'next/router';
 import { memo, useEffect, useMemo } from 'react';
 import { useInView } from 'react-intersection-observer';
 
+import { useAtom } from 'jotai';
+
 import { useJobListingInfQuery } from '~/features/jobs/hooks';
 import { Text } from '~/shared/components';
 import { getUrlWithFilters } from '~/shared/utils';
 
 import type { Job } from '../../jobs/core/types';
+import { prevLinkAtom } from '../atoms';
 import { createJobKey } from '../utils';
 
 import EmptyResult from './empty-result';
@@ -18,6 +21,8 @@ interface Props {
 }
 
 const JobList = ({ initJob, activeJob }: Props) => {
+  const { push, asPath } = useRouter();
+
   const {
     data,
     error,
@@ -43,6 +48,13 @@ const JobList = ({ initJob, activeJob }: Props) => {
     return result;
   }, [data, initJob]);
 
+  const [prevLink, setPrevLink] = useAtom(prevLinkAtom);
+  useEffect(() => {
+    if (jobs.length > 0) {
+      setPrevLink(asPath);
+    }
+  }, [asPath, jobs.length, setPrevLink]);
+
   const { ref, inView } = useInView();
   useEffect(() => {
     if (inView) {
@@ -50,7 +62,6 @@ const JobList = ({ initJob, activeJob }: Props) => {
     }
   }, [fetchNextPage, inView]);
 
-  const { push } = useRouter();
   useEffect(() => {
     if (activeJob === null && jobs.length > 0) {
       const url = getUrlWithFilters(
@@ -85,7 +96,7 @@ const JobList = ({ initJob, activeJob }: Props) => {
   if (jobs.length === 0) {
     return (
       <div className="py-8">
-        <EmptyResult />
+        <EmptyResult prevLink={prevLink} push={push} />
       </div>
     );
   }
