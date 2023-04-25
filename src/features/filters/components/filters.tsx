@@ -54,7 +54,10 @@ const Filters = () => {
   );
 
   const hasFilterValues = useMemo(
-    () => Object.values(state.filterValues).some((v) => v !== null),
+    () =>
+      Object.entries(state.filterValues)
+        .filter(([k, _]) => k !== 'query')
+        .some(([_, v]) => v !== null),
     [state.filterValues],
   );
 
