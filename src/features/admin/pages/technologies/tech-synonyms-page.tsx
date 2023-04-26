@@ -51,7 +51,6 @@ const TechSynonymsPage = () => {
         mode: 'cors',
       });
       const data = await res.json();
-      console.log('url =', url, 'DATA =', data);
     };
 
     getData();
