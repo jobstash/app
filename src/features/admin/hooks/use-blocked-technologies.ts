@@ -6,7 +6,7 @@ import { AdminTechnology } from '../core/types';
 
 export const useBlockedTechnologiesQuery = () =>
   useQuery({
-    queryKey: ['blocked-technologies', NEXT_PUBLIC_MW_URL],
+    queryKey: ['godmode-blocked-technologies', NEXT_PUBLIC_MW_URL],
     queryFn: async () => {
       const url = `${NEXT_PUBLIC_MW_URL}/technologies/blocked-terms`;
       const res = await fetch(url, {

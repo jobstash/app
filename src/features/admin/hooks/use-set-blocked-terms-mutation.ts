@@ -1,9 +1,11 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { NEXT_PUBLIC_MW_URL } from '~/shared/core/constants';
 
-export const useSetBlockedTermsMutation = () =>
-  useMutation({
+export const useSetBlockedTermsMutation = () => {
+  const queryClient = useQueryClient();
+
+  return useMutation({
     mutationFn: async ({
       technologyNameList,
       creatorWallet,
@@ -28,6 +30,14 @@ export const useSetBlockedTermsMutation = () =>
         throw new Error(data.message);
       }
 
+      queryClient.invalidateQueries({
+        queryKey: ['godmode-technologies'],
+      });
+      queryClient.invalidateQueries({
+        queryKey: ['godmode-blocked-technologies'],
+      });
+
       return data;
     },
   });
+};

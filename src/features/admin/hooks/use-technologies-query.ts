@@ -6,7 +6,7 @@ import { AdminTechnology } from '../core/types';
 
 export const useTechnologiesQuery = () =>
   useQuery({
-    queryKey: ['technologies', NEXT_PUBLIC_MW_URL],
+    queryKey: ['godmode-technologies', NEXT_PUBLIC_MW_URL],
     queryFn: async () => {
       const url = `${NEXT_PUBLIC_MW_URL}/technologies`;
       const res = await fetch(url, {
