@@ -2,10 +2,17 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { NEXT_PUBLIC_MW_URL } from '~/shared/core/constants';
 
-export const useUnsetBlockedTermsMutation = () => {
+export const useUnsetBlockedTermsMutation = (
+  successCb: (payload: string[]) => void,
+) => {
   const queryClient = useQueryClient();
 
-  return useMutation({
+  return useMutation<
+    { success: boolean; data: boolean },
+    { message: string },
+    { technologyNameList: string[]; creatorWallet: string },
+    undefined
+  >({
     mutationFn: async ({
       technologyNameList,
       creatorWallet,
@@ -29,14 +36,17 @@ export const useUnsetBlockedTermsMutation = () => {
         throw new Error(data.message);
       }
 
+      return data;
+    },
+
+    onSuccess(_, { technologyNameList }) {
       queryClient.invalidateQueries({
         queryKey: ['godmode-technologies'],
       });
       queryClient.invalidateQueries({
         queryKey: ['godmode-blocked-technologies'],
       });
-
-      return data;
+      successCb(technologyNameList);
     },
   });
 };

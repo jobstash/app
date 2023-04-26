@@ -22,6 +22,8 @@ import {
   BLOCKED_TERMS_DTYPE,
   BLOCKED_TERMS_INIT_DTYPE,
   BLOCKED_TERMS_INIT_TECHS_DTYPE,
+  SET_BLOCKED_TERMS_OK_DTYPE,
+  UNSET_BLOCKED_TERMS_OK_DTYPE,
 } from '../../core/constants';
 import { useBlockedTechnologiesQuery } from '../../hooks/use-blocked-technologies';
 import { useSetBlockedTermsMutation } from '../../hooks/use-set-blocked-terms-mutation';
@@ -69,14 +71,8 @@ const TechBlockedTermsPage = () => {
     error: errorBlockedTechnologiesQuery,
   } = useBlockedTechnologiesQuery();
 
-  const iniBlockedTermsRef = useRef(false);
   useEffect(() => {
-    if (
-      initBlockedTerms &&
-      initBlockedTerms.length > 0 &&
-      !iniBlockedTermsRef.current
-    ) {
-      iniBlockedTermsRef.current = true;
+    if (initBlockedTerms && initBlockedTerms.length > 0) {
       dispatch({
         type: BLOCKED_TERMS_INIT_DTYPE,
         payload: initBlockedTerms,
@@ -99,17 +95,25 @@ const TechBlockedTermsPage = () => {
     dispatch({ type: BLOCKED_TERMS_DTYPE, payload });
   };
 
+  const setBlockedTermsSuccessCb = (payload: string[]) => {
+    dispatch({ type: SET_BLOCKED_TERMS_OK_DTYPE, payload });
+  };
+
+  const unsetBlockedTermsSuccessCb = (payload: string[]) => {
+    dispatch({ type: UNSET_BLOCKED_TERMS_OK_DTYPE, payload });
+  };
+
   const {
     mutate: setBlockedTermsMutate,
     error: setBlockedTermsError,
     isLoading: isLoadingSetBlockedTerms,
-  } = useSetBlockedTermsMutation();
+  } = useSetBlockedTermsMutation(setBlockedTermsSuccessCb);
 
   const {
     mutate: unsetBlockedTermsMutate,
     error: unsetBlockedTermsError,
     isLoading: isLoadingUnetBlockedTerms,
-  } = useUnsetBlockedTermsMutation();
+  } = useUnsetBlockedTermsMutation(unsetBlockedTermsSuccessCb);
 
   const isLoading =
     isLoadingTechs ||
@@ -120,7 +124,6 @@ const TechBlockedTermsPage = () => {
   const onSubmit = () => {
     if (creatorWallet) {
       if (state.blockedTerms.length > 0) {
-        console.log('blocking:', state.blockedTerms);
         setBlockedTermsMutate({
           creatorWallet,
           technologyNameList: state.blockedTerms,
@@ -128,7 +131,6 @@ const TechBlockedTermsPage = () => {
       }
 
       if (state.unblockedTerms.length > 0) {
-        console.log('unblocking:', state.unblockedTerms);
         unsetBlockedTermsMutate({
           creatorWallet,
           technologyNameList: state.unblockedTerms,
@@ -205,15 +207,47 @@ const TechBlockedTermsPage = () => {
               <Grid.Col span={10}>
                 <MultiSelect
                   searchable
-                  placeholder="Search and remove blocked terms here"
+                  placeholder="Start blocking terms above"
                   maxDropdownHeight={320}
                   size="lg"
                   data={state.allBlockedTerms}
                   value={state.allBlockedTerms}
+                  disabled={state.allBlockedTerms.length === 0}
                   onChange={onChangeBlockTermList}
                 />
               </Grid.Col>
             </Grid>
+
+            {state.unblockedTerms.length > 0 && (
+              <>
+                <hr className="border-t border-white/10" />
+
+                <div className="flex w-full max-w-xs flex-col flex-wrap gap-y-4">
+                  <Text size="lg" fw="semibold">
+                    New term(s) to UNSET:
+                  </Text>
+                  <pre>
+                    {JSON.stringify(state.unblockedTerms, undefined, '\t')}
+                  </pre>
+                </div>
+              </>
+            )}
+
+            {state.blockedTerms.length > 0 && (
+              <>
+                <hr className="border-t border-white/10" />
+
+                <div className="flex w-full max-w-xs flex-col flex-wrap gap-y-4">
+                  <Text size="lg" fw="semibold">
+                    New term(s) to BLOCK:
+                  </Text>
+                  <pre>
+                    {JSON.stringify(state.blockedTerms, undefined, '\t')}
+                  </pre>
+                </div>
+              </>
+            )}
+
             <Flex w="full" justify="flex-end" align="center">
               <Button
                 radius="md"

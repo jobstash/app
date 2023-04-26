@@ -3,6 +3,8 @@ import {
   BLOCKED_TERMS_DTYPE,
   BLOCKED_TERMS_INIT_DTYPE,
   BLOCKED_TERMS_INIT_TECHS_DTYPE,
+  SET_BLOCKED_TERMS_OK_DTYPE,
+  UNSET_BLOCKED_TERMS_OK_DTYPE,
 } from '../constants';
 
 export type AdminTechnology = {
@@ -29,18 +31,30 @@ type BlockedTermListAction = {
   payload: string[];
 };
 
-type BlockedTermsInit = {
+type BlockedTermsInitAction = {
   type: typeof BLOCKED_TERMS_INIT_DTYPE;
   payload: string[];
 };
 
-type BlockedTermsInitTechs = {
+type BlockedTermsInitTechsAction = {
   type: typeof BLOCKED_TERMS_INIT_TECHS_DTYPE;
   payload: string[];
 };
 
+type SetBlockedTermsAction = {
+  type: typeof SET_BLOCKED_TERMS_OK_DTYPE;
+  payload: string[];
+};
+
+type UnsetBlockedTermsAction = {
+  type: typeof UNSET_BLOCKED_TERMS_OK_DTYPE;
+  payload: string[];
+};
+
 export type BlockedTermsAction =
-  | BlockedTermsInit
+  | BlockedTermsInitAction
   | BlockedTermAction
   | BlockedTermListAction
-  | BlockedTermsInitTechs;
+  | BlockedTermsInitTechsAction
+  | SetBlockedTermsAction
+  | UnsetBlockedTermsAction;
