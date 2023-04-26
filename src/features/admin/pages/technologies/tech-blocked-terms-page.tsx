@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import { useEffect, useMemo, useReducer, useRef, useState } from 'react';
 
 import {
   Button,
@@ -12,23 +13,22 @@ import {
 } from '@mantine/core';
 
 import { CHECK_WALLET_ROLES } from '~/features/auth/core/constants';
+import { useWalletAuthContext } from '~/features/auth/hooks';
 import { Text } from '~/shared/components';
 
 import TechnologiesSidenav from '../../components/technologies-sidenav';
+import {
+  BLOCKED_TERM_DTYPE,
+  BLOCKED_TERMS_DTYPE,
+  BLOCKED_TERMS_INIT_DTYPE,
+  BLOCKED_TERMS_INIT_TECHS_DTYPE,
+} from '../../core/constants';
+import { useBlockedTechnologiesQuery } from '../../hooks/use-blocked-technologies';
+import { useSetBlockedTermsMutation } from '../../hooks/use-set-blocked-terms-mutation';
+import { useTechnologiesQuery } from '../../hooks/use-technologies-query';
+import { useUnsetBlockedTermsMutation } from '../../hooks/use-unset-blocked-terms-mutation';
 import { AdminLayout } from '../../layouts/admin-layout';
-const data = [
-  'React',
-  'Angular',
-  'Svelte',
-  'Vue',
-  'Riot',
-  'NextJS',
-  'Qwik',
-  'Lit',
-  'Jest',
-  'Cypress',
-  'Playwright',
-];
+import { blockedTermsReducer } from '../../reducers';
 
 const breadCrumbs = [
   { title: 'Blocked Terms', href: '/godmode/technologies/blocked-terms' },
@@ -36,6 +36,106 @@ const breadCrumbs = [
 
 const TechBlockedTermsPage = () => {
   const { asPath, push } = useRouter();
+  const { address: creatorWallet } = useWalletAuthContext();
+
+  const [state, dispatch] = useReducer(blockedTermsReducer, {
+    initBlockedTerms: [],
+    techOptions: [],
+    blockedTerms: [],
+    unblockedTerms: [],
+    allBlockedTerms: [],
+  });
+
+  const {
+    data: initTechOptions,
+    error: errorTechnologiesQuery,
+    isLoading: isLoadingTechs,
+  } = useTechnologiesQuery();
+
+  const iniTechsRef = useRef(false);
+  useEffect(() => {
+    if (initTechOptions && initTechOptions.length > 0 && !iniTechsRef.current) {
+      iniTechsRef.current = true;
+      dispatch({
+        type: BLOCKED_TERMS_INIT_TECHS_DTYPE,
+        payload: initTechOptions,
+      });
+    }
+  }, [initTechOptions]);
+
+  const {
+    data: initBlockedTerms,
+    isLoading: isLoadingBlockedTechs,
+    error: errorBlockedTechnologiesQuery,
+  } = useBlockedTechnologiesQuery();
+
+  const iniBlockedTermsRef = useRef(false);
+  useEffect(() => {
+    if (
+      initBlockedTerms &&
+      initBlockedTerms.length > 0 &&
+      !iniBlockedTermsRef.current
+    ) {
+      iniBlockedTermsRef.current = true;
+      dispatch({
+        type: BLOCKED_TERMS_INIT_DTYPE,
+        payload: initBlockedTerms,
+      });
+    }
+  }, [initBlockedTerms]);
+
+  const selectRef = useRef<HTMLInputElement | null>(null);
+  const onChangeBlockTerm = (payload: string | null) => {
+    if (selectRef.current) {
+      (selectRef.current as HTMLInputElement).blur();
+    }
+
+    if (payload) {
+      dispatch({ type: BLOCKED_TERM_DTYPE, payload });
+    }
+  };
+
+  const onChangeBlockTermList = (payload: string[]) => {
+    dispatch({ type: BLOCKED_TERMS_DTYPE, payload });
+  };
+
+  const {
+    mutate: setBlockedTermsMutate,
+    error: setBlockedTermsError,
+    isLoading: isLoadingSetBlockedTerms,
+  } = useSetBlockedTermsMutation();
+
+  const {
+    mutate: unsetBlockedTermsMutate,
+    error: unsetBlockedTermsError,
+    isLoading: isLoadingUnetBlockedTerms,
+  } = useUnsetBlockedTermsMutation();
+
+  const isLoading =
+    isLoadingTechs ||
+    isLoadingBlockedTechs ||
+    isLoadingSetBlockedTerms ||
+    isLoadingUnetBlockedTerms;
+
+  const onSubmit = () => {
+    if (creatorWallet) {
+      if (state.blockedTerms.length > 0) {
+        console.log('blocking:', state.blockedTerms);
+        setBlockedTermsMutate({
+          creatorWallet,
+          technologyNameList: state.blockedTerms,
+        });
+      }
+
+      if (state.unblockedTerms.length > 0) {
+        console.log('unblocking:', state.unblockedTerms);
+        unsetBlockedTermsMutate({
+          creatorWallet,
+          technologyNameList: state.unblockedTerms,
+        });
+      }
+    }
+  };
 
   return (
     <AdminLayout
@@ -43,8 +143,36 @@ const TechBlockedTermsPage = () => {
       sideNav={<TechnologiesSidenav asPath={asPath} push={push} />}
     >
       <Stack w="70%" pt={60} spacing={60}>
+        {Boolean(errorBlockedTechnologiesQuery) && (
+          <p className="text-red-500">
+            Error retrieving blocked technologies ={' '}
+            {`"${(errorBlockedTechnologiesQuery as Error).message}"`}
+          </p>
+        )}
+
+        {Boolean(errorTechnologiesQuery) && (
+          <p className="text-red-500">
+            Error retrieving technologies ={' '}
+            {`"${(errorTechnologiesQuery as Error).message}"`}
+          </p>
+        )}
+
+        {Boolean(setBlockedTermsError) && (
+          <p className="text-red-500">
+            Error set-blocked-terms ={' '}
+            {`"${(setBlockedTermsError as Error).message}"`}
+          </p>
+        )}
+
+        {Boolean(unsetBlockedTermsError) && (
+          <p className="text-red-500">
+            Error unset-blocked-terms ={' '}
+            {`"${(unsetBlockedTermsError as Error).message}"`}
+          </p>
+        )}
+
         <Paper withBorder radius="lg" px={45} pt={45} pb={30} pos="relative">
-          <LoadingOverlay visible={false} />
+          <LoadingOverlay visible={isLoading} />
           <Stack spacing={30}>
             <Grid align="center">
               <Grid.Col span={2}>
@@ -54,16 +182,20 @@ const TechBlockedTermsPage = () => {
               </Grid.Col>
               <Grid.Col span={10}>
                 <Select
+                  ref={selectRef}
                   searchable
                   clearable
-                  data={data}
-                  placeholder="Pick one term"
+                  data={state.techOptions}
+                  placeholder="Search or select term to block"
                   maxDropdownHeight={320}
                   nothingFound="Nothing found"
                   size="lg"
+                  value={null}
+                  onChange={onChangeBlockTerm}
                 />
               </Grid.Col>
             </Grid>
+
             <Grid align="center">
               <Grid.Col span={2}>
                 <Text size="lg" fw="bold">
@@ -73,16 +205,26 @@ const TechBlockedTermsPage = () => {
               <Grid.Col span={10}>
                 <MultiSelect
                   searchable
-                  data={data}
-                  placeholder="Search and pick terms here"
+                  placeholder="Search and remove blocked terms here"
                   maxDropdownHeight={320}
-                  nothingFound="Nothing found"
                   size="lg"
+                  data={state.allBlockedTerms}
+                  value={state.allBlockedTerms}
+                  onChange={onChangeBlockTermList}
                 />
               </Grid.Col>
             </Grid>
             <Flex w="full" justify="flex-end" align="center">
-              <Button radius="md" size="md" variant="default">
+              <Button
+                radius="md"
+                size="md"
+                variant="default"
+                disabled={
+                  state.blockedTerms.length === 0 &&
+                  state.unblockedTerms.length === 0
+                }
+                onClick={onSubmit}
+              >
                 Submit
               </Button>
             </Flex>
