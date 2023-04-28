@@ -28,4 +28,6 @@ export default defineConfig({
     },
   ],
   outputDir: 'test-results',
+  // TODO: match test-files depending on wallet role to be used
+  // testMatch:
 });

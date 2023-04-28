@@ -14,7 +14,9 @@ test.afterAll(async ({ context }) => {
   await context.close();
 });
 
-test('dev wallet check', async ({ context }) => {
+test('auth flow', async ({ context }) => {
+  // TODO: reset wallet role/flow to ANON/LOGIN
+
   await sharedPage.getByRole('button', { name: 'Connect Wallet' }).click();
   await sharedPage.getByRole('button', { name: 'MetaMask' }).click();
 

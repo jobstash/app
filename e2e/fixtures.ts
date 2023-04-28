@@ -36,6 +36,7 @@ export const test = base.extend<{
     await context.pages()[0].waitForTimeout(3000);
     // setup metamask
     await initialSetup(chromium, {
+      // TODO: use different info for different wallet roles
       secretWordsOrPrivateKey: process.env.SECRET_WORDS,
       network: 'mainnet',
       password: process.env.METAMASK_PASSWORD,

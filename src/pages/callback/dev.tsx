@@ -43,6 +43,17 @@ const DevGithubCallbackPage = () => {
       });
       const data2 = await res2.json();
       console.log('check-wallet new data =', data2);
+
+      console.log('REFETCHING CHECK-WALLET AFTER 10sec');
+      setTimeout(async () => {
+        console.log('FETCHING ...');
+        const res3 = await fetch(`${NEXT_PUBLIC_MW_URL}/siwe/check-wallet`, {
+          mode: 'cors',
+          credentials: 'include',
+        });
+        const data3 = await res3.json();
+        console.log('check-wallet LATEST data =', data3);
+      }, 5000);
     }
   };
 
