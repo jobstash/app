@@ -5,20 +5,21 @@ import {
   LogoTitle,
   Text,
 } from '~/shared/components';
-import { Project } from '~/shared/core/interfaces';
+import { Category, Project } from '~/shared/core/interfaces';
 
 import { createRightPanelProjectCardTags } from '../utils';
 
 interface Props {
   project?: Project;
+  categories: Category[];
 }
 
-export const RightPanelProjectCard = ({ project }: Props) => {
+export const RightPanelProjectCard = ({ project, categories }: Props) => {
   if (!project) return null;
 
   const { logo, name, description } = project;
   const { projectSocialTags, projectTags, projectTvlTags, projectAuditTags } =
-    createRightPanelProjectCardTags(project);
+    createRightPanelProjectCardTags(project, categories);
 
   return (
     <div className="flex flex-col gap-5 p-6">

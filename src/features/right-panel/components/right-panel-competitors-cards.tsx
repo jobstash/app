@@ -13,7 +13,6 @@ interface Props {
 }
 
 const CompetitorCard = ({ project }: { project: Project }) => {
-  console.log('competitor project =', project);
   const { projectTags, projectTvlTags } = useMemo(
     () => createRightPanelProjectCardTags(project),
     [project],

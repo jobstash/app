@@ -14,10 +14,13 @@ import {
   TwitterIcon,
   UsersThreeIcon,
 } from '~/shared/components';
-import { Project, TagElement } from '~/shared/core/interfaces';
+import { Category, Project, TagElement } from '~/shared/core/interfaces';
 import { numFormatter } from '~/shared/utils';
 
-export const createRightPanelProjectCardTags = (project: Project) => {
+export const createRightPanelProjectCardTags = (
+  project: Project,
+  categories: Category[] = [],
+) => {
   const {
     url,
     githubOrganization,
@@ -85,12 +88,6 @@ export const createRightPanelProjectCardTags = (project: Project) => {
 
   const projectTags: TagElement[] = [
     {
-      text: 'Jobs: TBD',
-      icon: <SuitcaseIcon />,
-      link: '#',
-      showLinkIcon: false,
-    },
-    {
       text: 'Relevant Repos: TBD',
       icon: <GithubLogoOutlineIcon />,
       link: '#',
@@ -107,7 +104,12 @@ export const createRightPanelProjectCardTags = (project: Project) => {
     });
   }
 
-  projectTags.push({ text: 'Category: TBD', icon: <CategoryIcon /> });
+  if (categories.length > 0) {
+    projectTags.push({
+      text: `Category: ${categories[0].name}`,
+      icon: <CategoryIcon />,
+    });
+  }
 
   if (teamSize) {
     projectTags.push({

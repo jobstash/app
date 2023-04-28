@@ -33,6 +33,7 @@ const JobRightPanelCard = ({
     technologies,
     fundingRounds,
     investors,
+    categories,
   },
 }: Props) => {
   if (tabSegment === TEXT_ROUTE_TAB_COMPETITORS) {
@@ -58,7 +59,10 @@ const JobRightPanelCard = ({
           />
         )}
         {project && tabSegment === TEXT_ROUTE_TAB_PROJECT && (
-          <RightPanelProjectCard project={project} />
+          <RightPanelProjectCard
+            project={project}
+            categories={categories ?? []}
+          />
         )}
         {tabSegment === TEXT_ROUTE_TAB_REPOSITORIES && <RightPanelRepoCard />}
       </div>
