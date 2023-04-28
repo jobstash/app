@@ -1,16 +1,23 @@
-import { CardSet, Heading, Text } from '~/shared/components';
-import { Organization } from '~/shared/core/interfaces';
+import {
+  BankIcon,
+  CardSet,
+  Heading,
+  MoneyIcon,
+  Text,
+} from '~/shared/components';
+import { FundingRound, Investor, Organization } from '~/shared/core/interfaces';
+import { numFormatter, prettyTimestamp } from '~/shared/utils';
 
-import { createRightPanelOrgCardTags } from '../utils';
+import { createOrgFundingDateString } from '../utils';
 
 interface Props {
   org: Organization;
+  fundingRounds: FundingRound[];
+  investors: Investor[];
 }
 
-export const RightPanelOrgCard = ({ org }: Props) => {
+export const RightPanelOrgCard = ({ org, fundingRounds, investors }: Props) => {
   const { name, description } = org;
-
-  const { topTags, bottomTags } = createRightPanelOrgCardTags(org);
 
   return (
     <div className="flex flex-col p-6">
@@ -27,35 +34,35 @@ export const RightPanelOrgCard = ({ org }: Props) => {
           <Text color="dimmed">{description}</Text>
         </div>
 
-        {topTags.length > 0 && (
-          <>
-            <div className="flex h-fit flex-col justify-center">
-              <hr className="border-t border-white/10" />
-            </div>
+        <div className="flex h-fit flex-col justify-center">
+          <hr className="border-t border-white/10" />
+        </div>
 
-            <div className="flex gap-x-4 pl-0.5">
-              {topTags.map(({ text, link, icon }) => (
-                <CardSet key={text} link={link} icon={icon}>
-                  {text}
-                </CardSet>
-              ))}
+        <div className="flex flex-col justify-center gap-3">
+          {fundingRounds.map(({ id, date, raisedAmount, roundName }) => (
+            <div key={id} className="flex items-center gap-x-3">
+              {roundName && (
+                <CardSet
+                  icon={<BankIcon />}
+                >{`Round Name: ${roundName}`}</CardSet>
+              )}
+              <CardSet icon={<MoneyIcon />}>
+                {`Amount: $${numFormatter.format(raisedAmount)}M`}
+              </CardSet>
+              <CardSet icon={<BankIcon />}>{`Date: ${createOrgFundingDateString(
+                fundingRounds[0].date,
+              )}`}</CardSet>
             </div>
+          ))}
 
-            <div className="flex h-fit flex-col justify-center">
-              <hr className="border-t border-white/10" />
-            </div>
-          </>
-        )}
-
-        {bottomTags.length > 0 && (
-          <div className="flex gap-x-4 pl-0.5">
-            {bottomTags.map(({ text, link, icon }) => (
-              <CardSet key={text} link={link} icon={icon}>
-                {text}
+          <div className="flex flex-wrap items-center gap-3">
+            {investors.map(({ name }) => (
+              <CardSet key={name} icon={<MoneyIcon />}>
+                {name}
               </CardSet>
             ))}
           </div>
-        )}
+        </div>
       </div>
     </div>
   );

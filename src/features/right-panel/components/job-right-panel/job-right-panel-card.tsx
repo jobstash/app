@@ -26,7 +26,14 @@ interface Props {
 const JobRightPanelCard = ({
   tabSegment,
   isPending,
-  job: { jobpost, organization, project, technologies },
+  job: {
+    jobpost,
+    organization,
+    project,
+    technologies,
+    fundingRounds,
+    investors,
+  },
 }: Props) => {
   if (tabSegment === TEXT_ROUTE_TAB_COMPETITORS) {
     return <RightPanelCompetitorsCards isPending={isPending} />;
@@ -44,7 +51,11 @@ const JobRightPanelCard = ({
           <RightPanelJobCard job={jobpost} technologies={technologies} />
         )}
         {tabSegment === TEXT_ROUTE_TAB_ORGANIZATION && (
-          <RightPanelOrgCard org={organization} />
+          <RightPanelOrgCard
+            org={organization}
+            fundingRounds={fundingRounds}
+            investors={investors}
+          />
         )}
         {project && tabSegment === TEXT_ROUTE_TAB_PROJECT && (
           <RightPanelProjectCard project={project} />

@@ -1,4 +1,4 @@
-export interface Investors {
+export interface Investor {
   name: string;
   id: string;
 }
