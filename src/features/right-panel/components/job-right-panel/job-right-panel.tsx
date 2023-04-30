@@ -2,6 +2,7 @@ import { memo, useEffect, useTransition } from 'react';
 
 import { useUrlFilterParams } from '~/features/filters/hooks';
 import { Job } from '~/features/jobs/core/types';
+import { useOrgReposQuery } from '~/features/organizations/hooks';
 import { EVENT_CARD_CLICK, ID_TOP_RIGHT_PANEL } from '~/shared/core/constants';
 import { useRouteSegments } from '~/shared/hooks';
 import { getUrlWithFilters } from '~/shared/utils';
@@ -45,10 +46,13 @@ const JobRightPanel = ({ job }: Props) => {
       });
     });
 
-  if (!job) return <p>Loading right-panel</p>;
+  const { data: repos, isLoading: isLoadingOrgRepos } = useOrgReposQuery(
+    job?.organization.orgId,
+  );
+
+  if (!job || isLoadingOrgRepos) return <p>Loading right-panel</p>;
 
   const { organization, project, fundingRounds } = job;
-
   return (
     <JobRightPanelWrapper>
       <div className="absolute top-0 h-0" id={ID_TOP_RIGHT_PANEL} />
@@ -60,10 +64,13 @@ const JobRightPanel = ({ job }: Props) => {
         tab={segments.tab}
         isPending={isPending}
         hasProject={Boolean(project)}
+        repoCount={repos?.length}
         onClickTab={onClickTab}
       />
+
       <JobRightPanelCard
         job={job}
+        repos={repos}
         tabSegment={segments.tab}
         isPending={isPending}
       />

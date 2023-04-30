@@ -13,25 +13,31 @@ import {
 import {
   BookmarkIcon,
   Button,
-  CommitersGitBranchIcon,
-  CommitersLargerIcon,
   Heading,
-  ProjectIcon,
   RepoGithubIcon,
   RepoLinkIcon,
   ShareIcon,
-  TechWrapper,
   Text,
 } from '~/shared/components';
+import { Repository } from '~/shared/core/interfaces';
 
-const RightPanelRepoCard = () => (
-  <div className="flex flex-col gap-6 p-6">
+interface Props {
+  repo: Repository;
+  hourlyCommits: { hour: number; commits: number }[];
+  weeklyCommits: {
+    day: 'Sun' | 'Mon' | 'Tue' | 'Wed' | 'Thu' | 'Fri' | 'Sat';
+    commits: number;
+  }[];
+}
+
+const RightPanelRepoCard = ({ repo, hourlyCommits, weeklyCommits }: Props) => (
+  <div className="flex flex-col gap-4 p-6">
     <div className="flex flex-col gap-2">
       <div className="flex justify-between">
         <div className="flex items-center gap-2">
           <RepoGithubIcon />
           <Heading size="md" fw="semibold">
-            uniswap/interface
+            {repo.fullName}
           </Heading>
         </div>
         <div className="flex gap-x-4">
@@ -47,11 +53,11 @@ const RightPanelRepoCard = () => (
         </div>
       </div>
 
-      <div className="flex h-8 flex-col justify-center">
+      {/* <div className="flex h-8 flex-col justify-center">
         <hr className="border-t border-white/10" />
-      </div>
+      </div> */}
 
-      <div className="flex flex-col justify-center gap-2">
+      {/* <div className="flex flex-col justify-center gap-2">
         <div className="flex items-center gap-2">
           <ProjectIcon />
           <Text>Project: Uniswap v3 DApp</Text>
@@ -60,10 +66,10 @@ const RightPanelRepoCard = () => (
           <CommitersGitBranchIcon />
           <Text>Comitters: 17</Text>
         </div>
-      </div>
+      </div> */}
     </div>
 
-    <div className="flex flex-col gap-2.5">
+    {/* <div className="flex flex-col gap-2.5">
       <Text>🦄 An open source interface for the Uniswap protocol</Text>
       <div className="flex flex-col gap-2">
         <div className="flex w-fit items-center gap-4 rounded-2xl border border-white/40 p-2.5 pl-4">
@@ -86,7 +92,7 @@ const RightPanelRepoCard = () => (
         </div>
         <div />
       </div>
-    </div>
+    </div> */}
 
     <div className="flex h-8 flex-col justify-center">
       <hr className="border-t border-white/10" />
@@ -107,7 +113,7 @@ const RightPanelRepoCard = () => (
           <BarChart
             width={520}
             height={360}
-            data={dailyData}
+            data={hourlyCommits}
             margin={{
               top: 5,
               right: 0,
@@ -122,12 +128,12 @@ const RightPanelRepoCard = () => (
             />
             <XAxis
               includeHidden
-              dataKey="timezone"
+              dataKey="hour"
               tickLine={false}
               tick={{ fontWeight: 500, fontSize: 10 }}
               minTickGap={0}
               label={{
-                value: 'UTC Timezone',
+                value: 'Hour of the day',
                 fontSize: 12,
                 margin: 10,
               }}
@@ -180,7 +186,7 @@ const RightPanelRepoCard = () => (
           <BarChart
             width={520}
             height={360}
-            data={weeklyData}
+            data={weeklyCommits}
             margin={{
               top: 5,
               right: 0,
@@ -234,112 +240,3 @@ const RightPanelRepoCard = () => (
 );
 
 export default memo(RightPanelRepoCard);
-
-const dailyData = [
-  {
-    timezone: '-11',
-    commits: 8,
-  },
-  {
-    timezone: '-10',
-    commits: 3,
-  },
-  {
-    timezone: '-9',
-    commits: 2,
-  },
-  {
-    timezone: '-8',
-    commits: 0,
-  },
-  {
-    timezone: '-7',
-    commits: 3,
-  },
-  {
-    timezone: '-6',
-    commits: 1,
-  },
-  {
-    timezone: '-5',
-    commits: 0,
-  },
-  {
-    timezone: '-4',
-    commits: 0,
-  },
-  {
-    timezone: '-3',
-    commits: 0,
-  },
-  {
-    timezone: '-2',
-    commits: 1,
-  },
-  {
-    timezone: '-1',
-    commits: 0,
-  },
-  {
-    timezone: 'UT',
-    commits: 0,
-  },
-  {
-    timezone: '+1',
-    commits: 0,
-  },
-  {
-    timezone: '+2',
-    commits: 1,
-  },
-  {
-    timezone: '+3',
-    commits: 22,
-  },
-  {
-    timezone: '+4',
-    commits: 3,
-  },
-  {
-    timezone: '+5',
-    commits: 1,
-  },
-  {
-    timezone: '+6',
-    commits: 2,
-  },
-  {
-    timezone: '+7',
-    commits: 1,
-  },
-  {
-    timezone: '+8',
-    commits: 5,
-  },
-  {
-    timezone: '+9',
-    commits: 6,
-  },
-  {
-    timezone: '+10',
-    commits: 18,
-  },
-  {
-    timezone: '+11',
-    commits: 8,
-  },
-  {
-    timezone: '+12',
-    commits: 16,
-  },
-];
-
-const weeklyData = [
-  { day: 'Mon', commits: 8 },
-  { day: 'Tue', commits: 12 },
-  { day: 'Mon', commits: 8 },
-  { day: 'Mon', commits: 13 },
-  { day: 'Mon', commits: 50 },
-  { day: 'Mon', commits: 2 },
-  { day: 'Mon', commits: 1 },
-];

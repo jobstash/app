@@ -10,17 +10,19 @@ import {
   TEXT_ROUTE_TAB_PROJECT,
   TEXT_ROUTE_TAB_REPOSITORIES,
 } from '~/shared/core/constants';
+import { Repository } from '~/shared/core/interfaces';
 
 import RightPanelCompetitorsCards from '../right-panel-competitors-cards';
 import { RightPanelJobCard } from '../right-panel-job-card';
 import { RightPanelOrgCard } from '../right-panel-org-card';
 import { RightPanelProjectCard } from '../right-panel-project-card';
-import RightPanelRepoCard from '../right-panel-repo-card';
+import RightPanelRepoCards from '../right-panel-repo-cards';
 
 interface Props {
   tabSegment: string;
   isPending: boolean;
   job: Job;
+  repos: Repository[] | undefined;
 }
 
 const JobRightPanelCard = ({
@@ -35,9 +37,14 @@ const JobRightPanelCard = ({
     investors,
     categories,
   },
+  repos,
 }: Props) => {
   if (tabSegment === TEXT_ROUTE_TAB_COMPETITORS) {
     return <RightPanelCompetitorsCards isPending={isPending} />;
+  }
+
+  if (tabSegment === TEXT_ROUTE_TAB_REPOSITORIES) {
+    return <RightPanelRepoCards isPending={isPending} repos={repos ?? []} />;
   }
 
   return (
@@ -64,7 +71,6 @@ const JobRightPanelCard = ({
             categories={categories ?? []}
           />
         )}
-        {tabSegment === TEXT_ROUTE_TAB_REPOSITORIES && <RightPanelRepoCard />}
       </div>
     </div>
   );

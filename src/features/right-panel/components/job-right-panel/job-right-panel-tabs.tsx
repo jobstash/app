@@ -14,6 +14,7 @@ interface Props {
   isPending: boolean;
   hasProject: boolean;
   onClickTab: (_: string) => void;
+  repoCount?: number;
 }
 
 const JobRightPanelTabs = ({
@@ -21,6 +22,7 @@ const JobRightPanelTabs = ({
   isPending,
   hasProject,
   onClickTab,
+  repoCount = 0,
 }: Props) => {
   const tabButtons = [
     { text: 'Job Details', tabSegment: TEXT_ROUTE_TAB_DETAILS },
@@ -30,11 +32,18 @@ const JobRightPanelTabs = ({
     tabButtons.push({ text: 'Project', tabSegment: TEXT_ROUTE_TAB_PROJECT });
   }
 
+  if (repoCount > 0) {
+    tabButtons.push({
+      text: `Repositories${repoCount > 0 ? ' (' + repoCount + ')' : ''}`,
+      tabSegment: TEXT_ROUTE_TAB_REPOSITORIES,
+    });
+  }
+
   // Temporary (WIP)
-  tabButtons.push(
-    { text: 'Repositories (TBD)', tabSegment: TEXT_ROUTE_TAB_REPOSITORIES },
-    { text: 'Competitors (TBD)', tabSegment: TEXT_ROUTE_TAB_COMPETITORS },
-  );
+  tabButtons.push({
+    text: 'Competitors (TBD)',
+    tabSegment: TEXT_ROUTE_TAB_COMPETITORS,
+  });
 
   return (
     <div className="mt-8 flex flex-wrap space-x-2 border-t border-white/10 pt-8">
