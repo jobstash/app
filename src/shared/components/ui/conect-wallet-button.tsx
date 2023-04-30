@@ -26,7 +26,7 @@ export const ConnectWalletButton = () => {
             }
             right={null}
             text={
-              address && role !== 'ANON'
+              address
                 ? role === 'ADMIN'
                   ? 'ADMIN'
                   : `${address.slice(0, 6)}...${address.slice(-4)}`

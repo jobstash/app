@@ -1,15 +1,29 @@
+import { useRouter } from 'next/router';
 import { useRef } from 'react';
 
-import { CHECK_WALLET_ROLES } from '~/features/auth/core/constants';
+import { useQueryClient } from '@tanstack/react-query';
+
+import { fetchCheckWallet } from '~/features/auth/api';
+import {
+  CHECK_WALLET_ROLES,
+  CHECK_WALLET_ROUTE,
+} from '~/features/auth/core/constants';
 import { CheckWalletRole } from '~/features/auth/core/types';
 import { useWalletAuthContext } from '~/features/auth/hooks';
 import EmptyPage from '~/features/auth/pages/empty-page';
-import { NEXT_PUBLIC_MW_URL } from '~/shared/core/constants';
+import {
+  NEXT_PUBLIC_MW_URL,
+  SENTRY_MW_NON_200_RESPONSE,
+} from '~/shared/core/constants';
 import { useIsMounted } from '~/shared/hooks';
+import { sentryMessage } from '~/shared/utils';
 
 const DevGithubCallbackPage = () => {
   const isMounted = useIsMounted();
   const { address } = useWalletAuthContext();
+
+  const { push } = useRouter();
+  const queryClient = useQueryClient();
 
   const submittedRef = useRef(false);
 
@@ -22,38 +36,34 @@ const DevGithubCallbackPage = () => {
   ) => {
     if (!submittedRef.current) {
       submittedRef.current = true;
-      const res = await fetch(`${NEXT_PUBLIC_MW_URL}/github/github-login`, {
-        method: 'POST',
-        mode: 'cors',
-        credentials: 'include',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ code, wallet: address, role }),
-      });
-
-      const data = await res.json();
-      console.log('github login data =', data);
-
-      console.log('try fetching check-wallet for info (temp) ...');
-
-      const res2 = await fetch(`${NEXT_PUBLIC_MW_URL}/siwe/check-wallet`, {
-        mode: 'cors',
-        credentials: 'include',
-      });
-      const data2 = await res2.json();
-      console.log('check-wallet new data =', data2);
-
-      console.log('REFETCHING CHECK-WALLET AFTER 10sec');
-      setTimeout(async () => {
-        console.log('FETCHING ...');
-        const res3 = await fetch(`${NEXT_PUBLIC_MW_URL}/siwe/check-wallet`, {
+      const githubLoginRes = await fetch(
+        `${NEXT_PUBLIC_MW_URL}/github/github-login`,
+        {
+          method: 'POST',
           mode: 'cors',
           credentials: 'include',
-        });
-        const data3 = await res3.json();
-        console.log('check-wallet LATEST data =', data3);
-      }, 5000);
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ code, wallet: address, role }),
+        },
+      );
+      const githubLoginData = await githubLoginRes.json();
+
+      if (!githubLoginRes.ok || !githubLoginData.success) {
+        sentryMessage(
+          `githubLoginRes: ${SENTRY_MW_NON_200_RESPONSE}`,
+          JSON.stringify(githubLoginData),
+        );
+      }
+
+      const checkWalletData = await fetchCheckWallet();
+      const roleRoute = CHECK_WALLET_ROUTE[checkWalletData.flow];
+      queryClient.setQueryData(
+        ['check-wallet', NEXT_PUBLIC_MW_URL],
+        checkWalletData,
+      );
+      push(roleRoute, undefined, { shallow: true });
     }
   };
 

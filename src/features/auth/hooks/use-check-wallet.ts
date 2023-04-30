@@ -44,9 +44,8 @@ export const useCheckWallet = () => {
     const loginCb = async () => {
       const data = await fetchCheckWallet();
       const roleRoute = CHECK_WALLET_ROUTE[data.flow];
-      console.log('LOGIN CB data =', data, 'roleRoute =', roleRoute);
       queryClient.setQueryData(['check-wallet', NEXT_PUBLIC_MW_URL], data);
-      push(roleRoute, undefined, { shallow: true }).then(() => refetch());
+      push(roleRoute, undefined, { shallow: true });
     };
 
     const logoutCb = () => {

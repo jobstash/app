@@ -1,15 +1,19 @@
 import Image from 'next/image';
 
-import { Avatar, Button, Text } from '~/shared/components';
+import { Avatar as CkAvatar } from 'connectkit';
+
+import { Button, Text } from '~/shared/components';
 import { useIsMounted } from '~/shared/hooks';
 
 import { CHECK_WALLET_FLOWS, CHECK_WALLET_ROLES } from '../core/constants';
+import { useCheckWallet } from '../hooks/use-check-wallet';
 import { CenteredLayout } from '../layouts/centered-layout';
 
 import EmptyPage from './empty-page';
 
 const AddGithubAccountPage = () => {
   const isMounted = useIsMounted();
+  const { address } = useCheckWallet();
 
   if (!isMounted) return <EmptyPage isLoading />;
 
@@ -29,26 +33,25 @@ const AddGithubAccountPage = () => {
           </Text>
         </div>
 
-        <div className="flex items-center justify-between">
-          <div className="flex items-center gap-x-2">
-            <Avatar
-              isRounded
-              src={`https://avatars.dicebear.com/api/bottts/${Date.now()}.svg`}
-              alt="test-user"
-              size="sm"
-            />
-            <Text size="lg">0xDevoor</Text>
-          </div>
+        {address && (
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-x-2">
+              <CkAvatar address={address} name={address} size={24} />
+              <Text size="lg">
+                {`${address.slice(0, 4)}...${address.slice(-4)}`}
+              </Text>
+            </div>
 
-          <div className="cursor-pointer">
-            <Image
-              src="/icons/thrash.svg"
-              alt="Remove github account"
-              width="20"
-              height="20"
-            />
+            <div className="cursor-pointer">
+              <Image
+                src="/icons/thrash.svg"
+                alt="Remove github account"
+                width="20"
+                height="20"
+              />
+            </div>
           </div>
-        </div>
+        )}
 
         <div>
           <Button size="sm" variant="outline">
@@ -58,11 +61,11 @@ const AddGithubAccountPage = () => {
 
         <hr className="border-t border-white/10" />
 
-        <button className="flex items-center justify-center rounded-lg bg-gradient-to-l from-primary to-secondary py-3 transition duration-150 ease-in-out hover:opacity-90">
-          <Text fw="semibold" size="sm">
-            Go to My Repository List
-          </Text>
-        </button>
+        <div className="flex justify-center">
+          <Button variant="primary" textProps={{ fw: 'semibold', size: 'sm' }}>
+            Go To My Repository List
+          </Button>
+        </div>
       </div>
     </CenteredLayout>
   );
