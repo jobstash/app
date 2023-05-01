@@ -1,5 +1,7 @@
 import { useRouter } from 'next/router';
 
+import NProgress from 'nprogress';
+
 import { CHECK_WALLET_ROLES } from '~/features/auth/core/constants';
 import { useWalletAuthContext } from '~/features/auth/hooks';
 import {
@@ -16,7 +18,13 @@ export const SideBar = () => {
 
   return (
     <nav className="fixed left-0 z-50 flex h-[65px] w-full flex-col bg-gradient-to-l from-[#141317] to-[#121216] p-4 lg:inset-y-0 lg:h-auto lg:min-h-screen lg:w-52 lg:border-r lg:border-white/5 lg:bg-transparent">
-      <div className="lg:p-4 lg:pl-1">
+      <div
+        className="lg:p-4 lg:pl-1"
+        onClick={() => {
+          push('/', undefined, { shallow: true });
+          NProgress.start();
+        }}
+      >
         <Brand />
       </div>
       <div>

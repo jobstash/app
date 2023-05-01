@@ -38,7 +38,7 @@ import { MantineProvider } from '~/shared/mantine';
 NProgress.configure({
   template: '<div class="bar" role="bar"><div class="peg"></div></div></div>',
 });
-const nProgressRoutes = new Set(['/jobs']);
+const nProgressExcludedPathnames = new Set(['/jobs/[key]/[tab]']);
 
 const { provider, webSocketProvider } = configureChains(
   [mainnet],
@@ -75,7 +75,7 @@ const App = ({ Component, pageProps }: AppPropsWithAuth) => {
 
   const router = useRouter();
   useEffect(() => {
-    const shouldDisplay = nProgressRoutes.has(router.pathname);
+    const shouldDisplay = !nProgressExcludedPathnames.has(router.pathname);
     const handleStart = () => {
       if (shouldDisplay) NProgress.start();
     };

@@ -9,6 +9,7 @@ const Brand = () => (
     width="120"
     height="32"
     quality={100}
+    className="cursor-pointer"
   />
 );
 
