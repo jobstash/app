@@ -17,7 +17,7 @@ interface Props {
 }
 
 const JobCard = ({ job, isActive, shouldScroll, filterParamsObj }: Props) => {
-  const { jobpost, organization, project, technologies } = job;
+  const { jobpost, organization, project, technologies, fundingRounds } = job;
   const { jobTitle, jobCreatedTimestamp } = jobpost;
 
   return (
@@ -30,7 +30,7 @@ const JobCard = ({ job, isActive, shouldScroll, filterParamsObj }: Props) => {
       <JobCardHeader title={jobTitle} ts={jobCreatedTimestamp} />
       <JobCardTags jobPost={jobpost} />
       <JobCardTechs techs={technologies} />
-      <JobCardOrg org={organization} />
+      <JobCardOrg org={organization} fundingRounds={fundingRounds} />
       {project && <JobCardProject project={project} />}
     </JobCardWrapper>
   );

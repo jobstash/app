@@ -2,14 +2,18 @@ import { memo, useMemo } from 'react';
 
 import { createJobCardOrgTags } from '~/features/jobs/utils';
 import { CardSet, LogoTitle } from '~/shared/components';
-import { Organization } from '~/shared/core/interfaces';
+import { FundingRound, Organization } from '~/shared/core/interfaces';
 
 interface Props {
   org: Organization;
+  fundingRounds: FundingRound[];
 }
 
-const JobCardOrg = ({ org }: Props) => {
-  const orgTags = useMemo(() => createJobCardOrgTags(org), [org]);
+const JobCardOrg = ({ org, fundingRounds }: Props) => {
+  const orgTags = useMemo(
+    () => createJobCardOrgTags(fundingRounds),
+    [fundingRounds],
+  );
 
   return (
     <>
@@ -26,7 +30,7 @@ const JobCardOrg = ({ org }: Props) => {
           }}
         />
         <div className="grow pt-4 lg:flex lg:flex-wrap lg:gap-x-8 lg:pt-0">
-          {orgTags.length > 0 &&
+          {orgTags &&
             orgTags.map(({ text, icon, link }) => (
               <CardSet key={text} link={link} icon={icon}>
                 {text}
