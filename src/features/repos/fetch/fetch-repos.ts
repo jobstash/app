@@ -8,9 +8,9 @@ interface OrgReposResponse {
   data: Repository[];
 }
 
-const SENTRY_LABEL = `fetcgOrgRepos`;
+const SENTRY_LABEL = `fetchRepos`;
 
-export const fetcgOrgRepos = async (orgId: string): Promise<Repository[]> => {
+export const fetchRepos = async (orgId: string): Promise<Repository[]> => {
   const res = await fetch(
     `${NEXT_PUBLIC_MW_URL}/organizations/repositories/${orgId}`,
   );

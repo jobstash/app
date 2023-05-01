@@ -2,7 +2,7 @@ import { memo, useEffect, useTransition } from 'react';
 
 import { useUrlFilterParams } from '~/features/filters/hooks';
 import { Job } from '~/features/jobs/core/types';
-import { useOrgReposQuery } from '~/features/organizations/hooks';
+import { useReposQuery } from '~/features/repos/hooks';
 import { EVENT_CARD_CLICK, ID_TOP_RIGHT_PANEL } from '~/shared/core/constants';
 import { useRouteSegments } from '~/shared/hooks';
 import { getUrlWithFilters } from '~/shared/utils';
@@ -46,7 +46,7 @@ const JobRightPanel = ({ job }: Props) => {
       });
     });
 
-  const { data: repos, isLoading: isLoadingOrgRepos } = useOrgReposQuery(
+  const { data: repos, isLoading: isLoadingOrgRepos } = useReposQuery(
     job?.organization.orgId,
   );
 
