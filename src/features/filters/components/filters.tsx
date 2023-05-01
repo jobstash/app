@@ -92,23 +92,13 @@ const Filters = () => {
     setTimeout(() => push(url, undefined, { shallow: true }), 100);
   }, [push, state.filterValues.query]);
 
-  const hasSearchQuery = useMemo(() => {
-    const searchQuery = state.filterValues.query;
-
-    if (!searchQuery) return null;
-
-    return searchQuery.trim().length > 0;
-  }, [state.filterValues.query]);
-
   const onSubmitSearch: FormEventHandler = useCallback(
     (e) => {
       e.preventDefault();
 
-      if (hasSearchQuery) {
-        applyFilters();
-      }
+      applyFilters();
     },
-    [applyFilters, hasSearchQuery],
+    [applyFilters],
   );
 
   return (
