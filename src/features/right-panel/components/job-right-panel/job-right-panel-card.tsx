@@ -10,7 +10,7 @@ import {
   TEXT_ROUTE_TAB_PROJECT,
   TEXT_ROUTE_TAB_REPOSITORIES,
 } from '~/shared/core/constants';
-import { Repository } from '~/shared/core/interfaces';
+import type { Competitor, Repository } from '~/shared/core/interfaces';
 
 import RightPanelCompetitorsCards from '../right-panel-competitors-cards';
 import { RightPanelJobCard } from '../right-panel-job-card';
@@ -23,6 +23,7 @@ interface Props {
   isPending: boolean;
   job: Job;
   repos: Repository[] | undefined;
+  competitors: Competitor[] | undefined;
 }
 
 const JobRightPanelCard = ({
@@ -38,9 +39,10 @@ const JobRightPanelCard = ({
     categories,
   },
   repos,
+  competitors,
 }: Props) => {
   if (tabSegment === TEXT_ROUTE_TAB_COMPETITORS) {
-    return <RightPanelCompetitorsCards isPending={isPending} />;
+    return <RightPanelCompetitorsCards competitors={competitors ?? []} />;
   }
 
   if (tabSegment === TEXT_ROUTE_TAB_REPOSITORIES) {

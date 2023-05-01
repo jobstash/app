@@ -15,6 +15,7 @@ interface Props {
   hasProject: boolean;
   onClickTab: (_: string) => void;
   repoCount?: number;
+  competitorsCount?: number;
 }
 
 const JobRightPanelTabs = ({
@@ -23,6 +24,7 @@ const JobRightPanelTabs = ({
   hasProject,
   onClickTab,
   repoCount = 0,
+  competitorsCount = 0,
 }: Props) => {
   const tabButtons = [
     { text: 'Job Details', tabSegment: TEXT_ROUTE_TAB_DETAILS },
@@ -39,11 +41,14 @@ const JobRightPanelTabs = ({
     });
   }
 
-  // Temporary (WIP)
-  tabButtons.push({
-    text: 'Competitors (TBD)',
-    tabSegment: TEXT_ROUTE_TAB_COMPETITORS,
-  });
+  if (competitorsCount > 0) {
+    tabButtons.push({
+      text: `Competitors${
+        competitorsCount > 0 ? ' (' + competitorsCount + ')' : ''
+      }`,
+      tabSegment: TEXT_ROUTE_TAB_COMPETITORS,
+    });
+  }
 
   return (
     <div className="mt-8 flex flex-wrap space-x-2 border-t border-white/10 pt-8">
