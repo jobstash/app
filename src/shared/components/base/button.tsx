@@ -80,7 +80,7 @@ const button = cva(
         true: '',
       },
       isIcon: {
-        true: 'w-7 h-7',
+        true: 'w-9 h-9',
       },
       isFullWidth: {
         true: 'w-full justify-between',

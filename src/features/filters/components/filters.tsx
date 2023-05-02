@@ -14,8 +14,8 @@ import type { Entries } from 'type-fest';
 
 import {
   Button,
+  CloseIcon,
   FilterIcon,
-  RocketLaunchIcon,
   SearchInputIcon,
 } from '~/shared/components';
 import { getOriginString } from '~/shared/utils';
@@ -93,6 +93,13 @@ const Filters = () => {
     [applyFilters],
   );
 
+  const clearSearch = useCallback(() => {
+    dispatch({
+      type: 'SET_SEARCH_FILTER_VALUE',
+      payload: { searchQuery: '' },
+    });
+  }, []);
+
   return (
     <div className="flex flex-col gap-y-2 py-8 pb-4 lg:pb-0">
       <div className="py-4">
@@ -101,10 +108,14 @@ const Filters = () => {
             icon={<SearchInputIcon />}
             placeholder={(routerQuery.query as string) ?? 'Search Jobs'}
             size="lg"
+            rightSectionWidth={140}
             rightSection={
-              <Button isIcon type="submit">
-                <RocketLaunchIcon />
-              </Button>
+              <div className="flex items-center gap-x-2">
+                <Button isIcon onClick={clearSearch}>
+                  <CloseIcon />
+                </Button>
+                <Button type="submit">Search</Button>
+              </div>
             }
             value={state.filterValues.query ?? ''}
             disabled={isLoading}
@@ -115,6 +126,9 @@ const Filters = () => {
                 fontSize: 16,
                 border: 'transparent',
               },
+            }}
+            classNames={{
+              input: 'py-7 bg-white/10',
             }}
             onChange={onChangeSearchInput}
           />

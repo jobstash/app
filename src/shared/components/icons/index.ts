@@ -24,6 +24,7 @@ export { BriefcaseIcon } from './briefcase-icon';
 export { CaretDownIcon } from './caret-down-icon';
 export { CategoryIcon } from './category-icon';
 export { ClockIcon } from './clock-icon';
+export { default as CloseIcon } from './close-icon';
 export { CodeIcon } from './code-icon';
 export { CommitersGitBranchIcon } from './commiters-git-branch-icon';
 export { CurrencyCircleDollarIcon } from './currency-circle-dollar-icon';
