@@ -39,8 +39,8 @@ const MultiSelectFilter = ({
   );
 
   const { inputValue, inputLabel } = useMemo(() => {
-    const inputValue = value?.split(',');
-    const inputValueLength = inputValue?.length ?? 0;
+    const inputValue = value ? value.split(',') : [];
+    const inputValueLength = inputValue.length;
     const inputLabel = `${label}${
       inputValueLength > 0 ? ' (' + inputValueLength + ')' : ''
     }`;
@@ -71,4 +71,4 @@ const MultiSelectFilter = ({
   );
 };
 
-export default memo(MultiSelectFilter);
+export default MultiSelectFilter;
