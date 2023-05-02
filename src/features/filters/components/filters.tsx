@@ -117,6 +117,14 @@ const Filters = ({ jobCount }: Props) => {
     });
   }, []);
 
+  const filterCount = useMemo(
+    () =>
+      Object.entries(state.filterValues)
+        .filter(([k, _]) => k !== 'query')
+        .filter(([_, v]) => v !== null).length,
+    [state.filterValues],
+  );
+
   return (
     <div className="flex flex-col pt-8">
       <div className="">
@@ -157,13 +165,15 @@ const Filters = ({ jobCount }: Props) => {
           <div className="flex items-center justify-between gap-x-6">
             <div>
               <Button
-                variant="outline"
+                variant={filterCount > 0 ? 'primary' : 'outline'}
                 left={<FilterIcon />}
                 isActive={state.showFilters}
                 isDisabled={isLoading}
                 onClick={toggleFilters}
               >
-                Filters & Sorting
+                {`Filters & Sorting${
+                  filterCount > 0 ? ' (' + filterCount + ')' : ''
+                }`}
               </Button>
             </div>
 
@@ -218,7 +228,7 @@ const Filters = ({ jobCount }: Props) => {
         transitionDuration={100}
         transitionTimingFunction="linear"
       >
-        <div className="relative my-4">
+        <div className="relative mt-4">
           <div className="lg: -mx-2 flex flex-wrap pb-4 lg:-mx-3 lg:-mb-4">
             {filterConfigEntries.length > 0 &&
               filterConfigEntries.map(([key, config]) => (
@@ -268,7 +278,7 @@ const Filters = ({ jobCount }: Props) => {
           </div>
         </div>
 
-        <div className="flex flex-wrap gap-6 lg:py-4">
+        <div className="flex flex-wrap gap-6 lg:py-2">
           <Button variant="primary" onClick={applyFilters}>
             Apply Filters
           </Button>
