@@ -53,14 +53,6 @@ const Filters = () => {
     [state.filterConfig],
   );
 
-  const hasFilterValues = useMemo(
-    () =>
-      Object.entries(state.filterValues)
-        .filter(([k, _]) => k !== 'query')
-        .some(([_, v]) => v !== null),
-    [state.filterValues],
-  );
-
   const onChangeSearchInput: ChangeEventHandler<HTMLInputElement> = useCallback(
     (e) => {
       dispatch({
@@ -199,18 +191,10 @@ const Filters = () => {
         </div>
 
         <div className="flex flex-wrap gap-6 lg:py-4">
-          <Button
-            variant="primary"
-            isDisabled={!hasFilterValues}
-            onClick={applyFilters}
-          >
+          <Button variant="primary" onClick={applyFilters}>
             Apply Filters
           </Button>
-          <Button
-            variant="outline"
-            isDisabled={!hasFilterValues}
-            onClick={clearFilters}
-          >
+          <Button variant="outline" onClick={clearFilters}>
             Clear Filters
           </Button>
         </div>
