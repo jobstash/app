@@ -111,10 +111,12 @@ const Filters = () => {
             rightSectionWidth={140}
             rightSection={
               <div className="flex items-center gap-x-2">
-                <Button isIcon onClick={clearSearch}>
+                <Button isIcon isDisabled={isLoading} onClick={clearSearch}>
                   <CloseIcon />
                 </Button>
-                <Button type="submit">Search</Button>
+                <Button type="submit" isDisabled={isLoading}>
+                  Search
+                </Button>
               </div>
             }
             value={state.filterValues.query ?? ''}
