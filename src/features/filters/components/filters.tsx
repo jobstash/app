@@ -17,6 +17,7 @@ import {
   CloseIcon,
   FilterIcon,
   SearchInputIcon,
+  Text,
 } from '~/shared/components';
 import { getOriginString } from '~/shared/utils';
 
@@ -29,7 +30,11 @@ import MultiSelectFilter from './multi-select-filter';
 import RangeFilter from './range-filter';
 import SingleSelectFilter from './single-select-filter';
 
-const Filters = () => {
+interface Props {
+  jobCount?: number;
+}
+
+const Filters = ({ jobCount }: Props) => {
   const { query: routerQuery, push, isReady } = useRouter();
 
   const [state, dispatch] = useReducer(filterReducer, INIT_FILTER_STATE);
@@ -49,7 +54,19 @@ const Filters = () => {
   );
 
   const filterConfigEntries = useMemo(
-    () => Object.entries(state.filterConfig ?? {}) as Entries<FilterConfig>,
+    () =>
+      Object.entries(state.filterConfig ?? {}).slice(
+        0,
+        -2,
+      ) as Entries<FilterConfig>,
+    [state.filterConfig],
+  );
+
+  const sortFilterEntries = useMemo(
+    () =>
+      Object.entries(state.filterConfig ?? {}).slice(
+        -2,
+      ) as Entries<FilterConfig>,
     [state.filterConfig],
   );
 
@@ -101,53 +118,98 @@ const Filters = () => {
   }, []);
 
   return (
-    <div className="flex flex-col gap-y-2 py-8 pb-4 lg:pb-0">
-      <div className="py-4">
-        <form onSubmit={onSubmitSearch}>
-          <TextInput
-            icon={<SearchInputIcon />}
-            placeholder={(routerQuery.query as string) ?? 'Search Jobs'}
-            size="lg"
-            rightSectionWidth={140}
-            rightSection={
-              <div className="flex items-center gap-x-2">
-                <Button isIcon isDisabled={isLoading} onClick={clearSearch}>
-                  <CloseIcon />
-                </Button>
-                <Button type="submit" isDisabled={isLoading}>
-                  Search
-                </Button>
-              </div>
-            }
-            value={state.filterValues.query ?? ''}
-            disabled={isLoading}
-            radius="md"
-            styles={{
-              input: {
-                background: 'rgba(255, 255, 255, 0.1)',
-                fontSize: 16,
-                border: 'transparent',
-              },
-            }}
-            classNames={{
-              input: 'py-7 bg-white/10',
-            }}
-            onChange={onChangeSearchInput}
-          />
-        </form>
-      </div>
+    <div className="flex flex-col pt-8">
+      <div className="">
+        <div className="flex flex-col gap-y-3">
+          <form onSubmit={onSubmitSearch}>
+            <TextInput
+              icon={<SearchInputIcon />}
+              placeholder={(routerQuery.query as string) ?? 'Search Jobs'}
+              size="lg"
+              rightSectionWidth={140}
+              rightSection={
+                <div className="flex items-center gap-x-2">
+                  <Button isIcon isDisabled={isLoading} onClick={clearSearch}>
+                    <CloseIcon />
+                  </Button>
+                  <Button type="submit" isDisabled={isLoading}>
+                    Search
+                  </Button>
+                </div>
+              }
+              value={state.filterValues.query ?? ''}
+              disabled={isLoading}
+              radius="md"
+              styles={{
+                input: {
+                  background: 'rgba(255, 255, 255, 0.1)',
+                  fontSize: 16,
+                  border: 'transparent',
+                },
+              }}
+              classNames={{
+                input: 'py-7 bg-white/10',
+              }}
+              onChange={onChangeSearchInput}
+            />
+          </form>
 
-      <div className="relative min-h-[70px]">
-        <div className="flex items-center pt-4 md:absolute">
-          <Button
-            variant="outline"
-            left={<FilterIcon />}
-            isActive={state.showFilters}
-            isDisabled={isLoading}
-            onClick={toggleFilters}
-          >
-            Filters & Sorting
-          </Button>
+          <div className="flex items-center justify-between gap-x-6">
+            <div>
+              <Button
+                variant="outline"
+                left={<FilterIcon />}
+                isActive={state.showFilters}
+                isDisabled={isLoading}
+                onClick={toggleFilters}
+              >
+                Filters & Sorting
+              </Button>
+            </div>
+
+            {/* <div className="lg: -mx-2 flex flex-wrap pb-4 lg:-mx-3 lg:-mb-4">
+              {state.showFilters &&
+                sortFilterEntries.map(([key, config]) => (
+                  <div
+                    key={key}
+                    className="w-1/2 px-2 pb-2 lg:w-1/5 lg:px-3 lg:pb-4"
+                  >
+                    {config.kind === FILTER_KIND.SINGLE_SELECT && (
+                      <SingleSelectFilter
+                        value={state.filterValues[config.paramKey]}
+                        label={config.label}
+                        options={config.options}
+                        paramKey={config.paramKey}
+                        dispatch={dispatch}
+                      />
+                    )}
+                  </div>
+                ))}
+            </div> */}
+
+            <div className="flex grow items-center gap-x-6">
+              {state.showFilters &&
+                sortFilterEntries.map(([key, config]) => (
+                  <div key={key} className="w-[150px]">
+                    {config.kind === FILTER_KIND.SINGLE_SELECT && (
+                      <SingleSelectFilter
+                        value={state.filterValues[config.paramKey]}
+                        options={config.options}
+                        paramKey={config.paramKey}
+                        dispatch={dispatch}
+                        placeholder={config.label}
+                      />
+                    )}
+                  </div>
+                ))}
+            </div>
+
+            <div>
+              {jobCount && (
+                <Text color="dimmed">{`Jobs Listed: ${jobCount}`}</Text>
+              )}
+            </div>
+          </div>
         </div>
       </div>
 
@@ -156,7 +218,7 @@ const Filters = () => {
         transitionDuration={100}
         transitionTimingFunction="linear"
       >
-        <div className="relative py-4">
+        <div className="relative my-4">
           <div className="lg: -mx-2 flex flex-wrap pb-4 lg:-mx-3 lg:-mb-4">
             {filterConfigEntries.length > 0 &&
               filterConfigEntries.map(([key, config]) => (

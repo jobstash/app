@@ -2,13 +2,17 @@ import { useRouter } from 'next/router';
 import { memo, useEffect, useMemo, useRef } from 'react';
 import { useInView } from 'react-intersection-observer';
 
+import {
+  InfiniteData,
+  InfiniteQueryObserverBaseResult,
+} from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 
 import { useJobListingInfQuery } from '~/features/jobs/hooks';
 import { Text } from '~/shared/components';
 import { getUrlWithFilters } from '~/shared/utils';
 
-import type { Job } from '../../jobs/core/types';
+import type { Job, JobListQueryPage } from '../../jobs/core/types';
 import { prevLinkAtom } from '../atoms';
 import { createJobKey } from '../utils';
 
@@ -18,20 +22,27 @@ import { JobCard } from './job-card';
 interface Props {
   initJob?: Job | null;
   activeJob: Job | null;
+  data: InfiniteData<JobListQueryPage> | undefined;
+  fetchNextPage: InfiniteQueryObserverBaseResult['fetchNextPage'];
+  filterParamsObj: Record<string, string>;
+  isLoading: boolean;
+  error: unknown;
+  isFetchingNextPage: boolean;
+  hasNextPage: boolean | undefined;
 }
 
-const JobList = ({ initJob, activeJob }: Props) => {
+const JobList = ({
+  initJob,
+  activeJob,
+  data,
+  fetchNextPage,
+  filterParamsObj,
+  isLoading,
+  error,
+  isFetchingNextPage,
+  hasNextPage,
+}: Props) => {
   const { push, asPath } = useRouter();
-
-  const {
-    data,
-    error,
-    isLoading,
-    isFetchingNextPage,
-    fetchNextPage,
-    hasNextPage,
-    filterParamsObj,
-  } = useJobListingInfQuery();
 
   const jobs = useMemo(() => {
     if (!data) return [];
@@ -78,7 +89,7 @@ const JobList = ({ initJob, activeJob }: Props) => {
 
   if (isLoading)
     return (
-      <div>
+      <div className="py-4">
         {initJob && (
           <JobCard
             key={initJob.jobpost.shortUUID}
@@ -104,12 +115,7 @@ const JobList = ({ initJob, activeJob }: Props) => {
   }
 
   return (
-    <div>
-      {data && (
-        <div className="pt-4">
-          <Text color="dimmed">{`Jobs Listed: ${data.pages[0].total}`}</Text>
-        </div>
-      )}
+    <div className="py-4">
       {jobs.map((job) => (
         <JobCard
           key={job.jobpost.shortUUID}

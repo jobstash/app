@@ -12,6 +12,7 @@ import { activeJobAtom } from '~/features/jobs/atoms';
 import JobList from '~/features/jobs/components/job-list';
 import { Job } from '~/features/jobs/core/types';
 import { fetchJobList } from '~/features/jobs/fetch';
+import { useJobListingInfQuery } from '~/features/jobs/hooks';
 import { useJobQuery } from '~/features/jobs/hooks/use-job-query';
 import { JobRightPanel } from '~/features/right-panel/components';
 import { SideBar } from '~/features/sidebar/components';
@@ -58,13 +59,33 @@ const JobsPage = ({ data: { initJob, fromSSR } }: Props) => {
     }
   }, [initJob, jobPost, setActiveJob]);
 
+  const {
+    data,
+    error,
+    isLoading,
+    isFetchingNextPage,
+    fetchNextPage,
+    hasNextPage,
+    filterParamsObj,
+  } = useJobListingInfQuery();
+
   return (
     <div className="w-full lg:pl-52 lg:pr-[41.67%]">
       <SideBar />
 
       <div className="px-3.5 pt-[65px] lg:px-8 lg:pt-0">
-        <Filters />
-        <JobList initJob={initJob} activeJob={activeJob ?? initJob} />
+        <Filters jobCount={data?.pages[0].total} />
+        <JobList
+          initJob={initJob}
+          activeJob={activeJob ?? initJob}
+          data={data}
+          fetchNextPage={fetchNextPage}
+          filterParamsObj={filterParamsObj}
+          isLoading={isLoading}
+          error={error}
+          isFetchingNextPage={isFetchingNextPage}
+          hasNextPage={hasNextPage}
+        />
       </div>
 
       <div className="hide-scrollbar fixed -right-full top-0 z-10 h-screen w-5/12 overflow-y-auto bg-dark px-6 py-8 pr-10 lg:right-0 ">

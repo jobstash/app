@@ -21,7 +21,7 @@ interface Props {
 
 const jobCard = cva(
   [
-    'flex flex-col p-6 gap-2.5 rounded-3xl bg-white/5 my-8',
+    'flex flex-col p-6 gap-2.5 rounded-3xl bg-white/5 mb-8',
     'cursor-pointer hover:bg-white/10',
     'transition-all hover:ring-1 hover:ring-inset hover:ring-white/20',
   ],

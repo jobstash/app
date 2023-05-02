@@ -9,6 +9,7 @@ import { activeJobAtom } from '~/features/jobs/atoms';
 import { JobList } from '~/features/jobs/components';
 import { Job, JobListQueryPage } from '~/features/jobs/core/types';
 import { fetchJobList } from '~/features/jobs/fetch';
+import { useJobListingInfQuery } from '~/features/jobs/hooks';
 import { SideBar } from '~/features/sidebar/components';
 import { withCSR } from '~/shared/hocs';
 
@@ -19,12 +20,31 @@ interface Props {
 const JobListPage = ({ activeJob }: Props) => {
   useHydrateAtoms([[activeJobAtom, activeJob] as [typeof activeJobAtom, Job]]);
 
+  const {
+    data,
+    error,
+    isLoading,
+    isFetchingNextPage,
+    fetchNextPage,
+    hasNextPage,
+    filterParamsObj,
+  } = useJobListingInfQuery();
+
   return (
     <div className="w-full lg:pl-52 lg:pr-[41.67%]">
       <SideBar />
       <div className="px-3.5 pt-[65px] lg:px-8 lg:pt-0">
         <Filters />
-        <JobList activeJob={activeJob} />
+        <JobList
+          activeJob={activeJob}
+          data={data}
+          fetchNextPage={fetchNextPage}
+          filterParamsObj={filterParamsObj}
+          isLoading={isLoading}
+          error={error}
+          isFetchingNextPage={isFetchingNextPage}
+          hasNextPage={hasNextPage}
+        />
       </div>
     </div>
   );

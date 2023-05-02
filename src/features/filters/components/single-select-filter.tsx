@@ -12,19 +12,21 @@ import {
 import FilterWrapper from './filter-wrapper';
 
 interface Props {
-  label: string;
   value: FilterValue;
   paramKey: FilterParamKey;
   options: { label: string; value: string }[];
   dispatch: Dispatch<SetSelectFilterValueAction>;
+  label?: string;
+  placeholder?: string;
 }
 
 const SingleSelectFilter = ({
-  label,
   value,
   options,
   paramKey,
   dispatch,
+  label,
+  placeholder,
 }: Props) => {
   // Use labels in displaying input
   const selections = useMemo(() => options.map((o) => o.label), [options]);
@@ -47,7 +49,7 @@ const SingleSelectFilter = ({
     <FilterWrapper label={label}>
       <Select
         clearable
-        placeholder="Select"
+        placeholder={placeholder ?? 'Select'}
         data={selections}
         classNames={{
           input: clsx(
