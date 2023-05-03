@@ -21,7 +21,11 @@ import {
 } from '~/shared/components';
 import { getOriginString } from '~/shared/utils';
 
-import { FILTER_KIND, INIT_FILTER_STATE } from '../core/constants';
+import {
+  FILTER_KIND,
+  INIT_FILTER_STATE,
+  seniorityMapping,
+} from '../core/constants';
 import type { FilterConfig } from '../core/types';
 import { useFilterConfigQuery } from '../hooks';
 import { filterReducer } from '../reducers/filter-reducer';
@@ -83,7 +87,21 @@ const Filters = ({ jobCount }: Props) => {
   const applyFilters = useCallback(() => {
     const url = new URL(`${getOriginString()}/jobs`);
     for (const [key, value] of Object.entries(state.filterValues)) {
-      if (value) url.searchParams.set(key, value);
+      if (value) {
+        if (key === 'seniority') {
+          const labels = value.split(',');
+          const values = [];
+          for (const label of labels) {
+            values.push(
+              seniorityMapping[label as keyof typeof seniorityMapping],
+            );
+          }
+
+          url.searchParams.set(key, values.join(','));
+        } else {
+          url.searchParams.set(key, value);
+        }
+      }
     }
 
     dispatch({ type: 'TOGGLE_FILTERS', payload: { value: false } });

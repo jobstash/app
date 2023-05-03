@@ -78,3 +78,12 @@ export const INIT_FILTER_STATE = {
 };
 
 export const FILTER_CONFIG_KEY_SET = new Set(FILTER_PARAM_KEYS);
+
+// Seniority mapping (single use case)
+export const seniorityMapping = {
+  Intern: '1',
+  Junior: '2',
+  Senior: '3',
+  Lead: '4',
+  Head: '5',
+};

@@ -3,6 +3,7 @@ import { Dispatch, memo, useCallback, useMemo } from 'react';
 import { MultiSelect } from '@mantine/core';
 import clsx from 'clsx';
 
+import { seniorityMapping } from '../core/constants';
 import type {
   FilterParamKey,
   FilterValue,
@@ -53,7 +54,7 @@ const MultiSelectFilter = ({
     <FilterWrapper label={inputLabel}>
       <MultiSelect
         searchable
-        data={options}
+        data={label === 'Seniority' ? Object.keys(seniorityMapping) : options}
         placeholder="Select"
         classNames={{
           input: clsx(
