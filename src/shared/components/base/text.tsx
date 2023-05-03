@@ -30,6 +30,7 @@ type TextVariantProps = VariantProps<typeof text>;
 
 export interface TextProps extends TextVariantProps {
   children: string;
+  className?: string;
 }
 
 const Text = ({
@@ -37,6 +38,11 @@ const Text = ({
   fw = 'normal',
   size = 'md',
   color = 'white',
-}: TextProps) => <span className={text({ fw, size, color })}>{children}</span>;
+  className,
+}: TextProps) => (
+  <span className={`${text({ fw, size, color })} ${className}`}>
+    {children}
+  </span>
+);
 
 export default memo(Text);

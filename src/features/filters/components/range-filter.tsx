@@ -101,7 +101,12 @@ const RangeFilter = ({
       >
         <Popover.Target>
           <div className="[&>*]:w-full">
-            <Button isFullWidth variant="outline" right={<CaretDownIcon />}>
+            <Button
+              isFullWidth
+              variant="outline"
+              right={<CaretDownIcon />}
+              textProps={{ className: 'truncate' }}
+            >
               {buttonText}
             </Button>
           </div>
