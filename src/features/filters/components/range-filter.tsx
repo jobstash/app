@@ -94,6 +94,9 @@ const RangeFilter = ({
     return [minRangeValue, maxRangeValue] as [number, number];
   }, [maxConfigValue, maxValue, minConfigValue, minValue]);
 
+  const isBordered =
+    (Boolean(minValue) || Boolean(maxValue)) && changedRef.current;
+
   return (
     <FilterWrapper label={label}>
       <Popover
@@ -108,7 +111,7 @@ const RangeFilter = ({
           <div className="[&>*]:w-full">
             <Button
               isFullWidth
-              isBordered={changedRef.current}
+              isBordered={isBordered}
               variant="outline"
               right={<CaretDownIcon />}
               textProps={{ className: 'truncate' }}
