@@ -1,6 +1,7 @@
 import { Dispatch, memo, useCallback, useMemo } from 'react';
 
 import { MultiSelect } from '@mantine/core';
+import clsx from 'clsx';
 
 import type {
   FilterParamKey,
@@ -55,8 +56,10 @@ const MultiSelectFilter = ({
         data={options}
         placeholder="Select"
         classNames={{
-          input:
-            'bg-dark rounded-lg border-gray text-white placeholder-white focus-within:border-white/30',
+          input: clsx(
+            'rounded-lg border-gray bg-dark text-white placeholder:text-white focus-within:border-white/30',
+            { 'border border-white': inputValue.length > 0 },
+          ),
           searchInput: 'placeholder-white',
           itemsWrapper: 'bg-dark',
           item: '[&[data-hovered]]:bg-dark-gray [&[data-selected]]:bg-gray',

@@ -54,6 +54,7 @@ const SingleSelectFilter = ({
         classNames={{
           input: clsx(
             'rounded-lg bg-dark text-white placeholder:text-white focus:border-white',
+            { 'border border-white': Boolean(inputValue) },
           ),
           itemsWrapper: 'bg-dark',
           item: '[&[data-hovered]]:bg-dark-gray [&[data-selected]]:bg-gray',

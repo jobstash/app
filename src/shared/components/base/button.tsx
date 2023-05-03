@@ -6,7 +6,7 @@ import Text, { TextProps } from './text';
 
 const wrapper = cva(
   [
-    'rounded-lg w-fit cursor-pointer border-none p-[1px]',
+    'rounded-lg w-fit cursor-pointer p-[1px]',
     'transition-color duration-200 ease-in-out',
   ],
   {
@@ -22,6 +22,10 @@ const wrapper = cva(
       },
       isActive: {
         true: '',
+      },
+      isBordered: {
+        true: 'border border-white',
+        false: 'border-none',
       },
       isDisabled: {
         true: 'opacity-30 select-none pointer-events-none',
@@ -68,6 +72,9 @@ const button = cva(
         md: 'px-4 py-2',
       },
       isActive: {
+        true: '',
+      },
+      isBordered: {
         true: '',
       },
       isDisabled: {
@@ -143,12 +150,21 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       right,
       isIcon = false,
       isFullWidth,
+      isBordered,
       textProps,
       ...props
     }: ButtonProps,
     ref,
   ) => (
-    <div className={wrapper({ variant, isActive, isDisabled, isFullWidth })}>
+    <div
+      className={wrapper({
+        variant,
+        isActive,
+        isDisabled,
+        isFullWidth,
+        isBordered,
+      })}
+    >
       <button
         ref={ref}
         type="button"
@@ -161,6 +177,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           hasRight: Boolean(right),
           isIcon,
           isFullWidth,
+          isBordered,
         })}
         {...props}
       >

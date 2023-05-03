@@ -1,4 +1,4 @@
-import { Dispatch, memo, useCallback, useMemo } from 'react';
+import { Dispatch, memo, useCallback, useMemo, useRef } from 'react';
 
 import { Popover, RangeSlider } from '@mantine/core';
 
@@ -62,8 +62,13 @@ const RangeFilter = ({
     )}`;
   }, [maxValue, minValue, prefix]);
 
+  const changedRef = useRef(false);
   const onChange = useCallback(
     ([minRangeValue, maxRangeValue]: [number, number]) => {
+      if (!changedRef.current) {
+        changedRef.current = true;
+      }
+
       const min = Math.floor(
         minRangeValue * (increment / SLIDER_STEP) + minConfigValue,
       ).toString();
@@ -103,6 +108,7 @@ const RangeFilter = ({
           <div className="[&>*]:w-full">
             <Button
               isFullWidth
+              isBordered={changedRef.current}
               variant="outline"
               right={<CaretDownIcon />}
               textProps={{ className: 'truncate' }}
