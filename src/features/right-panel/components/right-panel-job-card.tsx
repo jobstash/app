@@ -4,6 +4,7 @@ import {
   Button,
   CardSet,
   Heading,
+  ShareButton,
   ShareIcon,
   TechWrapper,
   Text,
@@ -37,13 +38,11 @@ export const RightPanelJobCard = ({ job, technologies }: Props) => {
           <Heading size="md" fw="semibold">
             {jobTitle}
           </Heading>
-          <div className="flex items-start space-x-4 pl-8">
+          <div className="flex items-start space-x-4">
             <Button isIcon size="sm" variant="translucent">
               <BookmarkIcon />
             </Button>
-            <Button isIcon size="sm" variant="translucent">
-              <ShareIcon />
-            </Button>
+            <ShareButton jobTitle={jobTitle} />
           </div>
         </div>
 

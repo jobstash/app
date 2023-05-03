@@ -6,6 +6,7 @@ import type { AppProps } from 'next/app';
 import NextApp from 'next/app';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
+import { Toaster } from 'react-hot-toast';
 
 import {
   Hydrate,
@@ -136,6 +137,7 @@ const App = ({ Component, pageProps }: AppPropsWithAuth) => {
                       <Component {...pageProps} />
                     )}
                   </div>
+                  <Toaster position="bottom-center" />
                 </MantineProvider>
               </WalletAuthProvider>
             </ConnectKitProvider>

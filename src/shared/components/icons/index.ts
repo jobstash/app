@@ -38,6 +38,7 @@ export { GlobeIcon } from './globe-icon';
 export { GlobeSimpleIcon } from './globe-simple-icon';
 export { GlobeStandIcon } from './globe-stand-icon';
 export { LaptopIcon } from './laptop-icon';
+export { LensterIcon } from './lenster-icon';
 export { LevelIcon } from './level-icon';
 export { LinkIcon } from './link-icon';
 export { LinkedinIcon } from './linkedin-icon';
