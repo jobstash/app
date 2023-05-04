@@ -29,15 +29,15 @@ interface Props {
 }
 
 const JobsPage = ({ data: { initJob, fromSSR } }: Props) => {
-  sentryMessage('JobsPage initJob', JSON.stringify(initJob));
-  sentryMessage('JobsPage fromSSR', JSON.stringify(fromSSR));
+  // SentryMessage('JobsPage initJob', JSON.stringify(initJob));
+  // sentryMessage('JobsPage fromSSR', JSON.stringify(fromSSR));
 
   const [activeJob, setActiveJob] = useAtom(activeJobAtom);
   const initRef = useRef(false);
 
   const router = useRouter();
   const shortUuid = (router.query.key?.slice(-6) as string) ?? '';
-  sentryMessage('JobsPage shortUuid', JSON.stringify(shortUuid));
+  // SentryMessage('JobsPage shortUuid', JSON.stringify(shortUuid));
 
   const { data: jobPost } = useJobQuery(shortUuid, Boolean(shortUuid), (data) =>
     setActiveJob(data),
@@ -60,7 +60,7 @@ const JobsPage = ({ data: { initJob, fromSSR } }: Props) => {
     if (!initRef.current && !initJob && jobPost) {
       initRef.current = true;
       setActiveJob(jobPost);
-      sentryMessage('JobsPage useEffect setActiveJob', JSON.stringify(jobPost));
+      // SentryMessage('JobsPage useEffect setActiveJob', JSON.stringify(jobPost));
     }
   }, [initJob, jobPost, setActiveJob]);
 
@@ -92,7 +92,6 @@ const JobsPage = ({ data: { initJob, fromSSR } }: Props) => {
           hasNextPage={hasNextPage}
         />
       </div>
-
       <div className="hide-scrollbar fixed -right-full top-0 z-10 h-screen w-5/12 overflow-y-auto bg-dark px-6 py-8 pr-10 lg:right-0 ">
         <JobRightPanel job={jobPost} />
       </div>
@@ -112,7 +111,7 @@ export const getServerSideProps: GetServerSideProps<Props> = withCSR(
 
     const shortUuid = ctx.query.key?.slice(-6) as string;
     if (!shortUuid) return { notFound: true };
-    sentryMessage('getServerSideProps shortUuid', shortUuid);
+    // SentryMessage('getServerSideProps shortUuid', shortUuid);
 
     const initJob = await fetch(`${mwURL}/jobs/details/${shortUuid}`).then(
       (r) => {
@@ -124,7 +123,7 @@ export const getServerSideProps: GetServerSideProps<Props> = withCSR(
         return r.json();
       },
     );
-    sentryMessage('getServerSideProps initJob', JSON.stringify(initJob));
+    // SentryMessage('getServerSideProps initJob', JSON.stringify(initJob));
 
     const queryClient = new QueryClient();
 
@@ -151,8 +150,8 @@ export const getServerSideProps: GetServerSideProps<Props> = withCSR(
       }
     }
 
-    sentryMessage('getServerSideProps jobPosts', JSON.stringify(jobPosts));
-    sentryMessage('getServerSideProps jobInList', JSON.stringify(jobInList));
+    // SentryMessage('getServerSideProps jobPosts', JSON.stringify(jobPosts));
+    // sentryMessage('getServerSideProps jobInList', JSON.stringify(jobInList));
 
     if (!jobInList) {
       queryClient.setQueryData(
@@ -164,12 +163,12 @@ export const getServerSideProps: GetServerSideProps<Props> = withCSR(
     // Dehydrate again to include setup'd cached data
     const dehydratedState = dehydrate(queryClient);
     (dehydratedState.queries[0].state.data as any).pageParams = [null];
-    sentryMessage(
-      'getServerSideProps dehydratedState-jobList',
-      JSON.stringify(
-        (dehydratedState.queries[0].state.data as any).pages[0].data as Job[],
-      ),
-    );
+    // SentryMessage(
+    //   'getServerSideProps dehydratedState-jobList',
+    //   JSON.stringify(
+    //     (dehydratedState.queries[0].state.data as any).pages[0].data as Job[],
+    //   ),
+    // );
 
     return {
       props: {

@@ -42,9 +42,9 @@ const JobList = ({
   isFetchingNextPage,
   hasNextPage,
 }: Props) => {
-  sentryMessage('JobList initJob', JSON.stringify(initJob));
-  sentryMessage('JobList activeJob', JSON.stringify(activeJob));
-  sentryMessage('JobList data', JSON.stringify(data));
+  // SentryMessage('JobList initJob', JSON.stringify(initJob));
+  // sentryMessage('JobList activeJob', JSON.stringify(activeJob));
+  // sentryMessage('JobList data', JSON.stringify(data));
   const { push, asPath } = useRouter();
 
   const jobs = useMemo(() => {
