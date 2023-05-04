@@ -4,12 +4,8 @@ import { useState } from 'react';
 import {
   Anchor,
   Center,
-  Flex,
-  Grid,
   MultiSelect,
   NumberInput,
-  Paper,
-  Stack,
   Textarea,
   TextInput,
   Title,
@@ -19,13 +15,7 @@ import { DatePickerInput, DatesProvider } from '@mantine/dates';
 import { CHECK_WALLET_ROLES } from '~/features/auth/core/constants';
 import EmptyPage from '~/features/auth/pages/empty-page';
 import { Button } from '~/shared/components';
-import {
-  Avatar,
-  CardHeading,
-  Heading,
-  LogoTitle,
-  Text,
-} from '~/shared/components';
+import { Avatar, CardHeading, Heading, Text } from '~/shared/components';
 import { NEXT_PUBLIC_MW_URL } from '~/shared/core/constants';
 import { slugify } from '~/shared/utils';
 
@@ -110,8 +100,8 @@ const OrgEditPage = () => {
       sideNav={<OrgSideNavs activeLabel="Organization" />}
     >
       <div className="flex w-full flex-col items-center justify-center space-y-52 p-10">
-        {/* ORG DEETS */}
         <div className="flex flex-col items-center justify-center space-y-10">
+          {/* ORG DEETS HEADER */}
           <div className="w-9/12 rounded-lg bg-white/5 p-10">
             <div className="flex items-center gap-4">
               {logoSrc && (
@@ -129,6 +119,8 @@ const OrgEditPage = () => {
               </div>
             </div>
           </div>
+
+          {/* ORG DEETS */}
           <div className="flex w-7/12 flex-col gap-4">
             <div className="grid grid-cols-12 items-center gap-4">
               <div className="col-span-2">
@@ -245,10 +237,7 @@ const OrgEditPage = () => {
               </div>
             </div>
           </div>
-        </div>
 
-        {/* ORG FINANCIALS */}
-        <div className="flex w-full flex-col items-center justify-center space-y-10">
           {/* ORG FINANCIALS HEADER */}
           <div className="w-9/12 rounded-lg bg-white/5 p-10">
             <div className="flex items-center justify-between">
@@ -470,14 +459,12 @@ const OrgEditPage = () => {
               </div>
             </div>
 
-            <div className="flex justify-end">
+            <div className="flex justify-end gap-4">
               <Button variant="outline">Save</Button>
+              <Button variant="outline">Delete</Button>
             </div>
           </div>
-        </div>
 
-        {/* ORG SOCIALS */}
-        <div className="flex w-full flex-col items-center justify-center space-y-10">
           {/* ORG SOCIALS HEADER */}
           <div className="w-9/12 rounded-lg bg-white/5 p-10">
             <div className="flex items-center justify-between">
@@ -494,6 +481,7 @@ const OrgEditPage = () => {
               </div>
             </div>
           </div>
+
           {/* ORG SOCIALS FORM */}
           <div className="flex w-7/12 flex-col gap-4">
             <div className="grid grid-cols-12 items-center gap-4">
@@ -561,10 +549,10 @@ const OrgEditPage = () => {
             </div>
           </div>
 
+          {/* ORG SUBMIT CONTROLS */}
           <div className="flex h-fit w-8/12 flex-col gap-2.5 pt-8">
             <hr className="border-t border-white/10" />
           </div>
-
           <div className="flex w-full items-center justify-center gap-x-10">
             <Button variant="primary">Save Changes</Button>
             <Button>Delete Organization</Button>
