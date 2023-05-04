@@ -50,7 +50,18 @@ const OrgListPage = () => {
                     location={location}
                     size="lg"
                   />
-                  <Button variant="primary">Edit Organization</Button>
+                  <Button
+                    variant="primary"
+                    onClick={() =>
+                      push(
+                        `/godmode/organizations/${slugify(
+                          `${name}-${id}`,
+                        )}/edit`,
+                      )
+                    }
+                  >
+                    Edit Organization
+                  </Button>
                 </div>
               </div>
 
