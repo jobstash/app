@@ -107,6 +107,7 @@ export const getServerSideProps: GetServerSideProps<Props> = withCSR(
 
     const shortUuid = ctx.query.key?.slice(-6) as string;
     if (!shortUuid) return { notFound: true };
+    sentryMessage('getServerSideProps shortUuid', shortUuid);
 
     const initJob = await fetch(`${mwURL}/jobs/details/${shortUuid}`).then(
       (r) => {
@@ -118,6 +119,7 @@ export const getServerSideProps: GetServerSideProps<Props> = withCSR(
         return r.json();
       },
     );
+    sentryMessage('getServerSideProps initJob', initJob);
 
     const queryClient = new QueryClient();
 
@@ -144,6 +146,9 @@ export const getServerSideProps: GetServerSideProps<Props> = withCSR(
       }
     }
 
+    sentryMessage('getServerSideProps jobPosts', JSON.stringify(jobPosts));
+    sentryMessage('getServerSideProps jobInList', JSON.stringify(jobInList));
+
     if (!jobInList) {
       queryClient.setQueryData(
         ['job-post', initJob.jobpost.shortUUID],
@@ -154,6 +159,12 @@ export const getServerSideProps: GetServerSideProps<Props> = withCSR(
     // Dehydrate again to include setup'd cached data
     const dehydratedState = dehydrate(queryClient);
     (dehydratedState.queries[0].state.data as any).pageParams = [null];
+    sentryMessage(
+      'getServerSideProps dehydratedState-jobList',
+      JSON.stringify(
+        (dehydratedState.queries[0].state.data as any).pages[0].data as Job[],
+      ),
+    );
 
     return {
       props: {
