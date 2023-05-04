@@ -53,6 +53,12 @@ export const SideBar = () => {
                   text="Technologies"
                   onClick={() => push('/godmode/technologies/synonyms')}
                 />
+                <Bartab
+                  isActive={asPath.includes('/godmode/organizations')}
+                  left={null}
+                  text="Organizations"
+                  onClick={() => push('/godmode/organizations')}
+                />
               </div>
             </div>
           </div>

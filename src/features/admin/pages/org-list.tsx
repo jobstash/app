@@ -1,25 +1,16 @@
 import { useRouter } from 'next/router';
 
-import { Flex, Paper, Stack } from '@mantine/core';
+import { Stack } from '@mantine/core';
 
 import { CHECK_WALLET_ROLES } from '~/features/auth/core/constants';
 import EmptyPage from '~/features/auth/pages/empty-page';
-import {
-  Avatar,
-  BankIcon,
-  Button,
-  CardHeading,
-  CodeIcon,
-  MoneyIcon,
-  SuitcaseIcon,
-  TechWrapper,
-  Text,
-  UsersThreeIcon,
-} from '~/shared/components';
-import { numFormatter, prettyTimestamp, slugify } from '~/shared/utils';
+import { Button, CardSet, TechWrapper } from '~/shared/components';
+import LogoTitle from '~/shared/components/base/logo-title';
+import { slugify } from '~/shared/utils';
 
 import { useOrgList } from '../hooks/use-org-list';
 import { AdminLayout } from '../layouts/admin-layout';
+import { createAdminOrgListTags } from '../utils';
 
 const breadCrumbs = [
   { title: 'Organizations', href: '/godmode/organizations' },
@@ -39,101 +30,63 @@ const OrgListPage = () => {
   return (
     <AdminLayout breadCrumbs={breadCrumbs} sideNav={null}>
       <Stack w="60%" spacing={45}>
-        {data.map(
-          ({
-            id,
-            name,
-            logo,
-            location,
-            jobCount,
-            projectCount,
-            headCount,
-            lastFundingAmount,
-            lastFundingDate,
-            technologies,
-          }) => (
-            <Paper
+        {data.map((org) => {
+          const { id, name, location, technologies } = org;
+          const tags = createAdminOrgListTags(org);
+
+          return (
+            <div
               key={id}
-              radius="xl"
-              p={30}
-              pb={20}
-              bg="rgba(255, 255, 255, 0.05)"
+              className="flex flex-col gap-2 rounded-3xl bg-white/5 p-6"
             >
-              <Stack spacing={20}>
-                <Flex justify="space-between" align="center">
-                  <Flex gap="md">
-                    {logo && <Avatar src={logo} alt={name} />}
-                    <Stack spacing={0}>
-                      <CardHeading>{name}</CardHeading>
-                      <Text color="dimmed">{location}</Text>
-                    </Stack>
-                  </Flex>
-                  <Button variant="primary" onClick={() => editOrg(name, id)}>
-                    <Text fw="semibold">Edit Organization</Text>
-                  </Button>
-                </Flex>
+              <div className="flex flex-col justify-center gap-2">
+                <div className="flex items-center justify-between">
+                  <LogoTitle
+                    title={name}
+                    avatarProps={{
+                      src: '/jobstash-loading.png',
+                      alt: name,
+                    }}
+                    location={location}
+                    size="lg"
+                  />
+                  <Button variant="primary">Edit Organization</Button>
+                </div>
+              </div>
 
-                <hr className="border-t border-white/10" />
+              {tags.length > 0 && (
+                <>
+                  <div className="flex flex-col gap-2.5 py-2">
+                    <hr className="border-t border-white/10" />
+                  </div>
+                  <div className="flex items-center gap-x-4">
+                    {tags.map(({ text, icon }) => (
+                      <CardSet key={text} icon={icon}>
+                        {text}
+                      </CardSet>
+                    ))}
+                  </div>
+                </>
+              )}
 
-                <Flex gap="md" wrap="wrap">
-                  <Button
-                    left={<SuitcaseIcon />}
-                    variant="subtle"
-                    className="cursor-default"
-                  >
-                    Jobs: {jobCount}
-                  </Button>
-                  <Button
-                    left={<CodeIcon />}
-                    variant="subtle"
-                    className="cursor-default"
-                  >
-                    Projects: {projectCount}
-                  </Button>
-                  <Button
-                    left={<UsersThreeIcon />}
-                    variant="subtle"
-                    className="cursor-default"
-                  >
-                    Employees: {headCount}
-                  </Button>
+              {technologies.length > 0 && (
+                <>
+                  <div className="flex flex-col gap-2.5 py-2">
+                    <hr className="border-t border-white/10" />
+                  </div>
 
-                  {lastFundingAmount > 0 && (
-                    <Button
-                      left={<MoneyIcon />}
-                      variant="subtle"
-                      className="cursor-default"
-                    >
-                      {`Last Funding: $${numFormatter.format(
-                        lastFundingAmount,
-                      )}`}
-                    </Button>
-                  )}
-
-                  {lastFundingDate > 0 && (
-                    <Button
-                      left={<BankIcon />}
-                      variant="subtle"
-                      className="cursor-default"
-                    >
-                      Funding Date: {prettyTimestamp(lastFundingDate)}
-                    </Button>
-                  )}
-                </Flex>
-
-                <hr className="border-t border-white/10" />
-
-                <Flex gap="md">
-                  {technologies.map(({ id, name }) => (
-                    <TechWrapper key={id} id={id}>
-                      {name}
-                    </TechWrapper>
-                  ))}
-                </Flex>
-              </Stack>
-            </Paper>
-          ),
-        )}
+                  <div className="flex items-center gap-4">
+                    {technologies.map(({ name, id }) => (
+                      <TechWrapper key={id} id={id}>
+                        {name}
+                      </TechWrapper>
+                    ))}
+                  </div>
+                </>
+              )}
+            </div>
+          );
+        })}
       </Stack>
     </AdminLayout>
   );
