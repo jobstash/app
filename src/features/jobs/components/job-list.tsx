@@ -10,7 +10,7 @@ import { useAtom } from 'jotai';
 
 import { useJobListingInfQuery } from '~/features/jobs/hooks';
 import { Text } from '~/shared/components';
-import { getUrlWithFilters } from '~/shared/utils';
+import { getUrlWithFilters, sentryMessage } from '~/shared/utils';
 
 import type { Job, JobListQueryPage } from '../../jobs/core/types';
 import { prevLinkAtom } from '../atoms';
@@ -42,6 +42,9 @@ const JobList = ({
   isFetchingNextPage,
   hasNextPage,
 }: Props) => {
+  sentryMessage('JobList initJob', JSON.stringify(initJob));
+  sentryMessage('JobList activeJob', JSON.stringify(activeJob));
+  sentryMessage('JobList data', JSON.stringify(data));
   const { push, asPath } = useRouter();
 
   const jobs = useMemo(() => {

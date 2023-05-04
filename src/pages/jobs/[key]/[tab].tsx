@@ -29,11 +29,15 @@ interface Props {
 }
 
 const JobsPage = ({ data: { initJob, fromSSR } }: Props) => {
+  sentryMessage('JobsPage initJob', JSON.stringify(initJob));
+  sentryMessage('JobsPage fromSSR', JSON.stringify(fromSSR));
+
   const [activeJob, setActiveJob] = useAtom(activeJobAtom);
   const initRef = useRef(false);
 
   const router = useRouter();
   const shortUuid = (router.query.key?.slice(-6) as string) ?? '';
+  sentryMessage('JobsPage shortUuid', JSON.stringify(shortUuid));
 
   const { data: jobPost } = useJobQuery(shortUuid, Boolean(shortUuid), (data) =>
     setActiveJob(data),
@@ -56,6 +60,7 @@ const JobsPage = ({ data: { initJob, fromSSR } }: Props) => {
     if (!initRef.current && !initJob && jobPost) {
       initRef.current = true;
       setActiveJob(jobPost);
+      sentryMessage('JobsPage useEffect setActiveJob', JSON.stringify(jobPost));
     }
   }, [initJob, jobPost, setActiveJob]);
 
@@ -119,7 +124,7 @@ export const getServerSideProps: GetServerSideProps<Props> = withCSR(
         return r.json();
       },
     );
-    sentryMessage('getServerSideProps initJob', initJob);
+    sentryMessage('getServerSideProps initJob', JSON.stringify(initJob));
 
     const queryClient = new QueryClient();
 
