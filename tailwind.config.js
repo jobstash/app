@@ -108,8 +108,8 @@ module.exports = {
       'slide-up': 'slide-up 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
       pulse: 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       bounce: 'bounce 1.5s infinite',
-      spin: 'spin 2s linear infinite',
-      'reverse-spin': 'reverse-spin 2s linear infinite',
+      spin: 'spin 2.4s linear infinite',
+      'reverse-spin': 'reverse-spin 2.4s linear infinite',
     },
   },
   plugins: [

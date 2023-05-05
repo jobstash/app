@@ -100,7 +100,7 @@ const JobList = ({
             filterParamsObj={filterParamsObj}
           />
         )}
-        <p>Loading JobList ...</p>
+        <Loader />
       </div>
     );
 
