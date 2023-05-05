@@ -9,7 +9,7 @@ import {
 import { useAtom } from 'jotai';
 
 import { Loader, Text } from '~/shared/components';
-import { getUrlWithFilters, sentryMessage } from '~/shared/utils';
+import { getUrlWithFilters } from '~/shared/utils';
 
 import type { Job, JobListQueryPage } from '../../jobs/core/types';
 import { prevLinkAtom } from '../atoms';
@@ -28,6 +28,7 @@ interface Props {
   error: unknown;
   isFetchingNextPage: boolean;
   hasNextPage: boolean | undefined;
+  isMobile?: boolean;
 }
 
 const JobList = ({
@@ -40,6 +41,7 @@ const JobList = ({
   error,
   isFetchingNextPage,
   hasNextPage,
+  isMobile,
 }: Props) => {
   // SentryMessage('JobList initJob', JSON.stringify(initJob));
   // sentryMessage('JobList activeJob', JSON.stringify(activeJob));
@@ -77,7 +79,7 @@ const JobList = ({
 
   const isRedirectingRef = useRef(false);
   useEffect(() => {
-    if (jobs.length > 0 && !isRedirectingRef.current) {
+    if (jobs.length > 0 && !isRedirectingRef.current && !isMobile) {
       isRedirectingRef.current = true;
       const url = getUrlWithFilters(
         filterParamsObj,
@@ -87,7 +89,7 @@ const JobList = ({
         shallow: true,
       });
     }
-  }, [activeJob, filterParamsObj, jobs, push]);
+  }, [activeJob, filterParamsObj, isMobile, jobs, push]);
 
   if (isLoading)
     return (

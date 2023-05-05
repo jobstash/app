@@ -12,13 +12,17 @@ import { fetchJobList } from '~/features/jobs/fetch';
 import { useJobListingInfQuery } from '~/features/jobs/hooks';
 import { SideBar } from '~/features/sidebar/components';
 import { withCSR } from '~/shared/hocs';
+import { useMediaQuery } from '~/shared/hooks';
 
 interface Props {
   activeJob: Job;
 }
 
 const JobListPage = ({ activeJob }: Props) => {
-  useHydrateAtoms([[activeJobAtom, activeJob] as [typeof activeJobAtom, Job]]);
+  const isMobile = useMediaQuery('(max-width: 1024px)', true);
+  useHydrateAtoms([
+    [activeJobAtom, isMobile ? null : activeJob] as [typeof activeJobAtom, Job],
+  ]);
 
   const {
     data,
@@ -36,7 +40,7 @@ const JobListPage = ({ activeJob }: Props) => {
       <div className="px-3.5 pt-[65px] lg:px-8 lg:pt-0">
         <Filters />
         <JobList
-          activeJob={activeJob}
+          activeJob={isMobile ? null : activeJob}
           data={data}
           fetchNextPage={fetchNextPage}
           filterParamsObj={filterParamsObj}
@@ -44,6 +48,7 @@ const JobListPage = ({ activeJob }: Props) => {
           error={error}
           isFetchingNextPage={isFetchingNextPage}
           hasNextPage={hasNextPage}
+          isMobile={isMobile}
         />
       </div>
     </div>
