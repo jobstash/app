@@ -1,10 +1,7 @@
 import { ReactNode } from 'react';
 
-import clsx from 'clsx';
-
 import { SideBar } from '~/features/sidebar/components';
-
-import { JobstashCircleLogo } from '../components';
+import { Loader } from '~/shared/components';
 
 interface Props {
   isLoading?: boolean;
@@ -17,11 +14,7 @@ export const CenteredLayout = ({ children, isLoading }: Props) => (
 
     <div className="flex h-screen items-center justify-center pl-4">
       <div className="flex flex-col items-center space-y-6">
-        <div className={clsx({ 'animate-bounce': isLoading })}>
-          <div className={clsx({ 'animate-pulse': isLoading })}>
-            <JobstashCircleLogo />
-          </div>
-        </div>
+        <Loader />
         {children}
       </div>
     </div>

@@ -8,8 +8,7 @@ import {
 } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 
-import { useJobListingInfQuery } from '~/features/jobs/hooks';
-import { Text } from '~/shared/components';
+import { Loader, Text } from '~/shared/components';
 import { getUrlWithFilters, sentryMessage } from '~/shared/utils';
 
 import type { Job, JobListQueryPage } from '../../jobs/core/types';
@@ -118,7 +117,7 @@ const JobList = ({
   }
 
   return (
-    <div className="py-4">
+    <div className="flex flex-col gap-y-4 py-4">
       {jobs.map((job) => (
         <JobCard
           key={job.jobpost.shortUUID}
@@ -128,14 +127,8 @@ const JobList = ({
         />
       ))}
       {jobs.length > 0 && (
-        <div ref={ref} className="border border-violet-500 p-20">
-          {isFetchingNextPage && (
-            <div>
-              <p className="w-full pb-8 text-center">
-                Loading more job posts ...
-              </p>
-            </div>
-          )}
+        <div ref={ref} className="flex items-center justify-center pb-10">
+          {isFetchingNextPage && <Loader />}
           {!hasNextPage && <p>No more job posts to load</p>}
         </div>
       )}

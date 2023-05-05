@@ -84,6 +84,22 @@ module.exports = {
           'animation-timing-function': 'cubic-bezier(0, 0, 0.2, 1)',
         },
       },
+      spin: {
+        from: {
+          transform: 'rotate(0deg)',
+        },
+        to: {
+          transform: 'rotate(360deg)',
+        },
+      },
+      'reverse-spin': {
+        from: {
+          transform: 'rotate(360deg)',
+        },
+        to: {
+          transform: 'rotate(0deg)',
+        },
+      },
     },
     animation: {
       // Dropdown menu
@@ -92,6 +108,8 @@ module.exports = {
       'slide-up': 'slide-up 0.6s cubic-bezier(0.16, 1, 0.3, 1)',
       pulse: 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       bounce: 'bounce 1.5s infinite',
+      spin: 'spin 2s linear infinite',
+      'reverse-spin': 'reverse-spin 2s linear infinite',
     },
   },
   plugins: [

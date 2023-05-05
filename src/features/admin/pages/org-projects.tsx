@@ -12,6 +12,7 @@ import {
 } from '@mantine/core';
 
 import { CHECK_WALLET_ROLES } from '~/features/auth/core/constants';
+import EmptyPage from '~/features/auth/pages/empty-page';
 import {
   ActiveUsersIcon,
   ArrowCircleUpRightIcon,
@@ -52,7 +53,7 @@ const OrgProjectsPage = () => {
 
   const { data, isLoading, error } = useOrgProjects(orgId);
 
-  if (!data || isLoading) return <p>Loading ...</p>;
+  if (!data || isLoading) return <EmptyPage isLoading />;
 
   if (error) return <pre>{JSON.stringify(error, undefined, '\t')}</pre>;
 

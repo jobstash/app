@@ -6,6 +6,7 @@ export * from './card-heading';
 export { default as CardSet } from './card-set';
 export * from './chain-holder';
 export { default as Heading } from './heading';
+export { default as Loader } from './loader';
 export { default as LogoTitle } from './logo-title';
 export * from './range-slider';
 export { default as TechWrapper } from './tech-wrapper';
