@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 import {
   ActionIcon,
@@ -17,6 +18,7 @@ import {
   Avatar,
   Button,
   CardHeading,
+  CardSet,
   CategoryIcon,
   CurrencyCircleDollarIcon,
   GithubLogoIcon,
@@ -28,15 +30,215 @@ import {
   TvlIcon,
   UsersThreeIcon,
 } from '~/shared/components';
+import { numFormatter, slugify } from '~/shared/utils';
 
+import { fetchOrgProjects } from '../api/fetch-org-projects';
 import { RefreshIcon } from '../components/icons/refresh-icon';
 import { OrgSideNavs } from '../components/org-side-navs';
+import { useOrgProjects } from '../hooks/use-org-projects';
 import { AdminLayout } from '../layouts/admin-layout';
 
 const breadCrumbs = [
   { title: 'Organizations', href: '/godmode/organizations' },
   { title: 'My Projects', href: '/godmode/organizations/projects' },
 ];
+
+const OrgProjectsPage = () => {
+  const { push, query } = useRouter();
+
+  const splitIndex = (query.key as string).lastIndexOf('-');
+  const orgName = (query.key as string).slice(0, splitIndex);
+  const orgId = (query.key as string).slice(splitIndex + 1);
+
+  const { data, isLoading, error } = useOrgProjects(orgId);
+
+  if (!data || isLoading) return <p>Loading ...</p>;
+
+  if (error) return <pre>{JSON.stringify(error, undefined, '\t')}</pre>;
+
+  return (
+    <AdminLayout
+      breadCrumbs={breadCrumbs}
+      sideNav={
+        <OrgSideNavs
+          keySegment={slugify(`${orgName} ${orgId}`)}
+          activeLabel="Projects"
+        />
+      }
+    >
+      <Stack w="55%" spacing={15} pt={15}>
+        <Flex justify="end" gap="md" align="center">
+          <Text>{`Projects: ${data.length}`}</Text>
+          <ActionIcon variant="subtle">
+            <RefreshIcon />
+          </ActionIcon>
+        </Flex>
+
+        {data.map(
+          ({
+            id,
+            logo,
+            name,
+            url,
+            description,
+            tokenSymbol,
+            tokenAddress,
+            category,
+            teamSize,
+            tvl,
+            monthlyVolume,
+            monthlyActiveUsers,
+            monthlyFees,
+            monthlyRevenue,
+          }) => (
+            <Paper key={id} p={30} bg="rgba(255, 255, 255, 0.05)" radius="xl">
+              <Stack spacing={20}>
+                <Flex align="center" justify="space-between">
+                  <Flex gap="md" align="center">
+                    <Avatar
+                      src={
+                        logo.length > 0
+                          ? logo
+                          : `https://www.google.com/s2/favicons?domain=${url}&sz=128`
+                      }
+                      alt={name}
+                      size="lg"
+                    />
+                    <CardHeading>{name}</CardHeading>
+                  </Flex>
+                  <Flex>
+                    {/* {chains.map((chain) => (
+                    <Avatar
+                      key={chain}
+                      src={`/chains/${chain}.png`}
+                      alt={chain}
+                      size="sm"
+                    />
+                  ))} */}
+                    <p>{`TODO: <ChainAvatars />`}</p>
+                  </Flex>
+                </Flex>
+
+                <Button left={<UsersThreeIcon />} variant="subtle">
+                  <Text>Source of Data: DefiLlama</Text>
+                </Button>
+
+                <hr className="border-t border-white/10" />
+
+                <Stack>
+                  <Title order={4}>Description</Title>
+                  <MText color="dimmed" size="md">
+                    {description}
+                  </MText>
+                </Stack>
+
+                <hr className="border-t border-white/10" />
+
+                <Flex gap="lg" wrap="wrap" align="center">
+                  {tokenSymbol && (
+                    <CardSet
+                      icon={<CurrencyCircleDollarIcon />}
+                      link={
+                        tokenAddress
+                          ? `https://etherscan.io/token/${tokenAddress}`
+                          : url
+                      }
+                    >
+                      {`Token: $${tokenSymbol}`}
+                    </CardSet>
+                  )}
+                  <CardSet icon={<SuitcaseIcon />}>Jobs: TBD</CardSet>
+                  <CardSet icon={<GithubLogoIcon />}>
+                    Relevant Repos: TBD
+                  </CardSet>
+                  <CardSet icon={<CategoryIcon />}>
+                    {`Category: ${category}`}
+                  </CardSet>
+                  {}
+                  {teamSize && (
+                    <CardSet icon={<UsersThreeIcon />}>
+                      {`Team Size: ${teamSize}`}
+                    </CardSet>
+                  )}
+                  {tvl && (
+                    <CardSet icon={<TvlIcon />}>{`TVL: $${numFormatter.format(
+                      tvl,
+                    )}`}</CardSet>
+                  )}
+                  {monthlyVolume && (
+                    <CardSet
+                      icon={<MonthlyVolumeIcon />}
+                    >{`Monthly Volume: $${numFormatter.format(
+                      monthlyVolume,
+                    )}`}</CardSet>
+                  )}
+                  {monthlyActiveUsers && (
+                    <CardSet
+                      icon={<MonthlyVolumeIcon />}
+                    >{`Active Users: $${numFormatter.format(
+                      monthlyActiveUsers,
+                    )}`}</CardSet>
+                  )}
+                  {monthlyFees && (
+                    <CardSet
+                      icon={<MonthlyVolumeIcon />}
+                    >{`Monthly Fees: $${numFormatter.format(
+                      monthlyFees,
+                    )}`}</CardSet>
+                  )}
+                  {(monthlyRevenue ?? 0) > 10 && (
+                    <CardSet
+                      icon={<RevenueIcon />}
+                    >{`Monthly Revenue: $${numFormatter.format(
+                      monthlyRevenue ?? 0,
+                    )}`}</CardSet>
+                  )}
+                </Flex>
+
+                <hr className="border-t border-white/10" />
+
+                <Stack>
+                  <Title order={4}>TODO: Audits</Title>
+                  {/* <Flex gap="lg" wrap="wrap">
+                    <Button
+                      left={<ShieldCheckIcon />}
+                      right={<ArrowCircleUpRightIcon />}
+                    >
+                      SigmaPrime
+                    </Button>
+                    <Button
+                      left={<ShieldCheckIcon />}
+                      right={<ArrowCircleUpRightIcon />}
+                    >
+                      Chainsecurity
+                    </Button>
+                    <Button
+                      left={<ShieldCheckIcon />}
+                      right={<ArrowCircleUpRightIcon />}
+                    >
+                      Mixbytes
+                    </Button>
+                  </Flex> */}
+
+                  <hr className="border-t border-white/10" />
+
+                  <Flex gap="lg" align="center" justify="space-between">
+                    <Button variant="primary" onClick={() => null}>
+                      <MText fw="bold">Edit Project</MText>
+                    </Button>
+                    <MButton variant="outline" color="red">
+                      Delete Project
+                    </MButton>
+                  </Flex>
+                </Stack>
+              </Stack>
+            </Paper>
+          ),
+        )}
+      </Stack>
+    </AdminLayout>
+  );
+};
 
 const chains = [
   'Cardano ADA',
@@ -54,167 +256,6 @@ const chains = [
   'Uniswap UNI',
   'USD Coin USDC',
 ];
-
-const OrgProjectsPage = () => {
-  const { push } = useRouter();
-
-  const editOrgProject = (id: string) => {
-    console.log('TODO: set as currentOrgProjectEdit:', id);
-    push('/godmode/organizations/projects/edit');
-  };
-
-  return (
-    <AdminLayout
-      breadCrumbs={breadCrumbs}
-      sideNav={<OrgSideNavs activeLabel="Projects" />}
-    >
-      <Stack w="55%" spacing={15} pt={15}>
-        <Flex justify="end" gap="md" align="center">
-          <Text>Projects: 1</Text>
-          <ActionIcon variant="subtle">
-            <RefreshIcon />
-          </ActionIcon>
-        </Flex>
-        <Paper p={30} bg="rgba(255, 255, 255, 0.05)" radius="xl">
-          <Stack spacing={20}>
-            <Flex align="center" justify="space-between">
-              <Flex gap="md" align="center">
-                <Avatar
-                  src="/orgs/projects/Uniswap V3.png"
-                  alt="Uniswap Labs"
-                  size="lg"
-                />
-                <CardHeading>Uniswap V3</CardHeading>
-              </Flex>
-              <Flex>
-                {chains.map((chain) => (
-                  <Avatar
-                    key={chain}
-                    src={`/chains/${chain}.png`}
-                    alt={chain}
-                    size="sm"
-                  />
-                ))}
-              </Flex>
-            </Flex>
-
-            <Button left={<UsersThreeIcon />} variant="subtle">
-              <Text>Source of Data: DefiLlama</Text>
-            </Button>
-
-            <hr className="border-t border-white/10" />
-
-            <Stack>
-              <Title order={4}>Description</Title>
-              <MText color="dimmed" size="md">
-                Uniswap v3 is the most powerful version of the protocol yet,
-                with Concentrated Liquidity offering unprecedented capital
-                efficiency for liquidity providers better execution for traders,
-                and superior infrastructure at the heart of decentralized
-                finance.
-              </MText>
-            </Stack>
-
-            <hr className="border-t border-white/10" />
-
-            <Flex gap="lg" wrap="wrap">
-              <Button
-                left={<CurrencyCircleDollarIcon />}
-                right={<ArrowCircleUpRightIcon />}
-              >
-                Token: $UNI
-              </Button>
-              <Button left={<SuitcaseIcon />}>Jobs: 2</Button>
-              <Button left={<GithubLogoIcon />}>Relevant Repos: 2</Button>
-              <Button
-                left={<CategoryIcon />}
-                className="cursor-default"
-                variant="subtle"
-              >
-                Category: DEX
-              </Button>
-              <Button
-                left={<UsersThreeIcon />}
-                className="cursor-default"
-                variant="subtle"
-              >
-                Team Size: 12
-              </Button>
-              <Button
-                left={<TvlIcon />}
-                className="cursor-default"
-                variant="subtle"
-              >
-                TVL: $99M
-              </Button>
-              <Button
-                left={<MonthlyVolumeIcon />}
-                className="cursor-default"
-                variant="subtle"
-              >
-                Monthly Volume: $14K
-              </Button>
-              <Button
-                left={<ActiveUsersIcon />}
-                className="cursor-default"
-                variant="subtle"
-              >
-                Active Users: 23K
-              </Button>
-              <Button
-                left={<RevenueIcon />}
-                className="cursor-default"
-                variant="subtle"
-              >
-                Revenue: $590K
-              </Button>
-            </Flex>
-
-            <hr className="border-t border-white/10" />
-
-            <Stack>
-              <Title order={4}>Audits</Title>
-              <Flex gap="lg" wrap="wrap">
-                <Button
-                  left={<ShieldCheckIcon />}
-                  right={<ArrowCircleUpRightIcon />}
-                >
-                  SigmaPrime
-                </Button>
-                <Button
-                  left={<ShieldCheckIcon />}
-                  right={<ArrowCircleUpRightIcon />}
-                >
-                  Chainsecurity
-                </Button>
-                <Button
-                  left={<ShieldCheckIcon />}
-                  right={<ArrowCircleUpRightIcon />}
-                >
-                  Mixbytes
-                </Button>
-              </Flex>
-
-              <hr className="border-t border-white/10" />
-
-              <Flex gap="lg" align="center" justify="space-between">
-                <Button
-                  variant="primary"
-                  onClick={() => editOrgProject('some-id')}
-                >
-                  <MText fw="bold">Edit Project</MText>
-                </Button>
-                <MButton variant="outline" color="red">
-                  Delete Project
-                </MButton>
-              </Flex>
-            </Stack>
-          </Stack>
-        </Paper>
-      </Stack>
-    </AdminLayout>
-  );
-};
 
 OrgProjectsPage.requiredRole = CHECK_WALLET_ROLES.ADMIN;
 

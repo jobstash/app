@@ -32,6 +32,7 @@ export interface Project {
   createdTimestamp: number;
 
   updatedTimestamp?: number;
+  category?: string;
 
   //
   // hacks: Hack[];

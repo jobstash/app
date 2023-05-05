@@ -97,7 +97,12 @@ const OrgEditPage = () => {
   return (
     <AdminLayout
       breadCrumbs={getBreadCrumbs(name, orgId)}
-      sideNav={<OrgSideNavs activeLabel="Organization" />}
+      sideNav={
+        <OrgSideNavs
+          keySegment={slugify(`${name} ${id}`)}
+          activeLabel="Organization"
+        />
+      }
     >
       <div className="flex w-full flex-col items-center justify-center space-y-52 p-10">
         <div className="flex flex-col items-center justify-center space-y-10">
