@@ -100,7 +100,9 @@ const JobList = ({
             filterParamsObj={filterParamsObj}
           />
         )}
-        <Loader />
+        <div className="flex h-full w-full items-center justify-center">
+          <Loader />
+        </div>
       </div>
     );
 

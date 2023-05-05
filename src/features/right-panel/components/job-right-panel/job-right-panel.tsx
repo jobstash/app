@@ -4,6 +4,7 @@ import { useUrlFilterParams } from '~/features/filters/hooks';
 import { Job } from '~/features/jobs/core/types';
 import { useCompetitorsQuery } from '~/features/projects/hooks';
 import { useReposQuery } from '~/features/repos/hooks';
+import { Loader } from '~/shared/components';
 import { EVENT_CARD_CLICK, ID_TOP_RIGHT_PANEL } from '~/shared/core/constants';
 import { useRouteSegments } from '~/shared/hooks';
 import { getUrlWithFilters } from '~/shared/utils';
@@ -55,7 +56,11 @@ const JobRightPanel = ({ job }: Props) => {
     useCompetitorsQuery(job?.project?.id);
 
   if (!job || isLoadingOrgRepos || (job?.project && isLoadingCompetitors))
-    return <p>Loading right-panel</p>;
+    return (
+      <div className="flex h-full w-full items-center justify-center">
+        <Loader />
+      </div>
+    );
 
   const { organization, project, fundingRounds } = job;
   return (
