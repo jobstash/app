@@ -101,8 +101,6 @@ export const RightPanelJobCard = ({ job, technologies }: Props) => {
           </div>
         </>
       )}
-
-      {/* <Button variant="primary">Explore Project</Button> */}
     </div>
   );
 };

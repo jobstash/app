@@ -1,4 +1,9 @@
+import { useRouter } from 'next/router';
+
+import NProgress from 'nprogress';
+
 import {
+  Button,
   CardSet,
   Heading,
   LinkIcon,
@@ -15,6 +20,8 @@ interface Props {
 }
 
 export const RightPanelProjectCard = ({ project, categories }: Props) => {
+  const { push } = useRouter();
+
   if (!project) return null;
 
   const { logo, name, description } = project;
@@ -166,7 +173,17 @@ export const RightPanelProjectCard = ({ project, categories }: Props) => {
           <TechWrapper id="9">TBD</TechWrapper>
         </div>
 
-        <Button variant="primary">Explore Project</Button> */}
+         */}
+
+        <Button
+          variant="primary"
+          onClick={() => {
+            push(`/jobs?projects=${name}`);
+            NProgress.start();
+          }}
+        >
+          Explore Project
+        </Button>
       </div>
     </div>
   );
