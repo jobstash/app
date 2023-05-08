@@ -12,18 +12,12 @@ import {
 } from '@mantine/core';
 
 import { CHECK_WALLET_ROLES } from '~/features/auth/core/constants';
-import { slugify } from '~/shared/utils';
+import { slugify, unslugify } from '~/shared/utils';
 
 import { HandWavingIcon } from '../components/icons/hand-waving-icon';
 import { MegaphoneIcon } from '../components/icons/megaphone-icon';
 import { OrgSideNavs } from '../components/org-side-navs';
 import { AdminLayout } from '../layouts/admin-layout';
-
-const breadCrumbs = [
-  { title: 'Organizations', href: '/godmode/organizations' },
-  { title: 'My Projects', href: '/godmode/organizations/projects' },
-  { title: 'Edit Project', href: '/godmode/organizations/projects/edit' },
-];
 
 const OrgEditProjectPage = () => {
   const { query } = useRouter();
@@ -31,6 +25,26 @@ const OrgEditProjectPage = () => {
   const splitIndex = (query.key as string).lastIndexOf('-');
   const orgName = (query.key as string).slice(0, splitIndex);
   const orgId = (query.key as string).slice(splitIndex + 1);
+  const keySegment = slugify(`${orgName} ${orgId}`);
+
+  const projectSlugLength = (query.id as string).length - 36;
+  const projectSlug = (query.id as string).slice(0, projectSlugLength - 1);
+  const projectId = (query.id as string).slice(-36);
+
+  const breadCrumbs = [
+    { title: 'Organizations', href: '/godmode/organizations' },
+    {
+      title: unslugify(orgName),
+      href: `/godmode/organizations/${keySegment}/edit`,
+    },
+    {
+      title: 'Projects',
+      href: `/godmode/organizations/${keySegment}/projects`,
+    },
+    {
+      title: unslugify(projectSlug),
+    },
+  ];
 
   return (
     <AdminLayout
@@ -43,6 +57,10 @@ const OrgEditProjectPage = () => {
       }
     >
       <Stack w="60%" spacing={30} pt={20}>
+        <p>orgName = {orgName}</p>
+        <p>orgId = {orgId}</p>
+        <p>projectSlug = {projectSlug}</p>
+        <p>projectId = {projectId}</p>
         <Paper
           p={30}
           bg="rgba(255, 255, 255, 0.05)"

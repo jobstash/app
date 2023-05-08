@@ -31,7 +31,7 @@ import {
   TvlIcon,
   UsersThreeIcon,
 } from '~/shared/components';
-import { numFormatter, slugify } from '~/shared/utils';
+import { numFormatter, slugify, unslugify } from '~/shared/utils';
 
 import { fetchOrgProjects } from '../api/fetch-org-projects';
 import { RefreshIcon } from '../components/icons/refresh-icon';
@@ -39,17 +39,13 @@ import { OrgSideNavs } from '../components/org-side-navs';
 import { useOrgProjects } from '../hooks/use-org-projects';
 import { AdminLayout } from '../layouts/admin-layout';
 
-const breadCrumbs = [
-  { title: 'Organizations', href: '/godmode/organizations' },
-  { title: 'My Projects', href: '/godmode/organizations/projects' },
-];
-
 const OrgProjectsPage = () => {
-  const { push, query } = useRouter();
+  const { push, query, asPath } = useRouter();
 
   const splitIndex = (query.key as string).lastIndexOf('-');
   const orgName = (query.key as string).slice(0, splitIndex);
   const orgId = (query.key as string).slice(splitIndex + 1);
+  const keySegment = slugify(`${orgName} ${orgId}`);
 
   const { data, isLoading, error } = useOrgProjects(orgId);
 
@@ -57,15 +53,21 @@ const OrgProjectsPage = () => {
 
   if (error) return <pre>{JSON.stringify(error, undefined, '\t')}</pre>;
 
+  const breadCrumbs = [
+    { title: 'Organizations', href: '/godmode/organizations' },
+    {
+      title: unslugify(orgName),
+      href: `/godmode/organizations/${keySegment}/edit`,
+    },
+    {
+      title: 'Projects',
+    },
+  ];
+
   return (
     <AdminLayout
       breadCrumbs={breadCrumbs}
-      sideNav={
-        <OrgSideNavs
-          keySegment={slugify(`${orgName} ${orgId}`)}
-          activeLabel="Projects"
-        />
-      }
+      sideNav={<OrgSideNavs keySegment={keySegment} activeLabel="Projects" />}
     >
       <Stack w="55%" spacing={15} pt={15}>
         <Flex justify="end" gap="md" align="center">
@@ -224,7 +226,12 @@ const OrgProjectsPage = () => {
                   <hr className="border-t border-white/10" />
 
                   <Flex gap="lg" align="center" justify="space-between">
-                    <Button variant="primary" onClick={() => null}>
+                    <Button
+                      variant="primary"
+                      onClick={() =>
+                        push(`${asPath}/${slugify(name + ' ' + id)}`)
+                      }
+                    >
                       <MText fw="bold">Edit Project</MText>
                     </Button>
                     <MButton variant="outline" color="red">

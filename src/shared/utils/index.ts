@@ -6,3 +6,4 @@ export * from './num-formatter';
 export * from './pretty-timestamp';
 export * from './sentry-message';
 export * from './slugify';
+export * from './unslugify';
