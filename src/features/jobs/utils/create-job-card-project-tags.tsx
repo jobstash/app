@@ -24,6 +24,7 @@ export const createJobCardProjectTags = (project?: Project) => {
     monthlyActiveUsers,
     monthlyFees,
     monthlyRevenue,
+    category,
   } = project;
 
   if (tokenSymbol)
@@ -33,10 +34,12 @@ export const createJobCardProjectTags = (project?: Project) => {
       link: url,
     });
 
-  projectInfoTags.push({
-    text: 'Category: TBD',
-    icon: <CategoryIcon />,
-  });
+  if (category) {
+    projectInfoTags.push({
+      text: `Category: ${category}`,
+      icon: <CategoryIcon />,
+    });
+  }
 
   if (tvl)
     projectTvlTags.push({
