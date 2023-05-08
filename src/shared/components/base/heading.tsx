@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 import { cva, VariantProps } from 'class-variance-authority';
 
 import { lato } from '~/shared/core/constants';
@@ -26,7 +28,7 @@ const heading = cva(`${lato.variable} font-lato antialiased`, {
 type HeadingVariantProps = VariantProps<typeof heading>;
 
 interface HeadingProps extends HeadingVariantProps {
-  children: string;
+  children: ReactNode;
 }
 
 const sizeHeadingMap: Record<

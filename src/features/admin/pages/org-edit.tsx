@@ -73,7 +73,11 @@ const OrgEditPage = () => {
   } = data;
 
   const logoSrc =
-    logo ?? (logoFile ? URL.createObjectURL(logoFile) : undefined);
+    logo && logo.length > 0
+      ? logo
+      : logoFile
+      ? URL.createObjectURL(logoFile)
+      : undefined;
 
   const logoSubmit = async () => {
     if (logoFile) {

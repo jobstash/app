@@ -9,8 +9,8 @@ const text = cva(`${roboto.variable} font-roboto antialiased`, {
     fw: {
       normal: 'font-normal',
       medium: 'font-medium',
-      semibold: 'font-bold',
-      bold: 'font-black',
+      semibold: 'font-semibold',
+      bold: 'font-bold',
     },
     size: {
       xs: 'text-xs',
@@ -18,6 +18,7 @@ const text = cva(`${roboto.variable} font-roboto antialiased`, {
       md: 'text-md',
       lg: 'text-lg',
       xl: 'text-xl',
+      '2xl': 'text-2xl',
     },
     color: {
       white: 'text-white',
