@@ -39,9 +39,9 @@ export const RightPanelJobCard = ({ job, technologies }: Props) => {
             {jobTitle}
           </Heading>
           <div className="flex items-start space-x-4">
-            <Button isIcon size="sm" variant="translucent">
+            {/* <Button isIcon size="sm" variant="translucent">
               <BookmarkIcon />
-            </Button>
+            </Button> */}
             <ShareButton jobTitle={jobTitle} />
           </div>
         </div>

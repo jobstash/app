@@ -18,11 +18,11 @@ const JobCardHeader = ({ title, ts }: Props) => {
       </Heading>
       <div className="flex items-center space-x-3">
         <span className="text-sm">{timestamp}</span>
-        <div className="z-30">
+        {/* <div className="z-30">
           <Button size="sm" variant="translucent">
             <BookmarkIcon />
           </Button>
-        </div>
+        </div> */}
       </div>
     </div>
   );
