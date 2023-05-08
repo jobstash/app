@@ -92,7 +92,12 @@ const JobsPage = ({ data: { initJob, fromSSR } }: Props) => {
           hasNextPage={hasNextPage}
         />
       </div>
-      <div className="hide-scrollbar fixed -right-full top-0 z-10 h-screen w-5/12 overflow-y-auto bg-dark px-6 py-8 pr-10 lg:right-0 ">
+      <div
+        className={
+          'fixed inset-0 z-50 h-screen overflow-y-auto bg-dark p-4 lg:right-0 transition-all lg:top-0 lg:hide-scrollbar lg:w-5/12 lg:px-6 lg:py-8 lg:pr-10 lg:inset-auto' +
+          (activeJob === initJob ? 'active' : '')
+        }
+      >
         <JobRightPanel job={jobPost} />
       </div>
     </div>

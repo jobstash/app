@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import { useState } from 'react';
 
 import NProgress from 'nprogress';
 
@@ -7,7 +8,10 @@ import { useWalletAuthContext } from '~/features/auth/hooks';
 import {
   Bartab,
   Brand,
+  Button,
+  CloseIcon,
   ConnectWalletButton,
+  HamburgerIcon,
   JobsSidebarIcon,
   Text,
 } from '~/shared/components';
@@ -16,8 +20,10 @@ export const SideBar = () => {
   const { asPath, push } = useRouter();
   const { role } = useWalletAuthContext();
 
+  const [navbarOpen, setNavbarOpen] = useState(false);
+
   return (
-    <nav className="fixed left-0 z-50 flex h-[65px] w-full flex-col bg-gradient-to-l from-[#141317] to-[#121216] p-4 lg:inset-y-0 lg:h-auto lg:min-h-screen lg:w-52 lg:border-r lg:border-white/5 lg:bg-transparent">
+    <nav className="fixed left-0 z-50 flex h-[65px] w-full justify-between bg-gradient-to-l from-[#141317] to-[#121216] p-4 lg:inset-y-0 lg:h-auto lg:min-h-screen lg:w-52 lg:flex-col lg:justify-start lg:border-r lg:border-white/5 lg:bg-transparent">
       <div
         className="lg:p-4 lg:pl-1"
         onClick={() => {
@@ -26,6 +32,48 @@ export const SideBar = () => {
         }}
       >
         <Brand />
+      </div>
+      <nav
+        className={
+          'w-full transition-all duration-300 inset-0  p-4 bg-gradient-to-r from-tertiary to-primary bg-opacity-75' +
+          (navbarOpen
+            ? ' z-50 opacity-100 fixed overflow-auto h-screen'
+            : ' opacity-0 -z-50 absolute h-0 overflow-hidden')
+        }
+      >
+        <div className="flex justify-between">
+          <Brand />
+          <Button
+            size="sm"
+            variant="transparent"
+            onClick={() => setNavbarOpen(!navbarOpen)}
+          >
+            <CloseIcon />
+          </Button>
+        </div>
+        <Text color="dimmed" className="block pt-8">
+          Discover
+        </Text>
+        <div className="space-y-3 pt-3">
+          <Bartab
+            variant="mobileMenu"
+            isActive={asPath.slice(0, 5) === '/jobs'}
+            text="Jobs"
+            onClick={() => {
+              push('/jobs');
+              setNavbarOpen(!navbarOpen);
+            }}
+          />
+        </div>
+      </nav>
+      <div className="-mr-2 ml-auto self-center lg:hidden">
+        <Button
+          size="md"
+          variant="transparent"
+          onClick={() => setNavbarOpen(!navbarOpen)}
+        >
+          <HamburgerIcon />
+        </Button>
       </div>
       <div>
         <div className="mt-12 hidden lg:block">

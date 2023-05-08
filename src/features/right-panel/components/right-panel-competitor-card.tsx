@@ -44,9 +44,7 @@ const RightPanelCompetitorCard = ({ competitor }: Props) => {
             ))}
           </div>
 
-          <div className="flex h-4 flex-col justify-center">
-            <hr className="border-t border-white/10" />
-          </div>
+          <hr className="border-t border-white/10" />
 
           <div className="flex gap-4">
             {bottomTags.map(({ text, icon, link }) => (

@@ -144,7 +144,7 @@ const Filters = ({ jobCount }: Props) => {
   );
 
   return (
-    <div className="flex flex-col pt-8">
+    <div className="flex flex-col pt-4 lg:pt-8">
       <div className="">
         <div className="flex flex-col gap-y-3">
           <form onSubmit={onSubmitSearch}>
@@ -154,7 +154,7 @@ const Filters = ({ jobCount }: Props) => {
               size="lg"
               rightSectionWidth={140}
               rightSection={
-                <div className="flex items-center gap-x-2">
+                <div className="hidden items-center gap-x-2 lg:flex">
                   <Button isIcon isDisabled={isLoading} onClick={clearSearch}>
                     <CloseIcon />
                   </Button>
@@ -246,7 +246,20 @@ const Filters = ({ jobCount }: Props) => {
         transitionDuration={100}
         transitionTimingFunction="linear"
       >
-        <div className="relative mt-4">
+        <div className="fixed inset-0 z-50 bg-red-500 lg:relative lg:mt-4 lg:bg-transparent">
+          <div className="lg:hidden">
+            <Button
+              variant={filterCount > 0 ? 'primary' : 'outline'}
+              left={<FilterIcon />}
+              isActive={state.showFilters}
+              isDisabled={isLoading}
+              onClick={toggleFilters}
+            >
+              {`Filters & Sorting${
+                filterCount > 0 ? ' (' + filterCount + ')' : ''
+              }`}
+            </Button>
+          </div>
           <div className="lg: -mx-2 flex flex-wrap pb-4 lg:-mx-3 lg:-mb-4">
             {filterConfigEntries.length > 0 &&
               filterConfigEntries.map(([key, config]) => (
