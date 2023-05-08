@@ -6,7 +6,7 @@ import {
   SuitcaseIcon,
 } from '~/shared/components';
 import { JobPost, TagElement } from '~/shared/core/interfaces';
-import { numFormatter } from '~/shared/utils';
+import { capitalize, numFormatter } from '~/shared/utils';
 
 const senioritySet = new Set(Object.keys(seniorityMapping));
 
@@ -48,7 +48,7 @@ export const createJobTags = (job: JobPost): TagElement[] => {
   }
 
   if (jobLocation && jobLocation !== 'unspecified')
-    tags.push({ text: jobLocation, icon: <LocationIcon /> });
+    tags.push({ text: capitalize(jobLocation), icon: <LocationIcon /> });
   if (jobCommitment) tags.push({ text: jobCommitment, icon: <SuitcaseIcon /> });
 
   return [...tags];
