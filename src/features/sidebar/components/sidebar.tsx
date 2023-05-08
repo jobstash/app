@@ -56,7 +56,6 @@ export const SideBar = () => {
         </Text>
         <div className="space-y-3 pt-3">
           <Bartab
-            variant="mobileMenu"
             isActive={asPath.slice(0, 5) === '/jobs'}
             text="Jobs"
             onClick={() => {
