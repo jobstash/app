@@ -23,7 +23,13 @@ const JobCardProject = ({ project }: Props) => {
       <div className="flex flex-wrap items-center gap-8">
         <LogoTitle
           title={project.name}
-          avatarProps={{ src: project.logo, alt: project.name }}
+          avatarProps={{
+            src:
+              project.logo.length > 0
+                ? project.logo
+                : `https://www.google.com/s2/favicons?domain=${project.url}&sz=128`,
+            alt: project.name,
+          }}
         />
         {projectInfoTags.length > 0 &&
           projectInfoTags.map(({ text, icon, link }) => (
