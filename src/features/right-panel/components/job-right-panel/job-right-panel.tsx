@@ -48,14 +48,11 @@ const JobRightPanel = ({ job }: Props) => {
       });
     });
 
-  const { data: repos, isLoading: isLoadingOrgRepos } = useReposQuery(
-    job?.organization.orgId,
-  );
+  const { data: repos } = useReposQuery(job?.organization.orgId);
 
-  const { data: competitors, isLoading: isLoadingCompetitors } =
-    useCompetitorsQuery(job?.project?.id);
+  const { data: competitors } = useCompetitorsQuery(job?.project?.id);
 
-  if (!job || isLoadingOrgRepos || (job?.project && isLoadingCompetitors))
+  if (!job)
     return (
       <div className="flex h-full w-full items-center justify-center">
         <Loader />
