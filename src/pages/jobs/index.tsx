@@ -51,6 +51,7 @@ const JobListPage = ({ activeJob }: Props) => {
           isMobile={isMobile}
         />
       </div>
+      
     </div>
   );
 };

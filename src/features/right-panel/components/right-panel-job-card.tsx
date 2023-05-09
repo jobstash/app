@@ -46,7 +46,7 @@ export const RightPanelJobCard = ({ job, technologies }: Props) => {
           </div>
         </div>
 
-        <div className="flex h-6 gap-x-4 pl-0.5">
+        <div className="flex flex-wrap gap-x-4 pl-0.5">
           {tags.map(({ text, link, icon }) => (
             <CardSet key={text} link={link} icon={icon}>
               {capitalize(text)}
@@ -54,10 +54,16 @@ export const RightPanelJobCard = ({ job, technologies }: Props) => {
           ))}
         </div>
 
-        <div>
+        <div className="flex w-full justify-between">
           <Button variant="primary" onClick={onClick}>
             Apply for this job
           </Button>
+          <div className="flex items-start space-x-2 lg:hidden">
+            <Button isIcon size="sm" variant="translucent">
+              <BookmarkIcon />
+            </Button>
+            <ShareButton jobTitle={jobTitle} />
+          </div>
         </div>
       </div>
 

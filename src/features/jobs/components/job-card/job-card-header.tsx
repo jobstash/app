@@ -1,6 +1,6 @@
 import { memo, useMemo } from 'react';
 
-import { BookmarkIcon, Button, Heading } from '~/shared/components';
+import { Button, HamburgerIcon, Heading } from '~/shared/components';
 import { prettyTimestamp } from '~/shared/utils';
 
 interface Props {
@@ -16,11 +16,12 @@ const JobCardHeader = ({ title, ts }: Props) => {
       <Heading size="md" fw="semibold">
         {title}
       </Heading>
-      <div className="flex items-center space-x-3">
+      <hr className="flex border-t border-white/10 lg:hidden" />
+      <div className="hidden items-center space-x-3 lg:flex">
         <span className="text-sm">{timestamp}</span>
         {/* <div className="z-30">
           <Button size="sm" variant="translucent">
-            <BookmarkIcon />
+            <HamburgerIcon />
           </Button>
         </div> */}
       </div>

@@ -66,6 +66,9 @@ const JobRightPanel = ({ job }: Props) => {
   return (
     <JobRightPanelWrapper>
       <div className="absolute top-0 h-0" id={ID_TOP_RIGHT_PANEL} />
+      <div className="lg:hidden">
+        <button>back</button>
+      </div>
       <JobRightPanelHeader
         organization={organization}
         fundingRounds={fundingRounds}
@@ -78,7 +81,6 @@ const JobRightPanel = ({ job }: Props) => {
         competitorsCount={competitors?.length}
         onClickTab={onClickTab}
       />
-
       <JobRightPanelCard
         job={job}
         repos={repos}

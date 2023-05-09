@@ -37,6 +37,7 @@ export { GithubLogoOutlineIcon } from './github-logo-outline-icon';
 export { GlobeIcon } from './globe-icon';
 export { GlobeSimpleIcon } from './globe-simple-icon';
 export { GlobeStandIcon } from './globe-stand-icon';
+export { HamburgerIcon } from './hamburger-icon';
 export { LaptopIcon } from './laptop-icon';
 export { LensterIcon } from './lenster-icon';
 export { LevelIcon } from './level-icon';

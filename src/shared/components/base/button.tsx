@@ -19,6 +19,7 @@ const wrapper = cva(
         outline: 'bg-dark hover:bg-dark-gray [&>*]:active:bg-dark',
         subtle: 'bg-dark hover:bg-dark-gray [&>*]:active:bg-dark',
         translucent: 'bg-white/10 hover:bg-white/20 active:bg-white/30',
+        transparent: '',
       },
       isActive: {
         true: '',
@@ -57,7 +58,9 @@ const wrapper = cva(
 );
 
 const button = cva(
-  ['flex items-center justify-center z-20 relative rounded-lg gap-x-1'],
+  [
+    'flex items-center justify-center z-20 relative rounded-lg whitespace-nowrap gap-x-1',
+  ],
   {
     variants: {
       variant: {
@@ -66,6 +69,7 @@ const button = cva(
         outline: 'ring-1 ring-gray active:ring-0',
         subtle: '',
         translucent: '',
+        transparent: '',
       },
       size: {
         sm: 'px-2 py-1',

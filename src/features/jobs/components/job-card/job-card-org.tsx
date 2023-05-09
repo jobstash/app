@@ -17,9 +17,7 @@ const JobCardOrg = ({ org, fundingRounds }: Props) => {
 
   return (
     <>
-      <div className="flex h-4 flex-col justify-center">
-        <hr className="border-t border-white/10" />
-      </div>
+      <hr className="border-t border-white/10" />
 
       <div className="items-center gap-x-8 lg:flex">
         <LogoTitle
@@ -29,7 +27,7 @@ const JobCardOrg = ({ org, fundingRounds }: Props) => {
             alt: org.name,
           }}
         />
-        <div className="grow pt-4 lg:flex lg:flex-wrap lg:gap-x-8 lg:pt-0">
+        <div className="flex grow flex-wrap pt-2 lg:gap-x-8 lg:pt-0 [&>*]:mr-4">
           {orgTags &&
             orgTags.map(({ text, icon, link }) => (
               <CardSet key={text} link={link} icon={icon}>
