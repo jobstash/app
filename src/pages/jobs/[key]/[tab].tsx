@@ -200,8 +200,28 @@ const JobsPage = ({ data: { initJob, fromSSR } }: Props) => {
 
           {/* _ TODO switch from 'frontend.jobstash.xyz' to 'app.jobstash.xyz' when it goes live */}
           <link rel="canonical" href={urlMetaData} />
-          {/* _ TODO Open graph */}
-          {/* _ TODO twitter */}
+
+          <meta property="og:site_name" content="JobStash" />
+          <meta property="og:title" content={titleMetaData} />
+          <meta property="og:description" content={jobPost.jobpost.role} />
+          <meta property="og:url" content={urlMetaData} />
+          <meta
+            property="og:image"
+            content="https://frontend.jobstash.xyz/JobStash-Wordmark-800.png"
+          />
+          <meta
+            property="og:image:secure_url"
+            content="https://frontend.jobstash.xyz/JobStash-Wordmark-800.png"
+          />
+          <meta property="og:image:width" content="800" />
+          <meta property="og:image:height" content="364" />
+          <meta name="twitter:card" content="summary_large_image" />
+          <meta
+            property="twitter:image"
+            content="https://frontend.jobstash.xyz/JobStash-Wordmark-800.png"
+          />
+          <meta name="twitter:image:alt" content="JobStash" />
+          <meta name="twitter:site" content="@jobstash_xyz" />
 
           <script
             // eslint-disable-next-line react/no-danger
