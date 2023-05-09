@@ -7,6 +7,7 @@ const whiteListed = [
   '_next',
   'Logo-01.svg',
   'Logo-02.svg',
+  'JobStash-Wordmark-800.png',
 ];
 
 const getIsWhiteListed = (url: string) => {
