@@ -47,7 +47,7 @@ const OrgProjectsPage = () => {
   const orgId = (query.key as string).slice(splitIndex + 1);
   const keySegment = slugify(`${orgName} ${orgId}`);
 
-  const { data, isLoading, error } = useOrgProjects(orgId);
+  const { data, isLoading, error, refetch } = useOrgProjects(orgId);
 
   if (!data || isLoading) return <EmptyPage isLoading />;
 
@@ -72,7 +72,7 @@ const OrgProjectsPage = () => {
       <Stack w="55%" spacing={15} pt={15}>
         <Flex justify="end" gap="md" align="center">
           <Text>{`Projects: ${data.length}`}</Text>
-          <ActionIcon variant="subtle">
+          <ActionIcon variant="subtle" onClick={() => refetch()}>
             <RefreshIcon />
           </ActionIcon>
         </Flex>
