@@ -1,6 +1,8 @@
 import { useRouter } from 'next/router';
-import { useState } from 'react';
+import { useEffect } from 'react';
 
+import clsx from 'clsx';
+import { useAtom } from 'jotai';
 import NProgress from 'nprogress';
 
 import { CHECK_WALLET_ROLES } from '~/features/auth/core/constants';
@@ -11,19 +13,35 @@ import {
   Button,
   CloseIcon,
   ConnectWalletButton,
-  HamburgerIcon,
   JobsSidebarIcon,
+  MobileMenuButton,
   Text,
 } from '~/shared/components';
+
+import { navbarOpenAtom } from '../atoms';
 
 export const SideBar = () => {
   const { asPath, push } = useRouter();
   const { role } = useWalletAuthContext();
 
-  const [navbarOpen, setNavbarOpen] = useState(false);
+  const [navbarOpen, setNavbarOpen] = useAtom(navbarOpenAtom);
+
+  useEffect(() => {
+    const el = document.querySelectorAll('html')[0];
+    if (navbarOpen) {
+      el.classList.add('disable-scroll');
+    } else {
+      el.classList.remove('disable-scroll');
+    }
+  }, [navbarOpen]);
 
   return (
-    <nav className="fixed left-0 z-50 flex h-[65px] w-full justify-between bg-gradient-to-l from-[#141317] to-[#121216] p-4 lg:inset-y-0 lg:h-auto lg:min-h-screen lg:w-52 lg:flex-col lg:justify-start lg:border-r lg:border-white/5 lg:bg-transparent">
+    <nav
+      className={clsx(
+        'fixed left-0 z-50 flex h-[65px] w-full justify-between bg-gradient-to-l from-[#141317] to-[#121216] p-4 lg:inset-y-0 lg:h-auto lg:min-h-screen lg:w-52 lg:flex-col lg:justify-start lg:border-r lg:border-white/5 lg:bg-transparent',
+        { 'z-[100]': navbarOpen },
+      )}
+    >
       <div
         className="lg:p-4 lg:pl-1"
         onClick={() => {
@@ -34,12 +52,12 @@ export const SideBar = () => {
         <Brand />
       </div>
       <nav
-        className={
-          'w-full transition-all duration-300 inset-0  p-4 bg-gradient-to-r from-tertiary to-primary bg-opacity-75' +
-          (navbarOpen
-            ? ' z-50 opacity-100 fixed overflow-auto h-screen'
-            : ' opacity-0 -z-50 absolute h-0 overflow-hidden')
-        }
+        // eslint-disable-next-line tailwindcss/migration-from-tailwind-2
+        className={clsx(
+          'inset-0 w-full bg-opacity-75 bg-gradient-to-r from-tertiary to-primary p-4 transition-all duration-300',
+          { 'z-50 opacity-100 fixed overflow-auto h-screen': navbarOpen },
+          { 'opacity-0 -z-50 absolute h-0 overflow-hidden': !navbarOpen },
+        )}
       >
         <div className="flex justify-between">
           <Brand />
@@ -65,15 +83,9 @@ export const SideBar = () => {
           />
         </div>
       </nav>
-      <div className="-mr-2 ml-auto self-center lg:hidden">
-        <Button
-          size="md"
-          variant="transparent"
-          onClick={() => setNavbarOpen(!navbarOpen)}
-        >
-          <HamburgerIcon />
-        </Button>
-      </div>
+
+      <MobileMenuButton />
+
       <div>
         <div className="mt-12 hidden lg:block">
           <Text color="dimmed">Discover</Text>

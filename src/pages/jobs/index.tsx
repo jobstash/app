@@ -48,10 +48,8 @@ const JobListPage = ({ activeJob }: Props) => {
           error={error}
           isFetchingNextPage={isFetchingNextPage}
           hasNextPage={hasNextPage}
-          isMobile={isMobile}
         />
       </div>
-      
     </div>
   );
 };

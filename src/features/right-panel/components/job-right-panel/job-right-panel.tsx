@@ -4,7 +4,7 @@ import { useUrlFilterParams } from '~/features/filters/hooks';
 import { Job } from '~/features/jobs/core/types';
 import { useCompetitorsQuery } from '~/features/projects/hooks';
 import { useReposQuery } from '~/features/repos/hooks';
-import { Loader } from '~/shared/components';
+import { Button, Loader, MobileMenuButton } from '~/shared/components';
 import { EVENT_CARD_CLICK, ID_TOP_RIGHT_PANEL } from '~/shared/core/constants';
 import { useRouteSegments } from '~/shared/hooks';
 import { getUrlWithFilters } from '~/shared/utils';
@@ -66,8 +66,15 @@ const JobRightPanel = ({ job }: Props) => {
   return (
     <JobRightPanelWrapper>
       <div className="absolute top-0 h-0" id={ID_TOP_RIGHT_PANEL} />
-      <div className="lg:hidden">
-        <button>back</button>
+      <div className="flex justify-between py-2 lg:hidden">
+        <Button
+          variant="outline"
+          size="sm"
+          onClick={() => push('/jobs', { shallow: true, shouldScroll: false })}
+        >
+          Back
+        </Button>
+        <MobileMenuButton />
       </div>
       <JobRightPanelHeader
         organization={organization}

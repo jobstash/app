@@ -9,6 +9,7 @@ import {
 import { useAtom } from 'jotai';
 
 import { Loader, Text } from '~/shared/components';
+import { useMediaQuery } from '~/shared/hooks';
 import { getUrlWithFilters } from '~/shared/utils';
 
 import type { Job, JobListQueryPage } from '../../jobs/core/types';
@@ -28,7 +29,6 @@ interface Props {
   error: unknown;
   isFetchingNextPage: boolean;
   hasNextPage: boolean | undefined;
-  isMobile?: boolean;
 }
 
 const JobList = ({
@@ -41,7 +41,6 @@ const JobList = ({
   error,
   isFetchingNextPage,
   hasNextPage,
-  isMobile,
 }: Props) => {
   // SentryMessage('JobList initJob', JSON.stringify(initJob));
   // sentryMessage('JobList activeJob', JSON.stringify(activeJob));
@@ -78,6 +77,7 @@ const JobList = ({
   }, [fetchNextPage, inView]);
 
   const isRedirectingRef = useRef(false);
+  const isMobile = useMediaQuery('(max-width: 1024px)', true);
   useEffect(() => {
     if (jobs.length > 0 && !isRedirectingRef.current && !isMobile) {
       isRedirectingRef.current = true;
@@ -121,7 +121,7 @@ const JobList = ({
   }
 
   return (
-    <div className="flex flex-col gap-y-4 py-4">
+    <div className="flex flex-col gap-y-4 py-4" id="JOB-LIST">
       {jobs.map((job) => (
         <JobCard
           key={job.jobpost.shortUUID}
