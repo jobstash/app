@@ -38,7 +38,7 @@ export const RightPanelJobCard = ({ job, technologies }: Props) => {
           <Heading size="md" fw="semibold">
             {jobTitle}
           </Heading>
-          <div className="flex items-start space-x-4">
+          <div className="hidden items-start space-x-4 lg:flex">
             {/* <Button isIcon size="sm" variant="translucent">
               <BookmarkIcon />
             </Button> */}
@@ -59,9 +59,9 @@ export const RightPanelJobCard = ({ job, technologies }: Props) => {
             Apply for this job
           </Button>
           <div className="flex items-start space-x-2 lg:hidden">
-            <Button isIcon size="sm" variant="translucent">
+            {/* <Button isIcon size="sm" variant="translucent">
               <BookmarkIcon />
-            </Button>
+            </Button> */}
             <ShareButton jobTitle={jobTitle} />
           </div>
         </div>
