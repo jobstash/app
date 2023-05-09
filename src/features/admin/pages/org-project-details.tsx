@@ -25,23 +25,27 @@ import { lato } from '~/shared/core/constants';
 import { slugify, unslugify } from '~/shared/utils';
 
 import { ImageUploadContainer } from '../components/image-upload-container';
+import { OrgProjectNavs } from '../components/org-project-navs';
 import { OrgSideNavs } from '../components/org-side-navs';
 import { ProjectDefiLlamaSvg } from '../components/project-defillama-svg';
 import { ProjectMainnetSvg } from '../components/project-mainnet-svg';
 import { useProjectDeets } from '../hooks/use-project-deets';
 import { AdminLayout } from '../layouts/admin-layout';
 
-const OrgEditProjectPage = () => {
+const OrgProjectDetailsPage = () => {
   const { query } = useRouter();
 
-  const splitIndex = (query.key as string).lastIndexOf('-');
-  const orgName = (query.key as string).slice(0, splitIndex);
-  const orgId = (query.key as string).slice(splitIndex + 1);
+  const splitIndex = (query.orgSegment as string).lastIndexOf('-');
+  const orgName = (query.orgSegment as string).slice(0, splitIndex);
+  const orgId = (query.orgSegment as string).slice(splitIndex + 1);
   const keySegment = slugify(`${orgName} ${orgId}`);
 
-  const projectSlugLength = (query.id as string).length - 36;
-  const projectSlug = (query.id as string).slice(0, projectSlugLength - 1);
-  const projectId = (query.id as string).slice(-36);
+  const projectSlugLength = (query.projSegment as string).length - 36;
+  const projectSlug = (query.projSegment as string).slice(
+    0,
+    projectSlugLength - 1,
+  );
+  const projectId = (query.projSegment as string).slice(-36);
 
   const breadCrumbs = [
     { title: 'Organizations', href: '/godmode/organizations' },
@@ -66,7 +70,7 @@ const OrgEditProjectPage = () => {
 
   if (error) return <pre>error = {JSON.stringify(error)}</pre>;
 
-  const { logo, url, name, description, category, teamSize, tokenAddress } =
+  const { id, logo, url, name, description, category, teamSize, tokenAddress } =
     data;
 
   const logoSrc =
@@ -80,10 +84,22 @@ const OrgEditProjectPage = () => {
     <AdminLayout
       breadCrumbs={breadCrumbs}
       sideNav={
-        <OrgSideNavs
-          keySegment={slugify(`${orgName} ${orgId}`)}
-          activeLabel="Projects"
-        />
+        <div className="flex flex-col justify-end gap-4">
+          <OrgSideNavs
+            keySegment={slugify(`${orgName} ${orgId}`)}
+            activeLabel="Projects"
+          />
+
+          <div className="flex h-fit w-full flex-col gap-2.5">
+            <hr className="border-t border-white/10" />
+          </div>
+
+          <OrgProjectNavs
+            orgSegment={slugify(`${orgName} ${orgId}`)}
+            projSegment={slugify(`${name} ${id}`)}
+            activeLabel="Project Details"
+          />
+        </div>
       }
     >
       <Stack w="60%" spacing={30} pt={20}>
@@ -399,6 +415,6 @@ const OrgEditProjectPage = () => {
   );
 };
 
-OrgEditProjectPage.requiredRole = CHECK_WALLET_ROLES.ADMIN;
+OrgProjectDetailsPage.requiredRole = CHECK_WALLET_ROLES.ADMIN;
 
-export default OrgEditProjectPage;
+export default OrgProjectDetailsPage;

@@ -29,7 +29,7 @@ export const OrgSideNavs = ({ keySegment, activeLabel }: Props) => {
   const sideNavs = useMemo(() => getSideNavs(keySegment), [keySegment]);
 
   return (
-    <Flex gap="lg">
+    <Flex gap="lg" justify="end">
       {sideNavs.map(({ label, href }) => (
         <Button
           key={label}

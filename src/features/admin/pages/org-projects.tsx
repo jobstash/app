@@ -42,9 +42,9 @@ import { AdminLayout } from '../layouts/admin-layout';
 const OrgProjectsPage = () => {
   const { push, query, asPath } = useRouter();
 
-  const splitIndex = (query.key as string).lastIndexOf('-');
-  const orgName = (query.key as string).slice(0, splitIndex);
-  const orgId = (query.key as string).slice(splitIndex + 1);
+  const splitIndex = (query.orgSegment as string).lastIndexOf('-');
+  const orgName = (query.orgSegment as string).slice(0, splitIndex);
+  const orgId = (query.orgSegment as string).slice(splitIndex + 1);
   const keySegment = slugify(`${orgName} ${orgId}`);
 
   const { data, isLoading, error, refetch } = useOrgProjects(orgId);
@@ -229,7 +229,7 @@ const OrgProjectsPage = () => {
                     <Button
                       variant="primary"
                       onClick={() =>
-                        push(`${asPath}/${slugify(name + ' ' + id)}`)
+                        push(`${asPath}/${slugify(name + ' ' + id)}/details`)
                       }
                     >
                       <MText fw="bold">Edit Project</MText>
@@ -247,23 +247,6 @@ const OrgProjectsPage = () => {
     </AdminLayout>
   );
 };
-
-const chains = [
-  'Cardano ADA',
-  'Cronos',
-  'Dogecoin',
-  'Ethereum ETH',
-  'Huobi',
-  'Litecoin LTC',
-  'PancakeSwap CAKE',
-  'Polygon',
-  'Ripple XRP',
-  'Shiba',
-  'Solanart',
-  'TRON',
-  'Uniswap UNI',
-  'USD Coin USDC',
-];
 
 OrgProjectsPage.requiredRole = CHECK_WALLET_ROLES.ADMIN;
 
