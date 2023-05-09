@@ -24,7 +24,7 @@ export const RightPanelProjectCard = ({ project, categories }: Props) => {
 
   if (!project) return null;
 
-  const { logo, name, description } = project;
+  const { logo, name, description, url } = project;
   const { projectSocialTags, projectTags, projectTvlTags, projectAuditTags } =
     createRightPanelProjectCardTags(project, categories);
 
@@ -36,7 +36,13 @@ export const RightPanelProjectCard = ({ project, categories }: Props) => {
             <LogoTitle
               size="lg"
               title={name}
-              avatarProps={{ src: logo, alt: name }}
+              avatarProps={{
+                src:
+                  logo && logo.length > 0
+                    ? logo
+                    : `https://www.google.com/s2/favicons?domain=${url}&sz=128`,
+                alt: name,
+              }}
             />
             <div className="flex gap-x-4">
               {/** TODO: Bookmark, Share IconButton here */}
