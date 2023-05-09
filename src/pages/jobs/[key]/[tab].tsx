@@ -215,7 +215,7 @@ const JobsPage = ({ data: { initJob, fromSSR } }: Props) => {
           />
           <meta property="og:image:width" content="800" />
           <meta property="og:image:height" content="364" />
-          <meta name="twitter:card" content="summary_large_image" />
+          <meta name="twitter:card" content="summary" />
           <meta
             property="twitter:image"
             content="https://frontend.jobstash.xyz/JobStash-Wordmark-800.png"
