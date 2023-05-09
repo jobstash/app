@@ -1,4 +1,5 @@
 import type { GetServerSideProps } from 'next';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useEffect, useRef } from 'react';
 
@@ -74,33 +75,170 @@ const JobsPage = ({ data: { initJob, fromSSR } }: Props) => {
     filterParamsObj,
   } = useJobListingInfQuery();
 
-  return (
-    <div className="w-full lg:pl-52 lg:pr-[41.67%]">
-      <SideBar />
+  const getJsonLd = () => {
+    if (jobPost) {
+      const { organization, jobpost, technologies } = jobPost;
+      const imageLink =
+        organization.logoUrl && organization.logoUrl.length > 0
+          ? organization.logoUrl
+          : `https://www.google.com/s2/favicons?domain=${organization.url}&sz=128`;
 
-      <div className="px-3.5 pt-[65px] lg:px-8 lg:pt-0">
-        <Filters jobCount={data?.pages[0].total} />
-        <JobList
-          initJob={initJob}
-          activeJob={activeJob ?? initJob}
-          data={data}
-          fetchNextPage={fetchNextPage}
-          filterParamsObj={filterParamsObj}
-          isLoading={isLoading}
-          error={error}
-          isFetchingNextPage={isFetchingNextPage}
-          hasNextPage={hasNextPage}
-        />
-      </div>
-      <div
-        className={
-          'fixed inset-0 z-50 h-screen overflow-y-auto bg-dark p-4 lg:right-0 transition-all lg:top-0 lg:hide-scrollbar lg:w-5/12 lg:px-6 lg:py-8 lg:pr-10 lg:inset-auto' +
-          (activeJob === initJob ? 'active' : '')
+      let description = `<p>Role</p>\n\n<p>${jobpost.role}</p>\n\n`;
+      if (jobpost.team) {
+        description += `<p>Team</p>\n\n<p>${jobpost.team}</p>\n\n`;
+      }
+
+      if (jobpost.culture) {
+        description += `<p>Culture</p>\n\n<p>${jobpost.culture}</p>\n\n`;
+      }
+
+      if (technologies.length > 0) {
+        description += '<p>Technologies:</p>\n\n<ul>';
+        for (const tech of technologies.map((t) => t.name)) {
+          description += `<li>${tech}</li>`;
         }
-      >
-        <JobRightPanel job={jobPost} />
+
+        description += '</ul>\n\n';
+      }
+
+      const jsonLd: Record<
+        string,
+        | string
+        | number
+        | boolean
+        | Record<string, string | number | Record<string, string | number>>
+      > = {
+        '@context': 'https://schema.org/',
+        '@type': 'JobPosting',
+        title: jobpost.jobTitle,
+        description,
+        datePosted: new Date(jobpost.jobCreatedTimestamp).toISOString(),
+        hiringOrganization: {
+          '@type': 'Organization',
+          name: organization.name,
+          logo: imageLink,
+          sameAs: organization.url,
+        },
+        image: imageLink,
+        directApply:
+          Boolean(jobpost.jobApplyPageUrl) || Boolean(jobpost.jobPageUrl),
+        employerOverview: organization.description,
+        employmentType: jobpost.jobCommitment
+          ? jobpost.jobCommitment.toUpperCase()
+          : 'FULL_TIME',
+        responsibilities: jobpost.role,
+      };
+
+      if (jobpost.jobLocation) {
+        const isRemote = jobpost.jobLocation.toLowerCase().includes('remote');
+        if (isRemote) {
+          jsonLd['jobLocationType'] = 'TELECOMMUTE';
+        }
+
+        const locationName = jobpost.jobLocation
+          .replaceAll(/remote/gi, '')
+          .replaceAll('-', '')
+          .replaceAll('or', '')
+          .trim();
+
+        jsonLd['applicantLocationRequirements'] = {
+          '@type': 'Country',
+          name: locationName,
+        };
+
+        jsonLd['jobLocation'] = {
+          '@type': 'Place',
+          address: {
+            name: locationName,
+          },
+        };
+      }
+
+      if (jobpost.minSalaryRange && jobpost.maxSalaryRange) {
+        jsonLd['baseSalary'] = {
+          '@type': 'MonetaryAmount',
+          currency: 'USD',
+          value: {
+            '@type': 'QuantitativeValue',
+            minValue: jobpost.minSalaryRange,
+            maxValue: jobpost.maxSalaryRange,
+            unitText: 'YEAR',
+          },
+        };
+      }
+
+      if (jobpost.benefits) {
+        jsonLd['jobBenefits'] = jobpost.benefits;
+      }
+
+      if (technologies.length > 0) {
+        jsonLd['skills'] = technologies.map((t) => t.name).join(', ');
+      }
+
+      return {
+        __html: JSON.stringify(jsonLd),
+      };
+    }
+
+    return {
+      __html: '',
+    };
+  };
+
+  return (
+    <>
+      {jobPost?.jobpost.shortUUID === '1pN28S' && (
+        <Head>
+          <title>{`${jobPost?.jobpost.jobTitle} | ${jobPost?.organization.name}`}</title>
+          <meta name="description" content={jobPost.jobpost.role} />
+
+          {/* _ TODO switch from 'frontend.jobstash.xyz' to 'app.jobstash.xyz' when it goes live */}
+          <link
+            rel="canonical"
+            href={`https://frontend.jobstash.xyz${router.asPath.slice(
+              0,
+              router.asPath.lastIndexOf('/'),
+            )}/details`}
+          />
+          {/* _ TODO Open graph */}
+          {/* _ TODO twitter */}
+
+          <script
+            // eslint-disable-next-line react/no-danger
+            dangerouslySetInnerHTML={getJsonLd()}
+            key="jobpost-jsonld"
+            type="application/ld+json"
+          />
+        </Head>
+      )}
+
+      <div className="w-full lg:pl-52 lg:pr-[41.67%]">
+        <SideBar />
+
+        <div className="px-3.5 pt-[65px] lg:px-8 lg:pt-0">
+          <Filters jobCount={data?.pages[0].total} />
+          <JobList
+            initJob={initJob}
+            activeJob={activeJob ?? initJob}
+            data={data}
+            fetchNextPage={fetchNextPage}
+            filterParamsObj={filterParamsObj}
+            isLoading={isLoading}
+            error={error}
+            isFetchingNextPage={isFetchingNextPage}
+            hasNextPage={hasNextPage}
+          />
+        </div>
+        <div
+          className={
+            'fixed inset-0 z-50 h-screen overflow-y-auto bg-dark p-4 lg:right-0 transition-all lg:top-0 lg:hide-scrollbar lg:w-5/12 lg:px-6 lg:py-8 lg:pr-10 lg:inset-auto' +
+            (activeJob === initJob ? 'active' : '')
+          }
+        >
+          <JobRightPanel job={jobPost} />
+        </div>
       </div>
-    </div>
+    </>
   );
 };
 
