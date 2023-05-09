@@ -185,21 +185,21 @@ const JobsPage = ({ data: { initJob, fromSSR } }: Props) => {
     };
   };
 
+  const titleMetaData = `${jobPost?.jobpost.jobTitle} | ${jobPost?.organization.name}`;
+  const urlMetaData = `https://frontend.jobstash.xyz${router.asPath.slice(
+    0,
+    router.asPath.lastIndexOf('/'),
+  )}/details`;
+
   return (
     <>
       {jobPost?.jobpost.shortUUID === '1pN28S' && (
         <Head>
-          <title>{`${jobPost?.jobpost.jobTitle} | ${jobPost?.organization.name}`}</title>
+          <title>{titleMetaData}</title>
           <meta name="description" content={jobPost.jobpost.role} />
 
           {/* _ TODO switch from 'frontend.jobstash.xyz' to 'app.jobstash.xyz' when it goes live */}
-          <link
-            rel="canonical"
-            href={`https://frontend.jobstash.xyz${router.asPath.slice(
-              0,
-              router.asPath.lastIndexOf('/'),
-            )}/details`}
-          />
+          <link rel="canonical" href={urlMetaData} />
           {/* _ TODO Open graph */}
           {/* _ TODO twitter */}
 
