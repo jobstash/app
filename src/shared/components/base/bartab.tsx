@@ -63,14 +63,20 @@ type ButtonHTMLProps = Omit<
 >;
 
 interface BartabProps extends ButtonHTMLProps, BartabVariantProps {
-  text: string;
   left?: ReactNode;
   right?: ReactNode;
+  children: ReactNode;
 }
 
 const Bartab = forwardRef<HTMLButtonElement, BartabProps>(
   (
-    { text, left = null, variant = 'bartab', isActive, ...props }: BartabProps,
+    {
+      children,
+      left = null,
+      variant = 'bartab',
+      isActive,
+      ...props
+    }: BartabProps,
     ref,
   ) => {
     const isTextOnly = !left;
@@ -86,7 +92,11 @@ const Bartab = forwardRef<HTMLButtonElement, BartabProps>(
               { 'justify-center': isTextOnly },
             )}
           >
-            <Text fw="medium">{text}</Text>
+            {typeof children === 'string' ? (
+              <Text fw="medium">{children}</Text>
+            ) : (
+              children
+            )}
           </div>
         </div>
       </button>

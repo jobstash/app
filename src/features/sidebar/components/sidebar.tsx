@@ -75,12 +75,13 @@ export const SideBar = () => {
         <div className="space-y-3 pt-3">
           <Bartab
             isActive={asPath.slice(0, 5) === '/jobs'}
-            text="Jobs"
             onClick={() => {
               push('/jobs');
               setNavbarOpen(!navbarOpen);
             }}
-          />
+          >
+            Jobs
+          </Bartab>
         </div>
       </nav>
 
@@ -93,9 +94,10 @@ export const SideBar = () => {
             <Bartab
               isActive={asPath.slice(0, 5) === '/jobs'}
               left={<JobsSidebarIcon />}
-              text="Jobs"
               onClick={() => push('/jobs')}
-            />
+            >
+              Jobs
+            </Bartab>
           </div>
         </div>
       </div>
@@ -109,15 +111,17 @@ export const SideBar = () => {
                 <Bartab
                   isActive={asPath.includes('/godmode/technologies')}
                   left={null}
-                  text="Technologies"
                   onClick={() => push('/godmode/technologies/synonyms')}
-                />
+                >
+                  Technologies
+                </Bartab>
                 <Bartab
                   isActive={asPath.includes('/godmode/organizations')}
                   left={null}
-                  text="Organizations"
                   onClick={() => push('/godmode/organizations')}
-                />
+                >
+                  Organizations
+                </Bartab>
               </div>
             </div>
           </div>

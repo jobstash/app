@@ -10,7 +10,11 @@ export const ConnectWalletButton = () => {
   const { role } = useWalletAuthContext();
 
   if (!isMounted)
-    return <Bartab variant="wallet" text="Connect Wallet" isActive={false} />;
+    return (
+      <Bartab variant="wallet" isActive={false}>
+        Connect Wallet
+      </Bartab>
+    );
 
   return (
     <div style={{ minHeight: 40 }}>
@@ -25,15 +29,14 @@ export const ConnectWalletButton = () => {
               ) : null
             }
             right={null}
-            text={
-              address
-                ? role === 'ADMIN'
-                  ? 'ADMIN'
-                  : `${address.slice(0, 6)}...${address.slice(-4)}`
-                : 'Connect Wallet'
-            }
             onClick={() => (show ? show() : null)}
-          />
+          >
+            {address
+              ? role === 'ADMIN'
+                ? 'ADMIN'
+                : `${address.slice(0, 6)}...${address.slice(-4)}`
+              : 'Connect Wallet'}
+          </Bartab>
         )}
       </ConnectKitButton.Custom>
     </div>
