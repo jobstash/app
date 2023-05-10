@@ -234,7 +234,7 @@ const Filters = ({ jobCount }: Props) => {
 
             <div>
               {jobCount && (
-                <Text color="dimmed">{`Jobs Listed: ${jobCount}`}</Text>
+                <Text color="dimmed">{`Jobs Found: ${jobCount}`}</Text>
               )}
             </div>
           </div>
