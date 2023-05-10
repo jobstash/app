@@ -218,7 +218,7 @@ const JobsPage = ({ data: { initJob, fromSSR } }: Props) => {
           <meta name="twitter:description" content={jobPost.jobpost.role} />
           <meta
             property="twitter:image"
-            content="https://frontend.jobstash.xyz/JobStash-Wordmark-800.png"
+            content="https://frontend.jobstash.xyz/JobStash.svg"
           />
           <meta name="twitter:site" content="@jobstash_xyz" />
 
