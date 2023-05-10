@@ -198,7 +198,6 @@ const JobsPage = ({ data: { initJob, fromSSR } }: Props) => {
           <title>{titleMetaData}</title>
           <meta name="description" content={jobPost.jobpost.role} />
 
-          {/* _ TODO switch from 'frontend.jobstash.xyz' to 'app.jobstash.xyz' when it goes live */}
           <link rel="canonical" href={urlMetaData} />
 
           <meta property="og:site_name" content="JobStash" />
