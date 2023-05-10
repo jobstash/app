@@ -195,31 +195,31 @@ const JobsPage = ({ data: { initJob, fromSSR } }: Props) => {
     <>
       {jobPost?.jobpost.shortUUID === '1pN28S' && (
         <Head>
+          {/* Primary Meta Tags */}
           <title>{titleMetaData}</title>
+          <meta name="title" content={titleMetaData} />
           <meta name="description" content={jobPost.jobpost.role} />
-
           <link rel="canonical" href={urlMetaData} />
 
-          <meta property="og:site_name" content="JobStash" />
+          {/* Open Graph */}
+          <meta property="og:type" content="website" />
+          <meta property="og:url" content={urlMetaData} />
           <meta property="og:title" content={titleMetaData} />
           <meta property="og:description" content={jobPost.jobpost.role} />
-          <meta property="og:url" content={urlMetaData} />
           <meta
             property="og:image"
             content="https://frontend.jobstash.xyz/JobStash-Wordmark-800.png"
           />
-          <meta
-            property="og:image:secure_url"
-            content="https://frontend.jobstash.xyz/JobStash-Wordmark-800.png"
-          />
-          <meta property="og:image:width" content="800" />
-          <meta property="og:image:height" content="364" />
+
+          {/* Twitter */}
           <meta name="twitter:card" content="summary" />
+          <meta name="twitter:url" content={urlMetaData} />
+          <meta name="twitter:title" content={titleMetaData} />
+          <meta name="twitter:description" content={jobPost.jobpost.role} />
           <meta
             property="twitter:image"
             content="https://frontend.jobstash.xyz/JobStash-Wordmark-800.png"
           />
-          <meta name="twitter:image:alt" content="JobStash" />
           <meta name="twitter:site" content="@jobstash_xyz" />
 
           <script
