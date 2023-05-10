@@ -17,6 +17,7 @@ import { useJobListingInfQuery } from '~/features/jobs/hooks';
 import { useJobQuery } from '~/features/jobs/hooks/use-job-query';
 import { JobRightPanel } from '~/features/right-panel/components';
 import { SideBar } from '~/features/sidebar/components';
+import { MetaData } from '~/shared/components';
 import { ERR_INTERNAL } from '~/shared/core/constants';
 import { withCSR } from '~/shared/hocs';
 import { sentryMessage } from '~/shared/utils';
@@ -194,41 +195,17 @@ const JobsPage = ({ data: { initJob, fromSSR } }: Props) => {
   return (
     <>
       {jobPost?.jobpost.shortUUID === '1pN28S' && (
-        <Head>
-          {/* Primary Meta Tags */}
-          <title>{titleMetaData}</title>
-          <meta name="title" content={titleMetaData} />
-          <meta name="description" content={jobPost.jobpost.role} />
-          <link rel="canonical" href={urlMetaData} />
-
-          {/* Open Graph */}
-          <meta property="og:type" content="website" />
-          <meta property="og:url" content={urlMetaData} />
-          <meta property="og:title" content={titleMetaData} />
-          <meta property="og:description" content={jobPost.jobpost.role} />
-          <meta
-            property="og:image"
-            content="https://frontend.jobstash.xyz/JobStash-Wordmark-800.png"
-          />
-
-          {/* Twitter */}
-          <meta name="twitter:card" content="summary" />
-          <meta name="twitter:url" content={urlMetaData} />
-          <meta name="twitter:title" content={titleMetaData} />
-          <meta name="twitter:description" content={jobPost.jobpost.role} />
-          <meta
-            property="twitter:image"
-            content={`https://www.google.com/s2/favicons?domain=${jobPost.organization.url}&sz=128`}
-          />
-          <meta name="twitter:site" content="@jobstash_xyz" />
-
-          <script
-            // eslint-disable-next-line react/no-danger
-            dangerouslySetInnerHTML={getJsonLd()}
-            key="jobpost-jsonld"
-            type="application/ld+json"
-          />
-        </Head>
+        <MetaData
+          title={titleMetaData}
+          description={jobPost.jobpost.role}
+          url={urlMetaData}
+          image="https://frontend.jobstash.xyz/JobStash-Wordmark-800.png"
+          twitter={{
+            site: '@jobstash_xyz',
+            image: `https://www.google.com/s2/favicons?domain=${jobPost.organization.url}&sz=128`,
+          }}
+          jsonLd={getJsonLd()}
+        />
       )}
 
       <div className="w-full lg:pl-52 lg:pr-[41.67%]">
