@@ -135,7 +135,7 @@ export const RightPanelProjectCard = ({ project, categories }: Props) => {
           </>
         )}
 
-        <div className="flex h-4 flex-col justify-center">
+        {/* <div className="flex h-4 flex-col justify-center">
           <hr className="border-t border-white/10" />
         </div>
 
@@ -144,7 +144,7 @@ export const RightPanelProjectCard = ({ project, categories }: Props) => {
           <CardSet icon={<LinkIcon />} link="#">
             Token: TBD
           </CardSet>
-        </div>
+        </div> */}
 
         <div className="flex h-4 flex-col justify-center">
           <hr className="border-t border-white/10" />

@@ -87,12 +87,12 @@ export const createRightPanelProjectCardTags = (
   }
 
   const projectTags: TagElement[] = [
-    {
-      text: 'Relevant Repos: TBD',
-      icon: <GithubLogoOutlineIcon />,
-      link: '#',
-      showLinkIcon: false,
-    },
+    // {
+    //   text: 'Relevant Repos: TBD',
+    //   icon: <GithubLogoOutlineIcon />,
+    //   link: '#',
+    //   showLinkIcon: false,
+    // },
   ];
 
   if (defillamaSlug) {
@@ -156,16 +156,16 @@ export const createRightPanelProjectCardTags = (
   }
 
   const projectAuditTags: TagElement[] = [
-    { text: 'Audits: Peckshield', icon: <ShieldCheckIcon />, link: '#' },
-    {
-      text: 'Audits: Consensys Diligence',
-      icon: <ShieldCheckIcon />,
-      link: '#',
-    },
-    { text: 'Audits: SigmaPrime', icon: <ShieldCheckIcon />, link: '#' },
-    { text: 'Audits: Chainsecurity', icon: <ShieldCheckIcon />, link: '#' },
-    { text: 'Audits: Mixbytes', icon: <ShieldCheckIcon />, link: '#' },
-    { text: 'Hacks: Big Hack costing all TVL', icon: <SkullIcon />, link: '#' },
+    // { text: 'Audits: Peckshield', icon: <ShieldCheckIcon />, link: '#' },
+    // {
+    //   text: 'Audits: Consensys Diligence',
+    //   icon: <ShieldCheckIcon />,
+    //   link: '#',
+    // },
+    // { text: 'Audits: SigmaPrime', icon: <ShieldCheckIcon />, link: '#' },
+    // { text: 'Audits: Chainsecurity', icon: <ShieldCheckIcon />, link: '#' },
+    // { text: 'Audits: Mixbytes', icon: <ShieldCheckIcon />, link: '#' },
+    // { text: 'Hacks: Big Hack costing all TVL', icon: <SkullIcon />, link: '#' },
   ];
 
   return { projectSocialTags, projectTags, projectTvlTags, projectAuditTags };
