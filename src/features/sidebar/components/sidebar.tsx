@@ -127,9 +127,9 @@ export const SideBar = () => {
           </div>
         )}
 
-        <hr className="border-t border-white/20" />
+        {/* <hr className="border-t border-white/20" />
 
-        <ConnectWalletButton />
+        <ConnectWalletButton /> */}
       </div>
     </nav>
   );
