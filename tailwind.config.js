@@ -20,6 +20,7 @@ module.exports = {
         secondary: 'rgb(var(--color-secondary) / <alpha-value>)',
         tertiary: 'rgb(var(--color-tertiary) / <alpha-value>)',
         quaternary: 'rgb(var(--color-quaternary) / <alpha-value>)',
+        quinary: 'rgb(var(--color-quinary) / <alpha-value>)',
         dark: 'rgb(var(--color-dark) / <alpha-value>)',
         gray: 'rgb(var(--color-gray) / <alpha-value>)',
         'dark-gray': 'rgb(var(--color-dark-gray) / <alpha-value>)',

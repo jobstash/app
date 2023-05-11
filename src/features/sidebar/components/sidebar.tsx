@@ -54,7 +54,7 @@ export const SideBar = () => {
       <nav
         // eslint-disable-next-line tailwindcss/migration-from-tailwind-2
         className={clsx(
-          'inset-0 w-full bg-opacity-75 bg-gradient-to-r from-tertiary to-primary p-4 transition-all duration-300',
+          'inset-0 w-full bg-opacity-75 bg-gradient-to-r from-quinary from-20% to-primary p-4 transition-all duration-300 lg:hidden',
           { 'z-50 opacity-100 fixed overflow-auto h-screen': navbarOpen },
           { 'opacity-0 -z-50 absolute h-0 overflow-hidden': !navbarOpen },
         )}
@@ -72,7 +72,7 @@ export const SideBar = () => {
         <Text color="dimmed" className="block pt-8">
           Discover
         </Text>
-        <div className="space-y-3 pt-3">
+        <div className="inline-flex space-y-3 pt-3 [&>*]:bg-transparent  [&>*]:bg-none [&>*]:hover:bg-transparent">
           <Bartab
             isActive={asPath.slice(0, 5) === '/jobs'}
             onClick={() => {
@@ -80,7 +80,7 @@ export const SideBar = () => {
               setNavbarOpen(!navbarOpen);
             }}
           >
-            Jobs
+            <span className="text-2xl text-white">Jobs</span>
           </Bartab>
         </div>
       </nav>
