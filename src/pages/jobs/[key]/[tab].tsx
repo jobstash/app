@@ -188,7 +188,7 @@ const JobsPage = ({ data: { initJob, fromSSR } }: Props) => {
   };
 
   const titleMetaData = `${jobPost?.jobpost.jobTitle} | ${jobPost?.organization.name}`;
-  const urlMetaData = `https://frontend.jobstash.xyz${router.asPath.slice(
+  const urlMetaData = `https://app.jobstash.xyz${router.asPath.slice(
     0,
     router.asPath.lastIndexOf('/'),
   )}/details`;
@@ -200,7 +200,7 @@ const JobsPage = ({ data: { initJob, fromSSR } }: Props) => {
           title={titleMetaData}
           description={jobPost.jobpost.role}
           url={urlMetaData}
-          image="https://frontend.jobstash.xyz/JobStash-Wordmark-800.png"
+          image="https://app.jobstash.xyz/JobStash-Wordmark-800.png"
           twitter={{
             site: '@jobstash_xyz',
             image: `https://www.google.com/s2/favicons?domain=${jobPost.organization.url}&sz=128`,

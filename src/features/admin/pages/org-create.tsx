@@ -71,7 +71,7 @@ const OrgCreatePage = () => {
     //
     mutate({
       ...values,
-      logoUrl: 'https://frontend.jobstash.xyz/orgs/Curve.png',
+      logoUrl: 'https://app.jobstash.xyz/orgs/Curve.png', // FIXME: remove this ?
     });
   });
 
