@@ -1,4 +1,6 @@
-import { OPTION_SEPARATOR, seniorityMapping } from '../core/constants';
+import { encodeBase64 } from '~/shared/utils';
+
+import { seniorityMapping } from '../core/constants';
 import type { FilterAction, FilterState } from '../core/types';
 import { initFilterConfigData } from '../utils';
 
@@ -46,12 +48,13 @@ export const filterReducer = (
         selectedLabels.length > 0
           ? paramKey === 'seniority'
             ? selectedLabels
-                .map(
-                  (label) =>
+                .map((label) =>
+                  encodeBase64(
                     seniorityMapping[label as keyof typeof seniorityMapping],
+                  ),
                 )
-                .join(OPTION_SEPARATOR)
-            : selectedLabels.join(OPTION_SEPARATOR)
+                .join(',')
+            : selectedLabels.map((label) => encodeBase64(label)).join(',')
           : null;
       return {
         ...state,

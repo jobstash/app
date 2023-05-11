@@ -21,11 +21,7 @@ import {
 } from '~/shared/components';
 import { getOriginString } from '~/shared/utils';
 
-import {
-  FILTER_KIND,
-  INIT_FILTER_STATE,
-  OPTION_SEPARATOR,
-} from '../core/constants';
+import { FILTER_KIND, INIT_FILTER_STATE } from '../core/constants';
 import type { FilterConfig } from '../core/types';
 import { useFilterConfigQuery } from '../hooks';
 import { filterReducer } from '../reducers/filter-reducer';
@@ -88,7 +84,7 @@ const Filters = ({ jobCount }: Props) => {
     const url = new URL(`${getOriginString()}/jobs`);
     for (const [key, value] of Object.entries(state.filterValues)) {
       if (value) {
-        url.searchParams.set(key, value.replaceAll(OPTION_SEPARATOR, ','));
+        url.searchParams.set(key, value);
       }
     }
 

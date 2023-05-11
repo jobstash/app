@@ -1,3 +1,4 @@
+export * from './base64';
 export * from './capitalize';
 export * from './create-route-string';
 export * from './get-origin-string';

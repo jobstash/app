@@ -1,9 +1,11 @@
-import { Dispatch, memo, useCallback, useMemo } from 'react';
+import { Dispatch, useCallback, useMemo } from 'react';
 
 import { MultiSelect } from '@mantine/core';
 import clsx from 'clsx';
 
-import { OPTION_SEPARATOR, seniorityMapping } from '../core/constants';
+import { decodeBase64 } from '~/shared/utils';
+
+import { seniorityMapping } from '../core/constants';
 import type {
   FilterParamKey,
   FilterValue,
@@ -42,7 +44,7 @@ const MultiSelectFilter = ({
   );
 
   const { inputValue, inputLabel } = useMemo(() => {
-    let inputValue = value ? value.split(OPTION_SEPARATOR) : [];
+    let inputValue = value ? value.split(',').map((v) => decodeBase64(v)) : [];
     const inputValueLength = inputValue.length;
 
     if (label === 'Seniority') {
