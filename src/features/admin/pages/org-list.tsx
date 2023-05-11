@@ -70,7 +70,7 @@ const OrgListPage = () => {
                   <div className="flex flex-col gap-2.5 py-2">
                     <hr className="border-t border-white/10" />
                   </div>
-                  <div className="flex items-center gap-x-4">
+                  <div className="flex flex-wrap items-center gap-x-4">
                     {tags.map(({ text, icon }) => (
                       <CardSet key={text} icon={icon}>
                         {text}

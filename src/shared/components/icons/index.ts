@@ -18,6 +18,7 @@ export { SidebarIcon } from './sidebar-icon';
 // New Icons
 export { ActiveUsersIcon } from './active-users-icon';
 export { ArrowCircleUpRightIcon } from './arrow-circle-up-right-icon';
+export { ArrowLeft } from './arrow-left';
 export { BankIcon } from './bank-icon';
 export { BookIcon } from './book-icon';
 export { BriefcaseIcon } from './briefcase-icon';

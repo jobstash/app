@@ -9,7 +9,7 @@ import {
   useReducer,
 } from 'react';
 
-import { Collapse, TextInput } from '@mantine/core';
+import { TextInput } from '@mantine/core';
 import type { Entries } from 'type-fest';
 
 import {
@@ -175,7 +175,7 @@ const Filters = ({ jobCount }: Props) => {
             />
           </form>
 
-          <div className="flex items-center justify-between gap-x-6">
+          <div className="flex flex-wrap items-center justify-between gap-x-6">
             <div>
               <Button
                 variant={filterCount > 0 ? 'primary' : 'outline'}
@@ -210,7 +210,7 @@ const Filters = ({ jobCount }: Props) => {
                 ))}
             </div> */}
 
-            <div className="flex grow items-center gap-x-6">
+            <div className="hidden grow items-center gap-x-6 lg:flex">
               {state.showFilters &&
                 sortFilterEntries.map(([key, config]) => (
                   <div key={key} className="w-[150px]">
@@ -229,38 +229,65 @@ const Filters = ({ jobCount }: Props) => {
 
             <div>
               {jobCount && (
-                <Text color="dimmed">{`Jobs Found: ${jobCount}`}</Text>
+                <Text
+                  className="my-3 inline-block whitespace-nowrap"
+                  color="dimmed"
+                >{`Jobs Found: ${jobCount}`}</Text>
               )}
             </div>
           </div>
         </div>
       </div>
 
-      <Collapse
-        in={state.showFilters}
-        transitionDuration={100}
-        transitionTimingFunction="linear"
+      <div
+        className={
+          'overflow-hidden transition-all duration-300	lg:relative lg:mt-4  lg:bg-transparent lg:p-0 fixed inset-0 z-50 bg-filters lg:duration-100 ' +
+          (state.showFilters
+            ? 'h-screen lg:h-auto lg:max-h-[9999px]'
+            : 'h-0 lg:h-auto lg:max-h-0')
+        }
       >
-        <div className="fixed inset-0 z-50 bg-red-500 lg:relative lg:mt-4 lg:bg-transparent">
-          <div className="lg:hidden">
-            <Button
-              variant={filterCount > 0 ? 'primary' : 'outline'}
-              left={<FilterIcon />}
-              isActive={state.showFilters}
-              isDisabled={isLoading}
-              onClick={toggleFilters}
-            >
-              {`Filters & Sorting${
-                filterCount > 0 ? ' (' + filterCount + ')' : ''
-              }`}
-            </Button>
+        <div className="p-4 pt-6 lg:p-0">
+          <div className=" lg:hidden">
+            <div className="flex justify-between">
+              <Button
+                variant={filterCount > 0 ? 'primary' : 'outline'}
+                left={<FilterIcon />}
+                isActive={state.showFilters}
+                isDisabled={isLoading}
+                onClick={toggleFilters}
+              >
+                {`Filters & Sorting${
+                  filterCount > 0 ? ' (' + filterCount + ')' : ''
+                }`}
+              </Button>
+              <Button size="sm" variant="transparent" onClick={toggleFilters}>
+                <CloseIcon />
+              </Button>
+            </div>
+            <div className="my-4 flex justify-between border-y border-dark-gray py-4">
+              {state.showFilters &&
+                sortFilterEntries.map(([key, config]) => (
+                  <div key={key} className="w-[150px]">
+                    {config.kind === FILTER_KIND.SINGLE_SELECT && (
+                      <SingleSelectFilter
+                        value={state.filterValues[config.paramKey]}
+                        options={config.options}
+                        paramKey={config.paramKey}
+                        dispatch={dispatch}
+                        placeholder={config.label}
+                      />
+                    )}
+                  </div>
+                ))}
+            </div>
           </div>
-          <div className="lg: -mx-2 flex flex-wrap pb-4 lg:-mx-3 lg:-mb-4">
+          <div className="-mx-2 flex flex-wrap pb-4 lg:-mx-3 lg:-mb-4">
             {filterConfigEntries.length > 0 &&
               filterConfigEntries.map(([key, config]) => (
                 <div
                   key={key}
-                  className="w-1/2 px-2 pb-2 lg:w-1/5 lg:px-3 lg:pb-4"
+                  className="w-1/3 px-2 pb-2 lg:w-1/5 lg:px-3 lg:pb-4"
                 >
                   {config.kind === FILTER_KIND.RANGE && (
                     <RangeFilter
@@ -302,17 +329,17 @@ const Filters = ({ jobCount }: Props) => {
                 </div>
               ))}
           </div>
-        </div>
 
-        <div className="flex flex-wrap gap-6 lg:py-2">
-          <Button variant="primary" onClick={applyFilters}>
-            Apply Filters
-          </Button>
-          <Button variant="outline" onClick={clearFilters}>
-            Clear Filters
-          </Button>
+          <div className="flex flex-wrap gap-6 lg:py-2">
+            <Button variant="primary" onClick={applyFilters}>
+              Apply Filters
+            </Button>
+            <Button variant="outline" onClick={clearFilters}>
+              Clear Filters
+            </Button>
+          </div>
         </div>
-      </Collapse>
+      </div>
     </div>
   );
 };

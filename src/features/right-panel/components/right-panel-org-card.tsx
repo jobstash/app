@@ -47,7 +47,7 @@ export const RightPanelOrgCard = ({ org, fundingRounds, investors }: Props) => {
             <div className="flex flex-col justify-center gap-4 pl-1">
               {fundingRounds.map(({ id, date, raisedAmount, roundName }, i) => (
                 <div key={id} className="flex flex-col gap-2.5">
-                  <div className="flex items-center gap-x-4">
+                  <div className="flex flex-wrap items-center gap-x-4">
                     {roundName && (
                       <CardSet
                         icon={<BankIcon />}
