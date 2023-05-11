@@ -13,7 +13,10 @@ import { useForm } from '@mantine/form';
 import { useMutation } from '@tanstack/react-query';
 
 import { CHECK_WALLET_ROLES } from '~/features/auth/core/constants';
-import { NEXT_PUBLIC_MW_URL } from '~/shared/core/constants';
+import {
+  NEXT_PUBLIC_FRONTEND_URL,
+  NEXT_PUBLIC_MW_URL,
+} from '~/shared/core/constants';
 
 import { AdminLayout } from '../layouts/admin-layout';
 
@@ -71,7 +74,7 @@ const OrgCreatePage = () => {
     //
     mutate({
       ...values,
-      logoUrl: 'https://app.jobstash.xyz/orgs/Curve.png', // FIXME: remove this ?
+      logoUrl: `${NEXT_PUBLIC_FRONTEND_URL}/orgs/Curve.png`, // NOTE: hardcoded this (wip - not yet connected to mw)
     });
   });
 

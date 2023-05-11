@@ -2,7 +2,10 @@ import type { GetServerSideProps } from 'next';
 
 import type { Job } from '~/features/jobs/core/types';
 import { createJobKey } from '~/features/jobs/utils';
-import { NEXT_PUBLIC_MW_URL } from '~/shared/core/constants';
+import {
+  NEXT_PUBLIC_FRONTEND_URL,
+  NEXT_PUBLIC_MW_URL,
+} from '~/shared/core/constants';
 
 const SiteMap = () => {};
 
@@ -11,11 +14,11 @@ export default SiteMap;
 const generateSiteMap = (jobs: Job[]): string =>
   `<?xml version="1.0" encoding="UTF-8"?>
 		<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-			<url><loc>https://app.jobstash.xyz/jobs</loc></url>
+			<url><loc>${NEXT_PUBLIC_FRONTEND_URL}/jobs</loc></url>
 			${jobs
         .map(
           (job) =>
-            `<url><loc>https://app.jobstash.xyz/jobs/${createJobKey(
+            `<url><loc>${NEXT_PUBLIC_FRONTEND_URL}/jobs/${createJobKey(
               job,
             )}/details</loc></url>`,
         )

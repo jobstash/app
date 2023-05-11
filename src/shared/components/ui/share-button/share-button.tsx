@@ -4,10 +4,10 @@ import toast from 'react-hot-toast';
 
 import { Menu } from '@mantine/core';
 
+import { NEXT_PUBLIC_FRONTEND_URL } from '~/shared/core/constants';
+
 import Button from '../../base/button';
 import { LensterIcon, LinkIcon, ShareIcon, TwitterIcon } from '../../icons';
-
-const FRONTEND_URL = 'https://app.jobstash.xyz';
 
 interface Props {
   jobTitle: string;
@@ -18,7 +18,7 @@ const ShareButton = ({ jobTitle }: Props) => {
 
   const shareLink = useCallback(
     (baseUrl: string) => {
-      const text = `HIRING: ${jobTitle}\n\nCheck Full Details:\n${FRONTEND_URL}${asPath}\n\n@jobstash_xyz\n#TheUltimateJobAggregatorForCrypto`;
+      const text = `HIRING: ${jobTitle}\n\nCheck Full Details:\n${NEXT_PUBLIC_FRONTEND_URL}${asPath}\n\n@jobstash_xyz\n#TheUltimateJobAggregatorForCrypto`;
 
       window
         .open(`${baseUrl}?text=${encodeURIComponent(text)}`, '_blank')
@@ -38,7 +38,7 @@ const ShareButton = ({ jobTitle }: Props) => {
   );
 
   const onClickCopyLink = useCallback(() => {
-    navigator.clipboard.writeText(`${FRONTEND_URL}${asPath}`);
+    navigator.clipboard.writeText(`${NEXT_PUBLIC_FRONTEND_URL}${asPath}`);
     toast.success('Copied!');
   }, [asPath]);
 

@@ -19,7 +19,10 @@ import { useJobQuery } from '~/features/jobs/hooks/use-job-query';
 import { JobRightPanel } from '~/features/right-panel/components';
 import { SideBar } from '~/features/sidebar/components';
 import { MetaData } from '~/shared/components';
-import { ERR_INTERNAL } from '~/shared/core/constants';
+import {
+  ERR_INTERNAL,
+  NEXT_PUBLIC_FRONTEND_URL,
+} from '~/shared/core/constants';
 import { withCSR } from '~/shared/hocs';
 import { sentryMessage } from '~/shared/utils';
 
@@ -188,7 +191,7 @@ const JobsPage = ({ data: { initJob, fromSSR } }: Props) => {
   };
 
   const titleMetaData = `${jobPost?.jobpost.jobTitle} | ${jobPost?.organization.name}`;
-  const urlMetaData = `https://app.jobstash.xyz${router.asPath.slice(
+  const urlMetaData = `${NEXT_PUBLIC_FRONTEND_URL}${router.asPath.slice(
     0,
     router.asPath.lastIndexOf('/'),
   )}/details`;
@@ -200,7 +203,7 @@ const JobsPage = ({ data: { initJob, fromSSR } }: Props) => {
           title={titleMetaData}
           description={jobPost.jobpost.role}
           url={urlMetaData}
-          image="https://app.jobstash.xyz/JobStash-Wordmark-800.png"
+          image={`${NEXT_PUBLIC_FRONTEND_URL}/JobStash-Wordmark-800.png`}
           twitter={{
             site: '@jobstash_xyz',
             image: `https://www.google.com/s2/favicons?domain=${jobPost.organization.url}&sz=128`,
