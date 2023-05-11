@@ -125,9 +125,16 @@ const Filters = ({ jobCount }: Props) => {
 
   const filterCount = useMemo(
     () =>
-      Object.entries(state.filterValues)
-        .filter(([k, _]) => k !== 'query')
-        .filter(([_, v]) => v !== null).length,
+      new Set(
+        Object.entries(state.filterValues)
+          .filter(([k, _]) => k !== 'query')
+          .filter(([_, v]) => v !== null)
+          .map(([k, _]) => {
+            if (k.includes('min') || k.includes('max')) return k.slice(3);
+
+            return k;
+          }),
+      ).size,
     [state.filterValues],
   );
 
