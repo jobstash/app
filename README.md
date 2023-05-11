@@ -2,57 +2,37 @@
 
 This project is a Next.js application with integrated Storybook for component development.
 
-## Getting Started
+## Required System Setup
 
-This section contains the step needed to run the application locally on your machine.
+This section contains the steps needed set up your system.
+_The key takeaway is you need NodeJS LTS (18.x.x) installed._
 
 1. Have Node.js and Npm installed firstly by running: `brew install nodejs`
 2. Install `n` as a Node Version manager using: `npm install -g n`
 3. Install the LTS version of nodejs/npm using: `sudo n lts`
-4. Clone the repository: `git clone https://github.com/RecruitersRip/app.git`.
+4. Install madge globally: `npm i -g madge`
 5. Install Yarn: `npm install --global yarn` and verify: `yarn --version`.
-6. Install dependencies: `cd app/ && yarn`
-7. Create a new `env.local` paste from `.env.example.` and append keys/uris.
-8. To start the application in development, run the following command: `yarn dev`.
-9. Go to the `http://localhost:3000` port.
-10. To run the React Storybook: `yarn storybook`.
-11. Open `http://localhost:6006` to view the Storybook in the browser.
+
+## Setting up the app locally
+
+1. Clone the repository: `git clone https://github.com/RecruitersRip/app.git`.
+2. Install dependencies: `cd app/ && yarn`
+3. Init husky: `npx husky install`
+4. Create a new `env.local` paste from `.env.example.` and append keys/uris.
+
+## Starting the app
+
+This section contains the step needed to run the application locally on your machine.
+
+1. To start the application in development, run the following command: `yarn dev`.
+2. Go to the `http://localhost:3000` port.
+3. To run the React Storybook: `yarn storybook`.
+4. Open `http://localhost:6006` to view the Storybook in the browser.
 
 ## Features
 
 - Next.js for server-rendered React applications.
 - Storybook for developing and showcasing UI components.
-- Automatic code splitting and optimized production builds.
-- Built-in support for environment variables.
-- Customizable webpack config.
-- Prettier for code formatting.
-
-## File Structure
-
-```ascii
-project-folder/
-├── .storybook/
-│   ├── config.ts
-│   └── webpack.config.ts
-├── components/
-│   ├── [ComponentName]/
-│   │   ├── index.tsx
-│   │   ├── [ComponentName].tsx
-│   │   └── [ComponentName].stories.tsx
-├── pages/
-│   ├── _app.tsx
-│   ├── _document.tsx
-│   ├── index.tsx
-│   └── ...
-├── static/
-├── tsconfig.json
-├── tslint.json
-├── .gitignore
-├── .next/
-├── package.json
-├── README.md
-└── yarn.lock
-```
 
 ## Deployment
 
@@ -64,16 +44,30 @@ project-folder/
 
 - [NextJS: the React Framework for Production](https://nextjs.org/docs)
 - [Tailwindcss: rapidly build modern websites without ever leaving your HTML](https://tailwindcss.com/)
-- [Jotai: primitive and flexible state management for React.](https://docs.pmnd.rs/jotai/introduction)
-- [next-validations: NextJS API Validations, support Yup, Fastest-Validator, Joi, and more](https://next-validations.productsway.com/)
-- [zod: TypeScript-first schema validation with static type inference](https://github.com/colinhacks/zod)
-- [consola: Elegant Console Logger for Node.js and Browser 🐨](https://github.com/unjs/consola)
 - [Storybook: build bulletproof UI components faster](https://storybook.js.org)
-- [React-hook-form: performance, flexible and extensible forms with easy-to-use validation](https://www.react-hook-form.com/)
-- [react-testing: simple and complete testing utilities that encourage good testing practices](https://testing-library.com/)
-- [React-query: performant and powerful data synchronization for React](https://react-query.tanstack.com/)
-- And other standard tools as [Eslint](https://eslint.org/), [Prettier](https://prettier.io/), [nano-staged](https://github.com/usmanyunusov/nano-staged)
 
 ## Versioning
 
 We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/recruitersrip/app/tags).
+
+## Important Notes
+
+### On jobs data
+
+- When viewing the app for local dev, accessing specific job posts can be tricky since url depends on job-post data.  
+Here are the list of jobs with data:
+  - `/jobs/argent-lead-software-engineer-VKRSXh/details` -> job-post w/o project
+  - `/jobs/tessera-full-stack-engineer-remote-eu-MnKwY1/details` -> job-post with project
+  - `jobs/opensea-senior-software-engineer-full-stack-TnKvW1/details` -> job-post with funding round details
+
+### How to run `app` on local https
+
+1. Create local certs:
+    - Install [mkcert](https://github.com/FiloSottile/mkcert) - `brew install mkcert` or `choco install mkcert`
+    - Run `mkcert -install`
+    - Run `mkcert localhost`
+
+2. Install [local-ssl-proxy](https://github.com/cameronhunter/local-ssl-proxy) - `npm i -g local-ssl-proxy`
+3. Run these commands on separate terminals
+    - `NODE_TLS_REJECT_UNAUTHORIZED=0 yarn dev:ssl` or `NODE_TLS_REJECT_UNAUTHORIZED=0 yarn start:ssl`
+    - `yarn proxy:ssl`

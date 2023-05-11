@@ -1,0 +1,43 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --color-white: 255 255 255;
+    --color-black: 0 0 0;
+    --color-primary: 135 67 255; /* #8743FF */
+    --color-secondary: 102 61 249; /* #663DF9 */
+    --color-tertiary: 65 54 241; /* #4136F1 */
+    --color-quaternary: 214 136 0; /* #D68800 */
+    --color-quinary: 53 43 181;
+
+    --color-dark: 30 30 30;
+    --color-gray: 75 75 75;
+    --color-dark-gray: 52 52 52;
+    --color-darker-gray: 40 40 40;
+    --color-mobile-filters: 36 36 37;
+  }
+}
+
+html {
+  overflow-y: overlay;
+  color: #fff;
+}
+
+.hide-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+
+button:focus {
+  outline: none;
+}
+
+.disable-scroll {
+  overflow: hidden;
+}
