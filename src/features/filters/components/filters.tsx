@@ -24,6 +24,7 @@ import { getOriginString } from '~/shared/utils';
 import {
   FILTER_KIND,
   INIT_FILTER_STATE,
+  OPTION_SEPARATOR,
   seniorityMapping,
 } from '../core/constants';
 import type { FilterConfig } from '../core/types';
@@ -89,7 +90,7 @@ const Filters = ({ jobCount }: Props) => {
     for (const [key, value] of Object.entries(state.filterValues)) {
       if (value) {
         if (key === 'seniority') {
-          const labels = value.split(',');
+          const labels = value.split(OPTION_SEPARATOR);
           const values = [];
           for (const label of labels) {
             values.push(
@@ -99,7 +100,7 @@ const Filters = ({ jobCount }: Props) => {
 
           url.searchParams.set(key, values.join(','));
         } else {
-          url.searchParams.set(key, value);
+          url.searchParams.set(key, value.replaceAll(OPTION_SEPARATOR, ','));
         }
       }
     }

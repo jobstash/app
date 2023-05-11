@@ -89,3 +89,5 @@ export const seniorityMapping = {
   Lead: '4',
   Head: '5',
 };
+
+export const OPTION_SEPARATOR = '__';
