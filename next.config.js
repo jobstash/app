@@ -8,6 +8,7 @@ const { withSentryConfig } = require('@sentry/nextjs');
 const nextConfig = {
   reactStrictMode: true,
   images: {
+    domains: ['frontend.jobstash.xyz', 'app.jobstash.xyz'],
     remotePatterns: [
       {
         protocol: 'https',
@@ -24,6 +25,10 @@ const nextConfig = {
       {
         protocol: 'https',
         hostname: 'frontend.jobstash.xyz',
+      },
+      {
+        protocol: 'https',
+        hostname: 'app.jobstash.xyz',
       },
       {
         protocol: 'https',

@@ -19,6 +19,7 @@ const EmptyResult = ({ prevLink, push }: Props) => {
     <div className="flex flex-col items-center justify-center space-y-8 rounded-3xl bg-white/5 p-8">
       <div className="pt-16">
         <Image
+          priority
           src="https://frontend.jobstash.xyz/empty-result.png"
           quality={100}
           alt="Empty result"
