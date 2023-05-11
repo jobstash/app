@@ -11,11 +11,11 @@ export default SiteMap;
 const generateSiteMap = (jobs: Job[]): string =>
   `<?xml version="1.0" encoding="UTF-8"?>
 		<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-			<url><loc>https://frontend.jobstash.xyz/jobs</loc></url>
+			<url><loc>https://app.jobstash.xyz/jobs</loc></url>
 			${jobs
         .map(
           (job) =>
-            `<url><loc>https://frontend.jobstash.xyz/jobs/${createJobKey(
+            `<url><loc>https://app.jobstash.xyz/jobs/${createJobKey(
               job,
             )}/details</loc></url>`,
         )
