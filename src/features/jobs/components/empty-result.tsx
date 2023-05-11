@@ -20,7 +20,7 @@ const EmptyResult = ({ prevLink, push }: Props) => {
       <div className="pt-16">
         <Image
           priority
-          src="https://frontend.jobstash.xyz/empty-result.png"
+          src="/empty-result.png"
           quality={100}
           alt="Empty result"
           width={418}
