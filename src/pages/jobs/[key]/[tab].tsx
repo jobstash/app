@@ -4,6 +4,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useRef } from 'react';
 
 import { dehydrate, QueryClient } from '@tanstack/react-query';
+import clsx from 'clsx';
 import { useAtom } from 'jotai';
 import NProgress from 'nprogress';
 
@@ -226,10 +227,10 @@ const JobsPage = ({ data: { initJob, fromSSR } }: Props) => {
           />
         </div>
         <div
-          className={
-            'fixed inset-0 z-50 h-screen overflow-y-auto bg-dark p-4 lg:right-0 transition-all lg:top-0 lg:hide-scrollbar lg:w-5/12 lg:px-6 lg:py-8 lg:pr-10 lg:inset-auto' +
-            (activeJob === initJob ? 'active' : '')
-          }
+          className={clsx(
+            'lg:hide-scrollbar fixed inset-0 z-50 h-screen overflow-y-auto bg-dark p-4 transition-all lg:inset-auto lg:right-0 lg:top-0 lg:w-5/12 lg:px-6 lg:py-8 lg:pr-10',
+            { active: activeJob === initJob },
+          )}
         >
           <JobRightPanel job={jobPost} />
         </div>
