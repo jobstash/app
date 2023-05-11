@@ -1,5 +1,5 @@
 export const encodeBase64 = (data: string) =>
-  Buffer.from(data).toString('base64');
+  typeof window === 'undefined' ? '' : window.btoa(data);
 
 export const decodeBase64 = (data: string) =>
-  Buffer.from(data, 'base64').toString('ascii');
+  typeof window === 'undefined' ? '' : window.atob(data);
