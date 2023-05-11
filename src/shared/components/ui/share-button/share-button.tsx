@@ -7,11 +7,7 @@ import { Menu } from '@mantine/core';
 import Button from '../../base/button';
 import { LensterIcon, LinkIcon, ShareIcon, TwitterIcon } from '../../icons';
 
-<<<<<<< HEAD
-const FRONTEND_URL = 'https://frontend.jobstash.xyz';
-=======
 const FRONTEND_URL = 'https://app.jobstash.xyz';
->>>>>>> dev
 
 interface Props {
   jobTitle: string;
