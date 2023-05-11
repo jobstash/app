@@ -59,7 +59,7 @@ const wrapper = cva(
 
 const button = cva(
   [
-    'flex items-center justify-center z-20 relative rounded-lg whitespace-nowrap gap-x-1',
+    'flex items-center justify-center z-20 relative rounded-lg whitespace-nowrap gap-x-2',
   ],
   {
     variants: {

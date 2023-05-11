@@ -24,7 +24,7 @@ module.exports = {
         gray: 'rgb(var(--color-gray) / <alpha-value>)',
         'dark-gray': 'rgb(var(--color-dark-gray) / <alpha-value>)',
         'darker-gray': 'rgb(var(--color-darker-gray) / <alpha-value>)',
-
+        filters: 'rgb(var(--color-mobile-filters) / <alpha-value>)',
         // Tech wrapper skill color pool
         skill1: '#F7FD36',
         skill2: '#CAE402',
