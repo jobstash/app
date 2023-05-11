@@ -1,7 +1,7 @@
 import { ParsedUrlQuery } from 'node:querystring';
 import { Entries } from 'type-fest';
 
-import { FILTER_KIND } from '../core/constants';
+import { FILTER_KIND, OPTION_SEPARATOR } from '../core/constants';
 import type { FilterConfig, FilterParamKey, FilterValues } from '../core/types';
 
 export const initFilterConfigData = (
@@ -63,7 +63,14 @@ export const initFilterConfigData = (
     Record<string, string>
   >) {
     if (allParamKeys.has(key)) {
-      filterValues[key as FilterParamKey] = value;
+      if (multiSelectParamKeys.includes(key)) {
+        filterValues[key as FilterParamKey] = value
+          .replaceAll(', ', '!!!')
+          .replaceAll(',', OPTION_SEPARATOR)
+          .replaceAll('!!!', ', ');
+      } else {
+        filterValues[key as FilterParamKey] = value;
+      }
     }
   }
 
