@@ -29,6 +29,7 @@ const MultiSelectFilter = ({
 }: Props) => {
   const onChange = useCallback(
     (selectedLabels: string[]) => {
+      console.log('selectedLabels =', selectedLabels);
       dispatch({
         type: 'SET_MULTISELECT_FILTER_VALUE',
         payload: {
@@ -41,8 +42,25 @@ const MultiSelectFilter = ({
   );
 
   const { inputValue, inputLabel } = useMemo(() => {
-    const inputValue = value ? value.split(OPTION_SEPARATOR) : [];
+    let inputValue = value ? value.split(OPTION_SEPARATOR) : [];
     const inputValueLength = inputValue.length;
+
+    if (label === 'Seniority') {
+      const newInputValue = [];
+
+      for (const seniorityValue of inputValue) {
+        newInputValue.push(
+          Object.keys(seniorityMapping).find(
+            (key) =>
+              seniorityMapping[key as keyof typeof seniorityMapping] ===
+              seniorityValue,
+          )!,
+        );
+      }
+
+      inputValue = newInputValue;
+    }
+
     const inputLabel = `${label}${
       inputValueLength > 0 ? ' (' + inputValueLength + ')' : ''
     }`;

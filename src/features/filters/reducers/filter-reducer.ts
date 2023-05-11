@@ -1,4 +1,4 @@
-import { INIT_FILTER_STATE, OPTION_SEPARATOR } from '../core/constants';
+import { OPTION_SEPARATOR, seniorityMapping } from '../core/constants';
 import type { FilterAction, FilterState } from '../core/types';
 import { initFilterConfigData } from '../utils';
 
@@ -41,9 +41,17 @@ export const filterReducer = (
 
     case 'SET_MULTISELECT_FILTER_VALUE': {
       const { paramKey, selectedLabels } = payload;
+
       const value =
         selectedLabels.length > 0
-          ? selectedLabels.join(OPTION_SEPARATOR)
+          ? paramKey === 'seniority'
+            ? selectedLabels
+                .map(
+                  (label) =>
+                    seniorityMapping[label as keyof typeof seniorityMapping],
+                )
+                .join(OPTION_SEPARATOR)
+            : selectedLabels.join(OPTION_SEPARATOR)
           : null;
       return {
         ...state,

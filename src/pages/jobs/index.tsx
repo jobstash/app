@@ -87,7 +87,7 @@ export const getServerSideProps: GetServerSideProps<Props> = withCSR(
     return {
       props: {
         dehydratedState,
-        activeJob: jobPosts[0],
+        activeJob: jobPosts[0] ?? null,
       },
     };
   },
