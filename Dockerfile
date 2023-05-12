@@ -37,4 +37,4 @@ USER nextjs
 # EXPOSE 3000
 # ENV PORT 3000
 
-CMD ["node_modules/.bin/next", "start"]
+CMD ["node", "server.js"]
