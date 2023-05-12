@@ -5,6 +5,7 @@ import 'nprogress/nprogress.css';
 import type { AppProps } from 'next/app';
 import NextApp from 'next/app';
 import { useRouter } from 'next/router';
+import { GoogleAnalytics } from 'nextjs-google-analytics';
 import { useEffect, useState } from 'react';
 import { Toaster } from 'react-hot-toast';
 
@@ -104,48 +105,52 @@ const App = ({ Component, pageProps }: AppPropsWithAuth) => {
   }, [router]);
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <Hydrate state={pageProps.dehydratedState}>
-        <WagmiConfig client={connectkitClient}>
-          <SIWEProvider
-            getNonce={siweGetNonce}
-            getSession={siweGetSession}
-            createMessage={siweCreateMessage}
-            verifyMessage={siweVerifyMessage}
-            signOut={siweSignOut}
-            onSignIn={() => {
-              document.dispatchEvent(new Event(EVENT_SIWE_LOGIN));
-            }}
-            onSignOut={() => {
-              document.dispatchEvent(new Event(EVENT_SIWE_LOGOUT));
-            }}
-          >
-            <ConnectKitProvider theme="auto" mode="dark">
-              <WalletAuthProvider>
-                <MantineProvider>
-                  <div
-                    className={`${lato.variable} ${roboto.variable} font-roboto`}
-                  >
-                    {Component.requiredRole ? (
-                      <ProtectedLayout
-                        requiredRole={Component.requiredRole}
-                        requiredFlow={Component.requiredFlow}
-                      >
+    <>
+      <GoogleAnalytics trackPageViews />
+
+      <QueryClientProvider client={queryClient}>
+        <Hydrate state={pageProps.dehydratedState}>
+          <WagmiConfig client={connectkitClient}>
+            <SIWEProvider
+              getNonce={siweGetNonce}
+              getSession={siweGetSession}
+              createMessage={siweCreateMessage}
+              verifyMessage={siweVerifyMessage}
+              signOut={siweSignOut}
+              onSignIn={() => {
+                document.dispatchEvent(new Event(EVENT_SIWE_LOGIN));
+              }}
+              onSignOut={() => {
+                document.dispatchEvent(new Event(EVENT_SIWE_LOGOUT));
+              }}
+            >
+              <ConnectKitProvider theme="auto" mode="dark">
+                <WalletAuthProvider>
+                  <MantineProvider>
+                    <div
+                      className={`${lato.variable} ${roboto.variable} font-roboto`}
+                    >
+                      {Component.requiredRole ? (
+                        <ProtectedLayout
+                          requiredRole={Component.requiredRole}
+                          requiredFlow={Component.requiredFlow}
+                        >
+                          <Component {...pageProps} />
+                        </ProtectedLayout>
+                      ) : (
                         <Component {...pageProps} />
-                      </ProtectedLayout>
-                    ) : (
-                      <Component {...pageProps} />
-                    )}
-                  </div>
-                  <Toaster position="bottom-center" />
-                </MantineProvider>
-              </WalletAuthProvider>
-            </ConnectKitProvider>
-          </SIWEProvider>
-        </WagmiConfig>
-        <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
-      </Hydrate>
-    </QueryClientProvider>
+                      )}
+                    </div>
+                    <Toaster position="bottom-center" />
+                  </MantineProvider>
+                </WalletAuthProvider>
+              </ConnectKitProvider>
+            </SIWEProvider>
+          </WagmiConfig>
+          <ReactQueryDevtools initialIsOpen={false} position="bottom-right" />
+        </Hydrate>
+      </QueryClientProvider>
+    </>
   );
 };
 
