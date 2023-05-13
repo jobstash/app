@@ -13,7 +13,7 @@ import { numFormatter } from '~/shared/utils';
 
 export const createCompetitorTags = (competitor: Competitor) => {
   const {
-    defillamaSlug,
+    defiLlamaSlug,
     url,
     telegram,
     twitter,
@@ -30,9 +30,9 @@ export const createCompetitorTags = (competitor: Competitor) => {
   const topTags: TagElement[] = [];
   const bottomTags: TagElement[] = [];
 
-  if (defillamaSlug) {
+  if (defiLlamaSlug) {
     topTags.push({
-      text: defillamaSlug,
+      text: defiLlamaSlug,
       icon: null,
       showLinkIcon: true,
       asLink: true,
