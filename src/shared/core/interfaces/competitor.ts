@@ -1,16 +1,15 @@
 export interface Competitor {
-  defillamaSlug: string;
+  defiLlamaSlug: string;
   isMainnet: boolean; // Values from middleware are true / "TRUE"
   tokenSymbol: string;
   createdTimestamp: number;
   telegram?: string;
-  defillamaId: string;
+  defiLlamaId: string;
   description: string;
   updatedTimestamp: number;
   orgId?: string;
   url: string;
   tokenAddress?: string;
-  defiLlamaId?: string;
   twitter?: string;
   discord?: string;
   docs?: string;
@@ -21,7 +20,7 @@ export interface Competitor {
   id: string;
   category?: string;
   tvl?: number;
-  defillamaParent?: string;
+  defiLlamaParent?: string;
   monthlyVolume?: number;
   monthlyRevenue?: number;
   monthlyFees?: number;

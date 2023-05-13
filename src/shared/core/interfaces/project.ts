@@ -1,9 +1,9 @@
 export interface Project {
   id: string;
 
-  defillamaId?: string;
-  defillamaSlug?: string;
-  defillamaParent?: string;
+  defiLlamaId?: string;
+  defiLlamaSlug?: string;
+  defiLlamaParent?: string;
 
   name: string;
   description: string;
