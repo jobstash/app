@@ -108,10 +108,6 @@ const JobList = ({
       </div>
     );
 
-  if (error) {
-    return <p>error = {(error as Error).message}</p>;
-  }
-
   if (jobs.length === 0) {
     return (
       <div className="py-8">
@@ -134,6 +130,11 @@ const JobList = ({
         <div ref={ref} className="flex items-center justify-center pb-10">
           {isFetchingNextPage && <Loader />}
           {!hasNextPage && <p>No more job posts to load</p>}
+        </div>
+      )}
+      {(error as Error)?.message && (
+        <div className="py-8">
+          <p>error = {(error as Error).message}</p>
         </div>
       )}
     </div>
