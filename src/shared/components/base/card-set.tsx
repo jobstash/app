@@ -10,15 +10,15 @@ import Text from './text';
 
 const cardset = cva(
   [
-    'flex justify-center items-center gap-x-1 whitespace-nowrap',
-    'rounded w-fit h-[26px]',
+    'flex items-start gap-x-2 rounded mt-1',
     'transition-color duration-200 ease-in-out transform translate-x-0 translate-y-0',
+    '[&>svg]:mt-[2px]',
   ],
   {
     variants: {
       hasLink: {
         true: [
-          'bg-white/10 px-2 py-1 cursor-pointer relative',
+          'bg-white/10 px-2 py-1 cursor-pointer relative mt-0',
           'before:transition-all before:content-[""] before:rounded before:z-20 before:absolute before:inset-0 before:border before:border-white/40 before:opacity-0 hover:before:opacity-100 hover:bg-white/20',
         ],
         false: 'bg-none cursor-default',

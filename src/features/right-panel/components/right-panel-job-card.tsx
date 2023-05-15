@@ -33,7 +33,7 @@ export const RightPanelJobCard = ({ job, technologies }: Props) => {
 
   return (
     <div className="flex flex-col gap-y-4 p-6">
-      <div className="flex flex-col items-start justify-center gap-y-4">
+      <div className="flex flex-col items-start gap-y-4">
         <div className="flex h-fit w-full justify-between">
           <Heading size="md" fw="semibold">
             {jobTitle}
@@ -46,7 +46,7 @@ export const RightPanelJobCard = ({ job, technologies }: Props) => {
           </div>
         </div>
 
-        <div className="flex flex-wrap gap-x-4 pl-0.5">
+        <div className="flex flex-wrap gap-x-4 gap-y-1">
           {tags.map(({ text, link, icon }) => (
             <CardSet key={text} link={link} icon={icon}>
               {capitalize(text)}

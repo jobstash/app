@@ -72,6 +72,7 @@ export const SideBar = () => {
         <Text color="dimmed" className="block pt-8">
           Discover
         </Text>
+        <br />
         <div className="inline-flex space-y-3 pt-3 [&>*]:bg-transparent  [&>*]:bg-none [&>*]:hover:bg-transparent">
           <Bartab
             isActive={asPath.slice(0, 5) === '/jobs'}
