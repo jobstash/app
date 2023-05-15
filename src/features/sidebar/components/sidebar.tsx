@@ -45,7 +45,7 @@ export const SideBar = () => {
       <div
         className="lg:p-4 lg:pl-1"
         onClick={() => {
-          push('/', undefined, { shallow: true });
+          push('/jobs', undefined, { shallow: true });
           NProgress.start();
         }}
       >
