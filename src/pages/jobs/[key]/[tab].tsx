@@ -206,7 +206,7 @@ const JobsPage = ({ data: { initJob, fromSSR } }: Props) => {
           image={`${NEXT_PUBLIC_FRONTEND_URL}/JobStash-Wordmark-800.png`}
           twitter={{
             site: '@jobstash_xyz',
-            image: `https://www.google.com/s2/favicons?domain=${jobPost.organization.url}&sz=128`,
+            image: `${NEXT_PUBLIC_FRONTEND_URL}/JobStash.svg`,
           }}
           jsonLd={getJsonLd()}
         />
