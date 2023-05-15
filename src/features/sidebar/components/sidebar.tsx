@@ -12,7 +12,6 @@ import {
   Brand,
   Button,
   CloseIcon,
-  ConnectWalletButton,
   JobsSidebarIcon,
   MobileMenuButton,
   Text,
