@@ -5,7 +5,7 @@ import 'nprogress/nprogress.css';
 import type { AppProps } from 'next/app';
 import NextApp from 'next/app';
 import { useRouter } from 'next/router';
-import { GoogleAnalytics } from 'nextjs-google-analytics';
+import Script from 'next/script';
 import { useEffect, useState } from 'react';
 import { Toaster } from 'react-hot-toast';
 
@@ -34,8 +34,13 @@ import {
   siweSignOut,
   siweVerifyMessage,
 } from '~/features/auth/utils';
-import { lato, roboto } from '~/shared/core/constants';
+import {
+  lato,
+  NEXT_PUBLIC_GA_MEASUREMENT_ID,
+  roboto,
+} from '~/shared/core/constants';
 import { MantineProvider } from '~/shared/mantine';
+import { gaPageView } from '~/shared/utils';
 
 NProgress.configure({
   template: '<div class="bar" role="bar"><div class="peg"></div></div></div>',
@@ -78,22 +83,32 @@ const App = ({ Component, pageProps }: AppPropsWithAuth) => {
   const router = useRouter();
   useEffect(() => {
     const shouldDisplay = !nProgressExcludedPathnames.has(router.pathname);
-    const handleStart = () => {
+    const startNProgress = () => {
       if (shouldDisplay) NProgress.start();
     };
 
-    const handleStop = () => {
+    const stopNProgress = () => {
       if (shouldDisplay) NProgress.done();
     };
 
+    const handleStart = () => {
+      startNProgress();
+    };
+
+    const handleComplete = (url: string) => {
+      console.log('COMPELETE url =', url);
+      stopNProgress();
+      gaPageView(url);
+    };
+
     router.events.on('routeChangeStart', handleStart);
-    router.events.on('routeChangeComplete', handleStop);
-    router.events.on('routeChangeError', handleStop);
+    router.events.on('routeChangeComplete', handleComplete);
+    router.events.on('routeChangeError', stopNProgress);
 
     return () => {
       router.events.off('routeChangeStart', handleStart);
-      router.events.off('routeChangeComplete', handleStop);
-      router.events.off('routeChangeError', handleStop);
+      router.events.off('routeChangeComplete', handleComplete);
+      router.events.off('routeChangeError', stopNProgress);
     };
   }, [router]);
 
@@ -106,8 +121,24 @@ const App = ({ Component, pageProps }: AppPropsWithAuth) => {
 
   return (
     <>
-      <GoogleAnalytics trackPageViews />
-
+      <Script
+        strategy="afterInteractive"
+        src={`https://www.googletagmanager.com/gtag/js?id=${NEXT_PUBLIC_GA_MEASUREMENT_ID}`}
+      />
+      <Script
+        id="gtag-init"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+            gtag('config', '${NEXT_PUBLIC_GA_MEASUREMENT_ID}', {
+              page_path: window.location.pathname,
+            });
+          `,
+        }}
+      />
       <QueryClientProvider client={queryClient}>
         <Hydrate state={pageProps.dehydratedState}>
           <WagmiConfig client={connectkitClient}>
