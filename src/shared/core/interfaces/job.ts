@@ -1,44 +1,24 @@
 export interface JobPost {
-  /** Each job-post has an id */
   id: string;
-
-  /** Title for job-post card */
+  benefits: null | string;
+  extractedTimestamp: number;
+  role: null | string;
+  offersTokenAllocation?: boolean;
   jobTitle: string;
-
-  /** Id slug for url */
+  salaryCurrency?: string;
   shortUUID: string;
-
-  // Timestamp for job-post card
-  jobCreatedTimestamp: number; // Refinement: receive formatted string
-  jobFoundTimestamp: number; // Refinement: unused
-  extractedTimestamp: number; // Refinement: unused
-
-  /** Seniority tag for job-post card */
-  seniority?: string; // Refinement: receive formatted string, must be required
-
-  // Salaries
-  minSalaryRange?: number; // Refinement: receive formatted string
-  maxSalaryRange?: number; // Refinement: receive formatted string
-
-  /** Location tag for job-post card */
-  jobLocation?: string;
-
-  /** Commitment tag for job-post card */
-  jobCommitment?: string | null;
-
-  /** Apply button for right-panel */
+  jobCreatedTimestamp: number;
+  team: null | string;
+  aiDetectedTechnologies: string;
+  jobLocation: string;
+  culture: null | string;
+  jobFoundTimestamp: number;
+  jobPageUrl: string;
   jobApplyPageUrl: string;
-  jobPageUrl?: string; // Refinement: unused
-
-  /** Role section for right-panel */
-  role: string;
-
-  /** Team section for right-panel */
-  team?: string;
-
-  /** Benefits section for right-panel */
-  benefits?: string;
-
-  /** Culture section for right-panel */
-  culture?: string | null;
+  maxSalaryRange?: number;
+  medianSalary?: number;
+  seniority: string;
+  minSalaryRange?: number;
+  jobCommitment: null | string;
+  paysInCrypto?: boolean;
 }

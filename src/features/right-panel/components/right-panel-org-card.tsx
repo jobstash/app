@@ -58,9 +58,11 @@ export const RightPanelOrgCard = ({ org, fundingRounds, investors }: Props) => {
                     >{`Funding Date: ${createOrgFundingDateString(
                       date,
                     )}`}</CardSet>
-                    <CardSet icon={<MoneyIcon />}>
-                      {`Last Amount: $${numFormatter.format(raisedAmount)}M`}
-                    </CardSet>
+                    {raisedAmount && (
+                      <CardSet icon={<MoneyIcon />}>
+                        {`Last Amount: $${numFormatter.format(raisedAmount)}M`}
+                      </CardSet>
+                    )}
                   </div>
                   {i !== fundingRounds.length - 1 && (
                     <div className="flex h-fit flex-col justify-center">
