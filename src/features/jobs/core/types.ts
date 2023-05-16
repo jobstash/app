@@ -10,7 +10,7 @@ import type {
 
 export interface Job {
   organization: Organization;
-  project?: Project;
+  project: Project | null;
   jobpost: JobPost;
   technologies: Technology[];
   categories: Category[];

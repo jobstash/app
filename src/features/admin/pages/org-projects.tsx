@@ -85,7 +85,6 @@ const OrgProjectsPage = () => {
             url,
             description,
             tokenSymbol,
-            tokenAddress,
             category,
             teamSize,
             tvl,
@@ -139,14 +138,7 @@ const OrgProjectsPage = () => {
 
                 <Flex gap="lg" wrap="wrap" align="center">
                   {tokenSymbol && (
-                    <CardSet
-                      icon={<CurrencyCircleDollarIcon />}
-                      link={
-                        tokenAddress
-                          ? `https://etherscan.io/token/${tokenAddress}`
-                          : url
-                      }
-                    >
+                    <CardSet icon={<CurrencyCircleDollarIcon />} link={url}>
                       {`Token: $${tokenSymbol}`}
                     </CardSet>
                   )}

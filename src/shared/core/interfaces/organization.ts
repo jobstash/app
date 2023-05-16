@@ -2,19 +2,17 @@ export interface Organization {
   id: string;
   orgId: string;
   name: string;
-  altName?: string;
+  altName: string;
   description: string;
   summary: string;
   location: string;
   url: string;
-  logoUrl?: string;
-  githubOrganization?: string;
-  headCount?: number;
+  teamSize: number | null;
+  jobsiteLink: string;
+  github: string;
   twitter?: string;
+  telegram?: string;
   discord?: string;
   docs?: string;
-  telegram?: string;
-
-  createdTimestamp: number;
-  updatedTimestamp?: number;
+  headcount?: string;
 }

@@ -1,41 +1,28 @@
 export interface Project {
-  id: string;
-
-  defiLlamaId?: string;
-  defiLlamaSlug?: string;
-  defiLlamaParent?: string;
-
-  name: string;
+  isMainnet: boolean;
+  telegram: string;
   description: string;
   url: string;
+  orgId: string;
+  twitter: string;
+  discord: string;
+  docs: string;
+  teamSize: number | null;
+  name: string;
+  githubOrganization: string;
   logo: string;
-
-  githubOrganization?: string;
-  twitter?: string;
-  discord?: string;
-  docs?: string;
-  telegram?: string;
-  teamSize?: number;
-
-  isMainNet: boolean;
-  tokenAddress?: string;
-  tokenSymbol?: string;
-
-  isInConstruction?: boolean;
-
+  id: string;
+  category?: string;
+  tokenSymbol: null;
+  defiLlamaId?: string;
+  cmcId?: string;
   tvl?: number;
+  updatedTimestamp?: number;
+  monthlyRevenue?: number;
+  monthlyFees?: number;
   monthlyVolume?: number;
   monthlyActiveUsers?: number;
-  monthlyFees?: number;
-  monthlyRevenue?: number;
-
-  createdTimestamp: number;
-
-  updatedTimestamp?: number;
-  category?: string;
-
-  //
-  // hacks: Hack[];
-  // audits: string[];
-  // chains: string[];
+  chains: string[];
+  hacks: string[];
+  audits: string[];
 }

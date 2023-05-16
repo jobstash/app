@@ -70,8 +70,7 @@ const OrgProjectDetailsPage = () => {
 
   if (error) return <pre>error = {JSON.stringify(error)}</pre>;
 
-  const { id, logo, url, name, description, category, teamSize, tokenAddress } =
-    data;
+  const { id, logo, url, name, description, category, teamSize } = data;
 
   const logoSrc =
     logo.length > 0
@@ -276,20 +275,24 @@ const OrgProjectDetailsPage = () => {
               />
             </div>
 
-            <div className="col-span-3">
-              <Heading fw="semibold" size="sm">
-                Team Size
-              </Heading>
-            </div>
-            <div className="col-span-9">
-              <NumberInput
-                placeholder="Your organization's team size"
-                value={teamSize}
-                size="lg"
-                radius="md"
-                onChange={() => null}
-              />
-            </div>
+            {teamSize && (
+              <>
+                <div className="col-span-3">
+                  <Heading fw="semibold" size="sm">
+                    Team Size
+                  </Heading>
+                </div>
+                <div className="col-span-9">
+                  <NumberInput
+                    placeholder="Your organization's team size"
+                    value={teamSize}
+                    size="lg"
+                    radius="md"
+                    onChange={() => null}
+                  />
+                </div>
+              </>
+            )}
 
             <div className="col-span-3">
               <Heading fw="semibold" size="sm">
