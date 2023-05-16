@@ -1,8 +1,8 @@
 export interface FundingRound {
   id: string;
   date: number;
-  raisedAmount: number;
+  raisedAmount?: number;
+  createdTimestamp: number;
   roundName?: string;
   sourceLink?: string;
-  createdTimestamp: number;
 }

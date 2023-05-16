@@ -32,7 +32,6 @@ export const createRightPanelProjectCardTags = (
     monthlyActiveUsers,
     monthlyFees,
     monthlyRevenue,
-    defiLlamaSlug,
     teamSize,
   } = project;
 
@@ -94,15 +93,6 @@ export const createRightPanelProjectCardTags = (
     //   showLinkIcon: false,
     // },
   ];
-
-  if (defiLlamaSlug) {
-    projectTags.push({
-      text: defiLlamaSlug,
-      icon: null,
-      link: url,
-      asLink: true,
-    });
-  }
 
   if (categories.length > 0) {
     projectTags.push({

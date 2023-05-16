@@ -83,10 +83,7 @@ const JobsPage = ({ data: { initJob, fromSSR } }: Props) => {
   const getJsonLd = () => {
     if (jobPost) {
       const { organization, jobpost, technologies } = jobPost;
-      const imageLink =
-        organization.logoUrl && organization.logoUrl.length > 0
-          ? organization.logoUrl
-          : `https://www.google.com/s2/favicons?domain=${organization.url}&sz=128`;
+      const imageLink = `https://www.google.com/s2/favicons?domain=${organization.url}&sz=128`;
 
       let description = `<p>Role</p>\n\n<p>${jobpost.role}</p>\n\n`;
       if (jobpost.team) {
@@ -131,8 +128,11 @@ const JobsPage = ({ data: { initJob, fromSSR } }: Props) => {
         employmentType: jobpost.jobCommitment
           ? jobpost.jobCommitment.toUpperCase()
           : 'FULL_TIME',
-        responsibilities: jobpost.role,
       };
+
+      if (jobpost.role) {
+        jsonLd['responsibilities'] = jobpost.role;
+      }
 
       if (jobpost.jobLocation) {
         const isRemote = jobpost.jobLocation.toLowerCase().includes('remote');
@@ -201,12 +201,17 @@ const JobsPage = ({ data: { initJob, fromSSR } }: Props) => {
       {jobPost && (
         <MetaData
           title={titleMetaData}
-          description={jobPost.jobpost.role}
+          description={
+            jobPost.jobpost.role ??
+            jobPost.jobpost.benefits ??
+            jobPost.jobpost.team ??
+            jobPost.jobpost.jobTitle
+          }
           url={urlMetaData}
           image={`${NEXT_PUBLIC_FRONTEND_URL}/JobStash-Wordmark-800.png`}
           twitter={{
             site: '@jobstash_xyz',
-            image: `https://www.google.com/s2/favicons?domain=${jobPost.organization.url}&sz=128`,
+            image: `${NEXT_PUBLIC_FRONTEND_URL}/JobStash.svg`,
           }}
           jsonLd={getJsonLd()}
         />
