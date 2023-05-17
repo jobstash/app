@@ -4,6 +4,7 @@ import 'nprogress/nprogress.css';
 
 import type { AppProps } from 'next/app';
 import NextApp from 'next/app';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import Script from 'next/script';
 import { useEffect, useState } from 'react';
@@ -121,6 +122,11 @@ const App = ({ Component, pageProps }: AppPropsWithAuth) => {
 
   return (
     <>
+      <Head>
+        <link rel="manifest" href="/site.webmanifest" />
+        <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
+        <link rel="icon" href="/favicon.ico" sizes="any" />
+      </Head>
       <Script
         strategy="afterInteractive"
         src={`https://www.googletagmanager.com/gtag/js?id=${NEXT_PUBLIC_GA_MEASUREMENT_ID}`}
