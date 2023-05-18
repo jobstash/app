@@ -15,15 +15,15 @@ import { capitalize } from '~/shared/utils';
 import { createRightPanelJobDescriptions } from '../utils';
 
 interface Props {
-  job: JobPost;
+  jobListResult: JobPost;
   technologies: Technology[];
 }
 
-export const RightPanelJobCard = ({ job, technologies }: Props) => {
-  const { jobTitle, jobApplyPageUrl, jobPageUrl } = job;
+export const RightPanelJobCard = ({ jobListResult, technologies }: Props) => {
+  const { jobTitle, jobApplyPageUrl, jobPageUrl } = jobListResult;
 
-  const tags = createJobTags(job);
-  const descriptions = createRightPanelJobDescriptions(job);
+  const tags = createJobTags(jobListResult);
+  const descriptions = createRightPanelJobDescriptions(jobListResult);
 
   const onClick = () => {
     if (typeof window !== 'undefined') {

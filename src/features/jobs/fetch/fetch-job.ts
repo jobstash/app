@@ -6,11 +6,11 @@ import {
 } from '~/shared/core/constants';
 import { sentryMessage } from '~/shared/utils';
 
-import { Job } from '../core/types';
+import { JobListResult } from '../core/types';
 
 const SENTRY_LABEL = `fetchJobPost`;
 
-export const fetchJob = async (shortUuid: string): Promise<Job> => {
+export const fetchJob = async (shortUuid: string): Promise<JobListResult> => {
   const res = await fetch(`${NEXT_PUBLIC_MW_URL}/jobs/details/${shortUuid}`);
 
   if (!res.ok) {
@@ -18,7 +18,7 @@ export const fetchJob = async (shortUuid: string): Promise<Job> => {
     throw new Error(ERR_INTERNAL);
   }
 
-  let data: Job;
+  let data: JobListResult;
 
   try {
     data = await res.json();

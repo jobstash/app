@@ -1,8 +1,9 @@
 import { slugify } from '~/shared/utils';
 
-import { Job } from '../core/types';
+import { JobListResult } from '../core/types';
 
 export const createJobKey = ({
   organization: { name: orgName },
-  jobpost: { shortUUID, jobTitle },
-}: Job) => `${slugify(`${orgName} ${jobTitle} `)}${shortUUID}`;
+  shortUUID,
+  jobTitle,
+}: JobListResult) => `${slugify(`${orgName} ${jobTitle} `)}${shortUUID}`;

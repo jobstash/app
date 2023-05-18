@@ -2,7 +2,7 @@ import { memo } from 'react';
 
 import clsx from 'clsx';
 
-import type { Job } from '~/features/jobs/core/types';
+import type { JobListResult } from '~/features/jobs/core/types';
 import {
   TEXT_ROUTE_TAB_COMPETITORS,
   TEXT_ROUTE_TAB_DETAILS,
@@ -16,12 +16,13 @@ import RightPanelCompetitorsCards from '../right-panel-competitors-cards';
 import { RightPanelJobCard } from '../right-panel-job-card';
 import { RightPanelOrgCard } from '../right-panel-org-card';
 import { RightPanelProjectCard } from '../right-panel-project-card';
+import RightPanelProjectCards from '../right-panel-project-cards';
 import RightPanelRepoCards from '../right-panel-repo-cards';
 
 interface Props {
   tabSegment: string;
   isPending: boolean;
-  job: Job;
+  jobListResult: JobListResult;
   repos: Repository[] | undefined;
   competitors: Competitor[] | undefined;
 }
@@ -29,24 +30,23 @@ interface Props {
 const JobRightPanelCard = ({
   tabSegment,
   isPending,
-  job: {
-    jobpost,
-    organization,
-    project,
-    technologies,
-    fundingRounds,
-    investors,
-    categories,
-  },
+  jobListResult,
   repos,
   competitors,
 }: Props) => {
+  const { organization, technologies } = jobListResult;
+  const { projects } = organization;
+
   if (tabSegment === TEXT_ROUTE_TAB_COMPETITORS) {
     return <RightPanelCompetitorsCards competitors={competitors ?? []} />;
   }
 
   if (tabSegment === TEXT_ROUTE_TAB_REPOSITORIES) {
     return <RightPanelRepoCards isPending={isPending} repos={repos ?? []} />;
+  }
+
+  if (tabSegment === TEXT_ROUTE_TAB_PROJECT) {
+    return <RightPanelProjectCards projects={projects} />;
   }
 
   return (
@@ -58,20 +58,13 @@ const JobRightPanelCard = ({
     >
       <div className="rounded-3xl bg-darker-gray">
         {tabSegment === TEXT_ROUTE_TAB_DETAILS && (
-          <RightPanelJobCard job={jobpost} technologies={technologies} />
+          <RightPanelJobCard
+            jobListResult={jobListResult}
+            technologies={technologies}
+          />
         )}
         {tabSegment === TEXT_ROUTE_TAB_ORGANIZATION && (
-          <RightPanelOrgCard
-            org={organization}
-            fundingRounds={fundingRounds}
-            investors={investors}
-          />
-        )}
-        {project && tabSegment === TEXT_ROUTE_TAB_PROJECT && (
-          <RightPanelProjectCard
-            project={project}
-            categories={categories ?? []}
-          />
+          <RightPanelOrgCard org={organization} />
         )}
       </div>
     </div>

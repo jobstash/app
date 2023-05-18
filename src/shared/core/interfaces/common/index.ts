@@ -1,3 +1,4 @@
+export * from './audit';
 export * from './category';
 export * from './chain';
 export * from './funding-round';

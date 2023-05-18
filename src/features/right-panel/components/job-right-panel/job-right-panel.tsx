@@ -1,7 +1,7 @@
 import { memo, useEffect, useTransition } from 'react';
 
 import { useUrlFilterParams } from '~/features/filters/hooks';
-import { Job } from '~/features/jobs/core/types';
+import { JobListResult } from '~/features/jobs/core/types';
 import { useCompetitorsQuery } from '~/features/projects/hooks';
 import { useReposQuery } from '~/features/repos/hooks';
 import {
@@ -20,10 +20,10 @@ import JobRightPanelTabs from './job-right-panel-tabs';
 import JobRightPanelWrapper from './job-right-panel-wrapper';
 
 interface Props {
-  job?: Job | null;
+  jobListResult?: JobListResult | null;
 }
 
-const JobRightPanel = ({ job }: Props) => {
+const JobRightPanel = ({ jobListResult }: Props) => {
   const { segments, push } = useRouteSegments();
 
   useEffect(() => {
@@ -53,18 +53,21 @@ const JobRightPanel = ({ job }: Props) => {
       });
     });
 
-  const { data: repos } = useReposQuery(job?.organization.orgId);
+  const { data: repos } = useReposQuery(jobListResult?.organization.orgId);
 
-  const { data: competitors } = useCompetitorsQuery(job?.project?.id);
+  // TODO: competitors
+  // const { data: competitors } = useCompetitorsQuery(jobListResult?.project?.id);
 
-  if (!job)
+  if (!jobListResult)
     return (
       <div className="flex h-full w-full items-center justify-center">
         <Loader />
       </div>
     );
 
-  const { organization, project, fundingRounds } = job;
+  const { organization } = jobListResult;
+  const { projects, fundingRounds } = organization;
+
   return (
     <JobRightPanelWrapper>
       <div className="absolute top-0 h-0" id={ID_TOP_RIGHT_PANEL} />
@@ -86,17 +89,21 @@ const JobRightPanel = ({ job }: Props) => {
       <JobRightPanelTabs
         tab={segments.tab}
         isPending={isPending}
-        hasProject={Boolean(project)}
+        projectCount={projects.length}
         repoCount={repos?.length}
-        competitorsCount={competitors?.length}
+        //
+        // competitorsCount={competitors?.length}
+        competitorsCount={0}
         onClickTab={onClickTab}
       />
       <JobRightPanelCard
-        job={job}
+        jobListResult={jobListResult}
         repos={repos}
         tabSegment={segments.tab}
         isPending={isPending}
-        competitors={competitors}
+        //
+        // competitors={competitors}
+        competitors={undefined}
       />
     </JobRightPanelWrapper>
   );

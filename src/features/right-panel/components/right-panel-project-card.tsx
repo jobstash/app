@@ -15,11 +15,11 @@ import { Category, Project } from '~/shared/core/interfaces';
 import { createRightPanelProjectCardTags } from '../utils';
 
 interface Props {
-  project?: Project;
-  categories: Category[];
+  project: Project;
 }
 
-export const RightPanelProjectCard = ({ project, categories }: Props) => {
+export const RightPanelProjectCard = ({ project }: Props) => {
+  const { categories } = project;
   const { push } = useRouter();
 
   if (!project) return null;
@@ -29,113 +29,119 @@ export const RightPanelProjectCard = ({ project, categories }: Props) => {
     createRightPanelProjectCardTags(project, categories);
 
   return (
-    <div className="flex flex-col gap-5 p-6">
-      <div className="flex flex-col gap-5">
-        <div className="flex flex-col gap-5">
-          <div className="flex items-center justify-between">
-            <LogoTitle
-              size="lg"
-              title={name}
-              avatarProps={{
-                src:
-                  logo && logo.length > 0
-                    ? logo
-                    : `https://www.google.com/s2/favicons?domain=${url}&sz=128`,
-                alt: name,
-              }}
-            />
-            <div className="flex gap-x-4">
-              {/** TODO: Bookmark, Share IconButton here */}
+    <div className="mt-8 rounded-3xl bg-gradient-to-l from-primary to-tertiary p-0.5">
+      <div className="rounded-3xl bg-darker-gray">
+        <div className="flex flex-col gap-5 p-6">
+          <div className="flex flex-col gap-5">
+            <div className="flex flex-col gap-5">
+              <div className="flex items-center justify-between">
+                <LogoTitle
+                  size="lg"
+                  title={name}
+                  avatarProps={{
+                    src:
+                      logo && logo.length > 0
+                        ? logo
+                        : `https://www.google.com/s2/favicons?domain=${url}&sz=128`,
+                    alt: name,
+                  }}
+                />
+                <div className="flex gap-x-4">
+                  {/** TODO: Bookmark, Share IconButton here */}
+                </div>
+              </div>
+
+              {projectSocialTags.length > 0 && (
+                <div className="flex flex-wrap items-center gap-4">
+                  {projectSocialTags.map(
+                    ({ text, icon, link, showLinkIcon }) => (
+                      <CardSet
+                        key={text}
+                        link={link}
+                        icon={icon}
+                        showLinkIcon={showLinkIcon}
+                      >
+                        {text}
+                      </CardSet>
+                    ),
+                  )}
+                </div>
+              )}
             </div>
-          </div>
 
-          {projectSocialTags.length > 0 && (
-            <div className="flex flex-wrap items-center gap-4">
-              {projectSocialTags.map(({ text, icon, link, showLinkIcon }) => (
-                <CardSet
-                  key={text}
-                  link={link}
-                  icon={icon}
-                  showLinkIcon={showLinkIcon}
-                >
-                  {text}
-                </CardSet>
-              ))}
+            <div className="flex h-4 flex-col justify-center">
+              <hr className="border-t border-white/10" />
             </div>
-          )}
-        </div>
 
-        <div className="flex h-4 flex-col justify-center">
-          <hr className="border-t border-white/10" />
-        </div>
-
-        <div className="flex flex-col gap-5">
-          <div className="flex flex-col gap-2">
-            <Heading size="sm" fw="semibold">
-              Description
-            </Heading>
-            <Text color="dimmed">{description}</Text>
-          </div>
-        </div>
-
-        {projectTags.length > 0 && (
-          <>
-            <hr className="border-t border-white/10" />
-
-            <div className="flex flex-wrap items-center gap-4">
-              {projectTags.map(({ text, icon, link, showLinkIcon }) => (
-                <CardSet
-                  key={text}
-                  link={link}
-                  icon={icon}
-                  showLinkIcon={showLinkIcon}
-                >
-                  {text}
-                </CardSet>
-              ))}
+            <div className="flex flex-col gap-5">
+              <div className="flex flex-col gap-2">
+                <Heading size="sm" fw="semibold">
+                  Description
+                </Heading>
+                <Text color="dimmed">{description}</Text>
+              </div>
             </div>
-          </>
-        )}
 
-        {projectTvlTags.length > 0 && (
-          <>
-            <hr className="border-t border-white/10" />
+            {projectTags.length > 0 && (
+              <>
+                <hr className="border-t border-white/10" />
 
-            <div className="flex flex-wrap items-center gap-4">
-              {projectTvlTags.map(({ text, icon, link, showLinkIcon }) => (
-                <CardSet
-                  key={text}
-                  link={link}
-                  icon={icon}
-                  showLinkIcon={showLinkIcon}
-                >
-                  {text}
-                </CardSet>
-              ))}
-            </div>
-          </>
-        )}
+                <div className="flex flex-wrap items-center gap-4">
+                  {projectTags.map(({ text, icon, link, showLinkIcon }) => (
+                    <CardSet
+                      key={text}
+                      link={link}
+                      icon={icon}
+                      showLinkIcon={showLinkIcon}
+                    >
+                      {text}
+                    </CardSet>
+                  ))}
+                </div>
+              </>
+            )}
 
-        {projectAuditTags.length > 0 && (
-          <>
-            <hr className="border-t border-white/10" />
+            {projectTvlTags.length > 0 && (
+              <>
+                <hr className="border-t border-white/10" />
 
-            <div className="flex flex-wrap items-center gap-4">
-              {projectAuditTags.map(({ text, icon, link, showLinkIcon }) => (
-                <CardSet
-                  key={text}
-                  link={link}
-                  icon={icon}
-                  showLinkIcon={showLinkIcon}
-                >
-                  {text}
-                </CardSet>
-              ))}
-            </div>
-          </>
-        )}
+                <div className="flex flex-wrap items-center gap-4">
+                  {projectTvlTags.map(({ text, icon, link, showLinkIcon }) => (
+                    <CardSet
+                      key={text}
+                      link={link}
+                      icon={icon}
+                      showLinkIcon={showLinkIcon}
+                    >
+                      {text}
+                    </CardSet>
+                  ))}
+                </div>
+              </>
+            )}
 
-        {/* <div className="flex h-4 flex-col justify-center">
+            {projectAuditTags.length > 0 && (
+              <>
+                <hr className="border-t border-white/10" />
+
+                <div className="flex flex-wrap items-center gap-4">
+                  {projectAuditTags.map(
+                    ({ text, icon, link, showLinkIcon }) => (
+                      <CardSet
+                        key={text}
+                        link={link}
+                        icon={icon}
+                        showLinkIcon={showLinkIcon}
+                      >
+                        {text}
+                      </CardSet>
+                    ),
+                  )}
+                </div>
+              </>
+            )}
+
+            {/* <div className="flex h-4 flex-col justify-center">
           <hr className="border-t border-white/10" />
         </div>
 
@@ -146,11 +152,11 @@ export const RightPanelProjectCard = ({ project, categories }: Props) => {
           </CardSet>
         </div> */}
 
-        <div className="flex h-4 flex-col justify-center">
-          <hr className="border-t border-white/10" />
-        </div>
+            <div className="flex h-4 flex-col justify-center">
+              <hr className="border-t border-white/10" />
+            </div>
 
-        {/* <div className="flex flex-col gap-5">
+            {/* <div className="flex flex-col gap-5">
           <div className="flex flex-col gap-2">
             <Heading size="sm" fw="semibold">
               Technologies
@@ -175,15 +181,17 @@ export const RightPanelProjectCard = ({ project, categories }: Props) => {
 
          */}
 
-        <Button
-          variant="primary"
-          onClick={() => {
-            push(`/jobs?projects=${name}`);
-            NProgress.start();
-          }}
-        >
-          Explore Project
-        </Button>
+            <Button
+              variant="primary"
+              onClick={() => {
+                push(`/jobs?projects=${name}`);
+                NProgress.start();
+              }}
+            >
+              Explore Project
+            </Button>
+          </div>
+        </div>
       </div>
     </div>
   );

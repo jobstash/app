@@ -8,11 +8,11 @@ import { createJobKey } from '~/features/jobs/utils';
 import { EVENT_CARD_CLICK } from '~/shared/core/constants';
 import { getUrlWithFilters } from '~/shared/utils';
 
-import type { Job } from '../../../jobs/core/types';
+import type { JobListResult } from '../../../jobs/core/types';
 import { activeJobAtom } from '../../atoms';
 
 interface Props {
-  job: Job;
+  jobListResult: JobListResult;
   isActive: boolean;
   children: ReactNode;
   filterParamsObj: Record<string, string>;
@@ -35,7 +35,7 @@ const jobCard = cva(
 );
 
 const JobCardWrapper = ({
-  job,
+  jobListResult,
   isActive,
   children,
   filterParamsObj,
@@ -44,18 +44,18 @@ const JobCardWrapper = ({
   const route = useMemo(() => {
     const url = getUrlWithFilters(
       filterParamsObj,
-      `/jobs/${createJobKey(job)}/details`,
+      `/jobs/${createJobKey(jobListResult)}/details`,
     );
 
     return url.toString();
-  }, [filterParamsObj, job]);
+  }, [filterParamsObj, jobListResult]);
 
   const setActiveJob = useSetAtom(activeJobAtom);
 
   const onClick = useCallback(() => {
-    setActiveJob(job);
+    setActiveJob(jobListResult);
     document.dispatchEvent(new Event(EVENT_CARD_CLICK));
-  }, [job, setActiveJob]);
+  }, [jobListResult, setActiveJob]);
 
   return (
     <Link

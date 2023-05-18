@@ -1,4 +1,4 @@
 export interface Chain {
+  id: string;
   name: string;
-  avatar: string;
 }

@@ -1,26 +1,30 @@
 import type {
-  Category,
-  FundingRound,
-  Investor,
   JobPost,
   Organization,
-  Project,
   Technology,
 } from '~/shared/core/interfaces';
 
-export interface Job {
-  organization: Organization;
-  project: Project | null;
-  jobpost: JobPost;
-  technologies: Technology[];
-  categories: Category[];
-  fundingRounds: FundingRound[];
-  investors: Investor[];
+//
+// export interface JobListResult {
+//   technologies: Technology[];
+
+//   organization: Organization;
+//   project: Project | null;
+//   jobpost: JobPost;
+//   categories: Category[];
+//   fundingRounds: FundingRound[];
+//   investors: Investor[];
+// }
+
+export interface JobListResult extends JobPost {
+  // ? Different from actual data vs interface
+  organization: Organization; // * -> organization?: Organization | null
+  technologies: Technology[]; // * -> technologies: Technology[] | null
 }
 
 export interface JobListQueryPage {
   page: number;
   count: number;
   total: number;
-  data: Job[];
+  data: JobListResult[];
 }

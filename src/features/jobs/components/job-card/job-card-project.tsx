@@ -16,8 +16,6 @@ const JobCardProject = ({ project }: Props) => {
 
   return (
     <>
-      <hr className="border-t border-white/10" />
-
       <div className="flex flex-wrap items-center gap-8">
         <LogoTitle
           title={project.name}

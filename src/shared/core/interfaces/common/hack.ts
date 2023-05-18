@@ -1,7 +1,7 @@
 export interface Hack {
   id: string;
-  link: string;
+  date: number;
   classification: string;
   fundsLost: number;
-  date: number;
+  link: string;
 }

@@ -12,7 +12,7 @@ import { Filters } from '~/features/filters/components';
 import { getFilterFromQuery } from '~/features/filters/utils';
 import { activeJobAtom } from '~/features/jobs/atoms';
 import JobList from '~/features/jobs/components/job-list';
-import { Job } from '~/features/jobs/core/types';
+import { JobListResult } from '~/features/jobs/core/types';
 import { fetchJobList } from '~/features/jobs/fetch';
 import { useJobListingInfQuery } from '~/features/jobs/hooks';
 import { useJobQuery } from '~/features/jobs/hooks/use-job-query';
@@ -29,7 +29,7 @@ import { sentryMessage } from '~/shared/utils';
 interface Props {
   data: {
     //
-    initJob: Job | null;
+    initJob: JobListResult | null;
     fromSSR?: boolean;
   };
 }
@@ -45,8 +45,10 @@ const JobsPage = ({ data: { initJob, fromSSR } }: Props) => {
   const shortUuid = (router.query.key?.slice(-6) as string) ?? '';
   // SentryMessage('JobsPage shortUuid', JSON.stringify(shortUuid));
 
-  const { data: jobPost } = useJobQuery(shortUuid, Boolean(shortUuid), (data) =>
-    setActiveJob(data),
+  const { data: jobListResult } = useJobQuery(
+    shortUuid,
+    Boolean(shortUuid),
+    (data) => setActiveJob(data),
   );
 
   useEffect(() => {
@@ -63,12 +65,12 @@ const JobsPage = ({ data: { initJob, fromSSR } }: Props) => {
 
   // Sync SSR data active post
   useEffect(() => {
-    if (!initRef.current && !initJob && jobPost) {
+    if (!initRef.current && !initJob && jobListResult) {
       initRef.current = true;
-      setActiveJob(jobPost);
-      // SentryMessage('JobsPage useEffect setActiveJob', JSON.stringify(jobPost));
+      setActiveJob(jobListResult);
+      // SentryMessage('JobsPage useEffect setActiveJob', JSON.stringify(jobListResult));
     }
-  }, [initJob, jobPost, setActiveJob]);
+  }, [initJob, jobListResult, setActiveJob]);
 
   const {
     data,
@@ -81,17 +83,32 @@ const JobsPage = ({ data: { initJob, fromSSR } }: Props) => {
   } = useJobListingInfQuery();
 
   const getJsonLd = () => {
-    if (jobPost) {
-      const { organization, jobpost, technologies } = jobPost;
+    if (jobListResult) {
+      const {
+        organization,
+        technologies,
+        role,
+        team,
+        culture,
+        jobTitle,
+        jobCreatedTimestamp,
+        jobApplyPageUrl,
+        jobPageUrl,
+        jobCommitment,
+        jobLocation,
+        minSalaryRange,
+        maxSalaryRange,
+        benefits,
+      } = jobListResult;
       const imageLink = `https://www.google.com/s2/favicons?domain=${organization.url}&sz=128`;
 
-      let description = `<p>Role</p>\n\n<p>${jobpost.role}</p>\n\n`;
-      if (jobpost.team) {
-        description += `<p>Team</p>\n\n<p>${jobpost.team}</p>\n\n`;
+      let description = `<p>Role</p>\n\n<p>${role}</p>\n\n`;
+      if (team) {
+        description += `<p>Team</p>\n\n<p>${team}</p>\n\n`;
       }
 
-      if (jobpost.culture) {
-        description += `<p>Culture</p>\n\n<p>${jobpost.culture}</p>\n\n`;
+      if (culture) {
+        description += `<p>Culture</p>\n\n<p>${culture}</p>\n\n`;
       }
 
       if (technologies.length > 0) {
@@ -112,9 +129,9 @@ const JobsPage = ({ data: { initJob, fromSSR } }: Props) => {
       > = {
         '@context': 'https://schema.org/',
         '@type': 'JobPosting',
-        title: jobpost.jobTitle,
+        title: jobTitle,
         description,
-        datePosted: new Date(jobpost.jobCreatedTimestamp).toISOString(),
+        datePosted: new Date(jobCreatedTimestamp).toISOString(),
         hiringOrganization: {
           '@type': 'Organization',
           name: organization.name,
@@ -122,25 +139,24 @@ const JobsPage = ({ data: { initJob, fromSSR } }: Props) => {
           sameAs: organization.url,
         },
         image: imageLink,
-        directApply:
-          Boolean(jobpost.jobApplyPageUrl) || Boolean(jobpost.jobPageUrl),
+        directApply: Boolean(jobApplyPageUrl) || Boolean(jobPageUrl),
         employerOverview: organization.description,
-        employmentType: jobpost.jobCommitment
-          ? jobpost.jobCommitment.toUpperCase()
+        employmentType: jobCommitment
+          ? jobCommitment.toUpperCase()
           : 'FULL_TIME',
       };
 
-      if (jobpost.role) {
-        jsonLd['responsibilities'] = jobpost.role;
+      if (role) {
+        jsonLd['responsibilities'] = role;
       }
 
-      if (jobpost.jobLocation) {
-        const isRemote = jobpost.jobLocation.toLowerCase().includes('remote');
+      if (jobLocation) {
+        const isRemote = jobLocation.toLowerCase().includes('remote');
         if (isRemote) {
           jsonLd['jobLocationType'] = 'TELECOMMUTE';
         }
 
-        const locationName = jobpost.jobLocation
+        const locationName = jobLocation
           .replaceAll(/remote/gi, '')
           .replaceAll('-', '')
           .replaceAll('or', '')
@@ -159,21 +175,21 @@ const JobsPage = ({ data: { initJob, fromSSR } }: Props) => {
         };
       }
 
-      if (jobpost.minSalaryRange && jobpost.maxSalaryRange) {
+      if (minSalaryRange && maxSalaryRange) {
         jsonLd['baseSalary'] = {
           '@type': 'MonetaryAmount',
           currency: 'USD',
           value: {
             '@type': 'QuantitativeValue',
-            minValue: jobpost.minSalaryRange,
-            maxValue: jobpost.maxSalaryRange,
+            minValue: minSalaryRange,
+            maxValue: maxSalaryRange,
             unitText: 'YEAR',
           },
         };
       }
 
-      if (jobpost.benefits) {
-        jsonLd['jobBenefits'] = jobpost.benefits;
+      if (benefits) {
+        jsonLd['jobBenefits'] = benefits;
       }
 
       if (technologies.length > 0) {
@@ -190,7 +206,7 @@ const JobsPage = ({ data: { initJob, fromSSR } }: Props) => {
     };
   };
 
-  const titleMetaData = `${jobPost?.jobpost.jobTitle} | ${jobPost?.organization.name}`;
+  const titleMetaData = `${jobListResult?.jobTitle} | ${jobListResult?.organization.name}`;
   const urlMetaData = `${NEXT_PUBLIC_FRONTEND_URL}${router.asPath.slice(
     0,
     router.asPath.lastIndexOf('/'),
@@ -198,14 +214,14 @@ const JobsPage = ({ data: { initJob, fromSSR } }: Props) => {
 
   return (
     <>
-      {jobPost && (
+      {jobListResult && (
         <MetaData
           title={titleMetaData}
           description={
-            jobPost.jobpost.role ??
-            jobPost.jobpost.benefits ??
-            jobPost.jobpost.team ??
-            jobPost.jobpost.jobTitle
+            jobListResult.role ??
+            jobListResult.benefits ??
+            jobListResult.team ??
+            jobListResult.jobTitle
           }
           url={urlMetaData}
           image={`${NEXT_PUBLIC_FRONTEND_URL}/JobStash-Wordmark-800.png`}
@@ -240,7 +256,7 @@ const JobsPage = ({ data: { initJob, fromSSR } }: Props) => {
             { active: activeJob === initJob },
           )}
         >
-          <JobRightPanel job={jobPost} />
+          <JobRightPanel jobListResult={jobListResult} />
         </div>
       </div>
     </>
@@ -284,12 +300,12 @@ export const getServerSideProps: GetServerSideProps<Props> = withCSR(
 
     // Cache individual item from the list
     const initDehydratedState = dehydrate(queryClient);
-    const jobPosts = (initDehydratedState.queries[0].state.data as any).pages[0]
-      .data as Job[];
+    const jobListResults = (initDehydratedState.queries[0].state.data as any)
+      .pages[0].data as JobListResult[];
     let jobInList = false;
-    if (jobPosts.length > 0) {
-      for (const job of jobPosts) {
-        const jobUuid = job.jobpost.shortUUID;
+    if (jobListResults.length > 0) {
+      for (const job of jobListResults) {
+        const jobUuid = job.shortUUID;
         queryClient.setQueryData(['job-post', jobUuid], job);
 
         if (jobUuid === shortUuid) {
@@ -298,14 +314,11 @@ export const getServerSideProps: GetServerSideProps<Props> = withCSR(
       }
     }
 
-    // SentryMessage('getServerSideProps jobPosts', JSON.stringify(jobPosts));
+    // SentryMessage('getServerSideProps jobListResults', JSON.stringify(jobListResults));
     // sentryMessage('getServerSideProps jobInList', JSON.stringify(jobInList));
 
     if (!jobInList) {
-      queryClient.setQueryData(
-        ['job-post', initJob.jobpost.shortUUID],
-        initJob,
-      );
+      queryClient.setQueryData(['job-post', initJob.shortUUID], initJob);
     }
 
     // Dehydrate again to include setup'd cached data

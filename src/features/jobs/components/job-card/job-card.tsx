@@ -1,37 +1,43 @@
 import { memo } from 'react';
 
-import type { Job } from '../../../jobs/core/types';
+import type { JobListResult } from '../../../jobs/core/types';
 
 import JobCardHeader from './job-card-header';
 import JobCardOrg from './job-card-org';
-import JobCardProject from './job-card-project';
+import JobCardProjects from './job-card-projects';
 import JobCardTags from './job-card-tags';
 import JobCardTechs from './job-card-techs';
 import JobCardWrapper from './job-card-wrapper';
 
 interface Props {
-  job: Job;
+  jobListResult: JobListResult;
   isActive: boolean;
   shouldScroll?: boolean;
   filterParamsObj: Record<string, string>;
 }
 
-const JobCard = ({ job, isActive, shouldScroll, filterParamsObj }: Props) => {
-  const { jobpost, organization, project, technologies, fundingRounds } = job;
-  const { jobTitle, jobCreatedTimestamp } = jobpost;
+const JobCard = ({
+  jobListResult,
+  isActive,
+  shouldScroll,
+  filterParamsObj,
+}: Props) => {
+  const { organization, technologies } = jobListResult;
+  const { jobTitle, jobCreatedTimestamp } = jobListResult;
+  const { projects, fundingRounds } = organization;
 
   return (
     <JobCardWrapper
-      job={job}
+      jobListResult={jobListResult}
       isActive={isActive}
       shouldScroll={shouldScroll}
       filterParamsObj={filterParamsObj}
     >
       <JobCardHeader title={jobTitle} ts={jobCreatedTimestamp} />
-      <JobCardTags jobPost={jobpost} />
+      <JobCardTags jobPost={jobListResult} />
       <JobCardTechs techs={technologies} />
       <JobCardOrg org={organization} fundingRounds={fundingRounds} />
-      {project && <JobCardProject project={project} />}
+      <JobCardProjects projects={projects} />
     </JobCardWrapper>
   );
 };

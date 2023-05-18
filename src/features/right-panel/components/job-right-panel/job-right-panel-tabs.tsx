@@ -12,7 +12,7 @@ import {
 interface Props {
   tab: string;
   isPending: boolean;
-  hasProject: boolean;
+  projectCount: number;
   onClickTab: (_: string) => void;
   repoCount?: number;
   competitorsCount?: number;
@@ -21,7 +21,7 @@ interface Props {
 const JobRightPanelTabs = ({
   tab,
   isPending,
-  hasProject,
+  projectCount,
   onClickTab,
   repoCount = 0,
   competitorsCount = 0,
@@ -30,8 +30,11 @@ const JobRightPanelTabs = ({
     { text: 'Job Details', tabSegment: TEXT_ROUTE_TAB_DETAILS },
     { text: 'Organization', tabSegment: TEXT_ROUTE_TAB_ORGANIZATION },
   ];
-  if (hasProject) {
-    tabButtons.push({ text: 'Project', tabSegment: TEXT_ROUTE_TAB_PROJECT });
+  if (projectCount > 0) {
+    tabButtons.push({
+      text: `Project${projectCount > 1 ? 's' : ''} (${projectCount})`,
+      tabSegment: TEXT_ROUTE_TAB_PROJECT,
+    });
   }
 
   if (repoCount > 0) {

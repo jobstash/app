@@ -12,12 +12,12 @@ import { createOrgFundingDateString } from '../utils';
 
 interface Props {
   org: Organization;
-  fundingRounds: FundingRound[];
-  investors: Investor[];
 }
 
-export const RightPanelOrgCard = ({ org, fundingRounds, investors }: Props) => {
-  const { name, description } = org;
+export const RightPanelOrgCard = ({ org }: Props) => {
+  const { name, description, fundingRounds } = org;
+
+  const investors = fundingRounds.flatMap((f) => f.investors);
 
   return (
     <div className="flex flex-col p-6">

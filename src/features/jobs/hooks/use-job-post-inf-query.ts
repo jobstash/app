@@ -20,7 +20,7 @@ export const useJobListingInfQuery = () => {
         onSuccess: (data) => {
           const jobPosts = data.pages.flatMap((d) => d.data);
           for (const job of jobPosts) {
-            queryClient.setQueryData(['job-post', job.jobpost.shortUUID], job);
+            queryClient.setQueryData(['job-post', job.shortUUID], job);
           }
         },
       },

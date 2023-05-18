@@ -7,7 +7,7 @@ import { Filters } from '~/features/filters/components';
 import { getFilterFromQuery } from '~/features/filters/utils';
 import { activeJobAtom } from '~/features/jobs/atoms';
 import { JobList } from '~/features/jobs/components';
-import { Job, JobListQueryPage } from '~/features/jobs/core/types';
+import { JobListQueryPage, JobListResult } from '~/features/jobs/core/types';
 import { fetchJobList } from '~/features/jobs/fetch';
 import { useJobListingInfQuery } from '~/features/jobs/hooks';
 import { SideBar } from '~/features/sidebar/components';
@@ -15,13 +15,16 @@ import { withCSR } from '~/shared/hocs';
 import { useMediaQuery } from '~/shared/hooks';
 
 interface Props {
-  activeJob: Job;
+  activeJob: JobListResult;
 }
 
 const JobListPage = ({ activeJob }: Props) => {
   const isMobile = useMediaQuery('(max-width: 1024px)', true);
   useHydrateAtoms([
-    [activeJobAtom, isMobile ? null : activeJob] as [typeof activeJobAtom, Job],
+    [activeJobAtom, isMobile ? null : activeJob] as [
+      typeof activeJobAtom,
+      JobListResult,
+    ],
   ]);
 
   const {
@@ -75,7 +78,7 @@ export const getServerSideProps: GetServerSideProps<Props> = withCSR(
     ).pages.flatMap((d: JobListQueryPage) => d.data);
     if (jobPosts.length > 0) {
       for (const job of jobPosts) {
-        const jobUuid = job.jobpost.shortUUID;
+        const jobUuid = job.shortUUID;
         queryClient.setQueryData(['job-post', jobUuid], job);
       }
     }
