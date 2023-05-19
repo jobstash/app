@@ -16,7 +16,7 @@ export const createRightPanelOrgTags = (
   org: Organization,
   fundingDateTs: number,
 ) => {
-  const { url, location, teamSize, github, twitter, telegram, discord } = org;
+  const { url, location, headcount, github, twitter, telegram, discord } = org;
 
   const orgTags: TagElement[] = [
     {
@@ -30,9 +30,9 @@ export const createRightPanelOrgTags = (
     },
   ];
 
-  if (teamSize) {
+  if (headcount) {
     orgTags.push({
-      text: `Team Size: ${teamSize}`,
+      text: `Team Size: ${headcount}`,
       icon: <UsersIcon />,
     });
   }

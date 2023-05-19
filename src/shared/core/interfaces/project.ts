@@ -1,76 +1,41 @@
 import { Audit, Category, Chain, Hack } from './common';
-
-//
-// export interface Project {
-//   isMainnet: boolean;
-//   telegram: string;
-//   description: string;
-//   url: string;
-//   orgId: string;
-//   twitter: string;
-//   discord: string;
-//   docs: string;
-//   teamSize: number | null;
-//   name: string;
-//   githubOrganization: string;
-//   logo: string;
-//   id: string;
-//   category?: string;
-//   tokenSymbol: null;
-//   defiLlamaId?: string;
-//   cmcId?: string;
-//   tvl?: number;
-//   updatedTimestamp?: number;
-//   monthlyRevenue?: number;
-//   monthlyFees?: number;
-//   monthlyVolume?: number;
-//   monthlyActiveUsers?: number;
-//   chains: string[];
-//   hacks: string[];
-//   audits: string[];
-// }
-
 export interface Project {
-  // * Declared correctly
   id: string;
   defiLlamaId?: string;
+  defiLlamaSlug?: string;
   name: string;
   description: string;
   url: string;
   logo: string;
-  categories: Category[];
+  createdTimestamp: number;
 
-  // ? Different from actual data vs interface
-  tokenSymbol: null | string; // * -> tokenSymbol?: string
-
-  // ? Not in interface but found on data
-  isMainnet: boolean;
-  telegram: string;
-  orgId: string;
-  cmcId?: string;
-  twitter: string;
-  discord: string;
-  docs: string;
-  teamSize: null | number;
-  githubOrganization: string;
-  category: string;
-
-  // ? Declared in interface but not in data
-  defiLlamaSlug?: string;
   tokenAddress?: string;
-  isInConstruction?: boolean;
+  tokenSymbol?: string;
+
   tvl?: number;
   monthlyVolume?: number;
   monthlyFees?: number;
+  monthlyActiveUsers?: number;
   monthlyRevenue?: number;
-  createdTimestamp: number;
-  updatedTimestamp?: number;
+  teamSize: null | number;
+  category: string;
 
-  // ? Unable to confirm these types as it returns empty array
+  isInConstruction?: boolean;
+  isMainnet: boolean;
+
+  telegram?: string;
+  twitter?: string;
+  discord?: string;
+  githubOrganization?: string;
+
+  categories: Category[];
+
   chains: Chain[];
   hacks: Hack[];
   audits: Audit[];
 
-  // ? Was this removed?
-  monthlyActiveUsers?: number;
+  // Possibly unused
+  orgId: string;
+  docs: string;
+  updatedTimestamp?: number;
 }
