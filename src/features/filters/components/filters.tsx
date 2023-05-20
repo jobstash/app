@@ -10,6 +10,7 @@ import {
 } from 'react';
 
 import { TextInput } from '@mantine/core';
+import { useAtom } from 'jotai';
 import type { Entries } from 'type-fest';
 
 import {
@@ -22,7 +23,7 @@ import {
 import { getOriginString } from '~/shared/utils';
 
 import { FILTER_KIND, INIT_FILTER_STATE } from '../core/constants';
-import type { FilterConfig } from '../core/types';
+import type { FilterConfig, RangeFilterConfig } from '../core/types';
 import { useFilterConfigQuery } from '../hooks';
 import { filterReducer } from '../reducers/filter-reducer';
 
@@ -285,22 +286,23 @@ const Filters = ({ jobCount }: Props) => {
                   key={key}
                   className="w-1/3 px-2 pb-2 lg:w-1/5 lg:px-3 lg:pb-4"
                 >
-                  {config.kind === FILTER_KIND.RANGE && (
-                    <RangeFilter
-                      label={config.label}
-                      minValue={
-                        state.filterValues[config.value.lowest.paramKey]
-                      }
-                      maxValue={
-                        state.filterValues[config.value.highest.paramKey]
-                      }
-                      minParamKey={config.value.lowest.paramKey}
-                      maxParamKey={config.value.highest.paramKey}
-                      minConfigValue={config.value.lowest.value}
-                      maxConfigValue={config.value.highest.value}
-                      dispatch={dispatch}
-                    />
-                  )}
+                  {config.kind === FILTER_KIND.RANGE &&
+                    config.label === 'Salary' && (
+                      <RangeFilter
+                        label={config.label}
+                        minValue={
+                          state.filterValues[config.value.lowest.paramKey]
+                        }
+                        maxValue={
+                          state.filterValues[config.value.highest.paramKey]
+                        }
+                        minParamKey={config.value.lowest.paramKey}
+                        maxParamKey={config.value.highest.paramKey}
+                        minConfigValue={config.value.lowest.value}
+                        maxConfigValue={config.value.highest.value}
+                        dispatch={dispatch}
+                      />
+                    )}
 
                   {config.kind === FILTER_KIND.SINGLE_SELECT && (
                     <SingleSelectFilter
