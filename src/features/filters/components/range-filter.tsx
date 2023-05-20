@@ -1,4 +1,4 @@
-import { Dispatch, memo, useCallback, useMemo, useRef } from 'react';
+import { Dispatch, memo, useMemo, useRef } from 'react';
 
 import { Popover, RangeSlider } from '@mantine/core';
 
@@ -13,9 +13,6 @@ import {
 } from '../core/types';
 
 import FilterWrapper from './filter-wrapper';
-
-const NUM_STEPS = 5;
-const SLIDER_STEP = 100 / NUM_STEPS;
 
 interface Props {
   label: string;
@@ -40,18 +37,45 @@ const RangeFilter = ({
   prefix = '$',
   dispatch,
 }: Props) => {
-  const increment = Math.floor((maxConfigValue - minConfigValue) / NUM_STEPS);
+  const labelFn = (v: number) => {
+    const addNum =
+      (v / 100) * maxConfigValue === Number(maxValue) ? 0 : minConfigValue;
+    const result = formatNum(
+      Math.floor((v / 100) * maxConfigValue + addNum),
+      prefix,
+    );
 
-  const marks = useMemo(
-    () => generateMarks(minConfigValue, increment, prefix),
-    [increment, minConfigValue, prefix],
-  );
+    return result;
+  };
 
-  const labelFn = useCallback(
-    (v: number) =>
-      formatNum(v * (increment / SLIDER_STEP) + minConfigValue, prefix),
-    [increment, minConfigValue, prefix],
-  );
+  const changedRef = useRef(false);
+  const onChange = ([minRangeValue, maxRangeValue]: [number, number]) => {
+    if (!changedRef.current) {
+      changedRef.current = true;
+    }
+
+    const min = (minRangeValue / 100) * maxConfigValue + minConfigValue;
+
+    const max = (maxRangeValue / 100) * maxConfigValue;
+
+    dispatch({
+      type: 'SET_RANGE_FILTER_VALUE',
+      payload: {
+        min: min.toString(),
+        max: max.toString(),
+        minParamKey,
+        maxParamKey,
+      },
+    });
+  };
+
+  const marks = [0, 20, 40, 60, 80, 100].map((value) => ({
+    value,
+    label: formatNum(
+      value === 0 ? minConfigValue : (maxConfigValue * value) / 100,
+      prefix,
+    ),
+  }));
 
   const buttonText = useMemo(() => {
     if (!minValue || !maxValue) return 'Select';
@@ -62,37 +86,14 @@ const RangeFilter = ({
     )}`;
   }, [maxValue, minValue, prefix]);
 
-  const changedRef = useRef(false);
-  const onChange = useCallback(
-    ([minRangeValue, maxRangeValue]: [number, number]) => {
-      if (!changedRef.current) {
-        changedRef.current = true;
-      }
-
-      const min = Math.floor(
-        minRangeValue * (increment / SLIDER_STEP) + minConfigValue,
-      ).toString();
-      const max = Math.ceil(
-        maxRangeValue * (increment / SLIDER_STEP) + minConfigValue,
-      ).toString();
-      dispatch({
-        type: 'SET_RANGE_FILTER_VALUE',
-        payload: { min, max, minParamKey, maxParamKey },
-      });
-    },
-    [dispatch, increment, maxParamKey, minConfigValue, minParamKey],
+  const inputValue = useMemo(
+    () =>
+      [
+        Math.floor((Number(minValue) / maxConfigValue) * 100) - 1,
+        Math.floor((Number(maxValue) / maxConfigValue) * 100),
+      ] as [number, number],
+    [maxConfigValue, maxValue, minValue],
   );
-
-  const inputValue = useMemo(() => {
-    const minRangeValue = Math.floor(
-      (Number(minValue ?? minConfigValue) / maxConfigValue) * 100,
-    );
-    const maxRangeValue = Math.floor(
-      (Number(maxValue ?? maxConfigValue) / maxConfigValue) * 100,
-    );
-
-    return [minRangeValue, maxRangeValue] as [number, number];
-  }, [maxConfigValue, maxValue, minConfigValue, minValue]);
 
   const isBordered =
     (Boolean(minValue) || Boolean(maxValue)) && changedRef.current;
@@ -123,18 +124,17 @@ const RangeFilter = ({
         <Popover.Dropdown>
           <RangeSlider
             labelAlwaysOn
-            step={SLIDER_STEP}
             label={labelFn}
-            marks={marks}
             classNames={{
               root: 'my-10 mx-2',
               bar: 'bg-gradient-to-l from-primary to-tertiary',
-              thumb: 'bg-white/60 border-primary',
+              thumb: 'bg-white border-primary',
               mark: 'bg-white/90 border',
               markFilled: 'border border-primary',
               label: `-mt-1 ${roboto.variable} font-roboto bg-dark-gray px-2`,
               markLabel: `text-sm pt-2 ${roboto.variable} font-roboto`,
             }}
+            marks={marks}
             value={inputValue}
             onChange={onChange}
           />
@@ -148,10 +148,3 @@ export default memo(RangeFilter);
 
 const formatNum = (num: number, prefix?: string) =>
   `${prefix ?? ''}${numFormatter.format(num)}`;
-
-const generateMarks = (min: number, increment: number, prefix?: string) =>
-  // eslint-disable-next-line unicorn/prefer-spread
-  Array.from(Array.from({ length: 6 }).keys()).map((i) => ({
-    value: i * 20,
-    label: formatNum(i * increment + min, prefix),
-  }));
