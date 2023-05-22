@@ -89,8 +89,12 @@ const RangeFilter = ({
   const inputValue = useMemo(
     () =>
       [
-        Math.floor((Number(minValue) / maxConfigValue) * 100) - 1,
-        Math.floor((Number(maxValue) / maxConfigValue) * 100),
+        minValue === null
+          ? 0
+          : Math.floor((Number(minValue) / maxConfigValue) * 100) - 1,
+        maxValue === null
+          ? 100
+          : Math.floor((Number(maxValue) / maxConfigValue) * 100),
       ] as [number, number],
     [maxConfigValue, maxValue, minValue],
   );
