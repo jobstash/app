@@ -11,6 +11,7 @@ import {
   Text,
 } from '~/shared/components';
 import { Category, Project } from '~/shared/core/interfaces';
+import { encodeBase64 } from '~/shared/utils';
 
 import { createRightPanelProjectCardTags } from '../utils';
 
@@ -178,7 +179,7 @@ export const RightPanelProjectCard = ({ project, categories }: Props) => {
         <Button
           variant="primary"
           onClick={() => {
-            push(`/jobs?projects=${name}`);
+            push(`/jobs?projects=${encodeBase64(name)}`);
             NProgress.start();
           }}
         >
