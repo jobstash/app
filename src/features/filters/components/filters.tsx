@@ -286,23 +286,22 @@ const Filters = ({ jobCount }: Props) => {
                   key={key}
                   className="w-1/3 px-2 pb-2 lg:w-1/5 lg:px-3 lg:pb-4"
                 >
-                  {config.kind === FILTER_KIND.RANGE &&
-                    config.label === 'Salary' && (
-                      <RangeFilter
-                        label={config.label}
-                        minValue={
-                          state.filterValues[config.value.lowest.paramKey]
-                        }
-                        maxValue={
-                          state.filterValues[config.value.highest.paramKey]
-                        }
-                        minParamKey={config.value.lowest.paramKey}
-                        maxParamKey={config.value.highest.paramKey}
-                        minConfigValue={config.value.lowest.value}
-                        maxConfigValue={config.value.highest.value}
-                        dispatch={dispatch}
-                      />
-                    )}
+                  {config.kind === FILTER_KIND.RANGE && (
+                    <RangeFilter
+                      label={config.label}
+                      minValue={
+                        state.filterValues[config.value.lowest.paramKey]
+                      }
+                      maxValue={
+                        state.filterValues[config.value.highest.paramKey]
+                      }
+                      minParamKey={config.value.lowest.paramKey}
+                      maxParamKey={config.value.highest.paramKey}
+                      minConfigValue={config.value.lowest.value}
+                      maxConfigValue={config.value.highest.value}
+                      dispatch={dispatch}
+                    />
+                  )}
 
                   {config.kind === FILTER_KIND.SINGLE_SELECT && (
                     <SingleSelectFilter
