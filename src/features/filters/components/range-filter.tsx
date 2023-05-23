@@ -37,26 +37,19 @@ const RangeFilter = ({
   prefix = '$',
   dispatch,
 }: Props) => {
-  const labelFn = (v: number) => {
-    const addNum =
-      (v / 100) * maxConfigValue === Number(maxValue) ? 0 : minConfigValue;
-    const result = formatNum(
-      Math.floor((v / 100) * maxConfigValue + addNum),
-      prefix,
-    );
+  const increment = Math.round((maxConfigValue - minConfigValue) / 100);
 
-    return result;
-  };
+  const labelFn = (v: number) =>
+    formatNum(increment * v + minConfigValue, prefix);
 
-  const changedRef = useRef(false);
+  const marks = [0, 20, 40, 60, 80, 100].map((value) => ({
+    value,
+    label: formatNum(increment * value + minConfigValue, prefix),
+  }));
+
   const onChange = ([minRangeValue, maxRangeValue]: [number, number]) => {
-    if (!changedRef.current) {
-      changedRef.current = true;
-    }
-
-    const min = (minRangeValue / 100) * maxConfigValue + minConfigValue;
-
-    const max = (maxRangeValue / 100) * maxConfigValue;
+    const min = minRangeValue * increment + minConfigValue;
+    const max = maxRangeValue * increment + minConfigValue;
 
     dispatch({
       type: 'SET_RANGE_FILTER_VALUE',
@@ -69,13 +62,7 @@ const RangeFilter = ({
     });
   };
 
-  const marks = [0, 20, 40, 60, 80, 100].map((value) => ({
-    value,
-    label: formatNum(
-      value === 0 ? minConfigValue : (maxConfigValue * value) / 100,
-      prefix,
-    ),
-  }));
+  const isBordered = Boolean(minValue) || Boolean(maxValue);
 
   const buttonText = useMemo(() => {
     if (!minValue || !maxValue) return 'Select';
@@ -85,22 +72,6 @@ const RangeFilter = ({
       prefix,
     )}`;
   }, [maxValue, minValue, prefix]);
-
-  const inputValue = useMemo(
-    () =>
-      [
-        minValue === null
-          ? 0
-          : Math.floor((Number(minValue) / maxConfigValue) * 100) - 1,
-        maxValue === null
-          ? 100
-          : Math.floor((Number(maxValue) / maxConfigValue) * 100),
-      ] as [number, number],
-    [maxConfigValue, maxValue, minValue],
-  );
-
-  const isBordered =
-    (Boolean(minValue) || Boolean(maxValue)) && changedRef.current;
 
   return (
     <FilterWrapper label={label}>
@@ -129,6 +100,7 @@ const RangeFilter = ({
           <RangeSlider
             labelAlwaysOn
             label={labelFn}
+            marks={marks}
             classNames={{
               root: 'my-10 mx-2',
               bar: 'bg-gradient-to-l from-primary to-tertiary',
@@ -138,8 +110,6 @@ const RangeFilter = ({
               label: `-mt-1 ${roboto.variable} font-roboto bg-dark-gray px-2`,
               markLabel: `text-sm pt-2 ${roboto.variable} font-roboto`,
             }}
-            marks={marks}
-            value={inputValue}
             onChange={onChange}
           />
         </Popover.Dropdown>
