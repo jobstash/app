@@ -10,7 +10,6 @@ import {
 } from 'react';
 
 import { TextInput } from '@mantine/core';
-import { useAtom } from 'jotai';
 import type { Entries } from 'type-fest';
 
 import {
@@ -23,7 +22,7 @@ import {
 import { getOriginString } from '~/shared/utils';
 
 import { FILTER_KIND, INIT_FILTER_STATE } from '../core/constants';
-import type { FilterConfig, RangeFilterConfig } from '../core/types';
+import type { FilterConfig } from '../core/types';
 import { useFilterConfigQuery } from '../hooks';
 import { filterReducer } from '../reducers/filter-reducer';
 

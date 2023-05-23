@@ -12,13 +12,6 @@ export const initFilterConfigData = (
 
   const filteredDataEntries = (Object.entries(data) as Entries<FilterConfig>)
     .filter(([, config]) => config.show)
-    .filter(([, config]) => {
-      if (config.kind === FILTER_KIND.RANGE && config.label !== 'Salary') {
-        return false;
-      }
-
-      return true;
-    })
     .sort(([_k1, v1], [_k2, v2]) => v1.position - v2.position);
 
   for (const [key, config] of filteredDataEntries) {
