@@ -73,6 +73,13 @@ const RangeFilter = ({
     )}`;
   }, [maxValue, minValue, prefix]);
 
+  const minInputValue = minValue
+    ? Math.round((Number(minValue) / maxConfigValue) * 100)
+    : 0;
+  const maxInputValue = maxValue
+    ? Math.round((Number(maxValue) / maxConfigValue) * 100)
+    : 100;
+
   return (
     <FilterWrapper label={label}>
       <Popover
@@ -110,6 +117,7 @@ const RangeFilter = ({
               label: `-mt-1 ${roboto.variable} font-roboto bg-dark-gray px-2`,
               markLabel: `text-sm pt-2 ${roboto.variable} font-roboto`,
             }}
+            value={[minInputValue, maxInputValue]}
             onChange={onChange}
           />
         </Popover.Dropdown>
