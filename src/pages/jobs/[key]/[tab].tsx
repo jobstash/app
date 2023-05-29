@@ -197,7 +197,7 @@ const JobsPage = ({ data: { initJob, fromSSR } }: Props) => {
 
   return (
     <>
-      {jobPost?.jobpost.shortUUID === 'cJ1mvE' && (
+      {jobPost && (
         <MetaData
           title={titleMetaData}
           description={
