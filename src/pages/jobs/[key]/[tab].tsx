@@ -195,6 +195,8 @@ const JobsPage = ({ data: { initJob, fromSSR } }: Props) => {
     router.asPath.lastIndexOf('/'),
   )}/details`;
 
+  const imageMetaData = `${NEXT_PUBLIC_FRONTEND_URL}/api/job-card?id=${jobPost?.jobpost.shortUUID}`;
+
   return (
     <>
       {jobPost?.jobpost.shortUUID === 'cJ1mvE' && (
@@ -207,10 +209,10 @@ const JobsPage = ({ data: { initJob, fromSSR } }: Props) => {
             jobPost.jobpost.jobTitle
           }
           url={urlMetaData}
-          image={`${NEXT_PUBLIC_FRONTEND_URL}/JobStash-Wordmark-800.png`}
+          image={imageMetaData}
           twitter={{
             site: '@jobstash_xyz',
-            image: `${NEXT_PUBLIC_FRONTEND_URL}/JobStash.svg`,
+            image: imageMetaData,
           }}
           jsonLd={getJsonLd()}
         />
