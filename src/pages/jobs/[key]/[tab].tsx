@@ -20,6 +20,7 @@ import { SideBar } from '~/features/sidebar/components';
 import { MetaData } from '~/shared/components';
 import {
   ERR_INTERNAL,
+  NEXT_PUBLIC_EDGE_URL,
   NEXT_PUBLIC_FRONTEND_URL,
 } from '~/shared/core/constants';
 import { withCSR } from '~/shared/hocs';
@@ -195,7 +196,7 @@ const JobsPage = ({ data: { initJob, fromSSR } }: Props) => {
     router.asPath.lastIndexOf('/'),
   )}/details`;
 
-  const imageMetaData = `${NEXT_PUBLIC_FRONTEND_URL}/api/job-card?id=${jobPost?.jobpost.shortUUID}`;
+  const imageMetaData = `${NEXT_PUBLIC_EDGE_URL}/api/job-card?id=${jobPost?.jobpost.shortUUID}`;
 
   return (
     <>
