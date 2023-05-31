@@ -12,20 +12,27 @@ export const createJobCardOrgTags = (fundingRounds: FundingRound[]) => {
 
   const tags: TagElement[] = [];
 
-  if (fundingRounds[0].raisedAmount) {
+  let lastFunding: number | null = null;
+  let fundingDate: number | null = null;
+  for (const fundingRound of fundingRounds.reverse()) {
+    if (fundingRound.raisedAmount !== null) {
+      lastFunding = fundingRound.raisedAmount;
+      fundingDate = fundingRound.date;
+    }
+  }
+
+  if (lastFunding) {
     tags.push({
       id: TAG_ELEMENT_ID.lastFunding,
-      text: `Last Funding: $${numFormatter.format(
-        fundingRounds[0].raisedAmount * 1_000_000,
-      )}`,
+      text: `Last Funding: $${numFormatter.format(lastFunding * 1_000_000)}`,
       icon: <MoneyIcon />,
     });
   }
 
-  if (fundingRounds[0].date) {
+  if (fundingDate) {
     tags.push({
       id: TAG_ELEMENT_ID.fundingRounds,
-      text: `Funding Date: ${shortTimestamp(fundingRounds[0].date)}`,
+      text: `Funding Date: ${shortTimestamp(fundingDate)}`,
       icon: <BankIcon />,
     });
   }
