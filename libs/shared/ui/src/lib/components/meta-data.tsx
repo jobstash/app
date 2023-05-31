@@ -49,7 +49,7 @@ const MetaData = ({
     <meta property="og:image" content={og?.image ?? image} />
 
     {/* Twitter */}
-    <meta name="twitter:card" content={twitter.card ?? 'summary'} />
+    <meta name="twitter:card" content={twitter.card ?? 'summary_large_image'} />
     <meta name="twitter:url" content={twitter.url ?? url} />
     <meta name="twitter:title" content={twitter.title ?? title} />
     <meta
