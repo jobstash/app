@@ -8,8 +8,8 @@ const path = require('node:path');
  * @type {import('@nx/next/plugins/with-nx').WithNxOptions}
  **/
 const nextConfig = {
-  // Nx + nextjs + docker
-  output: 'standalone',
+  // // Nx + nextjs + docker
+  // output: 'standalone',
 
   nx: {
     // Set this to true if you would like to use SVGR
@@ -19,8 +19,8 @@ const nextConfig = {
   experimental: {
     appDir: false,
 
-    // Nx + nextjs + docker
-    outputFileTracingRoot: path.join(__dirname, '../../'),
+    // // Nx + nextjs + docker
+    // outputFileTracingRoot: path.join(__dirname, '../../'),
   },
 
   images: {
