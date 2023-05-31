@@ -12,12 +12,15 @@ FROM base as run-prod
 RUN yarn global add pnpm
 RUN apk add --no-cache libc6-compat
 WORKDIR /jobstash
+
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+
 COPY --from=build-web --chown=nextjs:nodejs /jobstash/dist ./dist
 WORKDIR /jobstash/dist/apps/web
 RUN pnpm i
 ENV NODE_ENV production
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
+
 USER nextjs
 
 CMD ["pnpm", "start"]
