@@ -26,7 +26,7 @@ import {
  * 	- you need mw running at address set by NEXT_PUBLIC_MW_URL env
  */
 
-describe.skip('Job List Validation', () => {
+describe('Job List Validation', () => {
   let jobPosts: JobPost[];
 
   beforeAll(async () => {
@@ -92,28 +92,28 @@ describe.skip('Job List Validation', () => {
     const duplicatedJobDetails: string[] = [];
 
     for (const jobPost of jobPosts) {
-      const fundingRoundsSet = new Set();
-      for (const fundingRound of jobPost.organization.fundingRounds) {
-        const investorsSet = new Set();
-        for (const investor of fundingRound.investors) {
-          // Append to allInvestors only if not yet present
-          if (!allInvestorsSet.has(investor.id)) {
-            allInvestorsSet.add(investor.id);
-            allInvestors.push(investor);
-          }
-
-          // Check duplicate investors for current fundingRound
-          if (investorsSet.has(investor.id)) {
-            duplicatedInvestors.push({
-              id: investor.id,
-              name: investor.name,
-              jobPost: jobPost.shortUUID,
-            });
-          } else {
-            investorsSet.add(investor.id);
-          }
+      const investorsSet = new Set();
+      for (const investor of jobPost.organization.investors) {
+        // Append to allInvestors only if not yet present
+        if (!allInvestorsSet.has(investor.id)) {
+          allInvestorsSet.add(investor.id);
+          allInvestors.push(investor);
         }
 
+        // Check duplicate investors for current fundingRound
+        if (investorsSet.has(investor.id)) {
+          duplicatedInvestors.push({
+            id: investor.id,
+            name: investor.name,
+            jobPost: jobPost.shortUUID,
+          });
+        } else {
+          investorsSet.add(investor.id);
+        }
+      }
+
+      const fundingRoundsSet = new Set();
+      for (const fundingRound of jobPost.organization.fundingRounds) {
         // Append to allFundingRounds only if not yet present
         if (!allFundingRoundsSet.has(fundingRound.id)) {
           allFundingRoundsSet.add(fundingRound.id);
