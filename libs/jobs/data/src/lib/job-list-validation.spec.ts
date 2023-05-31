@@ -26,7 +26,7 @@ import {
  * 	- you need mw running at address set by NEXT_PUBLIC_MW_URL env
  */
 
-describe('Job List Validation', () => {
+describe.skip('Job List Validation', () => {
   let jobPosts: JobPost[];
 
   beforeAll(async () => {
