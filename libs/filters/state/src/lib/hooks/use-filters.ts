@@ -9,7 +9,7 @@ import {
 } from 'react';
 
 import { type FilterConfig, type FilterState } from '@jobstash/filters/core';
-import { getFrontendUrl } from '@jobstash/shared/utils';
+import { NEXT_PUBLIC_FRONTEND_URL } from '@jobstash/shared/core';
 
 import { filterReducer } from '../reducers/filter-reducer';
 
@@ -29,9 +29,8 @@ export const useFilters = () => {
 
   const isLoading = isLoadingData || !isReady;
 
-  const frontendUrl = getFrontendUrl();
   const applyFilters = useCallback(() => {
-    const url = new URL(`${frontendUrl}/jobs`);
+    const url = new URL(`${NEXT_PUBLIC_FRONTEND_URL}/jobs`);
     for (const [key, value] of Object.entries(state.filterValues)) {
       if (value) {
         url.searchParams.set(key, value);
@@ -40,10 +39,10 @@ export const useFilters = () => {
 
     dispatch({ type: 'TOGGLE_FILTERS', payload: { value: false } });
     setTimeout(() => push(url, undefined, { shallow: true }), 100);
-  }, [frontendUrl, push, state.filterValues]);
+  }, [push, state.filterValues]);
 
   const clearFilters = useCallback(() => {
-    const url = new URL(`${frontendUrl}/jobs`);
+    const url = new URL(`${NEXT_PUBLIC_FRONTEND_URL}/jobs`);
     const searchQuery = state?.filterValues?.query;
     if (searchQuery) {
       url.searchParams.set('query', searchQuery);
@@ -51,7 +50,7 @@ export const useFilters = () => {
 
     dispatch({ type: 'TOGGLE_FILTERS', payload: { value: false } });
     setTimeout(() => push(url, undefined, { shallow: true }), 100);
-  }, [frontendUrl, push, state?.filterValues?.query]);
+  }, [push, state?.filterValues?.query]);
 
   const onSubmitSearch: FormEventHandler = useCallback(
     (e) => {

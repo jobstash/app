@@ -5,14 +5,13 @@ import { useEffect } from 'react';
 import { useAtom } from 'jotai';
 
 import { JobPost } from '@jobstash/jobs/core';
-import { ERR_INTERNAL } from '@jobstash/shared/core';
-import { createJobPostLdJson } from '@jobstash/jobs/utils';
 import {
-  cn,
-  getEdgeUrl,
-  getFrontendUrl,
-  sentryMessage,
-} from '@jobstash/shared/utils';
+  ERR_INTERNAL,
+  NEXT_PUBLIC_EDGE_URL,
+  NEXT_PUBLIC_FRONTEND_URL,
+} from '@jobstash/shared/core';
+import { createJobPostLdJson } from '@jobstash/jobs/utils';
+import { cn, sentryMessage } from '@jobstash/shared/utils';
 
 import { activeJobAtom, initJobAtom, useJobPost } from '@jobstash/jobs/state';
 
@@ -73,12 +72,10 @@ export const JobPostPage = ({ initJob, fromSSR }: JobPostPageProps) => {
     throw new Error(ERR_INTERNAL);
   }
 
-  const frontendUrl = getFrontendUrl();
   const titleMetaData = `${jobPost?.jobTitle} | ${jobPost?.organization.name}`;
-  const urlMetaData = `${frontendUrl}/jobs/${slug}/details`;
+  const urlMetaData = `${NEXT_PUBLIC_FRONTEND_URL}/jobs/${slug}/details`;
 
-  const edgeUrl = getEdgeUrl();
-  const imageMetaData = `${edgeUrl}/api/job-card?id=${jobPost?.shortUUID}`;
+  const imageMetaData = `${NEXT_PUBLIC_EDGE_URL}/api/job-card?id=${jobPost?.shortUUID}`;
 
   return (
     <>

@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-import { getFrontendUrl } from '@jobstash/shared/utils';
+import { NEXT_PUBLIC_FRONTEND_URL } from '@jobstash/shared/core';
 
 import { LinkButton } from '@jobstash/shared/ui';
 
@@ -19,11 +19,11 @@ const RightPanelTabButton = ({
 }: Props) => {
   const isActive = assignedTab === currentTab;
 
-  const frontendUrl = getFrontendUrl();
-
   const paramsStr = typeof window === 'undefined' ? '' : window.location.search;
 
-  const url = new URL(`${frontendUrl}/jobs/${slug}/${assignedTab}${paramsStr}`);
+  const url = new URL(
+    `${NEXT_PUBLIC_FRONTEND_URL}/jobs/${slug}/${assignedTab}${paramsStr}`,
+  );
 
   return (
     <LinkButton

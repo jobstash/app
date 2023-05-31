@@ -37,6 +37,14 @@ const nextConfig = {
     ],
   },
 
+  publicRuntimeConfig: {
+    publicEnvs: Object.fromEntries(
+      Object.entries(process.env).filter(([key]) =>
+        key.includes('NEXT_PUBLIC_'),
+      ),
+    ),
+  },
+
   redirects: async () => [
     {
       source: '/',

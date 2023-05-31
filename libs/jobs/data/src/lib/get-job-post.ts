@@ -1,11 +1,10 @@
 import { type JobPost, jobPostSchema } from '@jobstash/jobs/core';
-import { getMwUrl } from '@jobstash/shared/utils';
+import { NEXT_PUBLIC_MW_URL } from '@jobstash/shared/core';
 
 import { mwFetch } from '@jobstash/shared/data';
 
 export const getJobPost = async (shortUuid: string) => {
-  const mwUrl = getMwUrl();
-  const url = `${mwUrl}/jobs/details/${shortUuid}`;
+  const url = `${NEXT_PUBLIC_MW_URL}/jobs/details/${shortUuid}`;
   const options = {
     responseSchema: jobPostSchema,
     sentryLabel: 'getJobPost',

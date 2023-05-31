@@ -1,14 +1,12 @@
 import type { SIWEConfig } from 'connectkit/build/siwe';
 
-import { getMwUrl } from '@jobstash/shared/utils';
+import { NEXT_PUBLIC_MW_URL } from '@jobstash/shared/core';
 
 export const siweVerifyMessage: SIWEConfig['verifyMessage'] = async ({
   message,
   signature,
 }) => {
-  const mwUrl = getMwUrl();
-
-  const res = await fetch(`${mwUrl}/siwe/verify`, {
+  const res = await fetch(`${NEXT_PUBLIC_MW_URL}/siwe/verify`, {
     credentials: 'include',
     mode: 'cors',
     method: 'POST',

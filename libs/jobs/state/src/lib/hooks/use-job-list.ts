@@ -4,9 +4,9 @@ import { useInView } from 'react-intersection-observer';
 
 import { useAtom, useAtomValue } from 'jotai';
 
+import { NEXT_PUBLIC_FRONTEND_URL } from '@jobstash/shared/core';
 import { getUrlWithParams } from '@jobstash/filters/utils';
 import { createFilterParamsObj, createJobKey } from '@jobstash/jobs/utils';
-import { getFrontendUrl } from '@jobstash/shared/utils';
 
 import { useIsMobile } from '@jobstash/shared/state';
 
@@ -68,12 +68,11 @@ export const useJobList = () => {
 
   const isRedirectingRef = useRef(false);
   const isMobile = useIsMobile();
-  const frontendUrl = getFrontendUrl();
   useEffect(() => {
     if (jobPosts.length > 0 && !isRedirectingRef.current && !isMobile) {
       isRedirectingRef.current = true;
       const url = getUrlWithParams(
-        frontendUrl,
+        NEXT_PUBLIC_FRONTEND_URL,
         `/jobs/${createJobKey(jobPosts[0])}/details`,
         filterParamsObj,
       );
@@ -82,7 +81,7 @@ export const useJobList = () => {
         shallow: true,
       });
     }
-  }, [filterParamsObj, frontendUrl, isMobile, jobPosts, push]);
+  }, [filterParamsObj, isMobile, jobPosts, push]);
 
   return {
     push,
