@@ -5,3 +5,6 @@ node_modules
 .vscode
 .env.example
 .github
+dist
+coverage
+.husky

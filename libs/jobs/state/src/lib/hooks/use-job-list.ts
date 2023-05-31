@@ -1,0 +1,108 @@
+import { useRouter } from 'next/router';
+import { useEffect, useMemo, useRef } from 'react';
+import { useInView } from 'react-intersection-observer';
+
+import { useAtom } from 'jotai';
+
+import { type JobPost } from '@jobstash/jobs/core';
+import { getUrlWithParams } from '@jobstash/filters/utils';
+import { createFilterParamsObj, createJobKey } from '@jobstash/jobs/utils';
+import { getFrontendUrl } from '@jobstash/shared/utils';
+
+import { useIsMobile } from '@jobstash/shared/state';
+
+import { activeJobAtom } from '../atoms/active-job-atom';
+import { jobsPrevLinkAtom } from '../atoms/jobs-prev-link';
+
+import { useJobListQuery } from './use-job-list-query';
+export const useJobList = (initJob: JobPost | null) => {
+  const [activeJob, setActiveJob] = useAtom(activeJobAtom);
+
+  const { push, query, asPath } = useRouter();
+
+  const filterParamsObj = createFilterParamsObj(query);
+
+  const {
+    data,
+    isLoading,
+    error,
+    fetchNextPage,
+    isFetchingNextPage,
+    hasNextPage,
+  } = useJobListQuery();
+
+  const initJobRef = useRef<JobPost | null>(null);
+  const jobPosts = useMemo(() => {
+    if (!data) return [];
+
+    let result = data.pages.flatMap((d) => d.data);
+
+    if (initJob) {
+      result = result.filter((d) => d.shortUUID !== initJob.shortUUID);
+      result.unshift(initJob);
+      initJobRef.current = initJob;
+    }
+
+    if (initJobRef.current) {
+      result = result.filter(
+        (d) => d.shortUUID !== initJobRef.current?.shortUUID,
+      );
+      result.unshift(initJobRef.current);
+    }
+
+    return result;
+  }, [data, initJob]);
+
+  const setActiveRef = useRef(false);
+  useEffect(() => {
+    if (jobPosts.length > 0 && !setActiveRef.current) {
+      setActiveRef.current = true;
+      setActiveJob(jobPosts[0]);
+    }
+  }, [activeJob, jobPosts, setActiveJob]);
+
+  const [jobsPrevLink, setPrevLink] = useAtom(jobsPrevLinkAtom);
+  useEffect(() => {
+    if (jobPosts.length > 0) {
+      setPrevLink(asPath);
+    }
+  }, [asPath, jobPosts.length, setPrevLink]);
+
+  const { ref: inViewRef, inView } = useInView();
+  useEffect(() => {
+    if (inView) {
+      fetchNextPage();
+    }
+  }, [fetchNextPage, inView]);
+
+  const frontendUrl = getFrontendUrl();
+  const isRedirectingRef = useRef(false);
+  const isMobile = useIsMobile();
+  useEffect(() => {
+    if (jobPosts.length > 0 && !isRedirectingRef.current && !isMobile) {
+      isRedirectingRef.current = true;
+      const url = getUrlWithParams(
+        frontendUrl,
+        `/jobs/${createJobKey(jobPosts[0])}/details`,
+        filterParamsObj,
+      );
+
+      push(url, undefined, {
+        shallow: true,
+      });
+    }
+  }, [filterParamsObj, frontendUrl, isMobile, jobPosts, push]);
+
+  return {
+    push,
+    data,
+    isLoading,
+    error,
+    jobPosts,
+    jobsPrevLink,
+    isFetchingNextPage,
+    hasNextPage,
+    inViewRef,
+    filterParamsObj,
+  };
+};

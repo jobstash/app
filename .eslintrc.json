@@ -1,19 +1,22 @@
 {
+  "root": true,
+  "ignorePatterns": ["**/*"],
   "extends": [
-    "plugin:tailwindcss/recommended",
     "plugin:unicorn/recommended",
     "plugin:testing-library/react",
+    "plugin:jest-dom/recommended",
     "xo",
     "xo-react/space",
+    "plugin:@tanstack/eslint-plugin-query/recommended",
     "next/core-web-vitals",
-    "prettier",
-    "plugin:storybook/recommended",
-    "plugin:@tanstack/eslint-plugin-query/recommended"
+    "prettier"
   ],
   "plugins": [
     "unicorn",
     "testing-library",
     "prefer-arrow",
+    "jest-dom",
+    "@nx",
     "simple-import-sort",
     "@tanstack/query"
   ],
@@ -21,11 +24,79 @@
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
       "rules": {
-        // camelcase
-        "camelcase": "off",
-        // remove default-props since we're using typescript
-        "react/require-default-props": "off",
-        // sort rules
+        // NX
+        "@nx/enforce-module-boundaries": [
+          "error",
+          {
+            "enforceBuildableLibDependency": true,
+            "allow": [],
+            "depConstraints": [
+              {
+                "sourceTag": "type:core",
+                "onlyDependOnLibsWithTags": ["type:core"]
+              },
+              {
+                "sourceTag": "type:util",
+                "onlyDependOnLibsWithTags": ["type:core", "type:util"]
+              },
+              {
+                "sourceTag": "type:data",
+                "onlyDependOnLibsWithTags": [
+                  "type:core",
+                  "type:util",
+                  "type:data"
+                ]
+              },
+              {
+                "sourceTag": "type:state",
+                "onlyDependOnLibsWithTags": [
+                  "type:core",
+                  "type:util",
+                  "type:state",
+                  "type:data"
+                ]
+              },
+              {
+                "sourceTag": "type:ui",
+                "onlyDependOnLibsWithTags": [
+                  "type:core",
+                  "type:util",
+                  "type:state",
+                  "type:ui"
+                ]
+              },
+              {
+                "sourceTag": "type:feature",
+                "onlyDependOnLibsWithTags": [
+                  "type:core",
+                  "type:util",
+                  "type:state",
+                  "type:data",
+                  "type:ui",
+                  "type:feature"
+                ]
+              },
+              {
+                "sourceTag": "type:page",
+                "onlyDependOnLibsWithTags": [
+                  "type:core",
+                  "type:util",
+                  "type:ui",
+                  "type:state",
+                  "type:feature"
+                ]
+              },
+              {
+                "sourceTag": "*",
+                "onlyDependOnLibsWithTags": ["*"]
+              }
+            ]
+          }
+        ],
+        // React Query
+        "@tanstack/query/exhaustive-deps": "error",
+        "@tanstack/query/prefer-query-object-syntax": "error",
+        // Sort
         "simple-import-sort/exports": "error",
         "simple-import-sort/imports": [
           "error",
@@ -38,7 +109,9 @@
               // Other npm libraries.
               ["^@?\\w"],
               // Internal packages
-              ["^(~)(/.*|$)"],
+              ["^(@jobstash)(/.*/core|$)", "^(@jobstash)(/.*/utils|$)"],
+              ["^(@jobstash)(/.*/state|$)", "^(@jobstash)(/.*/data|$)"],
+              ["^(@jobstash)(/.*/ui|$)", "^(@jobstash)(/.*/feature|$)"],
               // Parent imports `..`
               ["^\\.\\.(?!/?$)", "^\\.\\./?$"],
               // Other relative imports '.'
@@ -46,13 +119,7 @@
             ]
           }
         ],
-        // disable object-shorthand for methods
-        "object-shorthand": [
-          "error",
-          "always",
-          { "methodsIgnorePattern": "." }
-        ],
-        // enforce arrow functions
+        // Enforce arrow functions
         "prefer-arrow/prefer-arrow-functions": [
           "error",
           {
@@ -61,11 +128,10 @@
             "classPropertiesAllowed": false
           }
         ],
-        // override xo default
-        "react/button-has-type": "off",
+        // Override xo default
         "react/boolean-prop-naming": [
           "error",
-          { "rule": "^(is|has|should)[A-Z]([A-Za-z0-9]?)+" }
+          { "rule": "^(is|has)[A-Z]([A-Za-z0-9]?)+" }
         ],
         "react/react-in-jsx-scope": "off",
         "react/function-component-definition": [
@@ -75,7 +141,7 @@
             "unnamedComponents": "arrow-function"
           }
         ],
-        "no-unused-vars": "off",
+        "react/require-default-props": "off",
         "no-unused-expressions": [
           "error",
           {
@@ -85,7 +151,7 @@
         "no-warning-comments": "warn",
         "dot-notation": "off",
         "new-cap": "off",
-        "@typescript-eslint/no-unused-vars": "off",
+        "@typescript-eslint/no-unused-vars": "error",
         "import/no-anonymous-default-export": "off",
         // override unicorn lint
         "unicorn/prefer-module": "off",
@@ -101,17 +167,16 @@
         "unicorn/prevent-abbreviations": "off",
         "unicorn/no-null": "off"
       }
+    },
+    {
+      "files": ["*.ts", "*.tsx"],
+      "extends": ["plugin:@nx/typescript"],
+      "rules": {}
+    },
+    {
+      "files": ["*.js", "*.jsx"],
+      "extends": ["plugin:@nx/javascript"],
+      "rules": {}
     }
-  ],
-  "settings": {
-    "tailwindcss": {
-      "config": "tailwind.config.js"
-    }
-  },
-  "globals": {
-    "JSX": true
-  },
-  "env": {
-    "jest": true
-  }
+  ]
 }
