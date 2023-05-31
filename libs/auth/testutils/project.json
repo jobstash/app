@@ -1,0 +1,16 @@
+{
+  "name": "auth-testutils",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/auth/testutils/src",
+  "projectType": "library",
+  "tags": ["type:testutil"],
+  "targets": {
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/auth/testutils/**/*.{ts,tsx,js,jsx}"]
+      }
+    }
+  }
+}

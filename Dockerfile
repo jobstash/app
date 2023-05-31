@@ -1,40 +1,23 @@
 FROM node:18-alpine AS base
 
-# Dependencies
-FROM base AS deps
-# Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
+FROM base as build-web
+RUN yarn global add pnpm
 RUN apk add --no-cache libc6-compat
-WORKDIR /app
-
-# Install dependencies
-COPY package.json yarn.lock* ./
-RUN yarn --frozen-lockfile
-
-# Build
-FROM base AS builder
-WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
+WORKDIR /jobstash
 COPY . .
-RUN yarn build
+RUN pnpm i --frozen-lockfile
+RUN pnpm build
 
-# Production
-FROM base AS runner
-WORKDIR /app
-
+FROM base as run-prod
+RUN yarn global add pnpm
+RUN apk add --no-cache libc6-compat
+WORKDIR /jobstash
+COPY --from=build-web --chown=nextjs:nodejs /jobstash/dist ./dist
+WORKDIR /jobstash/dist/apps/web
+RUN pnpm i
 ENV NODE_ENV production
-
 RUN addgroup --system --gid 1001 nodejs
 RUN adduser --system --uid 1001 nextjs
-
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/next.config.js ./next.config.js
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/package.json ./package.json
-COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
-
 USER nextjs
 
-# EXPOSE 3000
-# ENV PORT 3000
-
-CMD ["node_modules/.bin/next", "start"]
+CMD ["pnpm", "start"]

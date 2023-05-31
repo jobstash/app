@@ -1,0 +1,18 @@
+{
+  "name": "organizations-testutils",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/organizations/testutils/src",
+  "projectType": "library",
+  "tags": ["type:testutil"],
+  "targets": {
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": [
+          "libs/organizations/testutils/**/*.{ts,tsx,js,jsx}"
+        ]
+      }
+    }
+  }
+}

@@ -1,8 +1,8 @@
 #!/usr/bin/env sh
 . "$(dirname -- "$0")/_/husky.sh"
 
-# run tests
-yarn test
+pnpm lint:all
 
-# run build
-yarn build
+pnpm test:all --parallel=3
+
+pnpm build

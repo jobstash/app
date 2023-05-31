@@ -1,2 +1,6 @@
 [auth]
 token=29daa933e8a84cdfba576c3a78ce6fe32d589d546b904697b398410c7aca4d44
+
+[defaults]
+org=jobstash
+project=app
