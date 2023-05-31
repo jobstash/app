@@ -1,7 +1,9 @@
 import { JobListQueryPage, jobListQueryPageSchema } from '@jobstash/jobs/core';
-import { NEXT_PUBLIC_MW_URL } from '@jobstash/shared/core';
+import {
+  NEXT_PUBLIC_MW_URL,
+  NEXT_PUBLIC_PAGE_SIZE,
+} from '@jobstash/shared/core';
 import { getUrlWithParams } from '@jobstash/filters/utils';
-import { getJobListLimitEnv } from '@jobstash/shared/utils';
 
 import { mwFetch } from '@jobstash/shared/data';
 
@@ -9,7 +11,7 @@ export const getJobList = async (
   page: number,
   filterParams: Record<string, string>,
 ) => {
-  const limit = getJobListLimitEnv();
+  const limit = NEXT_PUBLIC_PAGE_SIZE ?? '20';
 
   const params: Record<string, string> = {
     ...filterParams,
