@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
 const whiteListed = [
-  'phantom-technologies-inc-senior-front-end-engineer-apps-cJ1mvE',
+  'jobs/ava-labs-senior-infrastructure-engineer-3oxfCO/details',
   'JobStash.svg',
   'favicon.ico',
   '_next',

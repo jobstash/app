@@ -10,7 +10,10 @@ import {
   NEXT_PUBLIC_EDGE_URL,
   NEXT_PUBLIC_FRONTEND_URL,
 } from '@jobstash/shared/core';
-import { createJobPostLdJson } from '@jobstash/jobs/utils';
+import {
+  createJobCardOgDetails,
+  createJobPostLdJson,
+} from '@jobstash/jobs/utils';
 import { cn, sentryMessage } from '@jobstash/shared/utils';
 
 import { activeJobAtom, initJobAtom, useJobPost } from '@jobstash/jobs/state';
@@ -72,19 +75,18 @@ export const JobPostPage = ({ initJob, fromSSR }: JobPostPageProps) => {
     throw new Error(ERR_INTERNAL);
   }
 
-  const titleMetaData = `${jobPost?.jobTitle} | ${jobPost?.organization.name}`;
   const urlMetaData = `${NEXT_PUBLIC_FRONTEND_URL}/jobs/${slug}/details`;
 
   const imageMetaData = `${NEXT_PUBLIC_EDGE_URL}/api/job-card?id=${jobPost?.shortUUID}`;
+  const { description: descriptionMetaData, title: titleMetaData } =
+    createJobCardOgDetails(jobPost);
 
   return (
     <>
       {jobPost && (
         <MetaData
           title={titleMetaData}
-          description={
-            jobPost.role ?? jobPost.benefits ?? jobPost.team ?? jobPost.jobTitle
-          }
+          description={descriptionMetaData}
           url={urlMetaData}
           image={imageMetaData}
           twitter={{

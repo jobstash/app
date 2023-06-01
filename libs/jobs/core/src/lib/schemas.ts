@@ -20,6 +20,7 @@ export const jobDetailsSchema = myzod.object({
   culture: myzod.string().min(1).nullable(),
   offersTokenAllocation: myzod.boolean().nullable(),
   paysInCrypto: myzod.boolean().nullable(),
+  salaryCurrency: myzod.string().min(1).nullable(),
 });
 
 export const jobPostSchema = myzod
