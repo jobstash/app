@@ -48,9 +48,9 @@ WORKDIR /jobstash
 ENV NODE_ENV=production
 ENV NEXT_PUBLIC_MW_URL=https://middleware.staging.jobstash.xyz
 ENV NEXT_PUBLIC_FRONTEND_URL=https://app.staging.jobstash.xyz
-env NEXT_PUBLIC_EDGE_URL=https://edge-staging.vercel.app
-env NEXT_PUBLIC_PAGE_SIZE=20
-env NEXT_PUBLIC_QUERY_RETRY_COUNT=0
+ENV NEXT_PUBLIC_EDGE_URL=https://edge-staging.vercel.app
+ENV NEXT_PUBLIC_PAGE_SIZE=20
+ENV NEXT_PUBLIC_QUERY_RETRY_COUNT=0
 
 RUN addgroup -g 1001 -S nodejs
 RUN adduser -S nextjs -u 1001
