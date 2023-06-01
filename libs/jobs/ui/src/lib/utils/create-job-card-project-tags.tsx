@@ -47,7 +47,7 @@ export const createJobCardProjectTags = (project: Project) => {
   if (isMainnet)
     projectInfoTags.push({
       id: TAG_ELEMENT_ID.mainnet,
-      text: 'MainNet',
+      text: 'Mainnet',
       icon: <MainnetIcon />,
     });
 

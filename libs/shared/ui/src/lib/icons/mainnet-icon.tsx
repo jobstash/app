@@ -1,15 +1,18 @@
 const MainnetIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    width="13"
-    height="13"
-    viewBox="0 0 64 64"
-    fill="none"
+    fill="cyan"
+    viewBox="0 0 24 24"
+    strokeWidth={1.5}
     stroke="currentColor"
-    className="stroke-2 fill-white"
+    className="w-3 h-3"
   >
-    <path d="M8 48V16l20 16v16" />
-    <path d="M56 48V16L36 32v16" />
+    <path
+      strokeLinecap="round"
+      strokeLinejoin="round"
+      d="M15 12H9m12 0a9 9 0 11-18 0 9 9 0 0118 0z"
+      color="cyan"
+    />
   </svg>
 );
 
