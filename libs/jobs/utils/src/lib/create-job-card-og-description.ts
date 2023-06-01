@@ -16,7 +16,7 @@ export const createJobCardOgDetails = (jobPost?: JobPost) => {
     salaryCurrency = 'USD',
   } = jobPost;
 
-  const title = `${organization.name.toUpperCase()} | ${jobTitle}\n\n`;
+  const title = `${organization.name} | ${jobTitle}\n\n`;
   let description = '';
 
   if (minSalaryRange && maxSalaryRange) {
@@ -34,7 +34,9 @@ export const createJobCardOgDetails = (jobPost?: JobPost) => {
   }
 
   if (technologies.length > 0) {
-    description += `🤓 Skills required: ${technologies.join(', ')}`;
+    description += `🤓 Skills required: ${technologies
+      .map((t) => t.name)
+      .join(', ')}`;
   }
 
   return { title, description };
