@@ -29,7 +29,7 @@ const JobList = ({ initJob, activeJob }: Props) => {
     hasNextPage,
     inViewRef,
     filterParamsObj,
-  } = useJobList();
+  } = useJobList(initJob);
 
   return (
     <>

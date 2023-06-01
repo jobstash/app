@@ -17,7 +17,7 @@ import {
   sentryMessage,
 } from '@jobstash/shared/utils';
 
-import { activeJobAtom, initJobAtom, useJobPost } from '@jobstash/jobs/state';
+import { activeJobAtom, useJobPost } from '@jobstash/jobs/state';
 
 const MetaData = dynamic(() =>
   import('@jobstash/shared/ui').then((m) => m.MetaData),
@@ -43,7 +43,6 @@ export interface JobPostPageProps {
 
 export const JobPostPage = ({ initJob, fromSSR }: JobPostPageProps) => {
   const [activeJob, setActiveJob] = useAtom(activeJobAtom);
-  const [initJobAtomValue, setInitJobAtomValue] = useAtom(initJobAtom);
 
   const router = useRouter();
   const shortUuid = (router.query.slug?.slice(-6) as string) ?? '';
@@ -53,11 +52,10 @@ export const JobPostPage = ({ initJob, fromSSR }: JobPostPageProps) => {
   });
 
   useEffect(() => {
-    if (!initJobAtomValue && initJob) {
-      setInitJobAtomValue(initJob);
+    if (initJob) {
       setActiveJob(initJob);
     }
-  }, [initJob, initJobAtomValue, setActiveJob, setInitJobAtomValue]);
+  }, [initJob, setActiveJob]);
 
   useEffect(() => {
     // Prevent scroll restore when directly accessed from address-bar
