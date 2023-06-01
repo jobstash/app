@@ -46,8 +46,10 @@ export const useJobList = () => {
     return result;
   }, [data, initJobAtomValue]);
 
+  const setActiveRef = useRef(false);
   useEffect(() => {
-    if (jobPosts.length > 0 && !activeJob) {
+    if (jobPosts.length > 0 && !setActiveRef.current) {
+      setActiveRef.current = true;
       setActiveJob(jobPosts[0]);
     }
   }, [activeJob, jobPosts, setActiveJob]);
