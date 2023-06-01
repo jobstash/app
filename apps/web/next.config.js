@@ -9,7 +9,7 @@ const path = require('node:path');
  **/
 const nextConfig = {
   // // Nx + nextjs + docker
-  // output: 'standalone',
+  output: 'standalone',
 
   nx: {
     // Set this to true if you would like to use SVGR
@@ -20,7 +20,7 @@ const nextConfig = {
     appDir: false,
 
     // // Nx + nextjs + docker
-    // outputFileTracingRoot: path.join(__dirname, '../../'),
+    outputFileTracingRoot: path.join(__dirname, '../../'),
   },
 
   images: {
