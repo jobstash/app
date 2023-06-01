@@ -16,10 +16,14 @@ export const createJobCardOrgTags = (
   if (fundingRounds.length > 0) {
     let lastFunding: number | null = null;
     let fundingDate: number | null = null;
-    for (const fundingRound of fundingRounds.reverse()) {
-      if (fundingRound.raisedAmount !== null) {
-        lastFunding = fundingRound.raisedAmount;
+
+    for (const fundingRound of fundingRounds) {
+      if (fundingRound.date && fundingRound.date > (lastFunding ?? 0)) {
         fundingDate = fundingRound.date;
+
+        if (fundingRound.raisedAmount) {
+          lastFunding = fundingRound.raisedAmount;
+        }
       }
     }
 
