@@ -24,6 +24,7 @@ export const createJobCardTags = (jobPost: JobPost) => {
     jobCommitment,
     paysInCrypto,
     offersTokenAllocation,
+    salaryCurrency = 'USD',
   } = jobPost;
 
   const tags: TagElement[] = [];
@@ -47,9 +48,9 @@ export const createJobCardTags = (jobPost: JobPost) => {
   }
 
   if (minSalaryRange && maxSalaryRange) {
-    const salary = `$${numFormatter.format(
+    const salary = `${salaryCurrency} ${numFormatter.format(
       minSalaryRange,
-    )} - $${numFormatter.format(maxSalaryRange)}`;
+    )} - ${numFormatter.format(maxSalaryRange)}`;
     tags.push({
       id: TAG_ELEMENT_ID.salary,
       text: `Salary: ${salary}`,
