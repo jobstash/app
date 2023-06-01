@@ -1,40 +1,70 @@
+# FROM node:18-alpine AS base
+
+# FROM base as build-web
+# RUN yarn global add pnpm
+# RUN apk add --no-cache libc6-compat
+# WORKDIR /jobstash
+# COPY . .
+# RUN pnpm i --frozen-lockfile
+# RUN pnpm build
+
+# FROM base as run-prod
+# RUN yarn global add pnpm
+# RUN apk add --no-cache libc6-compat
+# WORKDIR /jobstash
+
+# RUN addgroup --system --gid 1001 nodejs
+# RUN adduser --system --uid 1001 nextjs
+
+# COPY --from=build-web --chown=nextjs:nodejs /jobstash/dist ./dist
+# WORKDIR /jobstash/dist/apps/web
+# RUN pnpm i
+# ENV NODE_ENV production
+
+# USER nextjs
+
+# CMD ["pnpm", "start"]
+
 FROM node:18-alpine AS base
 
-# Dependencies
-FROM base AS deps
-# Check https://github.com/nodejs/docker-node/tree/b4117f9333da4138b03a546ec926ef50a31506c3#nodealpine to understand why libc6-compat might be needed.
+FROM base as deps
 RUN apk add --no-cache libc6-compat
-WORKDIR /app
+WORKDIR /jobstash
+COPY package.json pnpm-lock.yaml* ./
+RUN yarn global add pnpm && pnpm i --frozen-lockfile
+# RUN yarn install --frozen-lockfile
 
-# Install dependencies
-COPY package.json yarn.lock* ./
-RUN yarn --frozen-lockfile
-
-# Build
-FROM base AS builder
-WORKDIR /app
-COPY --from=deps /app/node_modules ./node_modules
+FROM base as builder
+RUN yarn global add pnpm
+WORKDIR /jobstash
+COPY --from=deps /jobstash/node_modules ./node_modules
 COPY . .
-RUN yarn build
 
-# Production
+ENV NODE_ENV=production
+ENV NEXT_PUBLIC_MW_URL=https://middleware.jobstash.xyz
+ENV NEXT_PUBLIC_FRONTEND_URL=https://app.jobstash.xyz
+ENV NEXT_PUBLIC_EDGE_URL=https://edge-staging.vercel.app
+ENV NEXT_PUBLIC_PAGE_SIZE=20
+ENV NEXT_PUBLIC_QUERY_RETRY_COUNT=0
+ENV NEXT_PUBLIC_GA_MEASUREMENT_ID=G-PQSHG9DB44
+
+RUN pnpm build
+# RUN yarn build
+
 FROM base AS runner
-WORKDIR /app
+WORKDIR /jobstash
 
-ENV NODE_ENV production
+RUN addgroup -g 1001 -S nodejs
+RUN adduser -S nextjs -u 1001
 
-RUN addgroup --system --gid 1001 nodejs
-RUN adduser --system --uid 1001 nextjs
-
-COPY --from=builder /app/public ./public
-COPY --from=builder /app/next.config.js ./next.config.js
-COPY --from=builder /app/node_modules ./node_modules
-COPY --from=builder /app/package.json ./package.json
-COPY --from=builder --chown=nextjs:nodejs /app/.next ./.next
+COPY --from=builder --chown=nextjs:nodejs /jobstash/dist/apps/web/.next/standalone ./
+COPY --from=builder /jobstash/apps/web/public ./apps/web/public
+COPY --from=builder --chown=nextjs:nodejs /jobstash/dist/apps/web/.next/static ./dist/apps/web/.next/static
 
 USER nextjs
 
-# EXPOSE 3000
-# ENV PORT 3000
+EXPOSE 3000
 
-CMD ["node_modules/.bin/next", "start"]
+ENV PORT 3000
+
+CMD ["node", "apps/web/server.js"]

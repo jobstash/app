@@ -1,5 +1,1 @@
-coverage
-
-!.storybook
-
-public/*
+node_modules
