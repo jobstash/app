@@ -1,9 +1,11 @@
 import type { SIWEConfig } from 'connectkit/build/siwe';
 
-import { NEXT_PUBLIC_MW_URL } from '@jobstash/shared/core';
+import { getMwUrl } from '@jobstash/shared/utils';
 
 export const siweGetSession: SIWEConfig['getSession'] = async () => {
-  const res = await fetch(`${NEXT_PUBLIC_MW_URL}/siwe/session`, {
+  const mwUrl = getMwUrl();
+
+  const res = await fetch(`${mwUrl}/siwe/session`, {
     mode: 'cors',
     credentials: 'include',
   });

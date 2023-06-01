@@ -1,7 +1,5 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
 import '../styles/globals.css';
 
-import NextApp from 'next/app';
 import { AppProps } from 'next/app';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
@@ -10,7 +8,7 @@ import { useEffect } from 'react';
 
 import { MantineProvider } from '@mantine/core';
 
-import { NEXT_PUBLIC_GA_MEASUREMENT_ID } from '@jobstash/shared/core';
+import { getAnalyticsId } from '@jobstash/shared/utils';
 
 import { ReactQueryProvider } from '@jobstash/shared/state';
 
@@ -24,7 +22,7 @@ const App = ({ Component, pageProps }: AppProps) => {
     });
   }, [router]);
 
-  const analyticsId = NEXT_PUBLIC_GA_MEASUREMENT_ID;
+  const analyticsId = getAnalyticsId();
 
   return (
     <>
@@ -66,14 +64,6 @@ const App = ({ Component, pageProps }: AppProps) => {
       </ReactQueryProvider>
     </>
   );
-};
-
-// At the moment all pages from the app requires some data from the server.
-// Therefore, its okay to opt out of the automatic static optimization feature.
-App.getInitialProps = async (ctx: any): Promise<any> => {
-  const appProps = await NextApp.getInitialProps(ctx);
-
-  return { ...appProps };
 };
 
 export default App;

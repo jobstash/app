@@ -37,23 +37,6 @@ const nextConfig = {
     ],
   },
 
-  publicRuntimeConfig: {
-    //
-    // publicEnvs: Object.fromEntries(
-    //   Object.entries(process.env).filter(([key]) =>
-    //     key.includes('NEXT_PUBLIC_'),
-    //   ),
-    // ),
-    publicEnvs: {
-      NEXT_PUBLIC_MW_URL: process.env.NEXT_PUBLIC_MW_URL,
-      NEXT_PUBLIC_FRONTEND_URL: process.env.NEXT_PUBLIC_FRONTEND_URL,
-      NEXT_PUBLIC_EDGE_URL: process.env.NEXT_PUBLIC_EDGE_URL,
-      NEXT_PUBLIC_PAGE_SIZE: process.env.NEXT_PUBLIC_PAGE_SIZE,
-      NEXT_PUBLIC_QUERY_RETRY_COUNT: process.env.NEXT_PUBLIC_QUERY_RETRY_COUNT,
-      NEXT_PUBLIC_GA_MEASUREMENT_ID: process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID,
-    },
-  },
-
   redirects: async () => [
     {
       source: '/',
