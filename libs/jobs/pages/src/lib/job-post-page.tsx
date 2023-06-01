@@ -81,6 +81,7 @@ export const JobPostPage = ({ initJob, fromSSR }: JobPostPageProps) => {
   const imageMetaData = `${edgeUrl}/api/job-card?id=${jobPost?.shortUUID}`;
   const { description: descriptionMetaData, title: titleMetaData } =
     createJobCardOgDetails(jobPost);
+  const ldJson = createJobPostLdJson(jobPost);
 
   return (
     <>
@@ -94,7 +95,7 @@ export const JobPostPage = ({ initJob, fromSSR }: JobPostPageProps) => {
             site: '@jobstash_xyz',
             image: imageMetaData,
           }}
-          ldJson={createJobPostLdJson()}
+          ldJson={ldJson}
         />
       )}
 
