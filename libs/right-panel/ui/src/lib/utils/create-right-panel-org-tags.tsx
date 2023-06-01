@@ -28,8 +28,8 @@ export const createRightPanelOrgTags = (organization: Organization) => {
 
   if (headCount) {
     tags.push({
-      id: TAG_ELEMENT_ID.teamSize,
-      text: `Team Size: ${headCount}`,
+      id: TAG_ELEMENT_ID.headCount,
+      text: `Employees: ${headCount}`,
       icon: <UsersIcon />,
     });
   }

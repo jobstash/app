@@ -47,6 +47,7 @@ export const TAG_ELEMENT_ID = {
   mainnet: 'mainnet',
   paysInCrypto: 'pays-in-cryto',
   offersTokenAllocation: 'offers-token-allocation',
+  headCount: 'head-count',
 } as const;
 
 // Sentry MSG

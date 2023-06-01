@@ -12,7 +12,7 @@ interface Props {
 }
 
 const JobCardOrg = ({ org }: Props) => {
-  const tags = createJobCardOrgTags(org.fundingRounds);
+  const tags = createJobCardOrgTags(org.fundingRounds, org.headCount);
 
   return (
     <>
