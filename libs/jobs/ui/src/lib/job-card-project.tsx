@@ -19,7 +19,7 @@ const JobCardProject = ({ project }: Props) => {
     <>
       <hr className="border-t border-white/10" />
 
-      <div className="flex flex-wrap items-center gap-8">
+      <div className="flex flex-wrap items-center gap-4">
         <LogoTitle
           title={project.name}
           avatarProps={{
