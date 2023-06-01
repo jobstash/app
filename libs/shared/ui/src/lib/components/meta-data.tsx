@@ -47,6 +47,8 @@ const MetaData = ({
     <meta property="og:title" content={og?.title ?? title} />
     <meta property="og:description" content={og?.description ?? description} />
     <meta property="og:image" content={og?.image ?? image} />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
 
     {/* Twitter */}
     <meta name="twitter:card" content={twitter.card ?? 'summary_large_image'} />
