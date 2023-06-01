@@ -77,14 +77,16 @@ const Filters = ({ jobCount }: Props) => {
         )}
 
         {/* FILTER CONTROLS */}
-        <div className="flex flex-wrap gap-6 lg:py-2">
-          <Button variant="primary" onClick={applyFilters}>
-            Apply Filters
-          </Button>
-          <Button variant="outline" onClick={clearFilters}>
-            Clear Filters
-          </Button>
-        </div>
+        {state?.showFilters && (
+          <div className="flex flex-wrap gap-6 lg:py-2">
+            <Button variant="primary" onClick={applyFilters}>
+              Apply Filters
+            </Button>
+            <Button variant="outline" onClick={clearFilters}>
+              Clear Filters
+            </Button>
+          </div>
+        )}
       </div>
     </div>
   );
