@@ -15,7 +15,7 @@ const RightPanelHeaderSocials = ({ organization }: Props) => {
   const socials: TagElement[] = createRightPanelSocialTags(organization);
 
   return (
-    <div className="flex gap-4">
+    <div className="flex gap-4 flex-wrap">
       {socials.map(({ id, text, icon, link }) => (
         <CardSet key={id} link={link} icon={icon}>
           {text}

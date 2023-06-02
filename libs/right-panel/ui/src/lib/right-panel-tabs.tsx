@@ -62,7 +62,7 @@ const RightPanelTabs = ({
   // TODO: Repositories Tab Button
 
   return (
-    <div className="flex items-center flex-wrap space-x-2 border-t border-white/10 pt-8">
+    <div className="flex items-center flex-wrap gap-4 border-t border-white/10 pt-8">
       {tabButtons.map(({ text, assignedTab }) => (
         <RightPanelTabButton
           key={text}
