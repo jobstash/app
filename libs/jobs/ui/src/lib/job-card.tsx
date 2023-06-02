@@ -9,6 +9,7 @@ import { createJobKey } from '@jobstash/jobs/utils';
 import { getFrontendUrl } from '@jobstash/shared/utils';
 
 import { activeJobAtom } from '@jobstash/jobs/state';
+import { mobileRightPanelOpenAtom, useIsMobile } from '@jobstash/shared/state';
 
 import JobCardHeader from './job-card-header';
 import JobCardOrg from './job-card-org';
@@ -30,10 +31,17 @@ const JobCard = ({ jobPost, isActive, filterParamsObj }: Props) => {
 
   const setActiveJob = useSetAtom(activeJobAtom);
 
+  const isMobile = useIsMobile();
+  const setMobileRightPanelOpen = useSetAtom(mobileRightPanelOpenAtom);
   const onClick = useCallback(() => {
     setActiveJob(jobPost);
     document.dispatchEvent(new Event(EVENT_CARD_CLICK));
-  }, [jobPost, setActiveJob]);
+
+    // If on mobile, set mobileRightPanelOpen (used for disabling scroll in main window)
+    if (isMobile) {
+      setMobileRightPanelOpen(true);
+    }
+  }, [isMobile, jobPost, setActiveJob, setMobileRightPanelOpen]);
 
   const frontendUrl = getFrontendUrl();
   const href = useMemo(() => {
