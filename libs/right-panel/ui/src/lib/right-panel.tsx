@@ -1,8 +1,11 @@
-import { memo } from 'react';
+import { memo, useEffect } from 'react';
+
+import { useAtomValue } from 'jotai';
 
 import { type JobPost } from '@jobstash/jobs/core';
 
 import { useCompetitors } from '@jobstash/competitors/state';
+import { mobileRightPanelOpenAtom } from '@jobstash/shared/state';
 
 import { Loader } from '@jobstash/shared/ui';
 
@@ -30,6 +33,17 @@ const RightPanel = ({ jobPost, slug, currentTab }: Props) => {
 
   // TODO: Repos fetch
   const isLoadingRepo = false;
+
+  // Disable main window scroll when mobile right-panel is open
+  const mobileRightPanelOpenValue = useAtomValue(mobileRightPanelOpenAtom);
+  useEffect(() => {
+    const el = document.querySelectorAll('html')[0];
+    if (mobileRightPanelOpenValue) {
+      el.classList.add('disable-scroll');
+    } else {
+      el.classList.remove('disable-scroll');
+    }
+  }, [mobileRightPanelOpenValue]);
 
   if (!jobPost) {
     return (
