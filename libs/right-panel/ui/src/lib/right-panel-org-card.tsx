@@ -12,12 +12,14 @@ interface Props {
 export const RightPanelOrgCard = ({ organization }: Props) => {
   const { name, description, fundingRounds, investors } = organization;
 
+  const sortedFundingRounds = fundingRounds.sort((a, b) => a.date - b.date);
+
   return (
     <RightPanelCardBorder>
       <div className="flex flex-col p-6">
         <div className="flex flex-col gap-6">
           <RightPanelOrgCardHeader name={name} description={description} />
-          <RightPanelOrgCardFundingRounds fundingRounds={fundingRounds} />
+          <RightPanelOrgCardFundingRounds fundingRounds={sortedFundingRounds} />
           <RightPanelOrgCardInvestors investors={investors} />
         </div>
       </div>
