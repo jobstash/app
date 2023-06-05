@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 import { useEffect, useMemo, useRef } from 'react';
 import { useInView } from 'react-intersection-observer';
 
-import { useAtom } from 'jotai';
+import { useAtom, useSetAtom } from 'jotai';
 
 import { type JobPost } from '@jobstash/jobs/core';
 import { getUrlWithParams } from '@jobstash/filters/utils';
@@ -12,6 +12,7 @@ import { getFrontendUrl } from '@jobstash/shared/utils';
 import { useIsMobile } from '@jobstash/shared/state';
 
 import { activeJobAtom } from '../atoms/active-job-atom';
+import { jobCountAtom } from '../atoms/job-count-atom';
 import { jobsPrevLinkAtom } from '../atoms/jobs-prev-link';
 
 import { useJobListQuery } from './use-job-list-query';
@@ -30,6 +31,13 @@ export const useJobList = (initJob: JobPost | null) => {
     isFetchingNextPage,
     hasNextPage,
   } = useJobListQuery();
+
+  const setJobCountAtom = useSetAtom(jobCountAtom);
+  useEffect(() => {
+    if (data) {
+      setJobCountAtom(data.pages[0].total);
+    }
+  }, [data, setJobCountAtom]);
 
   const initJobRef = useRef<JobPost | null>(null);
   const jobPosts = useMemo(() => {
@@ -95,7 +103,6 @@ export const useJobList = (initJob: JobPost | null) => {
 
   return {
     push,
-    data,
     isLoading,
     error,
     jobPosts,

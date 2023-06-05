@@ -14,7 +14,13 @@ export const validateSchema = <T>(data: unknown, schema: Type<T>) => {
       `${SENTRY_SCHEMA_VALIDATION_ERROR}: ${result.message}`,
       JSON.stringify(data),
     );
-    console.log('VALIDATION RESULT =', result);
+
+    //
+    // console.log(
+    //   `${SENTRY_SCHEMA_VALIDATION_ERROR}: ${result.message}`,
+    //   JSON.stringify(data),
+    // );
+
     throw new Error(ERR_INTERNAL);
   }
 

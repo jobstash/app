@@ -10,11 +10,7 @@ import {
 } from '@jobstash/filters/ui';
 import { Button } from '@jobstash/shared/ui';
 
-interface Props {
-  jobCount?: number;
-}
-
-const Filters = ({ jobCount }: Props) => {
+const Filters = () => {
   const {
     state,
     dispatch,
@@ -28,7 +24,14 @@ const Filters = ({ jobCount }: Props) => {
     shownFilterConfigs,
     applyFilters,
     clearFilters,
+    error,
+    jobCount,
+    showFilters,
   } = useFilters();
+
+  if (error) {
+    return null;
+  }
 
   return (
     <div className="flex flex-col pt-4 lg:pt-8">
@@ -44,13 +47,13 @@ const Filters = ({ jobCount }: Props) => {
         {/* DESKTOP FILTER TOP */}
         <div className="flex flex-wrap items-center justify-between gap-x-6">
           <FiltersToggleButton
-            isActive={Boolean(state?.showFilters)}
+            isActive={Boolean(showFilters)}
             isLoading={isLoading}
             filterCount={filterCount}
             toggleFilters={toggleFilters}
           />
 
-          {state?.showFilters && (
+          {showFilters && (
             <div className="hidden grow items-center gap-x-6 lg:flex">
               <FilterConfigMapper
                 filterValues={state?.filterValues}
@@ -61,11 +64,11 @@ const Filters = ({ jobCount }: Props) => {
             </div>
           )}
 
-          <FiltersJobCount jobCount={jobCount} />
+          {jobCount && <FiltersJobCount jobCount={jobCount} />}
         </div>
 
         {/* DESKTOP FILTER CONTENTS */}
-        {state?.showFilters && (
+        {showFilters && (
           <div className="-mx-2 flex flex-wrap pb-4 lg:-mx-3 lg:-mb-4">
             <FilterConfigMapper
               filterValues={state?.filterValues}
@@ -77,7 +80,7 @@ const Filters = ({ jobCount }: Props) => {
         )}
 
         {/* FILTER CONTROLS */}
-        {state?.showFilters && (
+        {showFilters && (
           <div className="flex flex-wrap gap-6 lg:py-2">
             <Button variant="primary" onClick={applyFilters}>
               Apply Filters
