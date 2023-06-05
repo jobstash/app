@@ -12,7 +12,6 @@ export interface FilterConfigSharedProperties {
 
 export interface RangeFilterConfig extends FilterConfigSharedProperties {
   kind: typeof FILTER_KIND.RANGE;
-  stepSize: number;
   value: {
     lowest: {
       paramKey: string;
