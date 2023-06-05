@@ -19,7 +19,7 @@ import SingleSelectFilter from './single-select-filter';
 
 export interface Props {
   filterValues?: FilterValues;
-  configs: FilterConfig[keyof FilterConfig][];
+  configs: FilterConfig[string][];
   dispatch: Dispatch<
     | SetSelectFilterValueAction
     | SetRangeFilterValueAction

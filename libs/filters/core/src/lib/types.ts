@@ -1,68 +1,93 @@
+import { type Infer } from 'myzod';
 import { type ParsedUrlQuery } from 'node:querystring';
 
-import { FILTER_KIND } from './constants';
+import {
+  filterConfigSchema,
+  filterConfigSharedPropertiesSchema,
+  multiSelectFilterConfigSchema,
+  rangeFilterConfigSchema,
+  selectOptionsSchema,
+  singleSelectFilterConfigSchema,
+} from './schemas';
 
-export interface FilterConfigSharedProperties {
-  position: number;
-  label: string;
-  show: boolean;
-  googleAnalyticsEventName?: string;
-  googleAnalyticsEventId?: string;
-}
+//
+// export interface FilterConfigSharedProperties {
+//   position: number;
+//   label: string;
+//   show: boolean;
+//   googleAnalyticsEventName?: string;
+//   googleAnalyticsEventId?: string;
+// }
+export type FilterConfigSharedProperties = Infer<
+  typeof filterConfigSharedPropertiesSchema
+>;
 
-export interface RangeFilterConfig extends FilterConfigSharedProperties {
-  kind: typeof FILTER_KIND.RANGE;
-  value: {
-    lowest: {
-      paramKey: string;
-      value: number;
-    };
-    highest: {
-      paramKey: string;
-      value: number;
-    };
-  };
-}
+//
+// export interface RangeFilterConfig extends FilterConfigSharedProperties {
+//   kind: typeof FILTER_KIND.RANGE;
+//   value: {
+//     lowest: {
+//       paramKey: string;
+//       value: number;
+//     };
+//     highest: {
+//       paramKey: string;
+//       value: number;
+//     };
+//   };
+// }
+export type RangeFilterConfig = Infer<typeof rangeFilterConfigSchema>;
 
-export interface SingleSelectFilterConfig extends FilterConfigSharedProperties {
-  kind: typeof FILTER_KIND.SINGLE_SELECT;
-  paramKey: string;
-  options: { label: string; value: string }[];
-}
+//
+// export interface SingleSelectFilterConfig extends FilterConfigSharedProperties {
+//   kind: typeof FILTER_KIND.SINGLE_SELECT;
+//   paramKey: string;
+//   options: { label: string; value: string }[];
+// }
+export type SingleSelectFilterConfig = Infer<
+  typeof singleSelectFilterConfigSchema
+>;
 
-export interface MultiSelectSearchFilterConfig
-  extends FilterConfigSharedProperties {
-  kind:
-    | typeof FILTER_KIND.MULTI_SELECT
-    | typeof FILTER_KIND.MULTI_SELECT_WITH_SEARCH;
-  paramKey: string;
-  options: string[];
-}
+//
+// export interface MultiSelectFilterConfig extends FilterConfigSharedProperties {
+//   kind:
+//     | typeof FILTER_KIND.MULTI_SELECT
+//     | typeof FILTER_KIND.MULTI_SELECT_WITH_SEARCH;
+//   paramKey: string;
+//   options: string[];
+// }
+export type MultiSelectFilterConfig = Infer<
+  typeof multiSelectFilterConfigSchema
+>;
 
-export interface FilterConfig {
-  publicationDate: SingleSelectFilterConfig;
-  salary: RangeFilterConfig;
-  seniority: MultiSelectSearchFilterConfig;
-  locations: MultiSelectSearchFilterConfig;
-  teamSize: RangeFilterConfig;
-  headCount: RangeFilterConfig;
-  tech: MultiSelectSearchFilterConfig;
-  organizations: MultiSelectSearchFilterConfig;
-  chains: MultiSelectSearchFilterConfig;
-  projects: MultiSelectSearchFilterConfig;
-  categories: MultiSelectSearchFilterConfig;
-  tvl: RangeFilterConfig;
-  monthlyVolume: RangeFilterConfig;
-  monthlyFees: RangeFilterConfig;
-  monthlyRevenue: RangeFilterConfig;
-  audits: RangeFilterConfig;
-  hacks: SingleSelectFilterConfig;
-  fundingRounds: MultiSelectSearchFilterConfig;
-  mainNet: SingleSelectFilterConfig;
-  token: SingleSelectFilterConfig;
-  order: SingleSelectFilterConfig;
-  orderBy: SingleSelectFilterConfig;
-}
+export type SelectOptions = Infer<typeof selectOptionsSchema>;
+
+//
+// export interface FilterConfig {
+//   publicationDate: SingleSelectFilterConfig;
+//   salary: RangeFilterConfig;
+//   seniority: MultiSelectFilterConfig;
+//   locations: MultiSelectFilterConfig;
+//   teamSize: RangeFilterConfig;
+//   headCount: RangeFilterConfig;
+//   tech: MultiSelectFilterConfig;
+//   organizations: MultiSelectFilterConfig;
+//   chains: MultiSelectFilterConfig;
+//   projects: MultiSelectFilterConfig;
+//   categories: MultiSelectFilterConfig;
+//   tvl: RangeFilterConfig;
+//   monthlyVolume: RangeFilterConfig;
+//   monthlyFees: RangeFilterConfig;
+//   monthlyRevenue: RangeFilterConfig;
+//   audits: RangeFilterConfig;
+//   hacks: SingleSelectFilterConfig;
+//   fundingRounds: MultiSelectFilterConfig;
+//   mainNet: SingleSelectFilterConfig;
+//   token: SingleSelectFilterConfig;
+//   order: SingleSelectFilterConfig;
+//   orderBy: SingleSelectFilterConfig;
+// }
+export type FilterConfig = Infer<typeof filterConfigSchema>;
 
 export type FilterValues = Record<string, string | null>;
 export type FilterValue = FilterValues[string];
@@ -87,7 +112,7 @@ export type SetSelectFilterValueAction = Action<
   {
     paramKey: string;
     selectedLabel: string;
-    options: { label: string; value: string }[];
+    options: SelectOptions;
   }
 >;
 

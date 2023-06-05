@@ -28,7 +28,12 @@ const Filters = ({ jobCount }: Props) => {
     shownFilterConfigs,
     applyFilters,
     clearFilters,
+    error,
   } = useFilters();
+
+  if (error) {
+    return null;
+  }
 
   return (
     <div className="flex flex-col pt-4 lg:pt-8">

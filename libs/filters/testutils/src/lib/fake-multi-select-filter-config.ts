@@ -2,15 +2,15 @@ import { faker } from '@faker-js/faker';
 
 import {
   FILTER_KIND,
-  type MultiSelectSearchFilterConfig,
+  type MultiSelectFilterConfig,
 } from '@jobstash/filters/core';
 
 import { fakeSelectOptions } from './fake-select-options';
 import { fakeSharedFilterConfigProperties } from './fake-shared-filter-config-properties';
 
 export const fakeMultiSelectFilterConfig = (
-  options: Partial<MultiSelectSearchFilterConfig>,
-): MultiSelectSearchFilterConfig => {
+  options: Partial<MultiSelectFilterConfig>,
+): MultiSelectFilterConfig => {
   const sharedFilterConfigProperties = fakeSharedFilterConfigProperties();
   const paramKey = faker.word.noun();
   const selection = fakeSelectOptions().map((s) => s.label);

@@ -20,7 +20,7 @@ export const useFilters = () => {
 
   const [state, dispatch] = useReducer(filterReducer, {} as FilterState);
 
-  const { data, isLoading: isLoadingData } = useFilterConfig();
+  const { data, isLoading: isLoadingData, error } = useFilterConfig();
   useEffect(() => {
     if (data) {
       dispatch({ type: 'UPDATE_DATA', payload: { data, routerQuery } });
@@ -99,13 +99,13 @@ export const useFilters = () => {
     [],
   );
 
-  const sortFilterConfigs: FilterConfig[keyof FilterConfig][] = useMemo(
+  const sortFilterConfigs: FilterConfig[string][] = useMemo(
     () =>
       state.filterConfig ? Object.values(state.filterConfig).slice(-2) : [],
     [state.filterConfig],
   );
 
-  const shownFilterConfigs: FilterConfig[keyof FilterConfig][] = useMemo(
+  const shownFilterConfigs: FilterConfig[string][] = useMemo(
     () =>
       state.filterConfig ? Object.values(state.filterConfig).slice(0, -2) : [],
     [state.filterConfig],
@@ -124,5 +124,6 @@ export const useFilters = () => {
     shownFilterConfigs,
     applyFilters,
     clearFilters,
+    error,
   };
 };
