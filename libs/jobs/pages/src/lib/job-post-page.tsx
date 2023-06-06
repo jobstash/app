@@ -2,7 +2,7 @@ import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
-import { useAtom } from 'jotai';
+import { useAtom, useAtomValue } from 'jotai';
 
 import { JobPost } from '@jobstash/jobs/core';
 import { ERR_INTERNAL } from '@jobstash/shared/core';
@@ -17,6 +17,7 @@ import {
   sentryMessage,
 } from '@jobstash/shared/utils';
 
+import { showFiltersAtom } from '@jobstash/filters/state';
 import { activeJobAtom, useJobPost } from '@jobstash/jobs/state';
 
 const MetaData = dynamic(() =>
@@ -86,6 +87,8 @@ export const JobPostPage = ({ initJob, fromSSR }: JobPostPageProps) => {
   const { description: descriptionMetaData, title: titleMetaData } =
     createJobCardOgDetails(jobPost);
 
+  const showFilters = useAtomValue(showFiltersAtom);
+
   return (
     <>
       {jobPost && (
@@ -102,18 +105,38 @@ export const JobPostPage = ({ initJob, fromSSR }: JobPostPageProps) => {
         />
       )}
 
-      <div className="w-full lg:pl-52 lg:pr-[41.67%]">
+      <div className={cn('w-full lg:pl-52')}>
         <SideBar />
 
-        <div className="px-3.5 pt-[65px] lg:px-8 lg:pt-0">
-          <Filters />
-          <JobList initJob={initJob} activeJob={activeJob} />
+        <div
+          className={cn('px-3.5 pt-[65px] lg:px-8 lg:pt-0', {
+            'z-50': showFilters,
+            'lg:pr-[50%]': !showFilters,
+          })}
+        >
+          <div
+            className={cn({
+              'bg-[#121216] w-[101%] pr-12': showFilters,
+            })}
+          >
+            <Filters />
+          </div>
+
+          <div
+            className={cn({
+              'lg:pr-[50%]': showFilters,
+            })}
+          >
+            <JobList initJob={initJob} activeJob={activeJob} />
+          </div>
         </div>
 
         <div
           className={cn(
-            'lg:hide-scrollbar fixed inset-0 z-50 h-screen overflow-y-auto bg-dark p-4 pt-6 transition-all lg:inset-auto lg:right-0 lg:top-0 lg:w-5/12 lg:px-6 lg:py-8 lg:pr-10',
+            'lg:hide-scrollbar fixed inset-0 h-screen overflow-y-auto bg-dark p-4 pt-6 transition-all lg:inset-auto lg:right-0 lg:top-0 lg:w-5/12 lg:px-6 lg:py-8 lg:pr-10',
             { active: activeJob === initJob },
+            { 'z-50': !showFilters },
+            { '-z-50': showFilters },
           )}
         >
           <RightPanel

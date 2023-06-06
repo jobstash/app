@@ -26,6 +26,7 @@ const Filters = () => {
     clearFilters,
     error,
     jobCount,
+    showFilters,
   } = useFilters();
 
   if (error) {
@@ -46,13 +47,13 @@ const Filters = () => {
         {/* DESKTOP FILTER TOP */}
         <div className="flex flex-wrap items-center justify-between gap-x-6">
           <FiltersToggleButton
-            isActive={Boolean(state?.showFilters)}
+            isActive={Boolean(showFilters)}
             isLoading={isLoading}
             filterCount={filterCount}
             toggleFilters={toggleFilters}
           />
 
-          {state?.showFilters && (
+          {showFilters && (
             <div className="hidden grow items-center gap-x-6 lg:flex">
               <FilterConfigMapper
                 filterValues={state?.filterValues}
@@ -67,7 +68,7 @@ const Filters = () => {
         </div>
 
         {/* DESKTOP FILTER CONTENTS */}
-        {state?.showFilters && (
+        {showFilters && (
           <div className="-mx-2 flex flex-wrap pb-4 lg:-mx-3 lg:-mb-4">
             <FilterConfigMapper
               filterValues={state?.filterValues}
@@ -79,7 +80,7 @@ const Filters = () => {
         )}
 
         {/* FILTER CONTROLS */}
-        {state?.showFilters && (
+        {showFilters && (
           <div className="flex flex-wrap gap-6 lg:py-2">
             <Button variant="primary" onClick={applyFilters}>
               Apply Filters

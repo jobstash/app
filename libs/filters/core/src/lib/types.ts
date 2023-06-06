@@ -93,7 +93,6 @@ export type FilterValues = Record<string, string | null>;
 export type FilterValue = FilterValues[string];
 
 export interface FilterState {
-  showFilters: boolean;
   filterConfig: FilterConfig | null;
   filterValues: FilterValues;
 }

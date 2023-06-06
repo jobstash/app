@@ -75,15 +75,13 @@ const MultiSelectFilter = ({
         classNames={{
           input: cn(
             'rounded-lg border-gray bg-dark text-white placeholder:text-white focus-within:border-white/30',
-            { 'border border-white': inputValue.length > 0 },
+            { 'border border-white p-2': inputValue.length > 0 },
           ),
           searchInput: 'placeholder-white',
           itemsWrapper: 'bg-dark',
           item: '[&[data-hovered]]:bg-dark-gray [&[data-selected]]:bg-gray',
-          values: 'overflow-hidden flex-nowrap [&>*]:-mr-3',
+          values: 'overflow-hidden [&>*]:-mr-1',
         }}
-        //
-        // value={['move', 'Rust']}
         value={inputValue}
         onChange={onChange}
       />
