@@ -48,7 +48,6 @@ const FilterConfigMapper = ({
               options={(config as SingleSelectFilterConfig).options}
               paramKey={(config as SingleSelectFilterConfig).paramKey}
               dispatch={dispatch}
-              placeholder={config.label}
             />
           )}
 
