@@ -9,6 +9,8 @@ import {
 } from '@jobstash/filters/core';
 import { cn, decodeBase64 } from '@jobstash/shared/utils';
 
+import { useIsMobile } from '@jobstash/shared/state';
+
 import FilterWrapper from './filter-wrapper';
 
 interface Props {
@@ -66,6 +68,9 @@ const MultiSelectFilter = ({
     return { inputValue, inputLabel };
   }, [label, value]);
 
+  const isMobile = useIsMobile();
+  const hasValue = inputValue.length > 0;
+
   return (
     <FilterWrapper label={inputLabel}>
       <MultiSelect
@@ -75,12 +80,15 @@ const MultiSelectFilter = ({
         classNames={{
           input: cn(
             'rounded-lg border-gray bg-dark text-white placeholder:text-white focus-within:border-white/30',
-            { 'border border-white p-2': inputValue.length > 0 },
+            { 'border border-white': hasValue },
+            { 'p-2': hasValue && !isMobile },
           ),
           searchInput: 'placeholder-white',
           itemsWrapper: 'bg-dark',
           item: '[&[data-hovered]]:bg-dark-gray [&[data-selected]]:bg-gray',
-          values: 'overflow-hidden [&>*]:-mr-1',
+          values: cn('overflow-hidden [&>*]:-mr-1', {
+            'flex-nowrap': isMobile,
+          }),
         }}
         value={inputValue}
         onChange={onChange}
