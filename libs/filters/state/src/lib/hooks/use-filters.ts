@@ -8,8 +8,12 @@ import {
   useReducer,
 } from 'react';
 
+import { useAtomValue } from 'jotai';
+
 import { type FilterConfig, type FilterState } from '@jobstash/filters/core';
 import { getFrontendUrl } from '@jobstash/shared/utils';
+
+import { jobCountAtom } from '@jobstash/jobs/state';
 
 import { filterReducer } from '../reducers/filter-reducer';
 
@@ -111,6 +115,8 @@ export const useFilters = () => {
     [state.filterConfig],
   );
 
+  const jobCount = useAtomValue(jobCountAtom);
+
   return {
     state: state as FilterState | undefined,
     dispatch,
@@ -125,5 +131,6 @@ export const useFilters = () => {
     applyFilters,
     clearFilters,
     error,
+    jobCount,
   };
 };

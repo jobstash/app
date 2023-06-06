@@ -10,11 +10,7 @@ import {
 } from '@jobstash/filters/ui';
 import { Button } from '@jobstash/shared/ui';
 
-interface Props {
-  jobCount?: number;
-}
-
-const Filters = ({ jobCount }: Props) => {
+const Filters = () => {
   const {
     state,
     dispatch,
@@ -29,6 +25,7 @@ const Filters = ({ jobCount }: Props) => {
     applyFilters,
     clearFilters,
     error,
+    jobCount,
   } = useFilters();
 
   if (error) {
@@ -66,7 +63,7 @@ const Filters = ({ jobCount }: Props) => {
             </div>
           )}
 
-          <FiltersJobCount jobCount={jobCount} />
+          {jobCount && <FiltersJobCount jobCount={jobCount} />}
         </div>
 
         {/* DESKTOP FILTER CONTENTS */}

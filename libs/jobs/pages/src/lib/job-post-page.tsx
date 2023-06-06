@@ -36,6 +36,10 @@ const JobList = dynamic(
   { ssr: false },
 );
 
+const Filters = dynamic(() =>
+  import('@jobstash/filters/feature').then((m) => m.Filters),
+);
+
 export interface JobPostPageProps {
   initJob: JobPost;
   fromSSR: boolean;
@@ -102,6 +106,7 @@ export const JobPostPage = ({ initJob, fromSSR }: JobPostPageProps) => {
         <SideBar />
 
         <div className="px-3.5 pt-[65px] lg:px-8 lg:pt-0">
+          <Filters />
           <JobList initJob={initJob} activeJob={activeJob} />
         </div>
 
