@@ -11,7 +11,7 @@ import {
 import { useAtom, useAtomValue } from 'jotai';
 
 import { type FilterConfig, type FilterState } from '@jobstash/filters/core';
-import { getFrontendUrl } from '@jobstash/shared/utils';
+import { FRONTEND_URL } from '@jobstash/shared/core';
 
 import { jobCountAtom } from '@jobstash/jobs/state';
 
@@ -40,9 +40,8 @@ export const useFilters = () => {
     [setShowFilters],
   );
 
-  const frontendUrl = getFrontendUrl();
   const applyFilters = useCallback(() => {
-    const url = new URL(`${frontendUrl}/jobs`);
+    const url = new URL(`${FRONTEND_URL}/jobs`);
     for (const [key, value] of Object.entries(state.filterValues)) {
       if (value) {
         url.searchParams.set(key, value);
@@ -51,10 +50,10 @@ export const useFilters = () => {
 
     setShowFilters(false);
     setTimeout(() => push(url, undefined, { shallow: true }), 100);
-  }, [frontendUrl, push, setShowFilters, state.filterValues]);
+  }, [push, setShowFilters, state.filterValues]);
 
   const clearFilters = useCallback(() => {
-    const url = new URL(`${frontendUrl}/jobs`);
+    const url = new URL(`${FRONTEND_URL}/jobs`);
     const searchQuery = state?.filterValues?.query;
     if (searchQuery) {
       url.searchParams.set('query', searchQuery);
@@ -62,7 +61,7 @@ export const useFilters = () => {
 
     setShowFilters(false);
     setTimeout(() => push(url, undefined, { shallow: true }), 100);
-  }, [frontendUrl, push, setShowFilters, state?.filterValues?.query]);
+  }, [push, setShowFilters, state?.filterValues?.query]);
 
   const onSubmitSearch: FormEventHandler = useCallback(
     (e) => {

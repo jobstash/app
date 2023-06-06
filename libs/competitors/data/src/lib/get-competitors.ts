@@ -1,11 +1,12 @@
 import { type Competitor } from '@jobstash/competitors/core';
 import {
   ERR_INTERNAL,
+  MW_URL,
   SENTRY_MW_INVALID_JSON_RESPONSE,
   SENTRY_MW_NON_200_RESPONSE,
   SENTRY_MW_UNSUCCESSFUL_RESPONSE,
 } from '@jobstash/shared/core';
-import { getMwUrl, sentryMessage } from '@jobstash/shared/utils';
+import { sentryMessage } from '@jobstash/shared/utils';
 
 interface ProjectCompetitorsResponse {
   success: boolean;
@@ -16,8 +17,7 @@ interface ProjectCompetitorsResponse {
 const SENTRY_LABEL = `getCompetitors`;
 
 export const getCompetitors = async (id?: string): Promise<Competitor[]> => {
-  const mwUrl = getMwUrl();
-  const res = await fetch(`${mwUrl}/projects/competitors/${id}`);
+  const res = await fetch(`${MW_URL}/projects/competitors/${id}`);
 
   let resData: ProjectCompetitorsResponse;
 

@@ -200,6 +200,7 @@ describe.skip('Job List Validation', () => {
           culture,
           offersTokenAllocation,
           paysInCrypto,
+          salaryCurrency,
         } = jobPost;
 
         allJobDetails.push({
@@ -219,6 +220,7 @@ describe.skip('Job List Validation', () => {
           culture,
           offersTokenAllocation,
           paysInCrypto,
+          salaryCurrency,
         });
       }
     }

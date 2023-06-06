@@ -8,7 +8,7 @@ import { useEffect } from 'react';
 
 import { MantineProvider } from '@mantine/core';
 
-import { getAnalyticsId } from '@jobstash/shared/utils';
+import { ANALYTICS_ID } from '@jobstash/shared/core';
 
 import { ReactQueryProvider } from '@jobstash/shared/state';
 
@@ -22,8 +22,6 @@ const App = ({ Component, pageProps }: AppProps) => {
     });
   }, [router]);
 
-  const analyticsId = getAnalyticsId();
-
   return (
     <>
       <Head>
@@ -31,11 +29,11 @@ const App = ({ Component, pageProps }: AppProps) => {
         <link rel="apple-touch-icon" href="/apple-touch-icon.png" />
         <link rel="icon" href="/favicon.ico" sizes="any" />
       </Head>
-      {analyticsId && (
+      {ANALYTICS_ID && (
         <>
           <Script
             strategy="afterInteractive"
-            src={`https://www.googletagmanager.com/gtag/js?id=${analyticsId}`}
+            src={`https://www.googletagmanager.com/gtag/js?id=${ANALYTICS_ID}`}
           />
           <Script
             id="gtag-init"
@@ -45,7 +43,7 @@ const App = ({ Component, pageProps }: AppProps) => {
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
-            gtag('config', '${analyticsId}', {
+            gtag('config', '${ANALYTICS_ID}', {
               page_path: window.location.pathname,
             });
           `,

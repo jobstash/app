@@ -1,6 +1,6 @@
 import { JobListQueryPage, jobListQueryPageSchema } from '@jobstash/jobs/core';
+import { JOB_LIST_LIMIT, MW_URL } from '@jobstash/shared/core';
 import { getUrlWithParams } from '@jobstash/filters/utils';
-import { getJobListLimit, getMwUrl } from '@jobstash/shared/utils';
 
 import { mwFetch } from '@jobstash/shared/data';
 
@@ -8,16 +8,13 @@ export const getJobList = async (
   page: number,
   filterParams: Record<string, string>,
 ) => {
-  const mwUrl = getMwUrl();
-  const limit = getJobListLimit();
-
   const params: Record<string, string> = {
     ...filterParams,
     page: page.toString(),
-    limit,
+    JOB_LIST_LIMIT,
   };
 
-  const url = getUrlWithParams(mwUrl, '/jobs/list', params);
+  const url = getUrlWithParams(MW_URL, '/jobs/list', params);
 
   const options = {
     responseSchema: jobListQueryPageSchema,
