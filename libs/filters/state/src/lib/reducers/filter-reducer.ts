@@ -11,11 +11,6 @@ export const filterReducer = (
   { type, payload }: FilterAction,
 ): FilterState => {
   switch (type) {
-    case 'TOGGLE_FILTERS': {
-      const value = payload === null ? !state.showFilters : payload.value;
-      return { ...state, showFilters: value };
-    }
-
     case 'UPDATE_DATA': {
       const { data, routerQuery } = payload;
       const { filterConfig, filterValues } = initFilterConfigData(

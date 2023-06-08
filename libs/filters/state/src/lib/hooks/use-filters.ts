@@ -8,9 +8,14 @@ import {
   useReducer,
 } from 'react';
 
+import { useAtom, useAtomValue } from 'jotai';
+
 import { type FilterConfig, type FilterState } from '@jobstash/filters/core';
 import { getFrontendUrl } from '@jobstash/shared/utils';
 
+import { jobCountAtom } from '@jobstash/jobs/state';
+
+import { showFiltersAtom } from '../atoms/show-filters-atom';
 import { filterReducer } from '../reducers/filter-reducer';
 
 import { useFilterConfig } from './use-filter-config';
@@ -20,7 +25,7 @@ export const useFilters = () => {
 
   const [state, dispatch] = useReducer(filterReducer, {} as FilterState);
 
-  const { data, isLoading: isLoadingData } = useFilterConfig();
+  const { data, isLoading: isLoadingData, error } = useFilterConfig();
   useEffect(() => {
     if (data) {
       dispatch({ type: 'UPDATE_DATA', payload: { data, routerQuery } });
@@ -28,6 +33,12 @@ export const useFilters = () => {
   }, [data, routerQuery]);
 
   const isLoading = isLoadingData || !isReady;
+
+  const [showFilters, setShowFilters] = useAtom(showFiltersAtom);
+  const toggleFilters = useCallback(
+    () => setShowFilters((prev) => !prev),
+    [setShowFilters],
+  );
 
   const frontendUrl = getFrontendUrl();
   const applyFilters = useCallback(() => {
@@ -38,9 +49,9 @@ export const useFilters = () => {
       }
     }
 
-    dispatch({ type: 'TOGGLE_FILTERS', payload: { value: false } });
+    setShowFilters(false);
     setTimeout(() => push(url, undefined, { shallow: true }), 100);
-  }, [frontendUrl, push, state.filterValues]);
+  }, [frontendUrl, push, setShowFilters, state.filterValues]);
 
   const clearFilters = useCallback(() => {
     const url = new URL(`${frontendUrl}/jobs`);
@@ -49,9 +60,9 @@ export const useFilters = () => {
       url.searchParams.set('query', searchQuery);
     }
 
-    dispatch({ type: 'TOGGLE_FILTERS', payload: { value: false } });
+    setShowFilters(false);
     setTimeout(() => push(url, undefined, { shallow: true }), 100);
-  }, [frontendUrl, push, state?.filterValues?.query]);
+  }, [frontendUrl, push, setShowFilters, state?.filterValues?.query]);
 
   const onSubmitSearch: FormEventHandler = useCallback(
     (e) => {
@@ -94,22 +105,19 @@ export const useFilters = () => {
     ).size;
   }, [state.filterValues]);
 
-  const toggleFilters = useCallback(
-    () => dispatch({ type: 'TOGGLE_FILTERS', payload: null }),
-    [],
-  );
-
-  const sortFilterConfigs: FilterConfig[keyof FilterConfig][] = useMemo(
+  const sortFilterConfigs: FilterConfig[string][] = useMemo(
     () =>
       state.filterConfig ? Object.values(state.filterConfig).slice(-2) : [],
     [state.filterConfig],
   );
 
-  const shownFilterConfigs: FilterConfig[keyof FilterConfig][] = useMemo(
+  const shownFilterConfigs: FilterConfig[string][] = useMemo(
     () =>
       state.filterConfig ? Object.values(state.filterConfig).slice(0, -2) : [],
     [state.filterConfig],
   );
+
+  const jobCount = useAtomValue(jobCountAtom);
 
   return {
     state: state as FilterState | undefined,
@@ -124,5 +132,8 @@ export const useFilters = () => {
     shownFilterConfigs,
     applyFilters,
     clearFilters,
+    error,
+    jobCount,
+    showFilters,
   };
 };

@@ -4,6 +4,7 @@ import { Select } from '@mantine/core';
 
 import {
   type FilterValue,
+  type SelectOptions,
   type SetSelectFilterValueAction,
 } from '@jobstash/filters/core';
 import { cn } from '@jobstash/shared/utils';
@@ -13,7 +14,7 @@ import FilterWrapper from './filter-wrapper';
 interface Props {
   value: FilterValue;
   paramKey: string;
-  options: { label: string; value: string }[];
+  options: SelectOptions;
   dispatch: Dispatch<SetSelectFilterValueAction>;
   label?: string;
   placeholder?: string;
