@@ -3,7 +3,7 @@ import { MW_URL } from '@jobstash/shared/core';
 
 import { mwFetch } from '@jobstash/shared/data';
 
-export const getFilterConfig = async (): Promise<FilterConfig> => {
+export const getFilterConfig = async () => {
   const url = `${MW_URL}/jobs/filters`;
   const options = {
     responseSchema: filterConfigSchema,

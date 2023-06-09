@@ -47,3 +47,8 @@ export const auditSchema = myzod.object({
   auditor: myzod.string().min(1).nullable(),
   link: myzod.string().min(1),
 });
+
+export const mwResponseFieldsSchema = myzod.object({
+  success: myzod.boolean(),
+  message: myzod.string().min(1),
+});

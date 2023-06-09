@@ -15,13 +15,14 @@ import {
 } from '@jobstash/shared/utils';
 
 interface MwFetchOptions<R, P> {
-  responseSchema: Type<R>;
   sentryLabel: string;
+  responseSchema?: Type<R>;
   method?: 'GET' | 'POST';
   payload?: P;
   payloadSchema?: Type<P>;
   credentials?: RequestCredentials;
   mode?: RequestMode;
+  headers?: Record<string, string>;
 }
 
 export const mwFetch = async <R, P = Undefined>(
@@ -40,9 +41,10 @@ export const mwFetch = async <R, P = Undefined>(
     payloadSchema = undefinedSchema,
     credentials,
     mode,
+    headers,
   } = options;
 
-  const validatedPayload = validateSchema(payload, payloadSchema);
+  const validatedPayload = validateSchema(payload, payloadSchema, sentryLabel);
   const { url, body } = createFetchDeets(reqUrl, method, validatedPayload);
 
   const res = await fetch(url, {
@@ -50,6 +52,7 @@ export const mwFetch = async <R, P = Undefined>(
     body,
     credentials,
     mode,
+    headers,
   });
 
   if (!res.ok) {
@@ -60,13 +63,23 @@ export const mwFetch = async <R, P = Undefined>(
     throw new Error(ERR_INTERNAL);
   }
 
-  let data: R;
+  const isJsonResponse = (res.headers.get('content-type') ?? '').includes(
+    'application/json',
+  );
+
+  let data: R | null = null;
   try {
-    data = await res.json();
+    if (isJsonResponse) {
+      data = await res.json();
+    }
   } catch {
     sentryMessage(sentryLabel, SENTRY_MW_INVALID_JSON_RESPONSE);
     throw new Error(ERR_INTERNAL);
   }
 
-  return validateSchema(data, responseSchema);
+  if (responseSchema && isJsonResponse) {
+    return validateSchema(data, responseSchema, sentryLabel);
+  }
+
+  return null as R;
 };

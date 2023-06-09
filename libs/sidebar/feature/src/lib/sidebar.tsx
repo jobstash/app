@@ -15,6 +15,7 @@ import {
   SidebarCloseButton,
   SidebarWrapper,
 } from '@jobstash/sidebar/ui';
+import { ConnectWalletButton } from '@jobstash/auth/feature';
 
 const Sidebar = () => {
   const sidebarOpen = useAtomValue(sidebarOpenAtom);
@@ -59,6 +60,11 @@ const Sidebar = () => {
         <div className="space-y-3 pt-3">
           <JobsBartab icon={<JobsSidebarIcon />}>Jobs</JobsBartab>
         </div>
+      </div>
+
+      <div className="inset-x-0 bottom-0 hidden space-y-4 p-4 lg:absolute lg:block">
+        <hr className="border-t border-white/20" />
+        <ConnectWalletButton />
       </div>
     </SidebarWrapper>
   );

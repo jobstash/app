@@ -7,19 +7,19 @@ import {
 
 import { sentryMessage } from './sentry-message';
 
-export const validateSchema = <T>(data: unknown, schema: Type<T>) => {
+export const validateSchema = <T>(
+  data: unknown,
+  schema: Type<T>,
+  sentryLabel?: string,
+) => {
   const result = schema.try(data);
   if (result instanceof myzod.ValidationError) {
     sentryMessage(
-      `${SENTRY_SCHEMA_VALIDATION_ERROR}: ${result.message}`,
+      `${
+        sentryLabel ? `"${sentryLabel}" ` : ''
+      }${SENTRY_SCHEMA_VALIDATION_ERROR}: ${result.message}`,
       JSON.stringify(data),
     );
-
-    //
-    // console.log(
-    //   `${SENTRY_SCHEMA_VALIDATION_ERROR}: ${result.message}`,
-    //   JSON.stringify(data),
-    // );
 
     throw new Error(ERR_INTERNAL);
   }

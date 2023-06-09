@@ -7,7 +7,7 @@ import { mwFetch } from '@jobstash/shared/data';
 export const getJobList = async (
   page: number,
   filterParams: Record<string, string>,
-) => {
+): Promise<JobListQueryPage> => {
   const params: Record<string, string> = {
     ...filterParams,
     page: page.toString(),

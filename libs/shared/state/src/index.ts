@@ -6,4 +6,5 @@ export { default as ReactQueryProvider } from './lib/providers/react-query-provi
 
 //  Hooks
 export * from './lib/hooks/use-is-mobile';
+export * from './lib/hooks/use-is-mounted';
 export * from './lib/hooks/use-media-query';

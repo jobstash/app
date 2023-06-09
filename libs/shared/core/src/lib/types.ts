@@ -9,6 +9,7 @@ import {
   fundingRoundSchema,
   hackSchema,
   investorSchema,
+  mwResponseFieldsSchema,
   technologySchema,
   undefinedSchema,
 } from './schemas';
@@ -81,3 +82,5 @@ export type Hack = Infer<typeof hackSchema>;
 //   link: string;
 // }
 export type Audit = Infer<typeof auditSchema>;
+
+export type MwResponseFields = Infer<typeof mwResponseFieldsSchema>;

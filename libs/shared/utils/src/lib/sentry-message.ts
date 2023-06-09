@@ -6,5 +6,10 @@ export const sentryMessage = (
   msg: string,
   level?: SeverityLevel,
 ) => {
-  Sentry.captureMessage(`${label}: ${msg}`, level ?? 'debug');
+  const message = `${label}: ${msg}`;
+  if (process.env.NODE_ENV === 'production') {
+    Sentry.captureMessage(message, level ?? 'debug');
+  } else {
+    console.log(message);
+  }
 };

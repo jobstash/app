@@ -21,6 +21,9 @@ const bartab = cva(['h-10 w-full border-none rounded-lg p-[2px]'], {
     isActive: {
       true: '',
     },
+    isDisabled: {
+      true: 'opacity-30 pointer-events-none animate-pulse',
+    },
   },
   compoundVariants: [
     {
@@ -71,6 +74,7 @@ type ButtonHTMLProps = Omit<
 interface BartabProps extends ButtonHTMLProps, BartabVariantProps {
   children: ReactNode;
   left?: ReactNode;
+  isDisabled?: boolean;
 }
 
 const Bartab = forwardRef<HTMLButtonElement, BartabProps>(
@@ -80,6 +84,7 @@ const Bartab = forwardRef<HTMLButtonElement, BartabProps>(
       left = null,
       variant = 'bartab',
       isActive,
+      isDisabled,
       ...props
     }: BartabProps,
     ref,
@@ -88,7 +93,8 @@ const Bartab = forwardRef<HTMLButtonElement, BartabProps>(
       ref={ref}
       type="button"
       {...props}
-      className={cn(bartab({ variant, isActive }))}
+      className={cn(bartab({ variant, isActive, isDisabled }))}
+      disabled={isDisabled}
     >
       <div className={cn(inner({ variant, isActive }))}>
         {left}

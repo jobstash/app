@@ -87,12 +87,38 @@ module.exports = {
           transform: 'rotate(0deg)',
         },
       },
+      shake: {
+        '10%, 90%': {
+          transform: 'translate3d(-1px, 0, 0)',
+        },
+        '20%, 80%': {
+          transform: 'translate3d(2px, 0, 0)',
+        },
+        '30%, 50%, 70%': {
+          transform: 'translate3d(-4px, 0, 0)',
+        },
+        '40%, 60%': {
+          transform: 'translate3d(4px, 0, 0)',
+        },
+      },
+      'fade-in-left': {
+        from: {
+          opacity: 0,
+          transform: 'translateX(-60px)',
+        },
+        to: {
+          opacity: 1,
+          transform: 'translateX(0px)',
+        },
+      },
     },
     animation: {
       pulse: 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       spin: 'spin 2.4s linear infinite',
       spin2: 'spin 0.4s linear infinite',
       'reverse-spin': 'reverse-spin 2.4s linear infinite',
+      shake: 'shake 0.82s cubic-bezier(.36,.07,.19,.97) both',
+      'fade-in-left': 'fade-in-left 0.3s linear',
     },
   },
   plugins: [],
