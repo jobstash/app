@@ -6,7 +6,7 @@ import { MW_URL } from '@jobstash/shared/core';
 
 import { mwFetch } from '@jobstash/shared/data';
 
-export const getSiweNonce = async () => {
+export const getSiweNonce = async (): Promise<string> => {
   const url = `${MW_URL}/siwe/nonce`;
 
   const options = {
@@ -16,5 +16,7 @@ export const getSiweNonce = async () => {
     mode: 'cors' as RequestMode,
   };
 
-  return mwFetch<SiweNonceResponse>(url, options);
+  const { data } = await mwFetch<SiweNonceResponse>(url, options);
+
+  return data;
 };

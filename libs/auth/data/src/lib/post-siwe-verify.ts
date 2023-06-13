@@ -23,5 +23,12 @@ export const postSiweVerify = async (payload: SiweVerifyPayload) => {
     payload,
     payloadSchema: siweVerifyPayloadSchema,
   };
-  return mwFetch<SiweVerifyResponse, SiweVerifyPayload>(url, options);
+
+  try {
+    await mwFetch<SiweVerifyResponse, SiweVerifyPayload>(url, options);
+  } catch {
+    return false;
+  }
+
+  return true;
 };

@@ -1,5 +1,6 @@
 // Constants
 export * from './lib/constants';
+export * from './lib/siwe-config';
 
 // Schemas
 export {

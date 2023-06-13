@@ -10,7 +10,7 @@ export const useSiweNonce = () => {
   });
 
   return {
-    siweNonceData: data?.data,
+    siweNonceData: data,
     siweNonceError: error,
     siweNonceIsLoading: isLoading,
   };
