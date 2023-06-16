@@ -10,8 +10,9 @@ import { MantineProvider } from '@mantine/core';
 
 import { ANALYTICS_ID } from '@jobstash/shared/core';
 
-import { AuthProvider } from '@jobstash/auth/state';
 import { ReactQueryProvider } from '@jobstash/shared/state';
+
+import { AuthProvider } from '@jobstash/auth/feature';
 
 const App = ({ Component, pageProps }: AppProps) => {
   const router = useRouter();

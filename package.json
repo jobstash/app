@@ -30,7 +30,8 @@
     "@tanstack/react-query": "^4.29.12",
     "class-variance-authority": "^0.6.0",
     "clsx": "^1.2.1",
-    "connectkit": "^1.4.0",
+    "connectkit": "^1.2.1",
+    "ethers": "^5",
     "isomorphic-fetch": "^3.0.0",
     "jotai": "^2.1.0",
     "myzod": "^1.10.0",
@@ -40,11 +41,10 @@
     "react-intersection-observer": "^9.4.3",
     "server-only": "^0.0.1",
     "sharp": "^0.32.1",
-    "siwe": "^2.1.4",
+    "siwe": "^1.1.6",
     "tailwind-merge": "^1.12.0",
     "tslib": "^2.3.0",
-    "viem": "^0.3.39",
-    "wagmi": "^1.0.9"
+    "wagmi": "^0.11.7"
   },
   "devDependencies": {
     "@commitlint/cli": "^17.6.3",
