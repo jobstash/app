@@ -41,6 +41,11 @@ export const createJobPostLdJson = (jobPost?: JobPost) => {
       description += '</ul>\n\n';
     }
 
+    const datePosted = new Date(jobCreatedTimestamp);
+    const validThrough = new Date(
+      datePosted.setMonth(datePosted.getMonth() + 3),
+    );
+
     const jsonLd: Record<
       string,
       | string
@@ -52,7 +57,8 @@ export const createJobPostLdJson = (jobPost?: JobPost) => {
       '@type': 'JobPosting',
       title: jobTitle,
       description,
-      datePosted: new Date(jobCreatedTimestamp).toISOString(),
+      datePosted: datePosted.toISOString(),
+      validThrough: validThrough.toISOString(),
       hiringOrganization: {
         '@type': 'Organization',
         name: organization.name,
