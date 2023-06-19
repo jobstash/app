@@ -1,5 +1,6 @@
 import { type JobPost } from '@jobstash/jobs/core';
 import { EDGE_URL } from '@jobstash/shared/core';
+import { getGoogleLogoUrl } from '@jobstash/shared/utils';
 
 export const createJobPostLdJson = (jobPost?: JobPost) => {
   if (jobPost) {
@@ -61,7 +62,7 @@ export const createJobPostLdJson = (jobPost?: JobPost) => {
       hiringOrganization: {
         '@type': 'Organization',
         name: organization.name,
-        logo: imageMetaData,
+        logo: getGoogleLogoUrl(organization.url),
         sameAs: organization.url,
       },
       image: imageMetaData,
