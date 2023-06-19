@@ -23,8 +23,7 @@ const RightPanelJobCardTechnologies = ({ technologies }: Props) => {
             Technologies
           </Heading>
           <Text color="dimmed">
-            Uncover the technical skills and tools employed by the company, and
-            gain insight into the technologies that drive their success.
+            Technologies that are required to be successful at the job
           </Text>
         </div>
       </div>
