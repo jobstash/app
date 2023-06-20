@@ -87,7 +87,12 @@ export const useJobList = (initJob: JobPost | null) => {
   const isRedirectingRef = useRef(false);
   const isMobile = useIsMobile();
   useEffect(() => {
-    if (jobPosts.length > 0 && !isRedirectingRef.current && !isMobile) {
+    if (
+      jobPosts.length > 0 &&
+      !isRedirectingRef.current &&
+      !isMobile &&
+      asPath === '/jobs'
+    ) {
       isRedirectingRef.current = true;
       const url = getUrlWithParams(
         frontendUrl,
@@ -99,7 +104,7 @@ export const useJobList = (initJob: JobPost | null) => {
         shallow: true,
       });
     }
-  }, [filterParamsObj, frontendUrl, isMobile, jobPosts, push]);
+  }, [asPath, filterParamsObj, frontendUrl, isMobile, jobPosts, push]);
 
   return {
     push,
