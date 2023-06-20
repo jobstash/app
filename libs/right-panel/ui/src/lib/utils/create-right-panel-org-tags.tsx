@@ -37,12 +37,13 @@ export const createRightPanelOrgTags = (organization: Organization) => {
   if (fundingRounds.length > 0) {
     const fundingDateTs = fundingRounds
       .filter((f) => Boolean(f.date))
-      .map((f) => f.date);
+      .map((f) => f.date)
+      .sort((a, b) => b - a);
 
     if (fundingDateTs.length > 0) {
       tags.push({
         id: TAG_ELEMENT_ID.fundingDate,
-        text: createOrgFundingDateString(fundingDateTs[0]),
+        text: `Funding: ${createOrgFundingDateString(fundingDateTs[0])}`,
         icon: <BankIcon />,
       });
     }
