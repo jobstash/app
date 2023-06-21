@@ -1,20 +1,8 @@
 import { ReactNode } from 'react';
 
-import {
-  ConnectKitProvider,
-  getDefaultClient,
-  SIWEProvider,
-  useIsMounted,
-  useSIWE,
-} from 'connectkit';
+import { ConnectKitProvider, getDefaultClient, SIWEProvider } from 'connectkit';
 import { SiweMessage } from 'siwe';
-import {
-  configureChains,
-  createClient,
-  mainnet,
-  useAccount,
-  WagmiConfig,
-} from 'wagmi';
+import { configureChains, createClient, mainnet, WagmiConfig } from 'wagmi';
 import { publicProvider } from 'wagmi/providers/public';
 
 import { MW_URL } from '@jobstash/shared/core';
@@ -35,42 +23,6 @@ const connectkitClient = createClient(
 interface Props {
   children: ReactNode;
 }
-
-const DebugInfo = () => {
-  const isMounted = useIsMounted();
-  const { address } = useAccount();
-
-  const {
-    data,
-    isSignedIn,
-    isReady: siweIsReady,
-    isError: siweIsError,
-    isLoading: siweIsLoading,
-    isRejected: siweIsRejected,
-    error: siweError,
-  } = useSIWE();
-
-  if (!isMounted) return null;
-
-  return (
-    <pre className="fixed pr-20 right-20 top-0">
-      {JSON.stringify(
-        {
-          data,
-          isSignedIn,
-          address,
-          siweIsReady,
-          siweIsLoading,
-          siweIsError,
-          siweIsRejected,
-          siweError: JSON.stringify(siweError),
-        },
-        undefined,
-        '\t',
-      )}
-    </pre>
-  );
-};
 
 export const AuthProvider = ({ children }: Props) => (
   <WagmiConfig client={connectkitClient}>
@@ -137,10 +89,7 @@ export const AuthProvider = ({ children }: Props) => (
         console.log('ONSIGNIN data =', data);
       }}
     >
-      <ConnectKitProvider>
-        <DebugInfo />
-        {children}
-      </ConnectKitProvider>
+      <ConnectKitProvider>{children}</ConnectKitProvider>
     </SIWEProvider>
   </WagmiConfig>
 );

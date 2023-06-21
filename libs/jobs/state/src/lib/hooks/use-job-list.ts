@@ -5,9 +5,7 @@ import { useInView } from 'react-intersection-observer';
 import { useAtom, useSetAtom } from 'jotai';
 
 import { type JobPost } from '@jobstash/jobs/core';
-import { FRONTEND_URL } from '@jobstash/shared/core';
-import { getUrlWithParams } from '@jobstash/filters/utils';
-import { createFilterParamsObj, createJobKey } from '@jobstash/jobs/utils';
+import { createFilterParamsObj } from '@jobstash/jobs/utils';
 
 import { useIsMobile } from '@jobstash/shared/state';
 
@@ -62,12 +60,18 @@ export const useJobList = (initJob: JobPost | null) => {
   }, [data, initJob]);
 
   const setActiveRef = useRef(false);
+  const isMobile = useIsMobile();
   useEffect(() => {
-    if (jobPosts.length > 0 && !setActiveRef.current) {
+    if (
+      jobPosts.length > 0 &&
+      !setActiveRef.current &&
+      !activeJob &&
+      !isMobile
+    ) {
       setActiveRef.current = true;
       setActiveJob(jobPosts[0]);
     }
-  }, [activeJob, jobPosts, setActiveJob]);
+  }, [activeJob, isMobile, jobPosts, setActiveJob]);
 
   const [jobsPrevLink, setPrevLink] = useAtom(jobsPrevLinkAtom);
   useEffect(() => {
@@ -82,28 +86,6 @@ export const useJobList = (initJob: JobPost | null) => {
       fetchNextPage();
     }
   }, [fetchNextPage, inView]);
-
-  const isRedirectingRef = useRef(false);
-  const isMobile = useIsMobile();
-  useEffect(() => {
-    if (
-      jobPosts.length > 0 &&
-      !isRedirectingRef.current &&
-      !isMobile &&
-      asPath === '/jobs'
-    ) {
-      isRedirectingRef.current = true;
-      const url = getUrlWithParams(
-        FRONTEND_URL,
-        `/jobs/${createJobKey(jobPosts[0])}/details`,
-        filterParamsObj,
-      );
-
-      push(url, undefined, {
-        shallow: true,
-      });
-    }
-  }, [asPath, filterParamsObj, isMobile, jobPosts, push]);
 
   return {
     push,
