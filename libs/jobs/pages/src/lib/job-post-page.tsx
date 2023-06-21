@@ -90,9 +90,11 @@ export const JobPostPage = ({ initJob, fromSSR }: JobPostPageProps) => {
 
   const showFilters = useAtomValue(showFiltersAtom);
 
+  const currentJobPost = jobPost ?? activeJob;
+
   return (
     <>
-      {jobPost && (
+      {currentJobPost && (
         <MetaData
           title={titleMetaData}
           description={descriptionMetaData}
@@ -128,7 +130,7 @@ export const JobPostPage = ({ initJob, fromSSR }: JobPostPageProps) => {
               'lg:pr-[50%]': showFilters,
             })}
           >
-            <JobList initJob={initJob} activeJob={activeJob} />
+            <JobList initJob={initJob} activeJob={currentJobPost} />
           </div>
         </div>
 
@@ -142,7 +144,7 @@ export const JobPostPage = ({ initJob, fromSSR }: JobPostPageProps) => {
         >
           <RightPanel
             slug={slug.toString()}
-            jobPost={jobPost}
+            jobPost={currentJobPost}
             currentTab={tab.toString()}
           />
         </div>

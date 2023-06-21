@@ -19,7 +19,7 @@ import RightPanelTabs from './right-panel-tabs';
 import RightPanelWrapper from './right-panel-wrapper';
 
 interface Props {
-  jobPost?: JobPost;
+  jobPost: JobPost | null;
   slug: string;
   currentTab: string;
 }

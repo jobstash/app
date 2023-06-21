@@ -1,4 +1,3 @@
-import { useRouter } from 'next/router';
 import { memo, type ReactNode, useEffect } from 'react';
 
 import { EVENT_CARD_CLICK } from '@jobstash/shared/core';
@@ -10,8 +9,6 @@ interface Props {
 }
 
 const RightPanelWrapper = ({ children }: Props) => {
-  const { pathname } = useRouter();
-
   useEffect(() => {
     const scrollListener = () => {
       const el = document.querySelector('#' + ID_TOP_RIGHT_PANEL);
@@ -23,9 +20,6 @@ const RightPanelWrapper = ({ children }: Props) => {
     document.addEventListener(EVENT_CARD_CLICK, scrollListener);
     return () => document.removeEventListener(EVENT_CARD_CLICK, scrollListener);
   }, []);
-
-  // Don't show right-panel on /jobs route
-  if (pathname === '/jobs') return null;
 
   return (
     <>
