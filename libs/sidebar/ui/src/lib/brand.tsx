@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { memo } from 'react';
 
 const Brand = () => (
-  <Link scroll={false} href="/jobs" className="lg:p-4 lg:pl-1">
+  <Link scroll={false} href="https://jobstash.xyz" className="lg:p-4 lg:pl-1">
     <Image
       priority
       src="/JobStash.svg"
