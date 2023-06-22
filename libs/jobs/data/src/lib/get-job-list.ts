@@ -1,5 +1,5 @@
 import { JobListQueryPage, jobListQueryPageSchema } from '@jobstash/jobs/core';
-import { JOB_LIST_LIMIT, MW_URL } from '@jobstash/shared/core';
+import { MW_URL, PAGE_SIZE } from '@jobstash/shared/core';
 import { getUrlWithParams } from '@jobstash/filters/utils';
 
 import { mwFetch } from '@jobstash/shared/data';
@@ -11,7 +11,7 @@ export const getJobList = async (
   const params: Record<string, string> = {
     ...filterParams,
     page: page.toString(),
-    JOB_LIST_LIMIT,
+    limit: PAGE_SIZE,
   };
 
   const url = getUrlWithParams(MW_URL, '/jobs/list', params);
