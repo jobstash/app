@@ -3,7 +3,7 @@ import { useRouter } from 'next/router';
 import { useInfiniteQuery, useQueryClient } from '@tanstack/react-query';
 
 import { type JobListQueryPage } from '@jobstash/jobs/core';
-import { createFilterParamsObj } from '@jobstash/jobs/utils';
+import { createJobsFilterParamsObj } from '@jobstash/jobs/utils';
 
 import { getCompetitors } from '@jobstash/competitors/data';
 import { getJobList } from '@jobstash/jobs/data';
@@ -12,7 +12,7 @@ export const useJobListQuery = () => {
   const queryClient = useQueryClient();
   const router = useRouter();
 
-  const filterParamsObj = createFilterParamsObj(router.query);
+  const filterParamsObj = createJobsFilterParamsObj(router.query);
 
   return useInfiniteQuery<JobListQueryPage>(
     ['job-posts', filterParamsObj],

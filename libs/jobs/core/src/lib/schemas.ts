@@ -25,7 +25,7 @@ export const jobDetailsSchema = myzod.object({
   salaryCurrency: myzod.string().min(1).nullable(),
 });
 
-const jobPostOrgSchema = myzod
+export const jobPostOrgSchema = myzod
   .intersection(
     organizationSchema,
     myzod.object({

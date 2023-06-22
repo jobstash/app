@@ -32,7 +32,7 @@ const LogoTitle = ({
 }: LogoTitleProps) => (
   <div className="flex w-fit items-center gap-x-3">
     <Avatar src={src} alt={alt} size={size} />
-    <div className="flex flex-col justify-center">
+    <div className="flex flex-col justify-center gap-1">
       <Heading size={size === 'lg' ? 'md' : 'sm'}>{title}</Heading>
       {location && (
         <Text size="sm" color="dimmed">
