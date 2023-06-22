@@ -44,8 +44,22 @@
       "@jobstash/jobs/ui": ["libs/jobs/ui/src/index.ts"],
       "@jobstash/jobs/utils": ["libs/jobs/utils/src/index.ts"],
       "@jobstash/organizations/core": ["libs/organizations/core/src/index.ts"],
+      "@jobstash/organizations/data": ["libs/organizations/data/src/index.ts"],
+      "@jobstash/organizations/feature": [
+        "libs/organizations/feature/src/index.ts"
+      ],
+      "@jobstash/organizations/pages": [
+        "libs/organizations/pages/src/index.ts"
+      ],
+      "@jobstash/organizations/state": [
+        "libs/organizations/state/src/index.ts"
+      ],
       "@jobstash/organizations/testutils": [
         "libs/organizations/testutils/src/index.ts"
+      ],
+      "@jobstash/organizations/ui": ["libs/organizations/ui/src/index.ts"],
+      "@jobstash/organizations/utils": [
+        "libs/organizations/utils/src/index.ts"
       ],
       "@jobstash/projects/core": ["libs/projects/core/src/index.ts"],
       "@jobstash/projects/testutils": ["libs/projects/testutils/src/index.ts"],
