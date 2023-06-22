@@ -5,7 +5,7 @@ import { useInView } from 'react-intersection-observer';
 import { useAtom, useSetAtom } from 'jotai';
 
 import { type JobPost } from '@jobstash/jobs/core';
-import { createFilterParamsObj } from '@jobstash/jobs/utils';
+import { createJobsFilterParamsObj } from '@jobstash/jobs/utils';
 
 import { useIsMobile } from '@jobstash/shared/state';
 
@@ -19,7 +19,7 @@ export const useJobList = (initJob: JobPost | null) => {
 
   const { push, query, asPath } = useRouter();
 
-  const filterParamsObj = createFilterParamsObj(query);
+  const filterParamsObj = createJobsFilterParamsObj(query);
 
   const {
     data,

@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-import { type Organization } from '@jobstash/organizations/core';
+import { JobPostOrg } from '@jobstash/jobs/core';
 import { getGoogleLogoUrl } from '@jobstash/shared/utils';
 
 import { CardSet, LogoTitle } from '@jobstash/shared/ui';
@@ -8,7 +8,7 @@ import { CardSet, LogoTitle } from '@jobstash/shared/ui';
 import { createJobCardOrgTags } from './utils/create-job-card-org-tags';
 
 interface Props {
-  org: Organization;
+  org: JobPostOrg;
 }
 
 const JobCardOrg = ({ org }: Props) => {
@@ -28,7 +28,7 @@ const JobCardOrg = ({ org }: Props) => {
           }}
         />
         <div className="flex grow flex-wrap pt-2 lg:gap-x-2 lg:pt-0 [&>*]:mr-4">
-          {tags &&
+          {tags.length > 0 &&
             tags.map(({ id, text, icon, link }) => (
               <CardSet key={id} link={link} icon={icon}>
                 {text}

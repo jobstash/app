@@ -9,7 +9,7 @@ import { BankIcon, MoneyIcon, UsersThreeIcon } from '@jobstash/shared/ui';
 
 export const createJobCardOrgTags = (
   fundingRounds: FundingRound[],
-  headCount: number | null,
+  headCount?: number | null,
 ) => {
   const tags: TagElement[] = [];
 
