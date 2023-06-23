@@ -1,40 +1,23 @@
 import { memo } from 'react';
 
-import { FRONTEND_URL } from '@jobstash/shared/core';
-
 import { LinkButton } from '@jobstash/shared/ui';
 
 interface Props {
   text: string;
   currentTab: string;
-  assignedTab: string;
-  slug: string;
+  tabSegment: string;
+  href: string;
 }
 
-const RightPanelTabButton = ({
-  text,
-  currentTab,
-  assignedTab,
-  slug,
-}: Props) => {
-  const isActive = assignedTab === currentTab;
-
-  const paramsStr = typeof window === 'undefined' ? '' : window.location.search;
-
-  const url = new URL(
-    `${FRONTEND_URL}/jobs/${slug}/${assignedTab}${paramsStr}`,
-  );
-
-  return (
-    <LinkButton
-      isActive={isActive}
-      variant="outline"
-      size="md"
-      linkProps={{ href: url.toString(), scroll: false }}
-    >
-      {text}
-    </LinkButton>
-  );
-};
+const RightPanelTabButton = ({ text, currentTab, tabSegment, href }: Props) => (
+  <LinkButton
+    isActive={tabSegment === currentTab}
+    variant="outline"
+    size="md"
+    linkProps={{ href, scroll: false }}
+  >
+    {text}
+  </LinkButton>
+);
 
 export default memo(RightPanelTabButton);

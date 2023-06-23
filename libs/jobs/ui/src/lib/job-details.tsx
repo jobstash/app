@@ -2,19 +2,19 @@ import { memo } from 'react';
 
 import { type JobPost } from '@jobstash/jobs/core';
 
+import { RightPanelCardBorder } from '@jobstash/right-panel/ui';
 import { Heading } from '@jobstash/shared/ui';
 
-import RightPanelCardBorder from './right-panel-card-border';
-import RightPanelJobCardApplyButton from './right-panel-job-card-apply-button';
-import RightPanelJobCardDescriptions from './right-panel-job-card-descriptions';
-import RightPanelJobCardTags from './right-panel-job-card-tags';
-import RightPanelJobCardTechnologies from './right-panel-job-card-technologies';
+import JobDetailsApplyButton from './job-details-apply-button';
+import JobDetailsDescriptions from './job-details-descriptions';
+import JobDetailsTags from './job-details-tags';
+import JobDetailsTechnologies from './job-details-technologies';
 
 interface Props {
   jobPost: JobPost;
 }
 
-const RightPanelJobCard = ({ jobPost }: Props) => {
+const JobDetails = ({ jobPost }: Props) => {
   const { jobTitle, jobApplyPageUrl, technologies } = jobPost;
 
   return (
@@ -30,21 +30,21 @@ const RightPanelJobCard = ({ jobPost }: Props) => {
           </div> */}
           </div>
 
-          <RightPanelJobCardTags jobPost={jobPost} />
+          <JobDetailsTags jobPost={jobPost} />
 
-          <RightPanelJobCardApplyButton applyUrl={jobApplyPageUrl} />
+          <JobDetailsApplyButton applyUrl={jobApplyPageUrl} />
         </div>
 
         <div className="flex h-8 flex-col justify-center">
           <hr className="border-t border-white/10" />
         </div>
 
-        <RightPanelJobCardDescriptions jobPost={jobPost} />
+        <JobDetailsDescriptions jobPost={jobPost} />
 
-        <RightPanelJobCardTechnologies technologies={technologies} />
+        <JobDetailsTechnologies technologies={technologies} />
       </div>
     </RightPanelCardBorder>
   );
 };
 
-export default memo(RightPanelJobCard);
+export default memo(JobDetails);

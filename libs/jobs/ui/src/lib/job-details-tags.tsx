@@ -4,14 +4,15 @@ import { type JobPost } from '@jobstash/jobs/core';
 import { type TagElement } from '@jobstash/shared/core';
 import { capitalize } from '@jobstash/shared/utils';
 
-import { createJobCardTags } from '@jobstash/jobs/ui';
 import { CardSet } from '@jobstash/shared/ui';
+
+import { createJobCardTags } from './utils/create-job-card-tags';
 
 interface Props {
   jobPost: JobPost;
 }
 
-const RightPanelJobCardTags = ({ jobPost }: Props) => {
+const JobDetailsTags = ({ jobPost }: Props) => {
   const tags: TagElement[] = createJobCardTags(jobPost);
 
   return (
@@ -26,6 +27,6 @@ const RightPanelJobCardTags = ({ jobPost }: Props) => {
 };
 
 export default memo(
-  RightPanelJobCardTags,
+  JobDetailsTags,
   (prev, next) => prev.jobPost.id === next.jobPost.id,
 );

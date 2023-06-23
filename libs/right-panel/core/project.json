@@ -1,0 +1,16 @@
+{
+  "name": "right-panel-core",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/right-panel/core/src",
+  "projectType": "library",
+  "tags": ["type:core"],
+  "targets": {
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/right-panel/core/**/*.{ts,tsx,js,jsx}"]
+      }
+    }
+  }
+}

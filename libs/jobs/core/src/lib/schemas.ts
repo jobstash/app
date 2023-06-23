@@ -1,9 +1,7 @@
 import myzod from 'myzod';
 
-import { organizationSchema } from '@jobstash/organizations/core';
-import { projectSchema } from '@jobstash/projects/core';
+import { orgDataSchema } from '@jobstash/organizations/core';
 import { technologySchema } from '@jobstash/shared/core';
-import { fundingRoundSchema, investorSchema } from '@jobstash/shared/core';
 
 export const jobDetailsSchema = myzod.object({
   id: myzod.string().min(1),
@@ -25,22 +23,11 @@ export const jobDetailsSchema = myzod.object({
   salaryCurrency: myzod.string().min(1).nullable(),
 });
 
-export const jobPostOrgSchema = myzod
-  .intersection(
-    organizationSchema,
-    myzod.object({
-      fundingRounds: myzod.array(fundingRoundSchema),
-      investors: myzod.array(investorSchema),
-      projects: myzod.array(projectSchema),
-    }),
-  )
-  .allowUnknownKeys(true);
-
 export const jobPostSchema = myzod
   .intersection(
     jobDetailsSchema,
     myzod.object({
-      organization: jobPostOrgSchema,
+      organization: orgDataSchema,
       technologies: myzod.array(technologySchema),
     }),
   )

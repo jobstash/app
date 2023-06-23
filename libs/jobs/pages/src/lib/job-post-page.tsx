@@ -23,8 +23,8 @@ const SideBar = dynamic(() =>
   import('@jobstash/sidebar/feature').then((m) => m.SideBar),
 );
 
-const RightPanel = dynamic(() =>
-  import('@jobstash/right-panel/ui').then((m) => m.RightPanel),
+const JobsRightPanel = dynamic(() =>
+  import('@jobstash/jobs/feature').then((m) => m.JobsRightPanel),
 );
 
 const JobList = dynamic(
@@ -134,8 +134,7 @@ export const JobPostPage = ({ initJob, fromSSR }: JobPostPageProps) => {
             { '-z-50': showFilters },
           )}
         >
-          <RightPanel
-            slug={slug.toString()}
+          <JobsRightPanel
             jobPost={currentJobPost}
             currentTab={tab.toString()}
           />

@@ -64,6 +64,7 @@
       ],
       "@jobstash/projects/core": ["libs/projects/core/src/index.ts"],
       "@jobstash/projects/testutils": ["libs/projects/testutils/src/index.ts"],
+      "@jobstash/right-panel/core": ["libs/right-panel/core/src/index.ts"],
       "@jobstash/right-panel/ui": ["libs/right-panel/ui/src/index.ts"],
       "@jobstash/shared/core": ["libs/shared/core/src/index.ts"],
       "@jobstash/shared/data": ["libs/shared/data/src/index.ts"],

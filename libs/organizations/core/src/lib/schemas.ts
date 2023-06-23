@@ -1,5 +1,8 @@
 import myzod from 'myzod';
 
+import { projectSchema } from '@jobstash/projects/core';
+import { fundingRoundSchema, investorSchema } from '@jobstash/shared/core';
+
 export const organizationSchema = myzod.object(
   {
     id: myzod.string().min(1),
@@ -23,6 +26,15 @@ export const organizationSchema = myzod.object(
     docs: myzod.string().nullable(), // Should have min(1) - otherwise null
   },
   { allowUnknown: true },
+);
+
+export const orgDataSchema = myzod.intersection(
+  organizationSchema,
+  myzod.object({
+    fundingRounds: myzod.array(fundingRoundSchema),
+    investors: myzod.array(investorSchema),
+    projects: myzod.array(projectSchema),
+  }),
 );
 
 export const orgPostSchema = myzod.intersection(
