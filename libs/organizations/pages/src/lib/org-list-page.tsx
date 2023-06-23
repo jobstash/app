@@ -1,0 +1,64 @@
+import dynamic from 'next/dynamic';
+
+import { useAtomValue } from 'jotai';
+
+import { cn } from '@jobstash/shared/utils';
+
+import { showFiltersAtom } from '@jobstash/filters/state';
+import { activeOrgAtom } from '@jobstash/organizations/state';
+import { useIsMobile } from '@jobstash/shared/state';
+
+const SideBar = dynamic(() =>
+  import('@jobstash/sidebar/feature').then((m) => m.SideBar),
+);
+
+const OrgList = dynamic(() =>
+  import('@jobstash/organizations/feature').then((m) => m.OrgList),
+);
+
+export const OrgListPage = () => {
+  const activeOrg = useAtomValue(activeOrgAtom);
+  const showFilters = useAtomValue(showFiltersAtom);
+  const isMobile = useIsMobile();
+
+  return (
+    <div className="w-full lg:pl-52">
+      <SideBar />
+
+      <div
+        className={cn('px-3.5 pt-[65px] lg:px-8 lg:pt-0', {
+          'z-50': showFilters,
+          'lg:pr-[50%]': !showFilters,
+        })}
+      >
+        <div
+          className={cn({
+            'bg-[#121216] w-[101%] pr-12': showFilters,
+          })}
+        >
+          <p>TODO</p>
+        </div>
+
+        <div
+          className={cn({
+            'lg:pr-[50%]': showFilters,
+          })}
+        >
+          <OrgList initOrg={null} activeOrg={activeOrg} />
+        </div>
+      </div>
+
+      {activeOrg && !isMobile && (
+        <div
+          className={cn(
+            'lg:hide-scrollbar fixed inset-0 h-screen overflow-y-auto bg-dark p-4 pt-6 transition-all lg:inset-auto lg:right-0 lg:top-0 lg:w-5/12 lg:px-6 lg:py-8 lg:pr-10',
+            { 'z-50': !showFilters },
+            { '-z-50': showFilters },
+          )}
+        >
+          <p>TODO</p>
+        </div>
+      )}
+    </div>
+  );
+};
