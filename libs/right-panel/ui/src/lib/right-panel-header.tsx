@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-import { type Organization } from '@jobstash/organizations/core';
+import { type OrgData } from '@jobstash/organizations/core';
 import { getGoogleLogoUrl } from '@jobstash/shared/utils';
 
 import { LogoTitle, Text } from '@jobstash/shared/ui';
@@ -9,7 +9,7 @@ import RightPanelHeaderSocials from './right-panel-header-socials';
 import RightPanelHeaderTags from './right-panel-header-tags';
 
 interface Props {
-  organization: Organization;
+  organization: OrgData;
 }
 
 const RightPanelHeader = ({ organization }: Props) => (

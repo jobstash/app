@@ -8,7 +8,7 @@ interface Props {
   jobPost: JobPost;
 }
 
-const RightPanelJobCardDescriptions = ({ jobPost }: Props) => {
+const JobDetailsDescriptions = ({ jobPost }: Props) => {
   const { role, team, benefits, culture } = jobPost;
 
   const descriptions = [];
@@ -32,4 +32,4 @@ const RightPanelJobCardDescriptions = ({ jobPost }: Props) => {
   );
 };
 
-export default memo(RightPanelJobCardDescriptions);
+export default memo(JobDetailsDescriptions);

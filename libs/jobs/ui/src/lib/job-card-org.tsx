@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-import { JobPostOrg } from '@jobstash/jobs/core';
+import { type OrgData } from '@jobstash/organizations/core';
 import { getGoogleLogoUrl } from '@jobstash/shared/utils';
 
 import { CardSet, LogoTitle } from '@jobstash/shared/ui';
@@ -8,7 +8,7 @@ import { CardSet, LogoTitle } from '@jobstash/shared/ui';
 import { createJobCardOrgTags } from './utils/create-job-card-org-tags';
 
 interface Props {
-  org: JobPostOrg;
+  org: OrgData;
 }
 
 const JobCardOrg = ({ org }: Props) => {

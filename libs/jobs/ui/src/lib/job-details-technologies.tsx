@@ -8,7 +8,7 @@ interface Props {
   technologies: Technology[];
 }
 
-const RightPanelJobCardTechnologies = ({ technologies }: Props) => {
+const JobDetailsTechnologies = ({ technologies }: Props) => {
   if (technologies.length === 0) return null;
 
   return (
@@ -39,4 +39,4 @@ const RightPanelJobCardTechnologies = ({ technologies }: Props) => {
   );
 };
 
-export default memo(RightPanelJobCardTechnologies);
+export default memo(JobDetailsTechnologies);

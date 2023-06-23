@@ -1,4 +1,4 @@
-import { type Organization } from '@jobstash/organizations/core';
+import { type OrgData } from '@jobstash/organizations/core';
 import { TAG_ELEMENT_ID, TagElement } from '@jobstash/shared/core';
 
 import {
@@ -10,8 +10,8 @@ import {
 
 import { createOrgFundingDateString } from './create-org-funding-date-string';
 
-export const createRightPanelOrgTags = (organization: Organization) => {
-  const { url, location, headCount, fundingRounds } = organization;
+export const createRightPanelOrgTags = (orgData: OrgData) => {
+  const { url, location, headCount, fundingRounds } = orgData;
   const tags: TagElement[] = [
     {
       id: TAG_ELEMENT_ID.website,

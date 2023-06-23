@@ -2,7 +2,7 @@ import dynamic from 'next/dynamic';
 
 import { useAtomValue } from 'jotai';
 
-import { cn, slugify } from '@jobstash/shared/utils';
+import { cn } from '@jobstash/shared/utils';
 
 import { showFiltersAtom } from '@jobstash/filters/state';
 import { activeJobAtom } from '@jobstash/jobs/state';
@@ -20,8 +20,8 @@ const Filters = dynamic(() =>
   import('@jobstash/filters/feature').then((m) => m.Filters),
 );
 
-const RightPanel = dynamic(() =>
-  import('@jobstash/right-panel/ui').then((m) => m.RightPanel),
+const JobsRightPanel = dynamic(() =>
+  import('@jobstash/jobs/feature').then((m) => m.JobsRightPanel),
 );
 
 export const JobListPage = () => {
@@ -64,13 +64,7 @@ export const JobListPage = () => {
             { '-z-50': showFilters },
           )}
         >
-          <RightPanel
-            slug={slugify(
-              `${activeJob.organization.name} ${activeJob.jobTitle} ${activeJob.shortUUID}`,
-            )}
-            jobPost={activeJob}
-            currentTab="details"
-          />
+          <JobsRightPanel jobPost={activeJob} currentTab="details" />
         </div>
       )}
     </div>

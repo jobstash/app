@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-import { type Organization } from '@jobstash/organizations/core';
+import { type OrgData } from '@jobstash/organizations/core';
 import { type TagElement } from '@jobstash/shared/core';
 
 import { CardSet } from '@jobstash/shared/ui';
@@ -8,7 +8,7 @@ import { CardSet } from '@jobstash/shared/ui';
 import { createRightPanelOrgTags } from './utils/create-right-panel-org-tags';
 
 interface Props {
-  organization: Organization;
+  organization: OrgData;
 }
 
 const RightPanelHeaderTags = ({ organization }: Props) => {

@@ -54,4 +54,11 @@ export const TAG_ELEMENT_ID = {
 export const SENTRY_MW_NON_200_RESPONSE = 'Non-200 mw response';
 export const SENTRY_MW_INVALID_JSON_RESPONSE = 'Invalid JSON mw response';
 export const SENTRY_MW_UNSUCCESSFUL_RESPONSE = 'Unsuccessful mw response';
-export const SENTRY_SCHEMA_VALIDATION_ERROR = 'Schema validation error';
+export const SENTRY_SCHEMA_VALIDATION_ERROR = 'Invalid Schema';
+
+export const TAB_SEGMENT = {
+  details: 'details' as const,
+  organization: 'organization' as const,
+  projects: 'projects' as const,
+  competitors: 'competitors' as const,
+} as const;
