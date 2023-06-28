@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-import { OrgPost } from '@jobstash/organizations/core';
+import { type OrgListItem } from '@jobstash/organizations/core';
 
 import { useOrgList } from '@jobstash/organizations/state';
 
@@ -8,16 +8,16 @@ import { OrgCard, OrgListEmptyResult } from '@jobstash/organizations/ui';
 import { Loader } from '@jobstash/shared/ui';
 
 interface Props {
-  initOrg: OrgPost | null;
-  activeOrg: OrgPost | null;
+  initOrg: OrgListItem | null;
+  activeOrgId: string | null;
 }
 
-const OrgList = ({ initOrg, activeOrg }: Props) => {
+const OrgList = ({ initOrg, activeOrgId }: Props) => {
   const {
     push,
     isLoading,
     error,
-    orgPosts,
+    orgListItems,
     orgsPrevLink,
     isFetchingNextPage,
     hasNextPage,
@@ -30,9 +30,9 @@ const OrgList = ({ initOrg, activeOrg }: Props) => {
       <div className="py-4">
         {initOrg && (
           <OrgCard
-            key={initOrg.id}
+            key={initOrg.orgId}
             isActive
-            orgPost={initOrg}
+            orgListItem={initOrg}
             filterParamsObj={filterParamsObj}
           />
         )}
@@ -43,7 +43,7 @@ const OrgList = ({ initOrg, activeOrg }: Props) => {
     );
   }
 
-  if (orgPosts.length === 0 && !error) {
+  if (orgListItems.length === 0 && !error) {
     return (
       <div className="py-8">
         <OrgListEmptyResult prevLink={orgsPrevLink} push={push} />
@@ -53,16 +53,16 @@ const OrgList = ({ initOrg, activeOrg }: Props) => {
 
   return (
     <div className="flex flex-col gap-y-4 py-4">
-      {orgPosts.map((orgPost) => (
+      {orgListItems.map((orgListItem) => (
         <OrgCard
-          key={orgPost.id}
-          orgPost={orgPost}
-          isActive={activeOrg?.id === orgPost.id}
+          key={orgListItem.orgId}
+          orgListItem={orgListItem}
+          isActive={activeOrgId === orgListItem.orgId}
           filterParamsObj={filterParamsObj}
         />
       ))}
 
-      {orgPosts.length > 0 && (
+      {orgListItems.length > 0 && (
         <div ref={inViewRef} className="flex items-center justify-center pb-10">
           {isFetchingNextPage && <Loader />}
           {!hasNextPage && <p>No more job posts to load</p>}

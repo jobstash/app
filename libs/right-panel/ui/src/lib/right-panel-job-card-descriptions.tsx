@@ -1,15 +1,15 @@
 import { memo } from 'react';
 
-import { type JobPost } from '@jobstash/jobs/core';
+import { type JobInfo } from '@jobstash/shared/core';
 
 import { Heading, Text } from '@jobstash/shared/ui';
 
 interface Props {
-  jobPost: JobPost;
+  jobInfo: JobInfo;
 }
 
-const JobDetailsDescriptions = ({ jobPost }: Props) => {
-  const { role, team, benefits, culture } = jobPost;
+const RightPanelJobCardDescriptions = ({ jobInfo }: Props) => {
+  const { role, team, benefits, culture } = jobInfo;
 
   const descriptions = [];
 
@@ -32,4 +32,4 @@ const JobDetailsDescriptions = ({ jobPost }: Props) => {
   );
 };
 
-export default memo(JobDetailsDescriptions);
+export default memo(RightPanelJobCardDescriptions);

@@ -48,6 +48,8 @@ export const TAG_ELEMENT_ID = {
   paysInCrypto: 'pays-in-cryto',
   offersTokenAllocation: 'offers-token-allocation',
   headCount: 'head-count',
+  jobs: 'jobs',
+  projects: 'projects',
 } as const;
 
 // Sentry MSG
@@ -60,5 +62,12 @@ export const TAB_SEGMENT = {
   details: 'details' as const,
   organization: 'organization' as const,
   projects: 'projects' as const,
+  jobs: 'jobs' as const,
   competitors: 'competitors' as const,
 } as const;
+
+export const LIST_PATHS = {
+  jobs: '/jobs',
+  organizations: '/organizations',
+  projects: '/projects',
+};

@@ -4,18 +4,18 @@ import { useInView } from 'react-intersection-observer';
 
 import { useAtom, useSetAtom } from 'jotai';
 
-import { OrgPost } from '@jobstash/organizations/core';
+import { type OrgListItem } from '@jobstash/organizations/core';
 import { createOrgsFilterParamsObj } from '@jobstash/organizations/utils';
 
 import { useIsMobile } from '@jobstash/shared/state';
 
-import { activeOrgAtom } from '../state/active-org-atom';
+import { activeOrgIdAtom } from '../state/active-org-atom';
 import { orgCountAtom } from '../state/org-count-atom';
 import { orgsPrevLinkAtom } from '../state/orgs-prev-link-atom';
 
 import { useOrgListQuery } from './use-org-list-query';
 
-export const useOrgList = (initOrg: OrgPost | null) => {
+export const useOrgList = (initOrg: OrgListItem | null) => {
   const {
     data,
     isLoading,
@@ -25,7 +25,7 @@ export const useOrgList = (initOrg: OrgPost | null) => {
     hasNextPage,
   } = useOrgListQuery();
 
-  const [activeOrg, setActiveOrg] = useAtom(activeOrgAtom);
+  const [activeOrgId, setActiveOrgId] = useAtom(activeOrgIdAtom);
 
   const setOrgCountAtom = useSetAtom(orgCountAtom);
   useEffect(() => {
@@ -34,20 +34,20 @@ export const useOrgList = (initOrg: OrgPost | null) => {
     }
   }, [data, setOrgCountAtom]);
 
-  const initOrgRef = useRef<OrgPost | null>(null);
-  const orgPosts = useMemo(() => {
+  const initOrgRef = useRef<OrgListItem | null>(null);
+  const orgListItems = useMemo(() => {
     if (!data) return [];
 
     let result = data.pages.flatMap((d) => d.data);
 
     if (initOrg) {
-      result = result.filter((d) => d.id !== initOrg.id);
+      result = result.filter((d) => d.orgId !== initOrg.orgId);
       result.unshift(initOrg);
       initOrgRef.current = initOrg;
     }
 
     if (initOrgRef.current) {
-      result = result.filter((d) => d.id !== initOrgRef.current?.id);
+      result = result.filter((d) => d.orgId !== initOrgRef.current?.orgId);
       result.unshift(initOrgRef.current);
     }
 
@@ -58,24 +58,24 @@ export const useOrgList = (initOrg: OrgPost | null) => {
   const isMobile = useIsMobile();
   useEffect(() => {
     if (
-      orgPosts.length > 0 &&
+      orgListItems.length > 0 &&
       !setActiveRef.current &&
-      !activeOrg &&
+      !activeOrgId &&
       !isMobile
     ) {
       setActiveRef.current = true;
-      setActiveOrg(orgPosts[0]);
+      setActiveOrgId(orgListItems[0].orgId);
     }
-  }, [activeOrg, isMobile, orgPosts, setActiveOrg]);
+  }, [activeOrgId, isMobile, orgListItems, setActiveOrgId]);
 
   const { asPath, push, query } = useRouter();
 
   const [orgsPrevLink, setPrevLink] = useAtom(orgsPrevLinkAtom);
   useEffect(() => {
-    if (orgPosts.length > 0) {
+    if (orgListItems.length > 0) {
       setPrevLink(asPath);
     }
-  }, [asPath, orgPosts.length, setPrevLink]);
+  }, [asPath, orgListItems.length, setPrevLink]);
 
   const { ref: inViewRef, inView } = useInView();
   useEffect(() => {
@@ -90,7 +90,7 @@ export const useOrgList = (initOrg: OrgPost | null) => {
     push,
     isLoading,
     error,
-    orgPosts,
+    orgListItems,
     orgsPrevLink,
     isFetchingNextPage,
     hasNextPage,

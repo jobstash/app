@@ -1,13 +1,11 @@
 import { type Infer } from 'myzod';
 
 import {
-  organizationSchema,
-  orgDataSchema,
+  orgDetailsSchema,
+  orgListItemSchema,
   orgListQueryPageSchema,
-  orgPostSchema,
 } from './schemas';
 
-export type Organization = Infer<typeof organizationSchema>;
-export type OrgData = Infer<typeof orgDataSchema>;
-export type OrgPost = Infer<typeof orgPostSchema>;
+export type OrgListItem = Infer<typeof orgListItemSchema>;
+export type OrgDetails = Infer<typeof orgDetailsSchema>;
 export type OrgListQueryPage = Infer<typeof orgListQueryPageSchema>;

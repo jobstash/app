@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-import { type OrgData } from '@jobstash/organizations/core';
+import { type RightPanelOrg } from '@jobstash/right-panel/core';
 
 import RightPanelCardBorder from './right-panel-card-border';
 import RightPanelOrgCardFundingRounds from './right-panel-org-card-funding-rounds';
@@ -8,11 +8,11 @@ import RightPanelOrgCardHeader from './right-panel-org-card-header';
 import RightPanelOrgCardInvestors from './right-panel-org-card-investors';
 
 interface Props {
-  organization: OrgData;
+  org: RightPanelOrg;
 }
 
-const RightPanelOrgCard = ({ organization }: Props) => {
-  const { name, description, fundingRounds, investors } = organization;
+const RightPanelOrgCard = ({ org }: Props) => {
+  const { name, description, fundingRounds, investors } = org;
 
   const sortedFundingRounds = fundingRounds.sort((a, b) => a.date - b.date);
 

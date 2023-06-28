@@ -1,21 +1,19 @@
+import { jobSeniorityMapping, jobSenioritySet } from '@jobstash/jobs/core';
 import {
-  type JobPost,
-  jobSeniorityMapping,
-  jobSenioritySet,
-} from '@jobstash/jobs/core';
-import { TAG_ELEMENT_ID, type TagElement } from '@jobstash/shared/core';
+  type JobInfo,
+  TAG_ELEMENT_ID,
+  type TagElement,
+} from '@jobstash/shared/core';
 import { capitalize, numFormatter } from '@jobstash/shared/utils';
 
-import {
-  EthereumIcon,
-  LevelIcon,
-  LocationIcon,
-  MoneyIcon,
-  SuitcaseIcon,
-  TokenAllocationIcon,
-} from '@jobstash/shared/ui';
+import EthereumIcon from '../icons/ethereum-icon';
+import LevelIcon from '../icons/level-icon';
+import LocationIcon from '../icons/location-icon';
+import MoneyIcon from '../icons/money-icon';
+import SuitcaseIcon from '../icons/suitcase-icon';
+import TokenAllocationIcon from '../icons/token-allocation-icon';
 
-export const createJobCardTags = (jobPost: JobPost) => {
+export const createJobTags = (jobInfo: JobInfo) => {
   const {
     seniority,
     minSalaryRange,
@@ -25,7 +23,7 @@ export const createJobCardTags = (jobPost: JobPost) => {
     paysInCrypto,
     offersTokenAllocation,
     salaryCurrency = 'USD',
-  } = jobPost;
+  } = jobInfo;
 
   const tags: TagElement[] = [];
 

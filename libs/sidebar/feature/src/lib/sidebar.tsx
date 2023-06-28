@@ -2,13 +2,18 @@ import { memo, useEffect } from 'react';
 
 import { useAtomValue } from 'jotai';
 
+import { LIST_PATHS } from '@jobstash/shared/core';
+
 import { sidebarOpenAtom } from '@jobstash/sidebar/state';
 
-import { CloseIcon, HamburgerIcon, Text } from '@jobstash/shared/ui';
+import {
+  CloseIcon,
+  HamburgerIcon,
+  OrgSidebarIcon,
+  Text,
+} from '@jobstash/shared/ui';
 import {
   Brand,
-  JobsBartab,
-  JobsBartabMobile,
   JobsSidebarIcon,
   MobileMenuButton,
   MobileNavbarWrapper,
@@ -16,6 +21,17 @@ import {
   SidebarWrapper,
 } from '@jobstash/sidebar/ui';
 import { ConnectWalletButton } from '@jobstash/auth/feature';
+
+import SidebarBartab from './sidebar-bartab';
+
+const sidebarBartabs = [
+  { text: 'Jobs', path: LIST_PATHS.jobs, icon: <JobsSidebarIcon /> },
+  {
+    text: 'Organizations',
+    path: LIST_PATHS.organizations,
+    icon: <OrgSidebarIcon />,
+  },
+];
 
 const Sidebar = () => {
   const sidebarOpen = useAtomValue(sidebarOpenAtom);
@@ -44,8 +60,18 @@ const Sidebar = () => {
           Discover
         </Text>
 
-        <div className="inline-flex space-y-3 pt-3 [&>*]:bg-transparent [&>*]:bg-none [&>*]:hover:bg-transparent">
-          <JobsBartabMobile />
+        <div className="flex flex-col justify-start items-start space-y-3 pt-3 [&>*]:bg-transparent [&>*]:bg-none [&>*]:hover:bg-transparent">
+          {/* <JobsBartabMobile /> */}
+
+          {sidebarBartabs.map(({ text, path, icon }) => (
+            <SidebarBartab
+              key={path}
+              isMobile
+              path={path}
+              icon={icon}
+              text={text}
+            />
+          ))}
         </div>
       </MobileNavbarWrapper>
 
@@ -58,7 +84,10 @@ const Sidebar = () => {
       <div className="mt-12 hidden lg:block">
         <Text color="dimmed">Discover</Text>
         <div className="space-y-3 pt-3">
-          <JobsBartab icon={<JobsSidebarIcon />}>Jobs</JobsBartab>
+          {/* <JobsBartab icon={<JobsSidebarIcon />}>Jobs</JobsBartab> */}
+          {sidebarBartabs.map(({ text, path, icon }) => (
+            <SidebarBartab key={path} path={path} icon={icon} text={text} />
+          ))}
         </div>
       </div>
 

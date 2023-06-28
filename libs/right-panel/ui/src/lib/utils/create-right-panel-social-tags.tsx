@@ -1,17 +1,16 @@
-import { type Organization } from '@jobstash/organizations/core';
+import { type RightPanelOrg } from '@jobstash/right-panel/core';
 import { TAG_ELEMENT_ID, type TagElement } from '@jobstash/shared/core';
 
 import {
   DiscordIcon,
   DocsIcon,
   GithubLogoOutlineIcon,
-  LinkedInIcon,
   TelegramIcon,
   TwitterIcon,
 } from '@jobstash/shared/ui';
 
-export const createRightPanelSocialTags = (organization: Organization) => {
-  const { github, twitter, telegram, discord, docs } = organization;
+export const createRightPanelSocialTags = (orgDetails: RightPanelOrg) => {
+  const { github, twitter, telegram, discord, docs } = orgDetails;
 
   const socials: TagElement[] = [];
 

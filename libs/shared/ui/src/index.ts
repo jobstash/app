@@ -19,6 +19,7 @@ export { default as BankIcon } from './lib/icons/bank-icon';
 export { default as CaretDownIcon } from './lib/icons/caret-down-icon';
 export { default as CategoryIcon } from './lib/icons/category-icon';
 export { default as CloseIcon } from './lib/icons/close-icon';
+export { default as CodeIcon } from './lib/icons/code-icon';
 export { default as CurrencyCircleDollarIcon } from './lib/icons/currency-circle-dollar-icon';
 export { default as DiscordIcon } from './lib/icons/discord-icon';
 export { default as DocsIcon } from './lib/icons/docs-icon';
@@ -34,6 +35,7 @@ export { default as LocationIcon } from './lib/icons/location-icon';
 export { default as MainnetIcon } from './lib/icons/mainnet-icon';
 export { default as MoneyIcon } from './lib/icons/money-icon';
 export { default as MonthlyVolumeIcon } from './lib/icons/monthly-volume-icon';
+export { default as OrgSidebarIcon } from './lib/icons/org-sidebar-icon';
 export { default as RevenueIcon } from './lib/icons/revenue-icon';
 export { default as SearchInputIcon } from './lib/icons/search-input-icon';
 export { default as SuitcaseIcon } from './lib/icons/suitcase-icon';
@@ -46,3 +48,7 @@ export { default as UsersThreeIcon } from './lib/icons/users-three-icon';
 
 // Components
 export { default as MetaData } from './lib/components/meta-data';
+
+// Utils
+export * from './lib/utils/create-funding-rounds-tags';
+export * from './lib/utils/create-job-tags';

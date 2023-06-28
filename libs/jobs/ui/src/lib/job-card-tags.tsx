@@ -2,16 +2,14 @@ import { memo } from 'react';
 
 import { type JobPost } from '@jobstash/jobs/core';
 
-import { CardSet } from '@jobstash/shared/ui';
-
-import { createJobCardTags } from './utils/create-job-card-tags';
+import { CardSet, createJobTags } from '@jobstash/shared/ui';
 
 interface Props {
   jobPost: JobPost;
 }
 
 const JobCardTags = ({ jobPost }: Props) => {
-  const tags = createJobCardTags(jobPost);
+  const tags = createJobTags(jobPost);
 
   return (
     <div className="flex flex-wrap [&>*]:mr-4">
