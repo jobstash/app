@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-import { type OrgData } from '@jobstash/organizations/core';
+import { type RightPanelOrg } from '@jobstash/right-panel/core';
 import { getGoogleLogoUrl } from '@jobstash/shared/utils';
 
 import { LogoTitle, Text } from '@jobstash/shared/ui';
@@ -9,27 +9,27 @@ import RightPanelHeaderSocials from './right-panel-header-socials';
 import RightPanelHeaderTags from './right-panel-header-tags';
 
 interface Props {
-  organization: OrgData;
+  org: RightPanelOrg;
 }
 
-const RightPanelHeader = ({ organization }: Props) => (
+const RightPanelHeader = ({ org }: Props) => (
   <div className="flex flex-col gap-4">
     <div className="flex flex-col gap-4">
       <div className="flex h-10 items-center">
         <LogoTitle
-          title={organization.name}
+          title={org.name}
           avatarProps={{
-            src: getGoogleLogoUrl(organization.url),
-            alt: organization.name,
+            src: getGoogleLogoUrl(org.url),
+            alt: org.name,
           }}
         />
       </div>
-      <RightPanelHeaderTags organization={organization} />
+      <RightPanelHeaderTags org={org} />
     </div>
 
-    <Text color="dimmed">{organization.summary as string}</Text>
+    <Text color="dimmed">{org.summary as string}</Text>
 
-    <RightPanelHeaderSocials organization={organization} />
+    <RightPanelHeaderSocials org={org} />
   </div>
 );
 
@@ -37,5 +37,5 @@ export default memo(
   RightPanelHeader,
   // Might be different org object reference e.g. from different job post
   // but if IDs are the same, the contents would also be the same
-  (prev, next) => prev.organization.id === next.organization.id,
+  (prev, next) => prev.org.id === next.org.id,
 );

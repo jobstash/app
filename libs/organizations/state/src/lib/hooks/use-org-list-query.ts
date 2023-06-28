@@ -1,25 +1,34 @@
 import { useRouter } from 'next/router';
 
-import { useInfiniteQuery } from '@tanstack/react-query';
+import { useInfiniteQuery, useQueryClient } from '@tanstack/react-query';
 
 import { OrgListQueryPage } from '@jobstash/organizations/core';
 import { createJobsFilterParamsObj } from '@jobstash/jobs/utils';
 
-import { getOrgList } from '@jobstash/organizations/data';
+import { getOrgDetails, getOrgList } from '@jobstash/organizations/data';
 
 export const useOrgListQuery = () => {
+  const queryClient = useQueryClient();
   const router = useRouter();
 
   const filterParamsObj = createJobsFilterParamsObj(router.query);
 
   return useInfiniteQuery<OrgListQueryPage>(
-    ['job-posts', filterParamsObj],
+    ['org-list', filterParamsObj],
     async ({ pageParam }) => getOrgList(pageParam ?? 1, filterParamsObj),
     {
       staleTime: 1000 * 60 * 60, // 1 hr
       getNextPageParam: ({ page }) => (page > 0 ? page + 1 : undefined),
-
-      // TODO: setQueryData for individual fetch of org details
+      onSuccess(data) {
+        const orgListItems = data.pages.flatMap((d) => d.data);
+        for (const orgListItem of orgListItems) {
+          const { orgId } = orgListItem;
+          queryClient.prefetchQuery({
+            queryKey: ['org-details', orgId],
+            queryFn: () => getOrgDetails(orgId),
+          });
+        }
+      },
     },
   );
 };

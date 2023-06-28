@@ -1,6 +1,4 @@
 export { default as Brand } from './lib/brand';
-export { default as JobsBartab } from './lib/jobs-bartab';
-export { default as JobsBartabMobile } from './lib/jobs-bartab-mobile';
 export { default as JobsSidebarIcon } from './lib/jobs-sidebar-icon';
 export { default as MobileMenuButton } from './lib/mobile-menu-button';
 export { default as MobileNavbarWrapper } from './lib/mobile-navbar-wrapper';

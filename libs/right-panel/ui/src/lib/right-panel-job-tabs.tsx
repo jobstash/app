@@ -6,7 +6,7 @@ import { FRONTEND_URL, TAB_SEGMENT } from '@jobstash/shared/core';
 import { createJobKey } from '@jobstash/jobs/utils';
 import { getPluralText } from '@jobstash/shared/utils';
 
-import { RightPanelTabs } from '@jobstash/right-panel/ui';
+import RightPanelTabs from './right-panel-tabs';
 
 interface Props {
   isLoading: boolean;
@@ -15,7 +15,7 @@ interface Props {
   competitorCount: number;
 }
 
-const JobsRightPanelTabs = ({
+const RightPanelJobTabs = ({
   isLoading,
   currentTab,
   jobPost,
@@ -77,4 +77,4 @@ const JobsRightPanelTabs = ({
   );
 };
 
-export default JobsRightPanelTabs;
+export default RightPanelJobTabs;

@@ -6,7 +6,7 @@ interface Props {
   applyUrl: string;
 }
 
-const JobDetailsApplyButton = ({ applyUrl }: Props) => {
+const RightPanelJobCardApplyButton = ({ applyUrl }: Props) => {
   const onClick = () => {
     if (typeof window !== 'undefined') {
       window.open(applyUrl, '_blank');
@@ -25,4 +25,4 @@ const JobDetailsApplyButton = ({ applyUrl }: Props) => {
   );
 };
 
-export default memo(JobDetailsApplyButton);
+export default memo(RightPanelJobCardApplyButton);

@@ -2,7 +2,7 @@ import { memo, type ReactNode, useEffect } from 'react';
 
 import { useAtomValue } from 'jotai';
 
-import { type OrgData } from '@jobstash/organizations/core';
+import { type RightPanelOrg } from '@jobstash/right-panel/core';
 
 import { mobileRightPanelOpenAtom } from '@jobstash/shared/state';
 
@@ -11,12 +11,12 @@ import RightPanelHeaderMobile from './right-panel-header-mobile';
 import RightPanelWrapper from './right-panel-wrapper';
 
 interface Props {
-  organization: OrgData;
+  org: RightPanelOrg;
   tabs: ReactNode;
   children: ReactNode;
 }
 
-const RightPanel = ({ organization, tabs, children }: Props) => {
+const RightPanel = ({ org, tabs, children }: Props) => {
   // Disable main window scroll when mobile right-panel is open
   const mobileRightPanelOpenValue = useAtomValue(mobileRightPanelOpenAtom);
   useEffect(() => {
@@ -31,7 +31,7 @@ const RightPanel = ({ organization, tabs, children }: Props) => {
   return (
     <RightPanelWrapper>
       <RightPanelHeaderMobile />
-      <RightPanelHeader organization={organization} />
+      <RightPanelHeader org={org} />
       {tabs}
       {children}
     </RightPanelWrapper>

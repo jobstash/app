@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-import { type Organization } from '@jobstash/organizations/core';
+import { type RightPanelOrg } from '@jobstash/right-panel/core';
 import { type TagElement } from '@jobstash/shared/core';
 
 import { CardSet } from '@jobstash/shared/ui';
@@ -8,11 +8,11 @@ import { CardSet } from '@jobstash/shared/ui';
 import { createRightPanelSocialTags } from './utils/create-right-panel-social-tags';
 
 interface Props {
-  organization: Organization;
+  org: RightPanelOrg;
 }
 
-const RightPanelHeaderSocials = ({ organization }: Props) => {
-  const socials: TagElement[] = createRightPanelSocialTags(organization);
+const RightPanelHeaderSocials = ({ org }: Props) => {
+  const socials: TagElement[] = createRightPanelSocialTags(org);
 
   return (
     <div className="flex gap-4 flex-wrap">

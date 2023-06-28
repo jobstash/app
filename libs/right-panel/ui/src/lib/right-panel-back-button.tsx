@@ -12,7 +12,8 @@ const RightPanelBackButton = () => {
 
   const setMobileRightPanelOpen = useSetAtom(mobileRightPanelOpenAtom);
   const onClick = useCallback(() => {
-    router.push('/jobs', undefined, { shallow: true, scroll: false });
+    // Router.push('/jobs', undefined, { shallow: true, scroll: false });
+    router.back();
 
     // Enable main window scroll again
     setMobileRightPanelOpen(false);

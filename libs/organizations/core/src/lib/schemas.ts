@@ -1,52 +1,42 @@
 import myzod from 'myzod';
 
 import { projectSchema } from '@jobstash/projects/core';
-import { fundingRoundSchema, investorSchema } from '@jobstash/shared/core';
+import {
+  fundingRoundSchema,
+  investorSchema,
+  jobInfoSchema,
+  orgInfoSchema,
+  technologySchema,
+} from '@jobstash/shared/core';
 
-export const organizationSchema = myzod.object(
-  {
-    id: myzod.string().min(1),
-    url: myzod.string().min(1),
-    name: myzod.string().min(1),
-    orgId: myzod.string().min(1),
-    summary: myzod.string().min(1),
-    location: myzod.string().min(1),
-    description: myzod.string().min(1),
-    jobsiteLink: myzod.string().min(1).nullable(),
-    github: myzod.string().min(1).nullable(),
-    twitter: myzod.string().min(1).nullable(),
-    createdTimestamp: myzod.number().nullable(),
-    updatedTimestamp: myzod.number().nullable(),
+export const orgListItemSchema = myzod.object({
+  orgId: myzod.string().min(1),
+  url: myzod.string().min(1),
+  name: myzod.string().min(1),
+  location: myzod.string().min(1),
+  jobCount: myzod.number(),
+  projectCount: myzod.number(),
+  lastFundingDate: myzod.number(),
+  lastFundingAmount: myzod.number(),
+  headCount: myzod.number().nullable(),
+  technologies: myzod.array(technologySchema),
+});
 
-    // Fields conflicting w/ actual data
-    headCount: myzod.number().min(1).nullable().optional(), // Should not be optional
-    teamSize: myzod.number().min(1).nullable(), // Should be removed - use headCount instead
-    discord: myzod.string().nullable(), // Should have min(1) - otherwise null
-    telegram: myzod.string().nullable(), // Should have min(1) - otherwise null
-    docs: myzod.string().nullable(), // Should have min(1) - otherwise null
-  },
-  { allowUnknown: true },
-);
-
-export const orgDataSchema = myzod.intersection(
-  organizationSchema,
-  myzod.object({
-    fundingRounds: myzod.array(fundingRoundSchema),
-    investors: myzod.array(investorSchema),
-    projects: myzod.array(projectSchema),
-  }),
-);
-
-export const orgPostSchema = myzod.intersection(
-  organizationSchema,
-  myzod.object({
-    // Add more fields here e.g. job count, project count (to be implemented in mw)
-  }),
-);
+export const orgDetailsSchema = myzod
+  .intersection(
+    orgInfoSchema,
+    myzod.object({
+      projects: myzod.array(projectSchema),
+      fundingRounds: myzod.array(fundingRoundSchema),
+      investors: myzod.array(investorSchema),
+      jobs: myzod.array(jobInfoSchema),
+    }),
+  )
+  .allowUnknownKeys(true);
 
 export const orgListQueryPageSchema = myzod.object({
   page: myzod.number(),
   count: myzod.number(),
   total: myzod.number(),
-  data: myzod.array(organizationSchema),
+  data: myzod.array(orgListItemSchema),
 });

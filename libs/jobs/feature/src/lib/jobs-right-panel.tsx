@@ -5,10 +5,11 @@ import { TAB_SEGMENT } from '@jobstash/shared/core';
 
 import { useCompetitors } from '@jobstash/competitors/state';
 
-import { JobDetails, JobsRightPanelTabs } from '@jobstash/jobs/ui';
 import {
   RightPanel,
   RightPanelCompetitorCards,
+  RightPanelJobCard,
+  RightPanelJobTabs,
   RightPanelOrgCard,
   RightPanelProjectCards,
 } from '@jobstash/right-panel/ui';
@@ -37,7 +38,7 @@ const JobsRightPanel = ({ jobPost, currentTab }: Props) => {
     );
   }
 
-  const { organization } = jobPost;
+  const { organization, technologies } = jobPost;
   const { projects } = organization;
 
   const hasProject = projects.length > 0;
@@ -48,9 +49,9 @@ const JobsRightPanel = ({ jobPost, currentTab }: Props) => {
 
   return (
     <RightPanel
-      organization={organization}
+      org={organization}
       tabs={
-        <JobsRightPanelTabs
+        <RightPanelJobTabs
           isLoading={isLoading}
           currentTab={currentTab}
           jobPost={jobPost}
@@ -58,9 +59,11 @@ const JobsRightPanel = ({ jobPost, currentTab }: Props) => {
         />
       }
     >
-      {currentTab === TAB_SEGMENT.details && <JobDetails jobPost={jobPost} />}
+      {currentTab === TAB_SEGMENT.details && (
+        <RightPanelJobCard jobInfo={jobPost} technologies={technologies} />
+      )}
       {currentTab === TAB_SEGMENT.organization && (
-        <RightPanelOrgCard organization={organization} />
+        <RightPanelOrgCard org={organization} />
       )}
       {currentTab === TAB_SEGMENT.projects && (
         <RightPanelProjectCards projects={projects} />

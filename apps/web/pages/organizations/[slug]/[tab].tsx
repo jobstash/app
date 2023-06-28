@@ -1,5 +1,4 @@
-/* eslint-disable @typescript-eslint/no-explicit-any */
-import { type GetServerSideProps } from 'next';
+import {  type GetServerSideProps } from 'next';
 
 import { dehydrate, QueryClient } from '@tanstack/react-query';
 
@@ -12,11 +11,12 @@ import { sentryMessage, withCSR } from '@jobstash/shared/utils';
 
 import { getOrgDetails, getOrgList } from '@jobstash/organizations/data';
 
-export { OrgListPage as default } from '@jobstash/organizations/pages';
-
 interface Props {
-  initActiveOrg: OrgDetails | null;
+  fromSSR: boolean;
+  initOrgDetails: OrgDetails;
 }
+
+export { OrgDetailsPage as default } from '@jobstash/organizations/pages';
 
 export const getServerSideProps: GetServerSideProps<Props> = withCSR(
   async (ctx) => {
@@ -50,18 +50,18 @@ export const getServerSideProps: GetServerSideProps<Props> = withCSR(
       }
     }
 
-    // Fetch first org detail
-    let initActiveOrg: OrgDetails | null = null;
-    if (hasItems) {
-      try {
-        initActiveOrg = await getOrgDetails(orgListItems[0].orgId);
-      } catch {
-        initActiveOrg = null;
-        sentryMessage(
-          '/organizations SSR',
-          'failed fetching first orgListItem details',
-        );
-      }
+    const { slug } = ctx.query;
+    const orgId = (slug as string).split('-').at(-1) ?? '';
+
+    let initOrgDetails: OrgDetails | null = null;
+    try {
+      initOrgDetails = await getOrgDetails(orgId);
+    } catch {
+      initOrgDetails = null;
+      sentryMessage(
+        '/organizations SSR',
+        'failed fetching first orgListItem details',
+      );
     }
 
     const dehydratedState = dehydrate(queryClient);
@@ -70,8 +70,10 @@ export const getServerSideProps: GetServerSideProps<Props> = withCSR(
     return {
       props: {
         dehydratedState,
-        initActiveOrg,
+        initOrgDetails,
+        fromSSR: true,
       },
     };
   },
+  { props: { initOrgDetails: null, fromSSR: false } },
 );
