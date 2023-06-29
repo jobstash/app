@@ -24,7 +24,7 @@ const RightPanelWrapper = ({ children }: Props) => {
   return (
     <>
       <div className="absolute top-0 h-0" id={ID_TOP_RIGHT_PANEL} />
-      <div className="flex flex-col gap-8">{children}</div>
+      <div className="flex flex-col gap-8 pb-24">{children}</div>
     </>
   );
 };
