@@ -83,7 +83,6 @@ export const OrgDetailsPage = ({ fromSSR, initOrgDetails }: Props) => {
         headCount: initOrgDetails.headCount,
         lastFundingAmount,
         lastFundingDate,
-        technologies: [],
       }
     : null;
 
