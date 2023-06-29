@@ -8,3 +8,6 @@ export const PAGE_SIZE = process.env.NEXT_PUBLIC_PAGE_SIZE!;
 export const INFRURA_ID = process.env.NEXT_PUBLIC_INFRURA_ID!;
 export const WALLETCONNECT_PROJECT_ID =
   process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID!;
+
+// TODO: put hardcode string in env
+export const ORG_SIGNUP_FORM_URL = 'https://forms.gle/HWP6bUf3CB8RyJnw5';
