@@ -89,6 +89,11 @@ const Sidebar = () => {
           ))}
         </div>
       </div>
+
+      {/* <div className="inset-x-0 bottom-0 hidden space-y-4 p-4 lg:absolute lg:block">
+        <hr className="border-t border-white/20" />
+        <ConnectWalletButton />
+      </div> */}
     </SidebarWrapper>
   );
 };
