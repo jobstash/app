@@ -38,10 +38,13 @@ export const chainSchema = myzod
 export const hackSchema = myzod
   .object({
     id: myzod.string().min(1),
-    date: myzod.number(),
-    classification: myzod.string().min(1),
+    defiId: myzod.string(),
+    category: myzod.string(),
     fundsLost: myzod.number(),
-    link: myzod.string().min(1),
+    issueType: myzod.string(),
+    date: myzod.number().nullable(),
+    description: myzod.string().nullable(),
+    fundsReturned: myzod.number().nullable(),
   })
   .allowUnknownKeys(true);
 
