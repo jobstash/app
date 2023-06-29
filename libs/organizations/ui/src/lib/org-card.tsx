@@ -12,7 +12,6 @@ import { mobileRightPanelOpenAtom, useIsMobile } from '@jobstash/shared/state';
 
 import OrgCardHeader from './org-card-header';
 import OrgCardTags from './org-card-tags';
-import OrgCardTechs from './org-card-techs';
 import OrgCardWrapper from './org-card-wrapper';
 
 interface Props {
@@ -22,7 +21,7 @@ interface Props {
 }
 
 const OrgCard = ({ orgListItem, isActive, filterParamsObj }: Props) => {
-  const { orgId, technologies, name } = orgListItem;
+  const { orgId, name } = orgListItem;
 
   const setActiveOrgId = useSetAtom(activeOrgIdAtom);
 
@@ -54,7 +53,6 @@ const OrgCard = ({ orgListItem, isActive, filterParamsObj }: Props) => {
     <OrgCardWrapper href={href} isActive={isActive} onClick={onClick}>
       <OrgCardHeader orgListItem={orgListItem} />
       <OrgCardTags orgListItem={orgListItem} />
-      <OrgCardTechs techs={technologies} />
     </OrgCardWrapper>
   );
 };

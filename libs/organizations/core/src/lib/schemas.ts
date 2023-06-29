@@ -6,7 +6,6 @@ import {
   investorSchema,
   jobInfoSchema,
   orgInfoSchema,
-  technologySchema,
 } from '@jobstash/shared/core';
 
 export const orgListItemSchema = myzod.object({
@@ -19,7 +18,6 @@ export const orgListItemSchema = myzod.object({
   lastFundingDate: myzod.number(),
   lastFundingAmount: myzod.number(),
   headCount: myzod.number().nullable(),
-  technologies: myzod.array(technologySchema),
 });
 
 export const orgDetailsSchema = myzod
