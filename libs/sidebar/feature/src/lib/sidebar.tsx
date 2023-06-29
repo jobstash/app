@@ -20,7 +20,6 @@ import {
   SidebarCloseButton,
   SidebarWrapper,
 } from '@jobstash/sidebar/ui';
-import { ConnectWalletButton } from '@jobstash/auth/feature';
 
 import SidebarBartab from './sidebar-bartab';
 
@@ -91,10 +90,10 @@ const Sidebar = () => {
         </div>
       </div>
 
-      <div className="inset-x-0 bottom-0 hidden space-y-4 p-4 lg:absolute lg:block">
+      {/* <div className="inset-x-0 bottom-0 hidden space-y-4 p-4 lg:absolute lg:block">
         <hr className="border-t border-white/20" />
         <ConnectWalletButton />
-      </div>
+      </div> */}
     </SidebarWrapper>
   );
 };

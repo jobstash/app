@@ -12,8 +12,6 @@ import { ANALYTICS_ID } from '@jobstash/shared/core';
 
 import { ReactQueryProvider } from '@jobstash/shared/state';
 
-import { AuthProvider } from '@jobstash/auth/feature';
-
 const App = ({ Component, pageProps }: AppProps) => {
   const router = useRouter();
 
@@ -59,9 +57,7 @@ const App = ({ Component, pageProps }: AppProps) => {
           withNormalizeCSS
           theme={{ colorScheme: 'dark', cursorType: 'pointer' }}
         >
-          <AuthProvider>
-            <Component {...pageProps} />
-          </AuthProvider>
+          <Component {...pageProps} />
         </MantineProvider>
       </ReactQueryProvider>
     </>
