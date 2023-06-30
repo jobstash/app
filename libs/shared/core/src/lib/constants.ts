@@ -50,6 +50,8 @@ export const TAG_ELEMENT_ID = {
   headCount: 'head-count',
   jobs: 'jobs',
   projects: 'projects',
+  audit: 'audit',
+  hack: 'hack',
 } as const;
 
 // Sentry MSG
