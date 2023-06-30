@@ -1,8 +1,8 @@
 import type { GetServerSideProps } from 'next';
 
 import { type JobPost } from '@jobstash/jobs/core';
+import { FRONTEND_URL, MW_URL } from '@jobstash/shared/core';
 import { createJobKey } from '@jobstash/jobs/utils';
-import { getFrontendUrl, getMwUrl } from '@jobstash/shared/utils';
 
 // eslint-disable-next-line @typescript-eslint/no-empty-function
 const SiteMap = () => {};
@@ -14,7 +14,7 @@ const generateSiteMap = (jobs: JobPost[]): string =>
         .map(
           (job) =>
             `<url>
-							<loc>${getFrontendUrl()}/jobs/${createJobKey(job)}/details</loc>
+							<loc>${FRONTEND_URL}/jobs/${createJobKey(job)}/details</loc>
 							<lastmod>${new Date(job.jobCreatedTimestamp).toISOString()}</lastmod>
 							<changefreq>monthly</changefreq>
 							<priority>1.0</priority>
@@ -25,8 +25,7 @@ const generateSiteMap = (jobs: JobPost[]): string =>
 	`;
 
 export const getServerSideProps: GetServerSideProps = async ({ res }) => {
-  const mwUrl = getMwUrl();
-  const req = await fetch(`${mwUrl}/jobs/list?page=1&limit=5000`);
+  const req = await fetch(`${MW_URL}/jobs/list?page=1&limit=5000`);
   const jsonRes = await req.json();
   const { data } = jsonRes as { data: JobPost[] };
 

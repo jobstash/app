@@ -5,17 +5,12 @@ import { useEffect } from 'react';
 import { useAtom, useAtomValue } from 'jotai';
 
 import { JobPost } from '@jobstash/jobs/core';
-import { ERR_INTERNAL } from '@jobstash/shared/core';
+import { EDGE_URL, ERR_INTERNAL, FRONTEND_URL } from '@jobstash/shared/core';
 import {
   createJobCardOgDetails,
   createJobPostLdJson,
 } from '@jobstash/jobs/utils';
-import {
-  cn,
-  getEdgeUrl,
-  getFrontendUrl,
-  sentryMessage,
-} from '@jobstash/shared/utils';
+import { cn, sentryMessage } from '@jobstash/shared/utils';
 
 import { showFiltersAtom } from '@jobstash/filters/state';
 import { activeJobAtom, useJobPost } from '@jobstash/jobs/state';
@@ -79,11 +74,9 @@ export const JobPostPage = ({ initJob, fromSSR }: JobPostPageProps) => {
     throw new Error(ERR_INTERNAL);
   }
 
-  const frontendUrl = getFrontendUrl();
-  const urlMetaData = `${frontendUrl}/jobs/${slug}/details`;
+  const urlMetaData = `${FRONTEND_URL}/jobs/${slug}/details`;
 
-  const edgeUrl = getEdgeUrl();
-  const imageMetaData = `${edgeUrl}/api/job-card?id=${jobPost?.shortUUID}`;
+  const imageMetaData = `${EDGE_URL}/api/job-card?id=${jobPost?.shortUUID}`;
   const { description: descriptionMetaData, title: titleMetaData } =
     createJobCardOgDetails(jobPost);
   const ldJson = createJobPostLdJson(jobPost);

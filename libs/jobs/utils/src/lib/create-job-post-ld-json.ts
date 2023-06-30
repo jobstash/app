@@ -1,5 +1,6 @@
 import { type JobPost } from '@jobstash/jobs/core';
-import { getEdgeUrl, getGoogleLogoUrl } from '@jobstash/shared/utils';
+import { EDGE_URL } from '@jobstash/shared/core';
+import { getGoogleLogoUrl } from '@jobstash/shared/utils';
 
 export const createJobPostLdJson = (jobPost?: JobPost) => {
   if (jobPost) {
@@ -20,8 +21,7 @@ export const createJobPostLdJson = (jobPost?: JobPost) => {
       shortUUID,
     } = jobPost;
 
-    const edgeUrl = getEdgeUrl();
-    const imageMetaData = `${edgeUrl}/jobs/job-card?id=${shortUUID}`;
+    const imageMetaData = `${EDGE_URL}/jobs/job-card?id=${shortUUID}`;
 
     let description = `<p>Role</p>\n\n<p>${role}</p>\n\n`;
     if (team) {

@@ -1,11 +1,9 @@
 import type { SIWEConfig } from 'connectkit/build/siwe';
 
-import { getMwUrl } from '@jobstash/shared/utils';
+import { MW_URL } from '@jobstash/shared/core';
 
 export const siweGetNonce: SIWEConfig['getNonce'] = async () => {
-  const mwUrl = getMwUrl();
-
-  const res = await fetch(`${mwUrl}/siwe/nonce`, {
+  const res = await fetch(`${MW_URL}/siwe/nonce`, {
     credentials: 'include',
     mode: 'cors',
   });

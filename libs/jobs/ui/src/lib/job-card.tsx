@@ -3,10 +3,9 @@ import { memo, useCallback, useMemo } from 'react';
 import { useSetAtom } from 'jotai';
 
 import { type JobPost } from '@jobstash/jobs/core';
-import { EVENT_CARD_CLICK } from '@jobstash/shared/core';
+import { EVENT_CARD_CLICK, FRONTEND_URL } from '@jobstash/shared/core';
 import { getUrlWithParams } from '@jobstash/filters/utils';
 import { createJobKey } from '@jobstash/jobs/utils';
-import { getFrontendUrl } from '@jobstash/shared/utils';
 
 import { activeJobAtom } from '@jobstash/jobs/state';
 import { mobileRightPanelOpenAtom, useIsMobile } from '@jobstash/shared/state';
@@ -43,16 +42,15 @@ const JobCard = ({ jobPost, isActive, filterParamsObj }: Props) => {
     }
   }, [isMobile, jobPost, setActiveJob, setMobileRightPanelOpen]);
 
-  const frontendUrl = getFrontendUrl();
   const href = useMemo(() => {
     const url = getUrlWithParams(
-      frontendUrl,
+      FRONTEND_URL,
       `/jobs/${createJobKey(jobPost)}/details`,
       filterParamsObj,
     );
 
     return url.toString();
-  }, [filterParamsObj, frontendUrl, jobPost]);
+  }, [filterParamsObj, jobPost]);
 
   return (
     <JobCardWrapper href={href} isActive={isActive} onClick={onClick}>
