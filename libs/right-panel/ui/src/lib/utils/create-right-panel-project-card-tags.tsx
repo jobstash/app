@@ -180,7 +180,9 @@ export const createRightPanelProjectCardTags = (project: Project) => {
       projectAuditTags.push({
         id: `${TAG_ELEMENT_ID.audit} ${audit.id}`,
         text: `${getPluralText('Audit', issueCount)}: ${title}${
-          issueCount ? ' (' + issueCount + ' issues)' : ''
+          issueCount
+            ? ' (' + issueCount + ` ${getPluralText('issue', issueCount)})`
+            : ''
         }`,
         icon: <ShieldCheckIcon />,
         link: audit.link ?? undefined,
