@@ -61,6 +61,7 @@ const FilterConfigMapper = ({
               minConfigValue={config.value.lowest.value}
               maxConfigValue={config.value.highest.value}
               dispatch={dispatch}
+              prefix={config.prefix}
             />
           )}
 
