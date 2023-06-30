@@ -175,11 +175,13 @@ export const createRightPanelProjectCardTags = (project: Project) => {
 
   if (audits.length > 0) {
     for (const audit of audits) {
+      const issueCount = audit.techIssues ?? 0;
+      const title = audit.auditor ?? audit.name;
       projectAuditTags.push({
-        id: `${TAG_ELEMENT_ID.audit} ${audit.name}`,
-        text: `${getPluralText('Audit', audit.techIssues ?? 0)}: ${
-          audit.name
-        } ${audit.techIssues ? '(' + audit.techIssues + ')' : ''}`,
+        id: `${TAG_ELEMENT_ID.audit} ${audit.id}`,
+        text: `${getPluralText('Audit', issueCount)}: ${title}${
+          issueCount ? ' (' + issueCount + ' issues)' : ''
+        }`,
         icon: <ShieldCheckIcon />,
         link: audit.link ?? undefined,
       });
@@ -188,11 +190,15 @@ export const createRightPanelProjectCardTags = (project: Project) => {
 
   if (hacks.length > 0) {
     for (const hack of hacks) {
+      const title =
+        hack.category && hack.category !== 'Other' ? hack.category : '';
+      const issueType = hack.issueType ?? 'Other';
+      const fundsLost = hack.fundsLost
+        ? `(${numFormatter.format(hack.fundsLost)})`
+        : '';
       projectAuditTags.push({
         id: `${TAG_ELEMENT_ID.hack} ${hack.id}`,
-        text: `Hack: ${hack.category} ${hack.issueType} (${
-          hack.fundsLost ? '$' + numFormatter.format(hack.fundsLost) : ''
-        })`,
+        text: `Hack: ${title} ${issueType} ${fundsLost}`,
         icon: <SkullIcon />,
       });
     }
