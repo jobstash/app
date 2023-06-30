@@ -38,6 +38,8 @@ export { default as MonthlyVolumeIcon } from './lib/icons/monthly-volume-icon';
 export { default as OrgSidebarIcon } from './lib/icons/org-sidebar-icon';
 export { default as RevenueIcon } from './lib/icons/revenue-icon';
 export { default as SearchInputIcon } from './lib/icons/search-input-icon';
+export { default as ShieldCheckIcon } from './lib/icons/shield-check-icon';
+export { default as SkullIcon } from './lib/icons/skull-icon';
 export { default as SuitcaseIcon } from './lib/icons/suitcase-icon';
 export { default as TelegramIcon } from './lib/icons/telegram-icon';
 export { default as TokenAllocationIcon } from './lib/icons/token-allocation-icon';

@@ -1,6 +1,7 @@
+/* eslint-disable complexity */
 import { type Project } from '@jobstash/projects/core';
 import { TAG_ELEMENT_ID, type TagElement } from '@jobstash/shared/core';
-import { numFormatter } from '@jobstash/shared/utils';
+import { getPluralText, numFormatter } from '@jobstash/shared/utils';
 
 import {
   ActiveUsersIcon,
@@ -10,6 +11,8 @@ import {
   GlobeSimpleIcon,
   MonthlyVolumeIcon,
   RevenueIcon,
+  ShieldCheckIcon,
+  SkullIcon,
   TelegramIcon,
   TvlIcon,
   TwitterIcon,
@@ -31,6 +34,8 @@ export const createRightPanelProjectCardTags = (project: Project) => {
     monthlyRevenue,
     teamSize,
     categories,
+    audits,
+    hacks,
   } = project;
 
   const projectSocialTags: TagElement[] = [
@@ -166,18 +171,32 @@ export const createRightPanelProjectCardTags = (project: Project) => {
     });
   }
 
-  const projectAuditTags: TagElement[] = [
-    // { text: 'Audits: Peckshield', icon: <ShieldCheckIcon />, link: '#' },
-    // {
-    //   text: 'Audits: Consensys Diligence',
-    //   icon: <ShieldCheckIcon />,
-    //   link: '#',
-    // },
-    // { text: 'Audits: SigmaPrime', icon: <ShieldCheckIcon />, link: '#' },
-    // { text: 'Audits: Chainsecurity', icon: <ShieldCheckIcon />, link: '#' },
-    // { text: 'Audits: Mixbytes', icon: <ShieldCheckIcon />, link: '#' },
-    // { text: 'Hacks: Big Hack costing all TVL', icon: <SkullIcon />, link: '#' },
-  ];
+  const projectAuditTags: TagElement[] = [];
+
+  if (audits.length > 0) {
+    for (const audit of audits) {
+      projectAuditTags.push({
+        id: `${TAG_ELEMENT_ID.audit} ${audit.name}`,
+        text: `${getPluralText('Audit', audit.techIssues ?? 0)}: ${
+          audit.name
+        } ${audit.techIssues ? '(' + audit.techIssues + ')' : ''}`,
+        icon: <ShieldCheckIcon />,
+        link: audit.link ?? undefined,
+      });
+    }
+  }
+
+  if (hacks.length > 0) {
+    for (const hack of hacks) {
+      projectAuditTags.push({
+        id: `${TAG_ELEMENT_ID.hack} ${hack.id}`,
+        text: `Hack: ${hack.category} ${hack.issueType} (${
+          hack.fundsLost ? '$' + numFormatter.format(hack.fundsLost) : ''
+        })`,
+        icon: <SkullIcon />,
+      });
+    }
+  }
 
   return { projectSocialTags, projectTags, projectTvlTags, projectAuditTags };
 };

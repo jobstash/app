@@ -50,8 +50,12 @@ export const hackSchema = myzod
 
 export const auditSchema = myzod
   .object({
-    auditor: myzod.string().min(1).nullable(),
-    link: myzod.string().min(1),
+    id: myzod.string().min(1),
+    name: myzod.string().min(1),
+    date: myzod.number().nullable(),
+    link: myzod.string().nullable(),
+    defiId: myzod.string().nullable(),
+    techIssues: myzod.number().nullable().optional(),
   })
   .allowUnknownKeys(true);
 
