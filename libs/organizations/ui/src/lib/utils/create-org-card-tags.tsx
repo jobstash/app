@@ -4,6 +4,7 @@ import {
   getPluralText,
   numFormatter,
   shortTimestamp,
+  slugify,
 } from '@jobstash/shared/utils';
 
 import {
@@ -16,6 +17,8 @@ import {
 
 export const createOrgCardTags = (orgListItem: OrgListItem): TagElement[] => {
   const {
+    name,
+    orgId,
     headCount,
     jobCount,
     projectCount,
@@ -25,11 +28,15 @@ export const createOrgCardTags = (orgListItem: OrgListItem): TagElement[] => {
 
   const tags: TagElement[] = [];
 
+  const slug = slugify(`${name} ${orgId}`);
+  const baseRoute = `/organizations/${slug}`;
+
   if (jobCount > 0) {
     tags.push({
       id: TAG_ELEMENT_ID.jobs,
       text: `${getPluralText('Job', jobCount)}: ${jobCount}`,
       icon: <SuitcaseIcon />,
+      link: `${baseRoute}/jobs`,
     });
   }
 
@@ -38,6 +45,7 @@ export const createOrgCardTags = (orgListItem: OrgListItem): TagElement[] => {
       id: TAG_ELEMENT_ID.projects,
       text: `${getPluralText('Project', projectCount)}: ${projectCount}`,
       icon: <CodeIcon />,
+      link: `${baseRoute}/projects`,
     });
   }
 
