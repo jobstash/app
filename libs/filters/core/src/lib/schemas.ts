@@ -24,6 +24,7 @@ export const rangeFilterConfigSchema = myzod
         lowest: rangeFilterConfigValueSchema,
         highest: rangeFilterConfigValueSchema,
       }),
+      prefix: myzod.string().min(1).nullable(),
     }),
   )
   .allowUnknownKeys(true);

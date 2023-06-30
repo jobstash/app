@@ -21,7 +21,7 @@ interface Props {
   maxParamKey: string;
   minConfigValue: number;
   maxConfigValue: number;
-  prefix?: string;
+  prefix: string | null;
   dispatch: Dispatch<SetRangeFilterValueAction>;
 }
 
@@ -33,7 +33,7 @@ const RangeFilter = ({
   maxParamKey,
   minConfigValue,
   maxConfigValue,
-  prefix = '$',
+  prefix,
   dispatch,
 }: Props) => {
   const increment = Math.round((maxConfigValue - minConfigValue) / 100);
