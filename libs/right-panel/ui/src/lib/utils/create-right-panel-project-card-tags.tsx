@@ -194,7 +194,7 @@ export const createRightPanelProjectCardTags = (project: Project) => {
         hack.category && hack.category !== 'Other' ? hack.category : '';
       const issueType = hack.issueType ?? 'Other';
       const fundsLost = hack.fundsLost
-        ? `(${numFormatter.format(hack.fundsLost)})`
+        ? `($${numFormatter.format(hack.fundsLost)})`
         : '';
       projectAuditTags.push({
         id: `${TAG_ELEMENT_ID.hack} ${hack.id}`,
