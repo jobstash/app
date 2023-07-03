@@ -1,21 +1,25 @@
 import { memo } from 'react';
 
+import { type FilterSection } from '@jobstash/filters/core';
+import { capitalize } from '@jobstash/shared/utils';
+
 import { Text } from '@jobstash/shared/ui';
 
 interface Props {
-  jobCount?: number;
+  filterSection: FilterSection;
+  count: number | null;
 }
 
-const FiltersJobCount = ({ jobCount }: Props) => {
-  if (!jobCount) return null;
+const FiltersJobCount = ({ filterSection, count }: Props) => {
+  if (!count) return null;
 
   return (
     <div>
-      {jobCount && (
+      {count && (
         <Text
           className="my-3 inline-block whitespace-nowrap"
           color="dimmed"
-        >{`Jobs Found: ${jobCount}`}</Text>
+        >{`${capitalize(filterSection)} Found: ${count}`}</Text>
       )}
     </div>
   );

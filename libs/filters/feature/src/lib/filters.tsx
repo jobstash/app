@@ -31,7 +31,7 @@ const Filters = ({ filterSection }: Props) => {
     applyFilters,
     clearFilters,
     error,
-    jobCount,
+    filteredItemsCount,
     showFilters,
   } = useFilters(filterSection);
 
@@ -70,7 +70,12 @@ const Filters = ({ filterSection }: Props) => {
             </div>
           )}
 
-          {jobCount && <FiltersJobCount jobCount={jobCount} />}
+          {filteredItemsCount && (
+            <FiltersJobCount
+              count={filteredItemsCount}
+              filterSection={filterSection}
+            />
+          )}
         </div>
 
         {/* DESKTOP FILTER CONTENTS */}
