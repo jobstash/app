@@ -10,7 +10,11 @@ import {
 
 import { useAtom, useAtomValue } from 'jotai';
 
-import { type FilterConfig, type FilterState } from '@jobstash/filters/core';
+import {
+  type FilterConfig,
+  type FilterSection,
+  type FilterState,
+} from '@jobstash/filters/core';
 import { FRONTEND_URL } from '@jobstash/shared/core';
 
 import { jobCountAtom } from '@jobstash/jobs/state';
@@ -20,12 +24,16 @@ import { filterReducer } from '../reducers/filter-reducer';
 
 import { useFilterConfig } from './use-filter-config';
 
-export const useFilters = () => {
+export const useFilters = (filterSection: FilterSection) => {
   const { query: routerQuery, push, isReady } = useRouter();
 
   const [state, dispatch] = useReducer(filterReducer, {} as FilterState);
 
-  const { data, isLoading: isLoadingData, error } = useFilterConfig();
+  const {
+    data,
+    isLoading: isLoadingData,
+    error,
+  } = useFilterConfig(filterSection);
   useEffect(() => {
     if (data) {
       dispatch({ type: 'UPDATE_DATA', payload: { data, routerQuery } });
@@ -41,7 +49,7 @@ export const useFilters = () => {
   );
 
   const applyFilters = useCallback(() => {
-    const url = new URL(`${FRONTEND_URL}/jobs`);
+    const url = new URL(`${FRONTEND_URL}/${filterSection}`);
     for (const [key, value] of Object.entries(state.filterValues)) {
       if (value) {
         url.searchParams.set(key, value);
@@ -50,10 +58,10 @@ export const useFilters = () => {
 
     setShowFilters(false);
     setTimeout(() => push(url, undefined, { shallow: true }), 100);
-  }, [push, setShowFilters, state.filterValues]);
+  }, [filterSection, push, setShowFilters, state.filterValues]);
 
   const clearFilters = useCallback(() => {
-    const url = new URL(`${FRONTEND_URL}/jobs`);
+    const url = new URL(`${FRONTEND_URL}/${filterSection}`);
     const searchQuery = state?.filterValues?.query;
     if (searchQuery) {
       url.searchParams.set('query', searchQuery);
@@ -61,7 +69,7 @@ export const useFilters = () => {
 
     setShowFilters(false);
     setTimeout(() => push(url, undefined, { shallow: true }), 100);
-  }, [push, setShowFilters, state?.filterValues?.query]);
+  }, [filterSection, push, setShowFilters, state?.filterValues?.query]);
 
   const onSubmitSearch: FormEventHandler = useCallback(
     (e) => {

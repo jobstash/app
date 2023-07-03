@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 
 import { useAtom, useAtomValue } from 'jotai';
 
+import { FILTER_SECTION } from '@jobstash/filters/core';
 import { JobPost } from '@jobstash/jobs/core';
 import { EDGE_URL, ERR_INTERNAL, FRONTEND_URL } from '@jobstash/shared/core';
 import {
@@ -114,7 +115,7 @@ export const JobPostPage = ({ initJob, fromSSR }: JobPostPageProps) => {
               'bg-[#121216] w-[101%] pr-12': showFilters,
             })}
           >
-            <Filters />
+            <Filters filterSection={FILTER_SECTION.JOBS} />
           </div>
 
           <div
