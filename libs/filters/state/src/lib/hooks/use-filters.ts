@@ -11,6 +11,7 @@ import {
 import { useAtom, useAtomValue } from 'jotai';
 
 import {
+  FILTER_SECTION,
   type FilterConfig,
   type FilterSection,
   type FilterState,
@@ -18,6 +19,7 @@ import {
 import { FRONTEND_URL } from '@jobstash/shared/core';
 
 import { jobCountAtom } from '@jobstash/jobs/state';
+import { orgCountAtom } from '@jobstash/organizations/state';
 
 import { showFiltersAtom } from '../atoms/show-filters-atom';
 import { filterReducer } from '../reducers/filter-reducer';
@@ -125,6 +127,22 @@ export const useFilters = (filterSection: FilterSection) => {
   );
 
   const jobCount = useAtomValue(jobCountAtom);
+  const orgCount = useAtomValue(orgCountAtom);
+  const filteredItemsCount = useMemo(() => {
+    switch (filterSection) {
+      case FILTER_SECTION.JOBS: {
+        return jobCount;
+      }
+
+      case FILTER_SECTION.ORGANIZATIONS: {
+        return orgCount;
+      }
+
+      default: {
+        return 0;
+      }
+    }
+  }, [filterSection, jobCount, orgCount]);
 
   return {
     state: state as FilterState | undefined,
@@ -140,7 +158,7 @@ export const useFilters = (filterSection: FilterSection) => {
     applyFilters,
     clearFilters,
     error,
-    jobCount,
+    filteredItemsCount,
     showFilters,
   };
 };
