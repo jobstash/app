@@ -1,6 +1,7 @@
 import { type Infer } from 'myzod';
 import { type ParsedUrlQuery } from 'node:querystring';
 
+import { FILTER_SECTION } from './constants';
 import {
   filterConfigSchema,
   filterConfigSharedPropertiesSchema,
@@ -88,3 +89,5 @@ export type FilterAction =
   | SetSearchFilterValueAction
   | ClearFilterValuesAction
   | ToggleFiltersAction;
+
+export type FilterSection = typeof FILTER_SECTION[keyof typeof FILTER_SECTION];

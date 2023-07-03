@@ -2,6 +2,7 @@ import dynamic from 'next/dynamic';
 
 import { useAtomValue } from 'jotai';
 
+import { FILTER_SECTION } from '@jobstash/filters/core';
 import { type OrgDetails } from '@jobstash/organizations/core';
 import { TAB_SEGMENT } from '@jobstash/shared/core';
 import { cn } from '@jobstash/shared/utils';
@@ -9,6 +10,8 @@ import { cn } from '@jobstash/shared/utils';
 import { showFiltersAtom } from '@jobstash/filters/state';
 import { activeOrgIdAtom } from '@jobstash/organizations/state';
 import { useIsMobile } from '@jobstash/shared/state';
+
+import { Filters } from '@jobstash/filters/feature';
 
 const SideBar = dynamic(() =>
   import('@jobstash/sidebar/feature').then((m) => m.SideBar),
@@ -41,13 +44,13 @@ export const OrgListPage = ({ initActiveOrg }: Props) => {
           'lg:pr-[50%]': !showFilters,
         })}
       >
-        {/* <div
+        <div
           className={cn({
             'bg-[#121216] w-[101%] pr-12': showFilters,
           })}
         >
-          <p>TODO: Filters</p>
-        </div> */}
+          <Filters filterSection={FILTER_SECTION.ORGANIZATIONS} />
+        </div>
 
         <div
           className={cn({

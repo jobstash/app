@@ -4,6 +4,7 @@ import { useEffect, useMemo } from 'react';
 
 import { useAtom, useAtomValue } from 'jotai';
 
+import { FILTER_SECTION } from '@jobstash/filters/core';
 import { type OrgDetails, OrgListItem } from '@jobstash/organizations/core';
 import { ERR_INTERNAL, FRONTEND_URL } from '@jobstash/shared/core';
 import { cn, sentryMessage } from '@jobstash/shared/utils';
@@ -12,6 +13,7 @@ import { showFiltersAtom } from '@jobstash/filters/state';
 import { activeOrgIdAtom } from '@jobstash/organizations/state';
 
 import { getFundingRoundsData } from '@jobstash/shared/ui';
+import { Filters } from '@jobstash/filters/feature';
 
 const SideBar = dynamic(() =>
   import('@jobstash/sidebar/feature').then((m) => m.SideBar),
@@ -104,13 +106,13 @@ export const OrgDetailsPage = ({ fromSSR, initOrgDetails }: Props) => {
             'lg:pr-[50%]': !showFilters,
           })}
         >
-          {/* <div
+          <div
             className={cn({
               'bg-[#121216] w-[101%] pr-12': showFilters,
             })}
           >
-            <p>TODO: Filters</p>
-          </div> */}
+            <Filters filterSection={FILTER_SECTION.ORGANIZATIONS} />
+          </div>
 
           <div
             className={cn({

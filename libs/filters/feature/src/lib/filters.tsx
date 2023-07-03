@@ -1,5 +1,7 @@
 import { memo } from 'react';
 
+import { FilterSection } from '@jobstash/filters/core';
+
 import { useFilters } from '@jobstash/filters/state';
 
 import {
@@ -10,7 +12,11 @@ import {
 } from '@jobstash/filters/ui';
 import { Button } from '@jobstash/shared/ui';
 
-const Filters = () => {
+interface Props {
+  filterSection: FilterSection;
+}
+
+const Filters = ({ filterSection }: Props) => {
   const {
     state,
     dispatch,
@@ -27,7 +33,7 @@ const Filters = () => {
     error,
     jobCount,
     showFilters,
-  } = useFilters();
+  } = useFilters(filterSection);
 
   if (error) {
     return null;
