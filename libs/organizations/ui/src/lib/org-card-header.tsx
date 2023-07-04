@@ -9,10 +9,12 @@ interface Props {
   orgListItem: OrgListItem;
 }
 
-const OrgCardHeader = ({ orgListItem: { name, location, url } }: Props) => (
+const OrgCardHeader = ({
+  orgListItem: { name, location, url, logo },
+}: Props) => (
   <div className="items-center justify-between space-y-2 lg:flex lg:space-y-0">
     <LogoTitle
-      avatarProps={{ src: getGoogleLogoUrl(url), alt: name }}
+      avatarProps={{ src: logo ?? getGoogleLogoUrl(url), alt: name }}
       title={name}
       location={location}
     />

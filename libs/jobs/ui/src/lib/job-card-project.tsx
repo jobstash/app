@@ -23,10 +23,7 @@ const JobCardProject = ({ project }: Props) => {
         <LogoTitle
           title={project.name}
           avatarProps={{
-            src:
-              project.logo && project.logo.trim().length > 0
-                ? project.logo
-                : getGoogleLogoUrl(project.url),
+            src: project.logo ?? getGoogleLogoUrl(project.url),
             alt: project.name,
           }}
         />

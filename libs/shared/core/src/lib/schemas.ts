@@ -102,6 +102,7 @@ export const orgInfoSchema = myzod.object(
     docs: myzod.string().min(1).nullable(),
     telegram: myzod.string().min(1).nullable(),
     headCount: myzod.number().nullable(),
+    logo: myzod.string().min(1).nullable(),
   },
   { allowUnknown: true },
 );

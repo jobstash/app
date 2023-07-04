@@ -34,6 +34,14 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'app.jobstash.xyz',
       },
+      {
+        protocol: 'https',
+        hostname: 'ipfs.io',
+      },
+      {
+        protocol: 'https',
+        hostname: 'cloudflare-ipfs.com',
+      },
     ],
   },
 
