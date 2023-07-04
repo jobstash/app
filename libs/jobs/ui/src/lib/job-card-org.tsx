@@ -23,7 +23,7 @@ const JobCardOrg = ({ org }: Props) => {
         <LogoTitle
           title={org.name}
           avatarProps={{
-            src: getGoogleLogoUrl(org.url),
+            src: org.logo ?? getGoogleLogoUrl(org.url),
             alt: org.name,
           }}
         />

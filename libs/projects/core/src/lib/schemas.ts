@@ -13,7 +13,7 @@ export const projectSchema = myzod.object(
     name: myzod.string().min(1),
     description: myzod.string().min(1),
     url: myzod.string().min(1),
-    logo: myzod.string().nullable(),
+    logo: myzod.string().min(1).nullable(),
     tvl: myzod.number().nullable(),
     monthlyRevenue: myzod.number().nullable(),
     monthlyVolume: myzod.number().nullable(),

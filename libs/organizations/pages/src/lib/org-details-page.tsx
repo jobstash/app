@@ -83,6 +83,7 @@ export const OrgDetailsPage = ({ fromSSR, initOrgDetails }: Props) => {
         jobCount: initOrgDetails.jobs.length,
         projectCount: initOrgDetails.projects.length,
         headCount: initOrgDetails.headCount,
+        logo: initOrgDetails.logo,
         lastFundingAmount,
         lastFundingDate,
       }
