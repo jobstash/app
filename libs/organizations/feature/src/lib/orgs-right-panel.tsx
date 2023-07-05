@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-import { TAB_SEGMENT } from '@jobstash/shared/core';
+import { ROUTE_SECTION, TAB_SEGMENT } from '@jobstash/shared/core';
 
 import { useOrgDetails } from '@jobstash/organizations/state';
 
@@ -35,6 +35,7 @@ const OrgsRightPanel = ({ orgId, currentTab }: Props) => {
       tabs={
         <OrgRightPanelTabs currentTab={currentTab} orgDetails={orgDetails} />
       }
+      routeSection={ROUTE_SECTION.ORGANIZATIONS}
     >
       {currentTab === TAB_SEGMENT.details && (
         <RightPanelOrgCard org={orgDetails} />
