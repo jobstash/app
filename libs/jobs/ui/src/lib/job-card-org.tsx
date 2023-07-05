@@ -27,7 +27,7 @@ const JobCardOrg = ({ org }: Props) => {
             alt: org.name,
           }}
         />
-        <div className="flex grow flex-wrap pt-2 lg:gap-x-2 lg:pt-0 [&>*]:mr-4">
+        <div className="flex grow flex-wrap pt-2 gap-2 lg:pt-0 [&>*]:mr-4">
           {tags.length > 0 &&
             tags.map(({ id, text, icon, link }) => (
               <CardSet key={id} link={link} icon={icon}>
