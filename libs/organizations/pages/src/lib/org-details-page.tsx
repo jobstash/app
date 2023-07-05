@@ -4,9 +4,12 @@ import { useEffect, useMemo } from 'react';
 
 import { useAtom, useAtomValue } from 'jotai';
 
-import { FILTER_SECTION } from '@jobstash/filters/core';
 import { type OrgDetails, OrgListItem } from '@jobstash/organizations/core';
-import { ERR_INTERNAL, FRONTEND_URL } from '@jobstash/shared/core';
+import {
+  ERR_INTERNAL,
+  FRONTEND_URL,
+  ROUTE_SECTION,
+} from '@jobstash/shared/core';
 import { cn, sentryMessage } from '@jobstash/shared/utils';
 
 import { showFiltersAtom } from '@jobstash/filters/state';
@@ -112,7 +115,7 @@ export const OrgDetailsPage = ({ fromSSR, initOrgDetails }: Props) => {
               'bg-[#121216] w-[101%] pr-12': showFilters,
             })}
           >
-            <Filters filterSection={FILTER_SECTION.ORGANIZATIONS} />
+            <Filters routeSection={ROUTE_SECTION.ORGANIZATIONS} />
           </div>
 
           <div

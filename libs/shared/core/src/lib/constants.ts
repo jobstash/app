@@ -60,6 +60,12 @@ export const SENTRY_MW_INVALID_JSON_RESPONSE = 'Invalid JSON mw response';
 export const SENTRY_MW_UNSUCCESSFUL_RESPONSE = 'Unsuccessful mw response';
 export const SENTRY_SCHEMA_VALIDATION_ERROR = 'Invalid Schema';
 
+export const ROUTE_SECTION = {
+  JOBS: '/jobs' as const,
+  ORGANIZATIONS: '/organizations' as const,
+  PROJECTS: '/projects' as const,
+} as const;
+
 export const TAB_SEGMENT = {
   details: 'details' as const,
   organization: 'organization' as const,
@@ -67,9 +73,3 @@ export const TAB_SEGMENT = {
   jobs: 'jobs' as const,
   competitors: 'competitors' as const,
 } as const;
-
-export const LIST_PATHS = {
-  jobs: '/jobs',
-  organizations: '/organizations',
-  projects: '/projects',
-};

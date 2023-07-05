@@ -1,16 +1,16 @@
 import { memo } from 'react';
 
-import { type FilterSection } from '@jobstash/filters/core';
+import { type RouteSection } from '@jobstash/shared/core';
 import { capitalize } from '@jobstash/shared/utils';
 
 import { Text } from '@jobstash/shared/ui';
 
 interface Props {
-  filterSection: FilterSection;
+  routeSection: RouteSection;
   count: number | null;
 }
 
-const FiltersJobCount = ({ filterSection, count }: Props) => {
+const FiltersJobCount = ({ routeSection, count }: Props) => {
   if (!count) return null;
 
   return (
@@ -19,7 +19,7 @@ const FiltersJobCount = ({ filterSection, count }: Props) => {
         <Text
           className="my-3 inline-block whitespace-nowrap"
           color="dimmed"
-        >{`${capitalize(filterSection)} Found: ${count}`}</Text>
+        >{`${capitalize(routeSection)} Found: ${count}`}</Text>
       )}
     </div>
   );

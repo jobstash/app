@@ -3,7 +3,7 @@ import { memo, type ReactNode, useCallback, useMemo } from 'react';
 
 import { useSetAtom } from 'jotai';
 
-import { LIST_PATHS } from '@jobstash/shared/core';
+import { ROUTE_SECTION } from '@jobstash/shared/core';
 
 import { activeJobAtom } from '@jobstash/jobs/state';
 import { activeOrgIdAtom } from '@jobstash/organizations/state';
@@ -32,11 +32,11 @@ const SidebarBartab = ({ text, path, icon, isMobile }: Props) => {
 
   const onClick = useCallback(() => {
     if (pathname !== path) {
-      if (path === LIST_PATHS.jobs) {
+      if (path === ROUTE_SECTION.JOBS) {
         setActiveJob(null);
       }
 
-      if (path === LIST_PATHS.organizations) {
+      if (path === ROUTE_SECTION.ORGANIZATIONS) {
         setActiveOrgId(null);
       }
     }

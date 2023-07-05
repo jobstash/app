@@ -10,13 +10,12 @@ import {
 
 import { useAtom, useAtomValue } from 'jotai';
 
+import { type FilterConfig, type FilterState } from '@jobstash/filters/core';
 import {
-  FILTER_SECTION,
-  type FilterConfig,
-  type FilterSection,
-  type FilterState,
-} from '@jobstash/filters/core';
-import { FRONTEND_URL } from '@jobstash/shared/core';
+  FRONTEND_URL,
+  ROUTE_SECTION,
+  type RouteSection,
+} from '@jobstash/shared/core';
 
 import { jobCountAtom } from '@jobstash/jobs/state';
 import { orgCountAtom } from '@jobstash/organizations/state';
@@ -26,7 +25,7 @@ import { filterReducer } from '../reducers/filter-reducer';
 
 import { useFilterConfig } from './use-filter-config';
 
-export const useFilters = (filterSection: FilterSection) => {
+export const useFilters = (routeSection: RouteSection) => {
   const { query: routerQuery, push, isReady } = useRouter();
 
   const [state, dispatch] = useReducer(filterReducer, {} as FilterState);
@@ -35,7 +34,7 @@ export const useFilters = (filterSection: FilterSection) => {
     data,
     isLoading: isLoadingData,
     error,
-  } = useFilterConfig(filterSection);
+  } = useFilterConfig(routeSection);
   useEffect(() => {
     if (data) {
       dispatch({ type: 'UPDATE_DATA', payload: { data, routerQuery } });
@@ -51,7 +50,7 @@ export const useFilters = (filterSection: FilterSection) => {
   );
 
   const applyFilters = useCallback(() => {
-    const url = new URL(`${FRONTEND_URL}/${filterSection}`);
+    const url = new URL(`${FRONTEND_URL}/${routeSection}`);
     for (const [key, value] of Object.entries(state.filterValues)) {
       if (value) {
         url.searchParams.set(key, value);
@@ -60,10 +59,10 @@ export const useFilters = (filterSection: FilterSection) => {
 
     setShowFilters(false);
     setTimeout(() => push(url, undefined, { shallow: true }), 100);
-  }, [filterSection, push, setShowFilters, state.filterValues]);
+  }, [routeSection, push, setShowFilters, state.filterValues]);
 
   const clearFilters = useCallback(() => {
-    const url = new URL(`${FRONTEND_URL}/${filterSection}`);
+    const url = new URL(`${FRONTEND_URL}/${routeSection}`);
     const searchQuery = state?.filterValues?.query;
     if (searchQuery) {
       url.searchParams.set('query', searchQuery);
@@ -71,7 +70,7 @@ export const useFilters = (filterSection: FilterSection) => {
 
     setShowFilters(false);
     setTimeout(() => push(url, undefined, { shallow: true }), 100);
-  }, [filterSection, push, setShowFilters, state?.filterValues?.query]);
+  }, [routeSection, push, setShowFilters, state?.filterValues?.query]);
 
   const onSubmitSearch: FormEventHandler = useCallback(
     (e) => {
@@ -129,12 +128,12 @@ export const useFilters = (filterSection: FilterSection) => {
   const jobCount = useAtomValue(jobCountAtom);
   const orgCount = useAtomValue(orgCountAtom);
   const filteredItemsCount = useMemo(() => {
-    switch (filterSection) {
-      case FILTER_SECTION.JOBS: {
+    switch (routeSection) {
+      case ROUTE_SECTION.JOBS: {
         return jobCount;
       }
 
-      case FILTER_SECTION.ORGANIZATIONS: {
+      case ROUTE_SECTION.ORGANIZATIONS: {
         return orgCount;
       }
 
@@ -142,7 +141,7 @@ export const useFilters = (filterSection: FilterSection) => {
         return 0;
       }
     }
-  }, [filterSection, jobCount, orgCount]);
+  }, [routeSection, jobCount, orgCount]);
 
   return {
     state: state as FilterState | undefined,
