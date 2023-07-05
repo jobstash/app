@@ -2,7 +2,7 @@ import dynamic from 'next/dynamic';
 
 import { useAtomValue } from 'jotai';
 
-import { FILTER_SECTION } from '@jobstash/filters/core';
+import { ROUTE_SECTION } from '@jobstash/shared/core';
 import { cn } from '@jobstash/shared/utils';
 
 import { showFiltersAtom } from '@jobstash/filters/state';
@@ -45,7 +45,7 @@ export const JobListPage = () => {
             'bg-[#121216] w-[101%] pr-12': showFilters,
           })}
         >
-          <Filters filterSection={FILTER_SECTION.JOBS} />
+          <Filters routeSection={ROUTE_SECTION.JOBS} />
         </div>
 
         <div

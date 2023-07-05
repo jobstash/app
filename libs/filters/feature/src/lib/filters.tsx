@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-import { FilterSection } from '@jobstash/filters/core';
+import { type RouteSection } from '@jobstash/shared/core';
 
 import { useFilters } from '@jobstash/filters/state';
 
@@ -13,10 +13,10 @@ import {
 import { Button } from '@jobstash/shared/ui';
 
 interface Props {
-  filterSection: FilterSection;
+  routeSection: RouteSection;
 }
 
-const Filters = ({ filterSection }: Props) => {
+const Filters = ({ routeSection }: Props) => {
   const {
     state,
     dispatch,
@@ -33,7 +33,7 @@ const Filters = ({ filterSection }: Props) => {
     error,
     filteredItemsCount,
     showFilters,
-  } = useFilters(filterSection);
+  } = useFilters(routeSection);
 
   if (error) {
     return null;
@@ -73,7 +73,7 @@ const Filters = ({ filterSection }: Props) => {
           {filteredItemsCount && (
             <FiltersJobCount
               count={filteredItemsCount}
-              filterSection={filterSection}
+              routeSection={routeSection}
             />
           )}
         </div>

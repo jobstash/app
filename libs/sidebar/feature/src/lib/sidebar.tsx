@@ -2,7 +2,7 @@ import { memo, useEffect } from 'react';
 
 import { useAtomValue } from 'jotai';
 
-import { LIST_PATHS } from '@jobstash/shared/core';
+import { ROUTE_SECTION } from '@jobstash/shared/core';
 
 import { sidebarOpenAtom } from '@jobstash/sidebar/state';
 
@@ -25,10 +25,10 @@ import {
 import SidebarBartab from './sidebar-bartab';
 
 const sidebarBartabs = [
-  { text: 'Jobs', path: LIST_PATHS.jobs, icon: <JobsSidebarIcon /> },
+  { text: 'Jobs', path: ROUTE_SECTION.JOBS, icon: <JobsSidebarIcon /> },
   {
     text: 'Organizations',
-    path: LIST_PATHS.organizations,
+    path: ROUTE_SECTION.ORGANIZATIONS,
     icon: <OrgSidebarIcon />,
   },
 ];

@@ -2,9 +2,8 @@ import dynamic from 'next/dynamic';
 
 import { useAtomValue } from 'jotai';
 
-import { FILTER_SECTION } from '@jobstash/filters/core';
 import { type OrgDetails } from '@jobstash/organizations/core';
-import { TAB_SEGMENT } from '@jobstash/shared/core';
+import { ROUTE_SECTION, TAB_SEGMENT } from '@jobstash/shared/core';
 import { cn } from '@jobstash/shared/utils';
 
 import { showFiltersAtom } from '@jobstash/filters/state';
@@ -49,7 +48,7 @@ export const OrgListPage = ({ initActiveOrg }: Props) => {
             'bg-[#121216] w-[101%] pr-12': showFilters,
           })}
         >
-          <Filters filterSection={FILTER_SECTION.ORGANIZATIONS} />
+          <Filters routeSection={ROUTE_SECTION.ORGANIZATIONS} />
         </div>
 
         <div

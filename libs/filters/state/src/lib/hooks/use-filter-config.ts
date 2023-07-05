@@ -1,12 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { type FilterSection } from '@jobstash/filters/core';
+import { type RouteSection } from '@jobstash/shared/core';
 
 import { getFilterConfig } from '@jobstash/filters/data';
 
-export const useFilterConfig = (filterSection: FilterSection) =>
+export const useFilterConfig = (routeSection: RouteSection) =>
   useQuery({
-    queryKey: ['filter-config', filterSection],
-    queryFn: () => getFilterConfig(filterSection),
+    queryKey: ['filter-config', routeSection],
+    queryFn: () => getFilterConfig(routeSection),
     staleTime: 1000 * 60 * 5, // After 5 mins, refetch
   });

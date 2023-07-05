@@ -13,8 +13,3 @@ export const seniorityMapping = {
   Lead: '4',
   Head: '5',
 };
-
-export const FILTER_SECTION = {
-  JOBS: 'jobs' as const,
-  ORGANIZATIONS: 'organizations' as const,
-} as const;

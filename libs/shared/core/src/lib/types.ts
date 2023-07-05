@@ -2,6 +2,7 @@ import type { ReactNode } from 'react';
 
 import { type Infer } from 'myzod';
 
+import { ROUTE_SECTION } from './constants';
 import {
   auditSchema,
   categorySchema,
@@ -45,3 +46,5 @@ export type JobInfo = Infer<typeof jobInfoSchema>;
 export type OrgInfo = Infer<typeof orgInfoSchema>;
 
 export type MwResponseFields = Infer<typeof mwResponseFieldsSchema>;
+
+export type RouteSection = typeof ROUTE_SECTION[keyof typeof ROUTE_SECTION];
