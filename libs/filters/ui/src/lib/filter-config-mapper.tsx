@@ -37,46 +37,50 @@ const FilterConfigMapper = ({
   if (!filterValues) return null;
   return (
     <>
-      {configs.map((config) => (
-        <div key={config.label} className={cn(wrapperClassName)}>
-          {config.kind === FILTER_KIND.SINGLE_SELECT && (
-            <SingleSelectFilter
-              label={config.label.includes('Order') ? undefined : config.label}
-              value={
-                filterValues[(config as SingleSelectFilterConfig).paramKey]
-              }
-              options={(config as SingleSelectFilterConfig).options}
-              paramKey={(config as SingleSelectFilterConfig).paramKey}
-              dispatch={dispatch}
-            />
-          )}
+      {configs.map((config) => {
+        const isOrderConfig = config.label.includes('Order');
+        return (
+          <div key={config.label} className={cn(wrapperClassName)}>
+            {config.kind === FILTER_KIND.SINGLE_SELECT && (
+              <SingleSelectFilter
+                label={isOrderConfig ? undefined : config.label}
+                value={
+                  filterValues[(config as SingleSelectFilterConfig).paramKey]
+                }
+                options={(config as SingleSelectFilterConfig).options}
+                paramKey={(config as SingleSelectFilterConfig).paramKey}
+                dispatch={dispatch}
+                placeholder={isOrderConfig ? config.label : undefined}
+              />
+            )}
 
-          {config.kind === FILTER_KIND.RANGE && (
-            <RangeFilter
-              label={config.label}
-              minValue={filterValues[config.value.lowest.paramKey]}
-              maxValue={filterValues[config.value.highest.paramKey]}
-              minParamKey={config.value.lowest.paramKey}
-              maxParamKey={config.value.highest.paramKey}
-              minConfigValue={config.value.lowest.value}
-              maxConfigValue={config.value.highest.value}
-              dispatch={dispatch}
-              prefix={config.prefix}
-            />
-          )}
+            {config.kind === FILTER_KIND.RANGE && (
+              <RangeFilter
+                label={config.label}
+                minValue={filterValues[config.value.lowest.paramKey]}
+                maxValue={filterValues[config.value.highest.paramKey]}
+                minParamKey={config.value.lowest.paramKey}
+                maxParamKey={config.value.highest.paramKey}
+                minConfigValue={config.value.lowest.value}
+                maxConfigValue={config.value.highest.value}
+                dispatch={dispatch}
+                prefix={config.prefix}
+              />
+            )}
 
-          {(config.kind === FILTER_KIND.MULTI_SELECT ||
-            config.kind === FILTER_KIND.MULTI_SELECT_WITH_SEARCH) && (
-            <MultiSelectFilter
-              value={filterValues[config.paramKey]}
-              label={config.label}
-              options={config.options}
-              paramKey={config.paramKey}
-              dispatch={dispatch}
-            />
-          )}
-        </div>
-      ))}
+            {(config.kind === FILTER_KIND.MULTI_SELECT ||
+              config.kind === FILTER_KIND.MULTI_SELECT_WITH_SEARCH) && (
+              <MultiSelectFilter
+                value={filterValues[config.paramKey]}
+                label={config.label}
+                options={config.options}
+                paramKey={config.paramKey}
+                dispatch={dispatch}
+              />
+            )}
+          </div>
+        );
+      })}
     </>
   );
 };
