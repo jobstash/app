@@ -3,21 +3,26 @@ import { memo, useCallback } from 'react';
 
 import { useSetAtom } from 'jotai';
 
+import { type RouteSection } from '@jobstash/shared/core';
+
 import { mobileRightPanelOpenAtom } from '@jobstash/shared/state';
 
 import { ArrowLeftIcon, Button } from '@jobstash/shared/ui';
 
-const RightPanelBackButton = () => {
+interface Props {
+  routeSection: RouteSection;
+}
+
+const RightPanelBackButton = ({ routeSection }: Props) => {
   const router = useRouter();
 
   const setMobileRightPanelOpen = useSetAtom(mobileRightPanelOpenAtom);
   const onClick = useCallback(() => {
-    // Router.push('/jobs', undefined, { shallow: true, scroll: false });
-    router.back();
+    router.push(routeSection, undefined, { shallow: true, scroll: false });
 
     // Enable main window scroll again
     setMobileRightPanelOpen(false);
-  }, [router, setMobileRightPanelOpen]);
+  }, [routeSection, router, setMobileRightPanelOpen]);
 
   return (
     <Button

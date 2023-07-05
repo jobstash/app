@@ -1,7 +1,7 @@
 import { memo } from 'react';
 
 import { type JobPost } from '@jobstash/jobs/core';
-import { TAB_SEGMENT } from '@jobstash/shared/core';
+import { ROUTE_SECTION, TAB_SEGMENT } from '@jobstash/shared/core';
 
 import { useCompetitors } from '@jobstash/competitors/state';
 
@@ -58,6 +58,7 @@ const JobsRightPanel = ({ jobPost, currentTab }: Props) => {
           competitorCount={competitorCount}
         />
       }
+      routeSection={ROUTE_SECTION.JOBS}
     >
       {currentTab === TAB_SEGMENT.details && (
         <RightPanelJobCard jobInfo={jobPost} technologies={technologies} />
