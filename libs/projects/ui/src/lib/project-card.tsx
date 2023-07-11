@@ -19,7 +19,6 @@ import { mobileRightPanelOpenAtom, useIsMobile } from '@jobstash/shared/state';
 import ProjectCardHeader from './project-card-header';
 import ProjectCardOrg from './project-card-org';
 import ProjectCardTags from './project-card-tags';
-import ProjectCardTechs from './project-card-techs';
 import ProjectCardWrapper from './project-card-wrapper';
 
 interface Props {
