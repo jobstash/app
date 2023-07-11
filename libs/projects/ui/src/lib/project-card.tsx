@@ -10,14 +10,10 @@ import {
 import { getUrlWithParams } from '@jobstash/filters/utils';
 import { createProjectKey } from '@jobstash/projects/utils';
 
-import {
-  activeProjectIdAtom,
-  useProjectDetails,
-} from '@jobstash/projects/state';
+import { activeProjectIdAtom } from '@jobstash/projects/state';
 import { mobileRightPanelOpenAtom, useIsMobile } from '@jobstash/shared/state';
 
 import ProjectCardHeader from './project-card-header';
-import ProjectCardOrg from './project-card-org';
 import ProjectCardTags from './project-card-tags';
 import ProjectCardWrapper from './project-card-wrapper';
 
@@ -55,7 +51,8 @@ const ProjectCard = ({ isActive, projectListItem, filterParamsObj }: Props) => {
     }
   };
 
-  const { data: projectDetails } = useProjectDetails(id);
+  //
+  // const { data: projectDetails } = useProjectDetails(id);
 
   return (
     <ProjectCardWrapper isActive={isActive} href={href} onClick={onClick}>
@@ -64,7 +61,7 @@ const ProjectCard = ({ isActive, projectListItem, filterParamsObj }: Props) => {
       {/* <ProjectCardTechs
         techs={projectDetails ? projectDetails.organization.technologies : []}
       /> */}
-      <ProjectCardOrg projectDetails={projectDetails} />
+      {/* <ProjectCardOrg projectDetails={projectDetails} /> */}
     </ProjectCardWrapper>
   );
 };

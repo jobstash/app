@@ -33,7 +33,7 @@ const ProjectCardTags = ({ projectListItem }: Props) => {
         <>
           <hr className="border-t border-white/10" />
 
-          <div className="flex grow flex-wrap gap-2 [&>*]:mr-4 py-2">
+          <div className="flex grow flex-wrap gap-2 [&>*]:mr-4 pt-2">
             {midTags.map(({ id, text, icon, link }) => (
               <CardSet key={id} link={link} icon={icon}>
                 {text}
