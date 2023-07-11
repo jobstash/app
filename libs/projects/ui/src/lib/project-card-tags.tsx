@@ -11,7 +11,7 @@ interface Props {
 }
 
 const ProjectCardTags = ({ projectListItem }: Props) => {
-  const { upperTags, midTags, lowerTags } = createProjectTags(projectListItem);
+  const { upperTags, midTags } = createProjectTags(projectListItem);
 
   if (upperTags.length === 0 && midTags.length === 0) return null;
 

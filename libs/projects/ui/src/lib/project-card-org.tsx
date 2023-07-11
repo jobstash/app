@@ -1,49 +1,60 @@
 /* eslint-disable unicorn/prefer-logical-operator-over-ternary */
-import { memo } from 'react';
+import { memo, type ReactNode } from 'react';
 
 import { type ProjectDetails } from '@jobstash/projects/core';
 import { getGoogleLogoUrl } from '@jobstash/shared/utils';
 
-import {
-  CardSet,
-  CurrencyCircleDollarIcon,
-  LogoTitle,
-} from '@jobstash/shared/ui';
+import { Loader, LogoTitle } from '@jobstash/shared/ui';
 
 interface Props {
   projectDetails?: ProjectDetails;
 }
 
-const ProjectCardOrg = ({ projectDetails }: Props) => {
-  if (!projectDetails) return null;
+const ProjectCardOrgWrapper = ({ children }: { children: ReactNode }) => (
+  <>
+    <hr className="border-t border-white/10" />
 
-  const { organization, tokenSymbol } = projectDetails;
+    <div className="items-center justify-between space-y-2 lg:flex lg:space-y-0 pt-2">
+      {children}
+    </div>
+  </>
+);
+
+const ProjectCardOrg = ({ projectDetails }: Props) => {
+  if (!projectDetails)
+    return (
+      <ProjectCardOrgWrapper>
+        <div className="flex items-center justify-center w-10 h-10">
+          <div
+            className="animate-spin2 opacity-40 inline-block w-5 h-5 border-2 border-current border-t-transparent text-white rounded-full"
+            role="status"
+            aria-label="loading"
+          >
+            <span className="sr-only">Loading...</span>
+          </div>
+        </div>
+      </ProjectCardOrgWrapper>
+    );
+
+  const { organization } = projectDetails;
 
   return (
-    <>
-      <hr className="border-t border-white/10" />
-      <div className="items-center justify-between space-y-2 lg:flex lg:space-y-0 pt-2">
-        <div className="flex gap-4">
-          <LogoTitle
-            avatarProps={{
-              src: organization.logo
-                ? organization.logo
-                : getGoogleLogoUrl(organization.url),
-              alt: organization.name,
-            }}
-            title={organization.name}
-            location={organization.location}
-          />
-          {tokenSymbol && (
-            <CardSet icon={<CurrencyCircleDollarIcon />}>
-              {`$${tokenSymbol}`}
-            </CardSet>
-          )}
-          {/* TODO: Chain logos */}
-        </div>
-        {/* TODO: Date + Bookmark */}
+    <ProjectCardOrgWrapper>
+      <div className="flex gap-4">
+        <LogoTitle
+          avatarProps={{
+            src: organization.logo
+              ? organization.logo
+              : getGoogleLogoUrl(organization.url),
+            alt: organization.name,
+          }}
+          title={organization.name}
+          location={organization.location}
+        />
+        {/* TODO: Chain logos */}
       </div>
-    </>
+      {/* TODO: Date + Bookmark */}
+    </ProjectCardOrgWrapper>
   );
 };
 

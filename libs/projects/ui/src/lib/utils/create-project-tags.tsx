@@ -20,7 +20,6 @@ import {
 export const createProjectTags = (project: ProjectInfo) => {
   const upperTags: TagElement[] = [];
   const midTags: TagElement[] = [];
-  const lowerTags: TagElement[] = [];
 
   const {
     url,
@@ -35,15 +34,6 @@ export const createProjectTags = (project: ProjectInfo) => {
     audits,
     hacks,
   } = project;
-
-  if (tokenSymbol) {
-    upperTags.push({
-      id: TAG_ELEMENT_ID.token,
-      text: `Token: $${tokenSymbol}`,
-      icon: <CurrencyCircleDollarIcon />,
-      link: url,
-    });
-  }
 
   if (category) {
     upperTags.push({
@@ -91,8 +81,17 @@ export const createProjectTags = (project: ProjectInfo) => {
       icon: <RevenueIcon />,
     });
 
+  if (tokenSymbol) {
+    upperTags.push({
+      id: TAG_ELEMENT_ID.token,
+      text: `Token: $${tokenSymbol}`,
+      icon: <CurrencyCircleDollarIcon />,
+      link: url,
+    });
+  }
+
   if (isMainnet) {
-    lowerTags.push({
+    upperTags.push({
       id: TAG_ELEMENT_ID.mainnet,
       text: 'Mainnet',
       icon: <MainnetIcon />,
@@ -132,5 +131,5 @@ export const createProjectTags = (project: ProjectInfo) => {
     }
   }
 
-  return { upperTags, midTags, lowerTags };
+  return { upperTags, midTags };
 };
