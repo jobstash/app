@@ -1,5 +1,11 @@
 import { Infer } from 'myzod';
 
-import { projectSchema } from './schemas';
+import {
+  projectDetailsSchema,
+  projectListQueryPageSchema,
+  projectOrgSchema,
+} from './schemas';
 
-export type Project = Infer<typeof projectSchema>;
+export type ProjectOrg = Infer<typeof projectOrgSchema>;
+export type ProjectDetails = Infer<typeof projectDetailsSchema>;
+export type ProjectListQueryPage = Infer<typeof projectListQueryPageSchema>;

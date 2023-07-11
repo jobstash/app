@@ -36,6 +36,7 @@ export { default as MainnetIcon } from './lib/icons/mainnet-icon';
 export { default as MoneyIcon } from './lib/icons/money-icon';
 export { default as MonthlyVolumeIcon } from './lib/icons/monthly-volume-icon';
 export { default as OrgSidebarIcon } from './lib/icons/org-sidebar-icon';
+export { default as ProjectsSidebarIcon } from './lib/icons/projects-sidebar-icon';
 export { default as RevenueIcon } from './lib/icons/revenue-icon';
 export { default as SearchInputIcon } from './lib/icons/search-input-icon';
 export { default as ShieldCheckIcon } from './lib/icons/shield-check-icon';

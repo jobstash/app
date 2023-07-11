@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-import { type Project } from '@jobstash/projects/core';
+import { type ProjectInfo, type ProjectMoreInfo } from '@jobstash/shared/core';
 import { getGoogleLogoUrl } from '@jobstash/shared/utils';
 
 import { createRightPanelProjectCardTags } from './utils/create-right-panel-project-card-tags';
@@ -12,7 +12,7 @@ import RightPanelProjectCardTags from './right-panel-project-card-tags';
 import RightPanelProjectCardTvlTags from './right-panel-project-card-tvl-tags';
 
 interface Props {
-  project: Project;
+  project: ProjectInfo & ProjectMoreInfo;
 }
 
 const RightPanelProjectCard = ({ project }: Props) => {

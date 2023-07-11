@@ -43,7 +43,6 @@ export const hackSchema = myzod
     fundsLost: myzod.number().nullable(),
     issueType: myzod.string().nullable(),
     date: myzod.number().nullable(),
-    description: myzod.string().nullable(),
     fundsReturned: myzod.number().nullable(),
   })
   .allowUnknownKeys(true);
@@ -53,7 +52,6 @@ export const auditSchema = myzod
     id: myzod.string().min(1),
     defiId: myzod.string(),
     name: myzod.string().min(1).nullable(),
-    auditor: myzod.string().nullable(),
     date: myzod.number().nullable(),
     link: myzod.string().nullable(),
     techIssues: myzod.number().nullable().optional(),
@@ -106,6 +104,44 @@ export const orgInfoSchema = myzod.object(
   },
   { allowUnknown: true },
 );
+
+export const projectInfoSchema = myzod.object(
+  {
+    id: myzod.string().min(1),
+    name: myzod.string().min(1),
+    url: myzod.string().min(1),
+    logo: myzod.string().nullable(),
+
+    teamSize: myzod.number().min(1).nullable(),
+    category: myzod.string().min(1).nullable(),
+    isMainnet: myzod.boolean(),
+    tokenSymbol: myzod.string().min(1).nullable(),
+
+    tvl: myzod.number().nullable(),
+    monthlyRevenue: myzod.number().nullable(),
+    monthlyVolume: myzod.number().nullable(),
+    monthlyFees: myzod.number().nullable(),
+    monthlyActiveUsers: myzod.number().nullable(),
+
+    chains: myzod.array(chainSchema),
+    hacks: myzod.array(hackSchema),
+    audits: myzod.array(auditSchema),
+  },
+  { allowUnknown: true },
+);
+
+export const projectMoreInfoSchema = myzod.object({
+  description: myzod.string().min(1),
+  githubOrganization: myzod.string().min(1).nullable(),
+  twitter: myzod.string().min(1).nullable(),
+  discord: myzod.string().min(1).nullable(),
+  telegram: myzod.string().min(1).nullable(),
+  docs: myzod.string().min(1).nullable(),
+});
+
+export const projectCompleteInfoSchema = myzod
+  .intersection(projectInfoSchema, projectMoreInfoSchema)
+  .allowUnknownKeys(true);
 
 export const mwResponseFieldsSchema = myzod.object({
   success: myzod.boolean(),

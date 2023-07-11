@@ -7,6 +7,7 @@ import { ROUTE_SECTION } from '@jobstash/shared/core';
 
 import { activeJobAtom } from '@jobstash/jobs/state';
 import { activeOrgIdAtom } from '@jobstash/organizations/state';
+import { activeProjectIdAtom } from '@jobstash/projects/state';
 import { sidebarOpenAtom } from '@jobstash/sidebar/state';
 
 import { Bartab } from '@jobstash/shared/ui';
@@ -29,6 +30,7 @@ const SidebarBartab = ({ text, path, icon, isMobile }: Props) => {
   const setSidebarOpen = useSetAtom(sidebarOpenAtom);
   const setActiveJob = useSetAtom(activeJobAtom);
   const setActiveOrgId = useSetAtom(activeOrgIdAtom);
+  const setActiveProjectId = useSetAtom(activeProjectIdAtom);
 
   const onClick = useCallback(() => {
     if (pathname !== path) {
@@ -38,6 +40,10 @@ const SidebarBartab = ({ text, path, icon, isMobile }: Props) => {
 
       if (path === ROUTE_SECTION.ORGANIZATIONS) {
         setActiveOrgId(null);
+      }
+
+      if (path === ROUTE_SECTION.PROJECTS) {
+        setActiveProjectId(null);
       }
     }
 
@@ -53,6 +59,7 @@ const SidebarBartab = ({ text, path, icon, isMobile }: Props) => {
     push,
     setActiveJob,
     setActiveOrgId,
+    setActiveProjectId,
     setSidebarOpen,
   ]);
 

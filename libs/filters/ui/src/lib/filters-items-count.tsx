@@ -10,8 +10,8 @@ interface Props {
   count: number | null;
 }
 
-const FiltersJobCount = ({ routeSection, count }: Props) => {
-  if (!count) return null;
+const FiltersItemsCount = ({ routeSection, count }: Props) => {
+  if (!count || count === 0) return null;
 
   return (
     <div>
@@ -19,10 +19,10 @@ const FiltersJobCount = ({ routeSection, count }: Props) => {
         <Text
           className="my-3 inline-block whitespace-nowrap"
           color="dimmed"
-        >{`${capitalize(routeSection)} Found: ${count}`}</Text>
+        >{`${capitalize(routeSection.slice(1))} Found: ${count}`}</Text>
       )}
     </div>
   );
 };
 
-export default memo(FiltersJobCount);
+export default memo(FiltersItemsCount);

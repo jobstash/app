@@ -1,6 +1,10 @@
 /* eslint-disable complexity */
-import { type Project } from '@jobstash/projects/core';
-import { TAG_ELEMENT_ID, type TagElement } from '@jobstash/shared/core';
+import {
+  type ProjectInfo,
+  type ProjectMoreInfo,
+  TAG_ELEMENT_ID,
+  type TagElement,
+} from '@jobstash/shared/core';
 import { getPluralText, numFormatter } from '@jobstash/shared/utils';
 
 import {
@@ -19,7 +23,9 @@ import {
   UsersThreeIcon,
 } from '@jobstash/shared/ui';
 
-export const createRightPanelProjectCardTags = (project: Project) => {
+export const createRightPanelProjectCardTags = (
+  project: ProjectInfo & ProjectMoreInfo,
+) => {
   const {
     url,
     githubOrganization,
@@ -33,7 +39,7 @@ export const createRightPanelProjectCardTags = (project: Project) => {
     monthlyFees,
     monthlyRevenue,
     teamSize,
-    categories,
+    category,
     audits,
     hacks,
   } = project;
@@ -113,10 +119,10 @@ export const createRightPanelProjectCardTags = (project: Project) => {
     // },
   ];
 
-  if (categories.length > 0) {
+  if (category) {
     projectTags.push({
       id: TAG_ELEMENT_ID.category,
-      text: `Category: ${categories[0].name}`,
+      text: `Category: ${category}`,
       icon: <CategoryIcon />,
     });
   }
@@ -176,7 +182,7 @@ export const createRightPanelProjectCardTags = (project: Project) => {
   if (audits.length > 0) {
     for (const audit of audits) {
       const issueCount = audit.techIssues ?? 0;
-      const title = audit.auditor ?? audit.name;
+      const title = audit.name;
       projectAuditTags.push({
         id: `${TAG_ELEMENT_ID.audit} ${audit.id}`,
         text: `${getPluralText('Audit', issueCount)}: ${title}${

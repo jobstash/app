@@ -1,11 +1,12 @@
 import myzod from 'myzod';
 
-import { projectSchema } from '@jobstash/projects/core';
 import {
   fundingRoundSchema,
   investorSchema,
   jobInfoSchema,
   orgInfoSchema,
+  projectInfoSchema,
+  projectMoreInfoSchema,
 } from '@jobstash/shared/core';
 
 export const orgListItemSchema = myzod.object({
@@ -21,11 +22,15 @@ export const orgListItemSchema = myzod.object({
   logo: myzod.string().min(1).nullable(),
 });
 
+const orgProjectSchema = myzod
+  .intersection(projectInfoSchema, projectMoreInfoSchema)
+  .allowUnknownKeys(true);
+
 export const orgDetailsSchema = myzod
   .intersection(
     orgInfoSchema,
     myzod.object({
-      projects: myzod.array(projectSchema),
+      projects: myzod.array(orgProjectSchema),
       fundingRounds: myzod.array(fundingRoundSchema),
       investors: myzod.array(investorSchema),
       jobs: myzod.array(jobInfoSchema),

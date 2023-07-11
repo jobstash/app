@@ -1,11 +1,11 @@
 import { memo } from 'react';
 
-import { type Project } from '@jobstash/projects/core';
+import { type ProjectInfo } from '@jobstash/shared/core';
 
 import JobCardProject from './job-card-project';
 
 interface Props {
-  projects: Project[];
+  projects: ProjectInfo[];
 }
 
 const JobCardProjects = ({ projects }: Props) => {

@@ -11,7 +11,7 @@ interface Props {
 
 const OrgListEmptyResult = ({ prevLink, push }: Props) => {
   const onClick = useCallback(() => {
-    const url = prevLink ?? '/jobs';
+    const url = prevLink ?? '/organizations';
     push(url, undefined, { shallow: true });
   }, [prevLink, push]);
 
