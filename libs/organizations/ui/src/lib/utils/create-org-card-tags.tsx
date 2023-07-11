@@ -37,6 +37,7 @@ export const createOrgCardTags = (orgListItem: OrgListItem): TagElement[] => {
       text: `${getPluralText('Job', jobCount)}: ${jobCount}`,
       icon: <SuitcaseIcon />,
       link: `${baseRoute}/jobs`,
+      showLinkIcon: false,
     });
   }
 
@@ -46,6 +47,7 @@ export const createOrgCardTags = (orgListItem: OrgListItem): TagElement[] => {
       text: `${getPluralText('Project', projectCount)}: ${projectCount}`,
       icon: <CodeIcon />,
       link: `${baseRoute}/projects`,
+      showLinkIcon: false,
     });
   }
 
