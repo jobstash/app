@@ -13,6 +13,9 @@ import {
   jobInfoSchema,
   mwResponseFieldsSchema,
   orgInfoSchema,
+  projectCompleteInfoSchema,
+  projectInfoSchema,
+  projectMoreInfoSchema,
   technologySchema,
   undefinedSchema,
 } from './schemas';
@@ -44,6 +47,9 @@ export type Audit = Infer<typeof auditSchema>;
 
 export type JobInfo = Infer<typeof jobInfoSchema>;
 export type OrgInfo = Infer<typeof orgInfoSchema>;
+export type ProjectInfo = Infer<typeof projectInfoSchema>;
+export type ProjectMoreInfo = Infer<typeof projectMoreInfoSchema>;
+export type ProjectCompleteInfo = Infer<typeof projectCompleteInfoSchema>;
 
 export type MwResponseFields = Infer<typeof mwResponseFieldsSchema>;
 

@@ -1,11 +1,11 @@
 import { memo } from 'react';
 
-import { type Project } from '@jobstash/projects/core';
+import { type ProjectCompleteInfo } from '@jobstash/shared/core';
 
 import RightPanelProjectCard from './right-panel-project-card';
 
 interface Props {
-  projects: Project[];
+  projects: ProjectCompleteInfo[];
 }
 
 const RightPanelProjectCards = ({ projects }: Props) => {

@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-import { type Project } from '@jobstash/projects/core';
+import { type ProjectInfo } from '@jobstash/shared/core';
 import { getGoogleLogoUrl } from '@jobstash/shared/utils';
 
 import { CardSet, LogoTitle } from '@jobstash/shared/ui';
@@ -8,7 +8,7 @@ import { CardSet, LogoTitle } from '@jobstash/shared/ui';
 import { createJobCardProjectTags } from './utils/create-job-card-project-tags';
 
 interface Props {
-  project: Project;
+  project: ProjectInfo;
 }
 
 const JobCardProject = ({ project }: Props) => {

@@ -10,6 +10,7 @@ import {
   CloseIcon,
   HamburgerIcon,
   OrgSidebarIcon,
+  ProjectsSidebarIcon,
   Text,
 } from '@jobstash/shared/ui';
 import {
@@ -30,6 +31,11 @@ const sidebarBartabs = [
     text: 'Organizations',
     path: ROUTE_SECTION.ORGANIZATIONS,
     icon: <OrgSidebarIcon />,
+  },
+  {
+    text: 'Projects',
+    path: ROUTE_SECTION.PROJECTS,
+    icon: <ProjectsSidebarIcon />,
   },
 ];
 

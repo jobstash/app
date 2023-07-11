@@ -6,7 +6,7 @@ import { useFilters } from '@jobstash/filters/state';
 
 import {
   FilterConfigMapper,
-  FiltersJobCount,
+  FiltersItemsCount,
   FiltersToggleButton,
   SearchFilter,
 } from '@jobstash/filters/ui';
@@ -46,6 +46,7 @@ const Filters = ({ routeSection }: Props) => {
           isLoading={isLoading}
           clearSearch={clearSearch}
           searchQuery={state?.filterValues?.query}
+          routeSection={routeSection}
           onSubmit={onSubmitSearch}
           onChange={onChangeSearch}
         />
@@ -71,7 +72,7 @@ const Filters = ({ routeSection }: Props) => {
           )}
 
           {filteredItemsCount && (
-            <FiltersJobCount
+            <FiltersItemsCount
               count={filteredItemsCount}
               routeSection={routeSection}
             />

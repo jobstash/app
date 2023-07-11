@@ -16,7 +16,10 @@ import { showFiltersAtom } from '@jobstash/filters/state';
 import { activeOrgIdAtom } from '@jobstash/organizations/state';
 
 import { getFundingRoundsData } from '@jobstash/shared/ui';
-import { Filters } from '@jobstash/filters/feature';
+
+const Filters = dynamic(() =>
+  import('@jobstash/filters/feature').then((m) => m.Filters),
+);
 
 const SideBar = dynamic(() =>
   import('@jobstash/sidebar/feature').then((m) => m.SideBar),

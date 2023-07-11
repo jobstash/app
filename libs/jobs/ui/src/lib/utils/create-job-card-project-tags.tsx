@@ -1,5 +1,8 @@
-import { type Project } from '@jobstash/projects/core';
-import { TAG_ELEMENT_ID, type TagElement } from '@jobstash/shared/core';
+import {
+  type ProjectInfo,
+  TAG_ELEMENT_ID,
+  type TagElement,
+} from '@jobstash/shared/core';
 import { numFormatter } from '@jobstash/shared/utils';
 
 import {
@@ -11,7 +14,7 @@ import {
   RevenueIcon,
   TvlIcon,
 } from '@jobstash/shared/ui';
-export const createJobCardProjectTags = (project: Project) => {
+export const createJobCardProjectTags = (project: ProjectInfo) => {
   const projectInfoTags: TagElement[] = [];
   const projectTvlTags: TagElement[] = [];
   const projectAuditTags: TagElement[] = [];

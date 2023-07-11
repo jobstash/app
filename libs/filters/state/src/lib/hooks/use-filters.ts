@@ -19,6 +19,7 @@ import {
 
 import { jobCountAtom } from '@jobstash/jobs/state';
 import { orgCountAtom } from '@jobstash/organizations/state';
+import { projectCountAtom } from '@jobstash/projects/state';
 
 import { showFiltersAtom } from '../atoms/show-filters-atom';
 import { filterReducer } from '../reducers/filter-reducer';
@@ -127,21 +128,33 @@ export const useFilters = (routeSection: RouteSection) => {
 
   const jobCount = useAtomValue(jobCountAtom);
   const orgCount = useAtomValue(orgCountAtom);
+  const projectCount = useAtomValue(projectCountAtom);
   const filteredItemsCount = useMemo(() => {
+    let count = null;
+
     switch (routeSection) {
       case ROUTE_SECTION.JOBS: {
-        return jobCount;
+        count = jobCount;
+
+        break;
       }
 
       case ROUTE_SECTION.ORGANIZATIONS: {
-        return orgCount;
+        count = orgCount;
+
+        break;
       }
 
-      default: {
-        return 0;
+      case ROUTE_SECTION.PROJECTS: {
+        count = projectCount;
+
+        break;
       }
+      // No default
     }
-  }, [routeSection, jobCount, orgCount]);
+
+    return count && count > 0 ? count : null;
+  }, [routeSection, jobCount, orgCount, projectCount]);
 
   return {
     state: state as FilterState | undefined,

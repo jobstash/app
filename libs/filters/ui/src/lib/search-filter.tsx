@@ -2,7 +2,8 @@ import { type ChangeEventHandler, type FormEventHandler, memo } from 'react';
 
 import { TextInput } from '@mantine/core';
 
-import { decodeBase64 } from '@jobstash/shared/utils';
+import { type RouteSection } from '@jobstash/shared/core';
+import { capitalize, decodeBase64 } from '@jobstash/shared/utils';
 
 import { Button, CloseIcon, SearchInputIcon } from '@jobstash/shared/ui';
 
@@ -12,6 +13,7 @@ interface Props {
   onSubmit: FormEventHandler;
   onChange: ChangeEventHandler<HTMLInputElement>;
   searchQuery?: string | null;
+  routeSection: RouteSection;
 }
 
 const SearchFilter = ({
@@ -20,11 +22,12 @@ const SearchFilter = ({
   clearSearch,
   onChange,
   searchQuery,
+  routeSection,
 }: Props) => (
   <form onSubmit={onSubmit}>
     <TextInput
       icon={<SearchInputIcon />}
-      placeholder="Search Jobs"
+      placeholder={`Search ${capitalize(routeSection.slice(1))}`}
       size="lg"
       rightSectionWidth={140}
       rightSection={
