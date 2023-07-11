@@ -29,6 +29,8 @@ const OrgsRightPanel = ({ orgId, currentTab }: Props) => {
     );
   }
 
+  const routeSection = ROUTE_SECTION.ORGANIZATIONS;
+
   return (
     <RightPanel
       org={orgDetails}
@@ -38,11 +40,14 @@ const OrgsRightPanel = ({ orgId, currentTab }: Props) => {
       routeSection={ROUTE_SECTION.ORGANIZATIONS}
     >
       {currentTab === TAB_SEGMENT.details && (
-        <RightPanelOrgCard org={orgDetails} />
+        <RightPanelOrgCard org={orgDetails} routeSection={routeSection} />
       )}
 
       {currentTab === TAB_SEGMENT.projects && (
-        <RightPanelProjectCards projects={orgDetails.projects} />
+        <RightPanelProjectCards
+          projects={orgDetails.projects}
+          routeSection={routeSection}
+        />
       )}
 
       {currentTab === TAB_SEGMENT.jobs && (

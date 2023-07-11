@@ -5,7 +5,7 @@ import { type JobInfo, type Technology } from '@jobstash/shared/core';
 import { Heading } from '@jobstash/shared/ui';
 
 import RightPanelCardBorder from './right-panel-card-border';
-import RightPanelJobCardApplyButton from './right-panel-job-card-apply-button';
+import RightPanelCta from './right-panel-cta';
 import RightPanelJobCardDescriptions from './right-panel-job-card-descriptions';
 import RightPanelJobCardTags from './right-panel-job-card-tags';
 import RightPanelJobCardTechnologies from './right-panel-job-card-technologies';
@@ -33,7 +33,11 @@ const RightPanelJobCard = ({ jobInfo, technologies }: Props) => {
 
           <RightPanelJobCardTags jobInfo={jobInfo} />
 
-          <RightPanelJobCardApplyButton applyUrl={jobApplyPageUrl} />
+          <RightPanelCta
+            external
+            link={jobApplyPageUrl}
+            text="Apply for this job"
+          />
         </div>
 
         <div className="flex h-8 flex-col justify-center">

@@ -3,20 +3,26 @@ import { memo } from 'react';
 import { Button } from '@jobstash/shared/ui';
 
 interface Props {
-  applyUrl: string;
+  link: string;
+  text: string;
+  external?: boolean;
 }
 
-const RightPanelJobCardApplyButton = ({ applyUrl }: Props) => {
+const RightPanelCta = ({ link, text, external }: Props) => {
   const onClick = () => {
     if (typeof window !== 'undefined') {
-      window.open(applyUrl, '_blank');
+      if (external) {
+        window.open(link, '_blank');
+      } else {
+        window.location.href = link;
+      }
     }
   };
 
   return (
     <div className="flex w-full justify-between">
       <Button variant="primary" onClick={onClick}>
-        Apply for this job
+        {text}
       </Button>
       {/* <div className="flex items-start space-x-2 lg:hidden">
         <ShareButton jobTitle={jobTitle} />
@@ -25,4 +31,4 @@ const RightPanelJobCardApplyButton = ({ applyUrl }: Props) => {
   );
 };
 
-export default memo(RightPanelJobCardApplyButton);
+export default memo(RightPanelCta);
