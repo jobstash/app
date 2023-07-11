@@ -21,8 +21,13 @@ const OrgCardTags = ({ orgListItem }: Props) => {
 
       <div className="flex grow flex-wrap pt-2 gap-2 lg:pt-0 [&>*]:mr-4 pl-2">
         {tags &&
-          tags.map(({ id, text, icon, link }) => (
-            <CardSet key={id} link={link} icon={icon}>
+          tags.map(({ id, text, icon, link, showLinkIcon }) => (
+            <CardSet
+              key={id}
+              link={link}
+              icon={icon}
+              showLinkIcon={showLinkIcon}
+            >
               {text}
             </CardSet>
           ))}
