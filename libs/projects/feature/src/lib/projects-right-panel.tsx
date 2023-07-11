@@ -29,6 +29,7 @@ const ProjectsRightPanel = ({ projectId, currentTab }: Props) => {
   }
 
   const org = projectDetails.organization;
+  const routeSection = ROUTE_SECTION.PROJECTS;
 
   return (
     <RightPanel
@@ -42,10 +43,13 @@ const ProjectsRightPanel = ({ projectId, currentTab }: Props) => {
       routeSection={ROUTE_SECTION.PROJECTS}
     >
       {currentTab === TAB_SEGMENT.details && (
-        <RightPanelProjectCard project={projectDetails} />
+        <RightPanelProjectCard
+          project={projectDetails}
+          routeSection={routeSection}
+        />
       )}
       {currentTab === TAB_SEGMENT.organization && (
-        <RightPanelOrgCard org={org} />
+        <RightPanelOrgCard org={org} routeSection={routeSection} />
       )}
     </RightPanel>
   );

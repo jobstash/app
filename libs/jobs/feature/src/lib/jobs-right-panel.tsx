@@ -47,6 +47,8 @@ const JobsRightPanel = ({ jobPost, currentTab }: Props) => {
 
   const competitorCount = competitors?.length ?? 0;
 
+  const routeSection = ROUTE_SECTION.JOBS;
+
   return (
     <RightPanel
       org={organization}
@@ -58,16 +60,19 @@ const JobsRightPanel = ({ jobPost, currentTab }: Props) => {
           competitorCount={competitorCount}
         />
       }
-      routeSection={ROUTE_SECTION.JOBS}
+      routeSection={routeSection}
     >
       {currentTab === TAB_SEGMENT.details && (
         <RightPanelJobCard jobInfo={jobPost} technologies={technologies} />
       )}
       {currentTab === TAB_SEGMENT.organization && (
-        <RightPanelOrgCard org={organization} />
+        <RightPanelOrgCard org={organization} routeSection={routeSection} />
       )}
       {currentTab === TAB_SEGMENT.projects && (
-        <RightPanelProjectCards projects={projects} />
+        <RightPanelProjectCards
+          projects={projects}
+          routeSection={routeSection}
+        />
       )}
       {currentTab === TAB_SEGMENT.competitors && (
         <RightPanelCompetitorCards competitors={competitors ?? []} />

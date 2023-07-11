@@ -1,10 +1,17 @@
 import { memo } from 'react';
 
-import { type ProjectInfo, type ProjectMoreInfo } from '@jobstash/shared/core';
-import { getGoogleLogoUrl } from '@jobstash/shared/utils';
+import {
+  type ProjectInfo,
+  type ProjectMoreInfo,
+  ROUTE_SECTION,
+  type RouteSection,
+  TAB_SEGMENT,
+} from '@jobstash/shared/core';
+import { getGoogleLogoUrl, slugify } from '@jobstash/shared/utils';
 
 import { createRightPanelProjectCardTags } from './utils/create-right-panel-project-card-tags';
 import RightPanelCardBorder from './right-panel-card-border';
+import RightPanelCta from './right-panel-cta';
 import RightPanelProjectCardAuditTags from './right-panel-project-card-audit-tags';
 import RightPanelProjectCardDescription from './right-panel-project-card-description';
 import RightPanelProjectCardHeader from './right-panel-project-card-header';
@@ -13,12 +20,16 @@ import RightPanelProjectCardTvlTags from './right-panel-project-card-tvl-tags';
 
 interface Props {
   project: ProjectInfo & ProjectMoreInfo;
+  routeSection: RouteSection;
 }
 
-const RightPanelProjectCard = ({ project }: Props) => {
-  const { name, url, logo, description } = project;
+const RightPanelProjectCard = ({ project, routeSection }: Props) => {
+  const { id, name, url, logo, description } = project;
   const { projectSocialTags, projectTags, projectTvlTags, projectAuditTags } =
     createRightPanelProjectCardTags(project);
+
+  const slug = slugify(`${name} ${id}`);
+  const link = `${ROUTE_SECTION.PROJECTS}/${slug}/${TAB_SEGMENT.details}`;
 
   return (
     <RightPanelCardBorder>
@@ -33,6 +44,10 @@ const RightPanelProjectCard = ({ project }: Props) => {
         <RightPanelProjectCardTags tags={projectTags} />
         <RightPanelProjectCardTvlTags tvlTags={projectTvlTags} />
         <RightPanelProjectCardAuditTags auditTags={projectAuditTags} />
+
+        {routeSection !== ROUTE_SECTION.PROJECTS && (
+          <RightPanelCta link={link} text="Explore Project" />
+        )}
       </div>
     </RightPanelCardBorder>
   );
