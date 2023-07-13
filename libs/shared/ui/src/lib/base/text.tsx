@@ -23,7 +23,7 @@ const text = cva(`${roboto.variable} font-roboto antialiased`, {
     },
     color: {
       white: 'text-white',
-      dimmed: 'text-white/70',
+      dimmed: 'text-white/60',
     },
   },
 });
