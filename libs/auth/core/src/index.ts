@@ -4,6 +4,7 @@ export * from './lib/constants';
 // Schemas
 export {
   checkWalletDataSchema,
+  checkWalletResponseSchema,
   siweCreateMessageResponseSchema,
   siweNonceResponseSchema,
   siweSessionResponseSchema,

@@ -83,7 +83,8 @@
                   "type:util",
                   "type:ui",
                   "type:state",
-                  "type:feature"
+                  "type:feature",
+                  "type:page"
                 ]
               },
               {

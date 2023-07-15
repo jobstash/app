@@ -5,13 +5,14 @@ import { mwResponseFieldsSchema } from '@jobstash/shared/core';
 import { CHECK_WALLET_FLOWS, CHECK_WALLET_ROLES } from './constants';
 
 export const checkWalletRolesSchema = myzod.literals(
-  CHECK_WALLET_ROLES.ANON,
+  CHECK_WALLET_ROLES.DEFAULT,
   CHECK_WALLET_ROLES.ADMIN,
   CHECK_WALLET_ROLES.DEV,
   CHECK_WALLET_ROLES.ORG,
 );
 
 export const checkWalletFlowsSchema = myzod.literals(
+  CHECK_WALLET_FLOWS.DEFAULT,
   CHECK_WALLET_FLOWS.PICK_ROLE,
   CHECK_WALLET_FLOWS.ADD_GITHUB_REPO,
   CHECK_WALLET_FLOWS.ONBOARD_REPO,
@@ -23,6 +24,12 @@ export const checkWalletFlowsSchema = myzod.literals(
 export const checkWalletDataSchema = myzod.object({
   role: checkWalletRolesSchema,
   flow: checkWalletFlowsSchema,
+});
+
+export const checkWalletResponseSchema = myzod.object({
+  data: checkWalletDataSchema,
+  success: myzod.boolean(),
+  message: myzod.string(),
 });
 
 export const siweNonceResponseSchema = myzod.intersection(

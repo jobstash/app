@@ -1,4 +1,5 @@
 import '../styles/globals.css';
+import 'nprogress/nprogress.css';
 
 import { AppProps } from 'next/app';
 import Head from 'next/head';
@@ -6,11 +7,23 @@ import { useRouter } from 'next/router';
 import Script from 'next/script';
 import { useEffect } from 'react';
 
+import { LoadingPage } from '@jobstash/shared/pages';
 import { MantineProvider } from '@mantine/core';
+import NProgress from 'nprogress';
 
 import { ANALYTICS_ID } from '@jobstash/shared/core';
 
+import { AuthProvider } from '@jobstash/auth/state';
 import { ReactQueryProvider } from '@jobstash/shared/state';
+
+NProgress.configure({
+  template: '<div class="bar" role="bar"><div class="peg"></div></div></div>',
+});
+const nProgressExcludedPathnames = new Set([
+  '/jobs/[slug]/[tab]',
+  '/organizations/[slug]/[tab]',
+  '/projects/[slug]/[tab]',
+]);
 
 const App = ({ Component, pageProps }: AppProps) => {
   const router = useRouter();
@@ -20,6 +33,35 @@ const App = ({ Component, pageProps }: AppProps) => {
       window.history.scrollRestoration = 'manual';
       return true;
     });
+  }, [router]);
+
+  useEffect(() => {
+    const shouldDisplay = !nProgressExcludedPathnames.has(router.pathname);
+    const startNProgress = () => {
+      if (shouldDisplay) NProgress.start();
+    };
+
+    const stopNProgress = () => {
+      if (shouldDisplay) NProgress.done();
+    };
+
+    const handleStart = () => {
+      startNProgress();
+    };
+
+    const handleComplete = (url: string) => {
+      stopNProgress();
+    };
+
+    router.events.on('routeChangeStart', handleStart);
+    router.events.on('routeChangeComplete', handleComplete);
+    router.events.on('routeChangeError', stopNProgress);
+
+    return () => {
+      router.events.off('routeChangeStart', handleStart);
+      router.events.off('routeChangeComplete', handleComplete);
+      router.events.off('routeChangeError', stopNProgress);
+    };
   }, [router]);
 
   return (
@@ -57,7 +99,9 @@ const App = ({ Component, pageProps }: AppProps) => {
           withNormalizeCSS
           theme={{ colorScheme: 'dark', cursorType: 'pointer' }}
         >
-          <Component {...pageProps} />
+          <AuthProvider screenLoader={<LoadingPage />}>
+            <Component {...pageProps} />
+          </AuthProvider>
         </MantineProvider>
       </ReactQueryProvider>
     </>
