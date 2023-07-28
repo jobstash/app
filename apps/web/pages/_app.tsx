@@ -16,6 +16,8 @@ import { ANALYTICS_ID } from '@jobstash/shared/core';
 import { AuthProvider } from '@jobstash/auth/state';
 import { ReactQueryProvider } from '@jobstash/shared/state';
 
+import { WagmiSiweSync } from '@jobstash/auth/feature';
+
 NProgress.configure({
   template: '<div class="bar" role="bar"><div class="peg"></div></div></div>',
 });
@@ -101,6 +103,7 @@ const App = ({ Component, pageProps }: AppProps) => {
         >
           <AuthProvider screenLoader={<LoadingPage />}>
             <Component {...pageProps} />
+            <WagmiSiweSync />
           </AuthProvider>
         </MantineProvider>
       </ReactQueryProvider>

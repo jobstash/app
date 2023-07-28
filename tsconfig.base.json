@@ -63,6 +63,14 @@
       "@jobstash/organizations/utils": [
         "libs/organizations/utils/src/index.ts"
       ],
+      "@jobstash/profile/core": ["libs/profile/core/src/index.ts"],
+      "@jobstash/profile/data": ["libs/profile/data/src/index.ts"],
+      "@jobstash/profile/feature": ["libs/profile/feature/src/index.ts"],
+      "@jobstash/profile/pages": ["libs/profile/pages/src/index.ts"],
+      "@jobstash/profile/state": ["libs/profile/state/src/index.ts"],
+      "@jobstash/profile/testutils": ["libs/profile/testutils/src/index.ts"],
+      "@jobstash/profile/ui": ["libs/profile/ui/src/index.ts"],
+      "@jobstash/profile/utils": ["libs/profile/utils/src/index.ts"],
       "@jobstash/projects/core": ["libs/projects/core/src/index.ts"],
       "@jobstash/projects/data": ["libs/projects/data/src/index.ts"],
       "@jobstash/projects/feature": ["libs/projects/feature/src/index.ts"],

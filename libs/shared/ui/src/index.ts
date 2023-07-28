@@ -43,6 +43,7 @@ export { default as ShieldCheckIcon } from './lib/icons/shield-check-icon';
 export { default as SkullIcon } from './lib/icons/skull-icon';
 export { default as SuitcaseIcon } from './lib/icons/suitcase-icon';
 export { default as TelegramIcon } from './lib/icons/telegram-icon';
+export { default as ThrashIcon } from './lib/icons/thrash-icon';
 export { default as TokenAllocationIcon } from './lib/icons/token-allocation-icon';
 export { default as TvlIcon } from './lib/icons/tvl-icon';
 export { default as TwitterIcon } from './lib/icons/twitter-icon';

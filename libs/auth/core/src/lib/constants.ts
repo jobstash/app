@@ -1,3 +1,5 @@
+import { CheckWalletFlow } from './types';
+
 export const EVENT_SIWE_LOGIN = 'siwe-login';
 export const EVENT_SIWE_LOGOUT = 'siwe-logout';
 
@@ -25,8 +27,14 @@ export const CHECK_WALLET_ROUTE: Record<
   [CHECK_WALLET_FLOWS.DEFAULT]: '/jobs',
   [CHECK_WALLET_FLOWS.PICK_ROLE]: '/pick-role',
   [CHECK_WALLET_FLOWS.ADD_GITHUB_REPO]: '/add-github-account',
-  [CHECK_WALLET_FLOWS.ONBOARD_REPO]: '/user/my-repositories',
+  [CHECK_WALLET_FLOWS.ONBOARD_REPO]: '/your-repositories',
   [CHECK_WALLET_FLOWS.ONBOARD_PROFILE]: '/TODO',
   [CHECK_WALLET_FLOWS.SIGNUP_COMPLETE]: '/jobs',
   [CHECK_WALLET_FLOWS.ADMIN_SYNONYMS]: '/godmode/technologies/synonyms',
 };
+
+export const redirectFlowsSet = new Set<CheckWalletFlow>([
+  CHECK_WALLET_FLOWS.PICK_ROLE,
+  CHECK_WALLET_FLOWS.ADD_GITHUB_REPO,
+  CHECK_WALLET_FLOWS.ONBOARD_REPO,
+]);
