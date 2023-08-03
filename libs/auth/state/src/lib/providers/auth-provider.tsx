@@ -181,8 +181,12 @@ export const AuthProvider = ({ children, screenLoader }: Props) => {
             data: { flow },
           } = checkWalletResponse;
           const flowRoute = CHECK_WALLET_ROUTE[flow];
-          if (redirectFlowsSet.has(flow) && asPath !== flowRoute) {
-            push(flowRoute);
+          if (redirectFlowsSet.has(flow)) {
+            if (asPath === flowRoute) {
+              NProgress.done();
+            } else {
+              push(flowRoute);
+            }
           }
         }}
         onSignOut={() => {

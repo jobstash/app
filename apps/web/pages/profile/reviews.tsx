@@ -22,8 +22,7 @@ export const getServerSideProps = withCSR(async (ctx) => {
     data: { flow },
   } = checkWalletResponse;
 
-  if (flow !== CHECK_WALLET_FLOWS.ONBOARD_REPO) {
-    console.log('FLOWWW =', flow);
+  if (flow !== CHECK_WALLET_FLOWS.ONBOARD_REVIEWS) {
     const redirectRoute = redirectFlowsSet.has(flow)
       ? CHECK_WALLET_ROUTE[flow]
       : '/';
@@ -39,9 +38,9 @@ export const getServerSideProps = withCSR(async (ctx) => {
   return {
     props: {
       dehydratedState,
-      isOnboardSSR: flow === CHECK_WALLET_FLOWS.ONBOARD_REPO,
+      isOnboardSSR: flow === CHECK_WALLET_FLOWS.ONBOARD_REVIEWS,
     },
   };
 });
 
-export { YourRepositoriesPage as default } from '@jobstash/profile/pages';
+export { ProfileReviewsPage as default } from '@jobstash/profile/pages';

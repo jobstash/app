@@ -65,7 +65,7 @@ const OrgList = ({ initOrg, activeOrgId }: Props) => {
       {orgListItems.length > 0 && (
         <div ref={inViewRef} className="flex items-center justify-center pb-10">
           {isFetchingNextPage && <Loader />}
-          {!hasNextPage && <p>No more job posts to load</p>}
+          {!hasNextPage && <p>No more organizations to load</p>}
         </div>
       )}
       {(error as Error)?.message && (

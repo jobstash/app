@@ -26,12 +26,12 @@ interface LogoTitleProps extends LogoTitleVariantProps {
 
 const LogoTitle = ({
   title,
-  avatarProps: { src, alt },
+  avatarProps: { src, alt, isRounded },
   size = 'md',
   location,
 }: LogoTitleProps) => (
   <div className="flex w-fit items-center gap-x-3">
-    <Avatar src={src} alt={alt} size={size} />
+    <Avatar src={src} alt={alt} size={size} isRounded={isRounded} />
     <div className="flex flex-col justify-center gap-1">
       <Heading size={size === 'lg' ? 'md' : 'sm'}>{title}</Heading>
       {location && (

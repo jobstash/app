@@ -9,7 +9,7 @@ import {
   technologySchema,
 } from '@jobstash/shared/core';
 
-const projectAllInfo = myzod.intersection(
+export const projectAllInfoSchema = myzod.intersection(
   projectInfoSchema,
   projectMoreInfoSchema,
 );
@@ -27,7 +27,7 @@ export const projectOrgSchema = myzod
 
 export const projectDetailsSchema = myzod
   .intersection(
-    projectAllInfo,
+    projectAllInfoSchema,
     myzod.object({
       organization: projectOrgSchema,
     }),

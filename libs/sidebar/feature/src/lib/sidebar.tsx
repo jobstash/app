@@ -1,12 +1,15 @@
 import { memo, useEffect } from 'react';
 
+import { useSIWE } from 'connectkit';
 import { useAtomValue } from 'jotai';
 
 import { ROUTE_SECTION } from '@jobstash/shared/core';
 
+import { useIsMounted } from '@jobstash/shared/state';
 import { sidebarOpenAtom } from '@jobstash/sidebar/state';
 
 import {
+  BookmarkSidebarIcon,
   CloseIcon,
   HamburgerIcon,
   OrgSidebarIcon,
@@ -26,7 +29,7 @@ import { ConnectWalletButton } from '@jobstash/auth/feature';
 
 import SidebarBartab from './sidebar-bartab';
 
-const sidebarBartabs = [
+const discoverBartabs = [
   { text: 'Jobs', path: ROUTE_SECTION.JOBS, icon: <JobsSidebarIcon /> },
   {
     text: 'Organizations',
@@ -37,6 +40,30 @@ const sidebarBartabs = [
     text: 'Projects',
     path: ROUTE_SECTION.PROJECTS,
     icon: <ProjectsSidebarIcon />,
+  },
+];
+
+const bookmarkedBartabs = [
+  {
+    text: 'Saved Jobs',
+    path: '/bookmarks/jobs',
+    icon: <BookmarkSidebarIcon />,
+  },
+  {
+    text: 'Saved Orgs',
+    path: '/bookmarks/organizations',
+    icon: <BookmarkSidebarIcon />,
+  },
+];
+
+const profileBartabs = [
+  {
+    text: 'Your Repositories',
+    path: '/profile/repositories',
+  },
+  {
+    text: 'Organization Reviews',
+    path: '/profile/reviews',
   },
 ];
 
@@ -51,6 +78,9 @@ const Sidebar = () => {
       el.classList.remove('disable-scroll');
     }
   }, [sidebarOpen]);
+
+  const isMounted = useIsMounted();
+  const { isSignedIn } = useSIWE();
 
   return (
     <SidebarWrapper sidebarOpen={sidebarOpen}>
@@ -70,7 +100,7 @@ const Sidebar = () => {
         <div className="flex flex-col justify-start items-start space-y-3 pt-3 [&>*]:bg-transparent [&>*]:bg-none [&>*]:hover:bg-transparent">
           {/* <JobsBartabMobile /> */}
 
-          {sidebarBartabs.map(({ text, path, icon }) => (
+          {discoverBartabs.map(({ text, path, icon }) => (
             <SidebarBartab
               key={path}
               isMobile
@@ -88,18 +118,42 @@ const Sidebar = () => {
         </MobileMenuButton>
       </div>
 
-      <div className="mt-12 hidden lg:block">
-        <Text color="dimmed">Discover</Text>
-        <div className="space-y-3 pt-3">
-          {/* <JobsBartab icon={<JobsSidebarIcon />}>Jobs</JobsBartab> */}
-          {sidebarBartabs.map(({ text, path, icon }) => (
-            <SidebarBartab key={path} path={path} icon={icon} text={text} />
-          ))}
+      <div className="mt-12 hidden lg:flex flex-col space-y-8">
+        <div className="flex-col">
+          <Text color="dimmed">Discover</Text>
+          <div className="space-y-3 pt-3">
+            {discoverBartabs.map(({ text, path, icon }) => (
+              <SidebarBartab key={path} path={path} icon={icon} text={text} />
+            ))}
+          </div>
         </div>
+
+        {isMounted && isSignedIn && (
+          <div className="flex-col">
+            <Text color="dimmed">Bookmarked</Text>
+            <div className="space-y-3 pt-3">
+              {bookmarkedBartabs.map(({ text, path, icon }) => (
+                <SidebarBartab key={path} path={path} icon={icon} text={text} />
+              ))}
+            </div>
+          </div>
+        )}
       </div>
 
       <div className="inset-x-0 bottom-0 hidden space-y-4 p-4 lg:absolute lg:block">
-        <RequestToBeListedButton />
+        {isMounted &&
+          (isSignedIn ? (
+            <div className="flex-col">
+              <Text color="dimmed">Your Profile</Text>
+              <div className="space-y-3 pt-3">
+                {profileBartabs.map(({ text, path }) => (
+                  <SidebarBartab key={path} path={path} text={text} />
+                ))}
+              </div>
+            </div>
+          ) : (
+            <RequestToBeListedButton />
+          ))}
         <hr className="border-t border-white/20" />
         <ConnectWalletButton />
       </div>

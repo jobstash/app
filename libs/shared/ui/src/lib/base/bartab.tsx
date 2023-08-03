@@ -102,7 +102,8 @@ const Bartab = forwardRef<HTMLButtonElement, BartabProps>(
           className={cn(
             'flex grow items-center',
             { 'justify-start': Boolean(left) },
-            { 'lg:justify-center': !left },
+            { 'lg:justify-start lg:pl-0.5': !left },
+            { 'lg:justify-center': variant === 'wallet' },
           )}
         >
           {typeof children === 'string' ? (
