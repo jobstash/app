@@ -4,6 +4,7 @@ import { type Infer } from 'myzod';
 
 import { ROUTE_SECTION } from './constants';
 import {
+  allTechnologiesResponseSchema,
   auditSchema,
   categorySchema,
   chainSchema,
@@ -33,6 +34,9 @@ export interface TagElement {
 export type Undefined = Infer<typeof undefinedSchema>;
 
 export type Technology = Infer<typeof technologySchema>;
+export type AllTechnologiesResponse = Infer<
+  typeof allTechnologiesResponseSchema
+>;
 
 export type Investor = Infer<typeof investorSchema>;
 

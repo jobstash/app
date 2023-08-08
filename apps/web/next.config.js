@@ -44,7 +44,11 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'api.multiavatar.com',
+        hostname: 'avatars.githubusercontent.com',
+      },
+      {
+        protocol: 'https',
+        hostname: 'loremflickr.com',
       },
     ],
   },

@@ -1,15 +1,17 @@
 import { memo } from 'react';
 
-import { ProfileRepo } from '@jobstash/profile/core';
+import { type ProfileRepo } from '@jobstash/profile/core';
 import { getGoogleLogoUrl } from '@jobstash/shared/utils';
 
 import { Heading, LogoTitle, Text } from '@jobstash/shared/ui';
 
 interface Props {
-  profileRepo: ProfileRepo;
+  profileRepo: ProfileRepo | null;
 }
 
-const ProfileRightPanelHeader = ({ profileRepo }: Props) => {
+const ProfileRightPanelRepoHeader = ({ profileRepo }: Props) => {
+  if (!profileRepo) return null;
+
   const { org, name, description } = profileRepo;
 
   return (
@@ -27,4 +29,4 @@ const ProfileRightPanelHeader = ({ profileRepo }: Props) => {
   );
 };
 
-export default memo(ProfileRightPanelHeader);
+export default memo(ProfileRightPanelRepoHeader);

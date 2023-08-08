@@ -8,11 +8,10 @@ import { mwFetch } from '@jobstash/shared/data';
 
 export const getProfileRepoList = async (
   page: number,
-  wallet: `0x${string}` | undefined,
 ): Promise<ProfileRepoListQueryPage> => {
   //
   // const url = `${MW_URL}/profile/repositories?page=${page.toSTring()}&limit=${PAGE_SIZE}&wallet=${wallet}`;
-  const url = `/api/fakers/profile/repositories?page=${page.toString()}&limit=${PAGE_SIZE}&wallet=${wallet}`;
+  const url = `/api/fakers/profile/repositories?page=${page.toString()}&limit=${PAGE_SIZE}`;
 
   const options = {
     responseSchema: profileRepoListQueryPageSchema,

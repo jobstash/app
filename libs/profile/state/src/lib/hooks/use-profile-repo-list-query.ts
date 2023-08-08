@@ -10,7 +10,7 @@ export const useProfileRepoListQuery = () => {
 
   return useInfiniteQuery<ProfileRepoListQueryPage>(
     ['profile-repo-list'],
-    async ({ pageParam }) => getProfileRepoList(pageParam ?? 1, address),
+    async ({ pageParam }) => getProfileRepoList(pageParam ?? 1),
     {
       enabled: Boolean(address),
       staleTime: 1000 * 60 * 60, // 1 hr

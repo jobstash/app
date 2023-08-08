@@ -1,8 +1,12 @@
 import { Infer } from 'myzod';
 
 import {
+  profileInfoSchema,
   profileOrgReviewListQueryPageSchema,
+  profileOrgReviewRatingSchema,
+  profileOrgReviewSalarySchema,
   profileOrgReviewSchema,
+  profileOrgReviewYourReviewSchema,
   profileRepoListQueryPageSchema,
   profileRepoSchema,
   profileRepoTechnology,
@@ -21,8 +25,15 @@ export type ProfileRightPanelTab = {
   onClick: () => void;
 };
 
+export type ProfileOrgReviewSalary = Infer<typeof profileOrgReviewSalarySchema>;
+export type ProfileOrgReviewRating = Infer<typeof profileOrgReviewRatingSchema>;
+export type ProfileOrgReviewYourReview = Infer<
+  typeof profileOrgReviewYourReviewSchema
+>;
 export type ProfileOrgReview = Infer<typeof profileOrgReviewSchema>;
 
 export type ProfileOrgReviewListQueryPage = Infer<
   typeof profileOrgReviewListQueryPageSchema
 >;
+
+export type ProfileInfo = Infer<typeof profileInfoSchema>;

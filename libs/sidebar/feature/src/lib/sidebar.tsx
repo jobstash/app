@@ -133,7 +133,13 @@ const Sidebar = () => {
             <Text color="dimmed">Bookmarked</Text>
             <div className="space-y-3 pt-3">
               {bookmarkedBartabs.map(({ text, path, icon }) => (
-                <SidebarBartab key={path} path={path} icon={icon} text={text} />
+                <SidebarBartab
+                  key={path}
+                  isDisabled
+                  path={path}
+                  icon={icon}
+                  text={text}
+                />
               ))}
             </div>
           </div>

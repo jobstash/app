@@ -1,6 +1,10 @@
 import myzod from 'myzod';
 
-import { repositoryInfoSchema, technologySchema } from '@jobstash/shared/core';
+import {
+  orgInfoSchema,
+  repositoryInfoSchema,
+  technologySchema,
+} from '@jobstash/shared/core';
 
 export const profileRepoTechnology = myzod.intersection(
   technologySchema,
@@ -32,17 +36,44 @@ export const profileRepoListQueryPageSchema = myzod.object({
   data: myzod.array(profileRepoSchema),
 });
 
-export const profileOrgReviewSchema = myzod.object({
-  org: myzod.object({
-    id: myzod.string().min(1),
-    orgId: myzod.string().min(1),
-    location: myzod.string().min(1),
+export const profileOrgReviewSalarySchema = myzod.object({
+  currency: myzod.object({
+    value: myzod.string().nullable(),
+    options: myzod.array(myzod.string()),
   }),
-  rating: myzod.number().min(1).max(5).nullable(),
+  amount: myzod.number().nullable(),
+  token: myzod.object({
+    value: myzod.string().nullable(),
+    options: myzod.array(myzod.string()),
+    noAllocation: myzod.boolean(),
+  }),
+});
+
+export const profileOrgReviewRatingSchema = myzod.object({
+  management: myzod.number().min(0).max(5).nullable(),
+  careerGrowth: myzod.number().min(0).max(5).nullable(),
+  benefits: myzod.number().min(0).max(5).nullable(),
+  workLifeBalance: myzod.number().min(0).max(5).nullable(),
+  cultureValues: myzod.number().min(0).max(5).nullable(),
+  diversityInclusion: myzod.number().min(0).max(5).nullable(),
+  interviewProcess: myzod.number().min(0).max(5).nullable(),
+});
+
+export const profileOrgReviewYourReviewSchema = myzod.object({
+  headline: myzod.string().nullable(),
+  pros: myzod.string().nullable(),
+  cons: myzod.string().nullable(),
+});
+
+export const profileOrgReviewSchema = myzod.object({
+  org: orgInfoSchema,
   membershipStatus: myzod.string().nullable(),
   startDate: myzod.number().nullable(),
   endDate: myzod.number().nullable(),
   commitCount: myzod.number().nullable(),
+  salary: profileOrgReviewSalarySchema,
+  rating: profileOrgReviewRatingSchema,
+  review: profileOrgReviewYourReviewSchema,
 });
 
 export const profileOrgReviewListQueryPageSchema = myzod.object({
@@ -50,4 +81,15 @@ export const profileOrgReviewListQueryPageSchema = myzod.object({
   count: myzod.number(),
   total: myzod.number(),
   data: myzod.array(profileOrgReviewSchema),
+});
+
+export const profileInfoSchema = myzod.object({
+  avatar: myzod.string().min(1),
+  username: myzod.string().min(1),
+  availableForWork: myzod.boolean(),
+  contact: myzod.object({
+    options: myzod.array(myzod.string().min(1)),
+    preferred: myzod.string().nullable(),
+    value: myzod.string().nullable(),
+  }),
 });

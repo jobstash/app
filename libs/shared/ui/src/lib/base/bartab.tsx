@@ -22,7 +22,7 @@ const bartab = cva(['h-10 w-full border-none rounded-lg p-[2px]'], {
       true: '',
     },
     isDisabled: {
-      true: 'opacity-30 pointer-events-none animate-pulse',
+      true: 'opacity-30 pointer-events-none',
     },
   },
   compoundVariants: [

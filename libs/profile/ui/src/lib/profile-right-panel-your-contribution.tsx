@@ -1,9 +1,11 @@
-import { memo, useState } from 'react';
+import { memo, useCallback, useState } from 'react';
 
-import { Textarea } from '@mantine/core';
+import { LoadingOverlay, Textarea } from '@mantine/core';
 
 import { type ProfileRepo } from '@jobstash/profile/core';
 import { cn } from '@jobstash/shared/utils';
+
+import { useYourContributionMutation } from '@jobstash/profile/state';
 
 import { Button, Heading, Text } from '@jobstash/shared/ui';
 
@@ -19,19 +21,23 @@ const ProfileRightPanelYourContribution = (props: Props) => {
     profileRepo?.contribution.summary ?? '',
   );
 
-  if (!profileRepo) return null;
+  const { id, name, description, contribution } =
+    profileRepo || ({} as ProfileRepo);
 
-  const { name, description, contribution } = profileRepo;
+  const disableSave = contribution.summary === contributionSummary;
 
-  //
-  // 	const summary = `I implemented the core smartcontracts for UniV3 and optimized the slippage algos for our trading engine.
+  const { isLoading, mutate } = useYourContributionMutation();
 
-  // I’ve used Solidity and implemented the LP pools singlehandedly.
-
-  // Reviewed colleagues and auditors code and suggestions, and implemented the required changes.`
+  const onClickSave = useCallback(() => {
+    mutate({
+      id,
+      contribution: contributionSummary,
+    });
+  }, [mutate, id, contributionSummary]);
 
   return (
     <>
+      <LoadingOverlay visible={isLoading} />
       <Heading size="lg" fw="semibold">
         Describe your contribution
       </Heading>
@@ -74,8 +80,7 @@ const ProfileRightPanelYourContribution = (props: Props) => {
               className: 'text-right pt-2 pr-2',
             }}
             w="98%"
-            minRows={12}
-            maxRows={10}
+            minRows={10}
             classNames={{
               input: cn(
                 'rounded-lg bg-dark-gray text-white/60 focus:border-white p-6',
@@ -94,10 +99,19 @@ const ProfileRightPanelYourContribution = (props: Props) => {
         </div>
 
         <div className="flex items-center justify-center pt-4 w-full gap-8">
-          <Button variant="primary" className="px-8">
+          <Button
+            variant="primary"
+            className="px-8"
+            isDisabled={disableSave}
+            onClick={onClickSave}
+          >
             Save
           </Button>
-          <Button variant="outline" className="px-8 bg-darker-gray">
+          <Button
+            variant="outline"
+            className="px-8 bg-darker-gray"
+            isDisabled={disableSave}
+          >
             Delete
           </Button>
         </div>
