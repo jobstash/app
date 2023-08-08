@@ -8,7 +8,7 @@ import { type RouteSection } from '@jobstash/shared/core';
 import { mobileRightPanelOpenAtom } from '@jobstash/shared/state';
 
 import RightPanelHeader from './right-panel-header';
-import RightPanelHeaderMobile from './right-panel-header-mobile';
+import RightPanelMobileNav from './right-panel-mobile-nav';
 import RightPanelWrapper from './right-panel-wrapper';
 
 interface Props {
@@ -32,7 +32,7 @@ const RightPanel = ({ org, tabs, children, routeSection }: Props) => {
 
   return (
     <RightPanelWrapper>
-      <RightPanelHeaderMobile routeSection={routeSection} />
+      <RightPanelMobileNav backURL={routeSection} />
       <RightPanelHeader org={org} />
       {tabs}
       {children}

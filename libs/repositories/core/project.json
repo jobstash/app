@@ -1,0 +1,16 @@
+{
+  "name": "repositories-core",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/repositories/core/src",
+  "projectType": "library",
+  "tags": ["type:core"],
+  "targets": {
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/repositories/core/**/*.{ts,tsx,js,jsx}"]
+      }
+    }
+  }
+}

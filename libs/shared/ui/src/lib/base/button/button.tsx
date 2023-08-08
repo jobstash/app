@@ -30,6 +30,7 @@ export const buttonVariants = cva(
       size: {
         sm: 'px-2 py-1',
         md: 'px-4 py-2',
+        lg: 'px-6 py-2.5',
       },
       isActive: {
         true: '',
@@ -112,6 +113,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
       isFullWidth,
       isBordered,
       textProps,
+      className,
       ...props
     }: ButtonProps,
     ref,
@@ -138,6 +140,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
             isFullWidth,
             isBordered,
           }),
+          className,
         )}
         {...props}
       >

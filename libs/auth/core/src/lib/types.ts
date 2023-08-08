@@ -32,5 +32,6 @@ export type AuthPageProps = {
 };
 
 export type AuthCtx = {
-  // Other auth fields for ctx here
+  isLoading: boolean;
+  refetch: () => void;
 } & AuthPageProps;

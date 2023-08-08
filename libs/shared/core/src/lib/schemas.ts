@@ -8,6 +8,10 @@ export const technologySchema = myzod.object({
   normalizedName: myzod.string().min(1),
 });
 
+export const allTechnologiesResponseSchema = myzod.object({
+  technologies: myzod.array(technologySchema),
+});
+
 export const investorSchema = myzod.object({
   id: myzod.string().min(1),
   name: myzod.string().min(1),
@@ -129,6 +133,15 @@ export const projectInfoSchema = myzod.object(
   },
   { allowUnknown: true },
 );
+
+export const repositoryInfoSchema = myzod.object({
+  id: myzod.string().min(1),
+  name: myzod.string().min(1),
+  description: myzod.string(),
+  timestamp: myzod.number(),
+  projectName: myzod.string().nullable(),
+  committers: myzod.number().nullable(),
+});
 
 export const projectMoreInfoSchema = myzod.object({
   description: myzod.string().min(1),

@@ -1,0 +1,16 @@
+{
+  "name": "profile-core",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/profile/core/src",
+  "projectType": "library",
+  "tags": ["type:core"],
+  "targets": {
+    "lint": {
+      "executor": "@nx/linter:eslint",
+      "outputs": ["{options.outputFile}"],
+      "options": {
+        "lintFilePatterns": ["libs/profile/core/**/*.{ts,tsx,js,jsx}"]
+      }
+    }
+  }
+}

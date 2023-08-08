@@ -1,7 +1,3 @@
 # auth-state
 
-This library was generated with [Nx](https://nx.dev).
-
-## Running unit tests
-
-Run `nx test auth-state` to execute the unit tests via [Jest](https://jestjs.io).
+This library exports auth-related shared client state e.g. hooks, atoms, etc

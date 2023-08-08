@@ -1,7 +1,13 @@
 import { useRouter } from 'next/router';
-import { ReactNode, useEffect, useMemo } from 'react';
+import { type ReactNode, useEffect, useMemo, useRef } from 'react';
 
-import { ConnectKitProvider, getDefaultClient, SIWEProvider } from 'connectkit';
+import { useQueryClient } from '@tanstack/react-query';
+import {
+  ConnectKitProvider,
+  getDefaultClient,
+  SIWEProvider,
+  useSIWE,
+} from 'connectkit';
 import NProgress from 'nprogress';
 import { SiweMessage } from 'siwe';
 import { configureChains, createClient, mainnet, WagmiConfig } from 'wagmi';
@@ -11,10 +17,12 @@ import {
   CHECK_WALLET_FLOWS,
   CHECK_WALLET_ROLES,
   CHECK_WALLET_ROUTE,
+  redirectFlowsSet,
 } from '@jobstash/auth/core';
 import { MW_URL } from '@jobstash/shared/core';
 
 import { useIsMounted } from '@jobstash/shared/state';
+import { getCheckWallet } from '@jobstash/auth/data';
 
 import { AuthContext } from '../contexts/auth-context';
 import { useCheckWallet } from '../hooks/use-check-wallet';
@@ -39,6 +47,7 @@ type Props = {
 
 export const AuthProvider = ({ children, screenLoader }: Props) => {
   const { push, asPath } = useRouter();
+  const queryClient = useQueryClient();
   const isMounted = useIsMounted();
 
   const {
@@ -46,27 +55,53 @@ export const AuthProvider = ({ children, screenLoader }: Props) => {
     refetch,
     isLoading,
     isConnected,
-    isConnecting,
   } = useCheckWallet();
 
-  const displayLoader = !isMounted || (isConnected && isLoading);
-
+  // If current wallet is signedIn to Ethereum but wallet is not currently connected,
+  // e.g. during client machine restart (SIWE uses cookies), we manually disconnect
+  const { disconnect, isSignedIn } = useSIWE();
   useEffect(() => {
-    if (checkWalletData) {
-      const flowRoute = CHECK_WALLET_ROUTE[checkWalletData.flow];
-      if (asPath !== flowRoute) {
-        push(flowRoute);
-      }
+    const execDisconnect = async () => {
+      await disconnect();
+    };
+
+    if (!isConnected && isSignedIn) {
+      execDisconnect();
     }
-  }, [asPath, checkWalletData, push]);
+  }, [disconnect, isConnected, isSignedIn]);
+
+  const displayLoader = !isMounted || (isConnected && isLoading);
 
   const value = useMemo(
     () => ({
       role: checkWalletData?.role ?? CHECK_WALLET_ROLES.DEFAULT,
       flow: checkWalletData?.flow ?? CHECK_WALLET_FLOWS.DEFAULT,
+      isLoading,
+      refetch: () => refetch(),
     }),
-    [checkWalletData?.flow, checkWalletData?.role],
+    [checkWalletData?.flow, checkWalletData?.role, isLoading, refetch],
   );
+
+  const redirectRef = useRef(false);
+
+  // Redirect if flow-route needs to and ref is still false
+  useEffect(() => {
+    const { flow } = value;
+    const flowRoute = CHECK_WALLET_ROUTE[flow];
+    if (
+      !redirectRef.current &&
+      redirectFlowsSet.has(flow) &&
+      asPath !== flowRoute
+    ) {
+      redirectRef.current = true;
+
+      setTimeout(() => {
+        if (isConnected) {
+          push(CHECK_WALLET_ROUTE[flow]);
+        }
+      }, 500);
+    }
+  }, [asPath, isConnected, push, value]);
 
   return (
     <WagmiConfig client={connectkitClient}>
@@ -129,11 +164,33 @@ export const AuthProvider = ({ children, screenLoader }: Props) => {
 
           return res.ok;
         }}
-        onSignIn={(data) => {
+        onSignIn={async () => {
           NProgress.start();
-          refetch();
+
+          // We redirect manually here, assign ref
+          redirectRef.current = true;
+
+          // Fetch check-manually after siwe signin
+          const checkWalletResponse = await getCheckWallet();
+
+          // Cache check-wallet response
+          queryClient.setQueryData(['check-wallet'], checkWalletResponse);
+
+          // Redirect if data.flow is in set of flows that needs to be redirected
+          const {
+            data: { flow },
+          } = checkWalletResponse;
+          const flowRoute = CHECK_WALLET_ROUTE[flow];
+          if (redirectFlowsSet.has(flow)) {
+            if (asPath === flowRoute) {
+              NProgress.done();
+            } else {
+              push(flowRoute);
+            }
+          }
         }}
         onSignOut={() => {
+          // Disconnect wallet on signout
           refetch();
         }}
       >

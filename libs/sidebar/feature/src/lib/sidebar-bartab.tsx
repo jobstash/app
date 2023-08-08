@@ -15,11 +15,12 @@ import { Bartab } from '@jobstash/shared/ui';
 interface Props {
   text: string;
   path: string;
-  icon: ReactNode;
+  icon?: ReactNode;
   isMobile?: boolean;
+  isDisabled?: boolean;
 }
 
-const SidebarBartab = ({ text, path, icon, isMobile }: Props) => {
+const SidebarBartab = ({ text, path, icon, isMobile, isDisabled }: Props) => {
   const { pathname, push } = useRouter();
 
   const isActive = useMemo(
@@ -64,7 +65,12 @@ const SidebarBartab = ({ text, path, icon, isMobile }: Props) => {
   ]);
 
   return (
-    <Bartab isActive={isActive} left={isMobile ? null : icon} onClick={onClick}>
+    <Bartab
+      isActive={isActive}
+      left={isMobile ? null : icon}
+      isDisabled={isDisabled}
+      onClick={onClick}
+    >
       {isMobile ? <span className="text-2xl text-white">{text}</span> : text}
     </Bartab>
   );

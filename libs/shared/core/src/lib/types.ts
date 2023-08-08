@@ -4,6 +4,7 @@ import { type Infer } from 'myzod';
 
 import { ROUTE_SECTION } from './constants';
 import {
+  allTechnologiesResponseSchema,
   auditSchema,
   categorySchema,
   chainSchema,
@@ -16,6 +17,7 @@ import {
   projectCompleteInfoSchema,
   projectInfoSchema,
   projectMoreInfoSchema,
+  repositoryInfoSchema,
   technologySchema,
   undefinedSchema,
 } from './schemas';
@@ -32,6 +34,9 @@ export interface TagElement {
 export type Undefined = Infer<typeof undefinedSchema>;
 
 export type Technology = Infer<typeof technologySchema>;
+export type AllTechnologiesResponse = Infer<
+  typeof allTechnologiesResponseSchema
+>;
 
 export type Investor = Infer<typeof investorSchema>;
 
@@ -50,6 +55,7 @@ export type OrgInfo = Infer<typeof orgInfoSchema>;
 export type ProjectInfo = Infer<typeof projectInfoSchema>;
 export type ProjectMoreInfo = Infer<typeof projectMoreInfoSchema>;
 export type ProjectCompleteInfo = Infer<typeof projectCompleteInfoSchema>;
+export type RepositoryInfo = Infer<typeof repositoryInfoSchema>;
 
 export type MwResponseFields = Infer<typeof mwResponseFieldsSchema>;
 

@@ -22,7 +22,7 @@ const bartab = cva(['h-10 w-full border-none rounded-lg p-[2px]'], {
       true: '',
     },
     isDisabled: {
-      true: 'opacity-30 pointer-events-none animate-pulse',
+      true: 'opacity-30 pointer-events-none',
     },
   },
   compoundVariants: [
@@ -102,7 +102,8 @@ const Bartab = forwardRef<HTMLButtonElement, BartabProps>(
           className={cn(
             'flex grow items-center',
             { 'justify-start': Boolean(left) },
-            { 'lg:justify-center': !left },
+            { 'lg:justify-start lg:pl-0.5': !left },
+            { 'lg:justify-center': variant === 'wallet' },
           )}
         >
           {typeof children === 'string' ? (
