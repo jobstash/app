@@ -49,6 +49,7 @@ const ProfileRepoRightPanel = () => {
             <div className="flex flex-col gap-6 py-2 relative">
               {activeTab === PROFILE_RIGHT_PANEL_TAB.TECHNOLOGIES_USED && (
                 <ProfileRightPanelTechsUsed
+                  key={activeProfileRepo?.id}
                   options={allTechnologiesData?.technologies ?? []}
                   profileRepo={activeProfileRepo}
                 />
