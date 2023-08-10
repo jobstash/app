@@ -1,35 +1,25 @@
-import { useRouter } from 'next/router';
 import { memo } from 'react';
 
 import { encodeBase64 } from '@jobstash/shared/utils';
 
-import { Button } from '@jobstash/shared/ui';
+import RightPanelCta from './right-panel-cta';
 
 interface Props {
   name: string;
 }
 
-const RightPanelProjectCardExploreButton = ({ name }: Props) => {
-  const { push } = useRouter();
+const RightPanelProjectCardExploreButton = ({ name }: Props) => (
+  <>
+    <div className="flex h-4 flex-col justify-center">
+      <hr className="border-t border-white/10" />
+    </div>
 
-  return (
-    <>
-      <div className="flex h-4 flex-col justify-center">
-        <hr className="border-t border-white/10" />
-      </div>
-
-      <Button
-        variant="primary"
-        onClick={() => {
-          push(`/jobs?projects=${encodeBase64(name)},`, undefined, {
-            shallow: true,
-          });
-        }}
-      >
-        Explore Project
-      </Button>
-    </>
-  );
-};
+    <RightPanelCta
+      external
+      link={`/jobs?projects=${encodeBase64(name)},`}
+      text="Explore Project"
+    />
+  </>
+);
 
 export default memo(RightPanelProjectCardExploreButton);
