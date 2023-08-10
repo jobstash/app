@@ -67,6 +67,7 @@ const JobsRightPanel = ({ jobPost, currentTab }: Props) => {
           orgName={organization.name}
           jobInfo={jobPost}
           technologies={technologies}
+          showExploreJob={false}
         />
       )}
       {currentTab === TAB_SEGMENT.organization && (
