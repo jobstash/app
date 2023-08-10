@@ -62,7 +62,6 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           },
         },
         rating: {
-          overall: faker.number.int({ min: 1, max: 5 }),
           management: faker.number.int({ min: 1, max: 5 }),
           careerGrowth: faker.number.int({ min: 1, max: 5 }),
           benefits: faker.number.int({ min: 1, max: 5 }),
@@ -123,7 +122,6 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           },
         },
         rating: {
-          overall: faker.number.int({ min: 1, max: 5 }),
           management: faker.number.int({ min: 1, max: 5 }),
           careerGrowth: faker.number.int({ min: 1, max: 5 }),
           benefits: faker.number.int({ min: 1, max: 5 }),
@@ -184,7 +182,6 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           },
         },
         rating: {
-          overall: faker.number.int({ min: 1, max: 5 }),
           management: faker.number.int({ min: 1, max: 5 }),
           careerGrowth: faker.number.int({ min: 1, max: 5 }),
           benefits: faker.number.int({ min: 1, max: 5 }),
