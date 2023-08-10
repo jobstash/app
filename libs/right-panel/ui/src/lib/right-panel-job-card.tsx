@@ -15,9 +15,15 @@ interface Props {
   orgName: string;
   jobInfo: JobInfo;
   technologies: Technology[];
+  showExploreJob?: boolean;
 }
 
-const RightPanelJobCard = ({ orgName, jobInfo, technologies }: Props) => {
+const RightPanelJobCard = ({
+  orgName,
+  jobInfo,
+  technologies,
+  showExploreJob = true,
+}: Props) => {
   const { jobTitle, jobApplyPageUrl, shortUUID } = jobInfo;
 
   return (
@@ -50,15 +56,17 @@ const RightPanelJobCard = ({ orgName, jobInfo, technologies }: Props) => {
 
         <RightPanelJobCardTechnologies technologies={technologies} />
 
-        <div className="flex flex-col items-start py-4">
-          <RightPanelCta
-            external
-            link={`/jobs/${slugify(
-              `${orgName} ${jobTitle}`,
-            )}-${shortUUID}/details`}
-            text="Explore Job"
-          />
-        </div>
+        {showExploreJob && (
+          <div className="flex flex-col items-start py-4">
+            <RightPanelCta
+              external
+              link={`/jobs/${slugify(
+                `${orgName} ${jobTitle}`,
+              )}-${shortUUID}/details`}
+              text="Explore Job"
+            />
+          </div>
+        )}
       </div>
     </RightPanelCardBorder>
   );
