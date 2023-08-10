@@ -51,7 +51,10 @@ const OrgsRightPanel = ({ orgId, currentTab }: Props) => {
       )}
 
       {currentTab === TAB_SEGMENT.jobs && (
-        <RightPanelJobCards jobInfos={orgDetails.jobs} />
+        <RightPanelJobCards
+          orgName={orgDetails.name}
+          jobInfos={orgDetails.jobs}
+        />
       )}
       {/* TODO: REPOSITORIES TAB */}
     </RightPanel>
