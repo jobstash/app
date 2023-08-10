@@ -15,7 +15,6 @@ const RightPanelProjectCardExploreButton = ({ name }: Props) => (
     </div>
 
     <RightPanelCta
-      external
       link={`/jobs?projects=${encodeBase64(name)},`}
       text="Explore Project"
     />

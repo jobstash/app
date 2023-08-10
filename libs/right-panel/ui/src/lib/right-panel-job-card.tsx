@@ -59,7 +59,6 @@ const RightPanelJobCard = ({
         {showExploreJob && (
           <div className="flex flex-col items-start py-4">
             <RightPanelCta
-              external
               link={`/jobs/${slugify(
                 `${orgName} ${jobTitle}`,
               )}-${shortUUID}/details`}

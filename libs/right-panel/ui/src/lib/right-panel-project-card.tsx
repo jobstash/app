@@ -46,7 +46,7 @@ const RightPanelProjectCard = ({ project, routeSection }: Props) => {
         <RightPanelProjectCardAuditTags auditTags={projectAuditTags} />
 
         {routeSection !== ROUTE_SECTION.PROJECTS && (
-          <RightPanelCta external link={link} text="Explore Project" />
+          <RightPanelCta link={link} text="Explore Project" />
         )}
       </div>
     </RightPanelCardBorder>

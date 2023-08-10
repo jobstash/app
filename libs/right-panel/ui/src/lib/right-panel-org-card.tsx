@@ -36,7 +36,7 @@ const RightPanelOrgCard = ({ org, routeSection }: Props) => {
           <RightPanelOrgCardInvestors investors={investors} />
 
           {routeSection !== ROUTE_SECTION.ORGANIZATIONS && (
-            <RightPanelCta external link={link} text="Explore Organization" />
+            <RightPanelCta link={link} text="Explore Organization" />
           )}
         </div>
       </div>
