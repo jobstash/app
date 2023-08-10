@@ -5,10 +5,11 @@ import { type JobInfo } from '@jobstash/shared/core';
 import RightPanelJobCard from './right-panel-job-card';
 
 interface Props {
+  orgName: string;
   jobInfos: JobInfo[];
 }
 
-const RightPanelJobCards = ({ jobInfos }: Props) => {
+const RightPanelJobCards = ({ orgName, jobInfos }: Props) => {
   if (jobInfos.length === 0) return null;
 
   return (
@@ -16,6 +17,7 @@ const RightPanelJobCards = ({ jobInfos }: Props) => {
       {jobInfos.map((jobInfo) => (
         <RightPanelJobCard
           key={jobInfo.id}
+          orgName={orgName}
           jobInfo={jobInfo}
           technologies={[]}
         />

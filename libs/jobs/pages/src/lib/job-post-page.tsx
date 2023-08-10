@@ -17,7 +17,6 @@ import {
 } from '@jobstash/jobs/utils';
 import { cn, sentryMessage } from '@jobstash/shared/utils';
 
-import { useAuthContext } from '@jobstash/auth/state';
 import { showFiltersAtom } from '@jobstash/filters/state';
 import { activeJobAtom, useJobPost } from '@jobstash/jobs/state';
 
@@ -90,8 +89,6 @@ export const JobPostPage = ({ initJob, fromSSR }: JobPostPageProps) => {
 
   const currentJobPost = jobPost ?? activeJob;
 
-  const { role, flow } = useAuthContext();
-
   return (
     <>
       {currentJobPost && (
@@ -130,7 +127,6 @@ export const JobPostPage = ({ initJob, fromSSR }: JobPostPageProps) => {
               'lg:pr-[50%]': showFilters,
             })}
           >
-            <p>auth-ctx role/flow = {JSON.stringify({ role, flow })}</p>
             <JobList initJob={initJob} activeJob={currentJobPost} />
           </div>
         </div>

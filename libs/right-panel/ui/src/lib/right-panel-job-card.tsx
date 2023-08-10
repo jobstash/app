@@ -1,6 +1,7 @@
 import { memo } from 'react';
 
 import { type JobInfo, type Technology } from '@jobstash/shared/core';
+import { slugify } from '@jobstash/shared/utils';
 
 import { Heading } from '@jobstash/shared/ui';
 
@@ -11,12 +12,13 @@ import RightPanelJobCardTags from './right-panel-job-card-tags';
 import RightPanelJobCardTechnologies from './right-panel-job-card-technologies';
 
 interface Props {
+  orgName: string;
   jobInfo: JobInfo;
   technologies: Technology[];
 }
 
-const RightPanelJobCard = ({ jobInfo, technologies }: Props) => {
-  const { jobTitle, jobApplyPageUrl } = jobInfo;
+const RightPanelJobCard = ({ orgName, jobInfo, technologies }: Props) => {
+  const { jobTitle, jobApplyPageUrl, shortUUID } = jobInfo;
 
   return (
     <RightPanelCardBorder>
@@ -47,6 +49,16 @@ const RightPanelJobCard = ({ jobInfo, technologies }: Props) => {
         <RightPanelJobCardDescriptions jobInfo={jobInfo} />
 
         <RightPanelJobCardTechnologies technologies={technologies} />
+
+        <div className="flex flex-col items-start py-4">
+          <RightPanelCta
+            external
+            link={`/jobs/${slugify(
+              `${orgName} ${jobTitle}`,
+            )}-${shortUUID}/details`}
+            text="Explore Job"
+          />
+        </div>
       </div>
     </RightPanelCardBorder>
   );
