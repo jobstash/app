@@ -9,9 +9,16 @@ interface Props {
   name: string;
   canTeach: boolean;
   onTechRemove: (id: string) => void;
+  onClickCanTeach: (id: string, canTeach: boolean) => void;
 }
 
-const ProfileRepoTech = ({ id, name, canTeach, onTechRemove }: Props) => (
+const ProfileRepoTech = ({
+  id,
+  name,
+  canTeach,
+  onTechRemove,
+  onClickCanTeach,
+}: Props) => (
   <div className="flex px-4 py-3 border border-gray gap-4 rounded-xl items-center">
     <div>
       <TechWrapper id={id}>{name}</TechWrapper>
@@ -22,6 +29,7 @@ const ProfileRepoTech = ({ id, name, canTeach, onTechRemove }: Props) => (
         color="gray"
         radius="xl"
         defaultChecked={canTeach}
+        onChange={(e) => onClickCanTeach(id, e.currentTarget.checked)}
       />
     </div>
     <div className="-ml-2">

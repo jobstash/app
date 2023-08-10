@@ -11,6 +11,6 @@ export { default as ProfileRightPanelRating } from './lib/profile-right-panel-ra
 export { default as ProfileRightPanelRepoHeader } from './lib/profile-right-panel-repo-header';
 export { default as ProfileRightPanelSalary } from './lib/profile-right-panel-salary';
 export { default as ProfileRightPanelTabs } from './lib/profile-right-panel-tabs';
-export { default as ProfileRightPanelTechsUsed } from './lib/profile-right-panel-techs-used';
 export { default as ProfileRightPanelYourContribution } from './lib/profile-right-panel-your-contribution';
 export { default as ProfileRightPanelYourReview } from './lib/profile-right-panel-your-review';
+export * from './lib/techs-used';
