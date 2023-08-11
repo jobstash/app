@@ -27,6 +27,8 @@ const nProgressExcludedPathnames = new Set([
   '/projects/[slug]/[tab]',
 ]);
 
+const nProgressStopExcludePathnames = new Set(['/pick-role']);
+
 const App = ({ Component, pageProps }: AppProps) => {
   const router = useRouter();
 
@@ -52,7 +54,9 @@ const App = ({ Component, pageProps }: AppProps) => {
     };
 
     const handleComplete = (url: string) => {
-      stopNProgress();
+      if (!nProgressStopExcludePathnames.has(url)) {
+        stopNProgress();
+      }
     };
 
     router.events.on('routeChangeStart', handleStart);

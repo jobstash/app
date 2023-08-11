@@ -1,14 +1,11 @@
 import { useRouter } from 'next/router';
-import { useCallback, useEffect } from 'react';
+import { useEffect } from 'react';
 
 import { LoadingPage } from '@jobstash/shared/pages';
 import { useAtomValue } from 'jotai';
+import NProgress from 'nprogress';
 
-import {
-  CHECK_WALLET_FLOWS,
-  CHECK_WALLET_ROUTE,
-  redirectFlowsSet,
-} from '@jobstash/auth/core';
+import { CHECK_WALLET_FLOWS } from '@jobstash/auth/core';
 import { MW_URL } from '@jobstash/shared/core';
 
 import { isLoadingDevCallbackAtom, useAuthContext } from '@jobstash/auth/state';
@@ -28,87 +25,92 @@ interface Props {
 }
 
 export const PickRolePage = ({ fromSSR }: Props) => {
-  const isMounted = useIsMounted();
+  const { push } = useRouter();
 
-  const { push, replace } = useRouter();
-  const onClickDevGithub = useCallback(() => {
+  const onClickDevGithub = () => {
     push(`${MW_URL}/github/trigger-dev-github-oauth`);
-  }, [push]);
+  };
 
+  const shouldRenderPickRole = useFlowCheck();
+
+  if (!shouldRenderPickRole) {
+    return <LoadingPage />;
+  }
+
+  return (
+    <div className="w-full pl-52">
+      <SideBar />
+
+      <div className="flex h-screen pl-4 [&>*]:w-full">
+        <DevSection onClickDevGithub={onClickDevGithub} />
+        <OrgSection />
+      </div>
+    </div>
+  );
+};
+
+const useFlowCheck = () => {
+  const isMounted = useIsMounted();
   const isLoadingDevCallback = useAtomValue(isLoadingDevCallbackAtom);
-
   const { flow } = useAuthContext();
-  const isPickRoleFlow = flow === CHECK_WALLET_FLOWS.PICK_ROLE;
 
   useEffect(() => {
-    if (!isPickRoleFlow && !fromSSR) {
-      const redirectRoute = redirectFlowsSet.has(flow)
-        ? CHECK_WALLET_ROUTE[flow]
-        : '/';
-
-      replace(redirectRoute);
+    if (isLoadingDevCallback) {
+      NProgress.start();
+    } else {
+      NProgress.done();
     }
-  }, [flow, fromSSR, isPickRoleFlow, replace]);
+  }, [isLoadingDevCallback]);
 
-  if (isMounted && !isLoadingDevCallback && isPickRoleFlow)
-    return (
-      <div className="w-full pl-52">
-        <SideBar />
-
-        <div className="flex h-screen pl-4 [&>*]:w-full">
-          {/* DEV SECTION */}
-          <PickRoleSection
-            className={['bg-gradient-to-l from-primary to-secondary']}
-          >
-            <Text size="lg" fw="bold">
-              Developer
-            </Text>
-            <div className="flex w-72 flex-col gap-y-6">
-              <Text color="dimmed" size="sm">
-                To create an account we need to validate your Github account(s).
-              </Text>
-              <Text color="dimmed" size="sm">
-                We will then verify you own the the account, and will inspect
-                which public commits you have made in the past.
-              </Text>
-            </div>
-
-            <PickRoleButton
-              text="Connect with Github"
-              icon={<PickRoleGithubIcon />}
-              onClick={onClickDevGithub}
-            />
-            <hr className="border-t border-white/10" />
-          </PickRoleSection>
-
-          {/* ORG SECTION */}
-          <PickRoleSection>
-            <Text size="lg" fw="bold">
-              Organization
-            </Text>
-            <div className="flex w-72">
-              <Text color="dimmed" size="sm">
-                We need to verify you are part of an organization to let you
-                sign in. We support Github and email validation for this. Please
-                pick one of the two.
-              </Text>
-            </div>
-
-            <PickRoleButton
-              text="Connect with Organization Email"
-              icon={<PickRoleEmailIcon />}
-            />
-
-            <hr className="border-t border-white/10" />
-
-            <PickRoleButton
-              text="Connect with Github"
-              icon={<PickRoleGithubIcon />}
-            />
-          </PickRoleSection>
-        </div>
-      </div>
-    );
-
-  return <LoadingPage />;
+  return (
+    isMounted && !isLoadingDevCallback && flow === CHECK_WALLET_FLOWS.PICK_ROLE
+  );
 };
+
+const DevSection = ({ onClickDevGithub }: { onClickDevGithub: () => void }) => (
+  <PickRoleSection className={['bg-gradient-to-l from-primary to-secondary']}>
+    <Text size="lg" fw="bold">
+      Developer
+    </Text>
+    <div className="flex w-72 flex-col gap-y-6">
+      <Text color="dimmed" size="sm">
+        To create an account we need to validate your Github account(s).
+      </Text>
+      <Text color="dimmed" size="sm">
+        We will then verify you own the the account, and will inspect which
+        public commits you have made in the past.
+      </Text>
+    </div>
+
+    <PickRoleButton
+      text="Connect with Github"
+      icon={<PickRoleGithubIcon />}
+      onClick={onClickDevGithub}
+    />
+    <hr className="border-t border-white/10" />
+  </PickRoleSection>
+);
+
+const OrgSection = () => (
+  <PickRoleSection>
+    <Text size="lg" fw="bold">
+      Organization
+    </Text>
+    <div className="flex w-72">
+      <Text color="dimmed" size="sm">
+        We need to verify you are part of an organization to let you sign in. We
+        support Github and email validation for this. Please pick one of the
+        two.
+      </Text>
+    </div>
+
+    <PickRoleButton
+      text="Connect with Organization Email"
+      icon={<PickRoleEmailIcon />}
+    />
+
+    <hr className="border-t border-white/10" />
+
+    <PickRoleButton text="Connect with Github" icon={<PickRoleGithubIcon />} />
+  </PickRoleSection>
+);
