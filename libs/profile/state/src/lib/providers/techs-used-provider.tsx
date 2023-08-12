@@ -18,7 +18,9 @@ export const TechsUsedProvider = ({
 
   return (
     <TechsUsedContext.Provider value={value}>
-      {children}
+      <div id="profile-right-panel-techs-used" className="flex flex-col gap-6">
+        {children}
+      </div>
     </TechsUsedContext.Provider>
   );
 };

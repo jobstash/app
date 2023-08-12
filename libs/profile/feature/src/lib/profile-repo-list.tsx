@@ -1,19 +1,19 @@
 import { memo } from 'react';
 
-import { ProfileRepo } from '@jobstash/profile/core';
-
-import { useProfileRepoList } from '@jobstash/profile/state';
+import {
+  useProfileRepoList,
+  useProfileRepoPageContext,
+} from '@jobstash/profile/state';
 
 import { ProfileRepoCard, ProfileRepoEmptyList } from '@jobstash/profile/ui';
-import { Loader } from '@jobstash/shared/ui';
+import {
+  ListErrorMessage,
+  ListNextPageLoader,
+  Loader,
+} from '@jobstash/shared/ui';
 
-interface Props {
-  initProfileRepo: ProfileRepo | null;
-  activeProfileRepo: ProfileRepo | null;
-}
-
-const ProfileRepoList = (props: Props) => {
-  const { initProfileRepo, activeProfileRepo } = props;
+const ProfileRepoList = () => {
+  const { activeProfileRepo } = useProfileRepoPageContext();
 
   const {
     isLoading,
@@ -22,27 +22,14 @@ const ProfileRepoList = (props: Props) => {
     isFetchingNextPage,
     hasNextPage,
     inViewRef,
-  } = useProfileRepoList(initProfileRepo);
+  } = useProfileRepoList();
 
   if (isLoading) {
-    return (
-      <div className="py-4">
-        {initProfileRepo && (
-          <ProfileRepoCard isActive profileRepo={initProfileRepo} />
-        )}
-        <div className="flex h-full w-full items-center justify-center">
-          <Loader />
-        </div>
-      </div>
-    );
+    return <LoadingState />;
   }
 
   if (profileRepoListItems.length === 0 && !error) {
-    return (
-      <div className="py-8">
-        <ProfileRepoEmptyList />
-      </div>
-    );
+    return <EmptyList />;
   }
 
   return (
@@ -55,19 +42,30 @@ const ProfileRepoList = (props: Props) => {
         />
       ))}
 
-      {profileRepoListItems.length > 0 && (
-        <div ref={inViewRef} className="flex items-center justify-center pb-10">
-          {isFetchingNextPage && <Loader />}
-          {!hasNextPage && <p>No more repositories to load</p>}
-        </div>
-      )}
-      {(error as Error)?.message && (
-        <div className="py-8">
-          <p>error = {(error as Error).message}</p>
-        </div>
-      )}
+      <ListNextPageLoader
+        isFetchingNextPage={isFetchingNextPage}
+        hasNextPage={hasNextPage}
+        inViewRef={inViewRef}
+        itemsLength={profileRepoListItems.length}
+      />
+
+      <ListErrorMessage error={error} />
     </div>
   );
 };
+
+const LoadingState = () => (
+  <div className="py-4">
+    <div className="flex h-full w-full items-center justify-center">
+      <Loader />
+    </div>
+  </div>
+);
+
+const EmptyList = () => (
+  <div className="py-8">
+    <ProfileRepoEmptyList />
+  </div>
+);
 
 export default memo(ProfileRepoList);

@@ -55,18 +55,6 @@ const bookmarkedBartabs = [
     icon: <BookmarkSidebarIcon />,
   },
 ];
-
-const profileBartabs = [
-  {
-    text: 'Your Repositories',
-    path: '/profile/repositories',
-  },
-  {
-    text: 'Organization Reviews',
-    path: '/profile/reviews',
-  },
-];
-
 const Sidebar = () => {
   const sidebarOpen = useAtomValue(sidebarOpenAtom);
 
@@ -152,9 +140,19 @@ const Sidebar = () => {
             <div className="flex-col">
               <Text color="dimmed">Your Profile</Text>
               <div className="space-y-3 pt-3">
-                {profileBartabs.map(({ text, path }) => (
-                  <SidebarBartab key={path} path={path} text={text} />
-                ))}
+                <div id="onboard-repo-1">
+                  <SidebarBartab
+                    path="/profile/repositories"
+                    text="Your Repositories"
+                  />
+                </div>
+
+                <div id="onboard-review-1">
+                  <SidebarBartab
+                    path="/profile/reviews"
+                    text="Organization Reviews"
+                  />
+                </div>
               </div>
             </div>
           ) : (

@@ -9,6 +9,7 @@ export * from './lib/hooks/use-profile-info';
 export * from './lib/hooks/use-profile-info-mutation';
 export * from './lib/hooks/use-profile-org-review-list';
 export * from './lib/hooks/use-profile-repo-list';
+export * from './lib/hooks/use-profile-repo-page';
 export * from './lib/hooks/use-rating-mutation';
 export * from './lib/hooks/use-salary-mutation';
 export * from './lib/hooks/use-techs-used-mutation';
@@ -16,5 +17,7 @@ export * from './lib/hooks/use-your-contribution-mutation';
 export * from './lib/hooks/use-your-review-mutation';
 
 // Contexts & Providers
+export * from './lib/contexts/profile-repo-page-context';
 export * from './lib/contexts/techs-used-context';
+export * from './lib/providers/profile-repo-page-provider';
 export * from './lib/providers/techs-used-provider';

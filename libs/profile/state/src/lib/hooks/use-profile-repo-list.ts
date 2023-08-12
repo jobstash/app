@@ -12,7 +12,7 @@ import { profileRepoCountAtom } from '../atoms/profile-repo-count-atom';
 
 import { useProfileRepoListQuery } from './use-profile-repo-list-query';
 
-export const useProfileRepoList = (initProfileRepo: ProfileRepo | null) => {
+export const useProfileRepoList = () => {
   const {
     data,
     isLoading,
@@ -37,20 +37,13 @@ export const useProfileRepoList = (initProfileRepo: ProfileRepo | null) => {
     if (!data) return [];
 
     let result = data.pages.flatMap((d) => d.data);
-
-    if (initProfileRepo) {
-      result = result.filter((d) => d.id !== initProfileRepo.id);
-      result.unshift(initProfileRepo);
-      initProfileRepoRef.current = initProfileRepo;
-    }
-
     if (initProfileRepoRef.current) {
       result = result.filter((d) => d.id !== initProfileRepoRef.current?.id);
       result.unshift(initProfileRepoRef.current);
     }
 
     return result;
-  }, [data, initProfileRepo]);
+  }, [data]);
 
   const setActiveRef = useRef(false);
   const isMobile = useIsMobile();

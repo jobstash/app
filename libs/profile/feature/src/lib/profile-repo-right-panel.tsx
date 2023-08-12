@@ -1,14 +1,11 @@
-import { memo, useMemo, useState } from 'react';
+import { memo } from 'react';
 
-import { useAtomValue } from 'jotai';
+import { useTour } from '@reactour/tour';
 
-import {
-  PROFILE_RIGHT_PANEL_TAB,
-  PROFILE_RIGHT_PANEL_TABS,
-} from '@jobstash/profile/core';
+import { PROFILE_RIGHT_PANEL_TAB } from '@jobstash/profile/core';
+import { cn } from '@jobstash/shared/utils';
 
-import { activeProfileRepoAtom } from '@jobstash/profile/state';
-import { useAllTechnologies } from '@jobstash/shared/state';
+import { useProfileRepoPageContext } from '@jobstash/profile/state';
 
 import {
   ProfileRightPanel,
@@ -20,22 +17,10 @@ import {
 import { RightPanelCardBorder } from '@jobstash/right-panel/ui';
 
 const ProfileRepoRightPanel = () => {
-  const activeProfileRepo = useAtomValue(activeProfileRepoAtom);
+  const { isOpen } = useTour();
 
-  const [activeTab, setActiveTab] = useState(
-    PROFILE_RIGHT_PANEL_TABS.REPOSITORIES[0],
-  );
-
-  const tabs = useMemo(
-    () =>
-      PROFILE_RIGHT_PANEL_TABS.REPOSITORIES.map((text) => ({
-        text,
-        onClick: () => setActiveTab(text),
-      })),
-    [],
-  );
-
-  const { data: allTechnologiesData } = useAllTechnologies();
+  const { activeProfileRepo, tabs, activeTab, allTechs } =
+    useProfileRepoPageContext();
 
   return (
     <ProfileRightPanel
@@ -44,25 +29,31 @@ const ProfileRepoRightPanel = () => {
       header={<ProfileRightPanelRepoHeader profileRepo={activeProfileRepo} />}
       tabs={<ProfileRightPanelTabs tabs={tabs} activeTab={activeTab} />}
       card={
-        <RightPanelCardBorder>
-          <div className="p-6">
-            <div className="flex flex-col gap-6 py-2 relative">
-              {activeTab === PROFILE_RIGHT_PANEL_TAB.TECHNOLOGIES_USED && (
-                <TechsUsed
-                  allTechs={allTechnologiesData?.technologies ?? []}
-                  profileRepo={activeProfileRepo}
-                />
-              )}
-              {activeTab === PROFILE_RIGHT_PANEL_TAB.YOUR_CONTRIBUTION && (
-                <ProfileRightPanelYourContribution
-                  key={activeProfileRepo?.id}
-                  username="0xDevoor"
-                  profileRepo={activeProfileRepo}
-                />
-              )}
+        <div
+          id="profile-right-panel-card"
+          className={cn({ 'pointer-events-none': isOpen })}
+        >
+          <RightPanelCardBorder>
+            <div className="p-6">
+              <div className="flex flex-col gap-6 py-2 relative">
+                {activeTab === PROFILE_RIGHT_PANEL_TAB.TECHNOLOGIES_USED && (
+                  <TechsUsed
+                    key={activeProfileRepo?.id}
+                    allTechs={allTechs}
+                    profileRepo={activeProfileRepo}
+                  />
+                )}
+                {activeTab === PROFILE_RIGHT_PANEL_TAB.YOUR_CONTRIBUTION && (
+                  <ProfileRightPanelYourContribution
+                    key={activeProfileRepo?.id}
+                    username="0xDevoor"
+                    profileRepo={activeProfileRepo}
+                  />
+                )}
+              </div>
             </div>
-          </div>
-        </RightPanelCardBorder>
+          </RightPanelCardBorder>
+        </div>
       }
     />
   );
