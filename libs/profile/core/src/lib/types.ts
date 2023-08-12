@@ -1,5 +1,3 @@
-import { type Dispatch, type SetStateAction } from 'react';
-
 import { type Infer } from 'myzod';
 
 import { type Technology } from '@jobstash/shared/core';
@@ -45,22 +43,4 @@ export type ProfileInfo = Infer<typeof profileInfoSchema>;
 export interface TechsUsedProps {
   allTechs: Technology[];
   profileRepo: ProfileRepo | null;
-}
-
-export interface TechsUsedContextProps {
-  techsUsed: ProfileRepoTechnology[];
-  techsCreated: ProfileRepoTechnology[];
-  searchValue: string;
-  setSearchValue: Dispatch<SetStateAction<string>>;
-  hoverAddButton: boolean;
-  setHoverAddButton: Dispatch<SetStateAction<boolean>>;
-  onBlurSearch: () => void;
-  currentTechs: ProfileRepoTechnology[];
-  disableAdd: boolean;
-  onTechRemove: (id: string) => void;
-  disableSave: boolean;
-  techOptions: string[];
-  isLoading: boolean;
-  onClickSave: () => void;
-  onClickCanTeach: (id: string, canTeach: boolean) => void;
 }

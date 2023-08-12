@@ -5,7 +5,6 @@ import { v4 } from '@lukeed/uuid';
 import type {
   ProfileRepo,
   ProfileRepoTechnology,
-  TechsUsedContextProps,
   TechsUsedProps,
 } from '@jobstash/profile/core';
 import { Technology } from '@jobstash/shared/core';
@@ -48,10 +47,7 @@ const getTechOptions = (
     .map((option) => option.name);
 };
 
-export const useTechsUsed = ({
-  allTechs,
-  profileRepo,
-}: TechsUsedProps): TechsUsedContextProps => {
+export const useTechsUsed = ({ allTechs, profileRepo }: TechsUsedProps) => {
   const { id, technologies: techs } = profileRepo || ({} as ProfileRepo);
 
   const [techsUsed, setTechsUsed] = useState<ProfileRepoTechnology[]>(techs);

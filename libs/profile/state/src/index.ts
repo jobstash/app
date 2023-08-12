@@ -11,10 +11,10 @@ export * from './lib/hooks/use-profile-org-review-list';
 export * from './lib/hooks/use-profile-repo-list';
 export * from './lib/hooks/use-rating-mutation';
 export * from './lib/hooks/use-salary-mutation';
-export * from './lib/hooks/use-techs-used-context';
 export * from './lib/hooks/use-techs-used-mutation';
 export * from './lib/hooks/use-your-contribution-mutation';
 export * from './lib/hooks/use-your-review-mutation';
 
-// Providers
+// Contexts & Providers
+export * from './lib/contexts/techs-used-context';
 export * from './lib/providers/techs-used-provider';
