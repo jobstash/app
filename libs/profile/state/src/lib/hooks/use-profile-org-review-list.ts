@@ -12,9 +12,7 @@ import { profileRepoCountAtom } from '../atoms/profile-repo-count-atom';
 
 import { useProfileOrgReviewListQuery } from './use-profile-org-review-list-query';
 
-export const useProfileOrgReviewList = (
-  initProfileOrgReview: ProfileOrgReview | null,
-) => {
+export const useProfileOrgReviewList = () => {
   const {
     data,
     isLoading,
@@ -39,13 +37,6 @@ export const useProfileOrgReviewList = (
     if (!data) return [];
 
     let result = data.pages.flatMap((d) => d.data);
-
-    if (initProfileOrgReview) {
-      result = result.filter((d) => d.org.id !== initProfileOrgReview.org.id);
-      result.unshift(initProfileOrgReview);
-      initProfileOrgReviewRef.current = initProfileOrgReview;
-    }
-
     if (initProfileOrgReviewRef.current) {
       result = result.filter(
         (d) => d.org.id !== initProfileOrgReviewRef.current?.org.id,
@@ -54,7 +45,7 @@ export const useProfileOrgReviewList = (
     }
 
     return result;
-  }, [data, initProfileOrgReview]);
+  }, [data]);
 
   const setActiveRef = useRef(false);
   const isMobile = useIsMobile();

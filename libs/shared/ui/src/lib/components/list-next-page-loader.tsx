@@ -8,17 +8,19 @@ interface Props {
   hasNextPage: boolean | undefined;
   inViewRef: InViewHookResponse['ref'];
   itemsLength: number;
+  text: string;
 }
 
 const ListNextPageLoader = (props: Props) => {
-  const { isFetchingNextPage, hasNextPage, inViewRef, itemsLength } = props;
+  const { isFetchingNextPage, hasNextPage, inViewRef, itemsLength, text } =
+    props;
 
   if (itemsLength === 0) return null;
 
   return (
     <div ref={inViewRef} className="flex items-center justify-center pb-10">
       {isFetchingNextPage && <Loader />}
-      {!hasNextPage && <p>No more repositories to load</p>}
+      {!hasNextPage && <p>{text}</p>}
     </div>
   );
 };

@@ -5,10 +5,11 @@ import { v4 } from '@lukeed/uuid';
 import type {
   ProfileRepo,
   ProfileRepoTechnology,
-  TechsUsedProps,
 } from '@jobstash/profile/core';
 import { Technology } from '@jobstash/shared/core';
 import { capitalize, slugify } from '@jobstash/shared/utils';
+
+import { useProfileRepoPageContext } from '../contexts/profile-repo-page-context';
 
 import { useTechsUsedMutation } from './use-techs-used-mutation';
 
@@ -47,7 +48,9 @@ const getTechOptions = (
     .map((option) => option.name);
 };
 
-export const useTechsUsed = ({ allTechs, profileRepo }: TechsUsedProps) => {
+export const useTechsUsed = () => {
+  const { activeProfileRepo: profileRepo, allTechs } =
+    useProfileRepoPageContext();
   const { id, technologies: techs } = profileRepo || ({} as ProfileRepo);
 
   const [techsUsed, setTechsUsed] = useState<ProfileRepoTechnology[]>(techs);

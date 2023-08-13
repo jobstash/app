@@ -1,22 +1,22 @@
 import { memo } from 'react';
 
-import { type ProfileOrgReview } from '@jobstash/profile/core';
-
-import { useProfileOrgReviewList } from '@jobstash/profile/state';
+import {
+  useProfileOrgReviewList,
+  useProfileReviewsPageContext,
+} from '@jobstash/profile/state';
 
 import {
   ProfileOrgReviewCard,
   ProfileOrgReviewEmptyList,
 } from '@jobstash/profile/ui';
-import { Loader } from '@jobstash/shared/ui';
+import {
+  ListErrorMessage,
+  ListNextPageLoader,
+  Loader,
+} from '@jobstash/shared/ui';
 
-interface Props {
-  initProfileOrgReview: ProfileOrgReview | null;
-  activeProfileOrgReview: ProfileOrgReview | null;
-}
-
-const ProfileOrgReviewList = (props: Props) => {
-  const { initProfileOrgReview, activeProfileOrgReview } = props;
+const ProfileOrgReviewList = () => {
+  const { activeProfileOrgReview } = useProfileReviewsPageContext();
 
   const {
     isLoading,
@@ -25,31 +25,10 @@ const ProfileOrgReviewList = (props: Props) => {
     isFetchingNextPage,
     hasNextPage,
     inViewRef,
-  } = useProfileOrgReviewList(initProfileOrgReview);
+  } = useProfileOrgReviewList();
 
-  if (isLoading) {
-    return (
-      <div className="py-4">
-        {initProfileOrgReview && (
-          <ProfileOrgReviewCard
-            isActive
-            profileOrgReview={initProfileOrgReview}
-          />
-        )}
-        <div className="flex h-full w-full items-center justify-center">
-          <Loader />
-        </div>
-      </div>
-    );
-  }
-
-  if (profileOrgReviewListItems.length === 0 && !error) {
-    return (
-      <div className="py-8">
-        <ProfileOrgReviewEmptyList />
-      </div>
-    );
-  }
+  if (isLoading) return <LoadingState />;
+  if (profileOrgReviewListItems.length === 0 && !error) return <EmptyList />;
 
   return (
     <div className="flex flex-col gap-y-4 py-4">
@@ -61,19 +40,31 @@ const ProfileOrgReviewList = (props: Props) => {
         />
       ))}
 
-      {profileOrgReviewListItems.length > 0 && (
-        <div ref={inViewRef} className="flex items-center justify-center pb-10">
-          {isFetchingNextPage && <Loader />}
-          {!hasNextPage && <p>No more organization reviews to load</p>}
-        </div>
-      )}
-      {(error as Error)?.message && (
-        <div className="py-8">
-          <p>error = {(error as Error).message}</p>
-        </div>
-      )}
+      <ListNextPageLoader
+        isFetchingNextPage={isFetchingNextPage}
+        hasNextPage={hasNextPage}
+        inViewRef={inViewRef}
+        itemsLength={profileOrgReviewListItems.length}
+        text="No more organization reviews to load"
+      />
+
+      <ListErrorMessage error={error} />
     </div>
   );
 };
+
+const LoadingState = () => (
+  <div className="py-4">
+    <div className="flex h-full w-full items-center justify-center">
+      <Loader />
+    </div>
+  </div>
+);
+
+const EmptyList = () => (
+  <div className="py-8">
+    <ProfileOrgReviewEmptyList />
+  </div>
+);
 
 export default memo(ProfileOrgReviewList);

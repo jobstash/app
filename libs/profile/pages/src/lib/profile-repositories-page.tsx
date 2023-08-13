@@ -3,10 +3,7 @@ import Head from 'next/head';
 import { LoadingPage } from '@jobstash/shared/pages';
 
 import { ProfileRepoPageProvider } from '@jobstash/profile/state';
-import {
-  useAllTechnologies,
-  useDelayedAuthRender,
-} from '@jobstash/shared/state';
+import { useDelayedAuthRender } from '@jobstash/shared/state';
 
 import {
   ProfileRepoGotItCard,
@@ -28,14 +25,9 @@ interface Props {
 export const ProfileRepositoriesPage = ({ isOnboardSSR }: Props) => {
   const { canRender } = useDelayedAuthRender({ requireConnected: true });
 
-  const { data: allTechsData } = useAllTechnologies();
-
   if (canRender)
     return (
-      <ProfileRepoPageProvider
-        isOnboardSSR={isOnboardSSR}
-        allTechs={allTechsData?.technologies}
-      >
+      <ProfileRepoPageProvider isOnboardSSR={isOnboardSSR}>
         <ProfileRepoTourWrapper>
           <Head>
             <title>Your Repositories</title>

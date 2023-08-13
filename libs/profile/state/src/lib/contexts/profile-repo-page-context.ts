@@ -5,23 +5,29 @@ import {
   useContext,
 } from 'react';
 
-import { type ProfileRepo } from '@jobstash/profile/core';
+import {
+  type ProfileInfo,
+  type ProfileRepo,
+  type ProfileTabOptions,
+} from '@jobstash/profile/core';
 import { Technology } from '@jobstash/shared/core';
 
 interface ProfileRepoPageContextProps {
+  isOnboardSSR: boolean;
   isOnboardFlow: boolean;
   profileRepoCount: number | null;
   activeProfileRepo: ProfileRepo | null;
   showGotItCard: boolean;
   setShowGotItCard: (show: boolean) => void;
-  isOnboardSSR: boolean;
   tabs: {
     text: string;
     onClick: () => void;
   }[];
   activeTab: string;
-  setActiveTab: Dispatch<SetStateAction<string>>;
+  setActiveTab: Dispatch<SetStateAction<ProfileTabOptions[number]>>;
   allTechs: Technology[];
+  profileRepo: ProfileRepo;
+  profileInfo: ProfileInfo;
 }
 
 export const ProfileRepoPageContext =

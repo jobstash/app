@@ -1,7 +1,6 @@
 import { type Infer } from 'myzod';
 
-import { type Technology } from '@jobstash/shared/core';
-
+import { PROFILE_RIGHT_PANEL_TABS } from './constants';
 import {
   profileInfoSchema,
   profileOrgReviewListQueryPageSchema,
@@ -40,7 +39,5 @@ export type ProfileOrgReviewListQueryPage = Infer<
 
 export type ProfileInfo = Infer<typeof profileInfoSchema>;
 
-export interface TechsUsedProps {
-  allTechs: Technology[];
-  profileRepo: ProfileRepo | null;
-}
+export type ProfileTabOptions =
+  typeof PROFILE_RIGHT_PANEL_TABS[keyof typeof PROFILE_RIGHT_PANEL_TABS];

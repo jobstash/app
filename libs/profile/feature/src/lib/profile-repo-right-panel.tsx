@@ -11,16 +11,15 @@ import {
   ProfileRightPanel,
   ProfileRightPanelRepoHeader,
   ProfileRightPanelTabs,
-  ProfileRightPanelYourContribution,
   TechsUsed,
+  YourContribution,
 } from '@jobstash/profile/ui';
 import { RightPanelCardBorder } from '@jobstash/right-panel/ui';
 
 const ProfileRepoRightPanel = () => {
   const { isOpen } = useTour();
 
-  const { activeProfileRepo, tabs, activeTab, allTechs } =
-    useProfileRepoPageContext();
+  const { activeProfileRepo, tabs, activeTab } = useProfileRepoPageContext();
 
   return (
     <ProfileRightPanel
@@ -37,18 +36,10 @@ const ProfileRepoRightPanel = () => {
             <div className="p-6">
               <div className="flex flex-col gap-6 py-2 relative">
                 {activeTab === PROFILE_RIGHT_PANEL_TAB.TECHNOLOGIES_USED && (
-                  <TechsUsed
-                    key={activeProfileRepo?.id}
-                    allTechs={allTechs}
-                    profileRepo={activeProfileRepo}
-                  />
+                  <TechsUsed key={activeProfileRepo?.id} />
                 )}
                 {activeTab === PROFILE_RIGHT_PANEL_TAB.YOUR_CONTRIBUTION && (
-                  <ProfileRightPanelYourContribution
-                    key={activeProfileRepo?.id}
-                    username="0xDevoor"
-                    profileRepo={activeProfileRepo}
-                  />
+                  <YourContribution key={activeProfileRepo?.id} />
                 )}
               </div>
             </div>

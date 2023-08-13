@@ -24,13 +24,8 @@ const ProfileRepoList = () => {
     inViewRef,
   } = useProfileRepoList();
 
-  if (isLoading) {
-    return <LoadingState />;
-  }
-
-  if (profileRepoListItems.length === 0 && !error) {
-    return <EmptyList />;
-  }
+  if (isLoading) return <LoadingState />;
+  if (profileRepoListItems.length === 0 && !error) return <EmptyList />;
 
   return (
     <div className="flex flex-col gap-y-4 py-4">
@@ -47,6 +42,7 @@ const ProfileRepoList = () => {
         hasNextPage={hasNextPage}
         inViewRef={inViewRef}
         itemsLength={profileRepoListItems.length}
+        text="No more repositories to load"
       />
 
       <ListErrorMessage error={error} />
