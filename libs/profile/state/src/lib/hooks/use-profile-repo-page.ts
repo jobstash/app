@@ -3,7 +3,6 @@ import { useAtomValue } from 'jotai';
 import { CHECK_WALLET_FLOWS } from '@jobstash/auth/core';
 import {
   PROFILE_RIGHT_PANEL_TABS,
-  type ProfileInfo,
   type ProfileRepo,
 } from '@jobstash/profile/core';
 
@@ -13,7 +12,6 @@ import { activeProfileRepoAtom } from '../atoms/active-profile-repo-atom';
 import { profileRepoCountAtom } from '../atoms/profile-repo-count-atom';
 
 import { useOnboardFlow } from './use-onboard-flow';
-import { useProfileInfo } from './use-profile-info';
 import { useProfileTabs } from './use-profile-tabs';
 
 export const useProfileRepoPage = (isOnboardSSR: boolean) => {
@@ -32,9 +30,6 @@ export const useProfileRepoPage = (isOnboardSSR: boolean) => {
   const activeProfileRepo = useAtomValue(activeProfileRepoAtom);
   const profileRepo = activeProfileRepo || ({} as ProfileRepo);
 
-  const { data: profileInfoData } = useProfileInfo();
-  const profileInfo = profileInfoData ?? ({} as ProfileInfo);
-
   return {
     isOnboardSSR,
     isOnboardFlow,
@@ -47,6 +42,5 @@ export const useProfileRepoPage = (isOnboardSSR: boolean) => {
     setActiveTab,
     allTechs: allTechsData?.technologies ?? [],
     profileRepo,
-    profileInfo,
   };
 };

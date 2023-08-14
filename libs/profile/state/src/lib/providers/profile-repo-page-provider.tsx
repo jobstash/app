@@ -3,6 +3,8 @@ import { type ReactNode } from 'react';
 import { ProfileRepoPageContext } from '../contexts/profile-repo-page-context';
 import { useProfileRepoPage } from '../hooks/use-profile-repo-page';
 
+import { ProfileInfoProvider } from './profile-info-provider';
+
 interface Props {
   children: ReactNode;
   isOnboardSSR: boolean;
@@ -13,7 +15,7 @@ export const ProfileRepoPageProvider = ({ children, isOnboardSSR }: Props) => {
 
   return (
     <ProfileRepoPageContext.Provider value={value}>
-      {children}
+      <ProfileInfoProvider>{children}</ProfileInfoProvider>
     </ProfileRepoPageContext.Provider>
   );
 };

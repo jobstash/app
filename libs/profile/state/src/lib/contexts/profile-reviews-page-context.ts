@@ -6,7 +6,6 @@ import {
 } from 'react';
 
 import {
-  type ProfileInfo,
   type ProfileOrgReview,
   type ProfileTabOptions,
 } from '@jobstash/profile/core';
@@ -25,7 +24,6 @@ interface ProfileReviewsPageContextProps {
   activeTab: string;
   setActiveTab: Dispatch<SetStateAction<ProfileTabOptions[number]>>;
   orgReview: ProfileOrgReview;
-  profileInfo: ProfileInfo;
 }
 
 export const ProfileReviewsPageContext =

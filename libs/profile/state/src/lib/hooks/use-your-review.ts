@@ -1,16 +1,19 @@
 import { useState } from 'react';
 
+import { useProfileInfoContext } from '../contexts/profile-info-context';
 import { useProfileReviewsPageContext } from '../contexts/profile-reviews-page-context';
 
 import { useYourReviewMutation } from './use-your-review-mutation';
 
 export const useYourReview = () => {
+  const { profileInfoData } = useProfileInfoContext();
+  const username = profileInfoData?.username ?? '';
+
   const {
     orgReview: {
       review: { headline, pros, cons },
       org: { orgId },
     },
-    profileInfo: { username },
   } = useProfileReviewsPageContext();
 
   const [currentReview, setCurrentReview] = useState({

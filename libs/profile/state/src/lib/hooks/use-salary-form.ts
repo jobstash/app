@@ -24,8 +24,8 @@ export const useSalaryForm = () => {
       orgId: org.id,
       currencyValue: state.currency,
       salaryAmount: state.amount ?? null,
-      tokenValue: state.token,
-      tokenNoAllocation: state.noAllocation,
+      token: state.token,
+      noAllocation: state.noAllocation,
     });
   };
 
@@ -33,8 +33,8 @@ export const useSalaryForm = () => {
     JSON.stringify({
       currency: currency.value,
       amount,
-      tokenValue: token.value,
-      tokenNoAllocation: token.noAllocation,
+      token: token.value,
+      noAllocation: token.noAllocation,
     }) === JSON.stringify(state);
 
   return {

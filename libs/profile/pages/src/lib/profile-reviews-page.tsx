@@ -6,6 +6,7 @@ import { ProfileReviewsPageProvider } from '@jobstash/profile/state';
 import { useDelayedAuthRender } from '@jobstash/shared/state';
 
 import {
+  ProfileHeader,
   ProfileReviewsGotItCard,
   ProfileReviewsSubHeader,
 } from '@jobstash/profile/ui';
@@ -14,8 +15,6 @@ import {
   ProfileOrgReviewsRightPanel,
 } from '@jobstash/profile/feature';
 import { SideBar } from '@jobstash/sidebar/feature';
-
-import ProfileHeader from './profile-header';
 
 interface Props {
   isOnboardSSR: boolean;

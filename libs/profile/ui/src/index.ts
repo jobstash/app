@@ -1,4 +1,5 @@
 // Components
+export * from './lib/profile-header';
 export { default as ProfileOrgReviewCard } from './lib/profile-org-review-card';
 export { default as ProfileOrgReviewEmptyList } from './lib/profile-org-review-empty-list';
 export { default as ProfileRepoCard } from './lib/profile-repo-card';

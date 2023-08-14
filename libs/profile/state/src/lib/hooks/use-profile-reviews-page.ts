@@ -3,7 +3,6 @@ import { useAtomValue } from 'jotai';
 import { CHECK_WALLET_FLOWS } from '@jobstash/auth/core';
 import {
   PROFILE_RIGHT_PANEL_TABS,
-  type ProfileInfo,
   type ProfileOrgReview,
 } from '@jobstash/profile/core';
 
@@ -11,7 +10,6 @@ import { activeProfileOrgReviewAtom } from '../atoms/active-profile-org-review-a
 import { profileOrgReviewCountAtom } from '../atoms/profile-org-review-count-atom';
 
 import { useOnboardFlow } from './use-onboard-flow';
-import { useProfileInfo } from './use-profile-info';
 import { useProfileTabs } from './use-profile-tabs';
 
 export const useProfileReviewsPage = (isOnboardSSR: boolean) => {
@@ -28,9 +26,6 @@ export const useProfileReviewsPage = (isOnboardSSR: boolean) => {
   const activeProfileOrgReview = useAtomValue(activeProfileOrgReviewAtom);
   const orgReview = activeProfileOrgReview || ({} as ProfileOrgReview);
 
-  const { data: profileInfoData } = useProfileInfo();
-  const profileInfo = profileInfoData ?? ({} as ProfileInfo);
-
   return {
     isOnboardSSR,
     isOnboardFlow,
@@ -42,6 +37,5 @@ export const useProfileReviewsPage = (isOnboardSSR: boolean) => {
     activeTab,
     setActiveTab,
     orgReview,
-    profileInfo,
   };
 };

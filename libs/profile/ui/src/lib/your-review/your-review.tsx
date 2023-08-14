@@ -1,5 +1,6 @@
 import { YourReviewProvider } from '@jobstash/profile/state';
 
+import YourReviewActions from './your-review-actions';
 import YourReviewCons from './your-review-cons';
 import YourReviewHeader from './your-review-header';
 import YourReviewHeadline from './your-review-headline';
@@ -12,6 +13,7 @@ const YourReview = () => (
       <YourReviewHeadline />
       <YourReviewPros />
       <YourReviewCons />
+      <YourReviewActions />
     </div>
   </YourReviewProvider>
 );

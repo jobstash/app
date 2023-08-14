@@ -6,7 +6,6 @@ import {
 } from 'react';
 
 import {
-  type ProfileInfo,
   type ProfileRepo,
   type ProfileTabOptions,
 } from '@jobstash/profile/core';
@@ -27,7 +26,6 @@ interface ProfileRepoPageContextProps {
   setActiveTab: Dispatch<SetStateAction<ProfileTabOptions[number]>>;
   allTechs: Technology[];
   profileRepo: ProfileRepo;
-  profileInfo: ProfileInfo;
 }
 
 export const ProfileRepoPageContext =

@@ -8,8 +8,8 @@ interface Payload {
   orgId: ProfileOrgReview['org']['id'];
   currencyValue: ProfileOrgReview['salary']['currency']['value'];
   salaryAmount: ProfileOrgReview['salary']['amount'];
-  tokenValue: ProfileOrgReview['salary']['token']['value'];
-  tokenNoAllocation: ProfileOrgReview['salary']['token']['noAllocation'];
+  token: ProfileOrgReview['salary']['token']['value'];
+  noAllocation: ProfileOrgReview['salary']['token']['noAllocation'];
 }
 
 export const useSalaryMutation = () => {
