@@ -1,3 +1,5 @@
+import { useState } from 'react';
+
 import { useAtomValue } from 'jotai';
 
 import { CHECK_WALLET_FLOWS } from '@jobstash/auth/core';
@@ -9,14 +11,16 @@ import {
 import { activeProfileOrgReviewAtom } from '../atoms/active-profile-org-review-atom';
 import { profileOrgReviewCountAtom } from '../atoms/profile-org-review-count-atom';
 
-import { useOnboardFlow } from './use-onboard-flow';
+import { useIsOnboarding } from './use-is-onboarding';
 import { useProfileTabs } from './use-profile-tabs';
 
 export const useProfileReviewsPage = (isOnboardSSR: boolean) => {
-  const { isOnboardFlow, showGotItCard, setShowGotItCard } = useOnboardFlow(
+  const isOnboarding = useIsOnboarding(
     isOnboardSSR,
     CHECK_WALLET_FLOWS.ONBOARD_REVIEWS,
   );
+
+  const [showGotItCard, setShowGotItCard] = useState(isOnboarding);
 
   const { tabs, activeTab, setActiveTab } = useProfileTabs(
     PROFILE_RIGHT_PANEL_TABS.ORG_REVIEWS,
@@ -27,8 +31,6 @@ export const useProfileReviewsPage = (isOnboardSSR: boolean) => {
   const orgReview = activeProfileOrgReview || ({} as ProfileOrgReview);
 
   return {
-    isOnboardSSR,
-    isOnboardFlow,
     profileOrgReviewCount,
     activeProfileOrgReview,
     showGotItCard,
@@ -37,5 +39,6 @@ export const useProfileReviewsPage = (isOnboardSSR: boolean) => {
     activeTab,
     setActiveTab,
     orgReview,
+    isOnboarding,
   };
 };

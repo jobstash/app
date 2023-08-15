@@ -11,8 +11,6 @@ import {
 } from '@jobstash/profile/core';
 
 interface ProfileReviewsPageContextProps {
-  isOnboardSSR: boolean;
-  isOnboardFlow: boolean;
   profileOrgReviewCount: number | null;
   activeProfileOrgReview: ProfileOrgReview | null;
   showGotItCard: boolean;
@@ -24,6 +22,7 @@ interface ProfileReviewsPageContextProps {
   activeTab: string;
   setActiveTab: Dispatch<SetStateAction<ProfileTabOptions[number]>>;
   orgReview: ProfileOrgReview;
+  isOnboarding: boolean;
 }
 
 export const ProfileReviewsPageContext =

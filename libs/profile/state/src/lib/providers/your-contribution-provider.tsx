@@ -12,7 +12,7 @@ export const YourContributionProvider = ({ children }: Props) => {
 
   return (
     <YourContributionContext.Provider value={value}>
-      {children}
+      <div id="profile-right-panel-your-contribution">{children}</div>
     </YourContributionContext.Provider>
   );
 };

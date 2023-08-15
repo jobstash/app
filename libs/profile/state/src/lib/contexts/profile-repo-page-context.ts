@@ -12,8 +12,6 @@ import {
 import { Technology } from '@jobstash/shared/core';
 
 interface ProfileRepoPageContextProps {
-  isOnboardSSR: boolean;
-  isOnboardFlow: boolean;
   profileRepoCount: number | null;
   activeProfileRepo: ProfileRepo | null;
   showGotItCard: boolean;
@@ -26,6 +24,7 @@ interface ProfileRepoPageContextProps {
   setActiveTab: Dispatch<SetStateAction<ProfileTabOptions[number]>>;
   allTechs: Technology[];
   profileRepo: ProfileRepo;
+  isOnboarding: boolean;
 }
 
 export const ProfileRepoPageContext =

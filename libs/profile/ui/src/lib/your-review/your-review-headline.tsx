@@ -14,7 +14,7 @@ const YourReviewHeadline = () => {
   } = useYourReviewContext();
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-4" id="profile-right-panel-your-review">
       <div className="flex justify-between">
         <Heading size="md" fw="semibold">
           Review Headline

@@ -9,12 +9,12 @@ import { sentryMessage } from '@jobstash/shared/utils';
 
 import { useAuthContext } from './use-auth-context';
 
-export const useUpdateFlow = (successRoute: string) => {
+export const useUpdateFlow = (successRoute?: string) => {
   const { push } = useRouter();
   const queryClient = useQueryClient();
 
   const { refetch } = useAuthContext();
-  const { isLoading, mutate } = useMutation({
+  const { isLoading, mutate, mutateAsync } = useMutation({
     mutationFn: (flow: CheckWalletFlow) =>
       fetch(`${MW_URL}/siwe/update-flow`, {
         method: 'POST',
@@ -40,16 +40,19 @@ export const useUpdateFlow = (successRoute: string) => {
       });
       refetch();
 
-      push(successRoute);
+      if (successRoute) {
+        push(successRoute);
+      }
     },
     onError(error) {
       sentryMessage(`updateFlow`, JSON.stringify(error));
       // TODO: Notification ?
     },
     onSettled() {
+      queryClient.invalidateQueries(['check-wallet']);
       NProgress.done();
     },
   });
 
-  return { isLoading, mutate };
+  return { isLoading, mutate, mutateAsync };
 };

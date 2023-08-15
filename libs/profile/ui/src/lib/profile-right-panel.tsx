@@ -29,7 +29,7 @@ const ProfileRightPanel = (props: Props) => {
     <RightPanelWrapper>
       <RightPanelMobileNav backURL={backUrl} />
       {header}
-      <hr className="border-t border-white/10 -mt-1" />
+      <hr className="border-t border-2 border-white/10 -mt-1" />
       {tabs}
       {card}
     </RightPanelWrapper>

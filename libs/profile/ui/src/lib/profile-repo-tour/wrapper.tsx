@@ -3,8 +3,6 @@ import { ReactNode } from 'react';
 
 import { type StepType, TourProvider } from '@reactour/tour';
 
-import { CHECK_WALLET_FLOWS } from '@jobstash/auth/core';
-
 import { useProfileRepoPageContext } from '@jobstash/profile/state';
 
 import { Heading, Text } from '@jobstash/shared/ui';
@@ -19,7 +17,7 @@ interface Props {
 }
 
 const ProfileRepoTourWrapper = ({ children }: Props) => {
-  const { isOnboardSSR } = useProfileRepoPageContext();
+  const { isOnboarding } = useProfileRepoPageContext();
 
   return (
     <TourProvider
@@ -39,10 +37,7 @@ const ProfileRepoTourWrapper = ({ children }: Props) => {
       nextButton={(props) => <NextButton {...props} />}
       onClickMask={() => null}
     >
-      <ProfileTourStarter
-        startTour={isOnboardSSR}
-        assignedFlow={CHECK_WALLET_FLOWS.ONBOARD_REPO}
-      />
+      <ProfileTourStarter startTour={isOnboarding} />
       {children}
     </TourProvider>
   );
@@ -78,12 +73,11 @@ const steps: StepType[] = [
       positionProps.windowWidth - (61 * positionProps.windowWidth) / 100,
       (40 * positionProps.windowHeight) / 100,
     ],
-    padding: { mask: [40, 60] },
-    //
-    // padding: { mask: [125, 40, 55, 40] },
+
+    padding: { mask: [150, 40, 60, 40] },
   },
   {
-    selector: '#profile-right-panel-card',
+    selector: '#profile-right-panel-your-contribution',
     content: (
       <div className="flex flex-col gap-3">
         <Heading size="lg">Your Contribution</Heading>
@@ -97,6 +91,8 @@ const steps: StepType[] = [
       positionProps.windowWidth - (61 * positionProps.windowWidth) / 100,
       (49 * positionProps.windowHeight) / 100,
     ],
+
+    padding: { mask: [150, 40, 60, 40] },
   },
 ];
 

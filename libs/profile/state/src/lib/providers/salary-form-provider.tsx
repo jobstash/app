@@ -12,7 +12,9 @@ export const SalaryFormProvider = ({ children }: Props) => {
 
   return (
     <SalaryFormContext.Provider value={value}>
-      {children}
+      <div id="profile-right-panel-salary" className="flex flex-col gap-6">
+        {children}
+      </div>
     </SalaryFormContext.Provider>
   );
 };

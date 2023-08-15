@@ -28,10 +28,7 @@ const ProfileRepoRightPanel = () => {
       header={<ProfileRightPanelRepoHeader profileRepo={activeProfileRepo} />}
       tabs={<ProfileRightPanelTabs tabs={tabs} activeTab={activeTab} />}
       card={
-        <div
-          id="profile-right-panel-card"
-          className={cn({ 'pointer-events-none': isOpen })}
-        >
+        <div className={cn({ 'pointer-events-none': isOpen })}>
           <RightPanelCardBorder>
             <div className="p-6">
               <div className="flex flex-col gap-6 py-2 relative">
