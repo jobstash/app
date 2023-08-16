@@ -31,6 +31,12 @@ const RightPanelProjectCard = ({ project, routeSection }: Props) => {
   const slug = slugify(`${name} ${id}`);
   const link = `${ROUTE_SECTION.PROJECTS}/${slug}/${TAB_SEGMENT.details}`;
 
+  const onClickExploreProject = () => {
+    if (typeof window !== 'undefined') {
+      window.location.href = link;
+    }
+  };
+
   return (
     <RightPanelCardBorder>
       <div className="flex flex-col gap-5 p-6">
@@ -46,7 +52,10 @@ const RightPanelProjectCard = ({ project, routeSection }: Props) => {
         <RightPanelProjectCardAuditTags auditTags={projectAuditTags} />
 
         {routeSection !== ROUTE_SECTION.PROJECTS && (
-          <RightPanelCta link={link} text="Explore Project" />
+          <RightPanelCta
+            text="Explore Project"
+            onClick={onClickExploreProject}
+          />
         )}
       </div>
     </RightPanelCardBorder>
