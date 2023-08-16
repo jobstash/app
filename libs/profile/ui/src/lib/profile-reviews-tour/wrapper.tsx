@@ -1,13 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { type ReactNode } from 'react';
 
-import { StepType, TourProvider } from '@reactour/tour';
+import { StepType } from '@reactour/tour';
 
 import { useProfileReviewsPageContext } from '@jobstash/profile/state';
 
-import { Heading, Text } from '@jobstash/shared/ui';
-
-import ProfileTourStarter from '../profile-tour-starter';
+import ProfileOnboardCard from '../profile-onboard-card';
+import ProfileTourWrapper from '../profile-tour-wrapper';
 
 import BackButton from './back-button';
 import NextButton from './next-button';
@@ -20,28 +19,14 @@ const ProfileReviewsTourWrapper = ({ children }: Props) => {
   const { isOnboarding } = useProfileReviewsPageContext();
 
   return (
-    <TourProvider
-      scrollSmooth
-      disableInteraction
+    <ProfileTourWrapper
       steps={steps}
-      showBadge={false}
-      styles={{
-        popover: (base) => ({
-          ...base,
-          background: '#4b4b4b',
-          borderRadius: 32,
-        }),
-      }}
-      components={{
-        Close: () => null,
-      }}
+      isOnboarding={isOnboarding}
       prevButton={(props) => <BackButton {...props} />}
       nextButton={(props) => <NextButton {...props} />}
-      onClickMask={() => null}
     >
-      <ProfileTourStarter startTour={isOnboarding} />
       {children}
-    </TourProvider>
+    </ProfileTourWrapper>
   );
 };
 
@@ -49,26 +34,22 @@ const steps: StepType[] = [
   {
     selector: '#onboard-review-1',
     content: (
-      <div className="flex flex-col gap-3">
-        <Heading size="lg">Organization Reviews</Heading>
-        <Text color="dimmed">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </Text>
-      </div>
+      <ProfileOnboardCard
+        title="Organization Reviews"
+        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua."
+      />
     ),
     position: (positionProps: any) => [210, positionProps.windowHeight - 230],
   },
   {
     selector: '#profile-right-panel-salary',
     content: (
-      <div className="flex flex-col gap-3">
-        <Heading size="lg">Salary</Heading>
-        <Text color="dimmed">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </Text>
-      </div>
+      <ProfileOnboardCard
+        title="Salary"
+        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua."
+      />
     ),
 
     position: (positionProps: any) => [
@@ -80,13 +61,11 @@ const steps: StepType[] = [
   {
     selector: '#profile-right-panel-ratings',
     content: (
-      <div className="flex flex-col gap-3">
-        <Heading size="lg">Ratings</Heading>
-        <Text color="dimmed">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </Text>
-      </div>
+      <ProfileOnboardCard
+        title="Ratings"
+        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua."
+      />
     ),
     position: (positionProps: any) => [
       positionProps.windowWidth - (61 * positionProps.windowWidth) / 100,
@@ -98,13 +77,11 @@ const steps: StepType[] = [
   {
     selector: '#profile-right-panel-your-review',
     content: (
-      <div className="flex flex-col gap-3">
-        <Heading size="lg">Your Review</Heading>
-        <Text color="dimmed">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </Text>
-      </div>
+      <ProfileOnboardCard
+        title="Your Review"
+        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua."
+      />
     ),
     position: (positionProps: any) => [
       positionProps.windowWidth - (61 * positionProps.windowWidth) / 100,

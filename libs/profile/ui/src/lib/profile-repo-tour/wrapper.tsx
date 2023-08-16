@@ -1,13 +1,12 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { ReactNode } from 'react';
 
-import { type StepType, TourProvider } from '@reactour/tour';
+import { type StepType } from '@reactour/tour';
 
 import { useProfileRepoPageContext } from '@jobstash/profile/state';
 
-import { Heading, Text } from '@jobstash/shared/ui';
-
-import ProfileTourStarter from '../profile-tour-starter';
+import ProfileOnboardCard from '../profile-onboard-card';
+import ProfileTourWrapper from '../profile-tour-wrapper';
 
 import BackButton from './back-button';
 import NextButton from './next-button';
@@ -20,26 +19,14 @@ const ProfileRepoTourWrapper = ({ children }: Props) => {
   const { isOnboarding } = useProfileRepoPageContext();
 
   return (
-    <TourProvider
+    <ProfileTourWrapper
       steps={steps}
-      showBadge={false}
-      styles={{
-        popover: (base) => ({
-          ...base,
-          background: '#4b4b4b',
-          borderRadius: 32,
-        }),
-      }}
-      components={{
-        Close: () => null,
-      }}
+      isOnboarding={isOnboarding}
       prevButton={(props) => <BackButton {...props} />}
       nextButton={(props) => <NextButton {...props} />}
-      onClickMask={() => null}
     >
-      <ProfileTourStarter startTour={isOnboarding} />
       {children}
-    </TourProvider>
+    </ProfileTourWrapper>
   );
 };
 
@@ -47,26 +34,22 @@ const steps: StepType[] = [
   {
     selector: '#onboard-repo-1',
     content: (
-      <div className="flex flex-col gap-3">
-        <Heading size="lg">Your Repositories</Heading>
-        <Text color="dimmed">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </Text>
-      </div>
+      <ProfileOnboardCard
+        title="Your Repositories"
+        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua."
+      />
     ),
     position: (positionProps: any) => [210, positionProps.windowHeight - 230],
   },
   {
     selector: '#profile-right-panel-techs-used',
     content: (
-      <div className="flex flex-col gap-3">
-        <Heading size="lg">Technologies Used</Heading>
-        <Text color="dimmed">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </Text>
-      </div>
+      <ProfileOnboardCard
+        title="Technologies Used"
+        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua."
+      />
     ),
 
     position: (positionProps: any) => [
@@ -79,13 +62,11 @@ const steps: StepType[] = [
   {
     selector: '#profile-right-panel-your-contribution',
     content: (
-      <div className="flex flex-col gap-3">
-        <Heading size="lg">Your Contribution</Heading>
-        <Text color="dimmed">
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
-          eiusmod tempor incididunt ut labore et dolore magna aliqua.
-        </Text>
-      </div>
+      <ProfileOnboardCard
+        title="Your Contribution"
+        description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+          eiusmod tempor incididunt ut labore et dolore magna aliqua."
+      />
     ),
     position: (positionProps: any) => [
       positionProps.windowWidth - (61 * positionProps.windowWidth) / 100,
