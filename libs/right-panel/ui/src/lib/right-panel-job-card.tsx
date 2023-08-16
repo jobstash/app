@@ -1,7 +1,9 @@
+/* eslint-disable camelcase */
 import { memo } from 'react';
 
 import { type JobInfo, type Technology } from '@jobstash/shared/core';
 import { slugify } from '@jobstash/shared/utils';
+import { gaEvent } from '@jobstash/shared/utils';
 
 import { Heading } from '@jobstash/shared/ui';
 
@@ -26,6 +28,26 @@ const RightPanelJobCard = ({
 }: Props) => {
   const { jobTitle, jobApplyPageUrl, shortUUID } = jobInfo;
 
+  const onClickApplyJob = () => {
+    gaEvent('job_apply', {
+      event_category: 'job',
+      event_label: `${shortUUID} ${jobTitle}`,
+    });
+
+    if (typeof window !== 'undefined') {
+      window.open(jobApplyPageUrl, '_blank');
+    }
+  };
+
+  const onClickExploreJob = () => {
+    const link = `/jobs/${slugify(
+      `${orgName} ${jobTitle}`,
+    )}-${shortUUID}/details`;
+    if (typeof window !== 'undefined') {
+      window.location.href = link;
+    }
+  };
+
   return (
     <RightPanelCardBorder>
       <div className="flex flex-col gap-y-4 p-6">
@@ -41,11 +63,7 @@ const RightPanelJobCard = ({
 
           <RightPanelJobCardTags jobInfo={jobInfo} />
 
-          <RightPanelCta
-            external
-            link={jobApplyPageUrl}
-            text="Apply for this job"
-          />
+          <RightPanelCta text="Apply for this job" onClick={onClickApplyJob} />
         </div>
 
         <div className="flex h-8 flex-col justify-center">
@@ -58,12 +76,7 @@ const RightPanelJobCard = ({
 
         {showExploreJob && (
           <div className="flex flex-col items-start py-4">
-            <RightPanelCta
-              link={`/jobs/${slugify(
-                `${orgName} ${jobTitle}`,
-              )}-${shortUUID}/details`}
-              text="Explore Job"
-            />
+            <RightPanelCta text="Explore Job" onClick={onClickExploreJob} />
           </div>
         )}
       </div>

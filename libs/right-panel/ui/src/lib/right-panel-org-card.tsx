@@ -27,6 +27,12 @@ const RightPanelOrgCard = ({ org, routeSection }: Props) => {
   const slug = slugify(`${name} ${orgId}`);
   const link = `${ROUTE_SECTION.ORGANIZATIONS}/${slug}/${TAB_SEGMENT.details}`;
 
+  const onClick = () => {
+    if (typeof window !== 'undefined') {
+      window.location.href = link;
+    }
+  };
+
   return (
     <RightPanelCardBorder>
       <div className="flex flex-col p-6">
@@ -36,7 +42,7 @@ const RightPanelOrgCard = ({ org, routeSection }: Props) => {
           <RightPanelOrgCardInvestors investors={investors} />
 
           {routeSection !== ROUTE_SECTION.ORGANIZATIONS && (
-            <RightPanelCta link={link} text="Explore Organization" />
+            <RightPanelCta text="Explore Organization" onClick={onClick} />
           )}
         </div>
       </div>
