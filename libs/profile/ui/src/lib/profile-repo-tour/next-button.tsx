@@ -31,6 +31,8 @@ const NextButton = (props: Props) => {
 
   const { isLoading, mutateAsync } = useUpdateFlow();
 
+  const buttonText = isLastStep ? 'OK Got it!' : 'Next';
+
   const onClick = () => {
     if (isLastStep) {
       const updateFlow = async () => {
@@ -56,7 +58,7 @@ const NextButton = (props: Props) => {
       isDisabled={isLoading}
       onClick={onClick}
     >
-      Next
+      {buttonText}
     </Button>
   );
 };
