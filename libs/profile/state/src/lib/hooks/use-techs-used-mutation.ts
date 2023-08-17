@@ -1,8 +1,9 @@
 /* eslint-disable no-alert */
 import { useMutation } from '@tanstack/react-query';
-import NProgress from 'nprogress';
 
 import { type ProfileRepoTechnology } from '@jobstash/profile/core';
+
+import { useNProgress } from '@jobstash/shared/state';
 
 interface Payload {
   id: string;
@@ -11,6 +12,8 @@ interface Payload {
 }
 
 export const useTechsUsedMutation = () => {
+  const { startNProgress, stopNProgress } = useNProgress();
+
   const { isLoading, mutate } = useMutation({
     mutationFn: (payload: Payload) =>
       fetch('/api/fakers/profile/repositories/techs-used', {
@@ -23,7 +26,7 @@ export const useTechsUsedMutation = () => {
         body: JSON.stringify({ ...payload }),
       }).then(() => payload),
     onMutate() {
-      NProgress.start();
+      startNProgress(true);
     },
     onSuccess(profileInfo) {
       // TODO: Add notifications
@@ -35,7 +38,7 @@ export const useTechsUsedMutation = () => {
       alert('Something went wrong :( (TODO: notifications)');
     },
     onSettled() {
-      NProgress.done();
+      stopNProgress(true);
 
       // TODO: invalidate profile-repo-list
     },

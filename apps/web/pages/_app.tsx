@@ -15,19 +15,13 @@ import { ANALYTICS_ID } from '@jobstash/shared/core';
 
 import { AuthProvider } from '@jobstash/auth/state';
 import { ReactQueryProvider } from '@jobstash/shared/state';
+import { useNProgress } from '@jobstash/shared/state';
 
 import { WagmiSiweSync } from '@jobstash/auth/feature';
 
 NProgress.configure({
   template: '<div class="bar" role="bar"><div class="peg"></div></div></div>',
 });
-const nProgressExcludedPathnames = new Set([
-  '/jobs/[slug]/[tab]',
-  '/organizations/[slug]/[tab]',
-  '/projects/[slug]/[tab]',
-]);
-
-const nProgressStopExcludePathnames = new Set(['/pick-role']);
 
 const App = ({ Component, pageProps }: AppProps) => {
   const router = useRouter();
@@ -39,24 +33,14 @@ const App = ({ Component, pageProps }: AppProps) => {
     });
   }, [router]);
 
+  const { startNProgress, stopNProgress } = useNProgress();
   useEffect(() => {
-    const shouldDisplay = !nProgressExcludedPathnames.has(router.pathname);
-    const startNProgress = () => {
-      if (shouldDisplay) NProgress.start();
-    };
-
-    const stopNProgress = () => {
-      if (shouldDisplay) NProgress.done();
-    };
-
     const handleStart = () => {
       startNProgress();
     };
 
     const handleComplete = (url: string) => {
-      if (!nProgressStopExcludePathnames.has(url)) {
-        stopNProgress();
-      }
+      stopNProgress(false, url);
     };
 
     router.events.on('routeChangeStart', handleStart);
@@ -68,7 +52,7 @@ const App = ({ Component, pageProps }: AppProps) => {
       router.events.off('routeChangeComplete', handleComplete);
       router.events.off('routeChangeError', stopNProgress);
     };
-  }, [router]);
+  }, [router, startNProgress, stopNProgress]);
 
   return (
     <>

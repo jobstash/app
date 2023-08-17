@@ -1,8 +1,9 @@
 /* eslint-disable no-alert */
 import { useMutation } from '@tanstack/react-query';
-import NProgress from 'nprogress';
 
 import { type ProfileOrgReview } from '@jobstash/profile/core';
+
+import { useNProgress } from '@jobstash/shared/state';
 
 interface Payload {
   orgId: ProfileOrgReview['org']['id'];
@@ -13,6 +14,8 @@ interface Payload {
 }
 
 export const useSalaryMutation = () => {
+  const { startNProgress, stopNProgress } = useNProgress();
+
   const { isLoading, mutate } = useMutation({
     mutationFn: (payload: Payload) =>
       fetch('/api/fakers/profile/reviews/salary', {
@@ -25,7 +28,7 @@ export const useSalaryMutation = () => {
         body: JSON.stringify({ ...payload }),
       }).then(() => payload),
     onMutate() {
-      NProgress.start();
+      startNProgress(true);
     },
     onSuccess(profileInfo) {
       // TODO: Add notifications
@@ -37,7 +40,7 @@ export const useSalaryMutation = () => {
       alert('Something went wrong :( (TODO: notifications)');
     },
     onSettled() {
-      NProgress.done();
+      stopNProgress(true);
 
       // TODO: invalidate org-review-list
     },

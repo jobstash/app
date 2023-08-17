@@ -8,7 +8,6 @@ import {
   SIWEProvider,
   useSIWE,
 } from 'connectkit';
-import NProgress from 'nprogress';
 import { SiweMessage } from 'siwe';
 import { configureChains, createClient, mainnet, WagmiConfig } from 'wagmi';
 import { publicProvider } from 'wagmi/providers/public';
@@ -21,7 +20,7 @@ import {
 } from '@jobstash/auth/core';
 import { MW_URL } from '@jobstash/shared/core';
 
-import { useIsMounted } from '@jobstash/shared/state';
+import { useIsMounted, useNProgress } from '@jobstash/shared/state';
 import { getCheckWallet } from '@jobstash/auth/data';
 
 import { AuthContext } from '../contexts/auth-context';
@@ -103,6 +102,8 @@ export const AuthProvider = ({ children, screenLoader }: Props) => {
     }
   }, [asPath, isConnected, push, value]);
 
+  const { startNProgress, stopNProgress } = useNProgress();
+
   return (
     <WagmiConfig client={connectkitClient}>
       <SIWEProvider
@@ -165,7 +166,7 @@ export const AuthProvider = ({ children, screenLoader }: Props) => {
           return res.ok;
         }}
         onSignIn={async () => {
-          NProgress.start();
+          startNProgress();
 
           // We redirect manually here, assign ref
           redirectRef.current = true;
@@ -183,7 +184,7 @@ export const AuthProvider = ({ children, screenLoader }: Props) => {
           const flowRoute = CHECK_WALLET_ROUTE[flow];
           if (redirectFlowsSet.has(flow)) {
             if (asPath === flowRoute) {
-              NProgress.done();
+              stopNProgress();
             } else {
               push(flowRoute);
             }

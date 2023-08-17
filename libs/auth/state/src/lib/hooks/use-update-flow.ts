@@ -1,15 +1,18 @@
 import { useRouter } from 'next/router';
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import NProgress from 'nprogress';
 
 import { type CheckWalletFlow } from '@jobstash/auth/core';
 import { MW_URL } from '@jobstash/shared/core';
 import { sentryMessage } from '@jobstash/shared/utils';
 
+import { useNProgress } from '@jobstash/shared/state';
+
 import { useAuthContext } from './use-auth-context';
 
 export const useUpdateFlow = (successRoute?: string) => {
+  const { startNProgress, stopNProgress } = useNProgress();
+
   const { push } = useRouter();
   const queryClient = useQueryClient();
 
@@ -26,7 +29,7 @@ export const useUpdateFlow = (successRoute?: string) => {
         credentials: 'include',
       }).then((res) => res.json()),
     onMutate() {
-      NProgress.start();
+      startNProgress();
     },
     onSuccess(data) {
       const {
@@ -50,7 +53,7 @@ export const useUpdateFlow = (successRoute?: string) => {
     },
     onSettled() {
       queryClient.invalidateQueries(['check-wallet']);
-      NProgress.done();
+      stopNProgress();
     },
   });
 

@@ -1,22 +1,24 @@
 import { useQuery } from '@tanstack/react-query';
-import NProgress from 'nprogress';
 import { useAccount } from 'wagmi';
 
+import { useNProgress } from '@jobstash/shared/state';
 import { getCheckWallet } from '@jobstash/auth/data';
 
 export const useCheckWallet = () => {
   const { isConnected, isConnecting } = useAccount();
 
+  const { startNProgress, stopNProgress } = useNProgress();
+
   const { data, isLoading, refetch, isFetching } = useQuery({
     queryKey: ['check-wallet'],
     queryFn() {
-      NProgress.start();
+      startNProgress();
       return getCheckWallet();
     },
     select: (data) => data.data,
     enabled: isConnected, // Only fetch when wallet is connected
     staleTime: 1000 * 60 * 60,
-    onSettled: () => NProgress.done(),
+    onSettled: () => stopNProgress(),
   });
 
   return {

@@ -1,15 +1,18 @@
 /* eslint-disable no-alert */
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import NProgress from 'nprogress';
 import { useAccount } from 'wagmi';
 
 import { type ProfileInfo } from '@jobstash/profile/core';
+
+import { useNProgress } from '@jobstash/shared/state';
 
 export const useProfileInfoMutation = () => {
   const { address } = useAccount();
   const queryClient = useQueryClient();
 
   const profileInfoQueryKey = ['profile-info', address];
+
+  const { startNProgress, stopNProgress } = useNProgress();
 
   const { isLoading, mutate } = useMutation({
     mutationFn: (profileInfo: ProfileInfo) =>
@@ -26,7 +29,7 @@ export const useProfileInfoMutation = () => {
         }),
       }).then(() => profileInfo),
     onMutate() {
-      NProgress.start();
+      startNProgress(true);
     },
     onSuccess(profileInfo) {
       queryClient.setQueryData(profileInfoQueryKey, profileInfo);
@@ -38,7 +41,7 @@ export const useProfileInfoMutation = () => {
       alert('Something went wrong :( (TODO: notifications)');
     },
     onSettled() {
-      NProgress.done();
+      stopNProgress(true);
 
       // Always refetch after
       queryClient.invalidateQueries({

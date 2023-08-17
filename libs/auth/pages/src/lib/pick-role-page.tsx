@@ -3,13 +3,12 @@ import { useEffect } from 'react';
 
 import { LoadingPage } from '@jobstash/shared/pages';
 import { useAtomValue } from 'jotai';
-import NProgress from 'nprogress';
 
 import { CHECK_WALLET_FLOWS } from '@jobstash/auth/core';
 import { MW_URL } from '@jobstash/shared/core';
 
 import { isLoadingDevCallbackAtom, useAuthContext } from '@jobstash/auth/state';
-import { useIsMounted } from '@jobstash/shared/state';
+import { useIsMounted, useNProgress } from '@jobstash/shared/state';
 
 import {
   PickRoleButton,
@@ -54,13 +53,15 @@ const useFlowCheck = () => {
   const isLoadingDevCallback = useAtomValue(isLoadingDevCallbackAtom);
   const { flow } = useAuthContext();
 
+  const { startNProgress, stopNProgress } = useNProgress();
+
   useEffect(() => {
     if (isLoadingDevCallback) {
-      NProgress.start();
+      startNProgress();
     } else {
-      NProgress.done();
+      stopNProgress();
     }
-  }, [isLoadingDevCallback]);
+  }, [isLoadingDevCallback, startNProgress, stopNProgress]);
 
   return (
     isMounted && !isLoadingDevCallback && flow === CHECK_WALLET_FLOWS.PICK_ROLE
