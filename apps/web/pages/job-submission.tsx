@@ -1,4 +1,3 @@
-/* eslint-disable no-alert */
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { FormEventHandler, useRef } from 'react';
@@ -11,7 +10,7 @@ import {
 } from '@mantine/core';
 import { useMutation } from '@tanstack/react-query';
 
-import { cn } from '@jobstash/shared/utils';
+import { cn, notifError, notifSuccess } from '@jobstash/shared/utils';
 
 import { Button, Text } from '@jobstash/shared/ui';
 
@@ -108,11 +107,11 @@ const JobSubmission = () => {
         body: JSON.stringify(data),
       }),
     onSuccess() {
-      alert('Job details have been submitted');
+      notifSuccess({ message: 'Job details have been submitted' });
       router.push('/jobs');
     },
     onError() {
-      alert('Something went wrong :(');
+      notifError();
     },
   });
 

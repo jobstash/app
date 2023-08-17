@@ -1,17 +1,13 @@
-import { LoadingOverlay, Switch } from '@mantine/core';
+import { LoadingOverlay } from '@mantine/core';
 
 import { useProfileHeaderContext } from '@jobstash/profile/state';
 
-import { LogoTitle, Text } from '@jobstash/shared/ui';
+import { LogoTitle } from '@jobstash/shared/ui';
+
+import ProfileHeaderSwitch from './profile-header-switch';
 
 const ProfileHeaderTitle = () => {
-  const {
-    isLoading,
-    username,
-    avatar,
-    isAvailableForWork,
-    setIsAvailableForWork,
-  } = useProfileHeaderContext();
+  const { isLoading, username, avatar } = useProfileHeaderContext();
 
   return (
     <>
@@ -27,17 +23,7 @@ const ProfileHeaderTitle = () => {
           }}
           size="lg"
         />
-        <Switch
-          size="md"
-          label={
-            <Text size="lg" color="dimmed">
-              Available for work
-            </Text>
-          }
-          color="green"
-          checked={isAvailableForWork}
-          onChange={(e) => setIsAvailableForWork(e.currentTarget.checked)}
-        />
+        <ProfileHeaderSwitch />
       </div>
     </>
   );

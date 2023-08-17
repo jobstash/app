@@ -18,10 +18,12 @@ const ProfileRepoSubHeader = () => {
 
       <div className="flex items-center space-x-4">
         <Text color="dimmed">{`Known Repositories: ${profileRepoCount}`}</Text>
-        <Button isIcon>
+        <Button isIcon isDisabled>
           <RefreshIcon />
         </Button>
-        <Button isIcon>[ ? ]</Button>
+        <Button isIcon isDisabled>
+          [ ? ]
+        </Button>
       </div>
     </div>
   );

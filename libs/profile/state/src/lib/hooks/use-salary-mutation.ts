@@ -1,7 +1,7 @@
-/* eslint-disable no-alert */
 import { useMutation } from '@tanstack/react-query';
 
 import { type ProfileOrgReview } from '@jobstash/profile/core';
+import { notifError, notifSuccess } from '@jobstash/shared/utils';
 
 import { useNProgress } from '@jobstash/shared/state';
 
@@ -34,10 +34,10 @@ export const useSalaryMutation = () => {
       // TODO: Add notifications
       // TODO: Update org-review-list,
       // TODO: Update org-review state (should update disableSave flag)
-      alert('You have updated your technologies used (TODO: notifications)');
+      notifSuccess({ message: 'You have updated your salary info' });
     },
     onError() {
-      alert('Something went wrong :( (TODO: notifications)');
+      notifError();
     },
     onSettled() {
       stopNProgress(true);

@@ -8,13 +8,12 @@ import Script from 'next/script';
 import { useEffect } from 'react';
 
 import { LoadingPage } from '@jobstash/shared/pages';
-import { MantineProvider } from '@mantine/core';
 import NProgress from 'nprogress';
 
 import { ANALYTICS_ID } from '@jobstash/shared/core';
 
 import { AuthProvider } from '@jobstash/auth/state';
-import { ReactQueryProvider } from '@jobstash/shared/state';
+import { MantineProvider, ReactQueryProvider } from '@jobstash/shared/state';
 import { useNProgress } from '@jobstash/shared/state';
 
 import { WagmiSiweSync } from '@jobstash/auth/feature';
@@ -71,7 +70,7 @@ const App = ({ Component, pageProps }: AppProps) => {
             id="gtag-init"
             strategy="afterInteractive"
             dangerouslySetInnerHTML={{
-              __html: `
+              __html: `p
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
@@ -84,11 +83,7 @@ const App = ({ Component, pageProps }: AppProps) => {
         </>
       )}
       <ReactQueryProvider dehydratedState={pageProps.dehydratedState}>
-        <MantineProvider
-          withGlobalStyles
-          withNormalizeCSS
-          theme={{ colorScheme: 'dark', cursorType: 'pointer' }}
-        >
+        <MantineProvider>
           <AuthProvider screenLoader={<LoadingPage />}>
             <Component {...pageProps} />
             <WagmiSiweSync />

@@ -1,5 +1,6 @@
-/* eslint-disable no-alert */
 import { useMutation } from '@tanstack/react-query';
+
+import { notifError, notifSuccess } from '@jobstash/shared/utils';
 
 import { useNProgress } from '@jobstash/shared/state';
 
@@ -29,12 +30,12 @@ export const useYourContributionMutation = () => {
       // TODO: Add notifications
       // TODO: Update profile-repo-list
       // TODO: Update profile repo state (should update disableSave flag)
-      alert(
-        'You have updated your contribution description (TODO: notifications)',
-      );
+      notifSuccess({
+        message: 'You have updated your contribution description',
+      });
     },
     onError() {
-      alert('Something went wrong :( (TODO: notifications)');
+      notifError();
     },
     onSettled() {
       stopNProgress(true);

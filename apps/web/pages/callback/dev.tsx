@@ -13,7 +13,7 @@ import {
   redirectFlowsSet,
 } from '@jobstash/auth/core';
 import { MW_URL, SENTRY_MW_NON_200_RESPONSE } from '@jobstash/shared/core';
-import { sentryMessage } from '@jobstash/shared/utils';
+import { notifError, sentryMessage } from '@jobstash/shared/utils';
 
 import { isLoadingDevCallbackAtom } from '@jobstash/auth/state';
 import { getCheckWallet } from '@jobstash/auth/data';
@@ -91,8 +91,7 @@ const handleGithubLoginFailure = (
     JSON.stringify(data),
   );
 
-  // eslint-disable-next-line no-alert
-  alert('Something went wrong :(');
+  notifError();
 
   // Disconnect then redirect
   signOut();

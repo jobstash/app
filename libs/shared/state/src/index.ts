@@ -2,6 +2,7 @@
 export * from './lib/atoms/mobile-right-panel-open-atom';
 
 // Providers
+export { default as MantineProvider } from './lib/providers/mantine-provider';
 export { default as ReactQueryProvider } from './lib/providers/react-query-provider';
 
 //  Hooks

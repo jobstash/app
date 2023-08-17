@@ -1,7 +1,7 @@
-/* eslint-disable no-alert */
 import { useMutation } from '@tanstack/react-query';
 
 import { type ProfileRepoTechnology } from '@jobstash/profile/core';
+import { notifError, notifSuccess } from '@jobstash/shared/utils';
 
 import { useNProgress } from '@jobstash/shared/state';
 
@@ -32,10 +32,10 @@ export const useTechsUsedMutation = () => {
       // TODO: Add notifications
       // TODO: Update profile-repo-list,
       // TODO: Update profile repo state (should update disableSave flag)
-      alert('You have updated your technologies used (TODO: notifications)');
+      notifSuccess({ message: 'You have updated your technologies used' });
     },
     onError() {
-      alert('Something went wrong :( (TODO: notifications)');
+      notifError();
     },
     onSettled() {
       stopNProgress(true);

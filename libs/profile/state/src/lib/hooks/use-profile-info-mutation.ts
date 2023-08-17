@@ -1,10 +1,12 @@
-/* eslint-disable no-alert */
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAccount } from 'wagmi';
 
 import { type ProfileInfo } from '@jobstash/profile/core';
+import { notifError, notifSuccess } from '@jobstash/shared/utils';
 
 import { useNProgress } from '@jobstash/shared/state';
+
+const PROFILE_HEADER_NOTIF_ID = 'profile-header';
 
 export const useProfileInfoMutation = () => {
   const { address } = useAccount();
@@ -33,12 +35,22 @@ export const useProfileInfoMutation = () => {
     },
     onSuccess(profileInfo) {
       queryClient.setQueryData(profileInfoQueryKey, profileInfo);
-      alert(
-        'Contacts Added. You are available for Work! (TODO: notifications)',
-      );
+
+      notifSuccess({
+        id: PROFILE_HEADER_NOTIF_ID,
+        title: `Contacts added.${
+          profileInfo.availableForWork ? ' You are Available for Work!' : ''
+        }`,
+        message:
+          'You are able to update your availability both in the header and in your profile at any time.',
+      });
     },
     onError() {
-      alert('Something went wrong :( (TODO: notifications)');
+      notifError({
+        id: PROFILE_HEADER_NOTIF_ID,
+        title: 'Something went wrong :(',
+        message: 'Please try again later.',
+      });
     },
     onSettled() {
       stopNProgress(true);
