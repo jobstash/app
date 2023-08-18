@@ -17,7 +17,7 @@ export const useSalaryForm = () => {
     noAllocation: token.noAllocation,
   });
 
-  const { isLoading, mutate } = useSalaryMutation();
+  const { mutate } = useSalaryMutation();
 
   const save = () => {
     mutate({
@@ -50,7 +50,6 @@ export const useSalaryForm = () => {
         setState((prev) => ({ ...prev, noAllocation: value })),
     },
     save,
-    isLoading,
     disableSave,
     orgReview,
   };

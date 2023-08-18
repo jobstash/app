@@ -5,7 +5,6 @@ import { ProfileRepo } from '@jobstash/profile/core';
 interface YourContributionContextProps {
   contribution: string;
   setContribution: (contribution: string) => void;
-  isLoading: boolean;
   onSave: () => void;
   disableSave: boolean;
   profileRepo: ProfileRepo;

@@ -12,7 +12,7 @@ const RightPanelCardBorder = ({ children }: Props) => (
       'rounded-3xl bg-gradient-to-l from-primary to-tertiary p-0.5',
     )}
   >
-    <div className="rounded-3xl bg-darker-gray">{children}</div>
+    <div className="rounded-3xl bg-darker-gray relative">{children}</div>
   </div>
 );
 

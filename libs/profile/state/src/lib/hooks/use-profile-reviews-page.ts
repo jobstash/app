@@ -30,6 +30,8 @@ export const useProfileReviewsPage = (isOnboardSSR: boolean) => {
   const activeProfileOrgReview = useAtomValue(activeProfileOrgReviewAtom);
   const orgReview = activeProfileOrgReview || ({} as ProfileOrgReview);
 
+  const [isLoadingCard, setIsLoadingCard] = useState(false);
+
   return {
     profileOrgReviewCount,
     activeProfileOrgReview,
@@ -40,5 +42,7 @@ export const useProfileReviewsPage = (isOnboardSSR: boolean) => {
     setActiveTab,
     orgReview,
     isOnboarding,
+    isLoadingCard,
+    setIsLoadingCard,
   };
 };

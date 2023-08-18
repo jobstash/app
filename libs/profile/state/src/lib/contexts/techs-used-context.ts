@@ -16,7 +16,6 @@ interface TechsUsedContextProps {
   onTechRemove: (id: string) => void;
   disableSave: boolean;
   techOptions: string[];
-  isLoading: boolean;
   onClickSave: () => void;
   onClickCanTeach: (id: string, canTeach: boolean) => void;
 }

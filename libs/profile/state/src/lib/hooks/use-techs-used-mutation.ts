@@ -5,6 +5,8 @@ import { notifError, notifSuccess } from '@jobstash/shared/utils';
 
 import { useNProgress } from '@jobstash/shared/state';
 
+import { useProfileRepoPageContext } from '../contexts/profile-repo-page-context';
+
 interface Payload {
   id: string;
   techsUsed: ProfileRepoTechnology[];
@@ -12,6 +14,7 @@ interface Payload {
 }
 
 export const useTechsUsedMutation = () => {
+  const { setIsLoadingCard } = useProfileRepoPageContext();
   const { startNProgress, stopNProgress } = useNProgress();
 
   const { isLoading, mutate } = useMutation({
@@ -27,6 +30,7 @@ export const useTechsUsedMutation = () => {
       }).then(() => payload),
     onMutate() {
       startNProgress(true);
+      setIsLoadingCard(true);
     },
     onSuccess(profileInfo) {
       // TODO: Add notifications
@@ -39,6 +43,7 @@ export const useTechsUsedMutation = () => {
     },
     onSettled() {
       stopNProgress(true);
+      setIsLoadingCard(false);
 
       // TODO: invalidate profile-repo-list
     },

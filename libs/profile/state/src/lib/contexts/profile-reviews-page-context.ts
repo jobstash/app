@@ -23,6 +23,8 @@ interface ProfileReviewsPageContextProps {
   setActiveTab: Dispatch<SetStateAction<ProfileTabOptions[number]>>;
   orgReview: ProfileOrgReview;
   isOnboarding: boolean;
+  isLoadingCard: boolean;
+  setIsLoadingCard: Dispatch<SetStateAction<boolean>>;
 }
 
 export const ProfileReviewsPageContext =

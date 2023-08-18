@@ -8,7 +8,6 @@ interface YourReviewContextProps {
   setPros: (pros: string | null) => void;
   setCons: (cons: string | null) => void;
   disableSave: boolean;
-  isLoading: boolean;
   onClickSave: () => void;
   username: string;
   avatar: string;

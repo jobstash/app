@@ -16,7 +16,7 @@ export const useYourContribution = () => {
     activeProfileRepo?.contribution.summary ?? '',
   );
 
-  const { isLoading, mutate } = useYourContributionMutation();
+  const { mutate } = useYourContributionMutation();
 
   const onSave = () => {
     if (activeProfileRepo) {
@@ -32,7 +32,6 @@ export const useYourContribution = () => {
   return {
     contribution,
     setContribution,
-    isLoading,
     onSave,
     disableSave,
     profileRepo,

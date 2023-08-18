@@ -84,8 +84,7 @@ export const useTechsUsed = () => {
   const disableSave = isTechsEqual(techs, currentTechs);
   const techOptions = getTechOptions(currentTechs, allTechs);
 
-  const { isLoading, mutate } = useTechsUsedMutation();
-
+  const { mutate } = useTechsUsedMutation();
   const onClickSave = () => {
     mutate({ id, techsUsed, techsCreated });
   };
@@ -116,7 +115,6 @@ export const useTechsUsed = () => {
     onTechRemove,
     disableSave,
     techOptions,
-    isLoading,
     onClickSave,
     onClickCanTeach,
   };

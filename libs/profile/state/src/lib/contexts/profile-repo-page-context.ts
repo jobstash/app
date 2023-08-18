@@ -25,6 +25,8 @@ interface ProfileRepoPageContextProps {
   allTechs: Technology[];
   profileRepo: ProfileRepo;
   isOnboarding: boolean;
+  isLoadingCard: boolean;
+  setIsLoadingCard: Dispatch<SetStateAction<boolean>>;
 }
 
 export const ProfileRepoPageContext =

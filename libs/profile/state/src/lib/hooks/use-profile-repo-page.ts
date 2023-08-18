@@ -34,6 +34,8 @@ export const useProfileRepoPage = (isOnboardSSR: boolean) => {
   const activeProfileRepo = useAtomValue(activeProfileRepoAtom);
   const profileRepo = activeProfileRepo || ({} as ProfileRepo);
 
+  const [isLoadingCard, setIsLoadingCard] = useState(false);
+
   return {
     profileRepoCount,
     activeProfileRepo,
@@ -45,5 +47,7 @@ export const useProfileRepoPage = (isOnboardSSR: boolean) => {
     allTechs: allTechsData?.technologies ?? [],
     profileRepo,
     isOnboarding,
+    isLoadingCard,
+    setIsLoadingCard,
   };
 };

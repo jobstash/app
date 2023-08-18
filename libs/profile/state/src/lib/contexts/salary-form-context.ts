@@ -16,7 +16,6 @@ interface SalaryFormContextProps {
     setNoAllocation: (value: boolean) => void;
   };
   save: () => void;
-  isLoading: boolean;
   disableSave: boolean;
   orgReview: ProfileOrgReview;
 }

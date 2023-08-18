@@ -5,6 +5,8 @@ import { notifError, notifSuccess } from '@jobstash/shared/utils';
 
 import { useNProgress } from '@jobstash/shared/state';
 
+import { useProfileReviewsPageContext } from '../contexts/profile-reviews-page-context';
+
 interface Payload {
   orgId: ProfileOrgReview['org']['id'];
   currencyValue: ProfileOrgReview['salary']['currency']['value'];
@@ -14,6 +16,8 @@ interface Payload {
 }
 
 export const useSalaryMutation = () => {
+  const { setIsLoadingCard } = useProfileReviewsPageContext();
+
   const { startNProgress, stopNProgress } = useNProgress();
 
   const { isLoading, mutate } = useMutation({
@@ -29,6 +33,7 @@ export const useSalaryMutation = () => {
       }).then(() => payload),
     onMutate() {
       startNProgress(true);
+      setIsLoadingCard(true);
     },
     onSuccess(profileInfo) {
       // TODO: Add notifications
@@ -41,6 +46,7 @@ export const useSalaryMutation = () => {
     },
     onSettled() {
       stopNProgress(true);
+      setIsLoadingCard(false);
 
       // TODO: invalidate org-review-list
     },

@@ -33,7 +33,7 @@ export const useYourReview = () => {
   const disableSave =
     JSON.stringify({ headline, pros, cons }) === JSON.stringify(currentReview);
 
-  const { isLoading, mutate } = useYourReviewMutation();
+  const { mutate } = useYourReviewMutation();
 
   const onClickSave = () => {
     mutate({
@@ -48,7 +48,6 @@ export const useYourReview = () => {
     setPros,
     setCons,
     disableSave,
-    isLoading,
     onClickSave,
     username,
     avatar,

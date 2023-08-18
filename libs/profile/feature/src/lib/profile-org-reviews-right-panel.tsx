@@ -1,5 +1,6 @@
 import { memo } from 'react';
 
+import { LoadingOverlay } from '@mantine/core';
 import { useTour } from '@reactour/tour';
 
 import { PROFILE_RIGHT_PANEL_TAB } from '@jobstash/profile/core';
@@ -20,7 +21,7 @@ import { RightPanelCardBorder } from '@jobstash/right-panel/ui';
 const ProfileOrgReviewsRightPanel = () => {
   const { isOpen } = useTour();
 
-  const { activeProfileOrgReview, tabs, activeTab } =
+  const { activeProfileOrgReview, tabs, activeTab, isLoadingCard } =
     useProfileReviewsPageContext();
 
   return (
@@ -34,6 +35,7 @@ const ProfileOrgReviewsRightPanel = () => {
       card={
         <div className={cn({ 'pointer-events-none': isOpen })}>
           <RightPanelCardBorder>
+            <LoadingOverlay visible={isLoadingCard} className="rounded-3xl" />
             <div className="p-6">
               <div className="flex flex-col gap-6 py-2 relative">
                 {activeTab === PROFILE_RIGHT_PANEL_TAB.SALARY && <SalaryForm />}
