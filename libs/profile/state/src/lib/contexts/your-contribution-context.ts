@@ -10,6 +10,7 @@ interface YourContributionContextProps {
   disableSave: boolean;
   profileRepo: ProfileRepo;
   username: string;
+  avatar: string;
 }
 
 export const YourContributionContext =

@@ -6,11 +6,14 @@ const SalaryFormNoAllocationCheckbox = () => {
   const { state, setState } = useSalaryFormContext();
 
   return (
-    <Checkbox
-      label="No token allocation"
-      checked={state.noAllocation}
-      onChange={(e) => setState.setNoAllocation(e.currentTarget.checked)}
-    />
+    <div className="flex justify-end">
+      <Checkbox
+        size="md"
+        label="No token allocation"
+        checked={state.noAllocation}
+        onChange={(e) => setState.setNoAllocation(e.currentTarget.checked)}
+      />
+    </div>
   );
 };
 

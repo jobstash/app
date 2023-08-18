@@ -12,7 +12,12 @@ export const YourContributionProvider = ({ children }: Props) => {
 
   return (
     <YourContributionContext.Provider value={value}>
-      <div id="profile-right-panel-your-contribution">{children}</div>
+      <div
+        id="profile-right-panel-your-contribution"
+        className="flex flex-col gap-4"
+      >
+        {children}
+      </div>
     </YourContributionContext.Provider>
   );
 };

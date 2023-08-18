@@ -12,7 +12,7 @@ export const TechsUsedProvider = ({ children }: Props) => {
 
   return (
     <TechsUsedContext.Provider value={value}>
-      <div id="profile-right-panel-techs-used" className="flex flex-col gap-6">
+      <div id="profile-right-panel-techs-used" className="flex flex-col gap-4">
         {children}
       </div>
     </TechsUsedContext.Provider>

@@ -12,7 +12,7 @@ export const YourReviewProvider = ({ children }: Props) => {
 
   return (
     <YourReviewContext.Provider value={value}>
-      {children}
+      <div className="flex flex-col gap-4">{children}</div>
     </YourReviewContext.Provider>
   );
 };

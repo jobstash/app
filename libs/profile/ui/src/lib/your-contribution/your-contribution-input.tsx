@@ -15,11 +15,14 @@ const YourContributionInput = () => {
         descriptionProps={{
           className: 'text-right pt-2 pr-2',
         }}
+        wrapperProps={{
+          className: 'w-full py-2',
+        }}
         w="98%"
         minRows={10}
         classNames={{
           input: cn(
-            'rounded-lg bg-dark-gray text-white/60 focus:border-white p-6',
+            'rounded-lg bg-dark-gray text-white/60 focus:border-white p-4',
           ),
         }}
         value={contribution}

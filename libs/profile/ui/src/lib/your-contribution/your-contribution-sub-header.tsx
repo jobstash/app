@@ -1,6 +1,6 @@
 import { useYourContributionContext } from '@jobstash/profile/state';
 
-import { Heading, Text } from '@jobstash/shared/ui';
+import { Heading, LogoTitle, Text } from '@jobstash/shared/ui';
 
 const YourContributionSubHeader = () => {
   const {
@@ -10,20 +10,20 @@ const YourContributionSubHeader = () => {
       contribution: { count },
     },
     username,
+    avatar,
   } = useYourContributionContext();
 
   return (
     <>
-      <div className="flex items-center justify-between w-full -mt-4">
+      <div className="flex items-center justify-between w-full">
         <Heading size="md" fw="semibold">
           {name}
         </Heading>
-        <Heading size="sm" fw="semibold">
-          {username}
-        </Heading>
+        <LogoTitle
+          title={username}
+          avatarProps={{ src: avatar, alt: `${username}'s avatar` }}
+        />
       </div>
-
-      <hr className="border-t border-white/10" />
 
       <div className="flex justify-between w-full gap-12">
         <Text size="sm" color="dimmed">

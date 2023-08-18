@@ -30,8 +30,8 @@ const ProfileRepoRightPanel = () => {
       card={
         <div className={cn({ 'pointer-events-none': isOpen })}>
           <RightPanelCardBorder>
-            <div className="p-6">
-              <div className="flex flex-col gap-6 py-2 relative">
+            <div className="p-8">
+              <div className="flex flex-col gap-6 relative">
                 {activeTab === PROFILE_RIGHT_PANEL_TAB.TECHNOLOGIES_USED && (
                   <TechsUsed key={activeProfileRepo?.id} />
                 )}

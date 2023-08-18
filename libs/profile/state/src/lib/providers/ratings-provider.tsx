@@ -12,7 +12,7 @@ export const RatingsProvider = ({ children }: Props) => {
 
   return (
     <RatingsContext.Provider value={value}>
-      <div id="profile-right-panel-ratings" className="flex flex-col gap-6">
+      <div id="profile-right-panel-ratings" className="flex flex-col gap-4">
         {children}
       </div>
     </RatingsContext.Provider>

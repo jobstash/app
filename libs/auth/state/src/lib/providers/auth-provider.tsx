@@ -20,7 +20,7 @@ import {
 } from '@jobstash/auth/core';
 import { MW_URL } from '@jobstash/shared/core';
 
-import { useIsMounted, useNProgress } from '@jobstash/shared/state';
+import { useIsMounted } from '@jobstash/shared/state';
 import { getCheckWallet } from '@jobstash/auth/data';
 
 import { AuthContext } from '../contexts/auth-context';
@@ -102,8 +102,6 @@ export const AuthProvider = ({ children, screenLoader }: Props) => {
     }
   }, [asPath, isConnected, push, value]);
 
-  const { startNProgress, stopNProgress } = useNProgress();
-
   return (
     <WagmiConfig client={connectkitClient}>
       <SIWEProvider
@@ -166,8 +164,6 @@ export const AuthProvider = ({ children, screenLoader }: Props) => {
           return res.ok;
         }}
         onSignIn={async () => {
-          startNProgress();
-
           // We redirect manually here, assign ref
           redirectRef.current = true;
 
@@ -182,12 +178,8 @@ export const AuthProvider = ({ children, screenLoader }: Props) => {
             data: { flow },
           } = checkWalletResponse;
           const flowRoute = CHECK_WALLET_ROUTE[flow];
-          if (redirectFlowsSet.has(flow)) {
-            if (asPath === flowRoute) {
-              stopNProgress();
-            } else {
-              push(flowRoute);
-            }
+          if (redirectFlowsSet.has(flow) && asPath !== flowRoute) {
+            push(flowRoute);
           }
         }}
         onSignOut={() => {

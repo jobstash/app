@@ -4,13 +4,14 @@ import { cn } from '@jobstash/shared/utils';
 
 import { useYourReviewContext } from '@jobstash/profile/state';
 
-import { Heading } from '@jobstash/shared/ui';
+import { Heading, LogoTitle } from '@jobstash/shared/ui';
 
 const YourReviewHeadline = () => {
   const {
     currentReview: { headline },
     setHeadline,
     username,
+    avatar,
   } = useYourReviewContext();
 
   return (
@@ -19,9 +20,10 @@ const YourReviewHeadline = () => {
         <Heading size="md" fw="semibold">
           Review Headline
         </Heading>
-        <Heading size="md" fw="semibold">
-          {username}
-        </Heading>
+        <LogoTitle
+          title={username}
+          avatarProps={{ src: avatar, alt: `${username}'s avatar` }}
+        />
       </div>
       <div className="w-full">
         <TextInput

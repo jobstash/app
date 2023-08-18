@@ -6,7 +6,7 @@ const SalaryFormActions = () => {
   const { disableSave, save } = useSalaryFormContext();
 
   return (
-    <div className="flex items-center justify-center pt-8 w-full gap-8">
+    <div className="flex items-center justify-center pt-2 w-full gap-8">
       <Button
         variant="primary"
         className="px-8"
@@ -15,6 +15,7 @@ const SalaryFormActions = () => {
       >
         Save & Next
       </Button>
+
       <Button
         variant="outline"
         className="px-8 bg-darker-gray"

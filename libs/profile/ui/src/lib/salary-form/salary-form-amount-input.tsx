@@ -1,8 +1,6 @@
-import { NumberInput } from '@mantine/core';
-
-import { cn } from '@jobstash/shared/utils';
-
 import { useSalaryFormContext } from '@jobstash/profile/state';
+
+import SalaryInput from './salary-input';
 
 const SalaryFormAmountInput = () => {
   const {
@@ -11,17 +9,11 @@ const SalaryFormAmountInput = () => {
   } = useSalaryFormContext();
 
   return (
-    <NumberInput
-      hideControls
-      placeholder="(Per Year)"
-      size="lg"
-      classNames={{
-        input: cn(
-          'rounded-lg bg-dark-gray text-white/60 text-lg placeholder:text-white/50 placeholder:text-md focus:border-white/40',
-        ),
-      }}
+    <SalaryInput
+      numberInput
+      title="Amount (Per Year)"
       value={amount ?? ''}
-      onChange={(v) => setAmount(v ? Number(v) : null)}
+      onChange={(v: number | '') => setAmount(v ? Number(v) : null)}
     />
   );
 };

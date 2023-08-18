@@ -8,6 +8,7 @@ import { useYourReviewMutation } from './use-your-review-mutation';
 export const useYourReview = () => {
   const { profileInfoData } = useProfileInfoContext();
   const username = profileInfoData?.username ?? '';
+  const avatar = profileInfoData?.avatar ?? '';
 
   const {
     orgReview: {
@@ -50,5 +51,6 @@ export const useYourReview = () => {
     isLoading,
     onClickSave,
     username,
+    avatar,
   };
 };

@@ -11,6 +11,7 @@ interface YourReviewContextProps {
   isLoading: boolean;
   onClickSave: () => void;
   username: string;
+  avatar: string;
 }
 
 export const YourReviewContext = createContext<YourReviewContextProps | null>(

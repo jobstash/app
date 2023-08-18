@@ -8,6 +8,7 @@ import { useYourContributionMutation } from './use-your-contribution-mutation';
 export const useYourContribution = () => {
   const { profileInfoData } = useProfileInfoContext();
   const username = profileInfoData?.username ?? '';
+  const avatar = profileInfoData?.avatar ?? '';
 
   const { activeProfileRepo, profileRepo } = useProfileRepoPageContext();
 
@@ -36,5 +37,6 @@ export const useYourContribution = () => {
     disableSave,
     profileRepo,
     username,
+    avatar,
   };
 };

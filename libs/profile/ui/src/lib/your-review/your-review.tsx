@@ -9,7 +9,7 @@ import YourReviewPros from './your-review-pros';
 const YourReview = () => (
   <YourReviewProvider>
     <YourReviewHeader />
-    <div className="flex flex-col items-center justify-center px-[10%] gap-8 [&>*]:w-full">
+    <div className="flex flex-col items-center justify-center gap-8 [&>*]:w-full">
       <YourReviewHeadline />
       <YourReviewPros />
       <YourReviewCons />

@@ -8,7 +8,7 @@ import YourContributionSubHeader from './your-contribution-sub-header';
 const YourContribution = () => (
   <YourContributionProvider>
     <YourContributionHeader />
-    <div className="flex flex-col gap-4 justify-center p-6">
+    <div className="flex flex-col gap-2 justify-center">
       <YourContributionSubHeader />
       <YourContributionInput />
       <YourContributionsActions />

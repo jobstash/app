@@ -6,7 +6,7 @@ const TechsUsedList = () => {
   const { currentTechs, onTechRemove, onClickCanTeach } = useTechsUsedContext();
 
   return (
-    <div className="flex flex-wrap gap-4 items-center">
+    <div className="flex flex-wrap gap-4 items-center pt-2">
       {currentTechs.map(({ id, name, canTeach }) => (
         <ProfileRepoTech
           key={id}

@@ -15,11 +15,11 @@ const RatingItem = ({ ratingKey }: Props) => {
     useRatingContext();
 
   return (
-    <div className="flex gap-8 items-center">
-      <div className="flex justify-end w-[30%]">
+    <div className="flex gap-8 items-center pl-[5%]">
+      <div className="flex justify-end w-[38%]">
         <Text size="lg">{getRatingTitle(ratingKey)}</Text>
       </div>
-      <div className="w-[70%]">
+      <div className="w-[55%]">
         <Rating
           size="xl"
           value={currentRating[ratingKey] ?? 0}
