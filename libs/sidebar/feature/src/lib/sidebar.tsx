@@ -1,79 +1,31 @@
-import { memo, useEffect } from 'react';
+import { memo } from 'react';
 
-import { useSIWE } from 'connectkit';
-import { useAtomValue } from 'jotai';
-
-import { ROUTE_SECTION } from '@jobstash/shared/core';
-
-import { useIsMounted } from '@jobstash/shared/state';
-import { sidebarOpenAtom } from '@jobstash/sidebar/state';
+import { SidebarProvider } from '@jobstash/sidebar/state';
 
 import {
-  BookmarkSidebarIcon,
   CloseIcon,
   HamburgerIcon,
-  OrgSidebarIcon,
-  ProjectsSidebarIcon,
+  IsMountedWrapper,
   Text,
 } from '@jobstash/shared/ui';
 import {
   Brand,
-  JobsSidebarIcon,
   MobileMenuButton,
   MobileNavbarWrapper,
-  RequestToBeListedButton,
+  SidebarBookmarksSection,
   SidebarCloseButton,
+  SidebarDiscoverBartabs,
+  SidebarUserSection,
   SidebarWrapper,
 } from '@jobstash/sidebar/ui';
 import { ConnectWalletButton } from '@jobstash/auth/feature';
 
-import SidebarBartab from './sidebar-bartab';
-
-const discoverBartabs = [
-  { text: 'Jobs', path: ROUTE_SECTION.JOBS, icon: <JobsSidebarIcon /> },
-  {
-    text: 'Organizations',
-    path: ROUTE_SECTION.ORGANIZATIONS,
-    icon: <OrgSidebarIcon />,
-  },
-  {
-    text: 'Projects',
-    path: ROUTE_SECTION.PROJECTS,
-    icon: <ProjectsSidebarIcon />,
-  },
-];
-
-const bookmarkedBartabs = [
-  {
-    text: 'Saved Jobs',
-    path: '/bookmarks/jobs',
-    icon: <BookmarkSidebarIcon />,
-  },
-  {
-    text: 'Saved Orgs',
-    path: '/bookmarks/organizations',
-    icon: <BookmarkSidebarIcon />,
-  },
-];
-const Sidebar = () => {
-  const sidebarOpen = useAtomValue(sidebarOpenAtom);
-
-  useEffect(() => {
-    const el = document.querySelectorAll('html')[0];
-    if (sidebarOpen) {
-      el.classList.add('disable-scroll');
-    } else {
-      el.classList.remove('disable-scroll');
-    }
-  }, [sidebarOpen]);
-
-  const isMounted = useIsMounted();
-  const { isSignedIn } = useSIWE();
-
-  return (
-    <SidebarWrapper sidebarOpen={sidebarOpen}>
+const Sidebar = () => (
+  <SidebarProvider>
+    <SidebarWrapper>
       <Brand />
 
+      {/* MOBILE BARTABS */}
       <MobileNavbarWrapper>
         <div className="flex justify-between">
           <Brand />
@@ -81,88 +33,39 @@ const Sidebar = () => {
             <CloseIcon />
           </SidebarCloseButton>
         </div>
+
         <Text color="dimmed" className="block pt-8">
           Discover
         </Text>
 
-        <div className="flex flex-col justify-start items-start space-y-3 pt-3 [&>*]:bg-transparent [&>*]:bg-none [&>*]:hover:bg-transparent">
-          {/* <JobsBartabMobile /> */}
-
-          {discoverBartabs.map(({ text, path, icon }) => (
-            <SidebarBartab
-              key={path}
-              isMobile
-              path={path}
-              icon={icon}
-              text={text}
-            />
-          ))}
-        </div>
+        <SidebarDiscoverBartabs isMobile />
       </MobileNavbarWrapper>
-
       <div className="-mr-2 ml-auto self-center lg:hidden">
         <MobileMenuButton>
           <HamburgerIcon />
         </MobileMenuButton>
       </div>
 
+      {/* DESKTOP BARTABS */}
       <div className="mt-12 hidden lg:flex flex-col space-y-8">
         <div className="flex-col">
           <Text color="dimmed">Discover</Text>
-          <div className="space-y-3 pt-3">
-            {discoverBartabs.map(({ text, path, icon }) => (
-              <SidebarBartab key={path} path={path} icon={icon} text={text} />
-            ))}
-          </div>
+          <SidebarDiscoverBartabs />
         </div>
 
-        {isMounted && isSignedIn && (
-          <div className="flex-col">
-            <Text color="dimmed">Bookmarked</Text>
-            <div className="space-y-3 pt-3">
-              {bookmarkedBartabs.map(({ text, path, icon }) => (
-                <SidebarBartab
-                  key={path}
-                  isDisabled
-                  path={path}
-                  icon={icon}
-                  text={text}
-                />
-              ))}
-            </div>
-          </div>
-        )}
+        <SidebarBookmarksSection />
       </div>
 
+      {/* BOTTOM BARTABS */}
       <div className="inset-x-0 bottom-0 hidden space-y-4 p-4 lg:absolute lg:block">
-        {isMounted &&
-          (isSignedIn ? (
-            <div className="flex-col">
-              <Text color="dimmed">Your Profile</Text>
-              <div className="space-y-3 pt-3">
-                <div id="onboard-repo-1">
-                  <SidebarBartab
-                    path="/profile/repositories"
-                    text="Your Repositories"
-                  />
-                </div>
-
-                <div id="onboard-review-1">
-                  <SidebarBartab
-                    path="/profile/reviews"
-                    text="Organization Reviews"
-                  />
-                </div>
-              </div>
-            </div>
-          ) : (
-            <RequestToBeListedButton />
-          ))}
+        <IsMountedWrapper>
+          <SidebarUserSection />
+        </IsMountedWrapper>
         <hr className="border-t border-white/20" />
         <ConnectWalletButton />
       </div>
     </SidebarWrapper>
-  );
-};
+  </SidebarProvider>
+);
 
 export default memo(Sidebar);
