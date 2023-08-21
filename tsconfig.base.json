@@ -16,6 +16,13 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
+      "@jobstash/admin/core": ["libs/admin/core/src/index.ts"],
+      "@jobstash/admin/data": ["libs/admin/data/src/index.ts"],
+      "@jobstash/admin/feature": ["libs/admin/feature/src/index.ts"],
+      "@jobstash/admin/pages": ["libs/admin/pages/src/index.ts"],
+      "@jobstash/admin/state": ["libs/admin/state/src/index.ts"],
+      "@jobstash/admin/ui": ["libs/admin/ui/src/index.ts"],
+      "@jobstash/admin/utils": ["libs/admin/utils/src/index.ts"],
       "@jobstash/auth/core": ["libs/auth/core/src/index.ts"],
       "@jobstash/auth/data": ["libs/auth/data/src/index.ts"],
       "@jobstash/auth/feature": ["libs/auth/feature/src/index.ts"],
