@@ -106,12 +106,17 @@ const OrgSection = () => (
     </div>
 
     <PickRoleButton
+      isDisabled
       text="Connect with Organization Email"
       icon={<PickRoleEmailIcon />}
     />
 
     <hr className="border-t border-white/10" />
 
-    <PickRoleButton text="Connect with Github" icon={<PickRoleGithubIcon />} />
+    <PickRoleButton
+      isDisabled
+      text="Connect with Github"
+      icon={<PickRoleGithubIcon />}
+    />
   </PickRoleSection>
 );
