@@ -6,17 +6,20 @@ import { memo } from 'react';
 
 import { useAtom } from 'jotai';
 
+import { gaEvent } from '@jobstash/shared/utils';
+
 import { isOpenTopBannerAtom } from '@jobstash/shared/state';
 
 import Text from '../base/text';
 
 const donateURL = `https://explorer.gitcoin.co/#/round/10/0x2871742b184633f8dc8546c6301cbc209945033e/0x2871742b184633f8dc8546c6301cbc209945033e-145`;
 
-const TopBanner = () => {
-  const [isOpen, setIsOpen] = useAtom(isOpenTopBannerAtom);
+const onClickDonate = () => {
+  gaEvent('donate_click');
+};
 
-  //
-  // const onClose = () => setIsOpen(false);
+const TopBanner = () => {
+  const [isOpen] = useAtom(isOpenTopBannerAtom);
 
   if (!isOpen) return null;
 
@@ -27,7 +30,7 @@ const TopBanner = () => {
           🔥 Please support JobStash on Gitcoin Grants 18.
         </Text>
         <Link passHref legacyBehavior href={donateURL}>
-          <a target="_blank">
+          <a target="_blank" onClick={onClickDonate}>
             <Text className="underline text-sm sm:text-md">Donate today</Text>
           </a>
         </Link>
