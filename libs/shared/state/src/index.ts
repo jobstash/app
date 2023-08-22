@@ -1,5 +1,6 @@
 // Atoms
 export * from './lib/atoms/mobile-right-panel-open-atom';
+export * from './lib/atoms/top-banner-atom';
 
 // Providers
 export { default as MantineProvider } from './lib/providers/mantine-provider';
