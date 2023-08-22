@@ -1,6 +1,7 @@
 import { memo, type ReactNode, useEffect } from 'react';
 
 import { EVENT_CARD_CLICK } from '@jobstash/shared/core';
+import { cn } from '@jobstash/shared/utils';
 
 export const ID_TOP_RIGHT_PANEL = 'top-right-panel';
 
@@ -24,7 +25,13 @@ const RightPanelWrapper = ({ children }: Props) => {
   return (
     <>
       <div className="absolute top-0 h-0" id={ID_TOP_RIGHT_PANEL} />
-      <div className="flex flex-col gap-8 pb-24">{children}</div>
+      <div
+        className={cn('flex flex-col gap-8 pb-24', {
+          'pt-10': true, // Only when top-banner is visible
+        })}
+      >
+        {children}
+      </div>
     </>
   );
 };

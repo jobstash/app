@@ -51,6 +51,7 @@ export { default as UsersThreeIcon } from './lib/icons/users-three-icon';
 
 // Components
 export { default as MetaData } from './lib/components/meta-data';
+export { default as TopBanner } from './lib/components/top-banner';
 
 // Utils
 export * from './lib/utils/create-funding-rounds-tags';
