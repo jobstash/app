@@ -22,11 +22,13 @@ const TopBanner = () => {
 
   return (
     <>
-      <div className="z-[70] fixed top-0 w-full flex justify-center h-10 bg-gradient-to-l from-primary to-tertiary items-center gap-2">
-        <Text>🔥 Please support JobStash on Gitcoin Grants 18. </Text>
+      <div className="z-[70] fixed top-0 w-full flex justify-center h-10 bg-gradient-to-l from-primary to-tertiary items-center py-8 pb-6 sm:py-0 sm:gap-1 flex-col sm:flex-row ">
+        <Text className="text-center text-sm sm:text-md">
+          🔥 Please support JobStash on Gitcoin Grants 18.
+        </Text>
         <Link passHref legacyBehavior href={donateURL}>
           <a target="_blank">
-            <Text className="underline">Donate today</Text>
+            <Text className="underline text-sm sm:text-md">Donate today</Text>
           </a>
         </Link>
       </div>
