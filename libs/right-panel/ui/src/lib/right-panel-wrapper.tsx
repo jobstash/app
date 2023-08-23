@@ -27,7 +27,7 @@ const RightPanelWrapper = ({ children }: Props) => {
       <div className="absolute top-0 h-0" id={ID_TOP_RIGHT_PANEL} />
       <div
         className={cn('flex flex-col gap-8 pb-24', {
-          'pt-10': true, // Only when top-banner is visible
+          'mt-4 sm:mt-0 pt-10': true, // Only when top-banner is visible
         })}
       >
         {children}
