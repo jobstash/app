@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { useAccount } from 'wagmi';
 
@@ -16,6 +16,9 @@ export const useDelayedAuthRender = ({
 
   const [canRender, setCanRender] = useState(false);
 
+  // Reference to avoid spamming loading spinner
+  const hasRendered = useRef(false);
+
   useEffect(() => {
     const timeout = setTimeout(() => {
       if (!isConnected) {
@@ -25,10 +28,14 @@ export const useDelayedAuthRender = ({
       const connectFlag = requireConnected ? isConnected : true;
 
       setCanRender(connectFlag && isMounted);
+
+      if (!hasRendered.current) {
+        hasRendered.current = true;
+      }
     }, 400);
 
     return () => clearTimeout(timeout);
   }, [isConnected, isMounted, push, requireConnected]);
 
-  return { canRender };
+  return { canRender: canRender || hasRendered.current };
 };

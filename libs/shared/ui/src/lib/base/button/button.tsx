@@ -62,6 +62,11 @@ export const buttonVariants = cva(
         className: 'ring-0 ring-transparent hover:bg-dark-gray',
       },
       {
+        isIcon: true,
+        size: 'sm',
+        className: 'w-6 h-6',
+      },
+      {
         hasLeft: true,
         size: 'md',
         className: 'pl-2',

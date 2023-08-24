@@ -49,6 +49,7 @@ export { default as RefreshIcon } from './lib/icons/refresh-icon';
 export { default as RemoveTechIcon } from './lib/icons/remove-tech-icon';
 export { default as RepoProjectNameIcon } from './lib/icons/repo-project-name-icon';
 export { default as RevenueIcon } from './lib/icons/revenue-icon';
+export { default as SearchIcon } from './lib/icons/search-icon';
 export { default as SearchInputIcon } from './lib/icons/search-input-icon';
 export { default as ShieldCheckIcon } from './lib/icons/shield-check-icon';
 export { default as SkullIcon } from './lib/icons/skull-icon';

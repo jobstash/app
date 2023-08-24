@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { memo, type ReactNode, useCallback, useMemo } from 'react';
+import { memo, type ReactNode, useCallback } from 'react';
 
 import { useSetAtom } from 'jotai';
 
@@ -18,15 +18,22 @@ interface Props {
   icon?: ReactNode;
   isMobile?: boolean;
   isDisabled?: boolean;
+  isActiveFn?: (pathname: string) => boolean;
 }
 
-const SidebarBartab = ({ text, path, icon, isMobile, isDisabled }: Props) => {
+const SidebarBartab = ({
+  text,
+  path,
+  icon,
+  isMobile,
+  isDisabled,
+  isActiveFn,
+}: Props) => {
   const { pathname, push } = useRouter();
 
-  const isActive = useMemo(
-    () => pathname.slice(0, path.length) === path,
-    [path, pathname],
-  );
+  const isActive = isActiveFn
+    ? isActiveFn(pathname)
+    : pathname.slice(0, path.length) === path;
 
   const setSidebarOpen = useSetAtom(sidebarOpenAtom);
   const setActiveJob = useSetAtom(activeJobAtom);
