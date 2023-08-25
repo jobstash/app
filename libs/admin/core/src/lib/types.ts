@@ -1,7 +1,10 @@
+import { UseMutateFunction } from '@tanstack/react-query';
 import { Infer } from 'myzod';
 
 import {
-  godmodeBlockedTechnologiesSchema,
+  godmodeBlockedTechnologiesResponseSchema,
+  godmodeBlockedTermsPayloadSchema,
+  godmodeBlockedTermsResponseSchema,
   godmodeTechnologiesSchema,
 } from './schemas';
 
@@ -10,5 +13,20 @@ export type GodmodeTechnologiesResponse = Infer<
 >;
 
 export type GodmodeBlockedTechnologiesResponse = Infer<
-  typeof godmodeBlockedTechnologiesSchema
+  typeof godmodeBlockedTechnologiesResponseSchema
+>;
+
+export type GodmodeBlockedTermsResponse = Infer<
+  typeof godmodeBlockedTermsResponseSchema
+>;
+
+export type GodmodeBlockedTermsPayload = Infer<
+  typeof godmodeBlockedTermsPayloadSchema
+>;
+
+export type GodmodeBlockedTermsMutFn = UseMutateFunction<
+  GodmodeBlockedTermsResponse,
+  unknown,
+  GodmodeBlockedTermsPayload,
+  unknown
 >;

@@ -6,6 +6,12 @@ import BlockedTerm from './blocked-term';
 
 const BlockedTermsList = () => {
   const blockedTerms = useBlockedTermsStore((state) => state.blockedTerms);
+  const fetchedBlockedTerms = useBlockedTermsStore(
+    (state) => state.fetchedBlockedTerms,
+  );
+  const unblockTerm = useBlockedTermsStore((state) => state.unblockTerm);
+
+  const allBlockedTerms = [...blockedTerms, ...fetchedBlockedTerms];
 
   return (
     <div className="flex items-start gap-6">
@@ -16,13 +22,17 @@ const BlockedTermsList = () => {
       </div>
       <div className="w-full gap-8">
         <div className="flex gap-4 items-center flex-wrap">
-          {blockedTerms.length > 1 ? (
-            blockedTerms.map((tech) => (
-              <BlockedTerm key={tech} tech={tech} onRemove={() => null} />
+          {allBlockedTerms.length > 0 ? (
+            allBlockedTerms.map((tech) => (
+              <BlockedTerm
+                key={tech}
+                tech={tech}
+                onRemove={(term) => unblockTerm(term)}
+              />
             ))
           ) : (
             <Text color="dimmed" size="lg">
-              No blocked terms yet
+              No blocked terms
             </Text>
           )}
         </div>

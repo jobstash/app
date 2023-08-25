@@ -16,7 +16,7 @@ export const getGodmodeTechnologies = async () => {
     mode: 'cors' as RequestMode,
   };
 
-  const { data } = await mwFetch<GodmodeTechnologiesResponse>(url, options);
+  const response = await mwFetch<GodmodeTechnologiesResponse>(url, options);
 
-  return data.map((d) => d.name);
+  return response.data.map((d) => d.name).slice(0, 5);
 };

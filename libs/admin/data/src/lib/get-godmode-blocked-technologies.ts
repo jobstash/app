@@ -1,6 +1,6 @@
 import {
   type GodmodeBlockedTechnologiesResponse,
-  godmodeBlockedTechnologiesSchema,
+  godmodeBlockedTechnologiesResponseSchema,
 } from '@jobstash/admin/core';
 import { MW_URL } from '@jobstash/shared/core';
 
@@ -10,16 +10,16 @@ export const getGodmodeBlockedTechnologies = async () => {
   const url = `${MW_URL}/technologies/blocked-terms`;
 
   const options = {
-    responseSchema: godmodeBlockedTechnologiesSchema,
+    responseSchema: godmodeBlockedTechnologiesResponseSchema,
     sentryLabel: `getGodmodeBlockedTechnologies`,
     credentials: 'include' as RequestCredentials,
     mode: 'cors' as RequestMode,
   };
 
-  const { data } = await mwFetch<GodmodeBlockedTechnologiesResponse>(
+  const response = await mwFetch<GodmodeBlockedTechnologiesResponse>(
     url,
     options,
   );
 
-  return data.map((d) => d.name);
+  return response.data.map((d) => d.name);
 };

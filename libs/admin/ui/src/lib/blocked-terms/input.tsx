@@ -7,20 +7,18 @@ import { useBlockedTermsStore } from '@jobstash/admin/state';
 import { Heading } from '@jobstash/shared/ui';
 
 const BlockedTermsInput = () => {
-  const { options, blockTerm } = useBlockedTermsStore((state) => ({
-    options: state.options,
-    blockTerm: state.blockTerm,
-  }));
+  const blockTerm = useBlockedTermsStore((state) => state.blockTerm);
+  const options = useBlockedTermsStore((state) => state.options);
 
-  const selectRef = useRef<HTMLInputElement | null>(null);
-
-  const onChange = (blockedTerm: string) => {
+  const onChange = (term: string) => {
     if (selectRef.current) {
       (selectRef.current as HTMLInputElement).blur();
     }
 
-    blockTerm(blockedTerm);
+    blockTerm(term);
   };
+
+  const selectRef = useRef<HTMLInputElement | null>(null);
 
   return (
     <div className="flex items-center gap-6">
