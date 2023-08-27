@@ -17,11 +17,12 @@ interface BlockedTermsState {
   // Blocked terms state
   blockedTerms: string[];
   blockTerm: (term: string) => void;
-  onSuccessBlockedTerms: (technologyNameList: string[]) => void;
+  onSuccessBlockTerms: (technologyNameList: string[]) => void;
 
   // Unblocked terms state
   unblockedTerms: string[];
   unblockTerm: (term: string) => void;
+  onSuccessUnblockTerms: (technologyNameList: string[]) => void;
 }
 
 export const useBlockedTermsStore = create<BlockedTermsState>()((set, get) => ({
@@ -56,13 +57,12 @@ export const useBlockedTermsStore = create<BlockedTermsState>()((set, get) => ({
       blockedTerms: dedupe(newBlockedTerms),
     });
   },
-  onSuccessBlockedTerms(technologyNameList: string[]) {
+  onSuccessBlockTerms(blockedTerms: string[]) {
     const { allTerms, fetchedBlockedTerms } = get();
 
     const newOptions = allTerms.filter(
       (term) =>
-        !technologyNameList.includes(term) &&
-        !fetchedBlockedTerms.includes(term),
+        !blockedTerms.includes(term) && !fetchedBlockedTerms.includes(term),
     );
 
     set({
@@ -76,23 +76,34 @@ export const useBlockedTermsStore = create<BlockedTermsState>()((set, get) => ({
     const { allTerms, unblockedTerms, fetchedBlockedTerms, blockedTerms } =
       get();
 
+    const newUnblockedTerms = [...unblockedTerms, unblockedTerm];
     const newBlockedTerms = blockedTerms.filter(
       (term) => term !== unblockedTerm,
     );
 
-    const newUnblockedTerms = [...unblockedTerms, unblockedTerm];
-
     const newOptions = allTerms.filter(
       (term) =>
-        (!newBlockedTerms.includes(term) &&
-          !fetchedBlockedTerms.includes(term)) ||
+        (!blockedTerms.includes(term) && !fetchedBlockedTerms.includes(term)) ||
         newUnblockedTerms.includes(term),
     );
 
     set({
       options: dedupe(newOptions),
-      unblockedTerms: dedupe(newUnblockedTerms),
       blockedTerms: dedupe(newBlockedTerms),
+      unblockedTerms: dedupe(newUnblockedTerms),
+    });
+  },
+  onSuccessUnblockTerms(unblockedTerms: string[]) {
+    const { allTerms, fetchedBlockedTerms } = get();
+
+    const newOptions = [
+      ...allTerms.filter((term) => !fetchedBlockedTerms.includes(term)),
+      ...unblockedTerms,
+    ];
+
+    set({
+      options: dedupe(newOptions),
+      unblockedTerms: [],
     });
   },
 }));

@@ -5,6 +5,8 @@ import { GodmodeBlockedTermsMutFn } from '@jobstash/admin/core';
 interface BlockedTermsContextProps {
   isLoading: boolean;
   mutateSetBlockedTerms: GodmodeBlockedTermsMutFn;
+  mutateUnsetBlockedTerms: GodmodeBlockedTermsMutFn;
+  isFetchingBlockedTerms: boolean;
 }
 
 export const BlockedTermsContext =

@@ -13,38 +13,46 @@ export const useGodmodeBlockedTermsMutation = () => {
   const fetchedBlockedTerms = useBlockedTermsStore(
     (state) => state.fetchedBlockedTerms,
   );
-  const onSuccessBlockedTerms = useBlockedTermsStore(
-    (state) => state.onSuccessBlockedTerms,
+  const onSuccessBlockTerms = useBlockedTermsStore(
+    (state) => state.onSuccessBlockTerms,
   );
 
-  const { isLoading, mutate: mutateSetBlockedTerms } = useMutation({
-    mutationFn: ({
-      technologyNameList,
-      creatorWallet,
-    }: GodmodeBlockedTermsPayload) =>
-      postSetBlockedTerms({ technologyNameList, creatorWallet }),
-    onSuccess(_, { technologyNameList }) {
-      notifSuccess({
-        message: `Successfully blocked "${
-          technologyNameList.length > 1
-            ? `${technologyNameList.length} terms`
-            : `"${technologyNameList[0]}" term`
-        }"`,
-      });
+  const { isLoading: isLoadingSetBlockedTerms, mutate: mutateSetBlockedTerms } =
+    useMutation({
+      mutationFn: ({
+        technologyNameList,
+        creatorWallet,
+      }: GodmodeBlockedTermsPayload) =>
+        postSetBlockedTerms({ technologyNameList, creatorWallet }),
+      onSuccess(_, { technologyNameList }) {
+        const title = `New Blocked Term${
+          technologyNameList.length > 1 ? 's' : ''
+        }`;
 
-      // Manually cache fetched blocked-techs
-      queryClient.setQueryData(
-        ['godmodeBlockedTechnologies'],
-        [...fetchedBlockedTerms, ...technologyNameList],
-      );
-      queryClient.invalidateQueries(['godmodeBlockedTechnologies']);
+        const message = `${technologyNameList.join(', ')}`;
 
-      onSuccessBlockedTerms(technologyNameList);
-    },
-    onError(data) {
-      notifError({ title: 'Request Failed', message: (data as Error).message });
-    },
-  });
+        notifSuccess({
+          title,
+          message,
+          autoClose: 10_000,
+        });
 
-  return { isLoading, mutateSetBlockedTerms };
+        // Manually cache fetched blocked-techs
+        queryClient.setQueryData(
+          ['godmodeBlockedTechnologies'],
+          [...fetchedBlockedTerms, ...technologyNameList],
+        );
+        queryClient.invalidateQueries(['godmodeBlockedTechnologies']);
+
+        onSuccessBlockTerms(technologyNameList);
+      },
+      onError(data) {
+        notifError({
+          title: 'Block Term Failed',
+          message: (data as Error).message,
+        });
+      },
+    });
+
+  return { isLoadingSetBlockedTerms, mutateSetBlockedTerms };
 };

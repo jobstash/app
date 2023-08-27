@@ -10,14 +10,26 @@ import { Button } from '@jobstash/shared/ui';
 const BlockedTermsActions = () => {
   const { address } = useAccount();
   const blockedTerms = useBlockedTermsStore((state) => state.blockedTerms);
+  const unblockedTerms = useBlockedTermsStore((state) => state.unblockedTerms);
 
-  const { mutateSetBlockedTerms } = useBlockedTermsContext();
+  const { mutateSetBlockedTerms, mutateUnsetBlockedTerms } =
+    useBlockedTermsContext();
 
   const onSubmit = () => {
-    mutateSetBlockedTerms({
-      creatorWallet: address ?? '',
-      technologyNameList: blockedTerms,
-    });
+    const creatorWallet = address ?? '';
+    if (blockedTerms.length > 0) {
+      mutateSetBlockedTerms({
+        creatorWallet,
+        technologyNameList: blockedTerms,
+      });
+    }
+
+    if (unblockedTerms.length > 0) {
+      mutateUnsetBlockedTerms({
+        creatorWallet: address ?? '',
+        technologyNameList: unblockedTerms,
+      });
+    }
   };
 
   return (

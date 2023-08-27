@@ -11,7 +11,6 @@ export const useGodmodeTechnologiesQuery = () => {
     queryKey: ['godmodeTechnologies'],
     queryFn: async () => getGodmodeTechnologies(),
     onSuccess(data) {
-      console.log('GODMODE TECH ONSUCCESS DATA =', data);
       setAllTerms(data);
     },
   });
