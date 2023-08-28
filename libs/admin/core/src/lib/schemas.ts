@@ -25,3 +25,9 @@ export const godmodeBlockedTermsPayloadSchema = myzod.object({
   technologyNameList: myzod.array(myzod.string().min(1)),
   creatorWallet: myzod.string().min(1),
 });
+
+export const godmodePairedTermsResponseSchema = myzod.object({
+  success: myzod.boolean(),
+  message: myzod.string().min(1),
+  data: myzod.array(myzod.string().min(1)),
+});

@@ -5,6 +5,7 @@ import {
   godmodeBlockedTechnologiesResponseSchema,
   godmodeBlockedTermsPayloadSchema,
   godmodeBlockedTermsResponseSchema,
+  godmodePairedTermsResponseSchema,
   godmodeTechnologiesSchema,
 } from './schemas';
 
@@ -29,4 +30,8 @@ export type GodmodeBlockedTermsMutFn = UseMutateFunction<
   unknown,
   GodmodeBlockedTermsPayload,
   unknown
+>;
+
+export type GodmodePairedTermsResponse = Infer<
+  typeof godmodePairedTermsResponseSchema
 >;

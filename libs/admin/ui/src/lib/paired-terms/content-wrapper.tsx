@@ -1,4 +1,4 @@
-import { useBlockedTermsContext } from '@jobstash/admin/state';
+import { usePairedTermsContext } from '@jobstash/admin/state';
 
 import AdminTechContentWrapper from '../admin-tech-content-wrapper';
 
@@ -6,8 +6,8 @@ interface Props {
   children: React.ReactNode;
 }
 
-const BlockedTermsContentWrapper = ({ children }: Props) => {
-  const { isLoading } = useBlockedTermsContext();
+const PairedTermsContentWrapper = ({ children }: Props) => {
+  const { isLoading } = usePairedTermsContext();
 
   return (
     <AdminTechContentWrapper isLoading={isLoading}>
@@ -16,4 +16,4 @@ const BlockedTermsContentWrapper = ({ children }: Props) => {
   );
 };
 
-export default BlockedTermsContentWrapper;
+export default PairedTermsContentWrapper;

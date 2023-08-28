@@ -3,7 +3,6 @@ import Head from 'next/head';
 import { ADMIN_BREADCRUMBS, ADMIN_TABS } from '@jobstash/admin/core';
 
 import { BlockedTermsProvider } from '@jobstash/admin/state';
-import { useDelayedAuthRender } from '@jobstash/shared/state';
 
 import {
   AdminLayout,
@@ -16,29 +15,26 @@ import { BlockedTermsList } from '@jobstash/admin/ui';
 import { BreadCrumbs } from '@jobstash/shared/ui';
 import { SideBar } from '@jobstash/sidebar/feature';
 
-export const BlockedTermsPage = () => {
-  const { canRender } = useDelayedAuthRender({ requireConnected: true });
-  return (
-    <>
-      <Head>
-        <title>Godmode | Blocked Terms</title>
-      </Head>
+export const BlockedTermsPage = () => (
+  <>
+    <Head>
+      <title>Godmode | Blocked Terms</title>
+    </Head>
 
-      <AdminLayout
-        breadCrumbs={
-          <BreadCrumbs breadCrumbs={ADMIN_BREADCRUMBS.BLOCKED_TERMS} />
-        }
-        sidebar={<SideBar />}
-        tabsSection={<AdminTabs tabs={ADMIN_TABS.TECHNOLOGIES} />}
-      >
-        <BlockedTermsProvider>
-          <BlockedTermsContentWrapper canRender={canRender}>
-            <BlockedTermsInput />
-            <BlockedTermsList />
-            <BlockedTermsActions />
-          </BlockedTermsContentWrapper>
-        </BlockedTermsProvider>
-      </AdminLayout>
-    </>
-  );
-};
+    <AdminLayout
+      breadCrumbs={
+        <BreadCrumbs breadCrumbs={ADMIN_BREADCRUMBS.BLOCKED_TERMS} />
+      }
+      sidebar={<SideBar />}
+      tabsSection={<AdminTabs tabs={ADMIN_TABS.TECHNOLOGIES} />}
+    >
+      <BlockedTermsProvider>
+        <BlockedTermsContentWrapper>
+          <BlockedTermsInput />
+          <BlockedTermsList />
+          <BlockedTermsActions />
+        </BlockedTermsContentWrapper>
+      </BlockedTermsProvider>
+    </AdminLayout>
+  </>
+);
