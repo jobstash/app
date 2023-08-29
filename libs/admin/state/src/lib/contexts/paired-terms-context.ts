@@ -1,7 +1,10 @@
 import { createContext, useContext } from 'react';
 
+import { GodmodePairedTermsMutFn } from '@jobstash/admin/core';
+
 interface PairedTermsContextProps {
   isLoading: boolean;
+  mutatePairedTerms: GodmodePairedTermsMutFn;
 }
 
 export const PairedTermsContext = createContext<PairedTermsContextProps | null>(

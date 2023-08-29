@@ -2,8 +2,10 @@ import Head from 'next/head';
 
 import { ADMIN_BREADCRUMBS, ADMIN_TABS } from '@jobstash/admin/core';
 
-import { useGodmodeTechnologiesQuery } from '@jobstash/admin/state';
-import { useDelayedAuthRender } from '@jobstash/shared/state';
+import {
+  useAllTechnologies,
+  useDelayedAuthRender,
+} from '@jobstash/shared/state';
 
 import { AdminLayout, AdminTabs } from '@jobstash/admin/ui';
 import { BreadCrumbs, Loader } from '@jobstash/shared/ui';
@@ -12,7 +14,7 @@ import { SideBar } from '@jobstash/sidebar/feature';
 export const SynonymsPage = () => {
   const { canRender } = useDelayedAuthRender({ requireConnected: true });
 
-  const { data, isLoading, isSuccess, isError } = useGodmodeTechnologiesQuery();
+  const { data, isLoading, isSuccess, isError } = useAllTechnologies();
 
   return (
     <>

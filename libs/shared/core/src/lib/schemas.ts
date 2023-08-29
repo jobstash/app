@@ -9,7 +9,9 @@ export const technologySchema = myzod.object({
 });
 
 export const allTechnologiesResponseSchema = myzod.object({
-  technologies: myzod.array(technologySchema),
+  success: myzod.boolean(),
+  message: myzod.string().min(1),
+  data: myzod.array(technologySchema),
 });
 
 export const investorSchema = myzod.object({

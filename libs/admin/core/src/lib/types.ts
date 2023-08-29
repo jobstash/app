@@ -5,9 +5,11 @@ import {
   godmodeBlockedTechnologiesResponseSchema,
   godmodeBlockedTermsPayloadSchema,
   godmodeBlockedTermsResponseSchema,
+  godmodePairedTermSchema,
   godmodePairedTermsResponseSchema,
   godmodeTechnologiesSchema,
 } from './schemas';
+import { godmodePairedTermsPayloadSchema } from './schemas';
 
 export type GodmodeTechnologiesResponse = Infer<
   typeof godmodeTechnologiesSchema
@@ -34,4 +36,17 @@ export type GodmodeBlockedTermsMutFn = UseMutateFunction<
 
 export type GodmodePairedTermsResponse = Infer<
   typeof godmodePairedTermsResponseSchema
+>;
+
+export type GodmodePairedTerm = Infer<typeof godmodePairedTermSchema>;
+
+export type GodmodePairedTermsPayload = Infer<
+  typeof godmodePairedTermsPayloadSchema
+>;
+
+export type GodmodePairedTermsMutFn = UseMutateFunction<
+  Omit<GodmodePairedTermsResponse, 'data'>,
+  unknown,
+  GodmodePairedTermsPayload,
+  unknown
 >;

@@ -26,8 +26,21 @@ export const godmodeBlockedTermsPayloadSchema = myzod.object({
   creatorWallet: myzod.string().min(1),
 });
 
-export const godmodePairedTermsResponseSchema = myzod.object({
-  success: myzod.boolean(),
-  message: myzod.string().min(1),
-  data: myzod.array(myzod.string().min(1)),
+export const godmodePairedTermSchema = myzod.object({
+  technology: myzod.string(),
+  pairings: myzod.array(myzod.string()),
+});
+
+export const godmodePairedTermsResponseSchema = myzod
+  .object({
+    success: myzod.boolean(),
+    message: myzod.string().min(1),
+    data: myzod.array(godmodePairedTermSchema),
+  })
+  .allowUnknownKeys(true);
+
+export const godmodePairedTermsPayloadSchema = myzod.object({
+  originTerm: myzod.string().min(1),
+  pairedTermList: myzod.array(myzod.string().min(1)),
+  creatorWallet: myzod.string().min(1),
 });

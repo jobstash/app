@@ -1,9 +1,7 @@
-import PairedTermsContentWrapper from './content-wrapper';
-
 const ExistingPairedTerms = () => (
-  <PairedTermsContentWrapper>
+  <div className="flex flex-col w-full gap-8">
     <p>TODO: ExistingPairedTerms</p>
-  </PairedTermsContentWrapper>
+  </div>
 );
 
 export default ExistingPairedTerms;

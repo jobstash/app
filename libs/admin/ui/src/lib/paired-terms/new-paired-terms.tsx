@@ -1,56 +1,24 @@
-import { useRef } from 'react';
-
-import { Select } from '@mantine/core';
-
 import { usePairedTermsStore } from '@jobstash/admin/state';
 
-import { Heading } from '@jobstash/shared/ui';
+import AdminFormControl from '../admin-form-control';
 
-import PairedTermsContentWrapper from './content-wrapper';
+import DestinationInput from './destination-input';
+import DestinationList from './destination-list';
+import OriginInput from './origin-input';
 
 const NewPairedTerms = () => {
-  const origins = usePairedTermsStore((store) => store.origins);
-
-  const selectRef = useRef<HTMLInputElement | null>(null);
-
-  const onChange = (term: string) => {
-    if (selectRef.current) {
-      (selectRef.current as HTMLInputElement).blur();
-    }
-
-    console.log('TODO: ');
-  };
+  const isDisabledDestination = usePairedTermsStore((store) => !store.origin);
 
   return (
-    <PairedTermsContentWrapper>
-      {/* NewPairedTermInput */}
-      <div className="flex items-center gap-6">
-        <div className="w-1/3 flex justify-end">
-          <Heading size="sm" fw="semibold">
-            Origin
-          </Heading>
-        </div>
-        <div className="w-full">
-          <Select
-            ref={selectRef}
-            searchable
-            data={origins}
-            maxDropdownHeight={320}
-            nothingFound="Nothing found"
-            placeholder="Type here ..."
-            size="lg"
-            classNames={{
-              input:
-                'rounded-lg bg-dark text-white/60 text-lg placeholder:text-white/40 placeholder:text-lg focus:border-white/40',
-              itemsWrapper: 'bg-dark',
-              item: '[&[data-hovered]]:bg-dark-gray [&[data-selected]]:bg-gray',
-            }}
-            value=""
-            onChange={onChange}
-          />
-        </div>
-      </div>
-    </PairedTermsContentWrapper>
+    <div className="flex flex-col w-full gap-8">
+      <AdminFormControl label="Origin" input={<OriginInput />} />
+      <AdminFormControl
+        label="Destination"
+        input={<DestinationInput />}
+        isDisabled={isDisabledDestination}
+      />
+      <AdminFormControl label="" input={<DestinationList />} />
+    </div>
   );
 };
 

@@ -7,7 +7,10 @@ import { useBlockedTermsStore } from '../store/blocked-terms-store';
 export const useGodmodeBlockedTechnologiesQuery = (enabled: boolean) => {
   const { setFetchedBlockedTerms } = useBlockedTermsStore();
 
-  return useQuery({
+  const {
+    isLoading: isLoadingInitBlockedTerms,
+    isFetching: isFetchingBlockedTerms,
+  } = useQuery({
     queryKey: ['godmodeBlockedTechnologies'],
     queryFn: async () => getGodmodeBlockedTechnologies(),
     onSuccess(data) {
@@ -15,4 +18,9 @@ export const useGodmodeBlockedTechnologiesQuery = (enabled: boolean) => {
     },
     enabled,
   });
+
+  return {
+    isLoadingInitBlockedTerms,
+    isFetchingBlockedTerms,
+  };
 };

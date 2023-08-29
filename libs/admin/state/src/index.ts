@@ -1,8 +1,8 @@
 // Hooks
 export * from './lib/hooks/use-godmode-blocked-technologies-query';
 export * from './lib/hooks/use-godmode-blocked-terms-mutation';
+export * from './lib/hooks/use-godmode-paired-terms-mutation';
 export * from './lib/hooks/use-godmode-paired-terms-query';
-export * from './lib/hooks/use-godmode-technologies-query';
 export * from './lib/hooks/use-godmode-unset-blocked-terms-mutation';
 
 // Contexts & Providers

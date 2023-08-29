@@ -15,7 +15,9 @@ export const PairedTermsProvider = ({ children }: Props) => {
   return (
     <CanRenderProvider>
       <PairedTermsContext.Provider value={value}>
-        {children}
+        <div className="flex flex-col gap-8 w-full justify-center items-center">
+          {children}
+        </div>
       </PairedTermsContext.Provider>
     </CanRenderProvider>
   );

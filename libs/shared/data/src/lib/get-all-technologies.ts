@@ -1,14 +1,13 @@
 import {
   AllTechnologiesResponse,
   allTechnologiesResponseSchema,
+  MW_URL,
 } from '@jobstash/shared/core';
 
 import { mwFetch } from './mw-fetch';
 
 export const getAllTechnologies = async () => {
-  //
-  // const url = `${MW_URL}/technologies`;
-  const url = `/api/fakers/technologies`;
+  const url = `${MW_URL}/technologies`;
 
   const options = {
     responseSchema: allTechnologiesResponseSchema,

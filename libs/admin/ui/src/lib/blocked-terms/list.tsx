@@ -5,7 +5,7 @@ import {
 
 import { Heading, Loader, Text } from '@jobstash/shared/ui';
 
-import BlockedTerm from './blocked-term';
+import AdminTechListItem from '../admin-tech-list-item';
 
 const BlockedTermsList = () => {
   const blockedTerms = useBlockedTermsStore((state) => state.blockedTerms);
@@ -37,7 +37,7 @@ const BlockedTermsList = () => {
           <div className="flex gap-4 items-center flex-wrap">
             {allBlockedTerms.length > 0 ? (
               allBlockedTerms.map((tech) => (
-                <BlockedTerm
+                <AdminTechListItem
                   key={tech}
                   tech={tech}
                   onRemove={(term) => unblockTerm(term)}

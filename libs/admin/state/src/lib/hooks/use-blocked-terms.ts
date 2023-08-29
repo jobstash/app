@@ -1,16 +1,26 @@
+import { useAllTechnologies } from '@jobstash/shared/state';
+
+import { useBlockedTermsStore } from '../store/blocked-terms-store';
+
 import { useGodmodeBlockedTechnologiesQuery } from './use-godmode-blocked-technologies-query';
 import { useGodmodeBlockedTermsMutation } from './use-godmode-blocked-terms-mutation';
-import { useGodmodeTechnologiesQuery } from './use-godmode-technologies-query';
 import { useGodmodeUnsetBlockedTermsMutation } from './use-godmode-unset-blocked-terms-mutation';
 
 export const useBlockedTerms = () => {
-  const { isLoading: isLoadingInitOptions, isSuccess: isSuccessAllData } =
-    useGodmodeTechnologiesQuery();
+  const { setAllTerms } = useBlockedTermsStore();
 
   const {
-    isLoading: isLoadingInitBlockedTerms,
-    isFetching: isFetchingBlockedTerms,
-  } = useGodmodeBlockedTechnologiesQuery(isSuccessAllData);
+    isLoading: isLoadingAllTechnologies,
+    isSuccess: isSuccessAllTechnologies,
+  } = useAllTechnologies({
+    onSuccess({ data }) {
+      const terms = data.length > 0 ? data.map((d) => d.name) : [];
+      setAllTerms(terms);
+    },
+  });
+
+  const { isLoadingInitBlockedTerms, isFetchingBlockedTerms } =
+    useGodmodeBlockedTechnologiesQuery(isSuccessAllTechnologies);
 
   const { isLoadingSetBlockedTerms, mutateSetBlockedTerms } =
     useGodmodeBlockedTermsMutation();
@@ -18,11 +28,12 @@ export const useBlockedTerms = () => {
   const { isLoadingUnsetBlockedTerms, mutateUnsetBlockedTerms } =
     useGodmodeUnsetBlockedTermsMutation();
 
-  const isLoading =
-    isLoadingInitOptions ||
-    isLoadingInitBlockedTerms ||
-    isLoadingSetBlockedTerms ||
-    isLoadingUnsetBlockedTerms;
+  const isLoading = [
+    isLoadingAllTechnologies,
+    isLoadingInitBlockedTerms,
+    isLoadingSetBlockedTerms,
+    isLoadingUnsetBlockedTerms,
+  ].includes(true);
 
   return {
     isLoading,

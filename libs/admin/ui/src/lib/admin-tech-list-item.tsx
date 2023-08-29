@@ -1,13 +1,13 @@
 import { Button, Text } from '@jobstash/shared/ui';
 
-import RemoveIcon from './remove-icon';
+import RemoveIcon from './icons/remove-icon';
 
 interface Props {
   tech: string;
   onRemove: (tech: string) => void;
 }
 
-const BlockedTerm = ({ tech, onRemove }: Props) => (
+const AdminTechListItem = ({ tech, onRemove }: Props) => (
   // <div className="w-fit">
   //   <Button right={<RemoveIcon />}>Javascript</Button>
   // </div>
@@ -30,4 +30,4 @@ const BlockedTerm = ({ tech, onRemove }: Props) => (
   </div>
 );
 
-export default BlockedTerm;
+export default AdminTechListItem;
