@@ -13,8 +13,6 @@ import { cn } from '@jobstash/shared/utils';
 
 import { ReactQueryProvider } from '@jobstash/shared/state';
 
-import { TopBanner } from '@jobstash/shared/ui';
-
 const App = ({ Component, pageProps }: AppProps) => {
   const router = useRouter();
 
@@ -60,10 +58,10 @@ const App = ({ Component, pageProps }: AppProps) => {
           withNormalizeCSS
           theme={{ colorScheme: 'dark', cursorType: 'pointer' }}
         >
-          <TopBanner />
+          {/* <TopBanner /> */}
           <div
             className={cn({
-              'pt-10': true, // Only when top-banner is visible
+              // 'pt-10': true, // Only when top-banner is visible
             })}
           >
             <Component {...pageProps} />
