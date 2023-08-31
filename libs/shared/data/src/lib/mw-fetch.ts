@@ -1,8 +1,9 @@
-import { type Type } from 'myzod';
+import myzod, { type Type } from 'myzod';
 
 import {
   ERR_INTERNAL,
   ERR_OFFLINE,
+  messageResponseSchema,
   SENTRY_MW_INVALID_JSON_RESPONSE,
   SENTRY_MW_NON_200_RESPONSE,
   type Undefined,
@@ -75,6 +76,16 @@ export const mwFetch = async <R, P = Undefined>(
   } catch {
     sentryMessage(sentryLabel, SENTRY_MW_INVALID_JSON_RESPONSE);
     throw new Error(ERR_INTERNAL);
+  }
+
+  // Try to parse success-message fields if given then throw error-message if not successful
+  if (data && typeof data === 'object') {
+    const result = messageResponseSchema.try(data);
+    const isMessageResponse = !(result instanceof myzod.ValidationError);
+
+    if (isMessageResponse && !result.success) {
+      throw new Error(result.message);
+    }
   }
 
   if (responseSchema && isJsonResponse) {

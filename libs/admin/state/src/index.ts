@@ -1,16 +1,17 @@
 // Hooks
-export * from './lib/hooks/use-godmode-blocked-technologies-query';
-export * from './lib/hooks/use-godmode-blocked-terms-mutation';
-export * from './lib/hooks/use-godmode-paired-terms-mutation';
-export * from './lib/hooks/use-godmode-paired-terms-query';
-export * from './lib/hooks/use-godmode-unset-blocked-terms-mutation';
+export * from './lib/hooks/use-blocked-technologies-query';
+export * from './lib/hooks/use-blocked-terms-mutation';
+export * from './lib/hooks/use-is-loading-synonyms-page';
+export * from './lib/hooks/use-paired-terms-mutation';
+export * from './lib/hooks/use-paired-terms-query';
+export * from './lib/hooks/use-sync-is-loading';
+export * from './lib/hooks/use-unset-blocked-terms-mutation';
 
 // Contexts & Providers
 export * from './lib/contexts/blocked-terms-context';
 export * from './lib/contexts/can-render-context';
 export * from './lib/contexts/paired-terms-context';
 export * from './lib/providers/blocked-terms-provider';
-export * from './lib/providers/can-render-provider';
 export * from './lib/providers/paired-terms-provider';
 
 // Store

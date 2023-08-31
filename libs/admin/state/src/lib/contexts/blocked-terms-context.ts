@@ -1,11 +1,11 @@
 import { createContext, useContext } from 'react';
 
-import { GodmodeBlockedTermsMutFn } from '@jobstash/admin/core';
+import { BlockedTermsMutFn } from '@jobstash/admin/core';
 
 interface BlockedTermsContextProps {
   isLoading: boolean;
-  mutateSetBlockedTerms: GodmodeBlockedTermsMutFn;
-  mutateUnsetBlockedTerms: GodmodeBlockedTermsMutFn;
+  mutateSetBlockedTerms: BlockedTermsMutFn;
+  mutateUnsetBlockedTerms: BlockedTermsMutFn;
   isFetchingBlockedTerms: boolean;
 }
 

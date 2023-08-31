@@ -1,14 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { getGodmodePairedTerms } from '@jobstash/admin/data';
+import { getPairedTerms } from '@jobstash/admin/data';
 
 import { usePairedTermsStore } from '../store/paired-terms-store';
 
-export const useGodmodePairedTermsQuery = () => {
+export const usePairedTermsQuery = () => {
   const { setPairedTerms } = usePairedTermsStore();
   const { isLoading: isLoadingPairedTermsQuery } = useQuery({
     queryKey: ['godmodePairedTerms'],
-    queryFn: async () => getGodmodePairedTerms(),
+    queryFn: async () => getPairedTerms(),
     onSuccess(data) {
       setPairedTerms(data);
     },

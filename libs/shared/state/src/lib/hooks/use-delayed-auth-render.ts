@@ -5,11 +5,13 @@ import { useAccount } from 'wagmi';
 
 import { useIsMounted } from './use-is-mounted';
 
-export const useDelayedAuthRender = ({
-  requireConnected,
-}: {
-  requireConnected: boolean;
-}) => {
+interface Params {
+  requireConnected?: boolean;
+}
+
+export const useDelayedAuthRender = (params?: Params) => {
+  const { requireConnected = true } = params ?? {};
+
   const isMounted = useIsMounted();
   const { push } = useRouter();
   const { isConnected } = useAccount();

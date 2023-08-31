@@ -1,13 +1,13 @@
 import { create } from 'zustand';
 
-import { GodmodePairedTerm } from '@jobstash/admin/core';
+import { PairedTerm } from '@jobstash/admin/core';
 
 interface PairedTermsState {
   allTerms: string[];
   setAllTerms: (_: string[]) => void;
 
-  pairedTerms: GodmodePairedTerm[];
-  setPairedTerms: (_: GodmodePairedTerm[]) => void;
+  pairedTerms: PairedTerm[];
+  setPairedTerms: (_: PairedTerm[]) => void;
 
   destinationOptions: string[];
   destinationTerms: string[];

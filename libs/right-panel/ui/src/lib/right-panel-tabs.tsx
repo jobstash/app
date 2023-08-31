@@ -2,6 +2,8 @@ import { memo } from 'react';
 
 import { type RightPanelTab } from '@jobstash/right-panel/core';
 
+import { Spinner } from '@jobstash/shared/ui';
+
 import RightPanelTabButton from './right-panel-tab-button';
 
 interface Props {
@@ -21,17 +23,7 @@ const RightPanelTabs = ({ isLoading, currentTab, tabs }: Props) => (
         href={href}
       />
     ))}
-    {isLoading && (
-      <div className="pl-1 flex items-center">
-        <div
-          className="animate-spin2 opacity-40 inline-block w-5 h-5 border-2 border-current border-t-transparent text-blue-600 rounded-full"
-          role="status"
-          aria-label="loading"
-        >
-          <span className="sr-only">Loading...</span>
-        </div>
-      </div>
-    )}
+    {isLoading && <Spinner />}
   </div>
 );
 

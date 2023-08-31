@@ -12,6 +12,7 @@ import {
   hackSchema,
   investorSchema,
   jobInfoSchema,
+  messageResponseSchema,
   mwResponseFieldsSchema,
   orgInfoSchema,
   projectCompleteInfoSchema,
@@ -32,6 +33,8 @@ export interface TagElement {
 }
 
 export type Undefined = Infer<typeof undefinedSchema>;
+
+export type MessageResponse = Infer<typeof messageResponseSchema>;
 
 export type Technology = Infer<typeof technologySchema>;
 export type AllTechnologiesResponse = Infer<

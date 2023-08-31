@@ -1,22 +1,22 @@
 import {
-  type GodmodePairedTermsResponse,
-  godmodePairedTermsResponseSchema,
+  type PairedTermsResponse,
+  pairedTermsResponseSchema,
 } from '@jobstash/admin/core';
 import { MW_URL } from '@jobstash/shared/core';
 
 import { mwFetch } from '@jobstash/shared/data';
 
-export const getGodmodePairedTerms = async () => {
+export const getPairedTerms = async () => {
   const url = `${MW_URL}/technologies/paired-terms`;
 
   const options = {
-    responseSchema: godmodePairedTermsResponseSchema,
-    sentryLabel: `getGodmodePairedTerms`,
+    responseSchema: pairedTermsResponseSchema,
+    sentryLabel: `getPairedTerms`,
     credentials: 'include' as RequestCredentials,
     mode: 'cors' as RequestMode,
   };
 
-  const response = await mwFetch<GodmodePairedTermsResponse>(url, options);
+  const response = await mwFetch<PairedTermsResponse>(url, options);
 
   return response.data;
 };

@@ -2,6 +2,11 @@ import myzod from 'myzod';
 
 export const undefinedSchema = myzod.undefined();
 
+export const messageResponseSchema = myzod.object({
+  success: myzod.boolean(),
+  message: myzod.string().min(1),
+});
+
 export const technologySchema = myzod.object({
   id: myzod.string().min(1),
   name: myzod.string().min(1),

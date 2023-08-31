@@ -1,13 +1,13 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { GodmodeBlockedTermsPayload } from '@jobstash/admin/core';
+import { BlockedTermsPayload } from '@jobstash/admin/core';
 import { notifError, notifSuccess } from '@jobstash/shared/utils';
 
 import { postSetBlockedTerms } from '@jobstash/admin/data';
 
 import { useBlockedTermsStore } from '../store/blocked-terms-store';
 
-export const useGodmodeBlockedTermsMutation = () => {
+export const useBlockedTermsMutation = () => {
   const queryClient = useQueryClient();
 
   const fetchedBlockedTerms = useBlockedTermsStore(
@@ -22,7 +22,7 @@ export const useGodmodeBlockedTermsMutation = () => {
       mutationFn: ({
         technologyNameList,
         creatorWallet,
-      }: GodmodeBlockedTermsPayload) =>
+      }: BlockedTermsPayload) =>
         postSetBlockedTerms({ technologyNameList, creatorWallet }),
       onSuccess(_, { technologyNameList }) {
         const title = `New Blocked Term${

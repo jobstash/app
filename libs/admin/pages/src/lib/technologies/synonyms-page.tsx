@@ -2,19 +2,14 @@ import Head from 'next/head';
 
 import { ADMIN_BREADCRUMBS, ADMIN_TABS } from '@jobstash/admin/core';
 
-import {
-  useAllTechnologies,
-  useDelayedAuthRender,
-} from '@jobstash/shared/state';
+import { useIsLoadingSynonymsPage } from '@jobstash/admin/state';
 
 import { AdminLayout, AdminTabs } from '@jobstash/admin/ui';
 import { BreadCrumbs, Loader } from '@jobstash/shared/ui';
 import { SideBar } from '@jobstash/sidebar/feature';
 
 export const SynonymsPage = () => {
-  const { canRender } = useDelayedAuthRender({ requireConnected: true });
-
-  const { data, isLoading, isSuccess, isError } = useAllTechnologies();
+  const isLoading = useIsLoadingSynonymsPage();
 
   return (
     <>
@@ -27,7 +22,7 @@ export const SynonymsPage = () => {
         sidebar={<SideBar />}
         tabsSection={<AdminTabs tabs={ADMIN_TABS.TECHNOLOGIES} />}
       >
-        {canRender ? <p>TODO</p> : <Loader />}
+        {isLoading ? <Loader /> : <p>TODO</p>}
       </AdminLayout>
     </>
   );

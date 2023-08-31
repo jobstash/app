@@ -9,7 +9,6 @@ import {
   AdminTabs,
   ExistingPairedTerms,
   NewPairedTerms,
-  PairedTermsContentWrapper,
 } from '@jobstash/admin/ui';
 import { BreadCrumbs } from '@jobstash/shared/ui';
 import { SideBar } from '@jobstash/sidebar/feature';
@@ -26,10 +25,8 @@ export const PairedTermsPage = () => (
       tabsSection={<AdminTabs tabs={ADMIN_TABS.TECHNOLOGIES} />}
     >
       <PairedTermsProvider>
-        <PairedTermsContentWrapper>
-          <NewPairedTerms />
-          <ExistingPairedTerms />
-        </PairedTermsContentWrapper>
+        <NewPairedTerms />
+        <ExistingPairedTerms />
       </PairedTermsProvider>
     </AdminLayout>
   </>

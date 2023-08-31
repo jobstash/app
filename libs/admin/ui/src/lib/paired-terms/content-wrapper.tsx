@@ -10,7 +10,7 @@ const PairedTermsContentWrapper = ({ children }: Props) => {
   const { isLoading } = usePairedTermsContext();
 
   return (
-    <AdminTechContentWrapper isLoading={isLoading}>
+    <AdminTechContentWrapper isLoading={isLoading} withBorders={false}>
       {children}
     </AdminTechContentWrapper>
   );

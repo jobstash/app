@@ -35,8 +35,6 @@ const DestinationInput = () => {
       classNames={{
         input:
           'rounded-lg bg-dark text-white/60 text-lg placeholder:text-white/40 placeholder:text-lg focus:border-white/40',
-        itemsWrapper: 'bg-dark',
-        item: '[&[data-hovered]]:bg-dark-gray [&[data-selected]]:bg-gray',
       }}
       value=""
       onChange={onChange}

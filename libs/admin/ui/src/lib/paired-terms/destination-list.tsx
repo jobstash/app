@@ -10,8 +10,6 @@ const DestinationList = () => {
     (store) => store.removeDestinationTerm,
   );
 
-  if (destinationTerms.length === 0) return null;
-
   return (
     <div className="flex gap-4 items-center flex-wrap">
       {destinationTerms.map((tech) => (

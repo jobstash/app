@@ -2,9 +2,9 @@ import { useAllTechnologies } from '@jobstash/shared/state';
 
 import { useBlockedTermsStore } from '../store/blocked-terms-store';
 
-import { useGodmodeBlockedTechnologiesQuery } from './use-godmode-blocked-technologies-query';
-import { useGodmodeBlockedTermsMutation } from './use-godmode-blocked-terms-mutation';
-import { useGodmodeUnsetBlockedTermsMutation } from './use-godmode-unset-blocked-terms-mutation';
+import { useBlockedTechnologiesQuery } from './use-blocked-technologies-query';
+import { useBlockedTermsMutation } from './use-blocked-terms-mutation';
+import { useUnsetBlockedTermsMutation } from './use-unset-blocked-terms-mutation';
 
 export const useBlockedTerms = () => {
   const { setAllTerms } = useBlockedTermsStore();
@@ -20,13 +20,13 @@ export const useBlockedTerms = () => {
   });
 
   const { isLoadingInitBlockedTerms, isFetchingBlockedTerms } =
-    useGodmodeBlockedTechnologiesQuery(isSuccessAllTechnologies);
+    useBlockedTechnologiesQuery(isSuccessAllTechnologies);
 
   const { isLoadingSetBlockedTerms, mutateSetBlockedTerms } =
-    useGodmodeBlockedTermsMutation();
+    useBlockedTermsMutation();
 
   const { isLoadingUnsetBlockedTerms, mutateUnsetBlockedTerms } =
-    useGodmodeUnsetBlockedTermsMutation();
+    useUnsetBlockedTermsMutation();
 
   const isLoading = [
     isLoadingAllTechnologies,

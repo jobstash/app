@@ -3,7 +3,7 @@ import {
   useBlockedTermsStore,
 } from '@jobstash/admin/state';
 
-import { Heading, Loader, Text } from '@jobstash/shared/ui';
+import { Heading, Spinner, Text } from '@jobstash/shared/ui';
 
 import AdminTechListItem from '../admin-tech-list-item';
 
@@ -30,9 +30,7 @@ const BlockedTermsList = () => {
       </div>
       <div className="w-full gap-8">
         {isFetchingBlockedTerms && !isLoading ? (
-          <div className="w-full flex items-center">
-            <Loader />
-          </div>
+          <Spinner />
         ) : (
           <div className="flex gap-4 items-center flex-wrap">
             {allBlockedTerms.length > 0 ? (

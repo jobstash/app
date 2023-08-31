@@ -2,8 +2,8 @@ import { useAllTechnologies } from '@jobstash/shared/state';
 
 import { usePairedTermsStore } from '../store/paired-terms-store';
 
-import { useGodmodePairedTermsMutation } from './use-godmode-paired-terms-mutation';
-import { useGodmodePairedTermsQuery } from './use-godmode-paired-terms-query';
+import { usePairedTermsMutation } from './use-paired-terms-mutation';
+import { usePairedTermsQuery } from './use-paired-terms-query';
 
 export const usePairedTerms = () => {
   const { setAllTerms } = usePairedTermsStore();
@@ -14,10 +14,10 @@ export const usePairedTerms = () => {
     },
   });
 
-  const { isLoadingPairedTermsQuery } = useGodmodePairedTermsQuery();
+  const { isLoadingPairedTermsQuery } = usePairedTermsQuery();
 
   const { isLoadingPairedTermsMutation, mutatePairedTerms } =
-    useGodmodePairedTermsMutation();
+    usePairedTermsMutation();
 
   const isLoading = [
     isLoadingGodmodeTechnologiesQuery,

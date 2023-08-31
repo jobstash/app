@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { getGodmodeBlockedTechnologies } from '@jobstash/admin/data';
+import { getBlockedTechnologies } from '@jobstash/admin/data';
 
 import { useBlockedTermsStore } from '../store/blocked-terms-store';
 
-export const useGodmodeBlockedTechnologiesQuery = (enabled: boolean) => {
+export const useBlockedTechnologiesQuery = (enabled: boolean) => {
   const { setFetchedBlockedTerms } = useBlockedTermsStore();
 
   const {
@@ -12,7 +12,7 @@ export const useGodmodeBlockedTechnologiesQuery = (enabled: boolean) => {
     isFetching: isFetchingBlockedTerms,
   } = useQuery({
     queryKey: ['godmodeBlockedTechnologies'],
-    queryFn: async () => getGodmodeBlockedTechnologies(),
+    queryFn: async () => getBlockedTechnologies(),
     onSuccess(data) {
       setFetchedBlockedTerms(data);
     },
