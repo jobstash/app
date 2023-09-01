@@ -4,7 +4,7 @@ import { ADMIN_BREADCRUMBS, ADMIN_TABS } from '@jobstash/admin/core';
 
 import { useIsLoadingSynonymsPage } from '@jobstash/admin/state';
 
-import { AdminLayout, AdminTabs } from '@jobstash/admin/ui';
+import { AdminLayout, AdminTabs, NewPreferredTerms } from '@jobstash/admin/ui';
 import { BreadCrumbs, Loader } from '@jobstash/shared/ui';
 import { SideBar } from '@jobstash/sidebar/feature';
 
@@ -22,7 +22,13 @@ export const SynonymsPage = () => {
         sidebar={<SideBar />}
         tabsSection={<AdminTabs tabs={ADMIN_TABS.TECHNOLOGIES} />}
       >
-        {isLoading ? <Loader /> : <p>TODO</p>}
+        {isLoading ? (
+          <Loader />
+        ) : (
+          <div className="flex flex-col gap-8 w-full justify-center items-center">
+            <NewPreferredTerms />
+          </div>
+        )}
       </AdminLayout>
     </>
   );

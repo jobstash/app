@@ -7,3 +7,4 @@ export { default as BlockedTermsList } from './lib/blocked-terms/list';
 export { default as PairedTermsContentWrapper } from './lib/paired-terms/content-wrapper';
 export { default as ExistingPairedTerms } from './lib/paired-terms/existing-paired-terms';
 export { default as NewPairedTerms } from './lib/paired-terms/new-paired-terms';
+export { default as NewPreferredTerms } from './lib/preferred-terms/new-preferred-terms';

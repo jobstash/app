@@ -4,6 +4,7 @@ export * from './lib/hooks/use-blocked-terms-mutation';
 export * from './lib/hooks/use-is-loading-synonyms-page';
 export * from './lib/hooks/use-paired-terms-mutation';
 export * from './lib/hooks/use-paired-terms-query';
+export * from './lib/hooks/use-preferred-terms-mutation';
 export * from './lib/hooks/use-sync-is-loading';
 export * from './lib/hooks/use-unset-blocked-terms-mutation';
 
