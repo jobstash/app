@@ -13,12 +13,9 @@ export const getFundingRoundsData = (fundingRounds: FundingRound[]) => {
 
   if (fundingRounds.length > 0) {
     for (const fundingRound of fundingRounds) {
-      if (fundingRound.date && fundingRound.date > (lastFundingAmount ?? 0)) {
+      if (fundingRound.date && fundingRound.date > (lastFundingDate ?? 0)) {
         lastFundingDate = fundingRound.date;
-
-        if (fundingRound.raisedAmount) {
-          lastFundingAmount = fundingRound.raisedAmount;
-        }
+        lastFundingAmount = fundingRound.raisedAmount ?? 0;
       }
     }
   }
