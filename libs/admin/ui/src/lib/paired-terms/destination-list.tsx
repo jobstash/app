@@ -1,12 +1,12 @@
-import { usePairedTermsStore } from '@jobstash/admin/state';
+import { useTechnologiesStore } from '@jobstash/admin/state';
 
 import AdminTechListItem from '../admin-tech-list-item';
 
 const DestinationList = () => {
-  const destinationTerms = usePairedTermsStore(
+  const destinationTerms = useTechnologiesStore(
     (store) => store.destinationTerms,
   );
-  const removeDestinationTerm = usePairedTermsStore(
+  const removeDestinationTerm = useTechnologiesStore(
     (store) => store.removeDestinationTerm,
   );
 

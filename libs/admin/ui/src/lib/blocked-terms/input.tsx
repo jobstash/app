@@ -2,13 +2,13 @@ import { useRef } from 'react';
 
 import { Select } from '@mantine/core';
 
-import { useBlockedTermsStore } from '@jobstash/admin/state';
+import { useTechnologiesStore } from '@jobstash/admin/state';
 
 import { Heading } from '@jobstash/shared/ui';
 
 const BlockedTermsInput = () => {
-  const blockTerm = useBlockedTermsStore((state) => state.blockTerm);
-  const options = useBlockedTermsStore((state) => state.options);
+  const blockTerm = useTechnologiesStore((state) => state.blockTerm);
+  const options = useTechnologiesStore((state) => state.options);
 
   const onChange = (term: string) => {
     if (selectRef.current) {

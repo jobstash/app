@@ -5,15 +5,15 @@ import { notifError, notifSuccess } from '@jobstash/shared/utils';
 
 import { postSetBlockedTerms } from '@jobstash/admin/data';
 
-import { useBlockedTermsStore } from '../store/blocked-terms-store';
+import { useTechnologiesStore } from '../store/technologies-store';
 
 export const useBlockedTermsMutation = () => {
   const queryClient = useQueryClient();
 
-  const fetchedBlockedTerms = useBlockedTermsStore(
+  const fetchedBlockedTerms = useTechnologiesStore(
     (state) => state.fetchedBlockedTerms,
   );
-  const onSuccessBlockTerms = useBlockedTermsStore(
+  const onSuccessBlockTerms = useTechnologiesStore(
     (state) => state.onSuccessBlockTerms,
   );
 

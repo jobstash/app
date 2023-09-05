@@ -44,7 +44,7 @@ export const useProfileRepoPage = (isOnboardSSR: boolean) => {
     tabs,
     activeTab,
     setActiveTab,
-    allTechs: allTechsData ?? [],
+    allTechs: allTechsData?.data ?? [],
     profileRepo,
     isOnboarding,
     isLoadingCard,

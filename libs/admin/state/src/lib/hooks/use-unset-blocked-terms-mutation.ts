@@ -5,16 +5,16 @@ import { notifError, notifSuccess } from '@jobstash/shared/utils';
 
 import { postUnsetBlockedTerms } from '@jobstash/admin/data';
 
-import { useBlockedTermsStore } from '../store/blocked-terms-store';
+import { useTechnologiesStore } from '../store/technologies-store';
 
 export const useUnsetBlockedTermsMutation = () => {
   const queryClient = useQueryClient();
 
-  const fetchedBlockedTerms = useBlockedTermsStore(
+  const fetchedBlockedTerms = useTechnologiesStore(
     (state) => state.fetchedBlockedTerms,
   );
 
-  const onSuccessUnblockTerms = useBlockedTermsStore(
+  const onSuccessUnblockTerms = useTechnologiesStore(
     (state) => state.onSuccessUnblockTerms,
   );
 

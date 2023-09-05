@@ -1,6 +1,6 @@
 import {
-  useBlockedTermsContext,
-  useBlockedTermsStore,
+  useBlockedTechnologiesQuery,
+  useTechnologiesStore,
 } from '@jobstash/admin/state';
 
 import { Heading, Spinner, Text } from '@jobstash/shared/ui';
@@ -8,18 +8,19 @@ import { Heading, Spinner, Text } from '@jobstash/shared/ui';
 import AdminTechListItem from '../admin-tech-list-item';
 
 const BlockedTermsList = () => {
-  const blockedTerms = useBlockedTermsStore((state) => state.blockedTerms);
-  const fetchedBlockedTerms = useBlockedTermsStore(
+  const blockedTerms = useTechnologiesStore((state) => state.blockedTerms);
+  const fetchedBlockedTerms = useTechnologiesStore(
     (state) => state.fetchedBlockedTerms,
   );
-  const unblockTerm = useBlockedTermsStore((state) => state.unblockTerm);
-  const unblockedTerms = useBlockedTermsStore((state) => state.unblockedTerms);
+  const unblockTerm = useTechnologiesStore((state) => state.unblockTerm);
+  const unblockedTerms = useTechnologiesStore((state) => state.unblockedTerms);
 
   const allBlockedTerms = [...blockedTerms, ...fetchedBlockedTerms].filter(
     (term) => !unblockedTerms.includes(term),
   );
 
-  const { isFetchingBlockedTerms, isLoading } = useBlockedTermsContext();
+  const { isFetchingBlockedTerms, isLoadingInitBlockedTerms } =
+    useBlockedTechnologiesQuery();
 
   return (
     <div className="flex items-start gap-6">
@@ -29,7 +30,7 @@ const BlockedTermsList = () => {
         </Heading>
       </div>
       <div className="w-full gap-8">
-        {isFetchingBlockedTerms && !isLoading ? (
+        {isFetchingBlockedTerms && !isLoadingInitBlockedTerms ? (
           <Spinner />
         ) : (
           <div className="flex gap-4 items-center flex-wrap">

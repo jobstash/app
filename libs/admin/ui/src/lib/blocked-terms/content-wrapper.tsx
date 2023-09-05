@@ -1,16 +1,21 @@
-import { useBlockedTermsContext } from '@jobstash/admin/state';
+import { type ReactNode } from 'react';
+
+import { LoadingOverlay } from '@mantine/core';
+
+import { useBlockedTermsMutationContext } from '@jobstash/admin/state';
 
 import AdminTechContentWrapper from '../admin-tech-content-wrapper';
 
 interface Props {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 const BlockedTermsContentWrapper = ({ children }: Props) => {
-  const { isLoading } = useBlockedTermsContext();
+  const { isLoading } = useBlockedTermsMutationContext();
 
   return (
-    <AdminTechContentWrapper isLoading={isLoading}>
+    <AdminTechContentWrapper>
+      <LoadingOverlay visible={isLoading} />
       {children}
     </AdminTechContentWrapper>
   );

@@ -1,8 +1,8 @@
 import { useAccount } from 'wagmi';
 
 import {
-  usePairedTermsContext,
-  usePairedTermsStore,
+  usePairedTermsMutation,
+  useTechnologiesStore,
 } from '@jobstash/admin/state';
 
 import { Button } from '@jobstash/shared/ui';
@@ -10,12 +10,12 @@ import { Button } from '@jobstash/shared/ui';
 const PairedTermsActions = () => {
   const { address } = useAccount();
 
-  const origin = usePairedTermsStore((state) => state.origin);
-  const destinationTerms = usePairedTermsStore(
+  const origin = useTechnologiesStore((state) => state.origin);
+  const destinationTerms = useTechnologiesStore(
     (state) => state.destinationTerms,
   );
 
-  const { mutatePairedTerms } = usePairedTermsContext();
+  const { mutatePairedTerms } = usePairedTermsMutation();
 
   const onSubmit = () => {
     //

@@ -1,11 +1,16 @@
 import { useQuery } from '@tanstack/react-query';
 
+import { useAllTechnologies } from '@jobstash/shared/state';
 import { getBlockedTechnologies } from '@jobstash/admin/data';
 
-import { useBlockedTermsStore } from '../store/blocked-terms-store';
+import { useTechnologiesStore } from '../store/technologies-store';
 
-export const useBlockedTechnologiesQuery = (enabled: boolean) => {
-  const { setFetchedBlockedTerms } = useBlockedTermsStore();
+export const useBlockedTechnologiesQuery = () => {
+  const { isSuccess: enabled } = useAllTechnologies();
+
+  const setFetchedBlockedTerms = useTechnologiesStore(
+    (state) => state.setFetchedBlockedTerms,
+  );
 
   const {
     isLoading: isLoadingInitBlockedTerms,

@@ -1,41 +1,24 @@
-import { create } from 'zustand';
+import { type StateCreator } from 'zustand';
 
+import {
+  type AllTechnologiesSlice,
+  type BlockedTermsSlice,
+} from '@jobstash/admin/core';
 import { dedupe } from '@jobstash/shared/utils';
 
-interface BlockedTermsState {
-  // Computed value
-  options: string[];
-
-  // All existing terms
-  allTerms: string[];
-  setAllTerms: (_: string[]) => void;
-
-  // Terms that are blocked by backend
-  fetchedBlockedTerms: string[];
-  setFetchedBlockedTerms: (_: string[]) => void;
-
-  // Blocked terms state
-  blockedTerms: string[];
-  blockTerm: (term: string) => void;
-  onSuccessBlockTerms: (technologyNameList: string[]) => void;
-
-  // Unblocked terms state
-  unblockedTerms: string[];
-  unblockTerm: (term: string) => void;
-  onSuccessUnblockTerms: (technologyNameList: string[]) => void;
-}
-
-export const useBlockedTermsStore = create<BlockedTermsState>()((set, get) => ({
+export const createBlockedTermsSlice: StateCreator<
+  AllTechnologiesSlice,
+  [],
+  [],
+  BlockedTermsSlice
+> = (set, get) => ({
   options: [],
-
-  allTerms: [],
-  setAllTerms: (allTerms: string[]) => set({ allTerms, options: allTerms }),
 
   fetchedBlockedTerms: [],
   setFetchedBlockedTerms(fetchedBlockedTerms: string[]) {
     set({
       fetchedBlockedTerms,
-      options: get().allTerms.filter(
+      options: get().technologies.filter(
         (term) => !fetchedBlockedTerms.includes(term),
       ),
     });
@@ -43,11 +26,11 @@ export const useBlockedTermsStore = create<BlockedTermsState>()((set, get) => ({
 
   blockedTerms: [],
   blockTerm(term) {
-    const { allTerms, fetchedBlockedTerms, blockedTerms } = get();
+    const { technologies, fetchedBlockedTerms, blockedTerms } = get();
 
     const newBlockedTerms = [...blockedTerms, term];
 
-    const newOptions = allTerms.filter(
+    const newOptions = technologies.filter(
       (term) =>
         !newBlockedTerms.includes(term) && !fetchedBlockedTerms.includes(term),
     );
@@ -58,9 +41,9 @@ export const useBlockedTermsStore = create<BlockedTermsState>()((set, get) => ({
     });
   },
   onSuccessBlockTerms(blockedTerms: string[]) {
-    const { allTerms, fetchedBlockedTerms } = get();
+    const { technologies, fetchedBlockedTerms } = get();
 
-    const newOptions = allTerms.filter(
+    const newOptions = technologies.filter(
       (term) =>
         !blockedTerms.includes(term) && !fetchedBlockedTerms.includes(term),
     );
@@ -73,7 +56,7 @@ export const useBlockedTermsStore = create<BlockedTermsState>()((set, get) => ({
 
   unblockedTerms: [],
   unblockTerm(unblockedTerm: string) {
-    const { allTerms, unblockedTerms, fetchedBlockedTerms, blockedTerms } =
+    const { technologies, unblockedTerms, fetchedBlockedTerms, blockedTerms } =
       get();
 
     const newUnblockedTerms = [...unblockedTerms, unblockedTerm];
@@ -81,7 +64,7 @@ export const useBlockedTermsStore = create<BlockedTermsState>()((set, get) => ({
       (term) => term !== unblockedTerm,
     );
 
-    const newOptions = allTerms.filter(
+    const newOptions = technologies.filter(
       (term) =>
         (!blockedTerms.includes(term) && !fetchedBlockedTerms.includes(term)) ||
         newUnblockedTerms.includes(term),
@@ -94,10 +77,10 @@ export const useBlockedTermsStore = create<BlockedTermsState>()((set, get) => ({
     });
   },
   onSuccessUnblockTerms(unblockedTerms: string[]) {
-    const { allTerms, fetchedBlockedTerms } = get();
+    const { technologies, fetchedBlockedTerms } = get();
 
     const newOptions = [
-      ...allTerms.filter((term) => !fetchedBlockedTerms.includes(term)),
+      ...technologies.filter((term) => !fetchedBlockedTerms.includes(term)),
       ...unblockedTerms,
     ];
 
@@ -106,4 +89,4 @@ export const useBlockedTermsStore = create<BlockedTermsState>()((set, get) => ({
       unblockedTerms: [],
     });
   },
-}));
+});

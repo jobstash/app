@@ -2,12 +2,12 @@ import { useRef } from 'react';
 
 import { Select } from '@mantine/core';
 
-import { usePairedTermsStore } from '@jobstash/admin/state';
+import { useTechnologiesStore } from '@jobstash/admin/state';
 
 const OriginInput = () => {
-  const allTerms = usePairedTermsStore((store) => store.allTerms);
-  const origin = usePairedTermsStore((store) => store.origin);
-  const onChangeOrigin = usePairedTermsStore((store) => store.onChangeOrigin);
+  const technologies = useTechnologiesStore((store) => store.technologies);
+  const origin = useTechnologiesStore((store) => store.origin);
+  const onChangeOrigin = useTechnologiesStore((store) => store.onChangeOrigin);
 
   const selectRef = useRef<HTMLInputElement | null>(null);
 
@@ -23,7 +23,7 @@ const OriginInput = () => {
     <Select
       ref={selectRef}
       searchable
-      data={allTerms}
+      data={technologies}
       maxDropdownHeight={320}
       nothingFound="Nothing found"
       placeholder="Select origin term"

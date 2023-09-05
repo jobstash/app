@@ -1,5 +1,7 @@
+export { default as AdminContentLoader } from './lib/admin-content-loader';
 export { default as AdminLayout } from './lib/admin-layout';
 export { default as AdminTabs } from './lib/admin-tabs';
+export { default as AdminTechContentWrapper } from './lib/admin-tech-content-wrapper';
 export { default as BlockedTermsActions } from './lib/blocked-terms/actions';
 export { default as BlockedTermsContentWrapper } from './lib/blocked-terms/content-wrapper';
 export { default as BlockedTermsInput } from './lib/blocked-terms/input';

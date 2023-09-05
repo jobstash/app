@@ -2,14 +2,14 @@ import { useRef } from 'react';
 
 import { Select } from '@mantine/core';
 
-import { usePairedTermsStore } from '@jobstash/admin/state';
+import { useTechnologiesStore } from '@jobstash/admin/state';
 
 const DestinationInput = () => {
-  const destinationOptions = usePairedTermsStore(
+  const destinationOptions = useTechnologiesStore(
     (store) => store.destinationOptions,
   );
-  const origin = usePairedTermsStore((store) => store.origin);
-  const addDestinationTerm = usePairedTermsStore(
+  const origin = useTechnologiesStore((store) => store.origin);
+  const addDestinationTerm = useTechnologiesStore(
     (store) => store.addDestinationTerm,
   );
 

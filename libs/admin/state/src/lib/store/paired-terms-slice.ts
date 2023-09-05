@@ -1,37 +1,26 @@
-import { create } from 'zustand';
+import { type StateCreator } from 'zustand';
 
-import { PairedTerm } from '@jobstash/admin/core';
+import {
+  type AllTechnologiesSlice,
+  type PairedTermsSlice,
+} from '@jobstash/admin/core';
 
-interface PairedTermsState {
-  allTerms: string[];
-  setAllTerms: (_: string[]) => void;
-
-  pairedTerms: PairedTerm[];
-  setPairedTerms: (_: PairedTerm[]) => void;
-
-  destinationOptions: string[];
-  destinationTerms: string[];
-  addDestinationTerm: (_: string) => void;
-  removeDestinationTerm: (_: string) => void;
-
-  origin: string;
-  onChangeOrigin: (_: string) => void;
-}
-
-export const usePairedTermsStore = create<PairedTermsState>((set, get) => ({
-  allTerms: [],
-  setAllTerms: (allTerms) => set({ allTerms }),
-
+export const createPairedTermsSlice: StateCreator<
+  AllTechnologiesSlice,
+  [],
+  [],
+  PairedTermsSlice
+> = (set, get) => ({
   pairedTerms: [],
   setPairedTerms: (pairedTerms) => set({ pairedTerms }),
 
   destinationOptions: [],
   destinationTerms: [],
   addDestinationTerm(term) {
-    const { destinationTerms, allTerms, origin } = get();
+    const { destinationTerms, technologies, origin } = get();
 
     const newDestinationTerms = [...destinationTerms, term];
-    const newDestinationOptions = allTerms.filter(
+    const newDestinationOptions = technologies.filter(
       (term) => !newDestinationTerms.includes(term) && term !== origin,
     );
 
@@ -41,12 +30,12 @@ export const usePairedTermsStore = create<PairedTermsState>((set, get) => ({
     });
   },
   removeDestinationTerm(term) {
-    const { destinationTerms, allTerms, origin } = get();
+    const { destinationTerms, technologies, origin } = get();
 
     const newDestinationTerms = destinationTerms.filter(
       (destinationTerm) => destinationTerm !== term,
     );
-    const newDestinationOptions = allTerms.filter(
+    const newDestinationOptions = technologies.filter(
       (term) => !newDestinationTerms.includes(term) && term !== origin,
     );
 
@@ -58,7 +47,7 @@ export const usePairedTermsStore = create<PairedTermsState>((set, get) => ({
 
   origin: '',
   onChangeOrigin(origin) {
-    const { allTerms, pairedTerms } = get();
+    const { technologies, pairedTerms } = get();
 
     const pairedTerm = pairedTerms.find(
       (pairedTerm) => pairedTerm.technology === origin,
@@ -66,10 +55,10 @@ export const usePairedTermsStore = create<PairedTermsState>((set, get) => ({
 
     const destinationTerms = pairedTerm?.pairings ?? [];
 
-    const destinationOptions = allTerms.filter(
+    const destinationOptions = technologies.filter(
       (term) => !destinationTerms.includes(term) && term !== origin,
     );
 
     set({ origin, destinationTerms, destinationOptions });
   },
-}));
+});

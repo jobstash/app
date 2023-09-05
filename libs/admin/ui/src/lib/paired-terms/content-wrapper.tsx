@@ -1,4 +1,4 @@
-import { usePairedTermsContext } from '@jobstash/admin/state';
+import { useIsLoadingPairedTermsPage } from '@jobstash/admin/state';
 
 import AdminTechContentWrapper from '../admin-tech-content-wrapper';
 
@@ -7,7 +7,7 @@ interface Props {
 }
 
 const PairedTermsContentWrapper = ({ children }: Props) => {
-  const { isLoading } = usePairedTermsContext();
+  const isLoading = useIsLoadingPairedTermsPage();
 
   return (
     <AdminTechContentWrapper isLoading={isLoading} withBorders={false}>
