@@ -5,7 +5,7 @@ import { useSetAtom } from 'jotai';
 
 import { type ProfileOrgReview } from '@jobstash/profile/core';
 import { EVENT_CARD_CLICK } from '@jobstash/shared/core';
-import { getGoogleLogoUrl } from '@jobstash/shared/utils';
+import { getLogoUrl } from '@jobstash/shared/utils';
 
 import { activeProfileOrgReviewAtom } from '@jobstash/profile/state';
 
@@ -52,7 +52,7 @@ const ProfileOrgReviewCard = (props: Props) => {
             title={org.name}
             location={org.location}
             avatarProps={{
-              src: org.logo ?? getGoogleLogoUrl(org.url),
+              src: getLogoUrl(org.url, org.logo),
               alt: org.name,
             }}
           />

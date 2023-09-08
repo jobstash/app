@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-import { getGoogleLogoUrl } from '@jobstash/shared/utils';
+import { getLogoUrl } from '@jobstash/shared/utils';
 
 import { LogoTitle } from '@jobstash/shared/ui';
 
@@ -21,7 +21,7 @@ const ProfileRepoCardOrg = (props: Props) => {
         <LogoTitle
           title={name}
           avatarProps={{
-            src: logo ?? getGoogleLogoUrl(url),
+            src: getLogoUrl(url, logo),
             alt: name,
           }}
         />

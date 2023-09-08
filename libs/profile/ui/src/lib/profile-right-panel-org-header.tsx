@@ -1,7 +1,7 @@
 import { memo } from 'react';
 
 import { type OrgInfo } from '@jobstash/shared/core';
-import { getGoogleLogoUrl } from '@jobstash/shared/utils';
+import { getLogoUrl } from '@jobstash/shared/utils';
 
 import { LogoTitle, Text } from '@jobstash/shared/ui';
 
@@ -24,7 +24,7 @@ const ProfileRightPanelOrgHeader = ({ orgInfo }: Props) => {
           <LogoTitle
             title={name}
             avatarProps={{
-              src: logo ?? getGoogleLogoUrl(url),
+              src: getLogoUrl(url, logo),
               alt: name,
             }}
           />

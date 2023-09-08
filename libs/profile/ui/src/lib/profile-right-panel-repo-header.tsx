@@ -1,7 +1,7 @@
 import { memo } from 'react';
 
 import { type ProfileRepo } from '@jobstash/profile/core';
-import { getGoogleLogoUrl } from '@jobstash/shared/utils';
+import { getLogoUrl } from '@jobstash/shared/utils';
 
 import { Heading, LogoTitle, Text } from '@jobstash/shared/ui';
 
@@ -21,7 +21,7 @@ const ProfileRightPanelRepoHeader = ({ profileRepo }: Props) => {
       <LogoTitle
         title={org.name}
         avatarProps={{
-          src: org.logo ?? getGoogleLogoUrl(org.url),
+          src: getLogoUrl(org.url, org.logo),
           alt: org.name,
         }}
       />

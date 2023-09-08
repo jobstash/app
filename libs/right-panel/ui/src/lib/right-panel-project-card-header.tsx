@@ -1,7 +1,7 @@
 import { memo } from 'react';
 
 import { type TagElement } from '@jobstash/shared/core';
-import { getGoogleLogoUrl } from '@jobstash/shared/utils';
+import { getLogoUrl } from '@jobstash/shared/utils';
 
 import RightPanelProjectCardTitle from '../right-panel-project-card-title';
 
@@ -19,7 +19,7 @@ const RightPanelProjectCardHeader = ({ name, url, logo, socials }: Props) => (
     <RightPanelProjectCardTitle
       name={name}
       url={url}
-      logo={logo && logo.length > 1 ? logo : getGoogleLogoUrl(url)}
+      logo={getLogoUrl(url, logo)}
     />
     <RightPanelProjectCardSocials socials={socials} />
   </div>

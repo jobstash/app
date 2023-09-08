@@ -1,7 +1,7 @@
 import { memo } from 'react';
 
 import { type Competitor } from '@jobstash/competitors/core';
-import { getGoogleLogoUrl } from '@jobstash/shared/utils';
+import { getLogoUrl } from '@jobstash/shared/utils';
 
 import { CardSet, LogoTitle, Text } from '@jobstash/shared/ui';
 
@@ -25,7 +25,7 @@ const RightPanelCompetitorCard = ({ competitor }: Props) => {
             size="lg"
             title={name}
             avatarProps={{
-              src: logo.trim().length > 0 ? logo : getGoogleLogoUrl(url),
+              src: getLogoUrl(url, logo),
               alt: name,
             }}
           />
