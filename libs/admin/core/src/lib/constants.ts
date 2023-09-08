@@ -3,6 +3,8 @@ const ADMIN_PATHS = {
   PAIRED_TERMS: '/godmode/technologies/paired-terms',
   SYNONYMS: '/godmode/technologies/synonyms',
   TECHNOLOGY_APPROVALS: '/godmode/technologies/approvals',
+  ORG_LIST: '/godmode/organizations',
+  ORG_CREATE: '/godmode/organizations/create',
 };
 
 export const ADMIN_BREADCRUMBS = {
@@ -11,6 +13,11 @@ export const ADMIN_BREADCRUMBS = {
   SYNONYMS: [{ title: 'Synonyms', href: ADMIN_PATHS.SYNONYMS }],
   TECHNOLOGY_APPROVALS: [
     { title: 'Technology Approvals', href: ADMIN_PATHS.TECHNOLOGY_APPROVALS },
+  ],
+  ORG_LIST: [{ title: 'Organizations', href: ADMIN_PATHS.ORG_LIST }],
+  ORG_CREATE: [
+    { title: 'Organizations', href: ADMIN_PATHS.ORG_LIST },
+    { title: 'Create Organization', href: ADMIN_PATHS.ORG_CREATE },
   ],
 };
 

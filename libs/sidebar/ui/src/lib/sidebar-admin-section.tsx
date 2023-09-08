@@ -2,7 +2,10 @@ import { Text } from '@jobstash/shared/ui';
 
 import SidebarBartab from './sidebar-bartab';
 
-const PATH_PREFIX = '/godmode/technologies';
+const GODMODE_PATH_PREFIX = {
+  TECHNOLOGIES: '/godmode/technologies',
+  ORGANIZATIONS: '/godmode/organizations',
+};
 
 const SidebarAdminSection = () => (
   <div className="flex-col">
@@ -12,7 +15,16 @@ const SidebarAdminSection = () => (
         path="/godmode/technologies/synonyms"
         text="Technologies"
         isActiveFn={(pathname) =>
-          pathname.slice(0, PATH_PREFIX.length) === PATH_PREFIX
+          pathname.slice(0, GODMODE_PATH_PREFIX.TECHNOLOGIES.length) ===
+          GODMODE_PATH_PREFIX.TECHNOLOGIES
+        }
+      />
+      <SidebarBartab
+        path="/godmode/organizations"
+        text="Organizations"
+        isActiveFn={(pathname) =>
+          pathname.slice(0, GODMODE_PATH_PREFIX.TECHNOLOGIES.length) ===
+          GODMODE_PATH_PREFIX.ORGANIZATIONS
         }
       />
     </div>

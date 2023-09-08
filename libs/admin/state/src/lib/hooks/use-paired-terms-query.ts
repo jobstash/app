@@ -16,6 +16,7 @@ export const usePairedTermsQuery = () => {
       setPairedTerms(data);
     },
     enabled,
+    staleTime: 1000 * 60 * 60,
   });
 
   return {

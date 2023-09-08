@@ -15,11 +15,11 @@ const PairedTermsActions = () => {
     (state) => state.destinationTerms,
   );
 
-  const { mutatePairedTerms } = usePairedTermsMutation();
+  const { mutate } = usePairedTermsMutation();
 
   const onSubmit = () => {
     //
-    mutatePairedTerms({
+    mutate({
       originTerm: origin,
       pairedTermList: destinationTerms,
       creatorWallet: address ?? '',

@@ -1,3 +1,5 @@
+import { LoadingOverlay } from '@mantine/core';
+
 import { useIsLoadingPairedTermsPage } from '@jobstash/admin/state';
 
 import AdminTechContentWrapper from '../admin-tech-content-wrapper';
@@ -10,7 +12,8 @@ const PairedTermsContentWrapper = ({ children }: Props) => {
   const isLoading = useIsLoadingPairedTermsPage();
 
   return (
-    <AdminTechContentWrapper isLoading={isLoading} withBorders={false}>
+    <AdminTechContentWrapper>
+      <LoadingOverlay visible={isLoading} />
       {children}
     </AdminTechContentWrapper>
   );
