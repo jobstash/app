@@ -8,6 +8,7 @@ import {
   AdminContentLoader,
   AdminLayout,
   AdminTabs,
+  ExistingPairedTerms,
   NewPairedTerms,
 } from '@jobstash/admin/ui';
 import { BreadCrumbs } from '@jobstash/shared/ui';
@@ -32,10 +33,10 @@ export const PairedTermsPage = () => {
         {isLoading ? (
           <AdminContentLoader />
         ) : (
-          <>
+          <div className="flex flex-col gap-12 w-full">
             <NewPairedTerms />
-            {/* <ExistingPairedTerms /> */}
-          </>
+            <ExistingPairedTerms />
+          </div>
         )}
       </AdminLayout>
     </>

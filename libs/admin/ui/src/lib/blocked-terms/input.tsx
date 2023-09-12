@@ -1,10 +1,10 @@
 import { useRef } from 'react';
 
-import { Select } from '@mantine/core';
-
 import { useTechnologiesStore } from '@jobstash/admin/state';
 
 import { Heading } from '@jobstash/shared/ui';
+
+import AdminSelectInput from '../admin-select-input';
 
 const BlockedTermsInput = () => {
   const blockTerm = useTechnologiesStore((state) => state.blockTerm);
@@ -28,20 +28,10 @@ const BlockedTermsInput = () => {
         </Heading>
       </div>
       <div className="w-full">
-        <Select
+        <AdminSelectInput
           ref={selectRef}
-          searchable
           data={options}
-          maxDropdownHeight={320}
-          nothingFound="Nothing found"
           placeholder="Select term to block"
-          size="lg"
-          classNames={{
-            input:
-              'rounded-lg bg-dark text-white/60 text-lg placeholder:text-white/40 placeholder:text-lg focus:border-white/40',
-            itemsWrapper: 'bg-dark',
-            item: '[&[data-hovered]]:bg-dark-gray [&[data-selected]]:bg-gray',
-          }}
           value=""
           onChange={onChange}
         />

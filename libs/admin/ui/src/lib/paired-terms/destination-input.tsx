@@ -1,8 +1,8 @@
 import { useRef } from 'react';
 
-import { Select } from '@mantine/core';
-
 import { useTechnologiesStore } from '@jobstash/admin/state';
+
+import AdminSelectInput from '../admin-select-input';
 
 const DestinationInput = () => {
   const destinationOptions = useTechnologiesStore(
@@ -24,18 +24,11 @@ const DestinationInput = () => {
   };
 
   return (
-    <Select
+    <AdminSelectInput
       ref={selectRef}
-      searchable
-      disabled={!origin}
       data={destinationOptions}
-      maxDropdownHeight={320}
       placeholder="Select multiple destination terms"
-      size="lg"
-      classNames={{
-        input:
-          'rounded-lg bg-dark text-white/60 text-lg placeholder:text-white/40 placeholder:text-lg focus:border-white/40',
-      }}
+      isDisabled={!origin}
       value=""
       onChange={onChange}
     />

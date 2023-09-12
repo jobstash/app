@@ -1,8 +1,8 @@
 import { useRef } from 'react';
 
-import { Select } from '@mantine/core';
-
 import { useTechnologiesStore } from '@jobstash/admin/state';
+
+import AdminSelectInput from '../admin-select-input';
 
 const OriginInput = () => {
   const technologies = useTechnologiesStore((store) => store.technologies);
@@ -20,20 +20,10 @@ const OriginInput = () => {
   };
 
   return (
-    <Select
+    <AdminSelectInput
       ref={selectRef}
-      searchable
       data={technologies}
-      maxDropdownHeight={320}
-      nothingFound="Nothing found"
       placeholder="Select origin term"
-      size="lg"
-      classNames={{
-        input:
-          'rounded-lg bg-dark text-white/60 text-lg placeholder:text-white/40 placeholder:text-lg focus:border-white/40',
-        itemsWrapper: 'bg-dark',
-        item: '[&[data-hovered]]:bg-dark-gray [&[data-selected]]:bg-gray',
-      }}
       value={origin}
       onChange={onChange}
     />

@@ -1,19 +1,14 @@
-import {
-  useIsLoadingPairedTermsPage,
-  useTechnologiesStore,
-} from '@jobstash/admin/state';
+import { useTechnologiesStore } from '@jobstash/admin/state';
 
 import { Heading } from '@jobstash/shared/ui';
 
 import AdminTechContentWrapper from '../admin-tech-content-wrapper';
 
 const ExistingPairedTerms = () => {
-  const isLoading = useIsLoadingPairedTermsPage();
-
   const pairedTerms = useTechnologiesStore((state) => state.pairedTerms);
   const hasPairedTerms = pairedTerms.length > 0;
 
-  if (!hasPairedTerms) return null;
+  if (!hasPairedTerms) return <p>No Existing Paired Terms</p>;
 
   return (
     <div className="flex flex-col w-full gap-8 pt-12">
@@ -23,6 +18,7 @@ const ExistingPairedTerms = () => {
       <div className="flex w-full justify-center">
         <AdminTechContentWrapper>
           <p>TODO: ExistingPairedTerms</p>
+          <pre>{JSON.stringify({ pairedTerms }, undefined, '\t')}</pre>
         </AdminTechContentWrapper>
       </div>
     </div>
