@@ -1,6 +1,8 @@
 import { type JobPost } from '@jobstash/jobs/core';
 import { numFormatter } from '@jobstash/shared/utils';
 
+import { createJobPageTitle } from './create-job-page-title';
+
 export const createJobCardOgDetails = (jobPost?: JobPost) => {
   if (!jobPost) return { title: '', description: '' };
 
@@ -16,7 +18,7 @@ export const createJobCardOgDetails = (jobPost?: JobPost) => {
     salaryCurrency = 'USD',
   } = jobPost;
 
-  const title = `${organization.name} | ${jobTitle}\n\n`;
+  const title = createJobPageTitle(organization.name, jobTitle);
   let description = '';
 
   if (minSalaryRange && maxSalaryRange) {
