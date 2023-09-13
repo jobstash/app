@@ -2,7 +2,11 @@ import { memo, useEffect } from 'react';
 
 import { useAtomValue } from 'jotai';
 
-import { ROUTE_SECTION } from '@jobstash/shared/core';
+import {
+  JOBSTASH_TELEGRAM_URL,
+  ORG_SIGNUP_FORM_URL,
+  ROUTE_SECTION,
+} from '@jobstash/shared/core';
 
 import { sidebarOpenAtom } from '@jobstash/sidebar/state';
 
@@ -37,6 +41,19 @@ const sidebarBartabs = [
     text: 'Projects',
     path: ROUTE_SECTION.PROJECTS,
     icon: <ProjectsSidebarIcon />,
+  },
+];
+
+const contactMobileBartabs = [
+  {
+    text: 'Subscribe on Telegram',
+    path: JOBSTASH_TELEGRAM_URL,
+    icon: <JobsSidebarIcon />,
+  },
+  {
+    text: 'Request to be Listed',
+    path: ORG_SIGNUP_FORM_URL,
+    icon: <OrgSidebarIcon />,
   },
 ];
 
@@ -80,6 +97,24 @@ const Sidebar = () => {
             />
           ))}
         </div>
+
+        <div className="fixed bottom-4">
+          <Text color="dimmed" className="block pt-8">
+            Contact
+          </Text>
+
+          <div className="flex flex-col justify-start items-start space-y-3 pt-3 [&>*]:bg-transparent [&>*]:bg-none [&>*]:hover:bg-transparent">
+            {contactMobileBartabs.map(({ text, path, icon }) => (
+              <SidebarBartab
+                key={path}
+                isMobile
+                path={path}
+                icon={icon}
+                text={text}
+              />
+            ))}
+          </div>
+        </div>
       </MobileNavbarWrapper>
 
       <div className="-mr-2 ml-auto self-center lg:hidden">
@@ -100,7 +135,7 @@ const Sidebar = () => {
 
       <div className="inset-x-0 bottom-0 hidden space-y-4 p-4 lg:absolute lg:block">
         <SubscribeTelegramButton />
-        <hr className="border-t border-white/20" />
+        <hr className="border-t border-white/10" />
         <RequestToBeListedButton />
       </div>
     </SidebarWrapper>

@@ -50,7 +50,7 @@ const inner = cva(
       {
         variant: 'wallet',
         isActive: true,
-        className: 'bg-transparent',
+        className: 'bg-gradient-to-l from-primary to-tertiary',
       },
       {
         variant: 'wallet',
