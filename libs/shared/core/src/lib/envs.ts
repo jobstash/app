@@ -11,3 +11,4 @@ export const WALLETCONNECT_PROJECT_ID =
 
 // TODO: put hardcode string in env
 export const ORG_SIGNUP_FORM_URL = 'https://forms.gle/HWP6bUf3CB8RyJnw5';
+export const JOBSTASH_TELEGRAM_URL = 'https://telegram.me/jobstash';

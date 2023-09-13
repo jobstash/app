@@ -21,6 +21,7 @@ import {
   RequestToBeListedButton,
   SidebarCloseButton,
   SidebarWrapper,
+  SubscribeTelegramButton,
 } from '@jobstash/sidebar/ui';
 
 import SidebarBartab from './sidebar-bartab';
@@ -98,6 +99,7 @@ const Sidebar = () => {
       </div>
 
       <div className="inset-x-0 bottom-0 hidden space-y-4 p-4 lg:absolute lg:block">
+        <SubscribeTelegramButton />
         <hr className="border-t border-white/20" />
         <RequestToBeListedButton />
       </div>

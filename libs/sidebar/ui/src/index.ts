@@ -6,3 +6,4 @@ export { default as RequestToBeListedButton } from './lib/request-to-be-listed-b
 export { default as SidebarCloseButton } from './lib/sidebar-close-button';
 export { default as SidebarSkeleton } from './lib/sidebar-skeleton';
 export { default as SidebarWrapper } from './lib/sidebar-wrapper';
+export { default as SubscribeTelegramButton } from './lib/subscribe-telegram-button';
