@@ -31,7 +31,8 @@ const RightPanelJobCard = ({
   const onClickApplyJob = () => {
     gaEvent('job_apply', {
       event_category: 'job',
-      event_label: `${shortUUID} ${jobTitle}`,
+      job_shortuuid: shortUUID,
+      organization_name: orgName,
     });
 
     if (typeof window !== 'undefined') {
