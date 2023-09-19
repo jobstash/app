@@ -1,7 +1,11 @@
 /* eslint-disable camelcase */
 import { memo } from 'react';
 
-import { type JobInfo, type Technology } from '@jobstash/shared/core';
+import {
+  GA_EVENT_ACTION,
+  type JobInfo,
+  type Technology,
+} from '@jobstash/shared/core';
 import { slugify } from '@jobstash/shared/utils';
 import { gaEvent } from '@jobstash/shared/utils';
 
@@ -29,7 +33,7 @@ const RightPanelJobCard = ({
   const { jobTitle, jobApplyPageUrl, shortUUID } = jobInfo;
 
   const onClickApplyJob = () => {
-    gaEvent('job_apply', {
+    gaEvent(GA_EVENT_ACTION.JOB_APPLY, {
       event_category: 'job',
       job_shortuuid: shortUUID,
       organization_name: orgName,
