@@ -7,7 +7,6 @@ export const filterConfigSharedPropertiesSchema = myzod.object({
   label: myzod.string().min(1),
   show: myzod.boolean(),
   googleAnalyticsEventName: myzod.string().min(1).nullable(),
-  googleAnalyticsEventId: myzod.string().min(1).nullable(),
 });
 
 const rangeFilterConfigValueSchema = myzod.object({
