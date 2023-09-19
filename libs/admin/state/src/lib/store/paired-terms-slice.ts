@@ -50,10 +50,10 @@ export const createPairedTermsSlice: StateCreator<
     const { technologies, pairedTerms } = get();
 
     const pairedTerm = pairedTerms.find(
-      (pairedTerm) => pairedTerm.technology === origin,
+      (pairedTerm) => pairedTerm.technology.name === origin,
     );
 
-    const destinationTerms = pairedTerm?.pairings ?? [];
+    const destinationTerms = pairedTerm?.pairings.map((t) => t.name) ?? [];
 
     const destinationOptions = technologies.filter(
       (term) => !destinationTerms.includes(term) && term !== origin,
