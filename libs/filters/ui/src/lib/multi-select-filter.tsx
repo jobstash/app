@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { type Dispatch, useCallback, useMemo } from 'react';
 
 import { MultiSelect } from '@mantine/core';
@@ -7,7 +8,8 @@ import {
   seniorityMapping,
   type SetMultiSelectFilterValueAction,
 } from '@jobstash/filters/core';
-import { cn, decodeBase64 } from '@jobstash/shared/utils';
+import { GA_EVENT_ACTION } from '@jobstash/shared/core';
+import { cn, decodeBase64, gaEvent } from '@jobstash/shared/utils';
 
 import { useIsMobile } from '@jobstash/shared/state';
 
@@ -19,6 +21,7 @@ interface Props {
   paramKey: string;
   options: string[];
   dispatch: Dispatch<SetMultiSelectFilterValueAction>;
+  gaEventName: string | null;
 }
 
 const MultiSelectFilter = ({
@@ -26,8 +29,21 @@ const MultiSelectFilter = ({
   value,
   options,
   paramKey,
+  gaEventName,
   dispatch,
 }: Props) => {
+  const onDropdownClose = () => {
+    if (gaEventName && value) {
+      gaEvent(GA_EVENT_ACTION.FILTER_ACTION, {
+        filter_name: gaEventName,
+        filter_value: value
+          .split(',')
+          .map((v) => decodeBase64(v))
+          .join(','),
+      });
+    }
+  };
+
   const onChange = useCallback(
     (selectedLabels: string[]) => {
       dispatch({
@@ -38,7 +54,7 @@ const MultiSelectFilter = ({
         },
       });
     },
-    [paramKey, dispatch],
+    [dispatch, paramKey],
   );
 
   const { inputValue, inputLabel } = useMemo(() => {
@@ -92,6 +108,7 @@ const MultiSelectFilter = ({
         }}
         value={inputValue}
         onChange={onChange}
+        onDropdownClose={onDropdownClose}
       />
     </FilterWrapper>
   );

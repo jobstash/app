@@ -1,7 +1,7 @@
 import { GA_EVENT_ACTION } from '@jobstash/shared/core';
 
 interface GaEventFields {
-  event_category: string;
+  event_category?: string;
   event_label?: string;
   value?: number;
 }

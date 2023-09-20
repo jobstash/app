@@ -51,6 +51,9 @@ const FilterConfigMapper = ({
                 paramKey={(config as SingleSelectFilterConfig).paramKey}
                 dispatch={dispatch}
                 placeholder={isOrderConfig ? config.label : undefined}
+                gaEventName={
+                  (config as SingleSelectFilterConfig).googleAnalyticsEventName
+                }
               />
             )}
 
@@ -65,6 +68,7 @@ const FilterConfigMapper = ({
                 maxConfigValue={config.value.highest.value}
                 dispatch={dispatch}
                 prefix={config.prefix}
+                gaEventName={config.googleAnalyticsEventName}
               />
             )}
 
@@ -76,6 +80,7 @@ const FilterConfigMapper = ({
                 options={config.options}
                 paramKey={config.paramKey}
                 dispatch={dispatch}
+                gaEventName={config.googleAnalyticsEventName}
               />
             )}
           </div>

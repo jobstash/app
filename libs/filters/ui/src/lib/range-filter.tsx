@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { type Dispatch, memo, useMemo } from 'react';
 
 import { Popover, RangeSlider } from '@mantine/core';
@@ -6,8 +7,9 @@ import {
   type FilterValue,
   type SetRangeFilterValueAction,
 } from '@jobstash/filters/core';
-import { roboto } from '@jobstash/shared/core';
+import { GA_EVENT_ACTION, roboto } from '@jobstash/shared/core';
 import { formatPrefixedNum } from '@jobstash/filters/utils';
+import { gaEvent } from '@jobstash/shared/utils';
 
 import { Button, CaretDownIcon } from '@jobstash/shared/ui';
 
@@ -23,6 +25,7 @@ interface Props {
   maxConfigValue: number;
   prefix: string | null;
   dispatch: Dispatch<SetRangeFilterValueAction>;
+  gaEventName: string | null;
 }
 
 const RangeFilter = ({
@@ -35,6 +38,7 @@ const RangeFilter = ({
   maxConfigValue,
   prefix,
   dispatch,
+  gaEventName,
 }: Props) => {
   const increment = Math.round((maxConfigValue - minConfigValue) / 100);
 
@@ -47,18 +51,30 @@ const RangeFilter = ({
   }));
 
   const onChange = ([minRangeValue, maxRangeValue]: [number, number]) => {
-    const min = minRangeValue * increment + minConfigValue;
-    const max = maxRangeValue * increment + minConfigValue;
+    const min = (minRangeValue * increment + minConfigValue).toString();
+    const max = (maxRangeValue * increment + minConfigValue).toString();
 
     dispatch({
       type: 'SET_RANGE_FILTER_VALUE',
       payload: {
-        min: min.toString(),
-        max: max.toString(),
+        min,
+        max,
         minParamKey,
         maxParamKey,
       },
     });
+  };
+
+  const onChangeEnd = ([minRangeValue, maxRangeValue]: [number, number]) => {
+    const min = (minRangeValue * increment + minConfigValue).toString();
+    const max = (maxRangeValue * increment + minConfigValue).toString();
+
+    if (gaEventName) {
+      gaEvent(GA_EVENT_ACTION.FILTER_ACTION, {
+        filter_name: gaEventName,
+        filter_value: `${min},${max}`,
+      });
+    }
   };
 
   const isBordered = Boolean(minValue) || Boolean(maxValue);
@@ -118,6 +134,7 @@ const RangeFilter = ({
             }}
             value={[minInputValue, maxInputValue]}
             onChange={onChange}
+            onChangeEnd={onChangeEnd}
           />
         </Popover.Dropdown>
       </Popover>
