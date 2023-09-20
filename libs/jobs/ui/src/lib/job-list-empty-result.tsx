@@ -39,16 +39,18 @@ const JobListEmptyResult = ({ prevLink, push }: Props) => {
         </div>
       </div>
 
-      <div>
-        <Button
-          variant="primary"
-          textProps={{ fw: 'semibold' }}
-          size="md"
-          onClick={onClick}
-        >
-          Back to Previous Results
-        </Button>
-      </div>
+      {prevLink && (
+        <div>
+          <Button
+            variant="primary"
+            textProps={{ fw: 'semibold' }}
+            size="md"
+            onClick={onClick}
+          >
+            Back to Previous Results
+          </Button>
+        </div>
+      )}
     </div>
   );
 };
