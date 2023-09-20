@@ -7,7 +7,7 @@ import { LogoTitle } from '@jobstash/shared/ui';
 interface Props {
   name: string;
   url: string;
-  logo?: string;
+  logo: string | null;
 }
 
 const RightPanelProjectCardTitle = ({ name, url, logo }: Props) => (

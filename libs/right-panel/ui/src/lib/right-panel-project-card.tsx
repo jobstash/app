@@ -7,7 +7,7 @@ import {
   type RouteSection,
   TAB_SEGMENT,
 } from '@jobstash/shared/core';
-import { getLogoUrl, slugify } from '@jobstash/shared/utils';
+import { slugify } from '@jobstash/shared/utils';
 
 import { createRightPanelProjectCardTags } from './utils/create-right-panel-project-card-tags';
 import RightPanelCardBorder from './right-panel-card-border';
@@ -43,7 +43,7 @@ const RightPanelProjectCard = ({ project, routeSection }: Props) => {
         <RightPanelProjectCardHeader
           name={name}
           url={url}
-          logo={getLogoUrl(url, logo)}
+          logo={logo}
           socials={projectSocialTags}
         />
         <RightPanelProjectCardDescription description={description} />
