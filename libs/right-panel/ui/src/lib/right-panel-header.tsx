@@ -1,7 +1,7 @@
 import { memo } from 'react';
 
 import { type RightPanelOrg } from '@jobstash/right-panel/core';
-import { getGoogleLogoUrl } from '@jobstash/shared/utils';
+import { getLogoUrl } from '@jobstash/shared/utils';
 
 import { LogoTitle, Text } from '@jobstash/shared/ui';
 
@@ -19,7 +19,7 @@ const RightPanelHeader = ({ org }: Props) => (
         <LogoTitle
           title={org.name}
           avatarProps={{
-            src: org.logo ?? getGoogleLogoUrl(org.url),
+            src: getLogoUrl(org.url, org.logo),
             alt: org.name,
           }}
         />

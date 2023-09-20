@@ -4,6 +4,7 @@ export * from './lib/cn';
 export * from './lib/create-fetch-deets';
 export * from './lib/ga-event';
 export * from './lib/get-google-logo-url';
+export * from './lib/get-logo-url';
 export * from './lib/get-plural-text';
 export * from './lib/num-formatter';
 export * from './lib/pretty-timestamp';

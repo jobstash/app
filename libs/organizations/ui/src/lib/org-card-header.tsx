@@ -1,7 +1,7 @@
 import { memo } from 'react';
 
 import { type OrgListItem } from '@jobstash/organizations/core';
-import { getGoogleLogoUrl } from '@jobstash/shared/utils';
+import { getLogoUrl } from '@jobstash/shared/utils';
 
 import { LogoTitle } from '@jobstash/shared/ui';
 
@@ -14,7 +14,7 @@ const OrgCardHeader = ({
 }: Props) => (
   <div className="items-center justify-between space-y-2 lg:flex lg:space-y-0">
     <LogoTitle
-      avatarProps={{ src: logo ?? getGoogleLogoUrl(url), alt: name }}
+      avatarProps={{ src: getLogoUrl(url, logo), alt: name }}
       title={name}
       location={location}
     />

@@ -1,10 +1,9 @@
-/* eslint-disable unicorn/prefer-logical-operator-over-ternary */
 import { memo, type ReactNode } from 'react';
 
 import { type ProjectDetails } from '@jobstash/projects/core';
-import { getGoogleLogoUrl } from '@jobstash/shared/utils';
+import { getLogoUrl } from '@jobstash/shared/utils';
 
-import { Loader, LogoTitle } from '@jobstash/shared/ui';
+import { LogoTitle } from '@jobstash/shared/ui';
 
 interface Props {
   projectDetails?: ProjectDetails;
@@ -43,9 +42,7 @@ const ProjectCardOrg = ({ projectDetails }: Props) => {
       <div className="flex gap-4">
         <LogoTitle
           avatarProps={{
-            src: organization.logo
-              ? organization.logo
-              : getGoogleLogoUrl(organization.url),
+            src: getLogoUrl(organization.url, organization.logo),
             alt: organization.name,
           }}
           title={organization.name}

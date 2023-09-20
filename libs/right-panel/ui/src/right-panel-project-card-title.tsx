@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-import { getGoogleLogoUrl } from '@jobstash/shared/utils';
+import { getLogoUrl } from '@jobstash/shared/utils';
 
 import { LogoTitle } from '@jobstash/shared/ui';
 
@@ -16,7 +16,7 @@ const RightPanelProjectCardTitle = ({ name, url, logo }: Props) => (
       size="lg"
       title={name}
       avatarProps={{
-        src: logo && logo.trim().length > 0 ? logo : getGoogleLogoUrl(url),
+        src: getLogoUrl(url, logo),
         alt: name,
       }}
     />
