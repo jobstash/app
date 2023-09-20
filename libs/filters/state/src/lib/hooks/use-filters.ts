@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { useRouter } from 'next/router';
 import {
   type ChangeEventHandler,
@@ -10,12 +11,18 @@ import {
 
 import { useAtom, useAtomValue } from 'jotai';
 
-import { type FilterConfig, type FilterState } from '@jobstash/filters/core';
+import {
+  type FilterConfig,
+  type FilterState,
+  FilterValues,
+} from '@jobstash/filters/core';
 import {
   FRONTEND_URL,
+  GA_EVENT_ACTION,
   ROUTE_SECTION,
   type RouteSection,
 } from '@jobstash/shared/core';
+import { gaEvent } from '@jobstash/shared/utils';
 
 import { jobCountAtom } from '@jobstash/jobs/state';
 import { orgCountAtom } from '@jobstash/organizations/state';
@@ -50,17 +57,28 @@ export const useFilters = (routeSection: RouteSection) => {
     [setShowFilters],
   );
 
-  const applyFilters = useCallback(() => {
-    const url = new URL(`${FRONTEND_URL}/${routeSection}`);
-    for (const [key, value] of Object.entries(state.filterValues)) {
-      if (value) {
-        url.searchParams.set(key, value);
+  const applyFilters = useCallback(
+    (isSearch = false) => {
+      const url = new URL(`${FRONTEND_URL}/${routeSection}`);
+      for (const [key, value] of Object.entries(state.filterValues)) {
+        if (value) {
+          url.searchParams.set(key, value);
+        }
       }
-    }
 
-    setShowFilters(false);
-    setTimeout(() => push(url, undefined, { shallow: true }), 100);
-  }, [routeSection, push, setShowFilters, state.filterValues]);
+      setShowFilters(false);
+
+      gaEvent(GA_EVENT_ACTION.FILTER_ACTION, {
+        filter_name: isSearch
+          ? 'filter_joblist_search'
+          : 'filter_joblist_apply',
+        filter_value: url.searchParams.toString(),
+      });
+
+      setTimeout(() => push(url, undefined, { shallow: true }), 100);
+    },
+    [routeSection, push, setShowFilters, state.filterValues],
+  );
 
   const clearFilters = useCallback(() => {
     const url = new URL(`${FRONTEND_URL}/${routeSection}`);
@@ -69,15 +87,22 @@ export const useFilters = (routeSection: RouteSection) => {
       url.searchParams.set('query', searchQuery);
     }
 
+    const currentFilterParams = getFilterValuesParams(state.filterValues);
+
+    gaEvent(GA_EVENT_ACTION.FILTER_ACTION, {
+      filter_name: 'filter_joblist_clear',
+      filter_value: currentFilterParams,
+    });
+
     setShowFilters(false);
     setTimeout(() => push(url, undefined, { shallow: true }), 100);
-  }, [routeSection, push, setShowFilters, state?.filterValues?.query]);
+  }, [routeSection, state.filterValues, setShowFilters, push]);
 
   const onSubmitSearch: FormEventHandler = useCallback(
     (e) => {
       e.preventDefault();
 
-      applyFilters();
+      applyFilters(true);
     },
     [applyFilters],
   );
@@ -173,4 +198,23 @@ export const useFilters = (routeSection: RouteSection) => {
     filteredItemsCount,
     showFilters,
   };
+};
+
+const getFilterValuesParams = (filterValues: FilterValues): string => {
+  const filterParams: string[] = [];
+
+  for (const filterValueKey in filterValues) {
+    if (Object.prototype.hasOwnProperty.call(filterValues, filterValueKey)) {
+      const filterValue = filterValues[filterValueKey];
+      if (filterValue) {
+        filterParams.push(
+          `${encodeURIComponent(filterValueKey)}=${encodeURIComponent(
+            filterValue,
+          )}`,
+        );
+      }
+    }
+  }
+
+  return filterParams.join('&');
 };

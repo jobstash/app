@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 import { type Dispatch, memo, useCallback, useMemo } from 'react';
 
 import { Select } from '@mantine/core';
@@ -7,7 +8,8 @@ import {
   type SelectOptions,
   type SetSelectFilterValueAction,
 } from '@jobstash/filters/core';
-import { cn } from '@jobstash/shared/utils';
+import { GA_EVENT_ACTION } from '@jobstash/shared/core';
+import { cn, gaEvent } from '@jobstash/shared/utils';
 
 import FilterWrapper from './filter-wrapper';
 
@@ -16,6 +18,7 @@ interface Props {
   paramKey: string;
   options: SelectOptions;
   dispatch: Dispatch<SetSelectFilterValueAction>;
+  gaEventName: string | null;
   label?: string;
   placeholder?: string;
 }
@@ -27,6 +30,7 @@ const SingleSelectFilter = ({
   dispatch,
   label,
   placeholder,
+  gaEventName,
 }: Props) => {
   // Use labels in displaying input
   const selections = useMemo(() => options.map((o) => o.label), [options]);
@@ -41,8 +45,15 @@ const SingleSelectFilter = ({
         type: 'SET_SELECT_FILTER_VALUE',
         payload: { paramKey, selectedLabel, options },
       });
+
+      if (gaEventName) {
+        gaEvent(GA_EVENT_ACTION.FILTER_ACTION, {
+          filter_name: gaEventName,
+          filter_value: selectedLabel,
+        });
+      }
     },
-    [options, paramKey, dispatch],
+    [dispatch, paramKey, options, gaEventName],
   );
 
   return (

@@ -4,6 +4,7 @@
 import Link from 'next/link';
 import { memo } from 'react';
 
+import { GA_EVENT_ACTION } from '@jobstash/shared/core';
 import { gaEvent } from '@jobstash/shared/utils';
 
 import Text from '../base/text';
@@ -12,7 +13,7 @@ const donateURL = `https://explorer.gitcoin.co/#/round/10/0x2871742b184633f8dc85
 
 const onClickDonate = () => {
   // eslint-disable-next-line camelcase
-  gaEvent('donate_click', { event_category: 'Donation' });
+  gaEvent(GA_EVENT_ACTION.DONATE_CLICK, { event_category: 'Donation' });
 };
 
 const TopBanner = () => (

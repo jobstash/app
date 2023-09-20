@@ -94,7 +94,7 @@ const Filters = ({ routeSection }: Props) => {
         {/* FILTER CONTROLS */}
         {showFilters && (
           <div className="flex flex-wrap gap-6 lg:py-2">
-            <Button variant="primary" onClick={applyFilters}>
+            <Button variant="primary" onClick={() => applyFilters()}>
               Apply Filters
             </Button>
             <Button variant="outline" onClick={clearFilters}>

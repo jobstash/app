@@ -73,3 +73,9 @@ export const TAB_SEGMENT = {
   jobs: 'jobs' as const,
   competitors: 'competitors' as const,
 } as const;
+
+export const GA_EVENT_ACTION = {
+  DONATE_CLICK: 'donate_click' as const,
+  JOB_APPLY: 'job_apply' as const,
+  FILTER_ACTION: 'filter_action' as const,
+} as const;
