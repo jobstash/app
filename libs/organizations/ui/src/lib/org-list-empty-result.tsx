@@ -18,16 +18,18 @@ const OrgListEmptyResult = ({ prevLink, push }: Props) => {
     <EmptyResult
       description="Your search criteria is too restrictive and yielded no results."
       actionSection={
-        <div>
-          <Button
-            variant="primary"
-            textProps={{ fw: 'semibold' }}
-            size="md"
-            onClick={onClick}
-          >
-            Back to Previous Results
-          </Button>
-        </div>
+        prevLink ? (
+          <div>
+            <Button
+              variant="primary"
+              textProps={{ fw: 'semibold' }}
+              size="md"
+              onClick={onClick}
+            >
+              Back to Previous Results
+            </Button>
+          </div>
+        ) : null
       }
     />
   );
