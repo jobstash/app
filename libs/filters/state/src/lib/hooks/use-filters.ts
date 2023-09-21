@@ -12,6 +12,7 @@ import {
 import { useAtom, useAtomValue } from 'jotai';
 
 import {
+  FILTER_KIND,
   type FilterConfig,
   type FilterState,
   FilterValues,
@@ -22,6 +23,7 @@ import {
   ROUTE_SECTION,
   type RouteSection,
 } from '@jobstash/shared/core';
+import { decodeMultiSelectValue } from '@jobstash/filters/utils';
 import { gaEvent } from '@jobstash/shared/utils';
 
 import { jobCountAtom } from '@jobstash/jobs/state';
@@ -67,17 +69,24 @@ export const useFilters = (routeSection: RouteSection) => {
       }
 
       setShowFilters(false);
+      const filter_value = getFilterConfigValueString(url, state.filterConfig);
 
       gaEvent(GA_EVENT_ACTION.FILTER_ACTION, {
         filter_name: isSearch
           ? 'filter_joblist_search'
           : 'filter_joblist_apply',
-        filter_value: url.searchParams.toString(),
+        filter_value,
       });
 
       setTimeout(() => push(url, undefined, { shallow: true }), 100);
     },
-    [routeSection, push, setShowFilters, state.filterValues],
+    [
+      routeSection,
+      setShowFilters,
+      state.filterConfig,
+      state.filterValues,
+      push,
+    ],
   );
 
   const clearFilters = useCallback(() => {
@@ -217,4 +226,32 @@ const getFilterValuesParams = (filterValues: FilterValues): string => {
   }
 
   return filterParams.join('&');
+};
+
+const getFilterConfigValueString = (
+  url: URL,
+  filterConfig: FilterConfig | null,
+) => {
+  const multiSelectKeys = new Set();
+  const filterConfigEntries = Object.entries(filterConfig ?? []);
+  for (const [key, value] of filterConfigEntries) {
+    if (
+      value.kind === FILTER_KIND.MULTI_SELECT ||
+      value.kind === FILTER_KIND.MULTI_SELECT_WITH_SEARCH
+    ) {
+      multiSelectKeys.add(key);
+    }
+  }
+
+  const filterValuePairs = [];
+
+  for (const [k, v] of url.searchParams.entries()) {
+    const isMultiSelect = multiSelectKeys.has(k);
+
+    const value = isMultiSelect ? decodeMultiSelectValue(v) : v;
+
+    filterValuePairs.push(`${k}=${value}`);
+  }
+
+  return filterValuePairs.join('&');
 };

@@ -9,6 +9,7 @@ import {
   type SetMultiSelectFilterValueAction,
 } from '@jobstash/filters/core';
 import { GA_EVENT_ACTION } from '@jobstash/shared/core';
+import { decodeMultiSelectValue } from '@jobstash/filters/utils';
 import { cn, decodeBase64, gaEvent } from '@jobstash/shared/utils';
 
 import { useIsMobile } from '@jobstash/shared/state';
@@ -36,10 +37,7 @@ const MultiSelectFilter = ({
     if (gaEventName && value) {
       gaEvent(GA_EVENT_ACTION.FILTER_ACTION, {
         filter_name: gaEventName,
-        filter_value: value
-          .split(',')
-          .map((v) => decodeBase64(v))
-          .join(','),
+        filter_value: decodeMultiSelectValue(value),
       });
     }
   };
