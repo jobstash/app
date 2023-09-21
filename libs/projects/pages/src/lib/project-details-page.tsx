@@ -7,13 +7,15 @@ import { useAtom, useAtomValue } from 'jotai';
 import { type ProjectDetails } from '@jobstash/projects/core';
 import {
   ERR_INTERNAL,
+  type NotFoundInfo,
   ROUTE_SECTION,
-  TAB_SEGMENT,
 } from '@jobstash/shared/core';
 import { cn, sentryMessage } from '@jobstash/shared/utils';
 
 import { showFiltersAtom } from '@jobstash/filters/state';
 import { activeProjectIdAtom } from '@jobstash/projects/state';
+
+import { NotFoundPage } from '@jobstash/shared/ui';
 
 const Filters = dynamic(() =>
   import('@jobstash/filters/feature').then((m) => m.Filters),
@@ -31,12 +33,17 @@ const ProjectsRightPanel = dynamic(() =>
   import('@jobstash/projects/feature').then((m) => m.ProjectsRightPanel),
 );
 
-interface Props {
+export interface ProjectDetailsPageProps {
   fromSSR: boolean;
   initProjectDetails: ProjectDetails | null;
+  notFoundInfo?: NotFoundInfo;
 }
 
-export const ProjectDetailsPage = ({ fromSSR, initProjectDetails }: Props) => {
+export const ProjectDetailsPage = ({
+  fromSSR,
+  initProjectDetails,
+  notFoundInfo,
+}: ProjectDetailsPageProps) => {
   const [activeProjectId, setActiveProjectId] = useAtom(activeProjectIdAtom);
 
   useEffect(() => {
@@ -73,6 +80,10 @@ export const ProjectDetailsPage = ({ fromSSR, initProjectDetails }: Props) => {
   }, [initProjectDetails, slug]);
 
   const showFilters = useAtomValue(showFiltersAtom);
+
+  if (notFoundInfo) {
+    return <NotFoundPage notFoundInfo={notFoundInfo} />;
+  }
 
   return (
     <div className="w-full lg:pl-52">

@@ -54,3 +54,10 @@ export type ProjectCompleteInfo = Infer<typeof projectCompleteInfoSchema>;
 export type MwResponseFields = Infer<typeof mwResponseFieldsSchema>;
 
 export type RouteSection = typeof ROUTE_SECTION[keyof typeof ROUTE_SECTION];
+
+export type NotFoundInfo = {
+  link: string;
+  title: string;
+  message: string;
+  buttonText: string;
+};

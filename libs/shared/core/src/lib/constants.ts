@@ -2,6 +2,7 @@ import { Lato, Roboto } from '@next/font/google';
 
 export const EVENT_CARD_CLICK = 'card-click';
 
+export const ERR_NOT_FOUND = 'Not Found';
 export const ERR_INTERNAL = 'Something went wrong :(';
 export const ERR_OFFLINE = 'No internet connection';
 

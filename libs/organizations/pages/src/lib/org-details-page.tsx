@@ -8,6 +8,7 @@ import { type OrgDetails, OrgListItem } from '@jobstash/organizations/core';
 import {
   ERR_INTERNAL,
   FRONTEND_URL,
+  type NotFoundInfo,
   ROUTE_SECTION,
 } from '@jobstash/shared/core';
 import { cn, sentryMessage } from '@jobstash/shared/utils';
@@ -15,7 +16,7 @@ import { cn, sentryMessage } from '@jobstash/shared/utils';
 import { showFiltersAtom } from '@jobstash/filters/state';
 import { activeOrgIdAtom } from '@jobstash/organizations/state';
 
-import { getFundingRoundsData } from '@jobstash/shared/ui';
+import { getFundingRoundsData, NotFoundPage } from '@jobstash/shared/ui';
 
 const Filters = dynamic(() =>
   import('@jobstash/filters/feature').then((m) => m.Filters),
@@ -33,12 +34,17 @@ const OrgsRightPanel = dynamic(() =>
   import('@jobstash/organizations/feature').then((m) => m.OrgsRightPanel),
 );
 
-interface Props {
+export interface OrgDetailsPageProps {
   fromSSR: boolean;
   initOrgDetails: OrgDetails | null;
+  notFoundInfo?: NotFoundInfo;
 }
 
-export const OrgDetailsPage = ({ fromSSR, initOrgDetails }: Props) => {
+export const OrgDetailsPage = ({
+  fromSSR,
+  initOrgDetails,
+  notFoundInfo,
+}: OrgDetailsPageProps) => {
   const [activeOrgId, setActiveOrgId] = useAtom(activeOrgIdAtom);
 
   useEffect(() => {
@@ -76,6 +82,10 @@ export const OrgDetailsPage = ({ fromSSR, initOrgDetails }: Props) => {
 
   const showFilters = useAtomValue(showFiltersAtom);
 
+  if (notFoundInfo) {
+    return <NotFoundPage notFoundInfo={notFoundInfo} />;
+  }
+
   const { lastFundingAmount, lastFundingDate } = getFundingRoundsData(
     initOrgDetails?.fundingRounds ?? [],
   );
@@ -95,7 +105,8 @@ export const OrgDetailsPage = ({ fromSSR, initOrgDetails }: Props) => {
       }
     : null;
 
-  const urlMetaData = `${FRONTEND_URL}/organizations/${slug}/details`;
+  //
+  // const urlMetaData = `${FRONTEND_URL}/organizations/${slug}/details`;
 
   // TODO: image meta data
   // TODO: org meta data
