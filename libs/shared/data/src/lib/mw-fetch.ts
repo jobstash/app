@@ -2,6 +2,7 @@ import myzod, { type Type } from 'myzod';
 
 import {
   ERR_INTERNAL,
+  ERR_NOT_FOUND,
   ERR_OFFLINE,
   messageResponseSchema,
   SENTRY_MW_INVALID_JSON_RESPONSE,
@@ -61,7 +62,10 @@ export const mwFetch = async <R, P = Undefined>(
       `${sentryLabel}: ${SENTRY_MW_NON_200_RESPONSE}`,
       JSON.stringify({ status: res.status, statusText: res.statusText }),
     );
-    throw new Error(ERR_INTERNAL);
+
+    const is404 = res.status === 404;
+
+    throw new Error(is404 ? ERR_NOT_FOUND : ERR_INTERNAL);
   }
 
   const isJsonResponse = (res.headers.get('content-type') ?? '').includes(

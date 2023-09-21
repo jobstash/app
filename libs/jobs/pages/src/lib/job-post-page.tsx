@@ -9,6 +9,7 @@ import {
   EDGE_URL,
   ERR_INTERNAL,
   FRONTEND_URL,
+  type NotFoundInfo,
   ROUTE_SECTION,
 } from '@jobstash/shared/core';
 import {
@@ -41,12 +42,21 @@ const Filters = dynamic(() =>
   import('@jobstash/filters/feature').then((m) => m.Filters),
 );
 
+const NotFoundPage = dynamic(() =>
+  import('@jobstash/shared/ui').then((m) => m.NotFoundPage),
+);
+
 export interface JobPostPageProps {
   initJob: JobPost;
   fromSSR: boolean;
+  notFoundInfo?: NotFoundInfo;
 }
 
-export const JobPostPage = ({ initJob, fromSSR }: JobPostPageProps) => {
+export const JobPostPage = ({
+  initJob,
+  fromSSR,
+  notFoundInfo,
+}: JobPostPageProps) => {
   const [activeJob, setActiveJob] = useAtom(activeJobAtom);
 
   const router = useRouter();
@@ -69,6 +79,12 @@ export const JobPostPage = ({ initJob, fromSSR }: JobPostPageProps) => {
     }
   }, [fromSSR]);
 
+  const showFilters = useAtomValue(showFiltersAtom);
+
+  if (notFoundInfo) {
+    return <NotFoundPage notFoundInfo={notFoundInfo} />;
+  }
+
   const { slug, tab } = router.query;
   if (!slug || !tab) {
     sentryMessage(
@@ -84,8 +100,6 @@ export const JobPostPage = ({ initJob, fromSSR }: JobPostPageProps) => {
   const imageMetaData = `${EDGE_URL}/api/job-card?id=${jobPost?.shortUUID}`;
   const { description: descriptionMetaData, title: titleMetaData } =
     createJobCardOgDetails(jobPost);
-
-  const showFilters = useAtomValue(showFiltersAtom);
 
   const currentJobPost = jobPost ?? activeJob;
 

@@ -4,7 +4,9 @@ import { type JobPostPageProps } from '@jobstash/jobs/pages';
 import { dehydrate, QueryClient } from '@tanstack/react-query';
 
 import { type CheckWalletResponse } from '@jobstash/auth/core';
-import { withCSR } from '@jobstash/shared/utils';
+import { JobPost } from '@jobstash/jobs/core';
+import { ERR_NOT_FOUND } from '@jobstash/shared/core';
+import { sentryMessage, withCSR } from '@jobstash/shared/utils';
 
 import { getCheckWallet } from '@jobstash/auth/data';
 import { getJobPost } from '@jobstash/jobs/data';
@@ -14,7 +16,31 @@ export const getServerSideProps: GetServerSideProps<JobPostPageProps> = withCSR(
     const shortUuid = ctx.query.slug?.slice(-6) as string | undefined;
     if (typeof shortUuid !== 'string') return { notFound: true };
 
-    const initJob = await getJobPost(shortUuid);
+    let initJob: JobPost | null = null;
+
+    try {
+      initJob = await getJobPost(shortUuid);
+    } catch (error) {
+      if ((error as Error).message === ERR_NOT_FOUND) {
+        return {
+          props: {
+            notFoundInfo: {
+              link: '/jobs',
+              title: 'Job Not Found',
+              message: "The job you tried to find doesn't exist anymore",
+              buttonText: 'Back to Job List',
+            },
+          },
+        };
+      }
+
+      sentryMessage(
+        '/jobs SSR',
+        `failed fetching first job details ${shortUuid}`,
+      );
+
+      throw error;
+    }
 
     const queryClient = new QueryClient();
     queryClient.setQueryData(['job-post', shortUuid], initJob);
