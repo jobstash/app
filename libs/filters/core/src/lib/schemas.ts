@@ -14,19 +14,17 @@ const rangeFilterConfigValueSchema = myzod.object({
   paramKey: myzod.string().min(1),
 });
 
-export const rangeFilterConfigSchema = myzod
-  .intersection(
-    filterConfigSharedPropertiesSchema,
-    myzod.object({
-      kind: myzod.literal(FILTER_KIND.RANGE),
-      value: myzod.object({
-        lowest: rangeFilterConfigValueSchema,
-        highest: rangeFilterConfigValueSchema,
-      }),
-      prefix: myzod.string().min(1).nullable(),
+export const rangeFilterConfigSchema = myzod.intersection(
+  filterConfigSharedPropertiesSchema,
+  myzod.object({
+    kind: myzod.literal(FILTER_KIND.RANGE),
+    value: myzod.object({
+      lowest: rangeFilterConfigValueSchema,
+      highest: rangeFilterConfigValueSchema,
     }),
-  )
-  .allowUnknownKeys(true);
+    prefix: myzod.string().min(1).nullable(),
+  }),
+);
 
 export const selectOptionsSchema = myzod.array(
   myzod.object({
