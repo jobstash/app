@@ -38,7 +38,7 @@ const FilterConfigMapper = ({
   return (
     <>
       {configs.map((config) => {
-        const isOrderConfig = config.label.includes('Order');
+        const isOrderConfig = config.label.includes('Sort');
         return (
           <div key={config.label} className={cn(wrapperClassName)}>
             {config.kind === FILTER_KIND.SINGLE_SELECT && (
