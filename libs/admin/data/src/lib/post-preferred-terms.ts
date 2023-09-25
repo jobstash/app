@@ -11,7 +11,7 @@ import {
 import { mwFetch } from '@jobstash/shared/data';
 
 export const postPreferredTerms = async (payload: PreferredTermsPayload) => {
-  const url = `${MW_URL}/technologies/create-preferred-terms`;
+  const url = `${MW_URL}/technologies/create-preferred-term`;
 
   const options = {
     method: 'POST' as const,
@@ -26,12 +26,12 @@ export const postPreferredTerms = async (payload: PreferredTermsPayload) => {
     },
   };
 
-  const {success, message} = await mwFetch<MessageResponse, PreferredTermsPayload>(
-    url,
-    options,
-  );
+  const { success, message } = await mwFetch<
+    MessageResponse,
+    PreferredTermsPayload
+  >(url, options);
 
-	if (success) throw new Error(message);
+  if (success) throw new Error(message);
 
-  return {success, message};
+  return { success, message };
 };

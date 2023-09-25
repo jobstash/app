@@ -2,12 +2,16 @@ import Head from 'next/head';
 
 import { ADMIN_BREADCRUMBS, ADMIN_TABS } from '@jobstash/admin/core';
 
-import { useIsLoadingSynonymsPage } from '@jobstash/admin/state';
+import {
+  PreferredTermsMutationProvider,
+  useIsLoadingSynonymsPage,
+} from '@jobstash/admin/state';
 
 import {
   AdminContentLoader,
   AdminLayout,
   AdminTabs,
+  ExistingPreferredTerms,
   NewPreferredTerms,
 } from '@jobstash/admin/ui';
 import { BreadCrumbs } from '@jobstash/shared/ui';
@@ -31,7 +35,10 @@ export const SynonymsPage = () => {
           <AdminContentLoader />
         ) : (
           <div className="flex flex-col gap-8 w-full justify-center items-center">
-            <NewPreferredTerms />
+            <PreferredTermsMutationProvider>
+              <NewPreferredTerms />
+            </PreferredTermsMutationProvider>
+            <ExistingPreferredTerms />
           </div>
         )}
       </AdminLayout>

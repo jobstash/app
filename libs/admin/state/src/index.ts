@@ -12,8 +12,10 @@ export * from './lib/hooks/use-unset-blocked-terms-mutation';
 // Context & Providers
 export * from './lib/contexts/blocked-terms-mutation-context';
 export * from './lib/contexts/paired-terms-mutation-context';
+export * from './lib/contexts/preferred-terms-mutation-context';
 export * from './lib/providers/blocked-terms-mutation-provider';
 export * from './lib/providers/paired-terms-mutation-provider';
+export * from './lib/providers/preferred-terms-mutation-provider';
 
 // Store
 export * from './lib/store/technologies-store';

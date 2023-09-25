@@ -31,7 +31,7 @@ export const postPairedTerms = async (payload: PairedTermsPayload) => {
     PairedTermsPayload
   >(url, options);
 
-  if (success) throw new Error(message);
+  if (!success) throw new Error(message);
 
   return { success, message };
 };
