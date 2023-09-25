@@ -19,7 +19,6 @@ export const pairedTermsResponseSchema = myzod
 export const pairedTermsPayloadSchema = myzod.object({
   originTerm: myzod.string().min(1),
   pairedTermList: myzod.array(myzod.string().min(1)),
-  creatorWallet: myzod.string().min(1),
 });
 
 export type PairedTermsResponse = Infer<typeof pairedTermsResponseSchema>;

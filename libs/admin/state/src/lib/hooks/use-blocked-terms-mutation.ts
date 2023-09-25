@@ -19,11 +19,8 @@ export const useBlockedTermsMutation = () => {
 
   const { isLoading: isLoadingSetBlockedTerms, mutate: mutateSetBlockedTerms } =
     useMutation({
-      mutationFn: ({
-        technologyNameList,
-        creatorWallet,
-      }: BlockedTermsPayload) =>
-        postSetBlockedTerms({ technologyNameList, creatorWallet }),
+      mutationFn: ({ technologyNameList }: BlockedTermsPayload) =>
+        postSetBlockedTerms({ technologyNameList }),
       onSuccess(_, { technologyNameList }) {
         const title = `New Blocked Term${
           technologyNameList.length > 1 ? 's' : ''

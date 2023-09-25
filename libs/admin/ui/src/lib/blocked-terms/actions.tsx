@@ -1,5 +1,3 @@
-import { useAccount } from 'wagmi';
-
 import {
   useBlockedTermsMutationContext,
   useTechnologiesStore,
@@ -8,7 +6,6 @@ import {
 import { Button } from '@jobstash/shared/ui';
 
 const BlockedTermsActions = () => {
-  const { address } = useAccount();
   const blockedTerms = useTechnologiesStore((state) => state.blockedTerms);
   const unblockedTerms = useTechnologiesStore((state) => state.unblockedTerms);
 
@@ -16,17 +13,14 @@ const BlockedTermsActions = () => {
     useBlockedTermsMutationContext();
 
   const onSubmit = () => {
-    const creatorWallet = address ?? '';
     if (blockedTerms.length > 0) {
       mutateSetBlockedTerms({
-        creatorWallet,
         technologyNameList: blockedTerms,
       });
     }
 
     if (unblockedTerms.length > 0) {
       mutateUnsetBlockedTerms({
-        creatorWallet: address ?? '',
         technologyNameList: unblockedTerms,
       });
     }

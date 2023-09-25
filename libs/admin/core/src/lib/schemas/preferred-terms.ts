@@ -17,7 +17,6 @@ export const preferredTermsResponseSchema = myzod.object({
 export const preferredTermsPayloadSchema = myzod.object({
   preferredName: myzod.string().min(1),
   synonyms: myzod.array(myzod.string().min(1)),
-  creatorWallet: myzod.string().min(1),
 });
 
 export type PreferredTerm = Infer<typeof preferredTermSchema>;

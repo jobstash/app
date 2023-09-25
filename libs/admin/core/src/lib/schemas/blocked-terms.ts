@@ -18,7 +18,6 @@ export const blockedTermsResponseSchema = myzod
 
 export const blockedTermsPayloadSchema = myzod.object({
   technologyNameList: myzod.array(myzod.string().min(1)),
-  creatorWallet: myzod.string().min(1),
 });
 
 export type BlockedTechnologiesResponse = Infer<

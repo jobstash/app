@@ -1,5 +1,3 @@
-import { useAccount } from 'wagmi';
-
 import {
   usePairedTermsMutation,
   useTechnologiesStore,
@@ -8,8 +6,6 @@ import {
 import { Button } from '@jobstash/shared/ui';
 
 const PairedTermsActions = () => {
-  const { address } = useAccount();
-
   const origin = useTechnologiesStore((state) => state.origin);
   const destinationTerms = useTechnologiesStore(
     (state) => state.destinationTerms,
@@ -22,7 +18,6 @@ const PairedTermsActions = () => {
     mutate({
       originTerm: origin,
       pairedTermList: destinationTerms,
-      creatorWallet: address ?? '',
     });
   };
 
