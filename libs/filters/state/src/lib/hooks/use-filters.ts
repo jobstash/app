@@ -13,6 +13,7 @@ import { useAtom, useAtomValue } from 'jotai';
 
 import {
   FILTER_KIND,
+  FILTER_NAME,
   type FilterConfig,
   type FilterState,
   FilterValues,
@@ -72,9 +73,7 @@ export const useFilters = (routeSection: RouteSection) => {
       const filter_value = getFilterConfigValueString(url, state.filterConfig);
 
       gaEvent(GA_EVENT_ACTION.FILTER_ACTION, {
-        filter_name: isSearch
-          ? 'filter_joblist_search'
-          : 'filter_joblist_apply',
+        filter_name: isSearch ? FILTER_NAME.JOB.SEARCH : FILTER_NAME.JOB.SUBMIT,
         filter_value,
       });
 
@@ -99,7 +98,7 @@ export const useFilters = (routeSection: RouteSection) => {
     const currentFilterParams = getFilterValuesParams(state.filterValues);
 
     gaEvent(GA_EVENT_ACTION.FILTER_ACTION, {
-      filter_name: 'filter_joblist_clear',
+      filter_name: FILTER_NAME.JOB.CLEAR,
       filter_value: currentFilterParams,
     });
 
