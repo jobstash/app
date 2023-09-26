@@ -13,3 +13,11 @@ export const seniorityMapping = {
   Lead: '4',
   Head: '5',
 };
+
+export const FILTER_NAME = {
+  JOB: {
+    SEARCH: 'FILTER_JOBLIST_SEARCH',
+    SUBMIT: 'FILTER_JOBLIST_SUBMIT',
+    CLEAR: 'FILTER_JOBLIST_SEARCH',
+  },
+};
