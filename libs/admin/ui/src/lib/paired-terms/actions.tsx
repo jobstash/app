@@ -1,30 +1,43 @@
+import { useMemo } from 'react';
+
 import {
+  usePairedTermsFormContext,
   usePairedTermsMutation,
-  useTechnologiesStore,
 } from '@jobstash/admin/state';
 
 import { Button } from '@jobstash/shared/ui';
 
 const PairedTermsActions = () => {
-  const origin = useTechnologiesStore((state) => state.origin);
-  const destinationTerms = useTechnologiesStore(
-    (state) => state.destinationTerms,
-  );
-
+  const { origin, destination, initDestination, setIsLoading } =
+    usePairedTermsFormContext();
   const { mutate } = usePairedTermsMutation();
 
   const onSubmit = () => {
-    //
-    mutate({
-      originTerm: origin,
-      pairedTermList: destinationTerms,
-    });
+    if (origin) {
+      setIsLoading(true);
+      mutate({
+        originTerm: origin,
+        pairedTermList: destination,
+      });
+    }
   };
+
+  const isDisabled = useMemo(
+    () =>
+      JSON.stringify(destination.sort()) ===
+      JSON.stringify(initDestination.sort()),
+    [destination, initDestination],
+  );
 
   return (
     <div className="w-full flex justify-end">
       <div className="flex gap-4 items-center">
-        <Button variant="primary" className="px-6" onClick={onSubmit}>
+        <Button
+          isDisabled={isDisabled}
+          variant="primary"
+          className="px-6"
+          onClick={onSubmit}
+        >
           Submit
         </Button>
       </div>

@@ -1,22 +1,25 @@
-import { LoadingOverlay } from '@mantine/core';
+import { type ReactNode } from 'react';
 
-import { useIsLoadingPairedTermsPage } from '@jobstash/admin/state';
+import {
+  usePairedTermsContext,
+  useTechnologiesContext,
+} from '@jobstash/admin/state';
 
-import AdminTechContentWrapper from '../admin-tech-content-wrapper';
+import AdminContentLoader from '../admin-content-loader';
 
 interface Props {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
 const PairedTermsContentWrapper = ({ children }: Props) => {
-  const isLoading = useIsLoadingPairedTermsPage();
+  const { isLoading: isLoadingTechnologies } = useTechnologiesContext();
+  const { isLoading: isLoadingPairedTerms } = usePairedTermsContext();
 
-  return (
-    <AdminTechContentWrapper>
-      <LoadingOverlay visible={isLoading} />
-      {children}
-    </AdminTechContentWrapper>
-  );
+  const isLoading = isLoadingTechnologies || isLoadingPairedTerms;
+
+  if (isLoading) return <AdminContentLoader />;
+
+  return <div className="w-full">{children}</div>;
 };
 
 export default PairedTermsContentWrapper;

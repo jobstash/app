@@ -1,17 +1,24 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { PairedTermsPayload } from '@jobstash/admin/core';
 import { notifError, notifSuccess } from '@jobstash/shared/utils';
 
 import { postPairedTerms } from '@jobstash/admin/data';
 
+import { usePairedTermsFormContext } from '../contexts/paired-terms-form-context';
+
 export const usePairedTermsMutation = () => {
+  const queryClient = useQueryClient();
+  const { origin, setIsLoading } = usePairedTermsFormContext();
   const { isLoading, mutate } = useMutation({
     mutationFn: (payload: PairedTermsPayload) => postPairedTerms(payload),
     onSuccess(_, { pairedTermList }) {
-      // TODO: invalidate paired terms query
+      queryClient.invalidateQueries(['godmodePairedTerms']);
+      // TODO: setQueryData paired terms
 
-      const title = `New Paired Term${pairedTermList.length > 1 ? 's' : ''}`;
+      const title = `New Paired Term${
+        pairedTermList.length > 1 ? 's' : ''
+      } for "${origin}"`;
       const message = `${pairedTermList.join(', ')}`;
 
       notifSuccess({
@@ -25,6 +32,9 @@ export const usePairedTermsMutation = () => {
         title: 'Paired Term Failed',
         message: (data as Error).message,
       });
+    },
+    onSettled() {
+      setIsLoading(false);
     },
   });
 

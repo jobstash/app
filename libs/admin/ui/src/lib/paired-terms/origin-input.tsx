@@ -1,33 +1,45 @@
 import { useRef } from 'react';
 
-import { useTechnologiesStore } from '@jobstash/admin/state';
+import {
+  usePairedTermsContext,
+  usePairedTermsFormContext,
+  useTechnologiesContext,
+} from '@jobstash/admin/state';
 
 import AdminSelectInput from '../admin-select-input';
 
-const OriginInput = () => {
-  const technologies = useTechnologiesStore((store) => store.technologies);
-  const origin = useTechnologiesStore((store) => store.origin);
-  const onChangeOrigin = useTechnologiesStore((store) => store.onChangeOrigin);
+const OriginInputX = () => {
+  const { mappedTechnologies } = useTechnologiesContext();
+  const { existingPairedTerms } = usePairedTermsContext();
+
+  const { origin, initOrigin, onChangeOrigin } = usePairedTermsFormContext();
 
   const selectRef = useRef<HTMLInputElement | null>(null);
 
-  const onChange = (origin: string) => {
+  const onChange = (value: string) => {
     if (selectRef.current) {
       (selectRef.current as HTMLInputElement).blur();
     }
 
-    onChangeOrigin(origin);
+    onChangeOrigin(value);
   };
+
+  const hasInitOrigin = Boolean(initOrigin);
+
+  const originOptions = hasInitOrigin
+    ? mappedTechnologies
+    : mappedTechnologies.filter((t) => !existingPairedTerms.includes(t));
 
   return (
     <AdminSelectInput
       ref={selectRef}
-      data={technologies}
-      placeholder="Select origin term"
+      isDisabled={hasInitOrigin}
+      data={originOptions}
+      placeholder="Select Origin Term"
       value={origin}
       onChange={onChange}
     />
   );
 };
 
-export default OriginInput;
+export default OriginInputX;

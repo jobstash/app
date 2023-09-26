@@ -1,26 +1,21 @@
 import { useRef } from 'react';
 
-import { useTechnologiesStore } from '@jobstash/admin/state';
+import { usePairedTermsFormContext } from '@jobstash/admin/state';
 
 import AdminSelectInput from '../admin-select-input';
 
-const DestinationInput = () => {
-  const destinationOptions = useTechnologiesStore(
-    (store) => store.destinationOptions,
-  );
-  const origin = useTechnologiesStore((store) => store.origin);
-  const addDestinationTerm = useTechnologiesStore(
-    (store) => store.addDestinationTerm,
-  );
+const DestinationInputX = () => {
+  const { origin, destinationOptions, addDestination } =
+    usePairedTermsFormContext();
 
   const selectRef = useRef<HTMLInputElement | null>(null);
 
-  const onChange = (term: string) => {
+  const onChange = (value: string) => {
     if (selectRef.current) {
       (selectRef.current as HTMLInputElement).blur();
     }
 
-    addDestinationTerm(term);
+    addDestination(value);
   };
 
   return (
@@ -35,4 +30,4 @@ const DestinationInput = () => {
   );
 };
 
-export default DestinationInput;
+export default DestinationInputX;

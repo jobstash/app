@@ -1,4 +1,6 @@
-import { useTechnologiesStore } from '@jobstash/admin/state';
+import { LoadingOverlay } from '@mantine/core';
+
+import { usePairedTermsFormContext } from '@jobstash/admin/state';
 
 import AdminFormControl from '../admin-form-control';
 import AdminTechContentWrapper from '../admin-tech-content-wrapper';
@@ -8,22 +10,19 @@ import DestinationInput from './destination-input';
 import DestinationList from './destination-list';
 import OriginInput from './origin-input';
 
-const NewPairedTerms = () => {
-  const isDisabledDestination = useTechnologiesStore((store) => !store.origin);
-  const destinationTerms = useTechnologiesStore(
-    (store) => store.destinationTerms,
-  );
-
-  const showDestinationList = destinationTerms.length > 0;
+const PairedTermForm = () => {
+  const { origin, destination, isLoading } = usePairedTermsFormContext();
+  const showDestinationList = destination.length > 0;
 
   return (
     <div className="flex w-full justify-center">
       <AdminTechContentWrapper>
+        <LoadingOverlay visible={isLoading} />
         <AdminFormControl label="Origin" input={<OriginInput />} />
         <AdminFormControl
           label="Destination"
           input={<DestinationInput />}
-          isDisabled={isDisabledDestination}
+          isDisabled={!origin}
         />
         {showDestinationList && (
           <AdminFormControl label="" input={<DestinationList />} />
@@ -34,4 +33,4 @@ const NewPairedTerms = () => {
   );
 };
 
-export default NewPairedTerms;
+export default PairedTermForm;
