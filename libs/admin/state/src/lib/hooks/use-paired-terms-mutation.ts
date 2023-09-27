@@ -9,7 +9,7 @@ import { usePairedTermsFormContext } from '../contexts/paired-terms-form-context
 
 export const usePairedTermsMutation = () => {
   const queryClient = useQueryClient();
-  const { origin, setIsLoading } = usePairedTermsFormContext();
+  const { origin } = usePairedTermsFormContext();
   const { isLoading, mutate } = useMutation({
     mutationFn: (payload: PairedTermsPayload) => postPairedTerms(payload),
     onSuccess(_, { pairedTermList }) {
@@ -32,9 +32,6 @@ export const usePairedTermsMutation = () => {
         title: 'Paired Term Failed',
         message: (data as Error).message,
       });
-    },
-    onSettled() {
-      setIsLoading(false);
     },
   });
 

@@ -1,20 +1,15 @@
 import { useMemo } from 'react';
 
-import {
-  usePairedTermsFormContext,
-  usePairedTermsMutation,
-} from '@jobstash/admin/state';
+import { usePairedTermsFormContext } from '@jobstash/admin/state';
 
 import { Button } from '@jobstash/shared/ui';
 
 const PairedTermsActions = () => {
-  const { origin, destination, initDestination, setIsLoading } =
+  const { origin, destination, initDestination, mutate } =
     usePairedTermsFormContext();
-  const { mutate } = usePairedTermsMutation();
 
   const onSubmit = () => {
     if (origin) {
-      setIsLoading(true);
       mutate({
         originTerm: origin,
         pairedTermList: destination,

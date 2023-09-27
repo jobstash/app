@@ -5,17 +5,12 @@ import { notifError, notifSuccess } from '@jobstash/shared/utils';
 
 import { postSetBlockedTerms } from '@jobstash/admin/data';
 
-import { useTechnologiesStore } from '../store/technologies-store';
+import { useBlockedTermsContext } from '../contexts/blocked-terms-context';
 
 export const useBlockedTermsMutation = () => {
   const queryClient = useQueryClient();
 
-  const fetchedBlockedTerms = useTechnologiesStore(
-    (state) => state.fetchedBlockedTerms,
-  );
-  const onSuccessBlockTerms = useTechnologiesStore(
-    (state) => state.onSuccessBlockTerms,
-  );
+  const { fetchedBlockedTerms } = useBlockedTermsContext();
 
   const { isLoading: isLoadingSetBlockedTerms, mutate: mutateSetBlockedTerms } =
     useMutation({
@@ -40,8 +35,6 @@ export const useBlockedTermsMutation = () => {
           [...fetchedBlockedTerms, ...technologyNameList],
         );
         queryClient.invalidateQueries(['godmodeBlockedTechnologies']);
-
-        onSuccessBlockTerms(technologyNameList);
       },
       onError(data) {
         notifError({

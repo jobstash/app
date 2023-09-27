@@ -1,6 +1,6 @@
 import {
-  useBlockedTechnologiesQuery,
-  useTechnologiesStore,
+  useBlockedTermsContext,
+  useBlockedTermsFormContext,
 } from '@jobstash/admin/state';
 
 import { Heading, Spinner, Text } from '@jobstash/shared/ui';
@@ -8,19 +8,11 @@ import { Heading, Spinner, Text } from '@jobstash/shared/ui';
 import AdminTechListItem from '../admin-tech-list-item';
 
 const BlockedTermsList = () => {
-  const blockedTerms = useTechnologiesStore((state) => state.blockedTerms);
-  const fetchedBlockedTerms = useTechnologiesStore(
-    (state) => state.fetchedBlockedTerms,
-  );
-  const unblockTerm = useTechnologiesStore((state) => state.unblockTerm);
-  const unblockedTerms = useTechnologiesStore((state) => state.unblockedTerms);
-
-  const allBlockedTerms = [...blockedTerms, ...fetchedBlockedTerms].filter(
-    (term) => !unblockedTerms.includes(term),
-  );
-
-  const { isFetchingBlockedTerms, isLoadingInitBlockedTerms } =
-    useBlockedTechnologiesQuery();
+  const {
+    isFetching: isFetchingBlockedTerms,
+    isLoading: isLoadingInitBlockedTerms,
+  } = useBlockedTermsContext();
+  const { unblockTerm, allBlockedTerms } = useBlockedTermsFormContext();
 
   return (
     <div className="flex items-start gap-6">

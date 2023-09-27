@@ -1,14 +1,13 @@
 import { useRef } from 'react';
 
-import { useTechnologiesStore } from '@jobstash/admin/state';
+import { useBlockedTermsFormContext } from '@jobstash/admin/state';
 
 import { Heading } from '@jobstash/shared/ui';
 
 import AdminSelectInput from '../admin-select-input';
 
 const BlockedTermsInput = () => {
-  const blockTerm = useTechnologiesStore((state) => state.blockTerm);
-  const options = useTechnologiesStore((state) => state.options);
+  const { blockTerm, options } = useBlockedTermsFormContext();
 
   const onChange = (term: string) => {
     if (selectRef.current) {

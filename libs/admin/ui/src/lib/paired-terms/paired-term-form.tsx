@@ -11,13 +11,14 @@ import DestinationList from './destination-list';
 import OriginInput from './origin-input';
 
 const PairedTermForm = () => {
-  const { origin, destination, isLoading } = usePairedTermsFormContext();
+  const { origin, destination, isLoadingMutation } =
+    usePairedTermsFormContext();
   const showDestinationList = destination.length > 0;
 
   return (
     <div className="flex w-full justify-center">
       <AdminTechContentWrapper>
-        <LoadingOverlay visible={isLoading} />
+        <LoadingOverlay visible={isLoadingMutation} />
         <AdminFormControl label="Origin" input={<OriginInput />} />
         <AdminFormControl
           label="Destination"

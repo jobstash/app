@@ -1,4 +1,6 @@
-import { createContext, Dispatch, SetStateAction, useContext } from 'react';
+import { createContext, useContext } from 'react';
+
+import { type PairedTermsMutFn } from '@jobstash/admin/core';
 
 export interface PairedTermsFormContextProps {
   origin: string | null;
@@ -9,8 +11,8 @@ export interface PairedTermsFormContextProps {
   destinationOptions: string[];
   addDestination: (_: string) => void;
   removeDestination: (_: string) => void;
-  isLoading: boolean;
-  setIsLoading: Dispatch<SetStateAction<boolean>>;
+  isLoadingMutation: boolean;
+  mutate: PairedTermsMutFn;
 }
 
 export const PairedTermsFormContext =

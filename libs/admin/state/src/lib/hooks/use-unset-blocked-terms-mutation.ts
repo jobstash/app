@@ -5,18 +5,12 @@ import { notifError, notifSuccess } from '@jobstash/shared/utils';
 
 import { postUnsetBlockedTerms } from '@jobstash/admin/data';
 
-import { useTechnologiesStore } from '../store/technologies-store';
+import { useBlockedTermsContext } from '../contexts/blocked-terms-context';
 
 export const useUnsetBlockedTermsMutation = () => {
   const queryClient = useQueryClient();
 
-  const fetchedBlockedTerms = useTechnologiesStore(
-    (state) => state.fetchedBlockedTerms,
-  );
-
-  const onSuccessUnblockTerms = useTechnologiesStore(
-    (state) => state.onSuccessUnblockTerms,
-  );
+  const { fetchedBlockedTerms } = useBlockedTermsContext();
 
   const {
     isLoading: isLoadingUnsetBlockedTerms,
@@ -45,8 +39,6 @@ export const useUnsetBlockedTermsMutation = () => {
         ),
       );
       queryClient.invalidateQueries(['godmodeBlockedTechnologies']);
-
-      onSuccessUnblockTerms(technologyNameList);
     },
     onError(data) {
       notifError({

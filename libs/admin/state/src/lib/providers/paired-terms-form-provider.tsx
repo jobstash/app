@@ -35,7 +35,7 @@ export const PairedTermsFormProvider = ({
   const removeDestination = (value: string) =>
     setDestination((prev) => prev.filter((t) => t !== value));
 
-  const [isLoading, setIsLoading] = useState(false);
+  const { isLoading: isLoadingMutation, mutate } = usePairedTermsMutation();
 
   const value = useMemo(
     () => ({
@@ -47,8 +47,8 @@ export const PairedTermsFormProvider = ({
       destinationOptions,
       addDestination,
       removeDestination,
-      isLoading,
-      setIsLoading,
+      isLoadingMutation,
+      mutate,
     }),
     [
       destination,
@@ -57,8 +57,8 @@ export const PairedTermsFormProvider = ({
       initOrigin,
       onChangeOrigin,
       origin,
-      isLoading,
-      setIsLoading,
+      isLoadingMutation,
+      mutate,
     ],
   );
 

@@ -18,5 +18,5 @@ export const getBlockedTechnologies = async () => {
 
   const response = await mwFetch<BlockedTechnologiesResponse>(url, options);
 
-  return response.data.map((d) => d.name);
+  return response.data.map((t) => t.name);
 };

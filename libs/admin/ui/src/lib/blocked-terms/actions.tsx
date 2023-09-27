@@ -1,27 +1,27 @@
 import {
+  useBlockedTermsFormContext,
   useBlockedTermsMutationContext,
-  useTechnologiesStore,
 } from '@jobstash/admin/state';
 
 import { Button } from '@jobstash/shared/ui';
 
 const BlockedTermsActions = () => {
-  const blockedTerms = useTechnologiesStore((state) => state.blockedTerms);
-  const unblockedTerms = useTechnologiesStore((state) => state.unblockedTerms);
+  const { currentBlockedTerms, currentUnblockedTerms } =
+    useBlockedTermsFormContext();
 
   const { mutateSetBlockedTerms, mutateUnsetBlockedTerms } =
     useBlockedTermsMutationContext();
 
   const onSubmit = () => {
-    if (blockedTerms.length > 0) {
+    if (currentBlockedTerms.length > 0) {
       mutateSetBlockedTerms({
-        technologyNameList: blockedTerms,
+        technologyNameList: currentBlockedTerms,
       });
     }
 
-    if (unblockedTerms.length > 0) {
+    if (currentUnblockedTerms.length > 0) {
       mutateUnsetBlockedTerms({
-        technologyNameList: unblockedTerms,
+        technologyNameList: currentUnblockedTerms,
       });
     }
   };
