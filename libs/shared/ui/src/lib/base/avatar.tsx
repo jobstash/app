@@ -8,9 +8,9 @@ import { cn } from '@jobstash/shared/utils';
 const avatar = cva(['relative rounded-xl object-cover overflow-hidden'], {
   variants: {
     size: {
-      sm: 'h-8 w-8',
-      md: 'h-10 w-10',
-      lg: 'h-[55px] w-[55px]',
+      sm: 'h-8 w-8 min-w-[32px] min-h-[32px]',
+      md: 'h-10 w-10 min-w-[40px] min-h-[40px]',
+      lg: 'h-[55px] w-[55px] min-w-[55px] min-h-[55px]',
     },
   },
 });
