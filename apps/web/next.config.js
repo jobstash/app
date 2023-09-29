@@ -53,14 +53,6 @@ const nextConfig = {
     ],
   },
 
-  redirects: async () => [
-    {
-      source: '/',
-      destination: '/jobs',
-      permanent: true,
-    },
-  ],
-
   sentry: {
     hideSourceMaps: true,
   },

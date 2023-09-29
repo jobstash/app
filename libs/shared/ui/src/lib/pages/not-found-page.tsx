@@ -13,7 +13,7 @@ interface Props {
 }
 
 const DEFAULT_NOT_FOUND_INFO = {
-  link: '/jobs',
+  link: '/',
   title: 'Nothing Here',
   message: "We could not find the content you're looking for",
   buttonText: 'Go to Home Page',
@@ -25,7 +25,7 @@ const NotFoundPage = ({ notFoundInfo }: Props) => {
 
   const router = useRouter();
   const onClick = useCallback(() => {
-    router.replace(link ?? '/jobs');
+    router.replace(link ?? '/');
   }, [link, router]);
 
   return (

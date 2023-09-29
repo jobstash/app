@@ -24,12 +24,12 @@ export const CHECK_WALLET_ROUTE: Record<
   typeof CHECK_WALLET_FLOWS[keyof typeof CHECK_WALLET_FLOWS],
   string
 > = {
-  [CHECK_WALLET_FLOWS.DEFAULT]: '/jobs',
+  [CHECK_WALLET_FLOWS.DEFAULT]: '/',
   [CHECK_WALLET_FLOWS.PICK_ROLE]: '/pick-role',
   [CHECK_WALLET_FLOWS.ADD_GITHUB_REPO]: '/add-github-account',
   [CHECK_WALLET_FLOWS.ONBOARD_REPO]: '/profile/repositories',
   [CHECK_WALLET_FLOWS.ONBOARD_REVIEWS]: '/profile/reviews',
-  [CHECK_WALLET_FLOWS.SIGNUP_COMPLETE]: '/jobs',
+  [CHECK_WALLET_FLOWS.SIGNUP_COMPLETE]: '/',
   [CHECK_WALLET_FLOWS.ADMIN_SYNONYMS]: '/godmode/technologies/synonyms',
 };
 

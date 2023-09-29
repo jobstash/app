@@ -108,7 +108,7 @@ const JobSubmission = () => {
       }),
     onSuccess() {
       notifSuccess({ message: 'Job details have been submitted' });
-      router.push('/jobs');
+      router.push('/');
     },
     onError() {
       notifError();

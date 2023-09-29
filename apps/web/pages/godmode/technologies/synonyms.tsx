@@ -23,7 +23,7 @@ export const getServerSideProps = withCSR(async (ctx) => {
   if (role !== CHECK_WALLET_ROLES.ADMIN) {
     return {
       redirect: {
-        destination: '/jobs',
+        destination: '/',
         permanent: false,
       },
     };
