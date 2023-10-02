@@ -35,6 +35,7 @@
     "clsx": "^1.2.1",
     "connectkit": "^1.2.1",
     "ethers": "^5",
+    "framer-motion": "^10.16.4",
     "isomorphic-fetch": "^3.0.0",
     "jotai": "^2.1.0",
     "myzod": "^1.10.0",
