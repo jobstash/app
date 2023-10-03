@@ -20,7 +20,7 @@ const TechsUsedInput = () => {
     <Select
       searchable
       data={techOptions}
-      placeholder="Add technology used"
+      placeholder="Add tag used"
       size="lg"
       classNames={{
         input: cn(

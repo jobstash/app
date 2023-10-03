@@ -19,7 +19,7 @@ const RightPanelHeader = ({ org }: Props) => (
         <LogoTitle
           title={org.name}
           avatarProps={{
-            src: getLogoUrl(org.url, org.logo),
+            src: getLogoUrl(org.website, org.logoUrl),
             alt: org.name,
           }}
         />

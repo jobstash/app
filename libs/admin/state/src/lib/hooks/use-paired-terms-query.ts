@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { useAllTechnologies } from '@jobstash/shared/state';
+import { useAllTags } from '@jobstash/shared/state';
 import { getPairedTerms } from '@jobstash/admin/data';
 
 export const usePairedTermsQuery = () => {
-  const { isSuccess: enabled } = useAllTechnologies();
+  const { isSuccess: enabled } = useAllTags();
 
   const { isLoading, data } = useQuery({
     queryKey: ['godmodePairedTerms'],

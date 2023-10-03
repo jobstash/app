@@ -3,13 +3,13 @@ import myzod from 'myzod';
 import {
   orgInfoSchema,
   repositoryInfoSchema,
-  technologySchema,
+  tagSchema,
 } from '@jobstash/shared/core';
 
 export const repositoryDetailsSchema = myzod.intersection(
   repositoryInfoSchema,
   myzod.object({
     org: orgInfoSchema,
-    technologies: myzod.array(technologySchema),
+    tags: myzod.array(tagSchema),
   }),
 );

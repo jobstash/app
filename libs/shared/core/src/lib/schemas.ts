@@ -9,16 +9,16 @@ export const messageResponseSchema = myzod
   })
   .allowUnknownKeys(true);
 
-export const technologySchema = myzod.object({
+export const tagSchema = myzod.object({
   id: myzod.string().min(1),
   name: myzod.string().min(1),
   normalizedName: myzod.string().min(1),
 });
 
-export const allTechnologiesResponseSchema = myzod.object({
+export const allTagsResponseSchema = myzod.object({
   success: myzod.boolean(),
   message: myzod.string().min(1),
-  data: myzod.array(technologySchema),
+  data: myzod.array(tagSchema),
 });
 
 export const investorSchema = myzod.object({
@@ -97,23 +97,22 @@ export const jobInfoSchema = myzod.object(
 export const orgInfoSchema = myzod.object(
   {
     id: myzod.string().min(1),
-    orgId: myzod.string().min(1),
-    url: myzod.string().min(1),
     name: myzod.string().min(1),
+    orgId: myzod.string().min(1),
+    summary: myzod.string().min(1),
     location: myzod.string().min(1),
     description: myzod.string().min(1),
-    summary: myzod.string().min(1),
-    altName: myzod.string().min(1).nullable(),
-    jobsiteLink: myzod.string().min(1).nullable(),
+    logoUrl: myzod.string().min(1).nullable(),
+    headCount: myzod.number().nullable(),
     createdTimestamp: myzod.number().nullable(),
     updatedTimestamp: myzod.number().nullable(),
-    github: myzod.string().min(1).nullable(),
-    twitter: myzod.string().min(1).nullable(),
     discord: myzod.string().min(1).nullable(),
-    docs: myzod.string().min(1).nullable(),
+    website: myzod.string().min(1),
     telegram: myzod.string().min(1).nullable(),
-    headCount: myzod.number().nullable(),
-    logo: myzod.string().min(1).nullable(),
+    github: myzod.string().min(1).nullable(),
+    alias: myzod.string().min(1).nullable(),
+    docs: myzod.string().min(1).nullable(),
+    twitter: myzod.string().min(1).nullable(),
   },
   { allowUnknown: true },
 );
@@ -122,7 +121,7 @@ export const projectInfoSchema = myzod.object(
   {
     id: myzod.string().min(1),
     name: myzod.string().min(1),
-    url: myzod.string().min(1),
+    website: myzod.string().min(1),
     logo: myzod.string().nullable(),
 
     teamSize: myzod.number().min(1).nullable(),
@@ -143,6 +142,15 @@ export const projectInfoSchema = myzod.object(
   { allowUnknown: true },
 );
 
+export const projectMoreInfoSchema = myzod.object({
+  description: myzod.string().min(1),
+  github: myzod.string().min(1).nullable(), // Rename this to github
+  twitter: myzod.string().min(1).nullable(),
+  discord: myzod.string().min(1).nullable(),
+  telegram: myzod.string().min(1).nullable(),
+  docs: myzod.string().min(1).nullable(),
+});
+
 export const repositoryInfoSchema = myzod.object({
   id: myzod.string().min(1),
   name: myzod.string().min(1),
@@ -151,19 +159,6 @@ export const repositoryInfoSchema = myzod.object({
   projectName: myzod.string().nullable(),
   committers: myzod.number().nullable(),
 });
-
-export const projectMoreInfoSchema = myzod.object({
-  description: myzod.string().min(1),
-  githubOrganization: myzod.string().min(1).nullable(),
-  twitter: myzod.string().min(1).nullable(),
-  discord: myzod.string().min(1).nullable(),
-  telegram: myzod.string().min(1).nullable(),
-  docs: myzod.string().min(1).nullable(),
-});
-
-export const projectCompleteInfoSchema = myzod
-  .intersection(projectInfoSchema, projectMoreInfoSchema)
-  .allowUnknownKeys(true);
 
 export const mwResponseFieldsSchema = myzod.object({
   success: myzod.boolean(),

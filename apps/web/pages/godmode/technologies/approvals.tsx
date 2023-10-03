@@ -5,7 +5,7 @@ import { withCSR } from '@jobstash/shared/utils';
 
 import { getCheckWallet } from '@jobstash/auth/data';
 
-export { TechnologyApprovalsPage as default } from '@jobstash/admin/pages';
+export { TagApprovalsPage as default } from '@jobstash/admin/pages';
 
 export const getServerSideProps = withCSR(async (ctx) => {
   const cookieString = ctx.req.headers.cookie;

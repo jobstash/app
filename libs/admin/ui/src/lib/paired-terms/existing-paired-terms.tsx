@@ -21,8 +21,8 @@ const ExistingPairedTermsX = () => {
       <div className="flex flex-col gap-12 w-full justify-center">
         {pairedTerms.map((pairedTerm) => (
           <PairedTermsFormProvider
-            key={pairedTerm.technology.id}
-            initOrigin={pairedTerm.technology.name}
+            key={pairedTerm.tag.id}
+            initOrigin={pairedTerm.tag.name}
             initDestination={pairedTerm.pairings.map((t) => t.name)}
           >
             <PairedTermForm />

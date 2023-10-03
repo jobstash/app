@@ -5,7 +5,7 @@ import { ADMIN_BREADCRUMBS, ADMIN_TABS } from '@jobstash/admin/core';
 import {
   PairedTermsFormProvider,
   PairedTermsProvider,
-  TechnologiesProvider,
+  TagsProvider,
 } from '@jobstash/admin/state';
 
 import {
@@ -29,7 +29,7 @@ export const PairedTermsPage = () => (
       sidebar={<SideBar />}
       tabsSection={<AdminTabs tabs={ADMIN_TABS.TECHNOLOGIES} />}
     >
-      <TechnologiesProvider>
+      <TagsProvider>
         <PairedTermsProvider>
           <PairedTermsContentWrapper>
             <div className="flex flex-col gap-12 w-full">
@@ -41,7 +41,7 @@ export const PairedTermsPage = () => (
             </div>
           </PairedTermsContentWrapper>
         </PairedTermsProvider>
-      </TechnologiesProvider>
+      </TagsProvider>
     </AdminLayout>
   </>
 );

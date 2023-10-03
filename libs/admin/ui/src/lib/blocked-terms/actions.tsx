@@ -15,13 +15,13 @@ const BlockedTermsActions = () => {
   const onSubmit = () => {
     if (currentBlockedTerms.length > 0) {
       mutateSetBlockedTerms({
-        technologyNameList: currentBlockedTerms,
+        tagNameList: currentBlockedTerms,
       });
     }
 
     if (currentUnblockedTerms.length > 0) {
       mutateUnsetBlockedTerms({
-        technologyNameList: currentUnblockedTerms,
+        tagNameList: currentUnblockedTerms,
       });
     }
   };

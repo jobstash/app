@@ -1,12 +1,9 @@
 import { StateCreator } from 'zustand';
 
-import {
-  type AllTechnologiesSlice,
-  PreferredTermsSlice,
-} from '@jobstash/admin/core';
+import { type AllTagsSlice, PreferredTermsSlice } from '@jobstash/admin/core';
 
 export const createPreferredTermsSlice: StateCreator<
-  AllTechnologiesSlice,
+  AllTagsSlice,
   [],
   [],
   PreferredTermsSlice
@@ -16,11 +13,11 @@ export const createPreferredTermsSlice: StateCreator<
 
   primaryTerm: '',
   onChangePrimaryTerm(primaryTerm) {
-    const { technologies, preferredTerms } = get();
+    const { tags, preferredTerms } = get();
 
-    const synonym = preferredTerms.find((t) => t.technology === primaryTerm);
+    const synonym = preferredTerms.find((t) => t.tag === primaryTerm);
     const synonyms = synonym?.synoynms.map((t) => t.name) ?? [];
-    const synonymsOptions = technologies.filter(
+    const synonymsOptions = tags.filter(
       (t) => !synonyms.includes(t) && t !== primaryTerm,
     );
 
@@ -30,10 +27,10 @@ export const createPreferredTermsSlice: StateCreator<
   synonyms: [],
   synonymsOptions: [],
   addSynonym(term) {
-    const { synonyms: prevSynonyms, technologies, primaryTerm } = get();
+    const { synonyms: prevSynonyms, tags, primaryTerm } = get();
 
     const synonyms = [...prevSynonyms, term];
-    const synonymsOptions = technologies.filter(
+    const synonymsOptions = tags.filter(
       (t) => !synonyms.includes(t) && t !== primaryTerm,
     );
 
@@ -43,10 +40,10 @@ export const createPreferredTermsSlice: StateCreator<
     });
   },
   removeSynonym(term) {
-    const { synonyms: prevSynonyms, technologies, primaryTerm } = get();
+    const { synonyms: prevSynonyms, tags, primaryTerm } = get();
 
     const synonyms = prevSynonyms.filter((t) => t !== term);
-    const synonymsOptions = technologies.filter(
+    const synonymsOptions = tags.filter(
       (t) => !synonyms.includes(t) && t !== primaryTerm,
     );
 

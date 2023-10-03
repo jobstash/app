@@ -1,11 +1,7 @@
 /* eslint-disable camelcase */
 import { memo } from 'react';
 
-import {
-  GA_EVENT_ACTION,
-  type JobInfo,
-  type Technology,
-} from '@jobstash/shared/core';
+import { GA_EVENT_ACTION, type JobInfo, type Tag } from '@jobstash/shared/core';
 import { slugify } from '@jobstash/shared/utils';
 import { gaEvent } from '@jobstash/shared/utils';
 
@@ -15,19 +11,18 @@ import RightPanelCardBorder from './right-panel-card-border';
 import RightPanelCta from './right-panel-cta';
 import RightPanelJobCardDescriptions from './right-panel-job-card-descriptions';
 import RightPanelJobCardTags from './right-panel-job-card-tags';
-import RightPanelJobCardTechnologies from './right-panel-job-card-technologies';
 
 interface Props {
   orgName: string;
   jobInfo: JobInfo;
-  technologies: Technology[];
+  tags: Tag[];
   showExploreJob?: boolean;
 }
 
 const RightPanelJobCard = ({
   orgName,
   jobInfo,
-  technologies,
+  tags,
   showExploreJob = true,
 }: Props) => {
   const { jobTitle, jobApplyPageUrl, shortUUID } = jobInfo;
@@ -77,7 +72,7 @@ const RightPanelJobCard = ({
 
         <RightPanelJobCardDescriptions jobInfo={jobInfo} />
 
-        <RightPanelJobCardTechnologies technologies={technologies} />
+        <RightPanelJobCardTags jobInfo={jobInfo} />
 
         {showExploreJob && (
           <div className="flex flex-col items-start py-4">

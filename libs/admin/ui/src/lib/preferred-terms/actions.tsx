@@ -1,13 +1,10 @@
-import {
-  usePreferredTermsMutation,
-  useTechnologiesStore,
-} from '@jobstash/admin/state';
+import { usePreferredTermsMutation, useTagsStore } from '@jobstash/admin/state';
 
 import { Button } from '@jobstash/shared/ui';
 
 const PreferredTermsActions = () => {
-  const primaryTerm = useTechnologiesStore((state) => state.primaryTerm);
-  const synonyms = useTechnologiesStore((state) => state.synonyms);
+  const primaryTerm = useTagsStore((state) => state.primaryTerm);
+  const synonyms = useTagsStore((state) => state.synonyms);
 
   const { mutate } = usePreferredTermsMutation();
 

@@ -1,29 +1,22 @@
-import {
-  useAllTechnologies,
-  useDelayedAuthRender,
-} from '@jobstash/shared/state';
+import { useAllTags, useDelayedAuthRender } from '@jobstash/shared/state';
 
-import { useTechnologiesStore } from '../store/technologies-store';
+import { useTagsStore } from '../store/tags-store';
 
 import { usePreferredTermsQuery } from './use-preferred-terms-query';
 
 export const useIsLoadingSynonymsPage = () => {
   const { canRender } = useDelayedAuthRender();
 
-  const setTechnologies = useTechnologiesStore(
-    (state) => state.setTechnologies,
-  );
+  const setTags = useTagsStore((state) => state.setTags);
 
-  const { isLoading: isLoadingTechnologies } = useAllTechnologies({
+  const { isLoading: isLoadingTags } = useAllTags({
     onSuccess({ data }) {
       const terms = data.length > 0 ? data.map((d) => d.name) : [];
-      setTechnologies(terms);
+      setTags(terms);
     },
   });
 
   const { isLoadingPreferredTerms } = usePreferredTermsQuery();
 
-  return [!canRender, isLoadingTechnologies, isLoadingPreferredTerms].includes(
-    true,
-  );
+  return [!canRender, isLoadingTags, isLoadingPreferredTerms].includes(true);
 };

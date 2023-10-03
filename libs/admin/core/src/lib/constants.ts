@@ -1,8 +1,8 @@
 const ADMIN_PATHS = {
-  BLOCKED_TERMS: '/godmode/technologies/blocked-terms',
-  PAIRED_TERMS: '/godmode/technologies/paired-terms',
-  SYNONYMS: '/godmode/technologies/synonyms',
-  TECHNOLOGY_APPROVALS: '/godmode/technologies/approvals',
+  BLOCKED_TERMS: '/godmode/tags/blocked-terms',
+  PAIRED_TERMS: '/godmode/tags/paired-terms',
+  SYNONYMS: '/godmode/tags/synonyms',
+  TAG_APPROVALS: '/godmode/tags/approvals',
   ORG_LIST: '/godmode/organizations',
   ORG_CREATE: '/godmode/organizations/create',
 };
@@ -12,7 +12,7 @@ export const ADMIN_BREADCRUMBS = {
   PAIRED_TERMS: [{ title: 'Paired Terms', href: ADMIN_PATHS.PAIRED_TERMS }],
   SYNONYMS: [{ title: 'Synonyms', href: ADMIN_PATHS.SYNONYMS }],
   TECHNOLOGY_APPROVALS: [
-    { title: 'Technology Approvals', href: ADMIN_PATHS.TECHNOLOGY_APPROVALS },
+    { title: 'Tag Approvals', href: ADMIN_PATHS.TAG_APPROVALS },
   ],
   ORG_LIST: [{ title: 'Organizations', href: ADMIN_PATHS.ORG_LIST }],
   ORG_CREATE: [
@@ -27,8 +27,8 @@ export const ADMIN_TABS = {
     { label: 'Paired Terms', path: ADMIN_PATHS.PAIRED_TERMS },
     { label: 'Blocked Terms', path: ADMIN_PATHS.BLOCKED_TERMS },
     {
-      label: 'Technology Approvals',
-      path: ADMIN_PATHS.TECHNOLOGY_APPROVALS,
+      label: 'Tag Approvals',
+      path: ADMIN_PATHS.TAG_APPROVALS,
     },
   ],
 };

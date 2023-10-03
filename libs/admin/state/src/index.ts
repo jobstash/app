@@ -1,5 +1,5 @@
 // Hooks
-export * from './lib/hooks/use-blocked-technologies-query';
+export * from './lib/hooks/use-blocked-tags-query';
 export * from './lib/hooks/use-blocked-terms-mutation';
 export * from './lib/hooks/use-is-loading-synonyms-page';
 export * from './lib/hooks/use-paired-terms-mutation';
@@ -15,14 +15,14 @@ export * from './lib/contexts/paired-terms-context';
 export * from './lib/contexts/paired-terms-form-context';
 export * from './lib/contexts/paired-terms-mutation-context';
 export * from './lib/contexts/preferred-terms-mutation-context';
-export * from './lib/contexts/technologies-context';
+export * from './lib/contexts/tags-context';
 export * from './lib/providers/blocked-terms-form-provider';
 export * from './lib/providers/blocked-terms-mutation-provider';
 export * from './lib/providers/blocked-terms-provider';
 export * from './lib/providers/paired-terms-form-provider';
 export * from './lib/providers/paired-terms-provider';
 export * from './lib/providers/preferred-terms-mutation-provider';
-export * from './lib/providers/technologies-provider';
+export * from './lib/providers/tags-provider';
 
 // Store
-export * from './lib/store/technologies-store';
+export * from './lib/store/tags-store';

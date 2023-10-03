@@ -93,13 +93,13 @@ export const OrgDetailsPage = ({
   const initOrgListItem: OrgListItem | null = initOrgDetails
     ? {
         orgId: initOrgDetails.orgId,
-        url: initOrgDetails.url,
+        url: initOrgDetails.website,
         name: initOrgDetails.name,
         location: initOrgDetails.location,
         jobCount: initOrgDetails.jobs.length,
         projectCount: initOrgDetails.projects.length,
         headCount: initOrgDetails.headCount,
-        logo: initOrgDetails.logo,
+        logo: initOrgDetails.logoUrl,
         lastFundingAmount,
         lastFundingDate,
       }

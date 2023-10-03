@@ -1,13 +1,13 @@
 import { useRef } from 'react';
 
-import { useTechnologiesStore } from '@jobstash/admin/state';
+import { useTagsStore } from '@jobstash/admin/state';
 
 import AdminSelectInput from '../admin-select-input';
 
 const PrimaryTermInput = () => {
-  const technologies = useTechnologiesStore((state) => state.technologies);
-  const primaryTerm = useTechnologiesStore((state) => state.primaryTerm);
-  const onChangePrimaryTerm = useTechnologiesStore(
+  const tags = useTagsStore((state) => state.tags);
+  const primaryTerm = useTagsStore((state) => state.primaryTerm);
+  const onChangePrimaryTerm = useTagsStore(
     (state) => state.onChangePrimaryTerm,
   );
 
@@ -24,7 +24,7 @@ const PrimaryTermInput = () => {
   return (
     <AdminSelectInput
       ref={selectRef}
-      data={technologies}
+      data={tags}
       placeholder="Select primary term"
       value={primaryTerm}
       onChange={onChange}

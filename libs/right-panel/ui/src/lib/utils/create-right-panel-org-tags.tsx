@@ -11,13 +11,13 @@ import {
 import { createOrgFundingDateString } from './create-org-funding-date-string';
 
 export const createRightPanelOrgTags = (orgData: RightPanelOrg) => {
-  const { url, location, headCount, fundingRounds } = orgData;
+  const { website, location, headCount, fundingRounds } = orgData;
   const tags: TagElement[] = [
     {
       id: TAG_ELEMENT_ID.website,
       text: 'Website',
       icon: <GlobeSimpleIcon />,
-      link: url,
+      link: website,
     },
     {
       id: TAG_ELEMENT_ID.location,

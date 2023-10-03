@@ -10,10 +10,10 @@ import {
   profileOrgReviewYourReviewSchema,
   profileRepoListQueryPageSchema,
   profileRepoSchema,
-  profileRepoTechnology,
+  profileRepoTag,
 } from './schemas';
 
-export type ProfileRepoTechnology = Infer<typeof profileRepoTechnology>;
+export type ProfileRepoTag = Infer<typeof profileRepoTag>;
 
 export type ProfileRepo = Infer<typeof profileRepoSchema>;
 

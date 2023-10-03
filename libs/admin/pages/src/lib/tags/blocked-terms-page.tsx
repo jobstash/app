@@ -6,7 +6,7 @@ import {
   BlockedTermsFormProvider,
   BlockedTermsMutationProvider,
   BlockedTermsProvider,
-  TechnologiesProvider,
+  TagsProvider,
 } from '@jobstash/admin/state';
 
 import {
@@ -33,7 +33,7 @@ export const BlockedTermsPage = () => (
       sidebar={<SideBar />}
       tabsSection={<AdminTabs tabs={ADMIN_TABS.TECHNOLOGIES} />}
     >
-      <TechnologiesProvider>
+      <TagsProvider>
         <BlockedTermsProvider>
           <BlockedTermsFormProvider>
             <BlockedTermsMutationProvider>
@@ -45,7 +45,7 @@ export const BlockedTermsPage = () => (
             </BlockedTermsMutationProvider>
           </BlockedTermsFormProvider>
         </BlockedTermsProvider>
-      </TechnologiesProvider>
+      </TagsProvider>
     </AdminLayout>
   </>
 );

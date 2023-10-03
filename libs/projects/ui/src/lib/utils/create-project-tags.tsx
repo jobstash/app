@@ -22,7 +22,7 @@ export const createProjectTags = (project: ProjectInfo) => {
   const midTags: TagElement[] = [];
 
   const {
-    url,
+    website,
     tokenSymbol,
     tvl,
     monthlyVolume,
@@ -86,7 +86,7 @@ export const createProjectTags = (project: ProjectInfo) => {
       id: TAG_ELEMENT_ID.token,
       text: `Token: $${tokenSymbol}`,
       icon: <CurrencyCircleDollarIcon />,
-      link: url,
+      link: website,
     });
   }
 

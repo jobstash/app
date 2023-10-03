@@ -5,7 +5,7 @@ import { LoadingOverlay } from '@mantine/core';
 import {
   useBlockedTermsContext,
   useBlockedTermsMutationContext,
-  useTechnologiesContext,
+  useTagsContext,
 } from '@jobstash/admin/state';
 
 import AdminContentLoader from '../admin-content-loader';
@@ -16,12 +16,12 @@ interface Props {
 }
 
 const BlockedTermsContentWrapper = ({ children }: Props) => {
-  const { isLoading: isLoadingTechnologies } = useTechnologiesContext();
+  const { isLoading: isLoadingTags } = useTagsContext();
   const { isLoading: isLoadingBlockedTerms } = useBlockedTermsContext();
   const { isLoading: isLoadingBlockedTermsMutation } =
     useBlockedTermsMutationContext();
 
-  const isLoadingPage = isLoadingTechnologies || isLoadingBlockedTerms;
+  const isLoadingPage = isLoadingTags || isLoadingBlockedTerms;
 
   if (isLoadingPage) return <AdminContentLoader />;
 

@@ -19,7 +19,7 @@ const RightPanelJobCards = ({ orgName, jobInfos }: Props) => {
           key={jobInfo.id}
           orgName={orgName}
           jobInfo={jobInfo}
-          technologies={[]}
+          tags={[]}
         />
       ))}
     </div>

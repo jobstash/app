@@ -35,7 +35,7 @@ const ProfileRepoRightPanel = () => {
             <LoadingOverlay visible={isLoadingCard} className="rounded-3xl" />
             <div className="p-8">
               <div className="flex flex-col gap-6 relative">
-                {activeTab === PROFILE_RIGHT_PANEL_TAB.TECHNOLOGIES_USED && (
+                {activeTab === PROFILE_RIGHT_PANEL_TAB.TAGS_USED && (
                   <TechsUsed key={activeProfileRepo?.id} />
                 )}
                 {activeTab === PROFILE_RIGHT_PANEL_TAB.YOUR_CONTRIBUTION && (

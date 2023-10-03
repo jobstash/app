@@ -30,7 +30,7 @@ export const CHECK_WALLET_ROUTE: Record<
   [CHECK_WALLET_FLOWS.ONBOARD_REPO]: '/profile/repositories',
   [CHECK_WALLET_FLOWS.ONBOARD_REVIEWS]: '/profile/reviews',
   [CHECK_WALLET_FLOWS.SIGNUP_COMPLETE]: '/',
-  [CHECK_WALLET_FLOWS.ADMIN_SYNONYMS]: '/godmode/technologies/synonyms',
+  [CHECK_WALLET_FLOWS.ADMIN_SYNONYMS]: '/godmode/tags/synonyms',
 };
 
 export const redirectFlowsSet = new Set<CheckWalletFlow>([

@@ -6,7 +6,7 @@ export const createJobPostLdJson = (jobPost?: JobPost) => {
   if (jobPost) {
     const {
       organization,
-      technologies,
+      tags,
       role,
       team,
       culture,
@@ -32,9 +32,9 @@ export const createJobPostLdJson = (jobPost?: JobPost) => {
       description += `<p>Culture</p>\n\n<p>${culture}</p>\n\n`;
     }
 
-    if (technologies.length > 0) {
-      description += '<p>Technologies:</p>\n\n<ul>';
-      for (const tech of technologies.map((t) => t.name)) {
+    if (tags.length > 0) {
+      description += '<p>Tags:</p>\n\n<ul>';
+      for (const tech of tags.map((t) => t.name)) {
         description += `<li>${tech}</li>`;
       }
 
@@ -62,8 +62,8 @@ export const createJobPostLdJson = (jobPost?: JobPost) => {
       hiringOrganization: {
         '@type': 'Organization',
         name: organization.name,
-        logo: getLogoUrl(organization.url, organization.logo),
-        sameAs: organization.url,
+        logo: getLogoUrl(organization.website, organization.logoUrl),
+        sameAs: organization.logoUrl ?? '',
       },
       image: imageMetaData,
       directApply: Boolean(jobApplyPageUrl),
@@ -117,8 +117,8 @@ export const createJobPostLdJson = (jobPost?: JobPost) => {
       jsonLd['jobBenefits'] = benefits;
     }
 
-    if (technologies.length > 0) {
-      jsonLd['skills'] = technologies.map((t) => t.name).join(', ');
+    if (tags.length > 0) {
+      jsonLd['skills'] = tags.map((t) => t.name).join(', ');
     }
 
     return {

@@ -20,7 +20,7 @@ export const createJobCardProjectTags = (project: ProjectInfo) => {
   const projectAuditTags: TagElement[] = [];
 
   const {
-    url,
+    website,
     tokenSymbol,
     tvl,
     monthlyVolume,
@@ -36,7 +36,7 @@ export const createJobCardProjectTags = (project: ProjectInfo) => {
       id: TAG_ELEMENT_ID.token,
       text: `Token: $${tokenSymbol}`,
       icon: <CurrencyCircleDollarIcon />,
-      link: url,
+      link: website,
     });
 
   if (category) {

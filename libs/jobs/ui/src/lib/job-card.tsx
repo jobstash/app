@@ -24,7 +24,7 @@ interface Props {
 }
 
 const JobCard = ({ jobPost, isActive, filterParamsObj }: Props) => {
-  const { organization, technologies } = jobPost;
+  const { organization, tags } = jobPost;
   const { jobTitle, jobCreatedTimestamp } = jobPost;
   const { projects } = organization;
 
@@ -57,7 +57,7 @@ const JobCard = ({ jobPost, isActive, filterParamsObj }: Props) => {
       <JobCardHeader title={jobTitle} ts={jobCreatedTimestamp} />
       <JobCardTags jobPost={jobPost} />
       <JobCardOrg org={organization} />
-      <JobCardTechs techs={technologies} />
+      <JobCardTechs techs={tags} />
       <JobCardProjects projects={projects} />
     </JobCardWrapper>
   );

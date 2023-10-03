@@ -38,7 +38,7 @@ const JobsRightPanel = ({ jobPost, currentTab }: Props) => {
     );
   }
 
-  const { organization, technologies } = jobPost;
+  const { organization, tags } = jobPost;
   const { projects } = organization;
 
   const hasProject = projects.length > 0;
@@ -66,7 +66,7 @@ const JobsRightPanel = ({ jobPost, currentTab }: Props) => {
         <RightPanelJobCard
           orgName={organization.name}
           jobInfo={jobPost}
-          technologies={technologies}
+          tags={tags}
           showExploreJob={false}
         />
       )}

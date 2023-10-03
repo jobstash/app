@@ -1,15 +1,15 @@
 import { memo } from 'react';
 
-import { type Technology } from '@jobstash/shared/core';
+import { type Tag } from '@jobstash/shared/core';
 
 import { Heading, TechWrapper, Text } from '@jobstash/shared/ui';
 
 interface Props {
-  technologies: Technology[];
+  tags: Tag[];
 }
 
-const RightPanelJobCardTechnologies = ({ technologies }: Props) => {
-  if (technologies.length === 0) return null;
+const RightPanelJobCardTags = ({ tags }: Props) => {
+  if (tags.length === 0) return null;
 
   return (
     <>
@@ -20,16 +20,16 @@ const RightPanelJobCardTechnologies = ({ technologies }: Props) => {
       <div className="flex flex-col gap-5">
         <div className="flex flex-col gap-2">
           <Heading size="sm" fw="semibold">
-            Technologies
+            Tags
           </Heading>
           <Text color="dimmed">
-            Technologies that are required to be successful at the job
+            Tags that are required to be successful at the job
           </Text>
         </div>
       </div>
 
       <div className="flex flex-wrap gap-3">
-        {technologies.map((tech) => (
+        {tags.map((tech) => (
           <TechWrapper key={tech.id} id={tech.id}>
             {tech.name}
           </TechWrapper>
@@ -39,4 +39,4 @@ const RightPanelJobCardTechnologies = ({ technologies }: Props) => {
   );
 };
 
-export default memo(RightPanelJobCardTechnologies);
+export default memo(RightPanelJobCardTags);

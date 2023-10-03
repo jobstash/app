@@ -7,7 +7,7 @@ import {
   orgInfoSchema,
   projectInfoSchema,
   projectMoreInfoSchema,
-  technologySchema,
+  tagSchema,
 } from '@jobstash/shared/core';
 
 export const jobPostSchema = myzod
@@ -28,7 +28,7 @@ export const jobPostSchema = myzod
           }),
         )
         .allowUnknownKeys(true),
-      technologies: myzod.array(technologySchema),
+      tags: myzod.array(tagSchema),
     }),
   )
   .allowUnknownKeys(true);

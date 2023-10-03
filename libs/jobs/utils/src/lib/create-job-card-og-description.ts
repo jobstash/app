@@ -14,7 +14,7 @@ export const createJobCardOgDetails = (jobPost?: JobPost) => {
     maxSalaryRange,
     role,
     benefits,
-    technologies,
+    tags,
     salaryCurrency = 'USD',
   } = jobPost;
 
@@ -35,10 +35,8 @@ export const createJobCardOgDetails = (jobPost?: JobPost) => {
     description += `🌎 ${jobLocation}\n\n`;
   }
 
-  if (technologies.length > 0) {
-    description += `🤓 Skills required: ${technologies
-      .map((t) => t.name)
-      .join(', ')}`;
+  if (tags.length > 0) {
+    description += `🤓 Skills required: ${tags.map((t) => t.name).join(', ')}`;
   }
 
   return { title, description };

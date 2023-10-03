@@ -14,7 +14,7 @@ export const PairedTermsProvider = ({ children }: Props) => {
     () => ({
       isLoading,
       pairedTerms: data ?? [],
-      existingPairedTerms: data?.map((t) => t.technology.name) ?? [],
+      existingPairedTerms: data?.map((t) => t.tag.name) ?? [],
     }),
     [data, isLoading],
   );

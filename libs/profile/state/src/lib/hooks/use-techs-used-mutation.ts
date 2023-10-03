@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 
-import { type ProfileRepoTechnology } from '@jobstash/profile/core';
+import { type ProfileRepoTag } from '@jobstash/profile/core';
 import { notifError, notifSuccess } from '@jobstash/shared/utils';
 
 import { useNProgress } from '@jobstash/shared/state';
@@ -9,8 +9,8 @@ import { useProfileRepoPageContext } from '../contexts/profile-repo-page-context
 
 interface Payload {
   id: string;
-  techsUsed: ProfileRepoTechnology[];
-  techsCreated: ProfileRepoTechnology[];
+  techsUsed: ProfileRepoTag[];
+  techsCreated: ProfileRepoTag[];
 }
 
 export const useTechsUsedMutation = () => {
@@ -36,7 +36,7 @@ export const useTechsUsedMutation = () => {
       // TODO: Add notifications
       // TODO: Update profile-repo-list,
       // TODO: Update profile repo state (should update disableSave flag)
-      notifSuccess({ message: 'You have updated your technologies used' });
+      notifSuccess({ message: 'You have updated your tags used' });
     },
     onError() {
       notifError();

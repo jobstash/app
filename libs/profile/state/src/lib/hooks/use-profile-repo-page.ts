@@ -8,7 +8,7 @@ import {
   type ProfileRepo,
 } from '@jobstash/profile/core';
 
-import { useAllTechnologies } from '@jobstash/shared/state';
+import { useAllTags } from '@jobstash/shared/state';
 
 import { activeProfileRepoAtom } from '../atoms/active-profile-repo-atom';
 import { profileRepoCountAtom } from '../atoms/profile-repo-count-atom';
@@ -17,7 +17,7 @@ import { useIsOnboarding } from './use-is-onboarding';
 import { useProfileTabs } from './use-profile-tabs';
 
 export const useProfileRepoPage = (isOnboardSSR: boolean) => {
-  const { data: allTechsData } = useAllTechnologies();
+  const { data: allTechsData } = useAllTags();
 
   const isOnboarding = useIsOnboarding(
     isOnboardSSR,

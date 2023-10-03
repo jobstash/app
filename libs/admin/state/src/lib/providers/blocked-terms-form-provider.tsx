@@ -2,14 +2,14 @@ import { type ReactNode, useCallback, useMemo, useState } from 'react';
 
 import { useBlockedTermsContext } from '../contexts/blocked-terms-context';
 import { BlockedTermsFormContext } from '../contexts/blocked-terms-form-context';
-import { useTechnologiesContext } from '../contexts/technologies-context';
+import { useTagsContext } from '../contexts/tags-context';
 
 interface Props {
   children: ReactNode;
 }
 
 export const BlockedTermsFormProvider = ({ children }: Props) => {
-  const { mappedTechnologies: technologies } = useTechnologiesContext();
+  const { mappedTags: tags } = useTagsContext();
   const { fetchedBlockedTerms } = useBlockedTermsContext();
 
   const [currentTerms, setCurrentTerms] = useState<{
@@ -28,7 +28,7 @@ export const BlockedTermsFormProvider = ({ children }: Props) => {
     [currentTerms.blocked, currentTerms.unblocked, fetchedBlockedTerms],
   );
 
-  const options = technologies.filter(
+  const options = tags.filter(
     (t) => currentTerms.unblocked.includes(t) || !allBlockedTerms.includes(t),
   );
 

@@ -29,7 +29,7 @@ export type JobListQueryPage = Infer<typeof jobListQueryPageSchema>;
 // interface ProjectListItem extends ProjectInfo {
 //   jobCount: number | null;
 //   repoCount: number | null;
-//   technologies: Technology[];
+//   tags: Tag[];
 // }
 
 // interface ProjectListQueryPage {
@@ -55,7 +55,7 @@ export type JobListQueryPage = Infer<typeof jobListQueryPageSchema>;
 // }
 
 // interface ProjectDetails extends ProjectInfo, ProjectMoreInfo {
-//   technologies: Technology[];
+//   tags: Tag[];
 //   jobs: JobInfo[];
 //   organization: ProjectOrg;
 // }
@@ -106,7 +106,7 @@ export type JobListQueryPage = Infer<typeof jobListQueryPageSchema>;
 //   name: string;
 // }
 
-// interface Technology {
+// interface Tag {
 //   id: string;
 //   name: string;
 //   normalizedName: string;

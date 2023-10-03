@@ -3,13 +3,13 @@ import { useRef } from 'react';
 import {
   usePairedTermsContext,
   usePairedTermsFormContext,
-  useTechnologiesContext,
+  useTagsContext,
 } from '@jobstash/admin/state';
 
 import AdminSelectInput from '../admin-select-input';
 
 const OriginInputX = () => {
-  const { mappedTechnologies } = useTechnologiesContext();
+  const { mappedTags } = useTagsContext();
   const { existingPairedTerms } = usePairedTermsContext();
 
   const { origin, initOrigin, onChangeOrigin } = usePairedTermsFormContext();
@@ -27,8 +27,8 @@ const OriginInputX = () => {
   const hasInitOrigin = Boolean(initOrigin);
 
   const originOptions = hasInitOrigin
-    ? mappedTechnologies
-    : mappedTechnologies.filter((t) => !existingPairedTerms.includes(t));
+    ? mappedTags
+    : mappedTags.filter((t) => !existingPairedTerms.includes(t));
 
   return (
     <AdminSelectInput

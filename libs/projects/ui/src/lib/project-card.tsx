@@ -59,7 +59,7 @@ const ProjectCard = ({ isActive, projectListItem, filterParamsObj }: Props) => {
       <ProjectCardHeader projectListItem={projectListItem} />
       <ProjectCardTags projectListItem={projectListItem} />
       {/* <ProjectCardTechs
-        techs={projectDetails ? projectDetails.organization.technologies : []}
+        techs={projectDetails ? projectDetails.organization.tags : []}
       /> */}
       {/* <ProjectCardOrg projectDetails={projectDetails} /> */}
     </ProjectCardWrapper>

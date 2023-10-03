@@ -3,11 +3,11 @@ import myzod from 'myzod';
 import {
   orgInfoSchema,
   repositoryInfoSchema,
-  technologySchema,
+  tagSchema,
 } from '@jobstash/shared/core';
 
-export const profileRepoTechnology = myzod.intersection(
-  technologySchema,
+export const profileRepoTag = myzod.intersection(
+  tagSchema,
   myzod.object({
     canTeach: myzod.boolean(),
   }),
@@ -21,7 +21,7 @@ export const profileRepoSchema = myzod.intersection(
       logo: myzod.string().nullable(),
       url: myzod.string().min(1),
     }),
-    technologies: myzod.array(profileRepoTechnology),
+    tags: myzod.array(profileRepoTag),
     contribution: myzod.object({
       summary: myzod.string(),
       count: myzod.number(),

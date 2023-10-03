@@ -1,7 +1,7 @@
 import { type ReactNode, useCallback, useMemo, useState } from 'react';
 
 import { PairedTermsFormContext } from '../contexts/paired-terms-form-context';
-import { useTechnologiesContext } from '../contexts/technologies-context';
+import { useTagsContext } from '../contexts/tags-context';
 import { usePairedTermsMutation } from '../hooks/use-paired-terms-mutation';
 
 interface Props {
@@ -15,7 +15,7 @@ export const PairedTermsFormProvider = ({
   initDestination,
   children,
 }: Props) => {
-  const { mappedTechnologies: technologies } = useTechnologiesContext();
+  const { mappedTags: tags } = useTagsContext();
 
   const [origin, setOrigin] = useState(initOrigin);
 
@@ -24,8 +24,8 @@ export const PairedTermsFormProvider = ({
   const [destination, setDestination] = useState<string[]>(initDestination);
 
   const destinationOptions = useMemo(
-    () => technologies.filter((t) => !destination.includes(t) && t !== origin),
-    [destination, origin, technologies],
+    () => tags.filter((t) => !destination.includes(t) && t !== origin),
+    [destination, origin, tags],
   );
 
   const addDestination = (value: string) => {

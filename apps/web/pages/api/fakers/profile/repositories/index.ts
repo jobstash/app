@@ -24,7 +24,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           logo: faker.internet.avatar(),
           url: faker.internet.url(),
         },
-        technologies: Array.from({
+        tags: Array.from({
           length: faker.number.int({ min: 0, max: 8 }),
         })
           .fill(0)
@@ -51,7 +51,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           logo: faker.internet.avatar(),
           url: faker.internet.url(),
         },
-        technologies: Array.from({
+        tags: Array.from({
           length: faker.number.int({ min: 0, max: 8 }),
         })
           .fill(0)
@@ -78,7 +78,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           logo: faker.internet.avatar(),
           url: faker.internet.url(),
         },
-        technologies: Array.from({
+        tags: Array.from({
           length: faker.number.int({ min: 0, max: 8 }),
         })
           .fill(0)

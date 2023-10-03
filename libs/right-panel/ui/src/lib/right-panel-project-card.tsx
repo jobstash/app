@@ -24,7 +24,7 @@ interface Props {
 }
 
 const RightPanelProjectCard = ({ project, routeSection }: Props) => {
-  const { id, name, url, logo, description } = project;
+  const { id, name, website, logo, description } = project;
   const { projectSocialTags, projectTags, projectTvlTags, projectAuditTags } =
     createRightPanelProjectCardTags(project);
 
@@ -42,7 +42,7 @@ const RightPanelProjectCard = ({ project, routeSection }: Props) => {
       <div className="flex flex-col gap-5 p-6">
         <RightPanelProjectCardHeader
           name={name}
-          url={url}
+          url={website}
           logo={logo}
           socials={projectSocialTags}
         />

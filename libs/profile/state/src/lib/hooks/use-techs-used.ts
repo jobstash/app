@@ -2,46 +2,37 @@ import { useState } from 'react';
 
 import { v4 } from '@lukeed/uuid';
 
-import type {
-  ProfileRepo,
-  ProfileRepoTechnology,
-} from '@jobstash/profile/core';
-import { Technology } from '@jobstash/shared/core';
+import type { ProfileRepo, ProfileRepoTag } from '@jobstash/profile/core';
+import { Tag } from '@jobstash/shared/core';
 import { capitalize, slugify } from '@jobstash/shared/utils';
 
 import { useProfileRepoPageContext } from '../contexts/profile-repo-page-context';
 
 import { useTechsUsedMutation } from './use-techs-used-mutation';
 
-const createTech = (searchValue: string): ProfileRepoTechnology => ({
+const createTech = (searchValue: string): ProfileRepoTag => ({
   id: v4(),
   name: capitalize(searchValue),
   normalizedName: slugify(searchValue),
   canTeach: false,
 });
 
-const findTech = (allTechs: Technology[], searchValue: string) =>
+const findTech = (allTechs: Tag[], searchValue: string) =>
   allTechs.find(
     (option) => option.name.toLowerCase() === searchValue?.toLowerCase(),
   );
 
-const isTechExists = (
-  currentTechs: ProfileRepoTechnology[],
-  searchValue: string,
-) =>
+const isTechExists = (currentTechs: ProfileRepoTag[], searchValue: string) =>
   currentTechs.some(
     (tech) => tech.name.toLowerCase() === searchValue.toLowerCase(),
   );
 
 const isTechsEqual = (
-  techs: ProfileRepoTechnology[],
-  currentTechs: ProfileRepoTechnology[],
+  techs: ProfileRepoTag[],
+  currentTechs: ProfileRepoTag[],
 ) => JSON.stringify(techs) === JSON.stringify(currentTechs);
 
-const getTechOptions = (
-  currentTechs: ProfileRepoTechnology[],
-  allTechs: Technology[],
-) => {
+const getTechOptions = (currentTechs: ProfileRepoTag[], allTechs: Tag[]) => {
   const usedIds = new Set(currentTechs.map((tech) => tech.id));
   return allTechs
     .filter((option) => !usedIds.has(option.id))
@@ -51,10 +42,10 @@ const getTechOptions = (
 export const useTechsUsed = () => {
   const { activeProfileRepo: profileRepo, allTechs } =
     useProfileRepoPageContext();
-  const { id, technologies: techs } = profileRepo || ({} as ProfileRepo);
+  const { id, tags } = profileRepo || ({} as ProfileRepo);
 
-  const [techsUsed, setTechsUsed] = useState<ProfileRepoTechnology[]>(techs);
-  const [techsCreated, setTechsCreated] = useState<ProfileRepoTechnology[]>([]);
+  const [techsUsed, setTechsUsed] = useState<ProfileRepoTag[]>(tags);
+  const [techsCreated, setTechsCreated] = useState<ProfileRepoTag[]>([]);
   const [searchValue, setSearchValue] = useState<string>('');
   const [hoverAddButton, setHoverAddButton] = useState(false);
 
@@ -81,7 +72,7 @@ export const useTechsUsed = () => {
     }
   };
 
-  const disableSave = isTechsEqual(techs, currentTechs);
+  const disableSave = isTechsEqual(tags, currentTechs);
   const techOptions = getTechOptions(currentTechs, allTechs);
 
   const { mutate } = useTechsUsedMutation();

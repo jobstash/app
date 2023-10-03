@@ -9,7 +9,7 @@ import { MW_URL } from '@jobstash/shared/core';
 import { mwFetch } from '@jobstash/shared/data';
 
 export const postSetBlockedTerms = async (payload: BlockedTermsPayload) => {
-  const url = `${MW_URL}/technologies/set-blocked-terms`;
+  const url = `${MW_URL}/tags/set-blocked-terms`;
 
   const options = {
     method: 'POST' as const,

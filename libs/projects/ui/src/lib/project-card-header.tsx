@@ -9,10 +9,12 @@ interface Props {
   projectListItem: ProjectInfo;
 }
 
-const ProjectCardHeader = ({ projectListItem: { name, url, logo } }: Props) => (
+const ProjectCardHeader = ({
+  projectListItem: { name, website, logo },
+}: Props) => (
   <div className="items-center justify-between space-y-2 lg:flex lg:space-y-0">
     <LogoTitle
-      avatarProps={{ src: getLogoUrl(url, logo), alt: name }}
+      avatarProps={{ src: getLogoUrl(website, logo), alt: name }}
       title={name}
     />
   </div>

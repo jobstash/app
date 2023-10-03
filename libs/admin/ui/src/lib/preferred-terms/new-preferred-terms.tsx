@@ -2,7 +2,7 @@ import { LoadingOverlay } from '@mantine/core';
 
 import {
   usePreferredTermsMutationContext,
-  useTechnologiesStore,
+  useTagsStore,
 } from '@jobstash/admin/state';
 
 import AdminFormControl from '../admin-form-control';
@@ -15,11 +15,9 @@ import SynonymsList from './synonyms-list';
 const NewPreferedTerms = () => {
   const { isLoading, mutate } = usePreferredTermsMutationContext();
 
-  const synonyms = useTechnologiesStore((store) => store.synonyms);
+  const synonyms = useTagsStore((store) => store.synonyms);
 
-  const isDisabledSynonymsInput = useTechnologiesStore(
-    (store) => !store.primaryTerm,
-  );
+  const isDisabledSynonymsInput = useTagsStore((store) => !store.primaryTerm);
   const showSynonymsList = synonyms.length > 0;
 
   return (

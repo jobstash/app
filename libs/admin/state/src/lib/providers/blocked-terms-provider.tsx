@@ -1,14 +1,14 @@
 import { type ReactNode, useMemo } from 'react';
 
 import { BlockedTermsContext } from '../contexts/blocked-terms-context';
-import { useBlockedTechnologiesQuery } from '../hooks/use-blocked-technologies-query';
+import { useBlockedTagsQuery } from '../hooks/use-blocked-tags-query';
 
 interface Props {
   children: ReactNode;
 }
 
 export const BlockedTermsProvider = ({ children }: Props) => {
-  const { isLoading, isFetching, data } = useBlockedTechnologiesQuery();
+  const { isLoading, isFetching, data } = useBlockedTagsQuery();
 
   const value = useMemo(
     () => ({

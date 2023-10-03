@@ -1,11 +1,11 @@
 import { type UseMutateFunction } from '@tanstack/react-query';
 import myzod, { type Infer } from 'myzod';
 
-import { type MessageResponse, technologySchema } from '@jobstash/shared/core';
+import { type MessageResponse, tagSchema } from '@jobstash/shared/core';
 
 export const preferredTermSchema = myzod.object({
-  technology: myzod.string(),
-  synoynms: myzod.array(technologySchema),
+  tag: myzod.string(),
+  synoynms: myzod.array(tagSchema),
 });
 
 export const preferredTermsResponseSchema = myzod.object({

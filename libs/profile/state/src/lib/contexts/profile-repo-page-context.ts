@@ -9,7 +9,7 @@ import {
   type ProfileRepo,
   type ProfileTabOptions,
 } from '@jobstash/profile/core';
-import { Technology } from '@jobstash/shared/core';
+import { Tag } from '@jobstash/shared/core';
 
 interface ProfileRepoPageContextProps {
   profileRepoCount: number | null;
@@ -22,7 +22,7 @@ interface ProfileRepoPageContextProps {
   }[];
   activeTab: string;
   setActiveTab: Dispatch<SetStateAction<ProfileTabOptions[number]>>;
-  allTechs: Technology[];
+  allTechs: Tag[];
   profileRepo: ProfileRepo;
   isOnboarding: boolean;
   isLoadingCard: boolean;

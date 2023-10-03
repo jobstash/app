@@ -13,8 +13,8 @@ import {
   fundingRoundSchema,
   Investor,
   investorSchema,
-  Technology,
-  technologySchema,
+  Tag,
+  tagSchema,
 } from '@jobstash/shared/core';
 
 /**
@@ -71,9 +71,9 @@ describe.skip('Job List Validation', () => {
     const duplicatedProjects: { id: string; name: string; jobPost: string }[] =
       [];
 
-    const allTechnologiesSet = new Set();
-    const allTechnologies: Technology[] = [];
-    const duplicatedTechnologies: {
+    const allTagsSet = new Set();
+    const allTags: Tag[] = [];
+    const duplicatedTags: {
       id: string;
       name: string;
       jobPost: string;
@@ -152,23 +152,23 @@ describe.skip('Job List Validation', () => {
         }
       }
 
-      const technologiesSet = new Set();
-      for (const technology of jobPost.technologies) {
+      const tagsSet = new Set();
+      for (const tag of jobPost.tags) {
         // Append to allProjects only if not yet present
-        if (!allTechnologiesSet.has(technology.id)) {
-          allTechnologiesSet.add(technology.id);
-          allTechnologies.push(technology);
+        if (!allTagsSet.has(tag.id)) {
+          allTagsSet.add(tag.id);
+          allTags.push(tag);
         }
 
         // Check duplicate project for current jobPost
-        if (technologiesSet.has(technology.id)) {
+        if (tagsSet.has(tag.id)) {
           duplicatedProjects.push({
-            id: technology.id,
-            name: technology.name,
+            id: tag.id,
+            name: tag.name,
             jobPost: jobPost.shortUUID,
           });
         } else {
-          technologiesSet.add(technology.id);
+          tagsSet.add(tag.id);
         }
       }
 
@@ -241,10 +241,10 @@ describe.skip('Job List Validation', () => {
         duplicate: duplicatedProjects.length,
         duplicateData: duplicatedProjects,
       },
-      technologies: {
-        totalCount: allTechnologies.length,
-        duplicate: duplicatedTechnologies.length,
-        duplicateData: duplicatedTechnologies,
+      tags: {
+        totalCount: allTags.length,
+        duplicate: duplicatedTags.length,
+        duplicateData: duplicatedTags,
       },
       organizations: {
         totalCount: allOrganizations.length,
@@ -288,8 +288,8 @@ describe.skip('Job List Validation', () => {
       projectSchema.parse(project);
     }
 
-    for (const technology of allTechnologies) {
-      technologySchema.parse(technology);
+    for (const tag of allTags) {
+      tagSchema.parse(tag);
     }
 
     for (const organization of allOrganizations) {

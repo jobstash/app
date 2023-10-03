@@ -1,17 +1,17 @@
 import { createContext, useContext } from 'react';
 import { type Dispatch, type SetStateAction } from 'react';
 
-import { type ProfileRepoTechnology } from '@jobstash/profile/core';
+import { type ProfileRepoTag } from '@jobstash/profile/core';
 
 interface TechsUsedContextProps {
-  techsUsed: ProfileRepoTechnology[];
-  techsCreated: ProfileRepoTechnology[];
+  techsUsed: ProfileRepoTag[];
+  techsCreated: ProfileRepoTag[];
   searchValue: string;
   setSearchValue: Dispatch<SetStateAction<string>>;
   hoverAddButton: boolean;
   setHoverAddButton: Dispatch<SetStateAction<boolean>>;
   onBlurSearch: () => void;
-  currentTechs: ProfileRepoTechnology[];
+  currentTechs: ProfileRepoTag[];
   disableAdd: boolean;
   onTechRemove: (id: string) => void;
   disableSave: boolean;

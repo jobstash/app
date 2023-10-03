@@ -16,14 +16,12 @@ export const useUnsetBlockedTermsMutation = () => {
     isLoading: isLoadingUnsetBlockedTerms,
     mutate: mutateUnsetBlockedTerms,
   } = useMutation({
-    mutationFn: ({ technologyNameList }: BlockedTermsPayload) =>
-      postUnsetBlockedTerms({ technologyNameList }),
-    onSuccess(_, { technologyNameList }) {
-      const title = `New Unblocked Term${
-        technologyNameList.length > 1 ? 's' : ''
-      }`;
+    mutationFn: ({ tagNameList }: BlockedTermsPayload) =>
+      postUnsetBlockedTerms({ tagNameList }),
+    onSuccess(_, { tagNameList }) {
+      const title = `New Unblocked Term${tagNameList.length > 1 ? 's' : ''}`;
 
-      const message = `${technologyNameList.join(', ')}`;
+      const message = `${tagNameList.join(', ')}`;
 
       notifSuccess({
         title,
@@ -33,12 +31,10 @@ export const useUnsetBlockedTermsMutation = () => {
 
       // Manually cache fetched blocked-techs
       queryClient.setQueryData(
-        ['godmodeBlockedTechnologies'],
-        fetchedBlockedTerms.filter(
-          (technologyName) => !technologyNameList.includes(technologyName),
-        ),
+        ['godmodeBlockedTags'],
+        fetchedBlockedTerms.filter((tagName) => !tagNameList.includes(tagName)),
       );
-      queryClient.invalidateQueries(['godmodeBlockedTechnologies']);
+      queryClient.invalidateQueries(['godmodeBlockedTags']);
     },
     onError(data) {
       notifError({

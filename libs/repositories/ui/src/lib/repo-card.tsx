@@ -16,12 +16,12 @@ interface Props {
 const RepoCard = (props: Props) => {
   const { repo, isActive, onClick } = props;
 
-  const { name, timestamp, technologies } = repo;
+  const { name, timestamp, tags } = repo;
 
   return (
     <RepoCardWrapper href="" isActive={false} onClick={onClick}>
       <RepoCardHeader title={name} timestamp={timestamp} />
-      <RepoCardTechs techs={technologies} />
+      <RepoCardTechs techs={tags} />
       <RepoCardOrg />
     </RepoCardWrapper>
   );

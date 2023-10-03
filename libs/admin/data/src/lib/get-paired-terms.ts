@@ -7,7 +7,7 @@ import { MW_URL } from '@jobstash/shared/core';
 import { mwFetch } from '@jobstash/shared/data';
 
 export const getPairedTerms = async () => {
-  const url = `${MW_URL}/technologies/paired-terms`;
+  const url = `${MW_URL}/tags/paired-terms`;
 
   const options = {
     responseSchema: pairedTermsResponseSchema,

@@ -22,8 +22,8 @@ const ProfileRepoGotItCard = () => {
       <Text color="dimmed">
         We have imported the public repositories available from the Github
         accounts provided. For each repository in the list that you think
-        highlights your Web3 and Crypto expertise, you can add technologies used
-        and leave a comment of your contribution.
+        highlights your Web3 and Crypto expertise, you can add tags used and
+        leave a comment of your contribution.
       </Text>
       <Text color="dimmed">
         This can help to build your reputation and credibility within the

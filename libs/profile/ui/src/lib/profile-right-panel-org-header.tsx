@@ -15,7 +15,7 @@ interface Props {
 const ProfileRightPanelOrgHeader = ({ orgInfo }: Props) => {
   if (!orgInfo) return null;
 
-  const { name, logo, url, summary } = orgInfo;
+  const { name, logoUrl, website, summary } = orgInfo;
 
   return (
     <div className="flex flex-col gap-4">
@@ -24,7 +24,7 @@ const ProfileRightPanelOrgHeader = ({ orgInfo }: Props) => {
           <LogoTitle
             title={name}
             avatarProps={{
-              src: getLogoUrl(url, logo),
+              src: getLogoUrl(website, logoUrl),
               alt: name,
             }}
           />

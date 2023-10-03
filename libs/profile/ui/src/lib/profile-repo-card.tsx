@@ -20,7 +20,7 @@ interface Props {
 const ProfileRepoCard = (props: Props) => {
   const { isActive, profileRepo } = props;
   const {
-    technologies,
+    tags,
     org: { name: orgName, logo: orgLogo, url: orgUrl },
   } = profileRepo;
 
@@ -34,7 +34,7 @@ const ProfileRepoCard = (props: Props) => {
   return (
     <ProfileCardWrapper isActive={isActive} onClick={onClick}>
       <ProfileRepoCardHeader profileRepo={profileRepo} />
-      <ProfileRepoCardTechs techs={technologies} />
+      <ProfileRepoCardTechs techs={tags} />
       <ProfileRepoCardOrg name={orgName} logo={orgLogo} url={orgUrl} />
     </ProfileCardWrapper>
   );

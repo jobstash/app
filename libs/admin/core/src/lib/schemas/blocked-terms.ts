@@ -1,12 +1,12 @@
 import { type UseMutateFunction } from '@tanstack/react-query';
 import myzod, { type Infer } from 'myzod';
 
-import { technologySchema } from '@jobstash/shared/core';
+import { tagSchema } from '@jobstash/shared/core';
 
-export const blockedTechnologiesResponseSchema = myzod.object({
+export const blockedTagsResponseSchema = myzod.object({
   success: myzod.boolean(),
   message: myzod.string().min(1),
-  data: myzod.array(technologySchema),
+  data: myzod.array(tagSchema),
 });
 
 export const blockedTermsResponseSchema = myzod
@@ -17,12 +17,10 @@ export const blockedTermsResponseSchema = myzod
   .allowUnknownKeys(true);
 
 export const blockedTermsPayloadSchema = myzod.object({
-  technologyNameList: myzod.array(myzod.string().min(1)),
+  tagNameList: myzod.array(myzod.string().min(1)),
 });
 
-export type BlockedTechnologiesResponse = Infer<
-  typeof blockedTechnologiesResponseSchema
->;
+export type BlockedTagsResponse = Infer<typeof blockedTagsResponseSchema>;
 
 export type BlockedTermsResponse = Infer<typeof blockedTermsResponseSchema>;
 

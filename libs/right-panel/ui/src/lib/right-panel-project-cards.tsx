@@ -1,14 +1,15 @@
 import { memo } from 'react';
 
 import {
-  type ProjectCompleteInfo,
+  type ProjectInfo,
+  type ProjectMoreInfo,
   type RouteSection,
 } from '@jobstash/shared/core';
 
 import RightPanelProjectCard from './right-panel-project-card';
 
 interface Props {
-  projects: ProjectCompleteInfo[];
+  projects: (ProjectInfo & ProjectMoreInfo)[];
   routeSection: RouteSection;
 }
 

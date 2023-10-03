@@ -1,9 +1,6 @@
 import { type ReactNode } from 'react';
 
-import {
-  usePairedTermsContext,
-  useTechnologiesContext,
-} from '@jobstash/admin/state';
+import { usePairedTermsContext, useTagsContext } from '@jobstash/admin/state';
 
 import AdminContentLoader from '../admin-content-loader';
 
@@ -12,10 +9,10 @@ interface Props {
 }
 
 const PairedTermsContentWrapper = ({ children }: Props) => {
-  const { isLoading: isLoadingTechnologies } = useTechnologiesContext();
+  const { isLoading: isLoadingTags } = useTagsContext();
   const { isLoading: isLoadingPairedTerms } = usePairedTermsContext();
 
-  const isLoading = isLoadingTechnologies || isLoadingPairedTerms;
+  const isLoading = isLoadingTags || isLoadingPairedTerms;
 
   if (isLoading) return <AdminContentLoader />;
 

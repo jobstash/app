@@ -46,7 +46,7 @@ const steps: StepType[] = [
     selector: '#profile-right-panel-techs-used',
     content: (
       <ProfileOnboardCard
-        title="Technologies Used"
+        title="Tags Used"
         description="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
           eiusmod tempor incididunt ut labore et dolore magna aliqua."
       />

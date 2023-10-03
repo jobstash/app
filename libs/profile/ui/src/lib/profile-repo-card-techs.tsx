@@ -1,11 +1,11 @@
 import { memo } from 'react';
 
-import { type Technology } from '@jobstash/shared/core';
+import { type Tag } from '@jobstash/shared/core';
 
 import { TechWrapper } from '@jobstash/shared/ui';
 
 interface Props {
-  techs: Technology[];
+  techs: Tag[];
 }
 
 const ProfileRepoCardTechs = (props: Props) => {

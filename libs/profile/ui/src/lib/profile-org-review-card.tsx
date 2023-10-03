@@ -52,7 +52,7 @@ const ProfileOrgReviewCard = (props: Props) => {
             title={org.name}
             location={org.location}
             avatarProps={{
-              src: getLogoUrl(org.url, org.logo),
+              src: getLogoUrl(org.website, org.logoUrl),
               alt: org.name,
             }}
           />

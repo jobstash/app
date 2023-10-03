@@ -1,15 +1,13 @@
 import { useRef } from 'react';
 
-import { useTechnologiesStore } from '@jobstash/admin/state';
+import { useTagsStore } from '@jobstash/admin/state';
 
 import AdminSelectInput from '../admin-select-input';
 
 const SynonymsInput = () => {
-  const primaryTerm = useTechnologiesStore((state) => state.primaryTerm);
-  const synonymsOptions = useTechnologiesStore(
-    (state) => state.synonymsOptions,
-  );
-  const addSynonym = useTechnologiesStore((state) => state.addSynonym);
+  const primaryTerm = useTagsStore((state) => state.primaryTerm);
+  const synonymsOptions = useTagsStore((state) => state.synonymsOptions);
+  const addSynonym = useTagsStore((state) => state.addSynonym);
 
   const selectRef = useRef<HTMLInputElement | null>(null);
 

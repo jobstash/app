@@ -27,8 +27,8 @@ export const createRightPanelProjectCardTags = (
   project: ProjectInfo & ProjectMoreInfo,
 ) => {
   const {
-    url,
-    githubOrganization,
+    website,
+    github,
     twitter,
     telegram,
     discord,
@@ -49,18 +49,18 @@ export const createRightPanelProjectCardTags = (
       id: TAG_ELEMENT_ID.website,
       text: 'Website',
       icon: <GlobeSimpleIcon />,
-      link: url,
+      link: website,
       showLinkIcon: false,
       asLink: true,
     },
   ];
 
-  if (githubOrganization) {
+  if (github) {
     projectSocialTags.push({
       id: TAG_ELEMENT_ID.github,
       text: 'Github',
       icon: <GithubLogoOutlineIcon />,
-      link: githubOrganization,
+      link: github,
       showLinkIcon: false,
       asLink: true,
     });

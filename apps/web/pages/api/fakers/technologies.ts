@@ -5,7 +5,7 @@ import { faker } from '@faker-js/faker';
 import { slugify } from '@jobstash/shared/utils';
 
 export default function handler(req: NextApiRequest, res: NextApiResponse) {
-  const technologies = faker.helpers
+  const tags = faker.helpers
     .uniqueArray(faker.word.sample, faker.number.int({ min: 20, max: 100 }))
     .map((name) => ({
       id: faker.string.uuid(),
@@ -14,6 +14,6 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
     }));
 
   return res.status(200).json({
-    technologies,
+    tags,
   });
 }

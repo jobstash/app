@@ -8,13 +8,13 @@ import { AdminLayout, AdminTabs } from '@jobstash/admin/ui';
 import { BreadCrumbs, Loader } from '@jobstash/shared/ui';
 import { SideBar } from '@jobstash/sidebar/feature';
 
-export const TechnologyApprovalsPage = () => {
+export const TagApprovalsPage = () => {
   const { canRender } = useDelayedAuthRender({ requireConnected: true });
 
   return (
     <>
       <Head>
-        <title>Godmode | Technology Approvals</title>
+        <title>Godmode | Tag Approvals</title>
       </Head>
 
       <AdminLayout
