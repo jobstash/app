@@ -21,7 +21,7 @@ const HomePage = () => (
         <motion.div
           layout
           className={cn(
-            'px-3.5 pt-[65px] lg:px-8 lg:pt-0 lg:pr-[50%] flex flex-col gap-16',
+            'px-3.5 pt-[65px] lg:px-8 lg:pt-0 lg:pr-[50%] flex flex-col gap-8',
           )}
         >
           <motion.div layout>

@@ -12,7 +12,7 @@ import Text from './text';
 
 const cardset = cva(
   [
-    'flex items-center gap-x-2 rounded',
+    'flex items-center gap-x-2 rounded pointer-events-none',
     'transition-color duration-200 ease-in-out transform translate-x-0 translate-y-0',
     '[&>svg]:mt-[1px]',
   ],
@@ -20,7 +20,7 @@ const cardset = cva(
     variants: {
       hasLink: {
         true: [
-          'bg-white/10 px-2 py-1 cursor-pointer relative mt-0',
+          'bg-white/10 px-2 py-1 cursor-pointer relative mt-0 pointer-events-auto',
           'before:transition-all before:content-[""] before:rounded before:z-20 before:absolute before:inset-0 before:border before:border-white/40 before:opacity-0 hover:before:opacity-100 hover:bg-white/20',
         ],
         false: 'bg-none cursor-default',

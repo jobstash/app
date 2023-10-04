@@ -22,11 +22,9 @@ const keywords = [
 const keywordAnimationVariants = {
   initial: {
     opacity: 0,
-    y: -20,
   },
   animate: (index: number) => ({
     opacity: 1,
-    y: 0,
     transition: {
       delay: 0.03 * index,
     },
@@ -38,7 +36,7 @@ const HomeSearchPopularKeywords = () => (
     {keywords.map((w, index) => (
       <motion.div
         key={w}
-        className="border border-white/20 transition-all duration-300 p-2 rounded-xl cursor-pointer hover:bg-darker-gray hover:border-white/40"
+        className="border border-white/20 p-2 rounded-xl cursor-pointer hover:bg-darker-gray hover:border-white/40 hover:transition-all hover:duration-300"
         variants={keywordAnimationVariants}
         initial="initial"
         animate="animate"

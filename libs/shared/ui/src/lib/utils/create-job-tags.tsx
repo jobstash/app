@@ -67,7 +67,7 @@ export const createJobTags = (jobInfo: JobInfo) => {
   if (jobCommitment) {
     tags.push({
       id: TAG_ELEMENT_ID.commitment,
-      text: jobCommitment,
+      text: capitalize(jobCommitment),
       icon: <SuitcaseIcon />,
     });
   }
