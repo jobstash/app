@@ -11,7 +11,6 @@ import RightPanelCardBorder from './right-panel-card-border';
 import RightPanelCta from './right-panel-cta';
 import RightPanelJobCardDescriptions from './right-panel-job-card-descriptions';
 import RightPanelJobCardTags from './right-panel-job-card-tags';
-import RightPanelJobCardTechnologies from './right-panel-job-card-technologies';
 
 interface Props {
   orgName: string;
@@ -70,8 +69,6 @@ const RightPanelJobCard = ({
         </div>
 
         <RightPanelJobCardDescriptions jobInfo={jobInfo} />
-
-        <RightPanelJobCardTechnologies tags={tags} />
 
         {showExploreJob && (
           <div className="flex flex-col items-start py-4">
