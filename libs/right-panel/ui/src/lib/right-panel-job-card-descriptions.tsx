@@ -25,32 +25,12 @@ const RightPanelJobCardDescriptions = ({ jobInfo }: Props) => {
 
   const hasListTexts = listTexts.length > 0;
 
-  //
-  // if (role) descriptions.push({ label: 'Role', desc: role });
-  // if (team) descriptions.push({ label: 'Team', desc: team });
-  // if (benefits) descriptions.push({ label: 'Benefits', desc: benefits });
-  // if (culture) descriptions.push({ label: 'Culture', desc: culture });
-
-  //
-  // return (
-  //   <>
-  //     {descriptions.map((d) => (
-  //       <div key={d.label} className="flex flex-col gap-2 self-stretch">
-  //         <Heading size="sm" fw="semibold">
-  //           {d.label}
-  //         </Heading>
-  //         <Text color="dimmed">{d.desc}</Text>
-  //       </div>
-  //     ))}
-  //   </>
-  // );
-
   return (
     <div className="flex flex-col gap-6">
       {summary && (
         <div className="flex flex-col gap-2 self-stretch">
           <Heading size="sm" fw="semibold">
-            Summary
+            Description
           </Heading>
           <Text color="dimmed">{summary}</Text>
         </div>
