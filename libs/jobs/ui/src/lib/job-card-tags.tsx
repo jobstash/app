@@ -12,7 +12,7 @@ const JobCardTags = ({ jobPost }: Props) => {
   const tags = createJobTags(jobPost);
 
   return (
-    <div className="flex flex-wrap [&>*]:mr-4">
+    <div className="flex flex-wrap gap-x-4 gap-y-2">
       {tags.map(({ id, text, link, icon }) => (
         <CardSet key={id} link={link} icon={icon}>
           {text}

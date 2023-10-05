@@ -6,6 +6,7 @@ import {
 } from '@jobstash/shared/core';
 import { capitalize, numFormatter } from '@jobstash/shared/utils';
 
+import CategoryIcon from '../icons/category-icon';
 import EthereumIcon from '../icons/ethereum-icon';
 import LevelIcon from '../icons/level-icon';
 import LocationIcon from '../icons/location-icon';
@@ -25,6 +26,7 @@ export const createJobTags = (jobInfo: JobInfo) => {
     paysInCrypto,
     offersTokenAllocation,
     salaryCurrency = 'USD',
+    classification,
   } = jobInfo;
 
   const tags: TagElement[] = [];
@@ -100,6 +102,15 @@ export const createJobTags = (jobInfo: JobInfo) => {
     });
   }
 
+  const classificationText = getClassificationText(classification);
+  if (classificationText) {
+    tags.push({
+      id: TAG_ELEMENT_ID.offersTokenAllocation,
+      text: classificationText,
+      icon: <CategoryIcon />,
+    });
+  }
+
   return tags;
 };
 
@@ -141,3 +152,9 @@ const getCommitmentText = (commitment: string | null) => {
 
   return null;
 };
+
+const getClassificationText = (classification: string | null) =>
+  classification
+    ?.replaceAll('_', ' ')
+    .toLowerCase()
+    .replaceAll(/\b\w/g, (s) => s.toUpperCase()) ?? null;
