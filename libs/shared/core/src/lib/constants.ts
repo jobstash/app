@@ -39,6 +39,7 @@ export const TAG_ELEMENT_ID = {
   seniority: 'seniority',
   salary: 'salary',
   location: 'location',
+  locationType: 'location-type',
   commitment: 'commitment',
   fundingDate: 'funding-date',
   lastFunding: 'last-funding',

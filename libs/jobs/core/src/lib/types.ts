@@ -63,9 +63,9 @@ export type JobListQueryPage = Infer<typeof jobListQueryPageSchema>;
 // interface JobInfo {
 //   id: string;
 //   shortUUID: string;
-//   jobTitle: string;
-//   jobLocation: string | null;
-//   jobCommitment: string | null;
+//   title: string;
+//   location: string | null;
+//   commitment: string | null;
 //   jobCreatedTimestamp: number;
 //   jobApplyPageUrl: string;
 //   minSalaryRange: number | null;

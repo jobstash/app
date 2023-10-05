@@ -8,12 +8,11 @@ export const createJobCardOgDetails = (jobPost?: JobPost) => {
 
   const {
     organization,
-    jobTitle,
-    jobLocation,
-    minSalaryRange,
-    maxSalaryRange,
-    role,
-    benefits,
+    title: jobTitle,
+    location,
+    minimumSalary,
+    maximumSalary,
+    summary,
     tags,
     salaryCurrency = 'USD',
   } = jobPost;
@@ -21,18 +20,18 @@ export const createJobCardOgDetails = (jobPost?: JobPost) => {
   const title = createJobPageTitle(organization.name, jobTitle);
   let description = '';
 
-  if (minSalaryRange && maxSalaryRange) {
+  if (minimumSalary && maximumSalary) {
     description += `💵 ${salaryCurrency} ${numFormatter.format(
-      minSalaryRange,
-    )}-${numFormatter.format(maxSalaryRange)}\n\n`;
+      minimumSalary,
+    )}-${numFormatter.format(maximumSalary)}\n\n`;
   }
 
-  if (role || benefits) {
-    description += `📝 ${role ?? benefits}\n\n`;
+  if (summary) {
+    description += `📝 ${summary}\n\n`;
   }
 
-  if (jobLocation) {
-    description += `🌎 ${jobLocation}\n\n`;
+  if (location) {
+    description += `🌎 ${location}\n\n`;
   }
 
   if (tags.length > 0) {

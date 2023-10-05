@@ -37,10 +37,7 @@ export const JobListPage = () => {
       {activeJob && (
         <Head>
           <title>
-            {createJobPageTitle(
-              activeJob.organization.name,
-              activeJob.jobTitle,
-            )}
+            {createJobPageTitle(activeJob.organization.name, activeJob.title)}
           </title>
         </Head>
       )}

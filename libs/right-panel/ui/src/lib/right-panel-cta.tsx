@@ -13,7 +13,7 @@ const RightPanelCta = ({ text, onClick }: Props) => (
       {text}
     </Button>
     {/* <div className="flex items-start space-x-2 lg:hidden">
-        <ShareButton jobTitle={jobTitle} />
+        <ShareButton title={title} />
       </div> */}
   </div>
 );

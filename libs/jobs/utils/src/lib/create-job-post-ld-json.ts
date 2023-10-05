@@ -2,46 +2,66 @@ import { type JobPost } from '@jobstash/jobs/core';
 import { EDGE_URL } from '@jobstash/shared/core';
 import { getLogoUrl } from '@jobstash/shared/utils';
 
+const getTextSectionString = (title: string, text: string) =>
+  `<div><h3>${title}</h3><p>${text}</p></div>`;
+
+const getListSectionString = (title: string, items: string[]) =>
+  `<div><h3>${title}</h3><ul>${items
+    .map((item) => `<li>${item}</li>`)
+    .join('')}</ul></div>`;
+
 export const createJobPostLdJson = (jobPost?: JobPost) => {
   if (jobPost) {
     const {
       organization,
       tags,
-      role,
-      team,
-      culture,
+      summary,
+      requirements,
+      responsibilities,
       benefits,
-      jobTitle,
-      jobCreatedTimestamp,
-      jobApplyPageUrl,
-      jobCommitment,
-      jobLocation,
-      minSalaryRange,
-      maxSalaryRange,
+      culture,
+      title,
+      lastSeenTimestamp,
+      url,
+      commitment,
+      location,
+      minimumSalary,
+      maximumSalary,
       shortUUID,
     } = jobPost;
 
     const imageMetaData = `${EDGE_URL}/jobs/job-card?id=${shortUUID}`;
 
-    let description = `<p>Role</p>\n\n<p>${role}</p>\n\n`;
-    if (team) {
-      description += `<p>Team</p>\n\n<p>${team}</p>\n\n`;
+    let description = '';
+
+    if (summary) {
+      description += getTextSectionString('Summary', summary);
+    }
+
+    if (requirements.length > 0) {
+      description += getListSectionString('Requirements', requirements);
+    }
+
+    if (responsibilities.length > 0) {
+      description += getListSectionString('Responsibilities', responsibilities);
+    }
+
+    if (benefits.length > 0) {
+      description += getListSectionString('Benefits', benefits);
     }
 
     if (culture) {
-      description += `<p>Culture</p>\n\n<p>${culture}</p>\n\n`;
+      description += getTextSectionString('Culture', culture);
     }
 
     if (tags.length > 0) {
-      description += '<p>Tags:</p>\n\n<ul>';
-      for (const tech of tags.map((t) => t.name)) {
-        description += `<li>${tech}</li>`;
-      }
-
-      description += '</ul>\n\n';
+      description += getListSectionString(
+        'Tags',
+        tags.map((t) => t.name),
+      );
     }
 
-    const datePosted = new Date(jobCreatedTimestamp);
+    const datePosted = new Date(lastSeenTimestamp);
     const validThrough = new Date(
       datePosted.setMonth(datePosted.getMonth() + 3),
     );
@@ -55,7 +75,7 @@ export const createJobPostLdJson = (jobPost?: JobPost) => {
     > = {
       '@context': 'https://schema.org/',
       '@type': 'JobPosting',
-      title: jobTitle,
+      title,
       description,
       datePosted: datePosted.toISOString(),
       validThrough: validThrough.toISOString(),
@@ -66,22 +86,30 @@ export const createJobPostLdJson = (jobPost?: JobPost) => {
         sameAs: organization.logoUrl ?? '',
       },
       image: imageMetaData,
-      directApply: Boolean(jobApplyPageUrl),
+      directApply: Boolean(url),
       employerOverview: organization.description,
-      employmentType: jobCommitment ? jobCommitment.toUpperCase() : 'FULL_TIME',
+      employmentType: commitment ? commitment.toUpperCase() : 'FULL_TIME',
     };
 
-    if (role) {
-      jsonLd['responsibilities'] = role;
+    if (requirements.length > 0) {
+      jsonLd['requirements'] = requirements.join(',');
     }
 
-    if (jobLocation) {
-      const isRemote = jobLocation.toLowerCase().includes('remote');
+    if (responsibilities.length > 0) {
+      jsonLd['responsibilities'] = responsibilities.join(',');
+    }
+
+    if (benefits.length > 0) {
+      jsonLd['benefits'] = benefits.join(',');
+    }
+
+    if (location) {
+      const isRemote = location.toLowerCase().includes('remote');
       if (isRemote) {
-        jsonLd['jobLocationType'] = 'TELECOMMUTE';
+        jsonLd['locationType'] = 'TELECOMMUTE';
       }
 
-      const locationName = jobLocation
+      const locationName = location
         .replaceAll(/remote/gi, '')
         .replaceAll('-', '')
         .replaceAll('or', '')
@@ -92,7 +120,7 @@ export const createJobPostLdJson = (jobPost?: JobPost) => {
         name: locationName,
       };
 
-      jsonLd['jobLocation'] = {
+      jsonLd['location'] = {
         '@type': 'Place',
         address: {
           name: locationName,
@@ -100,21 +128,17 @@ export const createJobPostLdJson = (jobPost?: JobPost) => {
       };
     }
 
-    if (minSalaryRange && maxSalaryRange) {
+    if (minimumSalary && maximumSalary) {
       jsonLd['baseSalary'] = {
         '@type': 'MonetaryAmount',
         currency: 'USD',
         value: {
           '@type': 'QuantitativeValue',
-          minValue: minSalaryRange,
-          maxValue: maxSalaryRange,
+          minValue: minimumSalary,
+          maxValue: maximumSalary,
           unitText: 'YEAR',
         },
       };
-    }
-
-    if (benefits) {
-      jsonLd['jobBenefits'] = benefits;
     }
 
     if (tags.length > 0) {

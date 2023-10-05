@@ -10,16 +10,18 @@ import EthereumIcon from '../icons/ethereum-icon';
 import LevelIcon from '../icons/level-icon';
 import LocationIcon from '../icons/location-icon';
 import MoneyIcon from '../icons/money-icon';
+import RemoteIcon from '../icons/remote-icon';
 import SuitcaseIcon from '../icons/suitcase-icon';
 import TokenAllocationIcon from '../icons/token-allocation-icon';
 
 export const createJobTags = (jobInfo: JobInfo) => {
   const {
     seniority,
-    minSalaryRange,
-    maxSalaryRange,
-    jobLocation,
-    jobCommitment,
+    minimumSalary,
+    maximumSalary,
+    location,
+    locationType,
+    commitment,
     paysInCrypto,
     offersTokenAllocation,
     salaryCurrency = 'USD',
@@ -45,10 +47,10 @@ export const createJobTags = (jobInfo: JobInfo) => {
     }
   }
 
-  if (minSalaryRange && maxSalaryRange) {
+  if (minimumSalary && maximumSalary) {
     const salary = `${salaryCurrency} ${numFormatter.format(
-      minSalaryRange,
-    )} - ${numFormatter.format(maxSalaryRange)}`;
+      minimumSalary,
+    )} - ${numFormatter.format(maximumSalary)}`;
     tags.push({
       id: TAG_ELEMENT_ID.salary,
       text: `Salary: ${salary}`,
@@ -56,18 +58,28 @@ export const createJobTags = (jobInfo: JobInfo) => {
     });
   }
 
-  if (jobLocation && jobLocation !== 'unspecified') {
+  if (locationType === LOCATION_TYPE.REMOTE) {
+    tags.push({
+      id: TAG_ELEMENT_ID.locationType,
+      text: REMOTE_TEXT,
+      icon: <RemoteIcon />,
+    });
+  }
+
+  const loc = getLocationText(location, locationType);
+  if (loc && loc !== 'unspecified') {
     tags.push({
       id: TAG_ELEMENT_ID.location,
-      text: capitalize(jobLocation),
+      text: capitalize(loc),
       icon: <LocationIcon />,
     });
   }
 
-  if (jobCommitment) {
+  const commitmentText = getCommitmentText(commitment);
+  if (commitmentText) {
     tags.push({
       id: TAG_ELEMENT_ID.commitment,
-      text: capitalize(jobCommitment),
+      text: capitalize(commitmentText),
       icon: <SuitcaseIcon />,
     });
   }
@@ -89,4 +101,43 @@ export const createJobTags = (jobInfo: JobInfo) => {
   }
 
   return tags;
+};
+
+const GLOBAL_TEXT = 'Global';
+const REMOTE_TEXT = 'Remote';
+const LOCATION_TYPE = {
+  REMOTE: 'REMOTE',
+  ONSITE: 'ONSITE',
+};
+
+const getLocationText = (
+  location: string | null,
+  type: string | null,
+): string | null => {
+  if (type === LOCATION_TYPE.REMOTE) {
+    return (
+      location
+        ?.replace(REMOTE_TEXT, '')
+        .replace(GLOBAL_TEXT, '')
+        .replaceAll(/\W+/g, ' ')
+        .trim() ?? null
+    );
+  }
+
+  return location ?? null;
+};
+
+const COMMITMENT_TYPE_TEXT = {
+  PART_TIME: 'Part Time',
+  FULL_TIME: 'Full Time',
+};
+
+const getCommitmentText = (commitment: string | null) => {
+  if (commitment && Object.keys(COMMITMENT_TYPE_TEXT).includes(commitment)) {
+    return COMMITMENT_TYPE_TEXT[
+      commitment as keyof typeof COMMITMENT_TYPE_TEXT
+    ];
+  }
+
+  return null;
 };

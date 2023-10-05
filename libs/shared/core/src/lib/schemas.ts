@@ -71,28 +71,36 @@ export const auditSchema = myzod
   })
   .allowUnknownKeys(true);
 
-export const jobInfoSchema = myzod.object(
-  {
-    id: myzod.string().min(1),
-    shortUUID: myzod.string().min(1),
-    jobTitle: myzod.string().min(1),
-    jobLocation: myzod.string().min(1).nullable(),
-    jobCommitment: myzod.string().min(1).nullable(),
-    jobCreatedTimestamp: myzod.number(),
-    jobApplyPageUrl: myzod.string().min(1),
-    minSalaryRange: myzod.number().nullable(),
-    maxSalaryRange: myzod.number().nullable(),
-    seniority: myzod.string().min(1).nullable(),
-    role: myzod.string().min(1).nullable(),
-    benefits: myzod.string().min(1).nullable(),
-    team: myzod.string().min(1).nullable(),
-    culture: myzod.string().min(1).nullable(),
-    offersTokenAllocation: myzod.boolean().nullable(),
-    paysInCrypto: myzod.boolean().nullable(),
-    salaryCurrency: myzod.string().min(1).nullable(),
-  },
-  { allowUnknown: true },
-);
+export const jobInfoSchema = myzod.object({
+  id: myzod.string().min(1),
+  url: myzod.string().min(1),
+  shortUUID: myzod.string().min(1),
+
+  firstSeenTimestamp: myzod.number(), // TODO: which one to use in ui, which is unused
+  lastSeenTimestamp: myzod.number(), // TODO: which one to use in ui, which is unused
+
+  requirements: myzod.array(myzod.string().min(1)),
+  responsibilities: myzod.array(myzod.string().min(1)),
+  benefits: myzod.array(myzod.string().min(1)),
+  summary: myzod.string().min(1).nullable(), // TODO: check where to put this
+  culture: myzod.string().min(1).nullable(),
+
+  title: myzod.string().min(1),
+
+  salary: myzod.number().nullable(), // TODO: maybe unused
+  minimumSalary: myzod.number().nullable(),
+  maximumSalary: myzod.number().nullable(),
+  salaryCurrency: myzod.string().min(1).nullable(),
+
+  location: myzod.string().min(1).nullable(),
+  locationType: myzod.string().min(1).nullable(),
+  seniority: myzod.string().min(1).nullable(),
+  commitment: myzod.string().min(1).nullable(),
+  classification: myzod.string().min(1).nullable(),
+
+  paysInCrypto: myzod.boolean().nullable(),
+  offersTokenAllocation: myzod.boolean().nullable(),
+});
 
 export const orgInfoSchema = myzod.object(
   {

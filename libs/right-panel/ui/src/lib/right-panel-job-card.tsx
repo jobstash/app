@@ -11,6 +11,7 @@ import RightPanelCardBorder from './right-panel-card-border';
 import RightPanelCta from './right-panel-cta';
 import RightPanelJobCardDescriptions from './right-panel-job-card-descriptions';
 import RightPanelJobCardTags from './right-panel-job-card-tags';
+import RightPanelJobCardTechnologies from './right-panel-job-card-technologies';
 
 interface Props {
   orgName: string;
@@ -25,7 +26,7 @@ const RightPanelJobCard = ({
   tags,
   showExploreJob = true,
 }: Props) => {
-  const { jobTitle, jobApplyPageUrl, shortUUID } = jobInfo;
+  const { title, url, shortUUID } = jobInfo;
 
   const onClickApplyJob = () => {
     gaEvent(GA_EVENT_ACTION.JOB_APPLY, {
@@ -35,14 +36,12 @@ const RightPanelJobCard = ({
     });
 
     if (typeof window !== 'undefined') {
-      window.open(jobApplyPageUrl, '_blank');
+      window.open(url, '_blank');
     }
   };
 
   const onClickExploreJob = () => {
-    const link = `/jobs/${slugify(
-      `${orgName} ${jobTitle}`,
-    )}-${shortUUID}/details`;
+    const link = `/jobs/${slugify(`${orgName} ${title}`)}-${shortUUID}/details`;
     if (typeof window !== 'undefined') {
       window.location.href = link;
     }
@@ -54,10 +53,10 @@ const RightPanelJobCard = ({
         <div className="flex flex-col items-start gap-y-4">
           <div className="flex h-fit w-full justify-between">
             <Heading size="md" fw="semibold">
-              {jobTitle}
+              {title}
             </Heading>
             {/* <div className="hidden items-start space-x-4 lg:flex">
-            <ShareButton jobTitle={jobTitle} />
+            <ShareButton title={title} />
           </div> */}
           </div>
 
@@ -72,7 +71,7 @@ const RightPanelJobCard = ({
 
         <RightPanelJobCardDescriptions jobInfo={jobInfo} />
 
-        <RightPanelJobCardTags jobInfo={jobInfo} />
+        <RightPanelJobCardTechnologies tags={tags} />
 
         {showExploreJob && (
           <div className="flex flex-col items-start py-4">
