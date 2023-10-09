@@ -7,7 +7,7 @@ import {
 import { GlobeSimpleIcon, LocationIcon, UsersIcon } from '@jobstash/shared/ui';
 
 export const createRightPanelOrgTags = (orgInfo: OrgInfo) => {
-  const { website, location, headCount } = orgInfo;
+  const { website, location, headcountEstimate } = orgInfo;
   const tags: TagElement[] = [
     {
       id: TAG_ELEMENT_ID.website,
@@ -22,10 +22,10 @@ export const createRightPanelOrgTags = (orgInfo: OrgInfo) => {
     },
   ];
 
-  if (headCount) {
+  if (headcountEstimate) {
     tags.push({
-      id: TAG_ELEMENT_ID.headCount,
-      text: `Employees: ${headCount}`,
+      id: TAG_ELEMENT_ID.headcountEstimate,
+      text: `Employees: ${headcountEstimate}`,
       icon: <UsersIcon />,
     });
   }

@@ -157,7 +157,7 @@ const fakeFeaturedJobs: JobPost[] = [
       location: 'Singapore',
       id: '0d1be7c3-f6b1-4ab6-a903-255e8f0784bf',
       logoUrl: null,
-      headCount: null,
+      headcountEstimate: null,
     },
   },
   {
@@ -353,7 +353,7 @@ const fakeFeaturedJobs: JobPost[] = [
       location: 'Singapore',
       id: '0d1be7c3-f6b1-4ab6-a903-255e8f0784bf',
       logoUrl: null,
-      headCount: null,
+      headcountEstimate: null,
     },
   },
 ];

@@ -97,7 +97,7 @@ export type JobListQueryPage = Infer<typeof jobListQueryPageSchema>;
 //   discord: string | null;
 //   docs: string | null;
 //   telegram: string | null;
-//   headCount: number | null;
+//   headcountEstimate: number | null;
 //   logo: string | null;
 // }
 

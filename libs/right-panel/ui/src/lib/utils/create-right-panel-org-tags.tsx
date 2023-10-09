@@ -11,7 +11,7 @@ import {
 import { createOrgFundingDateString } from './create-org-funding-date-string';
 
 export const createRightPanelOrgTags = (orgData: RightPanelOrg) => {
-  const { website, location, headCount, fundingRounds } = orgData;
+  const { website, location, headcountEstimate, fundingRounds } = orgData;
   const tags: TagElement[] = [
     {
       id: TAG_ELEMENT_ID.website,
@@ -26,10 +26,10 @@ export const createRightPanelOrgTags = (orgData: RightPanelOrg) => {
     },
   ];
 
-  if (headCount) {
+  if (headcountEstimate) {
     tags.push({
-      id: TAG_ELEMENT_ID.headCount,
-      text: `Employees: ${headCount}`,
+      id: TAG_ELEMENT_ID.headcountEstimate,
+      text: `Employees: ${headcountEstimate}`,
       icon: <UsersIcon />,
     });
   }

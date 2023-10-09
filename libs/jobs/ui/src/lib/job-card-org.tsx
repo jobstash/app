@@ -13,7 +13,7 @@ interface Props {
 
 const JobCardOrg = ({ org }: Props) => {
   const sortedFundingRounds = org.fundingRounds.sort((a, b) => a.date - b.date);
-  const tags = createJobCardOrgTags(sortedFundingRounds, org.headCount);
+  const tags = createJobCardOrgTags(sortedFundingRounds, org.headcountEstimate);
 
   return (
     <>

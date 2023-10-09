@@ -8,16 +8,16 @@ import { createFundingRoundsTags, UsersThreeIcon } from '@jobstash/shared/ui';
 
 export const createJobCardOrgTags = (
   fundingRounds: FundingRound[],
-  headCount?: number | null,
+  headcount?: number | null,
 ) => {
   const tags: TagElement[] = [];
 
   tags.push(...createFundingRoundsTags(fundingRounds));
 
-  if (headCount && headCount > 0) {
+  if (headcount && headcount > 0) {
     tags.push({
-      id: TAG_ELEMENT_ID.headCount,
-      text: `Employees: ${headCount}`,
+      id: TAG_ELEMENT_ID.headcountEstimate,
+      text: `Employees: ${headcount}`,
       icon: <UsersThreeIcon />,
     });
   }

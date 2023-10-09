@@ -7,7 +7,6 @@ import { useAtom, useAtomValue } from 'jotai';
 import { type OrgDetails, OrgListItem } from '@jobstash/organizations/core';
 import {
   ERR_INTERNAL,
-  FRONTEND_URL,
   type NotFoundInfo,
   ROUTE_SECTION,
 } from '@jobstash/shared/core';
@@ -98,7 +97,7 @@ export const OrgDetailsPage = ({
         location: initOrgDetails.location,
         jobCount: initOrgDetails.jobs.length,
         projectCount: initOrgDetails.projects.length,
-        headCount: initOrgDetails.headCount,
+        headcountEstimate: initOrgDetails.headcountEstimate,
         logo: initOrgDetails.logoUrl,
         lastFundingAmount,
         lastFundingDate,

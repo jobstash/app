@@ -111,7 +111,7 @@ export const orgInfoSchema = myzod.object(
     location: myzod.string().min(1),
     description: myzod.string().min(1),
     logoUrl: myzod.string().min(1).nullable(),
-    headCount: myzod.number().nullable(),
+    headcountEstimate: myzod.number().nullable(),
     createdTimestamp: myzod.number().nullable(),
     updatedTimestamp: myzod.number().nullable(),
     discord: myzod.string().min(1).nullable(),

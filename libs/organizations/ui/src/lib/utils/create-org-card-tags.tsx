@@ -19,7 +19,7 @@ export const createOrgCardTags = (orgListItem: OrgListItem): TagElement[] => {
   const {
     name,
     orgId,
-    headCount,
+    headcountEstimate,
     jobCount,
     projectCount,
     lastFundingAmount,
@@ -51,10 +51,10 @@ export const createOrgCardTags = (orgListItem: OrgListItem): TagElement[] => {
     });
   }
 
-  if (headCount) {
+  if (headcountEstimate) {
     tags.push({
-      id: TAG_ELEMENT_ID.headCount,
-      text: `Employees ${headCount}`,
+      id: TAG_ELEMENT_ID.headcountEstimate,
+      text: `Employees ${headcountEstimate}`,
       icon: <UsersThreeIcon />,
     });
   }
