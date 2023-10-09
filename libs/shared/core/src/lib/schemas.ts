@@ -132,7 +132,6 @@ export const projectInfoSchema = myzod.object(
     website: myzod.string().min(1),
     logo: myzod.string().nullable(),
 
-    teamSize: myzod.number().min(1).nullable(),
     category: myzod.string().min(1).nullable(),
     isMainnet: myzod.boolean(),
     tokenSymbol: myzod.string().min(1).nullable(),

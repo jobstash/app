@@ -194,12 +194,6 @@ const JobSubmission = () => {
                 placeholder="$60,000 - $80,000"
               />
               <TextInput
-                isNumber
-                name="teamSize"
-                label="Team Size"
-                placeholder="6"
-              />
-              <TextInput
                 name="commitment"
                 label="Commitment"
                 placeholder="Part-time / Full-time"

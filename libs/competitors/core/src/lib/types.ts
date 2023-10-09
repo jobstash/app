@@ -10,7 +10,6 @@ export interface Competitor {
   twitter: string;
   discord: string;
   docs: string;
-  teamSize: number | null;
   githubOrganization: string;
   category?: string;
 

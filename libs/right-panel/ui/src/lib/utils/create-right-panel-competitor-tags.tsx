@@ -22,7 +22,6 @@ export const createCompetitorTags = (competitor: Competitor) => {
     discord,
     githubOrganization,
     category,
-    teamSize,
     tvl,
     monthlyVolume,
     monthlyRevenue,
@@ -92,14 +91,6 @@ export const createCompetitorTags = (competitor: Competitor) => {
       id: TAG_ELEMENT_ID.category,
       text: `Category: ${category}`,
       icon: <CategoryIcon />,
-    });
-  }
-
-  if (teamSize) {
-    bottomTags.push({
-      id: TAG_ELEMENT_ID.teamSize,
-      text: `Team Size: ${teamSize}`,
-      icon: <UsersThreeIcon />,
     });
   }
 

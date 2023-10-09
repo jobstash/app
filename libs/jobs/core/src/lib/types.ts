@@ -10,7 +10,6 @@ export type JobListQueryPage = Infer<typeof jobListQueryPageSchema>;
 //   name: string;
 //   url: string;
 //   logo: string | null;
-//   teamSize: number | null;
 //   category: string | null;
 //   isMainnet: boolean;
 //   tokenSymbol: string | null;

@@ -20,7 +20,6 @@ import {
   TelegramIcon,
   TvlIcon,
   TwitterIcon,
-  UsersThreeIcon,
 } from '@jobstash/shared/ui';
 
 export const createRightPanelProjectCardTags = (
@@ -38,7 +37,6 @@ export const createRightPanelProjectCardTags = (
     monthlyActiveUsers,
     monthlyFees,
     monthlyRevenue,
-    teamSize,
     category,
     audits,
     hacks,
@@ -124,14 +122,6 @@ export const createRightPanelProjectCardTags = (
       id: TAG_ELEMENT_ID.category,
       text: `Category: ${category}`,
       icon: <CategoryIcon />,
-    });
-  }
-
-  if (teamSize) {
-    projectTags.push({
-      id: TAG_ELEMENT_ID.teamSize,
-      text: `Team Size: ${teamSize}`,
-      icon: <UsersThreeIcon />,
     });
   }
 

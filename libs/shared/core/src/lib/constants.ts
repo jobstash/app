@@ -30,7 +30,6 @@ export const TAG_ELEMENT_ID = {
   // linkedin: 'linkedin',
   docs: 'docs',
   category: 'category',
-  teamSize: 'team-size',
   tvl: 'tvl',
   monthlyVolume: 'monthly-volume',
   monthlyActiveUsers: 'monthly-active-users',
