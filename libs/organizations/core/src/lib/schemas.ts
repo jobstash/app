@@ -7,6 +7,7 @@ import {
   orgInfoSchema,
   projectInfoSchema,
   projectMoreInfoSchema,
+  tagSchema,
 } from '@jobstash/shared/core';
 
 export const orgListItemSchema = myzod.object({
@@ -33,7 +34,12 @@ export const orgDetailsSchema = myzod
       projects: myzod.array(orgProjectSchema),
       fundingRounds: myzod.array(fundingRoundSchema),
       investors: myzod.array(investorSchema),
-      jobs: myzod.array(jobInfoSchema),
+      jobs: myzod.array(
+        myzod.intersection(
+          jobInfoSchema,
+          myzod.object({ tags: myzod.array(tagSchema) }),
+        ),
+      ),
     }),
   )
   .allowUnknownKeys(true);
