@@ -13,12 +13,12 @@ const JobCardHeader = ({ title, ts }: Props) => {
   const timestamp = prettyTimestamp(ts);
 
   return (
-    <div className="items-center justify-between space-y-2 lg:flex lg:space-y-0">
+    <div className="sm:flex items-center justify-between">
       <Heading size="md" fw="semibold">
         {title}
       </Heading>
-      <hr className="flex border-t border-white/10 lg:hidden" />
-      <div className="hidden items-center space-x-3 lg:flex">
+      <hr className="border-t border-white/10 hidden sm:flex" />
+      <div className="hidden items-center sm:flex h-full min-w-fit">
         <span className="text-sm">{timestamp}</span>
       </div>
     </div>
