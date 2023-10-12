@@ -48,6 +48,7 @@ export const TAG_ELEMENT_ID = {
   mainnet: 'mainnet',
   paysInCrypto: 'pays-in-cryto',
   offersTokenAllocation: 'offers-token-allocation',
+  classification: 'classification',
   headcountEstimate: 'head-count-estimate',
   jobs: 'jobs',
   projects: 'projects',

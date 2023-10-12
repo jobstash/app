@@ -105,7 +105,7 @@ export const createJobTags = (jobInfo: JobInfo) => {
   const classificationText = getClassificationText(classification);
   if (classificationText) {
     tags.push({
-      id: TAG_ELEMENT_ID.offersTokenAllocation,
+      id: TAG_ELEMENT_ID.classification,
       text: classificationText,
       icon: <CategoryIcon />,
     });
