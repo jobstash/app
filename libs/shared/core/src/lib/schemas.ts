@@ -82,7 +82,8 @@ export const jobInfoSchema = myzod.object({
   requirements: myzod.array(myzod.string().min(1)),
   responsibilities: myzod.array(myzod.string().min(1)),
   benefits: myzod.array(myzod.string().min(1)),
-  summary: myzod.string().min(1).nullable(), // TODO: check where to put this
+  summary: myzod.string().min(1).nullable(),
+  description: myzod.string().min(1).nullable(),
   culture: myzod.string().min(1).nullable(),
 
   title: myzod.string().min(1),

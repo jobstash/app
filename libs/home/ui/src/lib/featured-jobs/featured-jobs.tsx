@@ -9,6 +9,8 @@ const fakeFeaturedJobs: JobPost[] = [
     title: 'Senior Software Engineer, Core Platform',
     summary:
       'The Oasis Protocol Foundation is looking for a Senior Software Engineer to design, develop, test, deploy and maintain the systems of our blockchain ecosystem.',
+    description:
+      'As a Senior Software Engineer, you will be responsible for the core network protocol, distributed systems architecture, cryptosystems, and developer tools. You will manage project priorities, fast-paced deadlines and concrete deliverables. You will also participate in design and code reviews, including from the Oasis Foundation team and the broader open-source community.',
     requirements: [
       'BS degree in Computer Science or a similar technical field of study',
       '5+ years of software development experience',
@@ -165,6 +167,8 @@ const fakeFeaturedJobs: JobPost[] = [
     title: 'Developer Relations Manager',
     summary:
       'Oasis Network is looking for a Developer Relations Manager to help developers and projects build and launch dApps using the Oasis Privacy Layer and the Oasis Sapphire, respond to technical questions, and build a strong Oasis developer community.',
+    description:
+      'As a Developer Relations Manager, you will be responsible for helping developers and projects to successfully build and launch dApps using the Oasis Privacy Layer and the Oasis Sapphire. You will respond to technical questions from developers and builders, solicit and respond to feedback from the Oasis developer community, and share feedback/insights with Product/Engineering. You will also host technical workshops at conferences/events and produce technical content.',
     requirements: [
       'Passionate about software development, Web3, privacy and building communities',
       'Bachelor degree in Computer Science or related Engineering fields',

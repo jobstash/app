@@ -8,9 +8,30 @@ interface Props {
   jobInfo: JobInfo;
 }
 
+const ParagraphDescription = ({
+  title,
+  text,
+}: {
+  title: string;
+  text: string;
+}) => (
+  <div className="flex flex-col gap-2 self-stretch">
+    <Heading size="sm" fw="semibold">
+      {title}
+    </Heading>
+    <Text color="dimmed">{text}</Text>
+  </div>
+);
+
 const RightPanelJobCardDescriptions = ({ jobInfo }: Props) => {
-  const { summary, requirements, responsibilities, benefits, culture } =
-    jobInfo;
+  const {
+    summary,
+    description,
+    requirements,
+    responsibilities,
+    benefits,
+    culture,
+  } = jobInfo;
 
   const listTexts: { label: string; items: string[] }[] = [];
 
@@ -27,13 +48,9 @@ const RightPanelJobCardDescriptions = ({ jobInfo }: Props) => {
 
   return (
     <div className="flex flex-col gap-6">
-      {summary && (
-        <div className="flex flex-col gap-2 self-stretch">
-          <Heading size="sm" fw="semibold">
-            Description
-          </Heading>
-          <Text color="dimmed">{summary}</Text>
-        </div>
+      {summary && <ParagraphDescription title="Summary" text={summary} />}
+      {description && (
+        <ParagraphDescription title="Description" text={description} />
       )}
       {hasListTexts &&
         listTexts.map(({ label, items }) => (
