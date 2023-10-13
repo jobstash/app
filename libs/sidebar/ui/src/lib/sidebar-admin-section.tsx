@@ -23,7 +23,7 @@ const SidebarAdminSection = () => (
         path="/godmode/organizations"
         text="Organizations"
         isActiveFn={(pathname) =>
-          pathname.slice(0, GODMODE_PATH_PREFIX.TAGS.length) ===
+          pathname.slice(0, GODMODE_PATH_PREFIX.ORGANIZATIONS.length) ===
           GODMODE_PATH_PREFIX.ORGANIZATIONS
         }
       />
