@@ -7,7 +7,7 @@ import {
 import { mwFetch } from './mw-fetch';
 
 export const getAllTags = async () => {
-  const url = `${MW_URL}/technologies`;
+  const url = `${MW_URL}/tags`;
 
   const options = {
     responseSchema: allTagsResponseSchema,

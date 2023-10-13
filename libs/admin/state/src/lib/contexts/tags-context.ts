@@ -4,7 +4,7 @@ import { type Tag } from '@jobstash/shared/core';
 
 export interface TagsContextProps {
   isLoading: boolean;
-  technologies: Tag[];
+  tags: Tag[];
   mappedTags: string[];
 }
 

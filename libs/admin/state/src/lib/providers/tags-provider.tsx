@@ -14,7 +14,7 @@ export const TagsProvider = ({ children }: Props) => {
   const value = useMemo(
     () => ({
       isLoading,
-      technologies: data?.data ?? [],
+      tags: data?.data ?? [],
       mappedTags: data?.data.map((t) => t.name) ?? [],
     }),
     [data, isLoading],
