@@ -17,7 +17,8 @@ const HomePage = () => (
     <div className="w-full lg:pl-52">
       <SideBar />
 
-      <LayoutGroup>
+      <p>TODO</p>
+      {/* <LayoutGroup>
         <motion.div
           layout
           className={cn(
@@ -36,7 +37,7 @@ const HomePage = () => (
             <FeaturedOrgs />
           </motion.div>
         </motion.div>
-      </LayoutGroup>
+      </LayoutGroup> */}
 
       <div
         className={cn(
