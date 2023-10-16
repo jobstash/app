@@ -24,14 +24,10 @@ export const getServerSideProps = withCSR(async (ctx) => {
     data: { flow },
   } = checkWalletResponse;
 
-  if (flow !== CHECK_WALLET_FLOWS.PICK_ROLE) {
-    const redirectRoute = redirectFlowsSet.has(flow)
-      ? CHECK_WALLET_ROUTE[flow]
-      : '/';
-
+  if (redirectFlowsSet.has(flow) && flow !== CHECK_WALLET_FLOWS.PICK_ROLE) {
     return {
       redirect: {
-        destination: redirectRoute,
+        destination: CHECK_WALLET_ROUTE[flow],
         permanent: false,
       },
     };
