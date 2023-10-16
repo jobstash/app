@@ -20,7 +20,7 @@ export const orgListItemSchema = myzod.object({
   lastFundingDate: myzod.number(),
   lastFundingAmount: myzod.number(),
   headcountEstimate: myzod.number().nullable(),
-  logo: myzod.string().min(1).nullable(),
+  logoUrl: myzod.string().min(1).nullable(),
 });
 
 const orgProjectSchema = myzod

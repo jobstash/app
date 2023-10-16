@@ -5,20 +5,15 @@ import { notifError, notifSuccess } from '@jobstash/shared/utils';
 
 import { postPairedTerms } from '@jobstash/admin/data';
 
-import { usePairedTermsFormContext } from '../contexts/paired-terms-form-context';
-
 export const usePairedTermsMutation = () => {
   const queryClient = useQueryClient();
-  const { origin } = usePairedTermsFormContext();
   const { isLoading, mutate } = useMutation({
     mutationFn: (payload: PairedTermsPayload) => postPairedTerms(payload),
     onSuccess(_, { pairedTermList }) {
       queryClient.invalidateQueries(['godmodePairedTerms']);
       // TODO: setQueryData paired terms
 
-      const title = `New Paired Term${
-        pairedTermList.length > 1 ? 's' : ''
-      } for "${origin}"`;
+      const title = `New Paired Term${pairedTermList.length > 1 ? 's' : ''}`;
       const message = `${pairedTermList.join(', ')}`;
 
       notifSuccess({

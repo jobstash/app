@@ -20,16 +20,14 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         org: {
           id: faker.string.uuid(),
           orgId: faker.number.int().toString(),
-          url: faker.internet.url(),
+          website: faker.internet.url(),
           name: faker.commerce.productName(),
           location: `${faker.location.state({
             abbreviated: true,
           })}, ${faker.location.country()}`,
           description: faker.lorem.paragraph({ min: 2, max: 5 }),
           summary: faker.lorem.paragraph({ min: 1, max: 2 }),
-          altName: faker.datatype.boolean()
-            ? faker.commerce.productName()
-            : null,
+          alias: faker.datatype.boolean() ? faker.commerce.productName() : null,
           jobsiteLink: faker.datatype.boolean() ? faker.internet.url() : null,
           createdTimestamp: faker.datatype.boolean()
             ? faker.date.recent().getTime()
@@ -43,7 +41,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           docs: faker.datatype.boolean() ? faker.internet.url() : null,
           telegram: faker.datatype.boolean() ? faker.internet.url() : null,
           headcountEstimate: faker.number.int({ min: 1, max: 100 }),
-          logo: faker.image.urlLoremFlickr({ category: 'business' }),
+          logoUrl: faker.image.urlLoremFlickr({ category: 'business' }),
         },
         membershipStatus: 'Previous Commiter',
         startDate: faker.date.recent().getTime(),
@@ -80,16 +78,14 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         org: {
           id: faker.string.uuid(),
           orgId: faker.number.int().toString(),
-          url: faker.internet.url(),
+          website: faker.internet.url(),
           name: faker.commerce.productName(),
           location: `${faker.location.state({
             abbreviated: true,
           })}, ${faker.location.country()}`,
           description: faker.lorem.paragraph({ min: 2, max: 5 }),
           summary: faker.lorem.paragraph({ min: 1, max: 2 }),
-          altName: faker.datatype.boolean()
-            ? faker.commerce.productName()
-            : null,
+          alias: faker.datatype.boolean() ? faker.commerce.productName() : null,
           jobsiteLink: faker.datatype.boolean() ? faker.internet.url() : null,
           createdTimestamp: faker.datatype.boolean()
             ? faker.date.recent().getTime()
@@ -103,7 +99,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           docs: faker.datatype.boolean() ? faker.internet.url() : null,
           telegram: faker.datatype.boolean() ? faker.internet.url() : null,
           headcountEstimate: faker.number.int({ min: 1, max: 100 }),
-          logo: faker.image.urlLoremFlickr({ category: 'business' }),
+          logoUrl: faker.image.urlLoremFlickr({ category: 'business' }),
         },
         membershipStatus: 'Previous Commiter',
         startDate: faker.date.recent().getTime(),
@@ -140,16 +136,14 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
         org: {
           id: faker.string.uuid(),
           orgId: faker.number.int().toString(),
-          url: faker.internet.url(),
+          website: faker.internet.url(),
           name: faker.commerce.productName(),
           location: `${faker.location.state({
             abbreviated: true,
           })}, ${faker.location.country()}`,
           description: faker.lorem.paragraph({ min: 2, max: 5 }),
           summary: faker.lorem.paragraph({ min: 1, max: 2 }),
-          altName: faker.datatype.boolean()
-            ? faker.commerce.productName()
-            : null,
+          alias: faker.datatype.boolean() ? faker.commerce.productName() : null,
           jobsiteLink: faker.datatype.boolean() ? faker.internet.url() : null,
           createdTimestamp: faker.datatype.boolean()
             ? faker.date.recent().getTime()
@@ -163,7 +157,7 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           docs: faker.datatype.boolean() ? faker.internet.url() : null,
           telegram: faker.datatype.boolean() ? faker.internet.url() : null,
           headcountEstimate: faker.number.int({ min: 1, max: 100 }),
-          logo: faker.image.urlLoremFlickr({ category: 'business' }),
+          logoUrl: faker.image.urlLoremFlickr({ category: 'business' }),
         },
         membershipStatus: 'Previous Commiter',
         startDate: faker.date.recent().getTime(),

@@ -98,7 +98,7 @@ export const OrgDetailsPage = ({
         jobCount: initOrgDetails.jobs.length,
         projectCount: initOrgDetails.projects.length,
         headcountEstimate: initOrgDetails.headcountEstimate,
-        logo: initOrgDetails.logoUrl,
+        logoUrl: initOrgDetails.logoUrl,
         lastFundingAmount,
         lastFundingDate,
       }
