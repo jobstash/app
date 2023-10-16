@@ -20,7 +20,7 @@ export const useProfileHeader = () => {
   useEffect(() => {
     if (profileInfoData && !initRef.current) {
       initRef.current = true;
-      setIsAvailableForWork(availableForWork);
+      setIsAvailableForWork(Boolean(availableForWork));
       setPreferredContact(contact.preferred);
       setSelectedContact(contact.value);
     }

@@ -2,6 +2,7 @@ import { type Infer } from 'myzod';
 
 import { PROFILE_RIGHT_PANEL_TABS } from './constants';
 import {
+  profileInfoResponseSchema,
   profileInfoSchema,
   profileOrgReviewListQueryPageSchema,
   profileOrgReviewRatingSchema,
@@ -38,6 +39,7 @@ export type ProfileOrgReviewListQueryPage = Infer<
 >;
 
 export type ProfileInfo = Infer<typeof profileInfoSchema>;
+export type ProfileInfoResponse = Infer<typeof profileInfoResponseSchema>;
 
 export type ProfileTabOptions =
   typeof PROFILE_RIGHT_PANEL_TABS[keyof typeof PROFILE_RIGHT_PANEL_TABS];
