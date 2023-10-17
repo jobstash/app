@@ -78,12 +78,12 @@ const ProfileOrgReviewCard = (props: Props) => {
         {(startDate || endDate || commitCount) && (
           <div className="flex items-center gap-4">
             {startDate && (
-              <CardSet icon={<StartDateIcon />}>{`Start Date: ${
+              <CardSet icon={<StartDateIcon />}>{`First Commit: ${
                 new Date(startDate).toLocaleString().split(',')[0]
               }`}</CardSet>
             )}
             {endDate && (
-              <CardSet icon={<EndDateIcon />}>{`End Date: ${
+              <CardSet icon={<EndDateIcon />}>{`Last Commit: ${
                 new Date(endDate).toLocaleString().split(',')[0]
               }`}</CardSet>
             )}

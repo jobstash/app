@@ -12,12 +12,16 @@ const breadCrumbs = [
 const ProfileReviewsSubHeader = () => {
   const { profileOrgReviewCount } = useProfileReviewsPageContext();
 
+  const hasOrgReview = profileOrgReviewCount && profileOrgReviewCount > 0;
+
   return (
     <div className="px-4 flex justify-between items-center">
       <BreadCrumbs breadCrumbs={breadCrumbs} />
 
       <div className="flex items-center space-x-4">
-        <Text color="dimmed">{`Known Organizations: ${profileOrgReviewCount}`}</Text>
+        {hasOrgReview && (
+          <Text color="dimmed">{`Known Organizations: ${profileOrgReviewCount}`}</Text>
+        )}
         <Button isIcon isDisabled>
           <RefreshIcon />
         </Button>

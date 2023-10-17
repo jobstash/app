@@ -24,31 +24,37 @@ const ProfileOrgReviewsRightPanel = () => {
   const { activeProfileOrgReview, tabs, activeTab, isLoadingCard } =
     useProfileReviewsPageContext();
 
+  if (!activeProfileOrgReview) return null;
+
   return (
-    <ProfileRightPanel
-      isLoading={!activeProfileOrgReview}
-      backUrl="/profile/reviews"
-      header={
-        <ProfileRightPanelOrgHeader orgInfo={activeProfileOrgReview?.org} />
-      }
-      tabs={<ProfileRightPanelTabs tabs={tabs} activeTab={activeTab} />}
-      card={
-        <div className={cn({ 'pointer-events-none': isOpen })}>
-          <RightPanelCardBorder>
-            <LoadingOverlay visible={isLoadingCard} className="rounded-3xl" />
-            <div className="p-6">
-              <div className="flex flex-col gap-6 py-2 relative">
-                {activeTab === PROFILE_RIGHT_PANEL_TAB.SALARY && <SalaryForm />}
-                {activeTab === PROFILE_RIGHT_PANEL_TAB.RATING && <Ratings />}
-                {activeTab === PROFILE_RIGHT_PANEL_TAB.YOUR_REVIEW && (
-                  <YourReview />
-                )}
+    <div className="hide-scrollbar fixed inset-0 h-screen overflow-y-auto bg-dark p-4 pt-6 transition-all lg:inset-auto lg:right-0 lg:top-0 lg:w-5/12 lg:px-6 lg:py-8 lg:pr-10">
+      <ProfileRightPanel
+        isLoading={!activeProfileOrgReview}
+        backUrl="/profile/reviews"
+        header={
+          <ProfileRightPanelOrgHeader orgInfo={activeProfileOrgReview?.org} />
+        }
+        tabs={<ProfileRightPanelTabs tabs={tabs} activeTab={activeTab} />}
+        card={
+          <div className={cn({ 'pointer-events-none': isOpen })}>
+            <RightPanelCardBorder>
+              <LoadingOverlay visible={isLoadingCard} className="rounded-3xl" />
+              <div className="p-6">
+                <div className="flex flex-col gap-6 py-2 relative">
+                  {activeTab === PROFILE_RIGHT_PANEL_TAB.SALARY && (
+                    <SalaryForm />
+                  )}
+                  {activeTab === PROFILE_RIGHT_PANEL_TAB.RATING && <Ratings />}
+                  {activeTab === PROFILE_RIGHT_PANEL_TAB.YOUR_REVIEW && (
+                    <YourReview />
+                  )}
+                </div>
               </div>
-            </div>
-          </RightPanelCardBorder>
-        </div>
-      }
-    />
+            </RightPanelCardBorder>
+          </div>
+        }
+      />
+    </div>
   );
 };
 
