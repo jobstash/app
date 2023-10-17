@@ -10,8 +10,10 @@ const SalaryFormNoAllocationCheckbox = () => {
       <Checkbox
         size="md"
         label="No token allocation"
-        checked={state.noAllocation}
-        onChange={(e) => setState.setNoAllocation(e.currentTarget.checked)}
+        checked={state.offersTokenAllocation}
+        onChange={(e) =>
+          setState.setOffersTokenAllocation(e.currentTarget.checked)
+        }
       />
     </div>
   );

@@ -4,16 +4,14 @@ import { ProfileOrgReview } from '@jobstash/profile/core';
 
 interface SalaryFormContextProps {
   state: {
-    currency: string | null;
+    selectedCurrency: string | null;
     amount: number | null;
-    token: string | null;
-    noAllocation: boolean;
+    offersTokenAllocation: boolean;
   };
   setState: {
-    setCurrency: (value: string | null) => void;
+    setSelectedCurrency: (value: string | null) => void;
     setAmount: (value: number | null) => void;
-    setToken: (value: string | null) => void;
-    setNoAllocation: (value: boolean) => void;
+    setOffersTokenAllocation: (value: boolean) => void;
   };
   save: () => void;
   disableSave: boolean;

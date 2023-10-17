@@ -2,19 +2,20 @@ import { useSalaryFormContext } from '@jobstash/profile/state';
 
 import SalaryInput from './salary-input';
 
+const SALARY_CURRENCY_OPTIONS = ['USD', 'EUR'];
+
 const SalaryFormCurrencyInput = () => {
   const {
-    orgReview,
-    state: { currency },
-    setState: { setCurrency },
+    state: { selectedCurrency },
+    setState: { setSelectedCurrency },
   } = useSalaryFormContext();
 
   return (
     <SalaryInput
       title="Currency"
-      options={orgReview.salary.currency.options}
-      value={currency}
-      onChange={setCurrency}
+      options={SALARY_CURRENCY_OPTIONS}
+      value={selectedCurrency}
+      onChange={setSelectedCurrency}
     />
   );
 };

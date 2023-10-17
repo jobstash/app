@@ -37,16 +37,9 @@ export const profileRepoListQueryPageSchema = myzod.object({
 });
 
 export const profileOrgReviewSalarySchema = myzod.object({
-  currency: myzod.object({
-    value: myzod.string().nullable(),
-    options: myzod.array(myzod.string()),
-  }),
+  selectedCurrency: myzod.string().nullable(),
   amount: myzod.number().nullable(),
-  token: myzod.object({
-    value: myzod.string().nullable(),
-    options: myzod.array(myzod.string()),
-    noAllocation: myzod.boolean(),
-  }),
+  offersTokenAllocation: myzod.boolean(),
 });
 
 export const profileOrgReviewRatingSchema = myzod.object({

@@ -8,13 +8,12 @@ export const useSalaryForm = () => {
   const { orgReview } = useProfileReviewsPageContext();
 
   const { org, salary } = orgReview;
-  const { currency, amount, token } = salary;
+  const { selectedCurrency, amount, offersTokenAllocation } = salary;
 
   const [state, setState] = useState({
-    currency: currency.value,
+    selectedCurrency,
     amount,
-    token: token.value,
-    noAllocation: token.noAllocation,
+    offersTokenAllocation,
   });
 
   const { mutate } = useSalaryMutation();
@@ -22,32 +21,28 @@ export const useSalaryForm = () => {
   const save = () => {
     mutate({
       orgId: org.id,
-      currencyValue: state.currency,
-      salaryAmount: state.amount ?? null,
-      token: state.token,
-      noAllocation: state.noAllocation,
+      selectedCurrency: state.selectedCurrency,
+      amount: state.amount ?? null,
+      offersTokenAllocation: state.offersTokenAllocation,
     });
   };
 
   const disableSave =
     JSON.stringify({
-      currency: currency.value,
+      selectedCurrency,
       amount,
-      token: token.value,
-      noAllocation: token.noAllocation,
+      offersTokenAllocation,
     }) === JSON.stringify(state);
 
   return {
     state,
     setState: {
-      setCurrency: (value: string | null) =>
-        setState((prev) => ({ ...prev, currency: value })),
+      setSelectedCurrency: (value: string | null) =>
+        setState((prev) => ({ ...prev, selectedCurrency: value })),
       setAmount: (value: number | null) =>
         setState((prev) => ({ ...prev, amount: value })),
-      setToken: (value: string | null) =>
-        setState((prev) => ({ ...prev, token: value })),
-      setNoAllocation: (value: boolean) =>
-        setState((prev) => ({ ...prev, noAllocation: value })),
+      setOffersTokenAllocation: (value: boolean) =>
+        setState((prev) => ({ ...prev, offersTokenAllocation: value })),
     },
     save,
     disableSave,

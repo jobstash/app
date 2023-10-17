@@ -9,10 +9,9 @@ import { useProfileReviewsPageContext } from '../contexts/profile-reviews-page-c
 
 interface Payload {
   orgId: ProfileOrgReview['org']['id'];
-  currencyValue: ProfileOrgReview['salary']['currency']['value'];
-  salaryAmount: ProfileOrgReview['salary']['amount'];
-  token: ProfileOrgReview['salary']['token']['value'];
-  noAllocation: ProfileOrgReview['salary']['token']['noAllocation'];
+  selectedCurrency: ProfileOrgReview['salary']['selectedCurrency'];
+  amount: ProfileOrgReview['salary']['amount'];
+  offersTokenAllocation: ProfileOrgReview['salary']['offersTokenAllocation'];
 }
 
 export const useSalaryMutation = () => {
