@@ -20,7 +20,10 @@ const MobileNavbarWrapper = ({ children }: Props) => {
         {
           'z-50 opacity-100 fixed overflow-auto h-screen': sidebarOpen,
         },
-        { 'opacity-0 -z-50 absolute h-0 overflow-hidden': !sidebarOpen },
+        {
+          'opacity-0 -z-50 absolute h-0 overflow-hidden pointer-events-none':
+            !sidebarOpen,
+        },
       )}
     >
       {children}
