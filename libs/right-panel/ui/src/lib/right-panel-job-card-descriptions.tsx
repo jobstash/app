@@ -24,14 +24,8 @@ const ParagraphDescription = ({
 );
 
 const RightPanelJobCardDescriptions = ({ jobInfo }: Props) => {
-  const {
-    summary,
-    description,
-    requirements,
-    responsibilities,
-    benefits,
-    culture,
-  } = jobInfo;
+  const { description, requirements, responsibilities, benefits, culture } =
+    jobInfo;
 
   const listTexts: { label: string; items: string[] }[] = [];
 
@@ -48,7 +42,6 @@ const RightPanelJobCardDescriptions = ({ jobInfo }: Props) => {
 
   return (
     <div className="flex flex-col gap-6">
-      {summary && <ParagraphDescription title="Summary" text={summary} />}
       {description && (
         <ParagraphDescription title="Description" text={description} />
       )}
