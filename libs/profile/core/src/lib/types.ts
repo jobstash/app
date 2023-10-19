@@ -12,6 +12,8 @@ import {
   profileRepoListQueryPageSchema,
   profileRepoSchema,
   profileRepoTag,
+  profileSkillResponseSchema,
+  profileSkillSchema,
 } from './schemas';
 
 export type ProfileRepoTag = Infer<typeof profileRepoTag>;
@@ -40,6 +42,9 @@ export type ProfileOrgReviewListQueryPage = Infer<
 
 export type ProfileInfo = Infer<typeof profileInfoSchema>;
 export type ProfileInfoResponse = Infer<typeof profileInfoResponseSchema>;
+
+export type ProfileSkill = Infer<typeof profileSkillSchema>;
+export type ProfileSkillResponse = Infer<typeof profileSkillResponseSchema>;
 
 export type ProfileTabOptions =
   typeof PROFILE_RIGHT_PANEL_TABS[keyof typeof PROFILE_RIGHT_PANEL_TABS];

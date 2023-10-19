@@ -44,6 +44,7 @@ export { default as MembershipStatusIcon } from './lib/icons/membership-status-i
 export { default as MoneyIcon } from './lib/icons/money-icon';
 export { default as MonthlyVolumeIcon } from './lib/icons/monthly-volume-icon';
 export { default as OrgSidebarIcon } from './lib/icons/org-sidebar-icon';
+export { default as ProfileHugeIcon } from './lib/icons/profile-huge-icon';
 export { default as ProjectsSidebarIcon } from './lib/icons/projects-sidebar-icon';
 export { default as RefreshIcon } from './lib/icons/refresh-icon';
 export { default as RemoteIcon } from './lib/icons/remote-icon';

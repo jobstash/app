@@ -92,3 +92,15 @@ export const profileInfoResponseSchema = myzod.object({
   success: myzod.boolean(),
   message: myzod.string(),
 });
+
+export const profileSkillSchema = myzod.object({
+  id: myzod.string().min(1),
+  name: myzod.string().min(1),
+  canTeach: myzod.boolean(),
+});
+
+export const profileSkillResponseSchema = myzod.object({
+  data: myzod.array(profileSkillSchema),
+  success: myzod.boolean(),
+  message: myzod.string(),
+});

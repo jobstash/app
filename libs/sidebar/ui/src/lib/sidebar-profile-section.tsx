@@ -2,17 +2,33 @@ import { Text } from '@jobstash/shared/ui';
 
 import SidebarBartab from './sidebar-bartab';
 
+const PROFILE_BARTABS = [
+  {
+    id: 'onboard-profile-1',
+    path: '/profile',
+    text: 'Profile',
+  },
+  {
+    id: 'onboard-repo-1',
+    path: '/profile/repositories',
+    text: 'Your Repositories',
+  },
+  {
+    id: 'onboard-review-1',
+    path: '/profile/reviews',
+    text: 'Organization Reviews',
+  },
+];
+
 const SidebarProfileSection = () => (
   <div className="flex-col">
     <Text color="dimmed">Your Profile</Text>
     <div className="space-y-3 pt-3">
-      <div id="onboard-repo-1">
-        <SidebarBartab path="/profile/repositories" text="Your Repositories" />
-      </div>
-
-      <div id="onboard-review-1">
-        <SidebarBartab path="/profile/reviews" text="Organization Reviews" />
-      </div>
+      {PROFILE_BARTABS.map(({ id, path, text }) => (
+        <div key={id} id="onboard-repo-1">
+          <SidebarBartab path={path} text={text} />
+        </div>
+      ))}
     </div>
   </div>
 );

@@ -5,7 +5,7 @@ import { useProfileRepoPageContext } from '@jobstash/profile/state';
 import { BreadCrumbs, Button, RefreshIcon, Text } from '@jobstash/shared/ui';
 
 const breadCrumbs = [
-  { title: 'Your Profile' },
+  { title: 'Your Profile', href: '/profile' },
   { title: 'Your Repositories', href: '/profile/repositories' },
 ];
 

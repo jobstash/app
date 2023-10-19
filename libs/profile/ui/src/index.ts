@@ -1,4 +1,6 @@
 // Components
+export * from './lib/profile-dev-info';
+export { default as ProfileGotItCard } from './lib/profile-got-it-card';
 export * from './lib/profile-header';
 export { default as ProfileOrgReviewCard } from './lib/profile-org-review-card';
 export { default as ProfileOrgReviewEmptyList } from './lib/profile-org-review-empty-list';
@@ -14,6 +16,7 @@ export { default as ProfileRightPanel } from './lib/profile-right-panel';
 export { default as ProfileRightPanelOrgHeader } from './lib/profile-right-panel-org-header';
 export { default as ProfileRightPanelRepoHeader } from './lib/profile-right-panel-repo-header';
 export { default as ProfileRightPanelTabs } from './lib/profile-right-panel-tabs';
+export { default as ProfileSubHeader } from './lib/profile-sub-header';
 export * from './lib/ratings';
 export * from './lib/salary-form';
 export * from './lib/techs-used';

@@ -31,9 +31,7 @@ const SidebarBartab = ({
 }: Props) => {
   const { pathname, push } = useRouter();
 
-  const isActive = isActiveFn
-    ? isActiveFn(pathname)
-    : pathname.slice(0, path.length) === path;
+  const isActive = isActiveFn ? isActiveFn(pathname) : pathname === path;
 
   const setSidebarOpen = useSetAtom(sidebarOpenAtom);
   const setActiveJob = useSetAtom(activeJobAtom);
