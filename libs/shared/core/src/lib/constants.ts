@@ -74,6 +74,7 @@ export const TAB_SEGMENT = {
   projects: 'projects' as const,
   jobs: 'jobs' as const,
   competitors: 'competitors' as const,
+  reviews: 'reviews' as const,
 } as const;
 
 export const GA_EVENT_ACTION = {

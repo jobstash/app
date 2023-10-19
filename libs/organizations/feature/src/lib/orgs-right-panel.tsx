@@ -10,6 +10,7 @@ import {
   RightPanelJobCards,
   RightPanelOrgCard,
   RightPanelProjectCards,
+  RightPanelReviews,
 } from '@jobstash/right-panel/ui';
 import { Loader } from '@jobstash/shared/ui';
 
@@ -56,6 +57,9 @@ const OrgsRightPanel = ({ orgId, currentTab }: Props) => {
           jobInfos={orgDetails.jobs}
         />
       )}
+
+      {currentTab === TAB_SEGMENT.reviews && <RightPanelReviews />}
+
       {/* TODO: REPOSITORIES TAB */}
     </RightPanel>
   );
