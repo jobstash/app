@@ -104,3 +104,18 @@ export const profileSkillResponseSchema = myzod.object({
   success: myzod.boolean(),
   message: myzod.string(),
 });
+
+export const profileSkillsPayloadSchema = myzod.object({
+  skills: myzod.array(profileSkillSchema),
+});
+
+export const profileShowcaseSchema = myzod.object({
+  label: myzod.string().min(1),
+  url: myzod.string().min(1),
+});
+
+export const profileShowcaseResponseSchema = myzod.object({
+  data: myzod.array(profileShowcaseSchema),
+  success: myzod.boolean(),
+  message: myzod.string().min(1),
+});

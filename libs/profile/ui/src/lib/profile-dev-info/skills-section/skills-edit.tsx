@@ -1,11 +1,15 @@
-import { useProfileSkillsContext } from '@jobstash/profile/state';
+import {
+  useProfileDevInfoContext,
+  useProfileSkillsContext,
+} from '@jobstash/profile/state';
 
 import ProfileRepoTech from '../../profile-repo-tech';
 
 import SkillsInput from './skills-input';
 
 const SkillsEdit = () => {
-  const { isEditing, skills, removeSkill } = useProfileSkillsContext();
+  const { skills, removeSkill } = useProfileDevInfoContext();
+  const { isEditing } = useProfileSkillsContext();
 
   if (!isEditing) return null;
 

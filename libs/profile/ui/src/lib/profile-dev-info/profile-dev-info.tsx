@@ -1,13 +1,15 @@
+import { ProfileDevInfoProvider } from '@jobstash/profile/state';
+
 import ProfileDevInfoSave from './profile-dev-info-save';
-import ProfileDevInfoShowcase from './profile-dev-info-showcase';
+import { ShowcaseSection } from './showcase-section';
 import { SkillsSection } from './skills-section';
 
 const ProfileDevInfo = () => (
-  <>
+  <ProfileDevInfoProvider>
     <SkillsSection />
-    <ProfileDevInfoShowcase />
+    <ShowcaseSection />
     <ProfileDevInfoSave />
-  </>
+  </ProfileDevInfoProvider>
 );
 
 export default ProfileDevInfo;

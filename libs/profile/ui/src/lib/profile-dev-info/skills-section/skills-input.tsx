@@ -2,10 +2,14 @@ import { Select } from '@mantine/core';
 
 import { cn } from '@jobstash/shared/utils';
 
-import { useProfileSkillsContext } from '@jobstash/profile/state';
+import {
+  useProfileDevInfoContext,
+  useProfileSkillsContext,
+} from '@jobstash/profile/state';
 
 const SkillsInput = () => {
-  const { options, addSkill } = useProfileSkillsContext();
+  const { addSkill } = useProfileDevInfoContext();
+  const { options } = useProfileSkillsContext();
 
   const onChange = (value: string) => {
     const skill = options.find((option) => option.name === value);

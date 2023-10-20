@@ -14,12 +14,14 @@ export default async function handler(
   return res.status(200).send({
     success: true,
     message: 'Profile skills retrieved successfully',
-    data: Array.from({ length: faker.number.int({ min: 4, max: 8 }) }).map(
-      () => ({
-        id: faker.string.uuid(),
-        name: faker.word.noun(),
-        canTeach: faker.datatype.boolean(),
-      }),
-    ),
+    data: [
+      ...Array.from({ length: faker.number.int({ min: 1, max: 2 }) }).map(
+        () => ({
+          label: faker.word.noun(),
+          url: faker.internet.url(),
+        }),
+      ),
+      { label: 'CV', url: faker.internet.url() },
+    ],
   });
 }

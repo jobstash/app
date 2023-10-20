@@ -2,11 +2,12 @@ import {
   ProfileSkillResponse,
   profileSkillResponseSchema,
 } from '@jobstash/profile/core';
+import { MW_URL } from '@jobstash/shared/core';
 
 import { mwFetch } from '@jobstash/shared/data';
 
 export const getProfileSkills = async () => {
-  const url = '/api/fakers/profile/skills';
+  const url = `${MW_URL}/profile/skills`;
 
   const options = {
     responseSchema: profileSkillResponseSchema,
