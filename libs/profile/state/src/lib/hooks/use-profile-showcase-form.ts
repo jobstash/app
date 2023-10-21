@@ -2,13 +2,12 @@ import { type ChangeEventHandler, useState } from 'react';
 
 import { isValidUrl } from '@jobstash/shared/utils';
 
+import { useProfileDevInfoContext } from '../contexts/profile-dev-info-context';
 import { type ProfileShowcaseFormContextProps } from '../contexts/profile-showcase-form-context';
-
-import { useProfileDevInfo } from './use-profile-dev-info';
 const SHOWCASE_OPTIONS = ['CV', 'Portfolio', 'Website'];
 
 export const useProfileShowcaseForm = (): ProfileShowcaseFormContextProps => {
-  const { showcases, addShowcase } = useProfileDevInfo();
+  const { showcases, addShowcase } = useProfileDevInfoContext();
 
   const showcaseLabelSet = new Set(showcases.map((s) => s.label.toLowerCase()));
 

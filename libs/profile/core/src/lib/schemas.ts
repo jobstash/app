@@ -119,3 +119,7 @@ export const profileShowcaseResponseSchema = myzod.object({
   success: myzod.boolean(),
   message: myzod.string().min(1),
 });
+
+export const profileShowcasePayloadSchema = myzod.object({
+  showcase: myzod.array(profileShowcaseSchema),
+});

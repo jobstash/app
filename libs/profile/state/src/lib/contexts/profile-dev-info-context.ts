@@ -1,7 +1,8 @@
 import { createContext, useContext } from 'react';
 
-import {
+import type {
   ProfileShowcase,
+  ProfileShowcaseMutFn,
   ProfileSkill,
   ProfileSkillsMutFn,
 } from '@jobstash/profile/core';
@@ -15,16 +16,17 @@ export interface ProfileDevInfoContextProps {
   };
 
   skills: ProfileSkill[];
+  fetchedSkills: ProfileSkill[];
   addSkill: (_: ProfileSkill) => void;
   removeSkill: (_: string) => void;
 
   showcases: ProfileShowcase[];
+  fetchedShowcases: ProfileShowcase[];
   addShowcase: (_: ProfileShowcase) => void;
   removeShowcase: (_: string) => void;
 
-  mutateSkills: ProfileSkillsMutFn;
-  //
-  // mutateShowcase
+  mutateAsyncSkills: ProfileSkillsMutFn;
+  mutateAsyncShowcase: ProfileShowcaseMutFn;
 }
 
 export const ProfileDevInfoContext =

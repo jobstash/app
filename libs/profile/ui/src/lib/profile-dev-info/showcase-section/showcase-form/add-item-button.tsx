@@ -5,17 +5,19 @@ import { useProfileShowcaseFormContext } from '@jobstash/profile/state';
 import { Button } from '@jobstash/shared/ui';
 
 const AddItemButton = () => {
-  const { disabled, onClickAddItem } = useProfileShowcaseFormContext();
+  const { disabled, currentShowcase, onClickAddItem } =
+    useProfileShowcaseFormContext();
 
   return (
     <Tooltip
       withArrow
-      label="Save Item"
+      label={`Add "${currentShowcase.label}" to your works`}
       opened={!disabled.addItem}
       color="dark"
       classNames={{
         tooltip: 'bg-gray',
       }}
+      position="right"
     >
       <Button isIcon isDisabled={disabled.addItem} onClick={onClickAddItem}>
         <svg

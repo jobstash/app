@@ -21,18 +21,20 @@ const SkillsEdit = () => {
         <div className="max-w-lg">
           <SkillsInput />
         </div>
-        <div className="flex flex-wrap gap-4 items-center">
-          {skills.map(({ id, name, canTeach }) => (
-            <ProfileRepoTech
-              key={id}
-              id={id}
-              name={name}
-              canTeach={canTeach}
-              onTechRemove={(id) => removeSkill(id)}
-              onClickCanTeach={() => null}
-            />
-          ))}
-        </div>
+        {skills.length > 0 && (
+          <div className="flex flex-wrap gap-4 items-center">
+            {skills.map(({ id, name, canTeach }) => (
+              <ProfileRepoTech
+                key={id}
+                id={id}
+                name={name}
+                canTeach={canTeach}
+                onTechRemove={(id) => removeSkill(id)}
+                onClickCanTeach={() => null}
+              />
+            ))}
+          </div>
+        )}
       </div>
     </>
   );

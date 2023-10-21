@@ -33,6 +33,7 @@ const SkillsInput = () => {
         item: '[&[data-hovered]]:bg-gray [&[data-selected]]:bg-gray',
       }}
       value=""
+      maxDropdownHeight={280}
       onChange={onChange}
     />
   );

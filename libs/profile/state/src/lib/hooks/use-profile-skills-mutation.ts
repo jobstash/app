@@ -9,13 +9,13 @@ export const useProfileSkillsMutation = () => {
   const { address } = useAccount();
   const queryClient = useQueryClient();
 
-  const { isLoading: isLoadingSkillsMutation, mutate: mutateSkills } =
+  const { isLoading: isLoadingSkillsMutation, mutateAsync: mutateAsyncSkills } =
     useMutation({
       mutationFn: (payload: ProfileSkillsPayload) => postProfileSkills(payload),
-      onSuccess() {
+      onSuccess(data) {
         queryClient.invalidateQueries(['profile-skills', address]);
       },
     });
 
-  return { isLoadingSkillsMutation, mutateSkills };
+  return { isLoadingSkillsMutation, mutateAsyncSkills };
 };

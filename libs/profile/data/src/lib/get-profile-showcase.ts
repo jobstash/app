@@ -2,11 +2,12 @@ import {
   type ProfileShowcaseResponse,
   profileShowcaseResponseSchema,
 } from '@jobstash/profile/core';
+import { MW_URL } from '@jobstash/shared/core';
 
 import { mwFetch } from '@jobstash/shared/data';
 
 export const getProfileShowcase = async () => {
-  const url = '/api/fakers/profile/showcase';
+  const url = `${MW_URL}/profile/showcase`;
 
   const options = {
     responseSchema: profileShowcaseResponseSchema,

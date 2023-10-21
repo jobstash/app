@@ -7,6 +7,7 @@ import { useProfileDevInfoContext } from '@jobstash/profile/state';
 import { Button } from '@jobstash/shared/ui';
 
 import DeleteItemIcon from './delete-item-icon';
+import ShowcaseItemLayout from './showcase-item-layout';
 
 interface Props {
   label: string;
@@ -20,8 +21,8 @@ const ShowcaseItem = (props: Props) => {
   const remove = () => removeShowcase(selectedOption);
 
   return (
-    <div className="flex gap-4 items-center">
-      <div className="flex-grow w-1/3">
+    <ShowcaseItemLayout
+      labelInput={
         <Select
           disabled
           data={[]}
@@ -33,9 +34,8 @@ const ShowcaseItem = (props: Props) => {
           }}
           searchValue={selectedOption}
         />
-      </div>
-
-      <div className="flex-grow">
+      }
+      urlInput={
         <TextInput
           disabled
           placeholder="Enter URL Link"
@@ -47,12 +47,13 @@ const ShowcaseItem = (props: Props) => {
           }}
           value={url}
         />
-      </div>
-
-      <Button isIcon onClick={remove}>
-        <DeleteItemIcon />
-      </Button>
-    </div>
+      }
+      iconButton={
+        <Button isIcon onClick={remove}>
+          <DeleteItemIcon />
+        </Button>
+      }
+    />
   );
 };
 

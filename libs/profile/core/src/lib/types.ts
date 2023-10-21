@@ -15,6 +15,7 @@ import {
   profileRepoListQueryPageSchema,
   profileRepoSchema,
   profileRepoTag,
+  profileShowcasePayloadSchema,
   profileShowcaseResponseSchema,
   profileShowcaseSchema,
   profileSkillResponseSchema,
@@ -62,6 +63,13 @@ export type ProfileSkillsMutFn = UseMutateFunction<
 export type ProfileShowcase = Infer<typeof profileShowcaseSchema>;
 export type ProfileShowcaseResponse = Infer<
   typeof profileShowcaseResponseSchema
+>;
+export type ProfileShowcasePayload = Infer<typeof profileShowcasePayloadSchema>;
+export type ProfileShowcaseMutFn = UseMutateFunction<
+  MessageResponse,
+  unknown,
+  ProfileShowcasePayload,
+  unknown
 >;
 
 export type ProfileTabOptions =

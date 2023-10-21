@@ -1,7 +1,4 @@
-import {
-  useProfileDevInfoContext,
-  useProfileShowcaseFormContext,
-} from '@jobstash/profile/state';
+import { useProfileShowcaseFormContext } from '@jobstash/profile/state';
 
 import AddAnotherButton from './add-another-button';
 import AddItemButton from './add-item-button';
@@ -9,10 +6,8 @@ import LabelInput from './label-input';
 import UrlInput from './url-input';
 
 const ShowcaseForm = () => {
-  const { isLoading } = useProfileDevInfoContext();
   const { displayForm } = useProfileShowcaseFormContext();
 
-  if (isLoading.showcaseQuery) return <p>Loading Showcase ...</p>;
   if (!displayForm) return <AddAnotherButton />;
 
   return (
