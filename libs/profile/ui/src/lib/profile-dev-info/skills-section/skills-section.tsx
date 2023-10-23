@@ -1,4 +1,5 @@
 import { LoadingOverlay } from '@mantine/core';
+import { AnimatePresence, motion } from 'framer-motion';
 
 import { TagsProvider } from '@jobstash/admin/state';
 import {
@@ -17,21 +18,33 @@ const SkillsSection = () => {
   const { isLoading } = useProfileDevInfoContext();
 
   return (
-    <div className="flex flex-col border border-white/10 rounded-3xl bg-dark p-6 pb-4 gap-4 relative">
+    <motion.div
+      layout
+      initial={{
+        borderRadius: 24,
+      }}
+      className="flex flex-col border border-white/10 rounded-3xl bg-dark p-6 pb-4 gap-4 relative"
+    >
       <LoadingOverlay
         visible={isLoading.skillsMutation}
         className="rounded-3xl"
         loader={<Loader size="12" />}
       />
+
       <TagsProvider>
         <ProfileSkillsProvider>
           <SkillsHeader />
+
           <SkillsList />
-          <SkillsEdit />
+
+          <AnimatePresence mode="popLayout">
+            <SkillsEdit />
+          </AnimatePresence>
+
           <SkillsToggle />
         </ProfileSkillsProvider>
       </TagsProvider>
-    </div>
+    </motion.div>
   );
 };
 

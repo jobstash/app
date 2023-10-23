@@ -1,15 +1,20 @@
 import { type ReactNode } from 'react';
 
+import { motion } from 'framer-motion';
+
 interface Props {
   children: ReactNode;
 }
 
 const SkillsWrapper = ({ children }: Props) => (
   <>
-    <hr className="border-t border-white/10" />
-    <div className="items-center justify-between lg:flex">
+    <motion.div layout>
+      <hr className="border-t border-white/10" />
+    </motion.div>
+
+    <motion.div layout className="items-center justify-between lg:flex">
       <div className="flex flex-wrap gap-4">{children}</div>
-    </div>
+    </motion.div>
   </>
 );
 

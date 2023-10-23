@@ -1,3 +1,5 @@
+import { motion } from 'framer-motion';
+
 import { useProfileDevInfoContext } from '@jobstash/profile/state';
 
 import { TechWrapper } from '@jobstash/shared/ui';
@@ -13,10 +15,12 @@ const SkillsList = () => {
 
   return (
     <SkillsWrapper>
-      {skills.map(({ name, id }) => (
-        <TechWrapper key={id} id={id}>
-          {name}
-        </TechWrapper>
+      {skills.map(({ name, id, canTeach }) => (
+        <motion.div key={id} layout>
+          <TechWrapper id={id} isChecked={canTeach}>
+            {name}
+          </TechWrapper>
+        </motion.div>
       ))}
     </SkillsWrapper>
   );

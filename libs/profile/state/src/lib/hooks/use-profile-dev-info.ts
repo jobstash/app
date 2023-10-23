@@ -24,8 +24,14 @@ export const useProfileDevInfo = (): ProfileDevInfoContextProps => {
 
   const addSkill = (skill: ProfileSkill) =>
     setSkills((prev) => [...prev, skill]);
+
   const removeSkill = (id: string) =>
     setSkills((prev) => prev.filter((skill) => skill.id !== id));
+
+  const updateCanTeach = (id: string, canTeach: boolean) =>
+    setSkills((prev) =>
+      prev.map((s) => (s.id === id ? { ...s, canTeach } : s)),
+    );
 
   const { isLoadingShowcaseQuery, showcaseData } = useProfileShowcaseQuery();
   const [fetchedShowcases, setFetchedShowcases] = useState<ProfileShowcase[]>(
@@ -63,6 +69,7 @@ export const useProfileDevInfo = (): ProfileDevInfoContextProps => {
     fetchedSkills,
     addSkill,
     removeSkill,
+    updateCanTeach,
     mutateAsyncSkills,
     showcases,
     fetchedShowcases,

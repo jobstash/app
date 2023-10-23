@@ -1,3 +1,5 @@
+import { motion } from 'framer-motion';
+
 import { useProfileDevInfoContext } from '@jobstash/profile/state';
 
 import ShowcaseItem from './showcase-item';
@@ -9,15 +11,17 @@ const ShowcaseItems = () => {
   if (!isLoading.showcaseQuery && showcases.length === 0) return null;
 
   return (
-    <div className="flex flex-col gap-4">
+    <motion.div layout className="flex flex-col gap-4">
       {isLoading.showcaseQuery ? (
         <ShowcaseSkeleton />
       ) : (
         showcases.map(({ label, url }) => (
-          <ShowcaseItem key={label} label={label} url={url} />
+          <motion.div key={label} layout>
+            <ShowcaseItem label={label} url={url} />
+          </motion.div>
         ))
       )}
-    </div>
+    </motion.div>
   );
 };
 

@@ -1,3 +1,5 @@
+import { motion } from 'framer-motion';
+
 import { useProfileSkillsContext } from '@jobstash/profile/state';
 
 import { Heading, Text } from '@jobstash/shared/ui';
@@ -13,8 +15,12 @@ const SkillsHeader = () => {
 
   return (
     <>
-      <Heading size="md">Your Skills</Heading>
-      <Text color="dimmed">{description}</Text>
+      <motion.div layout>
+        <Heading size="md">Your Skills</Heading>
+      </motion.div>
+      <motion.div layout>
+        <Text color="dimmed">{description}</Text>
+      </motion.div>
     </>
   );
 };

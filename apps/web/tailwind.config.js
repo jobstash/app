@@ -12,7 +12,7 @@ module.exports = {
   ],
   safelist: [
     {
-      pattern: /(text|border)-skill(1|2|3|4|5|6|7|8|9|10|11|12|13)/,
+      pattern: /(text|border|bg)-skill(1|2|3|4|5|6|7|8|9|10|11|12|13)/,
     },
   ],
   theme: {

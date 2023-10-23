@@ -1,3 +1,5 @@
+import { motion } from 'framer-motion';
+
 import {
   useProfileDevInfoContext,
   useProfileSkillsContext,
@@ -18,11 +20,16 @@ const SkillsToggle = () => {
     <>
       {showBorder && <hr className="border-t border-white/10" />}
       {isLoading.skillsQuery ? (
-        <div className="h-9 bg-white/20 rounded-lg w-24 animate-pulse" />
+        <motion.div
+          layout="position"
+          className="h-9 bg-white/20 rounded-lg w-24 animate-pulse"
+        />
       ) : (
-        <Button variant="outline" size="sm" onClick={() => toggleEdit()}>
-          {buttonText}
-        </Button>
+        <motion.div layout="position">
+          <Button variant="outline" size="sm" onClick={() => toggleEdit()}>
+            {buttonText}
+          </Button>
+        </motion.div>
       )}
     </>
   );

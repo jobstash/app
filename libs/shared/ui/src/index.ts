@@ -12,7 +12,6 @@ export { default as TechWrapper } from './lib/base/tech-wrapper';
 export { default as Text } from './lib/base/text';
 
 // Icons
-export { default as AddTechIcon } from './/lib/icons/add-tech-icon';
 export { default as ActiveUsersIcon } from './lib/icons/active-users-icon';
 export { default as ArrowCircleUpIcon } from './lib/icons/arrow-circle-up-right-icon';
 export { default as ArrowLeftIcon } from './lib/icons/arrow-left-icon';

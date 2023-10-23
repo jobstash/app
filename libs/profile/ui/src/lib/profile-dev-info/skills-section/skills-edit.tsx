@@ -1,3 +1,5 @@
+import { motion } from 'framer-motion';
+
 import {
   useProfileDevInfoContext,
   useProfileSkillsContext,
@@ -8,35 +10,44 @@ import ProfileRepoTech from '../../profile-repo-tech';
 import SkillsInput from './skills-input';
 
 const SkillsEdit = () => {
-  const { skills, removeSkill } = useProfileDevInfoContext();
+  const { skills, removeSkill, updateCanTeach } = useProfileDevInfoContext();
   const { isEditing } = useProfileSkillsContext();
 
   if (!isEditing) return null;
 
   return (
-    <>
-      <hr className="border-t border-white/10" />
+    <motion.div layout className="flex flex-col gap-4">
+      <motion.div layout>
+        <hr className="border-t border-white/10" />
+      </motion.div>
 
-      <div className="flex flex-col gap-4">
-        <div className="max-w-lg">
+      <motion.div
+        layout
+        className="flex flex-col gap-4"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        exit={{ opacity: 0 }}
+      >
+        <motion.div layout className="max-w-lg">
           <SkillsInput />
-        </div>
+        </motion.div>
         {skills.length > 0 && (
-          <div className="flex flex-wrap gap-4 items-center">
+          <motion.div layout className="flex flex-wrap gap-4 items-center">
             {skills.map(({ id, name, canTeach }) => (
-              <ProfileRepoTech
-                key={id}
-                id={id}
-                name={name}
-                canTeach={canTeach}
-                onTechRemove={(id) => removeSkill(id)}
-                onClickCanTeach={() => null}
-              />
+              <motion.div key={id} layout>
+                <ProfileRepoTech
+                  id={id}
+                  name={name}
+                  canTeach={canTeach}
+                  onTechRemove={(id) => removeSkill(id)}
+                  onClickCanTeach={updateCanTeach}
+                />
+              </motion.div>
             ))}
-          </div>
+          </motion.div>
         )}
-      </div>
-    </>
+      </motion.div>
+    </motion.div>
   );
 };
 

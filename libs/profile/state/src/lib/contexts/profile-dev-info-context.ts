@@ -19,6 +19,7 @@ export interface ProfileDevInfoContextProps {
   fetchedSkills: ProfileSkill[];
   addSkill: (_: ProfileSkill) => void;
   removeSkill: (_: string) => void;
+  updateCanTeach: (_: string, __: boolean) => void;
 
   showcases: ProfileShowcase[];
   fetchedShowcases: ProfileShowcase[];

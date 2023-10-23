@@ -1,3 +1,5 @@
+import { AnimatePresence, motion } from 'framer-motion';
+
 import { useProfileShowcaseFormContext } from '@jobstash/profile/state';
 
 import AddAnotherButton from './add-another-button';
@@ -8,10 +10,28 @@ import UrlInput from './url-input';
 const ShowcaseForm = () => {
   const { displayForm } = useProfileShowcaseFormContext();
 
-  if (!displayForm) return <AddAnotherButton />;
+  if (!displayForm)
+    return (
+      <AnimatePresence mode="popLayout">
+        <motion.div
+          layout="position"
+          initial={{ opacity: 0, y: 30 }}
+          animate={{ opacity: 1, y: 0 }}
+          exit={{ opacity: 0 }}
+        >
+          <AddAnotherButton />
+        </motion.div>
+      </AnimatePresence>
+    );
 
   return (
-    <div className="flex gap-4 items-center">
+    <motion.div
+      layout="position"
+      className="flex gap-4 items-center"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
       <div className="flex-grow w-1/3">
         <LabelInput />
       </div>
@@ -20,8 +40,10 @@ const ShowcaseForm = () => {
         <UrlInput />
       </div>
 
-      <AddItemButton />
-    </div>
+      <div>
+        <AddItemButton />
+      </div>
+    </motion.div>
   );
 };
 
