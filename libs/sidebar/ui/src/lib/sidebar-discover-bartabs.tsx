@@ -37,6 +37,14 @@ const SidebarDiscoverBartabs = ({ isMobile }: Props) => {
           path={path}
           icon={icon}
           text={text}
+          isActiveFn={(pathname) => {
+            const pathLength = path.length;
+            const pathString =
+              pathname.length > pathLength
+                ? pathname.slice(0, pathLength)
+                : pathname;
+            return pathString === path;
+          }}
         />
       ))}
     </div>
