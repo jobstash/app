@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useRef, useState } from 'react';
 
 import { ProfileShowcase, ProfileSkill } from '@jobstash/profile/core';
 
@@ -13,7 +13,14 @@ export const useProfileDevInfo = (): ProfileDevInfoContextProps => {
   const { isLoadingSkillsQuery, skillsQueryData } = useProfileSkillsQuery();
   const fetchedSkills = useMemo(() => skillsQueryData ?? [], [skillsQueryData]);
 
-  const [skills, setSkills] = useState<ProfileSkill[]>(fetchedSkills);
+  const [skills, setSkills] = useState<ProfileSkill[]>([]);
+  const initSkillsRef = useRef(false);
+  useEffect(() => {
+    if (!initSkillsRef.current && fetchedSkills.length > 0) {
+      setSkills(fetchedSkills);
+      initSkillsRef.current = true;
+    }
+  }, [fetchedSkills]);
 
   const addSkill = (skill: ProfileSkill) =>
     setSkills((prev) => [...prev, skill]);
@@ -30,6 +37,13 @@ export const useProfileDevInfo = (): ProfileDevInfoContextProps => {
   const fetchedShowcases = useMemo(() => showcaseData ?? [], [showcaseData]);
 
   const [showcases, setShowcases] = useState<ProfileShowcase[]>([]);
+  const initShowcaseRef = useRef(false);
+  useEffect(() => {
+    if (!initShowcaseRef.current && fetchedShowcases.length > 0) {
+      setShowcases(fetchedShowcases);
+      initShowcaseRef.current = true;
+    }
+  }, [fetchedShowcases, fetchedSkills]);
 
   const addShowcase = (showcase: ProfileShowcase) =>
     setShowcases((prev) => [...prev, showcase]);
