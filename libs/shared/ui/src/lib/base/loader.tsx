@@ -4,16 +4,16 @@ import { memo } from 'react';
 import { cn } from '@jobstash/shared/utils';
 
 interface Props {
-  size?: '12' | '16';
+  isSmall?: boolean;
   isSpinning?: boolean;
 }
 
-const Loader = ({ isSpinning = true, size = '16' }: Props) => (
-  <div className={`relative h-${size} w-${size}`}>
+const Loader = ({ isSpinning = true, isSmall = false }: Props) => (
+  <div className={cn('relative h-16 w-16', { 'h-12 w-12': isSmall })}>
     <div
       className={cn('absolute left-0 top-0', { 'animate-spin': isSpinning })}
     >
-      <div className={`h-${size} w-${size}`}>
+      <div className={cn('h-16 w-16', { 'h-12 w-12': isSmall })}>
         <Image src="/Logo-01.svg" height={300} width={300} alt="" />
       </div>
     </div>
@@ -23,7 +23,7 @@ const Loader = ({ isSpinning = true, size = '16' }: Props) => (
         'animate-reverse-spin': isSpinning,
       })}
     >
-      <div className={`h-${size} w-${size}`}>
+      <div className={cn('h-16 w-16', { 'h-12 w-12': isSmall })}>
         <Image src="/Logo-02.svg" height={300} width={300} alt="" />
       </div>
     </div>

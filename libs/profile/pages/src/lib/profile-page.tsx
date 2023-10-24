@@ -6,6 +6,7 @@ import { ProfileInfoProvider } from '@jobstash/profile/state';
 import { useDelayedAuthRender } from '@jobstash/shared/state';
 
 import {
+  AccountCard,
   ProfileDevInfo,
   ProfileGotItCard,
   ProfileHeader,
@@ -38,6 +39,12 @@ export const ProfilePage = ({ isOnboardSSR }: Props) => {
             <ProfileGotItCard initShow={isOnboardSSR} />
 
             <ProfileDevInfo />
+          </div>
+
+          <div className="hide-scrollbar fixed h-screen overflow-y-auto p-4 transition-all inset-auto right-0 top-0 w-5/12 px-6 py-8 pr-10 flex items-center justify-center">
+            <ProfileInfoProvider>
+              <AccountCard />
+            </ProfileInfoProvider>
           </div>
         </div>
       </>

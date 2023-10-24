@@ -25,7 +25,7 @@ const SidebarProfileSection = () => (
     <Text color="dimmed">Your Profile</Text>
     <div className="space-y-3 pt-3">
       {PROFILE_BARTABS.map(({ id, path, text }) => (
-        <div key={id} id="onboard-repo-1">
+        <div key={id} id={id}>
           <SidebarBartab path={path} text={text} />
         </div>
       ))}

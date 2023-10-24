@@ -9,6 +9,7 @@ export const useProfileShowcaseQuery = () => {
   const { isLoading: isLoadingShowcaseQuery, data: showcaseData } = useQuery({
     queryKey: ['profile-showcase', address],
     queryFn: () => getProfileShowcase(),
+    enabled: Boolean(address),
   });
 
   return {

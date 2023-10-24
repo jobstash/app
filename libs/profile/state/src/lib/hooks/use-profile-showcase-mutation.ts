@@ -15,7 +15,12 @@ export const useProfileShowcaseMutation = () => {
   } = useMutation({
     mutationFn: (payload: ProfileShowcasePayload) =>
       postProfileShowcase(payload),
-    onSuccess() {
+    onSuccess(_, vars) {
+      queryClient.setQueryData(['profile-showcase', address], {
+        data: vars.showcase,
+        message: 'User showcase retrieved successfully',
+        success: true,
+      });
       queryClient.invalidateQueries(['profile-showcase', address]);
     },
   });

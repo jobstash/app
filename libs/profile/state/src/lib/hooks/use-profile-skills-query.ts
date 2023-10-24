@@ -9,6 +9,7 @@ export const useProfileSkillsQuery = () => {
   const { isLoading: isLoadingSkillsQuery, data: skillsQueryData } = useQuery({
     queryKey: ['profile-skills', address],
     queryFn: () => getProfileSkills(),
+    enabled: Boolean(address),
   });
 
   return {

@@ -23,7 +23,7 @@ const ShowcaseSection = () => {
       <LoadingOverlay
         visible={isLoading.showcaseMutation}
         className="rounded-3xl"
-        loader={<Loader size="12" />}
+        loader={<Loader isSmall />}
       />
 
       <ShowcaseHeader />

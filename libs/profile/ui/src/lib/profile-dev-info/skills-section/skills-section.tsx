@@ -28,7 +28,7 @@ const SkillsSection = () => {
       <LoadingOverlay
         visible={isLoading.skillsMutation}
         className="rounded-3xl"
-        loader={<Loader size="12" />}
+        loader={<Loader isSmall />}
       />
 
       <TagsProvider>

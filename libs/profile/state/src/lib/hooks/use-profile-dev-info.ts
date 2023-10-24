@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useMemo, useState } from 'react';
 
 import { ProfileShowcase, ProfileSkill } from '@jobstash/profile/core';
 
@@ -11,22 +11,15 @@ import { useProfileSkillsQuery } from './use-profile-skills-query';
 
 export const useProfileDevInfo = (): ProfileDevInfoContextProps => {
   const { isLoadingSkillsQuery, skillsQueryData } = useProfileSkillsQuery();
-  const [fetchedSkills, setFetchedSkills] = useState<ProfileSkill[]>([]);
-  const [skills, setSkills] = useState<ProfileSkill[]>([]);
-  const initRefSkills = useRef(false);
-  useEffect(() => {
-    if (!initRefSkills.current && skillsQueryData) {
-      initRefSkills.current = true;
-      setSkills(skillsQueryData);
-      setFetchedSkills(skillsQueryData);
-    }
-  }, [skillsQueryData]);
+  const fetchedSkills = useMemo(() => skillsQueryData ?? [], [skillsQueryData]);
+
+  const [skills, setSkills] = useState<ProfileSkill[]>(fetchedSkills);
 
   const addSkill = (skill: ProfileSkill) =>
     setSkills((prev) => [...prev, skill]);
 
   const removeSkill = (id: string) =>
-    setSkills((prev) => prev.filter((skill) => skill.id !== id));
+    setSkills((prev) => prev.filter((s) => s.id !== id));
 
   const updateCanTeach = (id: string, canTeach: boolean) =>
     setSkills((prev) =>
@@ -34,18 +27,9 @@ export const useProfileDevInfo = (): ProfileDevInfoContextProps => {
     );
 
   const { isLoadingShowcaseQuery, showcaseData } = useProfileShowcaseQuery();
-  const [fetchedShowcases, setFetchedShowcases] = useState<ProfileShowcase[]>(
-    [],
-  );
+  const fetchedShowcases = useMemo(() => showcaseData ?? [], [showcaseData]);
+
   const [showcases, setShowcases] = useState<ProfileShowcase[]>([]);
-  const initRefShowcase = useRef(false);
-  useEffect(() => {
-    if (!initRefShowcase.current && showcaseData) {
-      initRefShowcase.current = true;
-      setShowcases(showcaseData);
-      setFetchedShowcases(showcaseData);
-    }
-  }, [showcaseData]);
 
   const addShowcase = (showcase: ProfileShowcase) =>
     setShowcases((prev) => [...prev, showcase]);

@@ -1,4 +1,5 @@
 // Components
+export * from './lib/account-card';
 export * from './lib/profile-dev-info';
 export { default as ProfileGotItCard } from './lib/profile-got-it-card';
 export * from './lib/profile-header';

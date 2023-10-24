@@ -12,7 +12,12 @@ export const useProfileSkillsMutation = () => {
   const { isLoading: isLoadingSkillsMutation, mutateAsync: mutateAsyncSkills } =
     useMutation({
       mutationFn: (payload: ProfileSkillsPayload) => postProfileSkills(payload),
-      onSuccess(data) {
+      onSuccess(_, vars) {
+        queryClient.setQueryData(['profile-skills', address], {
+          data: vars.skills,
+          message: 'User skills retrieved successfully',
+          success: true,
+        });
         queryClient.invalidateQueries(['profile-skills', address]);
       },
     });
