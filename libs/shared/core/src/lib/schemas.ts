@@ -76,8 +76,7 @@ export const jobInfoSchema = myzod.object({
   url: myzod.string().min(1),
   shortUUID: myzod.string().min(1),
 
-  firstSeenTimestamp: myzod.number(), // TODO: which one to use in ui, which is unused
-  lastSeenTimestamp: myzod.number(), // TODO: which one to use in ui, which is unused
+  timestamp: myzod.number(),
 
   requirements: myzod.array(myzod.string().min(1)),
   responsibilities: myzod.array(myzod.string().min(1)),

@@ -21,7 +21,7 @@ export const createJobPostLdJson = (jobPost?: JobPost) => {
       benefits,
       culture,
       title,
-      firstSeenTimestamp,
+      timestamp,
       url,
       commitment,
       location,
@@ -61,7 +61,7 @@ export const createJobPostLdJson = (jobPost?: JobPost) => {
       );
     }
 
-    const datePosted = new Date(firstSeenTimestamp);
+    const datePosted = new Date(timestamp);
     const validThrough = new Date(
       datePosted.setMonth(datePosted.getMonth() + 3),
     );

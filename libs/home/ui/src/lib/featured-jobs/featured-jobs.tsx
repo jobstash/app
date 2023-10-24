@@ -38,8 +38,7 @@ const fakeFeaturedJobs: JobPost[] = [
     salaryCurrency: 'USDT',
     paysInCrypto: true,
     offersTokenAllocation: null,
-    lastSeenTimestamp: 1_696_433_306_792,
-    firstSeenTimestamp: 1_696_420_041_590,
+    timestamp: 1_696_420_041_590,
     tags: [
       {
         name: 'Engineering Standards',
@@ -200,8 +199,7 @@ const fakeFeaturedJobs: JobPost[] = [
     salaryCurrency: 'USDT',
     paysInCrypto: true,
     offersTokenAllocation: false,
-    lastSeenTimestamp: 1_696_433_306_792,
-    firstSeenTimestamp: 1_696_420_041_590,
+    timestamp: 1_696_420_041_590,
     tags: [
       {
         name: 'tooling market',

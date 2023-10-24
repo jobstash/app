@@ -25,7 +25,7 @@ interface Props {
 
 const JobCard = ({ jobPost, isActive, filterParamsObj }: Props) => {
   const { organization, tags } = jobPost;
-  const { title, firstSeenTimestamp } = jobPost;
+  const { title, timestamp } = jobPost;
   const { projects } = organization;
 
   const setActiveJob = useSetAtom(activeJobAtom);
@@ -54,7 +54,7 @@ const JobCard = ({ jobPost, isActive, filterParamsObj }: Props) => {
 
   return (
     <JobCardWrapper href={href} isActive={isActive} onClick={onClick}>
-      <JobCardHeader title={title} ts={firstSeenTimestamp} />
+      <JobCardHeader title={title} ts={timestamp} />
       <JobCardTags jobPost={jobPost} />
       <JobCardOrg org={organization} />
       <JobCardTechs techs={tags} />
