@@ -4,7 +4,7 @@ import {
   seniorityMapping,
 } from '@jobstash/filters/core';
 import { initFilterConfigData } from '@jobstash/filters/utils';
-import { encodeBase64 } from '@jobstash/shared/utils';
+import { encodeBase64, normalizeString } from '@jobstash/shared/utils';
 
 export const filterReducer = (
   state: FilterState,
@@ -26,14 +26,17 @@ export const filterReducer = (
 
     case 'SET_SELECT_FILTER_VALUE': {
       const { paramKey, selectedLabel, options } = payload;
-      const value = // Find value associated to the label
+      // Find value associated to the label
+      const value =
         options.find((o) => o.label === selectedLabel)?.value.toString() ??
         null;
+      const normalizedValue = value ? normalizeString(value) : value;
+
       return {
         ...state,
         filterValues: {
           ...state.filterValues,
-          [paramKey]: value,
+          [paramKey]: normalizedValue,
         },
       };
     }
