@@ -9,7 +9,7 @@ import {
   type SetSelectFilterValueAction,
 } from '@jobstash/filters/core';
 import { GA_EVENT_ACTION } from '@jobstash/shared/core';
-import { cn, gaEvent, normalizeString } from '@jobstash/shared/utils';
+import { cn, gaEvent } from '@jobstash/shared/utils';
 
 import FilterWrapper from './filter-wrapper';
 
@@ -35,9 +35,7 @@ const SingleSelectFilter = ({
   // Use labels in displaying input
   const selections = useMemo(() => options.map((o) => o.label), [options]);
   const inputValue = useMemo(
-    () =>
-      options.find((o) => normalizeString(o.value.toString()) === value)
-        ?.label ?? null,
+    () => options.find((o) => o.value.toString() === value)?.label ?? null,
     [options, value],
   );
 
