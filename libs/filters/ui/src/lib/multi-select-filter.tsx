@@ -9,8 +9,7 @@ import {
   type SetMultiSelectFilterValueAction,
 } from '@jobstash/filters/core';
 import { GA_EVENT_ACTION } from '@jobstash/shared/core';
-import { decodeMultiSelectValue } from '@jobstash/filters/utils';
-import { cn, decodeBase64, gaEvent } from '@jobstash/shared/utils';
+import { cn, gaEvent, normalizeString } from '@jobstash/shared/utils';
 
 import { useIsMobile } from '@jobstash/shared/state';
 
@@ -37,7 +36,7 @@ const MultiSelectFilter = ({
     if (gaEventName && value) {
       gaEvent(GA_EVENT_ACTION.FILTER_ACTION, {
         filter_name: gaEventName,
-        filter_value: decodeMultiSelectValue(value),
+        filter_value: value,
       });
     }
   };
@@ -56,24 +55,8 @@ const MultiSelectFilter = ({
   );
 
   const { inputValue, inputLabel } = useMemo(() => {
-    let inputValue = value ? value.split(',').map((v) => decodeBase64(v)) : [];
+    const inputValue = value ? value.split(',') : [];
     const inputValueLength = inputValue.length;
-
-    if (label === 'Seniority') {
-      const newInputValue = [];
-
-      for (const seniorityValue of inputValue) {
-        newInputValue.push(
-          Object.keys(seniorityMapping).find(
-            (key) =>
-              seniorityMapping[key as keyof typeof seniorityMapping] ===
-              seniorityValue,
-          ) as string,
-        );
-      }
-
-      inputValue = newInputValue;
-    }
 
     const inputLabel = `${label}${
       inputValueLength > 0 ? ' (' + inputValueLength + ')' : ''
@@ -85,17 +68,32 @@ const MultiSelectFilter = ({
   const isMobile = useIsMobile();
   const hasValue = inputValue.length > 0;
 
+  const data = useMemo(
+    () =>
+      label === 'Seniority'
+        ? Object.keys(seniorityMapping).map((key) => ({
+            label: key,
+            value: normalizeString(
+              seniorityMapping[key as keyof typeof seniorityMapping],
+            ),
+          }))
+        : options.map((option) => ({
+            label: option,
+            value: normalizeString(option),
+          })),
+    [label, options],
+  );
+
   return (
     <FilterWrapper label={inputLabel}>
       <MultiSelect
         searchable
-        data={label === 'Seniority' ? Object.keys(seniorityMapping) : options}
+        data={data}
         placeholder="Select"
         classNames={{
           input: cn(
             'rounded-lg border-gray bg-dark text-white placeholder:text-white focus-within:border-white/30',
             { 'border border-white': hasValue },
-            { 'p-2': hasValue && !isMobile },
           ),
           searchInput: 'placeholder-white',
           itemsWrapper: 'bg-dark',

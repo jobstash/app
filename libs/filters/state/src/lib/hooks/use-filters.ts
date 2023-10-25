@@ -12,7 +12,6 @@ import {
 import { useAtom, useAtomValue } from 'jotai';
 
 import {
-  FILTER_KIND,
   FILTER_NAME,
   type FilterConfig,
   type FilterState,
@@ -24,7 +23,6 @@ import {
   ROUTE_SECTION,
   type RouteSection,
 } from '@jobstash/shared/core';
-import { decodeMultiSelectValue } from '@jobstash/filters/utils';
 import { gaEvent } from '@jobstash/shared/utils';
 
 import { jobCountAtom } from '@jobstash/jobs/state';
@@ -70,22 +68,22 @@ export const useFilters = (routeSection: RouteSection) => {
       }
 
       setShowFilters(false);
-      const filter_value = getFilterConfigValueString(url, state.filterConfig);
+      const filter_value = getFilterConfigValueString(url);
 
       gaEvent(GA_EVENT_ACTION.FILTER_ACTION, {
         filter_name: isSearch ? FILTER_NAME.JOB.SEARCH : FILTER_NAME.JOB.SUBMIT,
         filter_value,
       });
 
-      setTimeout(() => push(url, undefined, { shallow: true }), 100);
+      setTimeout(
+        () =>
+          push(url.toString().replaceAll('%2C', ','), undefined, {
+            shallow: true,
+          }),
+        100,
+      );
     },
-    [
-      routeSection,
-      setShowFilters,
-      state.filterConfig,
-      state.filterValues,
-      push,
-    ],
+    [routeSection, setShowFilters, state.filterValues, push],
   );
 
   const clearFilters = useCallback(() => {
@@ -227,29 +225,11 @@ const getFilterValuesParams = (filterValues: FilterValues): string => {
   return filterParams.join('&');
 };
 
-const getFilterConfigValueString = (
-  url: URL,
-  filterConfig: FilterConfig | null,
-) => {
-  const multiSelectKeys = new Set();
-  const filterConfigEntries = Object.entries(filterConfig ?? []);
-  for (const [key, value] of filterConfigEntries) {
-    if (
-      value.kind === FILTER_KIND.MULTI_SELECT ||
-      value.kind === FILTER_KIND.MULTI_SELECT_WITH_SEARCH
-    ) {
-      multiSelectKeys.add(key);
-    }
-  }
-
+const getFilterConfigValueString = (url: URL) => {
   const filterValuePairs = [];
 
   for (const [k, v] of url.searchParams.entries()) {
-    const isMultiSelect = multiSelectKeys.has(k);
-
-    const value = isMultiSelect ? decodeMultiSelectValue(v) : v;
-
-    filterValuePairs.push(`${k}=${value}`);
+    filterValuePairs.push(`${k}=${v}`);
   }
 
   return filterValuePairs.join('&');

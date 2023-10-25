@@ -1,8 +1,4 @@
-import {
-  type FilterAction,
-  type FilterState,
-  seniorityMapping,
-} from '@jobstash/filters/core';
+import { type FilterAction, type FilterState } from '@jobstash/filters/core';
 import { initFilterConfigData } from '@jobstash/filters/utils';
 import { encodeBase64, normalizeString } from '@jobstash/shared/utils';
 
@@ -47,15 +43,10 @@ export const filterReducer = (
       const value =
         selectedLabels.length > 0
           ? paramKey === 'seniority'
-            ? selectedLabels
-                .map((label) =>
-                  encodeBase64(
-                    seniorityMapping[label as keyof typeof seniorityMapping],
-                  ),
-                )
-                .join(',')
-            : selectedLabels.map((label) => encodeBase64(label)).join(',')
+            ? selectedLabels.join(',')
+            : selectedLabels.join(',')
           : null;
+
       return {
         ...state,
         filterValues: {
