@@ -13,6 +13,7 @@ import { createRightPanelProjectCardTags } from './utils/create-right-panel-proj
 import RightPanelCardBorder from './right-panel-card-border';
 import RightPanelCta from './right-panel-cta';
 import RightPanelProjectCardAuditTags from './right-panel-project-card-audit-tags';
+import RightPanelProjectCardChains from './right-panel-project-card-chains';
 import RightPanelProjectCardDescription from './right-panel-project-card-description';
 import RightPanelProjectCardHeader from './right-panel-project-card-header';
 import RightPanelProjectCardTags from './right-panel-project-card-tags';
@@ -24,7 +25,7 @@ interface Props {
 }
 
 const RightPanelProjectCard = ({ project, routeSection }: Props) => {
-  const { id, name, website, logo, description } = project;
+  const { id, name, website, logo, description, chains } = project;
   const { projectSocialTags, projectTags, projectTvlTags, projectAuditTags } =
     createRightPanelProjectCardTags(project);
 
@@ -50,12 +51,16 @@ const RightPanelProjectCard = ({ project, routeSection }: Props) => {
         <RightPanelProjectCardTags tags={projectTags} />
         <RightPanelProjectCardTvlTags tvlTags={projectTvlTags} />
         <RightPanelProjectCardAuditTags auditTags={projectAuditTags} />
+        <RightPanelProjectCardChains chains={chains} />
 
         {routeSection !== ROUTE_SECTION.PROJECTS && (
-          <RightPanelCta
-            text="Explore Project"
-            onClick={onClickExploreProject}
-          />
+          <>
+            <hr className="border-t border-white/10" />
+            <RightPanelCta
+              text="Explore Project"
+              onClick={onClickExploreProject}
+            />
+          </>
         )}
       </div>
     </RightPanelCardBorder>

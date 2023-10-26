@@ -13,6 +13,7 @@ import { createProjectKey } from '@jobstash/projects/utils';
 import { activeProjectIdAtom } from '@jobstash/projects/state';
 import { mobileRightPanelOpenAtom, useIsMobile } from '@jobstash/shared/state';
 
+import ProjectCardChains from './project-card-chains';
 import ProjectCardHeader from './project-card-header';
 import ProjectCardTags from './project-card-tags';
 import ProjectCardWrapper from './project-card-wrapper';
@@ -58,6 +59,7 @@ const ProjectCard = ({ isActive, projectListItem, filterParamsObj }: Props) => {
     <ProjectCardWrapper isActive={isActive} href={href} onClick={onClick}>
       <ProjectCardHeader projectListItem={projectListItem} />
       <ProjectCardTags projectListItem={projectListItem} />
+      <ProjectCardChains projectListItem={projectListItem} />
       {/* <ProjectCardTechs
         techs={projectDetails ? projectDetails.organization.tags : []}
       /> */}

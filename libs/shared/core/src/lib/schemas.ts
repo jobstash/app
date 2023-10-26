@@ -45,6 +45,7 @@ export const chainSchema = myzod
   .object({
     id: myzod.string().min(1),
     name: myzod.string().min(1),
+    logo: myzod.string().min(1).nullable(),
   })
   .allowUnknownKeys(true);
 
