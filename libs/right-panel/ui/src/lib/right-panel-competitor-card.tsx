@@ -31,17 +31,21 @@ const RightPanelCompetitorCard = ({ competitor }: Props) => {
           />
         </div>
 
-        <div>
-          <Text color="dimmed">{description}</Text>
-        </div>
+        {description && (
+          <div>
+            <Text color="dimmed">{description}</Text>
+          </div>
+        )}
 
-        <div className="flex gap-4">
-          {topTags.map(({ id, text, icon, link }) => (
-            <CardSet key={id} link={link} icon={icon}>
-              {text}
-            </CardSet>
-          ))}
-        </div>
+        {topTags.length > 0 && (
+          <div className="flex gap-4">
+            {topTags.map(({ id, text, icon, link }) => (
+              <CardSet key={id} link={link} icon={icon}>
+                {text}
+              </CardSet>
+            ))}
+          </div>
+        )}
 
         {bottomTags.length > 0 && (
           <>
