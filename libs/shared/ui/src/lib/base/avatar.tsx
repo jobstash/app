@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { forwardRef, memo } from 'react';
+import { memo } from 'react';
 
 import { cva, type VariantProps } from 'class-variance-authority';
 
@@ -25,16 +25,10 @@ export interface AvatarProps extends AvatarVariantProps {
   isRounded?: boolean;
 }
 
-const Avatar = forwardRef<HTMLDivElement, AvatarProps>(
-  ({ src, alt, size, isRounded }, ref) => (
-    <div
-      ref={ref}
-      className={cn(avatar({ size }), { 'rounded-full': isRounded })}
-    >
-      <Image fill src={src} alt={alt} />
-    </div>
-  ),
+const Avatar = ({ src, alt, size, isRounded }: AvatarProps) => (
+  <div className={cn(avatar({ size }), { 'rounded-full': isRounded })}>
+    <Image fill src={src} alt={alt} />
+  </div>
 );
-Avatar.displayName = 'Avatar';
 
 export default memo(Avatar);
