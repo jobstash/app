@@ -10,6 +10,7 @@ import { Heading } from '@jobstash/shared/ui';
 import RightPanelCardBorder from './right-panel-card-border';
 import RightPanelCta from './right-panel-cta';
 import RightPanelJobCardDescriptions from './right-panel-job-card-descriptions';
+import RightPanelJobCardSkills from './right-panel-job-card-skills';
 import RightPanelJobCardTags from './right-panel-job-card-tags';
 
 interface Props {
@@ -69,6 +70,8 @@ const RightPanelJobCard = ({
         </div>
 
         <RightPanelJobCardDescriptions jobInfo={jobInfo} />
+
+        <RightPanelJobCardSkills tags={tags} />
 
         {showExploreJob && (
           <div className="flex flex-col items-start py-4">

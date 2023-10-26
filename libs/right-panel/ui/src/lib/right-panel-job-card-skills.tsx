@@ -8,7 +8,7 @@ interface Props {
   tags: Tag[];
 }
 
-const RightPanelJobCardTags = ({ tags }: Props) => {
+const RightPanelJobCardSkills = ({ tags }: Props) => {
   if (tags.length === 0) return null;
 
   return (
@@ -20,10 +20,10 @@ const RightPanelJobCardTags = ({ tags }: Props) => {
       <div className="flex flex-col gap-5">
         <div className="flex flex-col gap-2">
           <Heading size="sm" fw="semibold">
-            Tags
+            Skills
           </Heading>
           <Text color="dimmed">
-            Tags that are required to be successful at the job
+            Skills that are required to be successful at the job
           </Text>
         </div>
       </div>
@@ -39,4 +39,4 @@ const RightPanelJobCardTags = ({ tags }: Props) => {
   );
 };
 
-export default memo(RightPanelJobCardTags);
+export default memo(RightPanelJobCardSkills);
