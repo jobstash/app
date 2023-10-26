@@ -4,7 +4,7 @@ export { default as Bartab } from './lib/base/bartab';
 export { default as Button } from './lib/base/button/button';
 export { default as LinkButton } from './lib/base/button/link-button';
 export { default as CardSet } from './lib/base/card-set';
-export { default as ChainList } from './lib/base/chain-list';
+export * from './lib/base/chain-list';
 export { default as Heading } from './lib/base/heading';
 export { default as Loader } from './lib/base/loader';
 export { default as LogoTitle } from './lib/base/logo-title';
