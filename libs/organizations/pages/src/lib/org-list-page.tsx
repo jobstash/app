@@ -45,7 +45,7 @@ export const OrgListPage = ({ initActiveOrg }: Props) => {
           'lg:pr-[50%]': !showFilters,
         })}
       >
-        <Filters routeSection={ROUTE_SECTION.JOBS} />
+        <Filters routeSection={ROUTE_SECTION.ORGANIZATIONS} />
 
         <div
           className={cn({

@@ -48,7 +48,7 @@ export const ProjectListPage = ({ initActiveProject }: Props) => {
           'lg:pr-[50%]': !showFilters,
         })}
       >
-        <Filters routeSection={ROUTE_SECTION.JOBS} />
+        <Filters routeSection={ROUTE_SECTION.PROJECTS} />
 
         <div
           className={cn({
