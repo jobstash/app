@@ -95,13 +95,7 @@ export const ProjectDetailsPage = ({
           'lg:pr-[50%]': !showFilters,
         })}
       >
-        <div
-          className={cn({
-            'bg-[#121216] w-[101%] pr-12': showFilters,
-          })}
-        >
-          <Filters routeSection={ROUTE_SECTION.PROJECTS} />
-        </div>
+        <Filters routeSection={ROUTE_SECTION.JOBS} />
 
         <div
           className={cn({
