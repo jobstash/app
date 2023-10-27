@@ -21,13 +21,16 @@ const FiltersWrapper = ({ children }: Props) => {
 
   useEffect(() => {
     let lastScrollY = window.pageYOffset;
+    const isLargerOffset = showFilters && scrollDirection === 'up';
+    const diffOffset = isLargerOffset ? 30 : 15;
 
     const updateScrollDirection = () => {
       const scrollY = window.pageYOffset;
       const direction = scrollY > lastScrollY ? 'down' : 'up';
       if (
         direction !== scrollDirection &&
-        (scrollY - lastScrollY > 15 || scrollY - lastScrollY < -15)
+        (scrollY - lastScrollY > diffOffset ||
+          scrollY - lastScrollY < -diffOffset)
       ) {
         setScrollDirection(direction);
       }
