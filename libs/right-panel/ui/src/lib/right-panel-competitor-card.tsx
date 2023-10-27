@@ -3,7 +3,7 @@ import { memo } from 'react';
 import { type Competitor } from '@jobstash/competitors/core';
 import { getLogoUrl } from '@jobstash/shared/utils';
 
-import { CardSet, LogoTitle, Text } from '@jobstash/shared/ui';
+import { CardSet, ChainList, LogoTitle, Text } from '@jobstash/shared/ui';
 
 import { createCompetitorTags } from './utils/create-right-panel-competitor-tags';
 import RightPanelCardBorder from './right-panel-card-border';
@@ -13,7 +13,7 @@ interface Props {
 }
 
 const RightPanelCompetitorCard = ({ competitor }: Props) => {
-  const { name, logo, description, url } = competitor;
+  const { name, logo, description, url, chains } = competitor;
 
   const { topTags, bottomTags } = createCompetitorTags(competitor);
 
@@ -58,6 +58,13 @@ const RightPanelCompetitorCard = ({ competitor }: Props) => {
                 </CardSet>
               ))}
             </div>
+          </>
+        )}
+
+        {chains.length > 0 && (
+          <>
+            <hr className="border-t border-white/10" />
+            <ChainList chains={chains} />
           </>
         )}
       </div>

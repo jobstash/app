@@ -1,3 +1,5 @@
+import { type Chain } from '@jobstash/shared/core';
+
 export interface Competitor {
   id: string;
   logo: string;
@@ -18,4 +20,6 @@ export interface Competitor {
   monthlyVolume?: number;
   monthlyRevenue?: number;
   monthlyFees?: number;
+
+  chains: Chain[];
 }
