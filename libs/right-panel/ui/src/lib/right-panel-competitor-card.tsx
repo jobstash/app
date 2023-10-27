@@ -1,21 +1,31 @@
 import { memo } from 'react';
 
 import { type Competitor } from '@jobstash/competitors/core';
-import { getLogoUrl } from '@jobstash/shared/utils';
+import { ROUTE_SECTION, TAB_SEGMENT } from '@jobstash/shared/core';
+import { getLogoUrl, slugify } from '@jobstash/shared/utils';
 
 import { CardSet, ChainList, LogoTitle, Text } from '@jobstash/shared/ui';
 
 import { createCompetitorTags } from './utils/create-right-panel-competitor-tags';
 import RightPanelCardBorder from './right-panel-card-border';
+import RightPanelCta from './right-panel-cta';
 
 interface Props {
   competitor: Competitor;
 }
 
 const RightPanelCompetitorCard = ({ competitor }: Props) => {
-  const { name, logo, description, url, chains } = competitor;
+  const { id, name, logo, description, url, chains } = competitor;
 
   const { topTags, bottomTags } = createCompetitorTags(competitor);
+
+  const slug = slugify(`${name} ${id}`);
+  const link = `${ROUTE_SECTION.PROJECTS}/${slug}/${TAB_SEGMENT.details}`;
+  const onClickExplore = () => {
+    if (typeof window !== 'undefined') {
+      window.location.href = link;
+    }
+  };
 
   return (
     <RightPanelCardBorder>
@@ -67,6 +77,10 @@ const RightPanelCompetitorCard = ({ competitor }: Props) => {
             <ChainList chains={chains} />
           </>
         )}
+
+        <hr className="border-t border-white/10" />
+
+        <RightPanelCta text="Explore Competitor" onClick={onClickExplore} />
       </div>
     </RightPanelCardBorder>
   );
