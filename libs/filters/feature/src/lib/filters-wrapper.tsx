@@ -55,15 +55,14 @@ const FiltersWrapper = ({ children }: Props) => {
   return (
     <div
       className={cn(
-        'bg-[#121216] z-50 sticky py-4 pr-2',
-        { 'transition-all duration-1000': scrollDirection !== null },
-        { 'top-16': isMobile },
-        { 'top-0': !isMobile },
+        'bg-[#121216] z-50 sticky py-4 pr-2 transition-all duration-1000 top-16 lg:top-0',
         {
-          '-top-44': scrollDirection === 'down' && !showFilters,
+          '-top-60 sm:-top-44 lg:-top-44':
+            scrollDirection === 'down' && !showFilters,
         },
         {
-          '-top-[75%]': scrollDirection === 'down' && topLarge,
+          '-top-[100%] sm:-top-[75%] lg:-top-[75%]':
+            scrollDirection === 'down' && topLarge,
         },
         { 'w-[calc(100%+32px)]': showFilters && !isMobile },
       )}
