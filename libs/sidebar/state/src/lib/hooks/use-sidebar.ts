@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 
-import { useSIWE } from 'connectkit';
 import { useAtomValue } from 'jotai';
 
 import { useAuthContext } from '@jobstash/auth/state';
@@ -19,7 +18,9 @@ export const useSidebar = () => {
     }
   }, [sidebarOpen]);
 
-  const { isSignedIn } = useSIWE();
+  //
+  // const { isSignedIn } = useSIWE();
+  const isSignedIn = false;
 
   const { role } = useAuthContext();
 

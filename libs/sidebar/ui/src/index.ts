@@ -9,3 +9,4 @@ export { default as SidebarDiscoverBartabs } from './lib/sidebar-discover-bartab
 export { default as SidebarSkeleton } from './lib/sidebar-skeleton';
 export { default as SidebarUserSection } from './lib/sidebar-user-section';
 export { default as SidebarWrapper } from './lib/sidebar-wrapper';
+export { default as SubscribeTelegramButton } from './lib/subscribe-telegram-button';

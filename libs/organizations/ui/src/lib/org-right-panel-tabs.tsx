@@ -53,11 +53,12 @@ const OrgRightPanelTabs = ({ currentTab, orgDetails }: Props) => {
       });
     }
 
-    tabs.push({
-      text: 'Reviews',
-      tabSegment: TAB_SEGMENT.reviews,
-      href: createOrgHref(TAB_SEGMENT.reviews),
-    });
+    //
+    // tabs.push({
+    //   text: 'Reviews',
+    //   tabSegment: TAB_SEGMENT.reviews,
+    //   href: createOrgHref(TAB_SEGMENT.reviews),
+    // });
 
     return tabs;
   }, [createOrgHref, jobs.length, projects.length]);

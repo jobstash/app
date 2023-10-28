@@ -7,16 +7,17 @@ import { useRouter } from 'next/router';
 import Script from 'next/script';
 import { useEffect } from 'react';
 
-import { LoadingPage } from '@jobstash/shared/pages';
 import NProgress from 'nprogress';
 
 import { ANALYTICS_ID } from '@jobstash/shared/core';
 
-import { AuthProvider } from '@jobstash/auth/state';
 import { MantineProvider, ReactQueryProvider } from '@jobstash/shared/state';
 import { useNProgress } from '@jobstash/shared/state';
 
-import { WagmiSiweSync } from '@jobstash/auth/feature';
+//
+// import { LoadingPage } from '@jobstash/shared/pages';
+// import { AuthProvider } from '@jobstash/auth/state';
+// import { WagmiSiweSync } from '@jobstash/auth/feature';
 
 NProgress.configure({
   template: '<div class="bar" role="bar"><div class="peg"></div></div></div>',
@@ -70,7 +71,7 @@ const App = ({ Component, pageProps }: AppProps) => {
             id="gtag-init"
             strategy="afterInteractive"
             dangerouslySetInnerHTML={{
-              __html: `p
+              __html: `
             window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
@@ -84,10 +85,10 @@ const App = ({ Component, pageProps }: AppProps) => {
       )}
       <ReactQueryProvider dehydratedState={pageProps.dehydratedState}>
         <MantineProvider>
-          <AuthProvider screenLoader={<LoadingPage />}>
-            <Component {...pageProps} />
-            <WagmiSiweSync />
-          </AuthProvider>
+          {/* <AuthProvider screenLoader={<LoadingPage />}> */}
+          <Component {...pageProps} />
+          {/* <WagmiSiweSync /> */}
+          {/* </AuthProvider> */}
         </MantineProvider>
       </ReactQueryProvider>
     </>

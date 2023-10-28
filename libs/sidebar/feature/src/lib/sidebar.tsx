@@ -2,23 +2,18 @@ import { memo } from 'react';
 
 import { SidebarProvider } from '@jobstash/sidebar/state';
 
-import {
-  CloseIcon,
-  HamburgerIcon,
-  IsMountedWrapper,
-  Text,
-} from '@jobstash/shared/ui';
+import { CloseIcon, HamburgerIcon, Text } from '@jobstash/shared/ui';
 import {
   Brand,
   MobileMenuButton,
   MobileNavbarWrapper,
+  RequestToBeListedButton,
   SidebarBookmarksSection,
   SidebarCloseButton,
   SidebarDiscoverBartabs,
-  SidebarUserSection,
   SidebarWrapper,
+  SubscribeTelegramButton,
 } from '@jobstash/sidebar/ui';
-import { ConnectWalletButton } from '@jobstash/auth/feature';
 
 const Sidebar = () => (
   <SidebarProvider>
@@ -58,11 +53,13 @@ const Sidebar = () => (
 
       {/* BOTTOM BARTABS */}
       <div className="inset-x-0 bottom-0 hidden space-y-4 p-4 lg:absolute lg:block">
-        <IsMountedWrapper>
+        {/* <IsMountedWrapper>
           <SidebarUserSection />
-        </IsMountedWrapper>
+        </IsMountedWrapper> */}
+        <SubscribeTelegramButton />
         <hr className="border-t border-white/20" />
-        <ConnectWalletButton />
+        {/* <ConnectWalletButton /> */}
+        <RequestToBeListedButton />
       </div>
     </SidebarWrapper>
   </SidebarProvider>
