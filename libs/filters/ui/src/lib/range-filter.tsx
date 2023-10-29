@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import { type Dispatch, memo, useMemo } from 'react';
+import { type Dispatch, memo, useCallback, useMemo } from 'react';
 
 import { Popover, RangeSlider } from '@mantine/core';
 
@@ -40,19 +40,27 @@ const RangeFilter = ({
   dispatch,
   gaEventName,
 }: Props) => {
-  const increment = Math.round((maxConfigValue - minConfigValue) / 100);
+  const interval = (maxConfigValue - minConfigValue) / 100;
 
-  const labelFn = (v: number) =>
-    formatPrefixedNum(increment * v + minConfigValue, prefix);
+  const getIntervalValue = useCallback(
+    (v: number) => v * interval + minConfigValue,
+    [minConfigValue, interval],
+  );
+  const getInputValue = useCallback(
+    (v: string) => (Number(v) - minConfigValue) / interval,
+    [minConfigValue, interval],
+  );
 
-  const marks = [0, 20, 40, 60, 80, 100].map((value) => ({
-    value,
-    label: formatPrefixedNum(increment * value + minConfigValue, prefix),
+  const labelFn = (v: number) => formatPrefixedNum(getIntervalValue(v), prefix);
+
+  const marks = [0, 20, 40, 60, 80, 100].map((v) => ({
+    value: v,
+    label: formatPrefixedNum(getIntervalValue(v), prefix),
   }));
 
   const onChange = ([minRangeValue, maxRangeValue]: [number, number]) => {
-    const min = (minRangeValue * increment + minConfigValue).toString();
-    const max = (maxRangeValue * increment + minConfigValue).toString();
+    const min = getIntervalValue(minRangeValue).toString();
+    const max = getIntervalValue(maxRangeValue).toString();
 
     dispatch({
       type: 'SET_RANGE_FILTER_VALUE',
@@ -66,8 +74,8 @@ const RangeFilter = ({
   };
 
   const onChangeEnd = ([minRangeValue, maxRangeValue]: [number, number]) => {
-    const min = (minRangeValue * increment + minConfigValue).toString();
-    const max = (maxRangeValue * increment + minConfigValue).toString();
+    const min = getIntervalValue(minRangeValue).toString();
+    const max = getIntervalValue(maxRangeValue).toString();
 
     if (gaEventName) {
       gaEvent(GA_EVENT_ACTION.FILTER_ACTION, {
@@ -88,12 +96,8 @@ const RangeFilter = ({
     )} - ${formatPrefixedNum(Number(maxValue), prefix)}`;
   }, [maxValue, minValue, prefix]);
 
-  const minInputValue = minValue
-    ? Math.round((Number(minValue) / maxConfigValue) * 100)
-    : 0;
-  const maxInputValue = maxValue
-    ? Math.round((Number(maxValue) / maxConfigValue) * 100)
-    : 100;
+  const minInputValue = minValue ? getInputValue(minValue) : 0;
+  const maxInputValue = maxValue ? getInputValue(maxValue) : 100;
 
   return (
     <FilterWrapper label={label}>
