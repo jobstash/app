@@ -102,7 +102,7 @@ const RangeFilter = ({
   return (
     <FilterWrapper label={label}>
       <Popover
-        withinPortal
+        trapFocus
         position="bottom-start"
         width={320}
         classNames={{
@@ -110,17 +110,16 @@ const RangeFilter = ({
         }}
       >
         <Popover.Target>
-          <div className="[&>*]:w-full">
-            <Button
-              isFullWidth
-              isBordered={isBordered}
-              variant="outline"
-              right={<CaretDownIcon />}
-              textProps={{ className: 'truncate' }}
-            >
-              {buttonText}
-            </Button>
-          </div>
+          <Button
+            isFullWidth
+            isBordered={isBordered}
+            variant="outline"
+            right={<CaretDownIcon />}
+            textProps={{ className: 'truncate' }}
+            className="w-full"
+          >
+            {buttonText}
+          </Button>
         </Popover.Target>
         <Popover.Dropdown>
           <RangeSlider
