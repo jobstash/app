@@ -64,8 +64,8 @@ const FilterConfigMapper = ({
                 maxValue={filterValues[config.value.highest.paramKey]}
                 minParamKey={config.value.lowest.paramKey}
                 maxParamKey={config.value.highest.paramKey}
-                minConfigValue={config.value.lowest.value}
-                maxConfigValue={config.value.highest.value}
+                minConfigValue={roundConfigValue(config.value.lowest.value)}
+                maxConfigValue={roundConfigValue(config.value.highest.value)}
                 dispatch={dispatch}
                 prefix={config.prefix}
                 gaEventName={config.googleAnalyticsEventName}
@@ -89,5 +89,7 @@ const FilterConfigMapper = ({
     </>
   );
 };
+
+const roundConfigValue = (num: number) => Math.round(num / 1000) * 1000;
 
 export default memo(FilterConfigMapper);
