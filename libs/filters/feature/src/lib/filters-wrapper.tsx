@@ -1,6 +1,7 @@
 import { ReactNode, useEffect, useState } from 'react';
+import { useInView } from 'react-intersection-observer';
 
-import { useAtomValue } from 'jotai';
+import { useAtom } from 'jotai';
 
 import { cn } from '@jobstash/shared/utils';
 
@@ -13,7 +14,7 @@ interface Props {
 
 const FiltersWrapper = ({ children }: Props) => {
   const isMobile = useIsMobile();
-  const showFilters = useAtomValue(showFiltersAtom);
+  const [showFilters, setShowFilters] = useAtom(showFiltersAtom);
 
   const [scrollDirection, setScrollDirection] = useState<'up' | 'down' | null>(
     null,
@@ -52,8 +53,16 @@ const FiltersWrapper = ({ children }: Props) => {
     }
   }, [scrollDirection, showFilters]);
 
+  const { ref, inView } = useInView();
+  useEffect(() => {
+    if (!inView && showFilters) {
+      setShowFilters(false);
+    }
+  }, [inView, setShowFilters, showFilters]);
+
   return (
     <div
+      ref={ref}
       className={cn(
         'flex flex-col py-4 lg:pt-8 gap-y-4 bg-[#121216] z-50 sticky pr-2 transition-all duration-1000 top-[49px] lg:top-0 box-border',
         {
