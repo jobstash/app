@@ -58,7 +58,7 @@ export const createRightPanelProjectCardTags = (
       id: TAG_ELEMENT_ID.github,
       text: 'Github',
       icon: <GithubLogoOutlineIcon />,
-      link: github,
+      link: `https://github.com/${github}`,
       showLinkIcon: false,
       asLink: true,
     });
@@ -80,7 +80,7 @@ export const createRightPanelProjectCardTags = (
       id: TAG_ELEMENT_ID.telegram,
       text: 'Telegram',
       icon: <TelegramIcon />,
-      link: telegram,
+      link: `https://telegram.me/${telegram}`,
       showLinkIcon: false,
       asLink: true,
     });
