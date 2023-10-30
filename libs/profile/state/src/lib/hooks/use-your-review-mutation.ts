@@ -6,8 +6,6 @@ import {
 } from '@jobstash/profile/core';
 import { notifError, notifSuccess } from '@jobstash/shared/utils';
 
-import { useNProgress } from '@jobstash/shared/state';
-
 import { useProfileReviewsPageContext } from '../contexts/profile-reviews-page-context';
 
 interface Payload {
@@ -26,7 +24,6 @@ interface Payload {
 
 export const useYourReviewMutation = () => {
   const { setIsLoadingCard } = useProfileReviewsPageContext();
-  const { startNProgress, stopNProgress } = useNProgress();
   const { isLoading, mutate } = useMutation({
     mutationFn: (payload: Payload) =>
       fetch('/api/fakers/profile/reviews/your-review', {
@@ -39,7 +36,6 @@ export const useYourReviewMutation = () => {
         body: JSON.stringify({ ...payload }),
       }).then(() => payload),
     onMutate() {
-      startNProgress(true);
       setIsLoadingCard(true);
     },
     onSuccess(profileInfo) {
@@ -52,7 +48,6 @@ export const useYourReviewMutation = () => {
       notifError();
     },
     onSettled() {
-      stopNProgress(true);
       setIsLoadingCard(false);
 
       // TODO: invalidate org-review-list

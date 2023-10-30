@@ -6,8 +6,6 @@ import {
 } from '@jobstash/profile/core';
 import { notifError, notifSuccess } from '@jobstash/shared/utils';
 
-import { useNProgress } from '@jobstash/shared/state';
-
 import { useProfileReviewsPageContext } from '../contexts/profile-reviews-page-context';
 
 interface Payload {
@@ -30,7 +28,6 @@ interface Payload {
 
 export const useRatingMutation = () => {
   const { setIsLoadingCard } = useProfileReviewsPageContext();
-  const { startNProgress, stopNProgress } = useNProgress();
 
   const { isLoading, mutate } = useMutation({
     mutationFn: (payload: Payload) =>
@@ -44,7 +41,6 @@ export const useRatingMutation = () => {
         body: JSON.stringify({ ...payload }),
       }).then(() => payload),
     onMutate() {
-      startNProgress(true);
       setIsLoadingCard(true);
     },
     onSuccess(profileInfo) {
@@ -57,7 +53,6 @@ export const useRatingMutation = () => {
       notifError();
     },
     onSettled() {
-      stopNProgress(true);
       setIsLoadingCard(false);
 
       // TODO: invalidate org-review-list
