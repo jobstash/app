@@ -9,9 +9,10 @@ import { createJobCardProjectTags } from './utils/create-job-card-project-tags';
 
 interface Props {
   project: ProjectInfo;
+  hasMinWidth?: boolean;
 }
 
-const JobCardProject = ({ project }: Props) => {
+const JobCardProject = ({ project, hasMinWidth }: Props) => {
   const { projectInfoTags, projectTvlTags, projectAuditTags } =
     createJobCardProjectTags(project);
 
@@ -19,8 +20,9 @@ const JobCardProject = ({ project }: Props) => {
     <>
       <hr className="border-t border-white/10" />
 
-      <div className="flex flex-wrap items-center gap-8">
+      <div className="flex flex-wrap items-center gap-x-6">
         <LogoTitle
+          hasMinWidth={hasMinWidth}
           title={project.name}
           avatarProps={{
             src: getLogoUrl(project.website, project.logo),

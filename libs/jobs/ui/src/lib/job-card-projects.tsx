@@ -12,9 +12,13 @@ const JobCardProjects = ({ projects }: Props) => {
   if (projects.length === 0) return null;
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-3">
       {projects.map((project) => (
-        <JobCardProject key={project.id} project={project} />
+        <JobCardProject
+          key={project.id}
+          project={project}
+          hasMinWidth={projects.length > 1}
+        />
       ))}
     </div>
   );

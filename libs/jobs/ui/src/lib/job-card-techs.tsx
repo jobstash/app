@@ -15,7 +15,7 @@ const JobCardTechs = ({ techs }: Props) => {
     <>
       <hr className="border-t border-white/10" />
       <div className="items-center justify-between lg:flex py-1">
-        <div className="flex flex-wrap gap-4">
+        <div className="flex flex-wrap gap-2">
           {techs.map(({ name, id }) => (
             <TechWrapper key={id} id={id}>
               {name}
