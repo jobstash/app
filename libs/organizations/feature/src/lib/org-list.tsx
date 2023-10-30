@@ -27,7 +27,7 @@ const OrgList = ({ initOrg, activeOrgId }: Props) => {
 
   if (isLoading) {
     return (
-      <div className="py-4">
+      <div className="pb-4">
         {initOrg && (
           <OrgCard
             key={initOrg.orgId}
@@ -52,7 +52,7 @@ const OrgList = ({ initOrg, activeOrgId }: Props) => {
   }
 
   return (
-    <div className="flex flex-col gap-y-4 py-4">
+    <div className="flex flex-col gap-y-4 pb-4">
       {orgListItems.map((orgListItem) => (
         <OrgCard
           key={orgListItem.orgId}
