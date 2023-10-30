@@ -2,8 +2,6 @@ import { useMutation } from '@tanstack/react-query';
 
 import { notifError, notifSuccess } from '@jobstash/shared/utils';
 
-import { useNProgress } from '@jobstash/shared/state';
-
 import { useProfileRepoPageContext } from '../contexts/profile-repo-page-context';
 
 interface Payload {
@@ -13,7 +11,6 @@ interface Payload {
 
 export const useYourContributionMutation = () => {
   const { setIsLoadingCard } = useProfileRepoPageContext();
-  const { startNProgress, stopNProgress } = useNProgress();
 
   const { isLoading, mutate } = useMutation({
     mutationFn: (payload: Payload) =>
@@ -27,7 +24,6 @@ export const useYourContributionMutation = () => {
         body: JSON.stringify({ ...payload }),
       }),
     onMutate() {
-      startNProgress(true);
       setIsLoadingCard(true);
     },
     onSuccess(profileInfo) {
@@ -42,7 +38,6 @@ export const useYourContributionMutation = () => {
       notifError();
     },
     onSettled() {
-      stopNProgress(true);
       setIsLoadingCard(false);
 
       // TODO: invalidate profile-repo-list

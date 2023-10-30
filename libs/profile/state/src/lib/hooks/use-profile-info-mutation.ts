@@ -4,8 +4,6 @@ import { useAccount } from 'wagmi';
 import { type ProfileInfo } from '@jobstash/profile/core';
 import { notifError, notifSuccess } from '@jobstash/shared/utils';
 
-import { useNProgress } from '@jobstash/shared/state';
-
 const PROFILE_HEADER_NOTIF_ID = 'profile-header';
 
 export const useProfileInfoMutation = () => {
@@ -13,8 +11,6 @@ export const useProfileInfoMutation = () => {
   const queryClient = useQueryClient();
 
   const profileInfoQueryKey = ['profile-info', address];
-
-  const { startNProgress, stopNProgress } = useNProgress();
 
   const { isLoading, mutate } = useMutation({
     mutationFn: (profileInfo: ProfileInfo) =>
@@ -30,9 +26,6 @@ export const useProfileInfoMutation = () => {
           contact: profileInfo.contact,
         }),
       }).then(() => profileInfo),
-    onMutate() {
-      startNProgress(true);
-    },
     onSuccess(profileInfo) {
       queryClient.setQueryData(profileInfoQueryKey, profileInfo);
 
@@ -53,8 +46,6 @@ export const useProfileInfoMutation = () => {
       });
     },
     onSettled() {
-      stopNProgress(true);
-
       // Always refetch after
       queryClient.invalidateQueries({
         queryKey: ['profile-info', address],

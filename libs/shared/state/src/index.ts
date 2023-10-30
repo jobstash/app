@@ -12,4 +12,3 @@ export * from './lib/hooks/use-delayed-auth-render';
 export * from './lib/hooks/use-is-mobile';
 export * from './lib/hooks/use-is-mounted';
 export * from './lib/hooks/use-media-query';
-export * from './lib/hooks/use-nprogress';

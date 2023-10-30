@@ -1,5 +1,4 @@
 import '../styles/globals.css';
-import 'nprogress/nprogress.css';
 
 import { AppProps } from 'next/app';
 import Head from 'next/head';
@@ -7,21 +6,14 @@ import { useRouter } from 'next/router';
 import Script from 'next/script';
 import { useEffect } from 'react';
 
-import NProgress from 'nprogress';
-
 import { ANALYTICS_ID } from '@jobstash/shared/core';
 
 import { MantineProvider, ReactQueryProvider } from '@jobstash/shared/state';
-import { useNProgress } from '@jobstash/shared/state';
 
 //
 // import { LoadingPage } from '@jobstash/shared/pages';
 // import { AuthProvider } from '@jobstash/auth/state';
 // import { WagmiSiweSync } from '@jobstash/auth/feature';
-
-NProgress.configure({
-  template: '<div class="bar" role="bar"><div class="peg"></div></div></div>',
-});
 
 const App = ({ Component, pageProps }: AppProps) => {
   const router = useRouter();
@@ -32,27 +24,6 @@ const App = ({ Component, pageProps }: AppProps) => {
       return true;
     });
   }, [router]);
-
-  const { startNProgress, stopNProgress } = useNProgress();
-  useEffect(() => {
-    const handleStart = () => {
-      startNProgress();
-    };
-
-    const handleComplete = (url: string) => {
-      stopNProgress(false, url);
-    };
-
-    router.events.on('routeChangeStart', handleStart);
-    router.events.on('routeChangeComplete', handleComplete);
-    router.events.on('routeChangeError', stopNProgress);
-
-    return () => {
-      router.events.off('routeChangeStart', handleStart);
-      router.events.off('routeChangeComplete', handleComplete);
-      router.events.off('routeChangeError', stopNProgress);
-    };
-  }, [router, startNProgress, stopNProgress]);
 
   return (
     <>

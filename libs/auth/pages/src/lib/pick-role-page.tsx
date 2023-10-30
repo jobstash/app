@@ -1,5 +1,4 @@
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
 
 import { LoadingPage } from '@jobstash/shared/pages';
 import { useAtomValue } from 'jotai';
@@ -8,7 +7,7 @@ import { CHECK_WALLET_FLOWS } from '@jobstash/auth/core';
 import { MW_URL } from '@jobstash/shared/core';
 
 import { isLoadingDevCallbackAtom, useAuthContext } from '@jobstash/auth/state';
-import { useIsMounted, useNProgress } from '@jobstash/shared/state';
+import { useIsMounted } from '@jobstash/shared/state';
 
 import {
   PickRoleButton,
@@ -52,16 +51,6 @@ const useFlowCheck = () => {
   const isMounted = useIsMounted();
   const isLoadingDevCallback = useAtomValue(isLoadingDevCallbackAtom);
   const { flow } = useAuthContext();
-
-  const { startNProgress, stopNProgress } = useNProgress();
-
-  useEffect(() => {
-    if (isLoadingDevCallback) {
-      startNProgress();
-    } else {
-      stopNProgress();
-    }
-  }, [isLoadingDevCallback, startNProgress, stopNProgress]);
 
   return (
     isMounted && !isLoadingDevCallback && flow === CHECK_WALLET_FLOWS.PICK_ROLE
