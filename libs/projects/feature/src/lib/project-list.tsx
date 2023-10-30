@@ -27,7 +27,7 @@ const ProjectList = ({ initProject, activeProjectId }: Props) => {
 
   if (isLoading) {
     return (
-      <div className="py-4">
+      <div className="pb-4">
         {initProject && (
           <ProjectCard
             key={initProject.id}
@@ -52,7 +52,7 @@ const ProjectList = ({ initProject, activeProjectId }: Props) => {
   }
 
   return (
-    <div className="flex flex-col gap-y-4 py-4">
+    <div className="flex flex-col gap-y-4 pb-4">
       {projectListItems.map((projectListItem) => (
         <ProjectCard
           key={projectListItem.id}

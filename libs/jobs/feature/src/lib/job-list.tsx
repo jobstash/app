@@ -27,7 +27,7 @@ const JobList = ({ initJob, activeJob }: Props) => {
 
   if (isLoading) {
     return (
-      <div className="py-4">
+      <div className="pb-4">
         {initJob && (
           <JobCard
             key={initJob.id}
@@ -52,7 +52,7 @@ const JobList = ({ initJob, activeJob }: Props) => {
   }
 
   return (
-    <div className="flex flex-col gap-y-4 py-4">
+    <div className="flex flex-col gap-y-4 pb-4">
       {jobPosts.map((jobPost) => (
         <JobCard
           key={jobPost.shortUUID}

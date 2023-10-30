@@ -45,7 +45,7 @@ export const JobListPage = () => {
         <SideBar />
 
         <div
-          className={cn('px-3.5 pt-[65px] lg:px-8 lg:pt-0', {
+          className={cn('px-3.5 pt-16 lg:px-8 lg:pt-0', {
             'z-50': showFilters,
             'lg:pr-[50%]': !showFilters,
           })}
