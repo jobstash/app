@@ -22,7 +22,7 @@ export const createOrgInfoSocials = (orgInfo: OrgInfo) => {
       id: TAG_ELEMENT_ID.github,
       text: 'Github',
       icon: <GithubLogoOutlineIcon />,
-      link: github,
+      link: `https://github.com/${github}`,
     });
   }
 
@@ -40,7 +40,7 @@ export const createOrgInfoSocials = (orgInfo: OrgInfo) => {
       id: TAG_ELEMENT_ID.telegram,
       text: 'Telegram',
       icon: <TelegramIcon />,
-      link: telegram,
+      link: `https://telegram.me/${telegram}`,
     });
   }
 
