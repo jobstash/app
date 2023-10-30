@@ -50,9 +50,13 @@ export const createJobTags = (jobInfo: JobInfo) => {
   }
 
   if (minimumSalary && maximumSalary) {
-    const salary = `${salaryCurrency} ${numFormatter.format(
-      minimumSalary,
-    )} - ${numFormatter.format(maximumSalary)}`;
+    const salary = `${salaryCurrency} ${
+      minimumSalary === maximumSalary
+        ? numFormatter.format(maximumSalary)
+        : `${numFormatter.format(minimumSalary)} - ${numFormatter.format(
+            maximumSalary,
+          )}`
+    }`;
     tags.push({
       id: TAG_ELEMENT_ID.salary,
       text: `Salary: ${salary}`,
