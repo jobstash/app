@@ -5,7 +5,7 @@ import { type JobPost } from '@jobstash/jobs/core';
 import { useJobList } from '@jobstash/jobs/state';
 
 import { JobCard, JobListEmptyResult } from '@jobstash/jobs/ui';
-import { Loader } from '@jobstash/shared/ui';
+import { ListErrorMessage, Loader } from '@jobstash/shared/ui';
 
 interface Props {
   initJob: JobPost | null;
@@ -68,11 +68,8 @@ const JobList = ({ initJob, activeJob }: Props) => {
           {!hasNextPage && <p>No more job posts to load</p>}
         </div>
       )}
-      {(error as Error)?.message && (
-        <div className="py-8">
-          <p>error = {(error as Error).message}</p>
-        </div>
-      )}
+
+      {(error as Error)?.message && <ListErrorMessage error={error} />}
     </div>
   );
 };

@@ -116,6 +116,7 @@ module.exports = {
       pulse: 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       spin: 'spin 2.4s linear infinite',
       spin2: 'spin 0.4s linear infinite',
+      'spin-slow': 'spin 220s linear infinite',
       'reverse-spin': 'reverse-spin 2.4s linear infinite',
       shake: 'shake 0.82s cubic-bezier(.36,.07,.19,.97) both',
       'fade-in-left': 'fade-in-left 0.3s linear',

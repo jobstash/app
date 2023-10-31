@@ -70,6 +70,7 @@ export { default as UsersThreeIcon } from './lib/icons/users-three-icon';
 export { default as BreadCrumbs } from './lib/components/breadcrumbs';
 export { default as EmptyResult } from './lib/components/empty-result';
 export { default as Hexagon } from './lib/components/hexagon';
+export { default as InternalErrorResult } from './lib/components/internal-error-result';
 export { default as IsMountedWrapper } from './lib/components/is-mounted-wrapper';
 export { default as ListErrorMessage } from './lib/components/list-error-message';
 export { default as ListNextPageLoader } from './lib/components/list-next-page-loader';

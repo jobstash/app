@@ -1,5 +1,7 @@
 import { memo } from 'react';
 
+import InternalErrorResult from './internal-error-result';
+
 interface Props {
   error: unknown;
 }
@@ -7,11 +9,7 @@ interface Props {
 const ListErrorMessage = ({ error }: Props) => {
   if (!error) return null;
 
-  return (
-    <div className="py-8">
-      <p>error = {(error as Error).message}</p>
-    </div>
-  );
+  return <InternalErrorResult />;
 };
 
 export default memo(ListErrorMessage);
