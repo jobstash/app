@@ -11,9 +11,13 @@ interface Props {
 const JobCardProjects = ({ projects }: Props) => {
   if (projects.length === 0) return null;
 
+  const sortedProjects = projects
+    .sort((a, b) => (a.tvl ?? 0) - (b.tvl ?? 0))
+    .slice(0, 2);
+
   return (
     <div className="flex flex-col gap-3">
-      {projects.map((project) => (
+      {sortedProjects.map((project) => (
         <JobCardProject
           key={project.id}
           project={project}
