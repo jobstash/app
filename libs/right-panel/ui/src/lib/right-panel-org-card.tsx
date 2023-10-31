@@ -36,7 +36,7 @@ const RightPanelOrgCard = ({ org, routeSection }: Props) => {
   return (
     <RightPanelCardBorder>
       <div className="flex flex-col p-6">
-        <div className="flex flex-col gap-6">
+        <div className="flex flex-col gap-4">
           <RightPanelOrgCardHeader name={name} description={description} />
           <RightPanelOrgCardFundingRounds fundingRounds={sortedFundingRounds} />
           <RightPanelOrgCardInvestors investors={investors} />

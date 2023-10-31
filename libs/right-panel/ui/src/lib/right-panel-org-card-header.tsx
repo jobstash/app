@@ -13,9 +13,7 @@ const RightPanelOrgCardHeader = ({ name, description }: Props) => (
       {name}
     </Heading>
 
-    <div className="flex h-fit flex-col justify-center">
-      <hr className="border-t border-white/10" />
-    </div>
+    <hr className="border-t border-white/10" />
 
     <div>
       <Text color="dimmed">{description}</Text>

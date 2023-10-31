@@ -40,7 +40,7 @@ const RightPanelProjectCard = ({ project, routeSection }: Props) => {
 
   return (
     <RightPanelCardBorder>
-      <div className="flex flex-col gap-5 p-6">
+      <div className="flex flex-col gap-4 p-6">
         <RightPanelProjectCardHeader
           name={name}
           url={website}
