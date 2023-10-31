@@ -10,8 +10,8 @@ import { Heading } from '@jobstash/shared/ui';
 import RightPanelCardBorder from './right-panel-card-border';
 import RightPanelCta from './right-panel-cta';
 import RightPanelJobCardDescriptions from './right-panel-job-card-descriptions';
+import RightPanelJobCardSets from './right-panel-job-card-sets';
 import RightPanelJobCardSkills from './right-panel-job-card-skills';
-import RightPanelJobCardTags from './right-panel-job-card-tags';
 
 interface Props {
   orgName: string;
@@ -60,12 +60,12 @@ const RightPanelJobCard = ({
           </div> */}
           </div>
 
-          <RightPanelJobCardTags jobInfo={jobInfo} />
+          <RightPanelJobCardSets jobCardSet={jobInfo} />
 
           <RightPanelCta text="Apply for this job" onClick={onClickApplyJob} />
         </div>
 
-        <div className="flex h-8 flex-col justify-center">
+        <div className="flex h-4 flex-col justify-center">
           <hr className="border-t border-white/10" />
         </div>
 

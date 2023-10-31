@@ -1,6 +1,6 @@
 import { jobSeniorityMapping, jobSenioritySet } from '@jobstash/jobs/core';
 import {
-  type JobInfo,
+  type JobCardSet,
   TAG_ELEMENT_ID,
   type TagElement,
 } from '@jobstash/shared/core';
@@ -15,7 +15,7 @@ import RemoteIcon from '../icons/remote-icon';
 import SuitcaseIcon from '../icons/suitcase-icon';
 import TokenAllocationIcon from '../icons/token-allocation-icon';
 
-export const createJobTags = (jobInfo: JobInfo) => {
+export const createJobTags = (jobCardSet: JobCardSet) => {
   const {
     seniority,
     minimumSalary,
@@ -27,7 +27,7 @@ export const createJobTags = (jobInfo: JobInfo) => {
     offersTokenAllocation,
     salaryCurrency = 'USD',
     classification,
-  } = jobInfo;
+  } = jobCardSet;
 
   const tags: TagElement[] = [];
 

@@ -6,6 +6,7 @@ export { default as RightPanelJobCards } from './lib/right-panel-job-cards';
 export { default as RightPanelJobTabs } from './lib/right-panel-job-tabs';
 export { default as RightPanelMobileNav } from './lib/right-panel-mobile-nav';
 export { default as RightPanelOrgCard } from './lib/right-panel-org-card';
+export { default as RightPanelOrgJobCards } from './lib/right-panel-org-job-cards';
 export { default as RightPanelProjectCard } from './lib/right-panel-project-card';
 export { default as RightPanelProjectCards } from './lib/right-panel-project-cards';
 export { default as RightPanelReviews } from './lib/right-panel-reviews';

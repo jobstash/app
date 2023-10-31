@@ -3,11 +3,10 @@ import myzod from 'myzod';
 import {
   fundingRoundSchema,
   investorSchema,
-  jobInfoSchema,
+  jobCardSetSchema,
   orgInfoSchema,
   projectInfoSchema,
   projectMoreInfoSchema,
-  tagSchema,
 } from '@jobstash/shared/core';
 
 export const orgListItemSchema = myzod.object({
@@ -27,6 +26,18 @@ const orgProjectSchema = myzod
   .intersection(projectInfoSchema, projectMoreInfoSchema)
   .allowUnknownKeys(true);
 
+export const orgJobSchema = myzod
+  .intersection(
+    jobCardSetSchema,
+    myzod.object({
+      id: myzod.string().min(1),
+      title: myzod.string().min(1),
+      shortUUID: myzod.string().min(1),
+      summary: myzod.string().min(1).nullable(),
+    }),
+  )
+  .allowUnknownKeys(true);
+
 export const orgDetailsSchema = myzod
   .intersection(
     orgInfoSchema,
@@ -34,12 +45,7 @@ export const orgDetailsSchema = myzod
       projects: myzod.array(orgProjectSchema),
       fundingRounds: myzod.array(fundingRoundSchema),
       investors: myzod.array(investorSchema),
-      jobs: myzod.array(
-        myzod.intersection(
-          jobInfoSchema,
-          myzod.object({ tags: myzod.array(tagSchema) }),
-        ),
-      ),
+      jobs: myzod.array(orgJobSchema),
     }),
   )
   .allowUnknownKeys(true);

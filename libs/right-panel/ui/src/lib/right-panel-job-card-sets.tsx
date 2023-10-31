@@ -1,16 +1,16 @@
 import { memo } from 'react';
 
-import { type JobInfo, type TagElement } from '@jobstash/shared/core';
+import { type JobCardSet, type TagElement } from '@jobstash/shared/core';
 import { capitalize } from '@jobstash/shared/utils';
 
 import { CardSet, createJobTags } from '@jobstash/shared/ui';
 
 interface Props {
-  jobInfo: JobInfo;
+  jobCardSet: JobCardSet;
 }
 
-const RightPanelJobCardTags = ({ jobInfo }: Props) => {
-  const tags: TagElement[] = createJobTags(jobInfo);
+const RightPanelJobCardSets = ({ jobCardSet }: Props) => {
+  const tags: TagElement[] = createJobTags(jobCardSet);
 
   return (
     <div className="flex flex-wrap gap-x-4 gap-y-1">
@@ -23,4 +23,4 @@ const RightPanelJobCardTags = ({ jobInfo }: Props) => {
   );
 };
 
-export default memo(RightPanelJobCardTags);
+export default memo(RightPanelJobCardSets);
