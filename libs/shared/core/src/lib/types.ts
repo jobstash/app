@@ -11,6 +11,7 @@ import {
   fundingRoundSchema,
   hackSchema,
   investorSchema,
+  jobCardSetSchema,
   jobInfoSchema,
   messageResponseSchema,
   mwResponseFieldsSchema,
@@ -50,6 +51,7 @@ export type Hack = Infer<typeof hackSchema>;
 
 export type Audit = Infer<typeof auditSchema>;
 
+export type JobCardSet = Infer<typeof jobCardSetSchema>;
 export type JobInfo = Infer<typeof jobInfoSchema>;
 export type OrgInfo = Infer<typeof orgInfoSchema>;
 export type ProjectInfo = Infer<typeof projectInfoSchema>;

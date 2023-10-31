@@ -72,36 +72,36 @@ export const auditSchema = myzod
   })
   .allowUnknownKeys(true);
 
-export const jobInfoSchema = myzod.object({
-  id: myzod.string().min(1),
-  url: myzod.string().min(1),
-  shortUUID: myzod.string().min(1),
-
-  timestamp: myzod.number(),
-
-  requirements: myzod.array(myzod.string().min(1)),
-  responsibilities: myzod.array(myzod.string().min(1)),
-  benefits: myzod.array(myzod.string().min(1)),
-  summary: myzod.string().min(1).nullable(),
-  description: myzod.string().min(1).nullable(),
-  culture: myzod.string().min(1).nullable(),
-
-  title: myzod.string().min(1),
-
-  salary: myzod.number().nullable(), // TODO: maybe unused
+export const jobCardSetSchema = myzod.object({
+  seniority: myzod.string().min(1).nullable(),
   minimumSalary: myzod.number().nullable(),
   maximumSalary: myzod.number().nullable(),
-  salaryCurrency: myzod.string().min(1).nullable(),
-
+  salary: myzod.number().nullable(), // TODO: maybe unused
   location: myzod.string().min(1).nullable(),
   locationType: myzod.string().min(1).nullable(),
-  seniority: myzod.string().min(1).nullable(),
   commitment: myzod.string().min(1).nullable(),
-  classification: myzod.string().min(1).nullable(),
-
   paysInCrypto: myzod.boolean().nullable(),
   offersTokenAllocation: myzod.boolean().nullable(),
+  salaryCurrency: myzod.string().min(1).nullable(),
+  classification: myzod.string().min(1).nullable(),
 });
+
+export const jobInfoSchema = myzod.intersection(
+  jobCardSetSchema,
+  myzod.object({
+    id: myzod.string().min(1),
+    url: myzod.string().min(1),
+    shortUUID: myzod.string().min(1),
+    timestamp: myzod.number(),
+    requirements: myzod.array(myzod.string().min(1)),
+    responsibilities: myzod.array(myzod.string().min(1)),
+    benefits: myzod.array(myzod.string().min(1)),
+    summary: myzod.string().min(1).nullable(),
+    description: myzod.string().min(1).nullable(),
+    culture: myzod.string().min(1).nullable(),
+    title: myzod.string().min(1),
+  }),
+);
 
 export const orgInfoSchema = myzod.object(
   {

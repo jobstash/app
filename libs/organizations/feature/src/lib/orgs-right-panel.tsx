@@ -9,6 +9,7 @@ import {
   RightPanel,
   RightPanelJobCards,
   RightPanelOrgCard,
+  RightPanelOrgJobCards,
   RightPanelProjectCards,
 } from '@jobstash/right-panel/ui';
 import { Loader } from '@jobstash/shared/ui';
@@ -51,9 +52,9 @@ const OrgsRightPanel = ({ orgId, currentTab }: Props) => {
       )}
 
       {currentTab === TAB_SEGMENT.jobs && (
-        <RightPanelJobCards
+        <RightPanelOrgJobCards
           orgName={orgDetails.name}
-          jobInfos={orgDetails.jobs}
+          orgJobs={orgDetails.jobs}
         />
       )}
 
