@@ -5,7 +5,7 @@ import { type OrgListItem } from '@jobstash/organizations/core';
 import { useOrgList } from '@jobstash/organizations/state';
 
 import { OrgCard, OrgListEmptyResult } from '@jobstash/organizations/ui';
-import { Loader } from '@jobstash/shared/ui';
+import { ListErrorMessage, Loader } from '@jobstash/shared/ui';
 
 interface Props {
   initOrg: OrgListItem | null;
@@ -68,11 +68,8 @@ const OrgList = ({ initOrg, activeOrgId }: Props) => {
           {!hasNextPage && <p>No more organizations to load</p>}
         </div>
       )}
-      {(error as Error)?.message && (
-        <div className="py-8">
-          <p>error = {(error as Error).message}</p>
-        </div>
-      )}
+
+      {(error as Error)?.message && <ListErrorMessage error={error} />}
     </div>
   );
 };

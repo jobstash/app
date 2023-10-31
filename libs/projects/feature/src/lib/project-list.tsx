@@ -5,7 +5,7 @@ import { type ProjectInfo } from '@jobstash/shared/core';
 import { useProjectList } from '@jobstash/projects/state';
 
 import { ProjectCard, ProjectListEmptyResult } from '@jobstash/projects/ui';
-import { Loader } from '@jobstash/shared/ui';
+import { ListErrorMessage, Loader } from '@jobstash/shared/ui';
 
 interface Props {
   initProject: ProjectInfo | null;
@@ -68,11 +68,8 @@ const ProjectList = ({ initProject, activeProjectId }: Props) => {
           {!hasNextPage && <p>No more projects to load</p>}
         </div>
       )}
-      {(error as Error)?.message && (
-        <div className="py-8">
-          <p>error = {(error as Error).message}</p>
-        </div>
-      )}
+
+      {(error as Error)?.message && <ListErrorMessage error={error} />}
     </div>
   );
 };
