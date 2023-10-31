@@ -12,7 +12,7 @@ const JobCardProjects = ({ projects }: Props) => {
   if (projects.length === 0) return null;
 
   const sortedProjects = projects
-    .sort((a, b) => (a.tvl ?? 0) - (b.tvl ?? 0))
+    .sort((a, b) => (b.tvl ?? 0) - (a.tvl ?? 0))
     .slice(0, 2);
 
   return (
