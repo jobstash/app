@@ -115,7 +115,7 @@ export const JobPostPage = ({
             site: '@jobstash_xyz',
             image: imageMetaData,
           }}
-          ldJson={createJobPostLdJson()}
+          ldJson={createJobPostLdJson(currentJobPost)}
         />
       )}
 
