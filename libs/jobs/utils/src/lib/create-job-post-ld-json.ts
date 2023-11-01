@@ -120,7 +120,7 @@ export const createJobPostLdJson = (jobPost: JobPost) => {
       name: locationName,
     };
 
-    jsonLd['location'] = {
+    jsonLd['jobLocation'] = {
       '@type': 'Place',
       address: {
         name: locationName,
