@@ -28,6 +28,7 @@ import { disablePageScroll, gaEvent } from '@jobstash/shared/utils';
 import { jobCountAtom } from '@jobstash/jobs/state';
 import { orgCountAtom } from '@jobstash/organizations/state';
 import { projectCountAtom } from '@jobstash/projects/state';
+import { useIsMobile } from '@jobstash/shared/state';
 
 import { showFiltersAtom } from '../atoms/show-filters-atom';
 import { filterReducer } from '../reducers/filter-reducer';
@@ -58,9 +59,10 @@ export const useFilters = (routeSection: RouteSection) => {
     [setShowFilters],
   );
 
+  const isMobile = useIsMobile();
   useEffect(() => {
-    disablePageScroll(showFilters);
-  }, [showFilters]);
+    disablePageScroll(showFilters && isMobile);
+  }, [isMobile, showFilters]);
 
   const applyFilters = useCallback(
     (isSearch = false) => {

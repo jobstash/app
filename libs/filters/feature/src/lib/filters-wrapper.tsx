@@ -64,7 +64,7 @@ const FiltersWrapper = ({ children }: Props) => {
     <div
       ref={ref}
       className={cn(
-        'flex flex-col py-4 lg:pt-8 gap-y-4 bg-[#121216] z-50 sticky pr-2 transition-all duration-1000 top-[49px] lg:top-0 box-border',
+        'flex flex-col py-4 lg:pt-8 gap-y-4 bg-[#121216] z-50 sticky transition-all duration-1000 top-[49px] lg:top-0 pr-2',
         {
           '-top-60 sm:-top-44 lg:-top-44':
             scrollDirection === 'down' && !showFilters,
@@ -73,7 +73,7 @@ const FiltersWrapper = ({ children }: Props) => {
           '-top-[100%] sm:-top-[75%] lg:-top-[75%]':
             scrollDirection === 'down' && topLarge,
         },
-        { 'w-[calc(100%+32px)]': showFilters && !isMobile },
+        { 'w-[calc(100%+32px)] overflow-x-hidden': showFilters && !isMobile },
       )}
     >
       {children}
