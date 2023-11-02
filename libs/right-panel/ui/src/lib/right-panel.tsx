@@ -4,6 +4,7 @@ import { useAtomValue } from 'jotai';
 
 import { type RightPanelOrg } from '@jobstash/right-panel/core';
 import { type RouteSection } from '@jobstash/shared/core';
+import { disablePageScroll } from '@jobstash/shared/utils';
 
 import { mobileRightPanelOpenAtom } from '@jobstash/shared/state';
 
@@ -22,12 +23,7 @@ const RightPanel = ({ org, tabs, children, routeSection }: Props) => {
   // Disable main window scroll when mobile right-panel is open
   const mobileRightPanelOpenValue = useAtomValue(mobileRightPanelOpenAtom);
   useEffect(() => {
-    const el = document.querySelectorAll('html')[0];
-    if (mobileRightPanelOpenValue) {
-      el.classList.add('disable-scroll');
-    } else {
-      el.classList.remove('disable-scroll');
-    }
+    disablePageScroll(mobileRightPanelOpenValue);
   }, [mobileRightPanelOpenValue]);
 
   return (
