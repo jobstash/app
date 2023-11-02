@@ -23,7 +23,7 @@ import {
   ROUTE_SECTION,
   type RouteSection,
 } from '@jobstash/shared/core';
-import { gaEvent } from '@jobstash/shared/utils';
+import { disablePageScroll, gaEvent } from '@jobstash/shared/utils';
 
 import { jobCountAtom } from '@jobstash/jobs/state';
 import { orgCountAtom } from '@jobstash/organizations/state';
@@ -57,6 +57,10 @@ export const useFilters = (routeSection: RouteSection) => {
     () => setShowFilters((prev) => !prev),
     [setShowFilters],
   );
+
+  useEffect(() => {
+    disablePageScroll(showFilters);
+  }, [showFilters]);
 
   const applyFilters = useCallback(
     (isSearch = false) => {
