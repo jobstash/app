@@ -1,11 +1,17 @@
-import { memo, useCallback, useMemo } from 'react';
+/* eslint-disable camelcase */
+import { memo, useMemo } from 'react';
 
 import { useSetAtom } from 'jotai';
 
 import { type JobPost } from '@jobstash/jobs/core';
-import { EVENT_CARD_CLICK, FRONTEND_URL } from '@jobstash/shared/core';
+import {
+  EVENT_CARD_CLICK,
+  FRONTEND_URL,
+  GA_EVENT_ACTION,
+} from '@jobstash/shared/core';
 import { getUrlWithParams } from '@jobstash/filters/utils';
 import { createJobKey } from '@jobstash/jobs/utils';
+import { gaEvent } from '@jobstash/shared/utils';
 
 import { activeJobAtom } from '@jobstash/jobs/state';
 import { mobileRightPanelOpenAtom, useIsMobile } from '@jobstash/shared/state';
@@ -24,15 +30,15 @@ interface Props {
 }
 
 const JobCard = ({ jobPost, isActive, filterParamsObj }: Props) => {
-  const { organization, tags } = jobPost;
-  const { title, timestamp } = jobPost;
-  const { projects } = organization;
+  const { organization, tags, title, timestamp, shortUUID, classification } =
+    jobPost;
+  const { projects, name: orgName } = organization;
 
   const setActiveJob = useSetAtom(activeJobAtom);
 
   const isMobile = useIsMobile();
   const setMobileRightPanelOpen = useSetAtom(mobileRightPanelOpenAtom);
-  const onClick = useCallback(() => {
+  const onClick = () => {
     setActiveJob(jobPost);
     document.dispatchEvent(new Event(EVENT_CARD_CLICK));
 
@@ -40,7 +46,14 @@ const JobCard = ({ jobPost, isActive, filterParamsObj }: Props) => {
     if (isMobile) {
       setMobileRightPanelOpen(true);
     }
-  }, [isMobile, jobPost, setActiveJob, setMobileRightPanelOpen]);
+
+    gaEvent(GA_EVENT_ACTION.JOB_EXPAND_DETAILS, {
+      event_category: 'job',
+      job_shortuuid: shortUUID,
+      job_classification: classification ?? '',
+      organization_name: orgName,
+    });
+  };
 
   const href = useMemo(() => {
     const url = getUrlWithParams(

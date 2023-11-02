@@ -26,12 +26,13 @@ const RightPanelJobCard = ({
   tags,
   showExploreJob = true,
 }: Props) => {
-  const { title, url, shortUUID } = jobInfo;
+  const { title, url, shortUUID, classification } = jobInfo;
 
   const onClickApplyJob = () => {
     gaEvent(GA_EVENT_ACTION.JOB_APPLY, {
       event_category: 'job',
       job_shortuuid: shortUUID,
+      job_classification: classification ?? '',
       organization_name: orgName,
     });
 
