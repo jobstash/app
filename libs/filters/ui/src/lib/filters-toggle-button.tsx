@@ -1,5 +1,7 @@
 import { memo } from 'react';
 
+import { getToggleFilterText } from '@jobstash/filters/utils';
+
 import { useFiltersContext } from '@jobstash/filters/state';
 
 import { Button, FilterIcon } from '@jobstash/shared/ui';
@@ -16,7 +18,7 @@ const FiltersToggleButton = () => {
       isDisabled={isLoading}
       onClick={toggleFilters}
     >
-      {`Filters & Sorting${filterCount > 0 ? ' (' + filterCount + ')' : ''}`}
+      {getToggleFilterText(filterCount)}
     </Button>
   );
 };

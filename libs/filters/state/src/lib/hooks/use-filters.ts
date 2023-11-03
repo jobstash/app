@@ -7,6 +7,7 @@ import {
   useEffect,
   useMemo,
   useReducer,
+  useState,
 } from 'react';
 
 import { useAtom, useAtomValue } from 'jotai';
@@ -52,17 +53,39 @@ export const useFilters = (routeSection: RouteSection) => {
   }, [data, routerQuery]);
 
   const isLoading = isLoadingData || !isReady;
+  const isMobile = useIsMobile();
 
   const [showFilters, setShowFilters] = useAtom(showFiltersAtom);
+  const [showFullscreenModal, setShowFullscreenModal] = useState(false);
   const toggleFilters = useCallback(
-    () => setShowFilters((prev) => !prev),
-    [setShowFilters],
+    () =>
+      isMobile
+        ? setShowFullscreenModal((prev) => !prev)
+        : setShowFilters((prev) => !prev),
+    [isMobile, setShowFilters],
   );
 
-  const isMobile = useIsMobile();
   useEffect(() => {
     disablePageScroll(showFilters && isMobile);
   }, [isMobile, showFilters]);
+
+  // Handle case where device width changes and filters are active
+  useEffect(() => {
+    if (!isMobile && showFullscreenModal) {
+      setShowFullscreenModal(false);
+      setShowFilters(false);
+    }
+
+    if (isMobile && showFilters) {
+      setShowFullscreenModal(false);
+      setShowFilters(false);
+    }
+  }, [isMobile, setShowFilters, showFilters, showFullscreenModal]);
+
+  const closeFilters = useCallback(() => {
+    setShowFilters(false);
+    setShowFullscreenModal(false);
+  }, [setShowFilters]);
 
   const applyFilters = useCallback(
     (isSearch = false) => {
@@ -73,13 +96,14 @@ export const useFilters = (routeSection: RouteSection) => {
         }
       }
 
-      setShowFilters(false);
       const filter_value = getFilterConfigValueString(url);
 
       gaEvent(GA_EVENT_ACTION.FILTER_ACTION, {
         filter_name: isSearch ? FILTER_NAME.JOB.SEARCH : FILTER_NAME.JOB.SUBMIT,
         filter_value,
       });
+
+      closeFilters();
 
       setTimeout(
         () =>
@@ -89,7 +113,7 @@ export const useFilters = (routeSection: RouteSection) => {
         100,
       );
     },
-    [routeSection, setShowFilters, state.filterValues, push],
+    [routeSection, closeFilters, state.filterValues, push],
   );
 
   const clearFilters = useCallback(() => {
@@ -106,9 +130,10 @@ export const useFilters = (routeSection: RouteSection) => {
       filter_value: currentFilterParams,
     });
 
-    setShowFilters(false);
+    closeFilters();
+
     setTimeout(() => push(url, undefined, { shallow: true }), 100);
-  }, [routeSection, state.filterValues, setShowFilters, push]);
+  }, [routeSection, state.filterValues, closeFilters, push]);
 
   const onSubmitSearch: FormEventHandler = useCallback(
     (e) => {
@@ -210,6 +235,7 @@ export const useFilters = (routeSection: RouteSection) => {
     filteredItemsCount,
     showFilters,
     routeSection,
+    showFullscreenModal,
   };
 };
 
