@@ -26,6 +26,7 @@ export interface Props {
     | SetMultiSelectFilterValueAction
   >;
   wrapperClassName: ClassValue;
+  removeSortLabel?: boolean;
 }
 
 const FilterConfigMapper = ({
@@ -33,6 +34,7 @@ const FilterConfigMapper = ({
   configs,
   dispatch,
   wrapperClassName,
+  removeSortLabel,
 }: Props) => {
   if (!filterValues) return null;
   return (
@@ -43,7 +45,9 @@ const FilterConfigMapper = ({
           <div key={config.label} className={cn(wrapperClassName)}>
             {config.kind === FILTER_KIND.SINGLE_SELECT && (
               <SingleSelectFilter
-                label={isOrderConfig ? undefined : config.label}
+                label={
+                  isOrderConfig && removeSortLabel ? undefined : config.label
+                }
                 value={
                   filterValues[(config as SingleSelectFilterConfig).paramKey]
                 }

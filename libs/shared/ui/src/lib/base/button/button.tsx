@@ -22,7 +22,7 @@ export const buttonVariants = cva(
       variant: {
         default: '',
         primary: '',
-        outline: 'ring-1 ring-gray active:ring-0',
+        outline: '',
         subtle: '',
         translucent: '',
         transparent: '',

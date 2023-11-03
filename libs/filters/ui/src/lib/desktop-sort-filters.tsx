@@ -13,6 +13,7 @@ const DesktopSortFilters = () => {
   return (
     <div className="hidden grow items-center gap-x-6 lg:flex">
       <FilterConfigMapper
+        removeSortLabel
         filterValues={state?.filterValues}
         configs={sortFilterConfigs}
         dispatch={dispatch}

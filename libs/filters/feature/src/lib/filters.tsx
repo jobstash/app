@@ -8,6 +8,7 @@ import {
   FilterActions,
   FilterControls,
   FilterInputs,
+  FullscreenrenFilterModal,
   SearchFilter,
 } from '@jobstash/filters/ui';
 
@@ -32,6 +33,7 @@ const Filters = ({ routeSection }: Props) => {
         <FilterInputs />
         <FilterActions />
       </FiltersWrapper>
+      <FullscreenrenFilterModal />
     </FiltersContext.Provider>
   );
 };

@@ -31,6 +31,7 @@ export interface FiltersContextProps {
   filteredItemsCount: number | null;
   showFilters: boolean;
   routeSection: RouteSection;
+  showFullscreenModal: boolean;
 }
 
 export const FiltersContext = createContext<FiltersContextProps | null>(null);
