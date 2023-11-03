@@ -66,7 +66,7 @@ export const useFilters = (routeSection: RouteSection) => {
 
   const applyFilters = useCallback(
     (isSearch = false) => {
-      const url = new URL(`${FRONTEND_URL}/${routeSection}`);
+      const url = new URL(`${FRONTEND_URL}${routeSection}`);
       for (const [key, value] of Object.entries(state.filterValues)) {
         if (value) {
           url.searchParams.set(key, value);
@@ -93,7 +93,7 @@ export const useFilters = (routeSection: RouteSection) => {
   );
 
   const clearFilters = useCallback(() => {
-    const url = new URL(`${FRONTEND_URL}/${routeSection}`);
+    const url = new URL(`${FRONTEND_URL}${routeSection}`);
     const searchQuery = state?.filterValues?.query;
     if (searchQuery) {
       url.searchParams.set('query', searchQuery);
