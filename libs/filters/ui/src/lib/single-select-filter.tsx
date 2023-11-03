@@ -60,6 +60,7 @@ const SingleSelectFilter = ({
     <FilterWrapper label={label}>
       <Select
         clearable
+        withinPortal
         placeholder={placeholder ?? 'Select'}
         data={selections}
         classNames={{

@@ -88,6 +88,7 @@ const MultiSelectFilter = ({
     <FilterWrapper label={inputLabel}>
       <MultiSelect
         searchable
+        withinPortal
         data={data}
         placeholder="Select"
         classNames={{
