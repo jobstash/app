@@ -14,6 +14,8 @@ const charToStringMap = new Map([
   ['*', '_asterisk_'],
   ['(', '_lparen_'],
   [')', '_rparen_'],
+  ['<', '_langle_'],
+  ['>', '_rangle_'],
   ['-', '_hyphen_'],
   ['+', '_plus_'],
   ['=', '_equals_'],
