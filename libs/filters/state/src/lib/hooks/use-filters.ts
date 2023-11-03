@@ -209,6 +209,7 @@ export const useFilters = (routeSection: RouteSection) => {
     error,
     filteredItemsCount,
     showFilters,
+    routeSection,
   };
 };
 

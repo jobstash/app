@@ -1,27 +1,24 @@
 import { memo } from 'react';
 
-import { type RouteSection } from '@jobstash/shared/core';
 import { capitalize } from '@jobstash/shared/utils';
 
-import { Text } from '@jobstash/shared/ui';
+import { useFiltersContext } from '@jobstash/filters/state';
 
-interface Props {
-  routeSection: RouteSection;
-  count: number | null;
-}
+import { Spinner, Text } from '@jobstash/shared/ui';
 
-const FiltersItemsCount = ({ routeSection, count }: Props) => {
-  if (!count || count === 0) return null;
+const FiltersItemsCount = () => {
+  const { filteredItemsCount, routeSection, isLoading } = useFiltersContext();
+
+  if (isLoading) return <Spinner />;
+  if (!filteredItemsCount) return null;
 
   return (
-    <div>
-      {count && (
-        <Text
-          className="my-3 inline-block whitespace-nowrap"
-          color="dimmed"
-        >{`${capitalize(routeSection.slice(1))} Found: ${count}`}</Text>
-      )}
-    </div>
+    <Text
+      className="my-3 inline-block whitespace-nowrap"
+      color="dimmed"
+    >{`${capitalize(
+      routeSection.slice(1),
+    )} Found: ${filteredItemsCount}`}</Text>
   );
 };
 
