@@ -20,6 +20,7 @@ export const checkWalletFlowsSchema = myzod.literals(
   CHECK_WALLET_FLOWS.ONBOARD_REVIEWS,
   CHECK_WALLET_FLOWS.SIGNUP_COMPLETE,
   CHECK_WALLET_FLOWS.ADMIN_SYNONYMS,
+  CHECK_WALLET_FLOWS.ADMIN_COMPLETE,
 );
 
 export const checkWalletDataSchema = myzod.object({

@@ -19,6 +19,7 @@ export const CHECK_WALLET_FLOWS = {
   ONBOARD_REVIEWS: 'ONBOARD-REVIEWS',
   SIGNUP_COMPLETE: 'SIGNUP-COMPLETE',
   ADMIN_SYNONYMS: 'SYNONYMS',
+  ADMIN_COMPLETE: 'ADMIN-COMPLETE',
 } as const;
 
 export const CHECK_WALLET_ROUTE: Record<
@@ -33,6 +34,7 @@ export const CHECK_WALLET_ROUTE: Record<
   [CHECK_WALLET_FLOWS.ONBOARD_REVIEWS]: '/profile/reviews',
   [CHECK_WALLET_FLOWS.SIGNUP_COMPLETE]: '/',
   [CHECK_WALLET_FLOWS.ADMIN_SYNONYMS]: '/godmode/tags/synonyms',
+  [CHECK_WALLET_FLOWS.ADMIN_COMPLETE]: '/godmode/tags/synonyms',
 };
 
 export const redirectFlowsSet = new Set<CheckWalletFlow>([
