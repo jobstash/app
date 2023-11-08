@@ -7,7 +7,7 @@ import { MW_URL } from '@jobstash/shared/core';
 import { mwFetch } from '@jobstash/shared/data';
 
 export const getPreferredTerms = async () => {
-  const url = `${MW_URL}/tags/preferred-terms`;
+  const url = `${MW_URL}/tags/preferred`;
 
   const options = {
     responseSchema: preferredTermsResponseSchema,
