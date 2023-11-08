@@ -1,9 +1,6 @@
 import { LoadingOverlay } from '@mantine/core';
 
-import {
-  usePreferredTermsMutationContext,
-  useTagsStore,
-} from '@jobstash/admin/state';
+import { usePreferredTermsFormContext } from '@jobstash/admin/state';
 
 import AdminFormControl from '../admin-form-control';
 
@@ -13,17 +10,16 @@ import SynonymsInput from './synonyms-input';
 import SynonymsList from './synonyms-list';
 
 const NewPreferedTerms = () => {
-  const { isLoading, mutate } = usePreferredTermsMutationContext();
+  const { isLoadingMutation, mutate, synonyms, primaryTerm } =
+    usePreferredTermsFormContext();
 
-  const synonyms = useTagsStore((store) => store.synonyms);
-
-  const isDisabledSynonymsInput = useTagsStore((store) => !store.primaryTerm);
+  const isDisabledSynonymsInput = !primaryTerm;
   const showSynonymsList = synonyms.length > 0;
 
   return (
     <div className="flex w-full justify-center">
       <div className="flex flex-col p-12 pb-8 w-1/2 gap-8 relative border border-gray rounded-lg">
-        <LoadingOverlay visible={isLoading} />
+        <LoadingOverlay visible={isLoadingMutation} />
         <AdminFormControl label="Primary Term" input={<PrimaryTermInput />} />
         <AdminFormControl
           label="List of Synonyms"

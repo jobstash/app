@@ -1,13 +1,12 @@
 import { useRef } from 'react';
 
-import { useTagsStore } from '@jobstash/admin/state';
+import { usePreferredTermsFormContext } from '@jobstash/admin/state';
 
 import AdminSelectInput from '../admin-select-input';
 
 const SynonymsInput = () => {
-  const primaryTerm = useTagsStore((state) => state.primaryTerm);
-  const synonymsOptions = useTagsStore((state) => state.synonymsOptions);
-  const addSynonym = useTagsStore((state) => state.addSynonym);
+  const { primaryTerm, synonymOptions, addSynonym } =
+    usePreferredTermsFormContext();
 
   const selectRef = useRef<HTMLInputElement | null>(null);
 
@@ -22,7 +21,7 @@ const SynonymsInput = () => {
   return (
     <AdminSelectInput
       ref={selectRef}
-      data={synonymsOptions}
+      data={synonymOptions}
       placeholder="Select multiple synonym terms"
       isDisabled={!primaryTerm}
       value=""

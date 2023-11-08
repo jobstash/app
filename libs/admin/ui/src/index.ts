@@ -9,5 +9,6 @@ export { default as BlockedTermsList } from './lib/blocked-terms/list';
 export { default as PairedTermsContentWrapper } from './lib/paired-terms/content-wrapper';
 export { default as ExistingPairedTerms } from './lib/paired-terms/existing-paired-terms';
 export { default as PairedTermForm } from './lib/paired-terms/paired-term-form';
+export { default as PreferredTermsContentWrapper } from './lib/preferred-terms/content-wrapper';
 export { default as ExistingPreferredTerms } from './lib/preferred-terms/existing-preferred-terms';
 export { default as NewPreferredTerms } from './lib/preferred-terms/new-preferred-terms';
