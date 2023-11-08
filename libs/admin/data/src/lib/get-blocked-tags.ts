@@ -7,7 +7,7 @@ import { MW_URL } from '@jobstash/shared/core';
 import { mwFetch } from '@jobstash/shared/data';
 
 export const getBlockedTags = async () => {
-  const url = `${MW_URL}/tags/blocked-terms`;
+  const url = `${MW_URL}/tags/blocked`;
 
   const options = {
     responseSchema: blockedTagsResponseSchema,
