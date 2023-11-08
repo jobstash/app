@@ -1,12 +1,9 @@
-import { usePreferredTermsMutation, useTagsStore } from '@jobstash/admin/state';
+import { usePreferredTermsFormContext } from '@jobstash/admin/state';
 
 import { Button } from '@jobstash/shared/ui';
 
 const PreferredTermsActions = () => {
-  const primaryTerm = useTagsStore((state) => state.primaryTerm);
-  const synonyms = useTagsStore((state) => state.synonyms);
-
-  const { mutate } = usePreferredTermsMutation();
+  const { primaryTerm, synonyms, mutate } = usePreferredTermsFormContext();
 
   const onSubmit = () => {
     mutate({

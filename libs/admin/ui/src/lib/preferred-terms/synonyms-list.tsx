@@ -1,10 +1,9 @@
-import { useTagsStore } from '@jobstash/admin/state';
+import { usePreferredTermsFormContext } from '@jobstash/admin/state';
 
 import AdminTechListItem from '../admin-tech-list-item';
 
 const SynonymsList = () => {
-  const synonyms = useTagsStore((state) => state.synonyms);
-  const removeSynonym = useTagsStore((state) => state.removeSynonym);
+  const { synonyms, removeSynonym } = usePreferredTermsFormContext();
 
   return (
     <div className="flex gap-4 items-center flex-wrap">

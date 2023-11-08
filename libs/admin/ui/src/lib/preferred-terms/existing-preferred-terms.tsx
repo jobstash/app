@@ -1,11 +1,12 @@
-import { useTagsStore } from '@jobstash/admin/state';
+import { usePreferredTermsContext } from '@jobstash/admin/state';
 
 import { Heading } from '@jobstash/shared/ui';
 
 import AdminTechContentWrapper from '../admin-tech-content-wrapper';
 
 const ExistingPreferredTerms = () => {
-  const preferredTerms = useTagsStore((state) => state.preferredTerms);
+  const { preferredTerms } = usePreferredTermsContext();
+
   const hasPreferredTerms = preferredTerms.length > 0;
 
   if (!hasPreferredTerms) return <p>No Existing Preferred Terms</p>;
