@@ -11,7 +11,7 @@ import {
 import { mwFetch } from '@jobstash/shared/data';
 
 export const postPairedTerms = async (payload: PairedTermsPayload) => {
-  const url = `${MW_URL}/tags/create-paired-terms`;
+  const url = `${MW_URL}/tags/pair`;
 
   const options = {
     method: 'POST' as const,

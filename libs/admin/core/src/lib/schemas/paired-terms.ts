@@ -17,8 +17,8 @@ export const pairedTermsResponseSchema = myzod
   .allowUnknownKeys(true);
 
 export const pairedTermsPayloadSchema = myzod.object({
-  originTerm: myzod.string().min(1),
-  pairedTermList: myzod.array(myzod.string().min(1)),
+  originTag: myzod.string().min(1),
+  pairedTagList: myzod.array(myzod.string().min(1)),
 });
 
 export type PairedTermsResponse = Infer<typeof pairedTermsResponseSchema>;

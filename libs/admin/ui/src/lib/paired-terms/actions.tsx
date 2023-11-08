@@ -11,8 +11,8 @@ const PairedTermsActions = () => {
   const onSubmit = () => {
     if (origin) {
       mutate({
-        originTerm: origin,
-        pairedTermList: destination,
+        originTag: origin,
+        pairedTagList: destination,
       });
     }
   };

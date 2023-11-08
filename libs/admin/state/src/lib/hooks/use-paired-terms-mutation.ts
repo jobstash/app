@@ -9,12 +9,12 @@ export const usePairedTermsMutation = () => {
   const queryClient = useQueryClient();
   const { isLoading, mutate } = useMutation({
     mutationFn: (payload: PairedTermsPayload) => postPairedTerms(payload),
-    onSuccess(_, { pairedTermList }) {
+    onSuccess(_, { pairedTagList }) {
       queryClient.invalidateQueries(['godmodePairedTerms']);
       // TODO: setQueryData paired terms
 
-      const title = `New Paired Term${pairedTermList.length > 1 ? 's' : ''}`;
-      const message = `${pairedTermList.join(', ')}`;
+      const title = `New Paired Term${pairedTagList.length > 1 ? 's' : ''}`;
+      const message = `${pairedTagList.join(', ')}`;
 
       notifSuccess({
         title,
