@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { type ChangeEventHandler, useEffect, useRef, useState } from 'react';
 
 import { ProfileInfo } from '@jobstash/profile/core';
 
@@ -32,6 +32,20 @@ export const useProfileHeader = () => {
     profileInfoData,
   ]);
 
+  const onChangePreferredContact = (v: string | null) => {
+    const isContactPreferred = v === profileInfoData?.contact.preferred;
+    const newSelectedContact = isContactPreferred
+      ? profileInfoData?.contact.value
+      : null;
+
+    setSelectedContact(newSelectedContact);
+    setPreferredContact(v);
+  };
+
+  const onChangeSelectedContact: ChangeEventHandler<HTMLInputElement> = (e) => {
+    setSelectedContact(e.currentTarget.value);
+  };
+
   const { isLoading, mutate } = useProfileInfoMutation();
 
   const saveProfileInfo = () => {
@@ -40,14 +54,13 @@ export const useProfileHeader = () => {
       username,
       availableForWork: isAvailableForWork,
       contact: {
-        options: contact.options,
         preferred: preferredContact,
         value: selectedContact,
       },
     });
   };
 
-  const disableSave =
+  const isEqualFetched =
     JSON.stringify({
       availableForWork,
       preferredContact: contact?.preferred,
@@ -59,8 +72,10 @@ export const useProfileHeader = () => {
       selectedContact,
     });
 
+  const disableSave = !selectedContact || isEqualFetched;
+
   return {
-    isLoading,
+    isLoading: isLoading || !initRef.current,
     isAvailableForWork,
     setIsAvailableForWork,
     preferredContact,
@@ -72,5 +87,7 @@ export const useProfileHeader = () => {
     avatar,
     contact,
     disableSave,
+    onChangePreferredContact,
+    onChangeSelectedContact,
   };
 };

@@ -3,15 +3,18 @@ import { Select } from '@mantine/core';
 import { useProfileHeaderContext } from '@jobstash/profile/state';
 
 const INPUT_PLACEHOLDER = 'Preferred Way of Contact';
+const INPUT_DEFAULT_OPTIONS = ['Portfolio', 'Email', 'Phone'];
 
 const ProfileHeaderPreferredContactInput = () => {
-  const { contact, preferredContact, setPreferredContact, setSelectedContact } =
+  const { isLoading, preferredContact, onChangePreferredContact } =
     useProfileHeaderContext();
+
+  const placeholder = isLoading ? undefined : INPUT_PLACEHOLDER;
 
   return (
     <Select
-      placeholder={INPUT_PLACEHOLDER}
-      data={contact?.options ?? []}
+      placeholder={placeholder}
+      data={INPUT_DEFAULT_OPTIONS}
       value={preferredContact}
       size="lg"
       classNames={{
@@ -20,10 +23,7 @@ const ProfileHeaderPreferredContactInput = () => {
         itemsWrapper: 'bg-dark',
         item: '[&[data-hovered]]:bg-dark-gray [&[data-selected]]:bg-gray',
       }}
-      onChange={(v) => {
-        setSelectedContact(null);
-        setPreferredContact(v);
-      }}
+      onChange={onChangePreferredContact}
     />
   );
 };
