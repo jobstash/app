@@ -1,4 +1,4 @@
-import { createContext, useContext } from 'react';
+import { type ChangeEventHandler, createContext, useContext } from 'react';
 
 import { ProfileInfo } from '@jobstash/profile/core';
 
@@ -7,14 +7,14 @@ interface ProfileHeaderContextProps {
   isAvailableForWork: boolean;
   setIsAvailableForWork: (isAvailableForWork: boolean) => void;
   preferredContact: string | null;
-  setPreferredContact: (preferredContact: string | null) => void;
   selectedContact: string | null;
-  setSelectedContact: (selectedContact: string | null) => void;
   saveProfileInfo: () => void;
-  avatar: string;
-  username: string;
+  avatar: string | null;
+  username: string | null;
   contact: ProfileInfo['contact'];
   disableSave: boolean;
+  onChangePreferredContact: (v: string | null) => void;
+  onChangeSelectedContact: ChangeEventHandler<HTMLInputElement>;
 }
 
 export const ProfileHeaderContext =

@@ -5,6 +5,7 @@ import { MessageResponse } from '@jobstash/shared/core';
 
 import { PROFILE_RIGHT_PANEL_TABS } from './constants';
 import {
+  profileInfoPayloadSchema,
   profileInfoResponseSchema,
   profileInfoSchema,
   profileOrgReviewListQueryPageSchema,
@@ -48,6 +49,7 @@ export type ProfileOrgReviewListQueryPage = Infer<
 >;
 
 export type ProfileInfo = Infer<typeof profileInfoSchema>;
+export type ProfileInfoPayload = Infer<typeof profileInfoPayloadSchema>;
 export type ProfileInfoResponse = Infer<typeof profileInfoResponseSchema>;
 
 export type ProfileSkill = Infer<typeof profileSkillSchema>;

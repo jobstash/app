@@ -77,11 +77,10 @@ export const profileOrgReviewListQueryPageSchema = myzod.object({
 });
 
 export const profileInfoSchema = myzod.object({
-  avatar: myzod.string().min(1),
-  username: myzod.string().min(1),
+  avatar: myzod.string().min(1).nullable(),
+  username: myzod.string().min(1).nullable(),
   availableForWork: myzod.boolean().nullable(),
   contact: myzod.object({
-    options: myzod.array(myzod.string().min(1)),
     preferred: myzod.string().nullable(),
     value: myzod.string().nullable(),
   }),
@@ -92,6 +91,8 @@ export const profileInfoResponseSchema = myzod.object({
   success: myzod.boolean(),
   message: myzod.string(),
 });
+
+export const profileInfoPayloadSchema = profileInfoSchema;
 
 export const profileSkillSchema = myzod.object({
   id: myzod.string().min(1),
