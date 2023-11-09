@@ -1,3 +1,5 @@
+import { forwardRef } from 'react';
+
 import { motion } from 'framer-motion';
 
 import {
@@ -9,14 +11,14 @@ import ProfileRepoTech from '../../profile-repo-tech';
 
 import SkillsInput from './skills-input';
 
-const SkillsEdit = () => {
+const SkillsEdit = forwardRef<HTMLDivElement>((_props, ref) => {
   const { skills, removeSkill, updateCanTeach } = useProfileDevInfoContext();
   const { isEditing } = useProfileSkillsContext();
 
   if (!isEditing) return null;
 
   return (
-    <motion.div layout className="flex flex-col gap-4">
+    <motion.div ref={ref} layout className="flex flex-col gap-4">
       <motion.div layout>
         <hr className="border-t border-white/10" />
       </motion.div>
@@ -49,6 +51,7 @@ const SkillsEdit = () => {
       </motion.div>
     </motion.div>
   );
-};
+});
+SkillsEdit.displayName = 'SkillsEdit';
 
 export default SkillsEdit;
