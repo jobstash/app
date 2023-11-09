@@ -60,10 +60,10 @@ export const createJobTags = (jobCardSet: JobCardSet) => {
     });
   }
 
-  if (locationType === LOCATION_TYPE.REMOTE) {
+  if (locationType) {
     tags.push({
       id: TAG_ELEMENT_ID.locationType,
-      text: REMOTE_TEXT,
+      text: capitalize(locationType, true),
       icon: <RemoteIcon />,
     });
   }
