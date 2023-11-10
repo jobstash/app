@@ -1,21 +1,19 @@
 import {
+  type CreatePreferenceResponse,
+  createPreferenceResponseSchema,
   type PreferredTermsPayload,
   preferredTermsPayloadSchema,
 } from '@jobstash/admin/core';
-import {
-  MessageResponse,
-  messageResponseSchema,
-  MW_URL,
-} from '@jobstash/shared/core';
+import { MW_URL } from '@jobstash/shared/core';
 
 import { mwFetch } from '@jobstash/shared/data';
 
-export const postPreferredTerms = async (payload: PreferredTermsPayload) => {
+export const postCreatePreference = async (payload: PreferredTermsPayload) => {
   const url = `${MW_URL}/tags/create-preference`;
 
   const options = {
     method: 'POST' as const,
-    responseSchema: messageResponseSchema,
+    responseSchema: createPreferenceResponseSchema,
     sentryLabel: `postPairedTerms`,
     credentials: 'include' as RequestCredentials,
     mode: 'cors' as RequestMode,
@@ -27,11 +25,11 @@ export const postPreferredTerms = async (payload: PreferredTermsPayload) => {
   };
 
   const { success, message } = await mwFetch<
-    MessageResponse,
+    CreatePreferenceResponse,
     PreferredTermsPayload
   >(url, options);
 
-  if (success) throw new Error(message);
+  if (!success) throw new Error(message);
 
   return { success, message };
 };

@@ -5,6 +5,7 @@ import { PreferredTerm } from '@jobstash/admin/core';
 export interface PreferredTermsContextProps {
   isLoading: boolean;
   preferredTerms: PreferredTerm[];
+  primaryTermOptions: string[];
 }
 
 export const PreferredTermsContext =

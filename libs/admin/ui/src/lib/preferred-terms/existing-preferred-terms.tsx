@@ -1,8 +1,11 @@
-import { usePreferredTermsContext } from '@jobstash/admin/state';
+import {
+  PreferredTermsFormProvider,
+  usePreferredTermsContext,
+} from '@jobstash/admin/state';
 
 import { Heading } from '@jobstash/shared/ui';
 
-import AdminTechContentWrapper from '../admin-tech-content-wrapper';
+import PreferredTermsForm from './preferred-terms-form';
 
 const ExistingPreferredTerms = () => {
   const { preferredTerms } = usePreferredTermsContext();
@@ -16,11 +19,16 @@ const ExistingPreferredTerms = () => {
       <div className="flex w-full justify-center">
         <Heading size="md">Existing Preferred Terms</Heading>
       </div>
-      <div className="flex w-full justify-center">
-        <AdminTechContentWrapper>
-          <p>TODO: ExistingPairedTerms</p>
-          <pre>{JSON.stringify({ preferredTerms }, undefined, '\t')}</pre>
-        </AdminTechContentWrapper>
+      <div className="flex flex-col gap-12 w-full justify-center">
+        {preferredTerms.map((preferredTerm) => (
+          <PreferredTermsFormProvider
+            key={preferredTerm.tag.id}
+            initPrimaryTerm={preferredTerm.tag.name}
+            initSynonyms={(preferredTerm.synonyms ?? []).map((s) => s.name)}
+          >
+            <PreferredTermsForm />
+          </PreferredTermsFormProvider>
+        ))}
       </div>
     </div>
   );

@@ -9,8 +9,8 @@ import PrimaryTermInput from './primary-term-input';
 import SynonymsInput from './synonyms-input';
 import SynonymsList from './synonyms-list';
 
-const NewPreferedTerms = () => {
-  const { isLoadingMutation, mutate, synonyms, primaryTerm } =
+const PreferredTermsForm = () => {
+  const { isLoadingMutation, synonyms, primaryTerm } =
     usePreferredTermsFormContext();
 
   const isDisabledSynonymsInput = !primaryTerm;
@@ -36,4 +36,4 @@ const NewPreferedTerms = () => {
   );
 };
 
-export default NewPreferedTerms;
+export default PreferredTermsForm;

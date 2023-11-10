@@ -4,8 +4,8 @@ import myzod, { type Infer } from 'myzod';
 import { type MessageResponse, tagSchema } from '@jobstash/shared/core';
 
 export const preferredTermSchema = myzod.object({
-  tag: myzod.string(),
-  synoynms: myzod.array(tagSchema),
+  tag: tagSchema,
+  synonyms: myzod.array(tagSchema),
 });
 
 export const preferredTermsResponseSchema = myzod.object({
@@ -19,9 +19,30 @@ export const preferredTermsPayloadSchema = myzod.object({
   synonyms: myzod.array(myzod.string().min(1)),
 });
 
+export const createPreferenceResponseSchema = myzod.object({
+  success: myzod.boolean(),
+  message: myzod.string().min(1),
+  data: myzod.object({
+    preferredName: myzod.string().min(1),
+    synonyms: myzod.array(tagSchema),
+  }),
+});
+
+export const deletePreferenceResponseSchema = myzod.object({
+  success: myzod.boolean(),
+  message: myzod.string().min(1),
+  data: preferredTermSchema,
+});
+
 export type PreferredTerm = Infer<typeof preferredTermSchema>;
 export type PreferredTermsResponse = Infer<typeof preferredTermsResponseSchema>;
 export type PreferredTermsPayload = Infer<typeof preferredTermsPayloadSchema>;
+export type CreatePreferenceResponse = Infer<
+  typeof createPreferenceResponseSchema
+>;
+export type DeletePreferenceResponse = Infer<
+  typeof deletePreferenceResponseSchema
+>;
 
 export type PreferredTermsMutFn = UseMutateFunction<
   MessageResponse,

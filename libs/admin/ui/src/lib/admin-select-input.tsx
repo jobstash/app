@@ -14,11 +14,14 @@ const AdminSelectInput = forwardRef<HTMLInputElement, Props>(
   (props: Props, ref) => {
     const { data, placeholder, isDisabled, value, onChange } = props;
 
+    // Have to include value as option, otherwise it'll not show on existing terms
+    const options = isDisabled && value ? [value, ...data] : data;
+
     return (
       <Select
         ref={ref}
         searchable
-        data={data}
+        data={options}
         maxDropdownHeight={320}
         nothingFound="Nothing found"
         placeholder={placeholder}
