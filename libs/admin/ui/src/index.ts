@@ -11,4 +11,4 @@ export { default as ExistingPairedTerms } from './lib/paired-terms/existing-pair
 export { default as PairedTermForm } from './lib/paired-terms/paired-term-form';
 export { default as PreferredTermsContentWrapper } from './lib/preferred-terms/content-wrapper';
 export { default as ExistingPreferredTerms } from './lib/preferred-terms/existing-preferred-terms';
-export { default as NewPreferredTerms } from './lib/preferred-terms/new-preferred-terms';
+export { default as PreferredTermsForm } from './lib/preferred-terms/preferred-terms-form';

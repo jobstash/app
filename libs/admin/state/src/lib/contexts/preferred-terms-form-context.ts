@@ -10,7 +10,16 @@ export interface PreferredTermsFormContextProps {
   addSynonym: (_: string) => void;
   removeSynonym: (_: string) => void;
   isLoadingMutation: boolean;
-  mutate: PreferredTermsMutFn;
+  mutateCreatePreference: PreferredTermsMutFn;
+  mutateDeletePreference: PreferredTermsMutFn;
+  isExisting: boolean;
+  currentSynonyms: {
+    created: string[];
+    deleted: string[];
+  };
+  clearForm: () => void;
+  isSuccess: boolean;
+  isDisabledSubmit: boolean;
 }
 
 export const PreferredTermsFormContext =

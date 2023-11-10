@@ -2,29 +2,78 @@ import { useMemo, useState } from 'react';
 
 import { useTagsContext } from '../contexts/tags-context';
 
-import { usePreferredTermsMutation } from './use-preferred-terms-mutation';
+import { useCreatePreferenceMutation } from './use-create-preference-mutation';
+import { useDeletePreferenceMutation } from './use-delete-preference-mutation';
 
 export const usePreferredTermsForm = (
   initPrimaryTerm: string | null,
   initSynonyms: string[] | null,
 ) => {
+  const isExisting = initPrimaryTerm !== null && initSynonyms !== null;
+
   const { mappedTags: tags } = useTagsContext();
 
   const [primaryTerm, setPrimaryTerm] = useState(initPrimaryTerm ?? '');
   const onChangePrimaryTerm = (v: string) => setPrimaryTerm(v);
 
-  const [synonyms, setSynonyms] = useState(initSynonyms ?? []);
+  const [currentSynonyms, setCurrentSynonyms] = useState<{
+    created: string[];
+    deleted: string[];
+  }>(defaultCurrentSynonyms);
 
-  const synonymOptions = useMemo(
-    () => tags.filter((t) => !synonyms.includes(t) && t !== primaryTerm),
-    [primaryTerm, synonyms, tags],
+  const synonyms = [...(initSynonyms ?? []), ...currentSynonyms.created].filter(
+    (s) => !currentSynonyms.deleted.includes(s),
   );
 
-  const addSynonym = (v: string) => setSynonyms((prev) => [...prev, v]);
-  const removeSynonym = (v: string) =>
-    setSynonyms((prev) => prev.filter((t) => t !== v));
+  const synonymOptions = tags.filter(
+    (t) => !synonyms.includes(t) && t !== primaryTerm,
+  );
 
-  const { isLoading: isLoadingMutation, mutate } = usePreferredTermsMutation();
+  const addSynonym = (term: string) => {
+    setCurrentSynonyms((prev) => ({
+      created: [
+        ...prev.created,
+        ...((initSynonyms ?? []).includes(term) ? [] : [term]),
+      ],
+      deleted: prev.deleted.filter((s) => s !== term),
+    }));
+  };
+
+  const removeSynonym = (term: string) => {
+    setCurrentSynonyms((prev) => ({
+      created: prev.created.filter((s) => s !== term),
+      deleted: [...prev.deleted, term],
+    }));
+  };
+
+  const {
+    isSuccessCreatePreference,
+    isLoadingCreatePreference,
+    mutateCreatePreference,
+  } = useCreatePreferenceMutation();
+
+  const {
+    isSuccessDeletePreference,
+    isLoadingDeletePreference,
+    mutateDeletePreference,
+  } = useDeletePreferenceMutation();
+
+  const isLoadingMutation = [
+    isLoadingCreatePreference,
+    isLoadingDeletePreference,
+  ].includes(true);
+
+  const clearForm = () => {
+    setPrimaryTerm('');
+    setCurrentSynonyms(defaultCurrentSynonyms);
+  };
+
+  const isSuccess = isSuccessCreatePreference && isSuccessDeletePreference;
+
+  const isDisabledSubmit =
+    !primaryTerm ||
+    JSON.stringify({ primaryTerm: initPrimaryTerm, synonyms: initSynonyms }) ===
+      JSON.stringify({ primaryTerm, synonyms });
 
   return {
     primaryTerm,
@@ -34,6 +83,17 @@ export const usePreferredTermsForm = (
     addSynonym,
     removeSynonym,
     isLoadingMutation,
-    mutate,
+    mutateCreatePreference,
+    mutateDeletePreference,
+    isExisting,
+    currentSynonyms,
+    clearForm,
+    isSuccess,
+    isDisabledSubmit,
   };
+};
+
+const defaultCurrentSynonyms = {
+  created: [],
+  deleted: [],
 };

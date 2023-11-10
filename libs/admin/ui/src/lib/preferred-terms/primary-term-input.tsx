@@ -1,15 +1,16 @@
 import { useRef } from 'react';
 
 import {
+  usePreferredTermsContext,
   usePreferredTermsFormContext,
-  useTagsContext,
 } from '@jobstash/admin/state';
 
 import AdminSelectInput from '../admin-select-input';
 
 const PrimaryTermInput = () => {
-  const { mappedTags: tags } = useTagsContext();
-  const { primaryTerm, onChangePrimaryTerm } = usePreferredTermsFormContext();
+  const { primaryTermOptions } = usePreferredTermsContext();
+  const { primaryTerm, onChangePrimaryTerm, isExisting } =
+    usePreferredTermsFormContext();
 
   const selectRef = useRef<HTMLInputElement | null>(null);
 
@@ -24,9 +25,10 @@ const PrimaryTermInput = () => {
   return (
     <AdminSelectInput
       ref={selectRef}
-      data={tags}
+      data={primaryTermOptions}
       placeholder="Select primary term"
       value={primaryTerm}
+      isDisabled={isExisting}
       onChange={onChange}
     />
   );

@@ -12,8 +12,8 @@ import {
   AdminLayout,
   AdminTabs,
   ExistingPreferredTerms,
-  NewPreferredTerms,
   PreferredTermsContentWrapper,
+  PreferredTermsForm,
 } from '@jobstash/admin/ui';
 import { BreadCrumbs } from '@jobstash/shared/ui';
 import { SideBar } from '@jobstash/sidebar/feature';
@@ -36,7 +36,7 @@ export const SynonymsPage = () => (
               initPrimaryTerm={null}
               initSynonyms={null}
             >
-              <NewPreferredTerms />
+              <PreferredTermsForm />
             </PreferredTermsFormProvider>
             <ExistingPreferredTerms />
           </PreferredTermsContentWrapper>
