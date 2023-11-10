@@ -20,7 +20,7 @@ const JobCardProject = ({ project, hasMinWidth }: Props) => {
     <>
       <hr className="border-t border-white/10" />
 
-      <div className="flex flex-wrap items-center gap-x-6">
+      <div className="flex flex-wrap items-center gap-x-6 gap-y-2">
         <LogoTitle
           hasMinWidth={hasMinWidth}
           title={project.name}
