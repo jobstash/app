@@ -9,7 +9,7 @@ export default class _Document extends Document {
 
   render() {
     return (
-      <Html lang="en">
+      <Html lang="en" className="scroll-smooth">
         <Head />
         <body className="bg-gradient-to-l from-[#141317] to-[#121216]">
           <Main />

@@ -21,6 +21,7 @@
 		--color-dark-gray: 52 52 52;
 		--color-darker-gray: 40 40 40;
 		--color-mobile-filters: 36 36 37;
+		--color-base-black: #141317;
 	}
 }
 
@@ -44,4 +45,73 @@ button:focus {
 
 .disable-scroll {
 	overflow: hidden;
+}
+
+@keyframes rotation {
+	from {
+		opacity: 0;
+		transform: rotate(5deg);
+	}
+
+	to {
+		opacity: 1;
+		transform: rotate(0);
+	}
+}
+
+/* Firefox < 16 */
+@-moz-keyframes rotation {
+	from {
+		opacity: 0;
+		transform: rotate(5deg);
+	}
+
+	to {
+		opacity: 1;
+		transform: rotate(0);
+	}
+}
+
+/* Safari, Chrome and Opera > 12.1 */
+@-webkit-keyframes rotation {
+	from {
+		opacity: 0;
+		transform: rotate(5deg);
+	}
+
+	to {
+		opacity: 1;
+		transform: rotate(0);
+	}
+}
+
+/* Internet Explorer */
+@-ms-keyframes rotation {
+	from {
+		opacity: 0;
+		transform: rotate(5deg);
+	}
+
+	to {
+		opacity: 1;
+		transform: rotate(0);
+	}
+}
+
+.animation-rotation {
+	animation: 1s ease-out 0s 1 rotation;
+}
+
+@keyframes fadeInPage {
+	0% {
+		opacity: 0;
+	}
+
+	100% {
+		opacity: 1;
+	}
+}
+
+.animation-fadeIn {
+	animation: 2s ease-out 0s 1 fadeInPage;
 }
