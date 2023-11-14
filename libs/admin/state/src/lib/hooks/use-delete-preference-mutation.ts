@@ -9,7 +9,7 @@ export const useDeletePreferenceMutation = () => {
   const {
     isSuccess: isSuccessDeletePreference,
     isLoading: isLoadingDeletePreference,
-    mutate: mutateDeletePreference,
+    mutateAsync: mutateAsyncDeletePreference,
   } = useMutation({
     mutationFn: (payload: PreferredTermsPayload) =>
       postDeletePreference(payload),
@@ -34,6 +34,6 @@ export const useDeletePreferenceMutation = () => {
   return {
     isSuccessDeletePreference,
     isLoadingDeletePreference,
-    mutateDeletePreference,
+    mutateAsyncDeletePreference,
   };
 };

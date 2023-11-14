@@ -10,7 +10,7 @@ interface Props {
 
 export const PreferredTermsProvider = ({ children }: Props) => {
   const { mappedTags } = useTagsContext();
-  const { isLoading, data } = usePreferredTermsQuery();
+  const { isLoading, isFetching, data } = usePreferredTermsQuery();
 
   const existingPrimaryTerms = new Set(
     (data ?? []).map((preferredTerm) => preferredTerm.tag.name),
@@ -23,10 +23,11 @@ export const PreferredTermsProvider = ({ children }: Props) => {
   const value = useMemo(
     () => ({
       isLoading,
+      isFetching,
       preferredTerms: data ?? [],
       primaryTermOptions,
     }),
-    [data, isLoading, primaryTermOptions],
+    [data, isFetching, isLoading, primaryTermOptions],
   );
 
   return (

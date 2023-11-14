@@ -60,7 +60,7 @@ export const usePreferredTermsForm = (
   const { isLoadingCreatePreference, mutateAsyncCreatePreference } =
     useCreatePreferenceMutation();
 
-  const { isLoadingDeletePreference, mutateDeletePreference } =
+  const { isLoadingDeletePreference, mutateAsyncDeletePreference } =
     useDeletePreferenceMutation();
 
   const queryClient = useQueryClient();
@@ -77,18 +77,18 @@ export const usePreferredTermsForm = (
 
     if (currentSynonyms.deleted.length > 0) {
       promises.push(
-        mutateDeletePreference({
+        mutateAsyncDeletePreference({
           preferredName: primaryTerm,
           synonyms: currentSynonyms.deleted,
         }),
       );
     }
 
-    await Promise.all(promises);
+    await Promise.allSettled(promises);
 
     clearForm();
 
-    queryClient.invalidateQueries({
+    await queryClient.invalidateQueries({
       queryKey: ['preferredTerms'],
     });
   };

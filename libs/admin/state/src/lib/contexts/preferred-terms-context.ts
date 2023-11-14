@@ -4,6 +4,7 @@ import { PreferredTerm } from '@jobstash/admin/core';
 
 export interface PreferredTermsContextProps {
   isLoading: boolean;
+  isFetching: boolean;
   preferredTerms: PreferredTerm[];
   primaryTermOptions: string[];
 }
