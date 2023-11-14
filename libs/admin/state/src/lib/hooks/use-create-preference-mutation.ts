@@ -9,13 +9,11 @@ export const useCreatePreferenceMutation = () => {
   const {
     isSuccess: isSuccessCreatePreference,
     isLoading: isLoadingCreatePreference,
-    mutate: mutateCreatePreference,
+    mutateAsync: mutateAsyncCreatePreference,
   } = useMutation({
     mutationFn: (payload: PreferredTermsPayload) =>
       postCreatePreference(payload),
     onSuccess(_, { synonyms }) {
-      // TODO: invalidate preferred terms query
-
       const title = `Created Preferred Terms${synonyms.length > 1 ? 's' : ''}`;
       const message = `${synonyms.join(', ')}`;
 
@@ -36,6 +34,6 @@ export const useCreatePreferenceMutation = () => {
   return {
     isSuccessCreatePreference,
     isLoadingCreatePreference,
-    mutateCreatePreference,
+    mutateAsyncCreatePreference,
   };
 };
