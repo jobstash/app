@@ -1,12 +1,17 @@
 import { createContext, useContext } from 'react';
 
 export interface BlockedTermsFormContextProps {
+  isLoadingQuery: boolean;
+  isFetchingQuery: boolean;
+  fetchedBlockedTerms: string[];
   options: string[];
   currentBlockedTerms: string[];
   blockTerm: (_: string) => void;
   currentUnblockedTerms: string[];
   unblockTerm: (_: string) => void;
   allBlockedTerms: string[];
+  isLoadingMutation: boolean;
+  onSubmit: () => void;
 }
 
 export const BlockedTermsFormContext =
