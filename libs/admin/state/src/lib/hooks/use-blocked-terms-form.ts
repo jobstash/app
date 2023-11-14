@@ -93,7 +93,7 @@ export const useBlockedTermsForm = () => {
 
     await Promise.all(promises);
 
-    queryClient.invalidateQueries({
+    await queryClient.invalidateQueries({
       queryKey: ['godmodeBlockedTags'],
     });
   };

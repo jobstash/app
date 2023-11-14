@@ -1,9 +1,18 @@
-import { usePreferredTermsFormContext } from '@jobstash/admin/state';
+import {
+  usePreferredTermsContext,
+  usePreferredTermsFormContext,
+} from '@jobstash/admin/state';
+
+import { Spinner } from '@jobstash/shared/ui';
 
 import AdminTechListItem from '../admin-tech-list-item';
 
 const SynonymsList = () => {
-  const { synonyms, removeSynonym } = usePreferredTermsFormContext();
+  const { isFetching } = usePreferredTermsContext();
+  const { synonyms, removeSynonym, isLoadingMutation } =
+    usePreferredTermsFormContext();
+
+  if (isFetching || isLoadingMutation) return <Spinner />;
 
   return (
     <div className="flex gap-4 items-center flex-wrap">
