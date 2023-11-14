@@ -14,8 +14,6 @@ export const useDeletePreferenceMutation = () => {
     mutationFn: (payload: PreferredTermsPayload) =>
       postDeletePreference(payload),
     onSuccess(_, { synonyms }) {
-      // TODO: invalidate preferred terms query
-
       const title = `Deleted Preferred Terms${synonyms.length > 1 ? 's' : ''}`;
       const message = `${synonyms.join(', ')}`;
 

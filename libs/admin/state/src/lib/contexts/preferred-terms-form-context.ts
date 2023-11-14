@@ -1,7 +1,5 @@
 import { createContext, useContext } from 'react';
 
-import { type PreferredTermsMutFn } from '@jobstash/admin/core';
-
 export interface PreferredTermsFormContextProps {
   primaryTerm: string;
   onChangePrimaryTerm: (_: string) => void;
@@ -10,16 +8,13 @@ export interface PreferredTermsFormContextProps {
   addSynonym: (_: string) => void;
   removeSynonym: (_: string) => void;
   isLoadingMutation: boolean;
-  mutateCreatePreference: PreferredTermsMutFn;
-  mutateDeletePreference: PreferredTermsMutFn;
   isExisting: boolean;
   currentSynonyms: {
     created: string[];
     deleted: string[];
   };
-  clearForm: () => void;
-  isSuccess: boolean;
   isDisabledSubmit: boolean;
+  onSubmit: () => void;
 }
 
 export const PreferredTermsFormContext =

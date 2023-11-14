@@ -1,5 +1,8 @@
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 
+import { useQueryClient } from '@tanstack/react-query';
+
+import { type PreferredTermsFormContextProps } from '../contexts/preferred-terms-form-context';
 import { useTagsContext } from '../contexts/tags-context';
 
 import { useCreatePreferenceMutation } from './use-create-preference-mutation';
@@ -8,7 +11,7 @@ import { useDeletePreferenceMutation } from './use-delete-preference-mutation';
 export const usePreferredTermsForm = (
   initPrimaryTerm: string | null,
   initSynonyms: string[] | null,
-) => {
+): PreferredTermsFormContextProps => {
   const isExisting = initPrimaryTerm !== null && initSynonyms !== null;
 
   const { mappedTags: tags } = useTagsContext();
@@ -46,29 +49,54 @@ export const usePreferredTermsForm = (
     }));
   };
 
-  const {
-    isSuccessCreatePreference,
-    isLoadingCreatePreference,
-    mutateCreatePreference,
-  } = useCreatePreferenceMutation();
+  const clearForm = () => {
+    if (!isExisting) {
+      setPrimaryTerm('');
+    }
 
-  const {
-    isSuccessDeletePreference,
-    isLoadingDeletePreference,
-    mutateDeletePreference,
-  } = useDeletePreferenceMutation();
+    setCurrentSynonyms(defaultCurrentSynonyms);
+  };
+
+  const { isLoadingCreatePreference, mutateAsyncCreatePreference } =
+    useCreatePreferenceMutation();
+
+  const { isLoadingDeletePreference, mutateDeletePreference } =
+    useDeletePreferenceMutation();
+
+  const queryClient = useQueryClient();
+  const onSubmit = async () => {
+    const promises = [];
+    if (currentSynonyms.created.length > 0) {
+      promises.push(
+        mutateAsyncCreatePreference({
+          preferredName: primaryTerm,
+          synonyms: currentSynonyms.created,
+        }),
+      );
+    }
+
+    if (currentSynonyms.deleted.length > 0) {
+      promises.push(
+        mutateDeletePreference({
+          preferredName: primaryTerm,
+          synonyms: currentSynonyms.deleted,
+        }),
+      );
+    }
+
+    await Promise.all(promises);
+
+    clearForm();
+
+    queryClient.invalidateQueries({
+      queryKey: ['preferredTerms'],
+    });
+  };
 
   const isLoadingMutation = [
     isLoadingCreatePreference,
     isLoadingDeletePreference,
   ].includes(true);
-
-  const clearForm = () => {
-    setPrimaryTerm('');
-    setCurrentSynonyms(defaultCurrentSynonyms);
-  };
-
-  const isSuccess = isSuccessCreatePreference && isSuccessDeletePreference;
 
   const isDisabledSubmit =
     !primaryTerm ||
@@ -83,13 +111,10 @@ export const usePreferredTermsForm = (
     addSynonym,
     removeSynonym,
     isLoadingMutation,
-    mutateCreatePreference,
-    mutateDeletePreference,
     isExisting,
     currentSynonyms,
-    clearForm,
-    isSuccess,
     isDisabledSubmit,
+    onSubmit,
   };
 };
 

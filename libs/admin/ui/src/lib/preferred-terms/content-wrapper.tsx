@@ -1,6 +1,9 @@
 import { type ReactNode } from 'react';
 
-import { usePreferredTermsContext } from '@jobstash/admin/state';
+import {
+  usePreferredTermsContext,
+  useTagsContext,
+} from '@jobstash/admin/state';
 
 import AdminContentLoader from '../admin-content-loader';
 
@@ -9,9 +12,12 @@ interface Props {
 }
 
 const PreferredTermsContentWrapper = ({ children }: Props) => {
-  const { isLoading } = usePreferredTermsContext();
+  const { isLoading: isLoadingTags } = useTagsContext();
+  const { isLoading: isLoadingQuery } = usePreferredTermsContext();
 
-  if (isLoading) return <AdminContentLoader />;
+  const isLoadingPage = isLoadingTags || isLoadingQuery;
+
+  if (isLoadingPage) return <AdminContentLoader />;
 
   return (
     <div className="flex flex-col gap-8 w-full justify-center items-center">
