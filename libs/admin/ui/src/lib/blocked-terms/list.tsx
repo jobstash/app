@@ -1,18 +1,14 @@
-import {
-  useBlockedTermsContext,
-  useBlockedTermsFormContext,
-} from '@jobstash/admin/state';
+import { useBlockedTermsFormContext } from '@jobstash/admin/state';
 
 import { Heading, Spinner, Text } from '@jobstash/shared/ui';
 
 import AdminTechListItem from '../admin-tech-list-item';
 
 const BlockedTermsList = () => {
-  const {
-    isFetching: isFetchingBlockedTerms,
-    isLoading: isLoadingInitBlockedTerms,
-  } = useBlockedTermsContext();
-  const { unblockTerm, allBlockedTerms } = useBlockedTermsFormContext();
+  const { unblockTerm, allBlockedTerms, isFetchingQuery, isLoadingMutation } =
+    useBlockedTermsFormContext();
+
+  const isLoading = isFetchingQuery || isLoadingMutation;
 
   return (
     <div className="flex items-start gap-6">
@@ -22,7 +18,7 @@ const BlockedTermsList = () => {
         </Heading>
       </div>
       <div className="w-full gap-8">
-        {isFetchingBlockedTerms && !isLoadingInitBlockedTerms ? (
+        {isLoading ? (
           <Spinner />
         ) : (
           <div className="flex gap-4 items-center flex-wrap">

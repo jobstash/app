@@ -2,12 +2,7 @@ import Head from 'next/head';
 
 import { ADMIN_BREADCRUMBS, ADMIN_TABS } from '@jobstash/admin/core';
 
-import {
-  BlockedTermsFormProvider,
-  BlockedTermsMutationProvider,
-  BlockedTermsProvider,
-  TagsProvider,
-} from '@jobstash/admin/state';
+import { BlockedTermsFormProvider, TagsProvider } from '@jobstash/admin/state';
 
 import {
   AdminLayout,
@@ -34,17 +29,13 @@ export const BlockedTermsPage = () => (
       tabsSection={<AdminTabs tabs={ADMIN_TABS.TECHNOLOGIES} />}
     >
       <TagsProvider>
-        <BlockedTermsProvider>
-          <BlockedTermsFormProvider>
-            <BlockedTermsMutationProvider>
-              <BlockedTermsContentWrapper>
-                <BlockedTermsInput />
-                <BlockedTermsList />
-                <BlockedTermsActions />
-              </BlockedTermsContentWrapper>
-            </BlockedTermsMutationProvider>
-          </BlockedTermsFormProvider>
-        </BlockedTermsProvider>
+        <BlockedTermsFormProvider>
+          <BlockedTermsContentWrapper>
+            <BlockedTermsInput />
+            <BlockedTermsList />
+            <BlockedTermsActions />
+          </BlockedTermsContentWrapper>
+        </BlockedTermsFormProvider>
       </TagsProvider>
     </AdminLayout>
   </>

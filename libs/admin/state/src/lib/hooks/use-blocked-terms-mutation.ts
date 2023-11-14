@@ -1,46 +1,37 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 
-import { BlockedTermsPayload } from '@jobstash/admin/core';
+import { type BlockedTermsPayload } from '@jobstash/admin/core';
 import { notifError, notifSuccess } from '@jobstash/shared/utils';
 
 import { postSetBlockedTerms } from '@jobstash/admin/data';
 
-import { useBlockedTermsContext } from '../contexts/blocked-terms-context';
+export const useBlockedTermsMutation = (successCb: () => void) => {
+  const {
+    isLoading: isLoadingSetBlockedTerms,
+    mutateAsync: mutateAsyncSetBlockedTerms,
+  } = useMutation({
+    mutationFn: ({ tagNameList }: BlockedTermsPayload) =>
+      postSetBlockedTerms({ tagNameList }),
+    onSuccess(_, { tagNameList }) {
+      const title = `New Blocked Term${tagNameList.length > 1 ? 's' : ''}`;
 
-export const useBlockedTermsMutation = () => {
-  const queryClient = useQueryClient();
+      const message = `${tagNameList.join(', ')}`;
 
-  const { fetchedBlockedTerms } = useBlockedTermsContext();
+      notifSuccess({
+        title,
+        message,
+        autoClose: 10_000,
+      });
 
-  const { isLoading: isLoadingSetBlockedTerms, mutate: mutateSetBlockedTerms } =
-    useMutation({
-      mutationFn: ({ tagNameList }: BlockedTermsPayload) =>
-        postSetBlockedTerms({ tagNameList }),
-      onSuccess(_, { tagNameList }) {
-        const title = `New Blocked Term${tagNameList.length > 1 ? 's' : ''}`;
+      successCb();
+    },
+    onError(data) {
+      notifError({
+        title: 'Block Term Failed',
+        message: (data as Error).message,
+      });
+    },
+  });
 
-        const message = `${tagNameList.join(', ')}`;
-
-        notifSuccess({
-          title,
-          message,
-          autoClose: 10_000,
-        });
-
-        // Manually cache fetched blocked-techs
-        queryClient.setQueryData(
-          ['godmodeBlockedTags'],
-          [...fetchedBlockedTerms, ...tagNameList],
-        );
-        queryClient.invalidateQueries(['godmodeBlockedTags']);
-      },
-      onError(data) {
-        notifError({
-          title: 'Block Term Failed',
-          message: (data as Error).message,
-        });
-      },
-    });
-
-  return { isLoadingSetBlockedTerms, mutateSetBlockedTerms };
+  return { isLoadingSetBlockedTerms, mutateAsyncSetBlockedTerms };
 };

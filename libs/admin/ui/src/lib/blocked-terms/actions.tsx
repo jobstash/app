@@ -1,35 +1,32 @@
-import {
-  useBlockedTermsFormContext,
-  useBlockedTermsMutationContext,
-} from '@jobstash/admin/state';
+import { useBlockedTermsFormContext } from '@jobstash/admin/state';
 
 import { Button } from '@jobstash/shared/ui';
 
 const BlockedTermsActions = () => {
-  const { currentBlockedTerms, currentUnblockedTerms } =
-    useBlockedTermsFormContext();
+  const {
+    onSubmit,
+    isFetchingQuery,
+    isLoadingMutation,
+    fetchedBlockedTerms,
+    allBlockedTerms,
+  } = useBlockedTermsFormContext();
 
-  const { mutateSetBlockedTerms, mutateUnsetBlockedTerms } =
-    useBlockedTermsMutationContext();
+  const isFetched =
+    JSON.stringify(fetchedBlockedTerms) === JSON.stringify(allBlockedTerms);
 
-  const onSubmit = () => {
-    if (currentBlockedTerms.length > 0) {
-      mutateSetBlockedTerms({
-        tagNameList: currentBlockedTerms,
-      });
-    }
-
-    if (currentUnblockedTerms.length > 0) {
-      mutateUnsetBlockedTerms({
-        tagNameList: currentUnblockedTerms,
-      });
-    }
-  };
+  const isDisabled = [isFetchingQuery, isLoadingMutation, isFetched].includes(
+    true,
+  );
 
   return (
     <div className="w-full flex justify-end">
       <div className="flex gap-4 items-center">
-        <Button variant="primary" className="px-6" onClick={onSubmit}>
+        <Button
+          variant="primary"
+          className="px-6"
+          isDisabled={isDisabled}
+          onClick={onSubmit}
+        >
           Submit
         </Button>
       </div>
