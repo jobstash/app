@@ -45,7 +45,9 @@ export const usePreferredTermsForm = (
   const removeSynonym = (term: string) => {
     setCurrentSynonyms((prev) => ({
       created: prev.created.filter((s) => s !== term),
-      deleted: [...prev.deleted, term],
+      deleted: (initSynonyms ?? []).includes(term)
+        ? [...prev.deleted, term]
+        : prev.deleted,
     }));
   };
 
