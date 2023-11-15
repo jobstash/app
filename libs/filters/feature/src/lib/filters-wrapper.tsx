@@ -1,5 +1,4 @@
 import { ReactNode, useEffect, useState } from 'react';
-import { useInView } from 'react-intersection-observer';
 
 import { useAtom } from 'jotai';
 
@@ -45,33 +44,23 @@ const FiltersWrapper = ({ children }: Props) => {
     };
   }, [scrollDirection, showFilters]);
 
-  const [topLarge, setTopLarge] = useState(false);
-
   useEffect(() => {
-    if (scrollDirection === 'up') {
-      setTopLarge(showFilters);
-    }
-  }, [scrollDirection, showFilters]);
+    let hideTimeout: NodeJS.Timeout;
 
-  const { ref, inView } = useInView();
-  useEffect(() => {
-    if (!inView && showFilters) {
-      setShowFilters(false);
+    if (scrollDirection === 'down' && showFilters) {
+      hideTimeout = setTimeout(() => setShowFilters(false), 300);
     }
-  }, [inView, setShowFilters, showFilters]);
+
+    return () => clearTimeout(hideTimeout);
+  }, [scrollDirection, setShowFilters, showFilters]);
 
   return (
     <div
-      ref={ref}
       className={cn(
         'flex flex-col py-4 lg:pt-8 gap-y-4 bg-[#121216] z-50 sticky transition-all duration-1000 top-[49px] lg:top-0 pr-2',
         {
           '-top-60 sm:-top-44 lg:-top-44':
             scrollDirection === 'down' && !showFilters,
-        },
-        {
-          '-top-[100%] sm:-top-[75%] lg:-top-[75%]':
-            scrollDirection === 'down' && topLarge,
         },
         { 'w-[calc(100%+32px)] overflow-x-hidden': showFilters && !isMobile },
       )}
