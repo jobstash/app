@@ -40,7 +40,7 @@ const Sidebar = () => (
 
         <SidebarDiscoverBartabs isMobile />
       </MobileNavbarWrapper>
-      <div className="-mr-2 ml-auto self-center lg:hidden">
+      <div className="-mr-2 ml-auto lg:hidden">
         <MobileMenuButton>
           <HamburgerIcon />
         </MobileMenuButton>

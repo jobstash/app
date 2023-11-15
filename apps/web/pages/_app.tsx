@@ -8,12 +8,19 @@ import Script from 'next/script';
 import { useEffect } from 'react';
 
 import { LoadingPage } from '@jobstash/shared/pages';
+import { useAtomValue } from 'jotai';
 
 import { ANALYTICS_ID } from '@jobstash/shared/core';
+import { cn } from '@jobstash/shared/utils';
 
 import { AuthProvider } from '@jobstash/auth/state';
-import { MantineProvider, ReactQueryProvider } from '@jobstash/shared/state';
+import {
+  isOpenTopBannerAtom,
+  MantineProvider,
+  ReactQueryProvider,
+} from '@jobstash/shared/state';
 
+import { TopBanner } from '@jobstash/shared/ui';
 import { WagmiSiweSync } from '@jobstash/auth/feature';
 
 const App = ({ Component, pageProps }: AppProps) => {
@@ -25,6 +32,8 @@ const App = ({ Component, pageProps }: AppProps) => {
       return true;
     });
   }, [router]);
+
+  const isOpenTopBanner = useAtomValue(isOpenTopBannerAtom);
 
   return (
     <>
@@ -62,7 +71,13 @@ const App = ({ Component, pageProps }: AppProps) => {
       <ReactQueryProvider dehydratedState={pageProps.dehydratedState}>
         <MantineProvider>
           <AuthProvider screenLoader={<LoadingPage />}>
-            <Component {...pageProps} />
+            {/* <Component {...pageProps} /> */}
+
+            <TopBanner />
+            <div className={cn({ 'pt-10': isOpenTopBanner })}>
+              <Component {...pageProps} />
+            </div>
+
             <WagmiSiweSync />
           </AuthProvider>
         </MantineProvider>
