@@ -1,6 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 
-import { PreferredTermsPayload } from '@jobstash/admin/core';
+import { type DeletePreferencePayload } from '@jobstash/admin/core';
 import { notifError, notifSuccess } from '@jobstash/shared/utils';
 
 import { postDeletePreference } from '@jobstash/admin/data';
@@ -11,11 +11,11 @@ export const useDeletePreferenceMutation = () => {
     isLoading: isLoadingDeletePreference,
     mutateAsync: mutateAsyncDeletePreference,
   } = useMutation({
-    mutationFn: (payload: PreferredTermsPayload) =>
+    mutationFn: (payload: DeletePreferencePayload) =>
       postDeletePreference(payload),
-    onSuccess(_, { synonyms }) {
-      const title = `Deleted Preferred Terms${synonyms.length > 1 ? 's' : ''}`;
-      const message = `${synonyms.join(', ')}`;
+    onSuccess(_, { preferredName }) {
+      const title = `Deleted Preference`;
+      const message = `Removed preference for "${preferredName}"`;
 
       notifSuccess({
         title,
