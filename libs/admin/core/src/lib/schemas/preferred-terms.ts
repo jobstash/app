@@ -19,6 +19,10 @@ export const preferredTermsPayloadSchema = myzod.object({
   synonyms: myzod.array(myzod.string().min(1)),
 });
 
+export const deletePreferrencePayloadSchema = myzod.object({
+  preferredName: myzod.string().min(1),
+});
+
 export const createPreferenceResponseSchema = myzod.object({
   success: myzod.boolean(),
   message: myzod.string().min(1),
@@ -26,6 +30,12 @@ export const createPreferenceResponseSchema = myzod.object({
     preferredName: myzod.string().min(1),
     synonyms: myzod.array(tagSchema),
   }),
+});
+
+export const deleteSynonymsResponseSchema = myzod.object({
+  success: myzod.boolean(),
+  message: myzod.string().min(1),
+  data: preferredTermSchema,
 });
 
 export const deletePreferenceResponseSchema = myzod.object({
@@ -37,9 +47,13 @@ export const deletePreferenceResponseSchema = myzod.object({
 export type PreferredTerm = Infer<typeof preferredTermSchema>;
 export type PreferredTermsResponse = Infer<typeof preferredTermsResponseSchema>;
 export type PreferredTermsPayload = Infer<typeof preferredTermsPayloadSchema>;
+export type DeletePreferencePayload = Infer<
+  typeof deletePreferrencePayloadSchema
+>;
 export type CreatePreferenceResponse = Infer<
   typeof createPreferenceResponseSchema
 >;
+export type DeleteSynonymsResponse = Infer<typeof deleteSynonymsResponseSchema>;
 export type DeletePreferenceResponse = Infer<
   typeof deletePreferenceResponseSchema
 >;

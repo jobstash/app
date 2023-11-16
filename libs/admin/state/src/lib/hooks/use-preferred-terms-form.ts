@@ -7,6 +7,7 @@ import { useTagsContext } from '../contexts/tags-context';
 
 import { useCreatePreferenceMutation } from './use-create-preference-mutation';
 import { useDeletePreferenceMutation } from './use-delete-preference-mutation';
+import { useDeleteSynonymsMutation } from './use-delete-synonyms-mutation';
 
 export const usePreferredTermsForm = (
   initPrimaryTerm: string | null,
@@ -62,6 +63,9 @@ export const usePreferredTermsForm = (
   const { isLoadingCreatePreference, mutateAsyncCreatePreference } =
     useCreatePreferenceMutation();
 
+  const { isLoadingDeleteSynonyms, mutateAsyncDeleteSynonyms } =
+    useDeleteSynonymsMutation();
+
   const { isLoadingDeletePreference, mutateAsyncDeletePreference } =
     useDeletePreferenceMutation();
 
@@ -79,7 +83,7 @@ export const usePreferredTermsForm = (
 
     if (currentSynonyms.deleted.length > 0) {
       promises.push(
-        mutateAsyncDeletePreference({
+        mutateAsyncDeleteSynonyms({
           preferredName: primaryTerm,
           synonyms: currentSynonyms.deleted,
         }),
@@ -97,6 +101,7 @@ export const usePreferredTermsForm = (
 
   const isLoadingMutation = [
     isLoadingCreatePreference,
+    isLoadingDeleteSynonyms,
     isLoadingDeletePreference,
   ].includes(true);
 
