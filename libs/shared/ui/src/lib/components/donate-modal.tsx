@@ -43,31 +43,37 @@ const DonateModal = () => {
   return (
     <Modal.Root
       centered
+      fullScreen
       opened={show}
       size="auto"
-      lockScroll={false}
       onClose={closeModal}
     >
       <Modal.Overlay opacity={0.85} blur={0.5} />
-      <Modal.Content className="rounded-3xl">
+      <Modal.Content>
         <Modal.Header>
-          <div className="absolute right-10 top-10">
+          <div className="absolute top-4 right-4 sm:right-10 sm:top-10">
             <Modal.CloseButton iconSize={32} />
           </div>
         </Modal.Header>
 
         <Modal.Body className="flex">
-          <div className="flex flex-col flex-wrap flex-auto basis-1/2 gap-6 items-center p-1 sm:p-8">
+          <div className="flex flex-col flex-wrap flex-auto basis-1/2 gap-6 items-center p-1 sm:p-4">
             <FoxSVG />
 
-            <h1
-              className={`${lato.variable} font-lato antialiased font-black text-2xl sm:text-5xl text-white`}
-            >
-              We Need Your Support{' '}
-              <span role="img" aria-label="Heart">
-                ❤️
-              </span>
-            </h1>
+            <div className="text-center space-y-1 sm:space-y-0">
+              <h1
+                className={`${lato.variable} font-lato antialiased font-black text-2xl sm:text-5xl text-white`}
+              >
+                We Need Your Support{' '}
+                <span role="img" aria-label="Heart">
+                  ❤️
+                </span>
+              </h1>
+
+              <Heading fw="semibold" className="text-white text-lg sm:text-xl">
+                Our new Gitcoin Grant campaign is live!
+              </Heading>
+            </div>
 
             <div className="text-center space-y-4 sm:space-y-0">
               <Heading size="sm" fw="normal" className="text-white/80">
@@ -78,7 +84,7 @@ const DonateModal = () => {
               <p
                 className={`${roboto.variable} font-roboto antialiased text-lg text-white/80 pt-1`}
               >
-                If you ever found our project useful, please support us on{' '}
+                Please support us on{' '}
                 <Link
                   href={GITCOIN_LINK}
                   className="text-blue-400"
@@ -127,49 +133,74 @@ const DonateModal = () => {
                 </p>
               </div>
 
+              <div className="flex flex-col space-y-4 sm:space-y-0">
+                <Text size="lg" className="text-white/80 items-center">
+                  Last time we ranked in the top 10 and managed to pay for our
+                  team for a few months.
+                </Text>
+                <Text size="lg" className="text-white/80 items-center">
+                  This time we really need your support as our finances are
+                  dwindling again, and as every GitCoin grant it&apos;s a
+                  popularity contest so the more votes we get the more we are
+                  able to collect in matching funds.
+                </Text>
+              </div>
+
               <Text size="lg" className="text-white/80 items-center">
-                Gitcoin introduced a new matching calulation where users who
-                only donate to one project have a reduced matching impact, so if
-                you donate to us, please also donate to another project of your
+                Gitcoin also introduced new calculations where users who only
+                donate to one project have a reduced matching impact, so if you
+                donate to us, please also donate to another project of your
                 choosing, so that you will not be clustered against bots and
                 sybils, and to maximise your matching amount.
               </Text>
 
+              <Text size="lg" className="text-white/80 items-center">
+                The minimum qualifying donation is 1 DAI.
+              </Text>
+
               <div className="flex flex-col space-y-4 sm:space-y-0">
                 <Text size="lg" className="text-white/80">
-                  Lastly, you need a Gitcoin passport score of &gt; 20 for the
-                  donation to count as valid.
+                  Lastly, you need a Gitcoin passport score of &gt; 25 for the
+                  donation to count as 100% matched.
                 </Text>
-
-                <p
-                  className={`${roboto.variable} font-roboto antialiased text-lg text-white/80 pt-1`}
-                >
-                  You can set that up at{' '}
-                  <Link
-                    href="https://passport.gitcoin.co/"
-                    className="text-blue-400"
-                    rel="noopener noreferrer"
-                    target="_blank"
-                    onClick={onClickPassport}
-                  >
-                    passport.gitcoin.co
-                  </Link>
-                </p>
+                <Text size="lg" className="text-white/80">
+                  If you have a score &gt;= 15 there wil be 0% matching, at a
+                  score of 20 there will be 50% matching, and 25 and above will
+                  have 100% matching.
+                </Text>
               </div>
+
+              <p
+                className={`${roboto.variable} font-roboto antialiased text-lg text-white/80 pt-1`}
+              >
+                You can set that up at{' '}
+                <Link
+                  href="https://passport.gitcoin.co/"
+                  className="text-blue-400"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  onClick={onClickPassport}
+                >
+                  passport.gitcoin.co
+                </Link>
+              </p>
             </div>
 
-            <div className="flex flex-col text-center">
-              <Link href="https://telegram.me/duckdegen" onClick={onClickDM}>
-                <span
-                  className={`${roboto.variable} font-roboto antialiased text-lg text-blue-400 flex items-center gap-2`}
+            <div className="flex flex-col space-y-4 sm:space-y-0 text-center">
+              <p
+                className={`${roboto.variable} font-roboto antialiased text-lg text-white/80 pt-1`}
+              >
+                If you need assistance with this, DM{' '}
+                <Link
+                  href="https://telegram.me/duckdegen"
+                  className="text-blue-400"
+                  rel="noopener noreferrer"
+                  target="_blank"
+                  onClick={onClickDM}
                 >
-                  DM @duckdegen on{' '}
-                  <div className="w-6 h-6">
-                    <TelegramIcon />
-                  </div>{' '}
-                  for assistance
-                </span>
-              </Link>
+                  @duckdegen
+                </Link>{' '}
+              </p>
 
               <Text size="lg" className="text-white/80">
                 Thank you for your support!
@@ -207,31 +238,13 @@ const initFromLocalStorage = (): boolean => {
   return isPastHour;
 };
 
-const TelegramIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    enable-background="new 0 0 100 100"
-    viewBox="0 0 100 100"
-    id="telegram"
-  >
-    <path
-      fill="#1b92d1"
-      d="M88.723,12.142C76.419,17.238,23.661,39.091,9.084,45.047c-9.776,3.815-4.053,7.392-4.053,7.392
-			s8.345,2.861,15.499,5.007c7.153,2.146,10.968-0.238,10.968-0.238l33.62-22.652c11.922-8.107,9.061-1.431,6.199,1.431
-			c-6.199,6.2-16.452,15.975-25.036,23.844c-3.815,3.338-1.908,6.199-0.238,7.63c6.199,5.246,23.129,15.976,24.082,16.691
-			c5.037,3.566,14.945,8.699,16.452-2.146c0,0,5.961-37.435,5.961-37.435c1.908-12.637,3.815-24.321,4.053-27.659
-			C97.307,8.804,88.723,12.142,88.723,12.142z"
-    />
-  </svg>
-);
-
 const FoxSVG = () => {
   const isMobile = useIsMobile();
 
   return (
     <svg
-      width={isMobile ? '83' : '133'}
-      height={isMobile ? '103' : '153'}
+      width={isMobile ? '83' : '113'}
+      height={isMobile ? '103' : '133'}
       viewBox="0 0 133 153"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"
