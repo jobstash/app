@@ -41,7 +41,13 @@ const DonateModal = () => {
   };
 
   return (
-    <Modal.Root centered opened={show} size="auto" onClose={closeModal}>
+    <Modal.Root
+      centered
+      opened={show}
+      size="auto"
+      lockScroll={false}
+      onClose={closeModal}
+    >
       <Modal.Overlay opacity={0.85} blur={0.5} />
       <Modal.Content className="rounded-3xl">
         <Modal.Header>
@@ -191,6 +197,7 @@ const initFromLocalStorage = (): boolean => {
 
   if (!rawTs) {
     localStorage.setItem(LS_KEY, nowTs.toString());
+    return true;
   }
 
   const storedTs = Number(rawTs ?? nowTs);
