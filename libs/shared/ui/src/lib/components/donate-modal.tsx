@@ -44,9 +44,12 @@ const DonateModal = () => {
 
   return (
     <Modal.Root
-      centered
+      // Centered
       opened={show}
+      // Opened
       fullScreen={isMobile}
+      centered={!isMobile}
+      lockScroll={false}
       size="auto"
       onClose={closeModal}
     >

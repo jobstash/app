@@ -33,7 +33,7 @@ const TopBanner = () => {
         <Text className="text-center text-sm sm:text-md">{bannerText}</Text>
         <Link passHref legacyBehavior href={donateURL}>
           <a target="_blank" onClick={onClickDonate}>
-            <Text className="underline text-sm sm:text-md">Donate today</Text>
+            <Text className="underline text-sm sm:text-md">Donate Today</Text>
           </a>
         </Link>
       </div>
