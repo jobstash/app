@@ -10,6 +10,7 @@ import ButtonWrapper from './button-wrapper';
 
 interface LinkButtonProps extends ButtonProps {
   linkProps: LinkProps;
+  external?: boolean;
 }
 
 const LinkButton = ({
@@ -24,6 +25,8 @@ const LinkButton = ({
   isBordered,
   textProps,
   linkProps,
+  external,
+  className,
   ...props
 }: LinkButtonProps) => (
   <ButtonWrapper
@@ -46,7 +49,10 @@ const LinkButton = ({
           isFullWidth,
           isBordered,
         }),
+        className,
       )}
+      rel={external ? 'noopener noreferrer' : undefined}
+      target={external ? '_blank' : undefined}
     >
       {left ?? null}
       <Text size={size} {...textProps}>

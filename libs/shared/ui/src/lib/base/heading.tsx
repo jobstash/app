@@ -30,6 +30,7 @@ type HeadingVariantProps = VariantProps<typeof heading>;
 
 interface HeadingProps extends HeadingVariantProps {
   children: ReactNode;
+  className?: string;
 }
 
 const sizeHeadingMap: Record<
@@ -48,13 +49,17 @@ const Heading = ({
   fw = 'bold',
   size = 'xl',
   color = 'white',
+  className,
   ...props
 }: HeadingProps) => {
   const HeadingTag =
     sizeHeadingMap[(size as keyof typeof sizeHeadingMap) ?? 'xl'];
 
   return (
-    <HeadingTag className={cn(heading({ fw, size, color }))} {...props}>
+    <HeadingTag
+      className={cn(heading({ fw, size, color }), className)}
+      {...props}
+    >
       {children}
     </HeadingTag>
   );
