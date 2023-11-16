@@ -18,7 +18,7 @@ import {
   ReactQueryProvider,
 } from '@jobstash/shared/state';
 
-import { TopBanner } from '@jobstash/shared/ui';
+import { DonateModal, TopBanner } from '@jobstash/shared/ui';
 
 //
 // import { LoadingPage } from '@jobstash/shared/pages';
@@ -77,6 +77,7 @@ const App = ({ Component, pageProps }: AppProps) => {
           {/* <Component {...pageProps} /> */}
 
           <TopBanner />
+          <DonateModal />
           <div className={cn({ 'pt-10': isOpenTopBanner })}>
             <Component {...pageProps} />
           </div>
