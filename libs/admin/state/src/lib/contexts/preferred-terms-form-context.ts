@@ -15,6 +15,7 @@ export interface PreferredTermsFormContextProps {
   };
   isDisabledSubmit: boolean;
   onSubmit: () => void;
+  onDelete: () => void;
 }
 
 export const PreferredTermsFormContext =

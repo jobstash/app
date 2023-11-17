@@ -1,7 +1,11 @@
 import { useMutation } from '@tanstack/react-query';
 
 import { PreferredTermsPayload } from '@jobstash/admin/core';
-import { notifError, notifSuccess } from '@jobstash/shared/utils';
+import {
+  getPluralText,
+  notifError,
+  notifSuccess,
+} from '@jobstash/shared/utils';
 
 import { postDeleteSynonyms } from '@jobstash/admin/data';
 
@@ -13,7 +17,7 @@ export const useDeleteSynonymsMutation = () => {
   } = useMutation({
     mutationFn: (payload: PreferredTermsPayload) => postDeleteSynonyms(payload),
     onSuccess(_, { synonyms }) {
-      const title = `Deleted Preferred Terms${synonyms.length > 1 ? 's' : ''}`;
+      const title = `Deleted ${getPluralText('Synonym', synonyms.length)}`;
       const message = `${synonyms.join(', ')}`;
 
       notifSuccess({
@@ -24,7 +28,7 @@ export const useDeleteSynonymsMutation = () => {
     },
     onError(data) {
       notifError({
-        title: 'Delete Preference Failed',
+        title: 'Delete Synonym Failed',
         message: (data as Error).message,
       });
     },
