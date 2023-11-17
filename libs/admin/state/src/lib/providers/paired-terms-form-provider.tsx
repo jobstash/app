@@ -1,8 +1,7 @@
-import { type ReactNode, useCallback, useMemo, useState } from 'react';
+import { type ReactNode } from 'react';
 
 import { PairedTermsFormContext } from '../contexts/paired-terms-form-context';
-import { useTagsContext } from '../contexts/tags-context';
-import { usePairedTermsMutation } from '../hooks/use-paired-terms-mutation';
+import { usePairedTermForm } from '../hooks/use-paired-term-form';
 
 interface Props {
   initOrigin: string | null;
@@ -15,52 +14,7 @@ export const PairedTermsFormProvider = ({
   initDestination,
   children,
 }: Props) => {
-  const { mappedTags: tags } = useTagsContext();
-
-  const [origin, setOrigin] = useState(initOrigin);
-
-  const onChangeOrigin = useCallback((value: string) => setOrigin(value), []);
-
-  const [destination, setDestination] = useState<string[]>(initDestination);
-
-  const destinationOptions = useMemo(
-    () => tags.filter((t) => !destination.includes(t) && t !== origin),
-    [destination, origin, tags],
-  );
-
-  const addDestination = (value: string) => {
-    setDestination((prev) => [...prev, value]);
-  };
-
-  const removeDestination = (value: string) =>
-    setDestination((prev) => prev.filter((t) => t !== value));
-
-  const { isLoading: isLoadingMutation, mutate } = usePairedTermsMutation();
-
-  const value = useMemo(
-    () => ({
-      origin,
-      initOrigin,
-      onChangeOrigin,
-      destination,
-      initDestination,
-      destinationOptions,
-      addDestination,
-      removeDestination,
-      isLoadingMutation,
-      mutate,
-    }),
-    [
-      destination,
-      destinationOptions,
-      initDestination,
-      initOrigin,
-      onChangeOrigin,
-      origin,
-      isLoadingMutation,
-      mutate,
-    ],
-  );
+  const value = usePairedTermForm(initOrigin, initDestination);
 
   return (
     <PairedTermsFormContext.Provider value={value}>

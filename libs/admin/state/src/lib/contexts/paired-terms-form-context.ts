@@ -1,7 +1,5 @@
 import { createContext, useContext } from 'react';
 
-import { type PairedTermsMutFn } from '@jobstash/admin/core';
-
 export interface PairedTermsFormContextProps {
   origin: string | null;
   initOrigin: string | null;
@@ -12,7 +10,7 @@ export interface PairedTermsFormContextProps {
   addDestination: (_: string) => void;
   removeDestination: (_: string) => void;
   isLoadingMutation: boolean;
-  mutate: PairedTermsMutFn;
+  onSubmit: () => void;
 }
 
 export const PairedTermsFormContext =
