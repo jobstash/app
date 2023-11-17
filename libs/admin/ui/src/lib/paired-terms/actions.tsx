@@ -5,17 +5,8 @@ import { usePairedTermsFormContext } from '@jobstash/admin/state';
 import { Button } from '@jobstash/shared/ui';
 
 const PairedTermsActions = () => {
-  const { origin, destination, initDestination, mutate } =
+  const { destination, initDestination, onSubmit } =
     usePairedTermsFormContext();
-
-  const onSubmit = () => {
-    if (origin) {
-      mutate({
-        originTag: origin,
-        pairedTagList: destination,
-      });
-    }
-  };
 
   const isDisabled = useMemo(
     () =>
