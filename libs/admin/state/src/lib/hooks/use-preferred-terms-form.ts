@@ -99,6 +99,16 @@ export const usePreferredTermsForm = (
     });
   };
 
+  const onDelete = async () => {
+    await mutateAsyncDeletePreference({
+      preferredName: primaryTerm,
+    });
+
+    await queryClient.invalidateQueries({
+      queryKey: ['preferredTerms'],
+    });
+  };
+
   const isLoadingMutation = [
     isLoadingCreatePreference,
     isLoadingDeleteSynonyms,
@@ -107,6 +117,7 @@ export const usePreferredTermsForm = (
 
   const isDisabledSubmit =
     !primaryTerm ||
+    (!isExisting && currentSynonyms.created.length === 0) ||
     JSON.stringify({ primaryTerm: initPrimaryTerm, synonyms: initSynonyms }) ===
       JSON.stringify({ primaryTerm, synonyms });
 
@@ -122,6 +133,7 @@ export const usePreferredTermsForm = (
     currentSynonyms,
     isDisabledSubmit,
     onSubmit,
+    onDelete,
   };
 };
 

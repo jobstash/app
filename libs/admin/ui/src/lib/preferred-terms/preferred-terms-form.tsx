@@ -28,7 +28,7 @@ const PreferredTermsForm = () => {
   return (
     <div className="flex w-full justify-center">
       <div className="flex flex-col p-12 pb-8 w-1/2 gap-8 relative border border-gray rounded-lg">
-        {isExisting ? (
+        {/* {isExisting ? (
           <pre>
             {JSON.stringify(
               { primaryTerm, synonyms, currentSynonyms },
@@ -38,7 +38,7 @@ const PreferredTermsForm = () => {
           </pre>
         ) : (
           <pre>{JSON.stringify({ preferredTerms }, undefined, '\t')}</pre>
-        )}
+        )} */}
 
         <LoadingOverlay visible={isLoadingMutation} />
         <AdminFormControl label="Primary Term" input={<PrimaryTermInput />} />
