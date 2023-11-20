@@ -1,6 +1,6 @@
 import { memo, ReactNode } from 'react';
 
-import { Button, Heading } from '@jobstash/shared/ui';
+import { Button, Heading, Hexagon } from '@jobstash/shared/ui';
 
 interface Props {
   icon: ReactNode;
@@ -15,7 +15,9 @@ const GotItCard = (props: Props) => {
   return (
     <div className="flex border border-white/10 rounded-3xl pt-4 pr-12 bg-dark">
       <div className="flex radius-xl gap-1">
-        <div>{icon}</div>
+        <div>
+          <Hexagon icon={icon} />
+        </div>
         <div className="flex flex-col py-6 space-y-4">
           <Heading fw="semibold" size="xl">
             {title}
