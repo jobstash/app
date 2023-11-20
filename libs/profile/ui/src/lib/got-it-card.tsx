@@ -5,7 +5,7 @@ import { Button, Heading, Hexagon } from '@jobstash/shared/ui';
 interface Props {
   icon: ReactNode;
   title: string;
-  onClick: () => void;
+  onClick?: () => void;
   children: ReactNode;
 }
 
@@ -24,15 +24,17 @@ const GotItCard = (props: Props) => {
           </Heading>
           {children}
 
-          <div className="flex justify-end">
-            <Button
-              variant="primary"
-              className="px-10 py-2.5"
-              onClick={onClick}
-            >
-              OK Got it!
-            </Button>
-          </div>
+          {onClick && (
+            <div className="flex justify-end">
+              <Button
+                variant="primary"
+                className="px-10 py-2.5"
+                onClick={onClick}
+              >
+                OK Got it!
+              </Button>
+            </div>
+          )}
         </div>
       </div>
     </div>
