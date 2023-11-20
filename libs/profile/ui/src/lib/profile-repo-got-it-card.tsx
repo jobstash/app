@@ -2,7 +2,7 @@ import { memo } from 'react';
 
 import { useProfileRepoPageContext } from '@jobstash/profile/state';
 
-import { GithubOutlineHugeIcon, Hexagon, Text } from '@jobstash/shared/ui';
+import { GithubOutlineHugeIcon, Text } from '@jobstash/shared/ui';
 
 import GotItCard from './got-it-card';
 
@@ -15,7 +15,7 @@ const ProfileRepoGotItCard = () => {
 
   return (
     <GotItCard
-      icon={<Hexagon icon={<GithubOutlineHugeIcon />} />}
+      icon={<GithubOutlineHugeIcon />}
       title="Your Repository List"
       onClick={onClick}
     >

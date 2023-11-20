@@ -1,6 +1,6 @@
 import { memo, useState } from 'react';
 
-import { Hexagon, ProfileHugeIcon, Text } from '@jobstash/shared/ui';
+import { ProfileHugeIcon, Text } from '@jobstash/shared/ui';
 
 import GotItCard from './got-it-card';
 
@@ -17,7 +17,7 @@ const ProfileGotItCard = ({ initShow }: Props) => {
 
   return (
     <GotItCard
-      icon={<Hexagon icon={<ProfileHugeIcon />} />}
+      icon={<ProfileHugeIcon />}
       title="Your Repository List"
       onClick={onClick}
     >

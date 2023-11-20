@@ -2,7 +2,7 @@ import { memo } from 'react';
 
 import { useProfileReviewsPageContext } from '@jobstash/profile/state';
 
-import { GithubOutlineHugeIcon, Hexagon, Text } from '@jobstash/shared/ui';
+import { GithubOutlineHugeIcon, Text } from '@jobstash/shared/ui';
 
 import GotItCard from './got-it-card';
 
@@ -15,7 +15,7 @@ const ProfileReviewsGotItCard = () => {
 
   return (
     <GotItCard
-      icon={<Hexagon icon={<GithubOutlineHugeIcon />} />}
+      icon={<GithubOutlineHugeIcon />}
       title="Organization Reviews"
       onClick={onClick}
     >
