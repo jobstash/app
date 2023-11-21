@@ -10,8 +10,8 @@ export const getProfileRepoList = async (
   page: number,
 ): Promise<ProfileRepoListQueryPage> => {
   //
-  // const url = `/api/fakers/profile/repositories?page=${page.toString()}&limit=${PAGE_SIZE}`;
-  const url = `${MW_URL}/profile/repositories?page=${page.toString()}&limit=${PAGE_SIZE}`;
+  // const url = `${MW_URL}/profile/repositories?page=${page.toString()}&limit=${PAGE_SIZE}`;
+  const url = `/api/fakers/profile/repositories?page=${page.toString()}&limit=${PAGE_SIZE}`;
 
   const options = {
     responseSchema: profileRepoListQueryPageSchema,

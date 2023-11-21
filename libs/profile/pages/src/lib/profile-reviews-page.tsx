@@ -9,7 +9,6 @@ import {
   ProfileHeader,
   ProfileReviewsGotItCard,
   ProfileReviewsSubHeader,
-  ProfileReviewsTourWrapper,
 } from '@jobstash/profile/ui';
 import {
   ProfileOrgReviewList,
@@ -29,23 +28,21 @@ export const ProfileReviewsPage = ({ isOnboardSSR }: Props) => {
   if (canRender) {
     return (
       <ProfileReviewsPageProvider isOnboardSSR={isOnboardSSR}>
-        <ProfileReviewsTourWrapper>
-          <Head>
-            <title>Organization Reviews</title>
-          </Head>
-          <div className="w-full lg:pl-52">
-            <SideBar />
+        <Head>
+          <title>Organization Reviews</title>
+        </Head>
+        <div className="w-full lg:pl-52">
+          <SideBar />
 
-            <div className="px-3.5 pt-[65px] lg:px-12 lg:pt-6 lg:pr-[50%] flex flex-col gap-6">
-              <ProfileHeader />
+          <div className="px-3.5 pt-[65px] lg:px-12 lg:pt-6 lg:pr-[50%] flex flex-col gap-6">
+            <ProfileHeader />
 
-              <ProfileReviewsSubHeader />
-              <ProfileReviewsGotItCard />
-              <ProfileOrgReviewList />
-            </div>
-            <ProfileOrgReviewsRightPanel />
+            <ProfileReviewsSubHeader />
+            <ProfileReviewsGotItCard />
+            <ProfileOrgReviewList />
           </div>
-        </ProfileReviewsTourWrapper>
+          <ProfileOrgReviewsRightPanel />
+        </div>
       </ProfileReviewsPageProvider>
     );
   }

@@ -29,3 +29,9 @@ export const RATING_TITLE_MAP = {
   diversityInclusion: 'Diversity & Inclusion',
   interviewProcess: 'Interview Process',
 } as const;
+
+export const LS_KEYS = {
+  TOURS: {
+    TECHS_USED: 'tour-techs-used' as const,
+  },
+} as const;

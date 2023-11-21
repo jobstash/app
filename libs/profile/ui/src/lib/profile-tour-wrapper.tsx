@@ -2,18 +2,15 @@ import { type ReactNode } from 'react';
 
 import { ProviderProps, StepType, TourProvider } from '@reactour/tour';
 
-import ProfileTourStarter from './profile-tour-starter';
-
 interface Props {
   steps: StepType[];
   children: ReactNode;
-  isOnboarding: boolean;
   prevButton: ProviderProps['prevButton'];
   nextButton: ProviderProps['nextButton'];
 }
 
 const ProfileTourWrapper = (props: Props) => {
-  const { steps, children, isOnboarding, prevButton, nextButton } = props;
+  const { steps, children, prevButton, nextButton } = props;
 
   return (
     <TourProvider
@@ -23,9 +20,10 @@ const ProfileTourWrapper = (props: Props) => {
         popover: (base) => ({
           ...base,
           background: 'rgb(52, 52, 52)',
-          border: '1px solid rgb(135, 67, 255)',
-          borderWidth: '2px',
+          // Border: '1px solid rgb(135, 67, 255)',
+          // borderWidth: '2px',
           borderRadius: '1.5rem',
+          marginLeft: -50,
         }),
         dot: (base, dotProps) => ({
           ...base,
@@ -37,9 +35,10 @@ const ProfileTourWrapper = (props: Props) => {
       }}
       prevButton={prevButton}
       nextButton={nextButton}
+      showDots={false}
       onClickMask={() => null}
     >
-      <ProfileTourStarter startTour={isOnboarding} />
+      {/* <ProfileTourStarter startTour={isOnboarding} /> */}
       {children}
     </TourProvider>
   );

@@ -3,8 +3,6 @@ import { ReactNode } from 'react';
 
 import { type StepType } from '@reactour/tour';
 
-import { useProfileRepoPageContext } from '@jobstash/profile/state';
-
 import ProfileOnboardCard from '../profile-onboard-card';
 import ProfileTourWrapper from '../profile-tour-wrapper';
 
@@ -15,20 +13,15 @@ interface Props {
   children: ReactNode;
 }
 
-const ProfileRepoTourWrapper = ({ children }: Props) => {
-  const { isOnboarding } = useProfileRepoPageContext();
-
-  return (
-    <ProfileTourWrapper
-      steps={steps}
-      isOnboarding={isOnboarding}
-      prevButton={(props) => <BackButton {...props} />}
-      nextButton={(props) => <NextButton {...props} />}
-    >
-      {children}
-    </ProfileTourWrapper>
-  );
-};
+const ProfileRepoTourWrapper = ({ children }: Props) => (
+  <ProfileTourWrapper
+    steps={steps}
+    prevButton={(props) => <BackButton {...props} />}
+    nextButton={(props) => <NextButton {...props} />}
+  >
+    {children}
+  </ProfileTourWrapper>
+);
 
 const steps: StepType[] = [
   {

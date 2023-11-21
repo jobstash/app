@@ -15,7 +15,7 @@ const CardActionButton = ({ isDisabled, onClick }: Props) => (
       isDisabled={isDisabled}
       onClick={onClick}
     >
-      Save & Next
+      Save
     </Button>
   </div>
 );
