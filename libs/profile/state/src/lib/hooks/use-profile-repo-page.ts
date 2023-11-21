@@ -8,23 +8,21 @@ import {
   type ProfileRepo,
 } from '@jobstash/profile/core';
 
+import { useAuthContext } from '@jobstash/auth/state';
 import { useAllTags } from '@jobstash/shared/state';
 
 import { activeProfileRepoAtom } from '../atoms/active-profile-repo-atom';
 import { profileRepoCountAtom } from '../atoms/profile-repo-count-atom';
 
-import { useIsOnboarding } from './use-is-onboarding';
 import { useProfileTabs } from './use-profile-tabs';
 
 export const useProfileRepoPage = (isOnboardSSR: boolean) => {
   const { data: allTechsData } = useAllTags();
 
-  const isOnboarding = useIsOnboarding(
-    isOnboardSSR,
-    CHECK_WALLET_FLOWS.ONBOARD_REPO,
-  );
-
-  const [showGotItCard, setShowGotItCard] = useState(isOnboarding);
+  const { flow } = useAuthContext();
+  const initShowGotItCard =
+    flow === CHECK_WALLET_FLOWS.ONBOARD_REPO || isOnboardSSR;
+  const [showGotItCard, setShowGotItCard] = useState(initShowGotItCard);
 
   const { tabs, activeTab, setActiveTab } = useProfileTabs(
     PROFILE_RIGHT_PANEL_TABS.REPOSITORIES,
@@ -46,7 +44,6 @@ export const useProfileRepoPage = (isOnboardSSR: boolean) => {
     setActiveTab,
     allTechs: allTechsData?.data ?? [],
     profileRepo,
-    isOnboarding,
     isLoadingCard,
     setIsLoadingCard,
   };

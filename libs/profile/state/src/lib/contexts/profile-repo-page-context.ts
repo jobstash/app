@@ -24,7 +24,6 @@ interface ProfileRepoPageContextProps {
   setActiveTab: Dispatch<SetStateAction<ProfileTabOptions[number]>>;
   allTechs: Tag[];
   profileRepo: ProfileRepo;
-  isOnboarding: boolean;
   isLoadingCard: boolean;
   setIsLoadingCard: Dispatch<SetStateAction<boolean>>;
 }

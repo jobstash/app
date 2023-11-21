@@ -8,19 +8,18 @@ import {
   type ProfileOrgReview,
 } from '@jobstash/profile/core';
 
+import { useAuthContext } from '@jobstash/auth/state';
+
 import { activeProfileOrgReviewAtom } from '../atoms/active-profile-org-review-atom';
 import { profileOrgReviewCountAtom } from '../atoms/profile-org-review-count-atom';
 
-import { useIsOnboarding } from './use-is-onboarding';
 import { useProfileTabs } from './use-profile-tabs';
 
 export const useProfileReviewsPage = (isOnboardSSR: boolean) => {
-  const isOnboarding = useIsOnboarding(
-    isOnboardSSR,
-    CHECK_WALLET_FLOWS.ONBOARD_REVIEWS,
-  );
-
-  const [showGotItCard, setShowGotItCard] = useState(isOnboarding);
+  const { flow } = useAuthContext();
+  const initShowGotItCard =
+    flow === CHECK_WALLET_FLOWS.ONBOARD_REVIEWS || isOnboardSSR;
+  const [showGotItCard, setShowGotItCard] = useState(initShowGotItCard);
 
   const { tabs, activeTab, setActiveTab } = useProfileTabs(
     PROFILE_RIGHT_PANEL_TABS.ORG_REVIEWS,
@@ -41,7 +40,6 @@ export const useProfileReviewsPage = (isOnboardSSR: boolean) => {
     activeTab,
     setActiveTab,
     orgReview,
-    isOnboarding,
     isLoadingCard,
     setIsLoadingCard,
   };
