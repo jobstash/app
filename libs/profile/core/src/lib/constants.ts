@@ -35,5 +35,6 @@ export const LS_KEYS = {
     TECHS_USED: 'tour-techs-used' as const,
     YOUR_CONTRIBUTION: 'tour-your-contribution' as const,
     SALARY: 'tour-salary' as const,
+    RATING: 'tour-rating' as const,
   },
 } as const;
