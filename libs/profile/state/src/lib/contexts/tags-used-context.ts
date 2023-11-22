@@ -3,32 +3,30 @@ import { type Dispatch, type SetStateAction } from 'react';
 
 import { type ProfileRepoTag } from '@jobstash/profile/core';
 
-interface TechsUsedContextProps {
-  techsUsed: ProfileRepoTag[];
-  techsCreated: ProfileRepoTag[];
+interface TagsUsedContextProps {
+  tagsUsed: ProfileRepoTag[];
+  tagsCreated: ProfileRepoTag[];
   searchValue: string;
   setSearchValue: Dispatch<SetStateAction<string>>;
   hoverAddButton: boolean;
   setHoverAddButton: Dispatch<SetStateAction<boolean>>;
   onBlurSearch: () => void;
-  currentTechs: ProfileRepoTag[];
+  currentTags: ProfileRepoTag[];
   disableAdd: boolean;
-  onTechRemove: (id: string) => void;
+  onTagRemove: (id: string) => void;
   disableSave: boolean;
-  techOptions: string[];
+  tagOptions: string[];
   onClickSave: () => void;
   onClickCanTeach: (id: string, canTeach: boolean) => void;
 }
 
-export const TechsUsedContext = createContext<TechsUsedContextProps | null>(
-  null,
-);
+export const TagsUsedContext = createContext<TagsUsedContextProps | null>(null);
 
-export const useTechsUsedContext = () => {
-  const context = useContext(TechsUsedContext);
+export const useTagsUsedContext = () => {
+  const context = useContext(TagsUsedContext);
   if (!context) {
     throw new Error(
-      'useTechsUsedContext must be used within a TechsUsedProvider',
+      'useTagsUsedContext must be used within a TagsUsedProvider',
     );
   }
 

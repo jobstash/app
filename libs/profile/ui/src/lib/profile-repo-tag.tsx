@@ -8,15 +8,15 @@ interface Props {
   id: string;
   name: string;
   canTeach: boolean;
-  onTechRemove: (id: string) => void;
+  onTagRemove: (id: string) => void;
   onClickCanTeach: (id: string, canTeach: boolean) => void;
 }
 
-const ProfileRepoTech = ({
+const ProfileRepoTag = ({
   id,
   name,
   canTeach,
-  onTechRemove,
+  onTagRemove,
   onClickCanTeach,
 }: Props) => (
   <div className="flex px-4 py-3 border border-gray gap-4 rounded-xl items-center">
@@ -37,7 +37,7 @@ const ProfileRepoTech = ({
         variant="transparent"
         size="sm"
         className="px-0"
-        onClick={() => onTechRemove(id)}
+        onClick={() => onTagRemove(id)}
       >
         <RemoveTechIcon />
       </Button>
@@ -45,4 +45,4 @@ const ProfileRepoTech = ({
   </div>
 );
 
-export default memo(ProfileRepoTech);
+export default memo(ProfileRepoTag);

@@ -7,16 +7,16 @@ import { useProfileRepoPageContext } from '../contexts/profile-repo-page-context
 
 interface Payload {
   id: string;
-  techsUsed: ProfileRepoTag[];
-  techsCreated: ProfileRepoTag[];
+  tagsUsed: ProfileRepoTag[];
+  tagsCreated: ProfileRepoTag[];
 }
 
-export const useTechsUsedMutation = () => {
+export const useTagsUsedMutation = () => {
   const { setIsLoadingCard } = useProfileRepoPageContext();
 
   const { isLoading, mutate } = useMutation({
     mutationFn: (payload: Payload) =>
-      fetch('/api/fakers/profile/repositories/techs-used', {
+      fetch('/api/fakers/profile/repositories/tags-used', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',

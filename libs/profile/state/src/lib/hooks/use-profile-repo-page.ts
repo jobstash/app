@@ -17,7 +17,7 @@ import { profileRepoCountAtom } from '../atoms/profile-repo-count-atom';
 import { useProfileTabs } from './use-profile-tabs';
 
 export const useProfileRepoPage = (isOnboardSSR: boolean) => {
-  const { data: allTechsData } = useAllTags();
+  const { data: allTagsData } = useAllTags();
 
   const { flow } = useAuthContext();
   const initShowGotItCard =
@@ -42,7 +42,7 @@ export const useProfileRepoPage = (isOnboardSSR: boolean) => {
     tabs,
     activeTab,
     setActiveTab,
-    allTechs: allTechsData?.data ?? [],
+    allTags: allTagsData?.data ?? [],
     profileRepo,
     isLoadingCard,
     setIsLoadingCard,

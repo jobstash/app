@@ -20,6 +20,6 @@ export { default as ProfileRightPanelTabs } from './lib/profile-right-panel-tabs
 export { default as ProfileSubHeader } from './lib/profile-sub-header';
 export * from './lib/ratings';
 export * from './lib/salary-form';
-export * from './lib/techs-used';
+export * from './lib/tags-used';
 export * from './lib/your-contribution';
 export * from './lib/your-review';

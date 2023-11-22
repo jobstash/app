@@ -22,7 +22,7 @@ interface ProfileRepoPageContextProps {
   }[];
   activeTab: string;
   setActiveTab: Dispatch<SetStateAction<ProfileTabOptions[number]>>;
-  allTechs: Tag[];
+  allTags: Tag[];
   profileRepo: ProfileRepo;
   isLoadingCard: boolean;
   setIsLoadingCard: Dispatch<SetStateAction<boolean>>;

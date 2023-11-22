@@ -24,18 +24,18 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           logo: faker.internet.avatar(),
           url: faker.internet.url(),
         },
-        tags: [],
         //
-        // tags: Array.from({
-        //   length: faker.number.int({ min: 0, max: 8 }),
-        // })
-        //   .fill(0)
-        //   .map(() => ({
-        //     id: faker.string.uuid(),
-        //     name: faker.hacker.noun(),
-        //     normalizedName: faker.hacker.noun(),
-        //     canTeach: faker.datatype.boolean(),
-        //   })),
+        // tags: [],
+        tags: Array.from({
+          length: faker.number.int({ min: 0, max: 8 }),
+        })
+          .fill(0)
+          .map(() => ({
+            id: faker.string.uuid(),
+            name: faker.hacker.noun(),
+            normalizedName: faker.hacker.noun(),
+            canTeach: faker.datatype.boolean(),
+          })),
         contribution: {
           count: faker.number.int({ min: 10, max: 500 }),
           summary: faker.lorem.paragraph({ min: 2, max: 6 }),
