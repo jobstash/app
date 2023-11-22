@@ -23,30 +23,34 @@ const ProfileRepoRightPanel = () => {
   const { activeProfileRepo, tabs, activeTab, isLoadingCard } =
     useProfileRepoPageContext();
 
+  if (!activeProfileRepo) return null;
+
   return (
-    <ProfileRightPanel
-      isLoading={!activeProfileRepo}
-      backUrl="/profile/repositories"
-      header={<ProfileRightPanelRepoHeader profileRepo={activeProfileRepo} />}
-      tabs={<ProfileRightPanelTabs tabs={tabs} activeTab={activeTab} />}
-      card={
-        <div className={cn({ 'pointer-events-none': isOpen })}>
-          <RightPanelCardBorder>
-            <LoadingOverlay visible={isLoadingCard} className="rounded-3xl" />
-            <div className="p-8">
-              <div className="flex flex-col gap-6 relative">
-                {activeTab === PROFILE_RIGHT_PANEL_TAB.TAGS_USED && (
-                  <TagsUsed key={activeProfileRepo?.id} />
-                )}
-                {activeTab === PROFILE_RIGHT_PANEL_TAB.YOUR_CONTRIBUTION && (
-                  <YourContribution key={activeProfileRepo?.id} />
-                )}
+    <div className="hide-scrollbar fixed inset-0 h-screen overflow-y-auto bg-dark p-4 pt-6 transition-all lg:inset-auto lg:right-0 lg:top-0 lg:w-5/12 lg:px-6 lg:py-8 lg:pr-10">
+      <ProfileRightPanel
+        isLoading={!activeProfileRepo}
+        backUrl="/profile/repositories"
+        header={<ProfileRightPanelRepoHeader profileRepo={activeProfileRepo} />}
+        tabs={<ProfileRightPanelTabs tabs={tabs} activeTab={activeTab} />}
+        card={
+          <div className={cn({ 'pointer-events-none': isOpen })}>
+            <RightPanelCardBorder>
+              <LoadingOverlay visible={isLoadingCard} className="rounded-3xl" />
+              <div className="p-8">
+                <div className="flex flex-col gap-6 relative">
+                  {activeTab === PROFILE_RIGHT_PANEL_TAB.TAGS_USED && (
+                    <TagsUsed key={activeProfileRepo?.id} />
+                  )}
+                  {activeTab === PROFILE_RIGHT_PANEL_TAB.YOUR_CONTRIBUTION && (
+                    <YourContribution key={activeProfileRepo?.id} />
+                  )}
+                </div>
               </div>
-            </div>
-          </RightPanelCardBorder>
-        </div>
-      }
-    />
+            </RightPanelCardBorder>
+          </div>
+        }
+      />
+    </div>
   );
 };
 
