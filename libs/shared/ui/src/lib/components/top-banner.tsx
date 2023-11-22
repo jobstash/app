@@ -16,12 +16,6 @@ import Text from '../base/text';
 const bannerText = '🔥 We are live on RetroPGF3';
 const donateURL = `https://drive.google.com/file/d/1gSMCvhjxKfZTCIGr_4TKwTcEI4ZhRBCg/view`;
 
-const onClickDonate = () => {
-  gaEvent('OPTIMISM_RETROPGF', {
-    donate_click_element: 'top-banner',
-  });
-};
-
 const TopBanner = () => {
   const [isOpen] = useAtom(isOpenTopBannerAtom);
 
@@ -32,7 +26,7 @@ const TopBanner = () => {
       <div className="z-[70] fixed top-0 w-full flex justify-center h-10 bg-gradient-to-l from-primary to-tertiary items-center py-8 pb-6 sm:py-0 sm:gap-1 flex-col sm:flex-row ">
         <Text className="text-center text-sm sm:text-md">{bannerText}</Text>
         <Link passHref legacyBehavior href={donateURL}>
-          <a target="_blank" onClick={onClickDonate}>
+          <a target="_blank">
             <Text className="underline text-sm sm:text-md">Discover our impact</Text>
           </a>
         </Link>
