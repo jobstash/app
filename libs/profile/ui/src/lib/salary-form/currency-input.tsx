@@ -4,7 +4,7 @@ import SalaryInput from './salary-input';
 
 const SALARY_CURRENCY_OPTIONS = ['USD', 'EUR'];
 
-const SalaryFormCurrencyInput = () => {
+const CurrencyInput = () => {
   const {
     state: { selectedCurrency },
     setState: { setSelectedCurrency },
@@ -20,4 +20,4 @@ const SalaryFormCurrencyInput = () => {
   );
 };
 
-export default SalaryFormCurrencyInput;
+export default CurrencyInput;

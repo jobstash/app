@@ -9,7 +9,7 @@ const ProfileOnboardCard = (props: Props) => {
   const { title, description } = props;
 
   return (
-    <div className="flex flex-col gap-3">
+    <div className="flex flex-col gap-3 z-50">
       <Heading size="lg">{title}</Heading>
       <Text color="dimmed">{description}</Text>
     </div>

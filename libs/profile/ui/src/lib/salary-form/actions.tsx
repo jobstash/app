@@ -2,7 +2,7 @@ import { useSalaryFormContext } from '@jobstash/profile/state';
 
 import { Button } from '@jobstash/shared/ui';
 
-const SalaryFormActions = () => {
+const Actions = () => {
   const { disableSave, save } = useSalaryFormContext();
 
   return (
@@ -13,7 +13,7 @@ const SalaryFormActions = () => {
         isDisabled={disableSave}
         onClick={save}
       >
-        Save & Next
+        Save
       </Button>
 
       <Button
@@ -27,4 +27,4 @@ const SalaryFormActions = () => {
   );
 };
 
-export default SalaryFormActions;
+export default Actions;

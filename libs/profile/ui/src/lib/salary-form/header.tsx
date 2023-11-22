@@ -1,6 +1,6 @@
 import { Heading, Text } from '@jobstash/shared/ui';
 
-const SalaryFormHeader = () => (
+const Header = () => (
   <>
     <Heading size="lg" fw="semibold">
       Salary
@@ -16,4 +16,4 @@ const SalaryFormHeader = () => (
   </>
 );
 
-export default SalaryFormHeader;
+export default Header;

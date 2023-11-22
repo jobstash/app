@@ -1,22 +1,25 @@
 import { SalaryFormProvider } from '@jobstash/profile/state';
 
-import SalaryFormActions from './salary-form-actions';
-import SalaryFormAmountInput from './salary-form-amount-input';
-import SalaryFormCurrencyInput from './salary-form-currency-input';
-import SalaryFormHeader from './salary-form-header';
-import SalaryFormNoAllocationCheckbox from './salary-form-no-allocation-checkbox';
+import Actions from './actions';
+import AmountInput from './amount-input';
+import Checkbox from './checkbox';
+import CurrencyInput from './currency-input';
+import Header from './header';
+import TourProvider from './tour-provider';
 
 const SalaryForm = () => (
-  <SalaryFormProvider>
-    <SalaryFormHeader />
+  <TourProvider>
+    <SalaryFormProvider>
+      <Header />
 
-    <div className="flex flex-col gap-6">
-      <SalaryFormCurrencyInput />
-      <SalaryFormAmountInput />
-      <SalaryFormNoAllocationCheckbox />
-      <SalaryFormActions />
-    </div>
-  </SalaryFormProvider>
+      <div className="flex flex-col gap-6">
+        <CurrencyInput />
+        <AmountInput />
+        <Checkbox />
+        <Actions />
+      </div>
+    </SalaryFormProvider>
+  </TourProvider>
 );
 
 export default SalaryForm;

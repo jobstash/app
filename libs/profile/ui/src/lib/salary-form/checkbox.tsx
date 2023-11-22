@@ -1,13 +1,13 @@
-import { Checkbox } from '@mantine/core';
+import { Checkbox as MCheckbox } from '@mantine/core';
 
 import { useSalaryFormContext } from '@jobstash/profile/state';
 
-const SalaryFormNoAllocationCheckbox = () => {
+const Checkbox = () => {
   const { state, setState } = useSalaryFormContext();
 
   return (
     <div className="flex justify-end">
-      <Checkbox
+      <MCheckbox
         size="md"
         label="No token allocation"
         checked={state.offersTokenAllocation}
@@ -19,4 +19,4 @@ const SalaryFormNoAllocationCheckbox = () => {
   );
 };
 
-export default SalaryFormNoAllocationCheckbox;
+export default Checkbox;

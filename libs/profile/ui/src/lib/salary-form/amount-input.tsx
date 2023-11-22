@@ -2,9 +2,9 @@ import { useSalaryFormContext } from '@jobstash/profile/state';
 
 import SalaryInput from './salary-input';
 
-const SalaryFormAmountInput = () => {
+const AmountInput = () => {
   const {
-    state: { amount },
+    state: { amount, selectedCurrency },
     setState: { setAmount },
   } = useSalaryFormContext();
 
@@ -12,10 +12,11 @@ const SalaryFormAmountInput = () => {
     <SalaryInput
       numberInput
       title="Amount (Per Year)"
-      value={amount ?? ''}
+      value={amount && selectedCurrency ? amount : ''}
+      isDisabled={!selectedCurrency}
       onChange={(v: number | '') => setAmount(v ? Number(v) : null)}
     />
   );
 };
 
-export default SalaryFormAmountInput;
+export default AmountInput;
