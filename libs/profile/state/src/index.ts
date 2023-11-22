@@ -16,7 +16,7 @@ export * from './lib/hooks/use-profile-skills-query';
 export * from './lib/hooks/use-rating-mutation';
 export * from './lib/hooks/use-salary-form';
 export * from './lib/hooks/use-salary-mutation';
-export * from './lib/hooks/use-techs-used-mutation';
+export * from './lib/hooks/use-tags-used-mutation';
 export * from './lib/hooks/use-your-contribution-mutation';
 
 // Contexts & Providers
@@ -28,7 +28,7 @@ export * from './lib/contexts/profile-showcase-form-context';
 export * from './lib/contexts/profile-skills-context';
 export * from './lib/contexts/ratings-context';
 export * from './lib/contexts/salary-form-context';
-export * from './lib/contexts/techs-used-context';
+export * from './lib/contexts/tags-used-context';
 export * from './lib/contexts/your-contribution-context';
 export * from './lib/contexts/your-review-context';
 export * from './lib/providers/profile-dev-info-provider';
@@ -40,6 +40,6 @@ export * from './lib/providers/profile-showcase-form-provider';
 export * from './lib/providers/profile-skills-provider';
 export * from './lib/providers/ratings-provider';
 export * from './lib/providers/salary-form-provider';
-export * from './lib/providers/techs-used-provider';
+export * from './lib/providers/tags-used-provider';
 export * from './lib/providers/your-contribution-provider';
 export * from './lib/providers/your-review-provider';

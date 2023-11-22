@@ -7,7 +7,7 @@ import {
   useProfileSkillsContext,
 } from '@jobstash/profile/state';
 
-import ProfileRepoTech from '../../profile-repo-tech';
+import ProfileRepoTag from '../../profile-repo-tag';
 
 import SkillsInput from './skills-input';
 
@@ -37,11 +37,11 @@ const SkillsEdit = forwardRef<HTMLDivElement>((_props, ref) => {
           <motion.div layout className="flex flex-wrap gap-4 items-center">
             {skills.map(({ id, name, canTeach }) => (
               <motion.div key={id} layout>
-                <ProfileRepoTech
+                <ProfileRepoTag
                   id={id}
                   name={name}
                   canTeach={canTeach}
-                  onTechRemove={(id) => removeSkill(id)}
+                  onTagRemove={(id) => removeSkill(id)}
                   onClickCanTeach={updateCanTeach}
                 />
               </motion.div>

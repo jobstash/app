@@ -9,7 +9,6 @@ import {
   ProfileHeader,
   ProfileRepoGotItCard,
   ProfileRepoSubHeader,
-  ProfileRepoTourWrapper,
 } from '@jobstash/profile/ui';
 import {
   ProfileRepoList,
@@ -27,7 +26,6 @@ export const ProfileRepositoriesPage = ({ isOnboardSSR }: Props) => {
   if (canRender)
     return (
       <ProfileRepoPageProvider isOnboardSSR={isOnboardSSR}>
-        {/* <ProfileRepoTourWrapper> */}
         <Head>
           <title>Your Repositories</title>
         </Head>
@@ -36,7 +34,6 @@ export const ProfileRepositoriesPage = ({ isOnboardSSR }: Props) => {
           <SideBar />
 
           <div className="px-3.5 pt-[65px] lg:px-12 lg:pt-6 lg:pr-[50%] flex flex-col gap-6">
-            <pre>{JSON.stringify({ isOnboardSSR })}</pre>
             <ProfileHeader />
             <ProfileRepoSubHeader />
             <ProfileRepoGotItCard />
@@ -47,7 +44,6 @@ export const ProfileRepositoriesPage = ({ isOnboardSSR }: Props) => {
             <ProfileRepoRightPanel />
           </div>
         </div>
-        {/* </ProfileRepoTourWrapper> */}
       </ProfileRepoPageProvider>
     );
 

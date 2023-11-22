@@ -2,24 +2,24 @@ import { Select } from '@mantine/core';
 
 import { cn } from '@jobstash/shared/utils';
 
-import { useTechsUsedContext } from '@jobstash/profile/state';
+import { useTagsUsedContext } from '@jobstash/profile/state';
 
 import { Button } from '@jobstash/shared/ui';
 
-const TechsUsedInput = () => {
+const Input = () => {
   const {
-    techOptions,
+    tagOptions,
     searchValue,
     disableAdd,
     setHoverAddButton,
     setSearchValue,
     onBlurSearch,
-  } = useTechsUsedContext();
+  } = useTagsUsedContext();
 
   return (
     <Select
       searchable
-      data={techOptions}
+      data={tagOptions}
       placeholder="Add tag used"
       size="lg"
       classNames={{
@@ -55,4 +55,4 @@ const TechsUsedInput = () => {
   );
 };
 
-export default TechsUsedInput;
+export default Input;

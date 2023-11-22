@@ -1,4 +1,3 @@
-import { useLocalStorage } from '@mantine/hooks';
 import { useTour } from '@reactour/tour';
 
 import { CHECK_WALLET_FLOWS } from '@jobstash/auth/core';
@@ -8,30 +7,31 @@ import { useUpdateFlow } from '@jobstash/auth/state';
 
 import { Button } from '@jobstash/shared/ui';
 
-const TechsUsedTourNextButton = () => {
+const TourNextButton = () => {
   const { isLoading, mutateAsync } = useUpdateFlow();
   const { setIsOpen } = useTour();
-
-  const [_, setLocalStorageValue] = useLocalStorage<boolean>({
-    key: LS_KEYS.TOURS.TECHS_USED,
-  });
 
   const onClick = async () => {
     await mutateAsync(CHECK_WALLET_FLOWS.ONBOARD_REVIEWS);
     setIsOpen(false);
-    setLocalStorageValue(true);
+
+    if (typeof localStorage !== 'undefined') {
+      localStorage.setItem(LS_KEYS.TOURS.TECHS_USED, '1');
+    }
   };
 
   return (
-    <Button
-      variant="primary"
-      className="py-1.5"
-      isDisabled={isLoading}
-      onClick={onClick}
-    >
-      Got It
-    </Button>
+    <div className="w-full flex justify-end">
+      <Button
+        variant="primary"
+        className="py-1.5"
+        isDisabled={isLoading}
+        onClick={onClick}
+      >
+        Got It
+      </Button>
+    </div>
   );
 };
 
-export default TechsUsedTourNextButton;
+export default TourNextButton;
