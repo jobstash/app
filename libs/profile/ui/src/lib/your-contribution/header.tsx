@@ -1,6 +1,6 @@
 import { Heading, Text } from '@jobstash/shared/ui';
 
-const YourContributionHeader = () => (
+const Header = () => (
   <>
     <Heading size="lg" fw="semibold">
       Describe your contribution
@@ -16,4 +16,4 @@ const YourContributionHeader = () => (
   </>
 );
 
-export default YourContributionHeader;
+export default Header;

@@ -2,6 +2,7 @@ import { type ReactNode } from 'react';
 
 import { YourContributionContext } from '../contexts/your-contribution-context';
 import { useYourContribution } from '../hooks/use-your-contribution';
+import { useYourContributionTour } from '../hooks/use-your-contribution-tour';
 
 interface Props {
   children: ReactNode;
@@ -10,14 +11,11 @@ interface Props {
 export const YourContributionProvider = ({ children }: Props) => {
   const value = useYourContribution();
 
+  useYourContributionTour();
+
   return (
     <YourContributionContext.Provider value={value}>
-      <div
-        id="profile-right-panel-your-contribution"
-        className="flex flex-col gap-4"
-      >
-        {children}
-      </div>
+      {children}
     </YourContributionContext.Provider>
   );
 };

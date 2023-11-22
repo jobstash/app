@@ -33,5 +33,6 @@ export const RATING_TITLE_MAP = {
 export const LS_KEYS = {
   TOURS: {
     TECHS_USED: 'tour-techs-used' as const,
+    YOUR_CONTRIBUTION: 'tour-your-contribution' as const,
   },
 } as const;

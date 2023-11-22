@@ -2,7 +2,7 @@ import { useYourContributionContext } from '@jobstash/profile/state';
 
 import { Heading, LogoTitle, Text } from '@jobstash/shared/ui';
 
-const YourContributionSubHeader = () => {
+const SubHeader = () => {
   const {
     profileRepo: {
       name,
@@ -39,4 +39,4 @@ const YourContributionSubHeader = () => {
   );
 };
 
-export default YourContributionSubHeader;
+export default SubHeader;
