@@ -13,11 +13,11 @@ import { isOpenTopBannerAtom } from '@jobstash/shared/state';
 
 import Text from '../base/text';
 
-const bannerText = '🔥 Discover the impact Jobstash has on the ecosystem';
+const bannerText = '🔥 We are live on RetroPGF3';
 const donateURL = `https://drive.google.com/file/d/1gSMCvhjxKfZTCIGr_4TKwTcEI4ZhRBCg/view`;
 
 const onClickDonate = () => {
-  gaEvent(GA_EVENT_ACTION.DONATE_CLICK, {
+  gaEvent('OPTIMISM_RETROPGF', {
     donate_click_element: 'top-banner',
   });
 };
@@ -33,7 +33,7 @@ const TopBanner = () => {
         <Text className="text-center text-sm sm:text-md">{bannerText}</Text>
         <Link passHref legacyBehavior href={donateURL}>
           <a target="_blank" onClick={onClickDonate}>
-            <Text className="underline text-sm sm:text-md">Donate Today</Text>
+            <Text className="underline text-sm sm:text-md">Discover our impact</Text>
           </a>
         </Link>
       </div>
