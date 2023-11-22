@@ -6,9 +6,6 @@ import { memo } from 'react';
 
 import { useAtom } from 'jotai';
 
-import { GA_EVENT_ACTION } from '@jobstash/shared/core';
-import { gaEvent } from '@jobstash/shared/utils';
-
 import { isOpenTopBannerAtom } from '@jobstash/shared/state';
 
 import Text from '../base/text';
