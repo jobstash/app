@@ -63,6 +63,7 @@ export const profileOrgReviewSchema = myzod.object({
   membershipStatus: myzod.string().nullable(),
   startDate: myzod.number().nullable(),
   endDate: myzod.number().nullable(),
+  reviewedTimestamp: myzod.number(),
   commitCount: myzod.number().nullable(),
   salary: profileOrgReviewSalarySchema,
   rating: profileOrgReviewRatingSchema,

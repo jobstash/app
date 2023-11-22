@@ -2,6 +2,7 @@ import { type ReactNode } from 'react';
 
 import { SalaryFormContext } from '../contexts/salary-form-context';
 import { useSalaryForm } from '../hooks/use-salary-form';
+import { useSalaryTour } from '../hooks/use-salary-tour';
 
 interface Props {
   children: ReactNode;
@@ -9,6 +10,8 @@ interface Props {
 
 export const SalaryFormProvider = ({ children }: Props) => {
   const value = useSalaryForm();
+
+  useSalaryTour();
 
   return (
     <SalaryFormContext.Provider value={value}>
