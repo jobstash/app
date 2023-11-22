@@ -10,6 +10,8 @@ export const getProfileOrgReviewList = async (
   page: number,
   wallet: `0x${string}` | undefined,
 ): Promise<ProfileOrgReviewListQueryPage> => {
+  //
+  // const url = `/api/fakers/profile/reviews?page=${page.toString()}&limit=${PAGE_SIZE}`;
   const url = `${MW_URL}/profile/reviews?page=${page.toString()}&limit=${PAGE_SIZE}`;
 
   const options = {

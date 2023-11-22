@@ -2,6 +2,7 @@ import { ReactNode } from 'react';
 
 import { RatingsContext } from '../contexts/ratings-context';
 import { useRatings } from '../hooks/use-ratings';
+import { useRatingsTour } from '../hooks/use-ratings-tour';
 
 interface Props {
   children: ReactNode;
@@ -10,11 +11,9 @@ interface Props {
 export const RatingsProvider = ({ children }: Props) => {
   const value = useRatings();
 
+  useRatingsTour();
+
   return (
-    <RatingsContext.Provider value={value}>
-      <div id="profile-right-panel-ratings" className="flex flex-col gap-4">
-        {children}
-      </div>
-    </RatingsContext.Provider>
+    <RatingsContext.Provider value={value}>{children}</RatingsContext.Provider>
   );
 };
