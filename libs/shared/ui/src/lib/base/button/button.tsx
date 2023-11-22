@@ -15,7 +15,7 @@ import ButtonWrapper from './button-wrapper';
 
 export const buttonVariants = cva(
   [
-    'flex items-center justify-center z-20 relative rounded-lg whitespace-nowrap gap-x-2',
+    'flex items-center justify-center relative rounded-lg whitespace-nowrap gap-x-2',
   ],
   {
     variants: {
