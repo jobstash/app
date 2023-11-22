@@ -2,6 +2,8 @@ import { ReactNode } from 'react';
 
 import { StepType } from '@reactour/tour';
 
+import { TOUR_SELECTOR_ID } from '@jobstash/profile/core';
+
 import ProfileOnboardCard from '../profile-onboard-card';
 import ProfileTourWrapper from '../profile-tour-wrapper';
 
@@ -25,7 +27,7 @@ export default TourProvider;
 
 const TECHS_USED_STEPS: StepType[] = [
   {
-    selector: '#profile-right-panel-techs-used',
+    selector: `#${TOUR_SELECTOR_ID}`,
     content: (
       <ProfileOnboardCard
         title="Tags Used"

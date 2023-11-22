@@ -2,6 +2,8 @@ import { type ReactNode } from 'react';
 
 import { type StepType } from '@reactour/tour';
 
+import { TOUR_SELECTOR_ID } from '@jobstash/profile/core';
+
 import ProfileOnboardCard from '../profile-onboard-card';
 import ProfileTourWrapper from '../profile-tour-wrapper';
 
@@ -25,7 +27,7 @@ export default TourProvider;
 
 const steps: StepType[] = [
   {
-    selector: '#profile-right-panel-your-contribution',
+    selector: `#${TOUR_SELECTOR_ID}`,
     content: (
       <ProfileOnboardCard
         title="Your Contribution"
