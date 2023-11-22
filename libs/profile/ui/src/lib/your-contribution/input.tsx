@@ -4,7 +4,7 @@ import { cn } from '@jobstash/shared/utils';
 
 import { useYourContributionContext } from '@jobstash/profile/state';
 
-const YourContributionInput = () => {
+const Input = () => {
   const { contribution, setContribution } = useYourContributionContext();
 
   return (
@@ -39,4 +39,4 @@ const YourContributionInput = () => {
   );
 };
 
-export default YourContributionInput;
+export default Input;

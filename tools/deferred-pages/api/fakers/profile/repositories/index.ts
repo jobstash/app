@@ -38,6 +38,8 @@ export default function handler(req: NextApiRequest, res: NextApiResponse) {
           })),
         contribution: {
           count: faker.number.int({ min: 10, max: 500 }),
+          //
+          // summary: '',
           summary: faker.lorem.paragraph({ min: 2, max: 6 }),
         },
       },

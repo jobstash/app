@@ -1,19 +1,27 @@
 import { YourContributionProvider } from '@jobstash/profile/state';
 
-import YourContributionsActions from './your-contribution-actions';
-import YourContributionHeader from './your-contribution-header';
-import YourContributionInput from './your-contribution-input';
-import YourContributionSubHeader from './your-contribution-sub-header';
+import Action from './action';
+import Header from './header';
+import Input from './input';
+import SubHeader from './sub-header';
+import TourProvider from './tour-provider';
 
 const YourContribution = () => (
-  <YourContributionProvider>
-    <YourContributionHeader />
-    <div className="flex flex-col gap-2 justify-center">
-      <YourContributionSubHeader />
-      <YourContributionInput />
-      <YourContributionsActions />
-    </div>
-  </YourContributionProvider>
+  <TourProvider>
+    <YourContributionProvider>
+      <div
+        id="profile-right-panel-your-contribution"
+        className="flex flex-col gap-4"
+      >
+        <Header />
+        <div className="flex flex-col gap-2 justify-center">
+          <SubHeader />
+          <Input />
+          <Action />
+        </div>
+      </div>
+    </YourContributionProvider>
+  </TourProvider>
 );
 
 export default YourContribution;
