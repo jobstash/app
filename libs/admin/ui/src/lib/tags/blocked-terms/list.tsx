@@ -2,7 +2,7 @@ import { useBlockedTermsFormContext } from '@jobstash/admin/state';
 
 import { Heading, Spinner, Text } from '@jobstash/shared/ui';
 
-import AdminTechListItem from '../admin-tech-list-item';
+import AdminTechListItem from '../../admin-tech-list-item';
 
 const BlockedTermsList = () => {
   const { unblockTerm, allBlockedTerms, isFetchingQuery, isLoadingMutation } =

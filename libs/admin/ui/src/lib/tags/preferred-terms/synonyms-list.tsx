@@ -5,7 +5,7 @@ import {
 
 import { Spinner } from '@jobstash/shared/ui';
 
-import AdminTechListItem from '../admin-tech-list-item';
+import AdminTechListItem from '../../admin-tech-list-item';
 
 const SynonymsList = () => {
   const { isFetching } = usePreferredTermsContext();

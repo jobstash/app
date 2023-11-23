@@ -2,7 +2,7 @@ import { useRef } from 'react';
 
 import { usePairedTermsFormContext } from '@jobstash/admin/state';
 
-import AdminSelectInput from '../admin-select-input';
+import AdminSelectInput from '../../admin-select-input';
 
 const DestinationInputX = () => {
   const { origin, destinationOptions, addDestination } =

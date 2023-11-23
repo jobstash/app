@@ -5,8 +5,8 @@ import {
   useTagsContext,
 } from '@jobstash/admin/state';
 
-import AdminContentLoader from '../admin-content-loader';
-import AdminTechContentWrapper from '../admin-tech-content-wrapper';
+import AdminContentLoader from '../../admin-content-loader';
+import AdminTechContentWrapper from '../../admin-tech-content-wrapper';
 
 interface Props {
   children: ReactNode;

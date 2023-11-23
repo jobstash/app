@@ -5,7 +5,7 @@ import {
   usePreferredTermsFormContext,
 } from '@jobstash/admin/state';
 
-import AdminFormControl from '../admin-form-control';
+import AdminFormControl from '../../admin-form-control';
 
 import PreferredTermsActions from './actions';
 import PrimaryTermInput from './primary-term-input';

@@ -1,6 +1,6 @@
 import { usePairedTermsFormContext } from '@jobstash/admin/state';
 
-import AdminTechListItem from '../admin-tech-list-item';
+import AdminTechListItem from '../../admin-tech-list-item';
 
 const DestinationListX = () => {
   const { destination, removeDestination } = usePairedTermsFormContext();
