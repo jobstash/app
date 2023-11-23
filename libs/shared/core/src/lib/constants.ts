@@ -82,4 +82,5 @@ export const GA_EVENT_ACTION = {
   JOB_APPLY: 'job_apply' as const,
   JOB_EXPAND_DETAILS: 'job_expand_details' as const,
   FILTER_ACTION: 'filter_action' as const,
+  RETROPGF: 'retropgf' as const,
 } as const;
