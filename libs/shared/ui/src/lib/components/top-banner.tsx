@@ -6,6 +6,9 @@ import { memo } from 'react';
 
 import { useAtom } from 'jotai';
 
+import { GA_EVENT_ACTION } from '@jobstash/shared/core';
+import { gaEvent } from '@jobstash/shared/utils';
+
 import { isOpenTopBannerAtom } from '@jobstash/shared/state';
 
 import Text from '../base/text';
@@ -16,15 +19,24 @@ const donateURL = `https://drive.google.com/file/d/1gSMCvhjxKfZTCIGr_4TKwTcEI4Zh
 const TopBanner = () => {
   const [isOpen] = useAtom(isOpenTopBannerAtom);
 
+  // eslint-disable-next-line unicorn/consistent-function-scoping
+  const onClickDonate = () => {
+    gaEvent(GA_EVENT_ACTION.RETROPGF, {
+      donate_click_element: 'top-banner',
+    });
+  };
+
   if (!isOpen) return null;
 
   return (
     <>
       <div className="z-[70] fixed top-0 w-full flex justify-center h-10 bg-gradient-to-l from-primary to-tertiary items-center py-8 pb-6 sm:py-0 sm:gap-1 flex-col sm:flex-row ">
         <Text className="text-center text-sm sm:text-md">{bannerText}</Text>
-        <Link passHref legacyBehavior href={donateURL}>
+        <Link passHref legacyBehavior href={donateURL} onClick={onClickDonate}>
           <a target="_blank">
-            <Text className="underline text-sm sm:text-md">Discover our impact</Text>
+            <Text className="underline text-sm sm:text-md">
+              Discover our impact
+            </Text>
           </a>
         </Link>
       </div>
