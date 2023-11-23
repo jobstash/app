@@ -2,7 +2,7 @@ import { useRef } from 'react';
 
 import { usePreferredTermsFormContext } from '@jobstash/admin/state';
 
-import AdminSelectInput from '../admin-select-input';
+import AdminSelectInput from '../../admin-select-input';
 
 const SynonymsInput = () => {
   const { primaryTerm, synonymOptions, addSynonym } =

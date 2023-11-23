@@ -4,7 +4,7 @@ import { useBlockedTermsFormContext } from '@jobstash/admin/state';
 
 import { Heading } from '@jobstash/shared/ui';
 
-import AdminSelectInput from '../admin-select-input';
+import AdminSelectInput from '../../admin-select-input';
 
 const BlockedTermsInput = () => {
   const { blockTerm, options } = useBlockedTermsFormContext();

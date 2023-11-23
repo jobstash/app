@@ -5,7 +5,7 @@ import {
   usePreferredTermsFormContext,
 } from '@jobstash/admin/state';
 
-import AdminSelectInput from '../admin-select-input';
+import AdminSelectInput from '../../admin-select-input';
 
 const PrimaryTermInput = () => {
   const { primaryTermOptions } = usePreferredTermsContext();

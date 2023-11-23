@@ -2,8 +2,8 @@ import { LoadingOverlay } from '@mantine/core';
 
 import { usePairedTermsFormContext } from '@jobstash/admin/state';
 
-import AdminFormControl from '../admin-form-control';
-import AdminTechContentWrapper from '../admin-tech-content-wrapper';
+import AdminFormControl from '../../admin-form-control';
+import AdminTechContentWrapper from '../../admin-tech-content-wrapper';
 
 import PairedTermsActions from './actions';
 import DestinationInput from './destination-input';
