@@ -16,15 +16,14 @@ import Text from '../base/text';
 const bannerText = '🔥 We are live on RetroPGF3';
 const donateURL = `https://drive.google.com/file/d/1gSMCvhjxKfZTCIGr_4TKwTcEI4ZhRBCg/view`;
 
+const onClickDonate = () => {
+  gaEvent(GA_EVENT_ACTION.DONATE_CLICK, {
+    donate_click_element: 'retropgf',
+  });
+};
+
 const TopBanner = () => {
   const [isOpen] = useAtom(isOpenTopBannerAtom);
-
-  // eslint-disable-next-line unicorn/consistent-function-scoping
-  const onClickDonate = () => {
-    gaEvent(GA_EVENT_ACTION.RETROPGF, {
-      donate_click_element: 'top-banner',
-    });
-  };
 
   if (!isOpen) return null;
 
