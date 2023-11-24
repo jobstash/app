@@ -1,11 +1,10 @@
-import { useInfiniteQuery } from '@tanstack/react-query';
-
-import { AllJobsQueryPage } from '@jobstash/admin/core';
+import { useQuery } from '@tanstack/react-query';
 
 import { getAllJobs } from '@jobstash/admin/data';
 
 export const useAllJobsQuery = () =>
-  useInfiniteQuery<AllJobsQueryPage>(['all-jobs'], async () => getAllJobs(), {
-    getNextPageParam: ({ page }) => (page > 0 ? page + 1 : undefined),
+  useQuery({
+    queryKey: ['all-jobs'],
+    queryFn: async () => getAllJobs(),
     staleTime: 1000 * 60,
   });

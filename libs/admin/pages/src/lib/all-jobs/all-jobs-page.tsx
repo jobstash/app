@@ -8,7 +8,7 @@ import { SideBar } from '@jobstash/sidebar/feature';
 export const AllJobsPage = () => {
   const { data, isLoading } = useAllJobsQuery();
 
-  const allJobs = data?.pages.flatMap((d) => d.data) ?? [];
+  const allJobs = data ?? [];
 
   return (
     <>
