@@ -85,7 +85,7 @@ const columns = [
   columnHelper.accessor('locationType', {
     cell: (info) => info.getValue(),
     header: () => <p>Location Type</p>,
-    size: 120,
+    size: 160,
   }),
   columnHelper.accessor('classification', {
     cell: (info) => info.getValue(),
@@ -100,32 +100,32 @@ const columns = [
   columnHelper.accessor('commitment', {
     cell: (info) => info.getValue(),
     header: () => <p>Commitment</p>,
-    size: 120,
+    size: 160,
   }),
   columnHelper.accessor('paysInCrypto', {
     cell: (info) => (info.getValue() ?? false).toString(),
     header: () => <p>Pays In Crypto</p>,
-    size: 120,
+    size: 160,
   }),
   columnHelper.accessor('offersTokenAllocation', {
     cell: (info) => (info.getValue() ?? false).toString(),
     header: () => <p>Offers Token Allocation</p>,
-    size: 120,
+    size: 160,
   }),
   columnHelper.accessor('salary', {
     cell: (info) => info.getValue(),
     header: () => <p>Salary</p>,
-    size: 120,
+    size: 160,
   }),
   columnHelper.accessor('minimumSalary', {
     cell: (info) => info.getValue(),
     header: () => <p>Minimum Salary</p>,
-    size: 120,
+    size: 160,
   }),
   columnHelper.accessor('maximumSalary', {
     cell: (info) => info.getValue(),
     header: () => <p>Maximum Salary</p>,
-    size: 120,
+    size: 160,
   }),
   columnHelper.accessor('culture', {
     cell: (info) => info.getValue(),

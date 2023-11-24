@@ -27,11 +27,10 @@ export const jobsUpdateableFieldsSchema = myzod
 
 export type JobsUpdateableFields = Infer<typeof jobsUpdateableFieldsSchema>;
 
-export const allJobsQueryPageSchema = myzod.object({
-  page: myzod.number(),
-  count: myzod.number(),
-  total: myzod.number(),
+export const allJobsResponseSchema = myzod.object({
+  success: myzod.boolean(),
+  message: myzod.string().min(1),
   data: myzod.array(jobsUpdateableFieldsSchema),
 });
 
-export type AllJobsQueryPage = Infer<typeof allJobsQueryPageSchema>;
+export type AllJobsResponse = Infer<typeof allJobsResponseSchema>;
