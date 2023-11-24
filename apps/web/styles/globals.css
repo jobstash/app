@@ -115,3 +115,33 @@ button:focus {
 .animation-fadeIn {
 	animation: 2s ease-out 0s 1 fadeInPage;
 }
+
+
+.resizer {
+  position: absolute;
+  right: 0;
+  top: 0;
+  height: 100%;
+  width: 1.5px;
+	background: rgb(73, 73, 73);
+  /* background: rgba(0, 0, 0, 0.5); */
+  cursor: col-resize;
+  user-select: none;
+  touch-action: none;
+}
+
+.resizer.isResizing {
+	width: 2px;
+  background: rgb(102, 59, 187);
+  opacity: 1;
+}
+
+@media (hover: hover) {
+  .resizer {
+    opacity: 0;
+  }
+
+  *:hover > .resizer {
+    opacity: 1;
+  }
+}

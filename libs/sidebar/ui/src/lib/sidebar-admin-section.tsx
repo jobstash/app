@@ -1,18 +1,15 @@
+import { ADMIN_PATHS, GODMODE_PATH_PREFIX } from '@jobstash/admin/core';
+
 import { Text } from '@jobstash/shared/ui';
 
 import SidebarBartab from './sidebar-bartab';
-
-const GODMODE_PATH_PREFIX = {
-  TAGS: '/godmode/tags',
-  ORGANIZATIONS: '/godmode/organizations',
-};
 
 const SidebarAdminSection = () => (
   <div className="flex-col">
     <Text color="dimmed">Admin Tasks</Text>
     <div className="space-y-3 pt-3">
       <SidebarBartab
-        path="/godmode/tags/synonyms"
+        path={ADMIN_PATHS.SYNONYMS}
         text="Tags"
         isActiveFn={(pathname) =>
           pathname.slice(0, GODMODE_PATH_PREFIX.TAGS.length) ===
@@ -20,11 +17,19 @@ const SidebarAdminSection = () => (
         }
       />
       <SidebarBartab
-        path="/godmode/organizations"
+        path={ADMIN_PATHS.ORG_LIST}
         text="Organizations"
         isActiveFn={(pathname) =>
           pathname.slice(0, GODMODE_PATH_PREFIX.ORGANIZATIONS.length) ===
           GODMODE_PATH_PREFIX.ORGANIZATIONS
+        }
+      />
+      <SidebarBartab
+        path={ADMIN_PATHS.ALL_JOBS}
+        text="All Jobs"
+        isActiveFn={(pathname) =>
+          pathname.slice(0, GODMODE_PATH_PREFIX.ALL_JOBS.length) ===
+          GODMODE_PATH_PREFIX.ALL_JOBS
         }
       />
     </div>
