@@ -1,3 +1,4 @@
+export * from './lib/get-all-jobs';
 export * from './lib/get-blocked-tags';
 export * from './lib/get-paired-terms';
 export * from './lib/get-preferred-terms';

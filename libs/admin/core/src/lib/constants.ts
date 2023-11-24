@@ -1,10 +1,17 @@
-const ADMIN_PATHS = {
-  BLOCKED_TERMS: '/godmode/tags/blocked-terms',
-  PAIRED_TERMS: '/godmode/tags/paired-terms',
-  SYNONYMS: '/godmode/tags/synonyms',
-  TAG_APPROVALS: '/godmode/tags/approvals',
-  ORG_LIST: '/godmode/organizations',
-  ORG_CREATE: '/godmode/organizations/create',
+export const GODMODE_PATH_PREFIX = {
+  TAGS: '/godmode/tags',
+  ORGANIZATIONS: '/godmode/organizations',
+  ALL_JOBS: '/godmode/jobs',
+};
+
+export const ADMIN_PATHS = {
+  BLOCKED_TERMS: `${GODMODE_PATH_PREFIX.TAGS}/blocked-terms`,
+  PAIRED_TERMS: `${GODMODE_PATH_PREFIX.TAGS}/paired-terms`,
+  SYNONYMS: `${GODMODE_PATH_PREFIX.TAGS}/synonyms`,
+  TAG_APPROVALS: `${GODMODE_PATH_PREFIX.TAGS}/approvals`,
+  ORG_LIST: GODMODE_PATH_PREFIX.ORGANIZATIONS,
+  ORG_CREATE: `${GODMODE_PATH_PREFIX.ORGANIZATIONS}/create`,
+  ALL_JOBS: GODMODE_PATH_PREFIX.ALL_JOBS,
 };
 
 export const ADMIN_BREADCRUMBS = {
