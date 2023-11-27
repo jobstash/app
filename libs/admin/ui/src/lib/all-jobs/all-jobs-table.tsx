@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useTransition } from 'react';
 
 import { List, Table } from '@mantine/core';
 import {
@@ -13,6 +13,18 @@ import { flexRender } from '@tanstack/react-table';
 import { JobsUpdateableFields } from '@jobstash/admin/core';
 import { cn } from '@jobstash/shared/utils';
 
+import {
+  Button,
+  Heading,
+  SaveIcon,
+  Text,
+  ThrashIcon,
+} from '@jobstash/shared/ui';
+
+import EditableText from './editable-text';
+import EditableTextarea from './editable-textarea';
+import TableHeaderWrapper from './table-header-wrapper';
+
 interface Props {
   allJobs: JobsUpdateableFields[];
 }
@@ -21,26 +33,50 @@ const columnHelper = createColumnHelper<JobsUpdateableFields>();
 
 const columns = [
   columnHelper.accessor('shortUUID', {
-    cell: (info) => info.getValue(),
-    header: () => <p>ID</p>,
-    size: 80,
+    cell: (info) => <Text>{info.getValue()}</Text>,
+    header: () => <Heading size="label">ID</Heading>,
+    size: 120,
   }),
   columnHelper.accessor('title', {
-    cell: (info) => info.getValue(),
-    header: () => <p>Title</p>,
+    cell: ({ getValue, row, column }) => (
+      <EditableText
+        getValue={getValue}
+        rowIndex={row.index}
+        columnId={column.id}
+      />
+    ),
+    header: () => <Heading size="label">Title</Heading>,
     size: 320,
   }),
   columnHelper.accessor('url', {
-    cell: (info) => info.getValue(),
-    header: () => <p>URL</p>,
+    cell: ({ getValue, row, column }) => (
+      <EditableText
+        getValue={getValue}
+        rowIndex={row.index}
+        columnId={column.id}
+      />
+    ),
+    header: () => <Heading size="label">URL</Heading>,
   }),
   columnHelper.accessor('summary', {
-    cell: (info) => info.getValue(),
-    header: () => <p>Summary</p>,
+    cell: ({ getValue, row, column }) => (
+      <EditableTextarea
+        getValue={getValue}
+        rowIndex={row.index}
+        columnId={column.id}
+      />
+    ),
+    header: () => <Heading size="label">Summary</Heading>,
   }),
   columnHelper.accessor('description', {
-    cell: (info) => info.getValue(),
-    header: () => <p>Description</p>,
+    cell: ({ getValue, row, column }) => (
+      <EditableTextarea
+        getValue={getValue}
+        rowIndex={row.index}
+        columnId={column.id}
+      />
+    ),
+    header: () => <Heading size="label">Description</Heading>,
   }),
   columnHelper.accessor('benefits', {
     cell: (info) => (
@@ -52,7 +88,7 @@ const columns = [
         </List>
       </div>
     ),
-    header: () => <p>Benefits</p>,
+    header: () => <Heading size="label">Benefits</Heading>,
   }),
   columnHelper.accessor('requirements', {
     cell: (info) => (
@@ -64,7 +100,7 @@ const columns = [
         </List>
       </div>
     ),
-    header: () => <p>Requirements</p>,
+    header: () => <Heading size="label">Requirements</Heading>,
   }),
   columnHelper.accessor('responsibilities', {
     cell: (info) => (
@@ -76,70 +112,85 @@ const columns = [
         </List>
       </div>
     ),
-    header: () => <p>Responsibilities</p>,
+    header: () => <Heading size="label">Responsibilities</Heading>,
   }),
   columnHelper.accessor('location', {
-    cell: (info) => info.getValue(),
-    header: () => <p>Location</p>,
+    cell: ({ getValue, row, column }) => (
+      <EditableText
+        getValue={getValue}
+        rowIndex={row.index}
+        columnId={column.id}
+      />
+    ),
+    header: () => <Heading size="label">Location</Heading>,
   }),
   columnHelper.accessor('locationType', {
     cell: (info) => info.getValue(),
-    header: () => <p>Location Type</p>,
+    header: () => <Heading size="label">Location Type</Heading>,
     size: 160,
   }),
   columnHelper.accessor('classification', {
     cell: (info) => info.getValue(),
-    header: () => <p>Classification</p>,
+    header: () => <Heading size="label">Classification</Heading>,
     size: 160,
   }),
   columnHelper.accessor('seniority', {
     cell: (info) => info.getValue(),
-    header: () => <p>Seniority</p>,
+    header: () => <Heading size="label">Seniority</Heading>,
     size: 80,
   }),
   columnHelper.accessor('commitment', {
     cell: (info) => info.getValue(),
-    header: () => <p>Commitment</p>,
+    header: () => <Heading size="label">Commitment</Heading>,
     size: 160,
   }),
   columnHelper.accessor('paysInCrypto', {
     cell: (info) => (info.getValue() ?? false).toString(),
-    header: () => <p>Pays In Crypto</p>,
+    header: () => <Heading size="label">Pays In Crypto</Heading>,
     size: 160,
   }),
   columnHelper.accessor('offersTokenAllocation', {
     cell: (info) => (info.getValue() ?? false).toString(),
-    header: () => <p>Offers Token Allocation</p>,
+    header: () => <Heading size="label">Offers Token Allocation</Heading>,
     size: 160,
   }),
   columnHelper.accessor('salary', {
     cell: (info) => info.getValue(),
-    header: () => <p>Salary</p>,
+    header: () => <Heading size="label">Salary</Heading>,
     size: 160,
   }),
   columnHelper.accessor('minimumSalary', {
     cell: (info) => info.getValue(),
-    header: () => <p>Minimum Salary</p>,
+    header: () => <Heading size="label">Minimum Salary</Heading>,
     size: 160,
   }),
   columnHelper.accessor('maximumSalary', {
     cell: (info) => info.getValue(),
-    header: () => <p>Maximum Salary</p>,
+    header: () => <Heading size="label">Maximum Salary</Heading>,
     size: 160,
   }),
   columnHelper.accessor('culture', {
     cell: (info) => info.getValue(),
-    header: () => <p>Culture</p>,
+    header: () => <Heading size="label">Culture</Heading>,
+  }),
+  columnHelper.display({
+    id: 'actions',
+    cell: () => (
+      <div className="flex items-center gap-4">
+        <Button isIcon isDisabled>
+          <SaveIcon />
+        </Button>
+        <Button isIcon isDisabled>
+          <ThrashIcon />
+        </Button>
+      </div>
+    ),
+    header: () => <p>Actions</p>,
+    size: 120,
   }),
 ];
 
-const initColumns = new Set([
-  'shortUUID',
-  'title',
-  'summary',
-  'locationType',
-  'commitment',
-]);
+const initColumns = new Set(['shortUUID', 'title', 'summary', 'actions']);
 
 const AllJobsTable = ({ allJobs }: Props) => {
   const [data, setData] = useState(allJobs);
@@ -147,6 +198,8 @@ const AllJobsTable = ({ allJobs }: Props) => {
   const [columnVisibility, setColumnVisibility] = useState({});
 
   const [sorting, setSorting] = useState<SortingState>([]);
+
+  const [isPending, startTransition] = useTransition();
 
   const table = useReactTable<JobsUpdateableFields>({
     data,
@@ -156,7 +209,7 @@ const AllJobsTable = ({ allJobs }: Props) => {
       sorting,
     },
     onColumnVisibilityChange: setColumnVisibility,
-    onSortingChange: setSorting,
+    onSortingChange: (updater) => startTransition(() => setSorting(updater)),
     columnResizeMode: 'onEnd',
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
@@ -185,7 +238,7 @@ const AllJobsTable = ({ allJobs }: Props) => {
   return (
     <div className="flex flex-col gap-8">
       <div className="flex flex-wrap max-w-4xl items-center gap-4">
-        <label>
+        <label className="cursor-pointer">
           <input
             {...{
               type: 'checkbox',
@@ -197,7 +250,7 @@ const AllJobsTable = ({ allJobs }: Props) => {
         </label>
 
         {table.getAllLeafColumns().map((column) => (
-          <label key={column.id}>
+          <label key={column.id} className="cursor-pointer">
             <input
               {...{
                 type: 'checkbox',
@@ -210,7 +263,11 @@ const AllJobsTable = ({ allJobs }: Props) => {
         ))}
       </div>
 
-      <div className="overflow-x-auto">
+      <div
+        className={cn('overflow-x-auto', {
+          'opacity-50 select-none': isPending,
+        })}
+      >
         <Table
           withBorder
           highlightOnHover
@@ -230,29 +287,17 @@ const AllJobsTable = ({ allJobs }: Props) => {
                     }}
                   >
                     {header.isPlaceholder ? null : (
-                      <div
-                        className={cn(
-                          'flex items-center gap-2 py-2 font-bold text-white text-md',
-                          {
-                            'cursor-pointer select-none':
-                              header.column.getCanSort(),
-                            'justify-center':
-                              header.column.getSize() < 300
-                                ? 'center'
-                                : undefined,
-                          },
-                        )}
-                        onClick={header.column.getToggleSortingHandler()}
+                      <TableHeaderWrapper
+                        isSorted={header.column.getIsSorted() || null}
+                        isSortable={header.column.getCanSort()}
+                        clearSorting={header.column.clearSorting}
+                        toggleSorting={header.column.toggleSorting}
                       >
                         {flexRender(
                           header.column.columnDef.header,
                           header.getContext(),
                         )}
-                        {{
-                          asc: ' 🔼',
-                          desc: ' 🔽',
-                        }[header.column.getIsSorted() as string] ?? null}
-                      </div>
+                      </TableHeaderWrapper>
                     )}
 
                     <div
@@ -282,8 +327,6 @@ const AllJobsTable = ({ allJobs }: Props) => {
                     key={cell.id}
                     style={{
                       width: cell.column.getSize(),
-                      textAlign:
-                        cell.column.getSize() < 300 ? 'center' : undefined,
                     }}
                   >
                     {flexRender(cell.column.columnDef.cell, cell.getContext())}
