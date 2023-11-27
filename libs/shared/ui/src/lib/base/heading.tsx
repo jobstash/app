@@ -5,7 +5,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { lato } from '@jobstash/shared/core';
 import { cn } from '@jobstash/shared/utils';
 
-const heading = cva(`${lato.variable} font-lato antialiased`, {
+const heading = cva(`${lato.variable} font-lato antialiased select-none`, {
   variants: {
     fw: {
       normal: 'font-normal',
