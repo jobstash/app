@@ -4,7 +4,7 @@ import { Menu } from '@mantine/core';
 
 import { cn } from '@jobstash/shared/utils';
 
-import { Button, FilterIcon } from '@jobstash/shared/ui';
+import { FilterIcon } from '@jobstash/shared/ui';
 
 interface Props {
   isSorted: null | 'asc' | 'desc';
@@ -39,42 +39,46 @@ const TableHeaderWrapper = (props: Props) => {
       onMouseLeave={() => setShowSort(false)}
     >
       <div className="flex items-center justify-between w-full">
-        <div className="flex gap-2 items-center">
-          {children}
-          <div>
-            {isAscending && ' 🔼'}
-            {isDescending && ' 🔽'}
-          </div>
-        </div>
+        {children}
 
-        <div className="flex gap-1 items-center">
-          {isSortable && showSort && (
-            <Menu>
-              <Menu.Target>
-                <Button isIcon>
-                  <FilterIcon />
-                </Button>
-              </Menu.Target>
-              <Menu.Dropdown>
-                {!isAscending && (
-                  <Menu.Item icon={<AscendingIcon />} onClick={sortAscending}>
-                    Ascending
-                  </Menu.Item>
-                )}
-                {!isDescending && (
-                  <Menu.Item icon={<DesendingIcon />} onClick={sortDescending}>
-                    Descending
-                  </Menu.Item>
-                )}
-                {!isClear && (
-                  <Menu.Item icon={<RemoveSortIcon />} onClick={clearSorting}>
-                    Clear
-                  </Menu.Item>
-                )}
-              </Menu.Dropdown>
-            </Menu>
-          )}
-        </div>
+        {isSortable && (
+          <div className="w-6 h-6">
+            {showSort ? (
+              <Menu position="bottom-end">
+                <Menu.Target>
+                  <button type="button">
+                    <FilterIcon />
+                  </button>
+                </Menu.Target>
+                <Menu.Dropdown>
+                  {!isAscending && (
+                    <Menu.Item icon={<AscendingIcon />} onClick={sortAscending}>
+                      Ascending
+                    </Menu.Item>
+                  )}
+                  {!isDescending && (
+                    <Menu.Item
+                      icon={<DesendingIcon />}
+                      onClick={sortDescending}
+                    >
+                      Descending
+                    </Menu.Item>
+                  )}
+                  {!isClear && (
+                    <Menu.Item icon={<RemoveSortIcon />} onClick={clearSorting}>
+                      Clear
+                    </Menu.Item>
+                  )}
+                </Menu.Dropdown>
+              </Menu>
+            ) : (
+              <div>
+                {isAscending && ' 🔼'}
+                {isDescending && ' 🔽'}
+              </div>
+            )}
+          </div>
+        )}
       </div>
     </div>
   );

@@ -1,194 +1,23 @@
 import { useEffect, useState, useTransition } from 'react';
 
-import { List, Table } from '@mantine/core';
+import { Table } from '@mantine/core';
 import {
   getSortedRowModel,
-  SortingState,
+  type SortingState,
   useReactTable,
 } from '@tanstack/react-table';
-import { createColumnHelper } from '@tanstack/react-table';
+import { type RowData } from '@tanstack/react-table';
 import { getCoreRowModel } from '@tanstack/react-table';
 import { flexRender } from '@tanstack/react-table';
 
-import { JobsUpdateableFields } from '@jobstash/admin/core';
+import { type JobsUpdateableFields } from '@jobstash/admin/core';
 import { cn } from '@jobstash/shared/utils';
 
-import {
-  Button,
-  Heading,
-  SaveIcon,
-  Text,
-  ThrashIcon,
-} from '@jobstash/shared/ui';
-
-import EditableText from './editable-text';
-import EditableTextarea from './editable-textarea';
+import { columns } from './columns';
 import TableHeaderWrapper from './table-header-wrapper';
-
 interface Props {
   allJobs: JobsUpdateableFields[];
 }
-
-const columnHelper = createColumnHelper<JobsUpdateableFields>();
-
-const columns = [
-  columnHelper.accessor('shortUUID', {
-    cell: (info) => <Text>{info.getValue()}</Text>,
-    header: () => <Heading size="label">ID</Heading>,
-    size: 120,
-  }),
-  columnHelper.accessor('title', {
-    cell: ({ getValue, row, column }) => (
-      <EditableText
-        getValue={getValue}
-        rowIndex={row.index}
-        columnId={column.id}
-      />
-    ),
-    header: () => <Heading size="label">Title</Heading>,
-    size: 320,
-  }),
-  columnHelper.accessor('url', {
-    cell: ({ getValue, row, column }) => (
-      <EditableText
-        getValue={getValue}
-        rowIndex={row.index}
-        columnId={column.id}
-      />
-    ),
-    header: () => <Heading size="label">URL</Heading>,
-  }),
-  columnHelper.accessor('summary', {
-    cell: ({ getValue, row, column }) => (
-      <EditableTextarea
-        getValue={getValue}
-        rowIndex={row.index}
-        columnId={column.id}
-      />
-    ),
-    header: () => <Heading size="label">Summary</Heading>,
-  }),
-  columnHelper.accessor('description', {
-    cell: ({ getValue, row, column }) => (
-      <EditableTextarea
-        getValue={getValue}
-        rowIndex={row.index}
-        columnId={column.id}
-      />
-    ),
-    header: () => <Heading size="label">Description</Heading>,
-  }),
-  columnHelper.accessor('benefits', {
-    cell: (info) => (
-      <div className="pr-6">
-        <List listStyleType="disc" size="sm" spacing="xs">
-          {info.getValue().map((value) => (
-            <List.Item key={value}>{value}</List.Item>
-          ))}
-        </List>
-      </div>
-    ),
-    header: () => <Heading size="label">Benefits</Heading>,
-  }),
-  columnHelper.accessor('requirements', {
-    cell: (info) => (
-      <div className="pr-6">
-        <List listStyleType="disc" size="sm" spacing="xs">
-          {info.getValue().map((value) => (
-            <List.Item key={value}>{value}</List.Item>
-          ))}
-        </List>
-      </div>
-    ),
-    header: () => <Heading size="label">Requirements</Heading>,
-  }),
-  columnHelper.accessor('responsibilities', {
-    cell: (info) => (
-      <div className="pr-6">
-        <List listStyleType="disc" size="sm" spacing="xs">
-          {info.getValue().map((value) => (
-            <List.Item key={value}>{value}</List.Item>
-          ))}
-        </List>
-      </div>
-    ),
-    header: () => <Heading size="label">Responsibilities</Heading>,
-  }),
-  columnHelper.accessor('location', {
-    cell: ({ getValue, row, column }) => (
-      <EditableText
-        getValue={getValue}
-        rowIndex={row.index}
-        columnId={column.id}
-      />
-    ),
-    header: () => <Heading size="label">Location</Heading>,
-  }),
-  columnHelper.accessor('locationType', {
-    cell: (info) => info.getValue(),
-    header: () => <Heading size="label">Location Type</Heading>,
-    size: 160,
-  }),
-  columnHelper.accessor('classification', {
-    cell: (info) => info.getValue(),
-    header: () => <Heading size="label">Classification</Heading>,
-    size: 160,
-  }),
-  columnHelper.accessor('seniority', {
-    cell: (info) => info.getValue(),
-    header: () => <Heading size="label">Seniority</Heading>,
-    size: 80,
-  }),
-  columnHelper.accessor('commitment', {
-    cell: (info) => info.getValue(),
-    header: () => <Heading size="label">Commitment</Heading>,
-    size: 160,
-  }),
-  columnHelper.accessor('paysInCrypto', {
-    cell: (info) => (info.getValue() ?? false).toString(),
-    header: () => <Heading size="label">Pays In Crypto</Heading>,
-    size: 160,
-  }),
-  columnHelper.accessor('offersTokenAllocation', {
-    cell: (info) => (info.getValue() ?? false).toString(),
-    header: () => <Heading size="label">Offers Token Allocation</Heading>,
-    size: 160,
-  }),
-  columnHelper.accessor('salary', {
-    cell: (info) => info.getValue(),
-    header: () => <Heading size="label">Salary</Heading>,
-    size: 160,
-  }),
-  columnHelper.accessor('minimumSalary', {
-    cell: (info) => info.getValue(),
-    header: () => <Heading size="label">Minimum Salary</Heading>,
-    size: 160,
-  }),
-  columnHelper.accessor('maximumSalary', {
-    cell: (info) => info.getValue(),
-    header: () => <Heading size="label">Maximum Salary</Heading>,
-    size: 160,
-  }),
-  columnHelper.accessor('culture', {
-    cell: (info) => info.getValue(),
-    header: () => <Heading size="label">Culture</Heading>,
-  }),
-  columnHelper.display({
-    id: 'actions',
-    cell: () => (
-      <div className="flex items-center gap-4">
-        <Button isIcon isDisabled>
-          <SaveIcon />
-        </Button>
-        <Button isIcon isDisabled>
-          <ThrashIcon />
-        </Button>
-      </div>
-    ),
-    header: () => <p>Actions</p>,
-    size: 120,
-  }),
-];
 
 const initColumns = new Set(['shortUUID', 'title', 'summary', 'actions']);
 
@@ -216,6 +45,26 @@ const AllJobsTable = ({ allJobs }: Props) => {
     defaultColumn: {
       size: 420,
       sortingFn: 'alphanumericCaseSensitive',
+    },
+    meta: {
+      allJobs,
+      updateData(rowIndex, columnId, value) {
+        setData((prev) =>
+          prev.map((row, index) =>
+            index === rowIndex
+              ? {
+                  ...prev[rowIndex],
+                  [columnId]: value,
+                }
+              : row,
+          ),
+        );
+      },
+      resetRow(rowIndex, value) {
+        setData((prev) =>
+          prev.map((row, index) => (index === rowIndex ? value : row)),
+        );
+      },
     },
   });
 
@@ -282,7 +131,6 @@ const AllJobsTable = ({ allJobs }: Props) => {
                     key={header.id}
                     colSpan={header.colSpan}
                     style={{
-                      position: 'relative',
                       width: header.getSize(),
                     }}
                   >
@@ -342,3 +190,12 @@ const AllJobsTable = ({ allJobs }: Props) => {
 };
 
 export default AllJobsTable;
+
+declare module '@tanstack/react-table' {
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  interface TableMeta<TData extends RowData> {
+    allJobs: JobsUpdateableFields[];
+    updateData: (rowIndex: number, columnId: string, value: unknown) => void;
+    resetRow: (rowIndex: number, value: JobsUpdateableFields) => void;
+  }
+}

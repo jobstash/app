@@ -1,26 +1,19 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState, useTransition } from 'react';
 
 import { Textarea } from '@mantine/core';
-import { Getter } from '@tanstack/react-table';
+import { type CellContext } from '@tanstack/react-table';
 
+import { type JobsUpdateableFields } from '@jobstash/admin/core';
 import { roboto } from '@jobstash/shared/core';
 import { cn } from '@jobstash/shared/utils';
 
-import { Button, EditIcon, Text } from '@jobstash/shared/ui';
+import { Text } from '@jobstash/shared/ui';
 
-interface Props {
-  getValue: Getter<string>;
-  rowIndex: number;
-  columnId: string;
-  minRows?: number;
-}
+type Props = CellContext<JobsUpdateableFields, string>;
 
-const EditableTextarea = ({
-  getValue,
-  rowIndex,
-  columnId,
-  minRows = 3,
-}: Props) => {
+const TextareaCell = (props: Props) => {
+  const { getValue, row, column, table } = props;
+
   const initialValue = getValue();
   const [value, setValue] = useState(initialValue);
 
@@ -34,13 +27,26 @@ const EditableTextarea = ({
     if (!isEditing) setIsEditing(true);
   };
 
+  const isChanged = JSON.stringify(value) !== JSON.stringify(initialValue);
+
+  const [isPending, startTransition] = useTransition();
+
   const onBlur = () => {
-    setIsEditing(false);
-    // TODO: update table data
+    if (isChanged) {
+      startTransition(() => {
+        table.options.meta?.updateData(row.index, column.id, value);
+        setIsEditing(false);
+      });
+    }
   };
 
   return (
-    <div className="cursor-pointer" onClick={onClickEdit}>
+    <div
+      className={cn('cursor-pointer', {
+        'pointer-events-none select-none opacity-50': isPending,
+      })}
+      onClick={onClickEdit}
+    >
       {isEditing ? (
         <div className="py-0.5">
           <Textarea
@@ -66,4 +72,4 @@ const EditableTextarea = ({
   );
 };
 
-export default EditableTextarea;
+export default TextareaCell;
