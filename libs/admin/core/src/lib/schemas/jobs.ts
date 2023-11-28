@@ -42,10 +42,6 @@ export const updateJobResponseSchema = myzod.object({
   data: jobsUpdateableFieldsSchema,
 });
 
-export const updateJobPayloadSchema = myzod.partial(jobsUpdateableFieldsSchema);
-
-export type UpdateJobPayload = Infer<typeof updateJobPayloadSchema>;
-
 export type UpdateJobResponse = Infer<typeof updateJobResponseSchema>;
 
 export type UpdateJobMutFn = UseMutateFunction<
