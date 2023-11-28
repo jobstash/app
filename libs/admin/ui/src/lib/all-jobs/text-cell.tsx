@@ -1,20 +1,19 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useTransition } from 'react';
 
 import { TextInput } from '@mantine/core';
-import { Getter } from '@tanstack/react-table';
+import type { CellContext } from '@tanstack/react-table';
 
+import { type JobsUpdateableFields } from '@jobstash/admin/core';
 import { roboto } from '@jobstash/shared/core';
 import { cn } from '@jobstash/shared/utils';
 
-import { Text } from '@jobstash/shared/ui';
+import { Spinner, Text } from '@jobstash/shared/ui';
 
-interface Props {
-  getValue: Getter<string>;
-  rowIndex: number;
-  columnId: string;
-}
+type Props = CellContext<JobsUpdateableFields, string>;
 
-const EditableText = ({ getValue, rowIndex, columnId }: Props) => {
+const TextCell = (props: Props) => {
+  const { getValue, row, column, table } = props;
+
   const initialValue = getValue();
   const [value, setValue] = useState(initialValue);
 
@@ -28,10 +27,20 @@ const EditableText = ({ getValue, rowIndex, columnId }: Props) => {
     if (!isEditing) setIsEditing(true);
   };
 
+  const isChanged = JSON.stringify(value) !== JSON.stringify(initialValue);
+
+  const [isPending, startTransition] = useTransition();
+
   const onBlur = () => {
-    setIsEditing(false);
-    // TODO: update table data
+    if (isChanged) {
+      startTransition(() => {
+        table.options.meta?.updateData(row.index, column.id, value);
+        setIsEditing(false);
+      });
+    }
   };
+
+  if (isPending) return <Spinner />;
 
   return (
     <div className="cursor-pointer" onClick={onClickEdit}>
@@ -56,4 +65,4 @@ const EditableText = ({ getValue, rowIndex, columnId }: Props) => {
   );
 };
 
-export default EditableText;
+export default TextCell;

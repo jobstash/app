@@ -1,3 +1,4 @@
+import { UseMutateFunction } from '@tanstack/react-query';
 import myzod, { type Infer } from 'myzod';
 
 export const jobsUpdateableFieldsSchema = myzod
@@ -34,3 +35,22 @@ export const allJobsResponseSchema = myzod.object({
 });
 
 export type AllJobsResponse = Infer<typeof allJobsResponseSchema>;
+
+export const updateJobResponseSchema = myzod.object({
+  success: myzod.boolean(),
+  message: myzod.string().min(1),
+  data: jobsUpdateableFieldsSchema,
+});
+
+export const updateJobPayloadSchema = myzod.partial(jobsUpdateableFieldsSchema);
+
+export type UpdateJobPayload = Infer<typeof updateJobPayloadSchema>;
+
+export type UpdateJobResponse = Infer<typeof updateJobResponseSchema>;
+
+export type UpdateJobMutFn = UseMutateFunction<
+  UpdateJobResponse,
+  unknown,
+  JobsUpdateableFields,
+  unknown
+>;

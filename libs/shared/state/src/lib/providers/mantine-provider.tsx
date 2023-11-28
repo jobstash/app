@@ -13,7 +13,7 @@ const MantineProvider = ({ children }: Props) => (
     withNormalizeCSS
     theme={{ colorScheme: 'dark', cursorType: 'pointer' }}
   >
-    <Notifications position="top-right" />
+    <Notifications position="top-right" className="z-[100]" />
     {children}
   </BaseMantineProvider>
 );
