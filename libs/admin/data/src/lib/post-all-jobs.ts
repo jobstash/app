@@ -5,11 +5,18 @@ import {
   updateJobResponseSchema,
 } from '@jobstash/admin/core';
 import { MW_URL } from '@jobstash/shared/core';
+import { convertBoolText } from '@jobstash/admin/utils';
 
 import { mwFetch } from '@jobstash/shared/data';
 
-export const postAllJobs = async (payload: JobsUpdateableFields) => {
-  const url = `${MW_URL}/jobs/update/${payload.shortUUID}`;
+export const postAllJobs = async (_payload: JobsUpdateableFields) => {
+  const url = `${MW_URL}/jobs/update/${_payload.shortUUID}`;
+
+  const payload: JobsUpdateableFields = {
+    ..._payload,
+    paysInCrypto: convertBoolText(_payload.paysInCrypto),
+    offersTokenAllocation: convertBoolText(_payload.paysInCrypto),
+  };
 
   const options = {
     method: 'POST' as const,

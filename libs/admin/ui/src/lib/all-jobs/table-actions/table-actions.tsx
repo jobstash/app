@@ -1,6 +1,7 @@
 import { type CellContext } from '@tanstack/react-table';
 
 import { type JobsUpdateableFields } from '@jobstash/admin/core';
+import { convertBoolText } from '@jobstash/admin/utils';
 
 import { useAllJobsMutation } from '@jobstash/admin/state';
 
@@ -11,13 +12,19 @@ import TableActionsButton from './button';
 type Props = CellContext<JobsUpdateableFields, unknown>;
 
 const TableActions = ({ table, row }: Props) => {
-	const initAllJobs = table.options.meta?.allJobs;
+  const initAllJobs = table.options.meta?.allJobs;
   const initData = initAllJobs ? initAllJobs[row.index] : undefined;
   const currentData = row.original;
 
   const { isLoading, mutate } = useAllJobsMutation(initAllJobs);
 
-  const isChanged = JSON.stringify(initData) !== JSON.stringify(currentData);
+  const cleanedCurrentData: JobsUpdateableFields = {
+    ...currentData,
+    paysInCrypto: convertBoolText(currentData.paysInCrypto),
+    offersTokenAllocation: convertBoolText(currentData.offersTokenAllocation),
+  };
+  const isChanged =
+    JSON.stringify(initData) !== JSON.stringify(cleanedCurrentData);
 
   const onClickSave = () => {
     if (mutate) {
