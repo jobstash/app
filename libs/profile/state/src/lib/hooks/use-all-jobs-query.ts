@@ -6,5 +6,5 @@ export const useAllJobsQuery = () =>
   useQuery({
     queryKey: ['all-jobs'],
     queryFn: async () => getAllJobs(),
-    staleTime: 1000 * 60,
+    staleTime: 1000 * 60 * 60,
   });

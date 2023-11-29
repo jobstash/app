@@ -11,10 +11,11 @@ import TableActionsButton from './button';
 type Props = CellContext<JobsUpdateableFields, unknown>;
 
 const TableActions = ({ table, row }: Props) => {
-  const initData = table.options.meta?.allJobs[row.index];
+	const initAllJobs = table.options.meta?.allJobs;
+  const initData = initAllJobs ? initAllJobs[row.index] : undefined;
   const currentData = row.original;
 
-  const { isLoading, mutate } = useAllJobsMutation();
+  const { isLoading, mutate } = useAllJobsMutation(initAllJobs);
 
   const isChanged = JSON.stringify(initData) !== JSON.stringify(currentData);
 
