@@ -1,6 +1,8 @@
 import { UseMutateFunction } from '@tanstack/react-query';
 import myzod, { type Infer } from 'myzod';
 
+import { tagSchema } from '@jobstash/shared/core';
+
 export const jobsUpdateableFieldsSchema = myzod
   .object({
     shortUUID: myzod.string().min(1),
@@ -23,6 +25,7 @@ export const jobsUpdateableFieldsSchema = myzod
     offersTokenAllocation: myzod.boolean().nullable(),
     commitment: myzod.string().min(1).nullable(),
     classification: myzod.string().min(1).nullable(),
+    tags: myzod.array(tagSchema),
   })
   .allowUnknownKeys(true);
 

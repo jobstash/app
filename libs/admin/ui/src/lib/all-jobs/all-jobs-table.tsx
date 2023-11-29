@@ -13,8 +13,10 @@ import { flexRender } from '@tanstack/react-table';
 import { type JobsUpdateableFields } from '@jobstash/admin/core';
 import { cn } from '@jobstash/shared/utils';
 
+import ColumnToggler from './column-toggler';
 import { columns } from './columns';
 import TableHeaderWrapper from './table-header-wrapper';
+
 interface Props {
   allJobs: JobsUpdateableFields[];
 }
@@ -82,39 +84,31 @@ const AllJobsTable = ({ allJobs }: Props) => {
       setIsReady(true);
     }
   }, [isReady, table]);
-  if (!isReady) return null;
+
+  if (!isReady || data.length === 0) return <p>Loading Table ...</p>;
 
   return (
     <div className="flex flex-col gap-8">
       <div className="flex flex-wrap max-w-4xl items-center gap-4">
-        <label className="cursor-pointer">
-          <input
-            {...{
-              type: 'checkbox',
-              checked: table.getIsAllColumnsVisible(),
-              onChange: table.getToggleAllColumnsVisibilityHandler(),
-            }}
-          />{' '}
-          Toggle All
-        </label>
+        <ColumnToggler
+          label="Toggle All"
+          isChecked={table.getIsAllColumnsVisible()}
+          handler={table.getToggleAllColumnsVisibilityHandler()}
+        />
 
         {table.getAllLeafColumns().map((column) => (
-          <label key={column.id} className="cursor-pointer">
-            <input
-              {...{
-                type: 'checkbox',
-                checked: column.getIsVisible(),
-                onChange: column.getToggleVisibilityHandler(),
-              }}
-            />{' '}
-            {column.id}
-          </label>
+          <ColumnToggler
+            key={column.id}
+            label={column.id}
+            isChecked={column.getIsVisible()}
+            handler={column.getToggleVisibilityHandler()}
+          />
         ))}
       </div>
 
       <div
         className={cn('overflow-x-auto', {
-          'opacity-50 select-none': isPending,
+          'opacity-30 select-none': isPending,
         })}
       >
         <Table
