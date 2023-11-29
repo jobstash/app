@@ -86,11 +86,13 @@ export const columns = [
     cell: (props) => <SelectCell options={['true', 'false']} {...props} />,
     header: () => <Heading size="label">Pays In Crypto</Heading>,
     size: 160,
+    sortingFn: 'basic',
   }),
   columnHelper.accessor('offersTokenAllocation', {
     cell: (props) => <SelectCell options={['true', 'false']} {...props} />,
     header: () => <Heading size="label">Offers Token Allocation</Heading>,
     size: 160,
+    sortingFn: 'basic',
   }),
   columnHelper.accessor('salary', {
     cell: NumberCell,

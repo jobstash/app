@@ -21,7 +21,7 @@ interface Props {
   allJobs: JobsUpdateableFields[];
 }
 
-const initColumns = new Set(['shortUUID', 'title', 'summary', 'actions']);
+const initColumns = new Set(['shortUUID', 'title', 'actions']);
 
 const AllJobsTable = ({ allJobs }: Props) => {
   const [data, setData] = useState(allJobs);

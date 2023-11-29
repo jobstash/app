@@ -37,9 +37,10 @@ const SelectCell = (props: Props) => {
     if (isChanged) {
       startTransition(() => {
         table.options.meta?.updateData(row.index, column.id, value);
-        setIsEditing(false);
       });
     }
+
+    setIsEditing(false);
   };
 
   if (isPending) return <Spinner />;
@@ -53,6 +54,7 @@ const SelectCell = (props: Props) => {
             searchable
             clearable
             data={options}
+            allowDeselect={false}
             className="w-full"
             classNames={{
               input: cn(
