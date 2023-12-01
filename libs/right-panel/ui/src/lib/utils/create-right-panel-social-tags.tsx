@@ -28,7 +28,7 @@ export const createRightPanelSocialTags = (orgDetails: RightPanelOrg) => {
       id: TAG_ELEMENT_ID.twitter,
       text: 'Twitter',
       icon: <TwitterIcon />,
-      link: twitter,
+      link: `https://twitter.com/${twitter}`,
     });
   }
 
