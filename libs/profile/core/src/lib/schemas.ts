@@ -23,7 +23,7 @@ export const profileRepoSchema = myzod.intersection(
     }),
     tags: myzod.array(profileRepoTag),
     contribution: myzod.object({
-      summary: myzod.string(),
+      summary: myzod.string().nullable(),
       count: myzod.number(),
     }),
   }),
@@ -98,6 +98,7 @@ export const profileInfoPayloadSchema = profileInfoSchema;
 export const profileSkillSchema = myzod.object({
   id: myzod.string().min(1),
   name: myzod.string().min(1),
+  normalizedName: myzod.string().min(1),
   canTeach: myzod.boolean(),
 });
 
@@ -124,4 +125,14 @@ export const profileShowcaseResponseSchema = myzod.object({
 
 export const profileShowcasePayloadSchema = myzod.object({
   showcase: myzod.array(profileShowcaseSchema),
+});
+
+export const profileRepoTagPayloadSchema = myzod.object({
+  id: myzod.string().min(1),
+  tagsUsed: myzod.array(profileSkillSchema),
+});
+
+export const profileRepoTagResponseSchema = myzod.object({
+  success: myzod.boolean(),
+  message: myzod.string().min(1),
 });

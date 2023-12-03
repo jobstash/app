@@ -160,7 +160,7 @@ export const projectMoreInfoSchema = myzod.object({
 });
 
 export const repositoryInfoSchema = myzod.object({
-  id: myzod.string().min(1),
+  id: myzod.number(),
   name: myzod.string().min(1),
   description: myzod.string(),
   timestamp: myzod.number(),

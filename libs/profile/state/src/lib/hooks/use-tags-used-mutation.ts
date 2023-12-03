@@ -1,46 +1,37 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { type ProfileRepoTag } from '@jobstash/profile/core';
+import { type ProfileRepoTagPayload } from '@jobstash/profile/core';
 import { notifError, notifSuccess } from '@jobstash/shared/utils';
+
+import { postProfileRepoTag } from '@jobstash/profile/data';
 
 import { useProfileRepoPageContext } from '../contexts/profile-repo-page-context';
 
-interface Payload {
-  id: string;
-  tagsUsed: ProfileRepoTag[];
-  tagsCreated: ProfileRepoTag[];
-}
-
 export const useTagsUsedMutation = () => {
   const { setIsLoadingCard } = useProfileRepoPageContext();
+  const queryClient = useQueryClient();
 
   const { isLoading, mutate } = useMutation({
-    mutationFn: (payload: Payload) =>
-      fetch('/api/fakers/profile/repositories/tags-used', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        mode: 'cors',
-        credentials: 'include',
-        body: JSON.stringify({ ...payload }),
-      }).then(() => payload),
+    mutationFn: (payload: ProfileRepoTagPayload) => postProfileRepoTag(payload),
     onMutate() {
       setIsLoadingCard(true);
     },
-    onSuccess(profileInfo) {
-      // TODO: Add notifications
+    onSuccess({ message }) {
       // TODO: Update profile-repo-list,
       // TODO: Update profile repo state (should update disableSave flag)
-      notifSuccess({ message: 'You have updated your tags used' });
+      notifSuccess({ message });
     },
-    onError() {
-      notifError();
+    onError(error) {
+      notifError({
+        title: 'Update tags failed!',
+        message: (error as Error).message,
+      });
     },
     onSettled() {
       setIsLoadingCard(false);
 
-      // TODO: invalidate profile-repo-list
+      // Invalidate profile-repo-list
+      queryClient.invalidateQueries({ queryKey: ['profile-repo-list'] });
     },
   });
 

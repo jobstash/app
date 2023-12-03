@@ -1,21 +1,11 @@
 import { useState } from 'react';
 
-import { v4 } from '@lukeed/uuid';
-
 import type { ProfileRepo, ProfileRepoTag } from '@jobstash/profile/core';
 import { Tag } from '@jobstash/shared/core';
-import { capitalize, slugify } from '@jobstash/shared/utils';
 
 import { useProfileRepoPageContext } from '../contexts/profile-repo-page-context';
 
 import { useTagsUsedMutation } from './use-tags-used-mutation';
-
-const createTag = (searchValue: string): ProfileRepoTag => ({
-  id: v4(),
-  name: capitalize(searchValue),
-  normalizedName: slugify(searchValue),
-  canTeach: false,
-});
 
 const findTag = (allTags: Tag[], searchValue: string) =>
   allTags.find(
@@ -43,31 +33,23 @@ export const useTagsUsed = () => {
   const { id, tags } = profileRepo || ({} as ProfileRepo);
 
   const [tagsUsed, setTagsUsed] = useState<ProfileRepoTag[]>(tags);
-  const [tagsCreated, setTagsCreated] = useState<ProfileRepoTag[]>([]);
   const [searchValue, setSearchValue] = useState<string>('');
   const [hoverAddButton, setHoverAddButton] = useState(false);
 
   const onBlurSearch = () => {
     if (hoverAddButton) {
-      const option = findTag(allTags, searchValue);
-      if (option) {
-        setTagsUsed((prev) => [...prev, { ...option, canTeach: false }]);
-      } else {
-        setTagsCreated((prev) => [...prev, createTag(searchValue)]);
+      const currentTag = findTag(allTags, searchValue);
+      if (currentTag) {
+        setTagsUsed((prev) => [...prev, { ...currentTag, canTeach: false }]);
       }
     }
   };
 
-  const currentTags = [...tagsUsed, ...tagsCreated];
+  const currentTags = [...tagsUsed];
   const disableAdd = !searchValue || isTagExists(currentTags, searchValue);
 
   const onTagRemove = (id: string) => {
-    const tagsUsedIds = new Set(tagsUsed.map((t) => t.id));
-    if (tagsUsedIds.has(id)) {
-      setTagsUsed(tagsUsed.filter((t) => t.id !== id));
-    } else {
-      setTagsCreated(tagsCreated.filter((t) => t.id !== id));
-    }
+    setTagsUsed(tagsUsed.filter((t) => t.id !== id));
   };
 
   const disableSave = isTagsEqual(tags, currentTags);
@@ -75,25 +57,17 @@ export const useTagsUsed = () => {
 
   const { mutate } = useTagsUsedMutation();
   const onClickSave = () => {
-    mutate({ id, tagsUsed, tagsCreated });
+    mutate({ id: id.toString(), tagsUsed });
   };
 
   const onClickCanTeach = (id: string, canTeach: boolean) => {
-    const tagsUsedIds = new Set(tagsUsed.map((t) => t.id));
-    if (tagsUsedIds.has(id)) {
-      setTagsUsed((prev) =>
-        prev.map((t) => (t.id === id ? { ...t, canTeach } : t)),
-      );
-    } else {
-      setTagsCreated((prev) =>
-        prev.map((t) => (t.id === id ? { ...t, canTeach } : t)),
-      );
-    }
+    setTagsUsed((prev) =>
+      prev.map((t) => (t.id === id ? { ...t, canTeach } : t)),
+    );
   };
 
   return {
     tagsUsed,
-    tagsCreated,
     searchValue,
     setSearchValue,
     hoverAddButton,
