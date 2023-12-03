@@ -11,7 +11,7 @@ export const useYourContributionTour = () => {
   } = useProfileRepoPageContext();
 
   const isCurrentTab = activeTab === PROFILE_RIGHT_PANEL_TAB.YOUR_CONTRIBUTION;
-  const isEmpty = contribution.summary.trim().length === 0;
+  const isEmpty = contribution.summary?.trim().length === 0;
 
   const boolArg = isCurrentTab && isEmpty;
 

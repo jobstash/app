@@ -21,7 +21,7 @@ export const useYourContribution = () => {
   const onSave = () => {
     if (activeProfileRepo) {
       mutate({
-        id: activeProfileRepo.id,
+        id: activeProfileRepo.id.toString(),
         contribution,
       });
     }

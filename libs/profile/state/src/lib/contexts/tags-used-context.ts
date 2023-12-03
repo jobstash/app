@@ -5,7 +5,6 @@ import { type ProfileRepoTag } from '@jobstash/profile/core';
 
 interface TagsUsedContextProps {
   tagsUsed: ProfileRepoTag[];
-  tagsCreated: ProfileRepoTag[];
   searchValue: string;
   setSearchValue: Dispatch<SetStateAction<string>>;
   hoverAddButton: boolean;

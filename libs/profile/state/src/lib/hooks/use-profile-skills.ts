@@ -14,7 +14,7 @@ export const useProfileSkills = (): ProfileSkillsContextProps => {
   const skillsIdsSet = new Set(skills.map((skill) => skill.id));
   const options = tags
     .filter((tag) => !skillsIdsSet.has(tag.id))
-    .map(({ id, name }) => ({ id, name, canTeach: false }));
+    .map((tag) => ({ ...tag, canTeach: false }));
 
   const [isEditing, toggleEdit] = useReducer((prev) => !prev, false);
 

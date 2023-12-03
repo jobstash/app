@@ -16,6 +16,8 @@ import {
   profileRepoListQueryPageSchema,
   profileRepoSchema,
   profileRepoTag,
+  profileRepoTagPayloadSchema,
+  profileRepoTagResponseSchema,
   profileShowcasePayloadSchema,
   profileShowcaseResponseSchema,
   profileShowcaseSchema,
@@ -76,3 +78,6 @@ export type ProfileShowcaseMutFn = UseMutateAsyncFunction<
 
 export type ProfileTabOptions =
   typeof PROFILE_RIGHT_PANEL_TABS[keyof typeof PROFILE_RIGHT_PANEL_TABS];
+
+export type ProfileRepoTagPayload = Infer<typeof profileRepoTagPayloadSchema>;
+export type ProfileRepoTagResponse = Infer<typeof profileRepoTagResponseSchema>;
