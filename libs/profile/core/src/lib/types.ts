@@ -13,6 +13,7 @@ import {
   profileOrgReviewSalarySchema,
   profileOrgReviewSchema,
   profileOrgReviewYourReviewSchema,
+  profileRepoContributionResponseSchema,
   profileRepoListQueryPageSchema,
   profileRepoSchema,
   profileRepoTag,
@@ -25,6 +26,7 @@ import {
   profileSkillSchema,
   profileSkillsPayloadSchema,
 } from './schemas';
+import { profileRepoContributionPayloadSchema } from './schemas';
 
 export type ProfileRepoTag = Infer<typeof profileRepoTag>;
 
@@ -81,3 +83,11 @@ export type ProfileTabOptions =
 
 export type ProfileRepoTagPayload = Infer<typeof profileRepoTagPayloadSchema>;
 export type ProfileRepoTagResponse = Infer<typeof profileRepoTagResponseSchema>;
+
+export type ProfileRepoContributionPayload = Infer<
+  typeof profileRepoContributionPayloadSchema
+>;
+
+export type ProfileRepoContributionResponse = Infer<
+  typeof profileRepoContributionResponseSchema
+>;

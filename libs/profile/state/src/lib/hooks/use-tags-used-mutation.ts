@@ -19,7 +19,10 @@ export const useTagsUsedMutation = () => {
     onSuccess({ message }) {
       // TODO: Update profile-repo-list,
       // TODO: Update profile repo state (should update disableSave flag)
-      notifSuccess({ message });
+      notifSuccess({
+        title: 'Tags Updated',
+        message,
+      });
     },
     onError(error) {
       notifError({

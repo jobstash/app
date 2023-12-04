@@ -5,6 +5,7 @@ export * from './lib/get-profile-showcase';
 export * from './lib/get-profile-skills';
 export * from './lib/post-delete-profile';
 export * from './lib/post-profile-info';
+export * from './lib/post-profile-repo-contribution';
 export * from './lib/post-profile-repo-tag';
 export * from './lib/post-profile-showcase';
 export * from './lib/post-profile-skills';

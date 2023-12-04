@@ -57,7 +57,7 @@ export const useTagsUsed = () => {
 
   const { mutate } = useTagsUsedMutation();
   const onClickSave = () => {
-    mutate({ id: id.toString(), tagsUsed });
+    mutate({ id, tagsUsed });
   };
 
   const onClickCanTeach = (id: string, canTeach: boolean) => {
