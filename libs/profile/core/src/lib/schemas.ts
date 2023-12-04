@@ -128,11 +128,21 @@ export const profileShowcasePayloadSchema = myzod.object({
 });
 
 export const profileRepoTagPayloadSchema = myzod.object({
-  id: myzod.string().min(1),
+  id: myzod.number(),
   tagsUsed: myzod.array(profileSkillSchema),
 });
 
 export const profileRepoTagResponseSchema = myzod.object({
+  success: myzod.boolean(),
+  message: myzod.string().min(1),
+});
+
+export const profileRepoContributionPayloadSchema = myzod.object({
+  id: myzod.number(),
+  contribution: myzod.string().min(1),
+});
+
+export const profileRepoContributionResponseSchema = myzod.object({
   success: myzod.boolean(),
   message: myzod.string().min(1),
 });
