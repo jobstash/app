@@ -47,6 +47,7 @@ const Input = () => {
           </Button>
         </div>
       }
+      limit={200}
       onSearchChange={(v) => {
         setSearchValue(v);
       }}
