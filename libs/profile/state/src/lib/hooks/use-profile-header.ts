@@ -50,8 +50,6 @@ export const useProfileHeader = () => {
 
   const saveProfileInfo = () => {
     mutate({
-      avatar,
-      username,
       availableForWork: isAvailableForWork,
       contact: {
         preferred: preferredContact,
