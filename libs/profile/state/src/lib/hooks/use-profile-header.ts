@@ -46,7 +46,7 @@ export const useProfileHeader = () => {
     setSelectedContact(e.currentTarget.value);
   };
 
-  const { isLoading, mutate } = useProfileInfoMutation();
+  const { isLoadingMutation, mutate } = useProfileInfoMutation();
 
   const saveProfileInfo = () => {
     mutate({
@@ -72,8 +72,10 @@ export const useProfileHeader = () => {
 
   const disableSave = !selectedContact || isEqualFetched;
 
+  const isLoading = isLoadingMutation || !profileInfoData;
+
   return {
-    isLoading: isLoading || !initRef.current,
+    isLoading,
     isAvailableForWork,
     setIsAvailableForWork,
     preferredContact,

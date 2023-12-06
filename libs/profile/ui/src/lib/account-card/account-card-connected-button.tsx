@@ -1,27 +1,48 @@
-import { Avatar, Button, Text } from '@jobstash/shared/ui';
+import { useProfileInfoContext } from '@jobstash/profile/state';
 
-const AccountCardConnectedButton = () => (
-  <>
-    <div className="text-center">
-      <Text size="sm" color="dimmed">
-        Connected Github Account:
-      </Text>
-    </div>
+import { Avatar, Button, LinkButton, Text } from '@jobstash/shared/ui';
 
-    <Button isFullWidth isDisabled variant="primary" className="justify-center">
-      <div className="flex items-center gap-2">
-        <Avatar
-          isRounded
-          src="https://i.pravatar.cc/69"
-          alt={`@0xDev00r's avatar`}
-          size="xs"
-        />
-        <Text size="sm" fw="semibold">
-          @0xDev00r
+const AccountCardConnectedButton = () => {
+  const { profileInfoData } = useProfileInfoContext();
+
+  return (
+    <>
+      <div className="text-center">
+        <Text size="sm" color="dimmed">
+          Connected Github Account:
         </Text>
       </div>
-    </Button>
-  </>
-);
+
+      <LinkButton
+        isFullWidth
+        external
+        isDisabled={!profileInfoData}
+        variant="primary"
+        className="justify-center"
+        linkProps={{
+          href: profileInfoData
+            ? `https://github.com/${profileInfoData.username}`
+            : '#',
+        }}
+      >
+        <div className="flex items-center gap-3">
+          {profileInfoData ? (
+            <>
+              <Avatar
+                isRounded
+                src={profileInfoData.avatar ?? ''}
+                alt={`${profileInfoData.username}'s avatar`}
+                size="xs"
+              />
+              <Text fw="semibold">{profileInfoData.username}</Text>
+            </>
+          ) : (
+            <Text>Loading</Text>
+          )}
+        </div>
+      </LinkButton>
+    </>
+  );
+};
 
 export default AccountCardConnectedButton;

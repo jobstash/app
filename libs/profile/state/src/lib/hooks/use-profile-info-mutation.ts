@@ -14,7 +14,7 @@ export const useProfileInfoMutation = () => {
 
   const profileInfoQueryKey = ['profile-info', address];
 
-  const { isLoading, mutate } = useMutation({
+  const { isLoading: isLoadingMutation, mutate } = useMutation({
     mutationFn: (payload: ProfileInfoPayload) => postProfileInfo(payload),
     onSuccess(profileInfo) {
       queryClient.setQueryData(profileInfoQueryKey, profileInfo);
@@ -44,5 +44,5 @@ export const useProfileInfoMutation = () => {
     },
   });
 
-  return { isLoading, mutate };
+  return { isLoadingMutation, mutate };
 };
