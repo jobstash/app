@@ -28,8 +28,9 @@ const ProfileReviewsGotItCard = () => {
         actions and incentivize them to create better working environments.
       </Text>
       <Text color="dimmed">
-        The information entered will be public, though your identity will be
-        anonymous.
+        The information entered will be{' '}
+        <span className="text-bold">public</span>, though your identity will be{' '}
+        <span className="text-bold">anonymous</span>.
       </Text>
     </GotItCard>
   );

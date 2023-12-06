@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 
 import {
-  ProfileOrgReviewRating,
+  type ProfileOrgReviewRating,
   RATING_TITLE_MAP,
 } from '@jobstash/profile/core';
 
@@ -27,7 +27,7 @@ export const useRatings = () => {
   const onClickSave = () => {
     mutate({
       orgId,
-      rating: currentRating,
+      ...currentRating,
     });
   };
 

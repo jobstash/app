@@ -52,7 +52,7 @@ const ProfileOrgReviewCard = (props: Props) => {
             title={org.name}
             location={org.location}
             avatarProps={{
-              src: getLogoUrl(org.website, org.logoUrl),
+              src: getLogoUrl(org.website ?? '', org.logo),
               alt: org.name,
             }}
           />
@@ -61,39 +61,31 @@ const ProfileOrgReviewCard = (props: Props) => {
           </Button>
         </div>
 
-        {rating && overallRating ? (
-          <div>
-            <Rating readOnly fractions={2} value={overallRating} />
-          </div>
-        ) : null}
+        <div>
+          <Rating readOnly fractions={2} value={overallRating} size="md" />
+        </div>
 
         <hr className="border-t border-white/10" />
 
-        {membershipStatus && (
-          <CardSet
-            icon={<MembershipStatusIcon />}
-          >{`Membership Status: ${membershipStatus}`}</CardSet>
-        )}
+        <CardSet icon={<MembershipStatusIcon />}>{`Membership Status: ${
+          membershipStatus ?? 'N/A'
+        }`}</CardSet>
 
-        {(startDate || endDate || commitCount) && (
-          <div className="flex items-center gap-4">
-            {startDate && (
-              <CardSet icon={<StartDateIcon />}>{`First Commit: ${
-                new Date(startDate).toLocaleString().split(',')[0]
-              }`}</CardSet>
-            )}
-            {endDate && (
-              <CardSet icon={<EndDateIcon />}>{`Last Commit: ${
-                new Date(endDate).toLocaleString().split(',')[0]
-              }`}</CardSet>
-            )}
-            {commitCount && (
-              <CardSet
-                icon={<CommitIcon />}
-              >{`Number of Your Commits: ${commitCount}`}</CardSet>
-            )}
-          </div>
-        )}
+        <div className="flex items-center gap-4">
+          <CardSet icon={<StartDateIcon />}>{`First Commit: ${
+            startDate
+              ? new Date(startDate).toLocaleString().split(',')[0]
+              : 'N/A'
+          }`}</CardSet>
+
+          <CardSet icon={<EndDateIcon />}>{`Last Commit: ${
+            endDate ? new Date(endDate).toLocaleString().split(',')[0] : 'N/A'
+          }`}</CardSet>
+
+          <CardSet icon={<CommitIcon />}>{`Number of Your Commits: ${
+            commitCount ?? 'N/A'
+          }`}</CardSet>
+        </div>
       </div>
     </ProfileCardWrapper>
   );

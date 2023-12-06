@@ -38,7 +38,7 @@ export const useYourReview = () => {
   const onClickSave = () => {
     mutate({
       orgId,
-      review: currentReview,
+      ...currentReview,
     });
   };
 

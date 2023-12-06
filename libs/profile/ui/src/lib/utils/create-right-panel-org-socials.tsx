@@ -1,8 +1,5 @@
-import {
-  type OrgInfo,
-  TAG_ELEMENT_ID,
-  type TagElement,
-} from '@jobstash/shared/core';
+import { type ProfileOrgReview } from '@jobstash/profile/core';
+import { TAG_ELEMENT_ID, type TagElement } from '@jobstash/shared/core';
 
 import {
   DiscordIcon,
@@ -12,7 +9,7 @@ import {
   TwitterIcon,
 } from '@jobstash/shared/ui';
 
-export const createOrgInfoSocials = (orgInfo: OrgInfo) => {
+export const createOrgInfoSocials = (orgInfo: ProfileOrgReview['org']) => {
   const { github, twitter, telegram, discord, docs } = orgInfo;
 
   const socials: TagElement[] = [];
@@ -31,7 +28,7 @@ export const createOrgInfoSocials = (orgInfo: OrgInfo) => {
       id: TAG_ELEMENT_ID.twitter,
       text: 'Twitter',
       icon: <TwitterIcon />,
-      link: twitter,
+      link: `https://twitter.com/${twitter}`,
     });
   }
 
@@ -52,16 +49,6 @@ export const createOrgInfoSocials = (orgInfo: OrgInfo) => {
       link: discord,
     });
   }
-
-  //
-  // if (linkedin) {
-  //   socials.push({
-  //     id: TAG_ELEMENT_ID.linkedin,
-  //     text: 'LinkedIn',
-  //     icon: <LinkedInIcon />,
-  //     link: linkedin,
-  //   });
-  // }
 
   if (docs) {
     socials.push({

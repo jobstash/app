@@ -8,11 +8,17 @@ import {
   profileInfoPayloadSchema,
   profileInfoResponseSchema,
   profileInfoSchema,
-  profileOrgReviewListQueryPageSchema,
+  profileOrgRatingPayloadSchema,
+  profileOrgRatingResponseSchema,
+  profileOrgReviewListResponseSchema,
+  profileOrgReviewPayloadSchema,
   profileOrgReviewRatingSchema,
+  profileOrgReviewResponseSchema,
   profileOrgReviewSalarySchema,
   profileOrgReviewSchema,
   profileOrgReviewYourReviewSchema,
+  profileOrgSalaryPayloadSchema,
+  profileOrgSalaryResponseSchema,
   profileRepoContributionResponseSchema,
   profileRepoListQueryPageSchema,
   profileRepoSchema,
@@ -47,9 +53,8 @@ export type ProfileOrgReviewYourReview = Infer<
   typeof profileOrgReviewYourReviewSchema
 >;
 export type ProfileOrgReview = Infer<typeof profileOrgReviewSchema>;
-
-export type ProfileOrgReviewListQueryPage = Infer<
-  typeof profileOrgReviewListQueryPageSchema
+export type ProfileOrgReviewListResponse = Infer<
+  typeof profileOrgReviewListResponseSchema
 >;
 
 export type ProfileInfo = Infer<typeof profileInfoSchema>;
@@ -90,4 +95,25 @@ export type ProfileRepoContributionPayload = Infer<
 
 export type ProfileRepoContributionResponse = Infer<
   typeof profileRepoContributionResponseSchema
+>;
+
+export type ProfileOrgSalaryPayload = Infer<
+  typeof profileOrgSalaryPayloadSchema
+>;
+export type ProfileOrgSalaryResponse = Infer<
+  typeof profileOrgSalaryResponseSchema
+>;
+
+export type ProfileOrgRatingPayload = Infer<
+  typeof profileOrgRatingPayloadSchema
+>;
+export type ProfileOrgRatingResponse = Infer<
+  typeof profileOrgRatingResponseSchema
+>;
+
+export type ProfileOrgReviewPayload = Infer<
+  typeof profileOrgReviewPayloadSchema
+>;
+export type ProfileOrgReviewResponse = Infer<
+  typeof profileOrgReviewResponseSchema
 >;

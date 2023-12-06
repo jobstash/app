@@ -1,61 +1,42 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useAccount } from 'wagmi';
 
-import {
-  ProfileOrgReview,
-  ProfileOrgReviewRating,
-} from '@jobstash/profile/core';
+import { type ProfileOrgRatingPayload } from '@jobstash/profile/core';
 import { notifError, notifSuccess } from '@jobstash/shared/utils';
+
+import { postProfileOrgRating } from '@jobstash/profile/data';
 
 import { useProfileReviewsPageContext } from '../contexts/profile-reviews-page-context';
 
-interface Payload {
-  orgId: ProfileOrgReview['org']['id'];
-  rating: ProfileOrgReviewRating;
-}
-
-interface Payload {
-  orgId: string;
-  rating: {
-    management: number | null;
-    careerGrowth: number | null;
-    benefits: number | null;
-    workLifeBalance: number | null;
-    cultureValues: number | null;
-    diversityInclusion: number | null;
-    interviewProcess: number | null;
-  };
-}
-
 export const useRatingMutation = () => {
   const { setIsLoadingCard } = useProfileReviewsPageContext();
+  const { address } = useAccount();
+  const queryClient = useQueryClient();
 
   const { isLoading, mutate } = useMutation({
-    mutationFn: (payload: Payload) =>
-      fetch('/api/fakers/profile/reviews/rating', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        mode: 'cors',
-        credentials: 'include',
-        body: JSON.stringify({ ...payload }),
-      }).then(() => payload),
+    mutationFn: (payload: ProfileOrgRatingPayload) =>
+      postProfileOrgRating(payload),
     onMutate() {
       setIsLoadingCard(true);
     },
-    onSuccess(profileInfo) {
-      // TODO: Add notifications
+    onSuccess({ message }) {
       // TODO: Update org-review-list,
       // TODO: Update org-review state (should update disableSave flag)
-      notifSuccess({ message: 'You have updated your ratings' });
+      notifSuccess({ title: 'Rating Updated', message });
+
+      // Invalidate profile-org-review-list
+      queryClient.invalidateQueries({
+        queryKey: ['profile-org-review-list', address],
+      });
     },
-    onError() {
-      notifError();
+    onError(error) {
+      notifError({
+        title: 'Update rating failed!',
+        message: (error as Error).message,
+      });
     },
     onSettled() {
       setIsLoadingCard(false);
-
-      // TODO: invalidate org-review-list
     },
   });
 

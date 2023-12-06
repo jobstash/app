@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { ProfileRepoContributionPayload } from '@jobstash/profile/core';
+import { type ProfileRepoContributionPayload } from '@jobstash/profile/core';
 import { notifError, notifSuccess } from '@jobstash/shared/utils';
 
 import { postProfileRepoContribution } from '@jobstash/profile/data';
@@ -25,6 +25,9 @@ export const useYourContributionMutation = () => {
         title: 'Review Added',
         message,
       });
+
+      // Invalidate profile-repo-list
+      queryClient.invalidateQueries({ queryKey: ['profile-repo-list'] });
     },
     onError(error) {
       notifError({
@@ -34,9 +37,6 @@ export const useYourContributionMutation = () => {
     },
     onSettled() {
       setIsLoadingCard(false);
-
-      // Invalidate profile-repo-list
-      queryClient.invalidateQueries({ queryKey: ['profile-repo-list'] });
     },
   });
 

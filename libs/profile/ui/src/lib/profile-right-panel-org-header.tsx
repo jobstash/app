@@ -1,21 +1,24 @@
 import { memo } from 'react';
 
-import { type OrgInfo } from '@jobstash/shared/core';
+import { type ProfileOrgReview } from '@jobstash/profile/core';
+import { type TagElement } from '@jobstash/shared/core';
 import { getLogoUrl } from '@jobstash/shared/utils';
 
-import { LogoTitle, Text } from '@jobstash/shared/ui';
+import { CardSet, LogoTitle, Text } from '@jobstash/shared/ui';
 
-import ProfileRightPanelOrgSocials from './profile-right-panel-org-socials';
+import { createOrgInfoSocials } from './utils/create-right-panel-org-socials';
 import ProfileRightPanelOrgTags from './profile-right-panel-org-tags';
 
 interface Props {
-  orgInfo?: OrgInfo;
+  orgInfo?: ProfileOrgReview['org'];
 }
 
 const ProfileRightPanelOrgHeader = ({ orgInfo }: Props) => {
   if (!orgInfo) return null;
 
-  const { name, logoUrl, website, summary } = orgInfo;
+  const { name, logo: logoUrl, website, summary } = orgInfo;
+
+  const socials: TagElement[] = createOrgInfoSocials(orgInfo);
 
   return (
     <div className="flex flex-col gap-4">
@@ -24,7 +27,7 @@ const ProfileRightPanelOrgHeader = ({ orgInfo }: Props) => {
           <LogoTitle
             title={name}
             avatarProps={{
-              src: getLogoUrl(website, logoUrl),
+              src: getLogoUrl(website ?? '', logoUrl),
               alt: name,
             }}
           />
@@ -34,7 +37,13 @@ const ProfileRightPanelOrgHeader = ({ orgInfo }: Props) => {
 
       <Text color="dimmed">{summary as string}</Text>
 
-      <ProfileRightPanelOrgSocials orgInfo={orgInfo} />
+      <div className="flex gap-4 flex-wrap">
+        {socials.map(({ id, text, icon, link }) => (
+          <CardSet key={id} link={link} icon={icon}>
+            {text}
+          </CardSet>
+        ))}
+      </div>
     </div>
   );
 };
