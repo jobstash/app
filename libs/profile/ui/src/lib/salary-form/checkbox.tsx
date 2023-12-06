@@ -10,6 +10,7 @@ const Checkbox = () => {
       <MCheckbox
         size="md"
         label="Offers Token Allocation"
+        color="gray"
         checked={state.offersTokenAllocation}
         onChange={(e) =>
           setState.setOffersTokenAllocation(e.currentTarget.checked)

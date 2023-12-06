@@ -11,7 +11,7 @@ import { mwFetch } from '@jobstash/shared/data';
 export const postProfileOrgReview = async (
   payload: ProfileOrgReviewPayload,
 ) => {
-  const url = `${MW_URL}/profile/reviews/rating`;
+  const url = `${MW_URL}/profile/reviews/review`;
 
   const options = {
     method: 'POST' as const,
