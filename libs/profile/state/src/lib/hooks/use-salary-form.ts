@@ -20,9 +20,9 @@ export const useSalaryForm = () => {
 
   const save = () => {
     mutate({
-      orgId: org.id,
+      orgId: org.orgId,
       selectedCurrency: state.selectedCurrency,
-      salaryAmount: state.amount ?? null,
+      amount: state.amount ?? null,
       offersTokenAllocation: state.offersTokenAllocation,
     });
   };

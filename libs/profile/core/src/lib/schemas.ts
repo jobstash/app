@@ -1,10 +1,6 @@
 import myzod from 'myzod';
 
-import {
-  orgInfoSchema,
-  repositoryInfoSchema,
-  tagSchema,
-} from '@jobstash/shared/core';
+import { repositoryInfoSchema, tagSchema } from '@jobstash/shared/core';
 
 export const profileRepoTag = myzod.intersection(
   tagSchema,
@@ -170,10 +166,7 @@ export const profileOrgSalaryPayloadSchema = myzod.intersection(
   myzod.object({
     orgId: myzod.string().min(1),
   }),
-  myzod.intersection(
-    myzod.omit(profileOrgReviewSalarySchema, ['amount']),
-    myzod.object({ salaryAmount: myzod.number().nullable() }),
-  ),
+  profileOrgReviewSalarySchema,
 );
 
 export const profileOrgSalaryResponseSchema = myzod.object({
