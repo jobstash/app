@@ -1,13 +1,14 @@
 import { memo } from 'react';
 
-import { type OrgInfo, TagElement } from '@jobstash/shared/core';
+import { type ProfileOrgReview } from '@jobstash/profile/core';
+import { type TagElement } from '@jobstash/shared/core';
 
 import { CardSet } from '@jobstash/shared/ui';
 
 import { createOrgInfoSocials } from './utils/create-right-panel-org-socials';
 
 interface Props {
-  orgInfo: OrgInfo;
+  orgInfo: ProfileOrgReview['org'];
 }
 
 const ProfileRightPanelOrgSocials = ({ orgInfo }: Props) => {

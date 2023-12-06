@@ -1,5 +1,4 @@
 import { useEffect, useMemo, useRef } from 'react';
-import { useInView } from 'react-intersection-observer';
 
 import { useAtom, useSetAtom } from 'jotai';
 
@@ -13,14 +12,7 @@ import { profileRepoCountAtom } from '../atoms/profile-repo-count-atom';
 import { useProfileOrgReviewListQuery } from './use-profile-org-review-list-query';
 
 export const useProfileOrgReviewList = () => {
-  const {
-    data,
-    isLoading,
-    error,
-    fetchNextPage,
-    isFetchingNextPage,
-    hasNextPage,
-  } = useProfileOrgReviewListQuery();
+  const { data, isLoading, error } = useProfileOrgReviewListQuery();
 
   const [activeProfileOrgReview, setActiveProfileOrgReview] = useAtom(
     activeProfileOrgReviewAtom,
@@ -28,7 +20,7 @@ export const useProfileOrgReviewList = () => {
   const setProfileOrgReviewCount = useSetAtom(profileRepoCountAtom);
   useEffect(() => {
     if (data) {
-      setProfileOrgReviewCount(data.pages[0].total);
+      setProfileOrgReviewCount(data.length);
     }
   }, [data, setProfileOrgReviewCount]);
 
@@ -36,7 +28,7 @@ export const useProfileOrgReviewList = () => {
   const profileOrgReviewListItems = useMemo(() => {
     if (!data) return [];
 
-    let result = data.pages.flatMap((d) => d.data);
+    let result = [...data];
     if (initProfileOrgReviewRef.current) {
       result = result.filter(
         (d) => d.org.id !== initProfileOrgReviewRef.current?.org.id,
@@ -66,19 +58,9 @@ export const useProfileOrgReviewList = () => {
     setActiveProfileOrgReview,
   ]);
 
-  const { ref: inViewRef, inView } = useInView();
-  useEffect(() => {
-    if (inView) {
-      fetchNextPage();
-    }
-  }, [fetchNextPage, inView]);
-
   return {
     isLoading,
     error,
     profileOrgReviewListItems,
-    isFetchingNextPage,
-    hasNextPage,
-    inViewRef,
   };
 };

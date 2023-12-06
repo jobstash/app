@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, type ReactNode } from 'react';
 
 import { cva, type VariantProps } from 'class-variance-authority';
 
@@ -31,7 +31,7 @@ const text = cva(`${roboto.variable} font-roboto antialiased`, {
 type TextVariantProps = VariantProps<typeof text>;
 
 export interface TextProps extends TextVariantProps {
-  children: string;
+  children: ReactNode;
   className?: string;
 }
 

@@ -1,56 +1,42 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useAccount } from 'wagmi';
 
-import {
-  ProfileOrgReview,
-  ProfileOrgReviewYourReview,
-} from '@jobstash/profile/core';
+import { type ProfileOrgReviewPayload } from '@jobstash/profile/core';
 import { notifError, notifSuccess } from '@jobstash/shared/utils';
+
+import { postProfileOrgReview } from '@jobstash/profile/data';
 
 import { useProfileReviewsPageContext } from '../contexts/profile-reviews-page-context';
 
-interface Payload {
-  orgId: ProfileOrgReview['org']['id'];
-  review: ProfileOrgReviewYourReview;
-}
-
-interface Payload {
-  orgId: string;
-  review: {
-    headline: string | null;
-    pros: string | null;
-    cons: string | null;
-  };
-}
-
 export const useYourReviewMutation = () => {
   const { setIsLoadingCard } = useProfileReviewsPageContext();
+  const { address } = useAccount();
+  const queryClient = useQueryClient();
+
   const { isLoading, mutate } = useMutation({
-    mutationFn: (payload: Payload) =>
-      fetch('/api/fakers/profile/reviews/your-review', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        mode: 'cors',
-        credentials: 'include',
-        body: JSON.stringify({ ...payload }),
-      }).then(() => payload),
+    mutationFn: (payload: ProfileOrgReviewPayload) =>
+      postProfileOrgReview(payload),
     onMutate() {
       setIsLoadingCard(true);
     },
-    onSuccess(profileInfo) {
-      // TODO: Add notifications
+    onSuccess({ message }) {
       // TODO: Update org-review-list,
       // TODO: Update org-review state (should update disableSave flag)
-      notifSuccess({ message: 'You have updated your review description' });
+      notifSuccess({ title: 'Review Updated', message });
+
+      // Invalidate profile-org-review-list
+      queryClient.invalidateQueries({
+        queryKey: ['profile-org-review-list', address],
+      });
     },
-    onError() {
-      notifError();
+    onError(error) {
+      notifError({
+        title: 'Update rating failed!',
+        message: (error as Error).message,
+      });
     },
     onSettled() {
       setIsLoadingCard(false);
-
-      // TODO: invalidate org-review-list
     },
   });
 

@@ -9,7 +9,7 @@ const Checkbox = () => {
     <div className="flex justify-end">
       <MCheckbox
         size="md"
-        label="No token allocation"
+        label="Offers Token Allocation"
         checked={state.offersTokenAllocation}
         onChange={(e) =>
           setState.setOffersTokenAllocation(e.currentTarget.checked)

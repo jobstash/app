@@ -22,7 +22,7 @@ export const useSalaryForm = () => {
     mutate({
       orgId: org.id,
       selectedCurrency: state.selectedCurrency,
-      amount: state.amount ?? null,
+      salaryAmount: state.amount ?? null,
       offersTokenAllocation: state.offersTokenAllocation,
     });
   };
