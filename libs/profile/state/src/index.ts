@@ -23,6 +23,7 @@ export * from './lib/hooks/use-your-contribution-mutation';
 // Contexts & Providers
 export * from './lib/contexts/profile-dev-info-context';
 export * from './lib/contexts/profile-header-context';
+export * from './lib/contexts/profile-info-context';
 export * from './lib/contexts/profile-repo-page-context';
 export * from './lib/contexts/profile-reviews-page-context';
 export * from './lib/contexts/profile-showcase-form-context';
