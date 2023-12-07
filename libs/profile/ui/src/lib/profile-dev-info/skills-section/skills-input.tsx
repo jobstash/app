@@ -1,5 +1,6 @@
 import { Select } from '@mantine/core';
 
+import { type Tag } from '@jobstash/shared/core';
 import { cn } from '@jobstash/shared/utils';
 
 import {
@@ -15,7 +16,10 @@ const SkillsInput = () => {
     const skill = options.find((option) => option.name === value);
 
     if (skill) {
-      addSkill(skill);
+      const newSkill = (({ normalizedName, ...o }) => o)(
+        skill as Tag & { canTeach: boolean },
+      );
+      addSkill(newSkill);
     }
   };
 
@@ -33,6 +37,7 @@ const SkillsInput = () => {
         item: '[&[data-hovered]]:bg-gray [&[data-selected]]:bg-gray',
       }}
       value=""
+      limit={200}
       maxDropdownHeight={280}
       onChange={onChange}
     />
