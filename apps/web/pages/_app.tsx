@@ -76,7 +76,7 @@ const App = ({ Component, pageProps }: AppProps) => {
 
           {/* <Component {...pageProps} /> */}
 
-          <TopBanner />
+          {/* <TopBanner /> */}
           {/* <DonateModal /> */}
           <div className={cn({ 'pt-10': isOpenTopBanner })}>
             <Component {...pageProps} />
