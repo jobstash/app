@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAccount } from 'wagmi';
 
 import { type ProfileShowcasePayload } from '@jobstash/profile/core';
+import { notifError, notifSuccess } from '@jobstash/shared/utils';
 
 import { postProfileShowcase } from '@jobstash/profile/data';
 
@@ -15,13 +16,17 @@ export const useProfileShowcaseMutation = () => {
   } = useMutation({
     mutationFn: (payload: ProfileShowcasePayload) =>
       postProfileShowcase(payload),
-    onSuccess(_, vars) {
-      queryClient.setQueryData(['profile-showcase', address], {
-        data: vars.showcase,
-        message: 'User showcase retrieved successfully',
-        success: true,
-      });
+    onSuccess({ message }, vars) {
+      notifSuccess({ title: 'Showcase Updated', message });
+
+      queryClient.setQueryData(['profile-showcase', address], vars.showcase);
       queryClient.invalidateQueries(['profile-showcase', address]);
+    },
+    onError(error) {
+      notifError({
+        title: 'Update skills failed!',
+        message: (error as Error).message,
+      });
     },
   });
 

@@ -18,18 +18,24 @@ const ProfileDevInfoSave = () => {
 
   const buttonText = isLoadingMutation ? 'Loading' : 'Save Details';
 
-  const similarPayload =
-    JSON.stringify({ skills, showcases }) ===
-    JSON.stringify({ skills: fetchedSkills, showcases: fetchedShowcases });
+  const isEqualFetchedSkills =
+    JSON.stringify(skills.map((s) => s.name).sort()) ===
+    JSON.stringify(fetchedSkills.map((s) => s.name).sort());
+  const isEqualFetchedShowcase =
+    JSON.stringify(showcases.map((s) => s.url).sort()) ===
+    JSON.stringify(fetchedShowcases.map((s) => s.url).sort());
+
+  const similarPayload = isEqualFetchedSkills && isEqualFetchedShowcase;
 
   const disableSave = isLoadingMutation || similarPayload;
 
   const onClick = async () => {
+    console.log('onClick skills =', skills);
     await Promise.all([
-      ...(skills.length > 0 ? [mutateAsyncSkills({ skills })] : []),
-      ...(showcases.length > 0
-        ? [mutateAsyncShowcase({ showcase: showcases })]
-        : []),
+      ...(isEqualFetchedSkills ? [] : [mutateAsyncSkills({ skills })]),
+      ...(isEqualFetchedShowcase
+        ? []
+        : [mutateAsyncShowcase({ showcase: showcases })]),
     ]);
   };
 
