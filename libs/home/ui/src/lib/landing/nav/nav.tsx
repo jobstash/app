@@ -1,5 +1,7 @@
 import { memo } from 'react';
 
+import { FRONTEND_URL } from '@jobstash/shared/core';
+
 import { LinkButton, Text } from '@jobstash/shared/ui';
 
 import NavBrand from './nav-brand';
@@ -28,7 +30,7 @@ const LandingNav = () => (
       <LinkButton
         variant="primary"
         linkProps={{
-          href: 'https://app.jobstash.xyz',
+          href: FRONTEND_URL,
         }}
       >
         <Text fw="semibold" className="px-2">

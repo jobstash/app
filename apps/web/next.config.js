@@ -24,7 +24,7 @@ const nextConfig = {
   },
 
   images: {
-    domains: ['app.jobstash.xyz'],
+    domains: ['jobstash.xyz'],
     remotePatterns: [
       {
         protocol: 'https',
@@ -32,7 +32,7 @@ const nextConfig = {
       },
       {
         protocol: 'https',
-        hostname: 'app.jobstash.xyz',
+        hostname: 'jobstash.xyz',
       },
       {
         protocol: 'https',
@@ -65,13 +65,14 @@ const nextConfig = {
     ],
   },
 
-  redirects: async () => [
-    {
-      source: '/',
-      destination: '/jobs',
-      permanent: true,
-    },
-  ],
+  //
+  // redirects: async () => [
+  //   {
+  //     source: '/',
+  //     destination: '/jobs',
+  //     permanent: true,
+  //   },
+  // ],
 
   sentry: {
     hideSourceMaps: true,
