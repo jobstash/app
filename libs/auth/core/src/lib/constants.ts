@@ -41,3 +41,7 @@ export const redirectFlowsSet = new Set<CheckWalletFlow>([
   CHECK_WALLET_FLOWS.PICK_ROLE,
   CHECK_WALLET_FLOWS.ONBOARD_REPO,
 ]);
+
+export const ignoredPathnameRedirectSet = new Set<string>([
+  '/callback/magic-login',
+]);

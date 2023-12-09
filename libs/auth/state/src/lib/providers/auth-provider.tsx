@@ -16,6 +16,7 @@ import {
   CHECK_WALLET_FLOWS,
   CHECK_WALLET_ROLES,
   CHECK_WALLET_ROUTE,
+  ignoredPathnameRedirectSet,
   redirectFlowsSet,
 } from '@jobstash/auth/core';
 import { MW_URL } from '@jobstash/shared/core';
@@ -45,7 +46,7 @@ type Props = {
 };
 
 export const AuthProvider = ({ children, screenLoader }: Props) => {
-  const { push, asPath } = useRouter();
+  const { push, asPath, pathname } = useRouter();
   const queryClient = useQueryClient();
   const isMounted = useIsMounted();
 
@@ -90,6 +91,7 @@ export const AuthProvider = ({ children, screenLoader }: Props) => {
     if (
       !redirectRef.current &&
       redirectFlowsSet.has(flow) &&
+      !ignoredPathnameRedirectSet.has(pathname) &&
       asPath !== flowRoute
     ) {
       redirectRef.current = true;
@@ -100,7 +102,7 @@ export const AuthProvider = ({ children, screenLoader }: Props) => {
         }
       }, 500);
     }
-  }, [asPath, isConnected, push, value]);
+  }, [asPath, isConnected, pathname, push, value]);
 
   return (
     <WagmiConfig client={connectkitClient}>
