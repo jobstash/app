@@ -100,6 +100,7 @@ const profileInfoContactSchema = myzod.object({
 export const profileInfoSchema = myzod.object({
   avatar: myzod.string().min(1).nullable(),
   username: myzod.string().min(1).nullable(),
+  email: myzod.string().min(1).nullable(),
   availableForWork: myzod.boolean().nullable(),
   contact: profileInfoContactSchema,
 });
