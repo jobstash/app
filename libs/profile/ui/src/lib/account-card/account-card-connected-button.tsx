@@ -1,48 +1,46 @@
-import { useProfileInfoContext } from '@jobstash/profile/state';
+import { ReactNode } from 'react';
 
-import { Avatar, Button, LinkButton, Text } from '@jobstash/shared/ui';
+import { Button, LinkButton, Text } from '@jobstash/shared/ui';
 
-const AccountCardConnectedButton = () => {
-  const { profileInfoData } = useProfileInfoContext();
+interface Props {
+  label: string;
+  isDisabled: boolean;
+  href: string | null;
+  children: ReactNode;
+}
 
-  return (
-    <>
-      <div className="text-center">
-        <Text size="sm" color="dimmed">
-          Connected Github Account:
-        </Text>
-      </div>
+const AccountCardConnectedButton = ({
+  label,
+  isDisabled,
+  href,
+  children,
+}: Props) => (
+  <>
+    <div className="text-center">
+      <Text size="sm" color="dimmed">
+        {label}
+      </Text>
+    </div>
 
+    {href ? (
       <LinkButton
         isFullWidth
         external
-        isDisabled={!profileInfoData}
+        isDisabled={isDisabled}
         variant="primary"
         className="justify-center"
         linkProps={{
-          href: profileInfoData
-            ? `https://github.com/${profileInfoData.username}`
-            : '#',
+          href,
         }}
       >
-        <div className="flex items-center gap-3">
-          {profileInfoData ? (
-            <>
-              <Avatar
-                isRounded
-                src={profileInfoData.avatar ?? ''}
-                alt={`${profileInfoData.username}'s avatar`}
-                size="xs"
-              />
-              <Text fw="semibold">{profileInfoData.username}</Text>
-            </>
-          ) : (
-            <Text>Loading</Text>
-          )}
-        </div>
+        <div className="flex items-center gap-3">{children}</div>
       </LinkButton>
-    </>
-  );
-};
+    ) : (
+      <Button isFullWidth variant="primary" className="justify-center">
+        <div className="flex items-center gap-3">{children}</div>
+      </Button>
+    )}
+  </>
+);
 
 export default AccountCardConnectedButton;

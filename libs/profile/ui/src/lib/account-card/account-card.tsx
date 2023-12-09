@@ -7,8 +7,9 @@ import { useDisconnect } from 'wagmi';
 import { useProfileDeleteMutation } from '@jobstash/profile/state';
 
 import AccountCardConnectButton from './account-card-connect-button';
-import AccountCardConnectedButton from './account-card-connected-button';
 import AccountCardDeleteButton from './account-card-delete-button';
+import AccountCardEmailButton from './account-card-email-button';
+import AccountCardGithubButton from './account-card-github-button';
 import AccountCardModal from './account-card-modal';
 import AccountCardTitle from './account-card-title';
 import AccountCardWrapper from './account-card-wrapper';
@@ -46,7 +47,8 @@ const AccountCard = () => {
 
         <div className="flex flex-col gap-2 py-4 text-center">
           <AccountCardTitle />
-          <AccountCardConnectedButton />
+          <AccountCardGithubButton />
+          <AccountCardEmailButton />
         </div>
 
         <hr className="border-t border-white/10" />

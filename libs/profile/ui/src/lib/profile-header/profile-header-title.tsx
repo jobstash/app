@@ -1,3 +1,5 @@
+import { getEmailAvatar } from '@jobstash/profile/utils';
+
 import { useProfileHeaderContext } from '@jobstash/profile/state';
 
 import { LogoTitle } from '@jobstash/shared/ui';
@@ -12,10 +14,7 @@ const ProfileHeaderTitle = () => {
       <LogoTitle
         title={username ?? email ?? ''}
         avatarProps={{
-          src:
-            avatar ?? email
-              ? `https://api.dicebear.com/7.x/identicon/png?seed=${email}&size=48`
-              : '',
+          src: avatar ?? email ? getEmailAvatar(email) : '',
           alt: `${username ?? email ?? ''}`,
           isRounded: true,
         }}
