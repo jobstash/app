@@ -30,7 +30,6 @@ const ProfileDevInfoSave = () => {
   const disableSave = isLoadingMutation || similarPayload;
 
   const onClick = async () => {
-    console.log('onClick skills =', skills);
     await Promise.all([
       ...(isEqualFetchedSkills ? [] : [mutateAsyncSkills({ skills })]),
       ...(isEqualFetchedShowcase

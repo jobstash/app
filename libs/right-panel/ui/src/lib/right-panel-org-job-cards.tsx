@@ -10,7 +10,6 @@ interface Props {
 }
 
 const RightPanelOrgJobCards = ({ orgName, orgJobs }: Props) => {
-  console.log({ orgName, orgJobs });
   if (orgJobs.length === 0) return null;
 
   return (
