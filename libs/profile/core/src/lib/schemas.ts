@@ -133,6 +133,7 @@ export const profileSkillsPayloadSchema = myzod.object({
 });
 
 export const profileShowcaseSchema = myzod.object({
+  id: myzod.string().min(1),
   label: myzod.string().min(1),
   url: myzod.string().min(1),
 });
@@ -144,7 +145,7 @@ export const profileShowcaseResponseSchema = myzod.object({
 });
 
 export const profileShowcasePayloadSchema = myzod.object({
-  showcase: myzod.array(profileShowcaseSchema),
+  showcase: myzod.array(myzod.omit(profileShowcaseSchema, ['id'])),
 });
 
 const profileTagsUsedSchema = myzod.intersection(

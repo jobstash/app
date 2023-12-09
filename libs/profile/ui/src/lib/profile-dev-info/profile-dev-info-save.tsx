@@ -35,7 +35,11 @@ const ProfileDevInfoSave = () => {
       ...(isEqualFetchedSkills ? [] : [mutateAsyncSkills({ skills })]),
       ...(isEqualFetchedShowcase
         ? []
-        : [mutateAsyncShowcase({ showcase: showcases })]),
+        : [
+            mutateAsyncShowcase({
+              showcase: showcases.map((s) => (({ id, ...o }) => o)(s)),
+            }),
+          ]),
     ]);
   };
 

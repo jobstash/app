@@ -23,6 +23,7 @@ export const useProfileShowcaseForm = (): ProfileShowcaseFormContextProps => {
   const [displayForm, setDisplayForm] = useState(false);
 
   const [currentShowcase, setCurrentShowcase] = useState({
+    id: '',
     label: '',
     url: '',
   });
@@ -43,8 +44,13 @@ export const useProfileShowcaseForm = (): ProfileShowcaseFormContextProps => {
 
   const onClickAddItem = () => {
     if (currentShowcase.label) {
-      addShowcase({ label: currentShowcase.label, url: currentShowcase.url });
+      addShowcase({
+        id: currentShowcase.id,
+        label: currentShowcase.label,
+        url: currentShowcase.url,
+      });
       setCurrentShowcase({
+        id: '',
         label: '',
         url: '',
       });
