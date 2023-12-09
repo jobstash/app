@@ -1,4 +1,5 @@
 import { useRouter } from 'next/router';
+import { useReducer } from 'react';
 
 import { LoadingPage } from '@jobstash/shared/pages';
 import { useAtomValue } from 'jotai';
@@ -10,6 +11,7 @@ import { isLoadingDevCallbackAtom, useAuthContext } from '@jobstash/auth/state';
 import { useIsMounted } from '@jobstash/shared/state';
 
 import {
+  ConnectEmailSection,
   PickRoleButton,
   PickRoleEmailIcon,
   PickRoleGithubIcon,
@@ -57,29 +59,49 @@ const useFlowCheck = () => {
   );
 };
 
-const DevSection = ({ onClickDevGithub }: { onClickDevGithub: () => void }) => (
-  <PickRoleSection className={['bg-gradient-to-l from-primary to-secondary']}>
-    <Text size="lg" fw="bold">
-      Developer
-    </Text>
-    <div className="flex w-72 flex-col gap-y-6">
-      <Text color="dimmed" size="sm">
-        To create an account we need to validate your Github account(s).
-      </Text>
-      <Text color="dimmed" size="sm">
-        We will then verify you own the the account, and will inspect which
-        public commits you have made in the past.
-      </Text>
-    </div>
+const DevSection = ({ onClickDevGithub }: { onClickDevGithub: () => void }) => {
+  const [showConnectEmail, toggleConnectEmail] = useReducer((b) => !b, false);
 
-    <PickRoleButton
-      text="Connect with Github"
-      icon={<PickRoleGithubIcon />}
-      onClick={onClickDevGithub}
-    />
-    <hr className="border-t border-white/10" />
-  </PickRoleSection>
-);
+  return (
+    <PickRoleSection
+      className={['bg-gradient-to-l from-primary to-secondary']}
+      withTopHr={!showConnectEmail}
+    >
+      {showConnectEmail ? (
+        <ConnectEmailSection toggleConnectEmail={toggleConnectEmail} />
+      ) : (
+        <>
+          <Text size="lg" fw="bold">
+            Developer
+          </Text>
+          <div className="flex w-72 flex-col gap-y-6">
+            <Text color="dimmed" size="sm">
+              To create an account we need to validate your Github account(s).
+            </Text>
+            <Text color="dimmed" size="sm">
+              We will then verify you own the the account, and will inspect
+              which public commits you have made in the past.
+            </Text>
+          </div>
+
+          <PickRoleButton
+            text="Connect with Organization Email"
+            icon={<PickRoleEmailIcon />}
+            onClick={toggleConnectEmail}
+          />
+
+          <hr className="border-t border-white/10" />
+
+          <PickRoleButton
+            text="Connect with Github"
+            icon={<PickRoleGithubIcon />}
+            onClick={onClickDevGithub}
+          />
+        </>
+      )}
+    </PickRoleSection>
+  );
+};
 
 const OrgSection = () => (
   <PickRoleSection>

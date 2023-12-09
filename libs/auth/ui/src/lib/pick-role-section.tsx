@@ -7,12 +7,17 @@ import { cn } from '@jobstash/shared/utils';
 interface Props {
   children: ReactNode;
   className?: ClassValue[];
+  withTopHr?: boolean;
 }
 
-const PickRoleSection = ({ children, className = [] }: Props) => (
+const PickRoleSection = ({
+  children,
+  className = [],
+  withTopHr = true,
+}: Props) => (
   <div className={cn('flex items-center justify-center', ...className)}>
-    <div className="flex flex-col space-y-6 rounded-3xl bg-gradient-to-r from-[#141317] to-black/60 p-8">
-      <hr className="border-t border-white/10" />
+    <div className="flex flex-col space-y-6 rounded-3xl bg-gradient-to-r from-[#141317] to-black/70 p-8">
+      {withTopHr && <hr className="border-t border-white/10" />}
       {children}
     </div>
   </div>

@@ -1,3 +1,4 @@
+export { default as ConnectEmailSection } from './lib/connect-email-section';
 export { default as PickRoleButton } from './lib/pick-role-button';
 export { default as PickRoleEmailIcon } from './lib/pick-role-email-icon';
 export { default as PickRoleGithubIcon } from './lib/pick-role-github-icon';

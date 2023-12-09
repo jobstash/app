@@ -74,7 +74,7 @@ export const buttonVariants = cva(
       {
         hasLeft: true,
         size: 'sm',
-        className: 'pl-1',
+        className: 'pl-1 gap-x-1',
       },
       {
         hasRight: true,
