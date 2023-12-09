@@ -8,6 +8,11 @@ import { postProfileInfo } from '@jobstash/profile/data';
 
 const PROFILE_HEADER_NOTIF_ID = 'profile-header';
 
+type MutationPayload = {
+  payload: ProfileInfoPayload;
+  isToggleAvailability?: boolean;
+};
+
 export const useProfileInfoMutation = () => {
   const { address } = useAccount();
   const queryClient = useQueryClient();
@@ -15,17 +20,23 @@ export const useProfileInfoMutation = () => {
   const profileInfoQueryKey = ['profile-info', address];
 
   const { isLoading: isLoadingMutation, mutate } = useMutation({
-    mutationFn: (payload: ProfileInfoPayload) => postProfileInfo(payload),
-    onSuccess(profileInfo) {
+    mutationFn: ({ payload }: MutationPayload) => postProfileInfo(payload),
+    onSuccess(profileInfo, { payload, isToggleAvailability }) {
       queryClient.setQueryData(profileInfoQueryKey, profileInfo);
+
+      const title = isToggleAvailability
+        ? payload.availableForWork
+          ? 'You are now Available for Work!'
+          : 'You turned off work availability.'
+        : 'Contacts added';
+
+      const message =
+        'You are able to update your availability both in the header and in your profile at any time.';
 
       notifSuccess({
         id: PROFILE_HEADER_NOTIF_ID,
-        title: `Contacts added.${
-          profileInfo.availableForWork ? ' You are Available for Work!' : ''
-        }`,
-        message:
-          'You are able to update your availability both in the header and in your profile at any time.',
+        title,
+        message,
         autoClose: 6000,
       });
     },

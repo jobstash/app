@@ -50,22 +50,36 @@ export const useProfileHeader = () => {
 
   const saveProfileInfo = () => {
     mutate({
-      availableForWork: isAvailableForWork,
-      contact: {
-        preferred: preferredContact,
-        value: selectedContact,
+      payload: {
+        availableForWork: isAvailableForWork,
+        contact: {
+          preferred: preferredContact,
+          value: selectedContact,
+        },
+      },
+    });
+  };
+
+  const updateAvailability = (isChecked: boolean) => {
+    setIsAvailableForWork(isChecked);
+    mutate({
+      isToggleAvailability: true,
+      payload: {
+        availableForWork: isChecked,
+        contact: {
+          preferred: preferredContact,
+          value: selectedContact,
+        },
       },
     });
   };
 
   const isEqualFetched =
     JSON.stringify({
-      availableForWork,
       preferredContact: contact?.preferred,
       selectedContact: contact?.value,
     }) ===
     JSON.stringify({
-      availableForWork: isAvailableForWork,
       preferredContact,
       selectedContact,
     });
@@ -83,6 +97,7 @@ export const useProfileHeader = () => {
     selectedContact,
     setSelectedContact,
     saveProfileInfo,
+    updateAvailability,
     username,
     avatar,
     contact,

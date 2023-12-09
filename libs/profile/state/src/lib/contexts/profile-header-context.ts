@@ -9,6 +9,7 @@ interface ProfileHeaderContextProps {
   preferredContact: string | null;
   selectedContact: string | null;
   saveProfileInfo: () => void;
+  updateAvailability: (isChecked: boolean) => void;
   avatar: string | null;
   username: string | null;
   contact: ProfileInfo['contact'];

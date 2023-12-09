@@ -7,11 +7,11 @@ import { useProfileHeaderContext } from '@jobstash/profile/state';
 import { Text } from '@jobstash/shared/ui';
 
 const ProfileHeaderSwitch = () => {
-  const { isAvailableForWork, setIsAvailableForWork } =
-    useProfileHeaderContext();
+  const { isAvailableForWork, updateAvailability } = useProfileHeaderContext();
 
   const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    setIsAvailableForWork(e.currentTarget.checked);
+    const isChecked = e.currentTarget.checked;
+    updateAvailability(isChecked);
   };
 
   return (
