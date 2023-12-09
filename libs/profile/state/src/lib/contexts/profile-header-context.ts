@@ -12,6 +12,7 @@ interface ProfileHeaderContextProps {
   updateAvailability: (isChecked: boolean) => void;
   avatar: string | null;
   username: string | null;
+  email: string | null;
   contact: ProfileInfo['contact'];
   disableSave: boolean;
   onChangePreferredContact: (v: string | null) => void;

@@ -11,7 +11,9 @@ interface Props {
 }
 
 const ProfileHeaderContentWrapper = ({ children }: Props) => {
-  const { isLoading, username } = useProfileHeaderContext();
+  const { isLoading, username, email } = useProfileHeaderContext();
+
+  const showHeader = username || email;
 
   return (
     <div
@@ -19,7 +21,7 @@ const ProfileHeaderContentWrapper = ({ children }: Props) => {
         'opacity-40 pointer-events-none': isLoading && username,
       })}
     >
-      {username ? children : <ProfileHeaderSkeleton />}
+      {showHeader ? children : <ProfileHeaderSkeleton />}
     </div>
   );
 };
