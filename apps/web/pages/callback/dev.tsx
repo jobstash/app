@@ -1,26 +1,18 @@
 import { type NextRouter, useRouter } from 'next/router';
 
 import { LoadingPage } from '@jobstash/shared/pages';
-import { QueryClient, useQueryClient } from '@tanstack/react-query';
 import { useSIWE } from 'connectkit';
 import { useAtom } from 'jotai';
 import { useAccount } from 'wagmi';
 
-import {
-  CHECK_WALLET_ROLES,
-  CHECK_WALLET_ROUTE,
-  CheckWalletRole,
-  redirectFlowsSet,
-} from '@jobstash/auth/core';
+import { CHECK_WALLET_ROLES, CheckWalletRole } from '@jobstash/auth/core';
 import { MW_URL, SENTRY_MW_NON_200_RESPONSE } from '@jobstash/shared/core';
 import { notifError, sentryMessage } from '@jobstash/shared/utils';
 
 import { isLoadingDevCallbackAtom } from '@jobstash/auth/state';
-import { getCheckWallet } from '@jobstash/auth/data';
 
 const DevGithubCallbackPage = () => {
-  const { push, asPath } = useRouter();
-  const queryClient = useQueryClient();
+  const { push } = useRouter();
   const { address } = useAccount();
   const { signOut } = useSIWE();
 
@@ -42,13 +34,8 @@ const DevGithubCallbackPage = () => {
       handleGithubLoginFailure(data, signOut, push);
     }
 
-    // Fetch new user role / flow
-    const { flow, flowRoute } = await fetchCheckWallet(queryClient);
-
-    // Redirect to flow route if need to
-    if (redirectFlowsSet.has(flow) && asPath !== flowRoute) {
-      push(flowRoute).then(() => setIsLoadingDevCallback(false));
-    }
+    // Push directly to profile repositories page
+    push('/profile/repositories');
   };
 
   const codeParam = new URLSearchParams(window.location.search).get('code');
@@ -98,15 +85,6 @@ const handleGithubLoginFailure = (
   setTimeout(() => {
     push('/');
   }, 1000);
-};
-
-const fetchCheckWallet = async (queryClient: QueryClient) => {
-  const checkWalletData = await getCheckWallet();
-  const { flow } = checkWalletData.data;
-  const flowRoute = CHECK_WALLET_ROUTE[flow];
-  queryClient.setQueryData(['check-wallet'], checkWalletData);
-
-  return { flow, flowRoute };
 };
 
 export default DevGithubCallbackPage;
