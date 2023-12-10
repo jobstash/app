@@ -15,6 +15,7 @@ import AccountCardDeleteButton from './account-card-delete-button';
 import AccountCardModal from './account-card-modal';
 import AccountCardTitle from './account-card-title';
 import AccountCardWrapper from './account-card-wrapper';
+import ConnectEmailAccount from './connect-email-account';
 import ConnectGithubAccount from './connect-github-account';
 import ConnectedAccount from './connected-account';
 
@@ -71,7 +72,12 @@ const AccountCard = () => {
           )}
         </div>
 
-        {!profileInfoData?.username && <ConnectGithubAccount />}
+        {profileInfoData && (
+          <>
+            {!profileInfoData.username && <ConnectGithubAccount />}
+            {!profileInfoData.email && <ConnectEmailAccount />}
+          </>
+        )}
 
         <hr className="border-t border-white/10" />
 

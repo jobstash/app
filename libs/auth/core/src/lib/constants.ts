@@ -39,7 +39,7 @@ export const CHECK_WALLET_ROUTE: Record<
 
 export const redirectFlowsSet = new Set<CheckWalletFlow>([
   CHECK_WALLET_FLOWS.PICK_ROLE,
-  CHECK_WALLET_FLOWS.ONBOARD_REPO,
+  // CHECK_WALLET_FLOWS.ONBOARD_REPO,
 ]);
 
 export const ignoredPathnameRedirectSet = new Set<string>([

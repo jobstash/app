@@ -1,20 +1,17 @@
-import {
-  type ProfileInfoResponse,
-  profileInfoResponseSchema,
-} from '@jobstash/profile/core';
-import { MW_URL } from '@jobstash/shared/core';
+import { ERR_INTERNAL, MW_URL } from '@jobstash/shared/core';
 
-import { mwFetch } from '@jobstash/shared/data';
+export const sendMagicLink = async (destination: string) => {
+  const { ok } = await fetch(`${MW_URL}/auth/magic/login`, {
+    method: 'POST',
+    mode: 'cors',
+    credentials: 'include',
+    headers: {
+      'Content-Type': 'application/json',
+    },
+    body: JSON.stringify({ destination }),
+  });
 
-export const sendMagicLink = async (token: string) => {
-  const url = `${MW_URL}/auth/magic/login/callback?token=${token}`;
-
-  const options = {
-    responseSchema: profileInfoResponseSchema,
-    sentryLabel: 'sendMagicLink',
-    credentials: 'include' as RequestCredentials,
-    mode: 'cors' as RequestMode,
-  };
-
-  return mwFetch<ProfileInfoResponse>(url, options);
+  if (!ok) {
+    throw new Error(ERR_INTERNAL);
+  }
 };

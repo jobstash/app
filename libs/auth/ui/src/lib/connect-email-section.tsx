@@ -2,8 +2,7 @@ import { ChangeEventHandler, useState } from 'react';
 
 import { TextInput } from '@mantine/core';
 
-import { ERR_INTERNAL, MW_URL } from '@jobstash/shared/core';
-import { notifError, notifSuccess } from '@jobstash/shared/utils';
+import { useSendMagicLink } from '@jobstash/auth/state';
 
 import { Button, Text } from '@jobstash/shared/ui';
 
@@ -14,51 +13,16 @@ interface Props {
 }
 
 const ConnectEmailSection = ({ toggleConnectEmail }: Props) => {
-  const [orgEmail, setOrgEmail] = useState('');
+  const [destination, setDestination] = useState('');
 
-  const [isSent, setIsSent] = useState(false);
-  const [isLoading, setIsLoading] = useState(false);
-  const [isFailed, setIsFailed] = useState(false);
+  const { isSuccess, isLoading, isError, mutate } = useSendMagicLink();
 
   const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
-    setOrgEmail(e.currentTarget.value);
-  };
-
-  const sendMagicLink = async () => {
-    setIsLoading(true);
-    const { ok } = await fetch(`${MW_URL}/auth/magic/login`, {
-      method: 'POST',
-      mode: 'cors',
-      credentials: 'include',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ destination: orgEmail }),
-    });
-
-    if (ok) {
-      if (isFailed) {
-        setIsFailed(false);
-      }
-
-      notifSuccess({
-        title: 'Magic link sent!',
-        message: 'Please check your inbox for the link.',
-      });
-    } else {
-      if (!isFailed) {
-        setIsFailed(true);
-      }
-
-      notifError({ title: ERR_INTERNAL });
-    }
-
-    setIsLoading(false);
+    setDestination(e.currentTarget.value);
   };
 
   const onClickSend = () => {
-    setIsSent(true);
-    sendMagicLink();
+    mutate(destination);
   };
 
   return (
@@ -87,10 +51,10 @@ const ConnectEmailSection = ({ toggleConnectEmail }: Props) => {
 
       <div className="w-full">
         <TextInput
-          disabled={(isSent || isLoading) && !isFailed}
+          disabled={(isSuccess || isLoading) && !isError}
           placeholder="Enter organization email address"
           size="lg"
-          value={orgEmail}
+          value={destination}
           classNames={{
             input:
               'rounded-lg bg-dark-gray/70 text-white font-bold text-md placeholder:font-normal placeholder:text-white/40 placeholder:text-md border-none focus:border-white/40 w-full rounded-lg',
@@ -107,11 +71,11 @@ const ConnectEmailSection = ({ toggleConnectEmail }: Props) => {
         text={
           isLoading
             ? 'Sending ...'
-            : isSent
+            : isSuccess
             ? 'Magic Link Sent!'
             : 'Send Magic Link'
         }
-        isDisabled={!orgEmail || isSent || isLoading}
+        isDisabled={!destination || isSuccess || isLoading}
         onClick={onClickSend}
       />
     </>

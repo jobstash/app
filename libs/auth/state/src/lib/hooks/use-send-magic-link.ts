@@ -1,20 +1,20 @@
-import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
+
+import { ERR_INTERNAL } from '@jobstash/shared/core';
+import { notifError, notifSuccess } from '@jobstash/shared/utils';
 
 import { sendMagicLink } from '@jobstash/auth/data';
 
-export const useSendMagicLink = (token: string | null) => {
-  const queryClient = useQueryClient();
-
-  const { data, isLoading } = useQuery({
-    queryKey: ['send-magic-link', token],
-    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
-    queryFn: () => sendMagicLink(token!),
-    enabled: Boolean(token),
-    onSuccess(data) {
-      console.log('SUCCESS SEND-MAGIC-LINK-TO-MW', 'data =', data);
-      queryClient.invalidateQueries(['check-wallet']);
+export const useSendMagicLink = () =>
+  useMutation({
+    mutationFn: (destination: string) => sendMagicLink(destination),
+    onSuccess() {
+      notifSuccess({
+        title: 'Magic link sent!',
+        message: 'Please check your inbox for the link.',
+      });
+    },
+    onError() {
+      notifError({ title: ERR_INTERNAL });
     },
   });
-
-  return { data, isLoading };
-};
