@@ -14,7 +14,7 @@ const ProfileHeaderTitle = () => {
       <LogoTitle
         title={username ?? email ?? ''}
         avatarProps={{
-          src: avatar ?? email ? getEmailAvatar(email) : '',
+          src: avatar ?? getEmailAvatar(email),
           alt: `${username ?? email ?? ''}`,
           isRounded: true,
         }}
