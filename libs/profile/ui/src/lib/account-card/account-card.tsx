@@ -11,11 +11,11 @@ import {
   useProfileInfoContext,
 } from '@jobstash/profile/state';
 
-import AccountCardConnectButton from './account-card-connect-button';
 import AccountCardDeleteButton from './account-card-delete-button';
 import AccountCardModal from './account-card-modal';
 import AccountCardTitle from './account-card-title';
 import AccountCardWrapper from './account-card-wrapper';
+import ConnectGithubAccount from './connect-github-account';
 import ConnectedAccount from './connected-account';
 
 const AccountCard = () => {
@@ -51,7 +51,7 @@ const AccountCard = () => {
       <AccountCardWrapper>
         <hr className="border-t border-white/10" />
 
-        <div className="flex flex-col gap-2 py-4 text-center">
+        <div className="flex flex-col gap-6 py-4 text-center">
           <AccountCardTitle />
 
           {profileInfoData?.email && (
@@ -71,11 +71,7 @@ const AccountCard = () => {
           )}
         </div>
 
-        <hr className="border-t border-white/10" />
-
-        <div className="flex flex-col gap-4 py-4">
-          <AccountCardConnectButton />
-        </div>
+        {!profileInfoData?.username && <ConnectGithubAccount />}
 
         <hr className="border-t border-white/10" />
 

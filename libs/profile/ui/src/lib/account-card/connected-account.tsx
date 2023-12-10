@@ -7,7 +7,7 @@ interface Props {
 }
 
 const ConnectedAccount = ({ label, avatar, text }: Props) => (
-  <>
+  <div className="flex flex-col gap-2">
     <div className="text-center">
       <Text size="sm" color="dimmed">
         {label}
@@ -17,7 +17,7 @@ const ConnectedAccount = ({ label, avatar, text }: Props) => (
       <Avatar isRounded src={avatar} alt={`${text}'s avatar`} size="xs" />
       <Text fw="semibold">{text}</Text>
     </div>
-  </>
+  </div>
 );
 
 export default ConnectedAccount;
