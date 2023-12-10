@@ -1,8 +1,9 @@
-import { ChangeEventHandler, useState } from 'react';
+import { ChangeEventHandler, useEffect, useState } from 'react';
 
 import { TextInput } from '@mantine/core';
+import { useSetAtom } from 'jotai';
 
-import { useSendMagicLink } from '@jobstash/auth/state';
+import { isMagicLinkSentAtom, useSendMagicLink } from '@jobstash/auth/state';
 
 import { Button, Text } from '@jobstash/shared/ui';
 
@@ -24,6 +25,15 @@ const ConnectEmailSection = ({ toggleConnectEmail }: Props) => {
   const onClickSend = () => {
     mutate(destination);
   };
+
+  const setIsMagicLinkSent = useSetAtom(isMagicLinkSentAtom);
+
+  // Show loading page on success
+  useEffect(() => {
+    if (isSuccess) {
+      setIsMagicLinkSent(true);
+    }
+  }, [isSuccess, setIsMagicLinkSent]);
 
   return (
     <>

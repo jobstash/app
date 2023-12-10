@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useReducer } from 'react';
+import { useReducer, useState } from 'react';
 
 import { LoadingPage } from '@jobstash/shared/pages';
 import { useAtomValue } from 'jotai';
@@ -7,7 +7,11 @@ import { useAtomValue } from 'jotai';
 import { CHECK_WALLET_FLOWS } from '@jobstash/auth/core';
 import { MW_URL } from '@jobstash/shared/core';
 
-import { isLoadingDevCallbackAtom, useAuthContext } from '@jobstash/auth/state';
+import {
+  isLoadingDevCallbackAtom,
+  isMagicLinkSentAtom,
+  useAuthContext,
+} from '@jobstash/auth/state';
 import { useIsMounted } from '@jobstash/shared/state';
 
 import {
@@ -31,6 +35,8 @@ export const PickRolePage = ({ fromSSR }: Props) => {
     push(`${MW_URL}/github/trigger-dev-github-oauth`);
   };
 
+  const isMagicLinkSent = useAtomValue(isMagicLinkSentAtom);
+
   const shouldRenderPickRole = useFlowCheck();
 
   if (!shouldRenderPickRole) {
@@ -41,10 +47,23 @@ export const PickRolePage = ({ fromSSR }: Props) => {
     <div className="w-full pl-52">
       <SideBar />
 
-      <div className="flex h-screen pl-4 [&>*]:w-full">
-        <DevSection onClickDevGithub={onClickDevGithub} />
-        <OrgSection />
-      </div>
+      {isMagicLinkSent ? (
+        <div className="flex items-center justify-center min-h-screen w-full">
+          <div className="flex flex-col gap-4 text-center">
+            <Text size="lg" fw="bold">
+              Magic Link Sent!
+            </Text>
+            <Text size="sm" color="dimmed">
+              TODO: Designs for this page
+            </Text>
+          </div>
+        </div>
+      ) : (
+        <div className="flex h-screen pl-4 [&>*]:w-full">
+          <DevSection onClickDevGithub={onClickDevGithub} />
+          <OrgSection />
+        </div>
+      )}
     </div>
   );
 };

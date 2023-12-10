@@ -1,5 +1,6 @@
 // Atoms
 export * from './lib/atoms/is-loading-dev-callback-atom';
+export * from './lib/atoms/is-magic-link-sent-atom';
 
 // Providers
 export * from './lib/providers/auth-provider';
