@@ -4,15 +4,19 @@ import { useState } from 'react';
 import { useDisclosure } from '@mantine/hooks';
 import { useDisconnect } from 'wagmi';
 
-import { useProfileDeleteMutation } from '@jobstash/profile/state';
+import { getEmailAvatar } from '@jobstash/profile/utils';
+
+import {
+  useProfileDeleteMutation,
+  useProfileInfoContext,
+} from '@jobstash/profile/state';
 
 import AccountCardConnectButton from './account-card-connect-button';
 import AccountCardDeleteButton from './account-card-delete-button';
-import AccountCardEmailButton from './account-card-email-button';
-import AccountCardGithubButton from './account-card-github-button';
 import AccountCardModal from './account-card-modal';
 import AccountCardTitle from './account-card-title';
 import AccountCardWrapper from './account-card-wrapper';
+import ConnectedAccount from './connected-account';
 
 const AccountCard = () => {
   const [opened, { open, close }] = useDisclosure(false);
@@ -34,6 +38,8 @@ const AccountCard = () => {
     mutate();
   };
 
+  const { profileInfoData } = useProfileInfoContext();
+
   return (
     <>
       <AccountCardModal
@@ -47,8 +53,22 @@ const AccountCard = () => {
 
         <div className="flex flex-col gap-2 py-4 text-center">
           <AccountCardTitle />
-          <AccountCardGithubButton />
-          <AccountCardEmailButton />
+
+          {profileInfoData?.email && (
+            <ConnectedAccount
+              label="Connected Email Account:"
+              avatar={getEmailAvatar(profileInfoData.email)}
+              text={profileInfoData.email}
+            />
+          )}
+
+          {profileInfoData?.username && profileInfoData?.avatar && (
+            <ConnectedAccount
+              label="Connected Github Account:"
+              avatar={profileInfoData.avatar}
+              text={profileInfoData.username}
+            />
+          )}
         </div>
 
         <hr className="border-t border-white/10" />
