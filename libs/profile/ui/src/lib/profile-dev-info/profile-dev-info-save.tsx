@@ -1,3 +1,8 @@
+import {
+  type ProfileShowcase,
+  type ProfileSkill,
+} from '@jobstash/profile/core';
+
 import { useProfileDevInfoContext } from '@jobstash/profile/state';
 
 import { Button } from '@jobstash/shared/ui';
@@ -19,11 +24,11 @@ const ProfileDevInfoSave = () => {
   const buttonText = isLoadingMutation ? 'Loading' : 'Save Details';
 
   const isEqualFetchedSkills =
-    JSON.stringify(skills.map((s) => s.name).sort()) ===
-    JSON.stringify(fetchedSkills.map((s) => s.name).sort());
+    JSON.stringify(skills.sort(sortSkill)) ===
+    JSON.stringify(fetchedSkills.sort(sortSkill));
   const isEqualFetchedShowcase =
-    JSON.stringify(showcases.map((s) => s.url).sort()) ===
-    JSON.stringify(fetchedShowcases.map((s) => s.url).sort());
+    JSON.stringify(showcases.sort(sortShowcase)) ===
+    JSON.stringify(fetchedShowcases.sort(sortShowcase));
 
   const similarPayload = isEqualFetchedSkills && isEqualFetchedShowcase;
 
@@ -52,3 +57,17 @@ const ProfileDevInfoSave = () => {
 };
 
 export default ProfileDevInfoSave;
+
+const sortSkill = (a: ProfileSkill, b: ProfileSkill) => {
+  if (a.name < b.name) return -1;
+  if (a.name > b.name) return 1;
+
+  return 0;
+};
+
+const sortShowcase = (a: ProfileShowcase, b: ProfileShowcase) => {
+  if (a.label < b.label) return -1;
+  if (a.label > b.label) return 1;
+
+  return 0;
+};
