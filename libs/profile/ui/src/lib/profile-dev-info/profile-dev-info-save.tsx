@@ -27,8 +27,10 @@ const ProfileDevInfoSave = () => {
     JSON.stringify(skills.sort(sortSkill)) ===
     JSON.stringify(fetchedSkills.sort(sortSkill));
   const isEqualFetchedShowcase =
-    JSON.stringify(showcases.sort(sortShowcase)) ===
-    JSON.stringify(fetchedShowcases.sort(sortShowcase));
+    JSON.stringify(
+      showcases.map(({ label, url }) => ({ label, url })).sort(sortShowcase),
+    ) ===
+    JSON.stringify(fetchedShowcases.map(({ label, url }) => ({ label, url })));
 
   const similarPayload = isEqualFetchedSkills && isEqualFetchedShowcase;
 
@@ -65,7 +67,8 @@ const sortSkill = (a: ProfileSkill, b: ProfileSkill) => {
   return 0;
 };
 
-const sortShowcase = (a: ProfileShowcase, b: ProfileShowcase) => {
+type SortedShowcase = Omit<ProfileShowcase, 'id'>;
+const sortShowcase = (a: SortedShowcase, b: SortedShowcase) => {
   if (a.label < b.label) return -1;
   if (a.label > b.label) return 1;
 
