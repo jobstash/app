@@ -2,6 +2,7 @@ import { memo } from 'react';
 
 import { useAtomValue } from 'jotai';
 
+import { FRONTEND_URL } from '@jobstash/shared/core';
 import { cn } from '@jobstash/shared/utils';
 
 import { isOpenTopBannerAtom } from '@jobstash/shared/state';
@@ -44,7 +45,7 @@ const LandingNav = () => {
         <LinkButton
           variant="primary"
           linkProps={{
-            href: 'https://app.jobstash.xyz',
+            href: FRONTEND_URL,
           }}
         >
           <Text fw="semibold" className="px-2">
