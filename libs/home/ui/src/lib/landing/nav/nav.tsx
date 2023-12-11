@@ -30,7 +30,7 @@ const LandingNav = () => (
       <LinkButton
         variant="primary"
         linkProps={{
-          href: FRONTEND_URL,
+          href: `${FRONTEND_URL}/jobs`,
         }}
       >
         <Text fw="semibold" className="px-2">
