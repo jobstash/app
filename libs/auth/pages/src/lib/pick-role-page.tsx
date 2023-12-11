@@ -1,15 +1,14 @@
 import { useRouter } from 'next/router';
-import { useReducer, useState } from 'react';
 
 import { LoadingPage } from '@jobstash/shared/pages';
-import { useAtomValue } from 'jotai';
+import { useAtomValue, useSetAtom } from 'jotai';
 
 import { CHECK_WALLET_FLOWS } from '@jobstash/auth/core';
 import { MW_URL } from '@jobstash/shared/core';
 
 import {
   isLoadingDevCallbackAtom,
-  isMagicLinkSentAtom,
+  isMagicLinkAtom,
   useAuthContext,
 } from '@jobstash/auth/state';
 import { useIsMounted } from '@jobstash/shared/state';
@@ -35,7 +34,7 @@ export const PickRolePage = ({ fromSSR }: Props) => {
     push(`${MW_URL}/github/trigger-dev-github-oauth`);
   };
 
-  const isMagicLinkSent = useAtomValue(isMagicLinkSentAtom);
+  const isMagicLink = useAtomValue(isMagicLinkAtom);
 
   const shouldRenderPickRole = useFlowCheck();
 
@@ -47,17 +46,8 @@ export const PickRolePage = ({ fromSSR }: Props) => {
     <div className="w-full pl-52">
       <SideBar />
 
-      {isMagicLinkSent ? (
-        <div className="flex items-center justify-center min-h-screen w-full">
-          <div className="flex flex-col gap-4 text-center">
-            <Text size="lg" fw="bold">
-              Magic Link Sent!
-            </Text>
-            <Text size="sm" color="dimmed">
-              TODO: Designs for this page
-            </Text>
-          </div>
-        </div>
+      {isMagicLink ? (
+        <ConnectEmailSection />
       ) : (
         <div className="flex h-screen pl-4 [&>*]:w-full">
           <DevSection onClickDevGithub={onClickDevGithub} />
@@ -79,45 +69,39 @@ const useFlowCheck = () => {
 };
 
 const DevSection = ({ onClickDevGithub }: { onClickDevGithub: () => void }) => {
-  const [showConnectEmail, toggleConnectEmail] = useReducer((b) => !b, false);
+  const setIsMagicLink = useSetAtom(isMagicLinkAtom);
+  const onClickConnectEmail = () => setIsMagicLink(true);
 
   return (
-    <PickRoleSection
-      className={['bg-gradient-to-l from-primary to-secondary']}
-      withTopHr={!showConnectEmail}
-    >
-      {showConnectEmail ? (
-        <ConnectEmailSection toggleConnectEmail={toggleConnectEmail} />
-      ) : (
-        <>
-          <Text size="lg" fw="bold">
-            Developer
+    <PickRoleSection className={['bg-gradient-to-l from-primary to-secondary']}>
+      <>
+        <Text size="lg" fw="bold">
+          Developer
+        </Text>
+        <div className="flex w-72 flex-col gap-y-6">
+          <Text color="dimmed" size="sm">
+            To create an account we need to validate your Github account(s).
           </Text>
-          <div className="flex w-72 flex-col gap-y-6">
-            <Text color="dimmed" size="sm">
-              To create an account we need to validate your Github account(s).
-            </Text>
-            <Text color="dimmed" size="sm">
-              We will then verify you own the the account, and will inspect
-              which public commits you have made in the past.
-            </Text>
-          </div>
+          <Text color="dimmed" size="sm">
+            We will then verify you own the the account, and will inspect which
+            public commits you have made in the past.
+          </Text>
+        </div>
 
-          <PickRoleButton
-            text="Connect with Organization Email"
-            icon={<PickRoleEmailIcon />}
-            onClick={toggleConnectEmail}
-          />
+        <PickRoleButton
+          text="Connect with Organization Email"
+          icon={<PickRoleEmailIcon />}
+          onClick={onClickConnectEmail}
+        />
 
-          <hr className="border-t border-white/10" />
+        <hr className="border-t border-white/10" />
 
-          <PickRoleButton
-            text="Connect with Github"
-            icon={<PickRoleGithubIcon />}
-            onClick={onClickDevGithub}
-          />
-        </>
-      )}
+        <PickRoleButton
+          text="Connect with Github"
+          icon={<PickRoleGithubIcon />}
+          onClick={onClickDevGithub}
+        />
+      </>
     </PickRoleSection>
   );
 };

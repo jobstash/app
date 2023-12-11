@@ -150,9 +150,13 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
         {...props}
       >
         {left ?? null}
-        <Text size={size} {...textProps}>
-          {children as string}
-        </Text>
+        {typeof children === 'string' ? (
+          <Text size={size} {...textProps}>
+            {children as string}
+          </Text>
+        ) : (
+          children
+        )}
         {right ?? null}
       </button>
     </ButtonWrapper>
