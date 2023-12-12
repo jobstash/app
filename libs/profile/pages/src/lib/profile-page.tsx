@@ -16,9 +16,10 @@ import { SideBar } from '@jobstash/sidebar/feature';
 
 interface Props {
   isOnboardSSR: boolean;
+  cookieString: string;
 }
 
-export const ProfilePage = ({ isOnboardSSR }: Props) => {
+export const ProfilePage = ({ isOnboardSSR, cookieString }: Props) => {
   const { canRender } = useDelayedAuthRender({ requireConnected: true });
 
   if (canRender) {
@@ -30,6 +31,7 @@ export const ProfilePage = ({ isOnboardSSR }: Props) => {
             <SideBar />
 
             <div className="px-3.5 pt-[65px] lg:px-12 lg:pt-6 lg:pr-[50%] flex flex-col gap-6">
+              <pre>{JSON.stringify({ cookieString }, undefined, '\t')}</pre>
               <ProfileHeader />
 
               <ProfileSubHeader />

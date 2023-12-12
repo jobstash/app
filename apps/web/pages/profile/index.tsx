@@ -38,6 +38,7 @@ export const getServerSideProps = withCSR(async (ctx) => {
     props: {
       dehydratedState,
       isOnboardSSR: flow === CHECK_WALLET_FLOWS.ONBOARD_PROFILE,
+      cookieString,
     },
   };
 });
