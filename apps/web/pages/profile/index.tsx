@@ -14,6 +14,7 @@ import { getCheckWallet } from '@jobstash/auth/data';
 
 export const getServerSideProps = (async (ctx) => {
   const cookieString = ctx.req.headers.cookie;
+	const reqCookies = ctx.req.cookies
 
   const checkWalletResponse = await getCheckWallet(cookieString);
 
@@ -43,12 +44,16 @@ export const getServerSideProps = (async (ctx) => {
       isOnboardSSR: flow === CHECK_WALLET_FLOWS.ONBOARD_PROFILE,
       cookieString,
       checkWalletResponse,
+			reqCookies
     },
   };
 }) satisfies GetServerSideProps<{
 	isOnboardSSR: boolean,
 	cookieString: string | undefined,
-	checkWalletResponse: CheckWalletResponse
+	checkWalletResponse: CheckWalletResponse,
+	reqCookies:  Partial<{
+    [key: string]: string;
+}>
 }>;
 
 export { ProfilePage as default } from '@jobstash/profile/pages';

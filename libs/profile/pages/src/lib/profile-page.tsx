@@ -18,12 +18,14 @@ interface Props {
   isOnboardSSR: boolean;
   cookieString: string;
   checkWalletResponse: any;
+  reqCookies: any;
 }
 
 export const ProfilePage = ({
   isOnboardSSR,
   cookieString,
   checkWalletResponse,
+  reqCookies,
 }: Props) => {
   const { canRender } = useDelayedAuthRender({ requireConnected: true });
 
@@ -41,6 +43,7 @@ export const ProfilePage = ({
                   {
                     cookieString: cookieString ?? '---',
                     checkWalletResponse: checkWalletResponse ?? '---',
+                    reqCookies,
                   },
                   undefined,
                   '\t',
