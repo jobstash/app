@@ -5,7 +5,7 @@ import { memo } from 'react';
 import { FRONTEND_URL } from '@jobstash/shared/core';
 
 const Brand = () => (
-  <Link scroll={false} href={FRONTEND_URL} className="lg:p-4 lg:pl-1">
+  <Link scroll={false} href={new URL(FRONTEND_URL)} className="lg:p-4 lg:pl-1">
     <Image
       priority
       src="/JobStash.svg"
