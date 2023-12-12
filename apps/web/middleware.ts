@@ -26,7 +26,9 @@ export function middleware(req: NextRequest) {
   const isWhiteListed = getIsWhiteListed(url.toString());
 
   if (isWhiteListed) {
-    return NextResponse.next();
+    const res = NextResponse.next();
+    res.cookies.set('msgx', 'henlo whitelisted');
+    return res;
   }
 
   if (basicAuth) {
