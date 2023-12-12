@@ -11,6 +11,7 @@ export const useCheckWallet = () => {
     queryFn: () => getCheckWallet(),
     select: (data) => data.data,
     enabled: isConnected, // Only fetch when wallet is connected
+    staleTime: 1000 * 60 * 60,
   });
 
   return {
