@@ -34,7 +34,9 @@ export function middleware(req: NextRequest) {
     const [user, pwd] = atob(authValue).split(':');
 
     if (user === 'gotrekt' && pwd === 'mcdonalds') {
-      return NextResponse.next();
+      const res = NextResponse.next();
+      res.cookies.set('msgx', 'hello from middleware!');
+      return res;
     }
   }
 
