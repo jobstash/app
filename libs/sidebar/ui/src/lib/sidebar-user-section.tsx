@@ -26,7 +26,7 @@ const SidebarUserSection = () => {
     }
 
     default: {
-      return null;
+      return <pre>{JSON.stringify({ isSignedIn, role })}</pre>;
     }
   }
 };
