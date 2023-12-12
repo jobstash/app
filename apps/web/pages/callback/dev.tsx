@@ -1,6 +1,7 @@
 import { type NextRouter, useRouter } from 'next/router';
 
 import { LoadingPage } from '@jobstash/shared/pages';
+import { useQueryClient } from '@tanstack/react-query';
 import { useSIWE } from 'connectkit';
 import { useAtom } from 'jotai';
 import { useAccount } from 'wagmi';
@@ -10,6 +11,7 @@ import { MW_URL, SENTRY_MW_NON_200_RESPONSE } from '@jobstash/shared/core';
 import { notifError, sentryMessage } from '@jobstash/shared/utils';
 
 import { isLoadingDevCallbackAtom } from '@jobstash/auth/state';
+import { getCheckWallet } from '@jobstash/auth/data';
 
 const DevGithubCallbackPage = () => {
   const { push } = useRouter();
@@ -19,6 +21,8 @@ const DevGithubCallbackPage = () => {
   const [isLoadingDevCallback, setIsLoadingDevCallback] = useAtom(
     isLoadingDevCallbackAtom,
   );
+
+  const queryClient = useQueryClient();
 
   const githubAuth = async (
     code: string,
@@ -33,6 +37,9 @@ const DevGithubCallbackPage = () => {
     if (!success) {
       handleGithubLoginFailure(data, signOut, push);
     }
+
+    const checkWalletData = await getCheckWallet();
+    queryClient.setQueryData(['check-wallet'], checkWalletData);
 
     // Push directly to profile repositories page
     push('/profile/repositories');
