@@ -1,15 +1,18 @@
+import { GetServerSideProps } from 'next';
+
 import { dehydrate, QueryClient } from '@tanstack/react-query';
 
 import {
   CHECK_WALLET_FLOWS,
   CHECK_WALLET_ROUTE,
+  CheckWalletResponse,
   redirectFlowsSet,
 } from '@jobstash/auth/core';
-import { withCSR } from '@jobstash/shared/utils';
 
 import { getCheckWallet } from '@jobstash/auth/data';
 
-export const getServerSideProps = withCSR(async (ctx) => {
+
+export const getServerSideProps = (async (ctx) => {
   const cookieString = ctx.req.headers.cookie;
 
   const checkWalletResponse = await getCheckWallet(cookieString);
@@ -42,6 +45,10 @@ export const getServerSideProps = withCSR(async (ctx) => {
       checkWalletResponse,
     },
   };
-});
+}) satisfies GetServerSideProps<{
+	isOnboardSSR: boolean,
+	cookieString: string | undefined,
+	checkWalletResponse: CheckWalletResponse
+}>;
 
 export { ProfilePage as default } from '@jobstash/profile/pages';
