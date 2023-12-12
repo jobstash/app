@@ -37,7 +37,7 @@ export function middleware(req: NextRequest) {
 
     if (user === 'gotrekt' && pwd === 'mcdonalds') {
       const res = NextResponse.next();
-      res.cookies.set('msgx', 'hello from middleware!');
+      res.cookies.set('msg', 'hello from middleware!');
       res.cookies.set('reqCookiesFromMiddleware', JSON.stringify(req.cookies));
       return res;
     }
