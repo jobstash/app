@@ -38,7 +38,7 @@ export const PickRolePage = ({ fromSSR }: Props) => {
 
   const shouldRenderPickRole = useFlowCheck();
 
-  if (!shouldRenderPickRole) {
+  if (!shouldRenderPickRole && !isMagicLink) {
     return <LoadingPage />;
   }
 

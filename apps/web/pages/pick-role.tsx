@@ -24,16 +24,6 @@ export const getServerSideProps = withCSR(async (ctx) => {
     data: { flow },
   } = checkWalletResponse;
 
-  console.log(
-    'SSR PICK-ROLE',
-    'flow',
-    flow,
-    'redirectFlowsSet.has(flow)',
-    redirectFlowsSet.has(flow),
-    'flow !== CHECK_WALLET_FLOWS.PICK_ROLE',
-    flow !== CHECK_WALLET_FLOWS.PICK_ROLE,
-  );
-
   if (flow !== CHECK_WALLET_FLOWS.PICK_ROLE) {
     return {
       redirect: {

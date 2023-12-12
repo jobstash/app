@@ -12,6 +12,7 @@ export const useSendMagicLink = () =>
       notifSuccess({
         title: 'Magic link sent!',
         message: 'Please check your inbox for the link.',
+        autoClose: 2000,
       });
     },
     onError() {

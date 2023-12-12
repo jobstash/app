@@ -23,3 +23,16 @@ export const notifError = (notifProps?: ErrorNotificationProps) => {
     message: notifProps?.message ?? 'Please try again later.',
   });
 };
+
+export const notifLoading = (notifProps: NotificationProps) => {
+  showNotif({
+    color: '#8742ff',
+    loading: true,
+    autoClose: false,
+    withCloseButton: false,
+    sx: {
+      borderRadius: 8,
+    },
+    ...notifProps,
+  });
+};

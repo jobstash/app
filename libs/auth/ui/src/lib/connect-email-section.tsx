@@ -1,19 +1,25 @@
 import Image from 'next/image';
-import { ChangeEventHandler, forwardRef, useEffect, useState } from 'react';
+import { useRouter } from 'next/router';
+import { ChangeEventHandler, useEffect, useRef, useState } from 'react';
 
 import { TextInput, Tooltip } from '@mantine/core';
+import { notifications } from '@mantine/notifications';
+import { useQueryClient } from '@tanstack/react-query';
 import { useSetAtom } from 'jotai';
 
-import { cn } from '@jobstash/shared/utils';
+import { CHECK_WALLET_ROLES } from '@jobstash/auth/core';
+import { notifLoading, notifSuccess } from '@jobstash/shared/utils';
 
-import { isMagicLinkAtom, useSendMagicLink } from '@jobstash/auth/state';
+import {
+  isMagicLinkAtom,
+  useAuthContext,
+  useSendMagicLink,
+} from '@jobstash/auth/state';
 
 import { Button, Text } from '@jobstash/shared/ui';
 
-import PickRoleButton from './pick-role-button';
-import PickRoleSection from './pick-role-section';
-
 const ConnectEmailSection = () => {
+  const { push } = useRouter();
   const [destination, setDestination] = useState('');
 
   const { isSuccess, isLoading, isError, mutate } = useSendMagicLink();
@@ -29,23 +35,62 @@ const ConnectEmailSection = () => {
   const setIsMagicLink = useSetAtom(isMagicLinkAtom);
   const onClickBack = () => setIsMagicLink(false);
 
-  // Show loading page on success
-  useEffect(() => {
-    if (isSuccess) {
-      setIsMagicLink(true);
-    }
-  }, [isSuccess, setIsMagicLink]);
+  const { role } = useAuthContext();
 
-  const backButton = (
-    <Button
-      size="sm"
-      variant="outline"
-      left={<CaretLeft />}
-      onClick={onClickBack}
-    >
-      Back
-    </Button>
-  );
+  // Show Pending notif
+  const pendingToastRef = useRef(false);
+  useEffect(() => {
+    let timeout: NodeJS.Timeout;
+
+    if (isSuccess && !pendingToastRef.current) {
+      pendingToastRef.current = true;
+
+      timeout = setTimeout(() => {
+        notifLoading({
+          title: 'Waiting for confirmation',
+          message: 'Please check your inbox for the link.',
+        });
+      }, 2000);
+    }
+
+    return () => clearTimeout(timeout);
+  }, [isSuccess]);
+
+  // Poll data every 2s
+  const queryClient = useQueryClient();
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (role !== CHECK_WALLET_ROLES.DEV) {
+        queryClient.invalidateQueries(['check-wallet']);
+      }
+    }, 2000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, [queryClient, role]);
+
+  // Success Toast and redirect
+  useEffect(() => {
+    let timeout: NodeJS.Timeout;
+    if (role === CHECK_WALLET_ROLES.DEV) {
+      notifications.clean();
+
+      notifSuccess({
+        title: 'Email Confirmed!',
+        message: 'You have successfully connected your email',
+      });
+
+      timeout = setTimeout(() => {
+        setIsMagicLink(false);
+        push('/profile');
+      }, 2000);
+    }
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, [push, role, setIsMagicLink]);
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-white/5">
@@ -76,6 +121,7 @@ const ConnectEmailSection = () => {
             size="sm"
             variant="outline"
             left={<CaretLeft />}
+            isDisabled={isLoading}
             onClick={onClickBack}
           >
             Back
@@ -114,17 +160,6 @@ const ConnectEmailSection = () => {
           <hr className="border-t border-white/10" />
         </div>
 
-        {/* <PickRoleButton
-          text={
-            isLoading
-              ? 'Sending ...'
-              : isSuccess
-              ? 'Magic Link Sent!'
-              : 'Send Magic Link'
-          }
-          isDisabled={!destination || isSuccess || isLoading}
-          onClick={onClickSend}
-        /> */}
         <Button
           isFullWidth
           variant="primary"
