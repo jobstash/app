@@ -12,9 +12,9 @@ import {
 import { getCheckWallet } from '@jobstash/auth/data';
 
 
-export const getServerSideProps = (async (ctx) => {
-  const cookieString = ctx.req.headers.cookie;
-	const reqCookies = ctx.req.cookies
+export const getServerSideProps = (async ({req}) => {
+  const cookieString = req.headers.cookie;
+	const reqCookies = req.cookies
 
   const checkWalletResponse = await getCheckWallet(cookieString);
 
