@@ -23,11 +23,7 @@ import {
 import { Text } from '@jobstash/shared/ui';
 import { SideBar } from '@jobstash/sidebar/feature';
 
-interface Props {
-  fromSSR?: boolean;
-}
-
-export const PickRolePage = ({ fromSSR }: Props) => {
+export const PickRolePage = () => {
   const { push } = useRouter();
 
   const onClickDevGithub = () => {

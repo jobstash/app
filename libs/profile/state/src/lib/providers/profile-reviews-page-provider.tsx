@@ -7,14 +7,10 @@ import { ProfileInfoProvider } from './profile-info-provider';
 
 interface Props {
   children: ReactNode;
-  isOnboardSSR: boolean;
 }
 
-export const ProfileReviewsPageProvider = ({
-  children,
-  isOnboardSSR,
-}: Props) => {
-  const value = useProfileReviewsPage(isOnboardSSR);
+export const ProfileReviewsPageProvider = ({ children }: Props) => {
+  const value = useProfileReviewsPage();
 
   return (
     <ProfileReviewsPageContext.Provider value={value}>

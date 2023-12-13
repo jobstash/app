@@ -14,8 +14,6 @@ import { Tag } from '@jobstash/shared/core';
 interface ProfileRepoPageContextProps {
   profileRepoCount: number | null;
   activeProfileRepo: ProfileRepo | null;
-  showGotItCard: boolean;
-  setShowGotItCard: (show: boolean) => void;
   tabs: {
     text: string;
     onClick: () => void;

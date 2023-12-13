@@ -16,16 +16,12 @@ import {
 } from '@jobstash/profile/feature';
 import { SideBar } from '@jobstash/sidebar/feature';
 
-interface Props {
-  isOnboardSSR: boolean;
-}
-
-export const ProfileRepositoriesPage = ({ isOnboardSSR }: Props) => {
+export const ProfileRepositoriesPage = () => {
   const { canRender } = useDelayedAuthRender({ requireConnected: true });
 
   if (canRender)
     return (
-      <ProfileRepoPageProvider isOnboardSSR={isOnboardSSR}>
+      <ProfileRepoPageProvider>
         <Head>
           <title>Your Repositories</title>
         </Head>

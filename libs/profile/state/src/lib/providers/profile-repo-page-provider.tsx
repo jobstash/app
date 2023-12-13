@@ -7,11 +7,10 @@ import { ProfileInfoProvider } from './profile-info-provider';
 
 interface Props {
   children: ReactNode;
-  isOnboardSSR: boolean;
 }
 
-export const ProfileRepoPageProvider = ({ children, isOnboardSSR }: Props) => {
-  const value = useProfileRepoPage(isOnboardSSR);
+export const ProfileRepoPageProvider = ({ children }: Props) => {
+  const value = useProfileRepoPage();
 
   return (
     <ProfileRepoPageContext.Provider value={value}>

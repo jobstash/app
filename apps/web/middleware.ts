@@ -26,14 +26,7 @@ export function middleware(req: NextRequest) {
   const isWhiteListed = getIsWhiteListed(url.toString());
 
   if (isWhiteListed) {
-    const res = NextResponse.next();
-    res.cookies.set('msgx', 'henlo whitelisted');
-
-    if (Object.keys(req.cookies).length > 0) {
-      res.cookies.set('mwReqCookiesWL', JSON.stringify(req.cookies));
-    }
-
-    return res;
+    return NextResponse.next();
   }
 
   if (basicAuth) {
@@ -41,14 +34,7 @@ export function middleware(req: NextRequest) {
     const [user, pwd] = atob(authValue).split(':');
 
     if (user === 'gotrekt' && pwd === 'mcdonalds') {
-      const res = NextResponse.next();
-      res.cookies.set('msg', 'hello from middleware!');
-
-      if (Object.keys(req.cookies).length > 0) {
-        res.cookies.set('mwReqCookies', JSON.stringify(req.cookies));
-      }
-
-      return res;
+      return NextResponse.next();
     }
   }
 

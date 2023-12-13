@@ -13,8 +13,6 @@ import {
 interface ProfileReviewsPageContextProps {
   profileOrgReviewCount: number | null;
   activeProfileOrgReview: ProfileOrgReview | null;
-  showGotItCard: boolean;
-  setShowGotItCard: (show: boolean) => void;
   tabs: {
     text: string;
     onClick: () => void;

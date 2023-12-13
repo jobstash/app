@@ -14,19 +14,7 @@ import {
 } from '@jobstash/profile/ui';
 import { SideBar } from '@jobstash/sidebar/feature';
 
-interface Props {
-  isOnboardSSR: boolean;
-  cookieString: string;
-  checkWalletResponse: any;
-  reqCookies: any;
-}
-
-export const ProfilePage = ({
-  isOnboardSSR,
-  cookieString,
-  checkWalletResponse,
-  reqCookies,
-}: Props) => {
+export const ProfilePage = () => {
   const { canRender } = useDelayedAuthRender({ requireConnected: true });
 
   if (canRender) {
@@ -38,22 +26,11 @@ export const ProfilePage = ({
             <SideBar />
 
             <div className="px-3.5 pt-[65px] lg:px-12 lg:pt-6 lg:pr-[50%] flex flex-col gap-6">
-              <pre>
-                {JSON.stringify(
-                  {
-                    cookieString: cookieString ?? '---',
-                    checkWalletResponse: checkWalletResponse ?? '---',
-                    reqCookies,
-                  },
-                  undefined,
-                  '\t',
-                )}
-              </pre>
               <ProfileHeader />
 
               <ProfileSubHeader />
 
-              <ProfileGotItCard initShow={isOnboardSSR} />
+              <ProfileGotItCard />
 
               <ProfileDevInfo />
             </div>

@@ -1,13 +1,12 @@
-import { memo } from 'react';
-
-import { useProfileReviewsPageContext } from '@jobstash/profile/state';
+import { memo, useState } from 'react';
 
 import { GithubOutlineHugeIcon, Text } from '@jobstash/shared/ui';
 
 import GotItCard from './got-it-card';
 
 const ProfileReviewsGotItCard = () => {
-  const { showGotItCard, setShowGotItCard } = useProfileReviewsPageContext();
+  // TODO: Implement when to show this card. Temporarily set to false during refactor-ssr check-wallet issue.
+  const [showGotItCard, setShowGotItCard] = useState(false);
 
   const onClick = () => setShowGotItCard(false);
 

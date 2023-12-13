@@ -3,12 +3,10 @@ import { GetServerSideProps } from 'next';
 import { type JobPostPageProps } from '@jobstash/jobs/pages';
 import { dehydrate, QueryClient } from '@tanstack/react-query';
 
-import { type CheckWalletResponse } from '@jobstash/auth/core';
 import { JobPost } from '@jobstash/jobs/core';
 import { ERR_NOT_FOUND } from '@jobstash/shared/core';
 import { sentryMessage, withCSR } from '@jobstash/shared/utils';
 
-import { getCheckWallet } from '@jobstash/auth/data';
 import { getJobPost } from '@jobstash/jobs/data';
 
 export const getServerSideProps: GetServerSideProps<JobPostPageProps> = withCSR(
@@ -44,12 +42,6 @@ export const getServerSideProps: GetServerSideProps<JobPostPageProps> = withCSR(
 
     const queryClient = new QueryClient();
     queryClient.setQueryData(['job-post', shortUuid], initJob);
-
-    // Fetch check-wallet then set-query-data
-    const checkWalletResponse = (await getCheckWallet(
-      ctx.req.headers.cookie,
-    )) as CheckWalletResponse;
-    queryClient.setQueryData(['check-wallet'], checkWalletResponse);
 
     const dehydratedState = dehydrate(queryClient);
 

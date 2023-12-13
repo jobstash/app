@@ -4,12 +4,9 @@ import { ProfileHugeIcon, Text } from '@jobstash/shared/ui';
 
 import GotItCard from './got-it-card';
 
-interface Props {
-  initShow: boolean;
-}
-
-const ProfileGotItCard = ({ initShow }: Props) => {
-  const [showGotItCard, setShowGotItCard] = useState(initShow);
+const ProfileGotItCard = () => {
+  // TODO: Implement when to show this card. Temporarily set to false during refactor-ssr check-wallet issue.
+  const [showGotItCard, setShowGotItCard] = useState(false);
 
   const onClick = () => setShowGotItCard(false);
 
