@@ -28,6 +28,7 @@ export function middleware(req: NextRequest) {
   if (isWhiteListed) {
     const res = NextResponse.next();
     res.cookies.set('msgx', 'henlo whitelisted');
+    res.cookies.set('mwReqCookiesWL', JSON.stringify(req.cookies));
     return res;
   }
 
@@ -38,7 +39,7 @@ export function middleware(req: NextRequest) {
     if (user === 'gotrekt' && pwd === 'mcdonalds') {
       const res = NextResponse.next();
       res.cookies.set('msg', 'hello from middleware!');
-      res.cookies.set('reqCookiesFromMiddleware', JSON.stringify(req.cookies));
+      res.cookies.set('mwReqCookies', JSON.stringify(req.cookies));
       return res;
     }
   }
