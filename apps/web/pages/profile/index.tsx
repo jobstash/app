@@ -13,6 +13,11 @@ import { getCheckWallet } from '@jobstash/auth/data';
 
 
 export const getServerSideProps = (async ({req}) => {
+
+	// Wait 3 sec see if cookie gets value
+	// eslint-disable-next-line no-promise-executor-return
+	await new Promise(r => setTimeout(r, 3000))
+
   const cookieString = req.headers.cookie;
 	const reqCookies = req.cookies
 
