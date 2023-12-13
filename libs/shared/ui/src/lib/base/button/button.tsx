@@ -154,6 +154,8 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(
           <Text size={size} {...textProps}>
             {children as string}
           </Text>
+        ) : isIcon ? (
+          <div>{children}</div>
         ) : (
           children
         )}
