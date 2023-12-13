@@ -26,11 +26,16 @@ const ProfileDevInfoSave = () => {
   const isEqualFetchedSkills =
     JSON.stringify(skills.sort(sortSkill)) ===
     JSON.stringify(fetchedSkills.sort(sortSkill));
+
   const isEqualFetchedShowcase =
     JSON.stringify(
       showcases.map(({ label, url }) => ({ label, url })).sort(sortShowcase),
     ) ===
-    JSON.stringify(fetchedShowcases.map(({ label, url }) => ({ label, url })));
+    JSON.stringify(
+      fetchedShowcases
+        .map(({ label, url }) => ({ label, url }))
+        .sort(sortShowcase),
+    );
 
   const similarPayload = isEqualFetchedSkills && isEqualFetchedShowcase;
 
