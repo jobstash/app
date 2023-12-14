@@ -14,7 +14,7 @@ import {
   jobCardSetSchema,
   jobInfoSchema,
   messageResponseSchema,
-  mwResponseFieldsSchema,
+  mwMessageResponseSchema,
   orgInfoSchema,
   projectInfoSchema,
   projectMoreInfoSchema,
@@ -58,7 +58,7 @@ export type ProjectInfo = Infer<typeof projectInfoSchema>;
 export type ProjectMoreInfo = Infer<typeof projectMoreInfoSchema>;
 export type RepositoryInfo = Infer<typeof repositoryInfoSchema>;
 
-export type MwResponseFields = Infer<typeof mwResponseFieldsSchema>;
+export type MwMessageResponse = Infer<typeof mwMessageResponseSchema>;
 
 export type RouteSection = typeof ROUTE_SECTION[keyof typeof ROUTE_SECTION];
 

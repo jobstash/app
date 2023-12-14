@@ -4,6 +4,7 @@ import {
   fundingRoundSchema,
   investorSchema,
   jobInfoSchema,
+  mwMessageResponseSchema,
   orgInfoSchema,
   projectInfoSchema,
   projectMoreInfoSchema,
@@ -41,3 +42,14 @@ export const jobListQueryPageSchema = myzod.object({
   total: myzod.number(),
   data: myzod.array(jobPostSchema),
 });
+
+export const jobBookmarkPayloadSchema = myzod.object({
+  shortUUID: myzod.string().min(1),
+});
+
+export const jobBookmarksResponseSchema = myzod.intersection(
+  mwMessageResponseSchema,
+  myzod.object({
+    data: myzod.array(jobPostSchema),
+  }),
+);

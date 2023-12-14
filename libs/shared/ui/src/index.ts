@@ -69,6 +69,7 @@ export { default as UsersIcon } from './lib/icons/users-icon';
 export { default as UsersThreeIcon } from './lib/icons/users-three-icon';
 
 // Components
+export { default as BookmarkButton } from './lib/components/bookmark-button';
 export { default as BreadCrumbs } from './lib/components/breadcrumbs';
 export { default as DonateModal } from './lib/components/donate-modal';
 export { default as EmptyResult } from './lib/components/empty-result';

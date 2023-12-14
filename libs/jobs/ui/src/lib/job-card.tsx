@@ -16,6 +16,7 @@ import { gaEvent } from '@jobstash/shared/utils';
 import { activeJobAtom } from '@jobstash/jobs/state';
 import { mobileRightPanelOpenAtom, useIsMobile } from '@jobstash/shared/state';
 
+import JobCardFooter from './job-card-footer';
 import JobCardHeader from './job-card-header';
 import JobCardOrg from './job-card-org';
 import JobCardProjects from './job-card-projects';
@@ -67,11 +68,12 @@ const JobCard = ({ jobPost, isActive, filterParamsObj }: Props) => {
 
   return (
     <JobCardWrapper href={href} isActive={isActive} onClick={onClick}>
-      <JobCardHeader title={title} ts={timestamp} />
+      <JobCardHeader shortUUID={shortUUID} title={title} ts={timestamp} />
       <JobCardTags jobPost={jobPost} />
       <JobCardOrg org={organization} />
       <JobCardTechs techs={tags} />
       <JobCardProjects projects={projects} />
+      <JobCardFooter ts={timestamp} />
     </JobCardWrapper>
   );
 };

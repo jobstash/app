@@ -168,7 +168,7 @@ export const repositoryInfoSchema = myzod.object({
   committers: myzod.number().nullable(),
 });
 
-export const mwResponseFieldsSchema = myzod.object({
+export const mwMessageResponseSchema = myzod.object({
   success: myzod.boolean(),
   message: myzod.string().min(1),
 });

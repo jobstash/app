@@ -18,6 +18,7 @@ const bookmarkedBartabs = [
     text: 'Saved Orgs',
     path: '/bookmarks/organizations',
     icon: <BookmarkSidebarIcon />,
+    isDisabled: true,
   },
 ];
 
@@ -31,13 +32,13 @@ const SidebarBookmarksSection = () => {
       <div className="flex-col">
         <Text color="dimmed">Bookmarked</Text>
         <div className="space-y-3 pt-3">
-          {bookmarkedBartabs.map(({ text, path, icon }) => (
+          {bookmarkedBartabs.map(({ text, path, icon, isDisabled }) => (
             <SidebarBartab
               key={path}
-              isDisabled
               path={path}
               icon={icon}
               text={text}
+              isDisabled={isDisabled}
             />
           ))}
         </div>

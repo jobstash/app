@@ -1,6 +1,6 @@
 import myzod from 'myzod';
 
-import { mwResponseFieldsSchema } from '@jobstash/shared/core';
+import { mwMessageResponseSchema } from '@jobstash/shared/core';
 
 import { CHECK_WALLET_FLOWS, CHECK_WALLET_ROLES } from './constants';
 
@@ -35,14 +35,14 @@ export const checkWalletResponseSchema = myzod.object({
 });
 
 export const siweNonceResponseSchema = myzod.intersection(
-  mwResponseFieldsSchema,
+  mwMessageResponseSchema,
   myzod.object({
     data: myzod.string().min(1),
   }),
 );
 
 export const siweSessionResponseSchema = myzod.intersection(
-  mwResponseFieldsSchema,
+  mwMessageResponseSchema,
   myzod.object({
     data: myzod.object({
       nonce: myzod.string().min(1).optional(),
@@ -65,6 +65,6 @@ export const siweVerifyPayloadSchema = myzod.object({
 });
 
 export const siweVerifyResponseSchema = myzod.intersection(
-  mwResponseFieldsSchema,
+  mwMessageResponseSchema,
   myzod.object({}),
 );

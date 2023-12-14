@@ -1,9 +1,16 @@
 import { Infer } from 'myzod';
 
-import { jobListQueryPageSchema, jobPostSchema } from './schemas';
+import {
+  jobBookmarkPayloadSchema,
+  jobBookmarksResponseSchema,
+  jobListQueryPageSchema,
+  jobPostSchema,
+} from './schemas';
 
 export type JobPost = Infer<typeof jobPostSchema>;
 export type JobListQueryPage = Infer<typeof jobListQueryPageSchema>;
+export type JobBookmarkPayload = Infer<typeof jobBookmarkPayloadSchema>;
+export type JobBookmarksResponse = Infer<typeof jobBookmarksResponseSchema>;
 
 // Interface ProjectInfo {
 //   id: string;
