@@ -7,7 +7,6 @@ import { useOrgDetails } from '@jobstash/organizations/state';
 import { OrgRightPanelTabs } from '@jobstash/organizations/ui';
 import {
   RightPanel,
-  RightPanelJobCards,
   RightPanelOrgCard,
   RightPanelOrgJobCards,
   RightPanelProjectCards,
@@ -59,7 +58,9 @@ const OrgsRightPanel = ({ orgId, currentTab }: Props) => {
         />
       )}
 
-      {currentTab === TAB_SEGMENT.reviews && <RightPanelReviews />}
+      {currentTab === TAB_SEGMENT.reviews && (
+        <RightPanelReviews org={orgDetails} />
+      )}
 
       {/* TODO: REPOSITORIES TAB */}
     </RightPanel>

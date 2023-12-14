@@ -101,6 +101,8 @@ export const OrgDetailsPage = ({
         logoUrl: initOrgDetails.logoUrl,
         lastFundingAmount,
         lastFundingDate,
+        aggregateRating: 0,
+        reviewCount: 0,
       }
     : null;
 

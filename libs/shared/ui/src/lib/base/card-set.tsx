@@ -1,5 +1,3 @@
-'use client';
-
 import { memo, type ReactNode, useCallback } from 'react';
 
 import { cva, type VariantProps } from 'class-variance-authority';
@@ -36,6 +34,7 @@ interface CardSetProps extends CardSetVariantProps {
   children: string;
   link?: string;
   showLinkIcon?: boolean;
+  onClick?: () => void;
 }
 
 const CardSet = ({
@@ -43,17 +42,17 @@ const CardSet = ({
   children,
   link,
   showLinkIcon = true,
+  onClick,
 }: CardSetProps) => {
-  const hasLink = Boolean(link) && link !== '#';
-
-  const hasOnClick = hasLink && typeof window !== 'undefined';
-  const onClick = useCallback(() => window.open(link, '_blank'), [link]);
+  const hasLink =
+    Boolean(link) && link !== '#' && typeof window !== 'undefined';
+  const onClickLink = useCallback(() => window.open(link, '_blank'), [link]);
 
   return (
     <button
       type="button"
-      className={cn(cardset({ hasLink }))}
-      onClick={hasOnClick ? onClick : undefined}
+      className={cn(cardset({ hasLink: hasLink || Boolean(onClick) }))}
+      onClick={onClick ?? hasLink ? onClickLink : undefined}
     >
       {icon}
       <Text size="sm">{children}</Text>

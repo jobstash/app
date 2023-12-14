@@ -14,4 +14,6 @@ export interface RightPanelTab {
 export interface RightPanelOrg extends OrgInfo {
   fundingRounds: FundingRound[];
   investors: Investor[];
+  aggregateRating: number;
+  reviewCount: number;
 }

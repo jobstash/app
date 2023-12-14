@@ -21,6 +21,8 @@ export const projectOrgSchema = myzod
       fundingRounds: myzod.array(fundingRoundSchema),
       investors: myzod.array(investorSchema),
       tags: myzod.array(tagSchema),
+      aggregateRating: myzod.number().min(0).max(5),
+      reviewCount: myzod.number(),
     }),
   )
   .allowUnknownKeys(true);

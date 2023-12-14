@@ -25,6 +25,8 @@ export const jobPostSchema = myzod
                 .intersection(projectInfoSchema, projectMoreInfoSchema)
                 .allowUnknownKeys(true),
             ),
+            aggregateRating: myzod.number().min(0).max(5),
+            reviewCount: myzod.number(),
           }),
         )
         .allowUnknownKeys(true),

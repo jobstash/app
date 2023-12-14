@@ -99,6 +99,8 @@ const fakeFeaturedJobs: JobPost[] = [
         'Oasis Protocol Foundation is the legal entity behind the Oasis Protocol',
       github: null,
       website: 'https://oasisprotocol.org/',
+      aggregateRating: 4.2,
+      reviewCount: 69,
       projects: [
         {
           github: null,
@@ -295,6 +297,8 @@ const fakeFeaturedJobs: JobPost[] = [
         'Oasis Protocol Foundation is the legal entity behind the Oasis Protocol',
       github: null,
       website: 'https://oasisprotocol.org/',
+      aggregateRating: 4.2,
+      reviewCount: 69,
       projects: [
         {
           github: null,

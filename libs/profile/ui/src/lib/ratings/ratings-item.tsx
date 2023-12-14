@@ -23,6 +23,7 @@ const RatingItem = ({ ratingKey }: Props) => {
         <Rating
           size="xl"
           value={currentRating[ratingKey] ?? 0}
+          color="gold"
           onChange={(v) =>
             setCurrentRating((prev) => ({ ...prev, [ratingKey]: v }))
           }
