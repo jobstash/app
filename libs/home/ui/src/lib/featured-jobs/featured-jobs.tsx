@@ -39,7 +39,6 @@ const fakeFeaturedJobs: JobPost[] = [
     paysInCrypto: true,
     offersTokenAllocation: null,
     timestamp: 1_696_420_041_590,
-    isBookmarked: false,
     tags: [
       {
         name: 'Engineering Standards',
@@ -203,7 +202,6 @@ const fakeFeaturedJobs: JobPost[] = [
     paysInCrypto: true,
     offersTokenAllocation: false,
     timestamp: 1_696_420_041_590,
-    isBookmarked: false,
     tags: [
       {
         name: 'tooling market',

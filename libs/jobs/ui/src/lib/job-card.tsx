@@ -31,15 +31,8 @@ interface Props {
 }
 
 const JobCard = ({ jobPost, isActive, filterParamsObj }: Props) => {
-  const {
-    organization,
-    tags,
-    title,
-    timestamp,
-    shortUUID,
-    classification,
-    isBookmarked,
-  } = jobPost;
+  const { organization, tags, title, timestamp, shortUUID, classification } =
+    jobPost;
   const { projects, name: orgName } = organization;
 
   const setActiveJob = useSetAtom(activeJobAtom);
@@ -79,13 +72,13 @@ const JobCard = ({ jobPost, isActive, filterParamsObj }: Props) => {
         shortUUID={shortUUID}
         title={title}
         ts={timestamp}
-        isBookmarked={isBookmarked}
+        isBookmarked={false}
       />
       <JobCardTags jobPost={jobPost} />
       <JobCardOrg org={organization} />
       <JobCardTechs techs={tags} />
       <JobCardProjects projects={projects} />
-      <JobCardFooter ts={timestamp} isBookmarked={isBookmarked} />
+      <JobCardFooter ts={timestamp} isBookmarked={false} />
     </JobCardWrapper>
   );
 };
