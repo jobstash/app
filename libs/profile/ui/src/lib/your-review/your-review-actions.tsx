@@ -1,11 +1,13 @@
-import { useYourReviewContext } from '@jobstash/profile/state';
+import { useProfileOrgReviewFormContext } from '@jobstash/profile/state';
 
 import CardActionButton from '../card-action-button';
 
 const YourReviewActions = () => {
-  const { disableSave, onClickSave } = useYourReviewContext();
+  const { isDisabledReviewSave, saveReview } = useProfileOrgReviewFormContext();
 
-  return <CardActionButton isDisabled={disableSave} onClick={onClickSave} />;
+  return (
+    <CardActionButton isDisabled={isDisabledReviewSave} onClick={saveReview} />
+  );
 };
 
 export default YourReviewActions;

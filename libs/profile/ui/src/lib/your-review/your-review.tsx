@@ -1,5 +1,3 @@
-import { YourReviewProvider } from '@jobstash/profile/state';
-
 import TourProvider from './tour-provider';
 import YourReviewActions from './your-review-actions';
 import YourReviewCons from './your-review-cons';
@@ -9,17 +7,15 @@ import YourReviewPros from './your-review-pros';
 
 const YourReview = () => (
   <TourProvider>
-    <YourReviewProvider>
-      <div id="profile-right-panel-your-review" className="flex flex-col gap-4">
-        <YourReviewHeader />
-        <div className="flex flex-col items-center justify-center gap-8 [&>*]:w-full">
-          <YourReviewHeadline />
-          <YourReviewPros />
-          <YourReviewCons />
-          <YourReviewActions />
-        </div>
+    <div id="profile-right-panel-your-review" className="flex flex-col gap-4">
+      <YourReviewHeader />
+      <div className="flex flex-col items-center justify-center gap-8 [&>*]:w-full">
+        <YourReviewHeadline />
+        <YourReviewPros />
+        <YourReviewCons />
+        <YourReviewActions />
       </div>
-    </YourReviewProvider>
+    </div>
   </TourProvider>
 );
 

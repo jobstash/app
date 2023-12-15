@@ -1,17 +1,17 @@
-import { useSalaryFormContext } from '@jobstash/profile/state';
+import { useProfileOrgReviewFormContext } from '@jobstash/profile/state';
 
 import { Button } from '@jobstash/shared/ui';
 
 const Actions = () => {
-  const { disableSave, save } = useSalaryFormContext();
+  const { isDisabledSalarySave, saveSalary } = useProfileOrgReviewFormContext();
 
   return (
     <div className="flex items-center justify-center pt-2 w-full gap-8">
       <Button
         variant="primary"
         className="px-8"
-        isDisabled={disableSave}
-        onClick={save}
+        isDisabled={isDisabledSalarySave}
+        onClick={saveSalary}
       >
         Save
       </Button>
@@ -19,7 +19,7 @@ const Actions = () => {
       <Button
         variant="outline"
         className="px-8 bg-darker-gray"
-        isDisabled={disableSave}
+        isDisabled={isDisabledSalarySave}
       >
         Delete
       </Button>

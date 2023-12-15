@@ -2,17 +2,23 @@ import { TextInput } from '@mantine/core';
 
 import { cn } from '@jobstash/shared/utils';
 
-import { useYourReviewContext } from '@jobstash/profile/state';
+import {
+  useProfileInfoContext,
+  useProfileOrgReviewFormContext,
+} from '@jobstash/profile/state';
 
 import { Heading, LogoTitle } from '@jobstash/shared/ui';
 
 const YourReviewHeadline = () => {
+  const { profileInfoData } = useProfileInfoContext();
+
+  const username = profileInfoData?.username ?? '';
+  const avatar = profileInfoData?.avatar ?? '';
+
   const {
     currentReview: { headline },
     setHeadline,
-    username,
-    avatar,
-  } = useYourReviewContext();
+  } = useProfileOrgReviewFormContext();
 
   return (
     <div className="flex flex-col gap-4" id="profile-right-panel-your-review">

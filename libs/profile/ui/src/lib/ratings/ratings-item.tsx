@@ -2,7 +2,7 @@ import { Rating } from '@mantine/core';
 
 import { type ProfileOrgReviewRating } from '@jobstash/profile/core';
 
-import { useRatingContext } from '@jobstash/profile/state';
+import { useProfileOrgReviewFormContext } from '@jobstash/profile/state';
 
 import { Text } from '@jobstash/shared/ui';
 
@@ -12,7 +12,7 @@ interface Props {
 
 const RatingItem = ({ ratingKey }: Props) => {
   const { currentRating, setCurrentRating, getRatingTitle } =
-    useRatingContext();
+    useProfileOrgReviewFormContext();
 
   return (
     <div className="flex gap-8 items-center pl-[5%]">

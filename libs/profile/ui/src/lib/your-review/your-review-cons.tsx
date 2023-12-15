@@ -2,7 +2,7 @@ import { Textarea } from '@mantine/core';
 
 import { cn } from '@jobstash/shared/utils';
 
-import { useYourReviewContext } from '@jobstash/profile/state';
+import { useProfileOrgReviewFormContext } from '@jobstash/profile/state';
 
 import { Heading } from '@jobstash/shared/ui';
 
@@ -10,7 +10,7 @@ const YourReviewCons = () => {
   const {
     currentReview: { cons },
     setCons,
-  } = useYourReviewContext();
+  } = useProfileOrgReviewFormContext();
 
   return (
     <div className="flex flex-col gap-4">

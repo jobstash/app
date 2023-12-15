@@ -1,12 +1,12 @@
-import { useSalaryFormContext } from '@jobstash/profile/state';
+import { useProfileOrgReviewFormContext } from '@jobstash/profile/state';
 
 import SalaryInput from './salary-input';
 
 const AmountInput = () => {
   const {
-    state: { amount, selectedCurrency },
-    setState: { setAmount },
-  } = useSalaryFormContext();
+    salary: { amount, selectedCurrency },
+    setAmount,
+  } = useProfileOrgReviewFormContext();
 
   return (
     <SalaryInput

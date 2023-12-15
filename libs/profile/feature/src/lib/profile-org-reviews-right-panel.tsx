@@ -6,7 +6,10 @@ import { useTour } from '@reactour/tour';
 import { PROFILE_RIGHT_PANEL_TAB } from '@jobstash/profile/core';
 import { cn } from '@jobstash/shared/utils';
 
-import { useProfileReviewsPageContext } from '@jobstash/profile/state';
+import {
+  ProfileOrgReviewFormProvider,
+  useProfileReviewsPageContext,
+} from '@jobstash/profile/state';
 
 import {
   ProfileRightPanel,
@@ -36,22 +39,29 @@ const ProfileOrgReviewsRightPanel = () => {
         }
         tabs={<ProfileRightPanelTabs tabs={tabs} activeTab={activeTab} />}
         card={
-          <div className={cn({ 'pointer-events-none': isOpen })}>
-            <RightPanelCardBorder>
-              <LoadingOverlay visible={isLoadingCard} className="rounded-3xl" />
-              <div className="p-6">
-                <div className="flex flex-col gap-6 py-2 relative">
-                  {activeTab === PROFILE_RIGHT_PANEL_TAB.SALARY && (
-                    <SalaryForm />
-                  )}
-                  {activeTab === PROFILE_RIGHT_PANEL_TAB.RATING && <Ratings />}
-                  {activeTab === PROFILE_RIGHT_PANEL_TAB.YOUR_REVIEW && (
-                    <YourReview />
-                  )}
+          <ProfileOrgReviewFormProvider>
+            <div className={cn({ 'pointer-events-none': isOpen })}>
+              <RightPanelCardBorder>
+                <LoadingOverlay
+                  visible={isLoadingCard}
+                  className="rounded-3xl"
+                />
+                <div className="p-6">
+                  <div className="flex flex-col gap-6 py-2 relative">
+                    {activeTab === PROFILE_RIGHT_PANEL_TAB.SALARY && (
+                      <SalaryForm />
+                    )}
+                    {activeTab === PROFILE_RIGHT_PANEL_TAB.RATING && (
+                      <Ratings />
+                    )}
+                    {activeTab === PROFILE_RIGHT_PANEL_TAB.YOUR_REVIEW && (
+                      <YourReview />
+                    )}
+                  </div>
                 </div>
-              </div>
-            </RightPanelCardBorder>
-          </div>
+              </RightPanelCardBorder>
+            </div>
+          </ProfileOrgReviewFormProvider>
         }
       />
     </div>

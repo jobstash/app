@@ -1,5 +1,3 @@
-import { SalaryFormProvider } from '@jobstash/profile/state';
-
 import Actions from './actions';
 import AmountInput from './amount-input';
 import Checkbox from './checkbox';
@@ -9,7 +7,7 @@ import TourProvider from './tour-provider';
 
 const SalaryForm = () => (
   <TourProvider>
-    <SalaryFormProvider>
+    <div id="profile-right-panel-salary" className="flex flex-col gap-4">
       <Header />
 
       <div className="flex flex-col gap-6">
@@ -18,7 +16,7 @@ const SalaryForm = () => (
         <Checkbox />
         <Actions />
       </div>
-    </SalaryFormProvider>
+    </div>
   </TourProvider>
 );
 

@@ -26,7 +26,7 @@ export const useSalaryForm = () => {
 
   const { mutate } = useSalaryMutation();
 
-  const save = () => {
+  const saveSalary = () => {
     mutate({
       orgId: org.orgId,
       selectedCurrency: state.selectedCurrency,
@@ -35,7 +35,7 @@ export const useSalaryForm = () => {
     });
   };
 
-  const disableSave =
+  const isDisabledSalarySave =
     JSON.stringify({
       selectedCurrency,
       amount,
@@ -43,17 +43,14 @@ export const useSalaryForm = () => {
     }) === JSON.stringify(state);
 
   return {
-    state,
-    setState: {
-      setSelectedCurrency: (value: string | null) =>
-        setState((prev) => ({ ...prev, selectedCurrency: value })),
-      setAmount: (value: number | null) =>
-        setState((prev) => ({ ...prev, amount: value })),
-      setOffersTokenAllocation: (value: boolean) =>
-        setState((prev) => ({ ...prev, offersTokenAllocation: value })),
-    },
-    save,
-    disableSave,
-    orgReview,
+    salary: state,
+    setSelectedCurrency: (value: string | null) =>
+      setState((prev) => ({ ...prev, selectedCurrency: value })),
+    setAmount: (value: number | null) =>
+      setState((prev) => ({ ...prev, amount: value })),
+    setOffersTokenAllocation: (value: boolean) =>
+      setState((prev) => ({ ...prev, offersTokenAllocation: value })),
+    saveSalary,
+    isDisabledSalarySave,
   };
 };

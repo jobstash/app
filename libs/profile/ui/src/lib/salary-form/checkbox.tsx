@@ -1,9 +1,12 @@
 import { Checkbox as MCheckbox } from '@mantine/core';
 
-import { useSalaryFormContext } from '@jobstash/profile/state';
+import { useProfileOrgReviewFormContext } from '@jobstash/profile/state';
 
 const Checkbox = () => {
-  const { state, setState } = useSalaryFormContext();
+  const {
+    salary: { offersTokenAllocation },
+    setOffersTokenAllocation,
+  } = useProfileOrgReviewFormContext();
 
   return (
     <div className="flex justify-end">
@@ -11,10 +14,8 @@ const Checkbox = () => {
         size="md"
         label="Offers Token Allocation"
         color="gray"
-        checked={state.offersTokenAllocation}
-        onChange={(e) =>
-          setState.setOffersTokenAllocation(e.currentTarget.checked)
-        }
+        checked={offersTokenAllocation}
+        onChange={(e) => setOffersTokenAllocation(e.currentTarget.checked)}
       />
     </div>
   );

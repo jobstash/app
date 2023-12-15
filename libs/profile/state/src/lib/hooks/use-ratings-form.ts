@@ -12,7 +12,7 @@ import { useRatingMutation } from './use-rating-mutation';
 const getRatingTitle = (ratingKey: keyof ProfileOrgReviewRating) =>
   RATING_TITLE_MAP[ratingKey];
 
-export const useRatings = () => {
+export const useRatingsForm = () => {
   const { orgReview } = useProfileReviewsPageContext();
 
   const {
@@ -26,16 +26,16 @@ export const useRatings = () => {
     setCurrentRating(rating);
   }, [rating]);
 
-  const { isLoading, mutate } = useRatingMutation();
+  const { mutate } = useRatingMutation();
 
-  const onClickSave = () => {
+  const saveRating = () => {
     mutate({
       orgId,
       ...currentRating,
     });
   };
 
-  const disableActions = useMemo(
+  const isDisabledRatingSave = useMemo(
     () => JSON.stringify(rating) === JSON.stringify(currentRating),
     [rating, currentRating],
   );
@@ -43,9 +43,8 @@ export const useRatings = () => {
   return {
     currentRating,
     setCurrentRating,
-    isLoading,
-    onClickSave,
-    disableActions,
     getRatingTitle,
+    saveRating,
+    isDisabledRatingSave,
   };
 };
