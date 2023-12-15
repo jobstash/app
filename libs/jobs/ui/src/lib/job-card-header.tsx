@@ -10,9 +10,10 @@ interface Props {
   shortUUID: string;
   title: string;
   ts: number;
+  isBookmarked: boolean;
 }
 
-const JobCardHeader = ({ shortUUID, title, ts }: Props) => {
+const JobCardHeader = ({ shortUUID, title, ts, isBookmarked }: Props) => {
   const timestamp = prettyTimestamp(ts);
 
   const { isLoading, mutate } = useJobBookmarkMutation();
@@ -30,7 +31,11 @@ const JobCardHeader = ({ shortUUID, title, ts }: Props) => {
       <div className="hidden items-center sm:flex h-full min-w-fit gap-4">
         <span className="text-sm">{timestamp}</span>
 
-        <BookmarkButton isLoading={isLoading} onClick={onClick} />
+        <BookmarkButton
+          isLoading={isLoading}
+          isBookmarked={isBookmarked}
+          onClick={onClick}
+        />
       </div>
     </div>
   );

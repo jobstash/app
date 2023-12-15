@@ -29,7 +29,7 @@ const OrgCardHeader = ({
         reviewCount={reviewCount}
       />
 
-      <BookmarkButton />
+      <BookmarkButton isBookmarked={false} />
     </div>
   </div>
 );

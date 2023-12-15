@@ -4,9 +4,10 @@ import { BookmarkButton } from '@jobstash/shared/ui';
 
 interface Props {
   ts: number;
+  isBookmarked: boolean;
 }
 
-const JobCardFooter = ({ ts }: Props) => {
+const JobCardFooter = ({ ts, isBookmarked }: Props) => {
   const timestamp = prettyTimestamp(ts);
 
   return (
@@ -15,7 +16,7 @@ const JobCardFooter = ({ ts }: Props) => {
 
       <div className="flex w-full justify-between items-center">
         <span className="text-sm">{timestamp}</span>
-        <BookmarkButton />
+        <BookmarkButton isBookmarked={isBookmarked} />
       </div>
     </div>
   );

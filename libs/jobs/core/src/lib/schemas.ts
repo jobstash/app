@@ -15,6 +15,7 @@ export const jobPostSchema = myzod
   .intersection(
     jobInfoSchema,
     myzod.object({
+      isBookmarked: myzod.boolean(),
       organization: myzod
         .intersection(
           orgInfoSchema,
