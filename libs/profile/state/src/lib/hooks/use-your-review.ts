@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useProfileInfoContext } from '../contexts/profile-info-context';
 import { useProfileReviewsPageContext } from '../contexts/profile-reviews-page-context';
@@ -22,6 +22,14 @@ export const useYourReview = () => {
     pros,
     cons,
   });
+
+  useEffect(() => {
+    setCurrentReview({
+      headline,
+      pros,
+      cons,
+    });
+  }, [headline, pros, cons]);
 
   const setHeadline = (headline: string | null) =>
     setCurrentReview((prev) => ({ ...prev, headline }));

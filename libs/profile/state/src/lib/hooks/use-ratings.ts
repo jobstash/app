@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import {
   type ProfileOrgReviewRating,
@@ -21,6 +21,10 @@ export const useRatings = () => {
   } = orgReview;
 
   const [currentRating, setCurrentRating] = useState(rating);
+
+  useEffect(() => {
+    setCurrentRating(rating);
+  }, [rating]);
 
   const { isLoading, mutate } = useRatingMutation();
 

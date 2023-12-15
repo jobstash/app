@@ -13,7 +13,7 @@ const RatingActions = () => {
         isDisabled={disableActions}
         onClick={onClickSave}
       >
-        Save & Next
+        Save
       </Button>
 
       <Button

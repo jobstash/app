@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { useProfileReviewsPageContext } from '../contexts/profile-reviews-page-context';
 
@@ -15,6 +15,14 @@ export const useSalaryForm = () => {
     amount,
     offersTokenAllocation,
   });
+
+  useEffect(() => {
+    setState({
+      selectedCurrency,
+      amount,
+      offersTokenAllocation,
+    });
+  }, [selectedCurrency, amount, offersTokenAllocation]);
 
   const { mutate } = useSalaryMutation();
 
