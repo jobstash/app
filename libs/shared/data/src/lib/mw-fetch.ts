@@ -19,7 +19,7 @@ import {
 interface MwFetchOptions<R, P> {
   sentryLabel: string;
   responseSchema?: Type<R>;
-  method?: 'GET' | 'POST';
+  method?: 'GET' | 'POST' | 'DELETE';
   payload?: P;
   payloadSchema?: Type<P>;
   credentials?: RequestCredentials;
@@ -62,6 +62,8 @@ export const mwFetch = async <R, P = Undefined>(
       `${sentryLabel}: ${SENTRY_MW_NON_200_RESPONSE}`,
       JSON.stringify({ status: res.status, statusText: res.statusText }),
     );
+
+    console.log('MWFETCH FAILED', { method, res });
 
     const is404 = res.status === 404;
 

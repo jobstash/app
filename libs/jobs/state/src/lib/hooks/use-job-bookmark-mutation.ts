@@ -1,20 +1,25 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { JobBookmarkPayload } from '@jobstash/jobs/core';
 import { notifError, notifSuccess } from '@jobstash/shared/utils';
 
-import { addJobBookmark } from '@jobstash/jobs/data';
+import { setJobBookmark } from '@jobstash/jobs/data';
 
-export const useJobBookmarkMutation = () => {
+export const useJobBookmarkMutation = (shouldDelete = false) => {
+  const queryClient = useQueryClient();
+
   const { isLoading, mutate } = useMutation({
-    mutationFn: (payload: JobBookmarkPayload) => addJobBookmark(payload),
+    mutationFn: (payload: JobBookmarkPayload) =>
+      setJobBookmark({ payload, shouldDelete }),
     onSuccess() {
       notifSuccess({
-        title: 'Bookmarked!',
-        message: 'Job has been added to your list',
+        title: `Bookmark ${shouldDelete ? 'Removed' : 'Added'}!`,
+        message: `Job has been ${
+          shouldDelete ? 'removed' : 'added'
+        } to your list.`,
       });
 
-      // TODO: invalidate GET bookmarks endpoint
+      queryClient.invalidateQueries(['job-bookmarks']);
     },
     onError(error) {
       notifError({

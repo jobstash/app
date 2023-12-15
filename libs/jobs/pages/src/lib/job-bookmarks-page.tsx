@@ -2,11 +2,11 @@ import { LoadingPage } from '@jobstash/shared/pages';
 
 import { useJobBookmarks } from '@jobstash/jobs/state';
 
-import { JobCard } from '@jobstash/jobs/ui';
+import { JobBookmarkButton, JobCard } from '@jobstash/jobs/ui';
 import { SideBar } from '@jobstash/sidebar/feature';
 
 export const JobBookmarksPage = () => {
-  const { isLoading, data } = useJobBookmarks();
+  const { isLoading, data, bookmarkedJobs } = useJobBookmarks();
 
   if (isLoading) return <LoadingPage />;
 
@@ -21,6 +21,13 @@ export const JobBookmarksPage = () => {
             jobPost={jobPost}
             isActive={false}
             filterParamsObj={{}}
+            bookmarkButton={
+              <JobBookmarkButton
+                shortUUID={jobPost.shortUUID}
+                isBookmarked={bookmarkedJobs.has(jobPost.shortUUID)}
+                isFetching={isLoading}
+              />
+            }
           />
         ))}
       </div>

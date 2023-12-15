@@ -10,11 +10,19 @@ import {
 
 import { mwFetch } from '@jobstash/shared/data';
 
-export const addJobBookmark = async (payload: JobBookmarkPayload) => {
+interface Params {
+  payload: JobBookmarkPayload;
+  shouldDelete?: boolean;
+}
+
+export const setJobBookmark = async ({
+  payload,
+  shouldDelete = false,
+}: Params) => {
   const url = `${MW_URL}/profile/jobs/bookmark`;
 
   const options = {
-    method: 'POST' as const,
+    method: shouldDelete ? ('DELETE' as const) : ('POST' as const),
     responseSchema: mwMessageResponseSchema,
     sentryLabel: 'addJobBookmark',
     credentials: 'include' as RequestCredentials,

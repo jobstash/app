@@ -1,13 +1,14 @@
-import { prettyTimestamp } from '@jobstash/shared/utils';
+import { type ReactNode } from 'react';
 
-import { BookmarkButton } from '@jobstash/shared/ui';
+import { prettyTimestamp } from '@jobstash/shared/utils';
 
 interface Props {
   ts: number;
-  isBookmarked: boolean;
+  shortUUID: string;
+  bookmarkButton: ReactNode;
 }
 
-const JobCardFooter = ({ ts, isBookmarked }: Props) => {
+const JobCardFooter = ({ ts, shortUUID, bookmarkButton }: Props) => {
   const timestamp = prettyTimestamp(ts);
 
   return (
@@ -16,7 +17,7 @@ const JobCardFooter = ({ ts, isBookmarked }: Props) => {
 
       <div className="flex w-full justify-between items-center">
         <span className="text-sm">{timestamp}</span>
-        <BookmarkButton isBookmarked={isBookmarked} />
+        {bookmarkButton}
       </div>
     </div>
   );

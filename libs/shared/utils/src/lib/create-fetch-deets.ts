@@ -1,6 +1,6 @@
 export const createFetchDeets = <P>(
   reqUrl: string,
-  method: 'GET' | 'POST',
+  method: 'GET' | 'POST' | 'DELETE',
   payload?: P,
 ) => {
   let url = reqUrl;
@@ -10,7 +10,10 @@ export const createFetchDeets = <P>(
       '?' + new URLSearchParams(payload as unknown as Record<string, string>);
   }
 
-  const body = method === 'POST' ? JSON.stringify(payload) : undefined;
+  const body =
+    method === 'POST' || method === 'DELETE'
+      ? JSON.stringify(payload)
+      : undefined;
 
   return { url, body };
 };

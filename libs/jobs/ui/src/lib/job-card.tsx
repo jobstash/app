@@ -1,5 +1,5 @@
 /* eslint-disable camelcase */
-import { memo, useMemo } from 'react';
+import { memo, type ReactNode, useMemo } from 'react';
 
 import { useSetAtom } from 'jotai';
 
@@ -28,9 +28,15 @@ interface Props {
   jobPost: JobPost;
   isActive: boolean;
   filterParamsObj: Record<string, string>;
+  bookmarkButton: ReactNode;
 }
 
-const JobCard = ({ jobPost, isActive, filterParamsObj }: Props) => {
+const JobCard = ({
+  jobPost,
+  isActive,
+  filterParamsObj,
+  bookmarkButton,
+}: Props) => {
   const { organization, tags, title, timestamp, shortUUID, classification } =
     jobPost;
   const { projects, name: orgName } = organization;
@@ -72,13 +78,17 @@ const JobCard = ({ jobPost, isActive, filterParamsObj }: Props) => {
         shortUUID={shortUUID}
         title={title}
         ts={timestamp}
-        isBookmarked={false}
+        bookmarkButton={bookmarkButton}
       />
       <JobCardTags jobPost={jobPost} />
       <JobCardOrg org={organization} />
       <JobCardTechs techs={tags} />
       <JobCardProjects projects={projects} />
-      <JobCardFooter ts={timestamp} isBookmarked={false} />
+      <JobCardFooter
+        shortUUID={shortUUID}
+        ts={timestamp}
+        bookmarkButton={bookmarkButton}
+      />
     </JobCardWrapper>
   );
 };

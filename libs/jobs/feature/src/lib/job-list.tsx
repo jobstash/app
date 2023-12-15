@@ -2,9 +2,13 @@ import { memo } from 'react';
 
 import { type JobPost } from '@jobstash/jobs/core';
 
-import { useJobList } from '@jobstash/jobs/state';
+import { useJobBookmarks, useJobList } from '@jobstash/jobs/state';
 
-import { JobCard, JobListEmptyResult } from '@jobstash/jobs/ui';
+import {
+  JobBookmarkButton,
+  JobCard,
+  JobListEmptyResult,
+} from '@jobstash/jobs/ui';
 import { ListErrorMessage, Loader } from '@jobstash/shared/ui';
 
 interface Props {
@@ -25,7 +29,9 @@ const JobList = ({ initJob, activeJob }: Props) => {
     filterParamsObj,
   } = useJobList(initJob);
 
-  if (isLoading) {
+  const { isLoading: isLoadingBookmarks, bookmarkedJobs } = useJobBookmarks();
+
+  if (isLoading || isLoadingBookmarks) {
     return (
       <div className="pb-4">
         {initJob && (
@@ -34,6 +40,7 @@ const JobList = ({ initJob, activeJob }: Props) => {
             isActive
             jobPost={initJob}
             filterParamsObj={filterParamsObj}
+            bookmarkButton={null}
           />
         )}
         <div className="flex h-full w-full items-center justify-center">
@@ -59,6 +66,13 @@ const JobList = ({ initJob, activeJob }: Props) => {
           jobPost={jobPost}
           isActive={activeJob?.shortUUID === jobPost.shortUUID}
           filterParamsObj={filterParamsObj}
+          bookmarkButton={
+            <JobBookmarkButton
+              shortUUID={jobPost.shortUUID}
+              isBookmarked={bookmarkedJobs.has(jobPost.shortUUID)}
+              isFetching={isLoadingBookmarks}
+            />
+          }
         />
       ))}
 

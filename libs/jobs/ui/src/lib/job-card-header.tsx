@@ -1,26 +1,18 @@
-import { memo } from 'react';
+import { memo, type ReactNode } from 'react';
 
 import { prettyTimestamp } from '@jobstash/shared/utils';
 
-import { useJobBookmarkMutation } from '@jobstash/jobs/state';
-
-import { BookmarkButton, Heading } from '@jobstash/shared/ui';
+import { Heading } from '@jobstash/shared/ui';
 
 interface Props {
-  shortUUID: string;
   title: string;
   ts: number;
-  isBookmarked: boolean;
+  shortUUID: string;
+  bookmarkButton: ReactNode;
 }
 
-const JobCardHeader = ({ shortUUID, title, ts, isBookmarked }: Props) => {
+const JobCardHeader = ({ shortUUID, title, ts, bookmarkButton }: Props) => {
   const timestamp = prettyTimestamp(ts);
-
-  const { isLoading, mutate } = useJobBookmarkMutation();
-
-  const onClick = () => {
-    mutate({ shortUUID });
-  };
 
   return (
     <div className="sm:flex items-center justify-between">
@@ -31,11 +23,7 @@ const JobCardHeader = ({ shortUUID, title, ts, isBookmarked }: Props) => {
       <div className="hidden items-center sm:flex h-full min-w-fit gap-4">
         <span className="text-sm">{timestamp}</span>
 
-        <BookmarkButton
-          isLoading={isLoading}
-          isBookmarked={isBookmarked}
-          onClick={onClick}
-        />
+        {bookmarkButton}
       </div>
     </div>
   );
