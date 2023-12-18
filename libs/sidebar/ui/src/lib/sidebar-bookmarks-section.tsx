@@ -1,3 +1,5 @@
+import { CHECK_WALLET_ROLES } from '@jobstash/auth/core';
+
 import { useSidebarContext } from '@jobstash/sidebar/state';
 
 import {
@@ -23,9 +25,11 @@ const bookmarkedBartabs = [
 ];
 
 const SidebarBookmarksSection = () => {
-  const { isSignedIn } = useSidebarContext();
+  const { role } = useSidebarContext();
 
-  if (!isSignedIn) return null;
+  const isDev = role === CHECK_WALLET_ROLES.DEV;
+
+  if (!isDev) return null;
 
   return (
     <IsMountedWrapper>
