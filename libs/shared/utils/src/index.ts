@@ -4,6 +4,7 @@ export * from './lib/cn';
 export * from './lib/create-fetch-deets';
 export * from './lib/dedupe';
 export * from './lib/disable-page-scroll';
+export * from './lib/dispatch-event';
 export * from './lib/ga-event';
 export * from './lib/get-google-logo-url';
 export * from './lib/get-logo-url';
