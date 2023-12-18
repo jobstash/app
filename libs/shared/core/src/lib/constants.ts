@@ -66,6 +66,7 @@ export const ROUTE_SECTION = {
   JOBS: '/jobs' as const,
   ORGANIZATIONS: '/organizations' as const,
   PROJECTS: '/projects' as const,
+  JOB_BOOKMARKS: '/bookmarks/jobs' as const,
 } as const;
 
 export const TAB_SEGMENT = {

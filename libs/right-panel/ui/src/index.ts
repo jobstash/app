@@ -1,10 +1,10 @@
 export { default as RightPanel } from './lib/right-panel';
+export { default as RightPanelBackButton } from './lib/right-panel-back-button';
 export { default as RightPanelCardBorder } from './lib/right-panel-card-border';
 export { default as RightPanelCompetitorCards } from './lib/right-panel-competitor-cards';
 export { default as RightPanelJobCard } from './lib/right-panel-job-card';
 export { default as RightPanelJobCards } from './lib/right-panel-job-cards';
 export { default as RightPanelJobTabs } from './lib/right-panel-job-tabs';
-export { default as RightPanelMobileNav } from './lib/right-panel-mobile-nav';
 export { default as RightPanelOrgCard } from './lib/right-panel-org-card';
 export { default as RightPanelOrgJobCards } from './lib/right-panel-org-job-cards';
 export { default as RightPanelProjectCard } from './lib/right-panel-project-card';

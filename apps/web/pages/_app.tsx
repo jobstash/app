@@ -18,9 +18,9 @@ import {
   isOpenTopBannerAtom,
   MantineProvider,
   ReactQueryProvider,
+  useDisableScrollListener,
 } from '@jobstash/shared/state';
 
-import { TopBanner } from '@jobstash/shared/ui';
 import { WagmiSiweSync } from '@jobstash/auth/feature';
 
 const App = ({ Component, pageProps }: AppProps) => {
@@ -34,6 +34,8 @@ const App = ({ Component, pageProps }: AppProps) => {
   }, [router]);
 
   const isOpenTopBanner = useAtomValue(isOpenTopBannerAtom);
+
+  useDisableScrollListener();
 
   return (
     <>

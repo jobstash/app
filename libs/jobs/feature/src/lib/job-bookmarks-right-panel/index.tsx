@@ -1,65 +1,49 @@
-import { memo } from 'react';
+import { useAtomValue } from 'jotai';
 
 import { type JobPost } from '@jobstash/jobs/core';
-import { ROUTE_SECTION, TAB_SEGMENT } from '@jobstash/shared/core';
+import { TAB_SEGMENT } from '@jobstash/shared/core';
 
 import { useCompetitors } from '@jobstash/competitors/state';
+import { activeJobBookmarkTabAtom } from '@jobstash/jobs/state';
 
 import {
   RightPanel,
   RightPanelBackButton,
   RightPanelCompetitorCards,
   RightPanelJobCard,
-  RightPanelJobTabs,
   RightPanelOrgCard,
   RightPanelProjectCards,
 } from '@jobstash/right-panel/ui';
-import { Loader } from '@jobstash/shared/ui';
+
+import JobBookmarksRightPanelTabs from './tabs';
 
 interface Props {
-  jobPost: JobPost | null;
-  currentTab: string;
+  jobPost: JobPost;
+  onClickBack: () => void;
 }
 
-const JobsRightPanel = ({ jobPost, currentTab }: Props) => {
-  const { data: competitors, isLoading: isLoadingCompetitors } = useCompetitors(
-    jobPost && jobPost.organization.projects.length > 0
-      ? jobPost.organization.projects[0].id
-      : undefined,
-  );
-
-  // TODO: Repos fetch
-  const isLoadingRepo = false;
-
-  if (!jobPost) {
-    return (
-      <div className="flex h-full w-full items-center justify-center">
-        <Loader />
-      </div>
-    );
-  }
-
+const JobBookmarksRightPanel = ({ jobPost, onClickBack }: Props) => {
   const { organization, tags } = jobPost;
   const { projects } = organization;
 
-  const hasProject = projects.length > 0;
-
-  const isLoading = (hasProject && isLoadingCompetitors) || isLoadingRepo;
-
+  const projectId = projects[0]?.id;
+  const { data: competitors, isLoading: isLoadingCompetitors } =
+    useCompetitors(projectId);
   const competitorCount = competitors?.length ?? 0;
+
+  const currentTab = useAtomValue(activeJobBookmarkTabAtom);
 
   return (
     <RightPanel
       org={organization}
       tabs={
-        <RightPanelJobTabs
-          isLoading={isLoading}
-          currentTab={currentTab}
+        <JobBookmarksRightPanelTabs
           jobPost={jobPost}
+          showSpinner={isLoadingCompetitors}
           competitorCount={competitorCount}
         />
       }
-      backButton={<RightPanelBackButton backURL={ROUTE_SECTION.JOBS} />}
+      backButton={<RightPanelBackButton onClick={onClickBack} />}
     >
       {currentTab === TAB_SEGMENT.details && (
         <RightPanelJobCard
@@ -85,4 +69,4 @@ const JobsRightPanel = ({ jobPost, currentTab }: Props) => {
   );
 };
 
-export default memo(JobsRightPanel);
+export default JobBookmarksRightPanel;

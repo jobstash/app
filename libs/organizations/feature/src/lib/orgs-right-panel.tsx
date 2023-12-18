@@ -7,6 +7,7 @@ import { useOrgDetails } from '@jobstash/organizations/state';
 import { OrgRightPanelTabs } from '@jobstash/organizations/ui';
 import {
   RightPanel,
+  RightPanelBackButton,
   RightPanelOrgCard,
   RightPanelOrgJobCards,
   RightPanelProjectCards,
@@ -30,25 +31,22 @@ const OrgsRightPanel = ({ orgId, currentTab }: Props) => {
     );
   }
 
-  const routeSection = ROUTE_SECTION.ORGANIZATIONS;
-
   return (
     <RightPanel
       org={orgDetails}
       tabs={
         <OrgRightPanelTabs currentTab={currentTab} orgDetails={orgDetails} />
       }
-      routeSection={ROUTE_SECTION.ORGANIZATIONS}
+      backButton={
+        <RightPanelBackButton backURL={ROUTE_SECTION.ORGANIZATIONS} />
+      }
     >
       {currentTab === TAB_SEGMENT.details && (
-        <RightPanelOrgCard org={orgDetails} routeSection={routeSection} />
+        <RightPanelOrgCard org={orgDetails} showCTA={false} />
       )}
 
       {currentTab === TAB_SEGMENT.projects && (
-        <RightPanelProjectCards
-          projects={orgDetails.projects}
-          routeSection={routeSection}
-        />
+        <RightPanelProjectCards projects={orgDetails.projects} />
       )}
 
       {currentTab === TAB_SEGMENT.jobs && (

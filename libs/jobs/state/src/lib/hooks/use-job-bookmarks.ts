@@ -5,9 +5,10 @@ import { useQuery } from '@tanstack/react-query';
 import { getJobBookmarks } from '@jobstash/jobs/data';
 
 export const useJobBookmarks = () => {
-  const { isLoading, data } = useQuery({
+  const { isLoading, isError, data, isFetching } = useQuery({
     queryKey: ['job-bookmarks'],
     queryFn: () => getJobBookmarks(),
+    staleTime: 1000 * 60 * 60,
   });
 
   const bookmarkedJobs = useMemo(
@@ -15,5 +16,5 @@ export const useJobBookmarks = () => {
     [data],
   );
 
-  return { isLoading, data, bookmarkedJobs };
+  return { isLoading, isError, data, bookmarkedJobs, isFetching };
 };

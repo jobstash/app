@@ -1,39 +1,34 @@
-import { memo, type ReactNode, useEffect } from 'react';
-
-import { useAtomValue } from 'jotai';
+import { type ReactNode } from 'react';
 
 import { type RightPanelOrg } from '@jobstash/right-panel/core';
-import { type RouteSection } from '@jobstash/shared/core';
-import { disablePageScroll } from '@jobstash/shared/utils';
 
-import { mobileRightPanelOpenAtom } from '@jobstash/shared/state';
+import { HamburgerIcon } from '@jobstash/shared/ui';
+import { MobileMenuButton } from '@jobstash/sidebar/ui';
 
 import RightPanelHeader from './right-panel-header';
-import RightPanelMobileNav from './right-panel-mobile-nav';
 import RightPanelWrapper from './right-panel-wrapper';
 
 interface Props {
   org: RightPanelOrg;
   tabs: ReactNode;
   children: ReactNode;
-  routeSection: RouteSection;
+  backButton: ReactNode;
 }
 
-const RightPanel = ({ org, tabs, children, routeSection }: Props) => {
-  // Disable main window scroll when mobile right-panel is open
-  const mobileRightPanelOpenValue = useAtomValue(mobileRightPanelOpenAtom);
-  useEffect(() => {
-    disablePageScroll(mobileRightPanelOpenValue);
-  }, [mobileRightPanelOpenValue]);
+const RightPanel = ({ org, tabs, children, backButton }: Props) => (
+  <RightPanelWrapper>
+    {/* MOBILE NAV */}
+    <div className="flex justify-between items-center lg:hidden">
+      {backButton}
+      <MobileMenuButton>
+        <HamburgerIcon />
+      </MobileMenuButton>
+    </div>
 
-  return (
-    <RightPanelWrapper>
-      <RightPanelMobileNav backURL={routeSection} />
-      <RightPanelHeader org={org} />
-      {tabs}
-      {children}
-    </RightPanelWrapper>
-  );
-};
+    <RightPanelHeader org={org} />
+    {tabs}
+    {children}
+  </RightPanelWrapper>
+);
 
-export default memo(RightPanel);
+export default RightPanel;

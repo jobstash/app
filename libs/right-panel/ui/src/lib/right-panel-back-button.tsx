@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { memo, useCallback } from 'react';
+import { memo } from 'react';
 
 import { useSetAtom } from 'jotai';
 
@@ -8,26 +8,35 @@ import { mobileRightPanelOpenAtom } from '@jobstash/shared/state';
 import { ArrowLeftIcon, Button } from '@jobstash/shared/ui';
 
 interface Props {
-  backURL: string;
+  backURL?: string;
+  onClick?: () => void;
 }
 
-const RightPanelBackButton = ({ backURL }: Props) => {
+const RightPanelBackButton = ({ backURL, onClick }: Props) => {
   const router = useRouter();
 
   const setMobileRightPanelOpen = useSetAtom(mobileRightPanelOpenAtom);
-  const onClick = useCallback(() => {
-    router.push(backURL, undefined, { shallow: true, scroll: false });
 
+  // Defaults to router push
+  const onClickBack = () => {
     // Enable main window scroll again
     setMobileRightPanelOpen(false);
-  }, [backURL, router, setMobileRightPanelOpen]);
+
+    if (backURL) {
+      router.push(backURL, undefined, { shallow: true, scroll: false });
+    }
+
+    if (onClick) {
+      onClick();
+    }
+  };
 
   return (
     <Button
       variant="outline"
       left={<ArrowLeftIcon />}
       size="md"
-      onClick={onClick}
+      onClick={onClickBack}
     >
       Back
     </Button>

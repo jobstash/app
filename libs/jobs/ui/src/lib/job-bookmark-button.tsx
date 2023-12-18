@@ -1,24 +1,39 @@
-import { useJobBookmarkMutation } from '@jobstash/jobs/state';
+import { useAtom } from 'jotai';
+
+import { type JobPost } from '@jobstash/jobs/core';
+
+import {
+  lastJobBookmarkedAtom,
+  useJobBookmarkMutation,
+} from '@jobstash/jobs/state';
 
 import { BookmarkButton } from '@jobstash/shared/ui';
 
 interface Props {
-  shortUUID: string;
+  jobPost: JobPost;
   isBookmarked: boolean;
   isFetching: boolean;
 }
 
-const JobBookmarkButton = ({ shortUUID, isBookmarked, isFetching }: Props) => {
+const JobBookmarkButton = ({ jobPost, isBookmarked, isFetching }: Props) => {
   const { isLoading: isLoadingMutation, mutate } =
     useJobBookmarkMutation(isBookmarked);
 
+  const [lastJobBookmarked, setLastJobBookmarked] = useAtom(
+    lastJobBookmarkedAtom,
+  );
+
   const onClick = () => {
-    mutate({
-      shortUUID,
-    });
+    // Show pending state until refetch - of a specific job instead of list
+    setLastJobBookmarked(jobPost.shortUUID);
+
+    mutate(jobPost);
   };
 
-  const isLoading = isFetching || isLoadingMutation;
+  // Show spinner only when remove-bookmark until refetch done
+  const showSpinner =
+    isFetching && isBookmarked && jobPost.shortUUID === lastJobBookmarked;
+  const isLoading = isLoadingMutation || showSpinner;
 
   return (
     <BookmarkButton

@@ -1,19 +1,15 @@
 import { memo } from 'react';
 
-import {
-  type ProjectInfo,
-  type ProjectMoreInfo,
-  type RouteSection,
-} from '@jobstash/shared/core';
+import { type ProjectInfo, type ProjectMoreInfo } from '@jobstash/shared/core';
 
 import RightPanelProjectCard from './right-panel-project-card';
 
 interface Props {
   projects: (ProjectInfo & ProjectMoreInfo)[];
-  routeSection: RouteSection;
+  showCTA?: boolean;
 }
 
-const RightPanelProjectCards = ({ projects, routeSection }: Props) => {
+const RightPanelProjectCards = ({ projects, showCTA }: Props) => {
   if (projects.length === 0) return null;
 
   return (
@@ -22,7 +18,7 @@ const RightPanelProjectCards = ({ projects, routeSection }: Props) => {
         <RightPanelProjectCard
           key={project.id}
           project={project}
-          routeSection={routeSection}
+          showCTA={showCTA}
         />
       ))}
     </div>

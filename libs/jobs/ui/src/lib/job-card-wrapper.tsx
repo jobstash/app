@@ -6,7 +6,7 @@ import { cva } from 'class-variance-authority';
 import { cn } from '@jobstash/shared/utils';
 
 interface Props {
-  href: string;
+  href: string | null;
   isActive: boolean;
   children: ReactNode;
   onClick: () => void;
@@ -27,10 +27,27 @@ const jobCard = cva(
   },
 );
 
-const JobCardWrapper = ({ href, isActive, children, onClick }: Props) => (
-  <Link href={href} scroll={false} onClick={onClick}>
-    <div className={cn(jobCard({ isActive }))}>{children}</div>
-  </Link>
-);
+const JobCardWrapper = ({ href, isActive, children, onClick }: Props) => {
+  if (!href)
+    return (
+      <div onClick={onClick}>
+        <InnerWrapper isActive={isActive}>{children}</InnerWrapper>
+      </div>
+    );
+
+  return (
+    <Link href={href} scroll={false} onClick={onClick}>
+      <InnerWrapper isActive={isActive}>{children}</InnerWrapper>
+    </Link>
+  );
+};
 
 export default memo(JobCardWrapper);
+
+const InnerWrapper = ({
+  isActive,
+  children,
+}: {
+  isActive: boolean;
+  children: ReactNode;
+}) => <div className={cn(jobCard({ isActive }))}>{children}</div>;

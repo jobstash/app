@@ -1,11 +1,11 @@
 import { useRouter } from 'next/router';
-import { memo, type ReactNode, useCallback } from 'react';
+import { memo, type ReactNode } from 'react';
 
 import { useSetAtom } from 'jotai';
 
 import { ROUTE_SECTION } from '@jobstash/shared/core';
 
-import { activeJobAtom } from '@jobstash/jobs/state';
+import { activeJobAtom, activeJobBookmarkAtom } from '@jobstash/jobs/state';
 import { activeOrgIdAtom } from '@jobstash/organizations/state';
 import { activeProjectIdAtom } from '@jobstash/projects/state';
 import { sidebarOpenAtom } from '@jobstash/sidebar/state';
@@ -37,8 +37,9 @@ const SidebarBartab = ({
   const setActiveJob = useSetAtom(activeJobAtom);
   const setActiveOrgId = useSetAtom(activeOrgIdAtom);
   const setActiveProjectId = useSetAtom(activeProjectIdAtom);
+  const setActiveJobBookmark = useSetAtom(activeJobBookmarkAtom);
 
-  const onClick = useCallback(() => {
+  const onClick = () => {
     if (pathname !== path) {
       if (path === ROUTE_SECTION.JOBS) {
         setActiveJob(null);
@@ -51,6 +52,10 @@ const SidebarBartab = ({
       if (path === ROUTE_SECTION.PROJECTS) {
         setActiveProjectId(null);
       }
+
+      if (path === ROUTE_SECTION.JOB_BOOKMARKS) {
+        setActiveJobBookmark(null);
+      }
     }
 
     if (isMobile) {
@@ -58,16 +63,7 @@ const SidebarBartab = ({
     }
 
     push(path, undefined, { shallow: false, scroll: true });
-  }, [
-    isMobile,
-    path,
-    pathname,
-    push,
-    setActiveJob,
-    setActiveOrgId,
-    setActiveProjectId,
-    setSidebarOpen,
-  ]);
+  };
 
   return (
     <Bartab

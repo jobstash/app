@@ -1,11 +1,7 @@
 import { memo } from 'react';
 
 import { type RightPanelOrg } from '@jobstash/right-panel/core';
-import {
-  ROUTE_SECTION,
-  type RouteSection,
-  TAB_SEGMENT,
-} from '@jobstash/shared/core';
+import { ROUTE_SECTION, TAB_SEGMENT } from '@jobstash/shared/core';
 import { slugify } from '@jobstash/shared/utils';
 
 import RightPanelCardBorder from './right-panel-card-border';
@@ -16,10 +12,10 @@ import RightPanelOrgCardInvestors from './right-panel-org-card-investors';
 
 interface Props {
   org: RightPanelOrg;
-  routeSection: RouteSection;
+  showCTA?: boolean;
 }
 
-const RightPanelOrgCard = ({ org, routeSection }: Props) => {
+const RightPanelOrgCard = ({ org, showCTA = true }: Props) => {
   const { name, description, fundingRounds, investors, orgId } = org;
 
   const sortedFundingRounds = fundingRounds.sort((a, b) => a.date - b.date);
@@ -41,7 +37,7 @@ const RightPanelOrgCard = ({ org, routeSection }: Props) => {
           <RightPanelOrgCardFundingRounds fundingRounds={sortedFundingRounds} />
           <RightPanelOrgCardInvestors investors={investors} />
 
-          {routeSection !== ROUTE_SECTION.ORGANIZATIONS && (
+          {showCTA && (
             <RightPanelCta text="Explore Organization" onClick={onClick} />
           )}
         </div>

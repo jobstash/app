@@ -1,13 +1,9 @@
 import { memo, type ReactNode } from 'react';
 
-import {
-  RightPanelMobileNav,
-  RightPanelWrapper,
-} from '@jobstash/right-panel/ui';
+import { RightPanelWrapper } from '@jobstash/right-panel/ui';
 import { Loader } from '@jobstash/shared/ui';
 
 interface Props {
-  backUrl: string;
   isLoading: boolean;
   header: ReactNode;
   tabs: ReactNode;
@@ -15,7 +11,7 @@ interface Props {
 }
 
 const ProfileRightPanel = (props: Props) => {
-  const { backUrl, isLoading, header, tabs, card } = props;
+  const { isLoading, header, tabs, card } = props;
 
   if (isLoading) {
     return (
@@ -27,7 +23,6 @@ const ProfileRightPanel = (props: Props) => {
 
   return (
     <RightPanelWrapper>
-      <RightPanelMobileNav backURL={backUrl} />
       {header}
       <hr className="border-t border-2 border-white/10 -mt-1" />
       {tabs}

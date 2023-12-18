@@ -29,7 +29,11 @@ const JobList = ({ initJob, activeJob }: Props) => {
     filterParamsObj,
   } = useJobList(initJob);
 
-  const { isLoading: isLoadingBookmarks, bookmarkedJobs } = useJobBookmarks();
+  const {
+    isLoading: isLoadingBookmarks,
+    bookmarkedJobs,
+    isFetching: isFetchingBookmarks,
+  } = useJobBookmarks();
 
   if (isLoading || isLoadingBookmarks) {
     return (
@@ -68,9 +72,9 @@ const JobList = ({ initJob, activeJob }: Props) => {
           filterParamsObj={filterParamsObj}
           bookmarkButton={
             <JobBookmarkButton
-              shortUUID={jobPost.shortUUID}
+              jobPost={jobPost}
               isBookmarked={bookmarkedJobs.has(jobPost.shortUUID)}
-              isFetching={isLoadingBookmarks}
+              isFetching={isFetchingBookmarks}
             />
           }
         />

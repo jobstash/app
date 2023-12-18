@@ -4,7 +4,6 @@ import {
   type ProjectInfo,
   type ProjectMoreInfo,
   ROUTE_SECTION,
-  type RouteSection,
   TAB_SEGMENT,
 } from '@jobstash/shared/core';
 import { slugify } from '@jobstash/shared/utils';
@@ -21,10 +20,10 @@ import RightPanelProjectCardTvlTags from './right-panel-project-card-tvl-tags';
 
 interface Props {
   project: ProjectInfo & ProjectMoreInfo;
-  routeSection: RouteSection;
+  showCTA?: boolean;
 }
 
-const RightPanelProjectCard = ({ project, routeSection }: Props) => {
+const RightPanelProjectCard = ({ project, showCTA = true }: Props) => {
   const { id, name, website, logo, description, chains } = project;
   const { projectSocialTags, projectTags, projectTvlTags, projectAuditTags } =
     createRightPanelProjectCardTags(project);
@@ -53,7 +52,7 @@ const RightPanelProjectCard = ({ project, routeSection }: Props) => {
         <RightPanelProjectCardAuditTags auditTags={projectAuditTags} />
         <RightPanelProjectCardChains chains={chains} />
 
-        {routeSection !== ROUTE_SECTION.PROJECTS && (
+        {showCTA && (
           <>
             <hr className="border-t border-white/10" />
             <RightPanelCta
