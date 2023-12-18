@@ -9,8 +9,8 @@ import {
   useSIWE,
 } from 'connectkit';
 import { SiweMessage } from 'siwe';
-import { configureChains, createClient, mainnet, WagmiConfig } from 'wagmi';
-import { publicProvider } from 'wagmi/providers/public';
+import { createClient, WagmiConfig } from 'wagmi';
+import { arbitrum, mainnet, optimism, polygon } from 'wagmi/chains';
 
 import {
   CHECK_WALLET_FLOWS,
@@ -19,7 +19,7 @@ import {
   ignoredPathnameRedirectSet,
   redirectFlowsSet,
 } from '@jobstash/auth/core';
-import { MW_URL } from '@jobstash/shared/core';
+import { INFRURA_ID, MW_URL } from '@jobstash/shared/core';
 
 import { useIsMounted } from '@jobstash/shared/state';
 import { getCheckWallet } from '@jobstash/auth/data';
@@ -27,16 +27,12 @@ import { getCheckWallet } from '@jobstash/auth/data';
 import { AuthContext } from '../contexts/auth-context';
 import { useCheckWallet } from '../hooks/use-check-wallet';
 
-const { provider, webSocketProvider } = configureChains(
-  [mainnet],
-  [publicProvider()],
-);
-
 const connectkitClient = createClient(
   getDefaultClient({
     appName: 'Job Stash',
-    provider,
-    webSocketProvider,
+
+    infuraId: INFRURA_ID,
+    chains: [mainnet, polygon, optimism, arbitrum],
   }),
 );
 
