@@ -41,7 +41,7 @@ export const JobListPage = () => {
           </title>
         </Head>
       )}
-      <div className="w-full lg:pl-52">
+      <div className="w-screen overflow-x-hidden lg:pl-52">
         <SideBar />
 
         <div
