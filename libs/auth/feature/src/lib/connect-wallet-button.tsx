@@ -13,7 +13,7 @@ const ConnectWalletButtonx = () => {
     <div style={{ minHeight: 40 }}>
       {isMounted ? (
         <ConnectKitButton.Custom>
-          {({ address, show, isConnected }) => (
+          {({ address, show, isConnected, ensName }) => (
             <Bartab
               isActive={false}
               variant="wallet"
@@ -25,7 +25,7 @@ const ConnectWalletButtonx = () => {
               onClick={() => (show ? show() : null)}
             >
               {address
-                ? `${address.slice(0, 6)}...${address.slice(-4)}`
+                ? ensName ?? `${address.slice(0, 6)}...${address.slice(-4)}`
                 : 'Connect Wallet'}
             </Bartab>
           )}
