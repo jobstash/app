@@ -1,14 +1,17 @@
 import { useMemo } from 'react';
 
 import { useQuery } from '@tanstack/react-query';
+import { useSIWE } from 'connectkit';
 
 import { getJobBookmarks } from '@jobstash/jobs/data';
 
 export const useJobBookmarks = () => {
+  const { isSignedIn } = useSIWE();
   const { isLoading, isError, data, isFetching } = useQuery({
     queryKey: ['job-bookmarks'],
     queryFn: () => getJobBookmarks(),
     staleTime: 1000 * 60 * 60,
+    enabled: isSignedIn,
   });
 
   const bookmarkedJobs = useMemo(
