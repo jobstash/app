@@ -8,10 +8,9 @@ import { getJobBookmarks } from '@jobstash/jobs/data';
 export const useJobBookmarks = () => {
   const { isSignedIn } = useSIWE();
   const { isLoading, isError, data, isFetching } = useQuery({
-    queryKey: ['job-bookmarks'],
-    queryFn: () => getJobBookmarks(),
+    queryKey: ['job-bookmarks', isSignedIn],
+    queryFn: () => getJobBookmarks(isSignedIn),
     staleTime: 1000 * 60 * 60,
-    enabled: isSignedIn,
   });
 
   const bookmarkedJobs = useMemo(
