@@ -1,5 +1,7 @@
 import { MouseEventHandler, useState } from 'react';
 
+import { useModal, useSIWE } from 'connectkit';
+
 import Button from '../base/button/button';
 
 import Spinner from './spinner';
@@ -11,11 +13,19 @@ interface Props {
 }
 
 const BookmarkButton = ({ isBookmarked, isLoading, onClick }: Props) => {
+  const { isSignedIn } = useSIWE();
+  const { setOpen } = useModal();
+
   const [bookmarked, setBookmarked] = useState(isBookmarked);
 
   const onClickHandler: MouseEventHandler = (e) => {
     e.preventDefault();
     e.stopPropagation();
+
+    if (!isSignedIn) {
+      setOpen(true);
+      return;
+    }
 
     if (onClick) {
       setBookmarked((prev) => !prev);
@@ -34,7 +44,7 @@ const BookmarkButton = ({ isBookmarked, isLoading, onClick }: Props) => {
         isDisabled={isLoading}
         onClick={onClickHandler}
       >
-        {bookmarked ? <BookmarkedIcon /> : <BookmarkIcon />}
+        {isSignedIn && bookmarked ? <BookmarkedIcon /> : <BookmarkIcon />}
       </Button>
     </div>
   );
