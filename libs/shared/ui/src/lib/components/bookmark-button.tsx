@@ -26,15 +26,17 @@ const BookmarkButton = ({ isBookmarked, isLoading, onClick }: Props) => {
   if (isLoading) return <Spinner />;
 
   return (
-    <Button
-      isIcon
-      variant="translucent"
-      size="sm"
-      isDisabled={isLoading}
-      onClick={onClickHandler}
-    >
-      {bookmarked ? <BookmarkedIcon /> : <BookmarkIcon />}
-    </Button>
+    <div className="flex items-center justify-center h-6 w-6">
+      <Button
+        isIcon
+        variant="translucent"
+        size="sm"
+        isDisabled={isLoading}
+        onClick={onClickHandler}
+      >
+        {bookmarked ? <BookmarkedIcon /> : <BookmarkIcon />}
+      </Button>
+    </div>
   );
 };
 
