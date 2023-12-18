@@ -49,7 +49,10 @@ const JobBookmarksRightPanelTabs = ({
 
   if (competitorCount) {
     tabs.push({
-      text: `${getPluralText('Competitor', projectCount)} (${competitorCount})`,
+      text: `${getPluralText(
+        'Competitor',
+        competitorCount,
+      )} (${competitorCount})`,
       tabSegment: TAB_SEGMENT.competitors,
     });
   }
