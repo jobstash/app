@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic';
 import { useEffect } from 'react';
 
 import { LoadingPage } from '@jobstash/shared/pages';
@@ -12,8 +13,14 @@ import { mobileRightPanelOpenAtom, useIsMobile } from '@jobstash/shared/state';
 
 import { JobBookmarkButton, JobBookmarkCard } from '@jobstash/jobs/ui';
 import { InternalErrorResult, Loader } from '@jobstash/shared/ui';
-import { JobBookmarksRightPanel } from '@jobstash/jobs/feature';
-import { SideBar } from '@jobstash/sidebar/feature';
+
+const SideBar = dynamic(() =>
+  import('@jobstash/sidebar/feature').then((m) => m.SideBar),
+);
+
+const JobBookmarksRightPanel = dynamic(() =>
+  import('@jobstash/jobs/feature').then((m) => m.JobBookmarksRightPanel),
+);
 
 export const JobBookmarksPage = () => {
   const { isLoading, isError, data, bookmarkedJobs, isFetching } =
