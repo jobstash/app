@@ -12,6 +12,7 @@ import {
   ProfileHeader,
   ProfileSubHeader,
 } from '@jobstash/profile/ui';
+import { PageWrapper } from '@jobstash/shared/ui';
 import { SideBar } from '@jobstash/sidebar/feature';
 
 export const ProfilePage = () => {
@@ -22,7 +23,7 @@ export const ProfilePage = () => {
       <>
         <Head>Profile</Head>
         <ProfileInfoProvider>
-          <div className="w-full lg:pl-52">
+          <PageWrapper>
             <SideBar />
 
             <div className="px-3.5 pt-[65px] lg:px-12 lg:pt-6 lg:pr-[50%] flex flex-col gap-6">
@@ -38,7 +39,7 @@ export const ProfilePage = () => {
             <div className="hide-scrollbar fixed h-screen overflow-y-auto p-4 transition-all inset-auto right-0 top-0 w-5/12 px-6 py-8 pr-10 flex items-center justify-center">
               <AccountCard />
             </div>
-          </div>
+          </PageWrapper>
         </ProfileInfoProvider>
       </>
     );

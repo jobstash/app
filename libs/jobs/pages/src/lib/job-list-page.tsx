@@ -11,6 +11,9 @@ import { showFiltersAtom } from '@jobstash/filters/state';
 import { activeJobAtom } from '@jobstash/jobs/state';
 import { useIsMobile } from '@jobstash/shared/state';
 
+// eslint-disable-next-line @nx/enforce-module-boundaries
+import { PageWrapper } from '@jobstash/shared/ui';
+
 const SideBar = dynamic(() =>
   import('@jobstash/sidebar/feature').then((m) => m.SideBar),
 );
@@ -41,7 +44,8 @@ export const JobListPage = () => {
           </title>
         </Head>
       )}
-      <div className="w-screen overflow-x-hidden lg:pl-52">
+
+      <PageWrapper>
         <SideBar />
 
         <div
@@ -72,7 +76,7 @@ export const JobListPage = () => {
             <JobsRightPanel jobPost={activeJob} currentTab="details" />
           </div>
         )}
-      </div>
+      </PageWrapper>
     </>
   );
 };

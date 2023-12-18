@@ -21,6 +21,9 @@ import { cn, sentryMessage } from '@jobstash/shared/utils';
 import { showFiltersAtom } from '@jobstash/filters/state';
 import { activeJobAtom, useJobPost } from '@jobstash/jobs/state';
 
+// eslint-disable-next-line @nx/enforce-module-boundaries
+import { PageWrapper } from '@jobstash/shared/ui';
+
 const MetaData = dynamic(() =>
   import('@jobstash/shared/ui').then((m) => m.MetaData),
 );
@@ -119,7 +122,7 @@ export const JobPostPage = ({
         />
       )}
 
-      <div className={cn('w-full lg:pl-52')}>
+      <PageWrapper>
         <SideBar />
 
         <div
@@ -152,7 +155,7 @@ export const JobPostPage = ({
             currentTab={tab.toString()}
           />
         </div>
-      </div>
+      </PageWrapper>
     </>
   );
 };

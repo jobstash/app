@@ -87,6 +87,9 @@ export { default as TopBanner } from './lib/components/top-banner';
 // Pages
 export { default as NotFoundPage } from './lib/pages/not-found-page';
 
+// Layouts
+export { default as PageWrapper } from './lib/layouts/page-wrapper';
+
 // Utils
 export * from './lib/utils/create-funding-rounds-tags';
 export * from './lib/utils/create-job-tags';

@@ -10,6 +10,7 @@ import {
   ProfileRepoGotItCard,
   ProfileRepoSubHeader,
 } from '@jobstash/profile/ui';
+import { PageWrapper } from '@jobstash/shared/ui';
 import {
   ProfileRepoList,
   ProfileRepoRightPanel,
@@ -26,7 +27,7 @@ export const ProfileRepositoriesPage = () => {
           <title>Your Repositories</title>
         </Head>
 
-        <div className="w-full lg:pl-52">
+        <PageWrapper>
           <SideBar />
 
           <div className="px-3.5 pt-[65px] lg:px-12 lg:pt-6 lg:pr-[50%] flex flex-col gap-6">
@@ -37,7 +38,7 @@ export const ProfileRepositoriesPage = () => {
           </div>
 
           <ProfileRepoRightPanel />
-        </div>
+        </PageWrapper>
       </ProfileRepoPageProvider>
     );
 

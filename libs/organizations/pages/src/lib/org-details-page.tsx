@@ -15,7 +15,11 @@ import { cn, sentryMessage } from '@jobstash/shared/utils';
 import { showFiltersAtom } from '@jobstash/filters/state';
 import { activeOrgIdAtom } from '@jobstash/organizations/state';
 
-import { getFundingRoundsData, NotFoundPage } from '@jobstash/shared/ui';
+import {
+  getFundingRoundsData,
+  NotFoundPage,
+  PageWrapper,
+} from '@jobstash/shared/ui';
 
 const Filters = dynamic(() =>
   import('@jobstash/filters/feature').then((m) => m.Filters),
@@ -116,7 +120,7 @@ export const OrgDetailsPage = ({
     <>
       {/* TODO: metadata */}
 
-      <div className={cn('w-full lg:pl-52')}>
+      <PageWrapper>
         <SideBar />
 
         <div
@@ -145,7 +149,7 @@ export const OrgDetailsPage = ({
         >
           <OrgsRightPanel orgId={orgId} currentTab={tab as string} />
         </div>
-      </div>
+      </PageWrapper>
     </>
   );
 };

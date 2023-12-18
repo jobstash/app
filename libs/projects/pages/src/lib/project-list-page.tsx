@@ -11,6 +11,8 @@ import { showFiltersAtom } from '@jobstash/filters/state';
 import { activeProjectIdAtom } from '@jobstash/projects/state';
 import { useIsMobile } from '@jobstash/shared/state';
 
+import { PageWrapper } from '@jobstash/shared/ui';
+
 const Filters = dynamic(() =>
   import('@jobstash/filters/feature').then((m) => m.Filters),
 );
@@ -39,7 +41,7 @@ export const ProjectListPage = ({ initActiveProject }: Props) => {
   useCheckWallet();
 
   return (
-    <div className="w-full lg:pl-52">
+    <PageWrapper>
       <SideBar />
 
       <div
@@ -73,6 +75,6 @@ export const ProjectListPage = ({ initActiveProject }: Props) => {
           />
         </div>
       )}
-    </div>
+    </PageWrapper>
   );
 };

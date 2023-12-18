@@ -15,7 +15,7 @@ import { cn, sentryMessage } from '@jobstash/shared/utils';
 import { showFiltersAtom } from '@jobstash/filters/state';
 import { activeProjectIdAtom } from '@jobstash/projects/state';
 
-import { NotFoundPage } from '@jobstash/shared/ui';
+import { NotFoundPage, PageWrapper } from '@jobstash/shared/ui';
 
 const Filters = dynamic(() =>
   import('@jobstash/filters/feature').then((m) => m.Filters),
@@ -86,7 +86,7 @@ export const ProjectDetailsPage = ({
   }
 
   return (
-    <div className="w-full lg:pl-52">
+    <PageWrapper>
       <SideBar />
 
       <div
@@ -121,6 +121,6 @@ export const ProjectDetailsPage = ({
           currentTab={tab as string}
         />
       </div>
-    </div>
+    </PageWrapper>
   );
 };

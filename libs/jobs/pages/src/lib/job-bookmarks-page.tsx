@@ -12,7 +12,8 @@ import { activeJobBookmarkAtom, useJobBookmarks } from '@jobstash/jobs/state';
 import { mobileRightPanelOpenAtom, useIsMobile } from '@jobstash/shared/state';
 
 import { JobBookmarkButton, JobBookmarkCard } from '@jobstash/jobs/ui';
-import { InternalErrorResult, Loader } from '@jobstash/shared/ui';
+// eslint-disable-next-line @nx/enforce-module-boundaries
+import { InternalErrorResult, Loader, PageWrapper } from '@jobstash/shared/ui';
 
 const SideBar = dynamic(() =>
   import('@jobstash/sidebar/feature').then((m) => m.SideBar),
@@ -58,7 +59,7 @@ export const JobBookmarksPage = () => {
   if (isLoading) return <LoadingPage />;
 
   return (
-    <div className="w-full lg:pl-52">
+    <PageWrapper>
       <SideBar />
 
       <div className="px-3.5 pt-16 lg:p-8 lg:pr-[50%] flex flex-col gap-4">
@@ -100,6 +101,6 @@ export const JobBookmarksPage = () => {
           )}
         </div>
       )}
-    </div>
+    </PageWrapper>
   );
 };

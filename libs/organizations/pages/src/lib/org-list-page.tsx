@@ -10,6 +10,8 @@ import { showFiltersAtom } from '@jobstash/filters/state';
 import { activeOrgIdAtom } from '@jobstash/organizations/state';
 import { useIsMobile } from '@jobstash/shared/state';
 
+import { PageWrapper } from '@jobstash/shared/ui';
+
 const Filters = dynamic(() =>
   import('@jobstash/filters/feature').then((m) => m.Filters),
 );
@@ -36,7 +38,7 @@ export const OrgListPage = ({ initActiveOrg }: Props) => {
   const isMobile = useIsMobile();
 
   return (
-    <div className="w-full lg:pl-52">
+    <PageWrapper>
       <SideBar />
 
       <div
@@ -70,6 +72,6 @@ export const OrgListPage = ({ initActiveOrg }: Props) => {
           />
         </div>
       )}
-    </div>
+    </PageWrapper>
   );
 };
