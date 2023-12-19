@@ -11,12 +11,19 @@ interface Props {
   org: OrgDetails;
 }
 
-const OrgReviewsSection = ({ org }: Props) => (
-  <div className="flex flex-col gap-4">
-    <LeaveReviewSection />
-    <AggregateSection org={org} />
-  </div>
-);
+const OrgReviewsSection = ({ org }: Props) => {
+  const noReviews = org.reviewCount === 0;
+  const hasRating = Object.values(org.aggregateRatings).some(
+    (n) => n !== null && n !== 0,
+  );
+
+  return (
+    <div className="flex flex-col gap-4">
+      {noReviews && <LeaveReviewSection />}
+      {hasRating && <AggregateSection org={org} />}
+    </div>
+  );
+};
 
 export default OrgReviewsSection;
 
