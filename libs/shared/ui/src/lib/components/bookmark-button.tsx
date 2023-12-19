@@ -1,6 +1,8 @@
 import { MouseEventHandler, useState } from 'react';
 
-import { useModal, useSIWE } from 'connectkit';
+import { CHECK_WALLET_ROLES } from '@jobstash/auth/core';
+
+import { useRoleClick } from '@jobstash/auth/state';
 
 import Button from '../base/button/button';
 
@@ -13,24 +15,19 @@ interface Props {
 }
 
 const BookmarkButton = ({ isBookmarked, isLoading, onClick }: Props) => {
-  const { isSignedIn } = useSIWE();
-  const { setOpen } = useModal();
+  const { isAuthd, roleClick } = useRoleClick(CHECK_WALLET_ROLES.DEV, () => {
+    if (onClick) {
+      setBookmarked((prev) => !prev);
+      onClick();
+    }
+  });
 
   const [bookmarked, setBookmarked] = useState(isBookmarked);
 
   const onClickHandler: MouseEventHandler = (e) => {
     e.preventDefault();
     e.stopPropagation();
-
-    if (!isSignedIn) {
-      setOpen(true);
-      return;
-    }
-
-    if (onClick) {
-      setBookmarked((prev) => !prev);
-      onClick();
-    }
+    roleClick();
   };
 
   if (isLoading) return <Spinner />;
@@ -44,7 +41,7 @@ const BookmarkButton = ({ isBookmarked, isLoading, onClick }: Props) => {
         isDisabled={isLoading}
         onClick={onClickHandler}
       >
-        {isSignedIn && bookmarked ? <BookmarkedIcon /> : <BookmarkIcon />}
+        {isAuthd && bookmarked ? <BookmarkedIcon /> : <BookmarkIcon />}
       </Button>
     </div>
   );
