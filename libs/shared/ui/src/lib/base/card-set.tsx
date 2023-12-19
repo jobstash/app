@@ -1,6 +1,12 @@
-import { memo, type ReactNode, useCallback } from 'react';
+import {
+  memo,
+  type MouseEventHandler,
+  type ReactNode,
+  useCallback,
+} from 'react';
 
 import { cva, type VariantProps } from 'class-variance-authority';
+import { ClassValue } from 'clsx';
 
 import { cn } from '@jobstash/shared/utils';
 
@@ -31,10 +37,11 @@ type CardSetVariantProps = VariantProps<typeof cardset>;
 
 interface CardSetProps extends CardSetVariantProps {
   icon: ReactNode;
-  children: string;
+  children: ReactNode;
   link?: string;
   showLinkIcon?: boolean;
-  onClick?: () => void;
+  onClick?: MouseEventHandler;
+  className?: ClassValue;
 }
 
 const CardSet = ({
@@ -43,19 +50,34 @@ const CardSet = ({
   link,
   showLinkIcon = true,
   onClick,
+  className,
 }: CardSetProps) => {
   const hasLink =
     Boolean(link) && link !== '#' && typeof window !== 'undefined';
   const onClickLink = useCallback(() => window.open(link, '_blank'), [link]);
 
+  const onClickCardSet: MouseEventHandler = (e) => {
+    e.preventDefault();
+    e.stopPropagation();
+
+    if (onClick) {
+      onClick(e);
+    } else if (hasLink) {
+      onClickLink();
+    }
+  };
+
   return (
     <button
       type="button"
-      className={cn(cardset({ hasLink: hasLink || Boolean(onClick) }))}
-      onClick={onClick ?? hasLink ? onClickLink : undefined}
+      className={cn(
+        cardset({ hasLink: hasLink || Boolean(onClick) }),
+        className,
+      )}
+      onClick={onClickCardSet}
     >
       {icon}
-      <Text size="sm">{children}</Text>
+      {children && <Text size="sm">{children}</Text>}
       {Boolean(link) && showLinkIcon && <ArrowCircleUpRightIcon />}
     </button>
   );
