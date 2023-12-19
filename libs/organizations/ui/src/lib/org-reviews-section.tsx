@@ -3,8 +3,9 @@ import { Rating } from '@mantine/core';
 import { type OrgDetails } from '@jobstash/organizations/core';
 
 import { RightPanelCardBorder } from '@jobstash/right-panel/ui';
-import { Button, EmptyStarIcon, Heading, Text } from '@jobstash/shared/ui';
+import { EmptyStarIcon, Heading, Text } from '@jobstash/shared/ui';
 
+import OrgReviewShareButton from './org-review-share-button';
 import OrgReviewSigninButton from './org-review-signin-button';
 
 interface Props {
@@ -19,7 +20,7 @@ const OrgReviewsSection = ({ org }: Props) => {
 
   return (
     <div className="flex flex-col gap-4">
-      {noReviews && <LeaveReviewSection />}
+      {noReviews && <LeaveReviewSection org={org} />}
       {hasRating && <AggregateSection org={org} />}
     </div>
   );
@@ -72,7 +73,7 @@ const AggregateSection = ({ org }: { org: OrgDetails }) => (
   </RightPanelCardBorder>
 );
 
-const LeaveReviewSection = () => (
+const LeaveReviewSection = ({ org }: { org: OrgDetails }) => (
   <RightPanelCardBorder>
     <div className="flex flex-col p-6 gap-6">
       <Heading size="lg" fw="semibold">
@@ -91,7 +92,7 @@ const LeaveReviewSection = () => (
 
       <div className="flex gap-x-4">
         <OrgReviewSigninButton />
-        <Button variant="translucent">Share with an Employee</Button>
+        <OrgReviewShareButton org={org} />
       </div>
     </div>
   </RightPanelCardBorder>
