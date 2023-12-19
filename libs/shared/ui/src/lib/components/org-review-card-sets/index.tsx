@@ -34,7 +34,7 @@ const OrgReviewCardSets = ({ org }: Props) => {
 
     if (isOrgSection) {
       setActiveOrgId(orgId);
-      push(reviewPath);
+      push(reviewPath, undefined, { scroll: false });
     } else {
       window.location.href = reviewPath;
     }
