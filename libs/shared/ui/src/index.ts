@@ -29,6 +29,7 @@ export { default as CurrencyCircleDollarIcon } from './lib/icons/currency-circle
 export { default as DiscordIcon } from './lib/icons/discord-icon';
 export { default as DocsIcon } from './lib/icons/docs-icon';
 export { default as EditIcon } from './lib/icons/edit-icon';
+export { default as EmptyStarIcon } from './lib/icons/empty-star-icon';
 export { default as EndDateIcon } from './lib/icons/end-date-icon';
 export { default as EthereumIcon } from './lib/icons/ethereum-icon';
 export { default as FilterIcon } from './lib/icons/filter-icon';

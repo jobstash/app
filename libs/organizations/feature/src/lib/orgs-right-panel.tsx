@@ -4,14 +4,16 @@ import { ROUTE_SECTION, TAB_SEGMENT } from '@jobstash/shared/core';
 
 import { useOrgDetails } from '@jobstash/organizations/state';
 
-import { OrgRightPanelTabs } from '@jobstash/organizations/ui';
+import {
+  OrgReviewsSection,
+  OrgRightPanelTabs,
+} from '@jobstash/organizations/ui';
 import {
   RightPanel,
   RightPanelBackButton,
   RightPanelOrgCard,
   RightPanelOrgJobCards,
   RightPanelProjectCards,
-  RightPanelReviews,
 } from '@jobstash/right-panel/ui';
 import { Loader } from '@jobstash/shared/ui';
 
@@ -57,7 +59,7 @@ const OrgsRightPanel = ({ orgId, currentTab }: Props) => {
       )}
 
       {currentTab === TAB_SEGMENT.reviews && (
-        <RightPanelReviews org={orgDetails} />
+        <OrgReviewsSection org={orgDetails} />
       )}
 
       {/* TODO: REPOSITORIES TAB */}
