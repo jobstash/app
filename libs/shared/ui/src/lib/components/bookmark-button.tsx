@@ -49,10 +49,10 @@ const BookmarkButton = ({
 export default BookmarkButton;
 
 const BookmarkIcon = () => (
-  <div className="flex items-center justify-center w-6 h-6">
+  <div className="flex items-center justify-center w-5 h-5">
     <svg
-      width="16"
-      height="28"
+      width="13.5"
+      height="17.75"
       viewBox="0 0 14 20"
       fill="none"
       xmlns="http://www.w3.org/2000/svg"

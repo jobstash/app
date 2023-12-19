@@ -16,7 +16,7 @@ import Text from './text';
 
 const cardset = cva(
   [
-    'flex items-center gap-x-1 rounded pointer-events-none',
+    'flex items-center gap-x-1 rounded pointer-events-none min-h-[28px]',
     'transition-color duration-200 ease-in-out transform translate-x-0 translate-y-0',
     '[&>svg]:mt-[1px]',
   ],

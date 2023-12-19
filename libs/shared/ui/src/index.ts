@@ -81,7 +81,7 @@ export { default as ListErrorMessage } from './lib/components/list-error-message
 export { default as ListNextPageLoader } from './lib/components/list-next-page-loader';
 export { default as MetaData } from './lib/components/meta-data';
 export { default as NotFoundSvg } from './lib/components/not-found-svg';
-export { default as OrgReviewButton } from './lib/components/org-review-button';
+export { default as OrgReviewCardSets } from './lib/components/org-review-card-sets';
 export { default as Spinner } from './lib/components/spinner';
 export { default as TopBanner } from './lib/components/top-banner';
 

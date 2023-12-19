@@ -56,7 +56,7 @@ const AggregateSection = ({ org }: { org: OrgDetails }) => (
               <Rating
                 count={1}
                 fractions={5}
-                value={(rating ?? 0) / 10}
+                value={(rating ?? 0) / 5}
                 color="gold"
               />
             ) : (
