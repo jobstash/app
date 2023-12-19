@@ -11,10 +11,16 @@ import Spinner from './spinner';
 interface Props {
   isBookmarked: boolean;
   isLoading?: boolean;
+  isDisabled?: boolean;
   onClick?: () => void;
 }
 
-const BookmarkButton = ({ isBookmarked, isLoading, onClick }: Props) => {
+const BookmarkButton = ({
+  isBookmarked,
+  isLoading,
+  isDisabled,
+  onClick,
+}: Props) => {
   const { isAuthd, roleClick } = useRoleClick(CHECK_WALLET_ROLES.DEV, () => {
     if (onClick) {
       setBookmarked((prev) => !prev);
@@ -31,6 +37,7 @@ const BookmarkButton = ({ isBookmarked, isLoading, onClick }: Props) => {
       <CardSet
         icon={isAuthd && bookmarked ? <BookmarkedIcon /> : <BookmarkIcon />}
         className="px-[3px]"
+        isDisabled={isDisabled}
         onClick={roleClick}
       >
         {null}

@@ -29,6 +29,9 @@ const cardset = cva(
         ],
         false: 'bg-none cursor-default',
       },
+      isDisabled: {
+        true: 'opacity-30 select-none pointer-events-none',
+      },
     },
   },
 );
@@ -42,6 +45,7 @@ interface CardSetProps extends CardSetVariantProps {
   showLinkIcon?: boolean;
   onClick?: MouseEventHandler;
   className?: ClassValue;
+  isDisabled?: boolean;
 }
 
 const CardSet = ({
@@ -51,6 +55,7 @@ const CardSet = ({
   showLinkIcon = true,
   onClick,
   className,
+  isDisabled,
 }: CardSetProps) => {
   const hasLink =
     Boolean(link) && link !== '#' && typeof window !== 'undefined';
@@ -71,7 +76,7 @@ const CardSet = ({
     <button
       type="button"
       className={cn(
-        cardset({ hasLink: hasLink || Boolean(onClick) }),
+        cardset({ hasLink: hasLink || Boolean(onClick), isDisabled }),
         className,
       )}
       onClick={onClickCardSet}
