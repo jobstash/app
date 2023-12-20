@@ -23,9 +23,6 @@ const ProfileReviewsSubHeader = () => {
           <Text color="dimmed">{`Known Organizations: ${profileOrgReviewCount}`}</Text>
         )}
         <Button isIcon isDisabled>
-          <RefreshIcon />
-        </Button>
-        <Button isIcon isDisabled>
           [ ? ]
         </Button>
       </div>
