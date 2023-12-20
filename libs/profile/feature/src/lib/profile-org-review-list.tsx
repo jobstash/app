@@ -1,5 +1,7 @@
 import { memo } from 'react';
 
+import { PROFILE_RIGHT_PANEL_TAB } from '@jobstash/profile/core';
+
 import {
   useProfileOrgReviewList,
   useProfileReviewsPageContext,
@@ -12,13 +14,18 @@ import {
 import { ListErrorMessage, Loader } from '@jobstash/shared/ui';
 
 const ProfileOrgReviewList = () => {
-  const { activeProfileOrgReview } = useProfileReviewsPageContext();
+  const { activeProfileOrgReview, setActiveTab } =
+    useProfileReviewsPageContext();
 
   const { isLoading, error, profileOrgReviewListItems } =
     useProfileOrgReviewList();
 
   if (isLoading) return <LoadingState />;
   if (profileOrgReviewListItems.length === 0 && !error) return <EmptyList />;
+
+  const onClickEdit = () => {
+    setActiveTab(PROFILE_RIGHT_PANEL_TAB.YOUR_REVIEW);
+  };
 
   return (
     <div className="flex flex-col gap-y-4">
@@ -27,6 +34,7 @@ const ProfileOrgReviewList = () => {
           key={profileOrgReview.org.id}
           profileOrgReview={profileOrgReview}
           isActive={activeProfileOrgReview?.org.id === profileOrgReview.org.id}
+          onClickEdit={onClickEdit}
         />
       ))}
 

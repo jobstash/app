@@ -25,10 +25,11 @@ import ProfileCardWrapper from './profile-card-wrapper';
 interface Props {
   isActive: boolean;
   profileOrgReview: ProfileOrgReview;
+  onClickEdit: () => void;
 }
 
 const ProfileOrgReviewCard = (props: Props) => {
-  const { isActive, profileOrgReview } = props;
+  const { isActive, profileOrgReview, onClickEdit } = props;
   const { org, rating, membershipStatus, startDate, endDate, commitCount } =
     profileOrgReview;
 
@@ -56,7 +57,11 @@ const ProfileOrgReviewCard = (props: Props) => {
               alt: org.name,
             }}
           />
-          <Button left={<EditIcon />} variant="translucent">
+          <Button
+            left={<EditIcon />}
+            variant="translucent"
+            onClick={onClickEdit}
+          >
             Edit Your Review
           </Button>
         </div>
