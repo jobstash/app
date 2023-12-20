@@ -1,8 +1,13 @@
 import { memo } from 'react';
 
-import { useProfileReviewsPageContext } from '@jobstash/profile/state';
+import { useAtom } from 'jotai';
 
-import { BreadCrumbs, Button, RefreshIcon, Text } from '@jobstash/shared/ui';
+import {
+  showGotItCardAtom,
+  useProfileReviewsPageContext,
+} from '@jobstash/profile/state';
+
+import { BreadCrumbs, Button, Text } from '@jobstash/shared/ui';
 
 const breadCrumbs = [
   { title: 'Your Profile', href: '/profile' },
@@ -11,8 +16,12 @@ const breadCrumbs = [
 
 const ProfileReviewsSubHeader = () => {
   const { profileOrgReviewCount } = useProfileReviewsPageContext();
+  const [, setShowGotItCard] = useAtom(showGotItCardAtom);
 
   const hasOrgReview = profileOrgReviewCount && profileOrgReviewCount > 0;
+  const onClickGotItCardHelper = () => {
+    setShowGotItCard((prev) => ({ ...prev, reviews: !prev.reviews }));
+  };
 
   return (
     <div className="px-4 flex justify-between items-center">
@@ -22,7 +31,7 @@ const ProfileReviewsSubHeader = () => {
         {hasOrgReview && (
           <Text color="dimmed">{`Known Organizations: ${profileOrgReviewCount}`}</Text>
         )}
-        <Button isIcon isDisabled>
+        <Button isIcon onClick={onClickGotItCardHelper}>
           [ ? ]
         </Button>
       </div>

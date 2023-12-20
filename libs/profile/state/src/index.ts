@@ -3,6 +3,7 @@ export * from './lib/atoms/active-profile-org-review-atom';
 export * from './lib/atoms/active-profile-repo-atom';
 export * from './lib/atoms/profile-org-review-count-atom';
 export * from './lib/atoms/profile-repo-count-atom';
+export * from './lib/atoms/show-got-it-card-atom';
 
 // Hooks
 export * from './lib/hooks/use-all-jobs-query';

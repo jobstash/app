@@ -21,7 +21,7 @@ const ProfileOrgReviewList = () => {
   if (profileOrgReviewListItems.length === 0 && !error) return <EmptyList />;
 
   return (
-    <div className="flex flex-col gap-y-4 py-4">
+    <div className="flex flex-col gap-y-4">
       {profileOrgReviewListItems.map((profileOrgReview) => (
         <ProfileOrgReviewCard
           key={profileOrgReview.org.id}
