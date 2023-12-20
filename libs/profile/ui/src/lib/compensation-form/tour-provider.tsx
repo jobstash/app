@@ -1,13 +1,13 @@
 import { ReactNode } from 'react';
 
-import { StepType } from '@reactour/tour';
+import { StepType, useTour } from '@reactour/tour';
 
-import { TOUR_SELECTOR_ID } from '@jobstash/profile/core';
+import { LS_KEYS, TOUR_SELECTOR_ID } from '@jobstash/profile/core';
+
+import { Button } from '@jobstash/shared/ui';
 
 import ProfileOnboardCard from '../profile-onboard-card';
 import ProfileTourWrapper from '../profile-tour-wrapper';
-
-import TourNextButton from './tour-next-button';
 
 interface Props {
   children: ReactNode;
@@ -46,3 +46,22 @@ const steps: StepType[] = [
     position: 'center',
   },
 ];
+
+const TourNextButton = () => {
+  const { setIsOpen } = useTour();
+
+  const onClick = () => {
+    setIsOpen(false);
+    if (typeof localStorage !== 'undefined') {
+      localStorage.setItem(LS_KEYS.TOURS.COMPENSATION, '1');
+    }
+  };
+
+  return (
+    <div className="w-full flex justify-end">
+      <Button variant="primary" className="py-1.5" onClick={onClick}>
+        Got It
+      </Button>
+    </div>
+  );
+};

@@ -3,7 +3,10 @@ import { useProfileOrgReviewFormContext } from '@jobstash/profile/state';
 import { Button } from '@jobstash/shared/ui';
 
 const Actions = () => {
-  const { isDisabledSalarySave, saveSalary } = useProfileOrgReviewFormContext();
+  const {
+    isDisabledCompensationSave: isDisabledSalarySave,
+    saveCompensation: saveSalary,
+  } = useProfileOrgReviewFormContext();
 
   return (
     <div className="flex items-center justify-center pt-2 w-full gap-8">

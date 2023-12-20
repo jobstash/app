@@ -12,11 +12,11 @@ import {
 } from '@jobstash/profile/state';
 
 import {
+  CompensationForm,
   ProfileRightPanel,
   ProfileRightPanelOrgHeader,
   ProfileRightPanelTabs,
   Ratings,
-  SalaryForm,
   YourReview,
 } from '@jobstash/profile/ui';
 import { RightPanelCardBorder } from '@jobstash/right-panel/ui';
@@ -47,8 +47,8 @@ const ProfileOrgReviewsRightPanel = () => {
                 />
                 <div className="p-6">
                   <div className="flex flex-col gap-6 py-2 relative">
-                    {activeTab === PROFILE_RIGHT_PANEL_TAB.SALARY && (
-                      <SalaryForm />
+                    {activeTab === PROFILE_RIGHT_PANEL_TAB.COMPENSATION && (
+                      <CompensationForm />
                     )}
                     {activeTab === PROFILE_RIGHT_PANEL_TAB.RATING && (
                       <Ratings />

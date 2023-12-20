@@ -9,6 +9,5 @@ export { default as RightPanelOrgCard } from './lib/right-panel-org-card';
 export { default as RightPanelOrgJobCards } from './lib/right-panel-org-job-cards';
 export { default as RightPanelProjectCard } from './lib/right-panel-project-card';
 export { default as RightPanelProjectCards } from './lib/right-panel-project-cards';
-export { default as RightPanelReviews } from './lib/right-panel-reviews';
 export { default as RightPanelTabs } from './lib/right-panel-tabs';
 export { default as RightPanelWrapper } from './lib/right-panel-wrapper';

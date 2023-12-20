@@ -1,6 +1,6 @@
 import { Heading, Text } from '@jobstash/shared/ui';
 
-const YourReviewHeader = () => (
+const Header = () => (
   <>
     <Heading size="lg" fw="semibold">
       Your Review
@@ -16,4 +16,4 @@ const YourReviewHeader = () => (
   </>
 );
 
-export default YourReviewHeader;
+export default Header;

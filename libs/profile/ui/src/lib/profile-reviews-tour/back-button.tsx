@@ -28,7 +28,7 @@ const BackButton = (props: Props) => {
     }
 
     if (currentStep === 2) {
-      setActiveTab(PROFILE_RIGHT_PANEL_TAB.SALARY);
+      setActiveTab(PROFILE_RIGHT_PANEL_TAB.COMPENSATION);
     }
 
     if (currentStep === 3) {

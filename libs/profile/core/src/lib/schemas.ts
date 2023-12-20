@@ -1,5 +1,11 @@
 import myzod from 'myzod';
 
+import {
+  orgCompensationSchema,
+  orgRatingSchema,
+  orgReviewSchema,
+  orgStaffReviewSchema,
+} from '@jobstash/organizations/core';
 import { repositoryInfoSchema, tagSchema } from '@jobstash/shared/core';
 
 export const profileRepoTag = myzod.intersection(
@@ -32,28 +38,6 @@ export const profileRepoListQueryPageSchema = myzod.object({
   data: myzod.array(profileRepoSchema),
 });
 
-export const profileOrgReviewSalarySchema = myzod.object({
-  selectedCurrency: myzod.string().nullable(),
-  amount: myzod.number().nullable(),
-  offersTokenAllocation: myzod.boolean(),
-});
-
-export const profileOrgReviewRatingSchema = myzod.object({
-  management: myzod.number().min(0).max(5).nullable(),
-  careerGrowth: myzod.number().min(0).max(5).nullable(),
-  benefits: myzod.number().min(0).max(5).nullable(),
-  workLifeBalance: myzod.number().min(0).max(5).nullable(),
-  cultureValues: myzod.number().min(0).max(5).nullable(),
-  diversityInclusion: myzod.number().min(0).max(5).nullable(),
-  interviewProcess: myzod.number().min(0).max(5).nullable(),
-});
-
-export const profileOrgReviewYourReviewSchema = myzod.object({
-  headline: myzod.string().nullable(),
-  pros: myzod.string().nullable(),
-  cons: myzod.string().nullable(),
-});
-
 const profileOrgSchema = myzod.object({
   id: myzod.string().min(1),
   name: myzod.string().min(1),
@@ -74,17 +58,12 @@ const profileOrgSchema = myzod.object({
   logo: myzod.string().min(1).nullable(),
 });
 
-export const profileOrgReviewSchema = myzod.object({
-  org: profileOrgSchema.allowUnknownKeys(true),
-  membershipStatus: myzod.string().nullable(),
-  startDate: myzod.number().nullable(),
-  endDate: myzod.number().nullable(),
-  reviewedTimestamp: myzod.number().nullable(),
-  commitCount: myzod.number().nullable(),
-  salary: profileOrgReviewSalarySchema,
-  rating: profileOrgReviewRatingSchema,
-  review: profileOrgReviewYourReviewSchema,
-});
+export const profileOrgReviewSchema = myzod.intersection(
+  orgReviewSchema,
+  myzod.object({
+    org: profileOrgSchema.allowUnknownKeys(true),
+  }),
+);
 
 export const profileOrgReviewListResponseSchema = myzod.object({
   success: myzod.boolean(),
@@ -179,7 +158,7 @@ export const profileOrgSalaryPayloadSchema = myzod.intersection(
   myzod.object({
     orgId: myzod.string().min(1),
   }),
-  profileOrgReviewSalarySchema,
+  orgCompensationSchema,
 );
 
 export const profileOrgSalaryResponseSchema = myzod.object({
@@ -191,7 +170,7 @@ export const profileOrgRatingPayloadSchema = myzod.intersection(
   myzod.object({
     orgId: myzod.string().min(1),
   }),
-  profileOrgReviewRatingSchema,
+  orgRatingSchema,
 );
 
 export const profileOrgRatingResponseSchema = myzod.object({
@@ -203,7 +182,7 @@ export const profileOrgReviewPayloadSchema = myzod.intersection(
   myzod.object({
     orgId: myzod.string().min(1),
   }),
-  profileOrgReviewYourReviewSchema,
+  orgStaffReviewSchema,
 );
 
 export const profileOrgReviewResponseSchema = myzod.object({

@@ -19,7 +19,7 @@ interface Props {
   onChange: StringOnChange | NumberOnChange;
 }
 
-const SalaryInput = (props: Props) => {
+const Input = (props: Props) => {
   const {
     title,
     options,
@@ -69,4 +69,4 @@ const SalaryInput = (props: Props) => {
   );
 };
 
-export default SalaryInput;
+export default Input;

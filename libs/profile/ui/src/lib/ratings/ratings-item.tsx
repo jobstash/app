@@ -1,17 +1,17 @@
 import { Rating } from '@mantine/core';
 
-import { type ProfileOrgReviewRating } from '@jobstash/profile/core';
+import { type OrgRating } from '@jobstash/organizations/core';
 
 import { useProfileOrgReviewFormContext } from '@jobstash/profile/state';
 
 import { Text } from '@jobstash/shared/ui';
 
 interface Props {
-  ratingKey: keyof ProfileOrgReviewRating;
+  ratingKey: keyof OrgRating;
 }
 
 const RatingItem = ({ ratingKey }: Props) => {
-  const { currentRating, setCurrentRating, getRatingTitle } =
+  const { rating, setRating, getRatingTitle } =
     useProfileOrgReviewFormContext();
 
   return (
@@ -22,11 +22,9 @@ const RatingItem = ({ ratingKey }: Props) => {
       <div className="w-[55%]">
         <Rating
           size="xl"
-          value={currentRating[ratingKey] ?? 0}
+          value={rating[ratingKey] ?? 0}
           color="gold"
-          onChange={(v) =>
-            setCurrentRating((prev) => ({ ...prev, [ratingKey]: v }))
-          }
+          onChange={(v) => setRating((prev) => ({ ...prev, [ratingKey]: v }))}
         />
       </div>
     </div>

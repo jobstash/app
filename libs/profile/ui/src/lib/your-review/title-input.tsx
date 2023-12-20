@@ -9,22 +9,22 @@ import {
 
 import { Heading, LogoTitle } from '@jobstash/shared/ui';
 
-const YourReviewHeadline = () => {
+const TitleInput = () => {
   const { profileInfoData } = useProfileInfoContext();
 
   const username = profileInfoData?.username ?? '';
   const avatar = profileInfoData?.avatar ?? '';
 
   const {
-    currentReview: { headline },
-    setHeadline,
+    review: { title },
+    setTitle,
   } = useProfileOrgReviewFormContext();
 
   return (
-    <div className="flex flex-col gap-4" id="profile-right-panel-your-review">
+    <div className="flex flex-col gap-4">
       <div className="flex justify-between">
         <Heading size="md" fw="semibold">
-          Review Headline
+          Title
         </Heading>
         <LogoTitle
           title={username}
@@ -41,9 +41,9 @@ const YourReviewHeadline = () => {
               // { 'border border-white': Boolean(selectedWOC) },
             ),
           }}
-          value={headline ?? ''}
+          value={title ?? ''}
           onChange={(e) => {
-            setHeadline(e.currentTarget.value);
+            setTitle(e.currentTarget.value);
           }}
         />
       </div>
@@ -51,4 +51,4 @@ const YourReviewHeadline = () => {
   );
 };
 
-export default YourReviewHeadline;
+export default TitleInput;

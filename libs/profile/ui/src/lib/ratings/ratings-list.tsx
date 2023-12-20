@@ -1,16 +1,13 @@
-import {
-  ProfileOrgReviewRating,
-  RATING_TITLE_MAP,
-} from '@jobstash/profile/core';
+import { ORG_RATING_LABELS } from '@jobstash/organizations/core';
 
 import RatingsItem from './ratings-item';
 
 const RatingsList = () => (
   <div className="flex flex-col gap-6">
-    {Object.keys(RATING_TITLE_MAP).map((ratingKey) => (
+    {Object.keys(ORG_RATING_LABELS).map((ratingKey) => (
       <RatingsItem
         key={ratingKey}
-        ratingKey={ratingKey as keyof ProfileOrgReviewRating}
+        ratingKey={ratingKey as keyof typeof ORG_RATING_LABELS}
       />
     ))}
   </div>

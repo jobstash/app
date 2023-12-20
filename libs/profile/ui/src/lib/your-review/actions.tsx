@@ -2,7 +2,7 @@ import { useProfileOrgReviewFormContext } from '@jobstash/profile/state';
 
 import CardActionButton from '../card-action-button';
 
-const YourReviewActions = () => {
+const Actions = () => {
   const { isDisabledReviewSave, saveReview } = useProfileOrgReviewFormContext();
 
   return (
@@ -10,4 +10,4 @@ const YourReviewActions = () => {
   );
 };
 
-export default YourReviewActions;
+export default Actions;

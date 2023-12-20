@@ -6,9 +6,9 @@ import { useProfileOrgReviewFormContext } from '@jobstash/profile/state';
 
 import { Heading } from '@jobstash/shared/ui';
 
-const YourReviewCons = () => {
+const ConsTextarea = () => {
   const {
-    currentReview: { cons },
+    review: { cons },
     setCons,
   } = useProfileOrgReviewFormContext();
 
@@ -44,4 +44,4 @@ const YourReviewCons = () => {
   );
 };
 
-export default YourReviewCons;
+export default ConsTextarea;

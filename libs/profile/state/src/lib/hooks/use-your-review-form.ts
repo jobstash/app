@@ -1,40 +1,59 @@
 import { useEffect, useState } from 'react';
 
+import {
+  OrgLocation,
+  OrgTimezone,
+  OrgWorkingHours,
+} from '@jobstash/organizations/core';
+
+import { type ProfileReviewContextProps } from '../contexts/profile-org-review-form-context';
 import { useProfileReviewsPageContext } from '../contexts/profile-reviews-page-context';
 
 import { useYourReviewMutation } from './use-your-review-mutation';
 
-export const useYourReviewForm = () => {
+export const useYourReviewForm = (): ProfileReviewContextProps => {
   const {
     orgReview: {
-      review: { headline, pros, cons },
+      review: { title, location, timezone, workingHours, pros, cons },
       org: { orgId },
     },
   } = useProfileReviewsPageContext();
 
   const [currentReview, setCurrentReview] = useState({
-    headline,
+    title,
+    location,
+    timezone,
+    workingHours,
     pros,
     cons,
   });
 
   useEffect(() => {
     setCurrentReview({
-      headline,
+      title,
+      location,
+      timezone,
+      workingHours,
       pros,
       cons,
     });
-  }, [headline, pros, cons]);
+  }, [title, pros, cons, location, timezone, workingHours]);
 
-  const setHeadline = (headline: string | null) =>
-    setCurrentReview((prev) => ({ ...prev, headline }));
+  const setTitle = (title: string | null) =>
+    setCurrentReview((prev) => ({ ...prev, title }));
+  const setLocation = (location: OrgLocation) =>
+    setCurrentReview((prev) => ({ ...prev, location }));
+  const setTimezone = (timezone: OrgTimezone) =>
+    setCurrentReview((prev) => ({ ...prev, timezone }));
+  const setWorkingHours = (workingHours: OrgWorkingHours) =>
+    setCurrentReview((prev) => ({ ...prev, workingHours }));
   const setPros = (pros: string | null) =>
     setCurrentReview((prev) => ({ ...prev, pros }));
   const setCons = (cons: string | null) =>
     setCurrentReview((prev) => ({ ...prev, cons }));
 
   const isDisabledReviewSave =
-    JSON.stringify({ headline, pros, cons }) === JSON.stringify(currentReview);
+    JSON.stringify({ title, pros, cons }) === JSON.stringify(currentReview);
 
   const { mutate } = useYourReviewMutation();
 
@@ -46,8 +65,11 @@ export const useYourReviewForm = () => {
   };
 
   return {
-    currentReview,
-    setHeadline,
+    review: currentReview,
+    setTitle,
+    setLocation,
+    setTimezone,
+    setWorkingHours,
     setPros,
     setCons,
     saveReview,

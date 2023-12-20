@@ -6,35 +6,46 @@ import {
 } from 'react';
 
 import {
-  type ProfileOrgReviewRating,
-  type ProfileOrgReviewYourReview,
-} from '@jobstash/profile/core';
+  type OrgCompensation,
+  OrgLocation,
+  type OrgRating,
+  OrgStaffReview,
+  OrgTimezone,
+  OrgWorkingHours,
+} from '@jobstash/organizations/core';
 
-export interface ProfileOrgReviewFormContextProps {
-  salary: {
-    selectedCurrency: string | null;
-    amount: number | null;
-    offersTokenAllocation: boolean;
-  };
-  setSelectedCurrency: (value: string | null) => void;
-  setAmount: (value: number | null) => void;
+export interface ProfileCompensationContextProps {
+  compensation: OrgCompensation;
+  setCurrency: (value: string | null) => void;
+  setSalary: (value: number | null) => void;
   setOffersTokenAllocation: (value: boolean) => void;
-  saveSalary: () => void;
-  isDisabledSalarySave: boolean;
+  saveCompensation: () => void;
+  isDisabledCompensationSave: boolean;
+}
 
-  currentRating: ProfileOrgReviewRating;
-  setCurrentRating: Dispatch<SetStateAction<ProfileOrgReviewRating>>;
-  getRatingTitle: (ratingKey: keyof ProfileOrgReviewRating) => string;
+export interface ProfileRatingContextProps {
+  rating: OrgRating;
+  setRating: Dispatch<SetStateAction<OrgRating>>;
+  getRatingTitle: (ratingKey: keyof OrgRating) => string;
   saveRating: () => void;
   isDisabledRatingSave: boolean;
+}
 
-  currentReview: ProfileOrgReviewYourReview;
-  setHeadline: (headline: string | null) => void;
+export interface ProfileReviewContextProps {
+  review: OrgStaffReview;
+  setTitle: (title: string | null) => void;
+  setLocation: (location: OrgLocation) => void;
+  setTimezone: (timezone: OrgTimezone) => void;
+  setWorkingHours: (workingHours: OrgWorkingHours) => void;
   setPros: (pros: string | null) => void;
   setCons: (cons: string | null) => void;
   saveReview: () => void;
   isDisabledReviewSave: boolean;
 }
+
+export type ProfileOrgReviewFormContextProps = ProfileCompensationContextProps &
+  ProfileRatingContextProps &
+  ProfileReviewContextProps;
 
 export const ProfileOrgReviewFormContext = createContext<
   ProfileOrgReviewFormContextProps | undefined

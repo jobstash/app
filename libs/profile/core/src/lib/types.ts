@@ -12,11 +12,8 @@ import {
   profileOrgRatingResponseSchema,
   profileOrgReviewListResponseSchema,
   profileOrgReviewPayloadSchema,
-  profileOrgReviewRatingSchema,
   profileOrgReviewResponseSchema,
-  profileOrgReviewSalarySchema,
   profileOrgReviewSchema,
-  profileOrgReviewYourReviewSchema,
   profileOrgSalaryPayloadSchema,
   profileOrgSalaryResponseSchema,
   profileRepoContributionResponseSchema,
@@ -47,11 +44,6 @@ export type ProfileRightPanelTab = {
   onClick: () => void;
 };
 
-export type ProfileOrgReviewSalary = Infer<typeof profileOrgReviewSalarySchema>;
-export type ProfileOrgReviewRating = Infer<typeof profileOrgReviewRatingSchema>;
-export type ProfileOrgReviewYourReview = Infer<
-  typeof profileOrgReviewYourReviewSchema
->;
 export type ProfileOrgReview = Infer<typeof profileOrgReviewSchema>;
 export type ProfileOrgReviewListResponse = Infer<
   typeof profileOrgReviewListResponseSchema

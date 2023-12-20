@@ -2,9 +2,9 @@ import { Checkbox as MCheckbox } from '@mantine/core';
 
 import { useProfileOrgReviewFormContext } from '@jobstash/profile/state';
 
-const Checkbox = () => {
+const OffersTokenAllocationCheckbox = () => {
   const {
-    salary: { offersTokenAllocation },
+    compensation: { offersTokenAllocation },
     setOffersTokenAllocation,
   } = useProfileOrgReviewFormContext();
 
@@ -21,4 +21,4 @@ const Checkbox = () => {
   );
 };
 
-export default Checkbox;
+export default OffersTokenAllocationCheckbox;

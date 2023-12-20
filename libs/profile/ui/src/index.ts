@@ -1,5 +1,6 @@
 // Components
 export * from './lib/account-card';
+export * from './lib/compensation-form';
 export * from './lib/profile-dev-info';
 export { default as ProfileGotItCard } from './lib/profile-got-it-card';
 export * from './lib/profile-header';
@@ -19,7 +20,6 @@ export { default as ProfileRightPanelRepoHeader } from './lib/profile-right-pane
 export { default as ProfileRightPanelTabs } from './lib/profile-right-panel-tabs';
 export { default as ProfileSubHeader } from './lib/profile-sub-header';
 export * from './lib/ratings';
-export * from './lib/salary-form';
 export * from './lib/tags-used';
 export * from './lib/your-contribution';
 export * from './lib/your-review';

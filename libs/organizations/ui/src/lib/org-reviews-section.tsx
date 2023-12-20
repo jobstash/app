@@ -1,12 +1,16 @@
 import { Rating } from '@mantine/core';
 
-import { type OrgDetails } from '@jobstash/organizations/core';
+import {
+  ORG_RATING_LABELS,
+  type OrgDetails,
+} from '@jobstash/organizations/core';
 
 import { RightPanelCardBorder } from '@jobstash/right-panel/ui';
 import { EmptyStarIcon, Heading, Text } from '@jobstash/shared/ui';
 
 import OrgReviewShareButton from './org-review-share-button';
 import OrgReviewSigninButton from './org-review-signin-button';
+import OrgStaffReview from './org-staff-review';
 
 interface Props {
   org: OrgDetails;
@@ -20,8 +24,24 @@ const OrgReviewsSection = ({ org }: Props) => {
 
   return (
     <div className="flex flex-col gap-4">
+      {/* <pre>
+        {JSON.stringify(
+          {
+            count: org.reviewCount,
+            reviews: org.reviews,
+          },
+          undefined,
+          '\t',
+        )}
+      </pre> */}
       {noReviews && <LeaveReviewSection org={org} />}
       {hasRating && <AggregateSection org={org} />}
+      {org.reviews.map((orgReview) => (
+        <OrgStaffReview
+          key={`${JSON.stringify(orgReview.review)}`}
+          orgReview={orgReview}
+        />
+      ))}
     </div>
   );
 };
@@ -48,7 +68,7 @@ const AggregateSection = ({ org }: { org: OrgDetails }) => (
       <hr className="border-t border-white/10" />
 
       <div className="flex flex-wrap gap-x-12 gap-y-4">
-        {sortRatings(org.aggregateRatings).map(([label, rating]) => (
+        {Object.entries(org.aggregateRatings).map(([label, rating]) => (
           <div key={label} className="flex items-center gap-2">
             <Text fw="bold">
               {rating && rating > 0 ? rating.toFixed(1) : 'n/d'}
@@ -63,7 +83,9 @@ const AggregateSection = ({ org }: { org: OrgDetails }) => (
             ) : (
               <EmptyStarIcon />
             )}
-            <Text>{labelMapping[label as OrgRatingKey]}</Text>
+            <Text>
+              {ORG_RATING_LABELS[label as keyof typeof ORG_RATING_LABELS]}
+            </Text>
           </div>
         ))}
       </div>
@@ -97,35 +119,3 @@ const LeaveReviewSection = ({ org }: { org: OrgDetails }) => (
     </div>
   </RightPanelCardBorder>
 );
-
-type OrgAggregateRatings = OrgDetails['aggregateRatings'];
-type OrgRatingKey = keyof OrgAggregateRatings;
-type OrgRatingMapping<T> = Record<OrgRatingKey, T>;
-
-const labelMapping: OrgRatingMapping<string> = {
-  management: 'Management',
-  careerGrowth: 'Career Growth',
-  benefits: 'Benefits',
-  workLifeBalance: 'Work Life Balance',
-  cultureValues: 'Culture & Values',
-  diversityInclusion: 'Diversity & Inclusion',
-  interviewProcess: 'Interview Process',
-};
-
-const labelPosition: OrgRatingMapping<number> = {
-  management: 1,
-  careerGrowth: 2,
-  benefits: 3,
-  workLifeBalance: 4,
-  cultureValues: 5,
-  diversityInclusion: 6,
-  interviewProcess: 7,
-};
-
-type LabelPosKey = keyof typeof labelPosition;
-
-const sortRatings = (ratings: OrgAggregateRatings) =>
-  Object.entries(ratings).sort(
-    ([keyA], [keyB]) =>
-      labelPosition[keyA as LabelPosKey] - labelPosition[keyB as LabelPosKey],
-  );

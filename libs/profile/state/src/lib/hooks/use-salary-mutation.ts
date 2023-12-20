@@ -36,10 +36,10 @@ export const useSalaryMutation = () => {
       });
 
       if (activeProfileOrgReview) {
-        const salary = (({ orgId, ...props }) => props)(payload);
+        const compensation = (({ orgId, ...props }) => props)(payload);
         setActiveProfileOrgReview({
           ...activeProfileOrgReview,
-          salary,
+          compensation,
         });
       }
     },

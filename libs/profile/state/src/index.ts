@@ -6,6 +6,7 @@ export * from './lib/atoms/profile-repo-count-atom';
 
 // Hooks
 export * from './lib/hooks/use-all-jobs-query';
+export * from './lib/hooks/use-compensation-form';
 export * from './lib/hooks/use-profile-delete-mutation';
 export * from './lib/hooks/use-profile-info';
 export * from './lib/hooks/use-profile-info-mutation';
@@ -15,7 +16,6 @@ export * from './lib/hooks/use-profile-repo-page';
 export * from './lib/hooks/use-profile-reviews-page';
 export * from './lib/hooks/use-profile-skills-query';
 export * from './lib/hooks/use-rating-mutation';
-export * from './lib/hooks/use-salary-form';
 export * from './lib/hooks/use-salary-mutation';
 export * from './lib/hooks/use-tags-used-mutation';
 export * from './lib/hooks/use-your-contribution-mutation';

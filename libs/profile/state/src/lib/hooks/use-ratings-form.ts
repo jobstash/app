@@ -1,48 +1,49 @@
 import { useEffect, useMemo, useState } from 'react';
 
 import {
-  type ProfileOrgReviewRating,
-  RATING_TITLE_MAP,
-} from '@jobstash/profile/core';
+  ORG_RATING_LABELS,
+  type OrgRating,
+} from '@jobstash/organizations/core';
 
+import { type ProfileRatingContextProps } from '../contexts/profile-org-review-form-context';
 import { useProfileReviewsPageContext } from '../contexts/profile-reviews-page-context';
 
 import { useRatingMutation } from './use-rating-mutation';
 
-const getRatingTitle = (ratingKey: keyof ProfileOrgReviewRating) =>
-  RATING_TITLE_MAP[ratingKey];
+const getRatingTitle = (ratingKey: keyof OrgRating) =>
+  ORG_RATING_LABELS[ratingKey];
 
-export const useRatingsForm = () => {
+export const useRatingsForm = (): ProfileRatingContextProps => {
   const { orgReview } = useProfileReviewsPageContext();
 
   const {
-    rating,
+    rating: orgRating,
     org: { orgId },
   } = orgReview;
 
-  const [currentRating, setCurrentRating] = useState(rating);
+  const [rating, setRating] = useState(orgRating);
 
   useEffect(() => {
-    setCurrentRating(rating);
-  }, [rating]);
+    setRating(orgRating);
+  }, [orgRating]);
 
   const { mutate } = useRatingMutation();
 
   const saveRating = () => {
     mutate({
       orgId,
-      ...currentRating,
+      ...rating,
     });
   };
 
   const isDisabledRatingSave = useMemo(
-    () => JSON.stringify(rating) === JSON.stringify(currentRating),
-    [rating, currentRating],
+    () => JSON.stringify(rating) === JSON.stringify(orgRating),
+    [rating, orgRating],
   );
 
   return {
-    currentRating,
-    setCurrentRating,
+    rating,
+    setRating,
     getRatingTitle,
     saveRating,
     isDisabledRatingSave,
