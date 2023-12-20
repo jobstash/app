@@ -11,6 +11,8 @@ import { useProfileReviewsPageContext } from '../contexts/profile-reviews-page-c
 
 import { useYourReviewMutation } from './use-your-review-mutation';
 
+const TEXTAREA_CHAR_LIMIT = 500;
+
 export const useYourReviewForm = (): ProfileReviewContextProps => {
   const {
     orgReview: {
@@ -47,10 +49,18 @@ export const useYourReviewForm = (): ProfileReviewContextProps => {
     setCurrentReview((prev) => ({ ...prev, timezone }));
   const setWorkingHours = (workingHours: OrgWorkingHours) =>
     setCurrentReview((prev) => ({ ...prev, workingHours }));
-  const setPros = (pros: string | null) =>
-    setCurrentReview((prev) => ({ ...prev, pros }));
-  const setCons = (cons: string | null) =>
-    setCurrentReview((prev) => ({ ...prev, cons }));
+
+  const setPros = (pros: string | null) => {
+    if (pros && pros.length <= TEXTAREA_CHAR_LIMIT) {
+      setCurrentReview((prev) => ({ ...prev, pros }));
+    }
+  };
+
+  const setCons = (cons: string | null) => {
+    if (cons && cons.length <= TEXTAREA_CHAR_LIMIT) {
+      setCurrentReview((prev) => ({ ...prev, cons }));
+    }
+  };
 
   const isDisabledReviewSave =
     JSON.stringify({ title, pros, cons }) === JSON.stringify(currentReview);
