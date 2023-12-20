@@ -12,6 +12,7 @@ export const ORG_RATING_LABELS = {
 export const ORG_REVIEW_LOCATIONS = ['ONSITE', 'REMOTE', 'HYBRID'];
 
 export const ORG_REVIEW_TIMEZONES = [
+  'ASYNC',
   'GMT-12',
   'GMT-11',
   'GMT-10',
