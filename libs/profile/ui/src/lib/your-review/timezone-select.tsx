@@ -6,7 +6,7 @@ import { ORG_REVIEW_TIMEZONES } from '@jobstash/organizations/core';
 
 import { useProfileOrgReviewFormContext } from '@jobstash/profile/state';
 
-import { Heading } from '@jobstash/shared/ui';
+import { Heading, Text } from '@jobstash/shared/ui';
 
 const TimezoneSelect = () => {
   const {
@@ -16,10 +16,15 @@ const TimezoneSelect = () => {
 
   return (
     <div className="flex flex-col gap-4">
-      <div>
+      <div className="flex flex-col gap-2">
         <Heading size="md" fw="semibold">
-          Timezone
+          Effective Timezone
         </Heading>
+
+        <Text color="dimmed">
+          Which timezone were you aligning with? Was it fully async, on your
+          own, or were you aligning with other colleagues in a specific region?
+        </Text>
       </div>
       <div className="w-full">
         <Select

@@ -2,19 +2,11 @@ import { TextInput } from '@mantine/core';
 
 import { cn } from '@jobstash/shared/utils';
 
-import {
-  useProfileInfoContext,
-  useProfileOrgReviewFormContext,
-} from '@jobstash/profile/state';
+import { useProfileOrgReviewFormContext } from '@jobstash/profile/state';
 
-import { Heading, LogoTitle } from '@jobstash/shared/ui';
+import { Heading, Text } from '@jobstash/shared/ui';
 
 const TitleInput = () => {
-  const { profileInfoData } = useProfileInfoContext();
-
-  const username = profileInfoData?.username ?? '';
-  const avatar = profileInfoData?.avatar ?? '';
-
   const {
     review: { title },
     setTitle,
@@ -22,14 +14,12 @@ const TitleInput = () => {
 
   return (
     <div className="flex flex-col gap-4">
-      <div className="flex justify-between">
+      <div className="flex flex-col gap-2">
         <Heading size="md" fw="semibold">
           Title
         </Heading>
-        <LogoTitle
-          title={username}
-          avatarProps={{ src: avatar, alt: `${username}'s avatar` }}
-        />
+
+        <Text color="dimmed">Give this review a compelling title</Text>
       </div>
       <div className="w-full">
         <TextInput

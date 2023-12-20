@@ -4,7 +4,7 @@ import { ORG_REVIEW_LOCATIONS } from '@jobstash/organizations/core';
 
 import { useProfileOrgReviewFormContext } from '@jobstash/profile/state';
 
-import { Heading } from '@jobstash/shared/ui';
+import { Heading, Text } from '@jobstash/shared/ui';
 
 const LocationSelect = () => {
   const {
@@ -14,10 +14,12 @@ const LocationSelect = () => {
 
   return (
     <div className="flex flex-col gap-4">
-      <div>
+      <div className="flex flex-col gap-2">
         <Heading size="md" fw="semibold">
           Location
         </Heading>
+
+        <Text color="dimmed">Where were you working from?</Text>
       </div>
       <div className="w-full">
         <Select

@@ -4,7 +4,7 @@ import { ORG_REVIEW_WORKING_HOURS } from '@jobstash/organizations/core';
 
 import { useProfileOrgReviewFormContext } from '@jobstash/profile/state';
 
-import { Heading } from '@jobstash/shared/ui';
+import { Heading, Text } from '@jobstash/shared/ui';
 
 const WorkingHoursSelect = () => {
   const {
@@ -20,10 +20,14 @@ const WorkingHoursSelect = () => {
 
   return (
     <div className="flex flex-col gap-4">
-      <div>
+      <div className="flex flex-col gap-2">
         <Heading size="md" fw="semibold">
           Working Hours
         </Heading>
+
+        <Text color="dimmed">
+          In your own timezone, what are your regular working hours?
+        </Text>
       </div>
       <div className="w-full flex items-center gap-4">
         <SelectHour value={workingHours.start} onChange={onChangeStart} />

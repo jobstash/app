@@ -4,7 +4,7 @@ import { cn } from '@jobstash/shared/utils';
 
 import { useProfileOrgReviewFormContext } from '@jobstash/profile/state';
 
-import { Heading } from '@jobstash/shared/ui';
+import { Heading, Text } from '@jobstash/shared/ui';
 
 const ProsTextarea = () => {
   const {
@@ -14,10 +14,15 @@ const ProsTextarea = () => {
 
   return (
     <div className="flex flex-col gap-4">
-      <div>
+      <div className="flex flex-col gap-2">
         <Heading size="md" fw="semibold">
           Pros
         </Heading>
+
+        <Text color="dimmed">
+          Tell others about things you liked about this organization and their
+          style
+        </Text>
       </div>
       <div className="w-full">
         <Textarea
