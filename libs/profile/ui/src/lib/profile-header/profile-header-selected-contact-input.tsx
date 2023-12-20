@@ -2,6 +2,8 @@ import { TextInput } from '@mantine/core';
 
 import { useProfileHeaderContext } from '@jobstash/profile/state';
 
+import { Heading } from '@jobstash/shared/ui';
+
 const ProfileHeaderSelectedContactInput = () => {
   const {
     isLoading,
@@ -14,17 +16,23 @@ const ProfileHeaderSelectedContactInput = () => {
     isLoading || !preferredContact ? undefined : `Your ${preferredContact}`;
 
   return (
-    <TextInput
-      placeholder={placeholder}
-      size="lg"
-      disabled={!preferredContact}
-      value={selectedContact ?? ''}
-      classNames={{
-        input:
-          'rounded-lg bg-dark text-white/60 text-lg placeholder:text-white/40 placeholder:text-lg focus:border-white/40',
-      }}
-      onChange={onChangeSelectedContact}
-    />
+    <div className="flex flex-col gap-2">
+      <div>
+        <Heading size="sm" fw="bold">
+          Address or Username
+        </Heading>
+      </div>
+      <TextInput
+        placeholder={placeholder}
+        size="lg"
+        value={selectedContact ?? ''}
+        classNames={{
+          input:
+            'rounded-lg bg-dark text-white/60 text-lg placeholder:text-white/40 placeholder:text-lg focus:border-white/40',
+        }}
+        onChange={onChangeSelectedContact}
+      />
+    </div>
   );
 };
 

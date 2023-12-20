@@ -33,3 +33,10 @@ export const LS_KEYS = {
 // Currently all tour focus component lives inside bordered component in right-panel
 // We use this constant to target highlight the content
 export const TOUR_SELECTOR_ID = 'tour-selector-id';
+
+export const CONTACT_DEFAULT_OPTIONS = [
+  'Email',
+  'Telegram',
+  'Discord',
+  'Twitter',
+];

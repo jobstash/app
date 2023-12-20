@@ -1,6 +1,6 @@
 import { type ChangeEventHandler, useEffect, useRef, useState } from 'react';
 
-import { ProfileInfo } from '@jobstash/profile/core';
+import { CONTACT_DEFAULT_OPTIONS, ProfileInfo } from '@jobstash/profile/core';
 
 import { useProfileInfoContext } from '../contexts/profile-info-context';
 
@@ -13,7 +13,9 @@ export const useProfileHeader = () => {
     profileInfoData ?? ({} as ProfileInfo);
 
   const [isAvailableForWork, setIsAvailableForWork] = useState<boolean>(false);
-  const [preferredContact, setPreferredContact] = useState<string | null>(null);
+  const [preferredContact, setPreferredContact] = useState<string | null>(
+    CONTACT_DEFAULT_OPTIONS[0],
+  );
   const [selectedContact, setSelectedContact] = useState<string | null>(null);
 
   const initRef = useRef(false);
