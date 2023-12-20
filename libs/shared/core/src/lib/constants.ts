@@ -54,6 +54,8 @@ export const TAG_ELEMENT_ID = {
   projects: 'projects',
   audit: 'audit',
   hack: 'hack',
+  timezone: 'timezone',
+  workingHours: 'working-hours',
 } as const;
 
 // Sentry MSG

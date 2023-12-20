@@ -1,13 +1,9 @@
-import { Rating } from '@mantine/core';
-
-import {
-  ORG_RATING_LABELS,
-  type OrgDetails,
-} from '@jobstash/organizations/core';
+import { type OrgDetails } from '@jobstash/organizations/core';
 
 import { RightPanelCardBorder } from '@jobstash/right-panel/ui';
-import { EmptyStarIcon, Heading, Text } from '@jobstash/shared/ui';
+import { Heading, Text } from '@jobstash/shared/ui';
 
+import OrgRatingList from './org-rating-list';
 import OrgReviewShareButton from './org-review-share-button';
 import OrgReviewSigninButton from './org-review-signin-button';
 import OrgStaffReview from './org-staff-review';
@@ -24,16 +20,6 @@ const OrgReviewsSection = ({ org }: Props) => {
 
   return (
     <div className="flex flex-col gap-4">
-      {/* <pre>
-        {JSON.stringify(
-          {
-            count: org.reviewCount,
-            reviews: org.reviews,
-          },
-          undefined,
-          '\t',
-        )}
-      </pre> */}
       {noReviews && <LeaveReviewSection org={org} />}
       {hasRating && <AggregateSection org={org} />}
       {org.reviews.map((orgReview) => (
@@ -67,28 +53,7 @@ const AggregateSection = ({ org }: { org: OrgDetails }) => (
 
       <hr className="border-t border-white/10" />
 
-      <div className="flex flex-wrap gap-x-12 gap-y-4">
-        {Object.entries(org.aggregateRatings).map(([label, rating]) => (
-          <div key={label} className="flex items-center gap-2">
-            <Text fw="bold">
-              {rating && rating > 0 ? rating.toFixed(1) : 'n/d'}
-            </Text>
-            {rating ? (
-              <Rating
-                count={1}
-                fractions={5}
-                value={(rating ?? 0) / 5}
-                color="gold"
-              />
-            ) : (
-              <EmptyStarIcon />
-            )}
-            <Text>
-              {ORG_RATING_LABELS[label as keyof typeof ORG_RATING_LABELS]}
-            </Text>
-          </div>
-        ))}
-      </div>
+      <OrgRatingList orgRating={org.aggregateRatings} />
 
       <OrgReviewSigninButton />
     </div>

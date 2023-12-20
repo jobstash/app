@@ -68,6 +68,7 @@ export { default as TvlIcon } from './lib/icons/tvl-icon';
 export { default as TwitterIcon } from './lib/icons/twitter-icon';
 export { default as UsersIcon } from './lib/icons/users-icon';
 export { default as UsersThreeIcon } from './lib/icons/users-three-icon';
+export { default as WorkingHoursIcon } from './lib/icons/working-hours-icon';
 
 // Components
 export { default as BookmarkButton } from './lib/components/bookmark-button';
