@@ -10,6 +10,7 @@ import {
 } from '@jobstash/shared/ui';
 import {
   Brand,
+  FollowTelegramButton,
   MobileMenuButton,
   MobileNavbarWrapper,
   SidebarBookmarksSection,
@@ -47,20 +48,22 @@ const Sidebar = () => (
       </div>
 
       {/* DESKTOP BARTABS */}
-      <div className="mt-12 hidden lg:flex flex-col space-y-8">
+      <div className="mt-12 hidden lg:flex flex-col space-y-6">
         <div className="flex-col">
           <Text color="dimmed">Discover</Text>
           <SidebarDiscoverBartabs />
         </div>
 
         <SidebarBookmarksSection />
+
+        <IsMountedWrapper>
+          <SidebarUserSection />
+        </IsMountedWrapper>
       </div>
 
       {/* BOTTOM BARTABS */}
       <div className="inset-x-0 bottom-0 hidden space-y-4 p-4 lg:absolute lg:block">
-        <IsMountedWrapper>
-          <SidebarUserSection />
-        </IsMountedWrapper>
+        <FollowTelegramButton />
         <hr className="border-t border-white/20" />
         <ConnectWalletButton />
       </div>
