@@ -1,3 +1,5 @@
+import { useRouter } from 'next/router';
+
 import { CHECK_WALLET_ROLES } from '@jobstash/auth/core';
 
 import { useRoleClick } from '@jobstash/auth/state';
@@ -5,14 +7,14 @@ import { useRoleClick } from '@jobstash/auth/state';
 import { Button } from '@jobstash/shared/ui';
 
 const OrgReviewSigninButton = () => {
-  const { roleClick } = useRoleClick(CHECK_WALLET_ROLES.DEV, () => {
-    // eslint-disable-next-line no-alert
-    alert('TODO');
+  const { push } = useRouter();
+  const { isAuthd, roleClick } = useRoleClick(CHECK_WALLET_ROLES.DEV, () => {
+    push('/profile/reviews');
   });
 
   return (
     <Button variant="primary" onClick={roleClick}>
-      Sign in if Eligible
+      {isAuthd ? 'Review Organization' : 'Sign in if Eligible'}
     </Button>
   );
 };
