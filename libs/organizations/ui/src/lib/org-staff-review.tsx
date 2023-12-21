@@ -51,21 +51,25 @@ const OrgStaffReview = ({ orgReview }: Props) => {
           <OrgRatingList orgRating={rating} />
         </div>
 
-        <hr className="border-t border-white/10" />
+        {(pros || cons) && <hr className="border-t border-white/10" />}
 
-        <div className="flex flex-col gap-2">
-          <Heading size="sm" fw="semibold">
-            Pros
-          </Heading>
-          <Text color="dimmed">{pros}</Text>
-        </div>
+        {pros && (
+          <div className="flex flex-col gap-2">
+            <Heading size="sm" fw="semibold">
+              Pros
+            </Heading>
+            <Text color="dimmed">{pros}</Text>
+          </div>
+        )}
 
-        <div className="flex flex-col gap-2">
-          <Heading size="sm" fw="semibold">
-            Cons
-          </Heading>
-          <Text color="dimmed">{cons}</Text>
-        </div>
+        {cons && (
+          <div className="flex flex-col gap-2">
+            <Heading size="sm" fw="semibold">
+              Cons
+            </Heading>
+            <Text color="dimmed">{cons}</Text>
+          </div>
+        )}
       </div>
     </RightPanelCardBorder>
   );
