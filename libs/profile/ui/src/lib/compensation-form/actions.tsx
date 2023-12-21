@@ -18,14 +18,6 @@ const Actions = () => {
       >
         Save
       </Button>
-
-      <Button
-        variant="outline"
-        className="px-8 bg-darker-gray"
-        isDisabled={isDisabledSalarySave}
-      >
-        Delete
-      </Button>
     </div>
   );
 };
