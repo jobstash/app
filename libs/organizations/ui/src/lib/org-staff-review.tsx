@@ -8,7 +8,7 @@ import { createOrgStaffReviewTags } from './utils/create-org-staff-review-tags';
 import OrgRatingList from './org-rating-list';
 
 interface Props {
-  orgReview: OrgReview;
+  orgReview: Omit<OrgReview, 'compensation'>;
 }
 
 const OrgStaffReview = ({ orgReview }: Props) => {

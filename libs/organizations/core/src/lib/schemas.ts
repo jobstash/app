@@ -51,12 +51,14 @@ export const orgJobSchema = myzod
 
 const starRatingSchema = myzod.number().min(0).max(5).nullable();
 export const orgRatingSchema = myzod.object({
-  onboarding: starRatingSchema,
-  careerGrowth: starRatingSchema,
   benefits: starRatingSchema,
-  workLifeBalance: starRatingSchema,
+  careerGrowth: starRatingSchema,
   diversityInclusion: starRatingSchema,
-  travel: starRatingSchema,
+  management: starRatingSchema,
+  product: starRatingSchema,
+  compensation: starRatingSchema,
+  onboarding: starRatingSchema,
+  workLifeBalance: starRatingSchema,
 });
 export const orgCompensationSchema = myzod.object({
   offersTokenAllocation: myzod.boolean(),
@@ -100,7 +102,7 @@ export const orgDetailsSchema = myzod
       aggregateRating: myzod.number().min(0).max(5),
       aggregateRatings: orgRatingSchema,
       reviewCount: myzod.number(),
-      reviews: myzod.array(orgReviewSchema),
+      reviews: myzod.array(myzod.omit(orgReviewSchema, ['compensation'])),
     }),
   )
   .allowUnknownKeys(true);

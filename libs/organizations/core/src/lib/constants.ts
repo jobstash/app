@@ -1,12 +1,14 @@
 export const orgDynamicSlugSet = new Set(['slug', 'tab']);
 
 export const ORG_RATING_LABELS = {
-  onboarding: 'Onboarding' as const,
-  careerGrowth: 'Career Growth' as const,
   benefits: 'Benefits' as const,
-  workLifeBalance: 'Work Life Balance' as const,
+  careerGrowth: 'Career Growth' as const,
   diversityInclusion: 'Diversity & Inclusion' as const,
-  travel: 'Travel' as const,
+  management: 'Management' as const,
+  product: 'Product' as const,
+  compensation: 'Compensation' as const,
+  onboarding: 'Onboarding' as const,
+  workLifeBalance: 'Work Life Balance' as const,
 };
 
 export const ORG_REVIEW_LOCATIONS = ['ONSITE', 'REMOTE', 'HYBRID'];
