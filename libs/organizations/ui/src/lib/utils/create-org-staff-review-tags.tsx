@@ -29,7 +29,7 @@ export const createOrgStaffReviewTags = (
 
   if (timezone) {
     tags.push({
-      id: TAG_ELEMENT_ID.location,
+      id: TAG_ELEMENT_ID.timezone,
       text: `Effective Timezone: ${timezone}`,
       icon: <LocationIcon />,
     });
@@ -37,7 +37,7 @@ export const createOrgStaffReviewTags = (
 
   if (start && end) {
     tags.push({
-      id: TAG_ELEMENT_ID.location,
+      id: TAG_ELEMENT_ID.workingHours,
       text: `Working Hours: ${start} - ${end}`,
       icon: <WorkingHoursIcon />,
     });
