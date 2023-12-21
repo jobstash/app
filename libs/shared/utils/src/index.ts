@@ -17,5 +17,6 @@ export * from './lib/pretty-timestamp';
 export * from './lib/sentry-message';
 export * from './lib/short-timestamp';
 export * from './lib/slugify';
+export * from './lib/validate-payload';
 export * from './lib/validate-schema';
 export * from './lib/with-csr';

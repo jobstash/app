@@ -13,6 +13,7 @@ import {
 import {
   createFetchDeets,
   sentryMessage,
+  validatePayload,
   validateSchema,
 } from '@jobstash/shared/utils';
 
@@ -46,7 +47,8 @@ export const mwFetch = async <R, P = Undefined>(
     headers,
   } = options;
 
-  const validatedPayload = validateSchema(payload, payloadSchema, sentryLabel);
+  const validatedPayload = validatePayload(payload, payloadSchema);
+
   const { url, body } = createFetchDeets(reqUrl, method, validatedPayload);
 
   const res = await fetch(url, {
