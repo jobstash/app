@@ -8,15 +8,15 @@ export const useSalaryTour = () => {
   const {
     activeTab,
     orgReview: {
-      salary: { selectedCurrency, amount },
+      compensation: { currency, salary },
     },
   } = useProfileReviewsPageContext();
 
-  const isCurrentTab = activeTab === PROFILE_RIGHT_PANEL_TAB.SALARY;
-  const isEmptyCurrency = selectedCurrency === null;
-  const isEmptyAmount = amount === null;
+  const isCurrentTab = activeTab === PROFILE_RIGHT_PANEL_TAB.COMPENSATION;
+  const isEmptyCurrency = currency === null;
+  const isEmptyAmount = salary === null;
 
   const boolArg = isCurrentTab && (isEmptyCurrency || isEmptyAmount);
 
-  useTourEffect(LS_KEYS.TOURS.SALARY, boolArg);
+  useTourEffect(LS_KEYS.TOURS.COMPENSATION, boolArg);
 };
