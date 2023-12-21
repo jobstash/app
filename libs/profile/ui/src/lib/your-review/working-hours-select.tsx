@@ -30,8 +30,16 @@ const WorkingHoursSelect = () => {
         </Text>
       </div>
       <div className="w-full flex items-center gap-4">
-        <SelectHour value={workingHours.start} onChange={onChangeStart} />
-        <SelectHour value={workingHours.end} onChange={onChangeEnd} />
+        <SelectHour
+          value={workingHours.start}
+          placeholder="Start time"
+          onChange={onChangeStart}
+        />
+        <SelectHour
+          value={workingHours.end}
+          placeholder="End time"
+          onChange={onChangeEnd}
+        />
       </div>
     </div>
   );
@@ -41,14 +49,15 @@ export default WorkingHoursSelect;
 
 interface SelectHourProps {
   value: string | null;
+  placeholder: string;
   onChange: (_: string | null) => void;
 }
 
-const SelectHour = ({ value, onChange }: SelectHourProps) => (
+const SelectHour = ({ value, placeholder, onChange }: SelectHourProps) => (
   <Select
     withinPortal
     allowDeselect
-    placeholder="Select Location"
+    placeholder={placeholder}
     size="lg"
     data={ORG_REVIEW_WORKING_HOURS}
     classNames={{
