@@ -28,11 +28,13 @@ const EmptyResult = (props: Props) => {
       </div>
 
       <div className="flex flex-col items-center gap-y-2">
-        <Heading size="xl" fw="semibold">
+        <Heading size="lg" fw="semibold">
           {title}
         </Heading>
         <div className="max-w-xs text-center">
-          <Text color="dimmed">{description}</Text>
+          <Text color="dimmed" className="text-sm md:text-md">
+            {description}
+          </Text>
         </div>
       </div>
 

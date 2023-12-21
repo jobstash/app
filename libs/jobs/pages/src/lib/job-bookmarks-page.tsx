@@ -1,4 +1,5 @@
 import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 import { LoadingPage } from '@jobstash/shared/pages';
@@ -12,8 +13,13 @@ import { activeJobBookmarkAtom, useJobBookmarks } from '@jobstash/jobs/state';
 import { mobileRightPanelOpenAtom, useIsMobile } from '@jobstash/shared/state';
 
 import { JobBookmarkButton, JobBookmarkCard } from '@jobstash/jobs/ui';
-// eslint-disable-next-line @nx/enforce-module-boundaries
-import { InternalErrorResult, Loader, PageWrapper } from '@jobstash/shared/ui';
+import {
+  Button,
+  EmptyResult,
+  InternalErrorResult,
+  Loader,
+  PageWrapper,
+} from '@jobstash/shared/ui';
 
 const SideBar = dynamic(() =>
   import('@jobstash/sidebar/feature').then((m) => m.SideBar),
@@ -56,6 +62,11 @@ export const JobBookmarksPage = () => {
     if (isMobile) setMobileRightPanelOpen(true);
   };
 
+  const { push } = useRouter();
+  const onClickBrowse = () => {
+    push('/', undefined, { scroll: false });
+  };
+
   if (isLoading) return <LoadingPage />;
 
   return (
@@ -63,21 +74,40 @@ export const JobBookmarksPage = () => {
       <SideBar />
 
       <div className="px-3.5 pt-16 lg:p-8 lg:pr-[50%] flex flex-col gap-4">
-        {data?.map((jobPost) => (
-          <JobBookmarkCard
-            key={jobPost.id}
-            jobPost={jobPost}
-            bookmarkButton={
-              <JobBookmarkButton
-                jobPost={jobPost}
-                isFetching={isFetching}
-                isBookmarked={bookmarkedJobs.has(jobPost.shortUUID)}
-              />
+        {data && data.length === 0 && (
+          <EmptyResult
+            description="You have not added any bookmarks yet."
+            actionSection={
+              <Button
+                variant="primary"
+                textProps={{ fw: 'semibold' }}
+                size="md"
+                onClick={onClickBrowse}
+              >
+                Browse Jobs
+              </Button>
             }
-            isActive={jobPost.id === activeJobBookmark?.id}
-            onClick={onClickCard}
           />
-        ))}
+        )}
+
+        {data &&
+          data.length > 0 &&
+          data?.map((jobPost) => (
+            <JobBookmarkCard
+              key={jobPost.id}
+              jobPost={jobPost}
+              bookmarkButton={
+                <JobBookmarkButton
+                  jobPost={jobPost}
+                  isFetching={isFetching}
+                  isBookmarked={bookmarkedJobs.has(jobPost.shortUUID)}
+                />
+              }
+              isActive={jobPost.id === activeJobBookmark?.id}
+              onClick={onClickCard}
+            />
+          ))}
+
         {isError && <InternalErrorResult />}
       </div>
 
