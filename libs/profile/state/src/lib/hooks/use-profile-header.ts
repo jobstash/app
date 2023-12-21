@@ -23,7 +23,7 @@ export const useProfileHeader = () => {
     if (profileInfoData && !initRef.current) {
       initRef.current = true;
       setIsAvailableForWork(Boolean(availableForWork));
-      setPreferredContact(contact.preferred);
+      setPreferredContact(contact.preferred ?? CONTACT_DEFAULT_OPTIONS[0]);
       setSelectedContact(contact.value);
     }
   }, [

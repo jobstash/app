@@ -31,11 +31,10 @@ const ProsTextarea = () => {
           descriptionProps={{
             className: 'text-right pt-2 pr-2',
           }}
-          w="98%"
-          minRows={10}
+          minRows={3}
           classNames={{
             input: cn(
-              'rounded-lg bg-dark-gray text-white/60 focus:border-white p-6',
+              'rounded-lg bg-dark-gray text-white/60 focus:border-white p-4',
             ),
           }}
           description={`${500 - (pros?.length ?? 0)} characters left`}

@@ -11,7 +11,7 @@ const OffersTokenAllocationCheckbox = () => {
   return (
     <div className="flex justify-end">
       <MCheckbox
-        size="md"
+        size="sm"
         label="Offers Token Allocation"
         color="gray"
         checked={offersTokenAllocation}

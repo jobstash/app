@@ -54,7 +54,7 @@ const SelectHour = ({ value, onChange }: SelectHourProps) => (
     classNames={{
       root: 'w-full',
       input:
-        'rounded-lg bg-dark-gray text-white/60 text-lg placeholder:text-white/50 placeholder:text-md focus:border-white/40',
+        'rounded-lg bg-dark-gray text-md placeholder:text-white/50 placeholder:text-md focus:border-white/40',
       itemsWrapper: 'bg-dark',
       item: '[&[data-hovered]]:bg-dark-gray [&[data-selected]]:bg-gray',
     }}

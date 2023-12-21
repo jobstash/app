@@ -41,7 +41,7 @@ const Input = (props: Props) => {
             size="lg"
             classNames={{
               input: cn(
-                'rounded-lg bg-dark-gray text-white/60 text-lg placeholder:text-white/50 placeholder:text-md focus:border-white/40',
+                'rounded-lg bg-dark-gray text-md placeholder:text-white/50 placeholder:text-md focus:border-white/40',
               ),
             }}
             value={(value as NumberOnChangeValue) ?? ''}
@@ -55,7 +55,7 @@ const Input = (props: Props) => {
             size="lg"
             classNames={{
               input: cn(
-                'rounded-lg bg-dark-gray text-white/60 text-lg placeholder:text-white/50 placeholder:text-lg focus:border-white/40',
+                'rounded-lg bg-dark-gray text-md placeholder:text-white/50 placeholder:text-lg focus:border-white/40',
               ),
               itemsWrapper: 'bg-dark-gray',
               item: '[&[data-hovered]]:bg-dark-gray [&[data-selected]]:bg-gray',

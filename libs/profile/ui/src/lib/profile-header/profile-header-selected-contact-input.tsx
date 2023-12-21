@@ -28,7 +28,7 @@ const ProfileHeaderSelectedContactInput = () => {
         value={selectedContact ?? ''}
         classNames={{
           input:
-            'rounded-lg bg-dark text-white/60 text-lg placeholder:text-white/40 placeholder:text-lg focus:border-white/40',
+            'rounded-lg bg-dark text-md placeholder:text-white/40 placeholder:text-md focus:border-white/40',
         }}
         onChange={onChangeSelectedContact}
       />

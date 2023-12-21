@@ -27,7 +27,7 @@ const TitleInput = () => {
           size="lg"
           classNames={{
             input: cn(
-              'rounded-lg bg-dark-gray text-white/60 text-lg placeholder:text-white/50 placeholder:text-md focus:border-white/40',
+              'rounded-lg bg-dark-gray text-md placeholder:text-white/50 placeholder:text-md focus:border-white/40',
               // { 'border border-white': Boolean(selectedWOC) },
             ),
           }}

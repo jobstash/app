@@ -21,7 +21,7 @@ const RatingItem = ({ ratingKey }: Props) => {
       </div>
       <div className="w-[55%]">
         <Rating
-          size="xl"
+          size="lg"
           value={rating[ratingKey] ?? 0}
           color="gold"
           onChange={(v) => setRating((prev) => ({ ...prev, [ratingKey]: v }))}
