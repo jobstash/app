@@ -1,16 +1,20 @@
-import { memo, useState } from 'react';
+import { memo } from 'react';
+
+import { useAtom } from 'jotai';
+
+import { showGotItCardAtom } from '@jobstash/profile/state';
 
 import { GithubOutlineHugeIcon, Text } from '@jobstash/shared/ui';
 
 import GotItCard from './got-it-card';
 
 const ProfileRepoGotItCard = () => {
-  // TODO: Implement when to show this card. Temporarily set to false during refactor-ssr check-wallet issue.
-  const [showGotItCard, setShowGotItCard] = useState(false);
+  const [showGotItCard, setShowGotItCard] = useAtom(showGotItCardAtom);
 
-  const onClick = () => setShowGotItCard(false);
+  const onClick = () =>
+    setShowGotItCard((prev) => ({ ...prev, repositories: false }));
 
-  if (!showGotItCard) return null;
+  if (!showGotItCard.repositories) return null;
 
   return (
     <GotItCard
