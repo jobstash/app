@@ -3,14 +3,14 @@ import Head from 'next/head';
 import { LoadingPage } from '@jobstash/shared/pages';
 
 import { ProfileRepoPageProvider } from '@jobstash/profile/state';
-import { useDelayedAuthRender } from '@jobstash/shared/state';
+import { useDelayedAuthRender, useIsMobile } from '@jobstash/shared/state';
 
 import {
   ProfileHeader,
   ProfileRepoGotItCard,
   ProfileRepoSubHeader,
 } from '@jobstash/profile/ui';
-import { PageWrapper } from '@jobstash/shared/ui';
+import { MobileSupportPage, PageWrapper } from '@jobstash/shared/ui';
 import {
   ProfileRepoList,
   ProfileRepoRightPanel,
@@ -19,6 +19,9 @@ import { SideBar } from '@jobstash/sidebar/feature';
 
 export const ProfileRepositoriesPage = () => {
   const { canRender } = useDelayedAuthRender({ requireConnected: true });
+
+  const isMobile = useIsMobile();
+  if (isMobile) return <MobileSupportPage />;
 
   if (canRender)
     return (

@@ -11,7 +11,7 @@ import {
   isMagicLinkAtom,
   useAuthContext,
 } from '@jobstash/auth/state';
-import { useIsMounted } from '@jobstash/shared/state';
+import { useIsMobile, useIsMounted } from '@jobstash/shared/state';
 
 import {
   ConnectEmailSection,
@@ -20,7 +20,7 @@ import {
   PickRoleGithubIcon,
   PickRoleSection,
 } from '@jobstash/auth/ui';
-import { Text } from '@jobstash/shared/ui';
+import { MobileSupportPage, Text } from '@jobstash/shared/ui';
 import { SideBar } from '@jobstash/sidebar/feature';
 
 export const PickRolePage = () => {
@@ -33,6 +33,9 @@ export const PickRolePage = () => {
   const isMagicLink = useAtomValue(isMagicLinkAtom);
 
   const shouldRenderPickRole = useFlowCheck();
+
+  const isMobile = useIsMobile();
+  if (isMobile) return <MobileSupportPage />;
 
   if (!shouldRenderPickRole && !isMagicLink) {
     return <LoadingPage />;
