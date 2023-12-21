@@ -50,15 +50,23 @@ export const useYourReviewForm = (): ProfileReviewContextProps => {
   const setWorkingHours = (workingHours: OrgWorkingHours) =>
     setCurrentReview((prev) => ({ ...prev, workingHours }));
 
-  const setPros = (pros: string | null) => {
-    if ((pros?.length ?? 0) <= TEXTAREA_CHAR_LIMIT) {
-      setCurrentReview((prev) => ({ ...prev, pros }));
+  const setPros = (v: string | null) => {
+    const length = v?.length ?? 0;
+    const isValid = length <= TEXTAREA_CHAR_LIMIT;
+    const value = length > 0 ? v : null;
+
+    if (isValid) {
+      setCurrentReview((prev) => ({ ...prev, pros: value }));
     }
   };
 
-  const setCons = (cons: string | null) => {
-    if ((cons?.length ?? 0) <= TEXTAREA_CHAR_LIMIT) {
-      setCurrentReview((prev) => ({ ...prev, cons }));
+  const setCons = (v: string | null) => {
+    const length = v?.length ?? 0;
+    const isValid = length <= TEXTAREA_CHAR_LIMIT;
+    const value = length > 0 ? v : null;
+
+    if (isValid) {
+      setCurrentReview((prev) => ({ ...prev, cons: value }));
     }
   };
 
