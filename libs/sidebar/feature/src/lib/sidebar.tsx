@@ -13,6 +13,7 @@ import {
   FollowTelegramButton,
   MobileMenuButton,
   MobileNavbarWrapper,
+  RequestToBeListedButton,
   SidebarBookmarksSection,
   SidebarCloseButton,
   SidebarDiscoverBartabs,
@@ -63,6 +64,9 @@ const Sidebar = () => (
 
       {/* BOTTOM BARTABS */}
       <div className="inset-x-0 bottom-0 hidden space-y-4 p-4 lg:absolute lg:block">
+        <IsMountedWrapper>
+          <RequestToBeListedButton />
+        </IsMountedWrapper>
         <FollowTelegramButton />
         <hr className="border-t border-white/20" />
         <ConnectWalletButton />
