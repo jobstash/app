@@ -10,7 +10,7 @@ export const useTagsUsedTour = () => {
     profileRepo: { tags },
   } = useProfileRepoPageContext();
 
-  const isTechsUsedTab = activeTab === PROFILE_RIGHT_PANEL_TAB.TAGS_USED;
+  const isTechsUsedTab = activeTab === PROFILE_RIGHT_PANEL_TAB.SKILLS_USED;
   const isEmptyTags = tags.length === 0;
 
   const boolArg = isTechsUsedTab && isEmptyTags;

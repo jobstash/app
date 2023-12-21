@@ -12,7 +12,7 @@ interface Props {
   onClickCanTeach: (id: string, canTeach: boolean) => void;
 }
 
-const ProfileRepoTag = ({
+const ProfileRepoSkill = ({
   id,
   name,
   canTeach,
@@ -45,4 +45,4 @@ const ProfileRepoTag = ({
   </div>
 );
 
-export default memo(ProfileRepoTag);
+export default memo(ProfileRepoSkill);

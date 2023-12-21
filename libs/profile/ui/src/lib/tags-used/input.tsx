@@ -2,7 +2,7 @@ import { Select } from '@mantine/core';
 
 import { cn } from '@jobstash/shared/utils';
 
-import { useTagsUsedContext } from '@jobstash/profile/state';
+import { useSkillsUsedContext } from '@jobstash/profile/state';
 
 import { Button } from '@jobstash/shared/ui';
 
@@ -14,13 +14,13 @@ const Input = () => {
     setHoverAddButton,
     setSearchValue,
     onBlurSearch,
-  } = useTagsUsedContext();
+  } = useSkillsUsedContext();
 
   return (
     <Select
       searchable
       data={tagOptions}
-      placeholder="Add tag used"
+      placeholder="Add skill used"
       size="lg"
       classNames={{
         input: cn(

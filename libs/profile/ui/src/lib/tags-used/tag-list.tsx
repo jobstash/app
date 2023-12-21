@@ -1,14 +1,14 @@
-import { useTagsUsedContext } from '@jobstash/profile/state';
+import { useSkillsUsedContext } from '@jobstash/profile/state';
 
-import ProfileRepoTag from '../profile-repo-tag';
+import ProfileRepoSkill from '../profile-repo-skill';
 
 const TagList = () => {
-  const { currentTags, onTagRemove, onClickCanTeach } = useTagsUsedContext();
+  const { currentTags, onTagRemove, onClickCanTeach } = useSkillsUsedContext();
 
   return (
     <div className="flex flex-wrap gap-4 items-center pt-2">
       {currentTags.map(({ id, name, canTeach }) => (
-        <ProfileRepoTag
+        <ProfileRepoSkill
           key={id}
           id={id}
           name={name}

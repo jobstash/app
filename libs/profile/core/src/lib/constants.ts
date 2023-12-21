@@ -1,5 +1,5 @@
 export const PROFILE_RIGHT_PANEL_TAB = {
-  TAGS_USED: 'Tags Used' as const,
+  SKILLS_USED: 'Skills Used' as const,
   YOUR_CONTRIBUTION: 'Your Contribution' as const,
   COMPENSATION: 'Compensation' as const,
   RATING: 'Rating' as const,
@@ -8,7 +8,7 @@ export const PROFILE_RIGHT_PANEL_TAB = {
 
 export const PROFILE_RIGHT_PANEL_TABS = {
   REPOSITORIES: [
-    PROFILE_RIGHT_PANEL_TAB.TAGS_USED,
+    PROFILE_RIGHT_PANEL_TAB.SKILLS_USED,
     PROFILE_RIGHT_PANEL_TAB.YOUR_CONTRIBUTION,
   ] as const,
   ORG_REVIEWS: [

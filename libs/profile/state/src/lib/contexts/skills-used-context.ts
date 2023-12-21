@@ -3,7 +3,7 @@ import { type Dispatch, type SetStateAction } from 'react';
 
 import { type ProfileRepoTag } from '@jobstash/profile/core';
 
-interface TagsUsedContextProps {
+interface SkillsUsedContextProps {
   tagsUsed: ProfileRepoTag[];
   searchValue: string;
   setSearchValue: Dispatch<SetStateAction<string>>;
@@ -19,13 +19,15 @@ interface TagsUsedContextProps {
   onClickCanTeach: (id: string, canTeach: boolean) => void;
 }
 
-export const TagsUsedContext = createContext<TagsUsedContextProps | null>(null);
+export const SkillsUsedContext = createContext<SkillsUsedContextProps | null>(
+  null,
+);
 
-export const useTagsUsedContext = () => {
-  const context = useContext(TagsUsedContext);
+export const useSkillsUsedContext = () => {
+  const context = useContext(SkillsUsedContext);
   if (!context) {
     throw new Error(
-      'useTagsUsedContext must be used within a TagsUsedProvider',
+      'useSkillsUsedContext must be used within a SkillsUsedProvider',
     );
   }
 

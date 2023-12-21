@@ -1,9 +1,9 @@
-import { useTagsUsedContext } from '@jobstash/profile/state';
+import { useSkillsUsedContext } from '@jobstash/profile/state';
 
 import CardActionButton from '../card-action-button';
 
 const Action = () => {
-  const { disableSave, onClickSave } = useTagsUsedContext();
+  const { disableSave, onClickSave } = useSkillsUsedContext();
 
   return (
     <div className="pt-3">

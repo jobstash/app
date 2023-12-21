@@ -1,1 +1,1 @@
-export { default as TagsUsed } from './tags-used';
+export { default as SkillsUsed } from './skills-used';

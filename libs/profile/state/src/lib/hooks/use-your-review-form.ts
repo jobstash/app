@@ -71,7 +71,8 @@ export const useYourReviewForm = (): ProfileReviewContextProps => {
   };
 
   const isDisabledReviewSave =
-    JSON.stringify({ title, pros, cons }) === JSON.stringify(currentReview);
+    JSON.stringify({ title, location, timezone, workingHours, pros, cons }) ===
+    JSON.stringify(currentReview);
 
   const { mutate } = useYourReviewMutation();
 

@@ -28,7 +28,7 @@ const BackButton = (props: Props) => {
     }
 
     if (currentStep === 2) {
-      setActiveTab(PROFILE_RIGHT_PANEL_TAB.TAGS_USED);
+      setActiveTab(PROFILE_RIGHT_PANEL_TAB.SKILLS_USED);
     }
 
     previousStep();
