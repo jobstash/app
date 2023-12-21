@@ -42,6 +42,11 @@ export const useRatingMutation = () => {
           rating,
         });
       }
+
+      // Invalidate org details
+      queryClient.invalidateQueries({
+        queryKey: ['org-details', payload.orgId],
+      });
     },
     onError(error) {
       notifError({
