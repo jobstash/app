@@ -39,7 +39,7 @@ const JobBookmarksRightPanel = ({ jobPost, onClickBack }: Props) => {
       tabs={
         <JobBookmarksRightPanelTabs
           jobPost={jobPost}
-          showSpinner={isLoadingCompetitors}
+          showSpinner={isLoadingCompetitors && Boolean(projectId)}
           competitorCount={competitorCount}
         />
       }
