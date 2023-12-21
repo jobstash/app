@@ -51,13 +51,13 @@ export const useYourReviewForm = (): ProfileReviewContextProps => {
     setCurrentReview((prev) => ({ ...prev, workingHours }));
 
   const setPros = (pros: string | null) => {
-    if (pros && pros.length <= TEXTAREA_CHAR_LIMIT) {
+    if ((pros?.length ?? 0) <= TEXTAREA_CHAR_LIMIT) {
       setCurrentReview((prev) => ({ ...prev, pros }));
     }
   };
 
   const setCons = (cons: string | null) => {
-    if (cons && cons.length <= TEXTAREA_CHAR_LIMIT) {
+    if ((cons?.length ?? 0) <= TEXTAREA_CHAR_LIMIT) {
       setCurrentReview((prev) => ({ ...prev, cons }));
     }
   };
