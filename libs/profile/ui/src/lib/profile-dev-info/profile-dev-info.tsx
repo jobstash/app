@@ -1,4 +1,4 @@
-import { LayoutGroup, motion } from 'framer-motion';
+import { LayoutGroup } from 'framer-motion';
 
 import { ProfileDevInfoProvider } from '@jobstash/profile/state';
 
@@ -9,15 +9,9 @@ import { SkillsSection } from './skills-section';
 const ProfileDevInfo = () => (
   <ProfileDevInfoProvider>
     <LayoutGroup>
+      <ShowcaseSection />
       <SkillsSection />
-
-      <motion.div layout>
-        <ShowcaseSection />
-      </motion.div>
-
-      <motion.div layout>
-        <ProfileDevInfoSave />
-      </motion.div>
+      <ProfileDevInfoSave />
     </LayoutGroup>
   </ProfileDevInfoProvider>
 );

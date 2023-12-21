@@ -1,3 +1,5 @@
+import { motion } from 'framer-motion';
+
 import {
   type ProfileShowcase,
   type ProfileSkill,
@@ -55,11 +57,13 @@ const ProfileDevInfoSave = () => {
   };
 
   return (
-    <div className="pb-12 flex justify-center">
-      <Button variant="primary" isDisabled={disableSave} onClick={onClick}>
-        {buttonText}
-      </Button>
-    </div>
+    <motion.div layout>
+      <div className="pb-12 flex justify-center">
+        <Button variant="primary" isDisabled={disableSave} onClick={onClick}>
+          {buttonText}
+        </Button>
+      </div>
+    </motion.div>
   );
 };
 
