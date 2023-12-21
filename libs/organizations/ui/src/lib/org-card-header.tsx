@@ -3,11 +3,7 @@ import { memo } from 'react';
 import { type OrgListItem } from '@jobstash/organizations/core';
 import { getLogoUrl } from '@jobstash/shared/utils';
 
-import {
-  BookmarkButton,
-  LogoTitle,
-  OrgReviewCardSets,
-} from '@jobstash/shared/ui';
+import { LogoTitle, OrgReviewCardSets } from '@jobstash/shared/ui';
 
 interface Props {
   orgListItem: OrgListItem;
@@ -27,7 +23,7 @@ const OrgCardHeader = ({ orgListItem }: Props) => {
       <div className="flex items-center gap-4">
         <OrgReviewCardSets org={orgListItem} />
 
-        <BookmarkButton isBookmarked={false} />
+        {/* <BookmarkButton isBookmarked={false} /> */}
       </div>
     </div>
   );
