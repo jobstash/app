@@ -12,7 +12,6 @@ export interface ProfileShowcaseFormContextProps {
   onClickAddAnother: () => void;
   errors: {
     label: string | null;
-    url: string | null;
   };
   disabled: {
     urlInput: boolean;

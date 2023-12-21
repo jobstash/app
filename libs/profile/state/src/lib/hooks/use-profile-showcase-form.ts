@@ -1,7 +1,5 @@
 import { type ChangeEventHandler, useState } from 'react';
 
-import { isValidUrl } from '@jobstash/shared/utils';
-
 import { useProfileDevInfoContext } from '../contexts/profile-dev-info-context';
 import { type ProfileShowcaseFormContextProps } from '../contexts/profile-showcase-form-context';
 const SHOWCASE_OPTIONS = ['CV', 'Portfolio', 'Website'];
@@ -66,17 +64,13 @@ export const useProfileShowcaseForm = (): ProfileShowcaseFormContextProps => {
   const hasErrorLabel = showcaseLabelSet.has(
     currentShowcase.label.toLowerCase(),
   );
-  const hasErrorUrl =
-    Boolean(currentShowcase.url) && !isValidUrl(currentShowcase.url);
 
   const errors = {
     label: hasErrorLabel ? 'Duplicate showcase' : null,
-    url: hasErrorUrl ? 'Invalid URL' : null,
   };
 
   const disableUrlInput = !currentShowcase.label || Boolean(errors.label);
-  const disableAddItem =
-    !currentShowcase.url || disableUrlInput || Boolean(errors.url);
+  const disableAddItem = !currentShowcase.url || disableUrlInput;
 
   const disabled = {
     urlInput: !currentShowcase.label || Boolean(errors.label),
@@ -93,7 +87,7 @@ export const useProfileShowcaseForm = (): ProfileShowcaseFormContextProps => {
     onChangeUrl,
     onClickAddItem,
     onClickAddAnother,
-    errors,
     disabled,
+    errors,
   };
 };
