@@ -17,7 +17,7 @@ const SkillsList = () => {
     <SkillsWrapper>
       {skills.map(({ name, id, canTeach }) => (
         <motion.div key={id} layout>
-          <TechWrapper id={id} isChecked={canTeach}>
+          <TechWrapper isChecked canTeach={canTeach} id={id}>
             {name}
           </TechWrapper>
         </motion.div>
