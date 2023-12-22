@@ -7,6 +7,7 @@ import { cn } from '@jobstash/shared/utils';
 interface Props {
   isActive: boolean;
   children: ReactNode;
+  isLoading: boolean;
   onClick: () => void;
 }
 
@@ -25,8 +26,16 @@ const profileCard = cva(
   },
 );
 
-const ProfileCardWrapper = ({ isActive, children, onClick }: Props) => (
-  <div onClick={onClick}>
+const ProfileCardWrapper = ({
+  isActive,
+  children,
+  isLoading,
+  onClick,
+}: Props) => (
+  <div
+    className={cn({ 'opacity-60 pointer-events-none': isLoading })}
+    onClick={onClick}
+  >
     <div className={cn(profileCard({ isActive }))}>{children}</div>
   </div>
 );

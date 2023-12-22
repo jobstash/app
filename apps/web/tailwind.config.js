@@ -65,7 +65,7 @@ module.exports = {
       '8xl': ['3.75rem', '1'],
     },
     keyframes: {
-      pulse: {
+      'pulse-tw': {
         '0%, 100%': {
           opacity: 1,
         },
@@ -115,7 +115,7 @@ module.exports = {
       },
     },
     animation: {
-      pulse: 'pulse 1.5s cubic-bezier(0.4, 0, 0.6, 1) infinite',
+      'pulse-tw': 'pulse-tw 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
       spin: 'spin 2.4s linear infinite',
       spin2: 'spin 0.4s linear infinite',
       'spin-slow': 'spin 220s linear infinite',

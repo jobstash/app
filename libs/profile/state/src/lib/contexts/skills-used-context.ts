@@ -3,17 +3,13 @@ import { type Dispatch, type SetStateAction } from 'react';
 
 import { type ProfileRepoTag } from '@jobstash/profile/core';
 
-interface SkillsUsedContextProps {
+export interface SkillsUsedContextProps {
   tagsUsed: ProfileRepoTag[];
   searchValue: string;
   setSearchValue: Dispatch<SetStateAction<string>>;
-  hoverAddButton: boolean;
-  setHoverAddButton: Dispatch<SetStateAction<boolean>>;
-  onBlurSearch: () => void;
-  currentTags: ProfileRepoTag[];
   disableAdd: boolean;
+  onTagSelect: (name: string) => void;
   onTagRemove: (id: string) => void;
-  disableSave: boolean;
   tagOptions: string[];
   onClickSave: () => void;
   onClickCanTeach: (id: string, canTeach: boolean) => void;

@@ -6,14 +6,12 @@ import { getProfileShowcase } from '@jobstash/profile/data';
 export const useProfileShowcaseQuery = () => {
   const { address } = useAccount();
 
-  const { isLoading: isLoadingShowcaseQuery, data: showcaseData } = useQuery({
+  const { isLoading, isFetching, data } = useQuery({
     queryKey: ['profile-showcase', address],
     queryFn: () => getProfileShowcase(),
     enabled: Boolean(address),
+    staleTime: 1000 * 60 * 60,
   });
 
-  return {
-    isLoadingShowcaseQuery,
-    showcaseData,
-  };
+  return { isLoading, isFetching, data };
 };

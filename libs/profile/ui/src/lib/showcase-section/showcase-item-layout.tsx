@@ -15,7 +15,9 @@ const ShowcaseItemLayout = (props: Props) => {
 
       <div className="flex-grow w-1/3">{urlInput}</div>
 
-      {iconButton}
+      <div className="flex items-center justify-center h-12 w-12">
+        {iconButton}
+      </div>
     </div>
   );
 };

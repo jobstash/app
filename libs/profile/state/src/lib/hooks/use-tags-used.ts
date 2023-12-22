@@ -1,9 +1,11 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import type { ProfileRepo, ProfileRepoTag } from '@jobstash/profile/core';
 import { Tag } from '@jobstash/shared/core';
+import { tagSortFn } from '@jobstash/profile/utils';
 
 import { useProfileRepoPageContext } from '../contexts/profile-repo-page-context';
+import { SkillsUsedContextProps } from '../contexts/skills-used-context';
 
 import { useTagsUsedMutation } from './use-tags-used-mutation';
 
@@ -12,48 +14,48 @@ const findTag = (allTags: Tag[], searchValue: string) =>
     (option) => option.name.toLowerCase() === searchValue?.toLowerCase(),
   );
 
-const isTagExists = (currentTags: ProfileRepoTag[], searchValue: string) =>
-  currentTags.some(
-    (tag) => tag.name.toLowerCase() === searchValue.toLowerCase(),
-  );
+const isTagExists = (tagsUsed: ProfileRepoTag[], searchValue: string) =>
+  tagsUsed.some((tag) => tag.name.toLowerCase() === searchValue.toLowerCase());
 
-const isTagsEqual = (tags: ProfileRepoTag[], currentTags: ProfileRepoTag[]) =>
-  JSON.stringify(tags) === JSON.stringify(currentTags);
-
-const getTagOptions = (currentTags: ProfileRepoTag[], allTags: Tag[]) => {
-  const usedIds = new Set(currentTags.map((tag) => tag.id));
+const getTagOptions = (tagsUsed: ProfileRepoTag[], allTags: Tag[]) => {
+  const usedIds = new Set(tagsUsed.map((tag) => tag.id));
   return allTags
     .filter((option) => !usedIds.has(option.id))
     .map((option) => option.name);
 };
 
-export const useTagsUsed = () => {
-  const { activeProfileRepo: profileRepo, allTags } =
-    useProfileRepoPageContext();
+export const useTagsUsed = (): SkillsUsedContextProps => {
+  const {
+    activeProfileRepo: profileRepo,
+    allTags,
+    userSkills,
+    mutateSkills,
+  } = useProfileRepoPageContext();
   const { id, tags } = profileRepo || ({} as ProfileRepo);
 
-  const [tagsUsed, setTagsUsed] = useState<ProfileRepoTag[]>(tags);
-  const [searchValue, setSearchValue] = useState<string>('');
-  const [hoverAddButton, setHoverAddButton] = useState(false);
-
-  const onBlurSearch = () => {
-    if (hoverAddButton) {
-      const currentTag = findTag(allTags, searchValue);
-      if (currentTag) {
-        setTagsUsed((prev) => [...prev, { ...currentTag, canTeach: false }]);
-      }
+  const [tagsUsed, setTagsUsed] = useState<ProfileRepoTag[]>(
+    tags.sort(tagSortFn),
+  );
+  useEffect(() => {
+    if (tags) {
+      setTagsUsed(tags.sort(tagSortFn));
     }
-  };
+  }, [tags]);
 
-  const currentTags = [...tagsUsed];
-  const disableAdd = !searchValue || isTagExists(currentTags, searchValue);
+  const [searchValue, setSearchValue] = useState<string>('');
+
+  const disableAdd = !searchValue || isTagExists(tagsUsed, searchValue);
+
+  const onTagSelect = (name: string) => {
+    const tag = findTag(allTags, name);
+    if (tag) setTagsUsed((prev) => [...prev, { ...tag, canTeach: false }]);
+  };
 
   const onTagRemove = (id: string) => {
     setTagsUsed(tagsUsed.filter((t) => t.id !== id));
   };
 
-  const disableSave = isTagsEqual(tags, currentTags);
-  const tagOptions = getTagOptions(currentTags, allTags);
+  const tagOptions = getTagOptions(tagsUsed, allTags);
 
   const { mutate } = useTagsUsedMutation();
   const onClickSave = () => {
@@ -64,19 +66,19 @@ export const useTagsUsed = () => {
     setTagsUsed((prev) =>
       prev.map((t) => (t.id === id ? { ...t, canTeach } : t)),
     );
+
+    mutateSkills({
+      skills: userSkills.map((t) => (t.id === id ? { ...t, canTeach } : t)),
+    });
   };
 
   return {
     tagsUsed,
     searchValue,
     setSearchValue,
-    hoverAddButton,
-    setHoverAddButton,
-    onBlurSearch,
-    currentTags,
     disableAdd,
+    onTagSelect,
     onTagRemove,
-    disableSave,
     tagOptions,
     onClickSave,
     onClickCanTeach,

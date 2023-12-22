@@ -15,10 +15,11 @@ import ProfileRepoCardTechs from './profile-repo-card-techs';
 interface Props {
   isActive: boolean;
   profileRepo: ProfileRepo;
+  isLoading: boolean;
 }
 
 const ProfileRepoCard = (props: Props) => {
-  const { isActive, profileRepo } = props;
+  const { isActive, profileRepo, isLoading } = props;
   const {
     tags,
     org: { name: orgName, logo: orgLogo, url: orgUrl },
@@ -32,7 +33,11 @@ const ProfileRepoCard = (props: Props) => {
   }, [profileRepo, setActiveProfileRepo]);
 
   return (
-    <ProfileCardWrapper isActive={isActive} onClick={onClick}>
+    <ProfileCardWrapper
+      isActive={isActive}
+      isLoading={isLoading}
+      onClick={onClick}
+    >
       <ProfileRepoCardHeader profileRepo={profileRepo} />
       <ProfileRepoCardTechs techs={tags} />
       <ProfileRepoCardOrg name={orgName} logo={orgLogo} url={orgUrl} />

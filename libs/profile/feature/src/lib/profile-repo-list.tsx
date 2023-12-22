@@ -13,7 +13,7 @@ import {
 } from '@jobstash/shared/ui';
 
 const ProfileRepoList = () => {
-  const { activeProfileRepo } = useProfileRepoPageContext();
+  const { activeProfileRepo, isLoadingCard } = useProfileRepoPageContext();
 
   const {
     isLoading,
@@ -22,6 +22,7 @@ const ProfileRepoList = () => {
     isFetchingNextPage,
     hasNextPage,
     inViewRef,
+    isFetching,
   } = useProfileRepoList();
 
   if (isLoading) return <LoadingState />;
@@ -34,6 +35,10 @@ const ProfileRepoList = () => {
           key={profileRepo.id}
           profileRepo={profileRepo}
           isActive={activeProfileRepo?.id === profileRepo.id}
+          isLoading={
+            activeProfileRepo?.id === profileRepo.id &&
+            (isLoadingCard || isFetching)
+          }
         />
       ))}
 

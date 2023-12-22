@@ -1,4 +1,4 @@
-import { type UseMutateAsyncFunction } from '@tanstack/react-query';
+import { type UseMutateFunction } from '@tanstack/react-query';
 import { type Infer } from 'myzod';
 
 import { MessageResponse } from '@jobstash/shared/core';
@@ -56,7 +56,7 @@ export type ProfileInfoResponse = Infer<typeof profileInfoResponseSchema>;
 export type ProfileSkill = Infer<typeof profileSkillSchema>;
 export type ProfileSkillResponse = Infer<typeof profileSkillResponseSchema>;
 export type ProfileSkillsPayload = Infer<typeof profileSkillsPayloadSchema>;
-export type ProfileSkillsMutFn = UseMutateAsyncFunction<
+export type ProfileSkillsMutFn = UseMutateFunction<
   MessageResponse,
   unknown,
   ProfileSkillsPayload,
@@ -68,7 +68,7 @@ export type ProfileShowcaseResponse = Infer<
   typeof profileShowcaseResponseSchema
 >;
 export type ProfileShowcasePayload = Infer<typeof profileShowcasePayloadSchema>;
-export type ProfileShowcaseMutFn = UseMutateAsyncFunction<
+export type ProfileShowcaseMutFn = UseMutateFunction<
   MessageResponse,
   unknown,
   ProfileShowcasePayload,

@@ -16,11 +16,12 @@ import {
   YourContribution,
 } from '@jobstash/profile/ui';
 import { RightPanelCardBorder } from '@jobstash/right-panel/ui';
+import { Loader } from '@jobstash/shared/ui';
 
 const ProfileRepoRightPanel = () => {
   const { isOpen } = useTour();
 
-  const { activeProfileRepo, tabs, activeTab, isLoadingCard } =
+  const { activeProfileRepo, tabs, activeTab, isLoadingCard, isLoadingSkills } =
     useProfileRepoPageContext();
 
   if (!activeProfileRepo) return null;
@@ -34,7 +35,12 @@ const ProfileRepoRightPanel = () => {
         card={
           <div className={cn({ 'pointer-events-none': isOpen })}>
             <RightPanelCardBorder>
-              <LoadingOverlay visible={isLoadingCard} className="rounded-3xl" />
+              <LoadingOverlay
+                visible={isLoadingCard || isLoadingSkills}
+                className="rounded-3xl"
+                loader={<Loader />}
+                overlayOpacity={0.8}
+              />
               <div className="p-8">
                 <div className="flex flex-col gap-6 relative">
                   {activeTab === PROFILE_RIGHT_PANEL_TAB.SKILLS_USED && (

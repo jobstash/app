@@ -26,7 +26,7 @@ const ProfileRepoCardHeader = ({ profileRepo }: Props) => {
         <Heading size="md" fw="semibold">
           {name}
         </Heading>
-        <div className="hidden items-center space-x-3 lg:flex">
+        <div className="hidden items-center lg:justify-center space-x-3 lg:flex">
           <span className="text-sm">{ts}</span>
         </div>
       </div>

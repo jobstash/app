@@ -1,7 +1,9 @@
 import { type NotificationProps, notifications } from '@mantine/notifications';
 
-const showNotif = (notifProps: NotificationProps) => {
-  notifications.show(notifProps);
+const showNotif = (notifProps: NotificationProps, show = false) => {
+  notifProps.id === undefined || show
+    ? notifications.show(notifProps)
+    : notifications.update({ ...notifProps, id: notifProps.id });
 };
 
 export const notifSuccess = (notifProps: NotificationProps) => {
@@ -25,14 +27,17 @@ export const notifError = (notifProps?: ErrorNotificationProps) => {
 };
 
 export const notifLoading = (notifProps: NotificationProps) => {
-  showNotif({
-    color: '#8742ff',
-    loading: true,
-    autoClose: false,
-    withCloseButton: false,
-    sx: {
-      borderRadius: 8,
+  showNotif(
+    {
+      color: '#8742ff',
+      loading: true,
+      autoClose: false,
+      withCloseButton: false,
+      sx: {
+        borderRadius: 8,
+      },
+      ...notifProps,
     },
-    ...notifProps,
-  });
+    true,
+  );
 };
