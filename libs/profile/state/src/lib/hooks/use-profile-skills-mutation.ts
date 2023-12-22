@@ -32,6 +32,7 @@ export const useProfileSkillsMutation = () => {
 
       queryClient.setQueryData(['profile-skills', address], vars.skills);
       queryClient.invalidateQueries(['profile-skills', address]);
+      queryClient.invalidateQueries(['profile-repo-list']);
     },
     onError(error) {
       notifError({

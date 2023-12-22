@@ -3,11 +3,11 @@ import { useSkillsUsedContext } from '@jobstash/profile/state';
 import ProfileRepoSkill from '../profile-repo-skill';
 
 const TagList = () => {
-  const { currentTags, onTagRemove, onClickCanTeach } = useSkillsUsedContext();
+  const { tagsUsed, onTagRemove, onClickCanTeach } = useSkillsUsedContext();
 
   return (
     <div className="flex flex-wrap gap-4 items-center pt-2">
-      {currentTags.map(({ id, name, canTeach }) => (
+      {tagsUsed.map(({ id, name, canTeach }) => (
         <ProfileRepoSkill
           key={id}
           id={id}

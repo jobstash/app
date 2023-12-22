@@ -20,6 +20,7 @@ export const useProfileRepoList = () => {
     fetchNextPage,
     isFetchingNextPage,
     hasNextPage,
+    isFetching,
   } = useProfileRepoListQuery();
 
   const [activeProfileRepo, setActiveProfileRepo] = useAtom(
@@ -73,5 +74,6 @@ export const useProfileRepoList = () => {
     isFetchingNextPage,
     hasNextPage,
     inViewRef,
+    isFetching,
   };
 };

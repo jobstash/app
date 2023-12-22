@@ -4,21 +4,13 @@ import { cn } from '@jobstash/shared/utils';
 
 import { useSkillsUsedContext } from '@jobstash/profile/state';
 
-import { Button } from '@jobstash/shared/ui';
-
 const Input = () => {
-  const {
-    tagOptions,
-    searchValue,
-    disableAdd,
-    setHoverAddButton,
-    setSearchValue,
-    onBlurSearch,
-  } = useSkillsUsedContext();
+  const { tagOptions, setSearchValue, onTagSelect } = useSkillsUsedContext();
 
   return (
     <Select
       searchable
+      clearable
       data={tagOptions}
       placeholder="Add skill used"
       size="lg"
@@ -29,29 +21,11 @@ const Input = () => {
         itemsWrapper: 'bg-dark-gray',
         item: '[&[data-hovered]]:bg-gray [&[data-selected]]:bg-gray',
       }}
-      rightSection={
-        <div key={searchValue} className="-ml-6 z-[99999]">
-          <Button
-            isActive
-            variant="primary"
-            className="bg-dark-gray hover:bg-gray"
-            isDisabled={disableAdd}
-            onMouseEnter={() => {
-              setHoverAddButton(true);
-            }}
-            onMouseLeave={() => {
-              setHoverAddButton(false);
-            }}
-          >
-            Add
-          </Button>
-        </div>
-      }
       limit={200}
       onSearchChange={(v) => {
         setSearchValue(v);
       }}
-      onBlur={onBlurSearch}
+      onChange={onTagSelect}
     />
   );
 };

@@ -21,7 +21,9 @@ const ProfileRepoSkill = ({
 }: Props) => (
   <div className="flex px-4 py-3 border border-gray gap-4 rounded-xl items-center">
     <div>
-      <TechWrapper id={id}>{name}</TechWrapper>
+      <TechWrapper isChecked id={id} canTeach={canTeach}>
+        {name}
+      </TechWrapper>
     </div>
     <div className="flex justify-center p-2 border border-gray rounded-xl">
       <Checkbox

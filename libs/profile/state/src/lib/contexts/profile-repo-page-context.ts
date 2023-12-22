@@ -5,11 +5,15 @@ import {
   useContext,
 } from 'react';
 
+import { type UseMutateFunction } from '@tanstack/react-query';
+
 import {
   type ProfileRepo,
+  type ProfileSkill,
+  type ProfileSkillsPayload,
   type ProfileTabOptions,
 } from '@jobstash/profile/core';
-import { Tag } from '@jobstash/shared/core';
+import { MessageResponse, Tag } from '@jobstash/shared/core';
 
 interface ProfileRepoPageContextProps {
   profileRepoCount: number | null;
@@ -24,6 +28,13 @@ interface ProfileRepoPageContextProps {
   profileRepo: ProfileRepo;
   isLoadingCard: boolean;
   setIsLoadingCard: Dispatch<SetStateAction<boolean>>;
+  isLoadingSkills: boolean;
+  userSkills: ProfileSkill[];
+  mutateSkills: UseMutateFunction<
+    MessageResponse,
+    unknown,
+    ProfileSkillsPayload
+  >;
 }
 
 export const ProfileRepoPageContext =

@@ -46,7 +46,7 @@ const ProfileOrgReviewCard = (props: Props) => {
   }, [profileOrgReview, setActiveProfileOrgReview]);
 
   return (
-    <ProfileCardWrapper isActive={isActive} onClick={onClick}>
+    <ProfileCardWrapper isActive={isActive} isLoading={false} onClick={onClick}>
       <div className="flex flex-col gap-4">
         <div className="flex w-full items-center justify-between">
           <LogoTitle

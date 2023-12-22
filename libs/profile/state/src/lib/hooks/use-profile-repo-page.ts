@@ -12,6 +12,8 @@ import { useAllTags } from '@jobstash/shared/state';
 import { activeProfileRepoAtom } from '../atoms/active-profile-repo-atom';
 import { profileRepoCountAtom } from '../atoms/profile-repo-count-atom';
 
+import { useProfileSkillsMutation } from './use-profile-skills-mutation';
+import { useProfileSkillsQuery } from './use-profile-skills-query';
 import { useProfileTabs } from './use-profile-tabs';
 
 export const useProfileRepoPage = () => {
@@ -25,6 +27,15 @@ export const useProfileRepoPage = () => {
   const activeProfileRepo = useAtomValue(activeProfileRepoAtom);
   const profileRepo = activeProfileRepo || ({} as ProfileRepo);
 
+  const {
+    isLoading: isLoadingSkillsQuery,
+    isFetching,
+    data,
+  } = useProfileSkillsQuery();
+
+  const { isLoading: isLoadingSkillsMutation, mutate: mutateSkills } =
+    useProfileSkillsMutation();
+
   const [isLoadingCard, setIsLoadingCard] = useState(false);
 
   return {
@@ -37,5 +48,9 @@ export const useProfileRepoPage = () => {
     profileRepo,
     isLoadingCard,
     setIsLoadingCard,
+    isLoadingSkills:
+      isLoadingSkillsQuery || isFetching || isLoadingSkillsMutation,
+    userSkills: data ?? [],
+    mutateSkills,
   };
 };
