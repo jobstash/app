@@ -6,14 +6,16 @@ import { getProfileSkills } from '@jobstash/profile/data';
 export const useProfileSkillsQuery = () => {
   const { address } = useAccount();
 
-  const { isLoading: isLoadingSkillsQuery, data: skillsQueryData } = useQuery({
+  const { isLoading, isFetching, data } = useQuery({
     queryKey: ['profile-skills', address],
     queryFn: () => getProfileSkills(),
     enabled: Boolean(address),
+    staleTime: 1000 * 60 * 60,
   });
 
   return {
-    isLoadingSkillsQuery,
-    skillsQueryData,
+    isLoading,
+    isFetching,
+    data,
   };
 };

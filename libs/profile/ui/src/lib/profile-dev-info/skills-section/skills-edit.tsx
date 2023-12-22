@@ -1,42 +1,36 @@
 import { forwardRef } from 'react';
 
-import { motion } from 'framer-motion';
+import { cn } from '@jobstash/shared/utils';
 
-import {
-  useProfileDevInfoContext,
-  useProfileSkillsContext,
-} from '@jobstash/profile/state';
+import { useProfileSkillsContext } from '@jobstash/profile/state';
 
 import ProfileRepoSkill from '../../profile-repo-skill';
 
 import SkillsInput from './skills-input';
 
 const SkillsEdit = forwardRef<HTMLDivElement>((_props, ref) => {
-  const { skills, removeSkill, updateCanTeach } = useProfileDevInfoContext();
-  const { isEditing } = useProfileSkillsContext();
+  const { isEditing, skills, removeSkill, updateCanTeach, isLoading } =
+    useProfileSkillsContext();
 
   if (!isEditing) return null;
 
   return (
-    <motion.div ref={ref} layout className="flex flex-col gap-4">
-      <motion.div layout>
+    <div ref={ref} className="flex flex-col gap-4">
+      <div>
         <hr className="border-t border-white/10" />
-      </motion.div>
+      </div>
 
-      <motion.div
-        layout
-        className="flex flex-col gap-4"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
+      <div
+        className={cn('flex flex-col gap-4 w-full', {
+          'opacity-40 pointer-events-none':
+            isLoading.query || isLoading.mutation,
+        })}
       >
-        <motion.div layout className="max-w-lg">
-          <SkillsInput />
-        </motion.div>
+        <SkillsInput />
         {skills.length > 0 && (
-          <motion.div layout className="flex flex-wrap gap-4 items-center">
+          <div className="flex flex-wrap gap-4 items-center">
             {skills.map(({ id, name, canTeach }) => (
-              <motion.div key={id} layout>
+              <div key={id}>
                 <ProfileRepoSkill
                   id={id}
                   name={name}
@@ -44,12 +38,12 @@ const SkillsEdit = forwardRef<HTMLDivElement>((_props, ref) => {
                   onTagRemove={(id) => removeSkill(id)}
                   onClickCanTeach={updateCanTeach}
                 />
-              </motion.div>
+              </div>
             ))}
-          </motion.div>
+          </div>
         )}
-      </motion.div>
-    </motion.div>
+      </div>
+    </div>
   );
 });
 SkillsEdit.displayName = 'SkillsEdit';
