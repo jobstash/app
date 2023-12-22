@@ -1,27 +1,25 @@
-import { motion } from 'framer-motion';
-
-import { useProfileDevInfoContext } from '@jobstash/profile/state';
+import { useProfileShowcaseContext } from '@jobstash/profile/state';
 
 import ShowcaseItem from './showcase-item';
 import ShowcaseSkeleton from './showcase-skeleton';
 
 const ShowcaseItems = () => {
-  const { showcases, isLoading } = useProfileDevInfoContext();
+  const { showcases, isLoading } = useProfileShowcaseContext();
 
-  if (!isLoading.showcaseQuery && showcases.length === 0) return null;
+  if (!isLoading.query && showcases.length === 0) return null;
 
   return (
-    <motion.div layout className="flex flex-col gap-4">
-      {isLoading.showcaseQuery ? (
-        <ShowcaseSkeleton />
+    <div className="flex flex-col gap-4">
+      {isLoading.query ? (
+        <ShowcaseSkeleton itemCount={showcases.length} />
       ) : (
-        showcases.map(({ label, url }) => (
-          <motion.div key={label} layout>
-            <ShowcaseItem label={label} url={url} />
-          </motion.div>
+        showcases.map((showcase) => (
+          <div key={JSON.stringify({ showcase })}>
+            <ShowcaseItem showcase={showcase} />
+          </div>
         ))
       )}
-    </motion.div>
+    </div>
   );
 };
 

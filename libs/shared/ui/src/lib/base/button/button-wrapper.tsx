@@ -28,7 +28,7 @@ const wrapper = cva(
         false: 'border-none',
       },
       isDisabled: {
-        true: 'opacity-30 select-none pointer-events-none',
+        true: 'opacity-60 select-none pointer-events-none',
       },
       isFullWidth: {
         true: 'w-full',

@@ -1,16 +1,22 @@
 import ShowcaseItemLayout from './showcase-item-layout';
 
-const ShowcaseSkeleton = () => (
+interface Props {
+  itemCount: number;
+}
+
+const ShowcaseSkeleton = ({ itemCount }: Props) => (
   <>
-    {[0, 1].map((i) => (
+    {[...Array.from({ length: itemCount }).keys()].map((i) => (
       <ShowcaseItemLayout
         key={i}
         labelInput={
-          <div className="h-12 bg-white/20 rounded-lg animate-pulse" />
+          <div className="h-12 p-2 bg-white/20 rounded-lg animate-pulse-tw" />
         }
-        urlInput={<div className="h-12 bg-white/20 rounded-lg animate-pulse" />}
+        urlInput={
+          <div className="h-12 p-2 bg-white/20 rounded-lg animate-pulse-tw" />
+        }
         iconButton={
-          <div className="h-10 bg-white/20 rounded-md w-[5%] animate-pulse" />
+          <div className="h-10 p-2 bg-white/20 rounded-md w-10 animate-pulse-tw" />
         }
       />
     ))}

@@ -14,7 +14,7 @@ import SkillsHeader from './skills-header';
 import SkillsList from './skills-list';
 import SkillsToggle from './skills-toggle';
 
-const SkillsSection = () => {
+const ProfileSkillsSection = () => {
   const { isLoading } = useProfileDevInfoContext();
 
   return (
@@ -48,4 +48,4 @@ const SkillsSection = () => {
   );
 };
 
-export default SkillsSection;
+export default ProfileSkillsSection;

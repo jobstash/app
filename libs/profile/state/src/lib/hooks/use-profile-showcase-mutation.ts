@@ -1,34 +1,52 @@
+import { notifications } from '@mantine/notifications';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAccount } from 'wagmi';
 
 import { type ProfileShowcasePayload } from '@jobstash/profile/core';
-import { notifError, notifSuccess } from '@jobstash/shared/utils';
+import { notifError, notifLoading, notifSuccess } from '@jobstash/shared/utils';
 
 import { postProfileShowcase } from '@jobstash/profile/data';
 
-export const useProfileShowcaseMutation = () => {
+const TOAST_ID = 'showcase-mutation';
+
+export const useProfileShowcaseMutation = (onSuccessCb: () => void) => {
   const { address } = useAccount();
   const queryClient = useQueryClient();
 
-  const {
-    isLoading: isLoadingShowcaseMutation,
-    mutateAsync: mutateAsyncShowcase,
-  } = useMutation({
+  const { isLoading, mutate } = useMutation({
     mutationFn: (payload: ProfileShowcasePayload) =>
       postProfileShowcase(payload),
+
+    onMutate() {
+      notifications.hide(TOAST_ID);
+      notifLoading({
+        id: TOAST_ID,
+        title: 'Updating Showcase',
+        message: 'Please wait while we update your showcase',
+      });
+    },
     onSuccess({ message }, vars) {
-      notifSuccess({ title: 'Showcase Updated', message });
+      notifSuccess({
+        id: TOAST_ID,
+        title: 'Showcase Updated',
+        message,
+      });
+
+      console.log('vars =', vars);
 
       queryClient.setQueryData(['profile-showcase', address], vars.showcase);
       queryClient.invalidateQueries(['profile-showcase', address]);
+
+      onSuccessCb();
     },
     onError(error) {
       notifError({
-        title: 'Update skills failed!',
+        id: TOAST_ID,
+        title: 'Showcase Failed!',
         message: (error as Error).message,
       });
     },
   });
 
-  return { isLoadingShowcaseMutation, mutateAsyncShowcase };
+  return { isLoading, mutate };
 };

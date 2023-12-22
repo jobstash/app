@@ -1,24 +1,24 @@
 import { Select, TextInput } from '@mantine/core';
 
+import { ProfileShowcase } from '@jobstash/profile/core';
 import { cn } from '@jobstash/shared/utils';
 
-import { useProfileDevInfoContext } from '@jobstash/profile/state';
+import { useProfileShowcaseContext } from '@jobstash/profile/state';
 
-import { Button } from '@jobstash/shared/ui';
+import { Button, Spinner } from '@jobstash/shared/ui';
 
 import DeleteItemIcon from './delete-item-icon';
 import ShowcaseItemLayout from './showcase-item-layout';
 
 interface Props {
-  label: string;
-  url: string;
+  showcase: ProfileShowcase;
 }
 
-const ShowcaseItem = (props: Props) => {
-  const { url, label: selectedOption } = props;
-  const { removeShowcase } = useProfileDevInfoContext();
+const ShowcaseItem = ({ showcase }: Props) => {
+  const { id, url, label } = showcase;
+  const { isLoading, removeShowcase, updatedId } = useProfileShowcaseContext();
 
-  const remove = () => removeShowcase(selectedOption);
+  const remove = () => removeShowcase(id);
 
   return (
     <ShowcaseItemLayout
@@ -32,7 +32,7 @@ const ShowcaseItem = (props: Props) => {
               'cursor-pointer rounded-xl bg-dark-gray text-white/60 text-lg placeholder:text-white/50 placeholder:text-lg focus:border-white/40',
             ),
           }}
-          searchValue={selectedOption}
+          searchValue={label}
         />
       }
       urlInput={
@@ -49,9 +49,13 @@ const ShowcaseItem = (props: Props) => {
         />
       }
       iconButton={
-        <Button isIcon onClick={remove}>
-          <DeleteItemIcon />
-        </Button>
+        id === updatedId ? (
+          <Spinner />
+        ) : (
+          <Button isIcon isDisabled={isLoading.mutation} onClick={remove}>
+            <DeleteItemIcon />
+          </Button>
+        )
       }
     />
   );

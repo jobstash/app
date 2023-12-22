@@ -1,24 +1,30 @@
+import { type ChangeEventHandler } from 'react';
+
 import { TextInput } from '@mantine/core';
 
 import { cn } from '@jobstash/shared/utils';
 
-import { useProfileShowcaseFormContext } from '@jobstash/profile/state';
+import { useProfileShowcaseContext } from '@jobstash/profile/state';
 
 const UrlInput = () => {
-  const { currentShowcase, onChangeUrl, disabled } =
-    useProfileShowcaseFormContext();
+  const { isLoading, editedShowcase, setEditedShowcase } =
+    useProfileShowcaseContext();
+
+  const onChangeUrl: ChangeEventHandler<HTMLInputElement> = (e) => {
+    setEditedShowcase({ ...editedShowcase, url: e.currentTarget.value });
+  };
 
   return (
     <TextInput
-      disabled={disabled.urlInput}
-      placeholder="Enter URL Link"
+      placeholder={isLoading.mutation ? editedShowcase.url : 'Enter URL Link'}
       size="lg"
       classNames={{
         input: cn(
           'rounded-xl bg-dark-gray text-white/60 text-lg placeholder:text-white/50 placeholder:text-lg focus:border-white/40',
         ),
       }}
-      value={currentShowcase.url}
+      disabled={isLoading.mutation || !editedShowcase.label}
+      value={editedShowcase.url}
       onChange={onChangeUrl}
     />
   );
