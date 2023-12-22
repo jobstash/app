@@ -22,7 +22,6 @@ export * from './lib/hooks/use-tags-used-mutation';
 export * from './lib/hooks/use-your-contribution-mutation';
 
 // Contexts & Providers
-export * from './lib/contexts/profile-dev-info-context';
 export * from './lib/contexts/profile-header-context';
 export * from './lib/contexts/profile-info-context';
 export * from './lib/contexts/profile-org-review-form-context';
@@ -32,7 +31,6 @@ export * from './lib/contexts/profile-showcase-context';
 export * from './lib/contexts/profile-skills-context';
 export * from './lib/contexts/skills-used-context';
 export * from './lib/contexts/your-contribution-context';
-export * from './lib/providers/profile-dev-info-provider';
 export * from './lib/providers/profile-header-provider';
 export * from './lib/providers/profile-info-provider';
 export * from './lib/providers/profile-org-review-form-provider';

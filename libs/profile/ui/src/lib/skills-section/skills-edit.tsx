@@ -4,7 +4,7 @@ import { cn } from '@jobstash/shared/utils';
 
 import { useProfileSkillsContext } from '@jobstash/profile/state';
 
-import ProfileRepoSkill from '../../profile-repo-skill';
+import ProfileRepoSkill from '../profile-repo-skill';
 
 import SkillsInput from './skills-input';
 
