@@ -43,6 +43,7 @@ Thumbs.db
 
 # Env
 .env.*
+.env
 
 # Certs
 *.pem
