@@ -16,6 +16,8 @@ const ProfileHeaderSkeleton = () => (
     selectedInput={
       <div className="h-12 bg-white/20 rounded-lg animate-pulse" />
     }
+    countryInput={<div className="h-12 bg-white/20 rounded-lg animate-pulse" />}
+    cityInput={<div className="h-12 bg-white/20 rounded-lg animate-pulse" />}
     saveButton={
       <div className="h-10 w-28 bg-white/20 rounded-lg animate-pulse" />
     }

@@ -16,7 +16,12 @@ export const useProfileHeader = () => {
   const [preferredContact, setPreferredContact] = useState<string | null>(
     CONTACT_DEFAULT_OPTIONS[0],
   );
-  const [selectedContact, setSelectedContact] = useState<string | null>(null);
+  const [selectedContact, setSelectedContact] = useState<string>('');
+
+  const [currentLocation, setCurrentLocation] = useState<{
+    city: string;
+    country: string;
+  }>({ city: '', country: '' });
 
   const initRef = useRef(false);
   useEffect(() => {
@@ -24,7 +29,11 @@ export const useProfileHeader = () => {
       initRef.current = true;
       setIsAvailableForWork(Boolean(availableForWork));
       setPreferredContact(contact.preferred ?? CONTACT_DEFAULT_OPTIONS[0]);
-      setSelectedContact(contact.value);
+      setSelectedContact(contact.value ?? '');
+      setCurrentLocation({
+        city: location.city ?? '',
+        country: location.country ?? '',
+      });
     }
   }, [
     contact,
@@ -32,6 +41,7 @@ export const useProfileHeader = () => {
     selectedContact,
     availableForWork,
     profileInfoData,
+    location,
   ]);
 
   const onChangePreferredContact = (v: string | null) => {
@@ -40,12 +50,25 @@ export const useProfileHeader = () => {
       ? profileInfoData?.contact.value
       : null;
 
-    setSelectedContact(newSelectedContact);
+    setSelectedContact(newSelectedContact ?? '');
     setPreferredContact(v);
   };
 
   const onChangeSelectedContact: ChangeEventHandler<HTMLInputElement> = (e) => {
     setSelectedContact(e.currentTarget.value);
+  };
+
+  const onChangeCountry: ChangeEventHandler<HTMLInputElement> = (e) => {
+    const { value } = e.currentTarget;
+    setCurrentLocation((prev) => ({ ...prev, country: value }));
+  };
+
+  const onChangeCity: ChangeEventHandler<HTMLInputElement> = (e) => {
+    const { value } = e.currentTarget;
+    setCurrentLocation((prev) => ({
+      ...prev,
+      city: value,
+    }));
   };
 
   const { isLoadingMutation, mutate } = useProfileInfoMutation();
@@ -58,6 +81,7 @@ export const useProfileHeader = () => {
           preferred: preferredContact,
           value: selectedContact,
         },
+        location: currentLocation,
       },
     });
   };
@@ -72,21 +96,35 @@ export const useProfileHeader = () => {
           preferred: preferredContact,
           value: selectedContact,
         },
+        location: currentLocation,
       },
     });
   };
 
-  const isEqualFetched =
-    JSON.stringify({
-      preferredContact: contact?.preferred,
-      selectedContact: contact?.value,
-    }) ===
-    JSON.stringify({
-      preferredContact,
-      selectedContact,
-    });
+  const prevJSON = JSON.stringify({
+    preferredContact: contact?.preferred ?? CONTACT_DEFAULT_OPTIONS[0],
+    selectedContact: contact?.value ?? '',
+    currentLocation: {
+      city: location?.city ?? '',
+      country: location?.country ?? '',
+    },
+  });
 
-  const disableSave = !selectedContact || isEqualFetched;
+  const currentJSON = JSON.stringify({
+    preferredContact,
+    selectedContact,
+    currentLocation,
+  });
+
+  const isEqualFetched = prevJSON === currentJSON;
+
+  console.log({
+    fetchedJSON: prevJSON,
+    currentJSON,
+    isEqualFetched,
+  });
+
+  const disableSave = isEqualFetched;
 
   const isLoading = isLoadingMutation || !profileInfoData;
 
@@ -103,10 +141,12 @@ export const useProfileHeader = () => {
     username,
     email,
     avatar,
-    location,
+    location: currentLocation,
     contact,
     disableSave,
     onChangePreferredContact,
     onChangeSelectedContact,
+    onChangeCountry,
+    onChangeCity,
   };
 };

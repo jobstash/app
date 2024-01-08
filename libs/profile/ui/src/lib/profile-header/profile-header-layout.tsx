@@ -4,6 +4,8 @@ interface Props {
   header: ReactNode;
   preferredInput: ReactNode;
   selectedInput: ReactNode;
+  countryInput: ReactNode;
+  cityInput: ReactNode;
   saveButton: ReactNode;
 }
 
@@ -12,16 +14,22 @@ const ProfileHeaderLayout = ({
   preferredInput,
   selectedInput,
   saveButton,
+  countryInput,
+  cityInput,
 }: Props) => (
   <>
     {header}
 
-    <div className="flex justify-between items-center gap-8">
-      <div className="flex gap-4 grow">
-        <div className="w-1/2">{preferredInput}</div>
-        <div className="w-1/2">{selectedInput}</div>
-      </div>
-      <div>{saveButton}</div>
+    <div className="flex justify-between items-center gap-4">
+      <div className="w-5/12">{preferredInput}</div>
+      <div className="w-5/12">{selectedInput}</div>
+      <div className="w-2/12" />
+    </div>
+
+    <div className="flex justify-between items-center gap-4">
+      <div className="w-5/12">{countryInput}</div>
+      <div className="w-5/12">{cityInput}</div>
+      <div className="w-2/12">{saveButton}</div>
     </div>
   </>
 );

@@ -4,36 +4,31 @@ import { useProfileHeaderContext } from '@jobstash/profile/state';
 
 import { Heading } from '@jobstash/shared/ui';
 
-const ProfileHeaderSelectedContactInput = () => {
+const ProfileHeaderCountryInput = () => {
   const {
-    isLoading,
-    preferredContact,
-    selectedContact,
-    onChangeSelectedContact,
+    location: { country },
+    onChangeCountry,
   } = useProfileHeaderContext();
-
-  const placeholder =
-    isLoading || !preferredContact ? undefined : `Your ${preferredContact}`;
 
   return (
     <div className="flex flex-col gap-2">
       <div>
         <Heading size="xs" fw="bold">
-          Address or Username
+          Country
         </Heading>
       </div>
       <TextInput
-        placeholder={placeholder}
+        placeholder="Your Country"
         size="lg"
-        value={selectedContact ?? ''}
+        value={country ?? ''}
         classNames={{
           input:
             'rounded-lg bg-dark text-md placeholder:text-white/40 placeholder:text-md focus:border-white/40',
         }}
-        onChange={onChangeSelectedContact}
+        onChange={onChangeCountry}
       />
     </div>
   );
 };
 
-export default ProfileHeaderSelectedContactInput;
+export default ProfileHeaderCountryInput;

@@ -76,16 +76,18 @@ const profileInfoContactSchema = myzod.object({
   value: myzod.string().nullable(),
 });
 
+const profileInfoLocationSchema = myzod.object({
+  country: myzod.string().min(1).nullable(),
+  city: myzod.string().min(1).nullable(),
+});
+
 export const profileInfoSchema = myzod.object({
   avatar: myzod.string().min(1).nullable(),
   username: myzod.string().min(1).nullable(),
   email: myzod.string().min(1).nullable(),
   availableForWork: myzod.boolean().nullable(),
   contact: profileInfoContactSchema,
-  location: myzod.object({
-    country: myzod.string().min(1).nullable(),
-    city: myzod.string().min(1).nullable(),
-  }),
+  location: profileInfoLocationSchema,
 });
 
 export const profileInfoResponseSchema = myzod.object({
@@ -97,6 +99,7 @@ export const profileInfoResponseSchema = myzod.object({
 export const profileInfoPayloadSchema = myzod.object({
   availableForWork: myzod.boolean(),
   contact: profileInfoContactSchema,
+  location: profileInfoLocationSchema,
 });
 
 export const profileSkillSchema = myzod.object({

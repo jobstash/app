@@ -18,6 +18,8 @@ interface ProfileHeaderContextProps {
   disableSave: boolean;
   onChangePreferredContact: (v: string | null) => void;
   onChangeSelectedContact: ChangeEventHandler<HTMLInputElement>;
+  onChangeCountry: ChangeEventHandler<HTMLInputElement>;
+  onChangeCity: ChangeEventHandler<HTMLInputElement>;
 }
 
 export const ProfileHeaderContext =
