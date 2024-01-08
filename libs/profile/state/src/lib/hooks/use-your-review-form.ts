@@ -22,7 +22,7 @@ export const useYourReviewForm = (): ProfileReviewContextProps => {
   } = useProfileReviewsPageContext();
 
   const [currentReview, setCurrentReview] = useState({
-    title,
+    title: '',
     location,
     timezone,
     workingHours,
@@ -32,7 +32,7 @@ export const useYourReviewForm = (): ProfileReviewContextProps => {
 
   useEffect(() => {
     setCurrentReview({
-      title,
+      title: title ?? '',
       location,
       timezone,
       workingHours,
@@ -42,7 +42,7 @@ export const useYourReviewForm = (): ProfileReviewContextProps => {
   }, [title, pros, cons, location, timezone, workingHours]);
 
   const setTitle = (title: string | null) =>
-    setCurrentReview((prev) => ({ ...prev, title }));
+    setCurrentReview((prev) => ({ ...prev, title: title ?? '' }));
   const setLocation = (location: OrgLocation) =>
     setCurrentReview((prev) => ({ ...prev, location }));
   const setTimezone = (timezone: OrgTimezone) =>

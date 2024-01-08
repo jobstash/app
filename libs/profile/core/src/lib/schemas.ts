@@ -182,7 +182,12 @@ export const profileOrgReviewPayloadSchema = myzod.intersection(
   myzod.object({
     orgId: myzod.string().min(1),
   }),
-  orgStaffReviewSchema,
+  myzod.intersection(
+    myzod.omit(orgStaffReviewSchema, ['title']),
+    myzod.object({
+      title: myzod.string().min(1, 'Title is required'),
+    }),
+  ),
 );
 
 export const profileOrgReviewResponseSchema = myzod.object({
