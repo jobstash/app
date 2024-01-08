@@ -30,7 +30,7 @@ const LocationSelect = () => {
           data={ORG_REVIEW_LOCATIONS}
           classNames={{
             input:
-              'rounded-lg bg-dark-gray text-md placeholder:text-white/50 placeholder:text-md focus:border-white/40',
+              'rounded-lg bg-dark-gray text-md placeholder:text-white/30 placeholder:text-md focus:border-white/40',
             itemsWrapper: 'bg-dark',
             item: '[&[data-hovered]]:bg-dark-gray [&[data-selected]]:bg-gray',
           }}
