@@ -9,7 +9,7 @@ import { useProfileInfoMutation } from './use-profile-info-mutation';
 export const useProfileHeader = () => {
   const { profileInfoData } = useProfileInfoContext();
 
-  const { availableForWork, username, email, avatar, contact } =
+  const { availableForWork, username, email, avatar, contact, location } =
     profileInfoData ?? ({} as ProfileInfo);
 
   const [isAvailableForWork, setIsAvailableForWork] = useState<boolean>(false);
@@ -103,6 +103,7 @@ export const useProfileHeader = () => {
     username,
     email,
     avatar,
+    location,
     contact,
     disableSave,
     onChangePreferredContact,

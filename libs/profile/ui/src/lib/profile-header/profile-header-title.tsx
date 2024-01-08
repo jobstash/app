@@ -7,7 +7,12 @@ import { LogoTitle } from '@jobstash/shared/ui';
 import ProfileHeaderSwitch from './profile-header-switch';
 
 const ProfileHeaderTitle = () => {
-  const { username, avatar, email } = useProfileHeaderContext();
+  const {
+    username,
+    avatar,
+    email,
+    location: { city, country },
+  } = useProfileHeaderContext();
 
   return (
     <div className="flex items-center gap-6">
@@ -18,6 +23,7 @@ const ProfileHeaderTitle = () => {
           alt: `${username ?? email ?? ''}`,
           isRounded: true,
         }}
+        location={city && country ? `${city}, ${country}` : undefined}
         size="lg"
       />
       <ProfileHeaderSwitch />

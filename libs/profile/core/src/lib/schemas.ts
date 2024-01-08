@@ -82,6 +82,10 @@ export const profileInfoSchema = myzod.object({
   email: myzod.string().min(1).nullable(),
   availableForWork: myzod.boolean().nullable(),
   contact: profileInfoContactSchema,
+  location: myzod.object({
+    country: myzod.string().min(1).nullable(),
+    city: myzod.string().min(1).nullable(),
+  }),
 });
 
 export const profileInfoResponseSchema = myzod.object({

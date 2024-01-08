@@ -12,6 +12,7 @@ interface ProfileHeaderContextProps {
   updateAvailability: (isChecked: boolean) => void;
   avatar: string | null;
   username: string | null;
+  location: { country: string | null; city: string | null };
   email: string | null;
   contact: ProfileInfo['contact'];
   disableSave: boolean;
