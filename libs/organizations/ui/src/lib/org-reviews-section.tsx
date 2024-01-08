@@ -18,11 +18,13 @@ const OrgReviewsSection = ({ org }: Props) => {
     (n) => n !== null && n !== 0,
   );
 
+  const reviews = org.reviews.filter((r) => Boolean(r.review.title));
+
   return (
     <div className="flex flex-col gap-4">
       {noReviews && <LeaveReviewSection org={org} />}
       {hasRating && <AggregateSection org={org} />}
-      {org.reviews.map((orgReview) => (
+      {reviews.map((orgReview) => (
         <OrgStaffReview
           key={`${JSON.stringify(orgReview.review)}`}
           orgReview={orgReview}
