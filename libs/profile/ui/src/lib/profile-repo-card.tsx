@@ -1,4 +1,4 @@
-import { memo, useCallback } from 'react';
+import { useCallback } from 'react';
 
 import { useSetAtom } from 'jotai';
 
@@ -45,4 +45,4 @@ const ProfileRepoCard = (props: Props) => {
   );
 };
 
-export default memo(ProfileRepoCard);
+export default ProfileRepoCard;

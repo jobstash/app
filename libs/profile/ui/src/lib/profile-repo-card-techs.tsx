@@ -1,5 +1,3 @@
-import { memo } from 'react';
-
 import { type ProfileRepoTag } from '@jobstash/profile/core';
 import { tagSortFn } from '@jobstash/profile/utils';
 
@@ -30,4 +28,4 @@ const ProfileRepoCardTechs = (props: Props) => {
   );
 };
 
-export default memo(ProfileRepoCardTechs);
+export default ProfileRepoCardTechs;
