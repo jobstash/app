@@ -21,10 +21,12 @@ const OrgStaffReview = ({ orgReview }: Props) => {
     <RightPanelCardBorder>
       <div className="flex flex-col p-6 gap-4">
         <div className="flex flex-col gap-2">
-          <div className="flex w-full justify-between items-end">
-            <Heading size="lg" fw="semibold">
-              {title}
-            </Heading>
+          <div className="flex w-full justify-between items-end flex-wrap">
+            <div className="w-full">
+              <Heading size="lg" fw="semibold">
+                {title}
+              </Heading>
+            </div>
             {reviewedTimestamp && (
               <Text size="sm" color="dimmed">
                 {prettyTimestamp(reviewedTimestamp)}

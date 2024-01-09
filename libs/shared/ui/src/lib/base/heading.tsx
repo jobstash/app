@@ -5,27 +5,30 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { lato } from '@jobstash/shared/core';
 import { cn } from '@jobstash/shared/utils';
 
-const heading = cva(`${lato.variable} font-lato antialiased select-none`, {
-  variants: {
-    fw: {
-      normal: 'font-normal',
-      semibold: 'font-bold',
-      bold: 'font-black',
-    },
-    size: {
-      xs: 'text-md',
-      sm: 'text-lg',
-      md: 'text-xl',
-      lg: 'text-2xl',
-      xl: 'text-3xl',
-      label: 'text-sm lg:text-md',
-    },
-    color: {
-      white: 'text-white',
-      dimmed: 'text-white/75',
+const heading = cva(
+  `${lato.variable} font-lato antialiased select-none break-words`,
+  {
+    variants: {
+      fw: {
+        normal: 'font-normal',
+        semibold: 'font-bold',
+        bold: 'font-black',
+      },
+      size: {
+        xs: 'text-md',
+        sm: 'text-lg',
+        md: 'text-xl',
+        lg: 'text-2xl',
+        xl: 'text-3xl',
+        label: 'text-sm lg:text-md',
+      },
+      color: {
+        white: 'text-white',
+        dimmed: 'text-white/75',
+      },
     },
   },
-});
+);
 
 type HeadingVariantProps = VariantProps<typeof heading>;
 
