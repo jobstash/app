@@ -2,7 +2,7 @@ import { memo } from 'react';
 
 import { TextInput } from '@mantine/core';
 
-import { capitalize, decodeBase64 } from '@jobstash/shared/utils';
+import { capitalize } from '@jobstash/shared/utils';
 
 import { useFiltersContext } from '@jobstash/filters/state';
 
@@ -37,7 +37,7 @@ const SearchFilter = () => {
             </Button>
           </div>
         }
-        value={searchQuery ? decodeBase64(searchQuery) : ''}
+        value={searchQuery ?? ''}
         disabled={isLoading}
         radius="md"
         styles={{
