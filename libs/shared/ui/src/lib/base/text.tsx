@@ -42,7 +42,7 @@ const Text = ({
   color = 'white',
   className,
 }: TextProps) => (
-  <span className={cn(`${text({ fw, size, color })} ${className}`)}>
+  <span className={cn(`${text({ fw, size, color })}`, className)}>
     {children}
   </span>
 );
