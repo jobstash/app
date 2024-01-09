@@ -77,7 +77,7 @@ export const createJobTags = (jobCardSet: JobCardSet) => {
     });
   }
 
-  const commitmentText = getCommitmentText(commitment);
+  const commitmentText = getTitleCase(commitment);
   if (commitmentText) {
     tags.push({
       id: TAG_ELEMENT_ID.commitment,
@@ -102,7 +102,7 @@ export const createJobTags = (jobCardSet: JobCardSet) => {
     });
   }
 
-  const classificationText = getClassificationText(classification);
+  const classificationText = getTitleCase(classification);
   if (classificationText) {
     tags.push({
       id: TAG_ELEMENT_ID.classification,
@@ -138,22 +138,7 @@ const getLocationText = (
   return location ?? null;
 };
 
-const COMMITMENT_TYPE_TEXT = {
-  PART_TIME: 'Part Time',
-  FULL_TIME: 'Full Time',
-};
-
-const getCommitmentText = (commitment: string | null) => {
-  if (commitment && Object.keys(COMMITMENT_TYPE_TEXT).includes(commitment)) {
-    return COMMITMENT_TYPE_TEXT[
-      commitment as keyof typeof COMMITMENT_TYPE_TEXT
-    ];
-  }
-
-  return null;
-};
-
-const getClassificationText = (classification: string | null) =>
+const getTitleCase = (classification: string | null) =>
   classification
     ?.replaceAll('_', ' ')
     .toLowerCase()
