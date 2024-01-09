@@ -6,8 +6,6 @@ import { notifError, notifSuccess } from '@jobstash/shared/utils';
 
 import { postProfileInfo } from '@jobstash/profile/data';
 
-const PROFILE_HEADER_NOTIF_ID = 'profile-header';
-
 type MutationPayload = {
   payload: ProfileInfoPayload;
   isToggleAvailability?: boolean;
@@ -34,7 +32,6 @@ export const useProfileInfoMutation = () => {
         'You are able to update your availability both in the header and in your profile at any time.';
 
       notifSuccess({
-        id: PROFILE_HEADER_NOTIF_ID,
         title,
         message,
         autoClose: 6000,
@@ -42,7 +39,6 @@ export const useProfileInfoMutation = () => {
     },
     onError() {
       notifError({
-        id: PROFILE_HEADER_NOTIF_ID,
         title: 'Something went wrong :(',
         message: 'Please try again later.',
       });

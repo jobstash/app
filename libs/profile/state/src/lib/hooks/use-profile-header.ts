@@ -118,12 +118,6 @@ export const useProfileHeader = () => {
 
   const isEqualFetched = prevJSON === currentJSON;
 
-  console.log({
-    fetchedJSON: prevJSON,
-    currentJSON,
-    isEqualFetched,
-  });
-
   const disableSave = isEqualFetched;
 
   const isLoading = isLoadingMutation || !profileInfoData;
