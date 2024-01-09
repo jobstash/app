@@ -1,8 +1,6 @@
 import { useRouter } from 'next/router';
 import { memo } from 'react';
 
-import { encodeBase64 } from '@jobstash/shared/utils';
-
 import RightPanelCta from './right-panel-cta';
 
 interface Props {
@@ -12,7 +10,7 @@ interface Props {
 const RightPanelProjectCardExploreButton = ({ name }: Props) => {
   const router = useRouter();
   const onClick = () => {
-    router.push(`/jobs?projects=${encodeBase64(name)},`);
+    router.push(`/jobs?projects=${name},`);
   };
 
   return (

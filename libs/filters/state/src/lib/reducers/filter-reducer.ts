@@ -1,6 +1,5 @@
 import { type FilterAction, type FilterState } from '@jobstash/filters/core';
 import { initFilterConfigData } from '@jobstash/filters/utils';
-import { encodeBase64 } from '@jobstash/shared/utils';
 
 export const filterReducer = (
   state: FilterState,
@@ -73,7 +72,7 @@ export const filterReducer = (
         ...state,
         filterValues: {
           ...state.filterValues,
-          query: encodeBase64(payload.searchQuery),
+          query: payload.searchQuery,
         },
       };
     }
