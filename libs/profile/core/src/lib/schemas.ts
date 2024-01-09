@@ -153,7 +153,7 @@ export const profileRepoTagResponseSchema = myzod.object({
 
 export const profileRepoContributionPayloadSchema = myzod.object({
   id: myzod.number(),
-  contribution: myzod.string().min(1),
+  contribution: myzod.string().min(1).max(500, 'Contribution text is too long'),
 });
 
 export const profileRepoContributionResponseSchema = myzod.object({
