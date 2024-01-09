@@ -57,6 +57,7 @@ export const mwFetch = async <R, P = Undefined>(
     credentials,
     mode,
     headers,
+    cache: 'no-cache',
   });
 
   if (!res.ok) {
