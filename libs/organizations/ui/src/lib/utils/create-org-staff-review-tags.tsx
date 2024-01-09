@@ -5,7 +5,7 @@ import { capitalize } from '@jobstash/shared/utils';
 import {
   LocationIcon,
   RemoteIcon,
-  WorkingHoursIcon,
+  // WorkingHoursIcon,
 } from '@jobstash/shared/ui';
 
 export const createOrgStaffReviewTags = (
@@ -14,7 +14,8 @@ export const createOrgStaffReviewTags = (
   const {
     location,
     timezone,
-    workingHours: { start, end },
+    //
+    // workingHours: { start, end },
   } = staffReview;
 
   const tags: TagElement[] = [];
@@ -35,13 +36,14 @@ export const createOrgStaffReviewTags = (
     });
   }
 
-  if (start && end) {
-    tags.push({
-      id: TAG_ELEMENT_ID.workingHours,
-      text: `Working Hours: ${start} - ${end}`,
-      icon: <WorkingHoursIcon />,
-    });
-  }
+  //
+  // if (start && end) {
+  //   tags.push({
+  //     id: TAG_ELEMENT_ID.workingHours,
+  //     text: `Working Hours: ${start} - ${end}`,
+  //     icon: <WorkingHoursIcon />,
+  //   });
+  // }
 
   return tags;
 };
