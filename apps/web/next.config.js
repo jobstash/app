@@ -65,10 +65,11 @@ const nextConfig = {
     ],
   },
 
+  // Redirect all routes to jobstash.xyz
   redirects: async () => [
     {
-      source: '/',
-      destination: '/jobs',
+      source: '/:all*',
+      destination: 'https://jobstash.xyz/:all*',
       permanent: true,
     },
   ],
