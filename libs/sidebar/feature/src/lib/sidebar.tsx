@@ -49,8 +49,10 @@ const Sidebar = () => (
           <SidebarUserSection isMobile />
         </IsMountedWrapper>
 
+        <div className="grow" />
+
         {/* MOBILE BOTTOM BARTABS */}
-        <div className="inset-x-0 bottom-0 absolute space-y-4 p-4 lg:relative lg:hidden flex flex-col">
+        <div className="inset-x-0 bottom-0 space-y-4 p-4 lg:relative lg:hidden flex flex-col">
           <IsMountedWrapper>
             <RequestToBeListedButton isMobile />
           </IsMountedWrapper>
