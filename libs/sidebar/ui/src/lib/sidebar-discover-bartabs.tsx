@@ -1,4 +1,5 @@
 import { ROUTE_SECTION } from '@jobstash/shared/core';
+import { cn } from '@jobstash/shared/utils';
 
 import { OrgSidebarIcon, ProjectsSidebarIcon } from '@jobstash/shared/ui';
 
@@ -24,9 +25,10 @@ interface Props {
 }
 
 const SidebarDiscoverBartabs = ({ isMobile }: Props) => {
-  const wrapperClassName = isMobile
-    ? 'flex flex-col justify-start items-start space-y-3 pt-3 [&>*]:bg-transparent [&>*]:bg-none [&>*]:hover:bg-transparent'
-    : 'space-y-3 pt-3';
+  const wrapperClassName = cn('space-y-2 pt-3', {
+    'flex flex-col justify-start items-start [&>*]:bg-transparent [&>*]:bg-none [&>*]:hover:bg-transparent':
+      isMobile,
+  });
 
   return (
     <div className={wrapperClassName}>

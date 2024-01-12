@@ -29,18 +29,35 @@ const Sidebar = () => (
 
       {/* MOBILE BARTABS */}
       <MobileNavbarWrapper>
-        <div className="flex justify-between">
+        <div className="flex justify-between pb-4">
           <Brand />
           <SidebarCloseButton>
             <CloseIcon />
           </SidebarCloseButton>
         </div>
 
-        <Text color="dimmed" className="block pt-8">
-          Discover
-        </Text>
+        <div className="flex flex-col">
+          <Text color="dimmed" className="block">
+            Discover
+          </Text>
+          <SidebarDiscoverBartabs isMobile />
+        </div>
 
-        <SidebarDiscoverBartabs isMobile />
+        <SidebarBookmarksSection isMobile />
+
+        <IsMountedWrapper>
+          <SidebarUserSection isMobile />
+        </IsMountedWrapper>
+
+        {/* MOBILE BOTTOM BARTABS */}
+        <div className="inset-x-0 bottom-0 absolute space-y-4 p-4 lg:relative lg:hidden flex flex-col">
+          <IsMountedWrapper>
+            <RequestToBeListedButton isMobile />
+          </IsMountedWrapper>
+          <FollowTelegramButton isMobile />
+          <hr className="border-t border-white/20" />
+          <ConnectWalletButton isMobile />
+        </div>
       </MobileNavbarWrapper>
       <div className="-mr-2 ml-auto lg:hidden">
         <MobileMenuButton>

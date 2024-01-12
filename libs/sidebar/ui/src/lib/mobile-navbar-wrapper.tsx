@@ -18,7 +18,7 @@ const MobileNavbarWrapper = ({ children }: Props) => {
   return (
     <nav
       className={cn(
-        'fixed inset-0 w-full bg-opacity-75 bg-gradient-to-r from-quinary from-20% to-primary p-4 transition-all duration-300 lg:hidden',
+        'fixed inset-0 w-full bg-opacity-75 bg-gradient-to-l from-[#8743FF] to-[#4136F1] p-4 transition-all duration-300 lg:hidden flex flex-col gap-6',
         { 'pt-[72px]': isOpenTopBanner },
         { 'z-50 opacity-100 overflow-auto h-screen': sidebarOpen },
         {

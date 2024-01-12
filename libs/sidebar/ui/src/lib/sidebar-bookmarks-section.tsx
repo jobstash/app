@@ -1,4 +1,5 @@
 import { CHECK_WALLET_ROLES } from '@jobstash/auth/core';
+import { cn } from '@jobstash/shared/utils';
 
 import { useSidebarContext } from '@jobstash/sidebar/state';
 
@@ -16,33 +17,42 @@ const bookmarkedBartabs = [
     path: '/bookmarks/jobs',
     icon: <BookmarkSidebarIcon />,
   },
-  {
-    text: 'Saved Orgs',
-    path: '/bookmarks/organizations',
-    icon: <BookmarkSidebarIcon />,
-    isDisabled: true,
-  },
+  // {
+  //   text: 'Saved Orgs',
+  //   path: '/bookmarks/organizations',
+  //   icon: <BookmarkSidebarIcon />,
+  //   isDisabled: true,
+  // },
 ];
 
-const SidebarBookmarksSection = () => {
+interface Props {
+  isMobile?: boolean;
+}
+
+const SidebarBookmarksSection = ({ isMobile }: Props) => {
   const { role } = useSidebarContext();
 
   const isDev = role === CHECK_WALLET_ROLES.DEV;
 
   if (!isDev) return null;
 
+  const wrapperClassName = cn('space-y-2 pt-3', {
+    'flex flex-col justify-start items-start [&>*]:bg-transparent [&>*]:bg-none [&>*]:hover:bg-transparent':
+      isMobile,
+  });
+
   return (
     <IsMountedWrapper>
       <div className="flex-col">
         <Text color="dimmed">Bookmarked</Text>
-        <div className="space-y-3 pt-3">
-          {bookmarkedBartabs.map(({ text, path, icon, isDisabled }) => (
+        <div className={wrapperClassName}>
+          {bookmarkedBartabs.map(({ text, path, icon }) => (
             <SidebarBartab
               key={path}
+              isMobile={isMobile}
               path={path}
               icon={icon}
               text={text}
-              isDisabled={isDisabled}
             />
           ))}
         </div>

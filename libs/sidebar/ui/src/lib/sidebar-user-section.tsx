@@ -6,7 +6,11 @@ import { useSidebarContext } from '@jobstash/sidebar/state';
 import SidebarAdminSection from './sidebar-admin-section';
 import SidebarProfileSection from './sidebar-profile-section';
 
-const SidebarUserSection = () => {
+interface Props {
+  isMobile?: boolean;
+}
+
+const SidebarUserSection = ({ isMobile }: Props) => {
   const { isSignedIn, role } = useSidebarContext();
 
   if (!isSignedIn) return null;
@@ -15,7 +19,7 @@ const SidebarUserSection = () => {
     case CHECK_WALLET_ROLES.DEV: {
       return (
         <ProfileInfoProvider>
-          <SidebarProfileSection />
+          <SidebarProfileSection isMobile={isMobile} />
         </ProfileInfoProvider>
       );
     }

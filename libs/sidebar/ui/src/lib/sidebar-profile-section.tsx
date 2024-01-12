@@ -1,26 +1,43 @@
+import { cn } from '@jobstash/shared/utils';
+
 import { useProfileInfoContext } from '@jobstash/profile/state';
 
 import { Text } from '@jobstash/shared/ui';
 
 import SidebarBartab from './sidebar-bartab';
 
-const SidebarProfileSection = () => {
+interface Props {
+  isMobile?: boolean;
+}
+
+const SidebarProfileSection = ({ isMobile }: Props) => {
   const { profileInfoData } = useProfileInfoContext();
+
+  const tabs = [
+    { text: 'Profile', path: '/profile' },
+    ...(profileInfoData?.username
+      ? [{ text: 'Your Repositories', path: '/profile/repositories' }]
+      : []),
+    { text: 'Organization Reviews', path: '/profile/reviews' },
+  ];
+
+  const wrapperClassName = cn('space-y-2 pt-3', {
+    'flex flex-col justify-start items-start [&>*]:bg-transparent [&>*]:bg-none [&>*]:hover:bg-transparent':
+      isMobile,
+  });
 
   return (
     <div className="flex-col">
       <Text color="dimmed">Your Profile</Text>
-      <div className="space-y-3 pt-3">
-        <SidebarBartab path="/profile" text="Profile" />
-
-        {profileInfoData?.username && (
+      <div className={wrapperClassName}>
+        {tabs.map(({ path, text }) => (
           <SidebarBartab
-            path="/profile/repositories"
-            text="Your Repositories"
+            key={text}
+            isMobile={isMobile}
+            path={path}
+            text={text}
           />
-        )}
-
-        <SidebarBartab path="/profile/reviews" text="Organization Reviews" />
+        ))}
       </div>
     </div>
   );
