@@ -19,7 +19,11 @@ import {
   ignoredPathnameRedirectSet,
   redirectFlowsSet,
 } from '@jobstash/auth/core';
-import { INFRURA_ID, MW_URL } from '@jobstash/shared/core';
+import {
+  INFRURA_ID,
+  MW_URL,
+  WALLETCONNECT_PROJECT_ID,
+} from '@jobstash/shared/core';
 
 import { useIsMounted } from '@jobstash/shared/state';
 import { getCheckWallet } from '@jobstash/auth/data';
@@ -32,6 +36,10 @@ const connectkitClient = createClient(
     appName: 'Job Stash',
 
     infuraId: INFRURA_ID,
+    walletConnectOptions: {
+      projectId: WALLETCONNECT_PROJECT_ID,
+      version: '2',
+    },
     chains: [mainnet, polygon, optimism, arbitrum],
   }),
 );
