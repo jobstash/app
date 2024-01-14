@@ -12,7 +12,7 @@ import { useAtomValue } from 'jotai';
 import { ANALYTICS_ID } from '@jobstash/shared/core';
 import { cn } from '@jobstash/shared/utils';
 
-import { AuthProvider } from '@jobstash/auth/state';
+import { AuthProvider, WalletProvider } from '@jobstash/auth/state';
 import {
   isOpenTopBannerAtom,
   MantineProvider,
@@ -69,21 +69,23 @@ const App = ({ Component, pageProps }: AppProps) => {
           />
         </>
       )}
-      <ReactQueryProvider dehydratedState={pageProps.dehydratedState}>
-        <MantineProvider>
-          <AuthProvider screenLoader={<LoadingPage />}>
-            {/* <Component {...pageProps} /> */}
+      <MantineProvider>
+        <ReactQueryProvider dehydratedState={pageProps.dehydratedState}>
+          <WalletProvider>
+            <AuthProvider screenLoader={<LoadingPage />}>
+              {/* <Component {...pageProps} /> */}
 
-            {/* <TopBanner /> */}
-            {/* <DonateModal /> */}
-            <div className={cn({ 'pt-10': isOpenTopBanner })}>
-              <Component {...pageProps} />
-            </div>
+              {/* <TopBanner /> */}
+              {/* <DonateModal /> */}
+              <div className={cn({ 'pt-10': isOpenTopBanner })}>
+                <Component {...pageProps} />
+              </div>
 
-            <WagmiSiweSync />
-          </AuthProvider>
-        </MantineProvider>
-      </ReactQueryProvider>
+              <WagmiSiweSync />
+            </AuthProvider>
+          </WalletProvider>
+        </ReactQueryProvider>
+      </MantineProvider>
     </>
   );
 };

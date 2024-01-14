@@ -4,6 +4,7 @@ export * from './lib/atoms/is-magic-link-atom';
 
 // Providers
 export * from './lib/providers/auth-provider';
+export * from './lib/providers/wallet-provider';
 
 // Hooks
 export * from './lib/hooks/use-auth-context';
