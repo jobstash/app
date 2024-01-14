@@ -39,18 +39,6 @@ This section contains the step needed to run the application locally on your mac
 2. Do commits as usual. Make sure all lints passed.
 3. Push to `dev` branch or better yet, open a PR for review.
 
-## How to run `app` on local https
-
-1. Create local certs:
-    - Install [mkcert](https://github.com/FiloSottile/mkcert) - `brew install mkcert` or `choco install mkcert`
-    - Run `mkcert -install`
-    - Run `mkcert localhost`
-
-2. Install [local-ssl-proxy](https://github.com/cameronhunter/local-ssl-proxy) - `npm i -g local-ssl-proxy`
-3. Run these commands on separate terminals
-    - `NODE_TLS_REJECT_UNAUTHORIZED=0 yarn dev:ssl` or `NODE_TLS_REJECT_UNAUTHORIZED=0 yarn start:ssl`
-    - `yarn proxy:ssl`
-
 ## Nx Monorepo
 
 - Libs are categorized as one of the following:
