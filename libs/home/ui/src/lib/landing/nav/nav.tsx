@@ -8,8 +8,8 @@ import { cn } from '@jobstash/shared/utils';
 import { isOpenTopBannerAtom } from '@jobstash/shared/state';
 
 import { LinkButton, Text } from '@jobstash/shared/ui';
+import { Brand } from '@jobstash/sidebar/ui';
 
-import NavBrand from './nav-brand';
 import NavButton from './nav-button';
 
 const LandingNav = () => {
@@ -18,13 +18,14 @@ const LandingNav = () => {
   return (
     <header
       className={cn(
-        'fixed inset-x-0 top-0 z-50 flex items-center justify-between bg-base-black px-8 py-6 lg:px-8',
+        'fixed inset-x-0 top-0 z-50 flex items-center justify-between bg-base-black p-4 ',
         {
           'mt-[56px] sm:mt-10': isOpenTopBanner,
         },
       )}
     >
-      <NavBrand />
+      <Brand />
+
       <div className="hidden items-center space-x-6 font-bold lg:flex">
         <NavButton
           isTransparent
