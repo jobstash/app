@@ -3,7 +3,7 @@ import Head from 'next/head';
 import { LoadingPage } from '@jobstash/shared/pages';
 
 import { ProfileInfoProvider } from '@jobstash/profile/state';
-import { useDelayedAuthRender, useIsMobile } from '@jobstash/shared/state';
+import { useDelayedAuthRender } from '@jobstash/shared/state';
 
 import {
   AccountCard,
@@ -13,14 +13,11 @@ import {
   ProfileSkillsSection,
   ProfileSubHeader,
 } from '@jobstash/profile/ui';
-import { MobileSupportPage, PageWrapper } from '@jobstash/shared/ui';
+import { PageWrapper } from '@jobstash/shared/ui';
 import { SideBar } from '@jobstash/sidebar/feature';
 
 export const ProfilePage = () => {
   const { canRender } = useDelayedAuthRender({ requireConnected: true });
-
-  const isMobile = useIsMobile();
-  if (isMobile) return <MobileSupportPage />;
 
   if (canRender) {
     return (
@@ -29,21 +26,22 @@ export const ProfilePage = () => {
         <ProfileInfoProvider>
           <PageWrapper>
             <SideBar />
+            <div className="flex flex-col gap-3 lg:flex-row min-h-screen w-full">
+              <div className="flex-1">
+                <div className="px-3.5 pt-[65px] lg:px-12 lg:pt-6 flex flex-col gap-6 lg:pb-40">
+                  <ProfileHeader />
+                  <ProfileSubHeader />
+                  <ProfileGotItCard />
+                  <ProfileShowcaseSection />
+                  <ProfileSkillsSection />
+                </div>
+              </div>
 
-            <div className="px-3.5 pt-[65px] lg:px-12 lg:pt-6 lg:pr-[50%] flex flex-col gap-6 pb-40">
-              <ProfileHeader />
+              <div className="hidden lg:flex lg:flex-1" />
 
-              <ProfileSubHeader />
-
-              <ProfileGotItCard />
-
-              <ProfileShowcaseSection />
-
-              <ProfileSkillsSection />
-            </div>
-
-            <div className="hide-scrollbar fixed h-screen overflow-y-auto p-4 transition-all inset-auto right-0 top-0 w-5/12 px-6 py-8 pr-10 flex items-center justify-center">
-              <AccountCard />
+              <div className="hide-scrollbar flex items-center justify-center lg:fixed lg:h-screen overflow-y-auto p-4 transition-all inset-auto lg:right-0 lg:top-0 lg:w-5/12 lg:px-6 lg:py-8 lg:pr-10 ">
+                <AccountCard />
+              </div>
             </div>
           </PageWrapper>
         </ProfileInfoProvider>
