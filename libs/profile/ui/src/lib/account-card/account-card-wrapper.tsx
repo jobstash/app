@@ -8,7 +8,6 @@ const AccountCardWrapper = ({ children }: Props) => (
   <div
     style={{
       display: 'flex',
-      width: '352px',
       flexDirection: 'column',
       alignItems: 'center',
       justifyContent: 'center',
@@ -19,7 +18,7 @@ const AccountCardWrapper = ({ children }: Props) => (
       borderRadius: '1.5rem',
       gap: '1rem',
     }}
-    className="[&>*]:w-full"
+    className="w-full lg:w-[352px] [&>*]:w-full"
   >
     {children}
   </div>
