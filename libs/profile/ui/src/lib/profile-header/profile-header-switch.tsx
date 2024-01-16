@@ -18,10 +18,14 @@ const ProfileHeaderSwitch = () => {
     <Switch
       size="md"
       label={
-        <Text size="lg" color="dimmed">
+        <Text color="dimmed" className="lg:text-lg">
           Available for work
         </Text>
       }
+      classNames={{
+        label: 'text-xs',
+        labelWrapper: 'shrink-0 flex items-center justify-center',
+      }}
       color="green"
       checked={isAvailableForWork}
       onChange={onChange}
