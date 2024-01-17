@@ -11,7 +11,6 @@ import { useProfileRepoPageContext } from '@jobstash/profile/state';
 import {
   ProfileRightPanel,
   ProfileRightPanelRepoHeader,
-  ProfileRightPanelTabs,
   SkillsUsed,
   YourContribution,
 } from '@jobstash/profile/ui';
@@ -31,7 +30,8 @@ const ProfileRepoRightPanel = () => {
       <ProfileRightPanel
         isLoading={!activeProfileRepo}
         header={<ProfileRightPanelRepoHeader profileRepo={activeProfileRepo} />}
-        tabs={<ProfileRightPanelTabs tabs={tabs} activeTab={activeTab} />}
+        tabs={tabs}
+        activeTab={activeTab}
         card={
           <div className={cn({ 'pointer-events-none': isOpen })}>
             <RightPanelCardBorder>

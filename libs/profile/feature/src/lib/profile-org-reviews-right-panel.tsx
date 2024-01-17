@@ -15,7 +15,6 @@ import {
   CompensationForm,
   ProfileRightPanel,
   ProfileRightPanelOrgHeader,
-  ProfileRightPanelTabs,
   Ratings,
   YourReview,
 } from '@jobstash/profile/ui';
@@ -36,7 +35,8 @@ const ProfileOrgReviewsRightPanel = () => {
         header={
           <ProfileRightPanelOrgHeader orgInfo={activeProfileOrgReview?.org} />
         }
-        tabs={<ProfileRightPanelTabs tabs={tabs} activeTab={activeTab} />}
+        tabs={tabs}
+        activeTab={activeTab}
         card={
           <ProfileOrgReviewFormProvider>
             <div className={cn({ 'pointer-events-none': isOpen })}>

@@ -1,23 +1,22 @@
-import { memo } from 'react';
-
 import { type ProfileOrgReview } from '@jobstash/profile/core';
 import { type TagElement } from '@jobstash/shared/core';
 import { getLogoUrl } from '@jobstash/shared/utils';
 
 import { CardSet, LogoTitle, Text } from '@jobstash/shared/ui';
 
-import { createOrgInfoSocials } from './utils/create-right-panel-org-socials';
-import ProfileRightPanelOrgTags from './profile-right-panel-org-tags';
+import { createOrgInfoSocials } from '../utils/create-right-panel-org-socials';
+import { createRightPanelOrgTags } from '../utils/create-right-panel-org-tags';
 
 interface Props {
   orgInfo?: ProfileOrgReview['org'];
 }
 
-const ProfileRightPanelOrgHeader = ({ orgInfo }: Props) => {
+export const ProfileRightPanelOrgHeader = ({ orgInfo }: Props) => {
   if (!orgInfo) return null;
 
   const { name, logo: logoUrl, website, summary } = orgInfo;
 
+  const tags: TagElement[] = createRightPanelOrgTags(orgInfo);
   const socials: TagElement[] = createOrgInfoSocials(orgInfo);
 
   return (
@@ -32,7 +31,13 @@ const ProfileRightPanelOrgHeader = ({ orgInfo }: Props) => {
             }}
           />
         </div>
-        <ProfileRightPanelOrgTags orgInfo={orgInfo} />
+        <div className="flex gap-4 flex-wrap">
+          {tags.map(({ id, text, icon, link }) => (
+            <CardSet key={id} link={link} icon={icon}>
+              {text}
+            </CardSet>
+          ))}
+        </div>
       </div>
 
       <Text color="dimmed">{summary as string}</Text>
@@ -47,5 +52,3 @@ const ProfileRightPanelOrgHeader = ({ orgInfo }: Props) => {
     </div>
   );
 };
-
-export default memo(ProfileRightPanelOrgHeader);

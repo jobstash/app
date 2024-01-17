@@ -1,5 +1,3 @@
-import { memo } from 'react';
-
 import { type ProfileRepo } from '@jobstash/profile/core';
 import { getLogoUrl } from '@jobstash/shared/utils';
 
@@ -9,7 +7,7 @@ interface Props {
   profileRepo: ProfileRepo | null;
 }
 
-const ProfileRightPanelRepoHeader = ({ profileRepo }: Props) => {
+export const ProfileRightPanelRepoHeader = ({ profileRepo }: Props) => {
   if (!profileRepo) return null;
 
   const { org, name, description } = profileRepo;
@@ -28,5 +26,3 @@ const ProfileRightPanelRepoHeader = ({ profileRepo }: Props) => {
     </div>
   );
 };
-
-export default memo(ProfileRightPanelRepoHeader);
