@@ -24,10 +24,10 @@ const ProfileRepoSubHeader = () => {
   };
 
   return (
-    <div className="px-4 flex justify-between items-center">
+    <div className="p-4 py-2 pt-4 md:pt-4 md:py-0 gap-4 sm:gap-0 flex flex-col md:flex-row items-start md:items-center md:justify-between">
       <BreadCrumbs breadCrumbs={breadCrumbs} />
 
-      <div className="flex items-center space-x-4">
+      <div className="flex items-center sm:items-end md:items-center space-x-4 w-full justify-between md:justify-end">
         {hasOrgReview && (
           <Text color="dimmed">{`Known Repositories: ${profileRepoCount}`}</Text>
         )}
