@@ -17,7 +17,7 @@ const ProfileHeaderContentWrapper = ({ children }: Props) => {
 
   return (
     <div
-      className={cn('relative flex flex-col gap-3 min-h-[130px]', {
+      className={cn('relative flex flex-col gap-6 lg:gap-4 min-h-[130px]', {
         'opacity-40 pointer-events-none': isLoading && username,
       })}
     >

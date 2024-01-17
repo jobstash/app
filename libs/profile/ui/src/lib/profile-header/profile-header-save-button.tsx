@@ -7,7 +7,6 @@ const ProfileHeaderSaveButton = () => {
 
   return (
     <div className="flex flex-col gap-2">
-      <div className="h-5" />
       <Button
         isDisabled={disableSave}
         variant="primary"

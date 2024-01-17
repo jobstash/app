@@ -16,22 +16,26 @@ const ProfileHeaderLayout = ({
   saveButton,
   countryInput,
   cityInput,
-}: Props) => (
-  <>
-    {header}
+}: Props) => {
+  const inputWrapperClassName = 'flex flex-col md:flex-row gap-6 [&>*]:flex-1';
 
-    <div className="flex justify-between items-center gap-4">
-      <div className="w-5/12">{preferredInput}</div>
-      <div className="w-5/12">{selectedInput}</div>
-      <div className="w-2/12" />
-    </div>
+  return (
+    <>
+      {header}
 
-    <div className="flex justify-between items-center gap-4">
-      <div className="w-5/12">{countryInput}</div>
-      <div className="w-5/12">{cityInput}</div>
-      <div className="w-2/12">{saveButton}</div>
-    </div>
-  </>
-);
+      <div className={inputWrapperClassName}>
+        {preferredInput}
+        {selectedInput}
+      </div>
+
+      <div className={inputWrapperClassName}>
+        {countryInput}
+        {cityInput}
+      </div>
+
+      {saveButton}
+    </>
+  );
+};
 
 export default ProfileHeaderLayout;

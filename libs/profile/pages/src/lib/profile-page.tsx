@@ -28,7 +28,7 @@ export const ProfilePage = () => {
             <SideBar />
             <div className="flex flex-col gap-3 lg:flex-row min-h-screen w-full">
               <div className="flex-1">
-                <div className="px-3.5 pt-[65px] lg:px-12 lg:pt-6 flex flex-col gap-6 lg:pb-40">
+                <div className="px-3.5 pt-20 lg:px-12 lg:pt-6 flex flex-col gap-6 lg:pb-40">
                   <ProfileHeader />
                   <ProfileSubHeader />
                   <ProfileGotItCard />
