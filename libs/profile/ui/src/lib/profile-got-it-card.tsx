@@ -19,7 +19,7 @@ const ProfileGotItCard = () => {
   return (
     <GotItCard
       icon={<ProfileHugeIcon />}
-      title="Your Repository List"
+      title="Your Profile"
       onClick={onClick}
     >
       <Text color="dimmed">
