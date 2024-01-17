@@ -2,11 +2,15 @@ import { memo } from 'react';
 
 import { LoadingOverlay } from '@mantine/core';
 import { useTour } from '@reactour/tour';
+import { useAtom } from 'jotai';
 
 import { PROFILE_RIGHT_PANEL_TAB } from '@jobstash/profile/core';
 import { cn } from '@jobstash/shared/utils';
 
-import { useProfileRepoPageContext } from '@jobstash/profile/state';
+import {
+  activeProfileRepoAtom,
+  useProfileRepoPageContext,
+} from '@jobstash/profile/state';
 
 import {
   ProfileRightPanel,
@@ -20,16 +24,27 @@ import { Loader } from '@jobstash/shared/ui';
 const ProfileRepoRightPanel = () => {
   const { isOpen } = useTour();
 
-  const { activeProfileRepo, tabs, activeTab, isLoadingCard, isLoadingSkills } =
+  const [activeProfileRepo, setActiveProfileRepo] = useAtom(
+    activeProfileRepoAtom,
+  );
+
+  const { tabs, activeTab, isLoadingCard, isLoadingSkills } =
     useProfileRepoPageContext();
+
+  const closeRightPanel = () => setActiveProfileRepo(null);
 
   if (!activeProfileRepo) return null;
 
   return (
-    <div className="hide-scrollbar fixed inset-0 h-screen overflow-y-auto bg-dark p-4 pt-6 transition-all lg:inset-auto lg:right-0 lg:top-0 lg:w-5/12 lg:px-6 lg:py-8 lg:pr-10">
+    <div className="hide-scrollbar fixed inset-0 h-screen overflow-y-auto bg-dark p-4 pt-20 md:pt-[88px] lg:pt-8 transition-all lg:inset-auto lg:right-0 lg:top-0 lg:w-5/12 lg:px-6 lg:py-8 lg:pr-10">
       <ProfileRightPanel
         isLoading={!activeProfileRepo}
-        header={<ProfileRightPanelRepoHeader profileRepo={activeProfileRepo} />}
+        header={
+          <ProfileRightPanelRepoHeader
+            profileRepo={activeProfileRepo}
+            closeRightPanel={closeRightPanel}
+          />
+        }
         tabs={tabs}
         activeTab={activeTab}
         card={

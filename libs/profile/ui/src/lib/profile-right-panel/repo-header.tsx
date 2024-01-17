@@ -1,20 +1,37 @@
 import { type ProfileRepo } from '@jobstash/profile/core';
 import { getLogoUrl } from '@jobstash/shared/utils';
 
-import { Heading, LogoTitle, Text } from '@jobstash/shared/ui';
+import {
+  Button,
+  CloseIcon,
+  Heading,
+  LogoTitle,
+  Text,
+} from '@jobstash/shared/ui';
 
 interface Props {
   profileRepo: ProfileRepo | null;
+  closeRightPanel: () => void;
 }
 
-export const ProfileRightPanelRepoHeader = ({ profileRepo }: Props) => {
+export const ProfileRightPanelRepoHeader = ({
+  profileRepo,
+  closeRightPanel,
+}: Props) => {
   if (!profileRepo) return null;
 
   const { org, name, description } = profileRepo;
 
   return (
     <div className="flex flex-col gap-6">
-      <Heading size="md">{name}</Heading>
+      <div className="flex items-center w-full justify-between">
+        <Heading size="md">{name}</Heading>
+        <div className="block lg:hidden">
+          <Button size="sm" variant="transparent" onClick={closeRightPanel}>
+            <CloseIcon />
+          </Button>
+        </div>
+      </div>
       <Text color="dimmed">{description}</Text>
       <LogoTitle
         title={org.name}
