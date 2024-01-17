@@ -30,15 +30,14 @@ const SkillsEdit = forwardRef<HTMLDivElement>((_props, ref) => {
         {skills.length > 0 && (
           <div className="flex flex-wrap gap-4 items-center">
             {skills.map(({ id, name, canTeach }) => (
-              <div key={id}>
-                <ProfileRepoSkill
-                  id={id}
-                  name={name}
-                  canTeach={canTeach}
-                  onTagRemove={(id) => removeSkill(id)}
-                  onClickCanTeach={updateCanTeach}
-                />
-              </div>
+              <ProfileRepoSkill
+                key={id}
+                id={id}
+                name={name}
+                canTeach={canTeach}
+                onTagRemove={(id) => removeSkill(id)}
+                onClickCanTeach={updateCanTeach}
+              />
             ))}
           </div>
         )}

@@ -19,7 +19,7 @@ const ProfileRepoSkill = ({
   onTagRemove,
   onClickCanTeach,
 }: Props) => (
-  <div className="flex px-4 py-3 border border-gray gap-4 rounded-xl items-center">
+  <div className="flex px-4 py-3 border border-gray gap-4 rounded-xl items-center w-full md:w-auto">
     <div>
       <TechWrapper isChecked id={id} canTeach={canTeach}>
         {name}
