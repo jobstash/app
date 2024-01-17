@@ -31,7 +31,7 @@ const ConnectWalletButton = ({ isMobile }: Props) => {
 
             if (isMobile) {
               const btnClassName = cn(
-                'flex h-14 w-full max-w-md items-center justify-center rounded-xl hover:brightness-110 md:hidden',
+                'flex h-14 w-full max-w-md items-center justify-center rounded-xl hover:brightness-110',
                 {
                   'h-14 w-full items-center  justify-center rounded-lg bg-gradient-to-r from-[#8743FF] to-[#D68800] p-0.5':
                     isSignedIn,
@@ -55,7 +55,7 @@ const ConnectWalletButton = ({ isMobile }: Props) => {
               );
 
               return (
-                <div className="flex min-h-[40px] w-full justify-center">
+                <div className="flex min-h-[40px] w-full justify-center pt-4">
                   <button
                     type="button"
                     className={btnClassName}
