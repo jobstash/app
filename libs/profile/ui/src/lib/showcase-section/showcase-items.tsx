@@ -9,14 +9,12 @@ const ShowcaseItems = () => {
   if (!isLoading.query && showcases.length === 0) return null;
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-8 md:gap-4">
       {isLoading.query ? (
         <ShowcaseSkeleton itemCount={showcases.length} />
       ) : (
         showcases.map((showcase) => (
-          <div key={JSON.stringify({ showcase })}>
-            <ShowcaseItem showcase={showcase} />
-          </div>
+          <ShowcaseItem key={showcase.id} showcase={showcase} />
         ))
       )}
     </div>

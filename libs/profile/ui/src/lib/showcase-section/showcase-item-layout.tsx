@@ -10,13 +10,16 @@ const ShowcaseItemLayout = (props: Props) => {
   const { labelInput, urlInput, iconButton } = props;
 
   return (
-    <div className="flex gap-4 items-center">
-      <div className="flex-grow w-1/3">{labelInput}</div>
+    <div className="flex flex-col md:flex-row gap-4">
+      <div className="flex-1 md:flex-grow md:flex-none md:max-w-[40%]">
+        {labelInput}
+      </div>
 
-      <div className="flex-grow w-1/3">{urlInput}</div>
-
-      <div className="flex items-center justify-center h-12 w-12">
-        {iconButton}
+      <div className="flex-1 md:flex-grow md:flex-none flex gap-2 items-center">
+        <div className="w-full">{urlInput}</div>
+        <div className="flex items-center justify-center h-12 w-12">
+          {iconButton}
+        </div>
       </div>
     </div>
   );

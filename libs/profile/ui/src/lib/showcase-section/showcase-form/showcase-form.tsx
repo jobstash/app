@@ -20,7 +20,9 @@ const ShowcaseForm = () => {
         />
       )}
 
-      <FormToggler />
+      <div className="pt-2">
+        <FormToggler />
+      </div>
     </>
   );
 };
