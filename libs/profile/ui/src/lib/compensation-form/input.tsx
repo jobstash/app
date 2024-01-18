@@ -31,7 +31,7 @@ const Input = (props: Props) => {
 
   return (
     <div className="flex items-center gap-8">
-      <div className="flex-grow justify-end text-right">
+      <div className="flex-grow md:justify-end md:text-right w-[30%]">
         <Heading size="sm">{title}</Heading>
       </div>
       <div className="w-[70%]">

@@ -55,8 +55,8 @@ const ProfileOrgReviewsRightPanel = () => {
                   visible={isLoadingCard}
                   className="rounded-3xl"
                 />
-                <div className="p-6">
-                  <div className="flex flex-col gap-6 py-2 relative">
+                <div className="p-4 md:p-6">
+                  <div className="flex flex-col gap-6 relative">
                     {activeTab === PROFILE_RIGHT_PANEL_TAB.COMPENSATION && (
                       <CompensationForm />
                     )}

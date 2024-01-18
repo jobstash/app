@@ -11,7 +11,7 @@ const SalaryInput = () => {
   return (
     <Input
       numberInput
-      title="Amount (Per Year)"
+      title="Annual Amount"
       value={salary && currency ? salary : ''}
       isDisabled={!currency}
       onChange={(v: number | '') => setSalary(v ? Number(v) : null)}
