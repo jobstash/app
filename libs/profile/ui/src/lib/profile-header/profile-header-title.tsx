@@ -10,7 +10,7 @@ const ProfileHeaderTitle = () => {
   const { username, avatar, email } = useProfileHeaderContext();
 
   return (
-    <div className="flex items-center gap-6">
+    <div className="flex flex-col py-4 md:flex-row md:items-center gap-4 md:gap-8">
       <LogoTitle
         title={username ?? email ?? ''}
         avatarProps={{
