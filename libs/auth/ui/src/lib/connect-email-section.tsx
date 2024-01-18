@@ -93,7 +93,7 @@ const ConnectEmailSection = () => {
   }, [push, role, setIsMagicLink]);
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-white/5">
+    <div className="flex items-center justify-center min-h-screen bg-white/5 pt-20 pb-10 md:pt-0">
       <div className="flex flex-col space-y-8 rounded-3xl bg-gradient-to-l from-[#141317] to-black/70 p-8 text-center">
         {isSuccess ? (
           <div className="flex w-full justify-start">

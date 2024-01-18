@@ -11,7 +11,7 @@ import {
   isMagicLinkAtom,
   useAuthContext,
 } from '@jobstash/auth/state';
-import { useIsMobile, useIsMounted } from '@jobstash/shared/state';
+import { useIsMounted } from '@jobstash/shared/state';
 
 import {
   ConnectEmailSection,
@@ -20,7 +20,7 @@ import {
   PickRoleGithubIcon,
   PickRoleSection,
 } from '@jobstash/auth/ui';
-import { MobileSupportPage, Text } from '@jobstash/shared/ui';
+import { Text } from '@jobstash/shared/ui';
 import { SideBar } from '@jobstash/sidebar/feature';
 
 export const PickRolePage = () => {
@@ -34,21 +34,18 @@ export const PickRolePage = () => {
 
   const shouldRenderPickRole = useFlowCheck();
 
-  const isMobile = useIsMobile();
-  if (isMobile) return <MobileSupportPage />;
-
   if (!shouldRenderPickRole && !isMagicLink) {
     return <LoadingPage />;
   }
 
   return (
-    <div className="w-full pl-52">
+    <div className="w-full lg:pl-52">
       <SideBar />
 
       {isMagicLink ? (
         <ConnectEmailSection />
       ) : (
-        <div className="flex h-screen pl-4 [&>*]:w-full">
+        <div className="flex flex-col lg:flex-row h-screen [&>*]:w-full pt-16 lg:pt-0 [&>*]:py-12">
           <DevSection onClickDevGithub={onClickDevGithub} />
           <OrgSection />
         </div>
@@ -73,34 +70,32 @@ const DevSection = ({ onClickDevGithub }: { onClickDevGithub: () => void }) => {
 
   return (
     <PickRoleSection className={['bg-gradient-to-l from-primary to-secondary']}>
-      <>
-        <Text size="lg" fw="bold">
-          Developer
+      <Text size="lg" fw="bold">
+        Developer
+      </Text>
+      <div className="flex w-72 flex-col gap-y-6">
+        <Text color="dimmed" size="sm">
+          To create an account we need to validate your Github account(s).
         </Text>
-        <div className="flex w-72 flex-col gap-y-6">
-          <Text color="dimmed" size="sm">
-            To create an account we need to validate your Github account(s).
-          </Text>
-          <Text color="dimmed" size="sm">
-            We will then verify you own the the account, and will inspect which
-            public commits you have made in the past.
-          </Text>
-        </div>
+        <Text color="dimmed" size="sm">
+          We will then verify you own the the account, and will inspect which
+          public commits you have made in the past.
+        </Text>
+      </div>
 
-        <PickRoleButton
-          text="Connect with Organization Email"
-          icon={<PickRoleEmailIcon />}
-          onClick={onClickConnectEmail}
-        />
+      <PickRoleButton
+        text="Connect with Organization Email"
+        icon={<PickRoleEmailIcon />}
+        onClick={onClickConnectEmail}
+      />
 
-        <hr className="border-t border-white/10" />
+      <hr className="border-t border-white/10" />
 
-        <PickRoleButton
-          text="Connect with Github"
-          icon={<PickRoleGithubIcon />}
-          onClick={onClickDevGithub}
-        />
-      </>
+      <PickRoleButton
+        text="Connect with Github"
+        icon={<PickRoleGithubIcon />}
+        onClick={onClickDevGithub}
+      />
     </PickRoleSection>
   );
 };
