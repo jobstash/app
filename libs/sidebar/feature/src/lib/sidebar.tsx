@@ -29,7 +29,7 @@ const Sidebar = () => (
 
       {/* MOBILE BARTABS */}
       <MobileNavbarWrapper>
-        <div className="flex justify-between pb-4">
+        <div className="flex justify-between pb-4 -mr-2">
           <Brand />
           <SidebarCloseButton>
             <CloseIcon />
@@ -61,7 +61,7 @@ const Sidebar = () => (
           <ConnectWalletButton isMobile />
         </div>
       </MobileNavbarWrapper>
-      <div className="-mr-2 ml-auto lg:hidden">
+      <div className="-mr-4 ml-auto lg:hidden">
         <MobileMenuButton>
           <HamburgerIcon />
         </MobileMenuButton>
