@@ -8,7 +8,7 @@ import { EVENT_CARD_CLICK } from '@jobstash/shared/core';
 import { getLogoUrl } from '@jobstash/shared/utils';
 
 import { activeProfileOrgReviewAtom } from '@jobstash/profile/state';
-import { useIsMobile } from '@jobstash/shared/state';
+import { mobileRightPanelOpenAtom, useIsMobile } from '@jobstash/shared/state';
 
 import {
   Button,
@@ -42,11 +42,18 @@ const ProfileOrgReviewCard = (props: Props) => {
   const overallRating = total / Object.keys(rating).length;
 
   const setActiveProfileOrgReview = useSetAtom(activeProfileOrgReviewAtom);
+  const setMobileRightPanelOpen = useSetAtom(mobileRightPanelOpenAtom);
 
   const onClick = useCallback(() => {
+    if (isMobile) setMobileRightPanelOpen(true);
     setActiveProfileOrgReview(profileOrgReview);
     document.dispatchEvent(new Event(EVENT_CARD_CLICK));
-  }, [profileOrgReview, setActiveProfileOrgReview]);
+  }, [
+    isMobile,
+    profileOrgReview,
+    setActiveProfileOrgReview,
+    setMobileRightPanelOpen,
+  ]);
 
   return (
     <ProfileCardWrapper isActive={isActive} isLoading={false} onClick={onClick}>

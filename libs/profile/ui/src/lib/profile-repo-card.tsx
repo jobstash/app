@@ -6,6 +6,7 @@ import { type ProfileRepo } from '@jobstash/profile/core';
 import { EVENT_CARD_CLICK } from '@jobstash/shared/core';
 
 import { activeProfileRepoAtom } from '@jobstash/profile/state';
+import { mobileRightPanelOpenAtom, useIsMobile } from '@jobstash/shared/state';
 
 import ProfileCardWrapper from './profile-card-wrapper';
 import ProfileRepoCardHeader from './profile-repo-card-header';
@@ -25,12 +26,16 @@ const ProfileRepoCard = (props: Props) => {
     org: { name: orgName, logo: orgLogo, url: orgUrl },
   } = profileRepo;
 
+  const isMobile = useIsMobile();
+
   const setActiveProfileRepo = useSetAtom(activeProfileRepoAtom);
+  const setMobileRightPanelOpen = useSetAtom(mobileRightPanelOpenAtom);
 
   const onClick = useCallback(() => {
+    if (isMobile) setMobileRightPanelOpen(true);
     setActiveProfileRepo(profileRepo);
     document.dispatchEvent(new Event(EVENT_CARD_CLICK));
-  }, [profileRepo, setActiveProfileRepo]);
+  }, [isMobile, profileRepo, setActiveProfileRepo, setMobileRightPanelOpen]);
 
   return (
     <ProfileCardWrapper
