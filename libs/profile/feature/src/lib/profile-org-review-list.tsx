@@ -28,7 +28,7 @@ const ProfileOrgReviewList = () => {
   };
 
   return (
-    <div className="flex flex-col gap-y-4">
+    <div className="flex flex-col gap-y-4 pb-10">
       {profileOrgReviewListItems.map((profileOrgReview) => (
         <ProfileOrgReviewCard
           key={profileOrgReview.org.id}

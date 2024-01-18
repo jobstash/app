@@ -13,7 +13,7 @@ interface Props {
 
 const profileCard = cva(
   [
-    'flex flex-col p-6 gap-4 rounded-3xl bg-white/5 lg:mb-8',
+    'flex flex-col p-4 pt-5 sm:p-6 gap-4 rounded-3xl bg-white/5 lg:mb-8',
     'cursor-pointer hover:bg-white/10',
     'transition-all hover:ring-1 hover:ring-inset hover:ring-white/20',
   ],
