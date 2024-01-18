@@ -15,7 +15,7 @@ const SubHeader = () => {
 
   return (
     <>
-      <div className="flex items-center justify-between w-full">
+      <div className="flex flex-col md:flex-row md:items-center gap-4 justify-between w-full">
         <Heading size="md" fw="semibold">
           {name}
         </Heading>
@@ -25,12 +25,12 @@ const SubHeader = () => {
         />
       </div>
 
-      <div className="flex justify-between w-full gap-12">
-        <Text size="sm" color="dimmed">
+      <div className="flex items-center justify-between w-full">
+        <Text color="dimmed" className="text-sm shrink-0">
           {description}
         </Text>
         <div className="min-w-[120px] text-right">
-          <Text size="sm" color="dimmed">
+          <Text color="dimmed" className="text-sm">
             {`${count} Contributions`}
           </Text>
         </div>

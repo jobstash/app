@@ -56,7 +56,7 @@ const ProfileRepoRightPanel = () => {
                 loader={<Loader />}
                 overlayOpacity={0.8}
               />
-              <div className="p-8">
+              <div className="p-4 md:p-6">
                 <div className="flex flex-col gap-6 relative">
                   {activeTab === PROFILE_RIGHT_PANEL_TAB.SKILLS_USED && (
                     <SkillsUsed key={activeProfileRepo?.id} />
