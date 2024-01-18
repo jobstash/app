@@ -24,7 +24,7 @@ const ProfileReviewsSubHeader = () => {
   };
 
   return (
-    <div className="px-4 flex justify-between items-center">
+    <div className="py-2 flex justify-between items-center">
       <BreadCrumbs breadCrumbs={breadCrumbs} />
 
       <div className="flex items-center space-x-4">
