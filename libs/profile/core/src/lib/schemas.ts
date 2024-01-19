@@ -77,8 +77,8 @@ const profileInfoContactSchema = myzod.object({
 });
 
 const profileInfoLocationSchema = myzod.object({
-  country: myzod.string().min(1).nullable(),
-  city: myzod.string().min(1).nullable(),
+  country: myzod.string().nullable(),
+  city: myzod.string().nullable(),
 });
 
 export const profileInfoSchema = myzod.object({
