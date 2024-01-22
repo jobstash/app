@@ -95,6 +95,9 @@ dependencies:
   react-intersection-observer:
     specifier: ^9.4.3
     version: 9.4.3(react@18.2.0)
+  react-use-draggable-scroll:
+    specifier: ^0.4.7
+    version: 0.4.7(react@18.2.0)
   server-only:
     specifier: ^0.0.1
     version: 0.0.1
@@ -12164,6 +12167,15 @@ packages:
     dependencies:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
+    dev: false
+
+  /react-use-draggable-scroll@0.4.7(react@18.2.0):
+    resolution: {integrity: sha512-6gCxGPO9WV5dIsBaDrgUKBaac8CY07PkygcArfajijYSNDwAq0girDRjaBuF1+lRqQryoLFQfpVaV2u/Yh6CrQ==}
+    engines: {node: '>=10'}
+    peerDependencies:
+      react: '>=16'
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /react-use-measure@2.1.1(react-dom@18.2.0)(react@18.2.0):
