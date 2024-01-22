@@ -66,7 +66,9 @@ export const useFilters = (routeSection: RouteSection) => {
   );
 
   useEffect(() => {
-    disablePageScroll(showFilters && isMobile);
+    if (showFilters && isMobile) {
+      disablePageScroll(true);
+    }
   }, [isMobile, showFilters]);
 
   // Handle case where device width changes and filters are active
