@@ -1,3 +1,4 @@
+/* eslint-disable @nx/enforce-module-boundaries */
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
@@ -20,8 +21,8 @@ import { cn, sentryMessage } from '@jobstash/shared/utils';
 
 import { showFiltersAtom } from '@jobstash/filters/state';
 import { activeJobAtom, useJobPost } from '@jobstash/jobs/state';
+import { useMobileDetailsScrollSyncer } from '@jobstash/shared/state';
 
-// eslint-disable-next-line @nx/enforce-module-boundaries
 import { PageWrapper } from '@jobstash/shared/ui';
 
 const MetaData = dynamic(() =>
@@ -83,6 +84,9 @@ export const JobPostPage = ({
   }, [fromSSR]);
 
   const showFilters = useAtomValue(showFiltersAtom);
+
+  // Sync main-page scroll disable
+  useMobileDetailsScrollSyncer();
 
   if (notFoundInfo) {
     return <NotFoundPage notFoundInfo={notFoundInfo} />;
