@@ -41,7 +41,7 @@ const OrgReviewCardSets = ({ org }: Props) => {
   });
 
   return (
-    <div className="flex items-center gap-4">
+    <div className="flex items-center gap-4 shrink-0">
       {Boolean(aggregateRating) && (
         <AggregateRating
           aggregateRating={aggregateRating}

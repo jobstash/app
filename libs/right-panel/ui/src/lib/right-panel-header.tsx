@@ -13,19 +13,17 @@ interface Props {
 }
 
 const RightPanelHeader = ({ org }: Props) => (
-  <div className="flex flex-col gap-4">
-    <div className="flex flex-col gap-4">
-      <div className="flex h-10 items-center">
-        <LogoTitle
-          title={org.name}
-          avatarProps={{
-            src: getLogoUrl(org.website, org.logoUrl),
-            alt: org.name,
-          }}
-        />
-      </div>
-      <RightPanelHeaderTags org={org} />
+  <div className="flex flex-col gap-6 md:gap-4">
+    <div className="flex h-10 items-center">
+      <LogoTitle
+        title={org.name}
+        avatarProps={{
+          src: getLogoUrl(org.website, org.logoUrl),
+          alt: org.name,
+        }}
+      />
     </div>
+    <RightPanelHeaderTags org={org} />
 
     <Text color="dimmed">{org.summary as string}</Text>
 

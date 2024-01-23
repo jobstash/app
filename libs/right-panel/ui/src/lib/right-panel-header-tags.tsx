@@ -3,7 +3,11 @@ import { memo } from 'react';
 import { type RightPanelOrg } from '@jobstash/right-panel/core';
 import { type TagElement } from '@jobstash/shared/core';
 
-import { CardSet, OrgReviewCardSets } from '@jobstash/shared/ui';
+import {
+  CardSet,
+  DraggableWrapper,
+  OrgReviewCardSets,
+} from '@jobstash/shared/ui';
 
 import { createRightPanelOrgTags } from './utils/create-right-panel-org-tags';
 
@@ -15,7 +19,7 @@ const RightPanelHeaderTags = ({ org }: Props) => {
   const tags: TagElement[] = createRightPanelOrgTags(org);
 
   return (
-    <div className="flex gap-4 flex-wrap">
+    <DraggableWrapper className="flex items-center gap-4">
       <OrgReviewCardSets org={org} />
 
       {tags.map(({ id, text, icon, link }) => (
@@ -23,7 +27,7 @@ const RightPanelHeaderTags = ({ org }: Props) => {
           {text}
         </CardSet>
       ))}
-    </div>
+    </DraggableWrapper>
   );
 };
 
