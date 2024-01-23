@@ -74,6 +74,7 @@ export { default as WorkingHoursIcon } from './lib/icons/working-hours-icon';
 export { default as BookmarkButton } from './lib/components/bookmark-button';
 export { default as BreadCrumbs } from './lib/components/breadcrumbs';
 export { default as DonateModal } from './lib/components/donate-modal';
+export { default as DraggableWrapper } from './lib/components/draggable-wrapper';
 export { default as EmptyResult } from './lib/components/empty-result';
 export { default as Hexagon } from './lib/components/hexagon';
 export { default as InternalErrorResult } from './lib/components/internal-error-result';
