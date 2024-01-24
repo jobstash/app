@@ -28,7 +28,7 @@ const ProfileRepoSubHeader = () => {
       <BreadCrumbs breadCrumbs={breadCrumbs} />
 
       <div className="flex items-end sm:items-end md:items-center space-x-4 w-full justify-between md:justify-end">
-        {hasOrgReview && (
+        {Boolean(hasOrgReview) && (
           <Text color="dimmed">{`Known Repositories: ${profileRepoCount}`}</Text>
         )}
 
