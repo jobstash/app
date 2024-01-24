@@ -18,7 +18,7 @@ interface Props {
 const ProfileRepoCardHeader = ({ profileRepo }: Props) => {
   const { name, timestamp, description, projectName, committers } = profileRepo;
 
-  const ts = prettyTimestamp(timestamp);
+  const ts = timestamp ? prettyTimestamp(timestamp) : null;
 
   return (
     <>
@@ -26,9 +26,11 @@ const ProfileRepoCardHeader = ({ profileRepo }: Props) => {
         <Heading size="md" fw="semibold">
           {name}
         </Heading>
-        <div className="hidden items-center lg:justify-center space-x-3 lg:flex">
-          <span className="text-sm">{ts}</span>
-        </div>
+        {Boolean(ts) && (
+          <div className="hidden items-center lg:justify-center space-x-3 lg:flex">
+            <span className="text-sm">{ts}</span>
+          </div>
+        )}
       </div>
       <div>
         <Text size="md" color="dimmed">

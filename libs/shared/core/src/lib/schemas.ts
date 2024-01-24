@@ -163,7 +163,7 @@ export const repositoryInfoSchema = myzod.object({
   id: myzod.string().min(1),
   name: myzod.string().min(1),
   description: myzod.string(),
-  timestamp: myzod.number(),
+  timestamp: myzod.number().nullable(),
   projectName: myzod.string().nullable(),
   committers: myzod.number().nullable(),
 });
