@@ -142,7 +142,7 @@ const profileTagsUsedSchema = myzod.intersection(
 );
 
 export const profileRepoTagPayloadSchema = myzod.object({
-  id: myzod.number(),
+  id: myzod.string().min(1),
   tagsUsed: myzod.array(profileTagsUsedSchema),
 });
 
@@ -152,7 +152,7 @@ export const profileRepoTagResponseSchema = myzod.object({
 });
 
 export const profileRepoContributionPayloadSchema = myzod.object({
-  id: myzod.number(),
+  id: myzod.string().min(1),
   contribution: myzod.string().min(1).max(500, 'Contribution text is too long'),
 });
 
