@@ -10,17 +10,15 @@ const ProfileOrgReviewEmptyList = () => (
     title="You have no Organizations to Review"
   >
     <Text color="dimmed">
-      We were unable to detect any past public activity for your profile on any
-      of the organizations we track, and thus are unable to assess that you were
-      indeed a contributor.
+      We were unable to detect any past or present public developement activity
+      based on your github profile, and were unable to match your verified email
+      with an organization in our database.
     </Text>
 
     <Text color="dimmed">
-      We only allow verified contributors to an organization in our to leave a
-      review.
+      We only allow verified past and current team members to leave a public
+      anonymoyus review.
     </Text>
-
-    <Text color="dimmed">This way we</Text>
   </GotItCard>
 );
 
