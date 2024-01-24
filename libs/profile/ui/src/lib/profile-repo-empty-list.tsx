@@ -7,9 +7,21 @@ import GotItCard from './got-it-card';
 const ProfileRepoEmptyList = () => (
   <GotItCard
     icon={<ProfileRepoEmptyIcon />}
-    title="You have no Repositories to Review"
+    title="No Publicly Relevant Repositories to Describe"
   >
-    <Text color="dimmed">!!!!!!!!!!</Text>
+    <Text color="dimmed">
+      We were unable to detect any publicly interesting repositories based on
+      your public GitHub activity.
+    </Text>
+    <Text color="dimmed">
+      We only allow users to describe their contributions to public repositories
+      that are part of the Electric Capital dataset, and this includes
+      repositoreis for &gt; 4.5k organizations.
+    </Text>
+    <Text color="dimmed">
+      We will soon allow for repositories that are deemed as interesting by
+      other developers to be included in this list, so check back soon!
+    </Text>
   </GotItCard>
 );
 
