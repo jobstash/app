@@ -9,10 +9,11 @@ interface Props {
   title: string;
   onClick?: () => void;
   children: ReactNode;
+  heading?: ReactNode;
 }
 
 const GotItCard = (props: Props) => {
-  const { icon, title, onClick, children } = props;
+  const { icon, title, onClick, children, heading } = props;
 
   return (
     <div className="flex flex-col gap-12">
@@ -21,7 +22,9 @@ const GotItCard = (props: Props) => {
           <Hexagon icon={icon} />
         </div>
         <div className="flex flex-col gap-4 md:gap-4 md:py-8">
-          <Heading className="text-xl md:text-2xl">{title}</Heading>
+          {heading || (
+            <Heading className="text-xl md:text-2xl">{title}</Heading>
+          )}
 
           {children}
 

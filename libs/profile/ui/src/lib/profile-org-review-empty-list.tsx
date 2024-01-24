@@ -1,13 +1,20 @@
 import { memo } from 'react';
 
-import { Text } from '@jobstash/shared/ui';
+import { Heading, Text } from '@jobstash/shared/ui';
 
 import GotItCard from './got-it-card';
+
+const title = 'You have no Organizations to Review';
 
 const ProfileOrgReviewEmptyList = () => (
   <GotItCard
     icon={<ProfileReviewsEmptyIcon />}
-    title="You have no Organizations to Review"
+    title={title}
+    heading={
+      <div className="pt-4">
+        <Heading className="text-xl md:text-2xl">{title}</Heading>
+      </div>
+    }
   >
     <Text color="dimmed">
       We were unable to detect any past or present public developement activity
