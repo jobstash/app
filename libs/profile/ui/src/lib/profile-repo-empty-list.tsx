@@ -16,7 +16,7 @@ const ProfileRepoEmptyList = () => (
     <Text color="dimmed">
       We only allow users to describe their contributions to public repositories
       that are part of the Electric Capital dataset, and this includes
-      repositoreis for &gt; 4.5k organizations.
+      repositories for &gt; 4.5k organizations.
     </Text>
     <Text color="dimmed">
       We will soon allow for repositories that are deemed as interesting by

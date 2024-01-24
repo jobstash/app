@@ -17,7 +17,7 @@ const ProfileOrgReviewEmptyList = () => (
     }
   >
     <Text color="dimmed">
-      We were unable to detect any past or present public developement activity
+      We were unable to detect any past or present public development activity
       based on your github profile, and were unable to match your verified email
       with an organization in our database.
     </Text>
