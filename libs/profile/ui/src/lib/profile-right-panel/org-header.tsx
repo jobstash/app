@@ -6,6 +6,7 @@ import {
   Button,
   CardSet,
   CloseIcon,
+  DraggableWrapper,
   LogoTitle,
   Text,
 } from '@jobstash/shared/ui';
@@ -52,24 +53,24 @@ export const ProfileRightPanelOrgHeader = ({
             </Button>
           </div>
         </div>
-        <div className="flex gap-4 flex-wrap">
+        <DraggableWrapper className="flex items-center gap-4">
           {tags.map(({ id, text, icon, link }) => (
             <CardSet key={id} link={link} icon={icon}>
               {text}
             </CardSet>
           ))}
-        </div>
+        </DraggableWrapper>
       </div>
 
       <Text color="dimmed">{summary as string}</Text>
 
-      <div className="flex gap-4 flex-wrap">
+      <DraggableWrapper className="flex items-center gap-4">
         {socials.map(({ id, text, icon, link }) => (
           <CardSet key={id} link={link} icon={icon}>
             {text}
           </CardSet>
         ))}
-      </div>
+      </DraggableWrapper>
     </div>
   );
 };
