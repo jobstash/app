@@ -40,14 +40,14 @@ WORKDIR /jobstash
 COPY --from=deps /jobstash/node_modules ./node_modules
 COPY . .
 
-ENV NODE_ENV=production
-ENV NEXT_PUBLIC_MW_URL=https://middleware.staging.jobstash.xyz
-ENV NEXT_PUBLIC_FRONTEND_URL=https://app.staging.jobstash.xyz
-ENV NEXT_PUBLIC_EDGE_URL=https://edge-staging.vercel.app
-ENV NEXT_PUBLIC_PAGE_SIZE=20
-ENV NEXT_PUBLIC_QUERY_RETRY_COUNT=0
-ENV NEXT_PUBLIC_INFURA_ID=805a91964ce748f7b7b3d0c787ad7783
-ENV NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID=87b84ef439c6b83474d85f870ebe2b4a
+# ENV NODE_ENV=production
+# ENV NEXT_PUBLIC_MW_URL=https://middleware.staging.jobstash.xyz
+# ENV NEXT_PUBLIC_FRONTEND_URL=https://app.staging.jobstash.xyz
+# ENV NEXT_PUBLIC_EDGE_URL=https://edge-staging.vercel.app
+# ENV NEXT_PUBLIC_PAGE_SIZE=20
+# ENV NEXT_PUBLIC_QUERY_RETRY_COUNT=0
+# ENV NEXT_PUBLIC_INFURA_ID=805a91964ce748f7b7b3d0c787ad7783
+# ENV NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID=87b84ef439c6b83474d85f870ebe2b4a
 
 RUN pnpm build
 # RUN yarn build
