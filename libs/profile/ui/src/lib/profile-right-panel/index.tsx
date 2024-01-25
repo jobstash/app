@@ -3,7 +3,7 @@ import { type ReactNode } from 'react';
 import { ProfileRightPanelTab } from '@jobstash/profile/core';
 
 import { RightPanelWrapper } from '@jobstash/right-panel/ui';
-import { Button, Loader } from '@jobstash/shared/ui';
+import { Button, DraggableWrapper, Loader } from '@jobstash/shared/ui';
 
 interface Props {
   isLoading: boolean;
@@ -30,7 +30,7 @@ export const ProfileRightPanel = (props: Props) => {
 
       <hr className="border-t border-2 border-white/10 -mt-1" />
 
-      <div className="flex gap-4 items-center">
+      <DraggableWrapper className="flex items-center gap-4 p-1">
         {tabs.map(({ text, onClick }) => (
           <Button
             key={text}
@@ -42,7 +42,7 @@ export const ProfileRightPanel = (props: Props) => {
             {text}
           </Button>
         ))}
-      </div>
+      </DraggableWrapper>
 
       {card}
     </RightPanelWrapper>
