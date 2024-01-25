@@ -7,6 +7,7 @@ import { ROUTE_SECTION } from '@jobstash/shared/core';
 
 import { activeJobAtom, activeJobBookmarkAtom } from '@jobstash/jobs/state';
 import { activeOrgIdAtom } from '@jobstash/organizations/state';
+import { activeProfileRepoAtom } from '@jobstash/profile/state';
 import { activeProjectIdAtom } from '@jobstash/projects/state';
 import { sidebarOpenAtom } from '@jobstash/sidebar/state';
 
@@ -38,6 +39,7 @@ const SidebarBartab = ({
   const setActiveOrgId = useSetAtom(activeOrgIdAtom);
   const setActiveProjectId = useSetAtom(activeProjectIdAtom);
   const setActiveJobBookmark = useSetAtom(activeJobBookmarkAtom);
+  const setActiveProfileRepo = useSetAtom(activeProfileRepoAtom);
 
   const onClick = () => {
     if (pathname !== path) {
@@ -55,6 +57,10 @@ const SidebarBartab = ({
 
       if (path === ROUTE_SECTION.JOB_BOOKMARKS) {
         setActiveJobBookmark(null);
+      }
+
+      if (path === ROUTE_SECTION.PROFILE_REPO) {
+        setActiveProfileRepo(null);
       }
     }
 

@@ -69,6 +69,7 @@ export const ROUTE_SECTION = {
   ORGANIZATIONS: '/organizations' as const,
   PROJECTS: '/projects' as const,
   JOB_BOOKMARKS: '/bookmarks/jobs' as const,
+  PROFILE_REPO: '/profile/repositories' as const,
 } as const;
 
 export const TAB_SEGMENT = {

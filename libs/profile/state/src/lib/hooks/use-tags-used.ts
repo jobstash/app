@@ -25,12 +25,8 @@ const getTagOptions = (tagsUsed: ProfileRepoTag[], allTags: Tag[]) => {
 };
 
 export const useTagsUsed = (): SkillsUsedContextProps => {
-  const {
-    activeProfileRepo: profileRepo,
-    allTags,
-    userSkills,
-    mutateSkills,
-  } = useProfileRepoPageContext();
+  const { profileRepo, allTags, userSkills, mutateSkills } =
+    useProfileRepoPageContext();
   const { id, tags } = profileRepo || ({} as ProfileRepo);
 
   const [tagsUsed, setTagsUsed] = useState<ProfileRepoTag[]>(
