@@ -6,7 +6,6 @@ import ProsTextarea from './pros-textarea';
 import TimezoneSelect from './timezone-select';
 import TitleInput from './title-input';
 import TourProvider from './tour-provider';
-import WorkingHoursSelect from './working-hours-select';
 
 export const YourReview = () => (
   <TourProvider>
@@ -16,7 +15,6 @@ export const YourReview = () => (
         <TitleInput />
         <LocationSelect />
         <TimezoneSelect />
-        <WorkingHoursSelect />
         <ProsTextarea />
         <ConsTextarea />
         <Actions />
