@@ -22,7 +22,7 @@ export const useTagsUsedMutation = () => {
         message,
       });
 
-      // Invalidate profile-repo-list
+      queryClient.invalidateQueries({ queryKey: ['profile-skills'] });
       queryClient.invalidateQueries({ queryKey: ['profile-repo-list'] });
     },
     onError(error) {
