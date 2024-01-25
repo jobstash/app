@@ -19,18 +19,21 @@ const ProfileRepoSkill = ({
   onTagRemove,
   onClickCanTeach,
 }: Props) => (
-  <div className="flex px-4 py-3 border border-gray gap-4 rounded-xl items-center w-full md:w-auto">
+  <div className="flex p-2 md:px-4 md:py-3 border border-gray gap-4 rounded-xl items-center w-full md:w-auto">
     <div>
       <TechWrapper isChecked id={id} canTeach={canTeach}>
         {name}
       </TechWrapper>
     </div>
-    <div className="flex justify-center p-2 border border-gray rounded-xl">
+    <div className="flex items-center justify-center p-2 border border-gray rounded-xl">
       <Checkbox
         label="I can teach"
         color="gray"
         radius="xl"
         defaultChecked={canTeach}
+        classNames={{
+          body: 'flex items-center',
+        }}
         onChange={(e) => onClickCanTeach(id, e.currentTarget.checked)}
       />
     </div>
