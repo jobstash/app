@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-import { type Investor } from '@jobstash/shared/core';
+import { FRONTEND_URL, type Investor } from '@jobstash/shared/core';
 
 import { CardSet, Heading, MoneyIcon } from '@jobstash/shared/ui';
 
@@ -23,7 +23,13 @@ const RightPanelOrgCardInvestors = ({ investors }: Props) => {
 
       <div className="flex flex-wrap items-center gap-4 pl-1">
         {investors.map(({ id, name }) => (
-          <CardSet key={id} icon={<MoneyIcon />}>
+          <CardSet
+            key={id}
+            icon={<MoneyIcon />}
+            link={`${FRONTEND_URL}/organizations?investor=${name}`}
+            showLinkIcon={false}
+            isExternal={false}
+          >
             {name}
           </CardSet>
         ))}
