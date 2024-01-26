@@ -71,7 +71,10 @@ const JobsRightPanel = ({ jobPost, currentTab }: Props) => {
       )}
 
       {currentTab === TAB_SEGMENT.organization && (
-        <RightPanelOrgCard org={organization} />
+        <RightPanelOrgCard
+          org={organization}
+          routeSection={ROUTE_SECTION.JOBS}
+        />
       )}
 
       {currentTab === TAB_SEGMENT.projects && (

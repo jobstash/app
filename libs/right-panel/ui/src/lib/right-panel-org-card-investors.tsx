@@ -1,14 +1,19 @@
 import { memo } from 'react';
 
-import { FRONTEND_URL, type Investor } from '@jobstash/shared/core';
+import {
+  FRONTEND_URL,
+  type Investor,
+  RouteSection,
+} from '@jobstash/shared/core';
 
 import { CardSet, Heading, MoneyIcon } from '@jobstash/shared/ui';
 
 interface Props {
   investors: Investor[];
+  routeSection: RouteSection;
 }
 
-const RightPanelOrgCardInvestors = ({ investors }: Props) => {
+const RightPanelOrgCardInvestors = ({ investors, routeSection }: Props) => {
   if (investors.length === 0) return null;
 
   return (
@@ -26,7 +31,7 @@ const RightPanelOrgCardInvestors = ({ investors }: Props) => {
           <CardSet
             key={id}
             icon={<MoneyIcon />}
-            link={`${FRONTEND_URL}/organizations?investor=${name}`}
+            link={`${FRONTEND_URL}${routeSection}?investor=${name}`}
             showLinkIcon={false}
             isExternal={false}
           >

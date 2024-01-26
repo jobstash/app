@@ -44,7 +44,11 @@ const OrgsRightPanel = ({ orgId, currentTab }: Props) => {
       }
     >
       {currentTab === TAB_SEGMENT.details && (
-        <RightPanelOrgCard org={orgDetails} showCTA={false} />
+        <RightPanelOrgCard
+          org={orgDetails}
+          showCTA={false}
+          routeSection={ROUTE_SECTION.ORGANIZATIONS}
+        />
       )}
 
       {currentTab === TAB_SEGMENT.projects && (

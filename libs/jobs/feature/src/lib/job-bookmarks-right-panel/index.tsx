@@ -1,7 +1,7 @@
 import { useAtomValue } from 'jotai';
 
 import { type JobPost } from '@jobstash/jobs/core';
-import { TAB_SEGMENT } from '@jobstash/shared/core';
+import { ROUTE_SECTION, TAB_SEGMENT } from '@jobstash/shared/core';
 
 import { useCompetitors } from '@jobstash/competitors/state';
 import { activeJobBookmarkTabAtom } from '@jobstash/jobs/state';
@@ -55,7 +55,10 @@ const JobBookmarksRightPanel = ({ jobPost, onClickBack }: Props) => {
       )}
 
       {currentTab === TAB_SEGMENT.organization && (
-        <RightPanelOrgCard org={organization} />
+        <RightPanelOrgCard
+          org={organization}
+          routeSection={ROUTE_SECTION.JOBS}
+        />
       )}
 
       {currentTab === TAB_SEGMENT.projects && (

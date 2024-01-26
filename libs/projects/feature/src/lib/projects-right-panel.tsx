@@ -48,7 +48,7 @@ const ProjectsRightPanel = ({ projectId, currentTab }: Props) => {
         <RightPanelProjectCard project={projectDetails} showCTA={false} />
       )}
       {currentTab === TAB_SEGMENT.organization && (
-        <RightPanelOrgCard org={org} />
+        <RightPanelOrgCard org={org} routeSection={ROUTE_SECTION.PROJECTS} />
       )}
     </RightPanel>
   );
