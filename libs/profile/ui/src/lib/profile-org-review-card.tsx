@@ -83,7 +83,7 @@ const ProfileOrgReviewCard = (props: Props) => {
 
         <hr className="border-t border-white/10" />
 
-        <div className="flex flex-col md:flex-row md:items-center gap-2 md:gap-6">
+        <div className="flex flex-col flex-wrap md:flex-row md:items-center gap-2 md:gap-x-6">
           <CardSet icon={<MembershipStatusIcon />}>{`Membership Status: ${
             membershipStatus ?? 'N/A'
           }`}</CardSet>
