@@ -4,7 +4,7 @@ import { LoadingPage } from '@jobstash/shared/pages';
 import { useQueryClient } from '@tanstack/react-query';
 import { useSIWE } from 'connectkit';
 import { useAtom } from 'jotai';
-import { useAccount } from 'wagmi';
+import { useAccount, useDisconnect } from 'wagmi';
 
 import { CHECK_WALLET_ROLES, CheckWalletRole } from '@jobstash/auth/core';
 import { MW_URL, SENTRY_MW_NON_200_RESPONSE } from '@jobstash/shared/core';
@@ -16,7 +16,13 @@ import { getCheckWallet } from '@jobstash/auth/data';
 const DevGithubCallbackPage = () => {
   const { push } = useRouter();
   const { address } = useAccount();
+  const { disconnect } = useDisconnect();
   const { signOut } = useSIWE();
+
+  const logout = () => {
+    disconnect();
+    signOut();
+  };
 
   const [isLoadingDevCallback, setIsLoadingDevCallback] = useAtom(
     isLoadingDevCallbackAtom,
@@ -35,7 +41,7 @@ const DevGithubCallbackPage = () => {
 
     // If github login failed, alert (for now), then push to root page
     if (!success) {
-      handleGithubLoginFailure(data, signOut, push);
+      handleGithubLoginFailure(data, logout, push, role);
     }
 
     const checkWalletData = await getCheckWallet();
@@ -77,21 +83,38 @@ const postGithubLogin = async (
 
 const handleGithubLoginFailure = (
   data: Record<string, string>,
-  signOut: () => void,
+  logout: () => void,
   push: NextRouter['push'],
+  role: CheckWalletRole,
 ) => {
+  const isGithubAccountUsed = data.message === GH_ACCOUNT_USED_MESSAGE;
+
+  const notifProps = isGithubAccountUsed
+    ? {
+        title: 'Github account is already used!',
+        message: 'Please try using a different github account.',
+        autoClose: 15_000,
+      }
+    : undefined;
+
+  notifError(notifProps);
+
   sentryMessage(
     `githubLoginRes: ${SENTRY_MW_NON_200_RESPONSE}`,
     JSON.stringify(data),
   );
 
-  notifError();
+  const isDev = role !== CHECK_WALLET_ROLES.DEV;
 
-  // Disconnect then redirect
-  signOut();
+  if (!isGithubAccountUsed || !isDev) logout();
+
+  const redirectUrl = isGithubAccountUsed && isDev ? '/profile' : '/';
   setTimeout(() => {
-    push('/');
+    push(redirectUrl);
   }, 1000);
 };
 
 export default DevGithubCallbackPage;
+
+const GH_ACCOUNT_USED_MESSAGE =
+  'Github user node already has a user associated with it';
