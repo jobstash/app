@@ -5,6 +5,7 @@ import {
   type Investor,
   RouteSection,
 } from '@jobstash/shared/core';
+import { normalizeString } from '@jobstash/shared/utils';
 
 import { CardSet, Heading, MoneyIcon } from '@jobstash/shared/ui';
 
@@ -31,7 +32,9 @@ const RightPanelOrgCardInvestors = ({ investors, routeSection }: Props) => {
           <CardSet
             key={id}
             icon={<MoneyIcon />}
-            link={`${FRONTEND_URL}${routeSection}?investor=${name}`}
+            link={`${FRONTEND_URL}${routeSection}?investors=${normalizeString(
+              name,
+            )}`}
             showLinkIcon={false}
             isExternal={false}
           >

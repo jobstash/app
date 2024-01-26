@@ -75,11 +75,11 @@ const MultiSelectFilter = ({
             label: key,
             value: normalizeString(
               seniorityMapping[key as keyof typeof seniorityMapping],
-            ),
+            ) as string,
           }))
         : options.map((option) => ({
             label: option,
-            value: normalizeString(option),
+            value: normalizeString(option) as string,
           })),
     [label, options],
   );
