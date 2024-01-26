@@ -1,9 +1,4 @@
-import {
-  memo,
-  type MouseEventHandler,
-  type ReactNode,
-  useCallback,
-} from 'react';
+import { memo, type MouseEventHandler, type ReactNode } from 'react';
 
 import { cva, type VariantProps } from 'class-variance-authority';
 import { ClassValue } from 'clsx';
@@ -46,6 +41,7 @@ interface CardSetProps extends CardSetVariantProps {
   onClick?: MouseEventHandler;
   className?: ClassValue;
   isDisabled?: boolean;
+  isExternal?: boolean;
 }
 
 const CardSet = ({
@@ -56,10 +52,13 @@ const CardSet = ({
   onClick,
   className,
   isDisabled,
+  isExternal = true,
 }: CardSetProps) => {
   const hasLink =
     Boolean(link) && link !== '#' && typeof window !== 'undefined';
-  const onClickLink = useCallback(() => window.open(link, '_blank'), [link]);
+
+  const target = isExternal ? '_blank' : '_self';
+  const onClickLink = () => window.open(link, target);
 
   const onClickCardSet: MouseEventHandler = (e) => {
     e.preventDefault();
