@@ -1,4 +1,7 @@
 import { ProfileOrgReview } from '@jobstash/profile/core';
+import { MW_URL } from '@jobstash/shared/core';
+
+import { useProfileInfoContext } from '@jobstash/profile/state';
 
 import {
   CardSet,
@@ -13,19 +16,17 @@ interface Props {
 }
 
 export const ProfileOrgReviewCardStats = ({ profileOrgReview }: Props) => {
-  const cardSets = createCardSets(profileOrgReview);
+  const { profileInfoData } = useProfileInfoContext();
+  const isConnectedToGithub = Boolean(profileInfoData?.username);
+
+  const cardSets = createCardSets(profileOrgReview, isConnectedToGithub);
 
   return (
     <>
       {cardSets.length > 0 && <hr className="border-t border-white/10" />}
       <div className="flex flex-col flex-wrap md:flex-row md:items-center gap-2 md:gap-x-6">
-        {cardSets.map(({ icon, text, link, showLinkIcon }) => (
-          <CardSet
-            key={text}
-            icon={icon}
-            link={link}
-            showLinkIcon={showLinkIcon}
-          >
+        {cardSets.map(({ icon, text, link, isExternal }) => (
+          <CardSet key={text} icon={icon} link={link} isExternal={isExternal}>
             {text}
           </CardSet>
         ))}
@@ -34,11 +35,14 @@ export const ProfileOrgReviewCardStats = ({ profileOrgReview }: Props) => {
   );
 };
 
-const createCardSets = (profileOrgReview: Props['profileOrgReview']) => {
+const createCardSets = (
+  profileOrgReview: Props['profileOrgReview'],
+  isConnectedToGithub: boolean,
+) => {
   const { org, membershipStatus, startDate, endDate, commitCount } =
     profileOrgReview;
 
-  const { github, website, docs, telegram, twitter, discord } = org;
+  const { name, github, website, docs, telegram, twitter, discord } = org;
 
   const cardSets = [];
 
@@ -70,28 +74,36 @@ const createCardSets = (profileOrgReview: Props['profileOrgReview']) => {
     });
   }
 
-  if (cardSets.length === 0) {
-    const link = [
-      github ? `http://github.com/${github}` : null,
-      website,
-      telegram ? `http://telegram.me/${telegram}` : null,
-      twitter ? `http://twitter.com/${twitter}` : null,
-      discord,
-      docs,
-    ].find(Boolean);
+  if (!isConnectedToGithub) {
+    cardSets.push({
+      icon: null,
+      text: 'Connect your Github Account',
+      link: `${MW_URL}/github/trigger-dev-github-oauth`,
+      isExternal: false,
+    });
+  }
 
-    const text = github
-      ? 'Contribute to repository to view stats'
-      : 'Reach out to Organization';
+  if (github) {
+    cardSets.push({
+      icon: null,
+      text: `Contribute to ${name}`,
+      link: `http://github.com/${github}`,
+    });
+  }
 
-    if (link) {
-      cardSets.push({
-        icon: null,
-        text,
-        link,
-        showLinkIcon: false,
-      });
-    }
+  const contactLink = [
+    website,
+    telegram ? `http://telegram.me/${telegram}` : null,
+    twitter ? `http://twitter.com/${twitter}` : null,
+    discord,
+    docs,
+  ].find(Boolean);
+  if (contactLink) {
+    cardSets.push({
+      icon: null,
+      text: `Get In Touch`,
+      link: contactLink,
+    });
   }
 
   return cardSets;
