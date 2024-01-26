@@ -9,7 +9,7 @@ import { cn } from '@jobstash/shared/utils';
 import { useCheckWallet } from '@jobstash/auth/state';
 import { showFiltersAtom } from '@jobstash/filters/state';
 import { activeProjectIdAtom } from '@jobstash/projects/state';
-import { useIsMobile } from '@jobstash/shared/state';
+import { useDisableScrollSyncer, useIsMobile } from '@jobstash/shared/state';
 
 import { PageWrapper } from '@jobstash/shared/ui';
 
@@ -38,7 +38,7 @@ export const ProjectListPage = ({ initActiveProject }: Props) => {
   const showFilters = useAtomValue(showFiltersAtom);
   const isMobile = useIsMobile();
 
-  useCheckWallet();
+  useDisableScrollSyncer(false);
 
   return (
     <PageWrapper>
