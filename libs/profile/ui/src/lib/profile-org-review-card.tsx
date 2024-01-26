@@ -10,18 +10,10 @@ import { getLogoUrl } from '@jobstash/shared/utils';
 import { activeProfileOrgReviewAtom } from '@jobstash/profile/state';
 import { mobileRightPanelOpenAtom, useIsMobile } from '@jobstash/shared/state';
 
-import {
-  Button,
-  CardSet,
-  CommitIcon,
-  EditIcon,
-  EndDateIcon,
-  LogoTitle,
-  MembershipStatusIcon,
-  StartDateIcon,
-} from '@jobstash/shared/ui';
+import { Button, EditIcon, LogoTitle } from '@jobstash/shared/ui';
 
 import ProfileCardWrapper from './profile-card-wrapper';
+import { ProfileOrgReviewCardStats } from './profile-org-review-card-stats';
 
 interface Props {
   isActive: boolean;
@@ -31,8 +23,7 @@ interface Props {
 
 const ProfileOrgReviewCard = (props: Props) => {
   const { isActive, profileOrgReview, onClickEdit } = props;
-  const { org, rating, membershipStatus, startDate, endDate, commitCount } =
-    profileOrgReview;
+  const { org, rating } = profileOrgReview;
 
   const isMobile = useIsMobile();
 
@@ -81,27 +72,7 @@ const ProfileOrgReviewCard = (props: Props) => {
           <Rating readOnly fractions={2} value={overallRating} size="md" />
         </div>
 
-        <hr className="border-t border-white/10" />
-
-        <div className="flex flex-col flex-wrap md:flex-row md:items-center gap-2 md:gap-x-6">
-          <CardSet icon={<MembershipStatusIcon />}>{`Membership Status: ${
-            membershipStatus ?? 'N/A'
-          }`}</CardSet>
-
-          <CardSet icon={<StartDateIcon />}>{`First Commit: ${
-            startDate
-              ? new Date(startDate).toLocaleString().split(',')[0]
-              : 'N/A'
-          }`}</CardSet>
-
-          <CardSet icon={<EndDateIcon />}>{`Last Commit: ${
-            endDate ? new Date(endDate).toLocaleString().split(',')[0] : 'N/A'
-          }`}</CardSet>
-
-          <CardSet icon={<CommitIcon />}>{`Number of Your Commits: ${
-            commitCount ?? 'N/A'
-          }`}</CardSet>
-        </div>
+        <ProfileOrgReviewCardStats profileOrgReview={profileOrgReview} />
       </div>
     </ProfileCardWrapper>
   );
