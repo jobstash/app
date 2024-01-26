@@ -25,7 +25,7 @@ const PremiumSection = () => (
         <LinkButton
           variant="primary"
           size="lg"
-          linkProps={{ href: 'https://t.me/duckdegen' }}
+          linkProps={{ href: 'https://telegram.me/duckdegen' }}
         >
           <Text fw="bold" className="px-2">
             Get in touch

@@ -39,7 +39,7 @@ const LandingNav = () => {
         />
         <NavButton
           isTransparent
-          href="https://t.me/jobstashxyz"
+          href="https://telegram.me/jobstashxyz"
           text="Community"
         />
 
