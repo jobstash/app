@@ -17,9 +17,12 @@ const OrgRatingList = ({ orgRating }: Props) => {
   ) as [string, number][];
 
   return (
-    <div className="flex flex-wrap gap-x-12 gap-y-4">
+    <div className="grid grid-cold-1 sm:grid-cols-2 2xl:grid-cols-3 gap-3">
       {ratings.map(([label, rating]) => (
-        <div key={label} className="flex items-center gap-2">
+        <div
+          key={label}
+          className="flex items-center gap-2 justify-start flex-wrap shrink-0"
+        >
           <Text fw="bold">{rating.toFixed(1)}</Text>
           <Rating
             count={1}
@@ -27,7 +30,7 @@ const OrgRatingList = ({ orgRating }: Props) => {
             value={(rating ?? 0) / 5}
             color="gold"
           />
-          <Text>
+          <Text className="shrink-0">
             {ORG_RATING_LABELS[label as keyof typeof ORG_RATING_LABELS]}
           </Text>
         </div>
