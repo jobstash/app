@@ -15,7 +15,7 @@ interface Props {
 const RightPanelTabs = ({ isLoading, currentTab, tabs }: Props) => (
   <>
     <hr className="border-t border-white/10 -my-2" />
-    <DraggableWrapper className="flex items-center gap-4 py-1">
+    <DraggableWrapper className="flex items-center gap-4 p-1">
       {tabs.map(({ text, tabSegment, href }) => (
         <RightPanelTabButton
           key={text}
