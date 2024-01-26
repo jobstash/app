@@ -57,7 +57,7 @@ const AggregateSection = ({ org }: { org: OrgDetails }) => (
 
       <OrgRatingList orgRating={org.aggregateRatings} />
 
-      <OrgReviewSigninButton />
+      <OrgReviewSigninButton orgId={org.orgId} />
     </div>
   </RightPanelCardBorder>
 );
@@ -80,7 +80,7 @@ const LeaveReviewSection = ({ org }: { org: OrgDetails }) => (
       </Text>
 
       <div className="flex gap-x-4">
-        <OrgReviewSigninButton />
+        <OrgReviewSigninButton orgId={org.orgId} />
         <OrgReviewShareButton org={org} />
       </div>
     </div>

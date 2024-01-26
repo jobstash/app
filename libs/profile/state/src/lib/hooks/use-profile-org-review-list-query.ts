@@ -10,5 +10,6 @@ export const useProfileOrgReviewListQuery = () => {
     queryKey: ['profile-org-review-list', address],
     queryFn: () => getProfileOrgReviewList(),
     enabled: Boolean(address),
+    staleTime: 1000 * 60 * 60,
   });
 };
