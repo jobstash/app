@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 
+import { ENABLE_BASIC_AUTH } from '@jobstash/shared/core';
+
 const whiteListed = [
   'jobs/ava-labs-senior-infrastructure-engineer-3oxfCO/details',
   'JobStash.svg',
@@ -21,24 +23,28 @@ const getIsWhiteListed = (url: string) => {
 };
 
 export function middleware(req: NextRequest) {
-  const basicAuth = req.headers.get('authorization');
-  const url = req.nextUrl;
-  const isWhiteListed = getIsWhiteListed(url.toString());
+  if (typeof ENABLE_BASIC_AUTH === 'string' && ENABLE_BASIC_AUTH === 'true') {
+    const basicAuth = req.headers.get('authorization');
+    const url = req.nextUrl;
+    const isWhiteListed = getIsWhiteListed(url.toString());
 
-  if (isWhiteListed) {
-    return NextResponse.next();
-  }
-
-  if (basicAuth) {
-    const authValue = basicAuth.split(' ')[1];
-    const [user, pwd] = atob(authValue).split(':');
-
-    if (user === 'gotrekt' && pwd === 'mcdonalds') {
+    if (isWhiteListed) {
       return NextResponse.next();
     }
+
+    if (basicAuth) {
+      const authValue = basicAuth.split(' ')[1];
+      const [user, pwd] = atob(authValue).split(':');
+
+      if (user === 'gotrekt' && pwd === 'mcdonalds') {
+        return NextResponse.next();
+      }
+    }
+
+    url.pathname = '/api/auth';
+
+    return NextResponse.rewrite(url);
   }
 
-  url.pathname = '/api/auth';
-
-  return NextResponse.rewrite(url);
+  return NextResponse.next();
 }
