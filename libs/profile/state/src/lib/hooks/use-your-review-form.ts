@@ -16,12 +16,13 @@ const TEXTAREA_CHAR_LIMIT = 500;
 export const useYourReviewForm = (): ProfileReviewContextProps => {
   const {
     orgReview: {
-      review: { title, location, timezone, workingHours, pros, cons },
+      review: { id, title, location, timezone, workingHours, pros, cons },
       org: { orgId },
     },
   } = useProfileReviewsPageContext();
 
   const [currentReview, setCurrentReview] = useState({
+    id: '',
     title: '',
     location,
     timezone,
@@ -32,6 +33,7 @@ export const useYourReviewForm = (): ProfileReviewContextProps => {
 
   useEffect(() => {
     setCurrentReview({
+      id,
       title: title ?? '',
       location,
       timezone,
@@ -39,7 +41,7 @@ export const useYourReviewForm = (): ProfileReviewContextProps => {
       pros,
       cons,
     });
-  }, [title, pros, cons, location, timezone, workingHours]);
+  }, [title, pros, cons, location, timezone, workingHours, id]);
 
   const setTitle = (title: string | null) =>
     setCurrentReview((prev) => ({ ...prev, title: title ?? '' }));
