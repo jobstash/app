@@ -22,7 +22,7 @@ export const useYourReviewForm = (): ProfileReviewContextProps => {
   } = useProfileReviewsPageContext();
 
   const [currentReview, setCurrentReview] = useState({
-    id: '',
+    id,
     title: '',
     location,
     timezone,

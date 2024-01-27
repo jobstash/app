@@ -73,7 +73,7 @@ export const orgWorkingHoursSchema = myzod.object({
   end: orgWorkingHourSchema.nullable(),
 });
 export const orgStaffReviewSchema = myzod.object({
-  id: myzod.string().min(1),
+  id: myzod.string().min(1).nullable(),
   title: myzod.string().nullable(),
   location: orgLocationSchema.nullable(),
   timezone: orgTimezoneSchema.nullable(),
