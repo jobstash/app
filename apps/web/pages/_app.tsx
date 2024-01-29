@@ -57,8 +57,7 @@ const App = ({ Component, pageProps }: AppProps) => {
             id="gtag-init"
             strategy="afterInteractive"
             dangerouslySetInnerHTML={{
-              __html: `p
-            window.dataLayer = window.dataLayer || [];
+              __html: `window.dataLayer = window.dataLayer || [];
             function gtag(){dataLayer.push(arguments);}
             gtag('js', new Date());
             gtag('config', '${ANALYTICS_ID}', {
