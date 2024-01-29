@@ -29,7 +29,7 @@ const TechWrapper = ({ id, children, isChecked, canTeach }: Props) => {
   const colorIndex = getColorIndex(id, colorPool.length);
 
   return (
-    <div className="relative">
+    <div className="relative flex items-center justify-center">
       {isChecked && (
         <>
           <div
