@@ -114,7 +114,7 @@ export const JobPostPage = ({
     <>
       {currentJobPost && (
         <MetaData
-          id={currentJobPost.id}
+          id={currentJobPost.shortUUID}
           title={titleMetaData}
           description={descriptionMetaData}
           url={urlMetaData}
