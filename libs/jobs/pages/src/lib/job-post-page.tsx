@@ -1,5 +1,6 @@
 /* eslint-disable @nx/enforce-module-boundaries */
 import dynamic from 'next/dynamic';
+import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
@@ -10,6 +11,7 @@ import {
   EDGE_URL,
   ERR_INTERNAL,
   FRONTEND_URL,
+  JOB_FRAME_URL,
   type NotFoundInfo,
   ROUTE_SECTION,
 } from '@jobstash/shared/core';
@@ -112,9 +114,22 @@ export const JobPostPage = ({
 
   return (
     <>
+      <Head>
+        <meta name="fc:frame" content="vNext" />
+        <meta name="fc:frame:button:1" content="Prev" />
+        <meta name="fc:frame:button:2" content="Next" />
+        <meta
+          name="fc:frame:image"
+          content={`${JOB_FRAME_URL}/api/jobs?id=${initJob.shortUUID}&tab=details`}
+        />
+        <meta
+          name="fc:frame:post_url"
+          content={`${JOB_FRAME_URL}/api/frame/jobs/${initJob.shortUUID}/details`}
+        />
+      </Head>
+
       {currentJobPost && (
         <MetaData
-          id={currentJobPost.shortUUID}
           title={titleMetaData}
           description={descriptionMetaData}
           url={urlMetaData}
