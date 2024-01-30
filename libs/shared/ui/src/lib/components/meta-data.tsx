@@ -67,10 +67,6 @@ const MetaData = ({
     <meta name="twitter:site" content={twitter.site} />
 
     {/* Warpcast */}
-    <meta
-      http-equiv="refresh"
-      content={`0; URL=${FRONTEND_URL}/jobs/${id}/details`}
-    />
     <meta name="fc:frame" content="vNext" />
     <meta name="fc:frame:button:1" content="Prev" />
     <meta name="fc:frame:button:2" content="Next" />
