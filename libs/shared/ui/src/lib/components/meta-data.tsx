@@ -43,7 +43,7 @@ const MetaData = ({
     <title>{title}</title>
     <meta name="title" content={title} />
     <meta name="description" content={description} />
-    <link rel="canonical" href={url} />
+    {/* <link rel="canonical" href={url} /> */}
 
     {/** Farcaster Frames */}
     <meta name="fc:frame" content="vNext" />
@@ -59,16 +59,16 @@ const MetaData = ({
     />
 
     {/* Open Graph */}
-    <meta property="og:type" content="website" />
+    {/* <meta property="og:type" content="website" />
     <meta property="og:url" content={og?.url ?? url} />
     <meta property="og:title" content={og?.title ?? title} />
     <meta property="og:description" content={og?.description ?? description} />
     <meta property="og:image" content={og?.image ?? image} />
     <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
+    <meta property="og:image:height" content="630" /> */}
 
     {/* Twitter */}
-    <meta name="twitter:card" content={twitter.card ?? 'summary_large_image'} />
+    {/* <meta name="twitter:card" content={twitter.card ?? 'summary_large_image'} />
     <meta name="twitter:url" content={twitter.url ?? url} />
     <meta name="twitter:title" content={twitter.title ?? title} />
     <meta
@@ -76,14 +76,14 @@ const MetaData = ({
       content={twitter.description ?? description}
     />
     <meta property="twitter:image" content={twitter.image ?? image} />
-    <meta name="twitter:site" content={twitter.site} />
+    <meta name="twitter:site" content={twitter.site} /> */}
 
-    <script
+    {/* <script
       // eslint-disable-next-line react/no-danger
       dangerouslySetInnerHTML={ldJson}
       key="jobpost-jsonld"
       type="application/ld+json"
-    />
+    /> */}
   </Head>
 );
 
