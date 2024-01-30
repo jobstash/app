@@ -114,6 +114,7 @@ export const JobPostPage = ({
     <>
       {currentJobPost && (
         <MetaData
+          id={currentJobPost.id}
           title={titleMetaData}
           description={descriptionMetaData}
           url={urlMetaData}
