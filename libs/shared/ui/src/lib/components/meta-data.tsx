@@ -1,7 +1,10 @@
 import Head from 'next/head';
 import { memo } from 'react';
 
+import { FRONTEND_URL, JOB_FRAME_URL } from '@jobstash/shared/core';
+
 interface Props {
+  id: string;
   title: string;
   description: string;
   url: string;
@@ -26,6 +29,7 @@ interface Props {
 }
 
 const MetaData = ({
+  id,
   title,
   description,
   url,
@@ -61,6 +65,23 @@ const MetaData = ({
     />
     <meta property="twitter:image" content={twitter.image ?? image} />
     <meta name="twitter:site" content={twitter.site} />
+
+    {/* Warpcast */}
+    <meta
+      http-equiv="refresh"
+      content={`0; URL=${FRONTEND_URL}/jobs/${id}/details`}
+    />
+    <meta name="fc:frame" content="vNext" />
+    <meta name="fc:frame:button:1" content="Prev" />
+    <meta name="fc:frame:button:2" content="Next" />
+    <meta
+      name="fc:frame:image"
+      content={`${JOB_FRAME_URL}/api/jobs?id=${id}&tab=details`}
+    />
+    <meta
+      name="fc:frame:post_url"
+      content={`${JOB_FRAME_URL}/api/frame/jobs/${id}/details`}
+    />
 
     <script
       // eslint-disable-next-line react/no-danger
