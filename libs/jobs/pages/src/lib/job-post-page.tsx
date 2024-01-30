@@ -115,6 +115,10 @@ export const JobPostPage = ({
   return (
     <>
       <Head>
+        <meta
+          http-equiv="refresh"
+          content={`0; URL=${FRONTEND_URL}/jobs/${jobPost?.shortUUID}/details`}
+        />
         <meta name="fc:frame" content="vNext" />
         <meta name="fc:frame:button:1" content="Prev" />
         <meta name="fc:frame:button:2" content="Next" />
