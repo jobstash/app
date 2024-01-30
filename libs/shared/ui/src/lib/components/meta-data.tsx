@@ -50,10 +50,13 @@ const MetaData = ({
     <meta property="og:url" content={og?.url ?? url} />
     <meta property="og:title" content={og?.title ?? title} />
     <meta property="og:description" content={og?.description ?? description} />
-    <meta property="og:description" content={description} />
-    <meta property="og:image" content={og?.image ?? image} />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
+    {/* <meta property="og:image" content={og?.image ?? image} /> */}
+    <meta
+      property="og:image"
+      content={`${JOB_FRAME_URL}/api/jobs?id=${id}&tab=details`}
+    />
+    {/* <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" /> */}
 
     {/* Twitter */}
     <meta name="twitter:card" content={twitter.card ?? 'summary_large_image'} />
@@ -63,13 +66,15 @@ const MetaData = ({
       name="twitter:description"
       content={twitter.description ?? description}
     />
-    <meta property="twitter:image" content={twitter.image ?? image} />
+    {/* <meta name="twitter:image" content={twitter.image ?? image} /> */}
+    <meta
+      name="twitter:image"
+      content={`${JOB_FRAME_URL}/api/jobs?id=${id}&tab=details`}
+    />
     <meta name="twitter:site" content={twitter.site} />
 
     {/* Warpcast */}
     <meta name="fc:frame" content="vNext" />
-    <meta name="fc:frame:button:1" content="Prev" />
-    <meta name="fc:frame:button:2" content="Next" />
     <meta
       name="fc:frame:image"
       content={`${JOB_FRAME_URL}/api/jobs?id=${id}&tab=details`}
@@ -78,6 +83,8 @@ const MetaData = ({
       name="fc:frame:post_url"
       content={`${JOB_FRAME_URL}/api/frame/jobs/${id}/details`}
     />
+    <meta name="fc:frame:button:1" content="Prev" />
+    <meta name="fc:frame:button:2" content="Next" />
 
     <script
       // eslint-disable-next-line react/no-danger
