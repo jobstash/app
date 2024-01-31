@@ -32,8 +32,6 @@ export const useProfileShowcaseMutation = (onSuccessCb: () => void) => {
         message,
       });
 
-      console.log('vars =', vars);
-
       queryClient.setQueryData(['profile-showcase', address], vars.showcase);
       queryClient.invalidateQueries(['profile-showcase', address]);
 

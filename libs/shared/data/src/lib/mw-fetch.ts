@@ -66,8 +66,6 @@ export const mwFetch = async <R, P = Undefined>(
       JSON.stringify({ status: res.status, statusText: res.statusText }),
     );
 
-    console.log('MWFETCH FAILED', { method, res });
-
     const is404 = res.status === 404;
 
     throw new Error(is404 ? ERR_NOT_FOUND : ERR_INTERNAL);

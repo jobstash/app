@@ -59,8 +59,6 @@ const useFlowCheck = () => {
   const isLoadingDevCallback = useAtomValue(isLoadingDevCallbackAtom);
   const { flow } = useAuthContext();
 
-  console.log({ isMounted, isLoadingDevCallback, flow });
-
   return (
     isMounted && !isLoadingDevCallback && flow === CHECK_WALLET_FLOWS.PICK_ROLE
   );
