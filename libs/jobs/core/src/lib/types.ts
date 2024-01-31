@@ -1,6 +1,7 @@
 import { Infer } from 'myzod';
 
 import {
+  jobApplyInteractionPayloadSchema,
   jobBookmarkPayloadSchema,
   jobBookmarksResponseSchema,
   jobListQueryPageSchema,
@@ -11,6 +12,9 @@ export type JobPost = Infer<typeof jobPostSchema>;
 export type JobListQueryPage = Infer<typeof jobListQueryPageSchema>;
 export type JobBookmarkPayload = Infer<typeof jobBookmarkPayloadSchema>;
 export type JobBookmarksResponse = Infer<typeof jobBookmarksResponseSchema>;
+export type JobApplyInteractionPayload = Infer<
+  typeof jobApplyInteractionPayloadSchema
+>;
 
 // Interface ProjectInfo {
 //   id: string;

@@ -10,3 +10,4 @@ export * from './lib/hooks/use-job-bookmark-mutation';
 export * from './lib/hooks/use-job-bookmarks';
 export * from './lib/hooks/use-job-list';
 export * from './lib/hooks/use-job-post';
+export * from './lib/hooks/use-send-job-apply-interaction-mutation';

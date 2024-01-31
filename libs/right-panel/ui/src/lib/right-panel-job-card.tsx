@@ -1,9 +1,13 @@
 /* eslint-disable camelcase */
 import { memo } from 'react';
 
+import { CHECK_WALLET_ROLES } from '@jobstash/auth/core';
 import { GA_EVENT_ACTION, type JobInfo, type Tag } from '@jobstash/shared/core';
 import { slugify } from '@jobstash/shared/utils';
 import { gaEvent } from '@jobstash/shared/utils';
+
+import { useAuthContext } from '@jobstash/auth/state';
+import { useSendJobApplyInteractionMutation } from '@jobstash/jobs/state';
 
 import { Heading } from '@jobstash/shared/ui';
 
@@ -28,17 +32,35 @@ const RightPanelJobCard = ({
 }: Props) => {
   const { title, url, shortUUID, classification } = jobInfo;
 
-  const onClickApplyJob = () => {
+  const { role } = useAuthContext();
+  const isDev = role === CHECK_WALLET_ROLES.DEV;
+
+  const { mutate: sendJobApplyInteraction } =
+    useSendJobApplyInteractionMutation();
+
+  const openApplyPage = () => {
+    if (typeof window !== 'undefined') {
+      window.open(url, '_blank');
+    }
+  };
+
+  const sendAnalyticsEvent = () => {
     gaEvent(GA_EVENT_ACTION.JOB_APPLY, {
       event_category: 'job',
       job_shortuuid: shortUUID,
       job_classification: classification ?? '',
       organization_name: orgName,
     });
+  };
 
-    if (typeof window !== 'undefined') {
-      window.open(url, '_blank');
+  const onClickApplyJob = () => {
+    sendAnalyticsEvent();
+
+    if (isDev) {
+      sendJobApplyInteraction(shortUUID);
     }
+
+    openApplyPage();
   };
 
   const onClickExploreJob = () => {
