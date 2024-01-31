@@ -8,6 +8,8 @@ export const getJobPost = async (shortUuid: string) => {
   const options = {
     responseSchema: jobPostSchema,
     sentryLabel: 'getJobPost',
+    credentials: 'include' as RequestCredentials,
+    mode: 'cors' as RequestMode,
   };
 
   return mwFetch<JobPost>(url, options);

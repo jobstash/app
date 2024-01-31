@@ -12,6 +12,8 @@ export const getOrgDetails = async (orgId: string) => {
   const options = {
     responseSchema: orgDetailsSchema,
     sentryLabel: `getOrgDetails`,
+    credentials: 'include' as RequestCredentials,
+    mode: 'cors' as RequestMode,
   };
 
   return mwFetch<OrgDetails>(url, options);

@@ -22,6 +22,8 @@ export const getOrgList = async (
   const options = {
     responseSchema: orgListQueryPageSchema,
     sentryLabel: 'getOrgList',
+    credentials: 'include' as RequestCredentials,
+    mode: 'cors' as RequestMode,
   };
 
   return mwFetch<OrgListQueryPage>(url, options);

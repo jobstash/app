@@ -9,6 +9,8 @@ export const getProjectDetails = async (projectId: string) => {
   const options = {
     responseSchema: projectDetailsSchema,
     sentryLabel: `getProjectDetails`,
+    credentials: 'include' as RequestCredentials,
+    mode: 'cors' as RequestMode,
   };
 
   return mwFetch<ProjectDetails>(url, options);

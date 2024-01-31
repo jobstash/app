@@ -19,6 +19,8 @@ export const getJobList = async (
   const options = {
     responseSchema: jobListQueryPageSchema,
     sentryLabel: 'getJobList',
+    credentials: 'include' as RequestCredentials,
+    mode: 'cors' as RequestMode,
   };
 
   return mwFetch<JobListQueryPage>(url, options);

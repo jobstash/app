@@ -22,6 +22,8 @@ export const getProjectList = async (
   const options = {
     responseSchema: projectListQueryPageSchema,
     sentryLabel: 'getProjectList',
+    credentials: 'include' as RequestCredentials,
+    mode: 'cors' as RequestMode,
   };
 
   return mwFetch<ProjectListQueryPage>(url, options);
