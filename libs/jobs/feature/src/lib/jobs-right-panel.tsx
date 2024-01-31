@@ -4,6 +4,7 @@ import { type JobPost } from '@jobstash/jobs/core';
 import { ROUTE_SECTION, TAB_SEGMENT } from '@jobstash/shared/core';
 
 import { useCompetitors } from '@jobstash/competitors/state';
+import { useOrgDetails } from '@jobstash/organizations/state';
 
 import {
   RightPanel,
@@ -12,6 +13,7 @@ import {
   RightPanelJobCard,
   RightPanelJobTabs,
   RightPanelOrgCard,
+  RightPanelOrgJobCards,
   RightPanelProjectCards,
 } from '@jobstash/right-panel/ui';
 import { Loader } from '@jobstash/shared/ui';
@@ -28,6 +30,10 @@ const JobsRightPanel = ({ jobPost, currentTab }: Props) => {
       : undefined,
   );
 
+  const orgId = jobPost?.organization.orgId ?? null;
+  const { data: orgDetails, isLoading: isLoadingOrgDetails } =
+    useOrgDetails(orgId);
+
   // TODO: Repos fetch
   const isLoadingRepo = false;
 
@@ -39,14 +45,23 @@ const JobsRightPanel = ({ jobPost, currentTab }: Props) => {
     );
   }
 
-  const { organization, tags } = jobPost;
+  const { id, organization, tags } = jobPost;
   const { projects } = organization;
 
   const hasProject = projects.length > 0;
 
-  const isLoading = (hasProject && isLoadingCompetitors) || isLoadingRepo;
+  const isLoading = [
+    hasProject && isLoadingCompetitors,
+    isLoadingRepo,
+    isLoadingOrgDetails,
+  ].includes(true);
 
   const competitorCount = competitors?.length ?? 0;
+
+  const orgJobs = orgDetails
+    ? orgDetails.jobs.filter((job) => job.id !== id)
+    : [];
+  const orgJobsCount = orgJobs.length;
 
   return (
     <RightPanel
@@ -57,6 +72,7 @@ const JobsRightPanel = ({ jobPost, currentTab }: Props) => {
           currentTab={currentTab}
           jobPost={jobPost}
           competitorCount={competitorCount}
+          orgJobsCount={orgJobsCount}
         />
       }
       backButton={<RightPanelBackButton backURL={ROUTE_SECTION.JOBS} />}
@@ -83,6 +99,10 @@ const JobsRightPanel = ({ jobPost, currentTab }: Props) => {
 
       {currentTab === TAB_SEGMENT.competitors && (
         <RightPanelCompetitorCards competitors={competitors ?? []} />
+      )}
+
+      {orgDetails && currentTab === TAB_SEGMENT.jobsHere && (
+        <RightPanelOrgJobCards orgName={orgDetails.name} orgJobs={orgJobs} />
       )}
     </RightPanel>
   );

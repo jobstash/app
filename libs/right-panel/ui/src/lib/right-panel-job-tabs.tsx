@@ -13,6 +13,7 @@ interface Props {
   currentTab: string;
   jobPost: JobPost;
   competitorCount: number;
+  orgJobsCount: number;
 }
 
 const RightPanelJobTabs = ({
@@ -20,6 +21,7 @@ const RightPanelJobTabs = ({
   currentTab,
   jobPost,
   competitorCount,
+  orgJobsCount,
 }: Props) => {
   const {
     organization: { projects },
@@ -69,8 +71,16 @@ const RightPanelJobTabs = ({
       });
     }
 
+    if (orgJobsCount) {
+      tabs.push({
+        text: `Jobs Here (${orgJobsCount - 1})`,
+        tabSegment: TAB_SEGMENT.jobsHere,
+        href: createTabHref(TAB_SEGMENT.jobsHere),
+      });
+    }
+
     return tabs;
-  }, [competitorCount, createTabHref, projects.length]);
+  }, [competitorCount, createTabHref, orgJobsCount, projects.length]);
 
   return (
     <RightPanelTabs isLoading={isLoading} currentTab={currentTab} tabs={tabs} />
