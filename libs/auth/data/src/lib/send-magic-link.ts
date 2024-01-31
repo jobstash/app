@@ -1,7 +1,7 @@
-import { ERR_INTERNAL, MW_URL } from '@jobstash/shared/core';
+import { MW_URL } from '@jobstash/shared/core';
 
 export const sendMagicLink = async (destination: string) => {
-  const { ok } = await fetch(`${MW_URL}/auth/magic/login`, {
+  const res = await fetch(`${MW_URL}/auth/magic/login`, {
     method: 'POST',
     mode: 'cors',
     credentials: 'include',
@@ -11,7 +11,9 @@ export const sendMagicLink = async (destination: string) => {
     body: JSON.stringify({ destination }),
   });
 
-  if (!ok) {
-    throw new Error(ERR_INTERNAL);
+  const data = await res.json();
+
+  if (!res.ok) {
+    throw new Error(data.message);
   }
 };
