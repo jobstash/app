@@ -1,10 +1,10 @@
 import { useRouter } from 'next/router';
-import { ReactNode, useMemo } from 'react';
+import { ReactNode } from 'react';
 
 import { CHECK_WALLET_ROLES } from '@jobstash/auth/core';
 
 import { useRoleClick } from '@jobstash/auth/state';
-import { useProfileOrgReviewListQuery } from '@jobstash/profile/state';
+import { useUserReview } from '@jobstash/profile/state';
 
 import { Button, Spinner } from '@jobstash/shared/ui';
 
@@ -18,27 +18,13 @@ const OrgReviewSigninButton = ({ orgId }: Props) => {
     push('/profile/reviews');
   });
 
-  const { data, isLoading } = useProfileOrgReviewListQuery();
-
-  const hasReviewed = useMemo(
-    () =>
-      (data ?? []).some(({ org, review, rating }) => {
-        const isMatchOrg = org.orgId === orgId;
-        const hasReview = Boolean(review.title);
-        const hasRating = Object.values(rating).some(
-          (v) => typeof v === 'number',
-        );
-
-        return isMatchOrg && (hasReview || hasRating);
-      }),
-    [data, orgId],
-  );
+  const { hasReviewed, isLoading } = useUserReview(orgId);
 
   if (!isAuthd)
     return (
       <Wrapper>
         <Button variant="primary" onClick={roleClick}>
-          Sign in if Eligible
+          Leave a Review
         </Button>
       </Wrapper>
     );

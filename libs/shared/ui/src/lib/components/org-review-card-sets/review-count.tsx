@@ -1,15 +1,27 @@
 import CardSet from '../../base/card-set';
 
 interface Props {
+  isAuthd: boolean;
+  hasReviewed: boolean;
   reviewCount: number;
   onClick: () => void;
 }
 
-const ReviewCount = ({ reviewCount, onClick }: Props) => (
-  <CardSet icon={<ReviewIcon />} onClick={onClick}>
-    {reviewCount > 0 ? `Reviews: ${reviewCount}` : 'Leave a Review'}
-  </CardSet>
-);
+const ReviewCount = ({ hasReviewed, isAuthd, reviewCount, onClick }: Props) => {
+  let text = 'Edit Review';
+
+  if (reviewCount > 0 && !isAuthd) {
+    text = `Reviews: ${reviewCount}`;
+  } else if (!isAuthd || !hasReviewed) {
+    text = 'Leave a Review';
+  }
+
+  return (
+    <CardSet icon={<ReviewIcon />} onClick={onClick}>
+      {text}
+    </CardSet>
+  );
+};
 
 export default ReviewCount;
 
