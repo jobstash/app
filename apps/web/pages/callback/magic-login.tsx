@@ -13,7 +13,7 @@ const MagicLoginCallbackPage = () => {
   if (isLoading) return <LoadingPage />;
 
   return (
-    <div className="w-full pl-52">
+    <div className="w-full lg:pl-52">
       <SideBar />
 
       <div className="flex h-screen items-center justify-center pl-4">
