@@ -101,7 +101,7 @@ const JobsRightPanel = ({ jobPost, currentTab }: Props) => {
         <RightPanelCompetitorCards competitors={competitors ?? []} />
       )}
 
-      {orgDetails && currentTab === TAB_SEGMENT.jobsHere && (
+      {orgDetails && currentTab === TAB_SEGMENT.otherJobs && (
         <RightPanelOrgJobCards orgName={orgDetails.name} orgJobs={orgJobs} />
       )}
     </RightPanel>

@@ -77,7 +77,7 @@ export const TAB_SEGMENT = {
   organization: 'organization' as const,
   projects: 'projects' as const,
   jobs: 'jobs' as const,
-  jobsHere: 'jobs-here' as const,
+  otherJobs: 'other-jobs' as const,
   competitors: 'competitors' as const,
   reviews: 'reviews' as const,
 } as const;

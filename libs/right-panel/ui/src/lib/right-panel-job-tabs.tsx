@@ -73,9 +73,9 @@ const RightPanelJobTabs = ({
 
     if (orgJobsCount) {
       tabs.push({
-        text: `Jobs Here (${orgJobsCount})`,
-        tabSegment: TAB_SEGMENT.jobsHere,
-        href: createTabHref(TAB_SEGMENT.jobsHere),
+        text: `Other Jobs (${orgJobsCount})`,
+        tabSegment: TAB_SEGMENT.otherJobs,
+        href: createTabHref(TAB_SEGMENT.otherJobs),
       });
     }
 
