@@ -18,15 +18,13 @@ import TokenAllocationIcon from '../icons/token-allocation-icon';
 export const createJobTags = (jobCardSet: JobCardSet) => {
   const {
     seniority,
-    minimumSalary,
-    maximumSalary,
     location,
     locationType,
     commitment,
     paysInCrypto,
     offersTokenAllocation,
-    salaryCurrency = 'USD',
     classification,
+    salaryCurrency,
   } = jobCardSet;
 
   const tags: TagElement[] = [];
@@ -49,13 +47,11 @@ export const createJobTags = (jobCardSet: JobCardSet) => {
     }
   }
 
-  if (minimumSalary && maximumSalary) {
-    const salary = `${salaryCurrency} ${numFormatter.format(
-      minimumSalary,
-    )} - ${numFormatter.format(maximumSalary)}`;
+  const salaryText = getSalaryText(jobCardSet);
+  if (salaryText && salaryCurrency) {
     tags.push({
       id: TAG_ELEMENT_ID.salary,
-      text: `Salary: ${salary}`,
+      text: `Salary: ${salaryCurrency} ${salaryText}`,
       icon: <MoneyIcon />,
     });
   }
@@ -143,3 +139,18 @@ const getTitleCase = (classification: string | null) =>
     ?.replaceAll('_', ' ')
     .toLowerCase()
     .replaceAll(/\b\w/g, (s) => s.toUpperCase()) ?? null;
+
+const getSalaryText = (job: JobCardSet) => {
+  const { minimumSalary, maximumSalary, salary } = job;
+
+  if (minimumSalary && maximumSalary) {
+    return `${numFormatter.format(minimumSalary)} - ${numFormatter.format(
+      maximumSalary,
+    )}`;
+  }
+
+  const isNotRange = [minimumSalary, maximumSalary].includes(null);
+  if (salary && isNotRange) return `${numFormatter.format(salary)}`;
+
+  return null;
+};
