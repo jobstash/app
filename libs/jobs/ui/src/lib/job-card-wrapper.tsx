@@ -3,18 +3,20 @@ import { memo, type ReactNode } from 'react';
 
 import { cva } from 'class-variance-authority';
 
+import { featuredGradientBorderStyle } from '@jobstash/shared/core';
 import { cn } from '@jobstash/shared/utils';
 
 interface Props {
   href: string | null;
   isActive: boolean;
+  isFeatured: boolean;
   children: ReactNode;
   onClick: () => void;
 }
 
 const jobCard = cva(
   [
-    'flex flex-col p-6 gap-2.5 rounded-3xl bg-white/5 lg:mb-8',
+    'flex flex-col p-6 gap-2.5 rounded-3xl bg-white/5 m-[-3px]',
     'cursor-pointer hover:bg-white/10',
     'transition-all hover:ring-1 hover:ring-inset hover:ring-white/20',
   ],
@@ -27,17 +29,27 @@ const jobCard = cva(
   },
 );
 
-const JobCardWrapper = ({ href, isActive, children, onClick }: Props) => {
+const JobCardWrapper = ({
+  href,
+  isActive,
+  isFeatured,
+  children,
+  onClick,
+}: Props) => {
   if (!href)
     return (
       <div onClick={onClick}>
-        <InnerWrapper isActive={isActive}>{children}</InnerWrapper>
+        <InnerWrapper isActive={isActive} isFeatured={isFeatured}>
+          {children}
+        </InnerWrapper>
       </div>
     );
 
   return (
     <Link href={href} scroll={false} onClick={onClick}>
-      <InnerWrapper isActive={isActive}>{children}</InnerWrapper>
+      <InnerWrapper isActive={isActive} isFeatured={isFeatured}>
+        {children}
+      </InnerWrapper>
     </Link>
   );
 };
@@ -46,8 +58,14 @@ export default memo(JobCardWrapper);
 
 const InnerWrapper = ({
   isActive,
+  isFeatured,
   children,
 }: {
   isActive: boolean;
+  isFeatured: boolean;
   children: ReactNode;
-}) => <div className={cn(jobCard({ isActive }))}>{children}</div>;
+}) => (
+  <div style={isFeatured ? featuredGradientBorderStyle : undefined}>
+    <div className={cn(jobCard({ isActive }))}>{children}</div>
+  </div>
+);

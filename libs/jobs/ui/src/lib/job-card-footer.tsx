@@ -15,7 +15,7 @@ const JobCardFooter = ({ ts, shortUUID, bookmarkButton }: Props) => {
     <div className="sm:hidden flex-col gap-4">
       <hr className="border-t border-white/10 h-2" />
 
-      <div className="flex w-full justify-between items-center">
+      <div className="flex w-full justify-between items-center pt-2">
         <span className="text-sm">{timestamp}</span>
         {bookmarkButton}
       </div>

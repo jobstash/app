@@ -10,11 +10,13 @@ import {
   GA_EVENT_ACTION,
 } from '@jobstash/shared/core';
 import { getUrlWithParams } from '@jobstash/filters/utils';
-import { createJobKey } from '@jobstash/jobs/utils';
+import { checkJobIsFeatured, createJobKey } from '@jobstash/jobs/utils';
 import { dispatchEvent, gaEvent } from '@jobstash/shared/utils';
 
 import { activeJobAtom } from '@jobstash/jobs/state';
 import { mobileRightPanelOpenAtom, useIsMobile } from '@jobstash/shared/state';
+
+import { Heading } from '@jobstash/shared/ui';
 
 import JobCardFooter from './job-card-footer';
 import JobCardHeader from './job-card-header';
@@ -37,8 +39,16 @@ const JobCard = ({
   filterParamsObj,
   bookmarkButton,
 }: Props) => {
-  const { organization, tags, title, timestamp, shortUUID, classification } =
-    jobPost;
+  const {
+    organization,
+    tags,
+    title,
+    timestamp,
+    shortUUID,
+    classification,
+    featureStartDate,
+    featureEndDate,
+  } = jobPost;
   const { projects, name: orgName } = organization;
 
   const setActiveJob = useSetAtom(activeJobAtom);
@@ -75,14 +85,26 @@ const JobCard = ({
     return url.toString();
   }, [filterParamsObj, jobPost]);
 
+  const isFeatured = checkJobIsFeatured(featureStartDate, featureEndDate);
+
   return (
-    <JobCardWrapper href={href} isActive={isActive} onClick={onClick}>
+    <JobCardWrapper
+      href={href}
+      isActive={isActive}
+      isFeatured={isFeatured}
+      onClick={onClick}
+    >
       <JobCardHeader
-        shortUUID={shortUUID}
         title={title}
         ts={timestamp}
+        isFeatured={isFeatured}
         bookmarkButton={bookmarkButton}
       />
+      {isFeatured && (
+        <Heading size="md" fw="semibold">
+          {title}
+        </Heading>
+      )}
       <JobCardTags jobPost={jobPost} />
       <JobCardOrg org={organization} />
       <JobCardTechs techs={tags} />

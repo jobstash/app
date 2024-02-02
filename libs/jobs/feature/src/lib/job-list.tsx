@@ -63,7 +63,7 @@ const JobList = ({ initJob, activeJob }: Props) => {
   }
 
   return (
-    <div className="flex flex-col gap-y-4 pb-4">
+    <div className="flex flex-col gap-y-4 lg:gap-y-8 pb-4">
       {jobPosts.map((jobPost) => (
         <JobCard
           key={jobPost.shortUUID}

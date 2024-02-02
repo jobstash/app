@@ -1,6 +1,9 @@
 import { type ReactNode } from 'react';
 
 import { type JobPost } from '@jobstash/jobs/core';
+import { checkJobIsFeatured } from '@jobstash/jobs/utils';
+
+import { Heading } from '@jobstash/shared/ui';
 
 import JobCardFooter from './job-card-footer';
 import JobCardHeader from './job-card-header';
@@ -23,21 +26,37 @@ const JobBookmarkCard = ({
   isActive,
   onClick,
 }: Props) => {
-  const { organization, tags, title, timestamp, shortUUID } = jobPost;
+  const {
+    organization,
+    tags,
+    title,
+    timestamp,
+    shortUUID,
+    featureStartDate,
+    featureEndDate,
+  } = jobPost;
   const { projects } = organization;
+
+  const isFeatured = checkJobIsFeatured(featureStartDate, featureEndDate);
 
   return (
     <JobCardWrapper
       href={null}
       isActive={isActive}
+      isFeatured={isFeatured}
       onClick={() => onClick(jobPost)}
     >
       <JobCardHeader
-        shortUUID={shortUUID}
         title={title}
         ts={timestamp}
+        isFeatured={isFeatured}
         bookmarkButton={bookmarkButton}
       />
+      {isFeatured && (
+        <Heading size="md" fw="semibold">
+          {title}
+        </Heading>
+      )}
       <JobCardTags jobPost={jobPost} />
       <JobCardOrg org={organization} />
       <JobCardTechs techs={tags} />

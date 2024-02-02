@@ -1,3 +1,5 @@
+import React from 'react';
+
 import { Lato, Roboto } from '@next/font/google';
 
 export const EVENT_CARD_CLICK = 'card-click';
@@ -88,3 +90,16 @@ export const GA_EVENT_ACTION = {
   JOB_EXPAND_DETAILS: 'job_expand_details' as const,
   FILTER_ACTION: 'filter_action' as const,
 } as const;
+
+export const featuredGradientBorderStyle: React.CSSProperties = {
+  background:
+    'linear-gradient(90deg, #1e1e1e, #1e1e1e) padding-box, linear-gradient(270deg, #D68800, #8743FF) border-box',
+  border: '3px solid transparent',
+  borderRadius: '1.5rem',
+  boxSizing: 'border-box',
+  backgroundSize: '400% 400%',
+  cursor: 'pointer',
+  animation: 'featuredbg 5s ease infinite',
+  WebkitAnimation: 'featuredbg 5s ease infinite',
+  MozAnimation: 'featuredbg 5s ease infinite',
+};
