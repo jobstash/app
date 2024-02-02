@@ -161,6 +161,9 @@ const fakeFeaturedJobs: JobPost[] = [
       logoUrl: null,
       headcountEstimate: null,
     },
+    featured: false,
+    featureStartDate: null,
+    featureEndDate: null,
   },
   {
     id: '3b03f2e4-cefb-4df2-999d-79dabd70a720',
@@ -359,6 +362,9 @@ const fakeFeaturedJobs: JobPost[] = [
       logoUrl: null,
       headcountEstimate: null,
     },
+    featured: false,
+    featureStartDate: null,
+    featureEndDate: null,
   },
 ];
 

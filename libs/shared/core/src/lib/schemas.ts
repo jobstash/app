@@ -100,6 +100,9 @@ export const jobInfoSchema = myzod.intersection(
     description: myzod.string().min(1).nullable(),
     culture: myzod.string().min(1).nullable(),
     title: myzod.string().min(1),
+    featured: myzod.boolean(),
+    featureStartDate: myzod.number().nullable(),
+    featureEndDate: myzod.number().nullable(),
   }),
 );
 
