@@ -125,6 +125,7 @@ export const orgInfoSchema = myzod.object(
     alias: myzod.string().min(1).nullable(),
     docs: myzod.string().min(1).nullable(),
     twitter: myzod.string().min(1).nullable(),
+    community: myzod.array(myzod.string()),
   },
   { allowUnknown: true },
 );
