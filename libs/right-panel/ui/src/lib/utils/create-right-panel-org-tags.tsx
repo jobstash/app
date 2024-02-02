@@ -5,7 +5,7 @@ import {
   BankIcon,
   GlobeSimpleIcon,
   LocationIcon,
-  UsersIcon,
+  UsersThreeIcon,
 } from '@jobstash/shared/ui';
 
 import { createOrgFundingDateString } from './create-org-funding-date-string';
@@ -30,7 +30,7 @@ export const createRightPanelOrgTags = (orgData: RightPanelOrg) => {
     tags.push({
       id: TAG_ELEMENT_ID.headcountEstimate,
       text: `Employees: ${headcountEstimate}`,
-      icon: <UsersIcon />,
+      icon: <UsersThreeIcon />,
     });
   }
 
