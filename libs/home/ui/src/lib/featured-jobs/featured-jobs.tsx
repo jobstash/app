@@ -101,6 +101,7 @@ const fakeFeaturedJobs: JobPost[] = [
       website: 'https://oasisprotocol.org/',
       aggregateRating: 4.2,
       reviewCount: 69,
+      community: [],
       projects: [
         {
           github: null,
@@ -302,6 +303,7 @@ const fakeFeaturedJobs: JobPost[] = [
       website: 'https://oasisprotocol.org/',
       aggregateRating: 4.2,
       reviewCount: 69,
+      community: [],
       projects: [
         {
           github: null,
