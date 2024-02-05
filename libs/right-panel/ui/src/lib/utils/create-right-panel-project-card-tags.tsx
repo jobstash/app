@@ -5,7 +5,11 @@ import {
   TAG_ELEMENT_ID,
   type TagElement,
 } from '@jobstash/shared/core';
-import { getPluralText, numFormatter } from '@jobstash/shared/utils';
+import {
+  getPluralText,
+  getWebsiteText,
+  numFormatter,
+} from '@jobstash/shared/utils';
 
 import {
   ActiveUsersIcon,
@@ -42,16 +46,19 @@ export const createRightPanelProjectCardTags = (
     hacks,
   } = project;
 
-  const projectSocialTags: TagElement[] = [
-    {
+  const projectSocialTags: TagElement[] = [];
+
+  if (website) {
+    const { link } = getWebsiteText(website);
+    projectSocialTags.push({
       id: TAG_ELEMENT_ID.website,
       text: 'Website',
       icon: <GlobeSimpleIcon />,
-      link: website,
+      link,
       showLinkIcon: false,
       asLink: true,
-    },
-  ];
+    });
+  }
 
   if (github) {
     projectSocialTags.push({

@@ -1,5 +1,6 @@
 import { type RightPanelOrg } from '@jobstash/right-panel/core';
 import { TAG_ELEMENT_ID, type TagElement } from '@jobstash/shared/core';
+import { getWebsiteText } from '@jobstash/shared/utils';
 
 import {
   BankIcon,
@@ -12,19 +13,25 @@ import { createOrgFundingDateString } from './create-org-funding-date-string';
 
 export const createRightPanelOrgTags = (orgData: RightPanelOrg) => {
   const { website, location, headcountEstimate, fundingRounds } = orgData;
-  const tags: TagElement[] = [
-    {
+  const tags: TagElement[] = [];
+
+  if (website) {
+    const { link } = getWebsiteText(website);
+    tags.push({
       id: TAG_ELEMENT_ID.website,
       text: 'Website',
       icon: <GlobeSimpleIcon />,
-      link: website,
-    },
-    {
+      link,
+    });
+  }
+
+  if (location) {
+    tags.push({
       id: TAG_ELEMENT_ID.location,
       text: location,
       icon: <LocationIcon />,
-    },
-  ];
+    });
+  }
 
   if (headcountEstimate) {
     tags.push({
