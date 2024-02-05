@@ -6,6 +6,7 @@ import { type TagElement } from '@jobstash/shared/core';
 import {
   CardSet,
   DraggableWrapper,
+  OrgCommunityTag,
   OrgReviewCardSets,
 } from '@jobstash/shared/ui';
 
@@ -27,6 +28,8 @@ const RightPanelHeaderTags = ({ org }: Props) => {
           {text}
         </CardSet>
       ))}
+
+      <OrgCommunityTag isOneLine community={org.community} />
     </DraggableWrapper>
   );
 };

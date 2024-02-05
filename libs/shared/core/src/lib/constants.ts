@@ -58,6 +58,7 @@ export const TAG_ELEMENT_ID = {
   hack: 'hack',
   timezone: 'timezone',
   workingHours: 'working-hours',
+  community: 'community',
 } as const;
 
 // Sentry MSG

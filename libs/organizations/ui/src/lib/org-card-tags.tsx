@@ -2,7 +2,7 @@ import { memo } from 'react';
 
 import { type OrgListItem } from '@jobstash/organizations/core';
 
-import { CardSet } from '@jobstash/shared/ui';
+import { CardSet, OrgCommunityTag } from '@jobstash/shared/ui';
 
 import { createOrgCardTags } from './utils/create-org-card-tags';
 
@@ -20,17 +20,12 @@ const OrgCardTags = ({ orgListItem }: Props) => {
       <hr className="border-t border-white/10" />
 
       <div className="flex grow flex-wrap pt-2 gap-2 lg:pt-0 [&>*]:mr-4 pl-2">
-        {tags &&
-          tags.map(({ id, text, icon, link, showLinkIcon }) => (
-            <CardSet
-              key={id}
-              link={link}
-              icon={icon}
-              showLinkIcon={showLinkIcon}
-            >
-              {text}
-            </CardSet>
-          ))}
+        {tags.map(({ id, text, icon, link, showLinkIcon }) => (
+          <CardSet key={id} link={link} icon={icon} showLinkIcon={showLinkIcon}>
+            {text}
+          </CardSet>
+        ))}
+        <OrgCommunityTag community={orgListItem.community} />
       </div>
     </>
   );

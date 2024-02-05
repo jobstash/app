@@ -27,9 +27,9 @@ export const orgListItemSchema = myzod
     lastFundingAmount: myzod.number(),
     headcountEstimate: myzod.number().nullable(),
     logoUrl: myzod.string().min(1).nullable(),
-
     aggregateRating: myzod.number().min(0).max(5),
     reviewCount: myzod.number(),
+    community: myzod.array(myzod.string()),
   })
   .allowUnknownKeys(true);
 
