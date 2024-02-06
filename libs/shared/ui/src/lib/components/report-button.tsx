@@ -21,7 +21,7 @@ const ReportButton = ({ ui }: Props) => {
   const onClick = () => {
     open({
       ui,
-      url: 'TODO',
+      url: window?.location.href ?? '',
       user: { role, flow, address, isConnected, isSignedIn },
       ts: Date.now(),
     });
