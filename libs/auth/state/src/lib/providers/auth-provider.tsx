@@ -29,6 +29,7 @@ export const AuthProvider = ({ children, screenLoader }: Props) => {
     data: checkWalletData,
     refetch,
     isLoading,
+    address,
     isConnected,
   } = useCheckWallet();
 
@@ -52,9 +53,20 @@ export const AuthProvider = ({ children, screenLoader }: Props) => {
       role: checkWalletData?.role ?? CHECK_WALLET_ROLES.DEFAULT,
       flow: checkWalletData?.flow ?? CHECK_WALLET_FLOWS.DEFAULT,
       isLoading,
+      address,
+      isConnected,
+      isSignedIn,
       refetch: () => refetch(),
     }),
-    [checkWalletData?.flow, checkWalletData?.role, isLoading, refetch],
+    [
+      address,
+      checkWalletData?.flow,
+      checkWalletData?.role,
+      isConnected,
+      isLoading,
+      isSignedIn,
+      refetch,
+    ],
   );
 
   const redirectRef = useRef(false);

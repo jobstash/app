@@ -4,7 +4,7 @@ import { useAccount } from 'wagmi';
 import { getCheckWallet } from '@jobstash/auth/data';
 
 export const useCheckWallet = () => {
-  const { isConnected, isConnecting } = useAccount();
+  const { address, isConnected, isConnecting } = useAccount();
 
   const { data, isLoading, refetch, isFetching } = useQuery({
     queryKey: ['check-wallet'],
@@ -18,6 +18,7 @@ export const useCheckWallet = () => {
     data,
     isLoading,
     isFetching,
+    address,
     isConnected,
     isConnecting,
     refetch,

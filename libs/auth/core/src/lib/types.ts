@@ -34,4 +34,7 @@ export type AuthPageProps = {
 export type AuthCtx = {
   isLoading: boolean;
   refetch: () => void;
+  address: string | undefined;
+  isConnected: boolean;
+  isSignedIn: boolean;
 } & AuthPageProps;

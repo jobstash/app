@@ -9,7 +9,7 @@ import { gaEvent } from '@jobstash/shared/utils';
 import { useAuthContext } from '@jobstash/auth/state';
 import { useSendJobApplyInteractionMutation } from '@jobstash/jobs/state';
 
-import { Heading } from '@jobstash/shared/ui';
+import { Heading, ReportButton } from '@jobstash/shared/ui';
 
 import RightPanelCardBorder from './right-panel-card-border';
 import RightPanelCta from './right-panel-cta';
@@ -74,13 +74,16 @@ const RightPanelJobCard = ({
     <RightPanelCardBorder>
       <div className="flex flex-col gap-y-4 p-6">
         <div className="flex flex-col items-start gap-y-4">
-          <div className="flex h-fit w-full justify-between">
+          <div className="flex h-fit w-full justify-between gap-2 relative">
             <Heading size="md" fw="semibold">
               {title}
             </Heading>
             {/* <div className="hidden items-start space-x-4 lg:flex">
             <ShareButton title={title} />
           </div> */}
+            <div className="relative">
+              <ReportButton ui="Job Details Subtab" />
+            </div>
           </div>
 
           <RightPanelJobCardSets jobCardSet={jobInfo} />
