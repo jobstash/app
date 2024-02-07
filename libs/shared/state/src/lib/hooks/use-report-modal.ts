@@ -1,6 +1,8 @@
 import { atom, useAtom } from 'jotai';
 
-type ReportCtx = Record<string, unknown>;
+import { ReportPayload } from '@jobstash/shared/core';
+
+type ReportCtx = ReportPayload['ctx'];
 
 const isOpenAtom = atom(false);
 const ctxAtom = atom<ReportCtx | null>(null);

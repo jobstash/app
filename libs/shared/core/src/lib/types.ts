@@ -18,6 +18,7 @@ import {
   orgInfoSchema,
   projectInfoSchema,
   projectMoreInfoSchema,
+  reportPayloadSchema,
   repositoryInfoSchema,
   tagSchema,
   undefinedSchema,
@@ -68,3 +69,5 @@ export type NotFoundInfo = {
   message: string;
   buttonText: string;
 };
+
+export type ReportPayload = Infer<typeof reportPayloadSchema>;

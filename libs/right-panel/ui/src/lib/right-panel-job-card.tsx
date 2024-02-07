@@ -81,9 +81,7 @@ const RightPanelJobCard = ({
             {/* <div className="hidden items-start space-x-4 lg:flex">
             <ShareButton title={title} />
           </div> */}
-            <div className="relative">
-              <ReportButton ui="Job Details Subtab" />
-            </div>
+            <ReportButton ui="Job Details Subtab" />
           </div>
 
           <RightPanelJobCardSets jobCardSet={jobInfo} />

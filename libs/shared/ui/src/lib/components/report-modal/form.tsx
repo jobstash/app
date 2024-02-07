@@ -3,7 +3,10 @@ import { useRef, useState } from 'react';
 import { Textarea, TextInput } from '@mantine/core';
 import { UseMutateFunction } from '@tanstack/react-query';
 
+import { MwMessageResponse, ReportPayload } from '@jobstash/shared/core';
 import { cn } from '@jobstash/shared/utils';
+
+import { useReportModal } from '@jobstash/shared/state';
 
 import Button from '../../base/button/button';
 import Heading from '../../base/heading';
@@ -13,7 +16,7 @@ import ReportModalDropzone from './dropzone';
 
 interface Props {
   isLoading: boolean;
-  mutate: UseMutateFunction<void, unknown, Record<string, unknown>, unknown>;
+  mutate: UseMutateFunction<MwMessageResponse, unknown, ReportPayload, unknown>;
 }
 
 const ReportModalForm = ({ isLoading, mutate }: Props) => {
@@ -21,12 +24,13 @@ const ReportModalForm = ({ isLoading, mutate }: Props) => {
 
   const [attachments, setAttachments] = useState<{ path: string }[]>([]);
 
+  const { ctx } = useReportModal();
   const submit: React.FormEventHandler = (e) => {
     e.preventDefault();
     if (ref.current) {
       const formData = new FormData(ref.current);
 
-      const payload = {};
+      const payload = {} as ReportPayload;
 
       // eslint-disable-next-line unicorn/no-array-for-each
       formData.forEach((v, k) => {
@@ -35,7 +39,9 @@ const ReportModalForm = ({ isLoading, mutate }: Props) => {
 
       Object.assign(payload, { attachments });
 
-      mutate(payload);
+      if (ctx) {
+        mutate({ ...payload, ctx });
+      }
     }
   };
 
@@ -102,6 +108,7 @@ export default ReportModalForm;
 
 const inputClassName =
   'rounded-lg bg-dark text-md text-white/60 focus:border-white/30 p-4';
+
 const subjectPlaceholder = 'Incorrect data';
 const textareaPlaceholder =
   "Detail the report's content, emphasizing any inconsistencies or inaccuracies in the data. Note flawed findings and areas that require validation or correction.";

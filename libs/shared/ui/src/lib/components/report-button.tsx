@@ -16,14 +16,15 @@ interface Props {
 const ReportButton = ({ ui }: Props) => {
   const { open } = useReportModal();
 
-  const { role, flow, address, isConnected, isSignedIn } = useAuthContext();
+  const { isConnected, isSignedIn } = useAuthContext();
 
   const onClick = () => {
     open({
       ui,
       url: window?.location.href ?? '',
-      user: { role, flow, address, isConnected, isSignedIn },
+      user: { isConnected, isSignedIn },
       ts: Date.now(),
+      other: '',
     });
   };
 

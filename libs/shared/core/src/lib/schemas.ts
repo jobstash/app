@@ -176,3 +176,23 @@ export const mwMessageResponseSchema = myzod.object({
   success: myzod.boolean(),
   message: myzod.string().min(1),
 });
+
+export const reportPayloadSchema = myzod.object({
+  subject: myzod.string().min(1, 'Subject is required'),
+  description: myzod.string().min(1, 'Description is required'),
+  ctx: myzod.object({
+    ui: myzod.string(),
+    url: myzod.string(),
+    ts: myzod.number(),
+    user: myzod.object({
+      isConnected: myzod.boolean(),
+      isSignedIn: myzod.boolean(),
+    }),
+    other: myzod.string(),
+  }),
+  attachments: myzod.array(
+    myzod.object({
+      path: myzod.string(),
+    }),
+  ),
+});

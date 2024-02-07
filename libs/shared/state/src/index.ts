@@ -16,3 +16,4 @@ export * from './lib/hooks/use-is-mounted';
 export * from './lib/hooks/use-media-query';
 export * from './lib/hooks/use-mobile-details-scroll-syncer';
 export * from './lib/hooks/use-report-modal';
+export * from './lib/hooks/use-send-report-mutation';
