@@ -184,10 +184,6 @@ export const reportPayloadSchema = myzod.object({
     ui: myzod.string(),
     url: myzod.string(),
     ts: myzod.number(),
-    user: myzod.object({
-      isConnected: myzod.boolean(),
-      isSignedIn: myzod.boolean(),
-    }),
     other: myzod.string(),
   }),
   attachments: myzod.array(
