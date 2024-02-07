@@ -75,6 +75,8 @@ const RightPanelJobCard = ({
     }
   };
 
+  const other = JSON.stringify({ job: { title, shortUUID } });
+
   return (
     <RightPanelCardBorder>
       <div className="flex flex-col gap-y-4 p-6">
@@ -84,7 +86,10 @@ const RightPanelJobCard = ({
               {title}
             </Heading>
             <CardMenu>
-              <ReportMenuItem ui={REPORT_UI_CTX.JOB_DETAILS_CARD} />
+              <ReportMenuItem
+                ui={REPORT_UI_CTX.JOB_DETAILS_CARD}
+                other={other}
+              />
             </CardMenu>
           </div>
 
