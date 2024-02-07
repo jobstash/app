@@ -30,7 +30,7 @@ const ReportModal = () => {
           // eslint-disable-next-line no-throw-literal
           throw {
             message: 'Files are too large!',
-            info: 'Total file size exceeded limit (5mb)',
+            info: 'Total file size exceeded limit (50mb)',
           };
         }
 

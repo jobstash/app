@@ -66,7 +66,9 @@ const ReportModalDropzone = (props: Props) => {
 
         <div className="flex flex-col">
           <Heading size="md">{dropzoneTitle}</Heading>
-          <Text color="dimmed">Attach attachments not exceeding 5mb total</Text>
+          <Text color="dimmed">
+            Attach attachments not exceeding 50mb total
+          </Text>
         </div>
       </div>
     </Dropzone>
