@@ -73,6 +73,7 @@ export { default as WorkingHoursIcon } from './lib/icons/working-hours-icon';
 // Components
 export { default as BookmarkButton } from './lib/components/bookmark-button';
 export { default as BreadCrumbs } from './lib/components/breadcrumbs';
+export { default as CardMenu } from './lib/components/card-menu';
 export { default as DonateModal } from './lib/components/donate-modal';
 export { default as DraggableWrapper } from './lib/components/draggable-wrapper';
 export { default as EmptyResult } from './lib/components/empty-result';
@@ -85,7 +86,7 @@ export { default as MetaData } from './lib/components/meta-data';
 export { default as NotFoundSvg } from './lib/components/not-found-svg';
 export { default as OrgCommunityTag } from './lib/components/org-community-tag';
 export { default as OrgReviewCardSets } from './lib/components/org-review-card-sets';
-export { default as ReportButton } from './lib/components/report-button';
+export { default as ReportMenuItem } from './lib/components/report-menu-item';
 export { default as ReportModal } from './lib/components/report-modal';
 export { default as Spinner } from './lib/components/spinner';
 export { default as TopBanner } from './lib/components/top-banner';

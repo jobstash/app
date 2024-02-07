@@ -1,31 +1,47 @@
 import { type OrgReview } from '@jobstash/organizations/core';
+import { REPORT_UI_CTX } from '@jobstash/shared/core';
 import { prettyTimestamp } from '@jobstash/shared/utils';
 
 import { RightPanelCardBorder } from '@jobstash/right-panel/ui';
-import { CardSet, Heading, Text } from '@jobstash/shared/ui';
+import {
+  CardMenu,
+  CardSet,
+  Heading,
+  ReportMenuItem,
+  Text,
+} from '@jobstash/shared/ui';
 
 import { createOrgStaffReviewTags } from './utils/create-org-staff-review-tags';
 import OrgRatingList from './org-rating-list';
 
 interface Props {
+  orgId: string;
   orgReview: Omit<OrgReview, 'compensation'>;
 }
 
-const OrgStaffReview = ({ orgReview }: Props) => {
+const OrgStaffReview = ({ orgId, orgReview }: Props) => {
   const { reviewedTimestamp, review, rating } = orgReview;
   const { title, pros, cons } = review;
 
   const tags = createOrgStaffReviewTags(review);
+
+  const other = JSON.stringify({ orgId, reviewTitle: title });
 
   return (
     <RightPanelCardBorder>
       <div className="flex flex-col p-6 gap-4">
         <div className="flex flex-col gap-2">
           <div className="flex w-full justify-between items-end flex-wrap">
-            <div className="w-full">
+            <div className="flex h-fit w-full items-center justify-between gap-2 relative">
               <Heading size="lg" fw="semibold">
                 {title}
               </Heading>
+              <CardMenu>
+                <ReportMenuItem
+                  ui={REPORT_UI_CTX.ORG_REVIEW_CARD}
+                  other={other}
+                />
+              </CardMenu>
             </div>
             {reviewedTimestamp && (
               <Text size="sm" color="dimmed">

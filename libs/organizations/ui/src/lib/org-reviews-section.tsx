@@ -27,6 +27,7 @@ const OrgReviewsSection = ({ org }: Props) => {
       {reviews.map((orgReview) => (
         <OrgStaffReview
           key={`${JSON.stringify(orgReview.review)}`}
+          orgId={org.orgId}
           orgReview={orgReview}
         />
       ))}

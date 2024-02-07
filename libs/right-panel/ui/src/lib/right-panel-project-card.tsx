@@ -41,6 +41,7 @@ const RightPanelProjectCard = ({ project, showCTA = true }: Props) => {
     <RightPanelCardBorder>
       <div className="flex flex-col gap-4 p-6">
         <RightPanelProjectCardHeader
+          id={id}
           name={name}
           url={website}
           logo={logo}

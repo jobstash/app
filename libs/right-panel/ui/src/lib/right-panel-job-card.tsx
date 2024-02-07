@@ -2,14 +2,19 @@
 import { memo } from 'react';
 
 import { CHECK_WALLET_ROLES } from '@jobstash/auth/core';
-import { GA_EVENT_ACTION, type JobInfo, type Tag } from '@jobstash/shared/core';
+import {
+  GA_EVENT_ACTION,
+  type JobInfo,
+  REPORT_UI_CTX,
+  type Tag,
+} from '@jobstash/shared/core';
 import { slugify } from '@jobstash/shared/utils';
 import { gaEvent } from '@jobstash/shared/utils';
 
 import { useAuthContext } from '@jobstash/auth/state';
 import { useSendJobApplyInteractionMutation } from '@jobstash/jobs/state';
 
-import { Heading, ReportButton } from '@jobstash/shared/ui';
+import { CardMenu, Heading, ReportMenuItem } from '@jobstash/shared/ui';
 
 import RightPanelCardBorder from './right-panel-card-border';
 import RightPanelCta from './right-panel-cta';
@@ -74,14 +79,13 @@ const RightPanelJobCard = ({
     <RightPanelCardBorder>
       <div className="flex flex-col gap-y-4 p-6">
         <div className="flex flex-col items-start gap-y-4">
-          <div className="flex h-fit w-full justify-between gap-2 relative">
+          <div className="flex h-fit w-full items-center justify-between gap-2 relative">
             <Heading size="md" fw="semibold">
               {title}
             </Heading>
-            {/* <div className="hidden items-start space-x-4 lg:flex">
-            <ShareButton title={title} />
-          </div> */}
-            <ReportButton ui="Job Details Subtab" />
+            <CardMenu>
+              <ReportMenuItem ui={REPORT_UI_CTX.JOB_DETAILS_CARD} />
+            </CardMenu>
           </div>
 
           <RightPanelJobCardSets jobCardSet={jobInfo} />

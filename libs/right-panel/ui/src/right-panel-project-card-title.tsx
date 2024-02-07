@@ -1,29 +1,34 @@
 import { memo } from 'react';
 
+import { REPORT_UI_CTX } from '@jobstash/shared/core';
 import { getLogoUrl } from '@jobstash/shared/utils';
 
-import { LogoTitle } from '@jobstash/shared/ui';
+import { CardMenu, LogoTitle, ReportMenuItem } from '@jobstash/shared/ui';
 
 interface Props {
+  id: string;
   name: string;
   url: string;
   logo: string | null;
 }
 
-const RightPanelProjectCardTitle = ({ name, url, logo }: Props) => (
-  <div className="flex items-center justify-between">
-    <LogoTitle
-      size="lg"
-      title={name}
-      avatarProps={{
-        src: getLogoUrl(url, logo),
-        alt: name,
-      }}
-    />
-    <div className="flex gap-x-4">
-      {/** TODO: Bookmark, Share IconButton here */}
+const RightPanelProjectCardTitle = ({ id, name, url, logo }: Props) => {
+  const other = JSON.stringify({ project: { id, name, url, logo } });
+
+  return (
+    <div className="flex h-fit w-full items-center justify-between gap-2 relative">
+      <LogoTitle
+        title={name}
+        avatarProps={{
+          src: getLogoUrl(url, logo),
+          alt: name,
+        }}
+      />
+      <CardMenu>
+        <ReportMenuItem ui={REPORT_UI_CTX.PROJECT_DETAILS_CARD} other={other} />
+      </CardMenu>
     </div>
-  </div>
-);
+  );
+};
 
 export default memo(RightPanelProjectCardTitle);

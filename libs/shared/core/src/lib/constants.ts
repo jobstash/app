@@ -104,3 +104,12 @@ export const featuredGradientBorderStyle: React.CSSProperties = {
   WebkitAnimation: 'featuredbg 5s ease infinite',
   MozAnimation: 'featuredbg 5s ease infinite',
 };
+
+export const REPORT_UI_CTX = {
+  JOB_DETAILS_CARD: 'Job Details Card',
+  ORG_DETAILS_CARD: 'Org Details Card',
+  PROJECT_DETAILS_CARD: 'Project Details Card',
+  COMPETITOR_CARD: 'Competitor Card',
+  OTHER_JOBS_CARD: 'Other Jobs Card',
+  ORG_REVIEW_CARD: 'Org Review Card',
+} as const;

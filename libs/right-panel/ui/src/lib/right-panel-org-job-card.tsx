@@ -1,9 +1,10 @@
 import { memo } from 'react';
 
 import { type OrgJob } from '@jobstash/organizations/core';
+import { REPORT_UI_CTX } from '@jobstash/shared/core';
 import { slugify } from '@jobstash/shared/utils';
 
-import { Heading, Text } from '@jobstash/shared/ui';
+import { CardMenu, Heading, ReportMenuItem, Text } from '@jobstash/shared/ui';
 
 import RightPanelCardBorder from './right-panel-card-border';
 import RightPanelCta from './right-panel-cta';
@@ -25,17 +26,23 @@ const RightPanelOrgJobCard = (props: Props) => {
     }
   };
 
+  const other = JSON.stringify({ job: { title, shortUUID } });
+
   return (
     <RightPanelCardBorder>
       <div className="flex flex-col gap-y-4 p-6">
         <div className="flex flex-col items-start gap-y-4">
-          <div className="flex h-fit w-full justify-between">
+          <div className="flex h-fit w-full items-center justify-between gap-2 relative">
             <Heading size="md" fw="semibold">
               {title}
             </Heading>
-            {/* <div className="hidden items-start space-x-4 lg:flex">
-            <ShareButton title={title} />
-          </div> */}
+
+            <CardMenu>
+              <ReportMenuItem
+                ui={REPORT_UI_CTX.OTHER_JOBS_CARD}
+                other={other}
+              />
+            </CardMenu>
           </div>
 
           <RightPanelJobCardSets jobCardSet={orgJob} />

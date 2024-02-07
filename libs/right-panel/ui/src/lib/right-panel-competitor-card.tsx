@@ -1,10 +1,21 @@
 import { memo } from 'react';
 
 import { type Competitor } from '@jobstash/competitors/core';
-import { ROUTE_SECTION, TAB_SEGMENT } from '@jobstash/shared/core';
+import {
+  REPORT_UI_CTX,
+  ROUTE_SECTION,
+  TAB_SEGMENT,
+} from '@jobstash/shared/core';
 import { getLogoUrl, slugify } from '@jobstash/shared/utils';
 
-import { CardSet, ChainList, LogoTitle, Text } from '@jobstash/shared/ui';
+import {
+  CardMenu,
+  CardSet,
+  ChainList,
+  LogoTitle,
+  ReportMenuItem,
+  Text,
+} from '@jobstash/shared/ui';
 
 import { createCompetitorTags } from './utils/create-right-panel-competitor-tags';
 import RightPanelCardBorder from './right-panel-card-border';
@@ -27,18 +38,23 @@ const RightPanelCompetitorCard = ({ competitor }: Props) => {
     }
   };
 
+  const other = JSON.stringify({ competitor: { id, name, url, logo } });
+
   return (
     <RightPanelCardBorder>
       <div className="flex flex-col gap-6 rounded-3xl p-6">
-        <div>
+        <div className="flex h-fit w-full items-center justify-between gap-2 relative">
           <LogoTitle
-            size="lg"
             title={name}
             avatarProps={{
               src: getLogoUrl(url, logo),
               alt: name,
             }}
           />
+
+          <CardMenu>
+            <ReportMenuItem ui={REPORT_UI_CTX.COMPETITOR_CARD} other={other} />
+          </CardMenu>
         </div>
 
         {description && (
