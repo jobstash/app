@@ -9,7 +9,7 @@ import { cn } from '@jobstash/shared/utils';
 
 import { showFiltersAtom } from '@jobstash/filters/state';
 import { activeJobAtom } from '@jobstash/jobs/state';
-import { useDisableScrollSyncer, useIsMobile } from '@jobstash/shared/state';
+import { useIsMobile } from '@jobstash/shared/state';
 
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import { PageWrapper } from '@jobstash/shared/ui';
@@ -34,8 +34,6 @@ export const JobListPage = () => {
   const activeJob = useAtomValue(activeJobAtom);
   const showFilters = useAtomValue(showFiltersAtom);
   const isMobile = useIsMobile();
-
-  useDisableScrollSyncer(false);
 
   return (
     <>

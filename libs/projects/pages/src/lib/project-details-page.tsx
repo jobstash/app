@@ -14,7 +14,7 @@ import { cn, sentryMessage } from '@jobstash/shared/utils';
 
 import { showFiltersAtom } from '@jobstash/filters/state';
 import { activeProjectIdAtom } from '@jobstash/projects/state';
-import { useMobileDetailsScrollSyncer } from '@jobstash/shared/state';
+import { useMobileDisableScrollSyncer } from '@jobstash/shared/state';
 
 import { NotFoundPage, PageWrapper } from '@jobstash/shared/ui';
 
@@ -82,8 +82,7 @@ export const ProjectDetailsPage = ({
 
   const showFilters = useAtomValue(showFiltersAtom);
 
-  // Sync main-page scroll disable
-  useMobileDetailsScrollSyncer();
+  useMobileDisableScrollSyncer({ shouldDisable: true });
 
   if (notFoundInfo) {
     return <NotFoundPage notFoundInfo={notFoundInfo} />;

@@ -14,7 +14,7 @@ import { cn, sentryMessage } from '@jobstash/shared/utils';
 
 import { showFiltersAtom } from '@jobstash/filters/state';
 import { activeOrgIdAtom } from '@jobstash/organizations/state';
-import { useMobileDetailsScrollSyncer } from '@jobstash/shared/state';
+import { useMobileDisableScrollSyncer } from '@jobstash/shared/state';
 
 import {
   getFundingRoundsData,
@@ -63,9 +63,7 @@ export const OrgDetailsPage = ({
       window.history.scrollRestoration = fromSSR ? 'manual' : 'auto';
     }
   }, [fromSSR]);
-
-  // Sync main-page scroll disable
-  useMobileDetailsScrollSyncer();
+  useMobileDisableScrollSyncer({ shouldDisable: true });
 
   const { query } = useRouter();
   const { slug, tab } = query;

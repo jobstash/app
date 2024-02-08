@@ -6,10 +6,9 @@ import { type ProjectDetails } from '@jobstash/projects/core';
 import { ROUTE_SECTION, TAB_SEGMENT } from '@jobstash/shared/core';
 import { cn } from '@jobstash/shared/utils';
 
-import { useCheckWallet } from '@jobstash/auth/state';
 import { showFiltersAtom } from '@jobstash/filters/state';
 import { activeProjectIdAtom } from '@jobstash/projects/state';
-import { useDisableScrollSyncer, useIsMobile } from '@jobstash/shared/state';
+import { useIsMobile } from '@jobstash/shared/state';
 
 import { PageWrapper } from '@jobstash/shared/ui';
 
@@ -37,8 +36,6 @@ export const ProjectListPage = ({ initActiveProject }: Props) => {
   const activeProjectId = useAtomValue(activeProjectIdAtom);
   const showFilters = useAtomValue(showFiltersAtom);
   const isMobile = useIsMobile();
-
-  useDisableScrollSyncer(false);
 
   return (
     <PageWrapper>

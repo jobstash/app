@@ -8,7 +8,7 @@ import { cn } from '@jobstash/shared/utils';
 
 import { showFiltersAtom } from '@jobstash/filters/state';
 import { activeOrgIdAtom } from '@jobstash/organizations/state';
-import { useDisableScrollSyncer, useIsMobile } from '@jobstash/shared/state';
+import { useIsMobile } from '@jobstash/shared/state';
 
 import { PageWrapper } from '@jobstash/shared/ui';
 
@@ -36,8 +36,6 @@ export const OrgListPage = ({ initActiveOrg }: Props) => {
   const activeOrgId = useAtomValue(activeOrgIdAtom);
   const showFilters = useAtomValue(showFiltersAtom);
   const isMobile = useIsMobile();
-
-  useDisableScrollSyncer(false);
 
   return (
     <PageWrapper>

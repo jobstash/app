@@ -11,7 +11,7 @@ import { EVENT_CARD_CLICK } from '@jobstash/shared/core';
 import { cn, dispatchEvent } from '@jobstash/shared/utils';
 
 import { activeJobBookmarkAtom, useJobBookmarks } from '@jobstash/jobs/state';
-import { mobileRightPanelOpenAtom, useIsMobile } from '@jobstash/shared/state';
+import { isDisabledPageScrollAtom, useIsMobile } from '@jobstash/shared/state';
 
 import { JobBookmarkButton, JobBookmarkCard } from '@jobstash/jobs/ui';
 import {
@@ -47,11 +47,14 @@ export const JobBookmarksPage = () => {
     }
   }, [activeJobBookmark, data, isMobile, setActiveJobBookmark]);
 
-  const setMobileRightPanelOpen = useSetAtom(mobileRightPanelOpenAtom);
-
   const onClickBack = () => {
     setActiveJobBookmark(null);
+
+    // Handle bookmarks (opening/closing cards for bookmark is not route-based)
+    setIsDisabledScroll(false);
   };
+
+  const setIsDisabledScroll = useSetAtom(isDisabledPageScrollAtom);
 
   const onClickCard = (jobPost: JobPost) => {
     setActiveJobBookmark(jobPost);
@@ -59,8 +62,8 @@ export const JobBookmarksPage = () => {
     // Right panel scroll back to top
     dispatchEvent(EVENT_CARD_CLICK);
 
-    // Disable main window scroll on mobile
-    if (isMobile) setMobileRightPanelOpen(true);
+    // Handle bookmarks (opening/closing cards for bookmark is not route-based)
+    setIsDisabledScroll(true);
   };
 
   const { push } = useRouter();
