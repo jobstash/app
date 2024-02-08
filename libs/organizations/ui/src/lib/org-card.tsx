@@ -8,7 +8,6 @@ import { getUrlWithParams } from '@jobstash/filters/utils';
 import { createOrgKey } from '@jobstash/organizations/utils';
 
 import { activeOrgIdAtom } from '@jobstash/organizations/state';
-import { mobileRightPanelOpenAtom, useIsMobile } from '@jobstash/shared/state';
 
 import OrgCardHeader from './org-card-header';
 import OrgCardTags from './org-card-tags';
@@ -25,9 +24,6 @@ const OrgCard = ({ orgListItem, isActive, filterParamsObj }: Props) => {
 
   const setActiveOrgId = useSetAtom(activeOrgIdAtom);
 
-  const isMobile = useIsMobile();
-  const setMobileRightPanelOpen = useSetAtom(mobileRightPanelOpenAtom);
-
   const href = useMemo(
     () =>
       getUrlWithParams(
@@ -42,11 +38,6 @@ const OrgCard = ({ orgListItem, isActive, filterParamsObj }: Props) => {
     setActiveOrgId(orgId);
 
     document.dispatchEvent(new Event(EVENT_CARD_CLICK));
-
-    // If on mobile, set mobileRightPanelOpen (used for disabling scroll in main window)
-    if (isMobile) {
-      setMobileRightPanelOpen(true);
-    }
   };
 
   return (

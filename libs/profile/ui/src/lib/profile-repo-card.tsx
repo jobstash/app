@@ -4,9 +4,9 @@ import { useSetAtom } from 'jotai';
 
 import { type ProfileRepo } from '@jobstash/profile/core';
 import { EVENT_CARD_CLICK } from '@jobstash/shared/core';
+import { disablePageScroll } from '@jobstash/shared/utils';
 
 import { activeProfileRepoAtom } from '@jobstash/profile/state';
-import { mobileRightPanelOpenAtom, useIsMobile } from '@jobstash/shared/state';
 
 import ProfileCardWrapper from './profile-card-wrapper';
 import ProfileRepoCardHeader from './profile-repo-card-header';
@@ -26,16 +26,13 @@ const ProfileRepoCard = (props: Props) => {
     org: { name: orgName, logo: orgLogo, url: orgUrl },
   } = profileRepo;
 
-  const isMobile = useIsMobile();
-
   const setActiveProfileRepo = useSetAtom(activeProfileRepoAtom);
-  const setMobileRightPanelOpen = useSetAtom(mobileRightPanelOpenAtom);
 
   const onClick = useCallback(() => {
-    if (isMobile) setMobileRightPanelOpen(true);
+    disablePageScroll(true);
     setActiveProfileRepo(profileRepo);
     document.dispatchEvent(new Event(EVENT_CARD_CLICK));
-  }, [isMobile, profileRepo, setActiveProfileRepo, setMobileRightPanelOpen]);
+  }, [profileRepo, setActiveProfileRepo]);
 
   return (
     <ProfileCardWrapper

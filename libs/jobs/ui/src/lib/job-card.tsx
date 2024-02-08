@@ -14,7 +14,6 @@ import { checkJobIsFeatured, createJobKey } from '@jobstash/jobs/utils';
 import { dispatchEvent, gaEvent } from '@jobstash/shared/utils';
 
 import { activeJobAtom } from '@jobstash/jobs/state';
-import { mobileRightPanelOpenAtom, useIsMobile } from '@jobstash/shared/state';
 
 import { Heading } from '@jobstash/shared/ui';
 
@@ -53,19 +52,11 @@ const JobCard = ({
 
   const setActiveJob = useSetAtom(activeJobAtom);
 
-  const isMobile = useIsMobile();
-  const setMobileRightPanelOpen = useSetAtom(mobileRightPanelOpenAtom);
-
   const onClick = () => {
     setActiveJob(jobPost);
 
     // Right panel scroll back to top
     dispatchEvent(EVENT_CARD_CLICK);
-
-    // If on mobile, set mobileRightPanelOpen (used for disabling scroll in main window)
-    if (isMobile) {
-      setMobileRightPanelOpen(true);
-    }
 
     gaEvent(GA_EVENT_ACTION.JOB_EXPAND_DETAILS, {
       event_category: 'job',

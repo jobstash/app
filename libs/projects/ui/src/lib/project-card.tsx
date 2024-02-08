@@ -11,7 +11,6 @@ import { getUrlWithParams } from '@jobstash/filters/utils';
 import { createProjectKey } from '@jobstash/projects/utils';
 
 import { activeProjectIdAtom } from '@jobstash/projects/state';
-import { mobileRightPanelOpenAtom, useIsMobile } from '@jobstash/shared/state';
 
 import ProjectCardChains from './project-card-chains';
 import ProjectCardHeader from './project-card-header';
@@ -37,19 +36,12 @@ const ProjectCard = ({ isActive, projectListItem, filterParamsObj }: Props) => {
     [filterParamsObj, name, id],
   );
 
-  const isMobile = useIsMobile();
-  const setMobileRightPanelOpen = useSetAtom(mobileRightPanelOpenAtom);
   const setActiveProjectId = useSetAtom(activeProjectIdAtom);
 
   const onClick = () => {
     setActiveProjectId(id);
 
     document.dispatchEvent(new Event(EVENT_CARD_CLICK));
-
-    // If on mobile, set mobileRightPanelOpen (used for disabling scroll in main window)
-    if (isMobile) {
-      setMobileRightPanelOpen(true);
-    }
   };
 
   //

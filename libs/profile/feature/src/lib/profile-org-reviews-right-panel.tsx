@@ -2,17 +2,16 @@ import { memo } from 'react';
 
 import { LoadingOverlay } from '@mantine/core';
 import { useTour } from '@reactour/tour';
-import { useAtom, useSetAtom } from 'jotai';
+import { useAtom } from 'jotai';
 
 import { PROFILE_RIGHT_PANEL_TAB } from '@jobstash/profile/core';
-import { cn } from '@jobstash/shared/utils';
+import { cn, disablePageScroll } from '@jobstash/shared/utils';
 
 import {
   activeProfileOrgReviewAtom,
   ProfileOrgReviewFormProvider,
   useProfileReviewsPageContext,
 } from '@jobstash/profile/state';
-import { mobileRightPanelOpenAtom, useIsMobile } from '@jobstash/shared/state';
 
 import {
   CompensationForm,
@@ -32,11 +31,8 @@ const ProfileOrgReviewsRightPanel = () => {
 
   const { tabs, activeTab, isLoadingCard } = useProfileReviewsPageContext();
 
-  const isMobile = useIsMobile();
-  const setMobileRightPanelOpen = useSetAtom(mobileRightPanelOpenAtom);
-
   const closeRightPanel = () => {
-    if (isMobile) setMobileRightPanelOpen(false);
+    disablePageScroll(false);
     setActiveProfileOrgReview(null);
   };
 
