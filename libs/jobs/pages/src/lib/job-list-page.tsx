@@ -37,13 +37,9 @@ export const JobListPage = () => {
 
   return (
     <>
-      {activeJob && (
-        <Head>
-          <title>
-            {createJobPageTitle(activeJob.organization.name, activeJob.title)}
-          </title>
-        </Head>
-      )}
+      <Head>
+        <title>Crypto Jobs</title>
+      </Head>
 
       <PageWrapper>
         <SideBar />

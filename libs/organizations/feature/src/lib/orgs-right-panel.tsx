@@ -1,6 +1,7 @@
-import { memo } from 'react';
+import Head from 'next/head';
 
 import { ROUTE_SECTION, TAB_SEGMENT } from '@jobstash/shared/core';
+import { createOrgPageTitle } from '@jobstash/organizations/utils';
 
 import { useOrgDetails } from '@jobstash/organizations/state';
 
@@ -20,9 +21,10 @@ import { Loader } from '@jobstash/shared/ui';
 interface Props {
   orgId: string | null;
   currentTab: string;
+  hasTitle?: boolean;
 }
 
-const OrgsRightPanel = ({ orgId, currentTab }: Props) => {
+const OrgsRightPanel = ({ orgId, currentTab, hasTitle }: Props) => {
   const { data: orgDetails } = useOrgDetails(orgId);
 
   if (!orgDetails) {
@@ -43,6 +45,11 @@ const OrgsRightPanel = ({ orgId, currentTab }: Props) => {
         <RightPanelBackButton backURL={ROUTE_SECTION.ORGANIZATIONS} />
       }
     >
+      {hasTitle && orgDetails && (
+        <Head>
+          <title>{createOrgPageTitle(orgDetails.name, currentTab)}</title>
+        </Head>
+      )}
       {currentTab === TAB_SEGMENT.details && (
         <RightPanelOrgCard
           org={orgDetails}
@@ -71,4 +78,4 @@ const OrgsRightPanel = ({ orgId, currentTab }: Props) => {
   );
 };
 
-export default memo(OrgsRightPanel);
+export default OrgsRightPanel;

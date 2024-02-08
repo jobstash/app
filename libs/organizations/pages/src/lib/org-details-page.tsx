@@ -143,7 +143,7 @@ export const OrgDetailsPage = ({
             { '-z-50': showFilters },
           )}
         >
-          <OrgsRightPanel orgId={orgId} currentTab={tab as string} />
+          <OrgsRightPanel hasTitle orgId={orgId} currentTab={tab as string} />
         </div>
       </PageWrapper>
     </>

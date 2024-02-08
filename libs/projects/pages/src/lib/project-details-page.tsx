@@ -120,6 +120,7 @@ export const ProjectDetailsPage = ({
         )}
       >
         <ProjectsRightPanel
+          hasTitle
           projectId={initProjectDetails?.id ?? projectId}
           currentTab={tab as string}
         />

@@ -1,4 +1,5 @@
 import dynamic from 'next/dynamic';
+import Head from 'next/head';
 
 import { useAtomValue } from 'jotai';
 
@@ -38,40 +39,46 @@ export const OrgListPage = ({ initActiveOrg }: Props) => {
   const isMobile = useIsMobile();
 
   return (
-    <PageWrapper>
-      <SideBar />
+    <>
+      <Head>
+        <title>Crypto Organizations</title>
+      </Head>
 
-      <div
-        className={cn('px-3.5 pt-[65px] lg:px-8 lg:pt-0', {
-          'z-50': showFilters,
-          'lg:pr-[50%]': !showFilters,
-        })}
-      >
-        <Filters routeSection={ROUTE_SECTION.ORGANIZATIONS} />
+      <PageWrapper>
+        <SideBar />
 
         <div
-          className={cn({
-            'lg:pr-[50%]': showFilters,
+          className={cn('px-3.5 pt-[65px] lg:px-8 lg:pt-0', {
+            'z-50': showFilters,
+            'lg:pr-[50%]': !showFilters,
           })}
         >
-          <OrgList initOrg={null} activeOrgId={activeOrgId} />
-        </div>
-      </div>
+          <Filters routeSection={ROUTE_SECTION.ORGANIZATIONS} />
 
-      {activeOrgId && !isMobile && (
-        <div
-          className={cn(
-            'hide-scrollbar fixed inset-0 h-screen overflow-y-auto bg-dark p-4 pt-6 transition-all lg:inset-auto lg:right-0 lg:top-0 lg:w-5/12 lg:px-6 lg:py-8 lg:pr-10',
-            { 'z-50': !showFilters },
-            { '-z-50': showFilters },
-          )}
-        >
-          <OrgsRightPanel
-            orgId={initActiveOrg?.orgId ?? activeOrgId}
-            currentTab={TAB_SEGMENT.details}
-          />
+          <div
+            className={cn({
+              'lg:pr-[50%]': showFilters,
+            })}
+          >
+            <OrgList initOrg={null} activeOrgId={activeOrgId} />
+          </div>
         </div>
-      )}
-    </PageWrapper>
+
+        {activeOrgId && !isMobile && (
+          <div
+            className={cn(
+              'hide-scrollbar fixed inset-0 h-screen overflow-y-auto bg-dark p-4 pt-6 transition-all lg:inset-auto lg:right-0 lg:top-0 lg:w-5/12 lg:px-6 lg:py-8 lg:pr-10',
+              { 'z-50': !showFilters },
+              { '-z-50': showFilters },
+            )}
+          >
+            <OrgsRightPanel
+              orgId={initActiveOrg?.orgId ?? activeOrgId}
+              currentTab={TAB_SEGMENT.details}
+            />
+          </div>
+        )}
+      </PageWrapper>
+    </>
   );
 };

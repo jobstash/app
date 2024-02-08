@@ -1,2 +1,2 @@
 export const createJobPageTitle = (orgName: string, title: string) =>
-  `${orgName} | ${title}`;
+  `Jobs at ${orgName} | ${title}`;

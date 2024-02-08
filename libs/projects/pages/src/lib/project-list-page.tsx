@@ -1,4 +1,5 @@
 import dynamic from 'next/dynamic';
+import Head from 'next/head';
 
 import { useAtomValue } from 'jotai';
 
@@ -38,40 +39,45 @@ export const ProjectListPage = ({ initActiveProject }: Props) => {
   const isMobile = useIsMobile();
 
   return (
-    <PageWrapper>
-      <SideBar />
-
-      <div
-        className={cn('px-3.5 pt-[65px] lg:px-8 lg:pt-0', {
-          'z-50': showFilters,
-          'lg:pr-[50%]': !showFilters,
-        })}
-      >
-        <Filters routeSection={ROUTE_SECTION.PROJECTS} />
+    <>
+      <Head>
+        <title>Crypto Projects</title>
+      </Head>
+      <PageWrapper>
+        <SideBar />
 
         <div
-          className={cn({
-            'lg:pr-[50%]': showFilters,
+          className={cn('px-3.5 pt-[65px] lg:px-8 lg:pt-0', {
+            'z-50': showFilters,
+            'lg:pr-[50%]': !showFilters,
           })}
         >
-          <ProjectList initProject={null} activeProjectId={activeProjectId} />
-        </div>
-      </div>
+          <Filters routeSection={ROUTE_SECTION.PROJECTS} />
 
-      {activeProjectId && !isMobile && (
-        <div
-          className={cn(
-            'hide-scrollbar fixed inset-0 h-screen overflow-y-auto bg-dark p-4 pt-6 transition-all lg:inset-auto lg:right-0 lg:top-0 lg:w-5/12 lg:px-6 lg:py-8 lg:pr-10',
-            { 'z-50': !showFilters },
-            { '-z-50': showFilters },
-          )}
-        >
-          <ProjectsRightPanel
-            projectId={initActiveProject?.id ?? activeProjectId}
-            currentTab={TAB_SEGMENT.details}
-          />
+          <div
+            className={cn({
+              'lg:pr-[50%]': showFilters,
+            })}
+          >
+            <ProjectList initProject={null} activeProjectId={activeProjectId} />
+          </div>
         </div>
-      )}
-    </PageWrapper>
+
+        {activeProjectId && !isMobile && (
+          <div
+            className={cn(
+              'hide-scrollbar fixed inset-0 h-screen overflow-y-auto bg-dark p-4 pt-6 transition-all lg:inset-auto lg:right-0 lg:top-0 lg:w-5/12 lg:px-6 lg:py-8 lg:pr-10',
+              { 'z-50': !showFilters },
+              { '-z-50': showFilters },
+            )}
+          >
+            <ProjectsRightPanel
+              projectId={initActiveProject?.id ?? activeProjectId}
+              currentTab={TAB_SEGMENT.details}
+            />
+          </div>
+        )}
+      </PageWrapper>
+    </>
   );
 };
