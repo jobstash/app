@@ -44,10 +44,6 @@ button:focus {
 	outline: none;
 }
 
-.disable-scroll {
-	overflow: hidden;
-}
-
 @keyframes rotation {
 	from {
 		opacity: 0;

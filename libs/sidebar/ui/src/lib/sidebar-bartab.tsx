@@ -9,7 +9,7 @@ import { activeJobAtom, activeJobBookmarkAtom } from '@jobstash/jobs/state';
 import { activeOrgIdAtom } from '@jobstash/organizations/state';
 import { activeProfileRepoAtom } from '@jobstash/profile/state';
 import { activeProjectIdAtom } from '@jobstash/projects/state';
-import { sidebarOpenAtom } from '@jobstash/sidebar/state';
+import { isOpenFullscreenNavAtom } from '@jobstash/shared/state';
 
 import { Bartab } from '@jobstash/shared/ui';
 
@@ -34,7 +34,7 @@ const SidebarBartab = ({
 
   const isActive = isActiveFn ? isActiveFn(pathname) : pathname === path;
 
-  const setSidebarOpen = useSetAtom(sidebarOpenAtom);
+  const setIsOpenNav = useSetAtom(isOpenFullscreenNavAtom);
   const setActiveJob = useSetAtom(activeJobAtom);
   const setActiveOrgId = useSetAtom(activeOrgIdAtom);
   const setActiveProjectId = useSetAtom(activeProjectIdAtom);
@@ -65,7 +65,7 @@ const SidebarBartab = ({
     }
 
     if (isMobile) {
-      setSidebarOpen((prev) => !prev);
+      setIsOpenNav((prev) => !prev);
     }
 
     push(path, undefined, { shallow: false, scroll: true });

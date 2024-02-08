@@ -1,4 +1,4 @@
-export const disablePageScroll = (isDisabled: boolean) => {
+export const disablePageScroll = (shouldDisable: boolean) => {
   const el = document.querySelectorAll('html')[0];
-  el.style.overflowY = isDisabled ? 'hidden' : 'unset';
+  el.style.overflowY = shouldDisable ? 'hidden' : 'unset';
 };

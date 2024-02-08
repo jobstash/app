@@ -1,17 +1,27 @@
+import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 import { useAtomValue } from 'jotai';
 
 import { disablePageScroll } from '@jobstash/shared/utils';
 
-import { mobileRightPanelOpenAtom } from '../atoms/mobile-right-panel-open-atom';
+import { isDisabledPageScrollAtom } from '../atoms/is-disabled-page-scroll-atom';
+import { isOpenFullscreenNavAtom } from '../atoms/is-open-fullscreen-nav-atom';
 
 // Used for appending `disable-scroll` class to html
 export const useDisableScrollListener = () => {
-  // Disable main window scroll when mobile right-panel is open
-  const mobileRightPanelOpenValue = useAtomValue(mobileRightPanelOpenAtom);
+  const { pathname } = useRouter();
+  const isWhitelisted = whitelistSet.has(pathname);
+
+  const isOpenNav = useAtomValue(isOpenFullscreenNavAtom);
+  const isDisabled = useAtomValue(isDisabledPageScrollAtom);
+
+  const shouldDisable = isOpenNav || (isDisabled && !isWhitelisted);
 
   useEffect(() => {
-    disablePageScroll(mobileRightPanelOpenValue);
-  }, [mobileRightPanelOpenValue]);
+    disablePageScroll(shouldDisable);
+  }, [shouldDisable]);
 };
+
+const whitelist = ['/jobs', '/organizations', '/projects'];
+const whitelistSet = new Set(whitelist);

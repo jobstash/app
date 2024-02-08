@@ -7,7 +7,7 @@ import { Modal } from '@mantine/core';
 import { GA_EVENT_ACTION, lato, roboto } from '@jobstash/shared/core';
 import { gaEvent } from '@jobstash/shared/utils';
 
-import { useIsMobile } from '@jobstash/shared/state';
+import { useMediaQuery } from '@jobstash/shared/state';
 
 import LinkButton from '../base/button/link-button';
 import Heading from '../base/heading';
@@ -42,7 +42,7 @@ const DonateModal = () => {
     }
   };
 
-  const isMobile = useIsMobile('(max-width: 667px)');
+  const isMobile = useMediaQuery('(max-width: 667px)');
 
   return (
     <Modal.Root

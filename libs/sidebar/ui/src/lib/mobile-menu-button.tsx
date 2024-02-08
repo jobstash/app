@@ -2,7 +2,7 @@ import { memo, type ReactNode, useCallback } from 'react';
 
 import { useSetAtom } from 'jotai';
 
-import { sidebarOpenAtom } from '@jobstash/sidebar/state';
+import { isOpenFullscreenNavAtom } from '@jobstash/shared/state';
 
 import { Button } from '@jobstash/shared/ui';
 
@@ -11,11 +11,8 @@ interface Props {
 }
 
 const MobileMenuButton = ({ children }: Props) => {
-  const setSidebarOpen = useSetAtom(sidebarOpenAtom);
-  const onClick = useCallback(
-    () => setSidebarOpen((prev) => !prev),
-    [setSidebarOpen],
-  );
+  const isOpenNav = useSetAtom(isOpenFullscreenNavAtom);
+  const onClick = useCallback(() => isOpenNav((prev) => !prev), [isOpenNav]);
 
   return (
     <Button size="md" variant="transparent" onClick={onClick}>

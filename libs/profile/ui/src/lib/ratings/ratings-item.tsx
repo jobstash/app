@@ -3,7 +3,7 @@ import { Rating } from '@mantine/core';
 import { type OrgRating } from '@jobstash/organizations/core';
 
 import { useProfileOrgReviewFormContext } from '@jobstash/profile/state';
-import { useIsMobile } from '@jobstash/shared/state';
+import { useMediaQuery } from '@jobstash/shared/state';
 
 import { Text } from '@jobstash/shared/ui';
 
@@ -15,7 +15,7 @@ const RatingItem = ({ ratingKey }: Props) => {
   const { rating, setRating, getRatingTitle } =
     useProfileOrgReviewFormContext();
 
-  const isXS = useIsMobile('(max-width: 374px)');
+  const isXS = useMediaQuery('(max-width: 374px)');
 
   return (
     <div className="flex gap-8 items-center pl-[5%]">

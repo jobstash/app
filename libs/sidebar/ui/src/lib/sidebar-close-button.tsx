@@ -2,7 +2,7 @@ import { memo, type ReactNode, useCallback } from 'react';
 
 import { useAtom } from 'jotai';
 
-import { sidebarOpenAtom } from '@jobstash/sidebar/state';
+import { isOpenFullscreenNavAtom } from '@jobstash/shared/state';
 
 import { Button } from '@jobstash/shared/ui';
 
@@ -11,11 +11,11 @@ interface Props {
 }
 
 const SidebarCloseButton = ({ children }: Props) => {
-  const [sidebarOpen, setSidebarOpen] = useAtom(sidebarOpenAtom);
+  const [isOpenNav, setIsOpenNav] = useAtom(isOpenFullscreenNavAtom);
 
   const onClick = useCallback(
-    () => setSidebarOpen(!sidebarOpen),
-    [setSidebarOpen, sidebarOpen],
+    () => setIsOpenNav(!isOpenNav),
+    [setIsOpenNav, isOpenNav],
   );
 
   return (
