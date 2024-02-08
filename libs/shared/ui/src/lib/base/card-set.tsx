@@ -11,7 +11,7 @@ import Text from './text';
 
 const cardset = cva(
   [
-    'flex items-center gap-x-1 rounded pointer-events-none min-h-[28px] shrink-0',
+    'flex items-center gap-x-1 rounded pointer-events-none min-h-[28px] shrink-0 truncate',
     'transition-color duration-200 ease-in-out transform translate-x-0 translate-y-0',
     '[&>svg]:mt-[1px]',
   ],
@@ -80,9 +80,19 @@ const CardSet = ({
       )}
       onClick={onClickCardSet}
     >
-      {icon}
-      {children && <Text size="sm">{children}</Text>}
-      {Boolean(link) && showLinkIcon && <ArrowCircleUpRightIcon />}
+      <div className="shrink-0">{icon}</div>
+      {typeof children === 'string' ? (
+        <div className="truncate max-w-[240px] sm:max-w-md lg:max-w-lg">
+          <Text size="sm">{children}</Text>
+        </div>
+      ) : (
+        children
+      )}
+      {Boolean(link) && showLinkIcon && (
+        <div className="shrink-0">
+          <ArrowCircleUpRightIcon />
+        </div>
+      )}
     </button>
   );
 };
