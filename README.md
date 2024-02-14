@@ -23,9 +23,9 @@ _The key takeaway is you need NodeJS LTS (18.x.x) installed._
 
 This section contains the step needed to run the application locally on your machine.
 
-1. To start the application in development, run `pnpm dev:ssl`
-2. Open another terminal and run `pnpm proxy:ssl`.
-3. Go to `https://localhost:3000` to view the app.
+1. To start the application in development, run `pnpm dev`
+2. Go to `http://localhost:3000` to view the app.
+3. Make sure `NEXT_PUBLIC_MW_URL` points to a working instance of mw.
 
 ## Built With
 
