@@ -8,6 +8,7 @@ interface Props {
   title: string;
   description: string;
   url: string;
+  canonicalUrl: string;
   image: string;
   og?: {
     title?: string;
@@ -33,6 +34,7 @@ const MetaData = ({
   title,
   description,
   url,
+  canonicalUrl,
   image,
   og,
   twitter,
@@ -43,7 +45,7 @@ const MetaData = ({
     <title>{title}</title>
     <meta name="title" content={title} />
     <meta name="description" content={description} />
-    <link rel="canonical" href={url} />
+    <link rel="canonical" href={canonicalUrl} />
 
     {/* Open Graph */}
     <meta property="og:type" content="website" />

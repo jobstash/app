@@ -1,4 +1,3 @@
-/* eslint-disable @nx/enforce-module-boundaries */
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
@@ -23,6 +22,7 @@ import { showFiltersAtom } from '@jobstash/filters/state';
 import { activeJobAtom, useJobPost } from '@jobstash/jobs/state';
 import { useMobileDisableScrollSyncer } from '@jobstash/shared/state';
 
+// eslint-disable-next-line @nx/enforce-module-boundaries
 import { PageWrapper } from '@jobstash/shared/ui';
 
 const MetaData = dynamic(() =>
@@ -117,6 +117,11 @@ export const JobPostPage = ({
           title={titleMetaData}
           description={descriptionMetaData}
           url={urlMetaData}
+          canonicalUrl={createCanonicalUrl(
+            currentJobPost,
+            tab as string,
+            urlMetaData,
+          )}
           image={imageMetaData}
           twitter={{
             site: '@jobstash_xyz',
@@ -162,4 +167,21 @@ export const JobPostPage = ({
       </PageWrapper>
     </>
   );
+};
+
+const createCanonicalUrl = (job: JobPost, tab: string, defaultUrl: string) => {
+  const {
+    shortUUID,
+    organization: { orgId, projects },
+  } = job;
+
+  if (tab === 'organization') {
+    return `${FRONTEND_URL}/organizations/${orgId}/details`;
+  }
+
+  if (tab === 'projects' && projects.length > 0) {
+    return `${FRONTEND_URL}/projects/${projects[0].id}/details`;
+  }
+
+  return `${FRONTEND_URL}/jobs/${shortUUID}/details`;
 };
