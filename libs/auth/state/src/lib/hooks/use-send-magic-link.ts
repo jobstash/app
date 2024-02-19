@@ -18,13 +18,17 @@ export const useSendMagicLink = () =>
     onError(err) {
       const msg = (err as Error).message;
       const isEmailUsed = msg === EMAIL_USED_MSG_RESPONSE;
+      const isInvalid = msg.includes('must be an email');
 
       const title = isEmailUsed
         ? 'Email account is already used!'
+        : isInvalid
+        ? 'Invalid Email'
         : ERR_INTERNAL;
-      const message = isEmailUsed
-        ? 'Please try using a different account'
-        : undefined;
+      const message =
+        isEmailUsed || isInvalid
+          ? 'Please try using a different email address'
+          : undefined;
 
       notifError({ title, message, autoClose: 15_000 });
     },
