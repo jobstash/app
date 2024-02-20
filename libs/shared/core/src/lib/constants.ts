@@ -1,6 +1,5 @@
+import { Lato, Roboto } from 'next/font/google';
 import React from 'react';
-
-import { Lato, Roboto } from '@next/font/google';
 
 export const EVENT_CARD_CLICK = 'card-click';
 
