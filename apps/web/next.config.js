@@ -17,14 +17,11 @@ const nextConfig = {
     svgr: false,
   },
   experimental: {
-    appDir: false,
-
     // // Nx + nextjs + docker
     outputFileTracingRoot: path.join(__dirname, '../../'),
   },
 
   images: {
-    domains: ['app.jobstash.xyz'],
     remotePatterns: [
       {
         protocol: 'https',

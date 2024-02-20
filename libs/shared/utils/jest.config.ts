@@ -8,7 +8,7 @@ export default {
     ],
   },
   moduleFileExtensions: ['ts', 'tsx', 'js', 'jsx'],
-  coverageDirectory: '../../../coverage/libs/shared/utils',
+  coverageDirectory: '../../../../coverage/libs/shared/utils',
   moduleNameMapper: {
     '\\.(css|less)$': '<rootDir>/tests/jest/__mocks__/styleMock.js',
     '@next/font/(.*)': require.resolve(

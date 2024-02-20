@@ -188,16 +188,12 @@ export const profileOrgRatingResponseSchema = myzod.object({
 export const profileOrgReviewPayloadSchema = myzod.intersection(
   myzod.object({
     orgId: myzod.string().min(1),
+    title: myzod
+      .string()
+      .min(1, 'Title is required')
+      .max(128, 'Title is too long'),
   }),
-  myzod.intersection(
-    myzod.omit(orgStaffReviewSchema, ['title']),
-    myzod.object({
-      title: myzod
-        .string()
-        .min(1, 'Title is required')
-        .max(128, 'Title is too long'),
-    }),
-  ),
+  myzod.omit(orgStaffReviewSchema, ['title']),
 );
 
 export const profileOrgReviewResponseSchema = myzod.object({

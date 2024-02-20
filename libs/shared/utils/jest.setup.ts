@@ -15,3 +15,16 @@ jest.mock('next/config', () => () => ({
     },
   },
 }));
+
+jest.mock('next/font/google', () => ({
+  Roboto: () => ({
+    style: {
+      fontFamily: 'mocked',
+    },
+  }),
+  Lato: () => ({
+    style: {
+      fontFamily: 'mocked',
+    },
+  }),
+}));
