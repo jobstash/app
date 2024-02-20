@@ -11,7 +11,7 @@ export default class _Document extends Document {
     return (
       <Html lang="en" className="scroll-smooth">
         <Head />
-        <body className="bg-gradient-to-l from-[#141317] to-[#121216]">
+        <body className="bg-gradient-to-l from-[#141317] to-[#121216] min-h-screen">
           <Main />
           <NextScript />
         </body>

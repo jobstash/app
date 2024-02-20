@@ -7,6 +7,7 @@ import Script from 'next/script';
 import { useEffect } from 'react';
 
 import { LoadingPage } from '@jobstash/shared/pages';
+import { NextUIProvider } from '@nextui-org/react';
 import { useAtomValue } from 'jotai';
 
 import { ANALYTICS_ID } from '@jobstash/shared/core';
@@ -66,24 +67,26 @@ const App = ({ Component, pageProps }: AppProps) => {
           />
         </>
       )}
-      <MantineProvider>
-        <ReactQueryProvider dehydratedState={pageProps.dehydratedState}>
-          <WalletProvider>
-            <AuthProvider screenLoader={<LoadingPage />}>
-              {/* <Component {...pageProps} /> */}
+      <NextUIProvider>
+        <MantineProvider>
+          <ReactQueryProvider dehydratedState={pageProps.dehydratedState}>
+            <WalletProvider>
+              <AuthProvider screenLoader={<LoadingPage />}>
+                {/* <Component {...pageProps} /> */}
 
-              {/* <TopBanner /> */}
-              {/* <DonateModal /> */}
-              <div className={cn({ 'pt-10': isOpenTopBanner })}>
-                <Component {...pageProps} />
-              </div>
+                {/* <TopBanner /> */}
+                {/* <DonateModal /> */}
+                <div className={cn({ 'pt-10': isOpenTopBanner })}>
+                  <Component {...pageProps} />
+                </div>
 
-              <WagmiSiweSync />
-              <ReportModal />
-            </AuthProvider>
-          </WalletProvider>
-        </ReactQueryProvider>
-      </MantineProvider>
+                <WagmiSiweSync />
+                <ReportModal />
+              </AuthProvider>
+            </WalletProvider>
+          </ReactQueryProvider>
+        </MantineProvider>
+      </NextUIProvider>
     </>
   );
 };

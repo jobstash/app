@@ -1,9 +1,11 @@
 const { createGlobPatternsForDependencies } = require('@nx/react/tailwind');
 const { join } = require('node:path');
+const { nextui } = require('@nextui-org/react');
 
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: [
+    '../../node_modules/@nextui-org/theme/dist/**/*.{js,ts,jsx,tsx}',
     join(
       __dirname,
       '{src,pages,components,app}/**/*!(*.stories|*.spec).{ts,tsx,html}',
@@ -124,5 +126,30 @@ module.exports = {
       'fade-in-left': 'fade-in-left 0.3s linear',
     },
   },
-  plugins: [],
+  darkMode: 'class',
+  plugins: [
+    nextui({
+      defaultTheme: 'dark',
+      defaultExtendTheme: 'dark',
+      themes: {
+        dark: {
+          colors: {
+            default: {
+              50: '#1E1E1E',
+              100: '#353535',
+              200: '#4D4D4D',
+              300: '#656565',
+              400: '#7D7D7D',
+              500: '#959595',
+              600: '#ADADAD',
+              700: '#C5C5C5',
+              800: '#DDDDDD',
+              900: '#F5F5F5',
+              DEFAULT: '#292929',
+            },
+          },
+        },
+      },
+    }),
+  ],
 };
