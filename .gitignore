@@ -50,3 +50,5 @@ Thumbs.db
 
 # Sentry
 .sentryclirc
+
+.nx/cache
