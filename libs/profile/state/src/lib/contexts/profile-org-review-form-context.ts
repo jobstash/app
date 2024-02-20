@@ -11,7 +11,6 @@ import {
   type OrgRating,
   OrgStaffReview,
   OrgTimezone,
-  OrgWorkingHours,
 } from '@jobstash/organizations/core';
 
 export interface ProfileCompensationContextProps {
@@ -36,7 +35,6 @@ export interface ProfileReviewContextProps {
   setTitle: (title: string | null) => void;
   setLocation: (location: OrgLocation) => void;
   setTimezone: (timezone: OrgTimezone) => void;
-  setWorkingHours: (workingHours: OrgWorkingHours) => void;
   setPros: (pros: string | null) => void;
   setCons: (cons: string | null) => void;
   saveReview: () => void;

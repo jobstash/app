@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import {
   OrgLocation,
   OrgTimezone,
-  OrgWorkingHours,
 } from '@jobstash/organizations/core';
 
 import { type ProfileReviewContextProps } from '../contexts/profile-org-review-form-context';
@@ -16,7 +15,7 @@ const TEXTAREA_CHAR_LIMIT = 500;
 export const useYourReviewForm = (): ProfileReviewContextProps => {
   const {
     orgReview: {
-      review: { id, title, location, timezone, workingHours, pros, cons },
+      review: { id, title, location, timezone, pros, cons },
       org: { orgId },
     },
   } = useProfileReviewsPageContext();
@@ -26,7 +25,6 @@ export const useYourReviewForm = (): ProfileReviewContextProps => {
     title: '',
     location,
     timezone,
-    workingHours,
     pros,
     cons,
   });
@@ -37,11 +35,10 @@ export const useYourReviewForm = (): ProfileReviewContextProps => {
       title: title ?? '',
       location,
       timezone,
-      workingHours,
       pros,
       cons,
     });
-  }, [title, pros, cons, location, timezone, workingHours, id]);
+  }, [title, pros, cons, location, timezone, id]);
 
   const setTitle = (title: string | null) =>
     setCurrentReview((prev) => ({ ...prev, title: title ?? '' }));
@@ -49,8 +46,6 @@ export const useYourReviewForm = (): ProfileReviewContextProps => {
     setCurrentReview((prev) => ({ ...prev, location }));
   const setTimezone = (timezone: OrgTimezone) =>
     setCurrentReview((prev) => ({ ...prev, timezone }));
-  const setWorkingHours = (workingHours: OrgWorkingHours) =>
-    setCurrentReview((prev) => ({ ...prev, workingHours }));
 
   const setPros = (v: string | null) => {
     const length = v?.length ?? 0;
@@ -73,7 +68,7 @@ export const useYourReviewForm = (): ProfileReviewContextProps => {
   };
 
   const isDisabledReviewSave =
-    JSON.stringify({ title, location, timezone, workingHours, pros, cons }) ===
+    JSON.stringify({ title, location, timezone, pros, cons }) ===
     JSON.stringify(currentReview);
 
   const { mutate } = useYourReviewMutation();
@@ -90,7 +85,6 @@ export const useYourReviewForm = (): ProfileReviewContextProps => {
     setTitle,
     setLocation,
     setTimezone,
-    setWorkingHours,
     setPros,
     setCons,
     saveReview,
