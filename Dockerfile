@@ -30,7 +30,7 @@ FROM node:18-alpine AS base
 FROM base as deps
 RUN apk add --no-cache libc6-compat
 WORKDIR /jobstash
-COPY package.json pnpm-lock.yaml* ./
+COPY package.json pnpm-lock.yaml* .npmrc ./
 RUN yarn global add pnpm && pnpm i --frozen-lockfile
 # RUN yarn install --frozen-lockfile
 
