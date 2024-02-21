@@ -5,9 +5,9 @@ import { notifError, notifSuccess } from '@jobstash/shared/utils';
 
 import { sendMagicLink } from '@jobstash/auth/data';
 
-export const useSendMagicLink = () =>
+export const useSendMagicLink = (userType: 'dev' | 'org') =>
   useMutation({
-    mutationFn: (destination: string) => sendMagicLink(destination),
+    mutationFn: (destination: string) => sendMagicLink(destination, userType),
     onSuccess() {
       notifSuccess({
         title: 'Magic link sent!',

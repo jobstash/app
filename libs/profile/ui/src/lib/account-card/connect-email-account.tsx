@@ -9,7 +9,7 @@ import { Button, Text } from '@jobstash/shared/ui';
 const ConnectEmailAccount = () => {
   const [destination, setDestination] = useState('');
 
-  const { isError, isSuccess, isLoading, mutate } = useSendMagicLink();
+  const { isError, isSuccess, isLoading, mutate } = useSendMagicLink('dev');
 
   const onChange: ChangeEventHandler<HTMLInputElement> = (e) => {
     setDestination(e.currentTarget.value);

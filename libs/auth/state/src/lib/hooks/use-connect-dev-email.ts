@@ -14,7 +14,7 @@ import { useAuthContext } from './use-auth-context';
 import { useSendMagicLink } from './use-send-magic-link';
 
 export const useConnectDevEmail = () => {
-  const { isSuccess, isLoading, isError, mutate } = useSendMagicLink();
+  const { isSuccess, isLoading, isError, mutate } = useSendMagicLink('dev');
 
   const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();

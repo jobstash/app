@@ -1,7 +1,10 @@
 import { MW_URL } from '@jobstash/shared/core';
 
-export const sendMagicLink = async (destination: string) => {
-  const res = await fetch(`${MW_URL}/auth/magic/login`, {
+export const sendMagicLink = async (
+  destination: string,
+  userType: 'dev' | 'org',
+) => {
+  const res = await fetch(`${MW_URL}/auth/magic/${userType}/login`, {
     method: 'POST',
     mode: 'cors',
     credentials: 'include',
