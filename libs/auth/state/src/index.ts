@@ -10,6 +10,7 @@ export * from './lib/providers/wallet-provider';
 export * from './lib/hooks/use-auth-context';
 export * from './lib/hooks/use-check-wallet';
 export * from './lib/hooks/use-connect-dev-email';
+export * from './lib/hooks/use-connect-org-email';
 export * from './lib/hooks/use-role-click';
 export * from './lib/hooks/use-send-magic-link';
 export * from './lib/hooks/use-send-magic-link-token';

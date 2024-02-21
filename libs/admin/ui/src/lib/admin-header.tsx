@@ -11,6 +11,7 @@ const AdminHeader = () => (
       <div className="flex basis-8/12 items-center">
         <div className="w-full">
           <Input
+            disabled
             icon={<SearchIcon />}
             radius="md"
             size="lg"

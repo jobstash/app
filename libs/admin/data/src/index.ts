@@ -1,6 +1,7 @@
 export * from './lib/get-all-jobs';
 export * from './lib/get-blocked-tags';
 export * from './lib/get-paired-terms';
+export * from './lib/get-pending-orgs';
 export * from './lib/get-preferred-terms';
 export * from './lib/post-all-jobs';
 export * from './lib/post-create-preference';

@@ -84,6 +84,7 @@
                   "type:ui",
                   "type:state",
                   "type:feature",
+                  "type:testutil",
                   "type:page"
                 ]
               },

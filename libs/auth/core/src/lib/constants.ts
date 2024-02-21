@@ -20,6 +20,9 @@ export const CHECK_WALLET_FLOWS = {
   SIGNUP_COMPLETE: 'SIGNUP-COMPLETE',
   ADMIN_SYNONYMS: 'SYNONYMS',
   ADMIN_COMPLETE: 'ADMIN-COMPLETE',
+  ORG_PENDING: 'ORG-PENDING',
+  ORG_COMPLETE: 'ORG-COMPLETE',
+  ORG_REJECTED: 'ORG-REJECTED',
 } as const;
 
 export const CHECK_WALLET_ROUTE: Record<
@@ -35,6 +38,9 @@ export const CHECK_WALLET_ROUTE: Record<
   [CHECK_WALLET_FLOWS.SIGNUP_COMPLETE]: '/',
   [CHECK_WALLET_FLOWS.ADMIN_SYNONYMS]: '/godmode/tags/synonyms',
   [CHECK_WALLET_FLOWS.ADMIN_COMPLETE]: '/godmode/tags/synonyms',
+  [CHECK_WALLET_FLOWS.ORG_PENDING]: '/profile/organization/pending',
+  [CHECK_WALLET_FLOWS.ORG_REJECTED]: '/profile/organization/rejected',
+  [CHECK_WALLET_FLOWS.ORG_COMPLETE]: '/profile/organization',
 };
 
 export const redirectFlowsSet = new Set<CheckWalletFlow>([

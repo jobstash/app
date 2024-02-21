@@ -5,6 +5,7 @@ export * from './lib/hooks/use-blocked-terms-mutation';
 export * from './lib/hooks/use-create-preference-mutation';
 export * from './lib/hooks/use-paired-terms-mutation';
 export * from './lib/hooks/use-paired-terms-query';
+export * from './lib/hooks/use-pending-orgs-query';
 export * from './lib/hooks/use-unset-blocked-terms-mutation';
 
 // Context & Providers
