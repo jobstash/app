@@ -35,14 +35,17 @@ export const OrgApprovalPage = () => {
   const renderCell = useCallback((user: ProfileInfo, columnKey: ColumnKey) => {
     if (columnKey === 'contact') {
       const contact = user[columnKey];
-      if (contact.preferred) {
-        return <Text>{`${contact.preferred}: ${contact.value}`}</Text>;
-      }
+      const text = contact.preferred
+        ? `${contact.preferred}: ${contact.value}`
+        : 'N/A';
+
+      return <Text>{text}</Text>;
     }
 
     if (columnKey === 'location') {
       const { city, country } = user[columnKey];
-      return <Text>{`${city}, ${country}`}</Text>;
+      const text = !city && !country ? 'N/A' : `${city}, ${country}`;
+      return <Text>{text}</Text>;
     }
 
     if (columnKey === 'status') {
