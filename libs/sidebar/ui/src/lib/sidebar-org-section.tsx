@@ -1,7 +1,5 @@
 import { cn } from '@jobstash/shared/utils';
 
-import { useProfileInfoContext } from '@jobstash/profile/state';
-
 import { Text } from '@jobstash/shared/ui';
 
 import SidebarBartab from './sidebar-bartab';
@@ -9,18 +7,14 @@ import SidebarBartab from './sidebar-bartab';
 interface Props {
   isMobile?: boolean;
 }
+const tabs = [
+  {
+    text: 'Profile',
+    path: '/profile',
+  },
+];
 
-const SidebarProfileSection = ({ isMobile }: Props) => {
-  const { profileInfoData } = useProfileInfoContext();
-
-  const tabs = [
-    { text: 'Profile', path: '/profile' },
-    ...(profileInfoData?.username
-      ? [{ text: 'Your Repositories', path: '/profile/repositories' }]
-      : []),
-    { text: 'Organization Reviews', path: '/profile/reviews' },
-  ];
-
+const SidebarOrgSection = ({ isMobile }: Props) => {
   const wrapperClassName = cn('space-y-2 pt-3', {
     'flex flex-col justify-start items-start [&>*]:bg-transparent [&>*]:bg-none [&>*]:hover:bg-transparent':
       isMobile,
@@ -43,4 +37,4 @@ const SidebarProfileSection = ({ isMobile }: Props) => {
   );
 };
 
-export default SidebarProfileSection;
+export default SidebarOrgSection;

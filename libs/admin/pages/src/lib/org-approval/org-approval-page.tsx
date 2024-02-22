@@ -77,7 +77,9 @@ export const OrgApprovalPage = () => {
 
       <AdminLayout breadCrumbs={null} sidebar={<SideBar />} tabsSection={null}>
         <div className="w-full flex flex-col gap-4">
-          <pre>{JSON.stringify({ isLoading, pendingOrgs })}</pre>
+          <pre>
+            {JSON.stringify({ isLoading, pendingOrgs }, undefined, '\t')}
+          </pre>
 
           <Table aria-label={TABLE_ARIA}>
             <TableHeader columns={COLUMNS}>

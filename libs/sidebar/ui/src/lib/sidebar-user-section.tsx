@@ -4,7 +4,8 @@ import { ProfileInfoProvider } from '@jobstash/profile/state';
 import { useSidebarContext } from '@jobstash/sidebar/state';
 
 import SidebarAdminSection from './sidebar-admin-section';
-import SidebarProfileSection from './sidebar-profile-section';
+import SidebarDevSection from './sidebar-dev-section';
+import SidebarOrgSection from './sidebar-org-section';
 
 interface Props {
   isMobile?: boolean;
@@ -19,9 +20,13 @@ const SidebarUserSection = ({ isMobile }: Props) => {
     case CHECK_WALLET_ROLES.DEV: {
       return (
         <ProfileInfoProvider>
-          <SidebarProfileSection isMobile={isMobile} />
+          <SidebarDevSection isMobile={isMobile} />
         </ProfileInfoProvider>
       );
+    }
+
+    case CHECK_WALLET_ROLES.ORG: {
+      return <SidebarOrgSection isMobile={isMobile} />;
     }
 
     case CHECK_WALLET_ROLES.ADMIN: {
