@@ -12,6 +12,10 @@ const tabs = [
     text: 'Profile',
     path: '/profile',
   },
+  {
+    text: 'Settings',
+    path: '/profile/org/settings',
+  },
 ];
 
 const SidebarOrgSection = ({ isMobile }: Props) => {
