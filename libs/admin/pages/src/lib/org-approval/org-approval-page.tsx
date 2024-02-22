@@ -1,9 +1,7 @@
 import Head from 'next/head';
 import { useCallback } from 'react';
 
-import { CheckIcon, XMarkIcon } from '@heroicons/react/16/solid';
-import { fakeProfileInfos } from '@jobstash/profile/testutils';
-import { Button } from '@nextui-org/button';
+import { LoadingPage } from '@jobstash/shared/pages';
 import {
   Table,
   TableBody,
@@ -12,7 +10,6 @@ import {
   TableHeader,
   TableRow,
 } from '@nextui-org/table';
-import { Tooltip } from '@nextui-org/tooltip';
 
 import { ProfileInfo } from '@jobstash/profile/core';
 import { capitalize, cn } from '@jobstash/shared/utils';
@@ -23,13 +20,17 @@ import { AdminLayout } from '@jobstash/admin/ui';
 import { Text } from '@jobstash/shared/ui';
 import { SideBar } from '@jobstash/sidebar/feature';
 
+import { ActionButtons } from './action-buttons';
+
 type ProfileInfoKey = keyof ProfileInfo;
 type ColumnKey = ProfileInfoKey | 'status' | 'actions';
 
 export const OrgApprovalPage = () => {
-  const { isLoading, data: pendingOrgs } = usePendingOrgsQuery();
+  const { isLoading, isFetching, data: pendingOrgs } = usePendingOrgsQuery();
 
-  const data = fakeProfileInfos().map((d, i) => ({ ...d, key: i }));
+  //
+  // const data = fakeProfileInfos().map((d, i) => ({ ...d, key: i }));
+  const data = (pendingOrgs ?? []).map((d, i) => ({ ...d, key: i }));
 
   const renderCell = useCallback((user: ProfileInfo, columnKey: ColumnKey) => {
     if (columnKey === 'contact') {
@@ -49,25 +50,14 @@ export const OrgApprovalPage = () => {
     }
 
     if (columnKey === 'actions') {
-      return (
-        <div className="flex items-center justify-center gap-4">
-          <Tooltip content="Approve">
-            <Button isIconOnly color="default" size="sm">
-              <CheckIcon className="w-6 h-6" />
-            </Button>
-          </Tooltip>
-          <Tooltip content="Reject">
-            <Button isIconOnly color="danger" size="sm">
-              <XMarkIcon className="w-6 h-6" />
-            </Button>
-          </Tooltip>
-        </div>
-      );
+      return <ActionButtons />;
     }
 
     const text = user[columnKey as ProfileInfoKey] as string;
     return <Text>{`${text}`}</Text>;
   }, []);
+
+  if (isLoading) return <LoadingPage />;
 
   return (
     <>
@@ -77,11 +67,13 @@ export const OrgApprovalPage = () => {
 
       <AdminLayout breadCrumbs={null} sidebar={<SideBar />} tabsSection={null}>
         <div className="w-full flex flex-col gap-4">
-          <pre>
-            {JSON.stringify({ isLoading, pendingOrgs }, undefined, '\t')}
-          </pre>
-
-          <Table aria-label={TABLE_ARIA}>
+          <pre>{JSON.stringify({ data }, undefined, '\t')}</pre>
+          <Table
+            aria-label={TABLE_ARIA}
+            classNames={{
+              base: cn({ 'pointer-events-none opacity-60': isFetching }),
+            }}
+          >
             <TableHeader columns={COLUMNS}>
               {(column) => (
                 <TableColumn key={column.key}>

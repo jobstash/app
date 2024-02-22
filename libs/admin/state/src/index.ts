@@ -1,5 +1,6 @@
 // Hooks
 export * from './lib/hooks/use-all-jobs-mutation';
+export * from './lib/hooks/use-authorize-org';
 export * from './lib/hooks/use-blocked-tags-query';
 export * from './lib/hooks/use-blocked-terms-mutation';
 export * from './lib/hooks/use-create-preference-mutation';

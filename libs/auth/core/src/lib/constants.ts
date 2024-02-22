@@ -47,7 +47,6 @@ export const redirectFlowsSet = new Set<CheckWalletFlow>([
   CHECK_WALLET_FLOWS.PICK_ROLE,
   CHECK_WALLET_FLOWS.ORG_APPROVAL,
   CHECK_WALLET_FLOWS.ORG_REJECTED,
-  CHECK_WALLET_FLOWS.ORG_COMPLETE,
 ]);
 
 export const ignoredPathnameRedirectSet = new Set<string>([
