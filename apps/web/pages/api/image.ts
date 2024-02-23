@@ -23,7 +23,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
   const { url, logo } = req.query;
 
   if (typeof url !== 'string' || typeof logo !== 'string') {
-    res.status(400).json({ error: 'Invalid Params' });
+    res.status(404).json({ error: 'Invalid Params' });
     return;
   }
 
@@ -39,7 +39,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     // Fetch google favicon using url param
     await fetchImage(getGoogleLogoUrl(url), res);
   } catch {
-    res.status(500).json({ error: 'Error fetching image' });
+    res.status(404).json({ error: 'Error fetching image' });
   }
 };
 
