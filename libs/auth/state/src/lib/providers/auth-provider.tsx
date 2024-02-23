@@ -31,6 +31,7 @@ export const AuthProvider = ({ children, screenLoader }: Props) => {
     isLoading,
     address,
     isConnected,
+    isFetching,
   } = useCheckWallet();
 
   // If current wallet is signedIn to Ethereum but wallet is not currently connected,
@@ -56,6 +57,7 @@ export const AuthProvider = ({ children, screenLoader }: Props) => {
       address,
       isConnected,
       isSignedIn,
+      isFetching,
       refetch: () => refetch(),
     }),
     [
@@ -65,6 +67,7 @@ export const AuthProvider = ({ children, screenLoader }: Props) => {
       isConnected,
       isLoading,
       isSignedIn,
+      isFetching,
       refetch,
     ],
   );
@@ -75,6 +78,7 @@ export const AuthProvider = ({ children, screenLoader }: Props) => {
   useEffect(() => {
     const { flow } = value;
     const flowRoute = CHECK_WALLET_ROUTE[flow];
+    console.log('PATHNAME =', pathname);
     if (
       !redirectRef.current &&
       redirectFlowsSet.has(flow) &&

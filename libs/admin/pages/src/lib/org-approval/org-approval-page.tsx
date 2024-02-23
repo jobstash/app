@@ -53,7 +53,7 @@ export const OrgApprovalPage = () => {
     }
 
     if (columnKey === 'actions') {
-      return <ActionButtons />;
+      return <ActionButtons wallet={user.wallet} />;
     }
 
     const text = user[columnKey as ProfileInfoKey] as string;
@@ -70,7 +70,6 @@ export const OrgApprovalPage = () => {
 
       <AdminLayout breadCrumbs={null} sidebar={<SideBar />} tabsSection={null}>
         <div className="w-full flex flex-col gap-4">
-          <pre>{JSON.stringify({ data }, undefined, '\t')}</pre>
           <Table
             aria-label={TABLE_ARIA}
             classNames={{
@@ -119,6 +118,7 @@ export const OrgApprovalPage = () => {
 const TABLE_ARIA = 'Table of Pending Org Approvals';
 
 const COLUMNS = [
+  'wallet',
   'username',
   'email',
   'contact',

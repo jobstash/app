@@ -35,7 +35,7 @@ const MagicLoginCallbackPage = () => {
                 : 'You have connected your email!'}
             </Text>
             <Text color="dimmed">
-              {isError
+              {isError || userType === 'org'
                 ? 'Please reload this page.'
                 : 'Please close this tab now.'}
             </Text>

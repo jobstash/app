@@ -1,3 +1,6 @@
+import { useRouter } from 'next/router';
+import { useEffect, useRef } from 'react';
+
 import { LoadingPage } from '@jobstash/shared/pages';
 import { useAtomValue } from 'jotai';
 
@@ -19,9 +22,31 @@ import {
 import { SideBar } from '@jobstash/sidebar/feature';
 
 export const PickRolePage = () => {
+  const router = useRouter();
   const section = useAtomValue(pickRoleSectionAtom);
 
-  const shouldRenderPickRole = useFlowCheck();
+  const isMounted = useIsMounted();
+  const isLoadingDevCallback = useAtomValue(isLoadingDevCallbackAtom);
+
+  const { flow, isLoading, refetch, isFetching } = useAuthContext();
+  const isPickRoleFlow = flow === CHECK_WALLET_FLOWS.PICK_ROLE;
+  const isLoadingAuth = isLoading || isFetching;
+
+  const shouldRenderPickRole =
+    isMounted && !isLoadingAuth && !isLoadingDevCallback && isPickRoleFlow;
+
+  // Refetch once
+  const refetchRef = useRef(false);
+  useEffect(() => {
+    if (!refetchRef.current) {
+      refetchRef.current = true;
+      refetch();
+    }
+  }, [refetch]);
+
+  if (!isPickRoleFlow) {
+    router.push('/');
+  }
 
   if (!shouldRenderPickRole && !section) {
     return <LoadingPage />;
@@ -42,15 +67,5 @@ export const PickRolePage = () => {
         </div>
       )}
     </div>
-  );
-};
-
-const useFlowCheck = () => {
-  const isMounted = useIsMounted();
-  const isLoadingDevCallback = useAtomValue(isLoadingDevCallbackAtom);
-  const { flow } = useAuthContext();
-
-  return (
-    isMounted && !isLoadingDevCallback && flow === CHECK_WALLET_FLOWS.PICK_ROLE
   );
 };

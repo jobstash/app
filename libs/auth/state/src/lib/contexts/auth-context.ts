@@ -13,5 +13,6 @@ export const AuthContext = createContext<AuthCtx>({
   address: undefined,
   isConnected: false,
   isSignedIn: false,
+  isFetching: false,
   refetch: () => null,
 });

@@ -1,21 +1,23 @@
 import { CheckIcon, XMarkIcon } from '@heroicons/react/16/solid';
 import { Button } from '@nextui-org/button';
 import { Tooltip } from '@nextui-org/tooltip';
-import { useAccount } from 'wagmi';
 
 import { useAuthorizeOrg } from '@jobstash/admin/state';
 
-export const ActionButtons = () => {
-  const { address: wallet } = useAccount();
+interface Props {
+  wallet: string;
+}
 
+export const ActionButtons = ({ wallet }: Props) => {
   const { isLoading, mutate } = useAuthorizeOrg();
 
   const approve = () => {
+    console.log('approving wallet =', wallet);
     if (wallet) mutate({ wallet, verdict: 'approve' });
   };
 
   const reject = () => {
-    if (wallet) mutate({ wallet, verdict: 'approve' });
+    if (wallet) mutate({ wallet, verdict: 'reject' });
   };
 
   return (
@@ -25,14 +27,20 @@ export const ActionButtons = () => {
           isIconOnly
           color="default"
           size="sm"
-          isLoading={isLoading}
+          isDisabled={isLoading}
           onClick={approve}
         >
           <CheckIcon className="w-6 h-6" />
         </Button>
       </Tooltip>
       <Tooltip content="Reject">
-        <Button isIconOnly color="danger" size="sm" onClick={reject}>
+        <Button
+          isIconOnly
+          color="danger"
+          size="sm"
+          isDisabled={isLoading}
+          onClick={reject}
+        >
           <XMarkIcon className="w-6 h-6" />
         </Button>
       </Tooltip>

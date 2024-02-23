@@ -37,4 +37,5 @@ export type AuthCtx = {
   address: string | undefined;
   isConnected: boolean;
   isSignedIn: boolean;
+  isFetching: boolean;
 } & AuthPageProps;

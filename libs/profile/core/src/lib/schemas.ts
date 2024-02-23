@@ -82,6 +82,7 @@ const profileInfoLocationSchema = myzod.object({
 });
 
 export const profileInfoSchema = myzod.object({
+  wallet: myzod.string().min(1),
   avatar: myzod.string().min(1).nullable(),
   username: myzod.string().min(1).nullable(),
   email: myzod.string().min(1).nullable(),

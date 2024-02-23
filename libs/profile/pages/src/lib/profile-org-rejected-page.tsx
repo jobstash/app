@@ -75,5 +75,6 @@ export const ProfileOrgRejectedPage = () => {
 };
 
 const TITLE = "Sorry, We're Not There Yet";
-const SUBTITLE = 'Rebuild your case with our team. Reach out today.';
+const SUBTITLE =
+  "We've rejected your request. Rebuild your case with our team.";
 const BUTTON_TEXT = 'Start a Conversation';
