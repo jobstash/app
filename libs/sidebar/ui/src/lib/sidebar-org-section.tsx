@@ -1,3 +1,4 @@
+import { IS_DEBUG } from '@jobstash/shared/core';
 import { cn } from '@jobstash/shared/utils';
 
 import { Text } from '@jobstash/shared/ui';
@@ -12,11 +13,14 @@ const tabs = [
     text: 'Profile',
     path: '/profile',
   },
-  {
+];
+
+if (IS_DEBUG) {
+  tabs.push({
     text: 'Settings',
     path: '/profile/org/settings',
-  },
-];
+  });
+}
 
 const SidebarOrgSection = ({ isMobile }: Props) => {
   const wrapperClassName = cn('space-y-2 pt-3', {

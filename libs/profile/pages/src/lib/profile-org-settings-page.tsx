@@ -3,6 +3,7 @@ import Head from 'next/head';
 import { LoadingPage } from '@jobstash/shared/pages';
 
 import { CHECK_WALLET_ROLES } from '@jobstash/auth/core';
+import { IS_DEBUG } from '@jobstash/shared/core';
 
 import { useAuthContext } from '@jobstash/auth/state';
 import { ProfileInfoProvider } from '@jobstash/profile/state';
@@ -15,6 +16,8 @@ import { SideBar } from '@jobstash/sidebar/feature';
 export const ProfileOrgSettingsPage = () => {
   const { isLoading, role } = useAuthContext();
   const { canRender } = useDelayedAuthRender({ requireConnected: true });
+
+  if (!IS_DEBUG) return <NotFoundPage />;
 
   if (!canRender || isLoading) return <LoadingPage />;
 
