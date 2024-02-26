@@ -27,12 +27,18 @@ export const ProfilePage = () => {
 
   if (isDev) return <ProfileDevPage />;
 
-  if (isOrg) {
+  if (isOrg && orgFlows.has(flow as keyof typeof ORG_ROLE_PAGE)) {
     return ORG_ROLE_PAGE[flow as keyof typeof ORG_ROLE_PAGE];
   }
 
   return <LoadingPage />;
 };
+
+const orgFlows = new Set([
+  CHECK_WALLET_FLOWS.ORG_APPROVAL,
+  CHECK_WALLET_FLOWS.ORG_REJECTED,
+  CHECK_WALLET_FLOWS.ORG_COMPLETE,
+]);
 
 const ORG_ROLE_PAGE = {
   [CHECK_WALLET_FLOWS.ORG_APPROVAL]: <ProfileOrgPendingPage />,

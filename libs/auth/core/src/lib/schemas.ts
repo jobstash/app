@@ -71,3 +71,9 @@ export const siweVerifyResponseSchema = myzod.intersection(
   mwMessageResponseSchema,
   myzod.object({}),
 );
+
+export const githubLoginPayloadSchema = myzod.object({
+  code: myzod.string(),
+  wallet: myzod.string(),
+  role: myzod.string(),
+});

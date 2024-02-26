@@ -1,4 +1,8 @@
+import { useRouter } from 'next/router';
+
 import { useSetAtom } from 'jotai';
+
+import { MW_URL } from '@jobstash/shared/core';
 
 import { pickRoleSectionAtom } from '@jobstash/auth/state';
 
@@ -10,6 +14,12 @@ import PickRoleGithubIcon from './pick-role-github-icon';
 import PickRoleSection from './pick-role-section';
 
 const PickRoleOrgSection = () => {
+  const { push } = useRouter();
+
+  const onClickDevGithub = () => {
+    push(`${MW_URL}/github/trigger-org-github-oauth`);
+  };
+
   const setPickRoleSection = useSetAtom(pickRoleSectionAtom);
 
   const onClickConnect = () => setPickRoleSection('org');
@@ -36,9 +46,9 @@ const PickRoleOrgSection = () => {
       <hr className="border-t border-white/10" />
 
       <PickRoleButton
-        isDisabled
         text="Connect with Github"
         icon={<PickRoleGithubIcon />}
+        onClick={onClickDevGithub}
       />
     </PickRoleSection>
   );

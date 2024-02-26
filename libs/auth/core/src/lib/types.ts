@@ -3,6 +3,7 @@ import { type Infer } from 'myzod';
 import {
   checkWalletDataSchema,
   checkWalletResponseSchema,
+  githubLoginPayloadSchema,
   siweCreateMessageResponseSchema,
   siweNonceResponseSchema,
   siweSessionResponseSchema,
@@ -39,3 +40,5 @@ export type AuthCtx = {
   isSignedIn: boolean;
   isFetching: boolean;
 } & AuthPageProps;
+
+export type GithubLoginPayload = Infer<typeof githubLoginPayloadSchema>;

@@ -78,7 +78,6 @@ export const AuthProvider = ({ children, screenLoader }: Props) => {
   useEffect(() => {
     const { flow } = value;
     const flowRoute = CHECK_WALLET_ROUTE[flow];
-    console.log('PATHNAME =', pathname);
     if (
       !redirectRef.current &&
       redirectFlowsSet.has(flow) &&

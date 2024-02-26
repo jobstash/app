@@ -12,7 +12,6 @@ export const ActionButtons = ({ wallet }: Props) => {
   const { isLoading, mutate } = useAuthorizeOrg();
 
   const approve = () => {
-    console.log('approving wallet =', wallet);
     if (wallet) mutate({ wallet, verdict: 'approve' });
   };
 

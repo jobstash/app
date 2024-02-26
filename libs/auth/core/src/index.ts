@@ -5,6 +5,7 @@ export * from './lib/constants';
 export {
   checkWalletDataSchema,
   checkWalletResponseSchema,
+  githubLoginPayloadSchema,
   siweCreateMessageResponseSchema,
   siweNonceResponseSchema,
   siweSessionResponseSchema,

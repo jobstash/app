@@ -7,7 +7,7 @@ import { CHECK_WALLET_ROLES } from '@jobstash/auth/core';
 
 import { useGithubLogin } from '@jobstash/auth/state';
 
-const DevGithubCallbackPage = () => {
+const OrgGithubCallbackPage = () => {
   const { address } = useAccount();
   const { mutate } = useGithubLogin();
 
@@ -18,10 +18,10 @@ const DevGithubCallbackPage = () => {
 
   if (codeParam && address && !ref.current) {
     ref.current = true;
-    mutate({ code: codeParam, wallet: address, role: CHECK_WALLET_ROLES.DEV });
+    mutate({ code: codeParam, wallet: address, role: CHECK_WALLET_ROLES.ORG });
   }
 
   return <LoadingPage />;
 };
 
-export default DevGithubCallbackPage;
+export default OrgGithubCallbackPage;

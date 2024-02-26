@@ -50,5 +50,7 @@ export const redirectFlowsSet = new Set<CheckWalletFlow>([
 ]);
 
 export const ignoredPathnameRedirectSet = new Set<string>([
+  '/callback/dev',
+  '/callback/org',
   '/callback/[userType]/magic-login',
 ]);
