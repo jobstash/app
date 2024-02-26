@@ -5,7 +5,7 @@ import {
   RemoveScroll,
 } from '@mantine/core';
 
-import { Heading, Loader, Text } from '@jobstash/shared/ui';
+import { Loader, Text } from '@jobstash/shared/ui';
 
 interface Props {
   opened: boolean;
@@ -43,7 +43,9 @@ const AccountCardModal = ({
         />
         <Modal.Header className="z-10">
           <Modal.Title>
-            <Heading size="sm">Delete your profile</Heading>
+            <span className="font-lato text-lg font-bold text-white">
+              Delete your profile
+            </span>
           </Modal.Title>
           <Modal.CloseButton />
         </Modal.Header>
