@@ -1,4 +1,4 @@
-import myzod from 'myzod';
+import myzod, { Infer } from 'myzod';
 
 import {
   fundingRoundSchema,
@@ -57,3 +57,25 @@ export const jobBookmarksResponseSchema = myzod.intersection(
 export const jobApplyInteractionPayloadSchema = myzod.object({
   shortUUID: myzod.string(),
 });
+
+export const jobApplicantSchema = myzod.object({
+  user: myzod.object({
+    avatar: myzod.string(),
+    name: myzod.string(),
+    email: myzod.string(),
+  }),
+  job: myzod.object({
+    title: myzod.string(),
+    sub: myzod.string(),
+  }),
+  date: myzod.number(),
+  cryptoNative: myzod.boolean(),
+  attestations: myzod.object({
+    up: myzod.number(),
+    down: myzod.number(),
+  }),
+  matchingSkills: myzod.number(),
+  upcomingTalent: myzod.boolean(),
+  oss: myzod.boolean(),
+});
+export type JobApplicant = Infer<typeof jobApplicantSchema>;
