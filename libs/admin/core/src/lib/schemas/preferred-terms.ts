@@ -76,3 +76,15 @@ export type PreferredTermsMutFn = UseMutateFunction<
   PreferredTermsPayload,
   unknown
 >;
+
+export const addAliasPayloadSchema = myzod.object({
+  orgId: myzod.string(),
+  alias: myzod.array(myzod.string()),
+});
+export type AddAliasPayload = Infer<typeof addAliasPayloadSchema>;
+export type AddAliasMutFn = UseMutateFunction<
+  MessageResponse,
+  unknown,
+  AddAliasPayload,
+  unknown
+>;
