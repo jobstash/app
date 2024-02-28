@@ -29,16 +29,16 @@ const PickRoleOrgSection = () => {
       <Text size="lg" fw="bold">
         Organization
       </Text>
-      <div className="flex w-72">
+      <div className="flex w-80">
         <Text color="dimmed" size="sm">
-          We need to verify you are part of an organization to let you sign in.
-          We support Github and email validation for this. Please pick one of
-          the two.
+          We will manually verify your request. Please connect using your
+          business email or using a github account which has contributed to the
+          Organization you wish to connect to.
         </Text>
       </div>
 
       <PickRoleButton
-        text="Connect with Organization Email"
+        text="Connect with Email"
         icon={<PickRoleEmailIcon />}
         onClick={onClickConnect}
       />

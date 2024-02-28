@@ -29,18 +29,19 @@ const PickRoleDevSection = () => {
       <Text size="lg" fw="bold">
         Candidate
       </Text>
-      <div className="flex w-72 flex-col gap-y-6">
+      <div className="flex w-80 flex-col gap-y-6">
         <Text color="dimmed" size="sm">
-          To create an account we need to validate your Github account(s).
+          We use your Github and your current or past company email to validate
+          which Organization, DAO or Company you have worked with in the past or
+          present.
         </Text>
         <Text color="dimmed" size="sm">
-          We will then verify you own the the account, and will inspect which
-          public commits you have made in the past.
+          Please use a business email account if you still have one.
         </Text>
       </div>
 
       <PickRoleButton
-        text="Connect with Organization Email"
+        text="Connect with Email"
         icon={<PickRoleEmailIcon />}
         onClick={onClickConnect}
       />

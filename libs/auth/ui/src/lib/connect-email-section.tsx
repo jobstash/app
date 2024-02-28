@@ -43,11 +43,20 @@ const ConnectEmailSection = (props: Props) => {
         </div>
 
         <Text size="xl" fw="bold">
-          Connect with Organizations Email
+          Connect with Business Email
         </Text>
 
-        <div className="flex w-full justify-start">
-          <Text color="dimmed">Organizations Email Address</Text>
+        <div className="flex max-w-sm flex-col gap-y-6">
+          <Text color="dimmed">
+            We require a business email to associate you with a current or past
+            employer. If you don&#39;t have a business email anymore, use your
+            private email.
+          </Text>
+          <Text color="dimmed">
+            Using a business email increases your chances to be hired as we will
+            present you as an employee of the organization and you will have
+            increased visibility.
+          </Text>
         </div>
 
         <div className="w-full">
