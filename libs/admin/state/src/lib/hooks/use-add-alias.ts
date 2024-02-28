@@ -10,14 +10,13 @@ export const useAddAlias = (successCb?: () => void) => {
 
   return useMutation({
     mutationFn: (payload: AddAliasPayload) => addAlias(payload),
-    onSuccess({ message }, { orgId }) {
+    onSuccess({ message }, { orgId, aliases }) {
       //
-      // queryClient.invalidateQueries(['org-details', orgId]);
-      // notifSuccess({
-      //   title: `Updated alias to "${aliasName}"`,
-      //   message,
-      //   autoClose: 10_000,
+      // queryClient.setQueryData(['org-details', orgId], {
+      //   ...org,
+      //   aliases,
       // });
+
       notifSuccess({
         title: `Alias Update Successful`,
         message,
@@ -27,6 +26,8 @@ export const useAddAlias = (successCb?: () => void) => {
       if (successCb) {
         successCb();
       }
+
+      queryClient.invalidateQueries(['org-details', orgId]);
     },
     onError(data) {
       notifError({

@@ -1,6 +1,5 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
-import { PlusIcon } from '@heroicons/react/16/solid';
 import { Button } from '@nextui-org/button';
 import { Chip } from '@nextui-org/react';
 import { Spinner } from '@nextui-org/spinner';
@@ -15,18 +14,11 @@ interface Props {
 }
 
 export const OrgAlias = ({ orgId }: Props) => {
-  const { isLoading, data } = useOrgDetails(orgId);
+  const { isLoading, isRefetching, data } = useOrgDetails(orgId);
 
-  const [alias, setAlias] = useState<string[]>([]);
+  const aliases = useMemo(() => data?.aliases ?? [], [data]);
 
-  // Sync alias data
-  useEffect(() => {
-    if (data?.alias && alias.length === 0) {
-      setAlias([data.alias]);
-    }
-  }, [alias.length, data?.alias]);
-
-  const hasAlias = alias.length > 0;
+  const hasAlias = aliases.length > 0;
 
   const [isHovering, setIsHovering] = useState(false);
 
@@ -36,14 +28,14 @@ export const OrgAlias = ({ orgId }: Props) => {
     if (data) {
       setEditAlias({
         org: data,
-        alias,
+        aliases,
         isOpen: true,
-        originalAlias: data.alias ? [data.alias] : [],
+        originalAlias: data?.aliases ?? [],
       });
     }
   };
 
-  if (isLoading) return <Spinner color="white" size="sm" />;
+  if (isLoading || isRefetching) return <Spinner color="white" size="sm" />;
 
   return (
     <div
@@ -53,9 +45,9 @@ export const OrgAlias = ({ orgId }: Props) => {
     >
       {hasAlias ? (
         <div className="flex gap-2 items-center">
-          {alias.map((a) => (
-            <Chip key={a} size="sm">
-              {a}
+          {aliases.map((alias) => (
+            <Chip key={alias} size="sm">
+              {alias}
             </Chip>
           ))}
         </div>

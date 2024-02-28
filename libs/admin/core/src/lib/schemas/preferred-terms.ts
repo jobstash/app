@@ -44,18 +44,6 @@ export const deletePreferenceResponseSchema = myzod.object({
   data: preferredTermSchema,
 });
 
-export const authorizeOrgPayloadSchema = myzod.object({
-  wallet: myzod.string(),
-  verdict: myzod.literals('approve', 'reject'),
-});
-export type AuthorizeOrgPayload = Infer<typeof authorizeOrgPayloadSchema>;
-export type AuthorizeOrgMutFn = UseMutateFunction<
-  MessageResponse,
-  unknown,
-  AuthorizeOrgPayload,
-  unknown
->;
-
 export type PreferredTerm = Infer<typeof preferredTermSchema>;
 export type PreferredTermsResponse = Infer<typeof preferredTermsResponseSchema>;
 export type PreferredTermsPayload = Infer<typeof preferredTermsPayloadSchema>;
@@ -74,17 +62,5 @@ export type PreferredTermsMutFn = UseMutateFunction<
   MessageResponse,
   unknown,
   PreferredTermsPayload,
-  unknown
->;
-
-export const addAliasPayloadSchema = myzod.object({
-  orgId: myzod.string(),
-  alias: myzod.array(myzod.string()),
-});
-export type AddAliasPayload = Infer<typeof addAliasPayloadSchema>;
-export type AddAliasMutFn = UseMutateFunction<
-  MessageResponse,
-  unknown,
-  AddAliasPayload,
   unknown
 >;

@@ -4,7 +4,7 @@ import { OrgDetails } from '@jobstash/organizations/core';
 
 export const editAliasAtom = atom({
   org: {} as OrgDetails,
-  alias: [] as string[],
+  aliases: [] as string[],
   originalAlias: [] as string[],
   isOpen: false,
 });

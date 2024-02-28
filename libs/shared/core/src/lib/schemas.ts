@@ -122,7 +122,7 @@ export const orgInfoSchema = myzod.object(
     website: myzod.string().min(1),
     telegram: myzod.string().min(1).nullable(),
     github: myzod.string().min(1).nullable(),
-    alias: myzod.string().min(1).nullable(),
+    aliases: myzod.array(myzod.string().min(1)),
     docs: myzod.string().min(1).nullable(),
     twitter: myzod.string().min(1).nullable(),
     community: myzod.array(myzod.string()),

@@ -15,42 +15,37 @@ import {
 import { Tooltip } from '@nextui-org/react';
 import { useAtom } from 'jotai';
 
+import { OrgDetails } from '@jobstash/organizations/core';
 import { getLogoUrl } from '@jobstash/shared/utils';
 
 import { editAliasAtom, useAddAlias } from '@jobstash/admin/state';
 
 import { Heading, LogoTitle } from '@jobstash/shared/ui';
 
-export const AliasEditModal = () => {
-  const [
-    {
-      alias,
-      isOpen,
-      org: { orgId, name, website, logoUrl, location },
-      originalAlias,
-    },
-    setEditAlias,
-  ] = useAtom(editAliasAtom);
+export const EditAliasModal = () => {
+  const [{ aliases, isOpen, org, originalAlias }, setEditAlias] =
+    useAtom(editAliasAtom);
 
-  const hasAlias = alias.length > 0;
+  const { orgId, name, website, logoUrl, location } = org;
+
+  const hasAlias = aliases.length > 0;
 
   const [value, setValue] = useState('');
 
   const isDisabledSave =
-    alias.length === 0 ||
-    JSON.stringify(originalAlias) === JSON.stringify(alias);
+    JSON.stringify(originalAlias) === JSON.stringify(aliases);
 
   const removeAlias = (currentAlias: string) => {
     setEditAlias((prev) => ({
       ...prev,
-      alias: prev.alias.filter((prevAlias) => prevAlias !== currentAlias),
+      aliases: prev.aliases.filter((prevAlias) => prevAlias !== currentAlias),
     }));
   };
 
   const addAlias = () => {
-    const isDuplicate = alias.includes(value);
-    if (!isDuplicate) {
-      setEditAlias((prev) => ({ ...prev, alias: [...prev.alias, value] }));
+    const isDuplicate = aliases.includes(value);
+    if (!isDuplicate && value) {
+      setEditAlias((prev) => ({ ...prev, aliases: [...prev.aliases, value] }));
       setValue('');
     }
   };
@@ -65,12 +60,17 @@ export const AliasEditModal = () => {
   };
 
   const closeModal = () => {
-    setEditAlias((prev) => ({ ...prev, isOpen: false }));
+    setEditAlias(() => ({
+      org: {} as OrgDetails,
+      aliases: [] as string[],
+      originalAlias: [] as string[],
+      isOpen: false,
+    }));
   };
 
   const { mutate, isLoading } = useAddAlias(closeModal);
   const onSave = () => {
-    mutate({ orgId, alias });
+    mutate({ orgId, aliases });
   };
 
   return (
@@ -102,14 +102,14 @@ export const AliasEditModal = () => {
               <div className="min-h-[40px] flex items-center">
                 {hasAlias ? (
                   <div className="flex gap-x-2 gap-y-4 items-center flex-wrap">
-                    {alias.map((a) => (
+                    {aliases.map((alias) => (
                       <div
-                        key={a}
+                        key={alias}
                         className="cursor-pointer"
-                        onClick={() => removeAlias(a)}
+                        onClick={() => removeAlias(alias)}
                       >
                         <Tooltip content="Click to remove">
-                          <Chip size="lg">{a}</Chip>
+                          <Chip size="lg">{alias}</Chip>
                         </Tooltip>
                       </div>
                     ))}
