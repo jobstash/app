@@ -7,7 +7,7 @@ import { useAtomValue } from 'jotai';
 import { CHECK_WALLET_FLOWS } from '@jobstash/auth/core';
 
 import {
-  isLoadingDevCallbackAtom,
+  isPendingPickRoleAtom,
   pickRoleSectionAtom,
   useAuthContext,
 } from '@jobstash/auth/state';
@@ -26,14 +26,13 @@ export const PickRolePage = () => {
   const section = useAtomValue(pickRoleSectionAtom);
 
   const isMounted = useIsMounted();
-  const isLoadingDevCallback = useAtomValue(isLoadingDevCallbackAtom);
 
   const { flow, isLoading, refetch, isFetching } = useAuthContext();
   const isPickRoleFlow = flow === CHECK_WALLET_FLOWS.PICK_ROLE;
   const isLoadingAuth = isLoading || isFetching;
 
-  const shouldRenderPickRole =
-    isMounted && !isLoadingAuth && !isLoadingDevCallback && isPickRoleFlow;
+  const shouldRenderPickRole = isMounted && !isLoadingAuth && isPickRoleFlow;
+  const isPendingPickRole = useAtomValue(isPendingPickRoleAtom);
 
   // Refetch once
   const refetchRef = useRef(false);
@@ -44,7 +43,7 @@ export const PickRolePage = () => {
     }
   }, [refetch]);
 
-  if (!isPickRoleFlow) {
+  if (!isPickRoleFlow && !isPendingPickRole) {
     router.push('/');
   }
 

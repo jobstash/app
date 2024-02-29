@@ -1,32 +1,16 @@
-import { Tooltip } from '@mantine/core';
-
 import { Button } from '@jobstash/shared/ui';
 
 interface Props {
   isSuccess: boolean;
-  tooltipText: string;
   onClick?: () => void;
   isDisabled?: boolean;
 }
 
-const SectionBackButton = ({
-  isSuccess,
-  onClick,
-  isDisabled,
-  tooltipText,
-}: Props) => {
+const SectionBackButton = ({ isSuccess, onClick, isDisabled }: Props) => {
   if (isSuccess) {
     return (
       <div className="flex w-full justify-start">
-        <Tooltip
-          label={tooltipText}
-          color="dark"
-          bg="rgb(52,52,52)"
-          offset={10}
-          position="top-start"
-        >
-          <BackButton isDisabled />
-        </Tooltip>
+        <BackButton isDisabled />
       </div>
     );
   }

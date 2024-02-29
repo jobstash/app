@@ -22,12 +22,13 @@ const MagicLoginCallbackPage = () => {
       queryClient.invalidateQueries({
         queryKey: ['check-wallet'],
       });
+      router.push('/profile');
     }
   }, [isSuccess, queryClient, router]);
 
   if (isLoading) return <LoadingPage />;
 
-  return <MagicLinkPage isError={isError} isOrg={false} />;
+  return <MagicLinkPage isError={isError} />;
 };
 
 export default MagicLoginCallbackPage;

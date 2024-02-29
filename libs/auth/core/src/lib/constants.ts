@@ -45,12 +45,12 @@ export const CHECK_WALLET_ROUTE: Record<
 
 export const redirectFlowsSet = new Set<CheckWalletFlow>([
   CHECK_WALLET_FLOWS.PICK_ROLE,
-  CHECK_WALLET_FLOWS.ORG_APPROVAL,
-  CHECK_WALLET_FLOWS.ORG_REJECTED,
 ]);
 
 export const ignoredPathnameRedirectSet = new Set<string>([
   '/callback/dev',
   '/callback/org',
+  '/callback/dev/magic-login',
+  '/callback/org/magic-login',
   '/callback/[userType]/magic-login',
 ]);

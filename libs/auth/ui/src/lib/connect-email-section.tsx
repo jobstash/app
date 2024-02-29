@@ -32,7 +32,6 @@ const ConnectEmailSection = (props: Props) => {
         <SectionBackButton
           isSuccess={isSuccess}
           isDisabled={isLoading}
-          tooltipText="Email already sent!"
           onClick={onClickBack}
         />
 
