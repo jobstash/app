@@ -7,7 +7,7 @@ import {
 
 import { useDevProfileInfoContext } from '../contexts/dev-profile-info-context';
 
-import { useProfileInfoMutation } from './use-profile-info-mutation';
+import { useDevProfileInfoMutation } from './use-dev-profile-info-mutation';
 
 export const useProfileHeader = () => {
   const { profileInfoData } = useDevProfileInfoContext();
@@ -74,7 +74,7 @@ export const useProfileHeader = () => {
     }));
   };
 
-  const { isLoadingMutation, mutate } = useProfileInfoMutation();
+  const { isLoadingMutation, mutate } = useDevProfileInfoMutation();
 
   const saveProfileInfo = () => {
     mutate({

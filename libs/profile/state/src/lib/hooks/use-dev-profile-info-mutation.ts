@@ -4,21 +4,21 @@ import { useAccount } from 'wagmi';
 import { type DevProfileInfoPayload } from '@jobstash/profile/core';
 import { notifError, notifSuccess } from '@jobstash/shared/utils';
 
-import { postProfileInfo } from '@jobstash/profile/data';
+import { postDevProfileInfo } from '@jobstash/profile/data';
 
 type MutationPayload = {
   payload: DevProfileInfoPayload;
   isToggleAvailability?: boolean;
 };
 
-export const useProfileInfoMutation = () => {
+export const useDevProfileInfoMutation = () => {
   const { address } = useAccount();
   const queryClient = useQueryClient();
 
-  const profileInfoQueryKey = ['profile-info', address];
+  const profileInfoQueryKey = ['dev-profile-info', address];
 
   const { isPending: isLoadingMutation, mutate } = useMutation({
-    mutationFn: ({ payload }: MutationPayload) => postProfileInfo(payload),
+    mutationFn: ({ payload }: MutationPayload) => postDevProfileInfo(payload),
     onSuccess(profileInfo, { payload, isToggleAvailability }) {
       queryClient.setQueryData(profileInfoQueryKey, profileInfo);
 
@@ -46,7 +46,7 @@ export const useProfileInfoMutation = () => {
     onSettled() {
       // Always refetch after
       queryClient.invalidateQueries({
-        queryKey: ['profile-info', address],
+        queryKey: ['dev-profile-info', address],
       });
     },
   });
