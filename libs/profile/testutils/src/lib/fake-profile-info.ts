@@ -1,9 +1,12 @@
 import { faker } from '@faker-js/faker';
 import { fakeNullable } from '@jobstash/shared/testutils';
 
-import { CONTACT_DEFAULT_OPTIONS, ProfileInfo } from '@jobstash/profile/core';
+import {
+  CONTACT_DEFAULT_OPTIONS,
+  DevProfileInfo,
+} from '@jobstash/profile/core';
 
-export const fakeProfileInfo = (): ProfileInfo => ({
+export const fakeProfileInfo = (): DevProfileInfo => ({
   avatar: fakeNullable(faker.image.avatar()),
   username: fakeNullable(faker.internet.userName()),
   email: fakeNullable(faker.internet.email()),

@@ -3,7 +3,7 @@ import { type ReactNode } from 'react';
 import { ProfileReviewsPageContext } from '../contexts/profile-reviews-page-context';
 import { useProfileReviewsPage } from '../hooks/use-profile-reviews-page';
 
-import { ProfileInfoProvider } from './profile-info-provider';
+import { DevProfileInfoProvider } from './dev-profile-info-provider';
 
 interface Props {
   children: ReactNode;
@@ -14,7 +14,7 @@ export const ProfileReviewsPageProvider = ({ children }: Props) => {
 
   return (
     <ProfileReviewsPageContext.Provider value={value}>
-      <ProfileInfoProvider>{children}</ProfileInfoProvider>
+      <DevProfileInfoProvider>{children}</DevProfileInfoProvider>
     </ProfileReviewsPageContext.Provider>
   );
 };

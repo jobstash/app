@@ -1,6 +1,6 @@
 import { cn } from '@jobstash/shared/utils';
 
-import { useProfileInfoContext } from '@jobstash/profile/state';
+import { useDevProfileInfoContext } from '@jobstash/profile/state';
 
 import { Text } from '@jobstash/shared/ui';
 
@@ -11,7 +11,7 @@ interface Props {
 }
 
 const SidebarDevSection = ({ isMobile }: Props) => {
-  const { profileInfoData } = useProfileInfoContext();
+  const { profileInfoData } = useDevProfileInfoContext();
 
   const tabs = [
     { text: 'Profile', path: '/profile' },

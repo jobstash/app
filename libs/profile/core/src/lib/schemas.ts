@@ -81,7 +81,7 @@ const profileInfoLocationSchema = myzod.object({
   city: myzod.string().nullable(),
 });
 
-export const profileInfoSchema = myzod.object({
+export const devProfileInfoSchema = myzod.object({
   wallet: myzod.string().min(1),
   avatar: myzod.string().min(1).nullable(),
   username: myzod.string().min(1).nullable(),
@@ -91,16 +91,52 @@ export const profileInfoSchema = myzod.object({
   location: profileInfoLocationSchema,
 });
 
-export const profileInfoResponseSchema = myzod.object({
-  data: profileInfoSchema,
+export const devProfileInfoResponseSchema = myzod.object({
+  data: devProfileInfoSchema,
   success: myzod.boolean(),
   message: myzod.string(),
 });
 
-export const profileInfoPayloadSchema = myzod.object({
+export const devProfileInfoPayloadSchema = myzod.object({
   availableForWork: myzod.boolean(),
   contact: profileInfoContactSchema,
   location: profileInfoLocationSchema,
+});
+
+const orgInternalReferenceSchema = myzod.object({
+  referencePersonName: myzod.string().nullable(),
+  referencePersonRole: myzod.string().nullable(),
+  referenceContact: myzod.string().nullable(),
+  referenceContactPlatform: myzod.string().nullable(),
+});
+
+export const orgProfileInfoSchema = myzod.object({
+  wallet: myzod.string().min(1),
+  avatar: myzod.string().min(1).nullable(),
+  username: myzod.string().min(1).nullable(),
+  email: myzod.string().min(1).nullable(),
+  linkedIn: myzod.string().nullable(),
+  calendly: myzod.string().nullable(),
+  orgId: myzod.string().nullable(),
+  contact: profileInfoContactSchema,
+  subscriberStatus: myzod.object({
+    status: myzod.boolean(),
+    expires: myzod.number().nullable(),
+  }),
+  internalReference: orgInternalReferenceSchema,
+});
+
+export const orgProfileInfoResponseSchema = myzod.object({
+  data: orgProfileInfoSchema,
+  success: myzod.boolean(),
+  message: myzod.string(),
+});
+
+export const orgProfileInfoPayloadSchema = myzod.object({
+  contact: profileInfoContactSchema,
+  linkedIn: myzod.string(),
+  calendly: myzod.string(),
+  internalReference: orgInternalReferenceSchema,
 });
 
 export const profileSkillSchema = myzod.object({

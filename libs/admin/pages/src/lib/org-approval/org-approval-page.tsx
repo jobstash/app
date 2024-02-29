@@ -11,7 +11,7 @@ import {
   TableRow,
 } from '@nextui-org/table';
 
-import { ProfileInfo } from '@jobstash/profile/core';
+import { DevProfileInfo } from '@jobstash/profile/core';
 import { capitalize, cn } from '@jobstash/shared/utils';
 
 import { usePendingOrgsQuery } from '@jobstash/admin/state';
@@ -22,7 +22,7 @@ import { SideBar } from '@jobstash/sidebar/feature';
 
 import { ActionButtons } from './action-buttons';
 
-type ProfileInfoKey = keyof ProfileInfo;
+type ProfileInfoKey = keyof DevProfileInfo;
 type ColumnKey = ProfileInfoKey | 'status' | 'actions';
 
 export const OrgApprovalPage = () => {
@@ -32,33 +32,36 @@ export const OrgApprovalPage = () => {
   // const data = fakeProfileInfos().map((d, i) => ({ ...d, key: i }));
   const data = (pendingOrgs ?? []).map((d, i) => ({ ...d, key: i }));
 
-  const renderCell = useCallback((user: ProfileInfo, columnKey: ColumnKey) => {
-    if (columnKey === 'contact') {
-      const contact = user[columnKey];
-      const text = contact.preferred
-        ? `${contact.preferred}: ${contact.value}`
-        : 'N/A';
+  const renderCell = useCallback(
+    (user: DevProfileInfo, columnKey: ColumnKey) => {
+      if (columnKey === 'contact') {
+        const contact = user[columnKey];
+        const text = contact.preferred
+          ? `${contact.preferred}: ${contact.value}`
+          : 'N/A';
 
-      return <Text>{text}</Text>;
-    }
+        return <Text>{text}</Text>;
+      }
 
-    if (columnKey === 'location') {
-      const { city, country } = user[columnKey];
-      const text = !city && !country ? 'N/A' : `${city}, ${country}`;
-      return <Text>{text}</Text>;
-    }
+      if (columnKey === 'location') {
+        const { city, country } = user[columnKey];
+        const text = !city && !country ? 'N/A' : `${city}, ${country}`;
+        return <Text>{text}</Text>;
+      }
 
-    if (columnKey === 'status') {
-      return <Text>PENDING</Text>;
-    }
+      if (columnKey === 'status') {
+        return <Text>PENDING</Text>;
+      }
 
-    if (columnKey === 'actions') {
-      return <ActionButtons wallet={user.wallet} />;
-    }
+      if (columnKey === 'actions') {
+        return <ActionButtons wallet={user.wallet} />;
+      }
 
-    const text = user[columnKey as ProfileInfoKey] as string;
-    return <Text>{`${text}`}</Text>;
-  }, []);
+      const text = user[columnKey as ProfileInfoKey] as string;
+      return <Text>{`${text}`}</Text>;
+    },
+    [],
+  );
 
   if (isLoading) return <LoadingPage />;
 
@@ -96,7 +99,7 @@ export const OrgApprovalPage = () => {
                 <TableRow key={item.key}>
                   {(columnKey) => (
                     <TableCell>
-                      {renderCell(item, columnKey as keyof ProfileInfo)}
+                      {renderCell(item, columnKey as keyof DevProfileInfo)}
                     </TableCell>
                   )}
                 </TableRow>

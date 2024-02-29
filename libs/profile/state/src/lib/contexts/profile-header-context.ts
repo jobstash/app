@@ -1,6 +1,6 @@
 import { type ChangeEventHandler, createContext, useContext } from 'react';
 
-import { ProfileInfo } from '@jobstash/profile/core';
+import { DevProfileInfo } from '@jobstash/profile/core';
 
 interface ProfileHeaderContextProps {
   isLoading: boolean;
@@ -14,7 +14,7 @@ interface ProfileHeaderContextProps {
   username: string | null;
   location: { country: string | null; city: string | null };
   email: string | null;
-  contact: ProfileInfo['contact'];
+  contact: DevProfileInfo['contact'];
   disableSave: boolean;
   onChangePreferredContact: (v: string | null) => void;
   onChangeSelectedContact: ChangeEventHandler<HTMLInputElement>;

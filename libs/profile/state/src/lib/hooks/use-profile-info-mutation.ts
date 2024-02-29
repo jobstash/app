@@ -1,13 +1,13 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAccount } from 'wagmi';
 
-import { type ProfileInfoPayload } from '@jobstash/profile/core';
+import { type DevProfileInfoPayload } from '@jobstash/profile/core';
 import { notifError, notifSuccess } from '@jobstash/shared/utils';
 
 import { postProfileInfo } from '@jobstash/profile/data';
 
 type MutationPayload = {
-  payload: ProfileInfoPayload;
+  payload: DevProfileInfoPayload;
   isToggleAvailability?: boolean;
 };
 

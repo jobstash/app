@@ -1,14 +1,14 @@
 import { useQuery } from '@tanstack/react-query';
 import { useAccount } from 'wagmi';
 
-import { getProfileInfo } from '@jobstash/profile/data';
+import { getDevProfileInfo } from '@jobstash/profile/data';
 
-export const useProfileInfo = () => {
+export const useDevProfileInfo = () => {
   const { address } = useAccount();
 
   const { isLoading, data: profileInfoData } = useQuery({
-    queryKey: ['profile-info', address],
-    queryFn: () => getProfileInfo(),
+    queryKey: ['dev-profile-info', address],
+    queryFn: () => getDevProfileInfo(),
   });
 
   return {

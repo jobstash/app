@@ -6,7 +6,7 @@ import { CHECK_WALLET_ROLES } from '@jobstash/auth/core';
 import { IS_DEBUG } from '@jobstash/shared/core';
 
 import { useAuthContext } from '@jobstash/auth/state';
-import { ProfileInfoProvider } from '@jobstash/profile/state';
+import { OrgProfileInfoProvider } from '@jobstash/profile/state';
 import { useDelayedAuthRender } from '@jobstash/shared/state';
 
 import { AccountCard } from '@jobstash/profile/ui';
@@ -34,9 +34,9 @@ export const ProfileOrgSettingsPage = () => {
         <SideBar />
 
         <div className="flex items-center justify-center min-h-screen p-2">
-          <ProfileInfoProvider>
+          <OrgProfileInfoProvider>
             <AccountCard />
-          </ProfileInfoProvider>
+          </OrgProfileInfoProvider>
         </div>
       </PageWrapper>
     </>

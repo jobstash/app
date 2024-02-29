@@ -5,9 +5,12 @@ import { MessageResponse } from '@jobstash/shared/core';
 
 import { PROFILE_RIGHT_PANEL_TABS } from './constants';
 import {
-  profileInfoPayloadSchema,
-  profileInfoResponseSchema,
-  profileInfoSchema,
+  devProfileInfoPayloadSchema,
+  devProfileInfoResponseSchema,
+  devProfileInfoSchema,
+  orgProfileInfoPayloadSchema,
+  orgProfileInfoResponseSchema,
+  orgProfileInfoSchema,
   profileOrgRatingPayloadSchema,
   profileOrgRatingResponseSchema,
   profileOrgReviewListResponseSchema,
@@ -49,9 +52,13 @@ export type ProfileOrgReviewListResponse = Infer<
   typeof profileOrgReviewListResponseSchema
 >;
 
-export type ProfileInfo = Infer<typeof profileInfoSchema>;
-export type ProfileInfoPayload = Infer<typeof profileInfoPayloadSchema>;
-export type ProfileInfoResponse = Infer<typeof profileInfoResponseSchema>;
+export type DevProfileInfo = Infer<typeof devProfileInfoSchema>;
+export type DevProfileInfoPayload = Infer<typeof devProfileInfoPayloadSchema>;
+export type DevProfileInfoResponse = Infer<typeof devProfileInfoResponseSchema>;
+
+export type OrgProfileInfo = Infer<typeof orgProfileInfoSchema>;
+export type OrgProfileInfoPayload = Infer<typeof orgProfileInfoPayloadSchema>;
+export type OrgProfileInfoResponse = Infer<typeof orgProfileInfoResponseSchema>;
 
 export type ProfileSkill = Infer<typeof profileSkillSchema>;
 export type ProfileSkillResponse = Infer<typeof profileSkillResponseSchema>;

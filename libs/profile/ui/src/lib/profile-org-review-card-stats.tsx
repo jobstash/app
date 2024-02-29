@@ -1,7 +1,7 @@
 import { ProfileOrgReview } from '@jobstash/profile/core';
 import { MW_URL } from '@jobstash/shared/core';
 
-import { useProfileInfoContext } from '@jobstash/profile/state';
+import { useDevProfileInfoContext } from '@jobstash/profile/state';
 
 import {
   CardSet,
@@ -16,7 +16,7 @@ interface Props {
 }
 
 export const ProfileOrgReviewCardStats = ({ profileOrgReview }: Props) => {
-  const { profileInfoData } = useProfileInfoContext();
+  const { profileInfoData } = useDevProfileInfoContext();
   const isConnectedToGithub = Boolean(profileInfoData?.username);
 
   const cardSets = createCardSets(profileOrgReview, isConnectedToGithub);

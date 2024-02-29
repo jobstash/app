@@ -1,6 +1,6 @@
 import { CHECK_WALLET_ROLES } from '@jobstash/auth/core';
 
-import { ProfileInfoProvider } from '@jobstash/profile/state';
+import { DevProfileInfoProvider } from '@jobstash/profile/state';
 import { useSidebarContext } from '@jobstash/sidebar/state';
 
 import SidebarAdminSection from './sidebar-admin-section';
@@ -19,9 +19,9 @@ const SidebarUserSection = ({ isMobile }: Props) => {
   switch (role) {
     case CHECK_WALLET_ROLES.DEV: {
       return (
-        <ProfileInfoProvider>
+        <DevProfileInfoProvider>
           <SidebarDevSection isMobile={isMobile} />
-        </ProfileInfoProvider>
+        </DevProfileInfoProvider>
       );
     }
 

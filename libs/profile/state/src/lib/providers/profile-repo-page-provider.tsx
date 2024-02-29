@@ -3,7 +3,7 @@ import { type ReactNode } from 'react';
 import { ProfileRepoPageContext } from '../contexts/profile-repo-page-context';
 import { useProfileRepoPage } from '../hooks/use-profile-repo-page';
 
-import { ProfileInfoProvider } from './profile-info-provider';
+import { DevProfileInfoProvider } from './dev-profile-info-provider';
 
 interface Props {
   children: ReactNode;
@@ -14,7 +14,7 @@ export const ProfileRepoPageProvider = ({ children }: Props) => {
 
   return (
     <ProfileRepoPageContext.Provider value={value}>
-      <ProfileInfoProvider>{children}</ProfileInfoProvider>
+      <DevProfileInfoProvider>{children}</DevProfileInfoProvider>
     </ProfileRepoPageContext.Provider>
   );
 };

@@ -7,8 +7,8 @@ import { useDisconnect } from 'wagmi';
 import { getEmailAvatar } from '@jobstash/profile/utils';
 
 import {
+  useDevProfileInfoContext,
   useProfileDeleteMutation,
-  useProfileInfoContext,
 } from '@jobstash/profile/state';
 
 import AccountCardDeleteButton from './account-card-delete-button';
@@ -39,7 +39,7 @@ const AccountCard = () => {
     mutate();
   };
 
-  const { profileInfoData } = useProfileInfoContext();
+  const { profileInfoData } = useDevProfileInfoContext();
 
   return (
     <>

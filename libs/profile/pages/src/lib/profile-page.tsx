@@ -3,6 +3,10 @@ import { LoadingPage } from '@jobstash/shared/pages';
 import { CHECK_WALLET_FLOWS, CHECK_WALLET_ROLES } from '@jobstash/auth/core';
 
 import { useAuthContext } from '@jobstash/auth/state';
+import {
+  DevProfileInfoProvider,
+  OrgProfileInfoProvider,
+} from '@jobstash/profile/state';
 import { useDelayedAuthRender } from '@jobstash/shared/state';
 
 import { NotFoundPage } from '@jobstash/shared/ui';
@@ -25,10 +29,19 @@ export const ProfilePage = () => {
     return <NotFoundPage />;
   }
 
-  if (isDev) return <ProfileDevPage />;
+  if (isDev)
+    return (
+      <DevProfileInfoProvider>
+        <ProfileDevPage />
+      </DevProfileInfoProvider>
+    );
 
   if (isOrg && orgFlows.has(flow as keyof typeof ORG_ROLE_PAGE)) {
-    return ORG_ROLE_PAGE[flow as keyof typeof ORG_ROLE_PAGE];
+    return (
+      <OrgProfileInfoProvider>
+        {ORG_ROLE_PAGE[flow as keyof typeof ORG_ROLE_PAGE]}
+      </OrgProfileInfoProvider>
+    );
   }
 
   return <LoadingPage />;

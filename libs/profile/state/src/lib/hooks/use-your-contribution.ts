@@ -1,12 +1,12 @@
 import { useState } from 'react';
 
-import { useProfileInfoContext } from '../contexts/profile-info-context';
+import { useDevProfileInfoContext } from '../contexts/dev-profile-info-context';
 import { useProfileRepoPageContext } from '../contexts/profile-repo-page-context';
 
 import { useYourContributionMutation } from './use-your-contribution-mutation';
 
 export const useYourContribution = () => {
-  const { profileInfoData } = useProfileInfoContext();
+  const { profileInfoData } = useDevProfileInfoContext();
   const username = profileInfoData?.username ?? '';
   const avatar = profileInfoData?.avatar ?? '';
 

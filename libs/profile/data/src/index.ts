@@ -1,4 +1,5 @@
-export * from './lib/get-profile-info';
+export * from './lib/get-dev-profile-info';
+export * from './lib/get-org-profile-info';
 export * from './lib/get-profile-org-review-list';
 export * from './lib/get-profile-repo-list';
 export * from './lib/get-profile-showcase';
