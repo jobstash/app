@@ -17,7 +17,7 @@ export const useProfileInfoMutation = () => {
 
   const profileInfoQueryKey = ['profile-info', address];
 
-  const { isLoading: isLoadingMutation, mutate } = useMutation({
+  const { isPending: isLoadingMutation, mutate } = useMutation({
     mutationFn: ({ payload }: MutationPayload) => postProfileInfo(payload),
     onSuccess(profileInfo, { payload, isToggleAvailability }) {
       queryClient.setQueryData(profileInfoQueryKey, profileInfo);

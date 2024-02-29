@@ -17,7 +17,7 @@ export const useYourContributionMutation = () => {
     activeProfileRepoAtom,
   );
 
-  const { isLoading, mutate } = useMutation({
+  const { isPending: isLoading, mutate } = useMutation({
     mutationFn: (payload: ProfileRepoContributionPayload) =>
       postProfileRepoContribution(payload),
 

@@ -97,7 +97,7 @@ const JobSubmission = () => {
 
   const router = useRouter();
 
-  const { isLoading, isSuccess, mutate } = useMutation({
+  const { isPending, isSuccess, mutate } = useMutation({
     mutationFn: (data: Record<string, string | number>) =>
       fetch('api/job-submission', {
         method: 'POST',
@@ -153,12 +153,12 @@ const JobSubmission = () => {
         className={cn(
           'pb-20 relative',
           // {
-          //   'opacity-40  pointer-events-none': isLoading,
+          //   'opacity-40  pointer-events-none': isPending,
           // }
         )}
         onSubmit={submit}
       >
-        <LoadingOverlay visible={isLoading} />
+        <LoadingOverlay visible={isPending} />
         <div className="grid grid-cols-1 md:grid-cols-2 min-h-screen text-center md:px-[10%]">
           {/* LEFT */}
           <div className="text-left p-8">
@@ -240,8 +240,8 @@ const JobSubmission = () => {
         {/* SUBMIT */}
         <div className="flex justify-end md: px-[10%]">
           <div className="px-8">
-            <Button type="submit" isDisabled={isLoading}>
-              {isLoading ? 'Loading' : isSuccess ? 'Redirecting' : 'Submit'}
+            <Button type="submit" isDisabled={isPending}>
+              {isPending ? 'Loading' : isSuccess ? 'Redirecting' : 'Submit'}
             </Button>
           </div>
         </div>

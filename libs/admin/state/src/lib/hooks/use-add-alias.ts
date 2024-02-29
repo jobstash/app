@@ -27,7 +27,7 @@ export const useAddAlias = (successCb?: () => void) => {
         successCb();
       }
 
-      queryClient.invalidateQueries(['org-details', orgId]);
+      queryClient.invalidateQueries({ queryKey: ['org-details', orgId] });
     },
     onError(data) {
       notifError({

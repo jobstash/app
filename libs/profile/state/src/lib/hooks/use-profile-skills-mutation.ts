@@ -18,7 +18,7 @@ export const useProfileSkillsMutation = () => {
 
   const [activeRepo, setActiveRepo] = useAtom(activeProfileRepoAtom);
 
-  const { isLoading, mutate } = useMutation({
+  const { isPending: isLoading, mutate } = useMutation({
     mutationFn: (payload: ProfileSkillsPayload) => postProfileSkills(payload),
     onMutate() {
       notifications.hide(TOAST_ID);
@@ -65,8 +65,8 @@ export const useProfileSkillsMutation = () => {
       });
     },
     onSettled() {
-      queryClient.invalidateQueries(['profile-skills', address]);
-      queryClient.invalidateQueries(['profile-repo-list']);
+      queryClient.invalidateQueries({ queryKey: ['profile-skills', address] });
+      queryClient.invalidateQueries({ queryKey: ['profile-repo-list'] });
     },
   });
 

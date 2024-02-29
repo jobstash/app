@@ -8,7 +8,7 @@ import { setJobBookmark } from '@jobstash/jobs/data';
 export const useJobBookmarkMutation = (shouldDelete = false) => {
   const queryClient = useQueryClient();
 
-  const { isLoading, mutate } = useMutation({
+  const { isPending: isLoading, mutate } = useMutation({
     mutationFn: ({ shortUUID }: JobPost) =>
       setJobBookmark({ payload: { shortUUID }, shouldDelete }),
     onSuccess() {
@@ -19,7 +19,7 @@ export const useJobBookmarkMutation = (shouldDelete = false) => {
         } to your list.`,
       });
 
-      queryClient.invalidateQueries(['job-bookmarks']);
+      queryClient.invalidateQueries({ queryKey: ['job-bookmarks'] });
     },
     onError(error) {
       notifError({

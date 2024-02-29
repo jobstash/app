@@ -20,7 +20,7 @@ export const useGithubLogin = () => {
 
   const queryClient = useQueryClient();
 
-  const { mutate, isLoading } = useMutation({
+  const { mutate, isPending } = useMutation({
     mutationFn: (payload: GithubLoginPayload) => githubLogin(payload),
     async onSuccess() {
       const checkWalletData = await getCheckWallet();
@@ -62,7 +62,7 @@ export const useGithubLogin = () => {
     },
   });
 
-  return { mutate, isLoading };
+  return { mutate, isLoadin: isPending };
 };
 
 const GH_ACCOUNT_USED_MESSAGE =

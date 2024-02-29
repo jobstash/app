@@ -16,7 +16,7 @@ const TableActions = ({ table, row }: Props) => {
   const initData = initAllJobs ? initAllJobs[row.index] : undefined;
   const currentData = row.original;
 
-  const { isLoading, mutate } = useAllJobsMutation(initAllJobs);
+  const { isPending: isLoading, mutate } = useAllJobsMutation(initAllJobs);
 
   const cleanedCurrentData: JobsUpdateableFields = {
     ...currentData,

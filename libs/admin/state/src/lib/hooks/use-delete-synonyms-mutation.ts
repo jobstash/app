@@ -12,7 +12,7 @@ import { postDeleteSynonyms } from '@jobstash/admin/data';
 export const useDeleteSynonymsMutation = () => {
   const {
     isSuccess: isSuccessDeleteSynonyms,
-    isLoading: isLoadingDeleteSynonyms,
+    isPending: isLoadingDeleteSynonyms,
     mutateAsync: mutateAsyncDeleteSynonyms,
   } = useMutation({
     mutationFn: (payload: PreferredTermsPayload) => postDeleteSynonyms(payload),

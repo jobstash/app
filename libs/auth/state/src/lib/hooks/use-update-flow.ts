@@ -13,7 +13,11 @@ export const useUpdateFlow = (successRoute?: string) => {
   const queryClient = useQueryClient();
 
   const { refetch } = useAuthContext();
-  const { isLoading, mutate, mutateAsync } = useMutation({
+  const {
+    isPending: isLoading,
+    mutate,
+    mutateAsync,
+  } = useMutation({
     mutationFn: (flow: CheckWalletFlow) =>
       fetch(`${MW_URL}/siwe/update-flow`, {
         method: 'POST',
@@ -45,7 +49,7 @@ export const useUpdateFlow = (successRoute?: string) => {
       // TODO: Notification ?
     },
     onSettled() {
-      queryClient.invalidateQueries(['check-wallet']);
+      queryClient.invalidateQueries({ queryKey: ['check-wallet'] });
     },
   });
 

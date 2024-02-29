@@ -66,8 +66,13 @@ export const JobPostPage = ({
   const router = useRouter();
   const shortUuid = (router.query.slug?.slice(-6) as string) ?? '';
 
-  const { data: jobPost } = useJobPost(shortUuid, (data) => {
-    setActiveJob(data);
+  const { data: jobPost } = useJobPost(shortUuid);
+
+  // (react-query breaking change v5 - removed onSuccess)
+  useEffect(() => {
+    if (jobPost && !initJob) {
+      setActiveJob(jobPost);
+    }
   });
 
   useEffect(() => {

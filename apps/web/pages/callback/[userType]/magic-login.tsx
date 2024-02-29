@@ -1,6 +1,8 @@
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 
 import { LoadingPage } from '@jobstash/shared/pages';
+import { useQueryClient } from '@tanstack/react-query';
 
 import { useSendMagicLinkToken } from '@jobstash/auth/state';
 
@@ -9,6 +11,7 @@ import { SideBar } from '@jobstash/sidebar/feature';
 
 const MagicLoginCallbackPage = () => {
   const router = useRouter();
+  const queryClient = useQueryClient();
 
   const tokenParam = new URLSearchParams(window.location.search).get('token');
 
@@ -18,7 +21,21 @@ const MagicLoginCallbackPage = () => {
     | undefined;
   const isUserType = USER_TYPES.has(userType ?? '');
 
-  const { isLoading, isError } = useSendMagicLinkToken(tokenParam, userType);
+  const { isLoading, isError, isSuccess } = useSendMagicLinkToken(
+    tokenParam,
+    userType,
+  );
+
+  // Invalidate check-wallet, handle org redirect
+  // (react-query breaking change v5 - removed onSuccess)
+  useEffect(() => {
+    if (isSuccess) {
+      queryClient.invalidateQueries({
+        queryKey: ['check-wallet'],
+      });
+      if (userType === 'org') router.push('/profile');
+    }
+  }, [isSuccess, queryClient, router, userType]);
 
   if (isLoading) return <LoadingPage />;
 

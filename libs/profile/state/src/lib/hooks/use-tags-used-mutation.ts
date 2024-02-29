@@ -11,7 +11,7 @@ export const useTagsUsedMutation = () => {
   const { setIsLoadingCard } = useProfileRepoPageContext();
   const queryClient = useQueryClient();
 
-  const { isLoading, mutate } = useMutation({
+  const { isPending: isLoading, mutate } = useMutation({
     mutationFn: (payload: ProfileRepoTagPayload) => postProfileRepoTag(payload),
     onMutate() {
       setIsLoadingCard(true);

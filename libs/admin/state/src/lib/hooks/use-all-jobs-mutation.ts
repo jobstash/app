@@ -7,7 +7,7 @@ import { postAllJobs } from '@jobstash/admin/data';
 
 export const useAllJobsMutation = (initAllJobs?: JobsUpdateableFields[]) => {
   const queryClient = useQueryClient();
-  const { isLoading, mutate } = useMutation({
+  const { isPending, mutate } = useMutation({
     mutationFn: (payload: JobsUpdateableFields) => postAllJobs(payload),
     async onMutate() {
       await queryClient.cancelQueries({ queryKey: ['all-jobs'] });
@@ -39,5 +39,5 @@ export const useAllJobsMutation = (initAllJobs?: JobsUpdateableFields[]) => {
     },
   });
 
-  return { isLoading, mutate };
+  return { isPending, mutate };
 };

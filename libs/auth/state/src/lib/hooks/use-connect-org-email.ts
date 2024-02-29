@@ -3,7 +3,12 @@ import { FormEventHandler } from 'react';
 import { useSendMagicLink } from './use-send-magic-link';
 
 export const useConnectOrgEmail = () => {
-  const { isSuccess, isLoading, isError, mutate } = useSendMagicLink('org');
+  const {
+    isSuccess,
+    isPending: isLoading,
+    isError,
+    mutate,
+  } = useSendMagicLink('org');
 
   const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();

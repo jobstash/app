@@ -9,7 +9,7 @@ interface Props {
 }
 
 export const ActionButtons = ({ wallet }: Props) => {
-  const { isLoading, mutate } = useAuthorizeOrg();
+  const { isPending, mutate } = useAuthorizeOrg();
 
   const approve = () => {
     if (wallet) mutate({ wallet, verdict: 'approve' });
@@ -26,7 +26,7 @@ export const ActionButtons = ({ wallet }: Props) => {
           isIconOnly
           color="default"
           size="sm"
-          isDisabled={isLoading}
+          isDisabled={isPending}
           onClick={approve}
         >
           <CheckIcon className="w-6 h-6" />
@@ -37,7 +37,7 @@ export const ActionButtons = ({ wallet }: Props) => {
           isIconOnly
           color="danger"
           size="sm"
-          isDisabled={isLoading}
+          isDisabled={isPending}
           onClick={reject}
         >
           <XMarkIcon className="w-6 h-6" />

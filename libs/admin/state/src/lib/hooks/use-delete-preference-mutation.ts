@@ -8,7 +8,7 @@ import { postDeletePreference } from '@jobstash/admin/data';
 export const useDeletePreferenceMutation = () => {
   const {
     isSuccess: isSuccessDeletePreference,
-    isLoading: isLoadingDeletePreference,
+    isPending: isLoadingDeletePreference,
     mutateAsync: mutateAsyncDeletePreference,
   } = useMutation({
     mutationFn: (payload: DeletePreferencePayload) =>

@@ -8,7 +8,7 @@ import { postCreatePreference } from '@jobstash/admin/data';
 export const useCreatePreferenceMutation = () => {
   const {
     isSuccess: isSuccessCreatePreference,
-    isLoading: isLoadingCreatePreference,
+    isPending: isLoadingCreatePreference,
     mutateAsync: mutateAsyncCreatePreference,
   } = useMutation({
     mutationFn: (payload: PreferredTermsPayload) =>

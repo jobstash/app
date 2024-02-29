@@ -19,7 +19,7 @@ export const useRatingMutation = () => {
     activeProfileOrgReviewAtom,
   );
 
-  const { isLoading, mutate } = useMutation({
+  const { isPending: isLoading, mutate } = useMutation({
     mutationFn: (payload: ProfileOrgRatingPayload) =>
       postProfileOrgRating(payload),
     onMutate() {

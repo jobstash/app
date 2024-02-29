@@ -124,7 +124,7 @@ export const WalletProvider = ({ children }: Props) => {
             message: 'Wallet checked successfully',
             success: true,
           });
-          queryClient.invalidateQueries(['check-wallet']);
+          queryClient.invalidateQueries({ queryKey: ['check-wallet'] });
         }}
       >
         <ConnectKitProvider>{children}</ConnectKitProvider>

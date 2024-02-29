@@ -7,10 +7,10 @@ import { postAuthorizeOrg } from '@jobstash/admin/data';
 
 export const useAuthorizeOrg = () => {
   const queryClient = useQueryClient();
-  const { isSuccess, isLoading, mutate } = useMutation({
+  const { isSuccess, isPending, mutate } = useMutation({
     mutationFn: (payload: AuthorizeOrgPayload) => postAuthorizeOrg(payload),
     onSuccess({ message }, { verdict }) {
-      queryClient.invalidateQueries(['pending-orgs']);
+      queryClient.invalidateQueries({ queryKey: ['pending-orgs'] });
       notifSuccess({
         title: verdict === 'approve' ? 'Org Approved!' : 'Org Rejected',
         message,
@@ -25,5 +25,5 @@ export const useAuthorizeOrg = () => {
     },
   });
 
-  return { isSuccess, isLoading, mutate };
+  return { isSuccess, isPending, mutate };
 };

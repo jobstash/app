@@ -13,7 +13,7 @@ export const useProfileShowcaseMutation = (onSuccessCb: () => void) => {
   const { address } = useAccount();
   const queryClient = useQueryClient();
 
-  const { isLoading, mutate } = useMutation({
+  const { isPending: isLoading, mutate } = useMutation({
     mutationFn: (payload: ProfileShowcasePayload) =>
       postProfileShowcase(payload),
 
@@ -33,7 +33,9 @@ export const useProfileShowcaseMutation = (onSuccessCb: () => void) => {
       });
 
       queryClient.setQueryData(['profile-showcase', address], vars.showcase);
-      queryClient.invalidateQueries(['profile-showcase', address]);
+      queryClient.invalidateQueries({
+        queryKey: ['profile-showcase', address],
+      });
 
       onSuccessCb();
     },

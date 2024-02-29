@@ -2,12 +2,14 @@ import { useRouter } from 'next/router';
 import { useEffect, useMemo, useRef } from 'react';
 import { useInView } from 'react-intersection-observer';
 
+import { useQueryClient } from '@tanstack/react-query';
 import { useAtom, useSetAtom } from 'jotai';
 
 import { type OrgListItem } from '@jobstash/organizations/core';
 import { createOrgsFilterParamsObj } from '@jobstash/organizations/utils';
 
 import { useIsMobile } from '@jobstash/shared/state';
+import { getOrgDetails } from '@jobstash/organizations/data';
 
 import { activeOrgIdAtom } from '../state/active-org-atom';
 import { orgCountAtom } from '../state/org-count-atom';
@@ -16,14 +18,31 @@ import { orgsPrevLinkAtom } from '../state/orgs-prev-link-atom';
 import { useOrgListQuery } from './use-org-list-query';
 
 export const useOrgList = (initOrg: OrgListItem | null) => {
+  const queryClient = useQueryClient();
   const {
     data,
     isLoading,
+    isSuccess,
     error,
     fetchNextPage,
     isFetchingNextPage,
     hasNextPage,
   } = useOrgListQuery();
+
+  // Prefetch org items
+  // (react-query breaking change v5 - removed onSuccess)
+  useEffect(() => {
+    if (data && isSuccess) {
+      const orgListItems = data.pages.flatMap((d) => d.data);
+      for (const orgListItem of orgListItems) {
+        const { orgId } = orgListItem;
+        queryClient.prefetchQuery({
+          queryKey: ['org-details', orgId],
+          queryFn: () => getOrgDetails(orgId),
+        });
+      }
+    }
+  }, [data, isSuccess, queryClient]);
 
   const [activeOrgId, setActiveOrgId] = useAtom(activeOrgIdAtom);
 

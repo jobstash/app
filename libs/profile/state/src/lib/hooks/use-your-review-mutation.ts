@@ -19,7 +19,7 @@ export const useYourReviewMutation = () => {
     activeProfileOrgReviewAtom,
   );
 
-  const { isLoading, mutate } = useMutation({
+  const { isPending: isLoading, mutate } = useMutation({
     mutationFn: (payload: ProfileOrgReviewPayload) =>
       postProfileOrgReview(payload),
     onMutate() {

@@ -7,10 +7,10 @@ import { postPairedTerms } from '@jobstash/admin/data';
 
 export const usePairedTermsMutation = () => {
   const queryClient = useQueryClient();
-  const { isLoading, mutate } = useMutation({
+  const { isPending, mutate } = useMutation({
     mutationFn: (payload: PairedTermsPayload) => postPairedTerms(payload),
     onSuccess(_, { pairedTagList }) {
-      queryClient.invalidateQueries(['godmodePairedTerms']);
+      queryClient.invalidateQueries({ queryKey: ['godmodePairedTerms'] });
       // TODO: setQueryData paired terms
 
       const title = `New Paired Term${pairedTagList.length > 1 ? 's' : ''}`;
@@ -31,7 +31,7 @@ export const usePairedTermsMutation = () => {
   });
 
   return {
-    isLoading,
+    isLoading: isPending,
     mutate,
   };
 };

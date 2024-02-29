@@ -22,14 +22,14 @@ export const getServerSideProps: GetServerSideProps<Props> = withCSR(
 
     const filterParamsObj = createProjectsFilterParamsObj(ctx.query);
 
-    await queryClient.fetchInfiniteQuery(
-      ['project-list', filterParamsObj],
-      async ({ pageParam }) => getProjectList(pageParam ?? 1, filterParamsObj),
-      {
-        staleTime: 1000 * 60 * 60, // 1hr
-        getNextPageParam: ({ page }) => (page > 0 ? page + 1 : undefined),
-      },
-    );
+    await queryClient.fetchInfiniteQuery({
+      queryKey: ['project-list', filterParamsObj],
+      queryFn: async ({ pageParam }) =>
+        getProjectList(pageParam ?? 1, filterParamsObj),
+      initialPageParam: 1,
+      staleTime: 1000 * 60 * 60, // 1hr
+      // getNextPageParam: ({ page }) => (page > 0 ? page + 1 : undefined),
+    });
 
     // Prefetch individual project details
     const initDehydratedState = dehydrate(queryClient);

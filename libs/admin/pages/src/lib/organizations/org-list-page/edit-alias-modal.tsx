@@ -2,7 +2,6 @@ import { FormEventHandler, useState } from 'react';
 
 import { Button } from '@nextui-org/button';
 import { Chip } from '@nextui-org/chip';
-import { Divider } from '@nextui-org/divider';
 import { Input } from '@nextui-org/input';
 import { Kbd } from '@nextui-org/kbd';
 import {
@@ -68,7 +67,7 @@ export const EditAliasModal = () => {
     }));
   };
 
-  const { mutate, isLoading } = useAddAlias(closeModal);
+  const { mutate, isPending } = useAddAlias(closeModal);
   const onSave = () => {
     mutate({ orgId, aliases });
   };
@@ -144,7 +143,7 @@ export const EditAliasModal = () => {
                     color="success"
                     variant="flat"
                     isDisabled={isDisabledSave}
-                    isLoading={isLoading}
+                    isLoading={isPending}
                     onClick={onSave}
                   >
                     Save

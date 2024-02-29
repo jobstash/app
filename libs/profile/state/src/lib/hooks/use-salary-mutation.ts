@@ -19,7 +19,7 @@ export const useSalaryMutation = () => {
     activeProfileOrgReviewAtom,
   );
 
-  const { isLoading, mutate } = useMutation({
+  const { isPending: isLoading, mutate } = useMutation({
     mutationFn: (payload: ProfileOrgSalaryPayload) =>
       postProfileOrgSalary(payload),
     onMutate() {

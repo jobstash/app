@@ -51,8 +51,8 @@ dependencies:
     specifier: 0.5.6
     version: 0.5.6
   '@tanstack/react-query':
-    specifier: ^4.29.12
-    version: 4.29.12(react-dom@18.2.0)(react@18.2.0)
+    specifier: ^5.24.1
+    version: 5.24.1(react@18.2.0)
   '@tanstack/react-table':
     specifier: ^8.10.7
     version: 8.10.7(react-dom@18.2.0)(react@18.2.0)
@@ -167,8 +167,8 @@ devDependencies:
     specifier: 0.2.20
     version: 0.2.20(@swc/core@1.3.107)
   '@tanstack/eslint-plugin-query':
-    specifier: ^4.29.9
-    version: 4.29.9
+    specifier: ^4.38.0
+    version: 4.38.0(eslint@8.48.0)
   '@testing-library/react':
     specifier: 14.0.0
     version: 14.0.0(react-dom@18.2.0)(react@18.2.0)
@@ -8431,8 +8431,12 @@ packages:
       defer-to-connect: 2.0.1
     dev: true
 
-  /@tanstack/eslint-plugin-query@4.29.9:
-    resolution: {integrity: sha512-JlIZcs+zhl/ihta49iIbMCf3E8tSvGDqMIH+oItnYLOzWI7oiujXu7FYgna2E1V79KhR0PaxkPX6jHZLpvacgw==}
+  /@tanstack/eslint-plugin-query@4.38.0(eslint@8.48.0):
+    resolution: {integrity: sha512-KmcrnjTQzONBqxNWSVKyPNi5tLq0URvIiWThE9HIK5qePGtB0VqoHfOsn4nuGJD268xDNDpFQjQiko9mMa5iLQ==}
+    peerDependencies:
+      eslint: ^6.0.0 || ^7.0.0 || ^8.0.0
+    dependencies:
+      eslint: 8.48.0
     dev: true
 
   /@tanstack/query-core@4.29.11:
@@ -8441,6 +8445,10 @@ packages:
 
   /@tanstack/query-core@4.36.1:
     resolution: {integrity: sha512-DJSilV5+ytBP1FbFcEJovv4rnnm/CokuVvrBEtW/Va9DvuJ3HksbXUJEpI0aV1KtuL4ZoO9AVE6PyNLzF7tLeA==}
+    dev: false
+
+  /@tanstack/query-core@5.24.1:
+    resolution: {integrity: sha512-DZ6Nx9p7BhjkG50ayJ+MKPgff+lMeol7QYXkvuU5jr2ryW/4ok5eanaS9W5eooA4xN0A/GPHdLGOZGzArgf5Cg==}
     dev: false
 
   /@tanstack/query-persist-client-core@4.36.1:
@@ -8480,6 +8488,15 @@ packages:
       react: 18.2.0
       react-dom: 18.2.0(react@18.2.0)
       use-sync-external-store: 1.2.0(react@18.2.0)
+    dev: false
+
+  /@tanstack/react-query@5.24.1(react@18.2.0):
+    resolution: {integrity: sha512-4+09JEdO4d6+Gc8Y/g2M/MuxDK5IY0QV8+2wL2304wPKJgJ54cBbULd3nciJ5uvh/as8rrxx6s0mtIwpRuGd1g==}
+    peerDependencies:
+      react: ^18.0.0
+    dependencies:
+      '@tanstack/query-core': 5.24.1
+      react: 18.2.0
     dev: false
 
   /@tanstack/react-table@8.10.7(react-dom@18.2.0)(react@18.2.0):

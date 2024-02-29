@@ -14,7 +14,12 @@ import { useAuthContext } from './use-auth-context';
 import { useSendMagicLink } from './use-send-magic-link';
 
 export const useConnectDevEmail = () => {
-  const { isSuccess, isLoading, isError, mutate } = useSendMagicLink('dev');
+  const {
+    isSuccess,
+    isPending: isLoading,
+    isError,
+    mutate,
+  } = useSendMagicLink('dev');
 
   const onSubmit: FormEventHandler<HTMLFormElement> = (e) => {
     e.preventDefault();
@@ -53,7 +58,7 @@ export const useConnectDevEmail = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       if (role !== CHECK_WALLET_ROLES.DEV) {
-        queryClient.invalidateQueries(['check-wallet']);
+        queryClient.invalidateQueries({ queryKey: ['check-wallet'] });
       }
     }, 2000);
 

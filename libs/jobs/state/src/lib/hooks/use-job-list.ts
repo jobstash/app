@@ -2,12 +2,14 @@ import { useRouter } from 'next/router';
 import { useEffect, useMemo, useRef } from 'react';
 import { useInView } from 'react-intersection-observer';
 
+import { useQueryClient } from '@tanstack/react-query';
 import { useAtom, useSetAtom } from 'jotai';
 
 import { type JobPost } from '@jobstash/jobs/core';
 import { createJobsFilterParamsObj } from '@jobstash/jobs/utils';
 
 import { useIsMobile } from '@jobstash/shared/state';
+import { getCompetitors } from '@jobstash/competitors/data';
 
 import { activeJobAtom } from '../atoms/active-job-atom';
 import { jobCountAtom } from '../atoms/job-count-atom';
@@ -15,6 +17,8 @@ import { jobsPrevLinkAtom } from '../atoms/jobs-prev-link';
 
 import { useJobListQuery } from './use-job-list-query';
 export const useJobList = (initJob: JobPost | null) => {
+  const queryClient = useQueryClient();
+
   const [activeJob, setActiveJob] = useAtom(activeJobAtom);
 
   const { push, query, asPath } = useRouter();
@@ -24,11 +28,30 @@ export const useJobList = (initJob: JobPost | null) => {
   const {
     data,
     isLoading,
+    isSuccess,
     error,
     fetchNextPage,
     isFetchingNextPage,
     hasNextPage,
   } = useJobListQuery();
+
+  // Prefetch job items
+  // (react-query breaking change v5 - removed onSuccess)
+  useEffect(() => {
+    if (data && isSuccess) {
+      const jobPosts = data.pages.flatMap((d) => d.data);
+      for (const job of jobPosts) {
+        queryClient.setQueryData(['job-post', job.shortUUID], job);
+        if (job.organization.projects.length > 0) {
+          const projectId = job.organization.projects[0].id;
+          queryClient.prefetchQuery({
+            queryKey: ['competitors', projectId],
+            queryFn: () => getCompetitors(job.organization.projects[0].id),
+          });
+        }
+      }
+    }
+  }, [data, isSuccess, queryClient]);
 
   const setJobCountAtom = useSetAtom(jobCountAtom);
   useEffect(() => {

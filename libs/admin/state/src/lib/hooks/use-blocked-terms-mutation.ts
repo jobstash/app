@@ -7,7 +7,7 @@ import { postSetBlockedTerms } from '@jobstash/admin/data';
 
 export const useBlockedTermsMutation = (successCb: () => void) => {
   const {
-    isLoading: isLoadingSetBlockedTerms,
+    isPending: isLoadingSetBlockedTerms,
     mutateAsync: mutateAsyncSetBlockedTerms,
   } = useMutation({
     mutationFn: ({ tagNameList }: BlockedTermsPayload) =>

@@ -23,14 +23,14 @@ export const getServerSideProps: GetServerSideProps<OrgDetailsPageProps> =
 
       const filterParamsObj = createOrgsFilterParamsObj(ctx.query);
 
-      await queryClient.fetchInfiniteQuery(
-        ['org-list', filterParamsObj],
-        async ({ pageParam }) => getOrgList(pageParam ?? 1, filterParamsObj),
-        {
-          staleTime: 1000 * 60 * 60, // 1hr
-          getNextPageParam: ({ page }) => (page > 0 ? page + 1 : undefined),
-        },
-      );
+      await queryClient.fetchInfiniteQuery({
+        queryKey: ['org-list', filterParamsObj],
+        queryFn: async ({ pageParam }) =>
+          getOrgList(pageParam ?? 1, filterParamsObj),
+        initialPageParam: 1,
+        staleTime: 1000 * 60 * 60, // 1hr
+        // getNextPageParam: ({ page }) => (page > 0 ? page + 1 : undefined),
+      });
 
       // Prefetch individual org details
       const initDehydratedState = dehydrate(queryClient);

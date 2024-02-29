@@ -1,7 +1,7 @@
 import { type ReactNode, useState } from 'react';
 
 import {
-  Hydrate,
+  HydrationBoundary,
   QueryClient,
   QueryClientProvider,
 } from '@tanstack/react-query';
@@ -26,7 +26,7 @@ const ReactQueryProvider = ({ children, dehydratedState }: Props) => {
 
   return (
     <QueryClientProvider client={queryClient}>
-      <Hydrate state={dehydratedState}>{children}</Hydrate>
+      <HydrationBoundary state={dehydratedState}>{children}</HydrationBoundary>
     </QueryClientProvider>
   );
 };

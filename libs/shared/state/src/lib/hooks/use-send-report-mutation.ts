@@ -10,7 +10,7 @@ import { useReportModal } from './use-report-modal';
 export const useSendReportMutation = () => {
   const { close } = useReportModal();
 
-  const { isLoading, mutate } = useMutation({
+  const { isPending: isLoading, mutate } = useMutation({
     mutationFn: (payload: ReportPayload) => sendReport(payload),
     onSuccess() {
       notifSuccess({
