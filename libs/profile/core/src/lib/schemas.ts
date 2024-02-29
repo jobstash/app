@@ -115,7 +115,7 @@ export const orgProfileInfoSchema = myzod.object({
   avatar: myzod.string().min(1).nullable(),
   username: myzod.string().min(1).nullable(),
   email: myzod.string().min(1).nullable(),
-  linkedIn: myzod.string().nullable(),
+  linkedin: myzod.string().nullable(),
   calendly: myzod.string().nullable(),
   orgId: myzod.string().nullable(),
   contact: profileInfoContactSchema,
@@ -134,7 +134,7 @@ export const orgProfileInfoResponseSchema = myzod.object({
 
 export const orgProfileInfoPayloadSchema = myzod.object({
   contact: profileInfoContactSchema,
-  linkedIn: myzod.string(),
+  linkedin: myzod.string(),
   calendly: myzod.string(),
   internalReference: orgInternalReferenceSchema,
 });
