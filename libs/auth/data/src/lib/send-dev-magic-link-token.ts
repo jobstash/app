@@ -6,15 +6,12 @@ import { MW_URL } from '@jobstash/shared/core';
 
 import { mwFetch } from '@jobstash/shared/data';
 
-export const sendMagicLinkToken = async (
-  token: string,
-  userType: 'dev' | 'org',
-) => {
-  const url = `${MW_URL}/auth/magic/${userType}/login/callback?token=${token}`;
+export const sendDevMagicLinkToken = async (token: string) => {
+  const url = `${MW_URL}/auth/magic/dev/login/callback?token=${token}`;
 
   const options = {
     responseSchema: devProfileInfoResponseSchema,
-    sentryLabel: 'sendMagicLinkToken',
+    sentryLabel: 'sendDevMagicLinkToken',
     credentials: 'include' as RequestCredentials,
     mode: 'cors' as RequestMode,
   };
