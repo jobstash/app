@@ -13,7 +13,11 @@ import { useAtomValue } from 'jotai';
 import { ANALYTICS_ID } from '@jobstash/shared/core';
 import { cn } from '@jobstash/shared/utils';
 
-import { AuthProvider, WalletProvider } from '@jobstash/auth/state';
+import {
+  AuthProvider,
+  WagmiProvider,
+  WalletProvider,
+} from '@jobstash/auth/state';
 import {
   isOpenTopBannerAtom,
   MantineProvider,
@@ -72,22 +76,24 @@ const App = ({ Component, pageProps }: AppProps) => {
       )}
       <NextUIProvider>
         <MantineProvider>
-          <ReactQueryProvider dehydratedState={pageProps.dehydratedState}>
-            <WalletProvider>
-              <AuthProvider screenLoader={<LoadingPage />}>
-                {/* <Component {...pageProps} /> */}
+          <WagmiProvider>
+            <ReactQueryProvider dehydratedState={pageProps.dehydratedState}>
+              <WalletProvider>
+                <AuthProvider screenLoader={<LoadingPage />}>
+                  {/* <Component {...pageProps} /> */}
 
-                {/* <TopBanner /> */}
-                {/* <DonateModal /> */}
-                <div className={cn({ 'pt-10': isOpenTopBanner })}>
-                  <Component {...pageProps} />
-                </div>
+                  {/* <TopBanner /> */}
+                  {/* <DonateModal /> */}
+                  <div className={cn({ 'pt-10': isOpenTopBanner })}>
+                    <Component {...pageProps} />
+                  </div>
 
-                <WagmiSiweSync />
-                <ReportModal />
-              </AuthProvider>
-            </WalletProvider>
-          </ReactQueryProvider>
+                  <WagmiSiweSync />
+                  <ReportModal />
+                </AuthProvider>
+              </WalletProvider>
+            </ReactQueryProvider>
+          </WagmiProvider>
         </MantineProvider>
       </NextUIProvider>
     </>

@@ -1,4 +1,4 @@
-import { memo, useEffect } from 'react';
+import { memo, useEffect, useRef } from 'react';
 
 import { useSIWE } from 'connectkit';
 import { useAccount } from 'wagmi';
@@ -7,13 +7,13 @@ const WagmiSiweSync = () => {
   const { isConnected } = useAccount();
   const { isSignedIn, signOut } = useSIWE();
 
-  useEffect(() => {
-    const siweSignOut = async () => {
-      await signOut();
-    };
+  const signOutRef = useRef(false);
 
-    if (!isConnected && isSignedIn) {
-      siweSignOut();
+  useEffect(() => {
+    if (!isConnected && isSignedIn && !signOutRef.current) {
+      signOutRef.current = true;
+      signOut();
+      window.location.href = '/jobs';
     }
   }, [isConnected, isSignedIn, signOut]);
 
