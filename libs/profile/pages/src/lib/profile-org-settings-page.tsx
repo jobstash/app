@@ -9,7 +9,7 @@ import { useAuthContext } from '@jobstash/auth/state';
 import { OrgProfileInfoProvider } from '@jobstash/profile/state';
 import { useDelayedAuthRender } from '@jobstash/shared/state';
 
-import { AccountCard } from '@jobstash/profile/ui';
+import { OrgAccountCard } from '@jobstash/profile/ui';
 import { NotFoundPage, PageWrapper } from '@jobstash/shared/ui';
 import { SideBar } from '@jobstash/sidebar/feature';
 
@@ -35,7 +35,7 @@ export const ProfileOrgSettingsPage = () => {
 
         <div className="flex items-center justify-center min-h-screen p-2">
           <OrgProfileInfoProvider>
-            <AccountCard />
+            <OrgAccountCard />
           </OrgProfileInfoProvider>
         </div>
       </PageWrapper>

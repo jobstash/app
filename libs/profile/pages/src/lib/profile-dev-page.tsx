@@ -1,7 +1,7 @@
 import Head from 'next/head';
 
 import {
-  AccountCard,
+  DevAccountCard,
   ProfileGotItCard,
   ProfileHeader,
   ProfileShowcaseSection,
@@ -32,7 +32,7 @@ export const ProfileDevPage = () => (
         <div className="hidden lg:flex lg:flex-1" />
 
         <div className="hide-scrollbar flex items-center justify-center lg:fixed lg:h-screen overflow-y-auto p-4 transition-all inset-auto lg:right-0 lg:top-0 lg:w-5/12 lg:px-6 lg:py-8 lg:pr-10 ">
-          <AccountCard />
+          <DevAccountCard />
         </div>
       </div>
     </PageWrapper>

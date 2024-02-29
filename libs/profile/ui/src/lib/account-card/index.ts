@@ -1,1 +1,2 @@
-export { default as AccountCard } from './account-card';
+export * from './dev-account-card';
+export * from './org-account-card';

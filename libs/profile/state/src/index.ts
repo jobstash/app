@@ -6,6 +6,7 @@ export * from './lib/atoms/profile-repo-count-atom';
 export * from './lib/atoms/show-got-it-card-atom';
 
 // Hooks
+export * from './lib/hooks/use-account-card';
 export * from './lib/hooks/use-all-jobs-query';
 export * from './lib/hooks/use-compensation-form';
 export * from './lib/hooks/use-dev-profile-info';

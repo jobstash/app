@@ -1,14 +1,8 @@
-import { useRouter } from 'next/router';
-import { useState } from 'react';
-
-import { useDisclosure } from '@mantine/hooks';
-import { useDisconnect } from 'wagmi';
-
 import { getEmailAvatar } from '@jobstash/profile/utils';
 
 import {
-  useDevProfileInfoContext,
-  useProfileDeleteMutation,
+  useAccountCard,
+  useOrgProfileInfoContext,
 } from '@jobstash/profile/state';
 
 import AccountCardDeleteButton from './account-card-delete-button';
@@ -19,27 +13,10 @@ import ConnectEmailAccount from './connect-email-account';
 import ConnectGithubAccount from './connect-github-account';
 import ConnectedAccount from './connected-account';
 
-const AccountCard = () => {
-  const [opened, { open, close }] = useDisclosure(false);
-  const router = useRouter();
+export const OrgAccountCard = () => {
+  const { opened, open, startDelete, onClickDelete } = useAccountCard();
 
-  const [startDelete, setStartDelete] = useState(false);
-  const { disconnect } = useDisconnect();
-
-  const onSuccessCb = () => {
-    disconnect();
-    close();
-    router.push('/');
-  };
-
-  const { mutate } = useProfileDeleteMutation(() => onSuccessCb());
-
-  const onClickDelete = () => {
-    setStartDelete(true);
-    mutate();
-  };
-
-  const { profileInfoData } = useDevProfileInfoContext();
+  const { profileInfoData } = useOrgProfileInfoContext();
 
   return (
     <>
@@ -90,5 +67,3 @@ const AccountCard = () => {
     </>
   );
 };
-
-export default AccountCard;
