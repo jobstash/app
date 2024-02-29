@@ -14,7 +14,10 @@ const RightPanelCompetitorCards = ({ competitors }: Props) => {
   return (
     <div className="flex flex-col space-y-4">
       {competitors.map((competitor) => (
-        <RightPanelCompetitorCard key={competitor.id} competitor={competitor} />
+        <RightPanelCompetitorCard
+          key={`${competitor.id}-${competitor.orgId}`}
+          competitor={competitor}
+        />
       ))}
     </div>
   );
