@@ -5,13 +5,13 @@ export * from './lib/atoms/edit-alias-atom';
 export * from './lib/hooks/use-add-alias';
 export * from './lib/hooks/use-all-jobs-mutation';
 export * from './lib/hooks/use-all-orgs';
+export * from './lib/hooks/use-approval-org-list';
 export * from './lib/hooks/use-authorize-org';
 export * from './lib/hooks/use-blocked-tags-query';
 export * from './lib/hooks/use-blocked-terms-mutation';
 export * from './lib/hooks/use-create-preference-mutation';
 export * from './lib/hooks/use-paired-terms-mutation';
 export * from './lib/hooks/use-paired-terms-query';
-export * from './lib/hooks/use-pending-orgs-query';
 export * from './lib/hooks/use-unset-blocked-terms-mutation';
 
 // Context & Providers

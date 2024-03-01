@@ -1,7 +1,7 @@
 import { UseMutateFunction } from '@tanstack/react-query';
 import myzod, { Infer } from 'myzod';
 
-import { devProfileInfoSchema } from '@jobstash/profile/core';
+import { orgProfileInfoSchema } from '@jobstash/profile/core';
 import { MessageResponse } from '@jobstash/shared/core';
 
 export * from './blocked-terms';
@@ -9,12 +9,13 @@ export * from './jobs';
 export * from './paired-terms';
 export * from './preferred-terms';
 
-export const pendingOrgsSchema = myzod.array(devProfileInfoSchema);
-export type PendingOrgs = Infer<typeof pendingOrgsSchema>;
+export const orgProfileListSchema = myzod.array(orgProfileInfoSchema);
+export type OrgProfileList = Infer<typeof orgProfileListSchema>;
 
 export const authorizeOrgPayloadSchema = myzod.object({
   wallet: myzod.string(),
   verdict: myzod.literals('approve', 'reject'),
+  orgId: myzod.string().optional(),
 });
 export type AuthorizeOrgPayload = Infer<typeof authorizeOrgPayloadSchema>;
 export type AuthorizeOrgMutFn = UseMutateFunction<
