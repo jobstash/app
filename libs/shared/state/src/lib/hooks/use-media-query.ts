@@ -3,7 +3,7 @@ import { useCallback, useEffect, useState } from 'react';
 const MEDIA_QUERY = {
   SM: '(max-width: 639px)' as const,
   MD: '(min-width: 640px)' as const,
-  LG: '(min-width: 1280px)' as const,
+  LG: '(min-width: 1024px)' as const,
 };
 type MediaQueryValues = typeof MEDIA_QUERY[keyof typeof MEDIA_QUERY];
 
