@@ -13,7 +13,7 @@ export const useTargetRoleCloseWindow = (
   const { role } = useAuthContext();
   const queryClient = useQueryClient();
 
-  // Poll data every 2s
+  // Poll data every 1s
   useEffect(() => {
     let interval: ReturnType<typeof setInterval>;
 
@@ -24,7 +24,7 @@ export const useTargetRoleCloseWindow = (
         } else {
           queryClient.invalidateQueries({ queryKey: ['check-wallet'] });
         }
-      }, 2000);
+      }, 1500);
     }
 
     return () => {

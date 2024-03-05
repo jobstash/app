@@ -6,6 +6,7 @@ export * from './lib/get-profile-showcase';
 export * from './lib/get-profile-skills';
 export * from './lib/post-delete-profile';
 export * from './lib/post-dev-profile-info';
+export * from './lib/post-org-profile-info';
 export * from './lib/post-profile-org-rating';
 export * from './lib/post-profile-org-review';
 export * from './lib/post-profile-org-salary';

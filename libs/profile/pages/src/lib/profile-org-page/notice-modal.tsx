@@ -16,23 +16,23 @@ import { Heading, Text } from '@jobstash/shared/ui';
 export const NoticeModal = () => {
   const { flow } = useAuthContext();
 
-  const isPendingOrg = flow === CHECK_WALLET_FLOWS.ORG_APPROVAL;
+  const isProfileSetup = flow === CHECK_WALLET_FLOWS.ORG_PROFILE;
   const isRejectedOrg = flow === CHECK_WALLET_FLOWS.ORG_REJECTED;
 
   const [isOpen, setIsOpen] = useState(false);
 
   const noticeRef = useRef(false);
   useEffect(() => {
-    if (!noticeRef.current && (isPendingOrg || isRejectedOrg)) {
+    if (!noticeRef.current && (isProfileSetup || isRejectedOrg)) {
       noticeRef.current = true;
 
       setIsOpen(true);
     }
-  }, [isPendingOrg, isRejectedOrg]);
+  }, [isProfileSetup, isRejectedOrg]);
 
   const onOpenChange = () => setIsOpen((prev) => !prev);
 
-  if (!isPendingOrg && !isRejectedOrg) return null;
+  if (!isProfileSetup && !isRejectedOrg) return null;
 
   return (
     <Modal
@@ -63,29 +63,28 @@ export const NoticeModal = () => {
               <div className="flex flex-col gap-4 items-center pt-12">
                 <Image
                   priority
-                  src={isPendingOrg ? '/rocket.png' : '/empty-result.png'}
+                  src={isProfileSetup ? '/rocket.png' : '/empty-result.png'}
                   quality={100}
-                  alt={isPendingOrg ? 'Pending Approval' : 'Org Rejected'}
-                  width={isPendingOrg ? 371 : 418}
-                  height={isPendingOrg ? 371 : 297}
+                  alt={isProfileSetup ? 'Pending Approval' : 'Org Rejected'}
+                  width={isProfileSetup ? 371 : 418}
+                  height={isProfileSetup ? 371 : 297}
                 />
                 <div className="flex flex-col items-center gap-y-6 text-center">
                   <Heading size="xl" fw="bold">
-                    {isPendingOrg
+                    {isProfileSetup
                       ? 'Pending Approval'
                       : "Sorry, We're Not There Yet"}
                   </Heading>
                   <div className="max-w-md text-center flex flex-col gap-4">
-                    {isPendingOrg ? (
+                    {isProfileSetup ? (
                       <>
                         <Text color="dimmed">
-                          A well-crafted profile is your first step towards
-                          success here. Ensure your approval by completing your
-                          profile info today.
+                          A well-crafted profile is is more likely to get
+                          approved.
                         </Text>
                         <Text color="dimmed">
                           Soon, you&#39;ll be handpicking from the finest in
-                          web3 space!
+                          web3 space. Complete your profile info today!
                         </Text>
                       </>
                     ) : (

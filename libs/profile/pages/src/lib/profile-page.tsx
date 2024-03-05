@@ -15,7 +15,7 @@ import { ProfileDevPage } from './profile-dev-page';
 import { ProfileOrgPage } from './profile-org-page';
 
 export const ProfilePage = () => {
-  const { isLoading, role, flow } = useAuthContext();
+  const { isLoading, role } = useAuthContext();
   const { canRender } = useDelayedAuthRender({ requireConnected: true });
 
   if (!canRender || isLoading) return <LoadingPage />;
