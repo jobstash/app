@@ -9,6 +9,7 @@ import { AdminLayout } from '@jobstash/admin/ui';
 import { SideBar } from '@jobstash/sidebar/feature';
 
 import { ApprovalTable } from './approval-table';
+import { ApproveOrgModal } from './approve-org-modal';
 
 export const OrgApprovalPage = () => {
   const { isLoading: isLoadingPendingOrgs, data: pendingOrgsData } =
@@ -42,6 +43,7 @@ export const OrgApprovalPage = () => {
             </Tab>
           </Tabs>
         </div>
+        <ApproveOrgModal />
       </AdminLayout>
     </>
   );

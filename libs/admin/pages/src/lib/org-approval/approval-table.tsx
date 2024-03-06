@@ -97,18 +97,20 @@ export const ApprovalTable = ({ data, showActions }: Props) => {
             },
           } = org;
           return (
-            <Text>
-              {JSON.stringify(
-                { name, role, contact, contactPlatform },
-                undefined,
-                '\t',
+            <div className="flex flex-col gap-2">
+              {name && <Text>Name: {name}</Text>}
+              {role && <Text>Role: {role}</Text>}
+              {contactPlatform && (
+                <Text>Contact Platform: {contactPlatform}</Text>
               )}
-            </Text>
+              {contact && <Text>Contact Handle: {contact}</Text>}
+              {!name && !role && !contactPlatform && !contact && 'N/A'}
+            </div>
           );
         }
 
         case 'actions': {
-          return <ActionButtons wallet={org.wallet} />;
+          return <ActionButtons org={org} />;
         }
 
         default: {

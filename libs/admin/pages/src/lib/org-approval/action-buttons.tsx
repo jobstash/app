@@ -1,18 +1,24 @@
 import { CheckIcon, XMarkIcon } from '@heroicons/react/16/solid';
 import { Button } from '@nextui-org/button';
 import { Tooltip } from '@nextui-org/tooltip';
+import { useSetAtom } from 'jotai';
 
-import { useAuthorizeOrg } from '@jobstash/admin/state';
+import { OrgProfileInfo } from '@jobstash/profile/core';
+
+import { orgApprovalProfileAtom, useAuthorizeOrg } from '@jobstash/admin/state';
 
 interface Props {
-  wallet: string;
+  org: OrgProfileInfo;
 }
 
-export const ActionButtons = ({ wallet }: Props) => {
+export const ActionButtons = ({ org }: Props) => {
   const { isPending, mutate } = useAuthorizeOrg();
+  const setOrgApprovalProfile = useSetAtom(orgApprovalProfileAtom);
+
+  const { wallet } = org;
 
   const approve = () => {
-    if (wallet) mutate({ wallet, verdict: 'approve' });
+    setOrgApprovalProfile({ org, isOpen: true });
   };
 
   const reject = () => {

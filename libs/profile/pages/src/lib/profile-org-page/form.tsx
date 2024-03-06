@@ -23,6 +23,7 @@ import { LogoTitle } from '@jobstash/shared/ui';
 export const ProfileOrgForm = () => {
   const { flow } = useAuthContext();
   const isSetup = flow === CHECK_WALLET_FLOWS.ORG_PROFILE;
+  const isComplete = flow === CHECK_WALLET_FLOWS.ORG_COMPLETE;
 
   const [linkedin, setLinkedin] = useState('');
   const [calendly, setCalendly] = useState('');
@@ -119,8 +120,13 @@ export const ProfileOrgForm = () => {
             }}
             size="lg"
           />
-          <Chip size="lg" radius="sm" variant="dot" color="warning">
-            PENDING
+          <Chip
+            size="lg"
+            radius="sm"
+            variant="dot"
+            color={isComplete ? 'success' : 'warning'}
+          >
+            {isComplete ? 'APPROVED' : 'PENDING'}
           </Chip>
         </div>
       </div>

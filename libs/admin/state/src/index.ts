@@ -1,5 +1,6 @@
 // Atoms
 export * from './lib/atoms/edit-alias-atom';
+export * from './lib/atoms/org-approval-profile-atom';
 
 // Hooks
 export * from './lib/hooks/use-add-alias';

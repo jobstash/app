@@ -10,7 +10,7 @@ export const useAuthorizeOrg = () => {
   const { isSuccess, isPending, mutate } = useMutation({
     mutationFn: (payload: AuthorizeOrgPayload) => postAuthorizeOrg(payload),
     onSuccess({ message }, { verdict }) {
-      queryClient.invalidateQueries({ queryKey: ['pending-orgs'] });
+      queryClient.invalidateQueries({ queryKey: ['approval-org-list'] });
       notifSuccess({
         title: verdict === 'approve' ? 'Org Approved!' : 'Org Rejected',
         message,
