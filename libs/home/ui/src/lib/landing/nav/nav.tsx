@@ -24,8 +24,8 @@ const LandingNav = () => {
         },
       )}
     >
+      
       <Brand />
-
       <div className="hidden items-center space-x-6 font-bold lg:flex">
         <NavButton
           isTransparent
