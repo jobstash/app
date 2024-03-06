@@ -1,14 +1,20 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAccount } from 'wagmi';
 
+import { CHECK_WALLET_FLOWS } from '@jobstash/auth/core';
 import { OrgProfileInfoPayload } from '@jobstash/profile/core';
 import { notifError, notifSuccess } from '@jobstash/shared/utils';
 
+import { useAuthContext } from '@jobstash/auth/state';
 import { postOrgProfileInfo } from '@jobstash/profile/data';
 
 export const useOrgProfileInfoMutation = () => {
   const { address } = useAccount();
   const queryClient = useQueryClient();
+  const { flow } = useAuthContext();
+  const isInitProfile =
+    flow === CHECK_WALLET_FLOWS.ORG_PROFILE ||
+    flow === CHECK_WALLET_FLOWS.ORG_APPROVAL;
 
   const profileInfoQueryKey = ['org-profile-info', address];
 
@@ -17,10 +23,11 @@ export const useOrgProfileInfoMutation = () => {
     onSuccess(profileInfo, payload) {
       queryClient.setQueryData(profileInfoQueryKey, profileInfo);
 
-      const title = 'You have updated your profile!';
+      const title = 'Profile Updated Successfully';
 
-      const message =
-        'Your profile has been queued and will be processed shortly';
+      const message = isInitProfile
+        ? 'Your profile has been queued and will be processed shortly.'
+        : 'Your profile changes have been saved.';
 
       notifSuccess({
         title,
