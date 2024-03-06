@@ -35,7 +35,7 @@ const JobList = ({ initJob, activeJob }: Props) => {
     isFetching: isFetchingBookmarks,
   } = useJobBookmarks();
 
-  if (isLoading || isLoadingBookmarks) {
+  if (isLoading) {
     return (
       <div className="pb-4">
         {initJob && (
@@ -74,7 +74,7 @@ const JobList = ({ initJob, activeJob }: Props) => {
             <JobBookmarkButton
               jobPost={jobPost}
               isBookmarked={bookmarkedJobs.has(jobPost.shortUUID)}
-              isFetching={isFetchingBookmarks}
+              isFetching={isFetchingBookmarks || isLoadingBookmarks}
             />
           }
         />
