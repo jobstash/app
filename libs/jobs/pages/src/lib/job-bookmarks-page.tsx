@@ -77,7 +77,7 @@ export const JobBookmarksPage = () => {
     <PageWrapper>
       <SideBar />
 
-      <div className="px-3.5 pt-16 lg:p-8 lg:pr-[50%] flex flex-col gap-4">
+      <div className="px-3.5 pt-16 lg:p-8 lg:pr-[calc(44vw)]   flex flex-col gap-4">
         {data && data.length === 0 && (
           <EmptyResult
             description="You have not added any bookmarks yet."

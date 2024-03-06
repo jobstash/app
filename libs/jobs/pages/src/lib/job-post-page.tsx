@@ -142,14 +142,14 @@ export const JobPostPage = ({
         <div
           className={cn('px-3.5 pt-[65px] lg:px-8 lg:pt-0', {
             'z-50': showFilters,
-            'lg:pr-[50%]': !showFilters,
+            'lg:pr-[calc(44vw)]  ': !showFilters,
           })}
         >
           <Filters routeSection={ROUTE_SECTION.JOBS} />
 
           <div
             className={cn({
-              'lg:pr-[50%]': showFilters,
+              'lg:pr-[calc(44vw)]  ': showFilters,
             })}
           >
             <JobList initJob={initJob} activeJob={currentJobPost} />
