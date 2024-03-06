@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 
-import { Avatar } from '@nextui-org/avatar';
 import { Button } from '@nextui-org/button';
 import { Chip } from '@nextui-org/chip';
 import { Divider } from '@nextui-org/divider';
@@ -8,18 +7,23 @@ import { Input } from '@nextui-org/input';
 import { Select, SelectItem } from '@nextui-org/select';
 import { Tab, Tabs } from '@nextui-org/tabs';
 
+import { CHECK_WALLET_FLOWS } from '@jobstash/auth/core';
 import { CONTACT_DEFAULT_OPTIONS } from '@jobstash/profile/core';
 import { getEmailAvatar } from '@jobstash/profile/utils';
 import { notifError } from '@jobstash/shared/utils';
 
+import { useAuthContext } from '@jobstash/auth/state';
 import {
   useOrgProfileInfo,
   useOrgProfileInfoMutation,
 } from '@jobstash/profile/state';
 
-import { Text } from '@jobstash/shared/ui';
+import { LogoTitle } from '@jobstash/shared/ui';
 
 export const ProfileOrgForm = () => {
+  const { flow } = useAuthContext();
+  const isSetup = flow === CHECK_WALLET_FLOWS.ORG_PROFILE;
+
   const [linkedin, setLinkedin] = useState('');
   const [calendly, setCalendly] = useState('');
   const [contact, setContact] = useState<{ value: string; preferred: string }>({
@@ -98,160 +102,169 @@ export const ProfileOrgForm = () => {
     });
   };
 
+  if (!profileInfoData) return null;
+
   return (
-    <div className="p-8 flex flex-col gap-4 border border-darker-gray h-fit rounded-3xl w-full">
+    <div className="flex flex-col gap-4 w-full">
       {/* <Heading size="xl">Setup Profile</Heading> */}
 
       <div className="flex justify-between items-center w-full">
-        <div className="flex items-center gap-2">
-          <Avatar
-            src={getEmailAvatar(profileInfoData?.email ?? '')}
-            alt={`${profileInfoData?.email}'s avatar`}
+        <div className="flex items-center gap-8">
+          <LogoTitle
+            title={profileInfoData.email ?? ''}
+            avatarProps={{
+              src: getEmailAvatar(profileInfoData.email),
+              alt: `${profileInfoData.email}'s avatar`,
+              isRounded: true,
+            }}
+            size="lg"
           />
-          <Text fw="semibold" size="lg">
-            {profileInfoData?.email}
-          </Text>
+          <Chip size="lg" radius="sm" variant="dot" color="warning">
+            PENDING
+          </Chip>
         </div>
-        <Chip size="lg" radius="sm" variant="dot" color="warning">
-          PENDING
-        </Chip>
       </div>
 
       <Divider />
-      <Tabs
-        size="lg"
-        aria-label="Setup Org Sections"
-        // ClassNames={{ cursor: 'bg-dark' }}
-        variant="underlined"
-        classNames={{ panel: 'pl-2' }}
-      >
-        <Tab key="basic" title="Basic">
-          <div className="flex flex-col gap-4">
-            <Input
-              isRequired
-              isDisabled={isPending}
-              label="LinkedIn"
-              classNames={{
-                base: 'w-full',
-                inputWrapper: ['bg-darker-gray'],
-              }}
-              errorMessage={errors.linkedin}
-              value={linkedin}
-              onChange={(e) => setLinkedin(e.target.value)}
-            />
-            <Input
-              isDisabled={isPending}
-              label="Calendly"
-              classNames={{
-                base: 'w-full',
-                inputWrapper: ['bg-darker-gray'],
-              }}
-              value={calendly}
-              onChange={(e) => setCalendly(e.target.value)}
-            />
-          </div>
-        </Tab>
-        <Tab key="contact" title="Contact">
-          <div className="flex flex-col gap-4">
-            <Select
-              isDisabled={isPending}
-              label="Contact Platform"
-              classNames={{
-                base: 'w-full',
-                trigger: 'bg-darker-gray',
-              }}
-              selectedKeys={contact.preferred ? [contact.preferred] : []}
-              description="Select your preferred platform for us to reach out."
-              onChange={(e) =>
-                setContact((prev) => ({ ...prev, preferred: e.target.value }))
-              }
-            >
-              {CONTACT_DEFAULT_OPTIONS.map((option) => (
-                <SelectItem key={option} value={option}>
-                  {option}
-                </SelectItem>
-              ))}
-            </Select>
-            <Input
-              isDisabled={isPending}
-              label="Platform Handle"
-              classNames={{
-                base: 'w-full',
-                inputWrapper: ['bg-darker-gray'],
-              }}
-              description="Provide the handle for the selected platform."
-              value={contact.value}
-              onChange={(e) =>
-                setContact((prev) => ({ ...prev, value: e.target.value }))
-              }
-            />
-          </div>
-        </Tab>
-        <Tab key="reference" title="Reference">
-          <div className="grid grid-cols-2 gap-4">
-            <Input
-              isDisabled={isPending}
-              label="Person Name"
-              classNames={{
-                base: 'w-full',
-                inputWrapper: ['bg-darker-gray'],
-              }}
-              value={internalReference.referencePersonName}
-              onChange={(e) =>
-                setInternalReference((prev) => ({
-                  ...prev,
-                  referencePersonName: e.target.value,
-                }))
-              }
-            />
-            <Input
-              isDisabled={isPending}
-              label="Person Role"
-              classNames={{
-                base: 'w-full',
-                inputWrapper: ['bg-darker-gray'],
-              }}
-              value={internalReference.referencePersonRole}
-              onChange={(e) =>
-                setInternalReference((prev) => ({
-                  ...prev,
-                  referencePersonRole: e.target.value,
-                }))
-              }
-            />
-            <Input
-              isDisabled={isPending}
-              label="Contact"
-              classNames={{
-                base: 'w-full',
-                inputWrapper: ['bg-darker-gray'],
-              }}
-              value={internalReference.referenceContact}
-              onChange={(e) =>
-                setInternalReference((prev) => ({
-                  ...prev,
-                  referenceContact: e.target.value,
-                }))
-              }
-            />
-            <Input
-              isDisabled={isPending}
-              label="Contact Platform"
-              classNames={{
-                base: 'w-full',
-                inputWrapper: ['bg-darker-gray'],
-              }}
-              value={internalReference.referenceContactPlatform}
-              onChange={(e) =>
-                setInternalReference((prev) => ({
-                  ...prev,
-                  referenceContactPlatform: e.target.value,
-                }))
-              }
-            />
-          </div>
-        </Tab>
-      </Tabs>
+
+      <div className="min-h-[260px]">
+        <Tabs
+          size="lg"
+          aria-label="Setup Org Sections"
+          // ClassNames={{ cursor: 'bg-dark' }}
+          variant="underlined"
+          classNames={{ panel: 'pl-2' }}
+        >
+          <Tab key="contact" title="Contact Info">
+            <div className="grid grid-cols-2 gap-4">
+              <Input
+                isRequired
+                isDisabled={isPending}
+                label="LinkedIn Page URL"
+                description="Showcase your organization's professional profile."
+                classNames={{
+                  base: 'w-full',
+                  inputWrapper: ['bg-darker-gray'],
+                }}
+                errorMessage={errors.linkedin}
+                value={linkedin}
+                onChange={(e) => setLinkedin(e.target.value)}
+              />
+              <Input
+                isDisabled={isPending}
+                label="Calendly Link"
+                description="For streamlined scheduling of meetings."
+                classNames={{
+                  base: 'w-full',
+                  inputWrapper: ['bg-darker-gray'],
+                }}
+                value={calendly}
+                onChange={(e) => setCalendly(e.target.value)}
+              />
+              <Select
+                isDisabled={isPending}
+                label="Contact Platform"
+                description="Select your preferred platform for us to reach out."
+                classNames={{
+                  base: 'w-full',
+                  trigger: 'bg-darker-gray',
+                }}
+                selectedKeys={contact.preferred ? [contact.preferred] : []}
+                onChange={(e) =>
+                  setContact((prev) => ({ ...prev, preferred: e.target.value }))
+                }
+              >
+                {CONTACT_DEFAULT_OPTIONS.map((option) => (
+                  <SelectItem key={option} value={option}>
+                    {option}
+                  </SelectItem>
+                ))}
+              </Select>
+              <Input
+                isDisabled={isPending}
+                label="Platform Handle"
+                description="Provide the handle for the selected contact platform."
+                classNames={{
+                  base: 'w-full',
+                  inputWrapper: ['bg-darker-gray'],
+                }}
+                value={contact.value}
+                onChange={(e) =>
+                  setContact((prev) => ({ ...prev, value: e.target.value }))
+                }
+              />
+            </div>
+          </Tab>
+          <Tab key="reference" title="Reference">
+            <div className="grid grid-cols-2 gap-4">
+              <Input
+                isDisabled={isPending}
+                label="Reference Name"
+                description="Enter the name of the person who vouches for you."
+                classNames={{
+                  base: 'w-full',
+                  inputWrapper: ['bg-darker-gray'],
+                }}
+                value={internalReference.referencePersonName}
+                onChange={(e) =>
+                  setInternalReference((prev) => ({
+                    ...prev,
+                    referencePersonName: e.target.value,
+                  }))
+                }
+              />
+              <Input
+                isDisabled={isPending}
+                label="Reference Role"
+                description="Current or most recent job title of your reference."
+                classNames={{
+                  base: 'w-full',
+                  inputWrapper: ['bg-darker-gray'],
+                }}
+                value={internalReference.referencePersonRole}
+                onChange={(e) =>
+                  setInternalReference((prev) => ({
+                    ...prev,
+                    referencePersonRole: e.target.value,
+                  }))
+                }
+              />
+              <Input
+                isDisabled={isPending}
+                label="Contact Platform"
+                description="Select the platform your reference prefers for communication e.g. LinkedIn, Email, etc."
+                classNames={{
+                  base: 'w-full',
+                  inputWrapper: ['bg-darker-gray'],
+                }}
+                value={internalReference.referenceContactPlatform}
+                onChange={(e) =>
+                  setInternalReference((prev) => ({
+                    ...prev,
+                    referenceContactPlatform: e.target.value,
+                  }))
+                }
+              />
+              <Input
+                isDisabled={isPending}
+                label="Contact Platform Handle"
+                description="Provide the specific handle or ID for the chosen contact platform of your reference."
+                classNames={{
+                  base: 'w-full',
+                  inputWrapper: ['bg-darker-gray'],
+                }}
+                value={internalReference.referenceContact}
+                onChange={(e) =>
+                  setInternalReference((prev) => ({
+                    ...prev,
+                    referenceContact: e.target.value,
+                  }))
+                }
+              />
+            </div>
+          </Tab>
+        </Tabs>
+      </div>
 
       <div className="flex w-full justify-end">
         <Button
@@ -259,25 +272,9 @@ export const ProfileOrgForm = () => {
           className="bg-gradient-to-l from-[#8743FF] to-[#4136F1] font-bold"
           onClick={onSubmit}
         >
-          Request Approval
+          {isSetup ? 'Request Approval' : 'Update Info'}
         </Button>
       </div>
-
-      <ul>
-        <li>
-          NOTE: This is not final - i just wing it to contain a form for
-          org-info
-        </li>
-        <li>TODO: adjust form layout - make it look nicer in general</li>
-        <li>
-          TODO: add description and better labels for inputs (see Contact tab)
-        </li>
-        <li>
-          TODO: add another modal for profile setup (current modal is for
-          pending)
-        </li>
-        <li>TODO: update texts when user already requested approval</li>
-      </ul>
     </div>
   );
 };
