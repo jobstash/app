@@ -122,14 +122,14 @@ export const OrgDetailsPage = ({
         <div
           className={cn('px-3.5 pt-[65px] lg:px-8 lg:pt-0', {
             'z-50': showFilters,
-            'lg:pr-[50%]': !showFilters,
+            'lg:pr-[calc(44vw)]  ': !showFilters,
           })}
         >
           <Filters routeSection={ROUTE_SECTION.ORGANIZATIONS} />
 
           <div
             className={cn({
-              'lg:pr-[50%]': showFilters,
+              'lg:pr-[calc(44vw)]  ': showFilters,
             })}
           >
             <OrgList initOrg={initOrgListItem} activeOrgId={activeOrgId} />
