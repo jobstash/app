@@ -19,12 +19,10 @@ const InternalErrorResult = () => (
 
     <div className="flex flex-col items-center gap-y-2">
       <Heading size="xl" fw="bold">
-        Serious Error
+        Unexpected Error
       </Heading>
       <div className="max-w-sm text-center flex flex-col gap-2">
-        <Text color="dimmed">
-          All shortcuts have disappeared. Screen. Mind. Both are blank
-        </Text>
+        <Text color="dimmed">Screen. Mind. Both are blank</Text>
       </div>
     </div>
   </div>
