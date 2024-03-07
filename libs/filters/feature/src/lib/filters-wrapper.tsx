@@ -59,7 +59,7 @@ const FiltersWrapper = ({ children }: Props) => {
   return (
     <div
       className={cn(
-        'flex flex-col py-4 lg:pt-8 gap-y-4 bg-[#121216] z-50 sticky transition-all duration-1000 top-[49px] lg:top-0 pr-2',
+        'flex flex-col py-4 lg:pt-8 gap-y-4 bg-[#121216] z-40 sticky transition-all duration-1000 top-[49px] lg:top-0 pr-2',
         { 'top-[108px] sm:top-[92px] lg:top-10': isOpenTopBanner },
         {
           '-top-60 sm:-top-44': scrollDirection === 'down' && !showFilters,

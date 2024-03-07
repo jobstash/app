@@ -5,7 +5,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 import { roboto } from '@jobstash/shared/core';
 import { cn } from '@jobstash/shared/utils';
 
-const text = cva(`${roboto.variable} font-roboto antialiased break-words`, {
+const text = cva(`${roboto.variable} font-roboto antialiased`, {
   variants: {
     fw: {
       normal: 'font-normal',

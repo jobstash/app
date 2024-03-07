@@ -100,7 +100,7 @@ const Bartab = forwardRef<HTMLButtonElement, BartabProps>(
         {left}
         <div
           className={cn(
-            'flex grow items-center',
+            'flex grow items-center whitespace-nowrap',
             { 'justify-start': Boolean(left) },
             { 'lg:justify-start lg:pl-0.5': !left },
             { 'lg:justify-center': variant === 'wallet' },
