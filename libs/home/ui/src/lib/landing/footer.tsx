@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import { memo } from 'react';
 
 const LandingFooter = () => (
@@ -49,7 +50,7 @@ const LandingFooter = () => (
 
     <hr className="h-px border-0 bg-white/50" />
 
-    <div>
+    <div className="flex w-full items-center justify-between">
       <span className="text-white/40">
         Built with{' '}
         <span role="img" aria-label="flame-heart">
@@ -57,6 +58,14 @@ const LandingFooter = () => (
         </span>{' '}
         by the JobStash Team
       </span>
+      <div className="flex items-center gap-4">
+        <Link href="/terms-and-conditions" className="text-white/60">
+          Terms and Conditions
+        </Link>
+        <Link href="/privacy" className="text-white/60">
+          Privacy
+        </Link>
+      </div>
     </div>
   </footer>
 );
