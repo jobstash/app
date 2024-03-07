@@ -52,3 +52,5 @@ Thumbs.db
 .sentryclirc
 
 .nx/cache
+
+next-env.d.ts
