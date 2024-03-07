@@ -9,7 +9,9 @@ export const getGoogleLogoUrl = (url: string) =>
   `${URL_PREFIX}${getWebsiteText(url).hostname}${URL_SUFFIX}`;
 
 export const getLogoUrlHttpsAlternative = (googleString: string) => {
-  const url = new URL(`${FRONTEND_URL}${googleString}`);
+  const url = new URL(
+    `${googleString.includes('http') ? '' : FRONTEND_URL}${googleString}`,
+  );
   const domain = url.searchParams.get('domain');
 
   return `${URL_PREFIX}https://${domain}${URL_SUFFIX}`;
