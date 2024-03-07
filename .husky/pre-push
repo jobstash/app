@@ -1,8 +1,0 @@
-#!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
-
-pnpm lint:all
-
-pnpm test:all --parallel=3
-
-pnpm build
