@@ -1,0 +1,57 @@
+name: Production
+
+on:
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  lint-build-test:
+    name: Run Lint/Build/Test
+    runs-on: ubuntu-latest
+    env:
+      NEXT_PUBLIC_MW_URL: https://middleware.staging.jobstash.xyz
+      NEXT_PUBLIC_FRONTEND_URL: https://app.staging.jobstash.xyz
+      NEXT_PUBLIC_INFRURA_ID: 1FITpPu8qaqd2ddB25qo41AWsgP2USAx
+      NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID: 87b84ef439c6b83474d85f870ebe2b4a
+      NEXT_PUBLIC_PAGE_SIZE: 20
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - uses: pnpm/action-setup@v2
+        name: Install pnpm
+        id: pnpm-install
+        with:
+          version: 8
+          run_install: false
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 18
+          cache: 'pnpm'
+      - name: Install deps
+        run: pnpm install --frozen-lockfile
+      - name: Run Lint
+        run: pnpm lint
+      - name: Run Build
+        run: pnpm build
+      - name: Run Test
+        run: pnpm test
+
+  # TODO: deploy production
+
+  update_release_draft:
+    permissions:
+      contents: write # permission to create a github release
+    runs-on: ubuntu-latest
+    needs: [lint-build-test]
+    steps:
+      # Drafts your next Release notes as Pull Requests are merged into "main"
+      - uses: release-drafter/release-drafter@v5
+        with:
+          disable-autolabeler: true
+        env:
+          GITHUB_TOKEN: ${{ secrets.GA_PAT }}

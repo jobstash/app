@@ -1,0 +1,31 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+	:root {
+		--color-base-dark: #141317;
+		--color-white: 255 255 255;
+		--color-darkest-gray: 30 30 30;
+		--color-darker-gray: 41 41 41;
+		--color-dark-gray: 52 52 52;
+		--color-primary: 135 67 255; /* #8743FF */
+		--color-mid-primary: 102 61 249; /* #663DF9 */
+		--color-secondary: 65 54 241; /* #4136F1 */
+	}
+}
+
+html {
+	background-color: #141317;
+	color: #fff;
+}
+
+
+.hide-scrollbar {
+	-ms-overflow-style: none;
+	scrollbar-width: none;
+}
+
+.hide-scrollbar::-webkit-scrollbar {
+	display: none;
+}
