@@ -112,3 +112,13 @@ export const REPORT_UI_CTX = {
   OTHER_JOBS_CARD: 'Other Jobs Card',
   ORG_REVIEW_CARD: 'Org Review Card',
 } as const;
+
+export const ECOSYSTEMS = {
+  ETHDAM: 'ethdam',
+  ETHLONDON: 'ethlondon',
+  LOBSTERDAO: 'lobsterdao',
+  SUPERCHAIN: 'superchain',
+} as const;
+
+export const ECOSYSTEMS_SET = new Set(Object.values(ECOSYSTEMS));
+export const ECOSYSTEM_HEADER_KEY = 'X-Ecosystem';

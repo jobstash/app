@@ -6,6 +6,8 @@ export * from './lib/dedupe';
 export * from './lib/disable-page-scroll';
 export * from './lib/dispatch-event';
 export * from './lib/ga-event';
+export * from './lib/get-ecosystem-header';
+export * from './lib/get-ecosystem-subdomain';
 export * from './lib/get-google-logo-url';
 export * from './lib/get-logo-url';
 export * from './lib/get-plural-text';

@@ -12,6 +12,7 @@ import {
 } from '@jobstash/shared/core';
 import {
   createFetchDeets,
+  getEcosystemHeader,
   sentryMessage,
   validatePayload,
   validateSchema,
@@ -51,12 +52,17 @@ export const mwFetch = async <R, P = Undefined>(
 
   const { url, body } = createFetchDeets(reqUrl, method, validatedPayload);
 
+  const ecosystemHeader = getEcosystemHeader();
+
   const res = await fetch(url, {
     method,
     body,
     credentials,
     mode,
-    headers,
+    headers: {
+      ...headers,
+      ...ecosystemHeader,
+    },
     cache: 'no-cache',
   });
 
