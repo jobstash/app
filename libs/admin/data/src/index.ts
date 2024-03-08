@@ -13,3 +13,4 @@ export * from './lib/post-delete-synonyms';
 export * from './lib/post-paired-terms';
 export * from './lib/post-set-blocked-terms';
 export * from './lib/post-unset-blocked-terms';
+export * from './lib/set-communities';

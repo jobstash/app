@@ -36,3 +36,15 @@ export type AddAliasMutFn = UseMutateFunction<
   AddAliasPayload,
   unknown
 >;
+
+export const setCommunitiesPayloadSchema = myzod.object({
+  orgId: myzod.string(),
+  communities: myzod.array(myzod.string()),
+});
+export type SetCommunitiesPayload = Infer<typeof setCommunitiesPayloadSchema>;
+export type SetCommunitiesMutFn = UseMutateFunction<
+  MessageResponse,
+  unknown,
+  SetCommunitiesPayload,
+  unknown
+>;
