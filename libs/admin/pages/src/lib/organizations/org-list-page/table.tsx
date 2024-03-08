@@ -17,6 +17,7 @@ import { getLogoUrl } from '@jobstash/shared/utils';
 import { LogoTitle, Text } from '@jobstash/shared/ui';
 
 import { OrgAlias } from './org-alias';
+import { OrgCommunities } from './org-communities';
 import { SearchInputIcon } from './search-input-icon';
 
 interface Props {
@@ -75,6 +76,10 @@ export const OrgListTable = ({ data }: Props) => {
 
       case 'alias': {
         return <OrgAlias orgId={org.orgId} />;
+      }
+
+      case 'communities': {
+        return <OrgCommunities org={org} />;
       }
 
       default: {
@@ -181,6 +186,7 @@ const headerColumns = [
   { key: 'orgId', label: 'ORG ID' },
   { key: 'name', label: 'Organization' },
   { key: 'alias', label: 'Alias' },
+  { key: 'communities', label: 'Communities' },
 ];
 
-const ROWS_PER_PAGE = 9;
+const ROWS_PER_PAGE = 8;

@@ -1,43 +1,45 @@
-import { useMemo, useState } from 'react';
+import { useState } from 'react';
 
 import { Button } from '@nextui-org/button';
-import { Chip } from '@nextui-org/react';
+import { Chip } from '@nextui-org/chip';
 import { Spinner } from '@nextui-org/spinner';
 import { Tooltip } from '@nextui-org/tooltip';
 import { useAtom } from 'jotai';
 
-import { editAliasAtom } from '@jobstash/admin/state';
-import { useOrgDetails } from '@jobstash/organizations/state';
+import { OrgListItem } from '@jobstash/organizations/core';
+
+import { editCommunitiesAtom, useAllOrgs } from '@jobstash/admin/state';
 
 import { EditIcon } from './edit-icon';
 
 interface Props {
-  orgId: string;
+  org: OrgListItem;
 }
 
-export const OrgAlias = ({ orgId }: Props) => {
-  const { isLoading, isRefetching, data } = useOrgDetails(orgId);
-
-  const aliases = useMemo(() => data?.aliases ?? [], [data]);
-
-  const hasAlias = aliases.length > 0;
+export const OrgCommunities = ({ org }: Props) => {
+  const { isRefetching } = useAllOrgs();
+  const hasCommunities = org.community.length > 0;
 
   const [isHovering, setIsHovering] = useState(false);
 
-  const [{ isOpen: isOpenEdit }, setEditAlias] = useAtom(editAliasAtom);
+  const [
+    {
+      isOpen: isOpenEdit,
+      org: { orgId: lastEditId },
+    },
+    setAtomValue,
+  ] = useAtom(editCommunitiesAtom);
 
   const openEditModal = () => {
-    if (data) {
-      setEditAlias({
-        org: data,
-        aliases,
-        isOpen: true,
-        originalAlias: data?.aliases ?? [],
-      });
-    }
+    setAtomValue({
+      org,
+      communities: org.community,
+      isOpen: true,
+    });
   };
 
-  if (isLoading || isRefetching) return <Spinner color="white" size="sm" />;
+  if (isRefetching && lastEditId === org.orgId)
+    return <Spinner color="white" size="sm" />;
 
   return (
     <div
@@ -45,11 +47,11 @@ export const OrgAlias = ({ orgId }: Props) => {
       onMouseEnter={() => setIsHovering(true)}
       onMouseLeave={() => setIsHovering(false)}
     >
-      {hasAlias ? (
+      {hasCommunities ? (
         <div className="flex gap-2 items-center">
-          {aliases.map((alias) => (
-            <Chip key={alias} size="sm">
-              {alias}
+          {org.community.map((community) => (
+            <Chip key={community} size="sm">
+              {community}
             </Chip>
           ))}
         </div>

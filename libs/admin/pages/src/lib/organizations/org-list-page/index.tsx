@@ -8,6 +8,7 @@ import { AdminLayout } from '@jobstash/admin/ui';
 import { SideBar } from '@jobstash/sidebar/feature';
 
 import { EditAliasModal } from './edit-alias-modal';
+import { EditCommunitiesModal } from './edit-communities-modal';
 import { OrgListTable } from './table';
 
 export const OrgListPage = () => {
@@ -29,6 +30,7 @@ export const OrgListPage = () => {
       >
         <OrgListTable data={data ?? []} />
         <EditAliasModal />
+        <EditCommunitiesModal />
       </AdminLayout>
     </>
   );

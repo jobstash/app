@@ -2,8 +2,6 @@ import { useState } from 'react';
 
 import { useAtom } from 'jotai';
 
-import { OrgListItem } from '@jobstash/organizations/core';
-
 import { editCommunitiesAtom, useSetCommunities } from '@jobstash/admin/state';
 
 export const useEditCommunitiesModal = () => {
@@ -50,7 +48,7 @@ export const useEditCommunitiesModal = () => {
 
   const closeModal = () => {
     setAtomValue(() => ({
-      org: {} as OrgListItem,
+      org,
       communities: [] as string[],
       isOpen: false,
     }));

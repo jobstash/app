@@ -1,5 +1,6 @@
 // Atoms
 export * from './lib/atoms/edit-alias-atom';
+export * from './lib/atoms/edit-communities-atom';
 export * from './lib/atoms/org-approval-profile-atom';
 
 // Hooks
@@ -13,6 +14,7 @@ export * from './lib/hooks/use-blocked-terms-mutation';
 export * from './lib/hooks/use-create-preference-mutation';
 export * from './lib/hooks/use-paired-terms-mutation';
 export * from './lib/hooks/use-paired-terms-query';
+export * from './lib/hooks/use-set-communities';
 export * from './lib/hooks/use-unset-blocked-terms-mutation';
 
 // Context & Providers
