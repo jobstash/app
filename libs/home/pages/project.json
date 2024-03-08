@@ -1,0 +1,20 @@
+{
+  "name": "home-pages",
+  "$schema": "../../../node_modules/nx/schemas/project-schema.json",
+  "sourceRoot": "libs/home/pages/src",
+  "projectType": "library",
+  "tags": ["type:page"],
+  "targets": {
+    "lint": {
+      "executor": "@nx/eslint:lint",
+      "outputs": ["{options.outputFile}"]
+    },
+    "test": {
+      "executor": "@nx/jest:jest",
+      "outputs": ["{workspaceRoot}/coverage/{projectRoot}"],
+      "options": {
+        "jestConfig": "libs/home/pages/jest.config.ts"
+      }
+    }
+  }
+}
