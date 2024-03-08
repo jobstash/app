@@ -22,9 +22,10 @@ import { useIsMobile } from '@jobstash/shared/state';
 import { LogoTitle } from '@jobstash/shared/ui';
 
 export const ProfileOrgForm = () => {
-  const { flow } = useAuthContext();
+  const { isLoading: isLoadingAuth, flow } = useAuthContext();
   const isSetup = flow === CHECK_WALLET_FLOWS.ORG_PROFILE;
   const isComplete = flow === CHECK_WALLET_FLOWS.ORG_COMPLETE;
+  const isRejected = flow === CHECK_WALLET_FLOWS.ORG_REJECTED;
 
   const [linkedin, setLinkedin] = useState('');
   const [calendly, setCalendly] = useState('');
@@ -127,9 +128,9 @@ export const ProfileOrgForm = () => {
             size={isMobile ? 'md' : 'lg'}
             radius="sm"
             variant="dot"
-            color={isComplete ? 'success' : 'warning'}
+            color={isComplete ? 'success' : isRejected ? 'default' : 'warning'}
           >
-            {isComplete ? 'APPROVED' : 'PENDING'}
+            {isComplete ? 'APPROVED' : isRejected ? 'REJECTED' : 'PENDING'}
           </Chip>
         </div>
       </div>
@@ -275,9 +276,9 @@ export const ProfileOrgForm = () => {
         </Tabs>
       </div>
 
-      <div className="flex w-full justify-end">
+      <div className="flex w-full pl-2">
         <Button
-          isLoading={isPending}
+          isLoading={isPending || isLoadingAuth}
           className={cn(
             'bg-gradient-to-l from-[#8743FF] to-[#4136F1] font-bold',
             { 'w-full mx-2': isMobile },

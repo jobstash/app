@@ -46,6 +46,9 @@ export const useOrgProfileInfoMutation = () => {
       queryClient.invalidateQueries({
         queryKey: ['org-profile-info', address],
       });
+      queryClient.invalidateQueries({
+        queryKey: ['check-wallet'],
+      });
     },
   });
 
