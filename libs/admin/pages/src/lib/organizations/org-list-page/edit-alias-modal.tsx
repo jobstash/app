@@ -129,7 +129,11 @@ export const EditAliasModal = () => {
                     }}
                     value={value}
                     endContent={
-                      <Button size="sm" className="bg-transparent">
+                      <Button
+                        size="sm"
+                        className="bg-transparent"
+                        onClick={addAlias}
+                      >
                         <Kbd keys={['enter']}>Add</Kbd>
                       </Button>
                     }

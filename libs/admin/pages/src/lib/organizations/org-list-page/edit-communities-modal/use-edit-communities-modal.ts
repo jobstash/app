@@ -65,6 +65,7 @@ export const useEditCommunitiesModal = () => {
     hasCommunities,
     org,
     communities,
+    addCommunity,
     removeCommunity,
     onSubmit,
     value,

@@ -24,6 +24,7 @@ export const EditCommunitiesModal = () => {
     hasCommunities,
     org: { name, location, url, logoUrl },
     communities,
+    addCommunity,
     removeCommunity,
     onSubmit,
     value,
@@ -92,7 +93,11 @@ export const EditCommunitiesModal = () => {
                     }}
                     value={value}
                     endContent={
-                      <Button size="sm" className="bg-transparent">
+                      <Button
+                        size="sm"
+                        className="bg-transparent"
+                        onClick={addCommunity}
+                      >
                         <Kbd keys={['enter']}>Add</Kbd>
                       </Button>
                     }
