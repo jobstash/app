@@ -10,13 +10,14 @@ import { Tab, Tabs } from '@nextui-org/tabs';
 import { CHECK_WALLET_FLOWS } from '@jobstash/auth/core';
 import { CONTACT_DEFAULT_OPTIONS } from '@jobstash/profile/core';
 import { getEmailAvatar } from '@jobstash/profile/utils';
-import { notifError } from '@jobstash/shared/utils';
+import { cn, notifError } from '@jobstash/shared/utils';
 
 import { useAuthContext } from '@jobstash/auth/state';
 import {
   useOrgProfileInfo,
   useOrgProfileInfoMutation,
 } from '@jobstash/profile/state';
+import { useIsMobile } from '@jobstash/shared/state';
 
 import { LogoTitle } from '@jobstash/shared/ui';
 
@@ -103,6 +104,8 @@ export const ProfileOrgForm = () => {
     });
   };
 
+  const isMobile = useIsMobile();
+
   if (!profileInfoData) return null;
 
   return (
@@ -118,10 +121,10 @@ export const ProfileOrgForm = () => {
               alt: `${profileInfoData.email}'s avatar`,
               isRounded: true,
             }}
-            size="lg"
+            size={isMobile ? 'sm' : 'lg'}
           />
           <Chip
-            size="lg"
+            size={isMobile ? 'md' : 'lg'}
             radius="sm"
             variant="dot"
             color={isComplete ? 'success' : 'warning'}
@@ -142,7 +145,7 @@ export const ProfileOrgForm = () => {
           classNames={{ panel: 'pl-2' }}
         >
           <Tab key="contact" title="Contact Info">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Input
                 isRequired
                 isDisabled={isPending}
@@ -202,7 +205,7 @@ export const ProfileOrgForm = () => {
             </div>
           </Tab>
           <Tab key="reference" title="Reference">
-            <div className="grid grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Input
                 isDisabled={isPending}
                 label="Reference Name"
@@ -275,7 +278,11 @@ export const ProfileOrgForm = () => {
       <div className="flex w-full justify-end">
         <Button
           isLoading={isPending}
-          className="bg-gradient-to-l from-[#8743FF] to-[#4136F1] font-bold"
+          className={cn(
+            'bg-gradient-to-l from-[#8743FF] to-[#4136F1] font-bold',
+            { 'w-full mx-2': isMobile },
+          )}
+          size={isMobile ? 'lg' : 'md'}
           onClick={onSubmit}
         >
           {isSetup ? 'Request Approval' : 'Update Info'}

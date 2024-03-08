@@ -30,7 +30,7 @@ export const ProfileOrgPage = () => {
       {profileInfoData ? (
         <PageWrapper>
           <SideBar />
-          <div className="flex flex-col gap-3 lg:flex-row min-h-screen w-full">
+          <div className="flex flex-col gap-3 pt-20 px-4 lg:pt-0 lg:flex-row lg:min-h-screen w-full">
             <div className="flex-1 flex lg:pl-10 lg:pt-10">
               <ProfileOrgForm />
             </div>
@@ -38,7 +38,7 @@ export const ProfileOrgPage = () => {
             <div className="hidden lg:flex lg:flex-1" />
 
             <div className="hide-scrollbar flex justify-center lg:fixed lg:h-screen overflow-y-auto p-4 transition-all inset-auto lg:right-0 lg:top-0 lg:w-5/12 lg:px-6 lg:py-8 lg:pr-10 lg:mt-20">
-              <div className="flex flex-col gap-4">
+              <div className="w-full flex items-center justify-center h-fit">
                 <OrgAccountCard />
               </div>
             </div>
