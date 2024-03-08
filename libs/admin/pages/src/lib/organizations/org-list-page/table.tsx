@@ -128,9 +128,9 @@ export const OrgListTable = ({ data }: Props) => {
             cursor: 'bg-foreground text-background',
           }}
           color="default"
-          isDisabled={hasSearchFilter}
+          isDisabled={filteredItems.length < ROWS_PER_PAGE}
           page={page}
-          total={pages}
+          total={filteredItems.length}
           variant="light"
           onChange={setPage}
         />
@@ -139,7 +139,7 @@ export const OrgListTable = ({ data }: Props) => {
         </span>
       </div>
     ),
-    [data.length, hasSearchFilter, page, pages],
+    [data.length, filteredItems.length, page],
   );
 
   return (
