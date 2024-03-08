@@ -17,7 +17,7 @@ const AdminLayout = ({
   children,
   hideHeader,
 }: Props) => (
-  <div className="w-full pl-64 flex flex-col gap-8 px-12">
+  <div className="w-full pl-64 flex flex-col gap-8 px-12 pt-12">
     {sidebar}
 
     {!hideHeader && <AdminHeader />}
