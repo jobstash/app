@@ -5,7 +5,7 @@ import { notifError, notifSuccess } from '@jobstash/shared/utils';
 
 import { postAuthorizeOrg } from '@jobstash/admin/data';
 
-export const useAuthorizeOrg = () => {
+export const useAuthorizeOrg = (successCb?: () => void) => {
   const queryClient = useQueryClient();
   const { isSuccess, isPending, mutate } = useMutation({
     mutationFn: (payload: AuthorizeOrgPayload) => postAuthorizeOrg(payload),
@@ -16,6 +16,10 @@ export const useAuthorizeOrg = () => {
         message,
         autoClose: 10_000,
       });
+
+      if (successCb) {
+        successCb();
+      }
     },
     onError(data) {
       notifError({

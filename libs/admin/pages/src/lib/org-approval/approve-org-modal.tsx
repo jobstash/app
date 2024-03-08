@@ -85,12 +85,12 @@ export const ApproveOrgModal = () => {
     }));
   };
 
-  const { isPending: isPendingMutation, mutate } = useAuthorizeOrg();
+  const { isPending: isPendingMutation, mutate } =
+    useAuthorizeOrg(onOpenChange);
 
   const onSubmit = () => {
     if (wallet && selectedOrg) {
       mutate({ wallet, verdict: 'approve', orgId: selectedOrg });
-      onOpenChange();
     }
   };
 
@@ -171,7 +171,9 @@ export const ApproveOrgModal = () => {
                       ? `There are ${allOrgs.length} orgs in total`
                       : undefined
                   }
-                  listboxProps={{ emptyContent: null }}
+                  listboxProps={{
+                    emptyContent: 'Type atleast 2 letters to show results',
+                  }}
                   placeholder="Type here ..."
                   variant="bordered"
                   isLoading={isPending || isPendingFilter}
