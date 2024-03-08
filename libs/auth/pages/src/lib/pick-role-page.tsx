@@ -15,6 +15,7 @@ import { useIsMounted } from '@jobstash/shared/state';
 
 import {
   ConnectDevEmail,
+  ConnectEmailDone,
   ConnectOrgEmail,
   PickRoleDevSection,
   PickRoleOrgSection,
@@ -55,7 +56,9 @@ export const PickRolePage = () => {
     <div className="w-full lg:pl-52">
       <SideBar />
 
-      {section === 'dev' ? (
+      {section === 'email-done' ? (
+        <ConnectEmailDone />
+      ) : section === 'dev' ? (
         <ConnectDevEmail />
       ) : section === 'org' ? (
         <ConnectOrgEmail />

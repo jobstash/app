@@ -1,8 +1,11 @@
 import { useEffect } from 'react';
 
 import { useQueryClient } from '@tanstack/react-query';
+import { useSetAtom } from 'jotai';
 
 import { CheckWalletRole } from '@jobstash/auth/core';
+
+import { pickRoleSectionAtom } from '../atoms/pick-role-section-atom';
 
 import { useAuthContext } from './use-auth-context';
 
@@ -12,6 +15,7 @@ export const useTargetRoleCloseWindow = (
 ) => {
   const { role } = useAuthContext();
   const queryClient = useQueryClient();
+  const setSection = useSetAtom(pickRoleSectionAtom);
 
   // Poll data every 1s
   useEffect(() => {
@@ -20,7 +24,7 @@ export const useTargetRoleCloseWindow = (
     if (isEnabled) {
       interval = setInterval(() => {
         if (role === targetRole) {
-          window.close();
+          setSection('email-done');
         } else {
           queryClient.invalidateQueries({ queryKey: ['check-wallet'] });
         }
@@ -30,5 +34,5 @@ export const useTargetRoleCloseWindow = (
     return () => {
       clearInterval(interval);
     };
-  }, [isEnabled, queryClient, role, targetRole]);
+  }, [isEnabled, queryClient, role, setSection, targetRole]);
 };

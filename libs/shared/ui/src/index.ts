@@ -77,6 +77,7 @@ export { default as CardMenu } from './lib/components/card-menu';
 export { default as DonateModal } from './lib/components/donate-modal';
 export { default as DraggableWrapper } from './lib/components/draggable-wrapper';
 export { default as EmptyResult } from './lib/components/empty-result';
+export * from './lib/components/fox-svg';
 export { default as Hexagon } from './lib/components/hexagon';
 export { default as InternalErrorResult } from './lib/components/internal-error-result';
 export { default as IsMountedWrapper } from './lib/components/is-mounted-wrapper';
