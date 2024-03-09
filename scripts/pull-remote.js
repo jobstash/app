@@ -13,11 +13,11 @@ const exec = util.promisify(require('node:child_process').exec);
       'git rev-parse --abbrev-ref HEAD',
     );
 
-    // Checkout main
-    await exec('git checkout main');
+    // Checkout app-router
+    await exec('git checkout app-router');
 
-    // Pull origin main
-    await exec('git pull origin main');
+    // Pull origin app-router
+    await exec('git pull origin app-router');
 
     // Delete local feature-branch
     await exec(`git branch -D ${branchName}`);
