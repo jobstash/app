@@ -1,14 +1,11 @@
 'use client';
 
+import dynamic from 'next/dynamic';
+
 import { ROUTE_TABS } from '~/shared/core/constants';
 
 import { JobDetails } from '~/jobs/core/schemas';
 import { useJobDetails } from '~/jobs/hooks/use-job-details';
-import { JobCompetitorCards } from '~/jobs/components/job-competitor-cards';
-import { JobDetailsCard } from '~/jobs/components/job-details-card';
-import { JobOrgCard } from '~/jobs/components/job-org-card';
-import { JobOtherJobCards } from '~/jobs/components/job-other-job-cards';
-import { JobProjectCards } from '~/jobs/components/job-project-cards';
 
 interface Props {
   params: {
@@ -41,3 +38,27 @@ const getPageContent = (job: JobDetails, tab: string) => {
 
   return null;
 };
+
+const JobDetailsCard = dynamic(() =>
+  import('~/jobs/components/job-details-card').then((m) => m.JobDetailsCard),
+);
+
+const JobOrgCard = dynamic(() =>
+  import('~/jobs/components/job-org-card').then((m) => m.JobOrgCard),
+);
+
+const JobProjectCards = dynamic(() =>
+  import('~/jobs/components/job-project-cards').then((m) => m.JobProjectCards),
+);
+
+const JobCompetitorCards = dynamic(() =>
+  import('~/jobs/components/job-competitor-cards').then(
+    (m) => m.JobCompetitorCards,
+  ),
+);
+
+const JobOtherJobCards = dynamic(() =>
+  import('~/jobs/components/job-other-job-cards').then(
+    (m) => m.JobOtherJobCards,
+  ),
+);
