@@ -15,6 +15,7 @@ export * from './lib/get-website-text';
 export * from './lib/normalize-string';
 export * from './lib/notifications';
 export * from './lib/num-formatter';
+export * from './lib/omit-keys';
 export * from './lib/pretty-timestamp';
 export * from './lib/sentry-message';
 export * from './lib/short-timestamp';
