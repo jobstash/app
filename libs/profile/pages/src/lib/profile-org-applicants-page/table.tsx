@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
 import {
   Table,
   TableBody,
@@ -43,12 +44,7 @@ export const ApplicantsTable = () => {
           {(item) => (
             <TableRow key={item.key}>
               {(columnKey) => (
-                <TableCell>
-                  {renderCell(
-                    item,
-                    columnKey as keyof Omit<typeof item, 'key'>,
-                  )}
-                </TableCell>
+                <TableCell>{renderCell(item, columnKey as any)}</TableCell>
               )}
             </TableRow>
           )}
