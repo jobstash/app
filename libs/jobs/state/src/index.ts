@@ -6,6 +6,7 @@ export * from './lib/atoms/job-count-atom';
 export * from './lib/atoms/last-job-bookmarked-atom';
 
 // Hooks
+export * from './lib/hooks/use-job-applicants';
 export * from './lib/hooks/use-job-bookmark-mutation';
 export * from './lib/hooks/use-job-bookmarks';
 export * from './lib/hooks/use-job-list';
