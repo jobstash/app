@@ -105,3 +105,11 @@ export const orgDetailsSchema = z
   })
   .merge(orgInfoSchema);
 export type OrgDetails = z.infer<typeof orgDetailsSchema>;
+
+export const orgListQueryPageSchema = z.object({
+  page: z.number(),
+  count: z.number(),
+  total: z.number(),
+  data: z.array(orgListItemSchema),
+});
+export type OrgListQueryPage = z.infer<typeof orgListQueryPageSchema>;
