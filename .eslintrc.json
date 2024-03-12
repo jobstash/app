@@ -88,6 +88,7 @@
             "callees": ["cn", "cva", "clsx"]
           }
         ],
+        "tailwindcss/no-custom-classname": "off", // Slow perf
         // Playwright
         "playwright/expect-expect": "off",
         // Unused vars
