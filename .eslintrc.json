@@ -1,8 +1,10 @@
 {
   "root": true,
   "extends": [
+    "eslint:recommended",
     "next/core-web-vitals",
     "prettier",
+    "plugin:@typescript-eslint/recommended",
     "plugin:react/recommended",
     "plugin:react-hooks/recommended",
     "plugin:tailwindcss/recommended",
@@ -86,8 +88,23 @@
             "callees": ["cn", "cva", "clsx"]
           }
         ],
+        "tailwindcss/no-custom-classname": "off", // Slow perf
         // Playwright
-        "playwright/expect-expect": "off"
+        "playwright/expect-expect": "off",
+        // Unused vars
+        "no-unused-vars": "off",
+        "@typescript-eslint/no-unused-vars": [
+          "error",
+          {
+            "args": "all",
+            "argsIgnorePattern": "^_",
+            "caughtErrors": "all",
+            "caughtErrorsIgnorePattern": "^_",
+            "destructuredArrayIgnorePattern": "^_",
+            "varsIgnorePattern": "^_",
+            "ignoreRestSiblings": true
+          }
+        ]
       }
     }
   ]

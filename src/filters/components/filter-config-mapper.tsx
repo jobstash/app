@@ -13,7 +13,7 @@ import { RangeInput } from './range-input';
 import { SingleSelectInput } from './single-select-input';
 
 export const FilterConfigMapper = () => {
-  const { filterSearchParams, filterConfigs, atom } = useFiltersContext();
+  const { filterSearchParams, filterConfigs } = useFiltersContext();
 
   return (
     <div className="grid grid-cols-1 gap-8 md:grid-cols-2">

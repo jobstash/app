@@ -1,4 +1,4 @@
-export const omit = <T extends Object>(
+export const omit = <T extends object>(
   obj: T,
   omitKeys: keyof T | (keyof T)[],
 ) => {

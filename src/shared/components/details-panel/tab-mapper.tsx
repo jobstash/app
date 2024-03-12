@@ -35,7 +35,9 @@ const checkIsActive = (pathname: string, href: string) => {
 
   // Pages w/ list e.g. /jobs does not have [tab] param.
   // We default to 'details' tab
-  const isListHrefPath = LIST_PAGES_PATHS.includes(pathname as any);
+  const isListHrefPath = LIST_PAGES_PATHS.includes(
+    pathname as (typeof LIST_PAGES_PATHS)[number],
+  );
   const isDefaultTab =
     href.substring(href.length - DEFAULT_TAB.length) === DEFAULT_TAB;
 

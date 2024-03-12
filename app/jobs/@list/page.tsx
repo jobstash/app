@@ -1,5 +1,3 @@
-import lazy from 'next/dynamic';
-
 import { dehydrate, HydrationBoundary } from '@tanstack/react-query';
 
 import { ROUTE_SECTIONS } from '~/shared/core/constants';
@@ -9,7 +7,6 @@ import { filterQueryKeys } from '~/filters/core/query-keys';
 import { jobQueryKeys } from '~/jobs/core/query-keys';
 import { getFilterConfig } from '~/filters/api/get-filter-config';
 import { getJobList } from '~/jobs/api/get-job-list';
-import { JobList } from '~/jobs/components/job-list';
 
 import { JobListClientPage } from './client-page';
 

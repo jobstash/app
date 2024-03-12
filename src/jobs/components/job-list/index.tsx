@@ -23,7 +23,7 @@ export const JobList = () => {
   } = useJobList();
   const hasJobs = jobs.length > 0;
 
-  const { isPendingFilters, filterSearchParams, atom } = useFiltersContext();
+  const { isPendingFilters, filterSearchParams } = useFiltersContext();
 
   const isPending = [isPendingFilters, isPendingJobs].includes(true);
 
