@@ -8,12 +8,13 @@ import { TotalCount } from './total-count';
 
 interface Props {
   countAtom: PrimitiveAtom<number | null>;
+  searchPlaceholder: string;
 }
 
-export const FiltersSection = ({ countAtom }: Props) => {
+export const FiltersSection = ({ countAtom, searchPlaceholder }: Props) => {
   return (
     <div className="flex flex-col gap-4">
-      <FilterQueryInput placeholder="Enter job title, description, or organization..." />
+      <FilterQueryInput placeholder={searchPlaceholder} />
 
       <FilterToggler countSection={<TotalCount countAtom={countAtom} />}>
         <FilterConfigMapper />
