@@ -117,7 +117,7 @@ export const orgProfileInfoSchema = myzod.object({
   email: myzod.string().min(1).nullable(),
   linkedin: myzod.string().nullable(),
   calendly: myzod.string().nullable(),
-  orgId: myzod.string(),
+  orgId: myzod.string().nullable(),
   contact: profileInfoContactSchema,
   subscriberStatus: myzod.object({
     status: myzod.boolean(),
