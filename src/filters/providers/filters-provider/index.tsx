@@ -4,7 +4,7 @@ import { PrimitiveAtom } from 'jotai';
 
 import { RouteSection } from '~/shared/core/constants';
 
-import { FiltersContext, useFiltersContext } from './context';
+import { FiltersContext } from './context';
 import { useFilters } from './use-filters';
 
 interface Props {

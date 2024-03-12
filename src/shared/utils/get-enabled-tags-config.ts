@@ -1,6 +1,6 @@
 import { EnabledTagsConfig } from '~/shared/core/types';
 
-export const getEnabledTagsConfig = <T extends Object>(
+export const getEnabledTagsConfig = <T extends object>(
   tags: Partial<T>,
   config?: EnabledTagsConfig<T>,
 ) => {

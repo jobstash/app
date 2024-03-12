@@ -26,8 +26,8 @@ export const sanitizeFilterParams = (
     if (config.kind === FILTER_KIND.RANGE) {
       const {
         value: {
-          lowest: { paramKey: minParamKey, value: minValue },
-          highest: { paramKey: maxParamKey, value: maxValue },
+          lowest: { paramKey: minParamKey },
+          highest: { paramKey: maxParamKey },
         },
       } = config;
 

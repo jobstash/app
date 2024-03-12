@@ -1,4 +1,4 @@
-import { ChangeEventHandler, useEffect, useState } from 'react';
+import { ChangeEventHandler, useState } from 'react';
 
 import { useAtom } from 'jotai';
 

@@ -16,7 +16,7 @@ export const mwGET = async <T extends z.ZodTypeAny>(props: Props<T>) => {
     throw new Error(errMsg.OFFLINE);
   }
 
-  const { url, label, responseSchema, options } = props;
+  const { url, responseSchema, options } = props;
 
   try {
     const res = await fetch(url, { method: 'GET', ...options });

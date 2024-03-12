@@ -1,5 +1,3 @@
-import { PrimitiveAtom } from 'jotai';
-
 import { RangeFilterConfig } from '~/filters/core/schemas';
 
 export interface RangeInputProps {

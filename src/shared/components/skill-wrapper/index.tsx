@@ -1,4 +1,3 @@
-import { lato } from '~/shared/core/fonts';
 import { cn } from '~/shared/utils/cn';
 
 import { getSkillColor } from './get-skill-color';
