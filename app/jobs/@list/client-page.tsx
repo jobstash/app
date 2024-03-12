@@ -19,7 +19,10 @@ export const JobListClientPage = ({ rawSearchParams }: Props) => {
       routeSection={ROUTE_SECTIONS.JOBS}
       atom={jobFiltersSearchParamsAtom}
     >
-      <FiltersSection countAtom={jobTotalCountAtom} />
+      <FiltersSection
+        countAtom={jobTotalCountAtom}
+        searchPlaceholder="Enter job title, description, or organization..."
+      />
       <JobList />
     </FiltersProvider>
   );
