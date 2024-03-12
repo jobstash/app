@@ -15,8 +15,8 @@ export const DetailsPanelCardSkeleton = () => {
       <DetailsPanelActionsWrapper>
         <Skeleton className="h-9 w-28 rounded-lg md:w-36" />
         <div className="flex justify-end gap-2.5">
-          <Skeleton className="h-10 w-10 rounded-md" />
-          <Skeleton className="h-10 w-10 rounded-md" />
+          <Skeleton className="size-10 rounded-md" />
+          <Skeleton className="size-10 rounded-md" />
         </div>
       </DetailsPanelActionsWrapper>
       <Divider />

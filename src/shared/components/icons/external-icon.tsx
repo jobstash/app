@@ -5,7 +5,7 @@ export const ExternalIcon = memo(() => (
     viewBox="0 0 16 16"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
-    className="h-4 w-4 lg:h-3.5 lg:w-3.5"
+    className="size-4 lg:size-3.5"
   >
     <path
       d="M14 8C14 11.3137 11.3137 14 8 14C4.68629 14 2 11.3137 2 8C2 4.68629 4.68629 2 8 2C11.3137 2 14 4.68629 14 8Z"

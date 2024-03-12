@@ -6,7 +6,7 @@ export const CanTeachIcon = () => {
       viewBox="0 0 24 24"
       strokeWidth="1.5"
       data-slot="icon"
-      className="mt-[-2px] h-4 w-4 stroke-darkest-gray"
+      className="mt-[-2px] size-4 stroke-darkest-gray"
     >
       <path
         strokeLinecap="round"

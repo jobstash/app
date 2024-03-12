@@ -7,7 +7,7 @@ export const MainnetIcon = memo(() => (
     viewBox="0 0 24 24"
     strokeWidth={1.5}
     stroke="currentColor"
-    className="h-3 w-3"
+    className="size-3"
   >
     <path
       strokeLinecap="round"
