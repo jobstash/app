@@ -10,7 +10,7 @@ export const getGoogleLogoUrl = (url: string) =>
 
 export const getLogoUrlHttpsAlternative = (googleString: string) => {
   const url = new URL(
-    `${googleString.includes('http') ? '' : FRONTEND_URL}${googleString}`,
+    `${googleString.startsWith('http') ? '' : FRONTEND_URL}${googleString}`,
   );
   const domain = url.searchParams.get('domain');
 
