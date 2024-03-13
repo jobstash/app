@@ -1,5 +1,5 @@
 import Image from 'next/image';
-import { memo, useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { Avatar as NextUIAvatar, Skeleton } from '@nextui-org/react';
 import { cva, type VariantProps } from 'class-variance-authority';
@@ -61,7 +61,7 @@ const Avatar = ({ src, alt, size, isRounded }: AvatarProps) => {
   );
 };
 
-export default memo(Avatar);
+export default Avatar;
 
 const FallbackImage = () => (
   <NextUIAvatar

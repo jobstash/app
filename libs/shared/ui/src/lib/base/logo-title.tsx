@@ -1,5 +1,3 @@
-import { memo } from 'react';
-
 import { cva, type VariantProps } from 'class-variance-authority';
 
 import { cn } from '@jobstash/shared/utils';
@@ -39,7 +37,7 @@ const LogoTitle = ({
       'min-w-[148px]': hasMinWidth,
     })}
   >
-    <Avatar src={src} alt={alt} size={size} isRounded={isRounded} />
+    <Avatar key={src} src={src} alt={alt} size={size} isRounded={isRounded} />
     <div className="flex flex-col justify-center gap-1">
       <Heading size={size === 'lg' ? 'md' : 'sm'}>{title}</Heading>
       {location && (
@@ -51,4 +49,4 @@ const LogoTitle = ({
   </div>
 );
 
-export default memo(LogoTitle);
+export default LogoTitle;
