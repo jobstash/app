@@ -1,5 +1,6 @@
 import myzod, { Infer } from 'myzod';
 
+import { devProfileInfoSchema } from '@jobstash/profile/core';
 import {
   fundingRoundSchema,
   investorSchema,
@@ -58,24 +59,58 @@ export const jobApplyInteractionPayloadSchema = myzod.object({
   shortUUID: myzod.string(),
 });
 
+// TODO: Update user prop to intersection of devProfileInfo
+// TODO: Update job prop to jobDetails schema (or whatever mw returns)
 export const jobApplicantSchema = myzod.object({
-  user: myzod.object({
-    avatar: myzod.string(),
-    name: myzod.string(),
-    email: myzod.string(),
-  }),
-  job: myzod.object({
-    title: myzod.string(),
-    sub: myzod.string(),
-  }),
-  date: myzod.number(),
-  cryptoNative: myzod.boolean(),
+  user: myzod
+    .object({
+      avatar: myzod.string().min(1).nullable(),
+      username: myzod.string().min(1).nullable(),
+      email: myzod.string().min(1).nullable(),
+      availableForWork: myzod.boolean().nullable(),
+      location: myzod.object({
+        country: myzod.string().nullable(),
+        city: myzod.string().nullable(),
+      }),
+      //
+      // wallet: myzod.string().min(1),
+      // contact: myzod.object({
+      //   preferred: myzod.string().nullable(),
+      //   value: myzod.string().nullable(),
+      // }),
+      // matchingSkills: myzod.number().nullable(),
+      // skills: myzod.array(
+      //   myzod.object({
+      //     id: myzod.string().min(1),
+      //     name: myzod.string().min(1),
+      //     canTeach: myzod.boolean(),
+      //   }),
+      // ),
+      // showcases: myzod.array(
+      //   myzod.object({
+      //     id: myzod.string().min(1),
+      //     label: myzod.string().min(1),
+      //     url: myzod.string().min(1),
+      //   }),
+      // ),
+    })
+    .allowUnknownKeys(true),
+  job: myzod
+    .object({
+      shortUUID: myzod.string(),
+      title: myzod.string(),
+      classification: myzod.string().min(1).nullable(),
+    })
+    .allowUnknownKeys(true),
   attestations: myzod.object({
-    up: myzod.number(),
-    down: myzod.number(),
+    upvotes: myzod.number().nullable(),
+    downvotes: myzod.number().nullable(),
   }),
-  matchingSkills: myzod.number(),
-  upcomingTalent: myzod.boolean(),
+  appliedTimestamp: myzod.number().nullable(),
+  calendly: myzod.string().nullable(),
   oss: myzod.boolean(),
+  interviewed: myzod.boolean(),
+  cryptoNative: myzod.boolean(),
+  upcomingTalent: myzod.boolean(),
 });
 export type JobApplicant = Infer<typeof jobApplicantSchema>;

@@ -14,11 +14,10 @@ import {
 import { OrgListItem } from '@jobstash/organizations/core';
 import { getLogoUrl } from '@jobstash/shared/utils';
 
-import { LogoTitle, Text } from '@jobstash/shared/ui';
+import { LogoTitle, SearchInputIcon, Text } from '@jobstash/shared/ui';
 
 import { OrgAlias } from './org-alias';
 import { OrgCommunities } from './org-communities';
-import { SearchInputIcon } from './search-input-icon';
 
 interface Props {
   data: OrgListItem[];
@@ -26,7 +25,7 @@ interface Props {
 
 export const OrgListTable = ({ data }: Props) => {
   const [page, setPage] = useState(1);
-  const pages = Math.ceil(data.length / ROWS_PER_PAGE);
+  const totalPageCount = Math.ceil(data.length / ROWS_PER_PAGE);
 
   const [filterValue, setFilterValue] = useState('');
   const hasSearchFilter = Boolean(filterValue);
@@ -128,9 +127,9 @@ export const OrgListTable = ({ data }: Props) => {
             cursor: 'bg-foreground text-background',
           }}
           color="default"
-          isDisabled={filteredItems.length < ROWS_PER_PAGE}
+          isDisabled={items.length === 0}
           page={page}
-          total={filteredItems.length}
+          total={totalPageCount}
           variant="light"
           onChange={setPage}
         />
@@ -139,7 +138,7 @@ export const OrgListTable = ({ data }: Props) => {
         </span>
       </div>
     ),
-    [data.length, filteredItems.length, page],
+    [data.length, page, totalPageCount, items],
   );
 
   return (

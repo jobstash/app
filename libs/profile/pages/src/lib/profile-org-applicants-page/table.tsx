@@ -12,19 +12,62 @@ import { cn } from '@jobstash/shared/utils';
 
 import { Text } from '@jobstash/shared/ui';
 
+import { JobSelection } from './table-job-selection';
+import { TablePagination } from './table-pagination';
+import { TableSearchInput } from './table-search-input';
 import { useApplicantsTable } from './use-applicants-table';
 
 export const ApplicantsTable = () => {
-  const { isLoading, applicants, columns, centeredSet, renderCell } =
-    useApplicantsTable();
-
-  const items = applicants.map((a, i) => ({ ...a, key: i }));
+  const {
+    isLoading,
+    items,
+    columns,
+    centeredSet,
+    renderCell,
+    searchFilter,
+    setSearchFilter,
+    onSearchChange,
+    page,
+    setPage,
+    pageRowCount,
+    totalPageCount,
+    totalApplicantCount,
+    jobs,
+    jobSelection,
+    onJobSelectionChange,
+    onJobSelectionInputChange,
+    selectedApplicants,
+    onTableSelectionChange,
+  } = useApplicantsTable();
 
   if (isLoading) return null;
 
   return (
-    <div className="flex flex-col gap-12">
-      <Table aria-label="Job Applicants Table">
+    <div className="flex flex-col gap-4">
+      <div className="flex items-center gap-8">
+        <TableSearchInput
+          value={searchFilter}
+          setValue={setSearchFilter}
+          onChange={onSearchChange}
+        />
+
+        <JobSelection
+          isLoading={isLoading}
+          items={jobs}
+          inputValue={jobSelection.input}
+          selectedKey={jobSelection.selectedKey}
+          onInputChange={onJobSelectionInputChange}
+          onSelectionChange={onJobSelectionChange}
+        />
+      </div>
+
+      <Table
+        color="default"
+        aria-label="Job Applicants Table"
+        selectionMode="multiple"
+        selectedKeys={selectedApplicants as Set<string>}
+        onSelectionChange={onTableSelectionChange}
+      >
         <TableHeader columns={columns}>
           {(column) => (
             <TableColumn key={column.key}>
@@ -42,7 +85,7 @@ export const ApplicantsTable = () => {
         </TableHeader>
         <TableBody items={items}>
           {(item) => (
-            <TableRow key={item.key}>
+            <TableRow key={item.user.username ?? item.user.email}>
               {(columnKey) => (
                 <TableCell>{renderCell(item, columnKey as any)}</TableCell>
               )}
@@ -50,6 +93,14 @@ export const ApplicantsTable = () => {
           )}
         </TableBody>
       </Table>
+
+      <TablePagination
+        page={page}
+        total={totalPageCount}
+        isDisabled={items.length < pageRowCount}
+        totalApplicantCount={totalApplicantCount}
+        onChange={setPage}
+      />
     </div>
   );
 };
