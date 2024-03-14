@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 
 import { Heading, Text } from '@jobstash/shared/ui';
+import { Bartab } from '@jobstash/shared/ui';
 
 interface AdvantageItem {
   emoji: string;
@@ -41,7 +42,11 @@ export const Advantage = ({ icon, title, desc, advantages }: Props) => (
           </div>
         ))}
       </div>
-      <div className="pt-4">{/* <Button text={buttonText} /> */}</div>
+      <div className="pt-2 pb-2 w-[150px] mx-auto">
+        <Bartab isActive={false} variant="wallet">
+          More details
+        </Bartab>
+      </div>
     </div>
   </div>
 );
