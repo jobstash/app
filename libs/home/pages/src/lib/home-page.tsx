@@ -2,6 +2,7 @@ import { ECOSYSTEMS } from '@jobstash/shared/core';
 import { getEcosystemSubdomain } from '@jobstash/shared/utils';
 
 import { DefaultHomePage } from './default-home-page';
+import { DevHomePage } from './dev-home-page';
 import { EthdamHomePage } from './ethdam-home-page';
 import { EthlondonHomePage } from './ethlondon-home-page';
 import { LobsterDAOHomePage } from './lobsterdao-home-page';
@@ -25,4 +26,6 @@ const homePageMap: Record<
   [ECOSYSTEMS.ETHLONDON]: <EthlondonHomePage />,
   [ECOSYSTEMS.LOBSTERDAO]: <LobsterDAOHomePage />,
   [ECOSYSTEMS.SUPERCHAIN]: <SuperchainHomePage />,
+  [ECOSYSTEMS.DEV]: <DevHomePage />,
+  [ECOSYSTEMS.STAGING]: <DevHomePage />,
 };

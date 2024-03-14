@@ -118,6 +118,8 @@ export const ECOSYSTEMS = {
   ETHLONDON: 'ethlondon',
   LOBSTERDAO: 'lobsterdao',
   SUPERCHAIN: 'superchain',
+  DEV: 'devcommunity',
+  STAGING: 'stagingcommunity',
 } as const;
 
 export const ECOSYSTEMS_SET = new Set(Object.values(ECOSYSTEMS));

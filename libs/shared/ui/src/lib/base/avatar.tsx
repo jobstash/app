@@ -120,8 +120,6 @@ const Avatar = ({ src, alt, size, isRounded, name }: AvatarProps) => {
     }
   }, [isFallback, isFinal, src, name]);
 
-  console.log({ src, name, isFallback });
-
   if (!src && name) {
     return <NextUIAvatar name={alt} />;
   }
