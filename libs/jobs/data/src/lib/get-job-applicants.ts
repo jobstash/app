@@ -1,12 +1,17 @@
+import { fakeJobApplicants } from '@jobstash/jobs/testutils';
 import myzod, { Infer } from 'myzod';
 
-import { jobPostSchema } from '@jobstash/jobs/core';
-import { devProfileInfoSchema } from '@jobstash/profile/core';
+import { jobApplicantSchema } from '@jobstash/jobs/core';
 import { messageResponseSchema, MW_URL } from '@jobstash/shared/core';
 
 import { mwFetch } from '@jobstash/shared/data';
 
 export const getJobApplicants = async (orgId: string) => {
+  // // eslint-disable-next-line no-promise-executor-return
+  // await new Promise((r) => setTimeout(r, 2000));
+
+  // return fakeJobApplicants();
+
   const url = `${MW_URL}/jobs/org/${orgId}/applicants`;
 
   const options = {
@@ -21,17 +26,10 @@ export const getJobApplicants = async (orgId: string) => {
   return response.data;
 };
 
-const jobPostWithApplicantSchema = myzod.intersection(
-  myzod.omit(jobPostSchema, ['organization']),
-  myzod.object({
-    applicants: myzod.array(devProfileInfoSchema),
-  }),
-);
-
 const responseSchema = myzod.intersection(
   messageResponseSchema,
   myzod.object({
-    data: myzod.array(jobPostWithApplicantSchema),
+    data: myzod.array(jobApplicantSchema),
   }),
 );
 type ResponseSchema = Infer<typeof responseSchema>;

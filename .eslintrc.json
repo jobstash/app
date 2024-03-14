@@ -44,7 +44,8 @@
                 "onlyDependOnLibsWithTags": [
                   "type:core",
                   "type:util",
-                  "type:data"
+                  "type:data",
+                  "type:testutil"
                 ]
               },
               {
@@ -53,7 +54,8 @@
                   "type:core",
                   "type:util",
                   "type:state",
-                  "type:data"
+                  "type:data",
+                  "type:testutil"
                 ]
               },
               {
@@ -62,7 +64,8 @@
                   "type:core",
                   "type:util",
                   "type:state",
-                  "type:ui"
+                  "type:ui",
+                  "type:testutil"
                 ]
               },
               {
@@ -73,7 +76,8 @@
                   "type:state",
                   "type:data",
                   "type:ui",
-                  "type:feature"
+                  "type:feature",
+                  "type:testutil"
                 ]
               },
               {
