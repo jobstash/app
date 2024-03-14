@@ -16,76 +16,70 @@ const TestimonialSection = () => (
         Some of the best organizations have found talent using JobStash. Here’s
         what they had to say
       </p>
-      <div className="flex flex-row mt-10 space-x-4">
-        <div className="w-1/3 rounded-3xl bg-white bg-opacity-5 p-5">
-          <h3
-            className={`${lato.variable} justify-center text-xl pb-3 font-bold text-white`}
-          >
-            Senior Developer Advocate Developer Advocate
-          </h3>
-          <p className="text-md text-white/75 text-left pb-">
-            PancakeSwap has the most users of any decentralized platform, ever.
-            And those users are now entrusting the platform with over $3.4
-            billion in funds. Will you join them? 1.4 million users in the last
-            30 days 55 million trades made in the last 30 days.
-          </p>
-          <hr className="border-t border-white/20 mt-4 mb-6" />
-          {/* <div>Refer & Earn</div> */}
-          {/* <div className='flex space-x-4'>
-              <div>5000</div>
-              <div>1000</div>
-            </div> */}
-        </div>
-        <div className="w-1/3 rounded-3xl bg-white bg-opacity-5 p-5 border-[3px] border-skill9">
-          <div className="text-sm mb-4 font-semibold px-4 rounded-md bg-skill9 w-[115px] py-1.5 text-center text-white">
-            Featured
+      <div className="flex flex-row flex-wrap mt-10 -mx-2">
+        <div className="w-full md:w-1/2 px-2 mb-4 md:mb-0">
+          <div className="rounded-3xl bg-white bg-opacity-5 p-5">
+            <div className="h-[60px] w-[60px] mx-auto mb-6">
+              <div className="aspect-w-1 aspect-h-1">
+                <img
+                  className="object-center object-cover rounded-full"
+                  src="https://placehold.co/600x400/EEE/31343C"
+                />
+              </div>
+            </div>
+            <p className="text-md text-white/75 text-left pb-">
+              PancakeSwap has the most users of any decentralized platform,
+              ever. And those users are now entrusting the platform with over
+              $3.4 billion in funds. Will you join them? 1.4 million users in
+              the last 30 days 55 million trades made in the last 30 days.
+            </p>
+            <hr className="border-t border-white/20 mb-3 mt-6" />
+            <p className='text-white font-semibold text-md'>Santiago Perez</p>
+            <p className='text-white font-semibold text-md'>Crypto Company | Innovation Consultant</p>
+            <div className="w-[40px] mt-3">
+              <div className="aspect-w-16 aspect-h-9">
+                <img
+                  className="object-center object-cover "
+                  src="https://placehold.co/600x400/EEE/31343C"
+                />
+              </div>
+            </div>
           </div>
-          <h3
-            className={`${lato.variable} justify-center text-xl pb-3 font-bold text-white`}
-          >
-            Crypto Native Jobs
-          </h3>
-          <div className="flex w-full justify-center"></div>
-          <p className="text-md text-white/75 text-left pb-">
-            JobStash is a Job Aggregator for Crytpo Native Jobs. Vacancies are
-            imported from organization career pages, and structured using AI to
-            make them easily digestable. Our bots work around the clock to bring
-            you the newest jobs, and our company and project metadata adds vital
-            context, so that you can make informed decisions about your career.
-          </p>
-
-          <hr className="border-t border-white/20 mt-4 mb-6" />
-          {/* <div>Refer & Earn</div> */}
-          {/* <div className='flex space-x-4'>
-              <div>5000</div>
-              <div>1000</div>
-            </div> */}
         </div>
-        <div className="w-1/3 rounded-3xl bg-white bg-opacity-5 p-5">
-          <h3
-            className={`${lato.variable} justify-center text-xl pb-3 font-bold text-white`}
-          >
-            Crypto Native Jobs
-          </h3>
-          <div className="flex w-full justify-center"></div>
-          <p className="text-md text-white/75 text-left">
-            JobStash is a Job Aggregator for Crytpo Native Jobs. Vacancies are
-            imported from organization career pages, and structured using AI to
-            make them easily digestable. Our bots work around the clock to bring
-            you the newest jobs, and our company and project metadata adds vital
-            context, so that you can make informed decisions about your career.
-          </p>
-
-          <hr className="border-t border-white/20 mt-4 mb-6" />
-          {/* <div>Refer & Earn</div> */}
-          {/* <div className='flex space-x-4'>
-              <div>5000</div>
-              <div>1000</div>
-            </div> */}
+        <div className="w-full md:w-1/2 px-2">
+          <div className="rounded-3xl bg-white bg-opacity-5 p-5">
+            <div className="h-[60px] w-[60px] mx-auto mb-6">
+              <div className="aspect-w-1 aspect-h-1">
+                <img
+                  className="object-center object-cover rounded-full"
+                  src="https://placehold.co/600x400/EEE/31343C"
+                />
+              </div>
+            </div>
+            <p className="text-md text-white/75 text-left pb-">
+              JobStash is a Job Aggregator for Crytpo Native Jobs. Vacancies are
+              imported from organization career pages, and structured using AI
+              to make them easily digestable. Our bots work around the clock to
+              bring you the newest jobs, and our company and project metadata
+              adds vital context, so that you can make informed decisions about
+              your career.
+            </p>
+            <hr className="border-t border-white/20 mb-3 mt-6" />
+            <p className='text-white font-semibold text-md'>Santiago Perez</p>
+            <p className='text-white font-semibold text-md'>Crypto Company | Innovation Consultant</p>
+            <div className="w-[40px] mt-3">
+              <div className="aspect-w-16 aspect-h-9">
+                <img
+                  className="object-center object-cover "
+                  src="https://placehold.co/600x400/EEE/31343C"
+                />
+              </div>
+            </div>
+          </div>
         </div>
       </div>
     </div>
-    <div className="mt-8 md:mt-16 bg-gradient-to-r from-secondary to-tertiary p-6 md:px-12 md:py-8 rounded-3xl border-[3px] border-skill9 flex flex-wrap items-center justify-between">
+    <div className="mt-8  bg-gradient-to-r from-secondary to-tertiary p-6 md:px-12 md:py-8 rounded-3xl border-[3px] border-skill9 flex flex-wrap items-center justify-between">
       <div className="grow text-white">
         <h4 className="text-xl font-bold">
           Want to Get Featured or Boost Your Jobs?

@@ -18,7 +18,7 @@ const CandidateDaoSection = () => (
         protocols, networks, DAOs, dApps and companies. For these organizations
         and projects, we show financial metrics from DefiLlama, Hacks and Audits
         from De.Fi and enrich it with our own propietary data.</p>
-    <div className="flex w-full flex-wrap items-start space-y-12 pt-12 lg:flex-nowrap lg:items-start lg:space-y-0 lg:space-x-12">
+    <div className="flex flex-wrap w-full  pt-12 -mx-2 md:-mx-4">
         <Advantage
           icon={<DevAdvIcon />}
           title={devsAdv.title}

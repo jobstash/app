@@ -9,7 +9,7 @@ const LandingSection = () => (
     <div className="">
       <div className=" w-full mx-auto">
         <div className={`${lato.className} text-center`}>
-          <h1 className="font-semibold leading-none text-white text-[80px] md:text-[10px] lg:text-[200px]">
+          <h1 className="font-semibold leading-none text-white text-[80px] md:text-[120px] lg:text-[200px]">
             Job<span className="text-secondary">Stash</span>
           </h1>
           <h2 className="text-xl lg:text-3xl text-white">
@@ -25,7 +25,7 @@ const LandingSection = () => (
             </Bartab>
           </div>
           <svg
-            className="h-[94px] my-8 mx-auto"
+            className="h-[94px] my-10 mx-auto"
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
             viewBox="0 0 12 101"
@@ -39,7 +39,7 @@ const LandingSection = () => (
         </div>
       </div>
 
-      <div className="z-10 w-full items-center pt-0 lg:pt-12 lg:py-0">
+      <div className="z-10 w-full items-center lg:py-0">
         <h3
           className={`${lato.className} text-white font-black text-5xl pb-3 md:text-6xl md:pb-6 text-center`}
         >
@@ -53,7 +53,7 @@ const LandingSection = () => (
           <div className="w-full px-2 mb-4 md:w-1/3 md:mb-0">
             <div className="rounded-3xl bg-white bg-opacity-5 p-5">
               <h3
-                className={`${lato.variable} justify-center text-xl pb-3 font-bold text-white`}
+                className={`${lato.className} justify-center text-xl pb-3 font-bold text-white`}
               >
                 Senior Developer Advocate Developer Advocate
               </h3>
@@ -73,7 +73,7 @@ const LandingSection = () => (
               </div>
               <div className="">
                 <h3
-                  className={`${lato.variable} justify-center text-xl pb-3 font-bold text-white`}
+                  className={`${lato.className} justify-center text-xl pb-3 font-bold text-white`}
                 >
                   Crypto Native Jobs
                 </h3>
@@ -94,7 +94,7 @@ const LandingSection = () => (
           <div className="w-full px-2 mb-4 md:w-1/3 md:mb-0">
             <div className="rounded-3xl bg-white bg-opacity-5 p-5">
               <h3
-                className={`${lato.variable} justify-center text-xl pb-3 font-bold text-white`}
+                className={`${lato.className} justify-center text-xl pb-3 font-bold text-white`}
               >
                 Crypto Native Jobs
               </h3>

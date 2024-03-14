@@ -6,7 +6,7 @@ import { lato } from '@jobstash/shared/core';
 import { cn } from '@jobstash/shared/utils';
 
 const heading = cva(
-  `${lato.variable} font-lato antialiased select-none break-words`,
+  `${lato.className}  antialiased select-none break-words`,
   {
     variants: {
       fw: {
