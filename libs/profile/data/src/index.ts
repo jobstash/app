@@ -14,3 +14,4 @@ export * from './lib/post-profile-repo-contribution';
 export * from './lib/post-profile-repo-tag';
 export * from './lib/post-profile-showcase';
 export * from './lib/post-profile-skills';
+export * from './lib/update-applicant-list';

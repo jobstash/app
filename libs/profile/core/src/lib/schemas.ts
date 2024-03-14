@@ -1,4 +1,5 @@
-import myzod from 'myzod';
+import { UseMutateFunction } from '@tanstack/react-query';
+import myzod, { Infer } from 'myzod';
 
 import {
   orgCompensationSchema,
@@ -6,7 +7,11 @@ import {
   orgReviewSchema,
   orgStaffReviewSchema,
 } from '@jobstash/organizations/core';
-import { repositoryInfoSchema, tagSchema } from '@jobstash/shared/core';
+import {
+  MessageResponse,
+  repositoryInfoSchema,
+  tagSchema,
+} from '@jobstash/shared/core';
 
 export const profileRepoTag = myzod.intersection(
   tagSchema,
@@ -237,3 +242,17 @@ export const profileOrgReviewResponseSchema = myzod.object({
   success: myzod.boolean(),
   message: myzod.string().min(1),
 });
+
+export const updateApplicantListPayloadSchema = myzod.object({
+  applicants: myzod.array(myzod.string()),
+  list: myzod.literals('shortlisted', 'archived'),
+});
+export type UpdateApplicantListPayload = Infer<
+  typeof updateApplicantListPayloadSchema
+>;
+export type UpdateApplicantListMutFn = UseMutateFunction<
+  MessageResponse,
+  unknown,
+  UpdateApplicantListPayload,
+  unknown
+>;

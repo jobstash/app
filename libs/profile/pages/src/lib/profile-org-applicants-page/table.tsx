@@ -10,6 +10,8 @@ import {
 
 import { cn } from '@jobstash/shared/utils';
 
+import { useOrgProfileInfoContext } from '@jobstash/profile/state';
+
 import { Text } from '@jobstash/shared/ui';
 
 import { ApplicantTabs } from './applicant-tabs';
@@ -20,6 +22,7 @@ import { TableSearchInput } from './table-search-input';
 import { useApplicantsTable } from './use-applicants-table';
 
 export const ApplicantsTable = () => {
+  const { profileInfoData } = useOrgProfileInfoContext();
   const {
     isLoading,
     items,
@@ -42,7 +45,7 @@ export const ApplicantsTable = () => {
     onTableSelectionChange,
   } = useApplicantsTable();
 
-  if (isLoading) return null;
+  if (isLoading || !profileInfoData) return null;
 
   return (
     <div className="flex flex-col gap-4">
@@ -66,7 +69,10 @@ export const ApplicantsTable = () => {
       </div>
 
       <div className="flex flex-col gap-2 pt-4">
-        <MultiSelectActions applicants={selectedApplicants} />
+        <MultiSelectActions
+          orgId={profileInfoData.orgId ?? ''}
+          selectedApplicants={selectedApplicants}
+        />
 
         <Table
           color="default"
