@@ -31,7 +31,7 @@ export const FRONTEND_URL = (() => {
   );
 
   // Return as usual if subdomain is not supported, or instance is not deployed
-  if (!isSupported || frontendEnv.includes(HOSTNAME)) return frontendEnv;
+  if (!isSupported || !frontendEnv.includes(HOSTNAME)) return frontendEnv;
 
   return `https://${subdomain}.${HOSTNAME}`;
 })();

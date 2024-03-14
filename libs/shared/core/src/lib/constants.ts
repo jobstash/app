@@ -121,6 +121,7 @@ export const ECOSYSTEMS = {
   DEV: 'devcommunity',
   STAGING: 'stagingcommunity',
 } as const;
+export type Ecosystem = typeof ECOSYSTEMS[keyof typeof ECOSYSTEMS];
 
 export const ECOSYSTEMS_SET = new Set(Object.values(ECOSYSTEMS));
 export const ECOSYSTEM_HEADER_KEY = 'X-Ecosystem';
