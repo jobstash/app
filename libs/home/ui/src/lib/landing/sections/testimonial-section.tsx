@@ -85,16 +85,17 @@ for successful hiring and even just for being interviewed</p>
           </div>
         </div>
       </div>
-      <div className='mt-16 bg-gradient-to-r from-secondary to-tertiary px-12 py-8 rounded-3xl border-[3px] border-skill9 flex items-center justify-between'>
-        <div className='grow'>
-          <h4 className='text-xl font-bold'>Want to Get Featured or Boost Your Jobs?</h4>
-          <p className='text-md mt-3'>Drop us a message and we will make it happen.</p>
+      <div className="mt-8 md:mt-16 bg-gradient-to-r from-secondary to-tertiary p-6 md:px-12 md:py-8 rounded-3xl border-[3px] border-skill9 flex flex-wrap items-center justify-between">
+        <div className="grow text-white">
+          <h4 className="text-xl font-bold">
+            Want to Get Featured or Boost Your Jobs?
+          </h4>
+          <p className="text-md mt-3">
+            Drop us a message and we will make it happen.
+          </p>
         </div>
-        <div className='w-[150px]'>
-          <Bartab
-            isActive={false}
-            variant="wallet"
-          >
+        <div className="w-[150px] mt-4 md:mt-0 mx-auto">
+          <Bartab isActive={false} variant="wallet">
             Contact
           </Bartab>
         </div>
