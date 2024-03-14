@@ -12,6 +12,8 @@ import { cn } from '@jobstash/shared/utils';
 
 import { Text } from '@jobstash/shared/ui';
 
+import { ApplicantTabs } from './applicant-tabs';
+import { MultiSelectActions } from './multi-select-actions';
 import { JobSelection } from './table-job-selection';
 import { TablePagination } from './table-pagination';
 import { TableSearchInput } from './table-search-input';
@@ -44,6 +46,8 @@ export const ApplicantsTable = () => {
 
   return (
     <div className="flex flex-col gap-4">
+      <ApplicantTabs />
+
       <div className="flex items-center gap-8">
         <TableSearchInput
           value={searchFilter}
@@ -61,46 +65,50 @@ export const ApplicantsTable = () => {
         />
       </div>
 
-      <Table
-        color="default"
-        aria-label="Job Applicants Table"
-        selectionMode="multiple"
-        selectedKeys={selectedApplicants as Set<string>}
-        onSelectionChange={onTableSelectionChange}
-      >
-        <TableHeader columns={columns}>
-          {(column) => (
-            <TableColumn key={column.key}>
-              <div
-                className={cn('flex items-center', {
-                  'justify-center': centeredSet.has(column.key),
-                })}
-              >
-                <Text size="md" fw="bold">
-                  {column.label}
-                </Text>
-              </div>
-            </TableColumn>
-          )}
-        </TableHeader>
-        <TableBody items={items}>
-          {(item) => (
-            <TableRow key={item.user.wallet}>
-              {(columnKey) => (
-                <TableCell>{renderCell(item, columnKey as any)}</TableCell>
-              )}
-            </TableRow>
-          )}
-        </TableBody>
-      </Table>
+      <div className="flex flex-col gap-2 pt-4">
+        <MultiSelectActions applicants={selectedApplicants} />
 
-      <TablePagination
-        page={page}
-        total={totalPageCount}
-        isDisabled={items.length < pageRowCount}
-        totalApplicantCount={totalApplicantCount}
-        onChange={setPage}
-      />
+        <Table
+          color="default"
+          aria-label="Job Applicants Table"
+          selectionMode="multiple"
+          selectedKeys={selectedApplicants as Set<string>}
+          onSelectionChange={onTableSelectionChange}
+        >
+          <TableHeader columns={columns}>
+            {(column) => (
+              <TableColumn key={column.key}>
+                <div
+                  className={cn('flex items-center', {
+                    'justify-center': centeredSet.has(column.key),
+                  })}
+                >
+                  <Text size="md" fw="bold">
+                    {column.label}
+                  </Text>
+                </div>
+              </TableColumn>
+            )}
+          </TableHeader>
+          <TableBody items={items}>
+            {(item) => (
+              <TableRow key={item.user.wallet}>
+                {(columnKey) => (
+                  <TableCell>{renderCell(item, columnKey as any)}</TableCell>
+                )}
+              </TableRow>
+            )}
+          </TableBody>
+        </Table>
+
+        <TablePagination
+          page={page}
+          total={totalPageCount}
+          isDisabled={items.length < pageRowCount}
+          totalApplicantCount={totalApplicantCount}
+          onChange={setPage}
+        />
+      </div>
     </div>
   );
 };
