@@ -15,7 +15,7 @@ const LandingFooter = () => (
           />
         </div>
 
-        <div className="max-w-[260px] text-white/60">
+        <div className="text-white/60">
           <span>The Ultimate Crypto Native Job Aggregator</span>
         </div>
       </div>
