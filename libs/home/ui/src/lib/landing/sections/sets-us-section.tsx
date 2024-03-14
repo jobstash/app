@@ -11,10 +11,10 @@ const SetsUsSection = () => (
       <path fill="#fff" fill-opacity=".1" d="M.667 95a5.333 5.333 0 1 1 10.666 0A5.333 5.333 0 0 1 .667 95ZM6 1V0h1v1H6ZM5 95V1h2v94H5ZM5 0h1v2H5V0Z"/>
     </svg>
     <div>
-        <h3 className='text-white font-black text-6xl pb-6 text-center'>What Sets us Apart</h3>
+        <h3 className={`${lato.className} text-white font-black text-5xl pb-3 md:text-6xl md:pb-6 text-center`}>What Sets us Apart</h3>
         <div className='flex flex-wrap flex-row mt-6 -mx-2'>
           <div
-            className="w-1/3 px-2 mb-4"
+            className="w-full md:w-1/3 px-2 mb-4"
           >
             <div className='bg-white bg-opacity-5 p-5 rounded-3xl'>
               <h3
@@ -28,7 +28,7 @@ const SetsUsSection = () => (
             </div>
           </div>
           <div
-            className="w-1/3 px-2 mb-4"
+            className="w-full md:w-1/3 px-2 mb-4"
           >
             <div className='bg-white bg-opacity-5 p-5 rounded-3xl'>
               <h3
@@ -42,7 +42,7 @@ const SetsUsSection = () => (
             </div>
           </div>
           <div
-            className="w-1/3 px-2 mb-4"
+            className="w-full md:w-1/3 px-2 mb-4"
           >
             <div className='bg-white bg-opacity-5 p-5 rounded-3xl'>
               <h3
@@ -56,7 +56,7 @@ const SetsUsSection = () => (
             </div>
           </div>
           <div
-            className="w-2/3 px-2"
+            className="w-full md:w-2/3 px-2 mb-4"
           >
             <div className='bg-white bg-opacity-5 p-5 rounded-3xl'>
               <h3
@@ -70,7 +70,7 @@ const SetsUsSection = () => (
             </div>
           </div>
           <div
-            className="w-1/3 px-2"
+            className="w-full md:w-1/3 px-2"
           >
             <div className='bg-white bg-opacity-5 p-5 rounded-3xl'>
               <h3
