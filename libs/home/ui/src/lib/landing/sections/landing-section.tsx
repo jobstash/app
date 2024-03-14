@@ -9,13 +9,13 @@ const LandingSection = () => (
   <section className="relative mx-auto lg:max-w-6xl">
     <div className="">
       <div className=" w-full mx-auto">
-        <div className="text-center">
+        <div className={`${lato.className} text-center`}>
           <h1
-            className={`${lato.variable}  font-sans text-4xl font-semibold leading-none text-white text-[200px]`}
+            className="font-sans font-semibold leading-none text-white text-[80px] md:text-[140px] lg:text-[200px]"
           >
             Job<span className='text-secondary'>Stash</span>
           </h1>
-          <h2 className='text-3xl text-white'>
+          <h2 className='text-xl lg:text-3xl text-white'>
             <span className='font-bold opacity-50'>tl;dr:</span> Crypto Native Job Board that Pays Referral Bounties
           </h2>
           <div className='mx-auto flex items-center justify-center space-x-8 mt-6 max-w-[400px]'>
@@ -118,7 +118,7 @@ for successful hiring and even just for being interviewed</p>
         </div>
       </div>
       <div className='mt-16 bg-gradient-to-r from-secondary to-tertiary px-12 py-8 rounded-3xl border-[3px] border-skill9 flex items-center justify-between'>
-        <div className='grow'>
+        <div className='grow text-white'>
           <h4 className='text-xl font-bold'>Want to Get Featured or Boost Your Jobs?</h4>
           <p className='text-md mt-3'>Drop us a message and we will make it happen.</p>
         </div>
