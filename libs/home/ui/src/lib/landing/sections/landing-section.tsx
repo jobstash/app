@@ -4,6 +4,9 @@ import { lato } from '@jobstash/shared/core';
 
 import { Bartab } from '@jobstash/shared/ui';
 
+import { ExploreJobsButton } from './buttons/explore-jobs-button';
+import { SubscribeTelegram } from './buttons/subscribe-telegram';
+
 const LandingSection = () => (
   <section className="relative mx-auto lg:max-w-6xl">
     <div className="">
@@ -17,12 +20,8 @@ const LandingSection = () => (
             Job Board
           </h2>
           <div className="mx-auto flex items-center justify-center space-x-8 mt-6 max-w-[400px]">
-            <Bartab isActive={false} variant="wallet">
-              Explore Jobs
-            </Bartab>
-            <Bartab isActive={false} variant="wallet">
-              Subscribe on Telegram
-            </Bartab>
+            <ExploreJobsButton />
+            <SubscribeTelegram />
           </div>
           <svg
             className="h-[94px] my-10 mx-auto"
@@ -78,7 +77,7 @@ const LandingSection = () => (
                 >
                   Senior Developer Advocate Developer Advocate
                 </h3>
-                <div className="flex w-full justify-center"></div>
+                <div className="flex w-full justify-center" />
                 <p className="text-md text-white/75 text-left pb-">
                   PancakeSwap has the most users of any decentralized platform,
                   ever. And those users are now entrusting the platform with
@@ -98,7 +97,7 @@ const LandingSection = () => (
               >
                 Senior Developer Advocate Developer Advocate
               </h3>
-              <div className="flex w-full justify-center"></div>
+              <div className="flex w-full justify-center" />
               <p className="text-md text-white/75 text-left">
                 PancakeSwap has the most users of any decentralized platform,
                 ever. And those users are now entrusting the platform with over
