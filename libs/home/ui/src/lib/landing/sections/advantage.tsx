@@ -15,7 +15,7 @@ interface Props {
 }
 
 export const Advantage = ({ icon, title, desc, advantages }: Props) => (
-  <div className="flex items-center justify-center rounded-2xl lg:basis-1/2">
+  <div className="flex w-full items-start justify-center rounded-2xl first:mb-5 px-2 md:w-1/2 md:px-4">
     <div className="flex w-full flex-col justify-center space-y-4 rounded-2xl bg-[#222224] p-5 md:p-6">
       <div className="flex space-x-4 items-center">
         <div>{icon}</div>

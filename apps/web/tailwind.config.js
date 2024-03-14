@@ -128,6 +128,7 @@ module.exports = {
   },
   darkMode: 'class',
   plugins: [
+    require('@tailwindcss/aspect-ratio'),
     nextui({
       defaultTheme: 'dark',
       defaultExtendTheme: 'dark',
