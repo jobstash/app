@@ -11,13 +11,14 @@ import SetsUsSection from './sets-us-section';
 import TestimonialSection from './testimonial-section';
 import CoffeeSection from './coffee-section';
 import SearchSkillSection from './search-skill-section';
+import { roboto } from '@jobstash/shared/core';
 
 const LandingSections = () => (
-  <main className="pt-[80px]">
+  <main className={`${roboto.className} pt-[80px]`}>
     <LandingSection />
     <SearchCategorySection />
     <SetsUsSection />
-    <CandidateDaoSection/>
+    <CandidateDaoSection />
     <TestimonialSection />
     <CoffeeSection />
     <SearchSkillSection />
