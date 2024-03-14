@@ -14,7 +14,7 @@ const LandingSection = () => (
           </h1>
           <h2 className="text-xl lg:text-3xl text-white">
             <span className="font-bold opacity-50">tl;dr:</span> Crypto Native
-            Job Board that Pays Referral Bounties
+            Job Board
           </h2>
           <div className="mx-auto flex items-center justify-center space-x-8 mt-6 max-w-[400px]">
             <Bartab isActive={false} variant="wallet">
@@ -43,11 +43,12 @@ const LandingSection = () => (
         <h3
           className={`${lato.className} text-white font-black text-5xl pb-3 md:text-6xl md:pb-6 text-center`}
         >
-          Highest Bounties
+          Newest Jobs Spotlight
         </h3>
         <p className="text-white opacity-75 max-w-[500px] mx-auto text-md text-center">
-          JobStash pays bounties to both the Candidate and the Referrer, for
-          successful hiring and even just for being interviewed
+          Discover Your Future Job with JobStash. Our Platform Swiftly Curates
+          the Largest List of Crypto Native Jobs, Powered by AI and Unique
+          Insights—All Free, All for You, as a Public Good.
         </p>
         <div className="flex flex-wrap flex-row mt-10 -mx-2">
           <div className="w-full px-2 mb-4 md:w-1/3 md:mb-0">
@@ -75,16 +76,15 @@ const LandingSection = () => (
                 <h3
                   className={`${lato.className} justify-center text-xl pb-3 font-bold text-white`}
                 >
-                  Crypto Native Jobs
+                  Senior Developer Advocate Developer Advocate
                 </h3>
                 <div className="flex w-full justify-center"></div>
                 <p className="text-md text-white/75 text-left pb-">
-                  JobStash is a Job Aggregator for Crytpo Native Jobs. Vacancies
-                  are imported from organization career pages, and structured
-                  using AI to make them easily digestable. Our bots work around
-                  the clock to bring you the newest jobs, and our company and
-                  project metadata adds vital context, so that you can make
-                  informed decisions about your career.
+                  PancakeSwap has the most users of any decentralized platform,
+                  ever. And those users are now entrusting the platform with
+                  over $3.4 billion in funds. Will you join them? 1.4 million
+                  users in the last 30 days 55 million trades made in the last
+                  30 days.
                 </p>
 
                 <hr className="border-t border-white/20 mt-4 mb-6" />
@@ -96,16 +96,14 @@ const LandingSection = () => (
               <h3
                 className={`${lato.className} justify-center text-xl pb-3 font-bold text-white`}
               >
-                Crypto Native Jobs
+                Senior Developer Advocate Developer Advocate
               </h3>
               <div className="flex w-full justify-center"></div>
               <p className="text-md text-white/75 text-left">
-                JobStash is a Job Aggregator for Crytpo Native Jobs. Vacancies
-                are imported from organization career pages, and structured
-                using AI to make them easily digestable. Our bots work around
-                the clock to bring you the newest jobs, and our company and
-                project metadata adds vital context, so that you can make
-                informed decisions about your career.
+                PancakeSwap has the most users of any decentralized platform,
+                ever. And those users are now entrusting the platform with over
+                $3.4 billion in funds. Will you join them? 1.4 million users in
+                the last 30 days 55 million trades made in the last 30 days.
               </p>
 
               <hr className="border-t border-white/20 mt-4 mb-6" />
@@ -121,15 +119,21 @@ const LandingSection = () => (
       <div className="mt-8 md:mt-16 bg-gradient-to-r from-secondary to-tertiary p-6 md:px-12 md:py-8 rounded-3xl border-[3px] border-skill9 flex flex-wrap items-center justify-between">
         <div className="grow text-white">
           <h4 className="text-xl font-bold">
-            Want to Get Featured or Boost Your Jobs?
+            Elevate Your Talent Search with JobStash
           </h4>
           <p className="text-md mt-3">
-            Drop us a message and we will make it happen.
+            JobStash redefines recruitment in crypto, spotlighting your roles
+            with unmatched safety and precision. Our unique data insights guard
+            against fraud and impostors, connecting you exclusively with
+            genuine, crypto-native and adjacent talent. It's more than hiring;
+            it's about building secure, innovative teams. With JobStash, find
+            the future architects of crypto, safely and effectively. Welcome to
+            a new era of talent discovery, where integrity meets innovation.
           </p>
         </div>
         <div className="w-[150px] mt-4 md:mt-0 mx-auto">
           <Bartab isActive={false} variant="wallet">
-            Contact
+            Hire on JobStash
           </Bartab>
         </div>
       </div>
