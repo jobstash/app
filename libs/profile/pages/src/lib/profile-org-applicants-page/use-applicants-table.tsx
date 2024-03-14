@@ -1,4 +1,3 @@
-import Image from 'next/image';
 import { useCallback, useMemo, useState } from 'react';
 
 import { Chip } from '@nextui-org/chip';
@@ -195,7 +194,7 @@ export const useApplicantsTable = () => {
     if (keys === 'all') {
       const allValues = new Set();
       for (const applicant of filteredItems) {
-        allValues.add(applicant.user.username ?? applicant.user.email);
+        allValues.add(applicant.user.wallet);
       }
 
       setSelectedApplicants(allValues as Set<string>);

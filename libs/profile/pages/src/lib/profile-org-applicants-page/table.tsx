@@ -85,7 +85,7 @@ export const ApplicantsTable = () => {
         </TableHeader>
         <TableBody items={items}>
           {(item) => (
-            <TableRow key={item.user.username ?? item.user.email}>
+            <TableRow key={item.user.wallet}>
               {(columnKey) => (
                 <TableCell>{renderCell(item, columnKey as any)}</TableCell>
               )}
