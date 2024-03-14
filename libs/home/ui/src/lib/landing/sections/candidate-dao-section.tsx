@@ -11,7 +11,7 @@ const CandidateDaoSection = () => (
       <div className="flex flex-col items-center">
         <h3 className='text-white font-black text-6xl pb-6 text-center'>
           All Crypto Native Jobs in One Place.
-          <span className='text-secondary inline-block'>None of the BS</span>
+          <span className='text-secondary block'>None of the BS</span>
         </h3>
       </div>
       <p className='text-white opacity-75 max-w-[500px] mx-auto text-md text-center'> We provide you with unrestricted access to jobs at top organizations,
