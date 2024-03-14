@@ -82,20 +82,20 @@ const SearchCategorySection = () => (
         </div>
       </div>
       <p className="text-white opacity-75 max-w-[500px] mx-auto text-md text-center">
-        Browse 35,640 blockchain jobs in web3 at 6,217 projects. Filter the best
-        remote crypto jobs by salary, location, and skills.
+        Browse 35,640 crypto jobs at 6,217 organizations. Filter the best remote
+        crypto jobs by salary, location, and skills.
       </p>
       <div className="w-[150px] mx-auto text-center">
         <span className="inline-block opacity-75 pb-4 text-white text-md text-center">
           or
         </span>
         <Bartab isActive={false} variant="wallet">
-          Explore Jobs
+          Explore Crypto Jobs
         </Bartab>
       </div>
       <div className="overflow-hidden whitespace-nowrap relative mt-8">
-        <div className='logo_items'>
-          <div className='inline-flex items-center mr-14'>
+        <div className="logo_items">
+          <div className="inline-flex items-center mr-14">
             <div className="h-[40px] w-[40px]">
               <div className="aspect-w-1 aspect-h-1">
                 <img
@@ -104,9 +104,13 @@ const SearchCategorySection = () => (
                 />
               </div>
             </div>
-            <span className={`${lato.className} font-bold ml-4 inline-block text-white`}>Uniswap V3</span>
+            <span
+              className={`${lato.className} font-bold ml-4 inline-block text-white`}
+            >
+              Uniswap V3
+            </span>
           </div>
-          <div className='inline-flex items-center mr-14'>
+          <div className="inline-flex items-center mr-14">
             <div className="h-[40px] w-[40px]">
               <div className="aspect-w-1 aspect-h-1">
                 <img
@@ -115,9 +119,13 @@ const SearchCategorySection = () => (
                 />
               </div>
             </div>
-            <span className={`${lato.className} font-bold ml-4 inline-block text-white`}>Uniswap V3</span>
+            <span
+              className={`${lato.className} font-bold ml-4 inline-block text-white`}
+            >
+              Uniswap V3
+            </span>
           </div>
-          <div className='inline-flex items-center mr-14'>
+          <div className="inline-flex items-center mr-14">
             <div className="h-[40px] w-[40px]">
               <div className="aspect-w-1 aspect-h-1">
                 <img
@@ -126,9 +134,13 @@ const SearchCategorySection = () => (
                 />
               </div>
             </div>
-            <span className={`${lato.className} font-bold ml-4 inline-block text-white`}>Uniswap V3</span>
+            <span
+              className={`${lato.className} font-bold ml-4 inline-block text-white`}
+            >
+              Uniswap V3
+            </span>
           </div>
-          <div className='inline-flex items-center mr-14'>
+          <div className="inline-flex items-center mr-14">
             <div className="h-[40px] w-[40px]">
               <div className="aspect-w-1 aspect-h-1">
                 <img
@@ -137,9 +149,13 @@ const SearchCategorySection = () => (
                 />
               </div>
             </div>
-            <span className={`${lato.className} font-bold ml-4 inline-block text-white`}>Uniswap V3</span>
+            <span
+              className={`${lato.className} font-bold ml-4 inline-block text-white`}
+            >
+              Uniswap V3
+            </span>
           </div>
-          <div className='inline-flex items-center mr-14'>
+          <div className="inline-flex items-center mr-14">
             <div className="h-[40px] w-[40px]">
               <div className="aspect-w-1 aspect-h-1">
                 <img
@@ -148,9 +164,13 @@ const SearchCategorySection = () => (
                 />
               </div>
             </div>
-            <span className={`${lato.className} font-bold ml-4 inline-block text-white`}>Uniswap V3</span>
+            <span
+              className={`${lato.className} font-bold ml-4 inline-block text-white`}
+            >
+              Uniswap V3
+            </span>
           </div>
-          <div className='inline-flex items-center mr-14'>
+          <div className="inline-flex items-center mr-14">
             <div className="h-[40px] w-[40px]">
               <div className="aspect-w-1 aspect-h-1">
                 <img
@@ -159,11 +179,15 @@ const SearchCategorySection = () => (
                 />
               </div>
             </div>
-            <span className={`${lato.className} font-bold ml-4 inline-block text-white`}>Uniswap V3</span>
+            <span
+              className={`${lato.className} font-bold ml-4 inline-block text-white`}
+            >
+              Uniswap V3
+            </span>
           </div>
         </div>
-        <div className='logo_items' aria-hidden="true">
-          <div className='inline-flex items-center mr-14'>
+        <div className="logo_items" aria-hidden="true">
+          <div className="inline-flex items-center mr-14">
             <div className="h-[40px] w-[40px]">
               <div className="aspect-w-1 aspect-h-1">
                 <img
@@ -172,9 +196,13 @@ const SearchCategorySection = () => (
                 />
               </div>
             </div>
-            <span className={`${lato.className} font-bold ml-4 inline-block text-white`}>Uniswap V3</span>
+            <span
+              className={`${lato.className} font-bold ml-4 inline-block text-white`}
+            >
+              Uniswap V3
+            </span>
           </div>
-          <div className='inline-flex items-center mr-14'>
+          <div className="inline-flex items-center mr-14">
             <div className="h-[40px] w-[40px]">
               <div className="aspect-w-1 aspect-h-1">
                 <img
@@ -183,9 +211,13 @@ const SearchCategorySection = () => (
                 />
               </div>
             </div>
-            <span className={`${lato.className} font-bold ml-4 inline-block text-white`}>Uniswap V3</span>
+            <span
+              className={`${lato.className} font-bold ml-4 inline-block text-white`}
+            >
+              Uniswap V3
+            </span>
           </div>
-          <div className='inline-flex items-center mr-14'>
+          <div className="inline-flex items-center mr-14">
             <div className="h-[40px] w-[40px]">
               <div className="aspect-w-1 aspect-h-1">
                 <img
@@ -194,9 +226,13 @@ const SearchCategorySection = () => (
                 />
               </div>
             </div>
-            <span className={`${lato.className} font-bold ml-4 inline-block text-white`}>Uniswap V3</span>
+            <span
+              className={`${lato.className} font-bold ml-4 inline-block text-white`}
+            >
+              Uniswap V3
+            </span>
           </div>
-          <div className='inline-flex items-center mr-14'>
+          <div className="inline-flex items-center mr-14">
             <div className="h-[40px] w-[40px]">
               <div className="aspect-w-1 aspect-h-1">
                 <img
@@ -205,9 +241,13 @@ const SearchCategorySection = () => (
                 />
               </div>
             </div>
-            <span className={`${lato.className} font-bold ml-4 inline-block text-white`}>Uniswap V3</span>
+            <span
+              className={`${lato.className} font-bold ml-4 inline-block text-white`}
+            >
+              Uniswap V3
+            </span>
           </div>
-          <div className='inline-flex items-center mr-14'>
+          <div className="inline-flex items-center mr-14">
             <div className="h-[40px] w-[40px]">
               <div className="aspect-w-1 aspect-h-1">
                 <img
@@ -216,9 +256,13 @@ const SearchCategorySection = () => (
                 />
               </div>
             </div>
-            <span className={`${lato.className} font-bold ml-4 inline-block text-white`}>Uniswap V3</span>
+            <span
+              className={`${lato.className} font-bold ml-4 inline-block text-white`}
+            >
+              Uniswap V3
+            </span>
           </div>
-          <div className='inline-flex items-center mr-14'>
+          <div className="inline-flex items-center mr-14">
             <div className="h-[40px] w-[40px]">
               <div className="aspect-w-1 aspect-h-1">
                 <img
@@ -227,7 +271,11 @@ const SearchCategorySection = () => (
                 />
               </div>
             </div>
-            <span className={`${lato.className} font-bold ml-4 inline-block text-white`}>Uniswap V3</span>
+            <span
+              className={`${lato.className} font-bold ml-4 inline-block text-white`}
+            >
+              Uniswap V3
+            </span>
           </div>
         </div>
       </div>

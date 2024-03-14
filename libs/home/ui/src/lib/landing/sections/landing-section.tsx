@@ -43,12 +43,12 @@ const LandingSection = () => (
         <h3
           className={`${lato.className} text-white font-black text-5xl pb-3 md:text-6xl md:pb-6 text-center`}
         >
-          Newest Jobs Spotlight
+          Newest Jobs
         </h3>
         <p className="text-white opacity-75 max-w-[500px] mx-auto text-md text-center">
-          Discover Your Future Job with JobStash. Our Platform Swiftly Curates
-          the Largest List of Crypto Native Jobs, Powered by AI and Unique
-          Insights—All Free, All for You, as a Public Good.
+          JobStash Curates Crypto Native Jobs Across the Entire Crypto
+          Ecosystem, Powered by AI and Enhanced by Unique Data Insights—As a
+          Public Good.
         </p>
         <div className="flex flex-wrap flex-row mt-10 -mx-2">
           <div className="w-full px-2 mb-4 md:w-1/3 md:mb-0">
@@ -118,22 +118,17 @@ const LandingSection = () => (
       </div>
       <div className="mt-8 md:mt-16 bg-gradient-to-r from-secondary to-tertiary p-6 md:px-12 md:py-8 rounded-3xl border-[3px] border-skill9 flex flex-wrap items-center justify-between">
         <div className="grow text-white">
-          <h4 className="text-xl font-bold">
-            Elevate Your Talent Search with JobStash
-          </h4>
+          <h4 className="text-xl font-bold">Elevate Your Talent Search</h4>
           <p className="text-md mt-3">
-            JobStash redefines recruitment in crypto, spotlighting your roles
-            with unmatched safety and precision. Our unique data insights guard
-            against fraud and impostors, connecting you exclusively with
-            genuine, crypto-native and adjacent talent. It's more than hiring;
-            it's about building secure, innovative teams. With JobStash, find
-            the future architects of crypto, safely and effectively. Welcome to
-            a new era of talent discovery, where integrity meets innovation.
+            JobStash redefines recruitment in crypto, guarding against fraud and
+            impostors, connecting you exclusively with genuine, crypto-native
+            and crypto-adjacent talent. Welcome to a new era of talent
+            discovery, where integrity meets innovation.
           </p>
         </div>
         <div className="w-[150px] mt-4 md:mt-0 mx-auto">
           <Bartab isActive={false} variant="wallet">
-            Hire on JobStash
+            Hire on JobStash ATS
           </Bartab>
         </div>
       </div>
