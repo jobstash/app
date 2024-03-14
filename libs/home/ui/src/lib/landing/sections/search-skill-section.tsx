@@ -11,25 +11,25 @@ const SearchSkillSection = () => (
     </div>
     <div>
       <h3 className='text-white font-black text-6xl pb-6 text-center'>Search Crypto Jobs by <span className='text-secondary'>Skill</span></h3>
-      <div className='flex flex-wrap items-center justify-center space-y-2 space-x-2 pb-6'>
-        <div className='text-sm text-white border border-gray rounded-lg px-2.5 py-1.5'>Accounting</div>
-        <div className='text-sm text-white border border-gray rounded-lg px-2.5 py-1.5'>Accounting</div>
-        <div className='text-sm text-white border border-gray rounded-lg px-2.5 py-1.5'>Accounting</div>
-        <div className='text-sm text-white border border-gray rounded-lg px-2.5 py-1.5'>Accounting</div>
-        <div className='text-sm text-white border border-gray rounded-lg px-2.5 py-1.5'>Accounting</div>
-        <div className='text-sm text-white border border-gray rounded-lg px-2.5 py-1.5'>Accounting</div>
-        <div className='text-sm text-white border border-gray rounded-lg px-2.5 py-1.5'>Accounting</div>
-        <div className='text-sm text-white border border-gray rounded-lg px-2.5 py-1.5'>Accounting</div>
-        <div className='text-sm text-white border border-gray rounded-lg px-2.5 py-1.5'>Accounting</div>
-        <div className='text-sm text-white border border-gray rounded-lg px-2.5 py-1.5'>Accounting</div>
-        <div className='text-sm text-white border border-gray rounded-lg px-2.5 py-1.5'>Accounting</div>
-        <div className='text-sm text-white border border-gray rounded-lg px-2.5 py-1.5'>Accounting</div>
-        <div className='text-sm text-white border border-gray rounded-lg px-2.5 py-1.5'>Accounting</div>
-        <div className='text-sm text-white border border-gray rounded-lg px-2.5 py-1.5'>Accounting</div>
-        <div className='text-sm text-white border border-gray rounded-lg px-2.5 py-1.5'>Accounting</div>
-        <div className='text-sm text-white border border-gray rounded-lg px-2.5 py-1.5'>Accounting</div>
-        <div className='text-sm text-white border border-gray rounded-lg px-2.5 py-1.5'>Accounting</div>
-        <div className='text-sm text-white border border-gray rounded-lg px-2.5 py-1.5'>Accounting</div>
+      <div className='flex flex-wrap items-center justify-center pb-6'>
+        <div className='text-sm text-white border border-gray rounded-lg px-2.5 py-1.5 mb-2 mr-2'>Accounting</div>
+        <div className='text-sm text-white border border-gray rounded-lg px-2.5 py-1.5 mb-2 mr-2'>Accounting</div>
+        <div className='text-sm text-white border border-gray rounded-lg px-2.5 py-1.5 mb-2 mr-2'>Accounting</div>
+        <div className='text-sm text-white border border-gray rounded-lg px-2.5 py-1.5 mb-2 mr-2'>Accounting</div>
+        <div className='text-sm text-white border border-gray rounded-lg px-2.5 py-1.5 mb-2 mr-2'>Accounting</div>
+        <div className='text-sm text-white border border-gray rounded-lg px-2.5 py-1.5 mb-2 mr-2'>Accounting</div>
+        <div className='text-sm text-white border border-gray rounded-lg px-2.5 py-1.5 mb-2 mr-2'>Accounting</div>
+        <div className='text-sm text-white border border-gray rounded-lg px-2.5 py-1.5 mb-2 mr-2'>Accounting</div>
+        <div className='text-sm text-white border border-gray rounded-lg px-2.5 py-1.5 mb-2 mr-2'>Accounting</div>
+        <div className='text-sm text-white border border-gray rounded-lg px-2.5 py-1.5 mb-2 mr-2'>Accounting</div>
+        <div className='text-sm text-white border border-gray rounded-lg px-2.5 py-1.5 mb-2 mr-2'>Accounting</div>
+        <div className='text-sm text-white border border-gray rounded-lg px-2.5 py-1.5 mb-2 mr-2'>Accounting</div>
+        <div className='text-sm text-white border border-gray rounded-lg px-2.5 py-1.5 mb-2 mr-2'>Accounting</div>
+        <div className='text-sm text-white border border-gray rounded-lg px-2.5 py-1.5 mb-2 mr-2'>Accounting</div>
+        <div className='text-sm text-white border border-gray rounded-lg px-2.5 py-1.5 mb-2 mr-2'>Accounting</div>
+        <div className='text-sm text-white border border-gray rounded-lg px-2.5 py-1.5 mb-2 mr-2'>Accounting</div>
+        <div className='text-sm text-white border border-gray rounded-lg px-2.5 py-1.5 mb-2 mr-2'>Accounting</div>
+        <div className='text-sm text-white border border-gray rounded-lg px-2.5 py-1.5 mb-2 mr-2'>Accounting</div>
       </div>
       <p className='text-white opacity-75 max-w-[500px] mx-auto text-md text-center'>Browse 35,640 blockchain jobs in web3 at 6,217 projects. Filter the best remote crypto jobs by salary, location, and skills.</p>
       <div className='w-[150px] mx-auto text-center'>
