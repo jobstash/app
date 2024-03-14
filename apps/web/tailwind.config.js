@@ -63,7 +63,7 @@ module.exports = {
       '3xl': ['29px', '42px'],
       '4xl': ['34.8px', '50px'],
       '5xl': ['41px', '56px'],
-      '6xl': ['50px', '72px'],
+      '6xl': ['48px', '42px'],
       '8xl': ['3.75rem', '1'],
     },
     keyframes: {
