@@ -11,7 +11,7 @@ const SearchSkillSection = () => (
     </div>
     <div>
       <h3 className='text-white font-black text-6xl pb-6 text-center'>Search Crypto Jobs by <span className='text-secondary'>Skill</span></h3>
-      <div className='flex flex-wrap items-center justify-center '>
+      <div className='flex flex-wrap items-center justify-center pb-6'>
         <div className='text-sm text-white border border-gray rounded-lg px-2.5 py-1.5 mb-2 mr-2'>Accounting</div>
         <div className='text-sm text-white border border-gray rounded-lg px-2.5 py-1.5 mb-2 mr-2'>Accounting</div>
         <div className='text-sm text-white border border-gray rounded-lg px-2.5 py-1.5 mb-2 mr-2'>Accounting</div>
