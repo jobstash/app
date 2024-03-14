@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { memo } from 'react';
 
 const LandingFooter = () => (
-  <footer className=" flex flex-col space-y-8 pb-8 lg:mx-auto lg:max-w-6xl">
+  <footer className=" flex flex-col space-y-8 pb-8 mt-18 lg:mx-auto lg:max-w-6xl">
     <div className="lg:flex lg:justify-between">
       <div className="space-y-4">
         <div className="w-1/2 lg:w-auto">

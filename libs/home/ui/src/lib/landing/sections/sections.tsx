@@ -1,9 +1,9 @@
 import { memo } from 'react';
 
 import CandidateDaoSection from './candidate-dao-section';
-import PremiumSection from './premium-section';
-import StatsSection from './stats-section';
-import TooLateSection from './too-late-section';
+// import PremiumSection from './premium-section';
+// import StatsSection from './stats-section';
+// import TooLateSection from './too-late-section';
 
 import LandingSection from './landing-section';
 import SearchCategorySection from './search-category-section';
@@ -17,6 +17,7 @@ const LandingSections = () => (
     <LandingSection />
     <SearchCategorySection />
     <SetsUsSection />
+    <CandidateDaoSection/>
     <TestimonialSection />
     <CoffeeSection />
     <SearchSkillSection />

@@ -1,6 +1,5 @@
 import { memo } from 'react';
 
-import { lato } from '@jobstash/shared/core';
 import { Bartab } from '@jobstash/shared/ui';
 
 const SearchCategorySection = () => (
