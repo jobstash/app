@@ -31,7 +31,7 @@ export const PopularSkills = () => {
           <Button
             key={skill}
             as={Link}
-            href={`${FRONTEND_URL}${ROUTE_SECTION.JOBS}?skills=${skill}`}
+            href={`${FRONTEND_URL}${ROUTE_SECTION.JOBS}?tags=${skill}`}
             target="_blank"
             rel="noopener noreferrer"
             variant="bordered"
@@ -64,4 +64,4 @@ const sanitizeSkill = (_skill: string) => {
 };
 
 const openSkill = (skill: string) =>
-  openNewTab(`${FRONTEND_URL}${ROUTE_SECTION.JOBS}?skills=${skill}`);
+  openNewTab(`${FRONTEND_URL}${ROUTE_SECTION.JOBS}?tags=${skill}`);
