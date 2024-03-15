@@ -1,9 +1,10 @@
 import Image from 'next/image';
 import { memo } from 'react';
 
-import { lato } from '@jobstash/shared/core';
+import { lato, TELEGRAM_URL } from '@jobstash/shared/core';
 
-import { Bartab } from '@jobstash/shared/ui';
+import { HomePageButton } from './buttons/home-page-button';
+import { GradientContainer } from './gradient-container';
 
 const TestimonialSection = () => (
   <section className="relative mx-auto mt-8 md:mt-16 lg:max-w-6xl">
@@ -92,22 +93,25 @@ const TestimonialSection = () => (
         </div>
       </div>
     </div>
-    <div className="mt-8  bg-gradient-to-r from-secondary to-tertiary p-6 md:px-12 md:py-8 rounded-3xl border-[3px] border-skill9 flex flex-wrap items-center justify-between">
-      <div className="grow text-white">
-        <h4 className="text-xl font-bold">
+
+    <GradientContainer className="mt-16">
+      <div className="grow text-white gap-4 flex flex-col">
+        <span className={`${lato.className} text-xl font-bold`}>
           Want to Get Featured or Boost Your Jobs?
-        </h4>
-        <p className="text-md mt-3">
+        </span>
+        <span className="text-md text-white/75">
           Drop us a message and we will make it happen.
-        </p>
+        </span>
       </div>
-      <div className="w-[150px] mt-4 md:mt-0 mx-auto">
-        <Bartab isActive={false} variant="wallet">
-          Contact
-        </Bartab>
-      </div>
-    </div>
+      <HomePageButton hasBorder text="Contact" onClick={openTelegram} />
+    </GradientContainer>
   </section>
 );
 
 export default memo(TestimonialSection);
+
+const openTelegram = () => {
+  if (typeof window !== 'undefined') {
+    window.open(TELEGRAM_URL, '_blank');
+  }
+};

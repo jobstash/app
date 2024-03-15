@@ -2,10 +2,10 @@ import { memo } from 'react';
 
 import { lato } from '@jobstash/shared/core';
 
-import { Bartab } from '@jobstash/shared/ui';
-
 import { ExploreJobsButton } from './buttons/explore-jobs-button';
+import { HomePageButton } from './buttons/home-page-button';
 import { SubscribeTelegram } from './buttons/subscribe-telegram';
+import { GradientContainer } from './gradient-container';
 import { NewestJobsSection } from './newest-jobs-section';
 
 const LandingSection = () => (
@@ -41,22 +41,22 @@ const LandingSection = () => (
 
       <NewestJobsSection />
 
-      <div className="mt-8 md:mt-16 bg-gradient-to-r from-secondary to-tertiary p-6 md:px-12 md:py-8 rounded-3xl border-[3px] border-skill9 flex flex-wrap items-center justify-between">
-        <div className="grow text-white">
-          <h4 className="text-xl font-bold">Elevate Your Talent Search</h4>
-          <p className="text-md mt-3">
-            JobStash redefines recruitment in crypto, guarding against fraud and
-            impostors, connecting you exclusively with genuine, crypto-native
-            and crypto-adjacent talent. Welcome to a new era of talent
-            discovery, where integrity meets innovation.
-          </p>
+      <GradientContainer className="mt-16">
+        <div className="grow text-white gap-3 flex flex-col">
+          <span className={`${lato.className} text-xl font-bold`}>
+            Elevate Your Talent Search
+          </span>
+          <div className="flex flex-col gap-0.5 max-w-3xl text-white/75">
+            <span className="text-md">
+              JobStash redefines recruitment in crypto, guarding against fraud
+              and impostors, connecting you exclusively with genuine,
+              crypto-native and crypto-adjacent talent. Welcome to a new era of
+              talent discovery, where integrity meets innovation.
+            </span>
+          </div>
         </div>
-        <div className="w-[150px] mt-4 md:mt-0 mx-auto">
-          <Bartab isActive={false} variant="wallet">
-            Hire on JobStash ATS
-          </Bartab>
-        </div>
-      </div>
+        <HomePageButton hasBorder text="Hire on JobStash ATS" />
+      </GradientContainer>
     </div>
   </section>
 );
