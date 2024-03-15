@@ -1,4 +1,4 @@
-import Image from 'next/image';
+// import Image from 'next/image';
 import { memo } from 'react';
 
 import { lato } from '@jobstash/shared/core';
@@ -29,13 +29,16 @@ const SetsUsSection = () => (
             <h3
               className={`${lato.className} justify-center text-xl pb-3 font-bold text-white`}
             >
-              Senior Developer Advocate Developer Advocate
+              Safety by Default
             </h3>
             <p className="text-md text-white/75 text-left pb-">
-              PancakeSwap has the most users of any decentralized platform,
-              ever. And those users are now entrusting the platform with over
-              $3.4 billion in funds. Will you join them? 1.4 million users in
-              the last 30 days 55 million trades made in the last 30 days.
+              At JobStash we don't let random anons post jobs. Other Job
+              Platforms allow to "post jobs" for payment, but we believe this
+              creates perverse incentives. In contrast, we pull jobs from career
+              pages of verified crypto organizations on a daily basis, and only
+              include reputable companies in our index. This way you know you
+              will never be sent to a fake recruiter and risk having your safety
+              compromised.
             </p>
             <div className="mt-6 aspect-w-16 aspect-h-6">
               <Image
@@ -52,21 +55,23 @@ const SetsUsSection = () => (
             <h3
               className={`${lato.className} justify-center text-xl pb-3 font-bold text-white`}
             >
-              Senior Developer Advocate Developer Advocate
+              Accurate data where it matters
             </h3>
             <p className="text-md text-white/75 text-left pb-">
-              PancakeSwap has the most users of any decentralized platform,
-              ever. And those users are now entrusting the platform with over
-              $3.4 billion in funds. Will you join them? 1.4 million users in
-              the last 30 days 55 million trades made in the last 30 days.
+              We built Jobstash from the ground up leveraging AI to Structure
+              Data so that jobposts can be presented in a concise, uniform and
+              filterable way. We are able to present you datapoints about jobs
+              that other platforms do not extract, and combine the information
+              we have about jobs with data from DefiLlama and from De.Fi to give
+              you a sense of the financials and safety of a protocol.
             </p>
             <div className="mt-6 aspect-w-16 aspect-h-6">
-              <Image
+              {/* <Image
                 fill
                 alt="placeholder"
                 className="object-center object-cover"
                 src="https://placehold.co/600x400/EEE/31343C/png"
-              />
+              /> */}
             </div>
           </div>
         </div>
@@ -75,21 +80,25 @@ const SetsUsSection = () => (
             <h3
               className={`${lato.className} justify-center text-xl pb-3 font-bold text-white`}
             >
-              Senior Developer Advocate Developer Advocate
+              Shining Light on Great Applicants
             </h3>
             <p className="text-md text-white/75 text-left pb-">
-              PancakeSwap has the most users of any decentralized platform,
-              ever. And those users are now entrusting the platform with over
-              $3.4 billion in funds. Will you join them? 1.4 million users in
-              the last 30 days 55 million trades made in the last 30 days.
+              In todays market condition successful job posts get hundreds if
+              not thousands of job applicants, with a very low S/N ratio. We
+              understand that crypto is different than other industries. High
+              performance teams are built on trust, and we embrace this natively
+              by surfacing applicants that are currently working in the industry
+              or that are crypto adjacent, so that when you interview with
+              JobStash, you know the person you're talking to is the real deal.
+              Great talent has the best chance of being hired using JobStash.
             </p>
             <div className="mt-6 aspect-w-16 aspect-h-6">
-              <Image
+              {/* <Image
                 fill
                 alt="placeholder"
                 className="object-center object-cover"
                 src="https://placehold.co/600x400/EEE/31343C/png"
-              />
+              /> */}
             </div>
           </div>
         </div>
@@ -98,21 +107,23 @@ const SetsUsSection = () => (
             <h3
               className={`${lato.className} justify-center text-xl pb-3 font-bold text-white`}
             >
-              Senior Developer Advocate Developer Advocate
+              No Middlemen
             </h3>
             <p className="text-md text-white/75 text-left pb-">
-              PancakeSwap has the most users of any decentralized platform,
-              ever. And those users are now entrusting the platform with over
-              $3.4 billion in funds. Will you join them? 1.4 million users in
-              the last 30 days 55 million trades made in the last 30 days.
+              JobStash does not include jobs from agencies. We directly connect
+              talent with the hiring managers, and provide data and ease of
+              access to facilitate great talent introductions. We actively
+              encourage people to introduce themselves via their trusted
+              personal network, as we believe that crypto teams are built on
+              reputation and trust.
             </p>
             <div className="mt-6 aspect-w-16 aspect-h-3">
-              <Image
+              {/* <Image
                 fill
                 alt="placeholder"
                 className="object-center object-cover"
                 src="https://placehold.co/600x400/EEE/31343C/png"
-              />
+              /> */}
             </div>
           </div>
         </div>
@@ -121,21 +132,27 @@ const SetsUsSection = () => (
             <h3
               className={`${lato.className} justify-center text-xl pb-3 font-bold text-white`}
             >
-              Senior Developer Advocate Developer Advocate
+              We take the hard road
             </h3>
             <p className="text-md text-white/75 text-left pb-">
-              PancakeSwap has the most users of any decentralized platform,
-              ever. And those users are now entrusting the platform with over
-              $3.4 billion in funds. Will you join them? 1.4 million users in
-              the last 30 days 55 million trades made in the last 30 days.
+              At JobStash we've spent the past years obsessing over how to build
+              an amazing experience for talent specifically in crypto. We have
+              done crazy things, such as built data pipelines that consume
+              literal years of compute time to import all of crypto GitHub, just
+              to be able to detect if a user is actually part of an
+              organization, as he may claim. See, in crypto you can't trust
+              anybody. We take the same approach. We verify every single bit of
+              data, and strive for accuracy and completeness. We don't simply
+              operate as a job board. We are an intelligence hub for people
+              operations in crypto, and base this on
             </p>
             <div className="mt-6 aspect-w-16 aspect-h-6">
-              <Image
+              {/* <Image
                 fill
                 alt="placeholder"
                 className="object-center object-cover"
                 src="https://placehold.co/600x400/EEE/31343C/png"
-              />
+              /> */}
             </div>
           </div>
         </div>
