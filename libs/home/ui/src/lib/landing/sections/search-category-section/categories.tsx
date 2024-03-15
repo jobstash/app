@@ -35,7 +35,7 @@ export const Categories = () => {
           >
             <span
               className={`${lato.className} font-semibold`}
-            >{`Remote ${label} Crypto Jobs`}</span>
+            >{`${label} Jobs in Crypto`}</span>
           </Button>
         ))}
       </div>

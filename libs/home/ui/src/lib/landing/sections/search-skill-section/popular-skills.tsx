@@ -49,7 +49,7 @@ export const PopularSkills = () => {
   );
 };
 
-const SKILL_COUNT = 60;
+const SKILL_COUNT = 120;
 
 const sanitizeSkill = (_skill: string) => {
   // Replace all non dash/underscore w/ space
