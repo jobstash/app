@@ -25,11 +25,12 @@ export const PopularSkills = () => {
 
   return (
     <>
-      <div className="flex flex-wrap gap-4 justify-center py-4 pb-8">
+      <div className="flex flex-wrap gap-2 md:gap-4 justify-around md:justify-center pt-4 pb-4">
         {skills.map(({ label, skill }) => (
           <Button
             key={skill}
             variant="bordered"
+            className="w-5/12 md:w-auto"
             onClick={() => openSkill(skill)}
           >
             <p className={`${lato.className} font-semibold`}>{label}</p>

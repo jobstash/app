@@ -22,7 +22,7 @@ export const NewestJobsSection = () => {
       </p>
 
       {data ? (
-        <div className="flex gap-6">
+        <div className="flex gap-6 flex-col md:flex-row">
           {data.data.map((job, i) => (
             <Card key={job.shortUUID} job={job} isFeatured={i === 1} />
           ))}

@@ -23,7 +23,7 @@ export const Card = ({ job, isFeatured }: Props) => {
 
   return (
     <div
-      className="bg-white/5 rounded-3xl p-6 flex flex-col gap-4 h-fit"
+      className="bg-white/5 rounded-3xl p-6 flex flex-col gap-4 h-fit max-w-[360px]"
       style={{
         ...(isFeatured ? featuredGradientBorderStyle : undefined),
         cursor: 'default',
