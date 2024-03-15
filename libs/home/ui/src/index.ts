@@ -10,3 +10,7 @@ export { default as LandingSections } from './lib/landing/sections/sections';
 export { default as FeaturedJobs } from './lib/featured-jobs/featured-jobs';
 export { default as FeaturedOrgs } from './lib/featured-orgs/featured-orgs';
 export { default as HomeSearch } from './lib/home-search/home-search';
+
+// Other components
+export * from './lib/landing/sections/buttons/explore-jobs-button';
+export * from './lib/landing/sections/buttons/subscribe-telegram';
