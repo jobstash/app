@@ -31,7 +31,9 @@ export const Categories = () => {
             className="w-5/12 md:w-auto"
             onClick={() => openCategory(category)}
           >
-            <p className={`${lato.className} font-semibold`}>{label}</p>
+            <p
+              className={`${lato.className} font-semibold`}
+            >{`Remote ${label} Crypto Jobs`}</p>
           </Button>
         ))}
       </div>

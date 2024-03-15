@@ -33,7 +33,9 @@ export const PopularSkills = () => {
             className="w-5/12 md:w-auto"
             onClick={() => openSkill(skill)}
           >
-            <p className={`${lato.className} font-semibold`}>{label}</p>
+            <p
+              className={`${lato.className} font-semibold`}
+            >{`Remote ${label} Jobs in Crypto`}</p>
           </Button>
         ))}
       </div>
@@ -42,7 +44,7 @@ export const PopularSkills = () => {
   );
 };
 
-const SKILL_COUNT = 30;
+const SKILL_COUNT = 60;
 
 const sanitizeSkill = (_skill: string) => {
   // Replace all non dash/underscore w/ space
