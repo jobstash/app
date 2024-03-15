@@ -18,7 +18,9 @@ export const OrgSlide = () => {
     );
   }
 
-  const orgs = shuffle(data.data);
+  const orgs = data.data
+    .filter((org) => org.jobCount > 0)
+    .sort((a, b) => b.lastFundingAmount - a.lastFundingAmount);
 
   return (
     <div>
@@ -50,12 +52,3 @@ const OrgItem = ({ org }: { org: OrgListItem }) => {
     </div>
   );
 };
-
-function shuffle<T>(array: T[]): T[] {
-  for (let i = array.length - 1; i > 0; i--) {
-    const j = Math.floor(Math.random() * (i + 1));
-    [array[i], array[j]] = [array[j], array[i]];
-  }
-
-  return array;
-}
