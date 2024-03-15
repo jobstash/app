@@ -1,4 +1,5 @@
 import { memo } from 'react';
+
 import { HomePageButton } from './buttons/home-page-button';
 
 const GIB_TO_URL = 'https://gib.to/jobstash.eth';
