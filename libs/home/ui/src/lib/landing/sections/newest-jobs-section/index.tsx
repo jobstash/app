@@ -1,19 +1,13 @@
-import { useQuery } from '@tanstack/react-query';
-
 import { lato } from '@jobstash/shared/core';
 
-import { getJobList } from '@jobstash/jobs/data';
+import { useHomePageJobs } from '@jobstash/home/state';
 
 import { LoadingSection } from '../loading-section';
 
 import { Card } from './card';
 
 export const NewestJobsSection = () => {
-  const { data } = useQuery({
-    queryKey: ['home-page', 'job-cards'],
-    queryFn: () => getJobList(1, {}, 3),
-    staleTime: 1000 * 60 * 60, // 1hr
-  });
+  const { data } = useHomePageJobs();
 
   return (
     <div className="z-10 w-full items-center lg:py-0 flex flex-col gap-6">

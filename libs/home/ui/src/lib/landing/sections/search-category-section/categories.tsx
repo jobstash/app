@@ -10,6 +10,7 @@ import {
 
 import { useFilterConfig } from '@jobstash/filters/state';
 
+import { BrowseSection } from '../browse-section';
 import { LoadingSection } from '../loading-section';
 
 export const Categories = () => {
@@ -21,17 +22,20 @@ export const Categories = () => {
   ).options.map((category) => ({ category, label: sanitizeOption(category) }));
 
   return (
-    <div className="flex flex-wrap gap-4 justify-center pt-4">
-      {categories.map(({ label, category }) => (
-        <Button
-          key={category}
-          variant="bordered"
-          onClick={() => openCategory(category)}
-        >
-          <p className={`${lato.className} font-semibold`}>{label}</p>
-        </Button>
-      ))}
-    </div>
+    <>
+      <div className="flex flex-wrap gap-4 justify-center pt-4">
+        {categories.map(({ label, category }) => (
+          <Button
+            key={category}
+            variant="bordered"
+            onClick={() => openCategory(category)}
+          >
+            <p className={`${lato.className} font-semibold`}>{label}</p>
+          </Button>
+        ))}
+      </div>
+      <BrowseSection isLoadingSibling={!data} />
+    </>
   );
 };
 

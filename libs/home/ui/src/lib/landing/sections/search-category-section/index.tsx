@@ -3,8 +3,6 @@ import { memo } from 'react';
 
 import { lato } from '@jobstash/shared/core';
 
-import { ExploreJobsButton } from '../buttons/explore-jobs-button';
-
 import { Categories } from './categories';
 
 const SearchCategorySection = () => (
@@ -32,17 +30,6 @@ const SearchCategorySection = () => (
 
       <Categories />
 
-      <p className="text-white opacity-75 max-w-[500px] mx-auto text-md text-center">
-        Browse 35,640 crypto jobs at 6,217 organizations. Filter the best remote
-        crypto jobs by salary, location, and skills.
-      </p>
-
-      <div className="w-[150px] mx-auto text-center flex justify-center flex-col items-center">
-        <span className="inline-block opacity-75 pb-4 text-white text-md text-center">
-          or
-        </span>
-        <ExploreJobsButton text="Explore Crypto Jobs" />
-      </div>
       <div className="overflow-hidden whitespace-nowrap relative mt-8">
         <div className="logo_items">
           <div className="inline-flex items-center mr-14">

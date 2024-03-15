@@ -6,6 +6,7 @@ import { capitalize, openNewTab } from '@jobstash/shared/utils';
 
 import { getPopularSkills } from '@jobstash/home/data';
 
+import { BrowseSection } from '../browse-section';
 import { LoadingSection } from '../loading-section';
 
 export const PopularSkills = () => {
@@ -23,13 +24,20 @@ export const PopularSkills = () => {
   }));
 
   return (
-    <div className="flex flex-wrap gap-4 justify-center py-4 pb-8">
-      {skills.map(({ label, skill }) => (
-        <Button key={skill} variant="bordered" onClick={() => openSkill(skill)}>
-          <p className={`${lato.className} font-semibold`}>{label}</p>
-        </Button>
-      ))}
-    </div>
+    <>
+      <div className="flex flex-wrap gap-4 justify-center py-4 pb-8">
+        {skills.map(({ label, skill }) => (
+          <Button
+            key={skill}
+            variant="bordered"
+            onClick={() => openSkill(skill)}
+          >
+            <p className={`${lato.className} font-semibold`}>{label}</p>
+          </Button>
+        ))}
+      </div>
+      <BrowseSection isLoadingSibling={!data} />
+    </>
   );
 };
 

@@ -1,7 +1,5 @@
 import { memo } from 'react';
 
-import { ExploreJobsButton } from '../buttons/explore-jobs-button';
-
 import { PopularSkills } from './popular-skills';
 
 const SearchSkillSection = () => (
@@ -26,18 +24,6 @@ const SearchSkillSection = () => (
       </h3>
 
       <PopularSkills />
-
-      <p className="text-white opacity-75 max-w-[500px] mx-auto text-md text-center">
-        Browse 35,640 blockchain jobs in web3 at 6,217 projects. Filter the best
-        remote crypto jobs by salary, location, and skills.
-      </p>
-
-      <div className="w-[150px] mx-auto text-center">
-        <span className="inline-block opacity-75 pb-4 text-white text-md text-center">
-          or
-        </span>
-        <ExploreJobsButton />
-      </div>
     </div>
   </section>
 );
