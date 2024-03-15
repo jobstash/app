@@ -19,14 +19,15 @@ export const EthlondonHomePage = () => {
       <PageWrapper>
         <SideBar />
 
-        <div className="lg:h-[calc(100vh-80px)] w-full flex items-center justify-center">
+        <div className="pt-[100px] w-full flex items-center justify-center px-6 md:px-10">
           <div className="flex flex-col gap-16 items-center">
-            <div className="flex items-center gap-20">
+            <div className="flex flex-col items-center md:gap-20 md:flex-row ">
               <Image
                 width={360}
                 height={132}
                 alt="Ethlondon"
                 src="/ethlondon-community.png"
+                className='w-[250px] md:w-[350px]'
               />
               <span className="text-4xl font-bold">X</span>
               <Image
@@ -34,6 +35,7 @@ export const EthlondonHomePage = () => {
                 height={106}
                 alt="JobStash"
                 src="/jobstash-community.png"
+                className='w-[250px] md:w-[350px]'
               />
             </div>
             <div
@@ -41,11 +43,10 @@ export const EthlondonHomePage = () => {
             >
               <p>
                 <span className="text-white/50 mr-2">tl;dr:</span>
-                All available Jobs at ETHGlobal
+                All available Jobs at ETHGlobal<br className='hidden md:block'></br> LONDON 
               </p>
-              <p>LONDON</p>
             </div>
-            <div className="flex items-center gap-8">
+            <div className="flex flex-col items-center gap-8 md:flex-row">
               <ExploreJobsButton />
               <SubscribeTelegram />
             </div>
