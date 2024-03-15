@@ -10,7 +10,7 @@ interface Props {
 
 export const HomePageButton = ({ text, hasBorder, onClick }: Props) => (
   <Button
-    className="h-11 w-96 rounded-lg bg-white/5"
+    className="h-11 min-w-[180px] rounded-lg bg-white/5"
     style={{
       border: '2px solid transparent',
       ...(hasBorder ? gradientStyles : undefined),

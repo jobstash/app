@@ -5,6 +5,8 @@ import { lato } from '@jobstash/shared/core';
 
 import { Bartab } from '@jobstash/shared/ui';
 
+import { ExploreJobsButton } from './buttons/explore-jobs-button';
+
 const SearchCategorySection = () => (
   <section className="relative mx-auto lg:max-w-6xl">
     <div className="my-10">
@@ -87,13 +89,11 @@ const SearchCategorySection = () => (
         Browse 35,640 crypto jobs at 6,217 organizations. Filter the best remote
         crypto jobs by salary, location, and skills.
       </p>
-      <div className="w-[150px] mx-auto text-center">
+      <div className="w-[150px] mx-auto text-center flex justify-center flex-col items-center">
         <span className="inline-block opacity-75 pb-4 text-white text-md text-center">
           or
         </span>
-        <Bartab isActive={false} variant="wallet">
-          Explore Crypto Jobs
-        </Bartab>
+        <ExploreJobsButton text="Explore Crypto Jobs" />
       </div>
       <div className="overflow-hidden whitespace-nowrap relative mt-8">
         <div className="logo_items">
