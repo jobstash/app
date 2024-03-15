@@ -9,7 +9,7 @@ import { mwFetch } from '@jobstash/shared/data';
 
 export const getOrgList = async (
   page: number,
-  filterParams: Record<string, string>,
+  filterParams?: Record<string, string>,
   limit?: number,
 ): Promise<OrgListQueryPage> => {
   const params: Record<string, string> = {
