@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import { memo } from 'react';
 
-import { DUCK_TELEGRAM_URL, lato, TELEGRAM_URL } from '@jobstash/shared/core';
+import { DUCK_TELEGRAM_URL, lato } from '@jobstash/shared/core';
 
 import { HomePageButton } from './buttons/home-page-button';
 import { GradientContainer } from './gradient-container';
@@ -18,8 +18,8 @@ const TestimonialSection = () => (
         Some of the best organizations have found talent using JobStash. Here’s
         what they had to say
       </p>
-      <div className="flex flex-row flex-wrap mt-10 -mx-2">
-        <div className="w-full md:w-1/2 px-2 mb-4 md:mb-0">
+      <div className="flex flex-row flex-wrap mt-10 -mx-2 justify-center">
+        <div className="max-w-md px-2 mb-4 md:mb-0">
           <div className="rounded-3xl bg-white bg-opacity-5 p-5">
             <div className="h-[60px] w-[60px] mx-auto mb-6">
               <div className="aspect-w-1 aspect-h-1">
@@ -27,7 +27,7 @@ const TestimonialSection = () => (
                   fill
                   alt="placeholder"
                   className="object-center object-cover rounded-full"
-                  src="https://twitter.com/0xJMG/photo"
+                  src="/0xJMG.jpg"
                 />
               </div>
             </div>
@@ -48,7 +48,7 @@ const TestimonialSection = () => (
                   fill
                   alt="placeholder"
                   className="object-center object-cover "
-                  src="https://twitter.com/reserveprotocol/photo"
+                  src="/reserveprotocol.png"
                 />
               </div>
             </div>
