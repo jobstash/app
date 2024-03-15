@@ -80,7 +80,7 @@ const JobsRightPanel = ({ jobPost, currentTab }: Props) => {
       {currentTab === TAB_SEGMENT.details && (
         <RightPanelJobCard
           orgName={organization.name}
-          jobInfo={jobPost}
+          jobPost={jobPost}
           tags={tags}
           showExploreJob={false}
         />
