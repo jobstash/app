@@ -39,14 +39,14 @@ const SetsUsSection = () => (
               know you will never be sent to a fake recruiter and risk having
               your safety compromised.
             </p>
-            <div className="mt-6 aspect-w-16 aspect-h-6">
-              {/* <Image
+            {/* <div className="mt-6 aspect-w-16 aspect-h-6">
+              <Image
                 fill
                 alt="placeholder"
                 className="object-center object-cover"
                 src="https://placehold.co/600x400/EEE/31343C/png"
-              /> */}
-            </div>
+              />
+            </div> */}
           </div>
         </div>
         <div className="w-full md:w-1/3 px-2 mb-4">
@@ -64,14 +64,14 @@ const SetsUsSection = () => (
               we have about jobs with data from DefiLlama and from De.Fi to give
               you a sense of the financials and safety of a protocol.
             </p>
-            <div className="mt-6 aspect-w-16 aspect-h-6">
-              {/* <Image
+            {/* <div className="mt-6 aspect-w-16 aspect-h-6">
+              <Image
                 fill
                 alt="placeholder"
                 className="object-center object-cover"
                 src="https://placehold.co/600x400/EEE/31343C/png"
-              /> */}
-            </div>
+              />
+            </div> */}
           </div>
         </div>
         <div className="w-full md:w-1/3 px-2 mb-4">
@@ -92,14 +92,14 @@ const SetsUsSection = () => (
               deal. Great talent has the best chance of being hired using
               JobStash.
             </p>
-            <div className="mt-6 aspect-w-16 aspect-h-6">
-              {/* <Image
+            {/* <div className="mt-6 aspect-w-16 aspect-h-6">
+              <Image
                 fill
                 alt="placeholder"
                 className="object-center object-cover"
                 src="https://placehold.co/600x400/EEE/31343C/png"
-              /> */}
-            </div>
+              />
+            </div> */}
           </div>
         </div>
         <div className="w-full md:w-2/3 px-2 mb-4">
@@ -117,14 +117,14 @@ const SetsUsSection = () => (
               personal network, as we believe that crypto teams are built on
               reputation and trust.
             </p>
-            <div className="mt-6 aspect-w-16 aspect-h-3">
-              {/* <Image
+            {/* <div className="mt-6 aspect-w-16 aspect-h-3">
+              <Image
                 fill
                 alt="placeholder"
                 className="object-center object-cover"
                 src="https://placehold.co/600x400/EEE/31343C/png"
-              /> */}
-            </div>
+              />
+            </div> */}
           </div>
         </div>
         <div className="w-full md:w-1/3 px-2">
@@ -146,14 +146,14 @@ const SetsUsSection = () => (
               simply operate as a job board. We are an intelligence hub for
               people operations in crypto, and base this on
             </p>
-            <div className="mt-6 aspect-w-16 aspect-h-6">
-              {/* <Image
+            {/* <div className="mt-6 aspect-w-16 aspect-h-6">
+              <Image
                 fill
                 alt="placeholder"
                 className="object-center object-cover"
                 src="https://placehold.co/600x400/EEE/31343C/png"
-              /> */}
-            </div>
+              />
+            </div> */}
           </div>
         </div>
       </div>
