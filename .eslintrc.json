@@ -63,6 +63,7 @@
                 "onlyDependOnLibsWithTags": [
                   "type:core",
                   "type:util",
+                  "type:data",
                   "type:state",
                   "type:ui",
                   "type:testutil"

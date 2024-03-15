@@ -21,7 +21,7 @@ const DraggableWrapper = (props: Props) => {
     <div
       ref={ref}
       className={cn(
-        'hide-scrollbar',
+        'hide-scrollbar p-1',
         { 'overflow-x-scroll': isHorizontal },
         className,
       )}

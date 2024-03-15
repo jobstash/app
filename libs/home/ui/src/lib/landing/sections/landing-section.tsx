@@ -6,6 +6,7 @@ import { Bartab } from '@jobstash/shared/ui';
 
 import { ExploreJobsButton } from './buttons/explore-jobs-button';
 import { SubscribeTelegram } from './buttons/subscribe-telegram';
+import { NewestJobsSection } from './newest-jobs-section';
 
 const LandingSection = () => (
   <section className="relative mx-auto lg:max-w-6xl">
@@ -38,83 +39,8 @@ const LandingSection = () => (
         </div>
       </div>
 
-      <div className="z-10 w-full items-center lg:py-0">
-        <h3
-          className={`${lato.className} text-white font-black text-5xl pb-3 md:text-6xl md:pb-6 text-center`}
-        >
-          Newest Jobs
-        </h3>
-        <p className="text-white opacity-75 max-w-[500px] mx-auto text-md text-center">
-          JobStash Curates Crypto Native Jobs Across the Entire Crypto
-          Ecosystem, Powered by AI and Enhanced by Unique Data Insights—As a
-          Public Good.
-        </p>
-        <div className="flex flex-wrap flex-row mt-10 -mx-2">
-          <div className="w-full px-2 mb-4 md:w-1/3 md:mb-0">
-            <div className="rounded-3xl bg-white bg-opacity-5 p-5">
-              <h3
-                className={`${lato.className} justify-center text-xl pb-3 font-bold text-white`}
-              >
-                Senior Developer Advocate Developer Advocate
-              </h3>
-              <p className="text-md text-white/75 text-left">
-                PancakeSwap has the most users of any decentralized platform,
-                ever. And those users are now entrusting the platform with over
-                $3.4 billion in funds. Will you join them? 1.4 million users in
-                the last 30 days 55 million trades made in the last 30 days.
-              </p>
-              <hr className="border-t border-white/20 mt-4 mb-6" />
-            </div>
-          </div>
-          <div className="w-full px-2 mb-4 md:w-1/3 md:mb-0">
-            <div className="border-[3px] border-skill9 rounded-3xl bg-white bg-opacity-5 p-5">
-              <div className="text-sm mb-4 font-semibold px-4 rounded-md bg-skill9 w-[115px] py-1.5 text-center text-white">
-                Featured
-              </div>
-              <div className="">
-                <h3
-                  className={`${lato.className} justify-center text-xl pb-3 font-bold text-white`}
-                >
-                  Senior Developer Advocate Developer Advocate
-                </h3>
-                <div className="flex w-full justify-center" />
-                <p className="text-md text-white/75 text-left pb-">
-                  PancakeSwap has the most users of any decentralized platform,
-                  ever. And those users are now entrusting the platform with
-                  over $3.4 billion in funds. Will you join them? 1.4 million
-                  users in the last 30 days 55 million trades made in the last
-                  30 days.
-                </p>
+      <NewestJobsSection />
 
-                <hr className="border-t border-white/20 mt-4 mb-6" />
-              </div>
-            </div>
-          </div>
-          <div className="w-full px-2 mb-4 md:w-1/3 md:mb-0">
-            <div className="rounded-3xl bg-white bg-opacity-5 p-5">
-              <h3
-                className={`${lato.className} justify-center text-xl pb-3 font-bold text-white`}
-              >
-                Senior Developer Advocate Developer Advocate
-              </h3>
-              <div className="flex w-full justify-center" />
-              <p className="text-md text-white/75 text-left">
-                PancakeSwap has the most users of any decentralized platform,
-                ever. And those users are now entrusting the platform with over
-                $3.4 billion in funds. Will you join them? 1.4 million users in
-                the last 30 days 55 million trades made in the last 30 days.
-              </p>
-
-              <hr className="border-t border-white/20 mt-4 mb-6" />
-            </div>
-            {/* <div>Refer & Earn</div> */}
-            {/* <div className='flex space-x-4'>
-              <div>5000</div>
-              <div>1000</div>
-            </div> */}
-          </div>
-        </div>
-      </div>
       <div className="mt-8 md:mt-16 bg-gradient-to-r from-secondary to-tertiary p-6 md:px-12 md:py-8 rounded-3xl border-[3px] border-skill9 flex flex-wrap items-center justify-between">
         <div className="grow text-white">
           <h4 className="text-xl font-bold">Elevate Your Talent Search</h4>
