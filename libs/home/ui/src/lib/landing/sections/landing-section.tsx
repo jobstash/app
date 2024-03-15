@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-import { lato } from '@jobstash/shared/core';
+import { DUCK_TELEGRAM_URL, lato } from '@jobstash/shared/core';
 
 import { ExploreJobsButton } from './buttons/explore-jobs-button';
 import { HomePageButton } from './buttons/home-page-button';
@@ -55,7 +55,11 @@ const LandingSection = () => (
             </span>
           </div>
         </div>
-        <HomePageButton hasBorder text="Hire on JobStash ATS" />
+        <HomePageButton
+          hasBorder
+          text="Hire on JobStash ATS"
+          url={DUCK_TELEGRAM_URL}
+        />
       </GradientContainer>
     </div>
   </section>
