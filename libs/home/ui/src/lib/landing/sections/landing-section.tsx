@@ -13,7 +13,7 @@ const LandingSection = () => (
     <div className="">
       <div className=" w-full mx-auto">
         <div className={`${lato.className} text-center`}>
-          <h1 className="font-semibold leading-none text-white text-[80px] md:text-[120px]">
+          <h1 className="font-semibold leading-none text-white text-[60px] md:text-[80px] md:text-[120px]">
             Job<span className="text-secondary">Stash</span>
           </h1>
           <h2 className="text-xl lg:text-3xl text-white">
