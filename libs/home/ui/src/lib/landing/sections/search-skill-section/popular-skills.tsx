@@ -2,6 +2,7 @@ import { Button } from '@nextui-org/button';
 import { Link } from '@nextui-org/link';
 import { useQuery } from '@tanstack/react-query';
 
+import { HOME_PAGE_SKILL_COUNT } from '@jobstash/home/core';
 import { FRONTEND_URL, lato, ROUTE_SECTION } from '@jobstash/shared/core';
 import { capitalize, openNewTab } from '@jobstash/shared/utils';
 
@@ -12,8 +13,8 @@ import { LoadingSection } from '../loading-section';
 
 export const PopularSkills = () => {
   const { data } = useQuery({
-    queryKey: ['popular-skills', SKILL_COUNT],
-    queryFn: () => getPopularSkills(SKILL_COUNT),
+    queryKey: ['popular-skills', HOME_PAGE_SKILL_COUNT],
+    queryFn: () => getPopularSkills(HOME_PAGE_SKILL_COUNT),
     staleTime: 1000 * 60 * 60, // 1hr
   });
 
@@ -48,8 +49,6 @@ export const PopularSkills = () => {
     </>
   );
 };
-
-const SKILL_COUNT = 120;
 
 const sanitizeSkill = (_skill: string) => {
   // Replace all non dash/underscore w/ space
