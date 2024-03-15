@@ -1,5 +1,4 @@
 import { lato } from '@jobstash/shared/core';
-import { checkJobIsFeatured } from '@jobstash/jobs/utils';
 
 import { useHomePageJobs } from '@jobstash/home/state';
 
@@ -24,15 +23,8 @@ export const NewestJobsSection = () => {
 
       {data ? (
         <div className="flex gap-6 flex-col md:flex-row">
-          {data.data.map((job, i) => (
-            <Card
-              key={job.shortUUID}
-              job={job}
-              isFeatured={checkJobIsFeatured(
-                job.featureStartDate,
-                job.featureEndDate,
-              )}
-            />
+          {data.data.map((job) => (
+            <Card key={job.shortUUID} job={job} />
           ))}
         </div>
       ) : (
