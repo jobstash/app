@@ -41,12 +41,12 @@ const SetsUsSection = () => (
               compromised.
             </p>
             <div className="mt-6 aspect-w-16 aspect-h-6">
-              <Image
+              {/* <Image
                 fill
                 alt="placeholder"
                 className="object-center object-cover"
                 src="https://placehold.co/600x400/EEE/31343C/png"
-              />
+              /> */}
             </div>
           </div>
         </div>
