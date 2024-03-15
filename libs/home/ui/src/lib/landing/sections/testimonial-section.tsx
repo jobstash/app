@@ -10,7 +10,7 @@ const TestimonialSection = () => (
   <section className="relative mx-auto mt-8 md:mt-16 lg:max-w-6xl">
     <div className="z-10 w-full items-center pt-12 lg:py-0">
       <h3
-        className={`${lato.className} text-white font-black text-5xl pb-3 md:text-6xl md:pb-6 text-center`}
+        className={`${lato.className} text-white !leading-tight font-black text-5xl md:text-6xl text-center pb-6`}
       >
         Testimonials
       </h3>

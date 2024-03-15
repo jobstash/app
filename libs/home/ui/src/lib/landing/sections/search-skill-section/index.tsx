@@ -6,7 +6,7 @@ const SearchSkillSection = () => (
   <section className="relative mx-auto lg:max-w-6xl">
     <div className="my-10">
       <svg
-        className="h-[153px] mx-auto"
+        className="w-4/5 md:h-[153px] mx-auto"
         xmlns="http://www.w3.org/2000/svg"
         fill="none"
         viewBox="0 0 664 159"

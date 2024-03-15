@@ -18,7 +18,7 @@ const SetsUsSection = () => (
     </svg>
     <div>
       <h3
-        className={`${lato.className} text-white font-black text-5xl pb-3 md:text-6xl md:pb-6 text-center`}
+        className={`${lato.className} text-white !leading-tight font-black text-5xl md:text-6xl text-center`}
       >
         What Sets us Apart
       </h3>
