@@ -13,7 +13,7 @@ const SetsUsSection = () => (
     >
       <path
         fill="#fff"
-        fill-opacity=".1"
+        fillOpacity=".1"
         d="M.667 95a5.333 5.333 0 1 1 10.666 0A5.333 5.333 0 0 1 .667 95ZM6 1V0h1v1H6ZM5 95V1h2v94H5ZM5 0h1v2H5V0Z"
       />
     </svg>
