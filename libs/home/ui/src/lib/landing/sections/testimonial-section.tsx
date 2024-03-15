@@ -103,15 +103,9 @@ const TestimonialSection = () => (
           Drop us a message and we will make it happen.
         </span>
       </div>
-      <HomePageButton hasBorder text="Contact" onClick={openTelegram} />
+      <HomePageButton hasBorder text="Contact" url={TELEGRAM_URL} />
     </GradientContainer>
   </section>
 );
 
 export default memo(TestimonialSection);
-
-const openTelegram = () => {
-  if (typeof window !== 'undefined') {
-    window.open(TELEGRAM_URL, '_blank');
-  }
-};

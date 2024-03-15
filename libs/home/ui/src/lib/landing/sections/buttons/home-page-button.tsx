@@ -1,25 +1,42 @@
 import { Button } from '@nextui-org/button';
+import { Link } from '@nextui-org/link';
 
 import { Text } from '@jobstash/shared/ui';
 
 interface Props {
   text: string;
+  url?: string;
   hasBorder?: boolean;
-  onClick?: () => void;
 }
 
-export const HomePageButton = ({ text, hasBorder, onClick }: Props) => (
-  <Button
-    className="h-11 min-w-[180px] rounded-lg bg-white/5"
-    style={{
-      border: '2px solid transparent',
-      ...(hasBorder ? gradientStyles : undefined),
-    }}
-    onClick={onClick}
-  >
-    <Text fw="bold">{text}</Text>
-  </Button>
-);
+export const HomePageButton = ({ text, url, hasBorder }: Props) => {
+  const content = <Text fw="bold">{text}</Text>;
+  const style = {
+    border: '2px solid transparent',
+    ...(hasBorder ? gradientStyles : undefined),
+  };
+
+  if (url) {
+    return (
+      <Button
+        as={Link}
+        href={url}
+        className="h-11 min-w-[180px] rounded-lg bg-white/5"
+        style={style}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {content}
+      </Button>
+    );
+  }
+
+  return (
+    <Button className="h-11 min-w-[180px] rounded-lg bg-white/5" style={style}>
+      {content}
+    </Button>
+  );
+};
 
 const gradientStyles = {
   background:
