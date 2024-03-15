@@ -3,9 +3,9 @@ import { memo } from 'react';
 import { Advantage } from './advantage';
 
 const CandidateDaoSection = () => (
-  <section className="relative flex flex-col items-center pt-32 lg:mx-auto lg:max-w-6xl">
+  <section className="relative flex flex-col items-center pt-16 lg:mx-auto lg:max-w-6xl">
     <div className="flex flex-col items-center">
-      <h3 className="text-white font-black text-6xl pb-6 text-center">
+      <h3 className="text-white !leading-tight font-black text-5xl md:text-6xl text-center pb-6">
         All Crypto Native Jobs in One Place.
         <span className="text-secondary block">None of the BS</span>
       </h3>

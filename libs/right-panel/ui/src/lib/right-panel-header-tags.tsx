@@ -20,7 +20,7 @@ const RightPanelHeaderTags = ({ org }: Props) => {
   const tags: TagElement[] = createRightPanelOrgTags(org);
 
   return (
-    <DraggableWrapper className="flex items-center gap-4">
+    <div className='flex flex-wrap gap-4'>
       <OrgReviewCardSets org={org} />
 
       {tags.map(({ id, text, icon, link }) => (
@@ -30,7 +30,7 @@ const RightPanelHeaderTags = ({ org }: Props) => {
       ))}
 
       <OrgCommunityTag isOneLine community={org.community} />
-    </DraggableWrapper>
+    </div>
   );
 };
 

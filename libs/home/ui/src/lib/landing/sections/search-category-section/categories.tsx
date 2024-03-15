@@ -20,7 +20,8 @@ export const Categories = () => {
 
   return (
     <>
-      <div className="flex flex-wrap gap-2 md:gap-4 justify-around md:justify-center pt-4">
+      {/* <div className="flex flex-wrap gap-2 md:gap-4 justify-around md:justify-center pt-4"> */}
+      <div className='flex items-center flex-wrap justify-around gap-y-2 md:justify-center md:gap-x-4'> 
         {categories.map(({ label, category }) => (
           <Button
             key={category}
@@ -31,10 +32,10 @@ export const Categories = () => {
             target="_blank"
             rel="noopener noreferrer"
             variant="bordered"
-            className="w-5/12 md:w-auto"
+            className=""
           >
             <span
-              className={`${lato.className} font-semibold`}
+              className={`${lato.className} font-semibold text-sm md:text-md`}
             >{`${label} Jobs in Crypto`}</span>
           </Button>
         ))}

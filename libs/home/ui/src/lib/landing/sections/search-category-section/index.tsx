@@ -23,7 +23,7 @@ const SearchCategorySection = () => (
     </div>
     <div className="flex flex-col gap-6">
       <h3
-        className={`${lato.className} text-white font-black text-5xl md:text-6xl text-center`}
+        className={`${lato.className} text-white !leading-tight font-black text-5xl md:text-6xl text-center`}
       >
         Search Crypto Jobs by <span className="text-secondary">Category</span>
       </h3>

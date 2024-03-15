@@ -13,14 +13,14 @@ const LandingSection = () => (
     <div className="">
       <div className=" w-full mx-auto">
         <div className={`${lato.className} text-center`}>
-          <h1 className="font-semibold leading-none text-white text-[80px] md:text-[120px] lg:text-[200px]">
+          <h1 className="font-semibold leading-none text-white text-[60px] md:text-[80px] md:text-[120px]">
             Job<span className="text-secondary">Stash</span>
           </h1>
           <h2 className="text-xl lg:text-3xl text-white">
             <span className="font-bold opacity-50">tl;dr:</span> Crypto Native
             Job Board
           </h2>
-          <div className="mx-auto flex items-center justify-center space-x-8 mt-6 max-w-[400px]">
+          <div className="mx-auto flex flex-wrap items-center justify-center gap-y-4 gap-x-4 mt-6 max-w-[400px]">
             <ExploreJobsButton />
             <SubscribeTelegram />
           </div>

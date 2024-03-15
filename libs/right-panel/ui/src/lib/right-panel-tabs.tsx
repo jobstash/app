@@ -2,7 +2,7 @@ import { memo } from 'react';
 
 import { type RightPanelTab } from '@jobstash/right-panel/core';
 
-import { DraggableWrapper, Spinner } from '@jobstash/shared/ui';
+import { Spinner } from '@jobstash/shared/ui';
 
 import RightPanelTabButton from './right-panel-tab-button';
 
@@ -15,7 +15,7 @@ interface Props {
 const RightPanelTabs = ({ isLoading, currentTab, tabs }: Props) => (
   <>
     <hr className="border-t border-white/10 -my-2" />
-    <DraggableWrapper className="flex items-center gap-4 p-1">
+    <div className='flex flex-wrap gap-2'>
       {tabs.map(({ text, tabSegment, href }) => (
         <RightPanelTabButton
           key={text}
@@ -26,7 +26,7 @@ const RightPanelTabs = ({ isLoading, currentTab, tabs }: Props) => (
         />
       ))}
       {isLoading && <Spinner />}
-    </DraggableWrapper>
+    </div>
   </>
 );
 
