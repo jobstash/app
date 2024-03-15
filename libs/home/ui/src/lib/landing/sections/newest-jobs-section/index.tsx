@@ -4,7 +4,9 @@ import { lato } from '@jobstash/shared/core';
 
 import { getJobList } from '@jobstash/jobs/data';
 
-import { Card, CardSkeletons } from './card';
+import { LoadingSection } from '../loading-section';
+
+import { Card } from './card';
 
 export const NewestJobsSection = () => {
   const { data } = useQuery({
@@ -32,7 +34,7 @@ export const NewestJobsSection = () => {
           ))}
         </div>
       ) : (
-        <CardSkeletons />
+        <LoadingSection className="pt-12" />
       )}
     </div>
   );

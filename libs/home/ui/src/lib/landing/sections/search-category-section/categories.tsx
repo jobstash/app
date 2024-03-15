@@ -8,13 +8,13 @@ import { capitalize, normalizeString } from '@jobstash/shared/utils';
 
 import { useFilterConfig } from '@jobstash/filters/state';
 
-import { Loader } from '@jobstash/shared/ui';
+import { LoadingSection } from '../loading-section';
 
 export const Categories = () => {
   const router = useRouter();
   const { data } = useFilterConfig(ROUTE_SECTION.JOBS);
 
-  if (!data) return <Loading />;
+  if (!data) return <LoadingSection />;
 
   const openCategory = (category: string) =>
     router.push(
@@ -39,12 +39,6 @@ export const Categories = () => {
     </div>
   );
 };
-
-const Loading = () => (
-  <div className="flex w-full items-center justify-center h-40">
-    <Loader />
-  </div>
-);
 
 const sanitizeOption = (option: string) =>
   option.includes('_')

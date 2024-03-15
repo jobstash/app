@@ -9,7 +9,6 @@ import {
   CardSet,
   createJobTags,
   DraggableWrapper,
-  Loader,
   Text,
 } from '@jobstash/shared/ui';
 
@@ -57,9 +56,3 @@ export const Card = ({ job, isFeatured }: Props) => {
     </div>
   );
 };
-
-export const CardSkeletons = () => (
-  <div className="flex w-full items-center justify-center h-40 pt-12">
-    <Loader />
-  </div>
-);
