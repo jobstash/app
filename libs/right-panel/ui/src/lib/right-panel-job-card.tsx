@@ -4,9 +4,9 @@ import { memo } from 'react';
 import { useModal } from 'connectkit';
 
 import { CHECK_WALLET_ROLES } from '@jobstash/auth/core';
-import { JobPost } from '@jobstash/jobs/core';
 import {
   GA_EVENT_ACTION,
+  JobInfo,
   REPORT_UI_CTX,
   type Tag,
 } from '@jobstash/shared/core';
@@ -26,14 +26,14 @@ import RightPanelJobCardSkills from './right-panel-job-card-skills';
 
 interface Props {
   orgName: string;
-  jobPost: JobPost;
+  jobInfo: JobInfo & { organization: { hasUser?: boolean } };
   tags: Tag[];
   showExploreJob?: boolean;
 }
 
 const RightPanelJobCard = ({
   orgName,
-  jobPost,
+  jobInfo,
   tags,
   showExploreJob = true,
 }: Props) => {
@@ -43,7 +43,7 @@ const RightPanelJobCard = ({
     shortUUID,
     classification,
     organization: { hasUser },
-  } = jobPost;
+  } = jobInfo;
 
   const { role } = useAuthContext();
   const isDev = role === CHECK_WALLET_ROLES.DEV;
@@ -108,7 +108,7 @@ const RightPanelJobCard = ({
             </CardMenu>
           </div>
 
-          <RightPanelJobCardSets jobCardSet={jobPost} />
+          <RightPanelJobCardSets jobCardSet={jobInfo} />
 
           <RightPanelCta text="Apply for this job" onClick={onClickApplyJob} />
         </div>
@@ -117,7 +117,7 @@ const RightPanelJobCard = ({
           <hr className="border-t border-white/10" />
         </div>
 
-        <RightPanelJobCardDescriptions jobInfo={jobPost} />
+        <RightPanelJobCardDescriptions jobInfo={jobInfo} />
 
         <RightPanelJobCardSkills tags={tags} />
 
