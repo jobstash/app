@@ -1,4 +1,5 @@
-import { useRouter } from 'next/router';
+import { FRONTEND_URL, ROUTE_SECTION } from '@jobstash/shared/core';
+import { openNewTab } from '@jobstash/shared/utils';
 
 import { HomePageButton } from './home-page-button';
 
@@ -6,12 +7,12 @@ interface Props {
   text?: string;
 }
 
-export const ExploreJobsButton = ({ text }: Props) => {
-  const router = useRouter();
+export const ExploreJobsButton = ({ text }: Props) => (
+  <HomePageButton
+    hasBorder
+    text={text ?? 'Explore Jobs'}
+    onClick={openJobsPage}
+  />
+);
 
-  const onClick = () => router.push('/jobs');
-
-  return (
-    <HomePageButton hasBorder text={text ?? 'Explore Jobs'} onClick={onClick} />
-  );
-};
+const openJobsPage = () => openNewTab(`${FRONTEND_URL}${ROUTE_SECTION.JOBS}`);

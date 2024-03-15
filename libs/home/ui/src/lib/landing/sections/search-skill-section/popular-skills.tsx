@@ -1,17 +1,14 @@
-import { useRouter } from 'next/router';
-
 import { Button } from '@nextui-org/button';
 import { useQuery } from '@tanstack/react-query';
 
-import { lato, ROUTE_SECTION } from '@jobstash/shared/core';
-import { capitalize } from '@jobstash/shared/utils';
+import { FRONTEND_URL, lato, ROUTE_SECTION } from '@jobstash/shared/core';
+import { capitalize, openNewTab } from '@jobstash/shared/utils';
 
 import { getPopularSkills } from '@jobstash/home/data';
 
 import { LoadingSection } from '../loading-section';
 
 export const PopularSkills = () => {
-  const router = useRouter();
   const { data } = useQuery({
     queryKey: ['popular-skills', SKILL_COUNT],
     queryFn: () => getPopularSkills(SKILL_COUNT),
@@ -19,9 +16,6 @@ export const PopularSkills = () => {
   });
 
   if (!data) return <LoadingSection />;
-
-  const openSkill = (skill: string) =>
-    router.push(`${ROUTE_SECTION.JOBS}?skills=${skill}`);
 
   const skills = data.map((tag) => ({
     label: sanitizeSkill(tag.name),
@@ -48,7 +42,10 @@ const sanitizeSkill = (_skill: string) => {
   return skill.includes(' ')
     ? skill
         .split(' ')
-        .map((o) => capitalize(o, true))
+        .map((o) => capitalize(o))
         .join(' ')
-    : capitalize(skill, true);
+    : capitalize(skill);
 };
+
+const openSkill = (skill: string) =>
+  openNewTab(`${FRONTEND_URL}${ROUTE_SECTION.JOBS}?skills=${skill}`);
