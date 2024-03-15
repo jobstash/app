@@ -1,4 +1,3 @@
-// import Image from 'next/image';
 import { memo } from 'react';
 
 import { lato } from '@jobstash/shared/core';
@@ -32,13 +31,13 @@ const SetsUsSection = () => (
               Safety by Default
             </h3>
             <p className="text-md text-white/75 text-left pb-">
-              At JobStash we don't let random anons post jobs. Other Job
-              Platforms allow to "post jobs" for payment, but we believe this
-              creates perverse incentives. In contrast, we pull jobs from career
-              pages of verified crypto organizations on a daily basis, and only
-              include reputable companies in our index. This way you know you
-              will never be sent to a fake recruiter and risk having your safety
-              compromised.
+              At JobStash we don&#39;t let random anons post jobs. Other Job
+              Platforms allow to &#34;post jobs&#34; for payment, but we believe
+              this creates perverse incentives. In contrast, we pull jobs from
+              career pages of verified crypto organizations on a daily basis,
+              and only include reputable companies in our index. This way you
+              know you will never be sent to a fake recruiter and risk having
+              your safety compromised.
             </p>
             <div className="mt-6 aspect-w-16 aspect-h-6">
               {/* <Image
@@ -89,8 +88,9 @@ const SetsUsSection = () => (
               performance teams are built on trust, and we embrace this natively
               by surfacing applicants that are currently working in the industry
               or that are crypto adjacent, so that when you interview with
-              JobStash, you know the person you're talking to is the real deal.
-              Great talent has the best chance of being hired using JobStash.
+              JobStash, you know the person you&#39;re talking to is the real
+              deal. Great talent has the best chance of being hired using
+              JobStash.
             </p>
             <div className="mt-6 aspect-w-16 aspect-h-6">
               {/* <Image
@@ -135,16 +135,16 @@ const SetsUsSection = () => (
               We take the hard road
             </h3>
             <p className="text-md text-white/75 text-left pb-">
-              At JobStash we've spent the past years obsessing over how to build
-              an amazing experience for talent specifically in crypto. We have
-              done crazy things, such as built data pipelines that consume
+              At JobStash we&#39;ve spent the past years obsessing over how to
+              build an amazing experience for talent specifically in crypto. We
+              have done crazy things, such as built data pipelines that consume
               literal years of compute time to import all of crypto GitHub, just
               to be able to detect if a user is actually part of an
-              organization, as he may claim. See, in crypto you can't trust
+              organization, as he may claim. See, in crypto you can&#39;t trust
               anybody. We take the same approach. We verify every single bit of
-              data, and strive for accuracy and completeness. We don't simply
-              operate as a job board. We are an intelligence hub for people
-              operations in crypto, and base this on
+              data, and strive for accuracy and completeness. We don&#39;t
+              simply operate as a job board. We are an intelligence hub for
+              people operations in crypto, and base this on
             </p>
             <div className="mt-6 aspect-w-16 aspect-h-6">
               {/* <Image

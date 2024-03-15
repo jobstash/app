@@ -1,4 +1,5 @@
 import { Button } from '@nextui-org/button';
+import { Link } from '@nextui-org/link';
 import { useQuery } from '@tanstack/react-query';
 
 import { FRONTEND_URL, lato, ROUTE_SECTION } from '@jobstash/shared/core';
@@ -29,13 +30,17 @@ export const PopularSkills = () => {
         {skills.map(({ label, skill }) => (
           <Button
             key={skill}
+            as={Link}
+            href={`${FRONTEND_URL}${ROUTE_SECTION.JOBS}?skills=${skill}`}
+            target="_blank"
+            rel="noopener noreferrer"
             variant="bordered"
             className="w-5/12 md:w-auto"
             onClick={() => openSkill(skill)}
           >
-            <p
+            <span
               className={`${lato.className} font-semibold`}
-            >{`Remote ${label} Jobs in Crypto`}</p>
+            >{`Remote ${label} Jobs in Crypto`}</span>
           </Button>
         ))}
       </div>

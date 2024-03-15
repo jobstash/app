@@ -1,12 +1,9 @@
+import { Link } from '@nextui-org/link';
 import { Button } from '@nextui-org/react';
 
 import { MultiSelectFilterConfig } from '@jobstash/filters/core';
 import { FRONTEND_URL, lato, ROUTE_SECTION } from '@jobstash/shared/core';
-import {
-  capitalize,
-  normalizeString,
-  openNewTab,
-} from '@jobstash/shared/utils';
+import { capitalize, normalizeString } from '@jobstash/shared/utils';
 
 import { useFilterConfig } from '@jobstash/filters/state';
 
@@ -27,13 +24,18 @@ export const Categories = () => {
         {categories.map(({ label, category }) => (
           <Button
             key={category}
+            as={Link}
+            href={`${FRONTEND_URL}${
+              ROUTE_SECTION.JOBS
+            }?classifications=${normalizeString(category)}`}
+            target="_blank"
+            rel="noopener noreferrer"
             variant="bordered"
             className="w-5/12 md:w-auto"
-            onClick={() => openCategory(category)}
           >
-            <p
+            <span
               className={`${lato.className} font-semibold`}
-            >{`Remote ${label} Crypto Jobs`}</p>
+            >{`Remote ${label} Crypto Jobs`}</span>
           </Button>
         ))}
       </div>
@@ -49,10 +51,3 @@ const sanitizeOption = (option: string) =>
         .map((o) => capitalize(o, true))
         .join(' ')
     : capitalize(option, true);
-
-const openCategory = (category: string) =>
-  openNewTab(
-    `${FRONTEND_URL}${ROUTE_SECTION.JOBS}?classifications=${normalizeString(
-      category,
-    )}`,
-  );

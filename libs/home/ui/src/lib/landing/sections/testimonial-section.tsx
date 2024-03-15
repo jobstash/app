@@ -103,21 +103,9 @@ const TestimonialSection = () => (
           Drop us a message and tell us how it went!
         </span>
       </div>
-      <HomePageButton hasBorder text="Contact" onClick={openDuckTelegram} />
+      <HomePageButton hasBorder text="Contact" url={DUCK_TELEGRAM_URL} />
     </GradientContainer>
   </section>
 );
 
 export default memo(TestimonialSection);
-
-const openDuckTelegram = () => {
-  if (typeof window !== 'undefined') {
-    window.open(DUCK_TELEGRAM_URL, '_blank');
-  }
-};
-
-const openTelegram = () => {
-  if (typeof window !== 'undefined') {
-    window.open(TELEGRAM_URL, '_blank');
-  }
-};
