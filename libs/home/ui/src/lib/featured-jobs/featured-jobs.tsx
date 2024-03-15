@@ -95,6 +95,7 @@ const fakeFeaturedJobs: JobPost[] = [
     locationType: 'REMOTE',
     classification: 'ENGINEERING',
     organization: {
+      hasUser: false,
       summary:
         'Oasis Protocol Foundation is the legal entity behind the Oasis Protocol',
       github: null,
@@ -297,6 +298,7 @@ const fakeFeaturedJobs: JobPost[] = [
     locationType: 'REMOTE',
     classification: 'DEVREL',
     organization: {
+      hasUser: false,
       summary:
         'Oasis Protocol Foundation is the legal entity behind the Oasis Protocol',
       github: null,

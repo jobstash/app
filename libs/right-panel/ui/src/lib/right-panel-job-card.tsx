@@ -1,10 +1,12 @@
 /* eslint-disable camelcase */
 import { memo } from 'react';
 
+import { useModal } from 'connectkit';
+
 import { CHECK_WALLET_ROLES } from '@jobstash/auth/core';
 import {
   GA_EVENT_ACTION,
-  type JobInfo,
+  JobInfo,
   REPORT_UI_CTX,
   type Tag,
 } from '@jobstash/shared/core';
@@ -24,7 +26,7 @@ import RightPanelJobCardSkills from './right-panel-job-card-skills';
 
 interface Props {
   orgName: string;
-  jobInfo: JobInfo;
+  jobInfo: JobInfo & { organization: { hasUser?: boolean } };
   tags: Tag[];
   showExploreJob?: boolean;
 }
@@ -35,7 +37,13 @@ const RightPanelJobCard = ({
   tags,
   showExploreJob = true,
 }: Props) => {
-  const { title, url, shortUUID, classification } = jobInfo;
+  const {
+    title,
+    url,
+    shortUUID,
+    classification,
+    organization: { hasUser },
+  } = jobInfo;
 
   const { role } = useAuthContext();
   const isDev = role === CHECK_WALLET_ROLES.DEV;
@@ -43,7 +51,14 @@ const RightPanelJobCard = ({
   const { mutate: sendJobApplyInteraction } =
     useSendJobApplyInteractionMutation();
 
+  const { setOpen } = useModal();
+
   const openApplyPage = () => {
+    if (!isDev && hasUser) {
+      setOpen(true);
+      return;
+    }
+
     if (typeof window !== 'undefined') {
       window.open(url, '_blank');
     }

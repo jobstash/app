@@ -104,6 +104,20 @@ export const featuredGradientBorderStyle: React.CSSProperties = {
   MozAnimation: 'featuredbg 5s ease infinite',
 };
 
+export const featuredButtonStyle: React.CSSProperties = {
+  width: '113px',
+  height: '29px',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  borderRadius: '8px',
+  background: 'linear-gradient(270deg, #D58701, #8743FF, #4436F1)',
+  backgroundSize: '400% 400%',
+  animation: 'featuredbg 5s ease infinite',
+  WebkitAnimation: 'featuredbg 5s ease infinite',
+  MozAnimation: 'featuredbg 5s ease infinite',
+};
+
 export const REPORT_UI_CTX = {
   JOB_DETAILS_CARD: 'Job Details Card',
   ORG_DETAILS_CARD: 'Org Details Card',

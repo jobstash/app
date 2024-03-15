@@ -1,5 +1,6 @@
 import { memo, type ReactNode } from 'react';
 
+import { featuredButtonStyle } from '@jobstash/shared/core';
 import { prettyTimestamp } from '@jobstash/shared/utils';
 
 import { Heading, Text } from '@jobstash/shared/ui';
@@ -38,17 +39,3 @@ const JobCardHeader = ({ title, ts, isFeatured, bookmarkButton }: Props) => {
 };
 
 export default memo(JobCardHeader);
-
-const featuredButtonStyle: React.CSSProperties = {
-  width: '113px',
-  height: '29px',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  borderRadius: '8px',
-  background: 'linear-gradient(270deg, #D58701, #8743FF, #4436F1)',
-  backgroundSize: '400% 400%',
-  animation: 'featuredbg 5s ease infinite',
-  WebkitAnimation: 'featuredbg 5s ease infinite',
-  MozAnimation: 'featuredbg 5s ease infinite',
-};

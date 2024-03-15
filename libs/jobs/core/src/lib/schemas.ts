@@ -28,6 +28,7 @@ export const jobPostSchema = myzod
             ),
             aggregateRating: myzod.number().min(0).max(5),
             reviewCount: myzod.number(),
+            hasUser: myzod.boolean(),
           }),
         )
         .allowUnknownKeys(true),
