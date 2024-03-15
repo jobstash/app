@@ -6,7 +6,7 @@ import RightPanelJobCard from './right-panel-job-card';
 
 interface Props {
   orgName: string;
-  jobInfos: JobInfo[];
+  jobInfos: (JobInfo & { organization: { hasUser?: boolean } })[];
 }
 
 const RightPanelJobCards = ({ orgName, jobInfos }: Props) => {
