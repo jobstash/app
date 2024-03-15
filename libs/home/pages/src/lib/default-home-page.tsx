@@ -6,7 +6,6 @@ import {
   LandingBalls,
   LandingFooter,
   LandingMetadata,
-  LandingNav,
   LandingScripts,
   LandingSections,
 } from '@jobstash/home/ui';
@@ -18,12 +17,9 @@ export const DefaultHomePage = () => (
     <LandingMetadata />
 
     <LandingBalls />
-
-   
-
+    
       <PageWrapper>
         <SideBar />
-        {/* <LandingNav /> */}
         <div className='px-6 md:px-10'>
           <LandingSections />
           <LandingFooter />
