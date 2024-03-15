@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import { memo } from 'react';
 
 import { lato } from '@jobstash/shared/core';
@@ -21,9 +22,11 @@ const TestimonialSection = () => (
           <div className="rounded-3xl bg-white bg-opacity-5 p-5">
             <div className="h-[60px] w-[60px] mx-auto mb-6">
               <div className="aspect-w-1 aspect-h-1">
-                <img
+                <Image
+                  fill
+                  alt="placeholder"
                   className="object-center object-cover rounded-full"
-                  src="https://placehold.co/600x400/EEE/31343C"
+                  src="https://placehold.co/600x400/EEE/31343C/png"
                 />
               </div>
             </div>
@@ -34,13 +37,17 @@ const TestimonialSection = () => (
               the last 30 days 55 million trades made in the last 30 days.
             </p>
             <hr className="border-t border-white/20 mb-3 mt-6" />
-            <p className='text-white font-semibold text-md'>Santiago Perez</p>
-            <p className='text-white font-semibold text-md'>Crypto Company | Innovation Consultant</p>
+            <p className="text-white font-semibold text-md">Santiago Perez</p>
+            <p className="text-white font-semibold text-md">
+              Crypto Company | Innovation Consultant
+            </p>
             <div className="w-[40px] mt-3">
               <div className="aspect-w-16 aspect-h-9">
-                <img
+                <Image
+                  fill
+                  alt="placeholder"
                   className="object-center object-cover "
-                  src="https://placehold.co/600x400/EEE/31343C"
+                  src="https://placehold.co/600x400/EEE/31343C/png"
                 />
               </div>
             </div>
@@ -50,9 +57,11 @@ const TestimonialSection = () => (
           <div className="rounded-3xl bg-white bg-opacity-5 p-5">
             <div className="h-[60px] w-[60px] mx-auto mb-6">
               <div className="aspect-w-1 aspect-h-1">
-                <img
+                <Image
+                  fill
+                  alt="placeholder"
                   className="object-center object-cover rounded-full"
-                  src="https://placehold.co/600x400/EEE/31343C"
+                  src="https://placehold.co/600x400/EEE/31343C/png"
                 />
               </div>
             </div>
@@ -65,13 +74,17 @@ const TestimonialSection = () => (
               your career.
             </p>
             <hr className="border-t border-white/20 mb-3 mt-6" />
-            <p className='text-white font-semibold text-md'>Santiago Perez</p>
-            <p className='text-white font-semibold text-md'>Crypto Company | Innovation Consultant</p>
+            <p className="text-white font-semibold text-md">Santiago Perez</p>
+            <p className="text-white font-semibold text-md">
+              Crypto Company | Innovation Consultant
+            </p>
             <div className="w-[40px] mt-3">
               <div className="aspect-w-16 aspect-h-9">
-                <img
+                <Image
+                  fill
+                  alt="placeholder"
                   className="object-center object-cover "
-                  src="https://placehold.co/600x400/EEE/31343C"
+                  src="https://placehold.co/600x400/EEE/31343C/png"
                 />
               </div>
             </div>

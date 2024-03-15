@@ -63,6 +63,10 @@ const nextConfig = {
         protocol: 'https',
         hostname: 'chainlist.org',
       },
+      {
+        protocol: 'https',
+        hostname: 'placehold.co',
+      },
     ],
   },
 

@@ -1,4 +1,6 @@
+import Image from 'next/image';
 import { memo } from 'react';
+
 import { lato } from '@jobstash/shared/core';
 
 import { Bartab } from '@jobstash/shared/ui';
@@ -98,9 +100,11 @@ const SearchCategorySection = () => (
           <div className="inline-flex items-center mr-14">
             <div className="h-[40px] w-[40px]">
               <div className="aspect-w-1 aspect-h-1">
-                <img
+                <Image
+                  fill
+                  alt="placeholder"
                   className="object-center object-cover rounded-xl"
-                  src="https://placehold.co/600x400/EEE/31343C"
+                  src="https://placehold.co/600x400/EEE/31343C/png"
                 />
               </div>
             </div>
@@ -113,9 +117,11 @@ const SearchCategorySection = () => (
           <div className="inline-flex items-center mr-14">
             <div className="h-[40px] w-[40px]">
               <div className="aspect-w-1 aspect-h-1">
-                <img
+                <Image
+                  fill
+                  alt="placeholder"
                   className="object-center object-cover rounded-xl"
-                  src="https://placehold.co/600x400/EEE/31343C"
+                  src="https://placehold.co/600x400/EEE/31343C/png"
                 />
               </div>
             </div>
@@ -128,9 +134,11 @@ const SearchCategorySection = () => (
           <div className="inline-flex items-center mr-14">
             <div className="h-[40px] w-[40px]">
               <div className="aspect-w-1 aspect-h-1">
-                <img
+                <Image
+                  fill
+                  alt="placeholder"
                   className="object-center object-cover rounded-xl"
-                  src="https://placehold.co/600x400/EEE/31343C"
+                  src="https://placehold.co/600x400/EEE/31343C/png"
                 />
               </div>
             </div>
@@ -143,9 +151,11 @@ const SearchCategorySection = () => (
           <div className="inline-flex items-center mr-14">
             <div className="h-[40px] w-[40px]">
               <div className="aspect-w-1 aspect-h-1">
-                <img
+                <Image
+                  fill
+                  alt="placeholder"
                   className="object-center object-cover rounded-xl"
-                  src="https://placehold.co/600x400/EEE/31343C"
+                  src="https://placehold.co/600x400/EEE/31343C/png"
                 />
               </div>
             </div>
@@ -158,9 +168,11 @@ const SearchCategorySection = () => (
           <div className="inline-flex items-center mr-14">
             <div className="h-[40px] w-[40px]">
               <div className="aspect-w-1 aspect-h-1">
-                <img
+                <Image
+                  fill
+                  alt="placeholder"
                   className="object-center object-cover rounded-xl"
-                  src="https://placehold.co/600x400/EEE/31343C"
+                  src="https://placehold.co/600x400/EEE/31343C/png"
                 />
               </div>
             </div>
@@ -173,9 +185,11 @@ const SearchCategorySection = () => (
           <div className="inline-flex items-center mr-14">
             <div className="h-[40px] w-[40px]">
               <div className="aspect-w-1 aspect-h-1">
-                <img
+                <Image
+                  fill
+                  alt="placeholder"
                   className="object-center object-cover rounded-xl"
-                  src="https://placehold.co/600x400/EEE/31343C"
+                  src="https://placehold.co/600x400/EEE/31343C/png"
                 />
               </div>
             </div>
@@ -190,9 +204,11 @@ const SearchCategorySection = () => (
           <div className="inline-flex items-center mr-14">
             <div className="h-[40px] w-[40px]">
               <div className="aspect-w-1 aspect-h-1">
-                <img
+                <Image
+                  fill
+                  alt="placeholder"
                   className="object-center object-cover rounded-xl"
-                  src="https://placehold.co/600x400/EEE/31343C"
+                  src="https://placehold.co/600x400/EEE/31343C/png"
                 />
               </div>
             </div>
@@ -205,9 +221,11 @@ const SearchCategorySection = () => (
           <div className="inline-flex items-center mr-14">
             <div className="h-[40px] w-[40px]">
               <div className="aspect-w-1 aspect-h-1">
-                <img
+                <Image
+                  fill
+                  alt="placeholder"
                   className="object-center object-cover rounded-xl"
-                  src="https://placehold.co/600x400/EEE/31343C"
+                  src="https://placehold.co/600x400/EEE/31343C/png"
                 />
               </div>
             </div>
@@ -220,9 +238,11 @@ const SearchCategorySection = () => (
           <div className="inline-flex items-center mr-14">
             <div className="h-[40px] w-[40px]">
               <div className="aspect-w-1 aspect-h-1">
-                <img
+                <Image
+                  fill
+                  alt="placeholder"
                   className="object-center object-cover rounded-xl"
-                  src="https://placehold.co/600x400/EEE/31343C"
+                  src="https://placehold.co/600x400/EEE/31343C/png"
                 />
               </div>
             </div>
@@ -235,9 +255,11 @@ const SearchCategorySection = () => (
           <div className="inline-flex items-center mr-14">
             <div className="h-[40px] w-[40px]">
               <div className="aspect-w-1 aspect-h-1">
-                <img
+                <Image
+                  fill
+                  alt="placeholder"
                   className="object-center object-cover rounded-xl"
-                  src="https://placehold.co/600x400/EEE/31343C"
+                  src="https://placehold.co/600x400/EEE/31343C/png"
                 />
               </div>
             </div>
@@ -250,9 +272,11 @@ const SearchCategorySection = () => (
           <div className="inline-flex items-center mr-14">
             <div className="h-[40px] w-[40px]">
               <div className="aspect-w-1 aspect-h-1">
-                <img
+                <Image
+                  fill
+                  alt="placeholder"
                   className="object-center object-cover rounded-xl"
-                  src="https://placehold.co/600x400/EEE/31343C"
+                  src="https://placehold.co/600x400/EEE/31343C/png"
                 />
               </div>
             </div>
@@ -265,9 +289,11 @@ const SearchCategorySection = () => (
           <div className="inline-flex items-center mr-14">
             <div className="h-[40px] w-[40px]">
               <div className="aspect-w-1 aspect-h-1">
-                <img
+                <Image
+                  fill
+                  alt="placeholder"
                   className="object-center object-cover rounded-xl"
-                  src="https://placehold.co/600x400/EEE/31343C"
+                  src="https://placehold.co/600x400/EEE/31343C/png"
                 />
               </div>
             </div>

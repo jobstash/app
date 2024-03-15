@@ -1,37 +1,35 @@
 import { memo } from 'react';
-import { AnimationOnScroll } from 'react-animation-on-scroll';
-
-import { lato } from '@jobstash/shared/core';
 
 import { Advantage } from './advantage';
 
 const CandidateDaoSection = () => (
   <section className="relative flex flex-col items-center pt-32 lg:mx-auto lg:max-w-6xl">
-
-      <div className="flex flex-col items-center">
-        <h3 className='text-white font-black text-6xl pb-6 text-center'>
-          All Crypto Native Jobs in One Place.
-          <span className='text-secondary block'>None of the BS</span>
-        </h3>
-      </div>
-      <p className='text-white opacity-75 max-w-[500px] mx-auto text-md text-center'> We provide you with unrestricted access to jobs at top organizations,
-        protocols, networks, DAOs, dApps and companies. For these organizations
-        and projects, we show financial metrics from DefiLlama, Hacks and Audits
-        from De.Fi and enrich it with our own propietary data.</p>
+    <div className="flex flex-col items-center">
+      <h3 className="text-white font-black text-6xl pb-6 text-center">
+        All Crypto Native Jobs in One Place.
+        <span className="text-secondary block">None of the BS</span>
+      </h3>
+    </div>
+    <p className="text-white opacity-75 max-w-[500px] mx-auto text-md text-center">
+      We provide you with unrestricted access to jobs at top organizations,
+      protocols, networks, DAOs, dApps and companies. For these organizations
+      and projects, we show financial metrics from DefiLlama, Hacks and Audits
+      from De.Fi and enrich it with our own propietary data.
+    </p>
     <div className="flex flex-wrap w-full  pt-12 -mx-2 md:-mx-4">
-        <Advantage
-          icon={<DevAdvIcon />}
-          title={devsAdv.title}
-          desc={devsAdv.desc}
-          advantages={devsAdv.advantages}
-        />
+      <Advantage
+        icon={<DevAdvIcon />}
+        title={devsAdv.title}
+        desc={devsAdv.desc}
+        advantages={devsAdv.advantages}
+      />
 
-        <Advantage
-          icon={<DaoAdvIcon />}
-          title={companiesAdv.title}
-          desc={companiesAdv.desc}
-          advantages={companiesAdv.advantages}
-        />
+      <Advantage
+        icon={<DaoAdvIcon />}
+        title={companiesAdv.title}
+        desc={companiesAdv.desc}
+        advantages={companiesAdv.advantages}
+      />
     </div>
   </section>
 );
