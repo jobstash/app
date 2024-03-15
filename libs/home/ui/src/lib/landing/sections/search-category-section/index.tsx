@@ -3,9 +3,9 @@ import { memo } from 'react';
 
 import { lato } from '@jobstash/shared/core';
 
-import { Bartab } from '@jobstash/shared/ui';
+import { ExploreJobsButton } from '../buttons/explore-jobs-button';
 
-import { ExploreJobsButton } from './buttons/explore-jobs-button';
+import { Categories } from './categories';
 
 const SearchCategorySection = () => (
   <section className="relative mx-auto lg:max-w-6xl">
@@ -23,72 +23,20 @@ const SearchCategorySection = () => (
         />
       </svg>
     </div>
-    <div>
+    <div className="flex flex-col gap-6">
       <h3
-        className={`${lato.className} text-white font-black text-5xl pb-3 md:text-6xl md:pb-6 text-center`}
+        className={`${lato.className} text-white font-black text-5xl md:text-6xl text-center`}
       >
         Search Crypto Jobs by <span className="text-secondary">Category</span>
       </h3>
-      <div className="flex flex-wrap items-center justify-center pb-6">
-        <div className="text-sm text-white border border-gray rounded-lg px-2.5 py-1.5 mr-2 mb-2">
-          Accounting
-        </div>
-        <div className="text-sm text-white border border-gray rounded-lg px-2.5 py-1.5 mr-2 mb-2">
-          Accounting
-        </div>
-        <div className="text-sm text-white border border-gray rounded-lg px-2.5 py-1.5 mr-2 mb-2">
-          Accounting
-        </div>
-        <div className="text-sm text-white border border-gray rounded-lg px-2.5 py-1.5 mr-2 mb-2">
-          Accounting
-        </div>
-        <div className="text-sm text-white border border-gray rounded-lg px-2.5 py-1.5 mr-2 mb-2">
-          Accounting
-        </div>
-        <div className="text-sm text-white border border-gray rounded-lg px-2.5 py-1.5 mr-2 mb-2">
-          Accounting
-        </div>
-        <div className="text-sm text-white border border-gray rounded-lg px-2.5 py-1.5 mr-2 mb-2">
-          Accounting
-        </div>
-        <div className="text-sm text-white border border-gray rounded-lg px-2.5 py-1.5 mr-2 mb-2">
-          Accounting
-        </div>
-        <div className="text-sm text-white border border-gray rounded-lg px-2.5 py-1.5 mr-2 mb-2">
-          Accounting
-        </div>
-        <div className="text-sm text-white border border-gray rounded-lg px-2.5 py-1.5 mr-2 mb-2">
-          Accounting
-        </div>
-        <div className="text-sm text-white border border-gray rounded-lg px-2.5 py-1.5 mr-2 mb-2">
-          Accounting
-        </div>
-        <div className="text-sm text-white border border-gray rounded-lg px-2.5 py-1.5 mr-2 mb-2">
-          Accounting
-        </div>
-        <div className="text-sm text-white border border-gray rounded-lg px-2.5 py-1.5 mr-2 mb-2">
-          Accounting
-        </div>
-        <div className="text-sm text-white border border-gray rounded-lg px-2.5 py-1.5 mr-2 mb-2">
-          Accounting
-        </div>
-        <div className="text-sm text-white border border-gray rounded-lg px-2.5 py-1.5 mr-2 mb-2">
-          Accounting
-        </div>
-        <div className="text-sm text-white border border-gray rounded-lg px-2.5 py-1.5 mr-2 mb-2">
-          Accounting
-        </div>
-        <div className="text-sm text-white border border-gray rounded-lg px-2.5 py-1.5 mr-2 mb-2">
-          Accounting
-        </div>
-        <div className="text-sm text-white border border-gray rounded-lg px-2.5 py-1.5 mr-2 mb-2">
-          Accounting
-        </div>
-      </div>
+
+      <Categories />
+
       <p className="text-white opacity-75 max-w-[500px] mx-auto text-md text-center">
         Browse 35,640 crypto jobs at 6,217 organizations. Filter the best remote
         crypto jobs by salary, location, and skills.
       </p>
+
       <div className="w-[150px] mx-auto text-center flex justify-center flex-col items-center">
         <span className="inline-block opacity-75 pb-4 text-white text-md text-center">
           or
