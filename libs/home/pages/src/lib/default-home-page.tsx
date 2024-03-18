@@ -1,6 +1,4 @@
 import 'animate.css/animate.min.css';
-import { PageWrapper } from '@jobstash/shared/ui';
-import { SideBar } from '@jobstash/sidebar/feature';
 
 import {
   LandingBalls,
@@ -9,6 +7,8 @@ import {
   LandingScripts,
   LandingSections,
 } from '@jobstash/home/ui';
+import { PageWrapper } from '@jobstash/shared/ui';
+import { SideBar } from '@jobstash/sidebar/feature';
 
 export const DefaultHomePage = () => (
   <>
@@ -17,14 +17,13 @@ export const DefaultHomePage = () => (
     <LandingMetadata />
 
     <LandingBalls />
-    
-      <PageWrapper>
-        <SideBar />
-        <div className='px-6 md:px-10'>
-          <LandingSections />
-          <LandingFooter />
-        </div>
-      </PageWrapper>
-    
+
+    <PageWrapper>
+      <SideBar />
+      <div className="px-6 md:px-10">
+        <LandingSections />
+        <LandingFooter />
+      </div>
+    </PageWrapper>
   </>
 );

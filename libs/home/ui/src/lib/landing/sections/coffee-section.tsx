@@ -1,14 +1,17 @@
 import { memo } from 'react';
 
-import { HomePageButton } from './buttons/home-page-button';
 import { lato } from '@jobstash/shared/core';
+
+import { HomePageButton } from './buttons/home-page-button';
 
 const GIB_TO_URL = 'https://gib.to/jobstash.eth';
 
 const CoffeeSection = () => (
   <section className="relative mx-auto mt-16 lg:max-w-6xl">
     <div>
-      <h3 className={`${lato.className} text-white !leading-tight font-black text-5xl md:text-6xl text-center pb-6`}>
+      <h3
+        className={`${lato.className} text-white !leading-tight font-black text-5xl md:text-6xl text-center pb-6`}
+      >
         Support Us
       </h3>
       <p className="text-white opacity-75 max-w-[500px] mx-auto text-md text-center">

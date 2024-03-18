@@ -27,7 +27,7 @@ export const EthlondonHomePage = () => {
                 height={132}
                 alt="Ethlondon"
                 src="/ethlondon-community.png"
-                className='w-[250px] md:w-[350px]'
+                className="w-[250px] md:w-[350px]"
               />
               <span className="text-4xl font-bold">X</span>
               <Image
@@ -35,7 +35,7 @@ export const EthlondonHomePage = () => {
                 height={106}
                 alt="JobStash"
                 src="/jobstash-community.png"
-                className='w-[250px] md:w-[350px]'
+                className="w-[250px] md:w-[350px]"
               />
             </div>
             <div
@@ -43,7 +43,8 @@ export const EthlondonHomePage = () => {
             >
               <p>
                 <span className="text-white/50 mr-2">tl;dr:</span>
-                All available Jobs at ETHGlobal<br className='hidden md:block'></br> LONDON 
+                All available Jobs at ETHGlobal
+                <br className="hidden md:block" /> LONDON
               </p>
             </div>
             <div className="flex flex-col items-center gap-8 md:flex-row">
