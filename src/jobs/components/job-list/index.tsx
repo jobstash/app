@@ -3,14 +3,13 @@
 import { cn } from '~/shared/utils/cn';
 import { reloadPage } from '~/shared/utils/reload-page';
 import { InternalErrorResult } from '~/shared/components/internal-error-result';
+import { VirtualWrapper } from '~/shared/components/virtual-wrapper';
 
 import { useJobList } from '~/jobs/hooks/use-job-list';
 import { InitJobCard } from '~/jobs/components/init-job-card';
 import { JobCard } from '~/jobs/components/job-card';
 import { JobCardSkeleton } from '~/jobs/components/job-card/skeleton';
 import { useFiltersContext } from '~/filters/providers/filters-provider/context';
-
-import { JobListVirtualWrapper } from './virtual-wrapper';
 
 export const JobList = () => {
   const {
@@ -42,7 +41,7 @@ export const JobList = () => {
           <>
             <InitJobCard filterParamsString={filterParamsString} />
 
-            <JobListVirtualWrapper count={jobs.length}>
+            <VirtualWrapper count={jobs.length}>
               {(index) => (
                 <div className={cn({ 'pt-8': index > 0 })}>
                   <JobCard
@@ -51,7 +50,7 @@ export const JobList = () => {
                   />
                 </div>
               )}
-            </JobListVirtualWrapper>
+            </VirtualWrapper>
 
             {hasNextPage ? (
               <div ref={inViewRef}>
