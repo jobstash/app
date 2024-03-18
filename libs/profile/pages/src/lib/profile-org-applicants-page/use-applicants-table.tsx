@@ -1,7 +1,12 @@
 import { useCallback, useMemo, useState } from 'react';
 
+import {
+  ArchiveBoxIcon,
+  HeartIcon,
+  WalletIcon,
+} from '@heroicons/react/16/solid';
 import { Chip } from '@nextui-org/chip';
-import { Selection } from '@nextui-org/react';
+import { Button, Selection, Tooltip } from '@nextui-org/react';
 
 import { JobApplicant } from '@jobstash/jobs/core';
 
@@ -196,8 +201,17 @@ export const useApplicantsTable = () => {
 
       if (columnKey === 'actions') {
         return (
-          <div className="flex w-full items-center justify-center">
-            <p>TODO</p>
+          <div className="flex gap-4 w-full items-center justify-center">
+            <Tooltip content="Add to shortlist">
+              <Button isIconOnly isDisabled>
+                <HeartIcon className="h-8 w-8" />
+              </Button>
+            </Tooltip>
+            <Tooltip content="Add to archive">
+              <Button isIconOnly isDisabled>
+                <ArchiveBoxIcon className="h-8 w-8" />
+              </Button>
+            </Tooltip>
           </div>
         );
       }
