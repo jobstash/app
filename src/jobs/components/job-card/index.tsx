@@ -1,14 +1,15 @@
 import Link from 'next/link';
 
+import { CardWrapper } from '~/shared/components/card-wrapper';
 import { Divider } from '~/shared/components/divider';
 import { Heading } from '~/shared/components/heading';
 
 import { JOB_TEST_IDS } from '~/jobs/core/constants';
 import { JobDetails } from '~/jobs/core/schemas';
 import { createJobCardInfoTags } from '~/jobs/utils/create-job-card-info-tags';
+import { activeJobIdAtom } from '~/jobs/atoms/active-job-id-atom';
 import { JobSkills } from '~/jobs/components/job-skills';
 
-import { JobCardClientWrapper } from './client-wrapper';
 import { JobCardInfoTags } from './info-tags';
 import { JobCardOrg } from './org';
 import { JobCardProjects } from './projects';
@@ -25,7 +26,7 @@ export const JobCard = ({ job, isInit, filterParamsString = '' }: Props) => {
   const jobTags = createJobCardInfoTags(job);
 
   return (
-    <JobCardClientWrapper id={shortUUID}>
+    <CardWrapper id={shortUUID} idAtom={activeJobIdAtom}>
       <Link
         className="flex flex-col gap-3 p-6"
         href={`/jobs/${shortUUID}/details${filterParamsString}`}
@@ -61,6 +62,6 @@ export const JobCard = ({ job, isInit, filterParamsString = '' }: Props) => {
           <JobCardTsBookmark timestamp={timestamp} />
         </div>
       </Link>
-    </JobCardClientWrapper>
+    </CardWrapper>
   );
 };
