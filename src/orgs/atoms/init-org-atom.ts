@@ -1,5 +1,5 @@
 import { atom } from 'jotai';
 
-import { OrgDetails } from '~/orgs/core/schemas';
+import { OrgListItem } from '~/orgs/core/schemas';
 
-export const initOrgAtom = atom<OrgDetails | null>(null);
+export const initOrgAtom = atom<OrgListItem | null>(null);
