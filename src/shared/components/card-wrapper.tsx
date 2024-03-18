@@ -1,22 +1,21 @@
 'use client';
 
-import { useAtom } from 'jotai';
+import { PrimitiveAtom, useAtom } from 'jotai';
 
 import { cn } from '~/shared/utils/cn';
 
-import { activeJobIdAtom } from '~/jobs/atoms/active-job-id-atom';
-
 interface Props {
   id: string;
+  idAtom: PrimitiveAtom<string | null>;
   children: React.ReactNode;
 }
 
-export const JobCardClientWrapper = ({ id, children }: Props) => {
-  const [activeJobId, setActiveJobId] = useAtom(activeJobIdAtom);
-  const isActive = id === activeJobId;
+export const CardWrapper = ({ id, idAtom, children }: Props) => {
+  const [activeId, setActiveId] = useAtom(idAtom);
+  const isActive = activeId === id;
 
-  const onClickCard = () => {
-    setActiveJobId(id);
+  const onClick = () => {
+    setActiveId(id);
   };
 
   return (
@@ -28,7 +27,7 @@ export const JobCardClientWrapper = ({ id, children }: Props) => {
             isActive,
         },
       )}
-      onClick={onClickCard}
+      onClick={onClick}
     >
       {children}
     </div>
