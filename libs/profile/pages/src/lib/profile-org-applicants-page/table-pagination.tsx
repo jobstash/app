@@ -32,7 +32,9 @@ export const TablePagination = ({
     />
     {totalApplicantCount && (
       <span className="text-small text-default-400">
-        {`Total Applicants: ${totalApplicantCount}`}
+        {totalApplicantCount > 0
+          ? `Total Applicants: ${totalApplicantCount}`
+          : 'No Applicants'}
       </span>
     )}
   </div>

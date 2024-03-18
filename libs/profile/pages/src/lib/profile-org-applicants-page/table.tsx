@@ -12,7 +12,7 @@ import { cn } from '@jobstash/shared/utils';
 
 import { useOrgProfileInfoContext } from '@jobstash/profile/state';
 
-import { Text } from '@jobstash/shared/ui';
+import { Loader, Text } from '@jobstash/shared/ui';
 
 import { ApplicantTabs } from './applicant-tabs';
 import { MultiSelectActions } from './multi-select-actions';
@@ -43,16 +43,19 @@ export const ApplicantsTable = () => {
     onJobSelectionInputChange,
     selectedApplicants,
     onTableSelectionChange,
+    activeList,
+    setActiveList,
   } = useApplicantsTable();
 
-  if (isLoading || !profileInfoData) return null;
+  if (!profileInfoData) return null;
 
   return (
     <div className="flex flex-col gap-4">
-      <ApplicantTabs />
+      <ApplicantTabs activeList={activeList} setActiveList={setActiveList} />
 
       <div className="flex items-center gap-8">
         <TableSearchInput
+          isLoading={isLoading}
           value={searchFilter}
           setValue={setSearchFilter}
           onChange={onSearchChange}
@@ -68,53 +71,59 @@ export const ApplicantsTable = () => {
         />
       </div>
 
-      <div className="flex flex-col gap-2 pt-4">
-        <MultiSelectActions
-          orgId={profileInfoData.orgId ?? ''}
-          selectedApplicants={selectedApplicants}
-        />
+      {isLoading ? (
+        <div className="pt-20 flex items-center justify-center">
+          <Loader />
+        </div>
+      ) : (
+        <div className="flex flex-col gap-2 pt-4">
+          <MultiSelectActions
+            orgId={profileInfoData.orgId ?? ''}
+            selectedApplicants={selectedApplicants}
+          />
 
-        <Table
-          color="default"
-          aria-label="Job Applicants Table"
-          selectionMode="multiple"
-          selectedKeys={selectedApplicants as Set<string>}
-          onSelectionChange={onTableSelectionChange}
-        >
-          <TableHeader columns={columns}>
-            {(column) => (
-              <TableColumn key={column.key}>
-                <div
-                  className={cn('flex items-center', {
-                    'justify-center': centeredSet.has(column.key),
-                  })}
-                >
-                  <Text size="md" fw="bold">
-                    {column.label}
-                  </Text>
-                </div>
-              </TableColumn>
-            )}
-          </TableHeader>
-          <TableBody items={items}>
-            {(item) => (
-              <TableRow key={item.user.wallet}>
-                {(columnKey) => (
-                  <TableCell>{renderCell(item, columnKey as any)}</TableCell>
-                )}
-              </TableRow>
-            )}
-          </TableBody>
-        </Table>
+          <Table
+            color="default"
+            aria-label="Job Applicants Table"
+            selectionMode="multiple"
+            selectedKeys={selectedApplicants as Set<string>}
+            onSelectionChange={onTableSelectionChange}
+          >
+            <TableHeader columns={columns}>
+              {(column) => (
+                <TableColumn key={column.key}>
+                  <div
+                    className={cn('flex items-center', {
+                      'justify-center': centeredSet.has(column.key),
+                    })}
+                  >
+                    <Text size="md" fw="bold">
+                      {column.label}
+                    </Text>
+                  </div>
+                </TableColumn>
+              )}
+            </TableHeader>
+            <TableBody items={items}>
+              {(item) => (
+                <TableRow key={item.user.wallet}>
+                  {(columnKey) => (
+                    <TableCell>{renderCell(item, columnKey as any)}</TableCell>
+                  )}
+                </TableRow>
+              )}
+            </TableBody>
+          </Table>
 
-        <TablePagination
-          page={page}
-          total={totalPageCount}
-          isDisabled={items.length < pageRowCount}
-          totalApplicantCount={totalApplicantCount}
-          onChange={setPage}
-        />
-      </div>
+          <TablePagination
+            page={page}
+            total={totalPageCount}
+            isDisabled={items.length < pageRowCount}
+            totalApplicantCount={totalApplicantCount}
+            onChange={setPage}
+          />
+        </div>
+      )}
     </div>
   );
 };

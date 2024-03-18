@@ -5,12 +5,18 @@ import { Input } from '@nextui-org/input';
 import { SearchInputIcon } from '@jobstash/shared/ui';
 
 interface Props {
+  isLoading: boolean;
   value: string;
   setValue: Dispatch<SetStateAction<string>>;
   onChange: (_: string) => void;
 }
 
-export const TableSearchInput = ({ value, setValue, onChange }: Props) => (
+export const TableSearchInput = ({
+  value,
+  isLoading,
+  setValue,
+  onChange,
+}: Props) => (
   <Input
     isClearable
     placeholder="Search Organization"
@@ -22,6 +28,7 @@ export const TableSearchInput = ({ value, setValue, onChange }: Props) => (
       input: 'pl-2',
     }}
     startContent={<SearchInputIcon />}
+    isDisabled={isLoading}
     onClear={() => setValue('')}
     onValueChange={onChange}
   />

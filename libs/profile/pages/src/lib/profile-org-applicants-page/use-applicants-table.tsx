@@ -12,7 +12,9 @@ import { LogoTitle, Text } from '@jobstash/shared/ui';
 
 export const useApplicantsTable = () => {
   const { profileInfoData } = useOrgProfileInfoContext();
-  const { data } = useJobApplicants(profileInfoData?.orgId);
+
+	const [activeList, setActiveList] = useState<'all' | 'shortlisted' | 'archived'>('all')
+  const { data } = useJobApplicants(profileInfoData?.orgId, activeList);
 
   const [searchFilter, setSearchFilter] = useState('');
 
@@ -225,6 +227,8 @@ export const useApplicantsTable = () => {
     onJobSelectionInputChange,
     selectedApplicants,
     onTableSelectionChange,
+		activeList,
+		setActiveList
   };
 };
 
