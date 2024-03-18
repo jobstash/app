@@ -6,6 +6,7 @@ import { getQueryClient } from '~/shared/utils/get-query-client';
 import { filterQueryKeys } from '~/filters/core/query-keys';
 import { orgQueryKeys } from '~/orgs/core/query-keys';
 import { getFilterConfig } from '~/filters/api/get-filter-config';
+import { getOrgDetails } from '~/orgs/api/get-org-details';
 import { getOrgList } from '~/orgs/api/get-org-list';
 
 import { OrgListClientPage } from './client-page';
@@ -17,9 +18,9 @@ interface Props {
 const OrgListPage = async ({ searchParams: rawSearchParams }: Props) => {
   const queryClient = getQueryClient();
 
-  await Promise.all([
+  const [orgListResult] = await Promise.all([
     // Prefetch list
-    queryClient.prefetchInfiniteQuery({
+    queryClient.fetchInfiniteQuery({
       queryKey: orgQueryKeys.list(rawSearchParams),
       queryFn: async ({ pageParam }) => getOrgList(pageParam, rawSearchParams),
       initialPageParam: 1,
@@ -30,6 +31,18 @@ const OrgListPage = async ({ searchParams: rawSearchParams }: Props) => {
       queryFn: () => getFilterConfig(`/${ROUTE_SECTIONS.ORGS}`),
     }),
   ]);
+
+  // Prefetch details for each org item
+  await Promise.all(
+    orgListResult.pages
+      .flatMap((page) => page.data)
+      .map(({ orgId }) =>
+        queryClient.prefetchQuery({
+          queryKey: orgQueryKeys.details(orgId),
+          queryFn: () => getOrgDetails(orgId),
+        }),
+      ),
+  );
 
   return (
     <HydrationBoundary state={dehydrate(queryClient)}>
