@@ -30,3 +30,7 @@ export const ORG_REVIEW_TIMEZONES = [
   'GMT+13',
   'GMT+14',
 ] as const;
+
+export const ORG_TEST_IDS = {
+  ORG_CARD: 'org-card',
+} as const;
