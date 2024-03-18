@@ -13,7 +13,9 @@ import { LogoTitle, Text } from '@jobstash/shared/ui';
 export const useApplicantsTable = () => {
   const { profileInfoData } = useOrgProfileInfoContext();
 
-	const [activeList, setActiveList] = useState<'all' | 'shortlisted' | 'archived'>('all')
+  const [activeList, setActiveList] = useState<
+    'all' | 'shortlisted' | 'archived'
+  >('all');
   const { data } = useJobApplicants(profileInfoData?.orgId, activeList);
 
   const [searchFilter, setSearchFilter] = useState('');
@@ -149,6 +151,22 @@ export const useApplicantsTable = () => {
         );
       }
 
+      if (columnKey === 'contact') {
+        const {
+          user: {
+            contact: { value, preferred },
+          },
+        } = applicant;
+
+        if (!value) return null;
+
+        return (
+          <Text size="md" fw="bold">
+            {`${preferred ?? 'Contact'}: ${value}`}
+          </Text>
+        );
+      }
+
       if (columnKey === 'availableForWork') {
         const isAvailable = applicant.user.availableForWork;
         const color = isAvailable ? 'success' : 'default';
@@ -227,24 +245,23 @@ export const useApplicantsTable = () => {
     onJobSelectionInputChange,
     selectedApplicants,
     onTableSelectionChange,
-		activeList,
-		setActiveList
+    activeList,
+    setActiveList,
   };
 };
 
-type CustomColumnKeys = 'user' | 'job' | 'actions' | 'availableForWork';
+type CustomColumnKeys =
+  | 'user'
+  | 'job'
+  | 'actions'
+  | 'availableForWork'
+  | 'contact';
 
 const columns = [
-  { key: 'user', label: 'User' },
   { key: 'job', label: 'Job' },
+  { key: 'user', label: 'User' },
+  { key: 'contact', label: 'Contact' },
   { key: 'availableForWork', label: 'Available for Work' },
-  // { key: 'wallet', label: 'Wallet' },
-  // { key: 'avatar', label: 'Avatar' },
-  // { key: 'username', label: 'Username' },
-  // { key: 'email', label: 'Email' },
-  // { key: 'availableForWork', label: 'Available' },
-  // { key: 'contact', label: 'Contact' },
-  // { key: 'location', label: 'Location' },
   { key: 'actions', label: 'Actions' },
 ];
 

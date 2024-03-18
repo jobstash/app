@@ -73,6 +73,10 @@ export const jobApplicantSchema = myzod.object({
         country: myzod.string().nullable(),
         city: myzod.string().nullable(),
       }),
+      contact: myzod.object({
+        preferred: myzod.string().nullable(),
+        value: myzod.string().nullable(),
+      }),
       //
       // wallet: myzod.string().min(1),
       // contact: myzod.object({
