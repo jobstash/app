@@ -1,9 +1,3 @@
-const OrgListPage = () => {
-  return (
-    <div className="flex min-h-screen w-full items-center justify-center">
-      OrgListPage
-    </div>
-  );
-};
+const OrgsChildrenPage = () => null;
 
-export default OrgListPage;
+export default OrgsChildrenPage;

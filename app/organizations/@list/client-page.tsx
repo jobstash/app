@@ -1,10 +1,11 @@
 'use client';
 
+import dynamic from 'next/dynamic';
+
 import { ROUTE_SECTIONS } from '~/shared/core/constants';
 
 import { orgFiltersSearchParamsAtom } from '~/orgs/atoms/org-filters-search-params-atom';
 import { orgTotalCountAtom } from '~/orgs/atoms/org-total-count-atom';
-import { FiltersSection } from '~/filters/components/filters-section';
 import { FiltersProvider } from '~/filters/providers/filters-provider';
 
 interface Props {
@@ -22,6 +23,15 @@ export const OrgListClientPage = ({ rawSearchParams }: Props) => {
         countAtom={orgTotalCountAtom}
         searchPlaceholder="Search organizations ..."
       />
+      <OrgList />
     </FiltersProvider>
   );
 };
+
+const FiltersSection = dynamic(() =>
+  import('~/filters/components/filters-section').then((m) => m.FiltersSection),
+);
+
+const OrgList = dynamic(() =>
+  import('~/orgs/components/org-list').then((m) => m.OrgList),
+);
