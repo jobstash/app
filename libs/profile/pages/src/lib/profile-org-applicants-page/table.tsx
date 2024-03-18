@@ -53,76 +53,84 @@ export const ApplicantsTable = () => {
     <div className="flex flex-col gap-4">
       <ApplicantTabs activeList={activeList} setActiveList={setActiveList} />
 
-      <div className="flex items-center gap-8">
-        <TableSearchInput
-          isLoading={isLoading}
-          value={searchFilter}
-          setValue={setSearchFilter}
-          onChange={onSearchChange}
-        />
-
-        <JobSelection
-          isLoading={isLoading}
-          items={jobs}
-          inputValue={jobSelection.input}
-          selectedKey={jobSelection.selectedKey}
-          onInputChange={onJobSelectionInputChange}
-          onSelectionChange={onJobSelectionChange}
-        />
-      </div>
-
-      {isLoading ? (
-        <div className="pt-20 flex items-center justify-center">
-          <Loader />
-        </div>
+      {items.length === 0 ? (
+        <p>TODO: Empty UI. No Applicants</p>
       ) : (
-        <div className="flex flex-col gap-2 pt-4">
-          <MultiSelectActions
-            orgId={profileInfoData.orgId ?? ''}
-            selectedApplicants={selectedApplicants}
-          />
+        <>
+          <div className="flex items-center gap-8">
+            <TableSearchInput
+              isLoading={isLoading}
+              value={searchFilter}
+              setValue={setSearchFilter}
+              onChange={onSearchChange}
+            />
 
-          <Table
-            color="default"
-            aria-label="Job Applicants Table"
-            selectionMode="multiple"
-            selectedKeys={selectedApplicants as Set<string>}
-            onSelectionChange={onTableSelectionChange}
-          >
-            <TableHeader columns={columns}>
-              {(column) => (
-                <TableColumn key={column.key}>
-                  <div
-                    className={cn('flex items-center', {
-                      'justify-center': centeredSet.has(column.key),
-                    })}
-                  >
-                    <Text size="md" fw="bold">
-                      {column.label}
-                    </Text>
-                  </div>
-                </TableColumn>
-              )}
-            </TableHeader>
-            <TableBody items={items}>
-              {(item) => (
-                <TableRow key={item.user.wallet}>
-                  {(columnKey) => (
-                    <TableCell>{renderCell(item, columnKey as any)}</TableCell>
+            <JobSelection
+              isLoading={isLoading}
+              items={jobs}
+              inputValue={jobSelection.input}
+              selectedKey={jobSelection.selectedKey}
+              onInputChange={onJobSelectionInputChange}
+              onSelectionChange={onJobSelectionChange}
+            />
+          </div>
+
+          {isLoading ? (
+            <div className="pt-20 flex items-center justify-center">
+              <Loader />
+            </div>
+          ) : (
+            <div className="flex flex-col gap-2 pt-4">
+              <MultiSelectActions
+                orgId={profileInfoData.orgId ?? ''}
+                selectedApplicants={selectedApplicants}
+              />
+
+              <Table
+                color="default"
+                aria-label="Job Applicants Table"
+                selectionMode="multiple"
+                selectedKeys={selectedApplicants as Set<string>}
+                onSelectionChange={onTableSelectionChange}
+              >
+                <TableHeader columns={columns}>
+                  {(column) => (
+                    <TableColumn key={column.key}>
+                      <div
+                        className={cn('flex items-center', {
+                          'justify-center': centeredSet.has(column.key),
+                        })}
+                      >
+                        <Text size="md" fw="bold">
+                          {column.label}
+                        </Text>
+                      </div>
+                    </TableColumn>
                   )}
-                </TableRow>
-              )}
-            </TableBody>
-          </Table>
+                </TableHeader>
+                <TableBody items={items}>
+                  {(item) => (
+                    <TableRow key={item.user.wallet}>
+                      {(columnKey) => (
+                        <TableCell>
+                          {renderCell(item, columnKey as any)}
+                        </TableCell>
+                      )}
+                    </TableRow>
+                  )}
+                </TableBody>
+              </Table>
 
-          <TablePagination
-            page={page}
-            total={totalPageCount}
-            isDisabled={items.length < pageRowCount}
-            totalApplicantCount={totalApplicantCount}
-            onChange={setPage}
-          />
-        </div>
+              <TablePagination
+                page={page}
+                total={totalPageCount}
+                isDisabled={items.length < pageRowCount}
+                totalApplicantCount={totalApplicantCount}
+                onChange={setPage}
+              />
+            </div>
+          )}
+        </>
       )}
     </div>
   );
