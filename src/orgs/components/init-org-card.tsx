@@ -6,8 +6,7 @@ import { useAtomValue } from 'jotai';
 
 import { HREFS } from '~/shared/core/constants';
 import { initPathAtom } from '~/shared/atoms/init-path-atom';
-
-import { JobCardSkeleton } from '~/jobs/components/job-card/skeleton';
+import { CardSkeleton } from '~/shared/components/card-skeleton';
 
 import { initOrgAtom } from '../atoms/init-org-atom';
 
@@ -39,6 +38,6 @@ export const InitOrgCard = ({ filterParamsString }: Props) => {
       />
     );
 
-  // Defaults to a skeleton (job card skeleton for now)
-  return <JobCardSkeleton />;
+  // Defaults to a skeleton
+  return <CardSkeleton />;
 };

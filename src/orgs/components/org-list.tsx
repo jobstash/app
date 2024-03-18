@@ -1,10 +1,10 @@
 import { cn } from '~/shared/utils/cn';
 import { reloadPage } from '~/shared/utils/reload-page';
+import { CardSkeleton } from '~/shared/components/card-skeleton';
 import { InternalErrorResult } from '~/shared/components/internal-error-result';
 import { VirtualWrapper } from '~/shared/components/virtual-wrapper';
 
 import { useOrgList } from '~/orgs/hooks/use-org-list';
-import { JobCardSkeleton } from '~/jobs/components/job-card/skeleton';
 import { useFiltersContext } from '~/filters/providers/filters-provider/context';
 
 import { InitOrgCard } from './init-org-card';
@@ -33,7 +33,7 @@ export const OrgList = () => {
       {error && <InternalErrorResult onReset={reloadPage} />}
 
       {isPending ? (
-        <JobCardSkeleton />
+        <CardSkeleton />
       ) : (
         isSuccess &&
         (hasOrgs ? (
@@ -55,7 +55,7 @@ export const OrgList = () => {
 
             {hasNextPage ? (
               <div ref={inViewRef}>
-                <JobCardSkeleton />
+                <CardSkeleton />
               </div>
             ) : (
               <p>TODO: No more orgs UI</p>
