@@ -1,5 +1,7 @@
 import { memo } from 'react';
 
+import { UserCircleIcon } from '@heroicons/react/24/outline';
+import { Badge, Tooltip } from '@nextui-org/react';
 import {
   Avatar,
   Avatar as CkAvatar,
@@ -11,7 +13,7 @@ import { cn } from '@jobstash/shared/utils';
 
 import { useIsMounted } from '@jobstash/shared/state';
 
-import { Bartab } from '@jobstash/shared/ui';
+import { Bartab, Text } from '@jobstash/shared/ui';
 
 interface Props {
   isMobile?: boolean;
@@ -64,13 +66,17 @@ const ConnectWalletButton = ({ isMobile }: Props) => {
                   >
                     <div className={innerClassName}>
                       <div className="flex items-center gap-4 md:gap-2 text-white text-xl">
-                        {address && (
-                          <Avatar
-                            address={address}
-                            name={displayName}
-                            size={28}
-                          />
-                        )}
+                        {isConnected ? (
+                          isSignedIn ? (
+                            <Avatar
+                              address={address}
+                              name={displayName}
+                              size={28}
+                            />
+                          ) : (
+                            <SiweAvatar />
+                          )
+                        ) : null}
 
                         {displayName ?? 'Connect Wallet'}
                       </div>
@@ -81,20 +87,34 @@ const ConnectWalletButton = ({ isMobile }: Props) => {
             }
 
             return (
-              <Bartab
-                isActive={false}
-                variant="wallet"
-                left={
-                  isConnected ? (
-                    <CkAvatar address={address} name={address} size={24} />
-                  ) : null
+              <Tooltip
+                isDisabled={!(isConnected && !isSignedIn)}
+                content={
+                  <div className="px-2 py-1">
+                    <Text fw="bold">Signin with Ethereum</Text>
+                  </div>
                 }
-                onClick={onClick}
+                size="lg"
               >
-                {address
-                  ? ensName ?? `${address.slice(0, 6)}...${address.slice(-4)}`
-                  : 'Connect Wallet'}
-              </Bartab>
+                <Bartab
+                  isActive={false}
+                  variant="wallet"
+                  left={
+                    isConnected ? (
+                      isSignedIn ? (
+                        <CkAvatar address={address} name={address} size={24} />
+                      ) : (
+                        <SiweAvatar />
+                      )
+                    ) : null
+                  }
+                  onClick={onClick}
+                >
+                  {address
+                    ? ensName ?? `${address.slice(0, 6)}...${address.slice(-4)}`
+                    : 'Connect Wallet'}
+                </Bartab>
+              </Tooltip>
             );
           }}
         </ConnectKitButton.Custom>
@@ -104,3 +124,16 @@ const ConnectWalletButton = ({ isMobile }: Props) => {
 };
 
 export default memo(ConnectWalletButton);
+
+const SiweAvatar = () => (
+  <Badge
+    content=""
+    color="success"
+    shape="circle"
+    size="sm"
+    classNames={{ badge: 'bg-[#1A88F8] mt-0.5 mr-0.5' }}
+    showOutline={false}
+  >
+    <UserCircleIcon className="w-9 md:w-7 h-9 md:h-7" />
+  </Badge>
+);
