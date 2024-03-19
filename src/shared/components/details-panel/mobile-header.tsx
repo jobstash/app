@@ -3,13 +3,13 @@ import { MobileHeader as BaseMobileHeader } from '~/shared/components/mobile-hea
 import { DetailsPanelBackButton } from './back-button';
 
 interface Props {
-  href: string;
+  backHref: string;
 }
 
-export const MobileHeader = ({ href }: Props) => {
+export const MobileHeader = ({ backHref }: Props) => {
   return (
     <BaseMobileHeader
-      left={<DetailsPanelBackButton href={href} />}
+      left={<DetailsPanelBackButton href={backHref} />}
       className="z-50 bg-darkest-gray md:left-auto md:right-0 md:flex md:w-[calc((100%-220px))] lg:hidden"
     />
   );
