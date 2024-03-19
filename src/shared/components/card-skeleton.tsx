@@ -2,7 +2,7 @@ import { Skeleton } from '@nextui-org/skeleton';
 
 import { Divider } from '~/shared/components/divider';
 
-export const JobCardSkeleton = () => {
+export const CardSkeleton = () => {
   return (
     <div className="flex flex-col gap-3 rounded-3xl bg-darkest-gray p-6">
       <div className="flex w-full items-center justify-between">
