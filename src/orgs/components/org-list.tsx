@@ -6,6 +6,8 @@ import { VirtualWrapper } from '~/shared/components/virtual-wrapper';
 import { useOrgList } from '~/orgs/hooks/use-org-list';
 import { useFiltersContext } from '~/filters/providers/filters-provider/context';
 
+import { OrgCard } from './org-card';
+
 export const OrgList = () => {
   const {
     orgs,
@@ -42,9 +44,10 @@ export const OrgList = () => {
             <VirtualWrapper count={orgs.length}>
               {(index) => (
                 <div className={cn({ 'pt-8': index > 0 })}>
-                  <div className="flex flex-col bg-darkest-gray p-4">
-                    <pre>{JSON.stringify(orgs[index], undefined, '\t')}</pre>
-                  </div>
+                  <OrgCard
+                    orgItem={orgs[index]}
+                    filterParamsString={filterParamsString}
+                  />
                 </div>
               )}
             </VirtualWrapper>
