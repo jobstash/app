@@ -4,8 +4,10 @@ import { InternalErrorResult } from '~/shared/components/internal-error-result';
 import { VirtualWrapper } from '~/shared/components/virtual-wrapper';
 
 import { useOrgList } from '~/orgs/hooks/use-org-list';
+import { JobCardSkeleton } from '~/jobs/components/job-card/skeleton';
 import { useFiltersContext } from '~/filters/providers/filters-provider/context';
 
+import { InitOrgCard } from './init-org-card';
 import { OrgCard } from './org-card';
 
 export const OrgList = () => {
@@ -31,14 +33,13 @@ export const OrgList = () => {
       {error && <InternalErrorResult onReset={reloadPage} />}
 
       {isPending ? (
-        <p>Card Skeleton</p>
+        <JobCardSkeleton />
       ) : (
         isSuccess &&
         (hasOrgs ? (
           <>
             <div>
-              <p>Init org card</p>
-              <p>{JSON.stringify({ filterParamsString })}</p>
+              <InitOrgCard filterParamsString={filterParamsString} />
             </div>
 
             <VirtualWrapper count={orgs.length}>
@@ -54,7 +55,7 @@ export const OrgList = () => {
 
             {hasNextPage ? (
               <div ref={inViewRef}>
-                <p>Card Skeleton</p>
+                <JobCardSkeleton />
               </div>
             ) : (
               <p>TODO: No more orgs UI</p>
