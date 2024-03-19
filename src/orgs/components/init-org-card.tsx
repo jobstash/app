@@ -9,8 +9,8 @@ import { getFundingRoundsData } from '~/shared/utils/get-funding-rounds-data';
 import { initPathAtom } from '~/shared/atoms/init-path-atom';
 import { CardSkeleton } from '~/shared/components/card-skeleton';
 
-import { initOrgAtom } from '../atoms/init-org-atom';
-import { OrgListItem } from '../core/schemas';
+import { OrgListItem } from '~/orgs/core/schemas';
+import { initOrgAtom } from '~/orgs/atoms/init-org-atom';
 
 import { OrgCard } from './org-card';
 
