@@ -3,7 +3,7 @@ import { memo, useCallback } from 'react';
 
 import { ORG_SIGNUP_FORM_URL } from '@jobstash/shared/core';
 
-import { Bartab, Text } from '@jobstash/shared/ui';
+import { Text } from '@jobstash/shared/ui';
 
 interface Props {
   isMobile?: boolean;
@@ -16,7 +16,7 @@ const RequestToBeListedButton = ({ isMobile }: Props) => {
     }
   }, []);
 
-  const text = 'Request to be listed';
+  const text = 'Get Listed';
 
   if (isMobile) {
     return (
@@ -31,9 +31,9 @@ const RequestToBeListedButton = ({ isMobile }: Props) => {
   }
 
   return (
-    <Bartab isActive={false} variant="wallet" left={null} onClick={onClick}>
-      {text}
-    </Bartab>
+    <Link target="_blank" href={ORG_SIGNUP_FORM_URL} rel="noopener noreferrer">
+      <Text className="text-md">{text}</Text>
+    </Link>
   );
 };
 

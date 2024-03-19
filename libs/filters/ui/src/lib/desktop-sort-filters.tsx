@@ -17,7 +17,7 @@ const DesktopSortFilters = () => {
         filterValues={state?.filterValues}
         configs={sortFilterConfigs}
         dispatch={dispatch}
-        wrapperClassName="w-[150px]"
+        wrapperClassName=""
       />
     </div>
   );
