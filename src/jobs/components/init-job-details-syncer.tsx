@@ -29,7 +29,6 @@ export const InitJobDetailsSyncer = ({ id }: Props) => {
     }
   }, [data, initJob, setInitJob]);
 
-  // TODO: Remove this (duplicate with initJobAtom)
   // Set active job ID on desktop
   useEffect(() => {
     if (isDesktop && !activeJobId && data) {
