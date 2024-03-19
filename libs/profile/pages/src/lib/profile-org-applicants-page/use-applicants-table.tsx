@@ -3,7 +3,6 @@ import { useCallback, useMemo, useState } from 'react';
 import {
   ArchiveBoxIcon,
   HeartIcon,
-  WalletIcon,
 } from '@heroicons/react/16/solid';
 import { Chip } from '@nextui-org/chip';
 import { Button, Selection, Tooltip } from '@nextui-org/react';
@@ -19,7 +18,7 @@ export const useApplicantsTable = () => {
   const { profileInfoData } = useOrgProfileInfoContext();
 
   const [activeList, setActiveList] = useState<
-    'all' | 'shortlisted' | 'archived'
+    'all' | 'new' | 'shortlisted' | 'archived'
   >('all');
   const { data } = useJobApplicants(profileInfoData?.orgId, activeList);
 

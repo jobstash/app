@@ -5,7 +5,10 @@ import { messageResponseSchema, MW_URL } from '@jobstash/shared/core';
 
 import { mwFetch } from '@jobstash/shared/data';
 
-export const getJobApplicants = async (orgId: string, list: 'all' | 'shortlisted' | 'archived') => {
+export const getJobApplicants = async (
+  orgId: string,
+  list: 'all' | 'new' | 'shortlisted' | 'archived',
+) => {
   const url = `${MW_URL}/jobs/org/${orgId}/applicants?list=${list}`;
 
   const options = {
