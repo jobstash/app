@@ -10,6 +10,7 @@ import {
   FilterInputs,
   FullscreenrenFilterModal,
   SearchFilter,
+  DesktopSortFilters
 } from '@jobstash/filters/ui';
 
 import FiltersWrapper from './filters-wrapper';
@@ -31,7 +32,7 @@ const Filters = ({ routeSection }: Props) => {
         <SearchFilter />
         <FilterControls />
         <div className='lg:fixed lg:top-[100px] lg:bg-green-500'>
-          {/* <DesktopSortFilters /> */}
+          <DesktopSortFilters />
           <FilterInputs />
           <FilterActions />
         </div>

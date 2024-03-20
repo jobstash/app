@@ -7,7 +7,7 @@ import FiltersToggleButton from './filters-toggle-button';
 const FilterControls = () => (
   <div className="flex flex-wrap items-center justify-between gap-x-6">
     <FiltersToggleButton />
-    <DesktopSortFilters />
+    {/* <DesktopSortFilters /> */}
     <FiltersItemsCount />
   </div>
 );
