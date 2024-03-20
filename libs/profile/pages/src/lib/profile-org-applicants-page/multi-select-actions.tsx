@@ -1,19 +1,22 @@
 import { Button } from '@nextui-org/button';
 import { Tooltip } from '@nextui-org/tooltip';
 
-import { useUpdateApplicantList } from '@jobstash/profile/state';
+import { UpdateApplicantListMutFn } from '@jobstash/profile/core';
 
 interface Props {
-  orgId: string;
+  isPending: boolean;
+  mutate: UpdateApplicantListMutFn;
   selectedApplicants: Set<string>;
 }
 
-export const MultiSelectActions = ({ orgId, selectedApplicants }: Props) => {
+export const MultiSelectActions = ({
+  isPending,
+  mutate,
+  selectedApplicants,
+}: Props) => {
   const applicants = [...selectedApplicants];
 
   const hasNoApplicants = applicants.length === 0;
-
-  const { isPending, mutate } = useUpdateApplicantList(orgId);
 
   const updateShortlist = () => {
     mutate({ applicants, list: 'shortlisted' });

@@ -1,16 +1,16 @@
 import { useCallback, useMemo, useState } from 'react';
 
-import {
-  ArchiveBoxIcon,
-  HeartIcon,
-} from '@heroicons/react/16/solid';
+import { ArchiveBoxIcon, HeartIcon } from '@heroicons/react/16/solid';
 import { Chip } from '@nextui-org/chip';
 import { Button, Selection, Tooltip } from '@nextui-org/react';
 
 import { JobApplicant } from '@jobstash/jobs/core';
 
 import { useJobApplicants } from '@jobstash/jobs/state';
-import { useOrgProfileInfoContext } from '@jobstash/profile/state';
+import {
+  useOrgProfileInfoContext,
+  useUpdateApplicantList,
+} from '@jobstash/profile/state';
 
 import { LogoTitle, Text } from '@jobstash/shared/ui';
 
@@ -20,7 +20,11 @@ export const useApplicantsTable = () => {
   const [activeList, setActiveList] = useState<
     'all' | 'new' | 'shortlisted' | 'archived'
   >('all');
-  const { data } = useJobApplicants(profileInfoData?.orgId, activeList);
+  const {
+    data,
+    isFetching,
+    isPending: isPendingQuery,
+  } = useJobApplicants(profileInfoData?.orgId, activeList);
 
   const [searchFilter, setSearchFilter] = useState('');
 
@@ -238,8 +242,13 @@ export const useApplicantsTable = () => {
     }
   };
 
+  const { isPending, mutate } = useUpdateApplicantList({
+    orgId: profileInfoData?.orgId ?? '',
+    successCb: () => setSelectedApplicants(new Set()),
+  });
+
   return {
-    isLoading: !profileInfoData || !data,
+    isLoading: !profileInfoData || !data || isPendingQuery || isFetching,
     totalApplicantCount: data?.length,
     items,
     renderCell,
@@ -260,6 +269,8 @@ export const useApplicantsTable = () => {
     onTableSelectionChange,
     activeList,
     setActiveList,
+    isPending,
+    mutate,
   };
 };
 

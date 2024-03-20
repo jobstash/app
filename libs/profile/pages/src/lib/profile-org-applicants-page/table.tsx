@@ -45,6 +45,8 @@ export const ApplicantsTable = () => {
     onTableSelectionChange,
     activeList,
     setActiveList,
+    isPending,
+    mutate,
   } = useApplicantsTable();
 
   if (!profileInfoData) return null;
@@ -80,7 +82,8 @@ export const ApplicantsTable = () => {
           </div>
           <div className="flex flex-col gap-2 pt-4">
             <MultiSelectActions
-              orgId={profileInfoData.orgId ?? ''}
+              isPending={isPending}
+              mutate={mutate}
               selectedApplicants={selectedApplicants}
             />
 
@@ -89,6 +92,11 @@ export const ApplicantsTable = () => {
               aria-label="Job Applicants Table"
               selectionMode="multiple"
               selectedKeys={selectedApplicants as Set<string>}
+              classNames={{
+                base: cn({
+                  'opacity-60 pointer-events-none': isPending,
+                }),
+              }}
               onSelectionChange={onTableSelectionChange}
             >
               <TableHeader columns={columns}>
