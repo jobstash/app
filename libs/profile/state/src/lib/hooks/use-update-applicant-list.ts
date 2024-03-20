@@ -5,7 +5,12 @@ import { notifError, notifSuccess } from '@jobstash/shared/utils';
 
 import { updateApplicantList } from '@jobstash/profile/data';
 
-export const useUpdateApplicantList = (orgId: string) => {
+interface Props {
+  orgId: string;
+  successCb?: () => void;
+}
+
+export const useUpdateApplicantList = ({ orgId, successCb }: Props) => {
   const queryClient = useQueryClient();
 
   return useMutation({
@@ -18,9 +23,15 @@ export const useUpdateApplicantList = (orgId: string) => {
         autoClose: 10_000,
       });
 
-      queryClient.invalidateQueries({
-        queryKey: ['job-applicants', orgId, list],
-      });
+      for (const list of ['new', 'shortlisted', 'archived']) {
+        queryClient.invalidateQueries({
+          queryKey: ['job-applicants', orgId, list],
+        });
+      }
+
+      if (successCb) {
+        successCb();
+      }
     },
     onError(data) {
       notifError({

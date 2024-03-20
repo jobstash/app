@@ -1,7 +1,9 @@
 import { memo } from 'react';
 
+import { CheckIcon } from '@heroicons/react/16/solid';
 import { UserCircleIcon } from '@heroicons/react/24/outline';
-import { Badge, Tooltip } from '@nextui-org/react';
+import { Tooltip } from '@mantine/core';
+import { Badge } from '@nextui-org/react';
 import {
   Avatar,
   Avatar as CkAvatar,
@@ -13,7 +15,7 @@ import { cn } from '@jobstash/shared/utils';
 
 import { useIsMounted } from '@jobstash/shared/state';
 
-import { Bartab, Text } from '@jobstash/shared/ui';
+import { Bartab } from '@jobstash/shared/ui';
 
 interface Props {
   isMobile?: boolean;
@@ -24,7 +26,7 @@ const ConnectWalletButton = ({ isMobile }: Props) => {
   const { isSignedIn } = useSIWE();
 
   return (
-    <div style={{ minHeight: 40 }}>
+    <div style={{ minHeight: 40, position: 'relative' }}>
       {isMounted ? (
         <ConnectKitButton.Custom>
           {({ address, show, isConnected, ensName, truncatedAddress }) => {
@@ -74,7 +76,7 @@ const ConnectWalletButton = ({ isMobile }: Props) => {
                               size={28}
                             />
                           ) : (
-                            <SiweAvatar />
+                            <SiweAvatar isSignedIn={isSignedIn} />
                           )
                         ) : null}
 
@@ -88,25 +90,40 @@ const ConnectWalletButton = ({ isMobile }: Props) => {
 
             return (
               <Tooltip
-                isDisabled={!(isConnected && !isSignedIn)}
-                content={
-                  <div className="px-2 py-1">
-                    <Text fw="bold">Signin with Ethereum</Text>
+                withArrow
+                withinPortal
+                opened={isConnected && !isSignedIn}
+                label={
+                  <div className="px-2 py-1 flex flex-col gap-0 text-white text-sm">
+                    <span className="">
+                      You&#39;re not signed in to this app.
+                    </span>
+                    <span>
+                      <span className="font-bold mr-1">
+                        Sign In With Ethereum
+                      </span>
+                      to continue.
+                    </span>
                   </div>
                 }
-                size="lg"
+                disabled={!(isConnected && !isSignedIn)}
+                classNames={{
+                  tooltip: 'bg-[#1A88F8] rounded-xl',
+                  arrow: 'bg-[#1A88F8]',
+                }}
+                arrowSize={12}
+                portalProps={{
+                  className: 'bg-red-50',
+                }}
               >
                 <Bartab
                   isActive={false}
                   variant="wallet"
                   left={
-                    isConnected ? (
-                      isSignedIn ? (
-                        <CkAvatar address={address} name={address} size={24} />
-                      ) : (
-                        <SiweAvatar />
-                      )
-                    ) : null
+                    <div className="flex items-center gap-2">
+                      <SiweAvatar isSignedIn={isSignedIn} />
+                      <CkAvatar address={address} name={address} size={24} />
+                    </div>
                   }
                   onClick={onClick}
                 >
@@ -125,15 +142,30 @@ const ConnectWalletButton = ({ isMobile }: Props) => {
 
 export default memo(ConnectWalletButton);
 
-const SiweAvatar = () => (
+interface SiweAvatarProps {
+  isSignedIn: boolean;
+}
+const SiweAvatar = ({ isSignedIn }: SiweAvatarProps) => (
   <Badge
-    content=""
+    content={
+      isSignedIn ? (
+        <div className="bg-[#64C365] rounded-full">
+          <CheckIcon className="w-2.5 h-2.5 stroke-white fill-white" />
+        </div>
+      ) : (
+        ''
+      )
+    }
     color="success"
     shape="circle"
-    size="sm"
-    classNames={{ badge: 'bg-[#1A88F8] mt-0.5 mr-0.5' }}
+    placement={isSignedIn ? 'bottom-right' : 'top-right'}
+    classNames={{
+      badge: cn('bg-[#1A88F8] mt-[3px] mr-0.5 h-2 w-2', {
+        'bg-transparent h-5 w-5 mb-0.5 mr-0': isSignedIn,
+      }),
+    }}
     showOutline={false}
   >
-    <UserCircleIcon className="w-9 md:w-7 h-9 md:h-7" />
+    <UserCircleIcon className="w-9 md:w-6 h-9 md:h-6" />
   </Badge>
 );

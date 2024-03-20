@@ -3,8 +3,10 @@ import { Dispatch, SetStateAction } from 'react';
 import { Tab, Tabs } from '@nextui-org/tabs';
 
 interface Props {
-  activeList: 'all' | 'shortlisted' | 'archived';
-  setActiveList: Dispatch<SetStateAction<'all' | 'shortlisted' | 'archived'>>;
+  activeList: 'all' | 'new' | 'shortlisted' | 'archived';
+  setActiveList: Dispatch<
+    SetStateAction<'all' | 'new' | 'shortlisted' | 'archived'>
+  >;
 }
 
 export const ApplicantTabs = ({ activeList, setActiveList }: Props) => (
@@ -19,6 +21,7 @@ export const ApplicantTabs = ({ activeList, setActiveList }: Props) => (
       }
     >
       <Tab key="all" title="All" />
+      <Tab key="new" title="New" />
       <Tab key="shortlisted" title="Shortlisted" />
       <Tab key="archived" title="Archived" />
     </Tabs>

@@ -1,27 +1,32 @@
 import { useCallback, useMemo, useState } from 'react';
 
-import {
-  ArchiveBoxIcon,
-  HeartIcon,
-  WalletIcon,
-} from '@heroicons/react/16/solid';
+import { ArchiveBoxIcon, HeartIcon } from '@heroicons/react/16/solid';
 import { Chip } from '@nextui-org/chip';
-import { Button, Selection, Tooltip } from '@nextui-org/react';
+import { Selection } from '@nextui-org/react';
 
 import { JobApplicant } from '@jobstash/jobs/core';
 
 import { useJobApplicants } from '@jobstash/jobs/state';
-import { useOrgProfileInfoContext } from '@jobstash/profile/state';
+import {
+  useOrgProfileInfoContext,
+  useUpdateApplicantList,
+} from '@jobstash/profile/state';
 
 import { LogoTitle, Text } from '@jobstash/shared/ui';
+
+import { ActionButton } from './action-button';
 
 export const useApplicantsTable = () => {
   const { profileInfoData } = useOrgProfileInfoContext();
 
   const [activeList, setActiveList] = useState<
-    'all' | 'shortlisted' | 'archived'
+    'all' | 'new' | 'shortlisted' | 'archived'
   >('all');
-  const { data } = useJobApplicants(profileInfoData?.orgId, activeList);
+  const {
+    data,
+    isFetching,
+    isPending: isPendingQuery,
+  } = useJobApplicants(profileInfoData?.orgId, activeList);
 
   const [searchFilter, setSearchFilter] = useState('');
 
@@ -120,6 +125,11 @@ export const useApplicantsTable = () => {
     }
   }, []);
 
+  const { isPending, mutate } = useUpdateApplicantList({
+    orgId: profileInfoData?.orgId ?? '',
+    successCb: () => setSelectedApplicants(new Set()),
+  });
+
   const renderCell = useCallback(
     (
       applicant: JobApplicant,
@@ -201,24 +211,32 @@ export const useApplicantsTable = () => {
 
       if (columnKey === 'actions') {
         return (
-          <div className="flex gap-4 w-full items-center justify-center">
-            <Tooltip content="Add to shortlist">
-              <Button isIconOnly isDisabled>
-                <HeartIcon className="h-8 w-8" />
-              </Button>
-            </Tooltip>
-            <Tooltip content="Add to archive">
-              <Button isIconOnly isDisabled>
-                <ArchiveBoxIcon className="h-8 w-8" />
-              </Button>
-            </Tooltip>
+          <div className="flex flex-col gap-2">
+            <div className="flex gap-4 w-full items-center justify-center">
+              <ActionButton
+                orgId={profileInfoData?.orgId}
+                wallet={applicant.user.wallet}
+                isPending={isPending}
+                mutate={mutate}
+                list="shortlisted"
+                icon={<HeartIcon className="h-8 w-8" />}
+              />
+              <ActionButton
+                orgId={profileInfoData?.orgId}
+                wallet={applicant.user.wallet}
+                isPending={isPending}
+                mutate={mutate}
+                list="archived"
+                icon={<ArchiveBoxIcon className="h-8 w-8" />}
+              />
+            </div>
           </div>
         );
       }
 
       return <pre>{JSON.stringify(applicant[columnKey])}</pre>;
     },
-    [],
+    [isPending, mutate, profileInfoData?.orgId],
   );
 
   const [selectedApplicants, setSelectedApplicants] = useState<Set<string>>(
@@ -240,7 +258,8 @@ export const useApplicantsTable = () => {
   };
 
   return {
-    isLoading: !profileInfoData || !data,
+    isLoading: !profileInfoData || !data || isPendingQuery || isFetching,
+
     totalApplicantCount: data?.length,
     items,
     renderCell,
@@ -261,6 +280,8 @@ export const useApplicantsTable = () => {
     onTableSelectionChange,
     activeList,
     setActiveList,
+    isPending,
+    mutate,
   };
 };
 
