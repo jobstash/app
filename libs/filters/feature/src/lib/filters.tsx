@@ -30,8 +30,11 @@ const Filters = ({ routeSection }: Props) => {
       <FiltersWrapper>
         <SearchFilter />
         <FilterControls />
-        <FilterInputs />
-        <FilterActions />
+        <div className='lg:fixed lg:top-[100px] lg:bg-green-500'>
+          {/* <DesktopSortFilters /> */}
+          <FilterInputs />
+          <FilterActions />
+        </div>
       </FiltersWrapper>
       <FullscreenrenFilterModal />
     </FiltersContext.Provider>
