@@ -32,7 +32,7 @@ const RequestToBeListedButton = ({ isMobile }: Props) => {
 
   return (
     <Link target="_blank" href={ORG_SIGNUP_FORM_URL} rel="noopener noreferrer">
-      <Text className="text-md">{text}</Text>
+      <Text className="text-md whitespace-nowrap">{text}</Text>
     </Link>
   );
 };

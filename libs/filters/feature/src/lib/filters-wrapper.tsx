@@ -59,7 +59,7 @@ const FiltersWrapper = ({ children }: Props) => {
   return (
     <div
       className={cn(
-        'fixed left-0 right-0 px-4 flex flex-col py-4 gap-y-4 bg-[#121216] z-40 transition-all duration-1000 lg:px-8 lg:py-0 lg:gap-x-4 lg:pt-0 lg:flex-row lg:relative lg:flex lg:right-auto lg:left-auto',
+        'fixed left-0 right-0 px-4 flex flex-col py-4 gap-y-4 bg-[#121216] z-40 transition-all duration-1000 lg:px-8 lg:items-center lg:py-0 lg:gap-x-4 lg:pt-0 lg:flex-row lg:relative lg:flex lg:right-auto lg:left-auto',
         { 'top-[108px] sm:top-[92px] lg:top-10': isOpenTopBanner },
         // {
         //   '-top-60 lg:-top-44': scrollDirection === 'down' && !showFilters,
