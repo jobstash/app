@@ -27,7 +27,7 @@ const Sidebar = () => (
     <SidebarWrapper>
       <div className="lg:z-[999] lg:w-screen lg:fixed lg:top-0 lg:left-0 lg:px-4 lg:bg-gradient-to-l lg:from-[#141317] lg:to-[#121216] lg:border-b lg:border-white/5 lg:h-20 lg:flex lg:items-center lg:justify-between">
         <Brand />
-        <div className="hidden space-x-4 p- lg:flex">
+        <div className="hidden space-x-4 lg:pr-4 lg:flex">
           <div className="flex items-center space-x-4 pr-6">
             <a
               href="https://telegram.me/jobstashxyz"
