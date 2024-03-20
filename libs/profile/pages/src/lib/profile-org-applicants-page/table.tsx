@@ -82,6 +82,7 @@ export const ApplicantsTable = () => {
           </div>
           <div className="flex flex-col gap-2 pt-4">
             <MultiSelectActions
+              activeList={activeList}
               isPending={isPending}
               mutate={mutate}
               selectedApplicants={selectedApplicants}
