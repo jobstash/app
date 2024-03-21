@@ -70,7 +70,7 @@ const Sidebar = ({ filtersRouteSection }: Props) => (
           </div>
         </div>
         {filtersRouteSection && <Filters routeSection={filtersRouteSection} />}
-        <div className="hidden space-x-6 lg:flex items-center lg:mr-0 lg:ml-auto">
+        <div className="hidden space-x-6 lg:flex items-center lg:mr-0 lg:ml-auto lg:pr-4">
           <IsMountedWrapper>
             <RequestToBeListedButton />
           </IsMountedWrapper>
