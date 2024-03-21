@@ -11,5 +11,6 @@ export const ExploreJobsButton = ({ text }: Props) => (
     hasBorder
     text={text ?? 'Explore Jobs'}
     url={`${FRONTEND_URL}${ROUTE_SECTION.JOBS}`}
+    external={false}
   />
 );

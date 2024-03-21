@@ -1,10 +1,19 @@
+/* eslint-disable complexity */
 import { useCallback, useMemo, useState } from 'react';
 
-import { ArchiveBoxIcon, HeartIcon } from '@heroicons/react/16/solid';
+import {
+  ArchiveBoxIcon,
+  CalendarDaysIcon,
+  HeartIcon,
+} from '@heroicons/react/16/solid';
+import { Button } from '@nextui-org/button';
 import { Chip } from '@nextui-org/chip';
+import { Link } from '@nextui-org/link';
 import { Selection } from '@nextui-org/react';
+import { Tooltip } from '@nextui-org/tooltip';
 
 import { JobApplicant } from '@jobstash/jobs/core';
+import { CONTACT_DEFAULT_OPTIONS } from '@jobstash/profile/core';
 
 import { useJobApplicants } from '@jobstash/jobs/state';
 import {
@@ -142,6 +151,7 @@ export const useApplicantsTable = () => {
             avatar,
             email,
             location: { city, country },
+            contact,
           },
         } = applicant;
 
@@ -152,33 +162,69 @@ export const useApplicantsTable = () => {
             ? undefined
             : `${city ? `${city}, ` : ''}${country}`;
 
+        const contactLink = getContactLink(
+          contact.preferred as PreferredContact,
+          contact.value,
+        );
+
         return (
-          <LogoTitle
-            key={title}
-            title={title}
-            location={location}
-            avatarProps={{
-              src: avatar ?? '',
-              alt: username ?? email ?? '',
-              name: username ?? email ?? '',
+          <div
+            className="flex flex-col gap-2"
+            onClick={(e) => {
+              e.stopPropagation();
+              e.preventDefault();
             }}
-          />
+          >
+            <LogoTitle
+              key={title}
+              title={title}
+              location={location}
+              avatarProps={{
+                src: avatar ?? '',
+                alt: username ?? email ?? '',
+                name: username ?? email ?? '',
+              }}
+            />
+
+            {contact.value && (
+              <div className="flex gap-1">
+                {contactLink ? (
+                  <Link
+                    href={contactLink}
+                    size="sm"
+                    underline="hover"
+                    className="font-semibold text-white/80"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {contact.preferred === 'Email'
+                      ? 'Send Email'
+                      : `Open ${contact.preferred}`}
+                  </Link>
+                ) : (
+                  <span>{`Contact: ${contact.value}`}</span>
+                )}
+              </div>
+            )}
+          </div>
         );
       }
 
-      if (columnKey === 'contact') {
+      if (columnKey === 'skills') {
         const {
-          user: {
-            contact: { value, preferred },
-          },
+          user: { skills },
         } = applicant;
 
-        if (!value) return null;
+        if (skills.length === 0) return null;
 
         return (
-          <Text size="md" fw="bold">
-            {`${preferred ?? 'Contact'}: ${value}`}
-          </Text>
+          <div className="flex gap-2 w-full flex-wrap max-w-xs py-2">
+            {skills.map(({ id, name }) => (
+              <Chip key={id} color="default" radius="sm">
+                {name}
+              </Chip>
+            ))}
+          </div>
         );
       }
 
@@ -213,6 +259,11 @@ export const useApplicantsTable = () => {
         return (
           <div className="flex flex-col gap-2">
             <div className="flex gap-4 w-full items-center justify-center">
+              <Tooltip content="Calendar Invite" delay={0}>
+                <Button isIconOnly>
+                  <CalendarDaysIcon className="h-8 w-8" />
+                </Button>
+              </Tooltip>
               <ActionButton
                 orgId={profileInfoData?.orgId}
                 wallet={applicant.user.wallet}
@@ -234,7 +285,7 @@ export const useApplicantsTable = () => {
         );
       }
 
-      return <pre>{JSON.stringify(applicant[columnKey])}</pre>;
+      return null;
     },
     [isPending, mutate, profileInfoData?.orgId],
   );
@@ -287,16 +338,21 @@ export const useApplicantsTable = () => {
 
 type CustomColumnKeys =
   | 'user'
+  | 'skills'
   | 'job'
   | 'actions'
-  | 'availableForWork'
-  | 'contact';
+  | 'availableForWork';
 
 const columns = [
   { key: 'job', label: 'Job' },
   { key: 'user', label: 'User' },
-  { key: 'contact', label: 'Contact' },
+  { key: 'skills', label: 'Skills' },
   { key: 'availableForWork', label: 'Available for Work' },
+  { key: 'oss', label: 'OSS' },
+  { key: 'interviewed', label: 'Interviewed' },
+  { key: 'upcomingTalent', label: 'Upcoming Talent' },
+  { key: 'attestations', label: 'Attestations' },
+  { key: 'cryptoNative', label: 'Crypto Native' },
   { key: 'actions', label: 'Actions' },
 ];
 
@@ -318,4 +374,41 @@ type JobSelection = {
   input: string;
   selectedKey: string | null;
   current: JobApplicant['job'] | null;
+};
+
+type PreferredContact = typeof CONTACT_DEFAULT_OPTIONS[number];
+
+const getContactLink = (preferred: PreferredContact, handle: string | null) => {
+  if (!handle) return null;
+
+  switch (preferred) {
+    case 'Email': {
+      return `mailto:${handle}`;
+    }
+
+    case 'Telegram': {
+      return getContactLinkUrl('telegram.me', handle);
+    }
+
+    case 'Twitter': {
+      return getContactLinkUrl('twitter.com', handle);
+    }
+
+    case 'Discord': {
+      return getContactLinkUrl('discord.gg', handle);
+    }
+
+    default: {
+      return null;
+    }
+  }
+};
+
+const getContactLinkUrl = (domain: string, handle: string) => {
+  if (
+    handle.toLowerCase().includes('https://') ||
+    handle.toLowerCase().includes('http://')
+  )
+    return handle;
+  return `https://${domain}/${handle}`;
 };

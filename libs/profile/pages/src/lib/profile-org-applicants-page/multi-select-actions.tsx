@@ -40,6 +40,7 @@ export const MultiSelectActions = ({
       {activeList !== 'shortlisted' && (
         <ActionButton
           isLoading={isPending && lastClicked === 'shortlisted'}
+          hasNoApplicants={hasNoApplicants}
           isDisabled={hasNoApplicants || isPending}
           buttonText="Bulk Shortlist"
           tooltipText={{ enabled: 'Shortlist selected applicants' }}
@@ -50,6 +51,7 @@ export const MultiSelectActions = ({
       {activeList !== 'archived' && (
         <ActionButton
           isLoading={isPending && lastClicked === 'archived'}
+          hasNoApplicants={hasNoApplicants}
           isDisabled={hasNoApplicants || isPending}
           buttonText="Bulk Archive"
           tooltipText={{ enabled: 'Archive selected applicants' }}
@@ -59,6 +61,7 @@ export const MultiSelectActions = ({
 
       <ActionButton
         isDisabled
+        hasNoApplicants={hasNoApplicants}
         buttonText="Export CSV"
         tooltipText={{ enabled: 'Download CSV for selected applicants' }}
       />
@@ -68,12 +71,14 @@ export const MultiSelectActions = ({
 
 const ActionButton = ({
   isLoading,
+  hasNoApplicants,
   isDisabled,
   buttonText,
   tooltipText,
   onClick,
 }: {
   isLoading?: boolean;
+  hasNoApplicants: boolean;
   isDisabled: boolean;
   buttonText: string;
   tooltipText: { enabled: string; disabled?: string };
@@ -85,6 +90,7 @@ const ActionButton = ({
     </Button>
   ) : (
     <Tooltip
+      isDisabled={hasNoApplicants}
       content={
         isDisabled
           ? tooltipText.disabled ?? 'Select multiple applicants first'

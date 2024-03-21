@@ -7,9 +7,15 @@ interface Props {
   text: string;
   url?: string;
   hasBorder?: boolean;
+  external?: boolean;
 }
 
-export const HomePageButton = ({ text, url, hasBorder }: Props) => {
+export const HomePageButton = ({
+  text,
+  url,
+  hasBorder,
+  external = true,
+}: Props) => {
   const content = <Text fw="bold">{text}</Text>;
   const style = {
     border: '2px solid transparent',
@@ -23,8 +29,8 @@ export const HomePageButton = ({ text, url, hasBorder }: Props) => {
         href={url}
         className="h-11 min-w-[180px] rounded-lg bg-white/5"
         style={style}
-        target="_blank"
-        rel="noopener noreferrer"
+        target={external ? '_blank' : undefined}
+        rel={external ? 'noopener noreferrer' : undefined}
       >
         {content}
       </Button>

@@ -77,6 +77,13 @@ export const jobApplicantSchema = myzod.object({
         preferred: myzod.string().nullable(),
         value: myzod.string().nullable(),
       }),
+      skills: myzod.array(
+        myzod.object({
+          id: myzod.string().min(1),
+          name: myzod.string().min(1),
+          canTeach: myzod.boolean(),
+        }),
+      ),
       //
       // wallet: myzod.string().min(1),
       // contact: myzod.object({

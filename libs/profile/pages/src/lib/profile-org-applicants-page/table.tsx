@@ -51,13 +51,13 @@ export const ApplicantsTable = () => {
 
   if (!profileInfoData) return null;
 
+  const hasNoApplicants = items.length === 0;
+
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-6 px-4">
       <ApplicantTabs activeList={activeList} setActiveList={setActiveList} />
 
-      {!isLoading && items.length === 0 ? (
-        <p>TODO: Empty UI. No Applicants</p>
-      ) : isLoading ? (
+      {isLoading ? (
         <div className="pt-20 flex items-center justify-center">
           <Loader />
         </div>
@@ -68,6 +68,7 @@ export const ApplicantsTable = () => {
               isLoading={isLoading}
               value={searchFilter}
               setValue={setSearchFilter}
+              isDisabled={hasNoApplicants}
               onChange={onSearchChange}
             />
 
@@ -76,18 +77,20 @@ export const ApplicantsTable = () => {
               items={jobs}
               inputValue={jobSelection.input}
               selectedKey={jobSelection.selectedKey}
+              isDisabled={hasNoApplicants}
               onInputChange={onJobSelectionInputChange}
               onSelectionChange={onJobSelectionChange}
             />
           </div>
-          <div className="flex flex-col gap-2 pt-4">
-            <MultiSelectActions
-              activeList={activeList}
-              isPending={isPending}
-              mutate={mutate}
-              selectedApplicants={selectedApplicants}
-            />
 
+          <MultiSelectActions
+            activeList={activeList}
+            isPending={isPending}
+            mutate={mutate}
+            selectedApplicants={selectedApplicants}
+          />
+
+          <div className="flex flex-col gap-2 overflow-hidden">
             <Table
               color="default"
               aria-label="Job Applicants Table"
@@ -115,26 +118,31 @@ export const ApplicantsTable = () => {
                   </TableColumn>
                 )}
               </TableHeader>
-              <TableBody items={items}>
-                {(item) => (
-                  <TableRow key={item.user.wallet}>
+              <TableBody items={items} emptyContent="No applicants to display.">
+                {items.map((item, i) => (
+                  <TableRow
+                    key={item.user.wallet}
+                    className={cn({ 'bg-[#212123]': i % 2 !== 0 })}
+                  >
                     {(columnKey) => (
-                      <TableCell>
+                      <TableCell className="py-4">
                         {renderCell(item, columnKey as any)}
                       </TableCell>
                     )}
                   </TableRow>
-                )}
+                ))}
               </TableBody>
             </Table>
 
-            <TablePagination
-              page={page}
-              total={totalPageCount}
-              isDisabled={items.length < pageRowCount}
-              totalApplicantCount={totalApplicantCount}
-              onChange={setPage}
-            />
+            {!hasNoApplicants && (
+              <TablePagination
+                page={page}
+                total={totalPageCount}
+                isDisabled={items.length < pageRowCount}
+                totalApplicantCount={totalApplicantCount}
+                onChange={setPage}
+              />
+            )}
           </div>
         </>
       )}
