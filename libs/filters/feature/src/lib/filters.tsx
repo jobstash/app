@@ -31,7 +31,7 @@ const Filters = ({ routeSection }: Props) => {
       <FiltersWrapper>
         <SearchFilter />
         <FilterControls />
-        <div className="transition-all lg:fixed lg:top-[100px] lg:bg-gradient-to-l lg:from-[#141317] lg:to-[#121216] lg:left-[207px] lg:shadow-md">
+        <div className="transition-all lg:fixed lg:top-[100px] lg:bg-gradient-to-l lg:from-[#141317] lg:to-[#121216] lg:left-[207px] lg:shadow-md lg:p-24">
           <DesktopSortFilters />
           <FilterInputs />
           <FilterActions />
