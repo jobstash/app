@@ -10,7 +10,7 @@ interface Props {
 }
 
 export const ApplicantTabs = ({ activeList, setActiveList }: Props) => (
-  <div className="pt-8 pb-4">
+  <div className="pt-8">
     <Tabs
       aria-label="Applicant Tabs"
       variant="underlined"

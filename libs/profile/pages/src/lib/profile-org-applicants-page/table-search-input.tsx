@@ -21,11 +21,11 @@ export const TableSearchInput = ({
 }: Props) => (
   <Input
     isClearable
-    placeholder="Search Organization"
+    placeholder="Search applicant, job title, location ..."
     size="sm"
     value={value}
     classNames={{
-      base: 'w-96',
+      base: 'w-80',
       inputWrapper: ['bg-darker-gray'],
       input: 'pl-2',
     }}

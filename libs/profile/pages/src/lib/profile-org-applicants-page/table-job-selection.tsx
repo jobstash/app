@@ -27,7 +27,8 @@ export const JobSelection = (props: Props) => {
 
   return (
     <Autocomplete
-      className="max-w-xs"
+      className="w-80"
+      size="sm"
       listboxProps={{
         emptyContent: 'Type atleast 2 letters to show results',
       }}

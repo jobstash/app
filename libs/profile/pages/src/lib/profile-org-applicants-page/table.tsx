@@ -54,7 +54,7 @@ export const ApplicantsTable = () => {
   const hasNoApplicants = items.length === 0;
 
   return (
-    <div className="flex flex-col gap-4">
+    <div className="flex flex-col gap-6 px-4">
       <ApplicantTabs activeList={activeList} setActiveList={setActiveList} />
 
       {isLoading ? (
@@ -82,14 +82,15 @@ export const ApplicantsTable = () => {
               onSelectionChange={onJobSelectionChange}
             />
           </div>
-          <div className="flex flex-col gap-2 pt-4 overflow-hidden">
-            <MultiSelectActions
-              activeList={activeList}
-              isPending={isPending}
-              mutate={mutate}
-              selectedApplicants={selectedApplicants}
-            />
 
+          <MultiSelectActions
+            activeList={activeList}
+            isPending={isPending}
+            mutate={mutate}
+            selectedApplicants={selectedApplicants}
+          />
+
+          <div className="flex flex-col gap-2 overflow-hidden">
             <Table
               color="default"
               aria-label="Job Applicants Table"
@@ -118,19 +119,22 @@ export const ApplicantsTable = () => {
                 )}
               </TableHeader>
               <TableBody items={items} emptyContent="No applicants to display.">
-                {(item) => (
-                  <TableRow key={item.user.wallet}>
+                {items.map((item, i) => (
+                  <TableRow
+                    key={item.user.wallet}
+                    className={cn({ 'bg-[#212123]': i % 2 !== 0 })}
+                  >
                     {(columnKey) => (
-                      <TableCell>
+                      <TableCell className="py-4">
                         {renderCell(item, columnKey as any)}
                       </TableCell>
                     )}
                   </TableRow>
-                )}
+                ))}
               </TableBody>
             </Table>
 
-            {hasNoApplicants && (
+            {!hasNoApplicants && (
               <TablePagination
                 page={page}
                 total={totalPageCount}
