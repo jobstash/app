@@ -39,4 +39,4 @@ export const CONTACT_DEFAULT_OPTIONS = [
   'Telegram',
   'Discord',
   'Twitter',
-];
+] as const;

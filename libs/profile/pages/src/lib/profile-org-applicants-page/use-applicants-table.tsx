@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 import { useCallback, useMemo, useState } from 'react';
 
 import {
@@ -7,10 +8,12 @@ import {
 } from '@heroicons/react/16/solid';
 import { Button } from '@nextui-org/button';
 import { Chip } from '@nextui-org/chip';
+import { Link } from '@nextui-org/link';
 import { Selection } from '@nextui-org/react';
 import { Tooltip } from '@nextui-org/tooltip';
 
 import { JobApplicant } from '@jobstash/jobs/core';
+import { CONTACT_DEFAULT_OPTIONS } from '@jobstash/profile/core';
 
 import { useJobApplicants } from '@jobstash/jobs/state';
 import {
@@ -148,6 +151,7 @@ export const useApplicantsTable = () => {
             avatar,
             email,
             location: { city, country },
+            contact,
           },
         } = applicant;
 
@@ -158,17 +162,51 @@ export const useApplicantsTable = () => {
             ? undefined
             : `${city ? `${city}, ` : ''}${country}`;
 
+        const contactLink = getContactLink(
+          contact.preferred as PreferredContact,
+          contact.value,
+        );
+
         return (
-          <LogoTitle
-            key={title}
-            title={title}
-            location={location}
-            avatarProps={{
-              src: avatar ?? '',
-              alt: username ?? email ?? '',
-              name: username ?? email ?? '',
+          <div
+            className="flex flex-col gap-2"
+            onClick={(e) => {
+              e.stopPropagation();
+              e.preventDefault();
             }}
-          />
+          >
+            <LogoTitle
+              key={title}
+              title={title}
+              location={location}
+              avatarProps={{
+                src: avatar ?? '',
+                alt: username ?? email ?? '',
+                name: username ?? email ?? '',
+              }}
+            />
+
+            {contact.value && (
+              <div className="flex gap-1">
+                {contactLink ? (
+                  <Link
+                    href={contactLink}
+                    size="sm"
+                    underline="hover"
+                    className="font-semibold text-white/80"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {contact.preferred === 'Email'
+                      ? 'Send Email'
+                      : `Open ${contact.preferred}`}
+                  </Link>
+                ) : (
+                  <span>{`Contact: ${contact.value}`}</span>
+                )}
+              </div>
+            )}
+          </div>
         );
       }
 
@@ -342,4 +380,41 @@ type JobSelection = {
   input: string;
   selectedKey: string | null;
   current: JobApplicant['job'] | null;
+};
+
+type PreferredContact = typeof CONTACT_DEFAULT_OPTIONS[number];
+
+const getContactLink = (preferred: PreferredContact, handle: string | null) => {
+  if (!handle) return null;
+
+  switch (preferred) {
+    case 'Email': {
+      return `mailto:${handle}`;
+    }
+
+    case 'Telegram': {
+      return getContactLinkUrl('telegram.me', handle);
+    }
+
+    case 'Twitter': {
+      return getContactLinkUrl('twitter.com', handle);
+    }
+
+    case 'Discord': {
+      return getContactLinkUrl('discord.gg', handle);
+    }
+
+    default: {
+      return null;
+    }
+  }
+};
+
+const getContactLinkUrl = (domain: string, handle: string) => {
+  if (
+    handle.toLowerCase().includes('https://') ||
+    handle.toLowerCase().includes('http://')
+  )
+    return handle;
+  return `https://${domain}/${handle}`;
 };
