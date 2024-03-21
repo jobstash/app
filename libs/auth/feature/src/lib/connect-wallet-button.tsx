@@ -120,10 +120,12 @@ const ConnectWalletButton = ({ isMobile }: Props) => {
                   isActive={false}
                   variant="wallet"
                   left={
-                    <div className="flex items-center gap-2">
-                      <SiweAvatar isSignedIn={isSignedIn} />
-                      <CkAvatar address={address} name={address} size={24} />
-                    </div>
+                    address ? (
+                      <div className="flex items-center gap-2">
+                        <SiweAvatar isSignedIn={isSignedIn} />
+                        <CkAvatar address={address} name={address} size={24} />
+                      </div>
+                    ) : undefined
                   }
                   onClick={onClick}
                 >
