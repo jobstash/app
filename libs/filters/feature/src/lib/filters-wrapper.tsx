@@ -5,14 +5,13 @@ import { useAtom, useAtomValue } from 'jotai';
 import { cn } from '@jobstash/shared/utils';
 
 import { showFiltersAtom } from '@jobstash/filters/state';
-import { isOpenTopBannerAtom, useIsMobile } from '@jobstash/shared/state';
+import { isOpenTopBannerAtom } from '@jobstash/shared/state';
 
 interface Props {
   children: ReactNode;
 }
 
 const FiltersWrapper = ({ children }: Props) => {
-  const isMobile = useIsMobile();
   const [showFilters, setShowFilters] = useAtom(showFiltersAtom);
 
   const [scrollDirection, setScrollDirection] = useState<'up' | 'down' | null>(

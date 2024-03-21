@@ -117,7 +117,7 @@ export const OrgDetailsPage = ({
       {/* TODO: metadata */}
 
       <PageWrapper>
-        <SideBar />
+        <SideBar filtersRouteSection={ROUTE_SECTION.ORGANIZATIONS} />
 
         <div
           className={cn('px-3.5 pt-[65px] lg:px-8 lg:pt-0', {
@@ -125,8 +125,6 @@ export const OrgDetailsPage = ({
             'lg:pr-[calc(44vw)]  ': !showFilters,
           })}
         >
-          <Filters routeSection={ROUTE_SECTION.ORGANIZATIONS} />
-
           <div
             className={cn({
               'lg:pr-[calc(44vw)]  ': showFilters,

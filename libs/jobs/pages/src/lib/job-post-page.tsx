@@ -137,7 +137,7 @@ export const JobPostPage = ({
       )}
 
       <PageWrapper>
-        <SideBar />
+        <SideBar filtersRouteSection={ROUTE_SECTION.JOBS} />
 
         <div
           className={cn('px-3.5 pt-[65px] lg:px-8 lg:pt-0', {

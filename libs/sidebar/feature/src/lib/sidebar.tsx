@@ -1,8 +1,8 @@
-import { memo } from 'react';
 import dynamic from 'next/dynamic';
-import { ROUTE_SECTION } from '@jobstash/shared/core';
+import { memo } from 'react';
 
-import { useAtomValue } from 'jotai';
+import { RouteSection } from '@jobstash/shared/core';
+
 import { SidebarProvider } from '@jobstash/sidebar/state';
 
 import {
@@ -24,18 +24,23 @@ import {
   SidebarWrapper,
 } from '@jobstash/sidebar/ui';
 import { ConnectWalletButton } from '@jobstash/auth/feature';
-import { showFiltersAtom } from '@jobstash/filters/state';
 
 const Filters = dynamic(() =>
   import('@jobstash/filters/feature').then((m) => m.Filters),
 );
 
-const Sidebar = () => (
+interface Props {
+  filtersRouteSection?: RouteSection;
+}
+
+const Sidebar = ({ filtersRouteSection }: Props) => (
   <SidebarProvider>
     <SidebarWrapper>
       <div className="lg:z-[999] lg:w-screen lg:fixed lg:top-0 lg:left-0 lg:px-4 lg:bg-gradient-to-l lg:from-[#141317] lg:to-[#121216] lg:h-[100px] lg:border-b lg:border-white/5  lg:flex lg:items-center">
-        <div className='lg:w-[191px]'>
-          <div className='lg:pt-5'><Brand /></div>
+        <div className="lg:w-[191px]">
+          <div className="lg:pt-5">
+            <Brand />
+          </div>
           <div className="items-center w-[165px] gap-x-7 pt-3.5 pb-4 hidden lg:flex">
             <a
               href="https://telegram.me/jobstashxyz"
@@ -64,7 +69,7 @@ const Sidebar = () => (
             </a>
           </div>
         </div>
-        <Filters routeSection={ROUTE_SECTION.JOBS} />
+        {filtersRouteSection && <Filters routeSection={filtersRouteSection} />}
         <div className="hidden space-x-6 lg:flex items-center lg:mr-0 lg:ml-auto">
           <IsMountedWrapper>
             <RequestToBeListedButton />
@@ -72,7 +77,6 @@ const Sidebar = () => (
           <FollowTelegramButton />
           <ConnectWalletButton />
         </div>
-        
       </div>
       {/* MOBILE BARTABS */}
       <MobileNavbarWrapper>
@@ -83,32 +87,32 @@ const Sidebar = () => (
           </SidebarCloseButton>
         </div>
         <div className="gap-x-7 flex -mt-2">
-            <a
-              href="https://telegram.me/jobstashxyz"
-              target="_blank"
-              rel="noreferrer"
-              className="hover:opacity-50 transition-all"
-            >
-              <TelegramIcon />
-            </a>
+          <a
+            href="https://telegram.me/jobstashxyz"
+            target="_blank"
+            rel="noreferrer"
+            className="hover:opacity-50 transition-all"
+          >
+            <TelegramIcon />
+          </a>
 
-            <a
-              href="https://twitter.com/jobstash_xyz"
-              target="_blank"
-              rel="noreferrer"
-              className="hover:opacity-50 transition-all"
-            >
-              <TwitterIcon />
-            </a>
-            <a
-              href="https://warpcast.com/~/channel/jobstash"
-              target="_blank"
-              rel="noreferrer"
-              className="hover:opacity-50 transition-all"
-            >
-              <FarcasterIcon />
-            </a>
-          </div>
+          <a
+            href="https://twitter.com/jobstash_xyz"
+            target="_blank"
+            rel="noreferrer"
+            className="hover:opacity-50 transition-all"
+          >
+            <TwitterIcon />
+          </a>
+          <a
+            href="https://warpcast.com/~/channel/jobstash"
+            target="_blank"
+            rel="noreferrer"
+            className="hover:opacity-50 transition-all"
+          >
+            <FarcasterIcon />
+          </a>
+        </div>
         <div className="flex flex-col">
           <Text color="dimmed" className="block">
             Discover
@@ -130,7 +134,7 @@ const Sidebar = () => (
             <RequestToBeListedButton isMobile />
           </IsMountedWrapper>
           <FollowTelegramButton isMobile />
-         
+
           <ConnectWalletButton isMobile />
         </div>
       </MobileNavbarWrapper>

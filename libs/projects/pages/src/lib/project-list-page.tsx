@@ -13,10 +13,6 @@ import { useIsMobile } from '@jobstash/shared/state';
 
 import { PageWrapper } from '@jobstash/shared/ui';
 
-const Filters = dynamic(() =>
-  import('@jobstash/filters/feature').then((m) => m.Filters),
-);
-
 const SideBar = dynamic(() =>
   import('@jobstash/sidebar/feature').then((m) => m.SideBar),
 );
@@ -44,7 +40,7 @@ export const ProjectListPage = ({ initActiveProject }: Props) => {
         <title>Crypto Projects</title>
       </Head>
       <PageWrapper>
-        <SideBar />
+        <SideBar filtersRouteSection={ROUTE_SECTION.PROJECTS} />
 
         <div
           className={cn('px-3.5 pt-[65px] lg:px-8 lg:pt-0', {
@@ -52,8 +48,6 @@ export const ProjectListPage = ({ initActiveProject }: Props) => {
             'lg:pr-[calc(44vw)]  ': !showFilters,
           })}
         >
-          <Filters routeSection={ROUTE_SECTION.PROJECTS} />
-
           <div
             className={cn({
               'lg:pr-[calc(44vw)]  ': showFilters,

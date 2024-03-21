@@ -18,10 +18,6 @@ import { useMobileDisableScrollSyncer } from '@jobstash/shared/state';
 
 import { NotFoundPage, PageWrapper } from '@jobstash/shared/ui';
 
-const Filters = dynamic(() =>
-  import('@jobstash/filters/feature').then((m) => m.Filters),
-);
-
 const SideBar = dynamic(() =>
   import('@jobstash/sidebar/feature').then((m) => m.SideBar),
 );
@@ -90,7 +86,7 @@ export const ProjectDetailsPage = ({
 
   return (
     <PageWrapper>
-      <SideBar />
+      <SideBar filtersRouteSection={ROUTE_SECTION.PROJECTS} />
 
       <div
         className={cn('px-3.5 pt-[65px] lg:px-8 lg:pt-0', {
@@ -98,8 +94,6 @@ export const ProjectDetailsPage = ({
           'lg:pr-[calc(44vw)]  ': !showFilters,
         })}
       >
-        <Filters routeSection={ROUTE_SECTION.PROJECTS} />
-
         <div
           className={cn({
             'lg:pr-[calc(44vw)]  ': showFilters,

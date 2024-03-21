@@ -1,6 +1,5 @@
 import { memo } from 'react';
 
-import DesktopSortFilters from './desktop-sort-filters';
 import FiltersItemsCount from './filters-items-count';
 import FiltersToggleButton from './filters-toggle-button';
 
