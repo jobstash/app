@@ -5,10 +5,8 @@ import { type RouteSection } from '@jobstash/shared/core';
 import { FiltersContext, useFilters } from '@jobstash/filters/state';
 
 import {
-  DesktopSortFilters,
-  FilterActions,
+  FilterContents,
   FilterControls,
-  FilterInputs,
   FullscreenrenFilterModal,
   SearchFilter,
 } from '@jobstash/filters/ui';
@@ -31,11 +29,7 @@ const Filters = ({ routeSection }: Props) => {
       <FiltersWrapper>
         <SearchFilter />
         <FilterControls />
-        <div className="transition-all lg:fixed lg:top-[100px] lg:bg-gradient-to-l lg:from-[#141317] lg:to-[#121216] lg:left-[207px] lg:shadow-md lg:p-24">
-          <DesktopSortFilters />
-          <FilterInputs />
-          <FilterActions />
-        </div>
+        <FilterContents />
       </FiltersWrapper>
       <FullscreenrenFilterModal />
     </FiltersContext.Provider>
