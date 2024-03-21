@@ -5,14 +5,13 @@ import { useAtom, useAtomValue } from 'jotai';
 import { cn } from '@jobstash/shared/utils';
 
 import { showFiltersAtom } from '@jobstash/filters/state';
-import { isOpenTopBannerAtom, useIsMobile } from '@jobstash/shared/state';
+import { isOpenTopBannerAtom } from '@jobstash/shared/state';
 
 interface Props {
   children: ReactNode;
 }
 
 const FiltersWrapper = ({ children }: Props) => {
-  const isMobile = useIsMobile();
   const [showFilters, setShowFilters] = useAtom(showFiltersAtom);
 
   const [scrollDirection, setScrollDirection] = useState<'up' | 'down' | null>(
@@ -59,12 +58,12 @@ const FiltersWrapper = ({ children }: Props) => {
   return (
     <div
       className={cn(
-        'flex flex-col py-4 lg:pt-8 gap-y-4 bg-[#121216] z-40 sticky transition-all duration-1000 top-[49px] lg:top-0 pr-2',
+        'fixed left-0 right-0 px-4 flex flex-col py-4 gap-y-4 bg-[#121216] z-40 transition-all duration-1000 lg:px-8 lg:items-center lg:py-0 lg:gap-x-4 lg:pt-0 lg:flex-row lg:relative lg:flex lg:right-auto lg:left-auto',
         { 'top-[108px] sm:top-[92px] lg:top-10': isOpenTopBanner },
-        {
-          '-top-60 sm:-top-44': scrollDirection === 'down' && !showFilters,
-        },
-        { 'w-[calc(100%+32px)] overflow-x-hidden': showFilters && !isMobile },
+        // {
+        //   '-top-60 lg:-top-44': scrollDirection === 'down' && !showFilters,
+        // },
+        // { 'w-[calc(100%+32px)] overflow-x-hidden': showFilters && !isMobile },
       )}
     >
       {children}

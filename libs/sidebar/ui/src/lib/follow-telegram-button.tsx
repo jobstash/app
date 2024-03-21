@@ -3,7 +3,7 @@ import { memo, useCallback } from 'react';
 
 import { TELEGRAM_URL } from '@jobstash/shared/core';
 
-import { Bartab, Text } from '@jobstash/shared/ui';
+import { Text } from '@jobstash/shared/ui';
 
 interface Props {
   isMobile?: boolean;
@@ -27,9 +27,9 @@ const FollowTelegramButton = ({ isMobile }: Props) => {
   }
 
   return (
-    <Bartab isActive={false} variant="wallet" left={null} onClick={onClick}>
-      {text}
-    </Bartab>
+    <Link target="_blank" href={TELEGRAM_URL} rel="noopener noreferrer">
+      <Text className="text-md whitespace-nowrap">{text}</Text>
+    </Link>
   );
 };
 

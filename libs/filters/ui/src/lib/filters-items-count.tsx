@@ -13,7 +13,7 @@ const FiltersItemsCount = () => {
 
   return (
     <Text
-      className="my-3 inline-block whitespace-nowrap"
+      className="inline-block whitespace-nowrap"
       color="dimmed"
     >{`${capitalize(
       routeSection.slice(1),

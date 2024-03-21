@@ -18,10 +18,6 @@ import { useMobileDisableScrollSyncer } from '@jobstash/shared/state';
 
 import { NotFoundPage, PageWrapper } from '@jobstash/shared/ui';
 
-const Filters = dynamic(() =>
-  import('@jobstash/filters/feature').then((m) => m.Filters),
-);
-
 const SideBar = dynamic(() =>
   import('@jobstash/sidebar/feature').then((m) => m.SideBar),
 );
@@ -90,16 +86,14 @@ export const ProjectDetailsPage = ({
 
   return (
     <PageWrapper>
-      <SideBar />
-
+      <SideBar filtersRouteSection={ROUTE_SECTION.PROJECTS} />
+        
       <div
-        className={cn('px-3.5 pt-[65px] lg:px-8 lg:pt-0', {
+        className={cn('px-3.5 pt-[65px] lg:px-8 lg:pt-8', {
           'z-50': showFilters,
           'lg:pr-[calc(44vw)]  ': !showFilters,
         })}
       >
-        <Filters routeSection={ROUTE_SECTION.PROJECTS} />
-
         <div
           className={cn({
             'lg:pr-[calc(44vw)]  ': showFilters,
@@ -114,7 +108,7 @@ export const ProjectDetailsPage = ({
 
       <div
         className={cn(
-          'hide-scrollbar fixed inset-0 h-screen overflow-y-auto bg-dark p-4 pt-6 transition-all lg:inset-auto lg:right-0 lg:top-0 lg:w-5/12 lg:px-6 lg:py-8 lg:pr-10 lg:mt-20',
+          'hide-scrollbar fixed inset-0 h-screen overflow-y-auto bg-dark p-4 pt-6 transition-all lg:inset-auto lg:right-0 lg:top-0 lg:w-5/12 lg:px-6 lg:py-8 lg:pr-10 lg:mt-[100px]',
           { 'z-50': !showFilters },
           { '-z-50': showFilters },
         )}

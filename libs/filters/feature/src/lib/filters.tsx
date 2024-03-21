@@ -5,9 +5,8 @@ import { type RouteSection } from '@jobstash/shared/core';
 import { FiltersContext, useFilters } from '@jobstash/filters/state';
 
 import {
-  FilterActions,
+  FilterContents,
   FilterControls,
-  FilterInputs,
   FullscreenrenFilterModal,
   SearchFilter,
 } from '@jobstash/filters/ui';
@@ -30,8 +29,7 @@ const Filters = ({ routeSection }: Props) => {
       <FiltersWrapper>
         <SearchFilter />
         <FilterControls />
-        <FilterInputs />
-        <FilterActions />
+        <FilterContents />
       </FiltersWrapper>
       <FullscreenrenFilterModal />
     </FiltersContext.Provider>
