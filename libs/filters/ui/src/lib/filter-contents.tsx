@@ -10,7 +10,7 @@ export const FilterContents = () => {
   if (!showFilters) return null;
 
   return (
-    <div className="lg:fixed lg:top-[100px] lg:bg-gradient-to-l lg:from-[#141317] lg:to-[#121216] lg:left-[207px] lg:shadow-md lg:p-24">
+    <div className="lg:fixed lg:top-[100px] lg:right-0 lg:bg-gradient-to-l lg:from-[#141317] lg:to-[#121216] lg:left-[207px] lg:shadow-md lg:py-5 lg:px-8">
       <DesktopSortFilters />
       <FilterInputs />
       <FilterActions />

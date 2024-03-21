@@ -11,13 +11,13 @@ const DesktopSortFilters = () => {
   if (!showFilters) return null;
 
   return (
-    <div className="hidden grow items-center gap-x-6 lg:flex">
+    <div className="hidden grow items-center lg:flex -mx-2 lg:-mx-3">
       <FilterConfigMapper
         removeSortLabel
         filterValues={state?.filterValues}
         configs={sortFilterConfigs}
         dispatch={dispatch}
-        wrapperClassName=""
+        wrapperClassName="w-1/2 sm:w-1/3 px-2 pb-2 lg:w-1/5 lg:px-3 lg:pb-4"
       />
     </div>
   );

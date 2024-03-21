@@ -87,7 +87,7 @@ export const ProjectDetailsPage = ({
   return (
     <PageWrapper>
       <SideBar filtersRouteSection={ROUTE_SECTION.PROJECTS} />
-
+        
       <div
         className={cn('px-3.5 pt-[65px] lg:px-8 lg:pt-8', {
           'z-50': showFilters,
