@@ -145,8 +145,6 @@ export const JobPostPage = ({
             'lg:pr-[calc(44vw)]  ': !showFilters,
           })}
         >
-          <Filters routeSection={ROUTE_SECTION.JOBS} />
-
           <div
             className={cn({
               'lg:pr-[calc(44vw)]  ': showFilters,
