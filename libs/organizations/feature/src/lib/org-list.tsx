@@ -52,7 +52,7 @@ const OrgList = ({ initOrg, activeOrgId }: Props) => {
   }
 
   return (
-    <div className="flex flex-col gap-y-4 pb-4">
+    <div className="flex flex-col gap-y-4 pb-4 lg:gap-y-8">
       {orgListItems.map((orgListItem) => (
         <OrgCard
           key={orgListItem.orgId}
