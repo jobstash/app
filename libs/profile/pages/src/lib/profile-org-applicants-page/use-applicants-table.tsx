@@ -210,26 +210,20 @@ export const useApplicantsTable = () => {
         );
       }
 
-      if (columnKey === 'contact') {
+      if (columnKey === 'skills') {
         const {
-          user: {
-            contact: { value, preferred },
-          },
-          calendly,
+          user: { skills },
         } = applicant;
 
-        if (!value) return null;
+        if (skills.length === 0) return null;
 
         return (
-          <div className="flex flex-col gap-2">
-            <Text size="md" fw="bold">
-              {`${preferred ?? 'Contact'}: ${value}`}
-            </Text>
-            {calendly && (
-              <Text size="md" fw="bold">
-                {`Calendly: ${calendly}`}
-              </Text>
-            )}
+          <div className="flex gap-2 w-full flex-wrap max-w-xs py-2">
+            {skills.map(({ id, name }) => (
+              <Chip key={id} color="default" radius="sm">
+                {name}
+              </Chip>
+            ))}
           </div>
         );
       }
@@ -344,15 +338,15 @@ export const useApplicantsTable = () => {
 
 type CustomColumnKeys =
   | 'user'
+  | 'skills'
   | 'job'
   | 'actions'
-  | 'availableForWork'
-  | 'contact';
+  | 'availableForWork';
 
 const columns = [
   { key: 'job', label: 'Job' },
   { key: 'user', label: 'User' },
-  { key: 'contact', label: 'Contact' },
+  { key: 'skills', label: 'Skills' },
   { key: 'availableForWork', label: 'Available for Work' },
   { key: 'oss', label: 'OSS' },
   { key: 'interviewed', label: 'Interviewed' },
