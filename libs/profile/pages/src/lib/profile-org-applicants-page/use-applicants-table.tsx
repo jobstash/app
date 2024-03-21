@@ -171,14 +171,22 @@ export const useApplicantsTable = () => {
           user: {
             contact: { value, preferred },
           },
+          calendly,
         } = applicant;
 
         if (!value) return null;
 
         return (
-          <Text size="md" fw="bold">
-            {`${preferred ?? 'Contact'}: ${value}`}
-          </Text>
+          <div className="flex flex-col gap-2">
+            <Text size="md" fw="bold">
+              {`${preferred ?? 'Contact'}: ${value}`}
+            </Text>
+            {calendly && (
+              <Text size="md" fw="bold">
+                {`Calendly: ${calendly}`}
+              </Text>
+            )}
+          </div>
         );
       }
 
@@ -234,7 +242,7 @@ export const useApplicantsTable = () => {
         );
       }
 
-      return <pre>{JSON.stringify(applicant[columnKey])}</pre>;
+      return null;
     },
     [isPending, mutate, profileInfoData?.orgId],
   );
@@ -297,6 +305,11 @@ const columns = [
   { key: 'user', label: 'User' },
   { key: 'contact', label: 'Contact' },
   { key: 'availableForWork', label: 'Available for Work' },
+  { key: 'oss', label: 'OSS' },
+  { key: 'interviewed', label: 'Interviewed' },
+  { key: 'upcomingTalent', label: 'Upcoming Talent' },
+  { key: 'attestations', label: 'Attestations' },
+  { key: 'cryptoNative', label: 'Crypto Native' },
   { key: 'actions', label: 'Actions' },
 ];
 
