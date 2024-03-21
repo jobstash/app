@@ -20,6 +20,13 @@ const SidebarOrgSection = ({ isMobile }: Props) => {
     path: '/profile',
   });
 
+  if (flow === CHECK_WALLET_FLOWS.ORG_COMPLETE) {
+    tabs.push({
+      text: 'Applicants',
+      path: '/profile/org/applicants',
+    });
+  }
+
   const wrapperClassName = cn('space-y-2 pt-3', {
     'flex flex-col justify-start items-start [&>*]:bg-transparent [&>*]:bg-none [&>*]:hover:bg-transparent':
       isMobile,
