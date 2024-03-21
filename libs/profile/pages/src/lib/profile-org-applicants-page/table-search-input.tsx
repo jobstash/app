@@ -6,6 +6,7 @@ import { SearchInputIcon } from '@jobstash/shared/ui';
 
 interface Props {
   isLoading: boolean;
+  isDisabled?: boolean;
   value: string;
   setValue: Dispatch<SetStateAction<string>>;
   onChange: (_: string) => void;
@@ -14,6 +15,7 @@ interface Props {
 export const TableSearchInput = ({
   value,
   isLoading,
+  isDisabled,
   setValue,
   onChange,
 }: Props) => (
@@ -28,7 +30,7 @@ export const TableSearchInput = ({
       input: 'pl-2',
     }}
     startContent={<SearchInputIcon />}
-    isDisabled={isLoading}
+    isDisabled={isLoading || (isDisabled && !value)}
     onClear={() => setValue('')}
     onValueChange={onChange}
   />

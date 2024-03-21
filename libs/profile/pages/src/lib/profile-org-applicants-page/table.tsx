@@ -51,13 +51,13 @@ export const ApplicantsTable = () => {
 
   if (!profileInfoData) return null;
 
+  const hasNoApplicants = items.length === 0;
+
   return (
     <div className="flex flex-col gap-4">
       <ApplicantTabs activeList={activeList} setActiveList={setActiveList} />
 
-      {!isLoading && items.length === 0 ? (
-        <p>TODO: Empty UI. No Applicants</p>
-      ) : isLoading ? (
+      {isLoading ? (
         <div className="pt-20 flex items-center justify-center">
           <Loader />
         </div>
@@ -68,6 +68,7 @@ export const ApplicantsTable = () => {
               isLoading={isLoading}
               value={searchFilter}
               setValue={setSearchFilter}
+              isDisabled={hasNoApplicants}
               onChange={onSearchChange}
             />
 
@@ -76,11 +77,12 @@ export const ApplicantsTable = () => {
               items={jobs}
               inputValue={jobSelection.input}
               selectedKey={jobSelection.selectedKey}
+              isDisabled={hasNoApplicants}
               onInputChange={onJobSelectionInputChange}
               onSelectionChange={onJobSelectionChange}
             />
           </div>
-          <div className="flex flex-col gap-2 pt-4">
+          <div className="flex flex-col gap-2 pt-4 overflow-hidden">
             <MultiSelectActions
               activeList={activeList}
               isPending={isPending}
@@ -115,7 +117,7 @@ export const ApplicantsTable = () => {
                   </TableColumn>
                 )}
               </TableHeader>
-              <TableBody items={items}>
+              <TableBody items={items} emptyContent="No applicants to display.">
                 {(item) => (
                   <TableRow key={item.user.wallet}>
                     {(columnKey) => (
@@ -128,13 +130,15 @@ export const ApplicantsTable = () => {
               </TableBody>
             </Table>
 
-            <TablePagination
-              page={page}
-              total={totalPageCount}
-              isDisabled={items.length < pageRowCount}
-              totalApplicantCount={totalApplicantCount}
-              onChange={setPage}
-            />
+            {hasNoApplicants && (
+              <TablePagination
+                page={page}
+                total={totalPageCount}
+                isDisabled={items.length < pageRowCount}
+                totalApplicantCount={totalApplicantCount}
+                onChange={setPage}
+              />
+            )}
           </div>
         </>
       )}

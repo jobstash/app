@@ -6,6 +6,7 @@ import { Text } from '@jobstash/shared/ui';
 
 interface Props {
   isLoading: boolean;
+  isDisabled?: boolean;
   items: JobApplicant['job'][];
   inputValue: string;
   selectedKey: string | null;
@@ -16,6 +17,7 @@ interface Props {
 export const JobSelection = (props: Props) => {
   const {
     isLoading,
+    isDisabled,
     items,
     inputValue,
     selectedKey,
@@ -31,7 +33,7 @@ export const JobSelection = (props: Props) => {
       }}
       placeholder="Select Job"
       isLoading={isLoading}
-      isDisabled={isLoading}
+      isDisabled={isLoading || (isDisabled && !inputValue)}
       items={items}
       inputValue={inputValue}
       selectedKey={selectedKey}
