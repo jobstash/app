@@ -1,8 +1,14 @@
 import { useCallback, useMemo, useState } from 'react';
 
-import { ArchiveBoxIcon, HeartIcon } from '@heroicons/react/16/solid';
+import {
+  ArchiveBoxIcon,
+  CalendarDaysIcon,
+  HeartIcon,
+} from '@heroicons/react/16/solid';
+import { Button } from '@nextui-org/button';
 import { Chip } from '@nextui-org/chip';
 import { Selection } from '@nextui-org/react';
+import { Tooltip } from '@nextui-org/tooltip';
 
 import { JobApplicant } from '@jobstash/jobs/core';
 
@@ -221,6 +227,11 @@ export const useApplicantsTable = () => {
         return (
           <div className="flex flex-col gap-2">
             <div className="flex gap-4 w-full items-center justify-center">
+              <Tooltip content="Calendar Invite" delay={0}>
+                <Button isIconOnly>
+                  <CalendarDaysIcon className="h-8 w-8" />
+                </Button>
+              </Tooltip>
               <ActionButton
                 orgId={profileInfoData?.orgId}
                 wallet={applicant.user.wallet}
