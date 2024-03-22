@@ -10,25 +10,29 @@ import { getOrgList } from '@jobstash/organizations/data';
 
 export { HomePage as default } from '@jobstash/home/pages';
 
-export const getServerSideProps = async () => {
+export const getStaticProps = async () => {
   const queryClient = new QueryClient();
 
   await Promise.all([
     queryClient.prefetchQuery({
       queryKey: ['home-page', 'orgs'],
       queryFn: () => getOrgList(1, undefined, 10_000),
+      staleTime: 1000 * 60 * 60 * 24 * 7, // 1 week
     }),
     queryClient.prefetchQuery({
       queryKey: ['home-page', 'jobs'],
       queryFn: () => getJobList(1, undefined, 3),
+      staleTime: 1000 * 60 * 60 * 24 * 7, // 1 week
     }),
     queryClient.prefetchQuery({
       queryKey: ['filter-config', ROUTE_SECTION.JOBS],
       queryFn: () => getFilterConfig(ROUTE_SECTION.JOBS),
+      staleTime: 1000 * 60 * 60 * 24 * 7, // 1 week
     }),
     queryClient.prefetchQuery({
       queryKey: ['popular-skills', HOME_PAGE_SKILL_COUNT],
       queryFn: () => getPopularSkills(HOME_PAGE_SKILL_COUNT),
+      staleTime: 1000 * 60 * 60 * 24 * 7, // 1 week
     }),
   ]);
 
