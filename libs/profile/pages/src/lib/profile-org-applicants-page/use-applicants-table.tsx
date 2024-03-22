@@ -241,21 +241,17 @@ export const useApplicantsTable = () => {
               <div className="min-w-[20px]">
                 <Text fw="bold">{upvotes ? `${upvotes}x` : 'TBD'}</Text>
               </div>
-              <Button isIconOnly size="sm">
-                <span role="img" aria-label="upvote">
-                  👍
-                </span>
-              </Button>
+              <span role="img" aria-label="upvote">
+                👍
+              </span>
             </div>
             <div className="flex items-center gap-2 justify-end">
               <div className="min-w-[20px] flex justify-end">
                 <Text fw="bold">{downvotes ? `${downvotes}x` : 'TBD'}</Text>
               </div>
-              <Button isIconOnly size="sm">
-                <span role="img" aria-label="downvote">
-                  👎
-                </span>
-              </Button>
+              <span role="img" aria-label="downvote">
+                👎
+              </span>
             </div>
           </div>
         );
