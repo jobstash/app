@@ -231,6 +231,36 @@ export const useApplicantsTable = () => {
         );
       }
 
+      if (columnKey === 'attestations') {
+        const {
+          attestations: { upvotes, downvotes },
+        } = applicant;
+        return (
+          <div className="flex flex-col gap-2 w-full items-center">
+            <div className="flex items-center gap-2 justify-end">
+              <div className="min-w-[20px]">
+                <Text fw="bold">{upvotes ? `${upvotes}x` : 'TBD'}</Text>
+              </div>
+              <Button isIconOnly size="sm">
+                <span role="img" aria-label="upvote">
+                  👍
+                </span>
+              </Button>
+            </div>
+            <div className="flex items-center gap-2 justify-end">
+              <div className="min-w-[20px] flex justify-end">
+                <Text fw="bold">{downvotes ? `${downvotes}x` : 'TBD'}</Text>
+              </div>
+              <Button isIconOnly size="sm">
+                <span role="img" aria-label="downvote">
+                  👎
+                </span>
+              </Button>
+            </div>
+          </div>
+        );
+      }
+
       if (columnKey === 'availableForWork') {
         const isAvailable = applicant.user.availableForWork;
         const color = isAvailable ? 'success' : 'default';
@@ -359,7 +389,7 @@ const columns = [
   { key: 'actions', label: 'Actions' },
 ];
 
-const centeredSet = new Set(['availableForWork', 'actions']);
+const centeredSet = new Set(['availableForWork', 'actions', 'attestations']);
 
 const ROWS_PER_PAGE = 8;
 

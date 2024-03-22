@@ -40,8 +40,8 @@ export const fakeJobApplicant = (): JobApplicant => {
       classification: faker.person.jobType(),
     },
     attestations: {
-      upvotes: faker.number.int({ min: 1, max: 30 }),
-      downvotes: faker.number.int({ min: 1, max: 20 }),
+      upvotes: fakeNullable(faker.number.int({ min: 1, max: 30 })),
+      downvotes: fakeNullable(faker.number.int({ min: 1, max: 20 })),
     },
     appliedTimestamp: faker.date.recent().getTime(),
     calendly: fakeNullable(faker.internet.userName()),
