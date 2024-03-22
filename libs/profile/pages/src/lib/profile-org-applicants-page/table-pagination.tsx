@@ -5,7 +5,6 @@ import { Pagination } from '@nextui-org/pagination';
 interface Props {
   page: number;
   total: number;
-  isDisabled: boolean;
   onChange: Dispatch<SetStateAction<number>>;
   totalApplicantCount?: number;
 }
@@ -13,7 +12,6 @@ interface Props {
 export const TablePagination = ({
   page,
   total,
-  isDisabled,
   onChange,
   totalApplicantCount,
 }: Props) => (
@@ -27,7 +25,6 @@ export const TablePagination = ({
       page={page}
       total={total}
       variant="light"
-      isDisabled={isDisabled}
       onChange={onChange}
     />
     <span className="text-small text-default-400">

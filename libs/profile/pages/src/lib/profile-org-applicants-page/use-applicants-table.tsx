@@ -14,6 +14,7 @@ import { Tooltip } from '@nextui-org/tooltip';
 
 import { JobApplicant } from '@jobstash/jobs/core';
 import { CONTACT_DEFAULT_OPTIONS } from '@jobstash/profile/core';
+import { capitalize } from '@jobstash/shared/utils';
 
 import { useJobApplicants } from '@jobstash/jobs/state';
 import {
@@ -160,7 +161,9 @@ export const useApplicantsTable = () => {
         const location =
           !city && !country
             ? undefined
-            : `${city ? `${city}, ` : ''}${country}`;
+            : `${city ? `${city}` : ''}${city && country ? ', ' : ' '}${
+                country ?? ''
+              }`;
 
         const contactLink = getContactLink(
           contact.preferred as PreferredContact,
@@ -221,7 +224,7 @@ export const useApplicantsTable = () => {
           <div className="flex gap-2 w-full flex-wrap max-w-xs py-2">
             {skills.map(({ id, name }) => (
               <Chip key={id} color="default" radius="sm">
-                {name}
+                {capitalize(name)}
               </Chip>
             ))}
           </div>
@@ -258,7 +261,7 @@ export const useApplicantsTable = () => {
       if (columnKey === 'actions') {
         return (
           <div className="flex flex-col gap-2">
-            <div className="flex gap-4 w-full items-center justify-center">
+            <div className="flex gap-2 w-full items-center justify-center">
               <Tooltip content="Calendar Invite" delay={0}>
                 <Button isIconOnly>
                   <CalendarDaysIcon className="h-8 w-8" />

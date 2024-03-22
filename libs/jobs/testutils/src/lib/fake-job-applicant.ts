@@ -1,14 +1,23 @@
 import { faker } from '@faker-js/faker';
 import { fakeNullable } from '@jobstash/shared/testutils';
 
+import { JobApplicant } from '@jobstash/jobs/core';
+
 faker.seed(69_420);
 
-export const fakeJobApplicant = () => {
+export const fakeJobApplicant = (): JobApplicant => {
   const { username, email } = fakeApplicantHandle();
+  const preferredContact = faker.helpers.arrayElement([
+    'Email',
+    'Twitter',
+    'Discord',
+    'Telegram',
+  ]);
 
   return {
     user: {
-      avatar: faker.image.avatar(),
+      wallet: faker.finance.bitcoinAddress(),
+      avatar: fakeNullable(faker.image.avatar()),
       username,
       email,
       availableForWork: faker.datatype.boolean(),
@@ -16,9 +25,14 @@ export const fakeJobApplicant = () => {
         city: fakeNullable(faker.location.city()),
         country: fakeNullable(faker.location.country()),
       },
-      matchingSkills: faker.number.int({ min: 1, max: 50 }),
-      skills: [],
-      showcases: [],
+      contact: {
+        preferred: preferredContact,
+        value: preferredContact === 'Email' ? email : username,
+      },
+      skills: fakeSkills(),
+      //
+      // matchingSkills: faker.number.int({ min: 1, max: 50 }),
+      // showcases: [],
     },
     job: {
       shortUUID: faker.string.sample(6),
@@ -33,7 +47,6 @@ export const fakeJobApplicant = () => {
     calendly: fakeNullable(faker.internet.userName()),
     oss: faker.datatype.boolean(),
     interviewed: faker.datatype.boolean(),
-    date: faker.date.recent().getTime(),
     cryptoNative: faker.datatype.boolean(),
     upcomingTalent: faker.datatype.boolean(),
   };
@@ -52,3 +65,10 @@ const fakeApplicantHandle = () => {
     email: isEmail ? faker.internet.email().toLowerCase() : null,
   };
 };
+
+const fakeSkills = (min = 0, max = 12) =>
+  Array.from({ length: faker.number.int({ min, max }) }).map(() => ({
+    id: faker.string.uuid(),
+    name: faker.word.words({ count: { min: 1, max: 2 } }),
+    canTeach: faker.datatype.boolean(),
+  }));

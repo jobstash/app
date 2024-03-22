@@ -34,7 +34,6 @@ export const ApplicantsTable = () => {
     onSearchChange,
     page,
     setPage,
-    pageRowCount,
     totalPageCount,
     totalApplicantCount,
     jobs,
@@ -138,7 +137,6 @@ export const ApplicantsTable = () => {
               <TablePagination
                 page={page}
                 total={totalPageCount}
-                isDisabled={items.length < pageRowCount}
                 totalApplicantCount={totalApplicantCount}
                 onChange={setPage}
               />
