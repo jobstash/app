@@ -120,7 +120,7 @@ export const OrgDetailsPage = ({
         <SideBar filtersRouteSection={ROUTE_SECTION.ORGANIZATIONS} />
 
         <div
-          className={cn('px-3.5 pt-[65px] lg:px-8 lg:pt-8', {
+          className={cn('px-3.5 pt-[212px] lg:px-8 lg:pt-8', {
             'z-50': showFilters,
             'lg:pr-[calc(44vw)]  ': !showFilters,
           })}
