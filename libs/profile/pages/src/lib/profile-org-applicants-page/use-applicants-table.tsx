@@ -284,6 +284,45 @@ export const useApplicantsTable = () => {
         );
       }
 
+      if (columnKey === 'hired') {
+        return (
+          <div className="flex w-full justify-center">
+            <Button
+              size="sm"
+              className="bg-gradient-to-l from-primary to-tertiary"
+            >
+              <Text fw="bold">Attest</Text>
+            </Button>
+          </div>
+        );
+      }
+
+      if (columnKey === 'interviewed') {
+        return (
+          <div className="flex w-full justify-center">
+            <Button
+              size="sm"
+              className="bg-gradient-to-l from-primary to-tertiary"
+            >
+              <Text fw="bold">Attest</Text>
+            </Button>
+          </div>
+        );
+      }
+
+      if (columnKey === 'fake') {
+        return (
+          <div className="flex w-full justify-center">
+            <Button
+              size="sm"
+              className="bg-gradient-to-l from-primary to-tertiary"
+            >
+              <Text fw="bold">Attest</Text>
+            </Button>
+          </div>
+        );
+      }
+
       if (columnKey === 'actions') {
         return (
           <div className="flex flex-col gap-2">
@@ -370,7 +409,10 @@ type CustomColumnKeys =
   | 'skills'
   | 'job'
   | 'actions'
-  | 'availableForWork';
+  | 'availableForWork'
+  | 'hired'
+  | 'interviewed'
+  | 'fake';
 
 const columns = [
   { key: 'job', label: 'Job' },
@@ -378,14 +420,23 @@ const columns = [
   { key: 'skills', label: 'Skills' },
   { key: 'availableForWork', label: 'Available for Work' },
   { key: 'oss', label: 'OSS' },
-  { key: 'interviewed', label: 'Interviewed' },
   { key: 'upcomingTalent', label: 'Upcoming Talent' },
   { key: 'attestations', label: 'Attestations' },
   { key: 'cryptoNative', label: 'Crypto Native' },
+  { key: 'hired', label: 'Hired' },
+  { key: 'interviewed', label: 'Interviewed' },
+  { key: 'fake', label: 'Fake' },
   { key: 'actions', label: 'Actions' },
 ];
 
-const centeredSet = new Set(['availableForWork', 'actions', 'attestations']);
+const centeredSet = new Set([
+  'availableForWork',
+  'actions',
+  'attestations',
+  'hired',
+  'interviewed',
+  'fake',
+]);
 
 const ROWS_PER_PAGE = 8;
 
