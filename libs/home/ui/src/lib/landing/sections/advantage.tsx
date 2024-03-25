@@ -25,7 +25,7 @@ export const Advantage = ({ icon, title, desc, advantages }: Props) => (
         </div>
       </div>
       <div>
-        <Text size="md" className="text-white/70">
+        <Text size="md" className="text-white/70 inline-block mx-auto">
           {desc}
         </Text>
       </div>
@@ -38,11 +38,11 @@ export const Advantage = ({ icon, title, desc, advantages }: Props) => (
         {advantages.map((adv) => (
           <div key={adv.desc} className="flex items-center space-x-4">
             <span>{adv.emoji}</span>
-            <Text className="text-white/70">{adv.desc}</Text>
+            <Text className="text-white/70 inline-block mx-auto">{adv.desc}</Text>
           </div>
         ))}
       </div>
-      <div className="pt-2 pb-2 w-[150px] mx-auto">
+      <div className="pt-2 pb-2 w-[150px] mx-auto [&_span]:mx-auto">
         <Bartab isActive={false} variant="wallet">
           More details
         </Bartab>
