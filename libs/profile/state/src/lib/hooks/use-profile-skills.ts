@@ -2,7 +2,7 @@ import { useEffect, useMemo, useReducer, useState } from 'react';
 
 import { ProfileSkill } from '@jobstash/profile/core';
 
-import { useTagsContext } from '@jobstash/admin/state';
+import { usePopularSkills } from '@jobstash/shared/state';
 
 import { ProfileSkillsContextProps } from '../contexts/profile-skills-context';
 
@@ -10,7 +10,9 @@ import { useProfileSkillsMutation } from './use-profile-skills-mutation';
 import { useProfileSkillsQuery } from './use-profile-skills-query';
 
 export const useProfileSkills = (): ProfileSkillsContextProps => {
-  const { tags } = useTagsContext();
+  const { data: popularSkills } = usePopularSkills();
+
+  const tags = popularSkills ?? [];
 
   const {
     isLoading: isLoadingQuery,

@@ -18,7 +18,7 @@ import {
 export const orgListItemSchema = myzod
   .object({
     orgId: myzod.string().min(1),
-    url: myzod.string().min(1),
+    url: myzod.string().min(1).nullable(),
     name: myzod.string().min(1),
     location: myzod.string().min(1),
     jobCount: myzod.number(),

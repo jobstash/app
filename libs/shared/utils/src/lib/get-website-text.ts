@@ -1,4 +1,4 @@
-export const getWebsiteText = (website: string) => {
+export const getWebsiteText = (website: string | null) => {
   if (!website) return { link: '', hostname: '' };
 
   const isUrl = website.startsWith('http');

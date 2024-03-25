@@ -241,21 +241,17 @@ export const useApplicantsTable = () => {
               <div className="min-w-[20px]">
                 <Text fw="bold">{upvotes ? `${upvotes}x` : 'TBD'}</Text>
               </div>
-              <Button isIconOnly size="sm">
-                <span role="img" aria-label="upvote">
-                  👍
-                </span>
-              </Button>
+              <span role="img" aria-label="upvote">
+                👍
+              </span>
             </div>
             <div className="flex items-center gap-2 justify-end">
               <div className="min-w-[20px] flex justify-end">
                 <Text fw="bold">{downvotes ? `${downvotes}x` : 'TBD'}</Text>
               </div>
-              <Button isIconOnly size="sm">
-                <span role="img" aria-label="downvote">
-                  👎
-                </span>
-              </Button>
+              <span role="img" aria-label="downvote">
+                👎
+              </span>
             </div>
           </div>
         );
@@ -284,6 +280,45 @@ export const useApplicantsTable = () => {
             <Text size="sm" color="dimmed">
               {classification}
             </Text>
+          </div>
+        );
+      }
+
+      if (columnKey === 'hired') {
+        return (
+          <div className="flex w-full justify-center">
+            <Button
+              size="sm"
+              className="bg-gradient-to-l from-primary to-tertiary"
+            >
+              <Text fw="bold">Attest</Text>
+            </Button>
+          </div>
+        );
+      }
+
+      if (columnKey === 'interviewed') {
+        return (
+          <div className="flex w-full justify-center">
+            <Button
+              size="sm"
+              className="bg-gradient-to-l from-primary to-tertiary"
+            >
+              <Text fw="bold">Attest</Text>
+            </Button>
+          </div>
+        );
+      }
+
+      if (columnKey === 'fake') {
+        return (
+          <div className="flex w-full justify-center">
+            <Button
+              size="sm"
+              className="bg-gradient-to-l from-primary to-tertiary"
+            >
+              <Text fw="bold">Attest</Text>
+            </Button>
           </div>
         );
       }
@@ -370,26 +405,41 @@ export const useApplicantsTable = () => {
 };
 
 type CustomColumnKeys =
+  | 'job'
   | 'user'
   | 'skills'
-  | 'job'
-  | 'actions'
-  | 'availableForWork';
+  | 'cryptoVerticals'
+  | 'availableForWork'
+  | 'cryptoAdjacent'
+  | 'hired'
+  | 'interviewed'
+  | 'fake'
+  | 'actions';
 
 const columns = [
   { key: 'job', label: 'Job' },
   { key: 'user', label: 'User' },
   { key: 'skills', label: 'Skills' },
+  { key: 'cryptoVerticals', label: 'Crypto Verticals' },
   { key: 'availableForWork', label: 'Available for Work' },
-  { key: 'oss', label: 'OSS' },
-  { key: 'interviewed', label: 'Interviewed' },
-  { key: 'upcomingTalent', label: 'Upcoming Talent' },
-  { key: 'attestations', label: 'Attestations' },
   { key: 'cryptoNative', label: 'Crypto Native' },
+  { key: 'cryptoAdjacent', label: 'Crypto Adjacent' },
+  { key: 'oss', label: 'OSS' },
+  { key: 'attestations', label: 'Attestations' },
+  { key: 'hired', label: 'Hired' },
+  { key: 'interviewed', label: 'Interviewed' },
+  { key: 'fake', label: 'Fake' },
   { key: 'actions', label: 'Actions' },
 ];
 
-const centeredSet = new Set(['availableForWork', 'actions', 'attestations']);
+const centeredSet = new Set([
+  'availableForWork',
+  'actions',
+  'attestations',
+  'hired',
+  'interviewed',
+  'fake',
+]);
 
 const ROWS_PER_PAGE = 8;
 

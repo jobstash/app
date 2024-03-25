@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { memo, useCallback } from 'react';
+import { memo } from 'react';
 
 import { TELEGRAM_URL } from '@jobstash/shared/core';
 
@@ -10,13 +10,7 @@ interface Props {
 }
 
 const FollowTelegramButton = ({ isMobile }: Props) => {
-  const onClick = useCallback(() => {
-    if (typeof window !== 'undefined') {
-      window.open(TELEGRAM_URL, '_blank');
-    }
-  }, []);
-
-  const text = 'Follow on Telegram';
+  const text = 'Subscribe on TG';
 
   if (isMobile) {
     return (

@@ -4,9 +4,9 @@ import { HOME_PAGE_SKILL_COUNT } from '@jobstash/home/core';
 import { ROUTE_SECTION } from '@jobstash/shared/core';
 
 import { getFilterConfig } from '@jobstash/filters/data';
-import { getPopularSkills } from '@jobstash/home/data';
 import { getJobList } from '@jobstash/jobs/data';
 import { getOrgList } from '@jobstash/organizations/data';
+import { getPopularSkills } from '@jobstash/shared/data';
 
 export { HomePage as default } from '@jobstash/home/pages';
 

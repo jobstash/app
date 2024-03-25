@@ -5,7 +5,7 @@ import { getWebsiteText } from './get-website-text';
 const URL_PREFIX = 'https://www.google.com/s2/favicons?domain=';
 const URL_SUFFIX = '&sz=64';
 
-export const getGoogleLogoUrl = (url: string) =>
+export const getGoogleLogoUrl = (url: string | null) =>
   `${URL_PREFIX}${getWebsiteText(url).hostname}${URL_SUFFIX}`;
 
 export const getLogoUrlHttpsAlternative = (googleString: string) => {
