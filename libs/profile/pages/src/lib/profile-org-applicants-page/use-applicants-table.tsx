@@ -153,6 +153,7 @@ export const useApplicantsTable = () => {
             email,
             location: { city, country },
             contact,
+            showcases,
           },
         } = applicant;
 
@@ -189,26 +190,42 @@ export const useApplicantsTable = () => {
               }}
             />
 
-            {contact.value && (
-              <div className="flex gap-1">
-                {contactLink ? (
+            <div className="flex flex-col gap-0.5">
+              {contact.value && (
+                <div className="flex gap-1">
+                  {contactLink ? (
+                    <Link
+                      href={contactLink}
+                      size="sm"
+                      underline="hover"
+                      className="font-semibold text-white/80"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      {contact.preferred === 'Email'
+                        ? 'Send Email'
+                        : `Open ${contact.preferred}`}
+                    </Link>
+                  ) : (
+                    <span>{`Contact: ${contact.value}`}</span>
+                  )}
+                </div>
+              )}
+              {showcases.length > 0 &&
+                showcases.map(({ id, label, url }) => (
                   <Link
-                    href={contactLink}
+                    key={id}
+                    href={url}
                     size="sm"
                     underline="hover"
                     className="font-semibold text-white/80"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
-                    {contact.preferred === 'Email'
-                      ? 'Send Email'
-                      : `Open ${contact.preferred}`}
+                    Open {label}
                   </Link>
-                ) : (
-                  <span>{`Contact: ${contact.value}`}</span>
-                )}
-              </div>
-            )}
+                ))}
+            </div>
           </div>
         );
       }

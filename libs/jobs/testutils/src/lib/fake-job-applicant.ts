@@ -30,9 +30,9 @@ export const fakeJobApplicant = (): JobApplicant => {
         value: preferredContact === 'Email' ? email : username,
       },
       skills: fakeSkills(),
+      showcases: [],
       //
       // matchingSkills: faker.number.int({ min: 1, max: 50 }),
-      // showcases: [],
     },
     job: {
       shortUUID: faker.string.sample(6),
