@@ -405,19 +405,22 @@ export const useApplicantsTable = () => {
 };
 
 type CustomColumnKeys =
+  | 'job'
   | 'user'
   | 'skills'
-  | 'job'
-  | 'actions'
+  | 'cryptoVerticals'
   | 'availableForWork'
+  | 'cryptoAdjacent'
   | 'hired'
   | 'interviewed'
-  | 'fake';
+  | 'fake'
+  | 'actions';
 
 const columns = [
   { key: 'job', label: 'Job' },
   { key: 'user', label: 'User' },
   { key: 'skills', label: 'Skills' },
+  { key: 'cryptoVerticals', label: 'Crypto Verticals' },
   { key: 'availableForWork', label: 'Available for Work' },
   { key: 'cryptoNative', label: 'Crypto Native' },
   { key: 'cryptoAdjacent', label: 'Crypto Adjacent' },
