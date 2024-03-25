@@ -7,7 +7,7 @@ import {
   type ProfileRepo,
 } from '@jobstash/profile/core';
 
-import { useAllTags } from '@jobstash/shared/state';
+import { usePopularSkills } from '@jobstash/shared/state';
 
 import { activeProfileRepoAtom } from '../atoms/active-profile-repo-atom';
 import { profileRepoCountAtom } from '../atoms/profile-repo-count-atom';
@@ -17,7 +17,7 @@ import { useProfileSkillsQuery } from './use-profile-skills-query';
 import { useProfileTabs } from './use-profile-tabs';
 
 export const useProfileRepoPage = () => {
-  const { data: allTagsData } = useAllTags();
+  const { data: allTagsData } = usePopularSkills();
 
   const { tabs, activeTab, setActiveTab } = useProfileTabs(
     PROFILE_RIGHT_PANEL_TABS.REPOSITORIES,
@@ -44,7 +44,7 @@ export const useProfileRepoPage = () => {
     tabs,
     activeTab,
     setActiveTab,
-    allTags: allTagsData?.data ?? [],
+    allTags: allTagsData ?? [],
     profileRepo,
     isLoadingCard,
     setIsLoadingCard,

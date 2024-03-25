@@ -1,22 +1,17 @@
 import { Button } from '@nextui-org/button';
 import { Link } from '@nextui-org/link';
-import { useQuery } from '@tanstack/react-query';
 
 import { HOME_PAGE_SKILL_COUNT } from '@jobstash/home/core';
 import { FRONTEND_URL, lato, ROUTE_SECTION } from '@jobstash/shared/core';
 import { capitalize, openNewTab } from '@jobstash/shared/utils';
 
-import { getPopularSkills } from '@jobstash/home/data';
+import { usePopularSkills } from '@jobstash/shared/state';
 
 import { BrowseSection } from '../browse-section';
 import { LoadingSection } from '../loading-section';
 
 export const PopularSkills = () => {
-  const { data } = useQuery({
-    queryKey: ['popular-skills', HOME_PAGE_SKILL_COUNT],
-    queryFn: () => getPopularSkills(HOME_PAGE_SKILL_COUNT),
-    staleTime: 1000 * 60 * 60, // 1hr
-  });
+  const { data } = usePopularSkills(HOME_PAGE_SKILL_COUNT);
 
   if (!data) return <LoadingSection />;
 

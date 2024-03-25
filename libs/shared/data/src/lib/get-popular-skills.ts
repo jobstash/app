@@ -2,10 +2,10 @@ import myzod, { Infer } from 'myzod';
 
 import { MW_URL, tagSchema } from '@jobstash/shared/core';
 
-import { mwFetch } from '@jobstash/shared/data';
+import { mwFetch } from './mw-fetch';
 
-export const getPopularSkills = async (count: number) => {
-  const url = `${MW_URL}/tags/popular/${count}`;
+export const getPopularSkills = async (count?: number) => {
+  const url = `${MW_URL}/tags/popular${count ? `?limit=${count}` : ''}`;
 
   const options = {
     responseSchema,
