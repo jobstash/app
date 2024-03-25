@@ -22,7 +22,7 @@ export const PopularSkills = () => {
 
   return (
     <>
-      <div className="flex flex-wrap gap-2 md:gap-4 justify-around md:justify-center pt-4 pb-4">
+      <div className='flex items-center  flex-wrap justify-around gap-y-2 md:justify-center md:gap-x-4'> 
         {skills.map(({ label, skill }) => (
           <Button
             key={skill}
@@ -31,7 +31,7 @@ export const PopularSkills = () => {
             target="_blank"
             rel="noopener noreferrer"
             variant="bordered"
-            className="w-5/12 md:w-auto"
+            className=""
             onClick={() => openSkill(skill)}
           >
             <span

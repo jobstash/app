@@ -18,8 +18,8 @@ const SearchSkillSection = () => (
         />
       </svg>
     </div>
-    <div>
-      <h3 className="text-white font-black text-6xl pb-6 text-center">
+    <div className='space-y-6'>
+      <h3 className="text-white !leading-tight font-black text-6xl text-center">
         Search Crypto Jobs by <span className="text-secondary">Skill</span>
       </h3>
 
