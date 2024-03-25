@@ -14,7 +14,7 @@ import { Tooltip } from '@nextui-org/tooltip';
 
 import { JobApplicant } from '@jobstash/jobs/core';
 import { CONTACT_DEFAULT_OPTIONS } from '@jobstash/profile/core';
-import { capitalize } from '@jobstash/shared/utils';
+import { capitalize, cn } from '@jobstash/shared/utils';
 
 import { useJobApplicants } from '@jobstash/jobs/state';
 import {
@@ -218,7 +218,9 @@ export const useApplicantsTable = () => {
           user: { skills },
         } = applicant;
 
-        if (skills.length === 0) return null;
+        if (skills.length === 0) {
+          return <ComingSoon isCentered={false} />;
+        }
 
         return (
           <div className="flex gap-2 w-full flex-wrap max-w-xs py-2">
@@ -353,7 +355,7 @@ export const useApplicantsTable = () => {
         );
       }
 
-      return null;
+      return <ComingSoon />;
     },
     [isPending, mutate, profileInfoData?.orgId],
   );
@@ -433,6 +435,10 @@ const columns = [
 ];
 
 const centeredSet = new Set([
+  'cryptoVerticals',
+  'oss',
+  'cryptoNative',
+  'cryptoAdjacent',
   'availableForWork',
   'actions',
   'attestations',
@@ -495,3 +501,9 @@ const getContactLinkUrl = (domain: string, handle: string) => {
     return handle;
   return `https://${domain}/${handle}`;
 };
+
+const ComingSoon = ({ isCentered = true }: { isCentered?: boolean }) => (
+  <div className={cn({ 'flex w-full justify-center': isCentered })}>
+    <Text color="dimmed">Coming Soon</Text>
+  </div>
+);
