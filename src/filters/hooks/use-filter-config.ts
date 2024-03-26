@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { RouteSection } from '~/shared/core/constants';
+import { QUERY_STALETIME, RouteSection } from '~/shared/core/constants';
 
 import { filterQueryKeys } from '~/filters/core/query-keys';
 import { sanitizeFilterParams } from '~/filters/utils/sanitizeFilterParams';
@@ -13,6 +13,7 @@ export const useFilterConfig = (
   const query = useQuery({
     queryKey: filterQueryKeys.list(searchParams, routeSection),
     queryFn: () => getFilterConfig(`/${routeSection}`),
+    staleTime: QUERY_STALETIME.DEFAULT,
     // Filter show-flag and then sort by position
     select: (data) =>
       Object.values(data)

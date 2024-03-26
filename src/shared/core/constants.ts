@@ -50,3 +50,7 @@ export const METADATA = {
   TWITTER_CREATOR: '@jobstash_xyz',
   IMAGE_DIMENSION: { width: 1100, height: 576 } as const,
 } as const;
+
+export const QUERY_STALETIME = {
+  DEFAULT: 1000 * 60 * 60, // 1 hr
+} as const;
