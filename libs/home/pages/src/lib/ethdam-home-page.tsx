@@ -43,8 +43,7 @@ export const EthdamHomePage = () => {
             >
               <p>
                 <span className="text-white/50 mr-2">tl;dr:</span>
-                All available Jobs at ETHGlobal
-                <br className="hidden md:block" /> AMSTERDAM
+                All available Jobs at ETHDam 2024
               </p>
             </div>
             <div className="flex flex-col items-center gap-8 md:flex-row">
