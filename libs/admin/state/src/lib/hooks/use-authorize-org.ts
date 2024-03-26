@@ -1,16 +1,25 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { AuthorizeOrgPayload } from '@jobstash/admin/core';
-import { notifError, notifSuccess } from '@jobstash/shared/utils';
+import {
+  getLSMwVersion,
+  notifError,
+  notifSuccess,
+} from '@jobstash/shared/utils';
 
 import { postAuthorizeOrg } from '@jobstash/admin/data';
 
 export const useAuthorizeOrg = (successCb?: () => void) => {
   const queryClient = useQueryClient();
+
+  const mwVersion = getLSMwVersion();
+
   const { isSuccess, isPending, mutate } = useMutation({
     mutationFn: (payload: AuthorizeOrgPayload) => postAuthorizeOrg(payload),
     onSuccess({ message }, { verdict }) {
-      queryClient.invalidateQueries({ queryKey: ['approval-org-list'] });
+      queryClient.invalidateQueries({
+        queryKey: [mwVersion, 'approval-org-list'],
+      });
       notifSuccess({
         title: verdict === 'approve' ? 'Org Approved!' : 'Org Rejected',
         message,

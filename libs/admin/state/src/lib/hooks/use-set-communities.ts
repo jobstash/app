@@ -1,12 +1,18 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { SetCommunitiesPayload } from '@jobstash/admin/core';
-import { notifError, notifSuccess } from '@jobstash/shared/utils';
+import {
+  getLSMwVersion,
+  notifError,
+  notifSuccess,
+} from '@jobstash/shared/utils';
 
 import { setCommunities } from '@jobstash/admin/data';
 
 export const useSetCommunities = (successCb?: () => void) => {
   const queryClient = useQueryClient();
+
+  const mwVersion = getLSMwVersion();
 
   return useMutation({
     mutationFn: (payload: SetCommunitiesPayload) => setCommunities(payload),
@@ -22,7 +28,7 @@ export const useSetCommunities = (successCb?: () => void) => {
         successCb();
       }
 
-      queryClient.invalidateQueries({ queryKey: ['all-orgs'] });
+      queryClient.invalidateQueries({ queryKey: [mwVersion, 'all-orgs'] });
     },
     onError(data) {
       notifError({

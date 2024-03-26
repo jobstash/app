@@ -1,12 +1,18 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { AddAliasPayload } from '@jobstash/admin/core';
-import { notifError, notifSuccess } from '@jobstash/shared/utils';
+import {
+  getLSMwVersion,
+  notifError,
+  notifSuccess,
+} from '@jobstash/shared/utils';
 
 import { addAlias } from '@jobstash/admin/data';
 
 export const useAddAlias = (successCb?: () => void) => {
   const queryClient = useQueryClient();
+
+  const mwVersion = getLSMwVersion();
 
   return useMutation({
     mutationFn: (payload: AddAliasPayload) => addAlias(payload),
@@ -27,7 +33,9 @@ export const useAddAlias = (successCb?: () => void) => {
         successCb();
       }
 
-      queryClient.invalidateQueries({ queryKey: ['org-details', orgId] });
+      queryClient.invalidateQueries({
+        queryKey: [mwVersion, 'org-details', orgId],
+      });
     },
     onError(data) {
       notifError({

@@ -7,6 +7,7 @@ import { useAtom, useSetAtom } from 'jotai';
 
 import { type JobPost } from '@jobstash/jobs/core';
 import { createJobsFilterParamsObj } from '@jobstash/jobs/utils';
+import { getLSMwVersion } from '@jobstash/shared/utils';
 
 import { useIsMobile } from '@jobstash/shared/state';
 import { getCompetitors } from '@jobstash/competitors/data';
@@ -35,6 +36,8 @@ export const useJobList = (initJob: JobPost | null) => {
     hasNextPage,
   } = useJobListQuery();
 
+  const mwVersion = getLSMwVersion();
+
   // Prefetch job items
   // (react-query breaking change v5 - removed onSuccess)
   useEffect(() => {
@@ -45,13 +48,13 @@ export const useJobList = (initJob: JobPost | null) => {
         if (job.organization.projects.length > 0) {
           const projectId = job.organization.projects[0].id;
           queryClient.prefetchQuery({
-            queryKey: ['competitors', projectId],
+            queryKey: [mwVersion, 'competitors', projectId],
             queryFn: () => getCompetitors(job.organization.projects[0].id),
           });
         }
       }
     }
-  }, [data, isSuccess, queryClient]);
+  }, [data, isSuccess, mwVersion, queryClient]);
 
   const setJobCountAtom = useSetAtom(jobCountAtom);
   useEffect(() => {

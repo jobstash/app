@@ -11,6 +11,7 @@ import { createProjectsFilterParamsObj } from '@jobstash/projects/utils';
 import { sentryMessage, withCSR } from '@jobstash/shared/utils';
 
 import { getProjectDetails, getProjectList } from '@jobstash/projects/data';
+import { getSSRMwVersion } from '@jobstash/shared/data';
 
 interface Props {
   initActiveProject: ProjectDetails | null;
@@ -22,8 +23,12 @@ export const getServerSideProps: GetServerSideProps<Props> = withCSR(
 
     const filterParamsObj = createProjectsFilterParamsObj(ctx.query);
 
+    const mwVersion = await getSSRMwVersion(
+      'project-list-page getServerSideProps',
+    );
+
     await queryClient.fetchInfiniteQuery({
-      queryKey: ['project-list', filterParamsObj],
+      queryKey: [mwVersion, 'project-list', filterParamsObj],
       queryFn: async ({ pageParam }) =>
         getProjectList(pageParam ?? 1, filterParamsObj),
       initialPageParam: 1,
@@ -42,7 +47,7 @@ export const getServerSideProps: GetServerSideProps<Props> = withCSR(
       for (const projectListItem of projectListItems) {
         const { id } = projectListItem;
         queryClient.prefetchQuery({
-          queryKey: ['project-details', id],
+          queryKey: [mwVersion, 'project-details', id],
           queryFn: () => getProjectDetails(id),
         });
       }

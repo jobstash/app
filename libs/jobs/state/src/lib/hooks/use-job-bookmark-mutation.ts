@@ -1,12 +1,18 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { type JobPost } from '@jobstash/jobs/core';
-import { notifError, notifSuccess } from '@jobstash/shared/utils';
+import {
+  getLSMwVersion,
+  notifError,
+  notifSuccess,
+} from '@jobstash/shared/utils';
 
 import { setJobBookmark } from '@jobstash/jobs/data';
 
 export const useJobBookmarkMutation = (shouldDelete = false) => {
   const queryClient = useQueryClient();
+
+  const mwVersion = getLSMwVersion();
 
   const { isPending: isLoading, mutate } = useMutation({
     mutationFn: ({ shortUUID }: JobPost) =>
@@ -19,7 +25,7 @@ export const useJobBookmarkMutation = (shouldDelete = false) => {
         } to your list.`,
       });
 
-      queryClient.invalidateQueries({ queryKey: ['job-bookmarks'] });
+      queryClient.invalidateQueries({ queryKey: [mwVersion, 'job-bookmarks'] });
     },
     onError(error) {
       notifError({

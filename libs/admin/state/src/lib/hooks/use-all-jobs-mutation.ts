@@ -1,16 +1,23 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { JobsUpdateableFields } from '@jobstash/admin/core';
-import { notifError, notifSuccess } from '@jobstash/shared/utils';
+import {
+  getLSMwVersion,
+  notifError,
+  notifSuccess,
+} from '@jobstash/shared/utils';
 
 import { postAllJobs } from '@jobstash/admin/data';
 
 export const useAllJobsMutation = (initAllJobs?: JobsUpdateableFields[]) => {
   const queryClient = useQueryClient();
+
+  const mwVersion = getLSMwVersion();
+
   const { isPending, mutate } = useMutation({
     mutationFn: (payload: JobsUpdateableFields) => postAllJobs(payload),
     async onMutate() {
-      await queryClient.cancelQueries({ queryKey: ['all-jobs'] });
+      await queryClient.cancelQueries({ queryKey: [mwVersion, 'all-jobs'] });
     },
     onSuccess(_, vars) {
       if (initAllJobs) {
@@ -34,7 +41,7 @@ export const useAllJobsMutation = (initAllJobs?: JobsUpdateableFields[]) => {
     },
     onSettled() {
       queryClient.invalidateQueries({
-        queryKey: ['all-jobs'],
+        queryKey: [mwVersion, 'all-jobs'],
       });
     },
   });

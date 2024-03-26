@@ -2,6 +2,8 @@ import { useState } from 'react';
 
 import { useQueryClient } from '@tanstack/react-query';
 
+import { getLSMwVersion } from '@jobstash/shared/utils';
+
 import { type PreferredTermsFormContextProps } from '../contexts/preferred-terms-form-context';
 import { useTagsContext } from '../contexts/tags-context';
 
@@ -69,6 +71,8 @@ export const usePreferredTermsForm = (
   const { isLoadingDeletePreference, mutateAsyncDeletePreference } =
     useDeletePreferenceMutation();
 
+  const mwVersion = getLSMwVersion();
+
   const queryClient = useQueryClient();
   const onSubmit = async () => {
     const promises = [];
@@ -95,7 +99,7 @@ export const usePreferredTermsForm = (
     clearForm();
 
     await queryClient.invalidateQueries({
-      queryKey: ['preferredTerms'],
+      queryKey: [mwVersion, 'preferredTerms'],
     });
   };
 
@@ -105,7 +109,7 @@ export const usePreferredTermsForm = (
     });
 
     await queryClient.invalidateQueries({
-      queryKey: ['preferredTerms'],
+      queryKey: [mwVersion, 'preferredTerms'],
     });
   };
 

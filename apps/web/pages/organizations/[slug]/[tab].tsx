@@ -13,6 +13,7 @@ import { createOrgsFilterParamsObj } from '@jobstash/organizations/utils';
 import { sentryMessage, withCSR } from '@jobstash/shared/utils';
 
 import { getOrgDetails, getOrgList } from '@jobstash/organizations/data';
+import { getSSRMwVersion } from '@jobstash/shared/data';
 
 export { OrgDetailsPage as default } from '@jobstash/organizations/pages';
 
@@ -23,8 +24,12 @@ export const getServerSideProps: GetServerSideProps<OrgDetailsPageProps> =
 
       const filterParamsObj = createOrgsFilterParamsObj(ctx.query);
 
+      const mwVersion = await getSSRMwVersion(
+        'org-details-page getServerSideProps',
+      );
+
       await queryClient.fetchInfiniteQuery({
-        queryKey: ['org-list', filterParamsObj],
+        queryKey: [mwVersion, 'org-list', filterParamsObj],
         queryFn: async ({ pageParam }) =>
           getOrgList(pageParam ?? 1, filterParamsObj),
         initialPageParam: 1,
@@ -43,7 +48,7 @@ export const getServerSideProps: GetServerSideProps<OrgDetailsPageProps> =
         for (const orgListItem of orgListItems) {
           const { orgId } = orgListItem;
           queryClient.prefetchQuery({
-            queryKey: ['org-details', orgId],
+            queryKey: [mwVersion, 'org-details', orgId],
             queryFn: () => getOrgDetails(orgId),
           });
         }

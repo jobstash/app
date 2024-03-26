@@ -2,6 +2,8 @@ import { useCallback, useState } from 'react';
 
 import { useQueryClient } from '@tanstack/react-query';
 
+import { getLSMwVersion } from '@jobstash/shared/utils';
+
 import { useTagsContext } from '../contexts/tags-context';
 
 import { useBlockedTagsQuery } from './use-blocked-tags-query';
@@ -93,8 +95,10 @@ export const useBlockedTermsForm = () => {
 
     await Promise.all(promises);
 
+    const mwVersion = getLSMwVersion();
+
     await queryClient.invalidateQueries({
-      queryKey: ['godmodeBlockedTags'],
+      queryKey: [mwVersion, 'godmodeBlockedTags'],
     });
   };
 

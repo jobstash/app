@@ -2,7 +2,11 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 
 import { type ProfileRepoContributionPayload } from '@jobstash/profile/core';
-import { notifError, notifSuccess } from '@jobstash/shared/utils';
+import {
+  getLSMwVersion,
+  notifError,
+  notifSuccess,
+} from '@jobstash/shared/utils';
 
 import { postProfileRepoContribution } from '@jobstash/profile/data';
 
@@ -16,6 +20,8 @@ export const useYourContributionMutation = () => {
   const [activeProfileRepo, setActiveProfileRepo] = useAtom(
     activeProfileRepoAtom,
   );
+
+  const mwVersion = getLSMwVersion();
 
   const { isPending: isLoading, mutate } = useMutation({
     mutationFn: (payload: ProfileRepoContributionPayload) =>
@@ -33,7 +39,9 @@ export const useYourContributionMutation = () => {
       });
 
       // Invalidate profile-repo-list
-      queryClient.invalidateQueries({ queryKey: ['profile-repo-list'] });
+      queryClient.invalidateQueries({
+        queryKey: [mwVersion, 'profile-repo-list'],
+      });
 
       if (activeProfileRepo) {
         setActiveProfileRepo({

@@ -15,4 +15,5 @@ export const AuthContext = createContext<AuthCtx>({
   isSignedIn: false,
   isFetching: false,
   refetch: () => null,
+  mwVersion: undefined,
 });

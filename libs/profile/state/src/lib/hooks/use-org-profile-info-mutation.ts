@@ -3,7 +3,11 @@ import { useAccount } from 'wagmi';
 
 import { CHECK_WALLET_FLOWS } from '@jobstash/auth/core';
 import { OrgProfileInfoPayload } from '@jobstash/profile/core';
-import { notifError, notifSuccess } from '@jobstash/shared/utils';
+import {
+  getLSMwVersion,
+  notifError,
+  notifSuccess,
+} from '@jobstash/shared/utils';
 
 import { useAuthContext } from '@jobstash/auth/state';
 import { postOrgProfileInfo } from '@jobstash/profile/data';
@@ -17,6 +21,8 @@ export const useOrgProfileInfoMutation = () => {
     flow === CHECK_WALLET_FLOWS.ORG_APPROVAL;
 
   const profileInfoQueryKey = ['org-profile-info', address];
+
+  const mwVersion = getLSMwVersion();
 
   const { isPending, mutate } = useMutation({
     mutationFn: (payload: OrgProfileInfoPayload) => postOrgProfileInfo(payload),
@@ -44,10 +50,10 @@ export const useOrgProfileInfoMutation = () => {
     onSettled() {
       // Always refetch after
       queryClient.invalidateQueries({
-        queryKey: ['org-profile-info', address],
+        queryKey: [mwVersion, 'org-profile-info', address],
       });
       queryClient.invalidateQueries({
-        queryKey: ['check-wallet'],
+        queryKey: [mwVersion, 'check-wallet'],
       });
     },
   });

@@ -7,6 +7,7 @@ import { useAtom, useSetAtom } from 'jotai';
 
 import { type ProjectInfo } from '@jobstash/shared/core';
 import { createProjectsFilterParamsObj } from '@jobstash/projects/utils';
+import { getLSMwVersion } from '@jobstash/shared/utils';
 
 import { useIsMobile } from '@jobstash/shared/state';
 import { getProjectDetails } from '@jobstash/projects/data';
@@ -30,6 +31,8 @@ export const useProjectList = (initProject: ProjectInfo | null) => {
     hasNextPage,
   } = useProjectListQuery();
 
+  const mwVersion = getLSMwVersion();
+
   // Prefetch project items
   // (react-query breaking change v5 - removed onSuccess)
   useEffect(() => {
@@ -38,12 +41,12 @@ export const useProjectList = (initProject: ProjectInfo | null) => {
       for (const projectListItem of projectListItems) {
         const { id } = projectListItem;
         queryClient.prefetchQuery({
-          queryKey: ['project-details', id],
+          queryKey: [mwVersion, 'project-details', id],
           queryFn: () => getProjectDetails(id),
         });
       }
     }
-  }, [data, isSuccess]);
+  }, [data, isSuccess, mwVersion, queryClient]);
 
   const [activeProject, setActiveProject] = useAtom(activeProjectIdAtom);
 

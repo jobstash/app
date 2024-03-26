@@ -11,6 +11,7 @@ export * from './lib/get-ecosystem-header';
 export * from './lib/get-ecosystem-subdomain';
 export * from './lib/get-frontend-url';
 export * from './lib/get-google-logo-url';
+export * from './lib/get-localstorage-value';
 export * from './lib/get-logo-url';
 export * from './lib/get-plural-text';
 export * from './lib/get-website-text';

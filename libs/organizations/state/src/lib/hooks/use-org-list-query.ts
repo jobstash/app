@@ -4,6 +4,7 @@ import { InfiniteData, useInfiniteQuery } from '@tanstack/react-query';
 
 import { OrgListQueryPage } from '@jobstash/organizations/core';
 import { createJobsFilterParamsObj } from '@jobstash/jobs/utils';
+import { getLSMwVersion } from '@jobstash/shared/utils';
 
 import { getOrgList } from '@jobstash/organizations/data';
 
@@ -12,14 +13,16 @@ export const useOrgListQuery = () => {
 
   const filterParamsObj = createJobsFilterParamsObj(router.query);
 
+  const mwVersion = getLSMwVersion();
+
   return useInfiniteQuery<
     OrgListQueryPage,
     Error,
     InfiniteData<OrgListQueryPage, number>,
-    [string, Record<string, string>],
+    [string | null, string, Record<string, string>],
     number
   >({
-    queryKey: ['org-list', filterParamsObj],
+    queryKey: [mwVersion, 'org-list', filterParamsObj],
     queryFn: async ({ pageParam }) => getOrgList(pageParam, filterParamsObj),
     initialPageParam: 1,
     staleTime: 1000 * 60 * 60, // 1 hr

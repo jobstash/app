@@ -1,7 +1,11 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { UpdateApplicantListPayload } from '@jobstash/profile/core';
-import { notifError, notifSuccess } from '@jobstash/shared/utils';
+import {
+  getLSMwVersion,
+  notifError,
+  notifSuccess,
+} from '@jobstash/shared/utils';
 
 import { updateApplicantList } from '@jobstash/profile/data';
 
@@ -12,6 +16,8 @@ interface Props {
 
 export const useUpdateApplicantList = ({ orgId, successCb }: Props) => {
   const queryClient = useQueryClient();
+
+  const mwVersion = getLSMwVersion();
 
   return useMutation({
     mutationFn: (payload: UpdateApplicantListPayload) =>
@@ -25,7 +31,7 @@ export const useUpdateApplicantList = ({ orgId, successCb }: Props) => {
 
       for (const list of ['new', 'shortlisted', 'archived']) {
         queryClient.invalidateQueries({
-          queryKey: ['job-applicants', orgId, list],
+          queryKey: [mwVersion, 'job-applicants', orgId, list],
         });
       }
 

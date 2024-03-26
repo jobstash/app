@@ -4,6 +4,8 @@ import { useEffect } from 'react';
 import { LoadingPage, MagicLinkPage } from '@jobstash/shared/pages';
 import { useQueryClient } from '@tanstack/react-query';
 
+import { getLSMwVersion } from '@jobstash/shared/utils';
+
 import { useOrgSendMagicLinkToken } from '@jobstash/auth/state';
 
 const MagicLoginCallbackPage = () => {
@@ -15,16 +17,18 @@ const MagicLoginCallbackPage = () => {
   const { isLoading, isError, isSuccess } =
     useOrgSendMagicLinkToken(tokenParam);
 
+  const mwVersion = getLSMwVersion();
+
   // Invalidate check-wallet, handle org redirect
   // (react-query breaking change v5 - removed onSuccess)
   useEffect(() => {
     if (isSuccess) {
       queryClient.invalidateQueries({
-        queryKey: ['check-wallet'],
+        queryKey: [mwVersion, 'check-wallet'],
       });
       router.push('/profile');
     }
-  }, [isSuccess, queryClient, router]);
+  }, [isSuccess, mwVersion, queryClient, router]);
 
   if (isLoading) return <LoadingPage />;
 

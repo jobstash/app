@@ -3,7 +3,12 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAccount } from 'wagmi';
 
 import { type ProfileShowcasePayload } from '@jobstash/profile/core';
-import { notifError, notifLoading, notifSuccess } from '@jobstash/shared/utils';
+import {
+  getLSMwVersion,
+  notifError,
+  notifLoading,
+  notifSuccess,
+} from '@jobstash/shared/utils';
 
 import { postProfileShowcase } from '@jobstash/profile/data';
 
@@ -12,6 +17,8 @@ const TOAST_ID = 'showcase-mutation';
 export const useProfileShowcaseMutation = (onSuccessCb: () => void) => {
   const { address } = useAccount();
   const queryClient = useQueryClient();
+
+  const mwVersion = getLSMwVersion();
 
   const { isPending: isLoading, mutate } = useMutation({
     mutationFn: (payload: ProfileShowcasePayload) =>
@@ -34,7 +41,7 @@ export const useProfileShowcaseMutation = (onSuccessCb: () => void) => {
 
       queryClient.setQueryData(['profile-showcase', address], vars.showcase);
       queryClient.invalidateQueries({
-        queryKey: ['profile-showcase', address],
+        queryKey: [mwVersion, 'profile-showcase', address],
       });
 
       onSuccessCb();

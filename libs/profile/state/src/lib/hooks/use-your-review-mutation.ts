@@ -3,7 +3,11 @@ import { useAtom } from 'jotai';
 import { useAccount } from 'wagmi';
 
 import { type ProfileOrgReviewPayload } from '@jobstash/profile/core';
-import { notifError, notifSuccess } from '@jobstash/shared/utils';
+import {
+  getLSMwVersion,
+  notifError,
+  notifSuccess,
+} from '@jobstash/shared/utils';
 
 import { postProfileOrgReview } from '@jobstash/profile/data';
 
@@ -19,6 +23,8 @@ export const useYourReviewMutation = () => {
     activeProfileOrgReviewAtom,
   );
 
+  const mwVersion = getLSMwVersion();
+
   const { isPending: isLoading, mutate } = useMutation({
     mutationFn: (payload: ProfileOrgReviewPayload) =>
       postProfileOrgReview(payload),
@@ -32,7 +38,7 @@ export const useYourReviewMutation = () => {
 
       // Invalidate profile-org-review-list
       queryClient.invalidateQueries({
-        queryKey: ['profile-org-review-list', address],
+        queryKey: [mwVersion, 'profile-org-review-list', address],
       });
 
       if (activeProfileOrgReview) {
@@ -45,7 +51,7 @@ export const useYourReviewMutation = () => {
 
       // Invalidate org details
       queryClient.invalidateQueries({
-        queryKey: ['org-details', payload.orgId],
+        queryKey: [mwVersion, 'org-details', payload.orgId],
       });
     },
     onError(error) {

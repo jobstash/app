@@ -4,13 +4,15 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { type CheckWalletFlow } from '@jobstash/auth/core';
 import { MW_URL } from '@jobstash/shared/core';
-import { sentryMessage } from '@jobstash/shared/utils';
+import { getLSMwVersion, sentryMessage } from '@jobstash/shared/utils';
 
 import { useAuthContext } from './use-auth-context';
 
 export const useUpdateFlow = (successRoute?: string) => {
   const { push } = useRouter();
   const queryClient = useQueryClient();
+
+  const mwVersion = getLSMwVersion();
 
   const { refetch } = useAuthContext();
   const {
@@ -49,7 +51,7 @@ export const useUpdateFlow = (successRoute?: string) => {
       // TODO: Notification ?
     },
     onSettled() {
-      queryClient.invalidateQueries({ queryKey: ['check-wallet'] });
+      queryClient.invalidateQueries({ queryKey: [mwVersion, 'check-wallet'] });
     },
   });
 

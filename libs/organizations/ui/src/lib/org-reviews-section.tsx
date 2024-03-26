@@ -49,8 +49,8 @@ const AggregateSection = ({ org }: { org: OrgDetails }) => (
       </Text>
 
       <Text color="dimmed">
-        If you know anyone who works or worked here here, please invite them to review this organization. 
-        It's easy: Share the link above with them!
+        If you know anyone who works or worked here here, please invite them to
+        review this organization. It&#39;s easy: Share the link above with them!
       </Text>
 
       <hr className="border-t border-white/10" />
@@ -74,8 +74,8 @@ const LeaveReviewSection = ({ org }: { org: OrgDetails }) => (
       </Text>
 
       <Text color="dimmed">
-        If you know anyone who works or worked here here, please invite them to review this organization. 
-        It's easy: Share the link above with them!
+        If you know anyone who works or worked here here, please invite them to
+        review this organization. It&#39;s easy: Share the link above with them!
       </Text>
 
       <div className="flex gap-x-4">
