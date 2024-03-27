@@ -87,16 +87,6 @@ export const ProfileOrgForm = () => {
   const onSubmit = () => {
     resetErrors();
 
-    // Manual validation (for now - in the future use schema validation instead)
-    if (linkedin.length === 0) {
-      setErrors((prev) => ({ ...prev, linkedin: 'LinkedIn is required' }));
-      notifError({
-        title: 'LinkedIn is required',
-        message: 'Please provide info for required fields',
-      });
-      return;
-    }
-
     mutate({
       linkedin,
       calendly,
@@ -148,7 +138,6 @@ export const ProfileOrgForm = () => {
           <Tab key="contact" title="Contact Info">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
               <Input
-                isRequired
                 isDisabled={isPending}
                 label="LinkedIn Page URL"
                 description="Showcase your organization's professional profile."
