@@ -7,6 +7,7 @@ import { SiweMessage } from 'siwe';
 
 import { CHECK_WALLET_ROUTE, redirectFlowsSet } from '@jobstash/auth/core';
 import { MW_URL } from '@jobstash/shared/core';
+import { getLSMwVersion } from '@jobstash/shared/utils';
 
 import { getCheckWallet } from '@jobstash/auth/data';
 
@@ -19,6 +20,8 @@ export const WalletProvider = ({ children }: Props) => {
   const queryClient = useQueryClient();
 
   const signOutRef = useRef(false);
+
+  const mwVersion = getLSMwVersion();
 
   return (
     <SIWEProvider
@@ -82,7 +85,14 @@ export const WalletProvider = ({ children }: Props) => {
       }}
       onSignIn={async () => {
         const checkWalletResponse = await getCheckWallet();
-        queryClient.setQueryData(['check-wallet'], checkWalletResponse);
+        console.log({ checkWalletResponse });
+        queryClient.setQueryData(
+          [mwVersion, 'check-wallet'],
+          checkWalletResponse,
+        );
+        queryClient.invalidateQueries({
+          queryKey: [mwVersion, 'check-wallet'],
+        });
 
         const {
           data: { flow },
