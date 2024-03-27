@@ -168,3 +168,8 @@ button:focus {
   display: inline-block;
   animation: 35s slides infinite linear;
 }
+
+#shader-web-background {
+  z-index: 10 !important;
+  opacity: 0.2
+}
