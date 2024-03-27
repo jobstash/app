@@ -139,11 +139,8 @@ setTimeout(() => {
     )
     .then(maybeAddActions);
 
-  console.log('running shader');
-
   shaderWebBackground.shade({
     onInit: (ctx) => {
-      console.log('init shader');
       mouseX = ctx.cssWidth / 2;
       mouseY = ctx.cssHeight / 2;
       oldScrollY = window.scrollY;
@@ -151,7 +148,6 @@ setTimeout(() => {
       drawCenterY = 0;
     },
     onResize: (width, height) => {
-      console.log('resize shader');
       minDimension = Math.min(width, height);
       if (width >= height) {
         screenRatioHalfX = (height / width) * 0.5;
