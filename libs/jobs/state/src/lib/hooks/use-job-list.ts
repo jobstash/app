@@ -44,7 +44,7 @@ export const useJobList = (initJob: JobPost | null) => {
     if (data && isSuccess) {
       const jobPosts = data.pages.flatMap((d) => d.data);
       for (const job of jobPosts) {
-        queryClient.setQueryData(['job-post', job.shortUUID], job);
+        queryClient.setQueryData([mwVersion, 'job-post', job.shortUUID], job);
         if (job.organization.projects.length > 0) {
           const projectId = job.organization.projects[0].id;
           queryClient.prefetchQuery({

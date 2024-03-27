@@ -19,9 +19,9 @@ export const useDevProfileInfoMutation = () => {
   const { address } = useAccount();
   const queryClient = useQueryClient();
 
-  const profileInfoQueryKey = ['dev-profile-info', address];
-
   const mwVersion = getLSMwVersion();
+
+  const profileInfoQueryKey = [mwVersion, 'dev-profile-info', address];
 
   const { isPending: isLoadingMutation, mutate } = useMutation({
     mutationFn: ({ payload }: MutationPayload) => postDevProfileInfo(payload),

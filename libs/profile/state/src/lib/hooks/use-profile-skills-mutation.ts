@@ -42,7 +42,10 @@ export const useProfileSkillsMutation = () => {
         message,
       });
 
-      queryClient.setQueryData(['profile-skills', address], vars.skills);
+      queryClient.setQueryData(
+        [mwVersion, 'profile-skills', address],
+        vars.skills,
+      );
 
       // Sync active profile repo skills
       // Active repo is only assigned on initial load or when selection changes

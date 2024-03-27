@@ -24,7 +24,7 @@ export const useAllJobsMutation = (initAllJobs?: JobsUpdateableFields[]) => {
         const newData = initAllJobs.map((data) =>
           data.shortUUID === vars.shortUUID ? vars : data,
         );
-        queryClient.setQueryData(['all-jobs'], newData);
+        queryClient.setQueryData([mwVersion, 'all-jobs'], newData);
       }
 
       notifSuccess({

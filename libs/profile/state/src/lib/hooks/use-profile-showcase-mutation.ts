@@ -39,7 +39,10 @@ export const useProfileShowcaseMutation = (onSuccessCb: () => void) => {
         message,
       });
 
-      queryClient.setQueryData(['profile-showcase', address], vars.showcase);
+      queryClient.setQueryData(
+        [mwVersion, 'profile-showcase', address],
+        vars.showcase,
+      );
       queryClient.invalidateQueries({
         queryKey: [mwVersion, 'profile-showcase', address],
       });

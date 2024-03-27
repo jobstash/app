@@ -6,7 +6,11 @@ import { useDisconnect } from 'wagmi';
 
 import { CHECK_WALLET_ROLES, GithubLoginPayload } from '@jobstash/auth/core';
 import { SENTRY_MW_NON_200_RESPONSE } from '@jobstash/shared/core';
-import { notifError, sentryMessage } from '@jobstash/shared/utils';
+import {
+  getLSMwVersion,
+  notifError,
+  sentryMessage,
+} from '@jobstash/shared/utils';
 
 import { getCheckWallet, githubLogin } from '@jobstash/auth/data';
 
@@ -20,11 +24,13 @@ export const useGithubLogin = () => {
 
   const queryClient = useQueryClient();
 
+  const mwVersion = getLSMwVersion();
+
   const { mutate, isPending } = useMutation({
     mutationFn: (payload: GithubLoginPayload) => githubLogin(payload),
     async onSuccess() {
       const checkWalletData = await getCheckWallet();
-      queryClient.setQueryData(['check-wallet'], checkWalletData);
+      queryClient.setQueryData([mwVersion, 'check-wallet'], checkWalletData);
 
       router.push('/profile');
     },

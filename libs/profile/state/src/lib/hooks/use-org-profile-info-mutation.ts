@@ -20,9 +20,9 @@ export const useOrgProfileInfoMutation = () => {
     flow === CHECK_WALLET_FLOWS.ORG_PROFILE ||
     flow === CHECK_WALLET_FLOWS.ORG_APPROVAL;
 
-  const profileInfoQueryKey = ['org-profile-info', address];
-
   const mwVersion = getLSMwVersion();
+
+  const profileInfoQueryKey = [mwVersion, 'org-profile-info', address];
 
   const { isPending, mutate } = useMutation({
     mutationFn: (payload: OrgProfileInfoPayload) => postOrgProfileInfo(payload),

@@ -35,7 +35,7 @@ export const useUpdateFlow = (successRoute?: string) => {
         data: { role, flow },
       } = data;
 
-      queryClient.setQueryData(['check-wallet'], {
+      queryClient.setQueryData([mwVersion, 'check-wallet'], {
         success: true,
         message: 'Wallet checked successfully',
         data: { role, flow },
