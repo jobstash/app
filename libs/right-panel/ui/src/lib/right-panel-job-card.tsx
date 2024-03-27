@@ -1,25 +1,13 @@
-/* eslint-disable camelcase */
 import { memo } from 'react';
 
-import { useModal } from 'connectkit';
-
-import { CHECK_WALLET_ROLES } from '@jobstash/auth/core';
-import {
-  GA_EVENT_ACTION,
-  JobInfo,
-  REPORT_UI_CTX,
-  type Tag,
-} from '@jobstash/shared/core';
+import { JobInfo, REPORT_UI_CTX, type Tag } from '@jobstash/shared/core';
 import { slugify } from '@jobstash/shared/utils';
-import { gaEvent } from '@jobstash/shared/utils';
-
-import { useAuthContext } from '@jobstash/auth/state';
-import { useSendJobApplyInteractionMutation } from '@jobstash/jobs/state';
 
 import { CardMenu, Heading, ReportMenuItem } from '@jobstash/shared/ui';
 
 import RightPanelCardBorder from './right-panel-card-border';
 import RightPanelCta from './right-panel-cta';
+import { RightPanelJobCardApplyButton } from './right-panel-job-card-apply-button';
 import RightPanelJobCardDescriptions from './right-panel-job-card-descriptions';
 import RightPanelJobCardSets from './right-panel-job-card-sets';
 import RightPanelJobCardSkills from './right-panel-job-card-skills';
@@ -44,44 +32,6 @@ const RightPanelJobCard = ({
     classification,
     organization: { hasUser },
   } = jobInfo;
-
-  const { role } = useAuthContext();
-  const isDev = role === CHECK_WALLET_ROLES.DEV;
-
-  const { mutate: sendJobApplyInteraction } =
-    useSendJobApplyInteractionMutation();
-
-  const { setOpen } = useModal();
-
-  const openApplyPage = () => {
-    if (!isDev && hasUser) {
-      setOpen(true);
-      return;
-    }
-
-    if (typeof window !== 'undefined') {
-      window.open(url, '_blank');
-    }
-  };
-
-  const sendAnalyticsEvent = () => {
-    gaEvent(GA_EVENT_ACTION.JOB_APPLY, {
-      event_category: 'job',
-      job_shortuuid: shortUUID,
-      job_classification: classification ?? '',
-      organization_name: orgName,
-    });
-  };
-
-  const onClickApplyJob = () => {
-    sendAnalyticsEvent();
-
-    if (isDev) {
-      sendJobApplyInteraction(shortUUID);
-    }
-
-    openApplyPage();
-  };
 
   const onClickExploreJob = () => {
     const link = `/jobs/${slugify(`${orgName} ${title}`)}-${shortUUID}/details`;
@@ -110,7 +60,13 @@ const RightPanelJobCard = ({
 
           <RightPanelJobCardSets jobCardSet={jobInfo} />
 
-          <RightPanelCta text="Apply for this job" onClick={onClickApplyJob} />
+          <RightPanelJobCardApplyButton
+            url={url}
+            shortUUID={shortUUID}
+            orgName={orgName}
+            hasUser={hasUser}
+            classification={classification}
+          />
         </div>
 
         <div className="flex h-4 flex-col justify-center">
