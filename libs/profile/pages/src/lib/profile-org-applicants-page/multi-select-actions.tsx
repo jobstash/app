@@ -1,9 +1,8 @@
 import { useState } from 'react';
 
-import { Button } from '@nextui-org/button';
-import { Tooltip } from '@nextui-org/tooltip';
-
 import { UpdateApplicantListMutFn } from '@jobstash/profile/core';
+
+import { TableMultiSelectActionButton } from '@jobstash/profile/ui';
 
 interface Props {
   activeList: 'all' | 'new' | 'shortlisted' | 'archived';
@@ -38,9 +37,9 @@ export const MultiSelectActions = ({
   return (
     <div className="flex items-center gap-4">
       {activeList !== 'shortlisted' && (
-        <ActionButton
+        <TableMultiSelectActionButton
           isLoading={isPending && lastClicked === 'shortlisted'}
-          hasNoApplicants={hasNoApplicants}
+          isDisabledTooltip={hasNoApplicants}
           isDisabled={hasNoApplicants || isPending}
           buttonText="Bulk Shortlist"
           tooltipText={{ enabled: 'Shortlist selected applicants' }}
@@ -49,9 +48,9 @@ export const MultiSelectActions = ({
       )}
 
       {activeList !== 'archived' && (
-        <ActionButton
+        <TableMultiSelectActionButton
           isLoading={isPending && lastClicked === 'archived'}
-          hasNoApplicants={hasNoApplicants}
+          isDisabledTooltip={hasNoApplicants}
           isDisabled={hasNoApplicants || isPending}
           buttonText="Bulk Archive"
           tooltipText={{ enabled: 'Archive selected applicants' }}
@@ -59,49 +58,12 @@ export const MultiSelectActions = ({
         />
       )}
 
-      <ActionButton
+      <TableMultiSelectActionButton
         isDisabled
-        hasNoApplicants={hasNoApplicants}
+        isDisabledTooltip={hasNoApplicants}
         buttonText="Export CSV"
         tooltipText={{ enabled: 'Download CSV for selected applicants' }}
       />
     </div>
   );
 };
-
-const ActionButton = ({
-  isLoading,
-  hasNoApplicants,
-  isDisabled,
-  buttonText,
-  tooltipText,
-  onClick,
-}: {
-  isLoading?: boolean;
-  hasNoApplicants: boolean;
-  isDisabled: boolean;
-  buttonText: string;
-  tooltipText: { enabled: string; disabled?: string };
-  onClick?: () => void;
-}) =>
-  isLoading ? (
-    <Button isDisabled isLoading>
-      {buttonText}
-    </Button>
-  ) : (
-    <Tooltip
-      isDisabled={hasNoApplicants}
-      content={
-        isDisabled
-          ? tooltipText.disabled ?? 'Select multiple applicants first'
-          : tooltipText.enabled
-      }
-      placement="top-start"
-    >
-      <div>
-        <Button isDisabled={isDisabled} onClick={onClick}>
-          {buttonText}
-        </Button>
-      </div>
-    </Tooltip>
-  );

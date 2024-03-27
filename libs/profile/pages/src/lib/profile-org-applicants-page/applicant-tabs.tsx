@@ -3,6 +3,8 @@ import { Dispatch, SetStateAction } from 'react';
 import { Spinner } from '@nextui-org/react';
 import { Tab, Tabs } from '@nextui-org/tabs';
 
+import { getTableTabCountText } from '@jobstash/profile/utils';
+
 import { useJobApplicants } from '@jobstash/jobs/state';
 import { useOrgProfileInfoContext } from '@jobstash/profile/state';
 
@@ -38,21 +40,18 @@ export const ApplicantTabs = ({ activeList, setActiveList }: Props) => {
           setActiveList(key as 'all' | 'shortlisted' | 'archived')
         }
       >
-        <Tab key="all" title={getCountText('All', allData?.length)} />
-        <Tab key="new" title={getCountText('New', newData?.length)} />
+        <Tab key="all" title={getTableTabCountText('All', allData?.length)} />
+        <Tab key="new" title={getTableTabCountText('New', newData?.length)} />
         <Tab
           key="shortlisted"
-          title={getCountText('Shortlisted', shortlistedData?.length)}
+          title={getTableTabCountText('Shortlisted', shortlistedData?.length)}
         />
         <Tab
           key="archived"
-          title={getCountText('Archived', archivedData?.length)}
+          title={getTableTabCountText('Archived', archivedData?.length)}
         />
       </Tabs>
       {isLoading && <Spinner color="white" size="sm" />}
     </div>
   );
 };
-
-const getCountText = (prefix: string, count?: number) =>
-  `${prefix}${typeof count === 'number' ? ` (${count})` : ''}`;

@@ -12,13 +12,12 @@ import { cn } from '@jobstash/shared/utils';
 
 import { useOrgProfileInfoContext } from '@jobstash/profile/state';
 
+import { TablePagination, TableSearchInput } from '@jobstash/profile/ui';
 import { Loader, Text } from '@jobstash/shared/ui';
 
 import { ApplicantTabs } from './applicant-tabs';
 import { MultiSelectActions } from './multi-select-actions';
 import { JobSelection } from './table-job-selection';
-import { TablePagination } from './table-pagination';
-import { TableSearchInput } from './table-search-input';
 import { useApplicantsTable } from './use-applicants-table';
 
 export const ApplicantsTable = () => {
@@ -50,7 +49,7 @@ export const ApplicantsTable = () => {
 
   if (!profileInfoData) return null;
 
-  const hasNoApplicants = items.length === 0;
+  const isEmpty = items.length === 0;
 
   return (
     <div className="flex flex-col gap-6 px-4">
@@ -67,7 +66,7 @@ export const ApplicantsTable = () => {
               isLoading={isLoading}
               value={searchFilter}
               setValue={setSearchFilter}
-              isDisabled={hasNoApplicants}
+              isDisabled={isEmpty}
               onChange={onSearchChange}
             />
 
@@ -76,7 +75,7 @@ export const ApplicantsTable = () => {
               items={jobs}
               inputValue={jobSelection.input}
               selectedKey={jobSelection.selectedKey}
-              isDisabled={hasNoApplicants}
+              isDisabled={isEmpty}
               onInputChange={onJobSelectionInputChange}
               onSelectionChange={onJobSelectionChange}
             />
@@ -133,7 +132,7 @@ export const ApplicantsTable = () => {
               </TableBody>
             </Table>
 
-            {!hasNoApplicants && (
+            {!isEmpty && (
               <TablePagination
                 page={page}
                 total={totalPageCount}

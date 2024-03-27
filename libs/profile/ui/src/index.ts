@@ -1,5 +1,6 @@
 // Components
 export * from './lib/account-card';
+export * from './lib/coming-soon-cell';
 export * from './lib/compensation-form';
 export { default as ProfileGotItCard } from './lib/profile-got-it-card';
 export * from './lib/profile-header';
@@ -20,6 +21,9 @@ export { default as ProfileSubHeader } from './lib/profile-sub-header';
 export * from './lib/ratings';
 export { default as ProfileShowcaseSection } from './lib/showcase-section';
 export { default as ProfileSkillsSection } from './lib/skills-section';
+export * from './lib/table-multi-select-action-button';
+export * from './lib/table-pagination';
+export * from './lib/table-search-input';
 export * from './lib/tags-used';
 export * from './lib/your-contribution';
 export * from './lib/your-review';

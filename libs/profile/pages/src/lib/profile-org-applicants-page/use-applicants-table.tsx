@@ -13,8 +13,13 @@ import { Selection } from '@nextui-org/react';
 import { Tooltip } from '@nextui-org/tooltip';
 
 import { JobApplicant } from '@jobstash/jobs/core';
-import { CONTACT_DEFAULT_OPTIONS } from '@jobstash/profile/core';
-import { capitalize, cn } from '@jobstash/shared/utils';
+import {
+  checkSearchFilterValue,
+  getContactLink,
+  PreferredContact,
+  sanitizeShowcaseUrl,
+} from '@jobstash/profile/utils';
+import { capitalize } from '@jobstash/shared/utils';
 
 import { useJobApplicants } from '@jobstash/jobs/state';
 import {
@@ -22,6 +27,7 @@ import {
   useUpdateApplicantList,
 } from '@jobstash/profile/state';
 
+import { ComingSoonCell } from '@jobstash/profile/ui';
 import { LogoTitle, Text } from '@jobstash/shared/ui';
 
 import { ActionButton } from './action-button';
@@ -93,7 +99,7 @@ export const useApplicantsTable = () => {
 
     if (searchFilter) {
       result = applicants.filter((applicant) =>
-        checkFilterValue(
+        checkSearchFilterValue(
           searchFilter,
           applicant.user.username,
           applicant.user.email,
@@ -112,7 +118,7 @@ export const useApplicantsTable = () => {
     if (!jobSelection.input) return jobs;
 
     return jobs.filter((job) =>
-      checkFilterValue(jobSelection.input, job.title, job.classification),
+      checkSearchFilterValue(jobSelection.input, job.title, job.classification),
     );
   }, [jobSelection.input, jobs]);
 
@@ -215,7 +221,7 @@ export const useApplicantsTable = () => {
                 showcases.map(({ id, label, url }) => (
                   <Link
                     key={id}
-                    href={url}
+                    href={sanitizeShowcaseUrl(url)}
                     size="sm"
                     underline="hover"
                     className="font-semibold text-white/80"
@@ -236,7 +242,7 @@ export const useApplicantsTable = () => {
         } = applicant;
 
         if (skills.length === 0) {
-          return <ComingSoon isCentered={false} />;
+          return <ComingSoonCell isCentered={false} />;
         }
 
         return (
@@ -372,7 +378,7 @@ export const useApplicantsTable = () => {
         );
       }
 
-      return <ComingSoon />;
+      return <ComingSoonCell />;
     },
     [isPending, mutate, profileInfoData?.orgId],
   );
@@ -423,6 +429,12 @@ export const useApplicantsTable = () => {
   };
 };
 
+type JobSelection = {
+  input: string;
+  selectedKey: string | null;
+  current: JobApplicant['job'] | null;
+};
+
 type CustomColumnKeys =
   | 'job'
   | 'user'
@@ -465,62 +477,3 @@ const centeredSet = new Set([
 ]);
 
 const ROWS_PER_PAGE = 8;
-
-const checkFilterValue = (
-  searchValue: string,
-  ...applicantValues: (string | null)[]
-) => {
-  const searchString = searchValue.toLowerCase();
-  return applicantValues.some((value) =>
-    value?.toLowerCase().includes(searchString),
-  );
-};
-
-type JobSelection = {
-  input: string;
-  selectedKey: string | null;
-  current: JobApplicant['job'] | null;
-};
-
-type PreferredContact = typeof CONTACT_DEFAULT_OPTIONS[number];
-
-const getContactLink = (preferred: PreferredContact, handle: string | null) => {
-  if (!handle) return null;
-
-  switch (preferred) {
-    case 'Email': {
-      return `mailto:${handle}`;
-    }
-
-    case 'Telegram': {
-      return getContactLinkUrl('telegram.me', handle);
-    }
-
-    case 'Twitter': {
-      return getContactLinkUrl('twitter.com', handle);
-    }
-
-    case 'Discord': {
-      return getContactLinkUrl('discord.gg', handle);
-    }
-
-    default: {
-      return null;
-    }
-  }
-};
-
-const getContactLinkUrl = (domain: string, handle: string) => {
-  if (
-    handle.toLowerCase().includes('https://') ||
-    handle.toLowerCase().includes('http://')
-  )
-    return handle;
-  return `https://${domain}/${handle}`;
-};
-
-const ComingSoon = ({ isCentered = true }: { isCentered?: boolean }) => (
-  <div className={cn({ 'flex w-full justify-center': isCentered })}>
-    <Text color="dimmed">Coming Soon</Text>
-  </div>
-);
