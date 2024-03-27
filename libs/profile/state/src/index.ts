@@ -11,6 +11,7 @@ export * from './lib/hooks/use-all-jobs-query';
 export * from './lib/hooks/use-compensation-form';
 export * from './lib/hooks/use-dev-profile-info';
 export * from './lib/hooks/use-dev-profile-info-mutation';
+export * from './lib/hooks/use-dev-talents';
 export * from './lib/hooks/use-org-profile-info';
 export * from './lib/hooks/use-org-profile-info-mutation';
 export * from './lib/hooks/use-profile-delete-mutation';

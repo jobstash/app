@@ -1,4 +1,5 @@
 import { CHECK_WALLET_FLOWS } from '@jobstash/auth/core';
+import { IS_DEBUG } from '@jobstash/shared/core';
 import { cn } from '@jobstash/shared/utils';
 
 import { useAuthContext } from '@jobstash/auth/state';
@@ -24,6 +25,13 @@ const SidebarOrgSection = ({ isMobile }: Props) => {
     tabs.push({
       text: 'Applicants',
       path: '/profile/org/applicants',
+    });
+  }
+
+  if (IS_DEBUG) {
+    tabs.push({
+      text: 'Available Talents',
+      path: '/profile/org/talents',
     });
   }
 

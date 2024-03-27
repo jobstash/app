@@ -8,6 +8,8 @@ import {
   devProfileInfoPayloadSchema,
   devProfileInfoResponseSchema,
   devProfileInfoSchema,
+  devTalentResponseSchema,
+  devTalentSchema,
   orgProfileInfoPayloadSchema,
   orgProfileInfoResponseSchema,
   orgProfileInfoSchema,
@@ -116,3 +118,9 @@ export type ProfileOrgReviewPayload = Infer<
 export type ProfileOrgReviewResponse = Infer<
   typeof profileOrgReviewResponseSchema
 >;
+
+export type DevTalent = Infer<typeof devTalentSchema>;
+export type DevTalentResponse = Infer<typeof devTalentResponseSchema>;
+
+export type TableListOption = 'all' | 'new' | 'shortlisted' | 'archived';
+export type UpdateTableListOption = 'shortlisted' | 'archived';

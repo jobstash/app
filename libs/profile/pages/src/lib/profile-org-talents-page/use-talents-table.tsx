@@ -1,18 +1,12 @@
 /* eslint-disable complexity */
 import { useCallback, useMemo, useState } from 'react';
 
-import {
-  ArchiveBoxIcon,
-  CalendarDaysIcon,
-  HeartIcon,
-} from '@heroicons/react/16/solid';
 import { Button } from '@nextui-org/button';
 import { Chip } from '@nextui-org/chip';
 import { Link } from '@nextui-org/link';
 import { Selection } from '@nextui-org/react';
-import { Tooltip } from '@nextui-org/tooltip';
 
-import { JobApplicant } from '@jobstash/jobs/core';
+import { DevTalent } from '@jobstash/profile/core';
 import {
   checkSearchFilterValue,
   getContactLink,
@@ -21,106 +15,48 @@ import {
 } from '@jobstash/profile/utils';
 import { capitalize } from '@jobstash/shared/utils';
 
-import { useJobApplicants } from '@jobstash/jobs/state';
 import {
+  useDevTalents,
   useOrgProfileInfoContext,
-  useUpdateApplicantList,
 } from '@jobstash/profile/state';
 
 import { ComingSoonCell } from '@jobstash/profile/ui';
 import { LogoTitle, Text } from '@jobstash/shared/ui';
 
-import { ActionButton } from './action-button';
-
-export const useApplicantsTable = () => {
+export const useTalentsTable = () => {
   const { profileInfoData } = useOrgProfileInfoContext();
 
   const [activeList, setActiveList] = useState<
     'all' | 'new' | 'shortlisted' | 'archived'
   >('all');
-  const {
-    data,
-    isFetching,
-    isPending: isPendingQuery,
-  } = useJobApplicants(profileInfoData?.orgId, activeList);
+
+  const { data, isFetching, isPending: isPendingQuery } = useDevTalents();
 
   const [searchFilter, setSearchFilter] = useState('');
 
-  const [jobSelection, setJobSelection] = useState<JobSelection>({
-    input: '',
-    selectedKey: null,
-    current: null,
-  });
-
-  const onJobSelectionChange = (key: React.Key) => {
-    setJobSelection(() => {
-      const item = jobs.find((job) => job.shortUUID === key);
-      return {
-        input: item?.title || '',
-        selectedKey: key as string | null,
-        current: item ?? null,
-      };
-    });
-  };
-
-  const onJobSelectionInputChange = (value: string) => {
-    setJobSelection((prev) => ({
-      ...prev,
-      input: value,
-      selectedKey: value === '' ? null : prev.selectedKey,
-    }));
-  };
-
-  const applicants = useMemo(() => data ?? [], [data]);
-  const jobs = useMemo(() => {
-    if (applicants.length === 0) return [];
-
-    const jobMap = new Map<string, JobApplicant['job']>();
-
-    for (const applicant of applicants) {
-      const { job } = applicant;
-      jobMap.set(job.shortUUID, job);
-    }
-
-    return [...jobMap.values()];
-  }, [applicants]);
+  const talents = useMemo(() => data ?? [], [data]);
 
   const filteredItems = useMemo(() => {
-    if (!searchFilter && !jobSelection.current) return applicants;
+    if (!searchFilter) return talents;
 
-    let result = applicants;
-
-    if (jobSelection.current) {
-      result = applicants.filter(
-        (applicant) =>
-          applicant.job.shortUUID === jobSelection.current?.shortUUID,
-      );
-    }
+    let result = talents;
 
     if (searchFilter) {
-      result = applicants.filter((applicant) =>
+      result = talents.filter((talent) =>
         checkSearchFilterValue(
           searchFilter,
-          applicant.user.username,
-          applicant.user.email,
-          applicant.user.location.city,
-          applicant.user.location.country,
-          applicant.job.title,
-          applicant.job.classification,
+          talent.contact.value,
+          talent.email,
+          talent.location.city,
+          talent.location.country,
+          talent.username,
+          talent.wallet,
         ),
       );
     }
 
     return result;
-  }, [applicants, jobSelection, searchFilter]);
-
-  const filteredJobs = useMemo(() => {
-    if (!jobSelection.input) return jobs;
-
-    return jobs.filter((job) =>
-      checkSearchFilterValue(jobSelection.input, job.title, job.classification),
-    );
-  }, [jobSelection.input, jobs]);
+  }, [searchFilter, talents]);
 
   const [page, setPage] = useState(1);
   const totalPageCount = Math.ceil(filteredItems.length / ROWS_PER_PAGE);
@@ -141,27 +77,35 @@ export const useApplicantsTable = () => {
     }
   }, []);
 
-  const { isPending, mutate } = useUpdateApplicantList({
-    orgId: profileInfoData?.orgId ?? '',
-    successCb: () => setSelectedApplicants(new Set()),
-  });
+  const [selectedTalents, setSelectedTalents] = useState<Set<string>>(
+    new Set(),
+  );
+  const onTableSelectionChange = (keys: Selection) => {
+    if (keys === 'all') {
+      const allValues = new Set();
+      for (const applicant of filteredItems) {
+        allValues.add(applicant.wallet);
+      }
+
+      setSelectedTalents(allValues as Set<string>);
+    } else if ((keys as Set<string>).size > 0) {
+      setSelectedTalents(keys as Set<string>);
+    } else {
+      setSelectedTalents(new Set());
+    }
+  };
 
   const renderCell = useCallback(
-    (
-      applicant: JobApplicant,
-      columnKey: keyof JobApplicant | CustomColumnKeys,
-    ) => {
-      if (columnKey === 'user') {
+    (talent: DevTalent, columnKey: keyof DevTalent | CustomColumnKeys) => {
+      if (columnKey === 'talent') {
         const {
-          user: {
-            username,
-            avatar,
-            email,
-            location: { city, country },
-            contact,
-            showcases,
-          },
-        } = applicant;
+          username,
+          avatar,
+          email,
+          location: { city, country },
+          contact,
+          showcases,
+        } = talent;
 
         // Devs have either username or email;
         const title = username ?? (email as string);
@@ -204,7 +148,7 @@ export const useApplicantsTable = () => {
                       href={contactLink}
                       size="sm"
                       underline="hover"
-                      className="font-semibold text-white/80"
+                      className="font-semibold text-white/80 w-fit"
                       target="_blank"
                       rel="noopener noreferrer"
                     >
@@ -224,7 +168,7 @@ export const useApplicantsTable = () => {
                     href={sanitizeShowcaseUrl(url)}
                     size="sm"
                     underline="hover"
-                    className="font-semibold text-white/80 w-fit"
+                    className="font-semibold text-white/80"
                     target="_blank"
                     rel="noopener noreferrer"
                   >
@@ -237,9 +181,7 @@ export const useApplicantsTable = () => {
       }
 
       if (columnKey === 'skills') {
-        const {
-          user: { skills },
-        } = applicant;
+        const { skills } = talent;
 
         if (skills.length === 0) {
           return <ComingSoonCell isCentered={false} />;
@@ -257,14 +199,11 @@ export const useApplicantsTable = () => {
       }
 
       if (columnKey === 'attestations') {
-        const {
-          attestations: { upvotes, downvotes },
-        } = applicant;
         return (
           <div className="flex flex-col gap-2 w-full items-center">
             <div className="flex items-center gap-2 justify-end">
               <div className="min-w-[20px]">
-                <Text fw="bold">{upvotes ? `${upvotes}x` : 'TBD'}</Text>
+                <Text fw="bold">TBD</Text>
               </div>
               <span role="img" aria-label="upvote">
                 👍
@@ -272,39 +211,12 @@ export const useApplicantsTable = () => {
             </div>
             <div className="flex items-center gap-2 justify-end">
               <div className="min-w-[20px] flex justify-end">
-                <Text fw="bold">{downvotes ? `${downvotes}x` : 'TBD'}</Text>
+                <Text fw="bold">TBD</Text>
               </div>
               <span role="img" aria-label="downvote">
                 👎
               </span>
             </div>
-          </div>
-        );
-      }
-
-      if (columnKey === 'availableForWork') {
-        const isAvailable = applicant.user.availableForWork;
-        const color = isAvailable ? 'success' : 'default';
-        const text = isAvailable ? 'Yes' : 'No';
-        return (
-          <div className="flex w-full justify-center">
-            <Chip color={color}>{text}</Chip>
-          </div>
-        );
-      }
-
-      if (columnKey === 'job') {
-        const {
-          job: { title, classification },
-        } = applicant;
-        return (
-          <div className="flex flex-col gap-2">
-            <Text size="md" fw="bold">
-              {title}
-            </Text>
-            <Text size="sm" color="dimmed">
-              {classification}
-            </Text>
           </div>
         );
       }
@@ -350,65 +262,22 @@ export const useApplicantsTable = () => {
 
       if (columnKey === 'actions') {
         return (
-          <div className="flex flex-col gap-2">
-            <div className="flex gap-2 w-full items-center justify-center">
-              <Tooltip content="Calendar Invite" delay={0}>
-                <Button isIconOnly>
-                  <CalendarDaysIcon className="h-8 w-8" />
-                </Button>
-              </Tooltip>
-              <ActionButton
-                orgId={profileInfoData?.orgId}
-                wallet={applicant.user.wallet}
-                isPending={isPending}
-                mutate={mutate}
-                list="shortlisted"
-                icon={<HeartIcon className="h-8 w-8" />}
-              />
-              <ActionButton
-                orgId={profileInfoData?.orgId}
-                wallet={applicant.user.wallet}
-                isPending={isPending}
-                mutate={mutate}
-                list="archived"
-                icon={<ArchiveBoxIcon className="h-8 w-8" />}
-              />
-            </div>
+          <div className="flex w-full  justify-center">
+            <p>TODO</p>
           </div>
         );
       }
 
       return <ComingSoonCell />;
     },
-    [isPending, mutate, profileInfoData?.orgId],
+    [],
   );
-
-  const [selectedApplicants, setSelectedApplicants] = useState<Set<string>>(
-    new Set(),
-  );
-  const onTableSelectionChange = (keys: Selection) => {
-    if (keys === 'all') {
-      const allValues = new Set();
-      for (const applicant of filteredItems) {
-        allValues.add(applicant.user.wallet);
-      }
-
-      setSelectedApplicants(allValues as Set<string>);
-    } else if ((keys as Set<string>).size > 0) {
-      setSelectedApplicants(keys as Set<string>);
-    } else {
-      setSelectedApplicants(new Set());
-    }
-  };
 
   return {
+    profileInfoData,
     isLoading: !profileInfoData || !data || isPendingQuery || isFetching,
-
     totalApplicantCount: data?.length,
     items,
-    renderCell,
-    columns,
-    centeredSet,
     searchFilter,
     setSearchFilter,
     onSearchChange,
@@ -416,46 +285,29 @@ export const useApplicantsTable = () => {
     setPage,
     totalPageCount,
     pageRowCount: ROWS_PER_PAGE,
-    jobs: filteredJobs,
-    jobSelection,
-    onJobSelectionChange,
-    onJobSelectionInputChange,
-    selectedApplicants,
+    columns,
+    centeredSet,
+    renderCell,
+    selectedTalents,
     onTableSelectionChange,
     activeList,
     setActiveList,
-    isPending,
-    mutate,
   };
 };
 
-type JobSelection = {
-  input: string;
-  selectedKey: string | null;
-  current: JobApplicant['job'] | null;
-};
+const ROWS_PER_PAGE = 8;
 
 type CustomColumnKeys =
-  | 'job'
-  | 'user'
-  | 'skills'
-  | 'cryptoVerticals'
-  | 'availableForWork'
-  | 'cryptoAdjacent'
+  | 'talent'
+  | 'attestations'
   | 'hired'
   | 'interviewed'
   | 'fake'
   | 'actions';
 
 const columns = [
-  { key: 'job', label: 'Job' },
-  { key: 'user', label: 'User' },
+  { key: 'talent', label: 'Talent' },
   { key: 'skills', label: 'Skills' },
-  { key: 'cryptoVerticals', label: 'Crypto Verticals' },
-  { key: 'availableForWork', label: 'Available for Work' },
-  { key: 'cryptoNative', label: 'Crypto Native' },
-  { key: 'cryptoAdjacent', label: 'Crypto Adjacent' },
-  { key: 'oss', label: 'OSS' },
   { key: 'attestations', label: 'Attestations' },
   { key: 'hired', label: 'Hired' },
   { key: 'interviewed', label: 'Interviewed' },
@@ -464,16 +316,9 @@ const columns = [
 ];
 
 const centeredSet = new Set([
-  'cryptoVerticals',
-  'oss',
-  'cryptoNative',
-  'cryptoAdjacent',
-  'availableForWork',
   'actions',
   'attestations',
   'hired',
   'interviewed',
   'fake',
 ]);
-
-const ROWS_PER_PAGE = 8;

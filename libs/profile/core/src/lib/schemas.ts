@@ -256,3 +256,13 @@ export type UpdateApplicantListMutFn = UseMutateFunction<
   UpdateApplicantListPayload,
   unknown
 >;
+
+export const devTalentSchema = myzod.intersection(
+  devProfileInfoSchema,
+  myzod.object({
+    skills: myzod.array(profileSkillSchema),
+    showcases: myzod.array(profileShowcaseSchema),
+  }),
+);
+
+export const devTalentResponseSchema = myzod.array(devTalentSchema);

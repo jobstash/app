@@ -8,6 +8,7 @@ import { ERR_NOT_FOUND } from '@jobstash/shared/core';
 import { sentryMessage, withCSR } from '@jobstash/shared/utils';
 
 import { getJobPost } from '@jobstash/jobs/data';
+import { getSSRMwVersion } from '@jobstash/shared/data';
 
 export const getServerSideProps: GetServerSideProps<JobPostPageProps> = withCSR(
   async (ctx) => {
@@ -41,7 +42,10 @@ export const getServerSideProps: GetServerSideProps<JobPostPageProps> = withCSR(
     }
 
     const queryClient = new QueryClient();
-    queryClient.setQueryData(['job-post', shortUuid], initJob);
+
+    const mwVersion = await getSSRMwVersion('job-post-page getServerSideProps');
+
+    queryClient.setQueryData([mwVersion, 'job-post', shortUuid], initJob);
 
     const dehydratedState = dehydrate(queryClient);
 

@@ -1,3 +1,4 @@
+export * from './lib/get-available-devs';
 export * from './lib/get-dev-profile-info';
 export * from './lib/get-org-profile-info';
 export * from './lib/get-profile-org-review-list';

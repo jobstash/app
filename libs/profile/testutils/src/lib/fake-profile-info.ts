@@ -7,6 +7,7 @@ import {
 } from '@jobstash/profile/core';
 
 export const fakeProfileInfo = (): DevProfileInfo => ({
+  wallet: faker.finance.ethereumAddress(),
   avatar: fakeNullable(faker.image.avatar()),
   username: fakeNullable(faker.internet.userName()),
   email: fakeNullable(faker.internet.email()),
