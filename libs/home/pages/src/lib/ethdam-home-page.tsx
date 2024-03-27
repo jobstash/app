@@ -6,10 +6,28 @@ import { lato } from '@jobstash/shared/core';
 import { ExploreJobsButton, SubscribeTelegram } from '@jobstash/home/ui';
 import { PageWrapper } from '@jobstash/shared/ui';
 import { SideBar } from '@jobstash/sidebar/feature';
+import React, { useEffect } from 'react';
 
-export const EthdamHomePage = () => {
-  return (
-    <>
+  export const EthdamHomePage = () => {
+    useEffect(() => {
+  
+      // Return a cleanup function that will be called on component unmount.
+      return () => {
+        // This is the cleanup function.
+        const canvasElement = document.getElementById('shader-web-background');
+        if (canvasElement) {
+          // Remove the canvas element from the DOM.
+          canvasElement.remove();
+        }
+        
+        // Here, you can also include any additional cleanup logic you might need,
+        // such as stopping animations or deallocating resources used by your WebGL context.
+      };
+    }, []); // The empty dependency array means this effect runs once on mount and once on unmount.
+  
+    // Component JSX
+    return (
+      <>
       <Head>
         <title>Ethdam | JobStash</title>
         <script
