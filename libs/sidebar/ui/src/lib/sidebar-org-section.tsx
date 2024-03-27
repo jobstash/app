@@ -26,13 +26,13 @@ const SidebarOrgSection = ({ isMobile }: Props) => {
       text: 'Applicants',
       path: '/profile/org/applicants',
     });
-  }
 
-  if (IS_DEBUG) {
-    tabs.push({
-      text: 'Available Talents',
-      path: '/profile/org/talents',
-    });
+    if (IS_DEBUG) {
+      tabs.push({
+        text: 'Available Talents',
+        path: '/profile/org/talents',
+      });
+    }
   }
 
   const wrapperClassName = cn('space-y-2 pt-3', {
