@@ -217,6 +217,20 @@ export const useApplicantsTable = () => {
                   )}
                 </div>
               )}
+
+              {username && (
+                <Link
+                  href={`https://github.com/${username}`}
+                  size="sm"
+                  underline="hover"
+                  className="font-semibold text-white/80 w-fit"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  Open Github
+                </Link>
+              )}
+
               {showcases.length > 0 &&
                 showcases.map(({ id, label, url }) => (
                   <Link
