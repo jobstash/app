@@ -1,6 +1,5 @@
 /* eslint-disable @next/next/no-sync-scripts */
 import 'animate.css/animate.min.css';
-import Script from 'next/script';
 import Head from 'next/head';
 import { FRONTEND_URL } from '@jobstash/shared/core';
 import {
@@ -18,12 +17,8 @@ export const DefaultHomePage = () => (
   <>
     <Head>
       <script src="https://xemantic.github.io/shader-web-background/dist/shader-web-background.min.js" />
-      {/* <script
-        type="x-shader/x-fragment"
-        id="image"
-        src={`${FRONTEND_URL}/shader.frag`}
-      /> */}
-      <script type="x-shader/x-fragment" id="image">{`
+      <script type="x-shader/x-fragment" id="image">
+        {`
 					precision highp float;
 
 					uniform float iTime;
@@ -39,19 +34,15 @@ export const DefaultHomePage = () => (
 				`}
       </script>
       <script src={`${FRONTEND_URL}/init-shader.js`} />
-
     </Head>
     <LandingScripts />
 
     <LandingMetadata />
 
     <LandingBalls />
-    
+
     <PageWrapper>
-      {/* <Script src="https://xemantic.github.io/shader-web-background/dist/shader-web-background.min.js" />
-      <Script type='text/javascript' src='/shader.js' />
-      <Script type='text/javascript' src="/init-shader.js" /> */}
-     <div id="canvas"></div>
+      <div id="canvas"></div>
       <SideBar />
       <div className="px-6 md:px-10">
         <LandingSections />
