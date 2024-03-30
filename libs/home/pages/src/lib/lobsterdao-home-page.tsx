@@ -8,26 +8,25 @@ import { PageWrapper } from '@jobstash/shared/ui';
 import { SideBar } from '@jobstash/sidebar/feature';
 import React, { useEffect } from 'react';
 
-  export const LobsterDAOHomePage = () => {
-    useEffect(() => {
-  
-      // Return a cleanup function that will be called on component unmount.
-      return () => {
-        // This is the cleanup function.
-        const canvasElement = document.getElementById('shader-web-background');
-        if (canvasElement) {
-          // Remove the canvas element from the DOM.
-          canvasElement.remove();
-        }
-        
-        // Here, you can also include any additional cleanup logic you might need,
-        // such as stopping animations or deallocating resources used by your WebGL context.
-      };
-    }, []); // The empty dependency array means this effect runs once on mount and once on unmount.
-  
-    // Component JSX
-    return (
-      <>
+export const LobsterDAOHomePage = () => {
+  useEffect(() => {
+    // Return a cleanup function that will be called on component unmount.
+    return () => {
+      // This is the cleanup function.
+      const canvasElement = document.getElementById('shader-web-background');
+      if (canvasElement) {
+        // Remove the canvas element from the DOM.
+        canvasElement.remove();
+      }
+
+      // Here, you can also include any additional cleanup logic you might need,
+      // such as stopping animations or deallocating resources used by your WebGL context.
+    };
+  }, []); // The empty dependency array means this effect runs once on mount and once on unmount.
+
+  // Component JSX
+  return (
+    <>
       <Head>
         <title>LobsterDAO | JobStash</title>
         <script
@@ -160,7 +159,7 @@ import React, { useEffect } from 'react';
 
           uniform vec2 iResolution;
           uniform sampler2D iChannel0;
-      
+
           void main(){
             gl_FragColor = texture2D(iChannel0, gl_FragCoord.xy / iResolution);
           }
@@ -178,7 +177,7 @@ import React, { useEffect } from 'react';
               <Image
                 width={360}
                 height={132}
-                alt="Ethdam"
+                alt="LobsterDAO"
                 src="/lobsterdao-community.png"
                 className="w-[150px] mb-4 md:w-auto md:mb-0 md:h-[182px]"
               />
@@ -196,7 +195,7 @@ import React, { useEffect } from 'react';
             >
               <p>
                 <span className="text-white/50 mr-2">tl;dr:</span>
-                All available Jobs in LobsterDAO
+                Available Jobs and Organizations part of LobsterDAO
               </p>
             </div>
             <div className="flex flex-col items-center gap-8 md:flex-row">
