@@ -194,8 +194,8 @@ export const LobsterDAOHomePage = () => {
               className={`${lato.className} font-semibold text-3xl text-white text-center`}
             >
               <p>
-                <span className="text-white/50 mr-2">Welcome Seafood!</span><br/>
-                Here are orgs and jobs with other Lobsters.<br/>
+                <span className="text-white/50 mr-2">Hello Seafood</span><br/>
+                Jobs at orgs with other aquatic creatures<br/>
                 Apply directly, or reach out on Telegram!
               </p>
             </div>
