@@ -194,13 +194,13 @@ export const LobsterDAOHomePage = () => {
               className={`${lato.className} font-semibold text-3xl text-white text-center`}
             >
               <p>
-                <span className="text-white/50 mr-2">tl;dr:</span>
-                Available Jobs and Organizations part of LobsterDAO
+                <span className="text-white/50 mr-2">Welcome Seafood!</span>
+                Here you can find a list of jobs at organizations which are founded or staffed by fellow Lobsters.
+                You can apply directly using the website, or you can come and find the relevant person in our chat.
               </p>
             </div>
             <div className="flex flex-col items-center gap-8 md:flex-row">
               <ExploreJobsButton />
-              <SubscribeTelegram />
             </div>
           </div>
         </div>
