@@ -9,7 +9,7 @@ import { GA_EVENT_ACTION } from '@jobstash/shared/core';
 import { gaEvent } from '@jobstash/shared/utils';
 
 import { useAuthContext } from '@jobstash/auth/state';
-import { sendJobApplyInteraction } from '@jobstash/jobs/data';
+import { useSendJobApplyInteractionMutation } from '@jobstash/jobs/state';
 
 import RightPanelCta from './right-panel-cta';
 
@@ -55,11 +55,13 @@ export const RightPanelJobCardApplyButton = (props: Props) => {
     });
   };
 
+  const { mutate: mutateJobApply } = useSendJobApplyInteractionMutation();
+
   const onClickApplyJob = () => {
     sendAnalyticsEvent();
 
     if (isDev) {
-      sendJobApplyInteraction(shortUUID);
+      mutateJobApply(shortUUID);
     }
 
     if (!isAnon && hasUser) {
