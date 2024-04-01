@@ -1,7 +1,11 @@
 /* eslint-disable @next/next/no-sync-scripts */
 import 'animate.css/animate.min.css';
+
 import Head from 'next/head';
+import { useEffect } from 'react';
+
 import { FRONTEND_URL } from '@jobstash/shared/core';
+
 import {
   LandingFooter,
   LandingMetadata,
@@ -10,35 +14,43 @@ import {
 } from '@jobstash/home/ui';
 import { PageWrapper } from '@jobstash/shared/ui';
 import { SideBar } from '@jobstash/sidebar/feature';
-import next from 'next';
-import React, { useEffect } from 'react';
 
 export const DefaultHomePage = () => {
-  useEffect(() => {
+  useEffect(
+    () =>
+      // Return a cleanup function that will be called on component unmount.
+      () => {
+        // This is the cleanup function.
+        const canvasElement = document.querySelector('#shader-web-background');
+        if (canvasElement) {
+          // Remove the canvas element from the DOM.
+          canvasElement.remove();
+        }
 
-    // Return a cleanup function that will be called on component unmount.
-    return () => {
-      // This is the cleanup function.
-      const canvasElement = document.getElementById('shader-web-background');
-      if (canvasElement) {
-        // Remove the canvas element from the DOM.
-        canvasElement.remove();
-      }
-      
-      // Here, you can also include any additional cleanup logic you might need,
-      // such as stopping animations or deallocating resources used by your WebGL context.
-    };
-  }, []); // The empty dependency array means this effect runs once on mount and once on unmount.
+        // Here, you can also include any additional cleanup logic you might need,
+        // such as stopping animations or deallocating resources used by your WebGL context.
+      },
+    [],
+  ); // The empty dependency array means this effect runs once on mount and once on unmount.
 
   // Component JSX
   return (
     <>
-    <Head>
-      <script type="text/javascript" src="https://xemantic.github.io/shader-web-background/src/main/js/shader-web-background-api.js"></script>
-      <script type="text/javascript" src="https://xemantic.github.io/shader-web-background/src/main/js/webgl-utils.js"></script>
-      <script type="text/javascript" src="https://xemantic.github.io/shader-web-background/src/main/js/shader-web-background.js" />
-      <script type="text/javascript">
-        {`
+      <Head>
+        <script
+          type="text/javascript"
+          src="https://xemantic.github.io/shader-web-background/src/main/js/shader-web-background-api.js"
+        />
+        <script
+          type="text/javascript"
+          src="https://xemantic.github.io/shader-web-background/src/main/js/webgl-utils.js"
+        />
+        <script
+          type="text/javascript"
+          src="https://xemantic.github.io/shader-web-background/src/main/js/shader-web-background.js"
+        />
+        <script type="text/javascript">
+          {`
           const ONE_IN_3D = [1, 1, 1];
           const c1 = [3.54585104, 2.93225262, 2.41593945];
           const x1 = [0.69549072, 0.49228336, 0.27699880];
@@ -56,10 +68,10 @@ export const DefaultHomePage = () => {
           const bump3y = (x, yoffset) => saturate3d(subtract3d(subtract3d(ONE_IN_3D, pow23d(x)), yoffset));
           const spectral_zucconi6 = (x) => add3d(bump3y(multiply3d(c1, subtract3d(to3d(x), x1)), y1), bump3y(multiply3d(c2, subtract3d(to3d(x), x2)), y2));
         `}
-      </script>
+        </script>
 
-      <script type="x-shader/x-fragment" id="feedback">
-        {`
+        <script type="x-shader/x-fragment" id="feedback">
+          {`
           precision highp float;
 
           uniform vec2      iResolution;
@@ -147,10 +159,10 @@ export const DefaultHomePage = () => {
             gl_FragColor = vec4(color, 1.);
           }
           `}
-      </script>
+        </script>
 
-      <script type="x-shader/x-fragment" id="image">
-        {`
+        <script type="x-shader/x-fragment" id="image">
+          {`
 					precision highp float;
 
           uniform vec2 iResolution;
@@ -160,23 +172,24 @@ export const DefaultHomePage = () => {
             gl_FragColor = texture2D(iChannel0, gl_FragCoord.xy / iResolution);
           }
 				`}
-      </script>
-      
-      <script type="text/javascript" src={`${FRONTEND_URL}/init-shader.js`} />
-    </Head>
-    <LandingScripts />
+        </script>
 
-    <LandingMetadata />
+        <script type="text/javascript" src={`${FRONTEND_URL}/init-shader.js`} />
+      </Head>
+      <LandingScripts />
 
-    {/* <LandingBalls /> */}
+      <LandingMetadata />
 
-    <PageWrapper>
-      <div id="canvas"></div>
-      <SideBar />
-      <div className="px-6 md:px-10">
-        <LandingSections />
-        <LandingFooter />
-      </div>
-    </PageWrapper>
-  </>
-)};
+      {/* <LandingBalls /> */}
+
+      <PageWrapper>
+        <div id="canvas" />
+        <SideBar />
+        <div className="px-6 md:px-10">
+          <LandingSections />
+          <LandingFooter />
+        </div>
+      </PageWrapper>
+    </>
+  );
+};

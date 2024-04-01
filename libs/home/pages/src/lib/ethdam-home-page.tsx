@@ -1,43 +1,46 @@
+/* eslint-disable @next/next/no-sync-scripts */
 import Head from 'next/head';
 import Image from 'next/image';
+import { useEffect } from 'react';
+
 import { FRONTEND_URL } from '@jobstash/shared/core';
 import { lato } from '@jobstash/shared/core';
 
 import { ExploreJobsButton, SubscribeTelegram } from '@jobstash/home/ui';
 import { PageWrapper } from '@jobstash/shared/ui';
 import { SideBar } from '@jobstash/sidebar/feature';
-import React, { useEffect } from 'react';
 
-  export const EthdamHomePage = () => {
-    useEffect(() => {
-  
+export const EthdamHomePage = () => {
+  useEffect(
+    () =>
       // Return a cleanup function that will be called on component unmount.
-      return () => {
+      () => {
         // This is the cleanup function.
-        const canvasElement = document.getElementById('shader-web-background');
+        const canvasElement = document.querySelector('#shader-web-background');
         if (canvasElement) {
           // Remove the canvas element from the DOM.
           canvasElement.remove();
         }
-        
+
         // Here, you can also include any additional cleanup logic you might need,
         // such as stopping animations or deallocating resources used by your WebGL context.
-      };
-    }, []); // The empty dependency array means this effect runs once on mount and once on unmount.
-  
-    // Component JSX
-    return (
-      <>
+      },
+    [],
+  ); // The empty dependency array means this effect runs once on mount and once on unmount.
+
+  // Component JSX
+  return (
+    <>
       <Head>
         <title>Ethdam | JobStash</title>
         <script
           type="text/javascript"
           src="https://xemantic.github.io/shader-web-background/src/main/js/shader-web-background-api.js"
-        ></script>
+        />
         <script
           type="text/javascript"
           src="https://xemantic.github.io/shader-web-background/src/main/js/webgl-utils.js"
-        ></script>
+        />
         <script
           type="text/javascript"
           src="https://xemantic.github.io/shader-web-background/src/main/js/shader-web-background.js"
