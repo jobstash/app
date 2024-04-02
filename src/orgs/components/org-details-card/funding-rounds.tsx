@@ -12,7 +12,7 @@ interface Props {
   fundingRounds: FundingRound[];
 }
 
-export const JobOrgCardFundingRounds = ({ fundingRounds }: Props) => {
+export const FundingRounds = ({ fundingRounds }: Props) => {
   const count = fundingRounds.length;
 
   if (!count) return null;

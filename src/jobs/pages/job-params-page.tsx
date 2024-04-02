@@ -26,7 +26,8 @@ export const JobParamsPage = ({ params: { id, tab } }: Props) => {
 
 const getPageContent = (job: JobDetails, tab: string) => {
   if (tab === ROUTE_TABS.SHARED.DETAILS) return <JobDetailsCard job={job} />;
-  if (tab === ROUTE_TABS.SHARED.ORG) return <JobOrgCard job={job} />;
+  if (tab === ROUTE_TABS.SHARED.ORG)
+    return <OrgDetailsCard withActions org={job.organization} />;
   if (tab === ROUTE_TABS.JOBS.PROJECTS) return <JobProjectCards job={job} />;
 
   if (tab === ROUTE_TABS.JOBS.COMPETITORS) {
@@ -43,8 +44,8 @@ const JobDetailsCard = dynamic(() =>
   import('~/jobs/components/job-details-card').then((m) => m.JobDetailsCard),
 );
 
-const JobOrgCard = dynamic(() =>
-  import('~/jobs/components/job-org-card').then((m) => m.JobOrgCard),
+const OrgDetailsCard = dynamic(() =>
+  import('~/orgs/components/org-details-card').then((m) => m.OrgDetailsCard),
 );
 
 const JobProjectCards = dynamic(() =>

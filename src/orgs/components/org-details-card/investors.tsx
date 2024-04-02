@@ -11,7 +11,7 @@ interface Props {
   investors: Investor[];
 }
 
-export const JobOrgCardInvestors = ({ investors }: Props) => {
+export const Investors = ({ investors }: Props) => {
   const count = investors.length;
 
   if (!count) return null;
