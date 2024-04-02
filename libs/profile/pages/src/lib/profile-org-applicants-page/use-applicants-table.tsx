@@ -256,7 +256,12 @@ export const useApplicantsTable = () => {
           user: { username },
         } = applicant;
 
-        if (!username) return <Text fw="bold">N/A</Text>;
+        if (!username)
+          return (
+            <div className="w-full flex justify-center items-center">
+              <Text fw="bold">N/A</Text>
+            </div>
+          );
 
         return <WorkHistory username={username} />;
       }
