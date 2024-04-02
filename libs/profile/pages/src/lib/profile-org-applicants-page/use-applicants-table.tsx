@@ -31,6 +31,7 @@ import { EmptyCellPlaceholder } from '@jobstash/profile/ui';
 import { LogoTitle, Text } from '@jobstash/shared/ui';
 
 import { ActionButton } from './action-button';
+import { WorkHistory } from './work-history';
 
 export const useApplicantsTable = () => {
   const { profileInfoData } = useOrgProfileInfoContext();
@@ -248,6 +249,16 @@ export const useApplicantsTable = () => {
             </div>
           </div>
         );
+      }
+
+      if (columnKey === 'prevOrgs') {
+        const {
+          user: { username },
+        } = applicant;
+
+        if (!username) return <Text fw="bold">N/A</Text>;
+
+        return <WorkHistory username={username} />;
       }
 
       if (columnKey === 'cryptoVerticals') {
@@ -511,6 +522,7 @@ type JobSelection = {
 type CustomColumnKeys =
   | 'job'
   | 'user'
+  | 'prevOrgs'
   | 'skills'
   | 'cryptoVerticals'
   | 'availableForWork'
@@ -524,6 +536,7 @@ const columns = [
   { key: 'job', label: 'Job' },
   { key: 'user', label: 'User' },
   { key: 'skills', label: 'Matching Skills' },
+  { key: 'prevOrgs', label: 'Previous Organizations' },
   { key: 'cryptoVerticals', label: 'Crypto Verticals' },
   { key: 'availableForWork', label: 'Available for Work' },
   { key: 'cryptoNative', label: 'Crypto Native' },

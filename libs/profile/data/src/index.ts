@@ -5,6 +5,7 @@ export * from './lib/get-profile-org-review-list';
 export * from './lib/get-profile-repo-list';
 export * from './lib/get-profile-showcase';
 export * from './lib/get-profile-skills';
+export * from './lib/get-work-history';
 export * from './lib/post-delete-profile';
 export * from './lib/post-dev-profile-info';
 export * from './lib/post-org-profile-info';

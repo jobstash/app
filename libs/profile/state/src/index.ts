@@ -26,6 +26,7 @@ export * from './lib/hooks/use-salary-mutation';
 export * from './lib/hooks/use-tags-used-mutation';
 export * from './lib/hooks/use-update-applicant-list';
 export * from './lib/hooks/use-user-review';
+export * from './lib/hooks/use-work-history';
 export * from './lib/hooks/use-your-contribution-mutation';
 
 // Contexts & Providers
