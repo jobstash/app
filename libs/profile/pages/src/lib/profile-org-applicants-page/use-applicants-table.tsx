@@ -13,7 +13,6 @@ import { Selection } from '@nextui-org/react';
 import { Tooltip } from '@nextui-org/tooltip';
 
 import { JobApplicant } from '@jobstash/jobs/core';
-import { TABLE_PLACEHOLDERS } from '@jobstash/shared/core';
 import {
   checkSearchFilterValue,
   getContactLink,
@@ -252,27 +251,47 @@ export const useApplicantsTable = () => {
       }
 
       if (columnKey === 'cryptoVerticals') {
-        return <EmptyCellPlaceholder text={TABLE_PLACEHOLDERS.LIST} />;
+        return <EmptyCellPlaceholder text="None Listed" />;
       }
 
       if (columnKey === 'skills') {
         const {
+          job: { tags },
           user: { skills },
         } = applicant;
 
-        if (skills.length === 0) {
+        const skillSet = new Set<string>();
+        for (const skill of skills) {
+          skillSet.add(skill.name);
+        }
+
+        const matchingSkills = [];
+        for (const { name } of tags) {
+          if (skillSet.has(name)) {
+            matchingSkills.push(name);
+          }
+        }
+
+        if (matchingSkills.length === 0) {
           return (
-            <EmptyCellPlaceholder
-              isCentered={false}
-              text={TABLE_PLACEHOLDERS.LIST}
-            />
+            <Tooltip
+              content="Applicant skills did not match job description"
+              delay={0}
+            >
+              <div>
+                <EmptyCellPlaceholder
+                  isCentered={false}
+                  text="No Skills Matched"
+                />
+              </div>
+            </Tooltip>
           );
         }
 
         return (
           <div className="flex gap-2 w-full flex-wrap max-w-xs py-2">
-            {skills.map(({ id, name }) => (
-              <Chip key={id} color="default" radius="sm">
+            {matchingSkills.map((name) => (
+              <Chip key={name} color="default" radius="sm">
                 {capitalize(name)}
               </Chip>
             ))}
@@ -504,7 +523,7 @@ type CustomColumnKeys =
 const columns = [
   { key: 'job', label: 'Job' },
   { key: 'user', label: 'User' },
-  { key: 'skills', label: 'Skills' },
+  { key: 'skills', label: 'Matching Skills' },
   { key: 'cryptoVerticals', label: 'Crypto Verticals' },
   { key: 'availableForWork', label: 'Available for Work' },
   { key: 'cryptoNative', label: 'Crypto Native' },

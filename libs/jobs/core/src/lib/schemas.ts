@@ -119,6 +119,7 @@ export const jobApplicantSchema = myzod.object({
       shortUUID: myzod.string(),
       title: myzod.string(),
       classification: myzod.string().min(1).nullable(),
+      tags: myzod.array(tagSchema),
     })
     .allowUnknownKeys(true),
   attestations: myzod.object({

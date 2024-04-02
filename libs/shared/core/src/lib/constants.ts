@@ -143,8 +143,3 @@ export const ECOSYSTEM_HEADER_KEY = 'X-Ecosystem';
 export const LS_KEYS = {
   MW_VERSION: 'jobstash-mw-version',
 } as const;
-
-export const TABLE_PLACEHOLDERS = {
-  LIST: 'None Listed',
-  BOOLEAN: 'TBD',
-} as const;
