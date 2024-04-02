@@ -2,7 +2,7 @@ import { DetailsPanelActionsWrapper } from '~/shared/components/details-panel/ac
 import { DetailsPanelCTA } from '~/shared/components/details-panel/cta';
 import { Divider } from '~/shared/components/divider';
 
-export const JobOrgCardActions = () => {
+export const Actions = () => {
   return (
     <>
       <Divider />
