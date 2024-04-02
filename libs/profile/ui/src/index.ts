@@ -1,7 +1,7 @@
 // Components
 export * from './lib/account-card';
-export * from './lib/coming-soon-cell';
 export * from './lib/compensation-form';
+export * from './lib/empty-cell-placeholder';
 export { default as ProfileGotItCard } from './lib/profile-got-it-card';
 export * from './lib/profile-header';
 export { default as ProfileOrgReviewCard } from './lib/profile-org-review-card';

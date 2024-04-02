@@ -2,12 +2,16 @@ import { cn } from '@jobstash/shared/utils';
 
 import { Text } from '@jobstash/shared/ui';
 
-export const ComingSoonCell = ({
-  isCentered = true,
-}: {
+interface Props {
+  text?: string;
   isCentered?: boolean;
-}) => (
+}
+
+export const EmptyCellPlaceholder = ({
+  isCentered = true,
+  text = 'Coming Soon',
+}: Props) => (
   <div className={cn({ 'flex w-full justify-center': isCentered })}>
-    <Text color="dimmed">Coming Soon</Text>
+    <Text color="dimmed">{text}</Text>
   </div>
 );

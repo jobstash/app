@@ -13,6 +13,7 @@ import { Selection } from '@nextui-org/react';
 import { Tooltip } from '@nextui-org/tooltip';
 
 import { JobApplicant } from '@jobstash/jobs/core';
+import { TABLE_PLACEHOLDERS } from '@jobstash/shared/core';
 import {
   checkSearchFilterValue,
   getContactLink,
@@ -27,7 +28,7 @@ import {
   useUpdateApplicantList,
 } from '@jobstash/profile/state';
 
-import { ComingSoonCell } from '@jobstash/profile/ui';
+import { EmptyCellPlaceholder } from '@jobstash/profile/ui';
 import { LogoTitle, Text } from '@jobstash/shared/ui';
 
 import { ActionButton } from './action-button';
@@ -250,13 +251,22 @@ export const useApplicantsTable = () => {
         );
       }
 
+      if (columnKey === 'cryptoVerticals') {
+        return <EmptyCellPlaceholder text={TABLE_PLACEHOLDERS.LIST} />;
+      }
+
       if (columnKey === 'skills') {
         const {
           user: { skills },
         } = applicant;
 
         if (skills.length === 0) {
-          return <ComingSoonCell isCentered={false} />;
+          return (
+            <EmptyCellPlaceholder
+              isCentered={false}
+              text={TABLE_PLACEHOLDERS.LIST}
+            />
+          );
         }
 
         return (
@@ -266,6 +276,36 @@ export const useApplicantsTable = () => {
                 {capitalize(name)}
               </Chip>
             ))}
+          </div>
+        );
+      }
+
+      if (columnKey === 'cryptoNative') {
+        return (
+          <div className="flex w-full justify-center">
+            <Chip>
+              <Text fw="bold">N/A</Text>
+            </Chip>
+          </div>
+        );
+      }
+
+      if (columnKey === 'cryptoAdjacent') {
+        return (
+          <div className="flex w-full justify-center">
+            <Chip>
+              <Text fw="bold">N/A</Text>
+            </Chip>
+          </div>
+        );
+      }
+
+      if (columnKey === 'oss') {
+        return (
+          <div className="flex w-full justify-center">
+            <Chip>
+              <Text fw="bold">N/A</Text>
+            </Chip>
           </div>
         );
       }
@@ -392,7 +432,7 @@ export const useApplicantsTable = () => {
         );
       }
 
-      return <ComingSoonCell />;
+      return <EmptyCellPlaceholder />;
     },
     [isPending, mutate, profileInfoData?.orgId],
   );

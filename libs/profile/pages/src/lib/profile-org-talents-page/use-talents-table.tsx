@@ -20,7 +20,7 @@ import {
   useOrgProfileInfoContext,
 } from '@jobstash/profile/state';
 
-import { ComingSoonCell } from '@jobstash/profile/ui';
+import { EmptyCellPlaceholder } from '@jobstash/profile/ui';
 import { LogoTitle, Text } from '@jobstash/shared/ui';
 
 export const useTalentsTable = () => {
@@ -184,7 +184,7 @@ export const useTalentsTable = () => {
         const { skills } = talent;
 
         if (skills.length === 0) {
-          return <ComingSoonCell isCentered={false} />;
+          return <EmptyCellPlaceholder isCentered={false} />;
         }
 
         return (
@@ -268,7 +268,7 @@ export const useTalentsTable = () => {
         );
       }
 
-      return <ComingSoonCell />;
+      return <EmptyCellPlaceholder />;
     },
     [],
   );
