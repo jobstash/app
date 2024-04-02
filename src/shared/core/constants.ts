@@ -15,6 +15,11 @@ export const ROUTE_TABS = {
     COMPETITORS: 'competitors',
     OTHER_JOBS: 'other-jobs',
   },
+  ORGS: {
+    PROJECTS: 'projects',
+    JOBS: 'jobs',
+    REVIEWS: 'reviews',
+  },
 };
 
 export const HREFS = {
