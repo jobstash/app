@@ -1,6 +1,5 @@
 import { JobDetails } from '~/jobs/core/schemas';
-
-import { JobProjectCard } from './job-project-card';
+import { ProjectDetailsCards } from '~/projects/components/project-details-cards';
 
 interface Props {
   job: JobDetails;
@@ -13,11 +12,5 @@ export const JobProjectCards = ({ job }: Props) => {
 
   if (!projects.length) return null;
 
-  return (
-    <div className="flex flex-col gap-6">
-      {projects.map((project) => (
-        <JobProjectCard key={project.id} project={project} />
-      ))}
-    </div>
-  );
+  return <ProjectDetailsCards projects={projects} />;
 };

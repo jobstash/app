@@ -14,13 +14,13 @@ import { LogoTitle } from '~/shared/components/logo-title';
 import { ShareButton } from '~/shared/components/share-button';
 import { Text } from '~/shared/components/text';
 
-import { JobProjectCardLinks } from './links';
+import { ProjectDetailsCardLinks } from './links';
 
 interface Props {
   project: ProjectAllInfo;
 }
 
-export const JobProjectCard = ({ project }: Props) => {
+export const ProjectDetailsCard = ({ project }: Props) => {
   const { name, website, logo, description, chains } = project;
 
   const src = getLogoUrl(website, logo);
@@ -40,7 +40,7 @@ export const JobProjectCard = ({ project }: Props) => {
         </DetailsPanelActionsWrapper>
       </div>
 
-      <JobProjectCardLinks project={project} />
+      <ProjectDetailsCardLinks project={project} />
 
       <Divider />
       <Heading
