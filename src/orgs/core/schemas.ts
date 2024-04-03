@@ -100,6 +100,7 @@ export const orgDetailsSchema = z
     investors: z.array(investorSchema),
     jobs: z.array(orgJobSchema),
     aggregateRating: starRatingSchema,
+    aggregateRatings: orgRatingSchema,
     reviewCount: z.number(),
     reviews: z.array(orgReviewSchema.omit({ compensation: true })),
   })
