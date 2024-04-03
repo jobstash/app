@@ -41,7 +41,7 @@ export const orgJobSchema = jobInfoSchema
     summary: true,
   })
   .merge(jobInfoTagsSchema);
-export type OrgJobSchema = z.infer<typeof orgJobSchema>;
+export type OrgJob = z.infer<typeof orgJobSchema>;
 
 const starRatingSchema = z.number().min(0).max(5).nullable();
 export type StarRating = z.infer<typeof starRatingSchema>;

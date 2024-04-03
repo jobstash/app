@@ -4,6 +4,7 @@ import { ROUTE_TABS } from '~/shared/core/constants';
 
 import { useOrgDetails } from '~/orgs/hooks/use-org-details';
 import { OrgDetailsCard } from '~/orgs/components/org-details-card';
+import { OtherJobCards } from '~/orgs/components/other-job-cards';
 import { ProjectDetailsCards } from '~/projects/components/project-details-cards';
 
 interface Props {
@@ -21,7 +22,7 @@ export const OrgParamsPage = ({ params: { id, tab } }: Props) => {
   if (tab === ROUTE_TABS.SHARED.DETAILS) return <OrgDetailsCard org={data} />;
   if (tab === ROUTE_TABS.ORGS.PROJECTS)
     return <ProjectDetailsCards projects={data.projects} />;
-  if (tab === ROUTE_TABS.ORGS.JOBS) return <p>OrgJobsCard</p>;
+  if (tab === ROUTE_TABS.ORGS.JOBS) return <OtherJobCards jobs={data.jobs} />;
   if (tab === ROUTE_TABS.ORGS.REVIEWS) return <p>OrgReviewsCard</p>;
 
   return null;
