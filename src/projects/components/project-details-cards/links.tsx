@@ -8,7 +8,7 @@ interface Props {
   project: ProjectAllInfo;
 }
 
-export const JobProjectCardLinks = ({ project }: Props) => {
+export const ProjectDetailsCardLinks = ({ project }: Props) => {
   const tags = createSocialsInfoTagProps(project);
 
   if (!tags.length) return null;

@@ -28,7 +28,8 @@ const getPageContent = (job: JobDetails, tab: string) => {
   if (tab === ROUTE_TABS.SHARED.DETAILS) return <JobDetailsCard job={job} />;
   if (tab === ROUTE_TABS.SHARED.ORG)
     return <OrgDetailsCard withActions org={job.organization} />;
-  if (tab === ROUTE_TABS.JOBS.PROJECTS) return <JobProjectCards job={job} />;
+  if (tab === ROUTE_TABS.JOBS.PROJECTS)
+    return <ProjectDetailsCards projects={job.organization.projects} />;
 
   if (tab === ROUTE_TABS.JOBS.COMPETITORS) {
     return <JobCompetitorCards job={job} />;
@@ -48,8 +49,10 @@ const OrgDetailsCard = dynamic(() =>
   import('~/orgs/components/org-details-card').then((m) => m.OrgDetailsCard),
 );
 
-const JobProjectCards = dynamic(() =>
-  import('~/jobs/components/job-project-cards').then((m) => m.JobProjectCards),
+const ProjectDetailsCards = dynamic(() =>
+  import('~/projects/components/project-details-cards').then(
+    (m) => m.ProjectDetailsCards,
+  ),
 );
 
 const JobCompetitorCards = dynamic(() =>
