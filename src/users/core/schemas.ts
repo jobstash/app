@@ -1,6 +1,11 @@
 import { z } from 'zod';
 
-import { genericResponseSchema } from '~/shared/core/schemas';
+import {
+  genericResponseSchema,
+  socialsInfoSchema,
+} from '~/shared/core/schemas';
+
+import { orgReviewSchema } from '~/orgs/core/schemas';
 
 import { CHECK_WALLET_FLOWS, CHECK_WALLET_ROLES } from './constants';
 
@@ -42,3 +47,36 @@ export const walletDataResponseSchema = z
   })
   .merge(genericResponseSchema);
 export type WalletDataResponse = z.infer<typeof walletDataResponseSchema>;
+
+export const candidateOrgSchema = z
+  .object({
+    id: z.string().min(1),
+    name: z.string().min(1),
+    description: z.string().min(1),
+    orgId: z.string().min(1),
+    location: z.string().min(1),
+    summary: z.string().min(1),
+    altName: z.string().min(1).nullable(),
+    jobsiteLink: z.string().min(1).nullable(),
+    updatedTimestamp: z.number().nullable(),
+    headCount: z.number().nullable(),
+    logo: z.string().min(1).nullable(),
+  })
+  .merge(socialsInfoSchema);
+export type CandidateOrg = z.infer<typeof candidateOrgSchema>;
+
+export const candidateOrgReviewSchema = z
+  .object({
+    org: candidateOrgSchema,
+  })
+  .merge(orgReviewSchema);
+export type CandidateOrgReview = z.infer<typeof candidateOrgReviewSchema>;
+
+export const candidateOrgReviewsResponseSchema = z
+  .object({
+    data: z.array(candidateOrgReviewSchema),
+  })
+  .merge(genericResponseSchema);
+export type CandidateOrgReviewsResponse = z.infer<
+  typeof candidateOrgReviewsResponseSchema
+>;
