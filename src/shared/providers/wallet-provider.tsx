@@ -4,8 +4,39 @@ import { ConnectKitProvider, SIWEProvider } from 'connectkit';
 import { SiweMessage } from 'siwe';
 
 import { MW_URL } from '~/shared/core/envs';
+import { getQueryClient } from '~/shared/utils/get-query-client';
+
+import { userQueryKeys } from '~/users/core/query-keys';
 
 export const WalletProvider = ({ children }: { children: React.ReactNode }) => {
+  const queryClient = getQueryClient();
+
+  const invalidateWalletData = () => {
+    queryClient.invalidateQueries({
+      queryKey: userQueryKeys.walletData(),
+    });
+  };
+
+  const onSignIn = () => {
+    invalidateWalletData();
+    // Other cb tasks
+  };
+
+  const onSignOut = () => {
+    invalidateWalletData();
+    // Other cb tasks
+  };
+
+  const onConnect = () => {
+    invalidateWalletData();
+    // Other cb tasks
+  };
+
+  const onDisconnect = () => {
+    invalidateWalletData();
+    // Other cb tasks
+  };
+
   return (
     <SIWEProvider
       getNonce={async () => {
@@ -69,17 +100,15 @@ export const WalletProvider = ({ children }: { children: React.ReactNode }) => {
 
         return res.ok;
       }}
-      onSignIn={() => {
-        console.log('SIGN IN');
-      }}
+      onSignIn={onSignIn}
       signOutOnAccountChange
       signOutOnDisconnect
       signOutOnNetworkChange
-      onSignOut={() => {
-        console.log('SIGN OUT');
-      }}
+      onSignOut={onSignOut}
     >
-      <ConnectKitProvider>{children}</ConnectKitProvider>
+      <ConnectKitProvider onConnect={onConnect} onDisconnect={onDisconnect}>
+        {children}
+      </ConnectKitProvider>
     </SIWEProvider>
   );
 };
