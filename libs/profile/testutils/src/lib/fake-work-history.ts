@@ -33,6 +33,8 @@ const fakeWorkHistoryRepos = (min = 1, max = 6) =>
 const fakeWorkHistoryOrg = () => {
   const login = faker.internet.domainName();
   const name = capitalize(faker.company.catchPhraseNoun());
+  const url = faker.image.url();
+  const logoUrl = faker.image.url();
   const firstContributedAt = faker.date
     .past({
       years: faker.number.int({ min: 1, max: 8 }),
@@ -44,6 +46,8 @@ const fakeWorkHistoryOrg = () => {
   return {
     login,
     name,
+    url,
+    logoUrl,
     firstContributedAt,
     lastContributedAt,
     repositories,

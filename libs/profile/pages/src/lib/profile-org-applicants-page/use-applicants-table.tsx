@@ -259,7 +259,7 @@ export const useApplicantsTable = () => {
         } = applicant;
 
         if (!username) {
-          return <EmptyCellPlaceholder text="N/A" />;
+          return <EmptyCellPlaceholder text="None Listed" />;
         }
 
         return <WorkHistory workHistory={workHistory} />;
@@ -491,7 +491,6 @@ export const useApplicantsTable = () => {
 
   return {
     isLoading: !profileInfoData || !data || isPendingQuery || isFetching,
-
     totalApplicantCount: data?.length,
     items,
     renderCell,

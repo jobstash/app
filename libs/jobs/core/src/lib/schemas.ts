@@ -93,6 +93,8 @@ export const jobApplicantSchema = myzod.object({
         myzod.object({
           login: myzod.string(),
           name: myzod.string(),
+          url: myzod.string().nullable(),
+          logoUrl: myzod.string().nullable(),
           firstContributedAt: myzod.number(),
           lastContributedAt: myzod.number(),
           repositories: myzod.array(
