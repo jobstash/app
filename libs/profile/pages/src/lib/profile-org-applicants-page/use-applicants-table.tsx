@@ -53,7 +53,10 @@ export const useApplicantsTable = () => {
     current: null,
   });
 
+  const [page, setPage] = useState(1);
+
   const onJobSelectionChange = (key: React.Key) => {
+    setPage(1);
     setJobSelection(() => {
       const item = jobs.find((job) => job.shortUUID === key);
       return {
@@ -123,7 +126,6 @@ export const useApplicantsTable = () => {
     );
   }, [jobSelection.input, jobs]);
 
-  const [page, setPage] = useState(1);
   const totalPageCount = Math.ceil(filteredItems.length / ROWS_PER_PAGE);
 
   const items = useMemo(() => {
