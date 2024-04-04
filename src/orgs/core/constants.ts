@@ -34,3 +34,14 @@ export const ORG_REVIEW_TIMEZONES = [
 export const ORG_TEST_IDS = {
   ORG_CARD: 'org-card',
 } as const;
+
+export const ORG_RATING_LABELS = {
+  benefits: 'Benefits' as const,
+  careerGrowth: 'Career Growth' as const,
+  diversityInclusion: 'Diversity & Inclusion' as const,
+  management: 'Management' as const,
+  product: 'Product' as const,
+  compensation: 'Compensation' as const,
+  onboarding: 'Onboarding' as const,
+  workLifeBalance: 'Work Life Balance' as const,
+};
