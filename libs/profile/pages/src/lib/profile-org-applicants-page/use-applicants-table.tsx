@@ -253,17 +253,14 @@ export const useApplicantsTable = () => {
 
       if (columnKey === 'prevOrgs') {
         const {
-          user: { username },
+          user: { username, workHistory },
         } = applicant;
 
-        if (!username)
-          return (
-            <div className="w-full flex justify-center items-center">
-              <Text fw="bold">N/A</Text>
-            </div>
-          );
+        if (!username) {
+          return <EmptyCellPlaceholder text="N/A" />;
+        }
 
-        return <WorkHistory username={username} />;
+        return <WorkHistory workHistory={workHistory} />;
       }
 
       if (columnKey === 'cryptoVerticals') {
@@ -555,6 +552,7 @@ const columns = [
 ];
 
 const centeredSet = new Set([
+  'prevOrgs',
   'cryptoVerticals',
   'oss',
   'cryptoNative',

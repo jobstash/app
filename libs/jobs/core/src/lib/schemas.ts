@@ -59,8 +59,6 @@ export const jobApplyInteractionPayloadSchema = myzod.object({
   shortUUID: myzod.string(),
 });
 
-// TODO: Update user prop to intersection of devProfileInfo
-// TODO: Update job prop to jobDetails schema (or whatever mw returns)
 export const jobApplicantSchema = myzod.object({
   user: myzod
     .object({
@@ -91,27 +89,22 @@ export const jobApplicantSchema = myzod.object({
           url: myzod.string().min(1),
         }),
       ),
-      //
-      // wallet: myzod.string().min(1),
-      // contact: myzod.object({
-      //   preferred: myzod.string().nullable(),
-      //   value: myzod.string().nullable(),
-      // }),
-      // matchingSkills: myzod.number().nullable(),
-      // skills: myzod.array(
-      //   myzod.object({
-      //     id: myzod.string().min(1),
-      //     name: myzod.string().min(1),
-      //     canTeach: myzod.boolean(),
-      //   }),
-      // ),
-      // showcases: myzod.array(
-      //   myzod.object({
-      //     id: myzod.string().min(1),
-      //     label: myzod.string().min(1),
-      //     url: myzod.string().min(1),
-      //   }),
-      // ),
+      workHistory: myzod.array(
+        myzod.object({
+          login: myzod.string(),
+          name: myzod.string(),
+          firstContributedAt: myzod.number(),
+          lastContributedAt: myzod.number(),
+          repositories: myzod.array(
+            myzod.object({
+              name: myzod.string(),
+              firstContributedAt: myzod.number(),
+              lastContributedAt: myzod.number(),
+              commitsCount: myzod.number(),
+            }),
+          ),
+        }),
+      ),
     })
     .allowUnknownKeys(true),
   job: myzod

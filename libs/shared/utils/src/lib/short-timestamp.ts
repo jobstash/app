@@ -21,3 +21,10 @@ export const shortTimestamp = (ts: number) => {
 
   return `${date} ${month}, ${year}`;
 };
+
+export const shortTimestamp2 = (ts: number) => {
+  const d = new Date(ts);
+  const year = d.getFullYear();
+  const month = months[d.getMonth()];
+  return `${month} ${year}`;
+};
