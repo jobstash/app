@@ -99,6 +99,7 @@ export const jobApplicantSchema = myzod.object({
           lastContributedAt: myzod.number(),
           repositories: myzod.array(
             myzod.object({
+              url: myzod.string(),
               name: myzod.string(),
               firstContributedAt: myzod.number(),
               lastContributedAt: myzod.number(),
