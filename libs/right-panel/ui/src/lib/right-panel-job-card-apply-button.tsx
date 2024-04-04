@@ -5,8 +5,8 @@ import { useModal, useSIWE } from 'connectkit';
 import { useAccount } from 'wagmi';
 
 import { CHECK_WALLET_ROLES } from '@jobstash/auth/core';
-import { GA_EVENT_ACTION } from '@jobstash/shared/core';
-import { gaEvent } from '@jobstash/shared/utils';
+import { ECOSYSTEMS, GA_EVENT_ACTION } from '@jobstash/shared/core';
+import { gaEvent, getEcosystemSubdomain } from '@jobstash/shared/utils';
 
 import { useAuthContext } from '@jobstash/auth/state';
 import { useSendJobApplyInteractionMutation } from '@jobstash/jobs/state';
@@ -35,8 +35,13 @@ export const RightPanelJobCardApplyButton = (props: Props) => {
 
   const isAnon = !isConnected || !isSignedIn;
 
+  const { isSupported, subdomain } = getEcosystemSubdomain();
+  const isEthdam = isSupported && subdomain === ECOSYSTEMS.ETHDAM;
+
+  const isOneClick = hasUser || isEthdam;
+
   const openApplyPage = () => {
-    if (isAnon && hasUser) {
+    if (isAnon && isOneClick) {
       setOpen(true);
       return;
     }
@@ -64,14 +69,14 @@ export const RightPanelJobCardApplyButton = (props: Props) => {
       mutateJobApply(shortUUID);
     }
 
-    if (!isAnon && hasUser) {
+    if (!isAnon && isOneClick) {
       setIsDisabled(true);
     }
 
     openApplyPage();
   };
 
-  const text = hasUser
+  const text = isOneClick
     ? isDisabled
       ? 'Already applied for this job'
       : '1-Click Apply'
