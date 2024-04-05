@@ -1,4 +1,5 @@
 import './globals.css';
+import '@smastrom/react-rating/style.css';
 
 import type { Metadata, Viewport } from 'next';
 
