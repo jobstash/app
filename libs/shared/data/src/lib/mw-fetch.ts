@@ -1,6 +1,7 @@
 import myzod, { type Type } from 'myzod';
 
 import {
+  ECOSYSTEM_HEADER_KEY,
   ERR_INTERNAL,
   ERR_NOT_FOUND,
   ERR_OFFLINE,
@@ -52,6 +53,11 @@ export const mwFetch = async <R, P = Undefined>(
 
   const { url, body } = createFetchDeets(reqUrl, method, validatedPayload);
 
+  // Only add client ecosystem header if ecosystem is not set in options
+  const headerOptionKeys = new Set(Object.keys(headers ?? {}));
+  const hasEcosystemHeader = headerOptionKeys.has(ECOSYSTEM_HEADER_KEY);
+  const clientEcosystemHeader = hasEcosystemHeader ? {} : getEcosystemHeader();
+
   const res = await fetch(url, {
     method,
     body,
@@ -59,6 +65,7 @@ export const mwFetch = async <R, P = Undefined>(
     mode,
     headers: {
       ...headers,
+      ...clientEcosystemHeader,
     },
     cache: 'no-cache',
   });
