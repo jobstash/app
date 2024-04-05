@@ -8,8 +8,8 @@ export const useOrgDetails = (orgId: string | null) => {
   const mwVersion = getLSMwVersion();
 
   return useQuery({
-    queryKey: [mwVersion, 'org-details', orgId],
-    queryFn: () => getOrgDetails(orgId as string),
+    queryKey: [mwVersion, 'org-details', orgId, undefined],
+    queryFn: () => getOrgDetails({ orgId: orgId as string }),
     staleTime: 1000 * 60 * 60, // 1 hr,
     enabled: Boolean(orgId),
   });

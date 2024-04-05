@@ -41,7 +41,7 @@ export const useOrgList = (initOrg: OrgListItem | null) => {
         const { orgId } = orgListItem;
         queryClient.prefetchQuery({
           queryKey: [mwVersion, 'org-details', orgId],
-          queryFn: () => getOrgDetails(orgId),
+          queryFn: () => getOrgDetails({ orgId }),
         });
       }
     }

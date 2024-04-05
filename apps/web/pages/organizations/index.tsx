@@ -49,8 +49,8 @@ export const getServerSideProps: GetServerSideProps<Props> = withCSR(
       for (const orgListItem of orgListItems) {
         const { orgId } = orgListItem;
         queryClient.prefetchQuery({
-          queryKey: [mwVersion, 'org-details', orgId],
-          queryFn: () => getOrgDetails(orgId),
+          queryKey: [mwVersion, 'org-details', orgId, ssrHost],
+          queryFn: () => getOrgDetails({ orgId, ssrHost }),
         });
       }
     }
@@ -59,7 +59,10 @@ export const getServerSideProps: GetServerSideProps<Props> = withCSR(
     let initActiveOrg: OrgDetails | null = null;
     if (hasItems) {
       try {
-        initActiveOrg = await getOrgDetails(orgListItems[0].orgId);
+        initActiveOrg = await getOrgDetails({
+          orgId: orgListItems[0].orgId,
+          ssrHost,
+        });
       } catch {
         initActiveOrg = null;
         sentryMessage(
