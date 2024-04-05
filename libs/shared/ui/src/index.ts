@@ -39,6 +39,7 @@ export { default as GithubOutlineHugeIcon } from './lib/icons/github-outline-hug
 export { default as GlobeSimpleIcon } from './lib/icons/globe-simple-icon';
 export { default as HamburgerIcon } from './lib/icons/hamburger-icon';
 export { default as HexagonBorderIcon } from './lib/icons/hexagon-border-icon';
+export { default as LamaIcon } from './lib/icons/lama-icon';
 export { default as LevelIcon } from './lib/icons/level-icon';
 export { default as LinkedInIcon } from './lib/icons/linked-in-icon';
 export { default as LocationIcon } from './lib/icons/location-icon';
