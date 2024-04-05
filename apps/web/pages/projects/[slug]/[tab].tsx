@@ -28,10 +28,16 @@ export const getServerSideProps: GetServerSideProps<ProjectDetailsPageProps> =
         'project-details-page getServerSideProps',
       );
 
+      const ssrHost = ctx.req.headers.host;
+
       await queryClient.fetchInfiniteQuery({
-        queryKey: [mwVersion, 'project-list', filterParamsObj],
+        queryKey: [mwVersion, 'project-list', filterParamsObj, ssrHost],
         queryFn: async ({ pageParam }) =>
-          getProjectList(pageParam ?? 1, filterParamsObj),
+          getProjectList({
+            page: pageParam ?? 1,
+            filterParams: filterParamsObj,
+            ssrHost,
+          }),
         initialPageParam: 1,
         staleTime: 1000 * 60 * 60, // 1hr
         // getNextPageParam: ({ page }) => (page > 0 ? page + 1 : undefined),
@@ -48,8 +54,8 @@ export const getServerSideProps: GetServerSideProps<ProjectDetailsPageProps> =
         for (const projectListItem of projectListItems) {
           const { id } = projectListItem;
           queryClient.prefetchQuery({
-            queryKey: [mwVersion, 'project-details', id],
-            queryFn: () => getProjectDetails(id),
+            queryKey: [mwVersion, 'project-details', id, ssrHost],
+            queryFn: () => getProjectDetails({ projectId: id, ssrHost }),
           });
         }
       }
@@ -59,7 +65,7 @@ export const getServerSideProps: GetServerSideProps<ProjectDetailsPageProps> =
 
       let initProjectDetails: ProjectDetails | null = null;
       try {
-        initProjectDetails = await getProjectDetails(projectId);
+        initProjectDetails = await getProjectDetails({ projectId, ssrHost });
       } catch (error) {
         if ((error as Error).message === ERR_NOT_FOUND) {
           return {

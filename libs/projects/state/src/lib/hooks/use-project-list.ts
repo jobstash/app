@@ -41,8 +41,8 @@ export const useProjectList = (initProject: ProjectInfo | null) => {
       for (const projectListItem of projectListItems) {
         const { id } = projectListItem;
         queryClient.prefetchQuery({
-          queryKey: [mwVersion, 'project-details', id],
-          queryFn: () => getProjectDetails(id),
+          queryKey: [mwVersion, 'project-details', id, undefined],
+          queryFn: () => getProjectDetails({ projectId: id }),
         });
       }
     }

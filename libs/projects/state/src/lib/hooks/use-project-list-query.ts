@@ -19,12 +19,12 @@ export const useProjectListQuery = () => {
     ProjectListQueryPage,
     Error,
     InfiniteData<ProjectListQueryPage, number>,
-    [string | null, string, Record<string, string>],
+    [string | null, string, Record<string, string>, string | undefined],
     number
   >({
-    queryKey: [mwVersion, 'project-list', filterParamsObj],
+    queryKey: [mwVersion, 'project-list', filterParamsObj, undefined],
     queryFn: async ({ pageParam }) =>
-      getProjectList(pageParam, filterParamsObj),
+      getProjectList({ page: pageParam, filterParams: filterParamsObj }),
     initialPageParam: 1,
     getNextPageParam: ({ page }) => (page > 0 ? page + 1 : undefined),
     staleTime: 1000 * 60 * 60, // 1 hr

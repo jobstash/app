@@ -17,8 +17,10 @@ export const getServerSideProps: GetServerSideProps<JobPostPageProps> = withCSR(
 
     let initJob: JobPost | null = null;
 
+    const ssrHost = ctx.req.headers.host;
+
     try {
-      initJob = await getJobPost(shortUuid);
+      initJob = await getJobPost({ shortUuid, ssrHost });
     } catch (error) {
       if ((error as Error).message === ERR_NOT_FOUND) {
         return {

@@ -4,13 +4,21 @@ import {
 } from '@jobstash/projects/core';
 import { MW_URL, PAGE_SIZE } from '@jobstash/shared/core';
 import { getUrlWithParams } from '@jobstash/filters/utils';
+import { getEcosystemHeader } from '@jobstash/shared/utils';
 
 import { mwFetch } from '@jobstash/shared/data';
 
-export const getProjectList = async (
-  page: number,
-  filterParams: Record<string, string>,
-): Promise<ProjectListQueryPage> => {
+interface Props {
+  page: number;
+  filterParams: Record<string, string>;
+  ssrHost?: string;
+}
+
+export const getProjectList = async ({
+  page,
+  filterParams,
+  ssrHost,
+}: Props): Promise<ProjectListQueryPage> => {
   const params: Record<string, string> = {
     ...filterParams,
     page: page.toString(),
@@ -24,6 +32,9 @@ export const getProjectList = async (
     sentryLabel: 'getProjectList',
     credentials: 'include' as RequestCredentials,
     mode: 'cors' as RequestMode,
+    headers: {
+      ...getEcosystemHeader(ssrHost),
+    },
   };
 
   return mwFetch<ProjectListQueryPage>(url, options);

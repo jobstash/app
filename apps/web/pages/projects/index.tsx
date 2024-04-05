@@ -27,10 +27,16 @@ export const getServerSideProps: GetServerSideProps<Props> = withCSR(
       'project-list-page getServerSideProps',
     );
 
+    const ssrHost = ctx.req.headers.host;
+
     await queryClient.fetchInfiniteQuery({
-      queryKey: [mwVersion, 'project-list', filterParamsObj],
+      queryKey: [mwVersion, 'project-list', filterParamsObj, ssrHost],
       queryFn: async ({ pageParam }) =>
-        getProjectList(pageParam ?? 1, filterParamsObj),
+        getProjectList({
+          page: pageParam ?? 1,
+          filterParams: filterParamsObj,
+          ssrHost,
+        }),
       initialPageParam: 1,
       staleTime: 1000 * 60 * 60, // 1hr
       // getNextPageParam: ({ page }) => (page > 0 ? page + 1 : undefined),
@@ -47,8 +53,8 @@ export const getServerSideProps: GetServerSideProps<Props> = withCSR(
       for (const projectListItem of projectListItems) {
         const { id } = projectListItem;
         queryClient.prefetchQuery({
-          queryKey: [mwVersion, 'project-details', id],
-          queryFn: () => getProjectDetails(id),
+          queryKey: [mwVersion, 'project-details', id, ssrHost],
+          queryFn: () => getProjectDetails({ projectId: id, ssrHost }),
         });
       }
     }
