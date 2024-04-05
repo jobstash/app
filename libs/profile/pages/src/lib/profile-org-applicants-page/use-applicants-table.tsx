@@ -31,6 +31,7 @@ import { EmptyCellPlaceholder } from '@jobstash/profile/ui';
 import { LogoTitle, Text } from '@jobstash/shared/ui';
 
 import { ActionButton } from './action-button';
+import { BooleanCell } from './boolean-cell';
 import { WorkHistory } from './work-history';
 
 export const useApplicantsTable = () => {
@@ -315,13 +316,7 @@ export const useApplicantsTable = () => {
       }
 
       if (columnKey === 'cryptoNative') {
-        return (
-          <div className="flex w-full justify-center">
-            <Chip>
-              <Text fw="bold">N/A</Text>
-            </Chip>
-          </div>
-        );
+        return <BooleanCell value={applicant.cryptoNative} />;
       }
 
       if (columnKey === 'cryptoAdjacent') {
@@ -335,13 +330,7 @@ export const useApplicantsTable = () => {
       }
 
       if (columnKey === 'oss') {
-        return (
-          <div className="flex w-full justify-center">
-            <Chip>
-              <Text fw="bold">N/A</Text>
-            </Chip>
-          </div>
-        );
+        return <BooleanCell value={applicant.oss} />;
       }
 
       if (columnKey === 'attestations') {
@@ -371,14 +360,7 @@ export const useApplicantsTable = () => {
       }
 
       if (columnKey === 'availableForWork') {
-        const isAvailable = applicant.user.availableForWork;
-        const color = isAvailable ? 'success' : 'default';
-        const text = isAvailable ? 'Yes' : 'No';
-        return (
-          <div className="flex w-full justify-center">
-            <Chip color={color}>{text}</Chip>
-          </div>
-        );
+        return <BooleanCell value={Boolean(applicant.user.availableForWork)} />;
       }
 
       if (columnKey === 'job') {
