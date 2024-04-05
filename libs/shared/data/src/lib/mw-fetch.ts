@@ -52,8 +52,6 @@ export const mwFetch = async <R, P = Undefined>(
 
   const { url, body } = createFetchDeets(reqUrl, method, validatedPayload);
 
-  const ecosystemHeader = getEcosystemHeader();
-
   const res = await fetch(url, {
     method,
     body,
@@ -61,7 +59,6 @@ export const mwFetch = async <R, P = Undefined>(
     mode,
     headers: {
       ...headers,
-      ...ecosystemHeader,
     },
     cache: 'no-cache',
   });
