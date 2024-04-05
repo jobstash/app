@@ -31,7 +31,7 @@ export const getServerSideProps: GetServerSideProps<OrgDetailsPageProps> =
       await queryClient.fetchInfiniteQuery({
         queryKey: [mwVersion, 'org-list', filterParamsObj],
         queryFn: async ({ pageParam }) =>
-          getOrgList(pageParam ?? 1, filterParamsObj),
+          getOrgList({ page: pageParam ?? 1, filterParams: filterParamsObj }),
         initialPageParam: 1,
         staleTime: 1000 * 60 * 60, // 1hr
         // getNextPageParam: ({ page }) => (page > 0 ? page + 1 : undefined),

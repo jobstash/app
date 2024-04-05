@@ -7,11 +7,19 @@ import { getUrlWithParams } from '@jobstash/filters/utils';
 
 import { mwFetch } from '@jobstash/shared/data';
 
-export const getOrgList = async (
-  page: number,
-  filterParams?: Record<string, string>,
-  limit?: number,
-): Promise<OrgListQueryPage> => {
+interface Props {
+  page: number;
+  filterParams?: Record<string, string>;
+  limit?: number;
+  ssrHost?: string;
+}
+
+export const getOrgList = async ({
+  page,
+  filterParams,
+  limit,
+  ssrHost,
+}: Props): Promise<OrgListQueryPage> => {
   const params: Record<string, string> = {
     ...filterParams,
     page: page.toString(),

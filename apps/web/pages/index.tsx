@@ -19,7 +19,7 @@ export const getStaticProps = async () => {
   await Promise.all([
     queryClient.prefetchQuery({
       queryKey: [mwVersion, 'home-page', 'orgs'],
-      queryFn: () => getOrgList(1, undefined, 10_000),
+      queryFn: () => getOrgList({ page: 1, limit: 10_000 }),
       staleTime: 1000 * 60 * 60 * 24 * 7, // 1 week
     }),
     queryClient.prefetchQuery({

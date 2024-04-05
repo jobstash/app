@@ -9,7 +9,7 @@ export const useHomePageOrgs = () => {
 
   return useQuery({
     queryKey: [mwVersion, 'home-page', 'orgs'],
-    queryFn: () => getOrgList(1, undefined, 10_000),
+    queryFn: () => getOrgList({ page: 1, limit: 10_000 }),
     staleTime: 1000 * 60 * 60, // 1hr
   });
 };
