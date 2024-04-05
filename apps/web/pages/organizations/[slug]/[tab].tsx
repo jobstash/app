@@ -28,10 +28,13 @@ export const getServerSideProps: GetServerSideProps<OrgDetailsPageProps> =
         'org-details-page getServerSideProps',
       );
 
+
+    const ssrHost = ctx.req.headers.host;
+
       await queryClient.fetchInfiniteQuery({
-        queryKey: [mwVersion, 'org-list', filterParamsObj],
+        queryKey: [mwVersion, 'org-list', filterParamsObj, ssrHost],
         queryFn: async ({ pageParam }) =>
-          getOrgList({ page: pageParam ?? 1, filterParams: filterParamsObj }),
+          getOrgList({ page: pageParam ?? 1, filterParams: filterParamsObj, ssrHost }),
         initialPageParam: 1,
         staleTime: 1000 * 60 * 60, // 1hr
         // getNextPageParam: ({ page }) => (page > 0 ? page + 1 : undefined),

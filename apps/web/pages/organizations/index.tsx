@@ -32,7 +32,7 @@ export const getServerSideProps: GetServerSideProps<Props> = withCSR(
     await queryClient.fetchInfiniteQuery({
       queryKey: [mwVersion, 'org-list', filterParamsObj, ssrHost],
       queryFn: async ({ pageParam }) =>
-        getOrgList({ page: pageParam, filterParams: filterParamsObj }),
+        getOrgList({ page: pageParam, filterParams: filterParamsObj, ssrHost }),
       initialPageParam: 1,
       staleTime: 1000 * 60 * 60, // 1hr
       // getNextPageParam: ({ page }) => (page > 0 ? page + 1 : undefined),
