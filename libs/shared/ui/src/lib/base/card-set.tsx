@@ -85,9 +85,9 @@ const CardSet = ({
     >
       <div className="shrink-0">{icon}</div>
       {typeof children === 'string' ? (
-        <div className="truncate flex items-center max-w-[240px] sm:max-w-md lg:max-w-lg">
+        <div className="truncate flex max-w-[240px] sm:max-w-md lg:max-w-lg">
           <Text size="sm">{children}</Text>
-          {(children.includes('Funding') || children.includes('TVL')) && <span className='ml-1 [&>svg]:h-5'><LamaIcon /></span>}
+          {(children.includes('Funding') || children.includes('TVL')) && <span className='ml-1 [&>svg]:h-3'><LamaIcon /></span>}
         </div>
       ) : (
         children
