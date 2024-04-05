@@ -1,12 +1,10 @@
 'use client';
 
+import dynamic from 'next/dynamic';
+
 import { ROUTE_TABS } from '~/shared/core/constants';
 
 import { useOrgDetails } from '~/orgs/hooks/use-org-details';
-import { OrgDetailsCard } from '~/orgs/components/org-details-card';
-import { OrgReviews } from '~/orgs/components/org-reviews';
-import { OtherJobCards } from '~/orgs/components/other-job-cards';
-import { ProjectDetailsCards } from '~/projects/components/project-details-cards';
 
 interface Props {
   params: {
@@ -28,3 +26,21 @@ export const OrgParamsPage = ({ params: { id, tab } }: Props) => {
 
   return null;
 };
+
+const OrgDetailsCard = dynamic(() =>
+  import('~/orgs/components/org-details-card').then((m) => m.OrgDetailsCard),
+);
+
+const ProjectDetailsCards = dynamic(() =>
+  import('~/projects/components/project-details-cards').then(
+    (m) => m.ProjectDetailsCards,
+  ),
+);
+
+const OtherJobCards = dynamic(() =>
+  import('~/orgs/components/other-job-cards').then((m) => m.OtherJobCards),
+);
+
+const OrgReviews = dynamic(() =>
+  import('~/orgs/components/org-reviews').then((m) => m.OrgReviews),
+);
