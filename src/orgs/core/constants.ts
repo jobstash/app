@@ -40,7 +40,7 @@ export const ORG_RATING_LABELS = {
   careerGrowth: 'Career Growth' as const,
   diversityInclusion: 'Diversity & Inclusion' as const,
   management: 'Management' as const,
-  product: 'Product' as const,
+  product: 'Overall Product' as const,
   compensation: 'Compensation' as const,
   onboarding: 'Onboarding' as const,
   workLifeBalance: 'Work Life Balance' as const,
