@@ -63,7 +63,10 @@ export const getServerSideProps: GetServerSideProps<Props> = withCSR(
     let initActiveProject: ProjectDetails | null = null;
     if (hasItems) {
       try {
-        initActiveProject = await getProjectDetails(projectListItems[0].id);
+        initActiveProject = await getProjectDetails({
+          projectId: projectListItems[0].id,
+          ssrHost,
+        });
       } catch {
         initActiveProject = null;
         sentryMessage(
