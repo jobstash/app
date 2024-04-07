@@ -54,7 +54,7 @@ export const ProjectList = () => {
               <p>Card Skeleton</p>
             </div>
           ) : (
-            <p>TODO: No more orgs UI</p>
+            <p>TODO: No more projects UI</p>
           )}
         </>
       ) : (

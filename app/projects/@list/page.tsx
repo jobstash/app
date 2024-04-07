@@ -18,7 +18,7 @@ const ProjectListPage = async ({ searchParams: rawSearchParams }: Props) => {
   const queryClient = getQueryClient();
 
   await Promise.all([
-    // Prefetc list
+    // Prefetch list
     queryClient.prefetchInfiniteQuery({
       queryKey: projectQueryKeys.list(rawSearchParams),
       queryFn: async ({ pageParam }) =>
