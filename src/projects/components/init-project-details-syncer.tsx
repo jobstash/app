@@ -20,14 +20,14 @@ export const InitProjectDetailsSyncer = ({ id }: Props) => {
 
   const { data } = useProjectDetails(id);
 
-  // Initialize org details
+  // Initialize project details
   useEffect(() => {
     if (!initProject && data) {
       setInitProject(data);
     }
   }, [data, initProject, setInitProject]);
 
-  // Set active org ID on desktop
+  // Set active project ID on desktop
   useEffect(() => {
     if (isDesktop && !activeId && data) {
       setActiveId(data.id);
