@@ -11,7 +11,7 @@ interface Props {
 
 export const getProjectList = ({ page, searchParams }: Props) => {
   const url = createUrlWithSearchParams(
-    `${MW_URL}/organizations/list?page=${page}&limit=${PAGE_SIZE}`,
+    `${MW_URL}/projects/list?page=${page}&limit=${PAGE_SIZE}`,
     searchParams,
   );
 
