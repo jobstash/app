@@ -12,7 +12,7 @@ export const ProjectDetailsCards = ({ projects }: Props) => {
   return (
     <div className="flex flex-col gap-6">
       {projects.map((project) => (
-        <ProjectDetailsCard key={project.id} project={project} />
+        <ProjectDetailsCard key={project.id} withActions project={project} />
       ))}
     </div>
   );
