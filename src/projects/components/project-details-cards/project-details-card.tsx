@@ -18,9 +18,10 @@ import { ProjectDetailsCardLinks } from './links';
 
 interface Props {
   project: ProjectAllInfo;
+  withActions?: boolean;
 }
 
-export const ProjectDetailsCard = ({ project }: Props) => {
+export const ProjectDetailsCard = ({ project, withActions }: Props) => {
   const { name, website, logo, description, chains } = project;
 
   const src = getLogoUrl(website, logo);
@@ -62,11 +63,15 @@ export const ProjectDetailsCard = ({ project }: Props) => {
 
       <ChainsInfoTag chains={chains} />
 
-      <Divider />
+      {withActions && (
+        <>
+          <Divider />
 
-      <DetailsPanelActionsWrapper>
-        <DetailsPanelCTA text={CTA_TEXT} />
-      </DetailsPanelActionsWrapper>
+          <DetailsPanelActionsWrapper>
+            <DetailsPanelCTA text={CTA_TEXT} />
+          </DetailsPanelActionsWrapper>
+        </>
+      )}
     </DetailsPanelCardWrapper>
   );
 };
