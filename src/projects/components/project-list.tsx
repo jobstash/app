@@ -8,6 +8,8 @@ import { VirtualWrapper } from '~/shared/components/virtual-wrapper';
 import { useProjectList } from '~/projects/hooks/use-project-list';
 import { useFiltersContext } from '~/filters/providers/filters-provider/context';
 
+import { ProjectCard } from './project-card';
+
 export const ProjectList = () => {
   const {
     projects,
@@ -42,9 +44,10 @@ export const ProjectList = () => {
           <VirtualWrapper count={projects.length}>
             {(index) => (
               <div className={cn({ 'pt-8': index > 0 })}>
-                <div className="flex flex-col bg-darkest-gray p-4">
-                  <pre>{JSON.stringify(projects[index], undefined, '\t')}</pre>
-                </div>
+                <ProjectCard
+                  project={projects[index]}
+                  filterParamsString={filterParamsString}
+                />
               </div>
             )}
           </VirtualWrapper>
