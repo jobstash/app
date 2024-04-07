@@ -5,19 +5,19 @@ import { AnonReview } from './anon-review';
 import { InfoTexts } from './info-texts';
 import { ReviewButton } from './review-button';
 import { ShareButton } from './share-button';
+import { StaffReviewList } from './staff-review-list';
 
 interface Props {
   org: OrgDetails;
 }
 
 export const OrgReviews = ({ org }: Props) => {
-  const { orgId, aggregateRatings } = org;
+  const { orgId, aggregateRatings, reviews } = org;
 
   const showAnonReview = org.reviewCount === 0;
   const hasRating = Object.values(org.aggregateRatings).some(
     (n) => n !== null && n !== 0,
   );
-  const reviews = org.reviews.filter((r) => !!r.review.title);
 
   const actions = (
     <div className="flex gap-4">
@@ -41,11 +41,7 @@ export const OrgReviews = ({ org }: Props) => {
         />
       )}
 
-      {reviews.map((r) => (
-        <pre key={`${JSON.stringify(r.review)}`}>
-          {JSON.stringify({ review: r.review }, undefined, '\t')}
-        </pre>
-      ))}
+      <StaffReviewList orgId={orgId} reviews={reviews} />
     </div>
   );
 };
