@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 
 import { useAtom } from 'jotai';
 
@@ -27,5 +27,23 @@ export const PageScrollDisableSyncer = ({ shouldDisable }: Props) => {
     }
   }, [isDesktop, isDisabled, isMounted, setIsDisabled, shouldDisable]);
 
+  // Fix scroll disabled on resize (re-enable scroll on large devices)
+  const checkOnResize = useCallback(() => {
+    if (window.innerWidth >= DETAILS_BREAKPOINT && isDisabled) {
+      setIsDisabled(false);
+    }
+  }, [isDisabled, setIsDisabled]);
+
+  useEffect(() => {
+    // Invoke check on init
+    checkOnResize();
+
+    window.addEventListener('resize', checkOnResize);
+
+    return () => window.removeEventListener('resize', checkOnResize);
+  }, [checkOnResize]);
+
   return null;
 };
+
+const DETAILS_BREAKPOINT = 1280;
