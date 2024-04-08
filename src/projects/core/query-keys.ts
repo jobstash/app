@@ -1,5 +1,5 @@
 export const projectQueryKeys = {
-  all: ['orgs'] as const,
+  all: ['projects'] as const,
   details: (projectId: string) =>
     [...projectQueryKeys.all, 'details', projectId] as const,
   list: (params: string | Record<string, string>) => {
