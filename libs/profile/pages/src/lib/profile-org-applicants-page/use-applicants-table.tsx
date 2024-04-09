@@ -266,9 +266,10 @@ export const useApplicantsTable = () => {
         return <WorkHistory workHistory={workHistory} />;
       }
 
-      if (columnKey === 'cryptoVerticals') {
-        return <EmptyCellPlaceholder text="None Listed" />;
-      }
+      //
+      // if (columnKey === 'cryptoVerticals') {
+      //   return <EmptyCellPlaceholder text="None Listed" />;
+      // }
 
       if (columnKey === 'skills') {
         const {
@@ -319,19 +320,21 @@ export const useApplicantsTable = () => {
         return <BooleanCell value={applicant.cryptoNative} />;
       }
 
-      if (columnKey === 'cryptoAdjacent') {
-        return (
-          <div className="flex w-full justify-center">
-            <Chip>
-              <Text fw="bold">N/A</Text>
-            </Chip>
-          </div>
-        );
-      }
+      //
+      // if (columnKey === 'cryptoAdjacent') {
+      //   return (
+      //     <div className="flex w-full justify-center">
+      //       <Chip>
+      //         <Text fw="bold">N/A</Text>
+      //       </Chip>
+      //     </div>
+      //   );
+      // }
 
-      if (columnKey === 'oss') {
-        return <BooleanCell value={applicant.oss} />;
-      }
+      //
+      // if (columnKey === 'oss') {
+      //   return <BooleanCell value={applicant.oss} />;
+      // }
 
       if (columnKey === 'attestations') {
         const {
@@ -379,18 +382,19 @@ export const useApplicantsTable = () => {
         );
       }
 
-      if (columnKey === 'hired') {
-        return (
-          <div className="flex w-full justify-center">
-            <Button
-              size="sm"
-              className="bg-gradient-to-l from-primary to-tertiary"
-            >
-              <Text fw="bold">Attest</Text>
-            </Button>
-          </div>
-        );
-      }
+      //
+      // if (columnKey === 'hired') {
+      //   return (
+      //     <div className="flex w-full justify-center">
+      //       <Button
+      //         size="sm"
+      //         className="bg-gradient-to-l from-primary to-tertiary"
+      //       >
+      //         <Text fw="bold">Attest</Text>
+      //       </Button>
+      //     </div>
+      //   );
+      // }
 
       if (columnKey === 'interviewed') {
         return (
@@ -405,52 +409,54 @@ export const useApplicantsTable = () => {
         );
       }
 
-      if (columnKey === 'fake') {
-        return (
-          <div className="flex w-full justify-center">
-            <Button
-              size="sm"
-              className="bg-gradient-to-l from-primary to-tertiary"
-            >
-              <Text fw="bold">Attest</Text>
-            </Button>
-          </div>
-        );
-      }
+      //
+      // if (columnKey === 'fake') {
+      //   return (
+      //     <div className="flex w-full justify-center">
+      //       <Button
+      //         size="sm"
+      //         className="bg-gradient-to-l from-primary to-tertiary"
+      //       >
+      //         <Text fw="bold">Attest</Text>
+      //       </Button>
+      //     </div>
+      //   );
+      // }
 
-      if (columnKey === 'actions') {
-        return (
-          <div className="flex flex-col gap-2">
-            <div className="flex gap-2 w-full items-center justify-center">
-              <Tooltip content="Calendar Invite" delay={0}>
-                <Button isIconOnly>
-                  <CalendarDaysIcon className="h-8 w-8" />
-                </Button>
-              </Tooltip>
-              <ActionButton
-                orgId={profileInfoData?.orgId}
-                wallet={applicant.user.wallet}
-                isPending={isPending}
-                mutate={mutate}
-                list="shortlisted"
-                icon={<HeartIcon className="h-8 w-8" />}
-              />
-              <ActionButton
-                orgId={profileInfoData?.orgId}
-                wallet={applicant.user.wallet}
-                isPending={isPending}
-                mutate={mutate}
-                list="archived"
-                icon={<ArchiveBoxIcon className="h-8 w-8" />}
-              />
-            </div>
-          </div>
-        );
-      }
+      //
+      // if (columnKey === 'actions') {
+      //   return (
+      //     <div className="flex flex-col gap-2">
+      //       <div className="flex gap-2 w-full items-center justify-center">
+      //         <Tooltip content="Calendar Invite" delay={0}>
+      //           <Button isIconOnly>
+      //             <CalendarDaysIcon className="h-8 w-8" />
+      //           </Button>
+      //         </Tooltip>
+      //         <ActionButton
+      //           orgId={profileInfoData?.orgId}
+      //           wallet={applicant.user.wallet}
+      //           isPending={isPending}
+      //           mutate={mutate}
+      //           list="shortlisted"
+      //           icon={<HeartIcon className="h-8 w-8" />}
+      //         />
+      //         <ActionButton
+      //           orgId={profileInfoData?.orgId}
+      //           wallet={applicant.user.wallet}
+      //           isPending={isPending}
+      //           mutate={mutate}
+      //           list="archived"
+      //           icon={<ArchiveBoxIcon className="h-8 w-8" />}
+      //         />
+      //       </div>
+      //     </div>
+      //   );
+      // }
 
       return <EmptyCellPlaceholder />;
     },
-    [isPending, mutate, profileInfoData?.orgId],
+    [],
   );
 
   const [selectedApplicants, setSelectedApplicants] = useState<Set<string>>(
@@ -509,37 +515,37 @@ type CustomColumnKeys =
   | 'user'
   | 'prevOrgs'
   | 'skills'
-  | 'cryptoVerticals'
-  | 'availableForWork'
-  | 'cryptoAdjacent'
-  | 'hired'
-  | 'interviewed'
-  | 'fake'
-  | 'actions';
+  // | 'cryptoVerticals'
+  | 'availableForWork';
+// | 'cryptoAdjacent'
+// | 'hired'
+// | 'interviewed'
+// | 'fake'
+// | 'actions';
 
 const columns = [
   { key: 'job', label: 'Job' },
   { key: 'user', label: 'User' },
   { key: 'skills', label: 'Matching Skills' },
   { key: 'prevOrgs', label: 'Previous Organizations' },
-  { key: 'cryptoVerticals', label: 'Crypto Verticals' },
+  // { key: 'cryptoVerticals', label: 'Crypto Verticals' },
   { key: 'availableForWork', label: 'Available for Work' },
-  { key: 'cryptoNative', label: 'Crypto Native' },
-  { key: 'cryptoAdjacent', label: 'Crypto Adjacent' },
-  { key: 'oss', label: 'OSS' },
-  { key: 'attestations', label: 'Attestations' },
-  { key: 'hired', label: 'Hired' },
-  { key: 'interviewed', label: 'Interviewed' },
-  { key: 'fake', label: 'Fake' },
-  { key: 'actions', label: 'Actions' },
+  // { key: 'cryptoNative', label: 'Crypto Native' },
+  // { key: 'cryptoAdjacent', label: 'Crypto Adjacent' },
+  // { key: 'oss', label: 'OSS' },
+  // { key: 'attestations', label: 'Attestations' },
+  // { key: 'hired', label: 'Hired' },
+  // { key: 'interviewed', label: 'Interviewed' },
+  // { key: 'fake', label: 'Fake' },
+  // { key: 'actions', label: 'Actions' },
 ];
 
 const centeredSet = new Set([
   'prevOrgs',
   'cryptoVerticals',
-  'oss',
+  // 'oss',
   'cryptoNative',
-  'cryptoAdjacent',
+  // 'cryptoAdjacent',
   'availableForWork',
   'actions',
   'attestations',
