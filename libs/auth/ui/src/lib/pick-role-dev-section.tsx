@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 
 import { useSetAtom } from 'jotai';
+import { lato } from '@jobstash/shared/core';
 
 import { MW_URL } from '@jobstash/shared/core';
 
@@ -25,18 +26,17 @@ const PickRoleDevSection = () => {
   const onClickConnect = () => setPickRoleSection('dev');
 
   return (
-    <PickRoleSection className={['bg-gradient-to-l from-primary to-secondary']}>
-      <Text size="lg" fw="bold">
+    <PickRoleSection className={['']}>
+      
+      <h3 className={`${lato.className} font-semibold leading-none text-white text-[20px] lg:text-[24px] xl:text-[30px]`}>
         Candidate
-      </Text>
-      <div className="flex w-80 flex-col gap-y-6">
-        <Text color="dimmed" size="sm">
-          We use your Github and your current or past company email to validate
-          which Organization, DAO or Company you have worked with in the past or
-          present.
+      </h3>
+      <div className="flex w-80 flex-col gap-y-4 pb-2">
+        <Text color="dimmed" size="md">
+          You are looking for a job.
         </Text>
-        <Text color="dimmed" size="sm">
-          Please use a business email account if you still have one.
+        <Text color="dimmed" size="md">
+          Please connect your github or your professional email, so we may validate your current and past contributions in crypto.
         </Text>
       </div>
 

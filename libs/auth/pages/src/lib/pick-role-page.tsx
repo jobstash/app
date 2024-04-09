@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import { useEffect, useRef } from 'react';
+import { lato } from '@jobstash/shared/core';
 
 import { LoadingPage } from '@jobstash/shared/pages';
 import { useAtomValue } from 'jotai';
@@ -53,7 +54,7 @@ export const PickRolePage = () => {
   }
 
   return (
-    <div className="w-full lg:pl-52">
+    <div className="w-full lg:pl-52 lg:pt-[100px] min-h-screen">
       <SideBar />
 
       {section === 'email-done' ? (
@@ -63,9 +64,14 @@ export const PickRolePage = () => {
       ) : section === 'org' ? (
         <ConnectOrgEmail />
       ) : (
-        <div className="flex flex-col lg:flex-row h-screen [&>*]:w-full pt-16 lg:pt-0 [&>*]:py-12">
-          <PickRoleDevSection />
-          <PickRoleOrgSection />
+        <div className="pt-[80px] xl:pr-52">
+          <div className="text-center px-4 pb-10 lg:pb-20">
+            <h2 className={`${lato.className} font-semibold leading-none text-white text-[40px] lg:text-[70px] lg:text-[110px]`}>Choose your <span className='text-secondary'>side</span></h2>
+          </div>
+          <div className='px-4 space-y-6 lg:flex lg:justify-center lg:gap-x-5 xl:gap-x-20 lg:items-start lg:space-y-0 lg:px-0'>
+            <PickRoleDevSection />
+            <PickRoleOrgSection />
+          </div>
         </div>
       )}
     </div>

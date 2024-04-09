@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 
 import { useSetAtom } from 'jotai';
+import { lato } from '@jobstash/shared/core';
 
 import { MW_URL } from '@jobstash/shared/core';
 
@@ -21,13 +22,15 @@ const PickRoleOrgSection = () => {
 
   return (
     <PickRoleSection>
-      <Text size="lg" fw="bold">
+      <h3 className={`${lato.className} font-semibold leading-none text-white text-[20px] lg:text-[24px] xl:text-[30px]`}>
         Organization
-      </Text>
-      <div className="flex w-80">
-        <Text color="dimmed" size="sm">
-          We will manually verify your request. Please add your business email
-          which the Organization will be connected to.
+      </h3>
+      <div className="flex w-80 flex-col gap-y-4 pb-2">
+        <Text color="dimmed" size="md">
+          You are looking to hire.
+        </Text>
+        <Text color="dimmed" size="md">
+          Please connect your professional email, so we can validate you are an internal recruiter. Sorry, no external recruiters or talent agencies allowed.
         </Text>
       </div>
 
