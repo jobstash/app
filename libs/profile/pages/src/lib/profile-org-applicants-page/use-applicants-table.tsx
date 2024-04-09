@@ -357,9 +357,10 @@ export const useApplicantsTable = () => {
         );
       }
 
-      if (columnKey === 'availableForWork') {
-        return <BooleanCell value={Boolean(applicant.user.availableForWork)} />;
-      }
+      //
+      // if (columnKey === 'availableForWork') {
+      //   return <BooleanCell value={Boolean(applicant.user.availableForWork)} />;
+      // }
 
       if (columnKey === 'community') {
         const {
@@ -530,12 +531,12 @@ type CustomColumnKeys =
 const columns = [
   { key: 'job', label: 'Job' },
   { key: 'user', label: 'User' },
-  { key: 'skills', label: 'Matching Skills' },
-  { key: 'prevOrgs', label: 'Previous Organizations' },
+  { key: 'skills', label: 'Skill Match' },
+  { key: 'prevOrgs', label: 'Work History' },
   // { key: 'cryptoVerticals', label: 'Crypto Verticals' },
   { key: 'community', label: 'Community' },
-  { key: 'availableForWork', label: 'Available for Work' },
-  // { key: 'cryptoNative', label: 'Crypto Native' },
+  // { key: 'availableForWork', label: 'Available' },
+  { key: 'cryptoNative', label: 'Crypto Native' },
   // { key: 'cryptoAdjacent', label: 'Crypto Adjacent' },
   // { key: 'oss', label: 'OSS' },
   // { key: 'attestations', label: 'Attestations' },
@@ -551,7 +552,7 @@ const centeredSet = new Set([
   // 'oss',
   'cryptoNative',
   // 'cryptoAdjacent',
-  'availableForWork',
+  // 'availableForWork',
   'community',
   'actions',
   'attestations',
@@ -560,4 +561,4 @@ const centeredSet = new Set([
   'fake',
 ]);
 
-const ROWS_PER_PAGE = 8;
+const ROWS_PER_PAGE = 20;
