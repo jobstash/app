@@ -1,7 +1,7 @@
 import Head from 'next/head';
 import { memo } from 'react';
 
-import { FRONTEND_URL, JOB_FRAME_URL } from '@jobstash/shared/core';
+import { JOB_FRAME_URL } from '@jobstash/shared/core';
 
 interface Props {
   id: string;

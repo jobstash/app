@@ -2,13 +2,11 @@ import { memo, type MouseEventHandler, type ReactNode } from 'react';
 
 import { cva, type VariantProps } from 'class-variance-authority';
 import { ClassValue } from 'clsx';
-import {
-  LamaIcon,
-} from '@jobstash/shared/ui';
 
 import { cn } from '@jobstash/shared/utils';
 
 import ArrowCircleUpRightIcon from '../icons/arrow-circle-up-right-icon';
+import LamaIcon from '../icons/lama-icon';
 
 import Text from './text';
 
@@ -87,7 +85,13 @@ const CardSet = ({
       {typeof children === 'string' ? (
         <div className="truncate flex max-w-[240px] sm:max-w-md lg:max-w-lg">
           <Text size="sm">{children}</Text>
-          {(children.includes('Funding') || children.includes('TVL') || children.includes('Last Amount')) && <span className='ml-0.5 [&>svg]:h-2'><LamaIcon /></span>}
+          {(children.includes('Funding') ||
+            children.includes('TVL') ||
+            children.includes('Last Amount')) && (
+            <span className="ml-0.5 [&>svg]:h-2">
+              <LamaIcon />
+            </span>
+          )}
         </div>
       ) : (
         children
@@ -97,7 +101,6 @@ const CardSet = ({
           <ArrowCircleUpRightIcon />
         </div>
       )}
-      
     </button>
   );
 };
