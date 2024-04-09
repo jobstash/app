@@ -21,10 +21,10 @@ export const CommunityCell = ({ wallet }: Props) => {
   });
 
   const incrementFetched = () =>
-    setCounts((prev) => ({ ...prev, fetched: prev.fetched++ }));
+    setCounts((prev) => ({ ...prev, fetched: prev.fetched + 1 }));
 
   const incrementCommunities = () =>
-    setCounts((prev) => ({ ...prev, communities: prev.communities++ }));
+    setCounts((prev) => ({ ...prev, communities: prev.communities + 1 }));
 
   const isLoading = counts.fetched < COMMUNITY_KEYS.length;
   const hasNoCommunity = counts.communities === 0;
