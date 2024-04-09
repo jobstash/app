@@ -5,7 +5,7 @@ import {
   http,
   WagmiProvider as BaseProvider,
 } from 'wagmi';
-import { mainnet } from 'wagmi/chains';
+import { mainnet, optimism, polygon } from 'wagmi/chains';
 
 import {
   FRONTEND_URL,
@@ -20,12 +20,13 @@ const config = createConfig(
     appUrl: FRONTEND_URL,
     appIcon: `${FRONTEND_URL}/apple-touch-icon.png`,
     walletConnectProjectId: WALLETCONNECT_PROJECT_ID,
-    chains: [mainnet],
+    chains: [mainnet, polygon, optimism],
     transports: {
       [mainnet.id]: fallback([
         http(`https://mainnet.infura.io/v3/${INFRURA_ID}`),
         http(), // Public fallback
       ]),
+      [polygon.id]: fallback([http()]),
     },
     ssr: true,
   }),

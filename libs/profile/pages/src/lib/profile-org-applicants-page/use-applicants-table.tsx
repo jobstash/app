@@ -1,11 +1,6 @@
 /* eslint-disable complexity */
 import { useCallback, useMemo, useState } from 'react';
 
-import {
-  ArchiveBoxIcon,
-  CalendarDaysIcon,
-  HeartIcon,
-} from '@heroicons/react/16/solid';
 import { Button } from '@nextui-org/button';
 import { Chip } from '@nextui-org/chip';
 import { Link } from '@nextui-org/link';
@@ -30,8 +25,8 @@ import {
 import { EmptyCellPlaceholder } from '@jobstash/profile/ui';
 import { LogoTitle, Text } from '@jobstash/shared/ui';
 
-import { ActionButton } from './action-button';
 import { BooleanCell } from './boolean-cell';
+import { CommunityCell } from './community-cell';
 import { WorkHistory } from './work-history';
 
 export const useApplicantsTable = () => {
@@ -366,6 +361,14 @@ export const useApplicantsTable = () => {
         return <BooleanCell value={Boolean(applicant.user.availableForWork)} />;
       }
 
+      if (columnKey === 'community') {
+        const {
+          user: { wallet },
+        } = applicant;
+
+        return <CommunityCell wallet={wallet} />;
+      }
+
       if (columnKey === 'job') {
         const {
           job: { title, classification },
@@ -516,6 +519,7 @@ type CustomColumnKeys =
   | 'prevOrgs'
   | 'skills'
   // | 'cryptoVerticals'
+  | 'community'
   | 'availableForWork';
 // | 'cryptoAdjacent'
 // | 'hired'
@@ -529,6 +533,7 @@ const columns = [
   { key: 'skills', label: 'Matching Skills' },
   { key: 'prevOrgs', label: 'Previous Organizations' },
   // { key: 'cryptoVerticals', label: 'Crypto Verticals' },
+  { key: 'community', label: 'Community' },
   { key: 'availableForWork', label: 'Available for Work' },
   // { key: 'cryptoNative', label: 'Crypto Native' },
   // { key: 'cryptoAdjacent', label: 'Crypto Adjacent' },
@@ -547,6 +552,7 @@ const centeredSet = new Set([
   'cryptoNative',
   // 'cryptoAdjacent',
   'availableForWork',
+  'community',
   'actions',
   'attestations',
   'hired',

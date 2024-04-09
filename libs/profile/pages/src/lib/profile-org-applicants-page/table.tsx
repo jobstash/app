@@ -56,7 +56,7 @@ export const ApplicantsTable = () => {
       <ApplicantTabs activeList={activeList} setActiveList={setActiveList} />
 
       {isLoading ? (
-        <div className="pt-20 flex items-center justify-center">
+        <div className="py-40 flex items-center justify-center overflow-hidden">
           <Loader />
         </div>
       ) : (
