@@ -104,6 +104,7 @@ export const jobApplicantSchema = myzod.object({
               firstContributedAt: myzod.number(),
               lastContributedAt: myzod.number(),
               commitsCount: myzod.number(),
+              cryptoNative: myzod.boolean(),
             }),
           ),
         }),
