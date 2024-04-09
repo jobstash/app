@@ -22,7 +22,7 @@ const PickRoleButton = ({ text, icon, isDisabled, onClick }: Props) => (
     onClick={onClick}
   >
     {icon}
-    <Text size="sm" fw="semibold">
+    <Text size="md" fw="semibold">
       {text}
     </Text>
   </button>

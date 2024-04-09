@@ -20,11 +20,11 @@ const MobileNavbarWrapper = ({ children }: Props) => {
   return (
     <nav
       className={cn(
-        'fixed inset-0 max-h-full w-full bg-opacity-75 bg-gradient-to-l from-[#8743FF] to-[#4136F1] p-4 transition-all duration-300 lg:hidden flex flex-col gap-6',
+        'fixed z-[99] inset-0 max-h-full w-full bg-opacity-75 bg-gradient-to-l from-[#8743FF] to-[#4136F1] p-4 transition-all duration-300 lg:hidden flex flex-col gap-6',
         { 'pt-[72px]': isOpenTopBanner },
-        { 'z-50 opacity-100 overflow-auto h-screen': isOpenNav },
+        { ' opacity-100 overflow-auto h-screen': isOpenNav },
         {
-          '-z-50 opacity-0 h-0 overflow-hidden pointer-events-none': !isOpenNav,
+          'opacity-0 h-0 overflow-hidden pointer-events-none': !isOpenNav,
         },
       )}
     >

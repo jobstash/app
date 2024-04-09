@@ -29,9 +29,9 @@ const SearchFilter = () => {
         rightSectionWidth={140}
         rightSection={
           <div className="hidden items-center gap-x-2 lg:flex">
-            <Button isIcon isDisabled={isLoading} onClick={clearSearch}>
+            {/* <Button isIcon isDisabled={isLoading} onClick={clearSearch}>
               <CloseIcon />
-            </Button>
+            </Button> */}
             <Button type="submit" isDisabled={isLoading}>
               Search
             </Button>
