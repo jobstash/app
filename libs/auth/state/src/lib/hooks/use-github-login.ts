@@ -56,10 +56,12 @@ export const useGithubLogin = () => {
       const isUser =
         role !== CHECK_WALLET_ROLES.DEV && role !== CHECK_WALLET_ROLES.ORG;
 
-      if (!isGithubAccountUsed || !isUser) {
-        disconnect();
-        signOut();
-      }
+      //
+      // Commented this out to troubleshoot issue where user is signed out when signing in with github, as he's not a dev yet, or if the github comes back with some error.
+      // if (!isGithubAccountUsed || !isUser) {
+      //   disconnect();
+      //   signOut();
+      // }
 
       const redirectUrl = isGithubAccountUsed && isUser ? '/profile' : '/';
       setTimeout(() => {
