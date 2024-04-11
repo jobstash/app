@@ -4,12 +4,12 @@ import { Heading, Text } from '@jobstash/shared/ui';
 const ShowcaseHeader = () => (
   <>
     <motion.div layout>
-      <Heading size="md">Showcase Your Work</Heading>
+      <Heading size="md">Your Links</Heading>
     </motion.div>
     <motion.div layout>
       <Text color="dimmed">
-        Add link to your CV, Portfolio or Website and increase the chance of
-        getting hired.
+        Showcase your expertise by adding links to your CV, Portfolio and things
+        you built
       </Text>
     </motion.div>
   </>

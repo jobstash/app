@@ -27,7 +27,7 @@ const ProfileRepoSkill = ({
     </div>
     <div className="flex items-center justify-center p-2 border border-gray rounded-xl">
       <Checkbox
-        label="I can teach"
+        label="Can Mentor Others"
         color="gray"
         radius="xl"
         defaultChecked={canTeach}

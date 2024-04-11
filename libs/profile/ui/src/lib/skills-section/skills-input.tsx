@@ -24,7 +24,7 @@ const SkillsInput = () => {
       <Select
         searchable
         data={options.map((option) => option.name)}
-        placeholder="Add technology you used ..."
+        placeholder="Add your skills..."
         size="lg"
         classNames={{
           root: 'min-w-[70%]',
