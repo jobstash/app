@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 
 import { Chip, Spinner } from '@nextui-org/react';
 import { useReadContract } from 'wagmi';
-import { polygon } from 'wagmi/chains';
 
 import { COMMUNITY_NFT_ADDRESSES } from '@jobstash/profile/core';
 import { cn } from '@jobstash/shared/utils';
@@ -67,14 +66,14 @@ const CommunityFetcher = ({
 }: CommunityProps) => {
   const [initialized, setInitialized] = useState(false);
 
-  const { address, label } = COMMUNITY_NFT_ADDRESSES[communityKey];
+  const { address, label, chainId } = COMMUNITY_NFT_ADDRESSES[communityKey];
 
   const { data, isError, isSuccess } = useReadContract({
     abi: ABI,
     address,
     functionName: FUNCTION_NAME,
     args: [wallet as `0x${string}`],
-    chainId: polygon.id,
+    chainId,
   });
 
   const hasLoaded = isError || isSuccess;

@@ -1,3 +1,5 @@
+import { mainnet, polygon } from 'wagmi/chains';
+
 import { ECOSYSTEMS } from '@jobstash/shared/core';
 
 export const PROFILE_RIGHT_PANEL_TAB = {
@@ -47,9 +49,11 @@ export const COMMUNITY_NFT_ADDRESSES = {
   [ECOSYSTEMS.ETHDAM]: {
     address: '0xb71df844faBa80EEcE907B421652E07FFFF505B4',
     label: 'EthDam',
+    chainId: polygon.id,
   },
   [ECOSYSTEMS.LOBSTERDAO]: {
     address: '0x026224a2940bfe258d0dbe947919b62fe321f042',
     label: 'LobsterDAO',
+    chainId: mainnet.id,
   },
 } as const;
