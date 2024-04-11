@@ -44,10 +44,13 @@ export const RightPanelJobCardApplyButton = (props: Props) => {
   const { data: jobPost, isPending: isPendingJobPost } = useJobPost(shortUUID);
   const { appliedJobs, isPendingJobsApplied, isFetchingJobsApplied } =
     useJobsApplied();
-  const isLoadingJobsApplied = isPendingJobsApplied || isFetchingJobsApplied;
-  const hasApplied = appliedJobs
-    .map((job) => job.shortUUID)
-    .includes(shortUUID);
+  const isLoadingJobsApplied =
+    isDev && (isPendingJobsApplied || isFetchingJobsApplied);
+
+  const hasApplied =
+    isDev &&
+    hasUser &&
+    appliedJobs.map((job) => job.shortUUID).includes(shortUUID);
 
   const { mutate: mutateJobApply, isPendingMutation } =
     useSendJobApplyInteractionMutation({
@@ -63,7 +66,7 @@ export const RightPanelJobCardApplyButton = (props: Props) => {
   ].includes(true);
 
   const openApplyPage = () => {
-    if (isAnon && isOneClick) {
+    if (isAnon) {
       setOpen(true);
       return;
     }
@@ -93,13 +96,13 @@ export const RightPanelJobCardApplyButton = (props: Props) => {
     openApplyPage();
   };
 
-  const text = isOneClick
-    ? hasApplied
-      ? 'Already applied for this job'
-      : '1-Click Apply'
-    : isLoadingJobsApplied
-    ? 'Connect Your Wallet & Sign Up to Apply'
-    : 'Apply for this job';
+  const text = hasApplied
+    ? 'Already applied for this job'
+    : isOneClick
+    ? '1-Click Apply'
+    : isDev
+    ? 'Apply for this job'
+    : 'Connect Your Wallet & Sign Up to Apply';
 
   return (
     <div className="h-[40px] w-[112px] flex justify-center">
@@ -108,7 +111,7 @@ export const RightPanelJobCardApplyButton = (props: Props) => {
       ) : (
         <RightPanelCta
           text={text}
-          isDisabled={hasApplied || isLoadingJobsApplied}
+          isDisabled={hasApplied}
           onClick={onClickApplyJob}
         />
       )}

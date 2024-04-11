@@ -83,7 +83,7 @@ export const WalletProvider = ({ children }: Props) => {
 
         return res.ok;
       }}
-      onSignIn={async () => {
+      onSignIn={async (data) => {
         const checkWalletResponse = await getCheckWallet();
         console.log({ checkWalletResponse });
         queryClient.setQueryData(
@@ -92,6 +92,11 @@ export const WalletProvider = ({ children }: Props) => {
         );
         queryClient.invalidateQueries({
           queryKey: [mwVersion, 'check-wallet'],
+        });
+
+        // Invalidate applied jobs
+        queryClient.invalidateQueries({
+          queryKey: [mwVersion, 'jobs-applied', data?.address],
         });
 
         const {

@@ -36,13 +36,17 @@ export const useSendJobApplyInteractionMutation = ({
         });
       }
 
-      notifSuccess({
-        title: 'Job Application Successful!',
-        message: 'You have directly applied through jobstash!',
-      });
+      if (isDevOneClick) {
+        notifSuccess({
+          title: 'Job Application Successful!',
+          message: 'You have directly applied through jobstash!',
+        });
+      }
     },
     onError(error) {
-      notifError({ title: 'Job Application Failed', message: error.message });
+      if (isDevOneClick) {
+        notifError({ title: 'Job Application Failed', message: error.message });
+      }
     },
   });
 
