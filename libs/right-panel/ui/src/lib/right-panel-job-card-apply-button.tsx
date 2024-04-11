@@ -1,5 +1,4 @@
 /* eslint-disable camelcase */
-import { useState } from 'react';
 
 import { Spinner } from '@nextui-org/spinner';
 import { useQueryClient } from '@tanstack/react-query';
@@ -41,22 +40,22 @@ export const RightPanelJobCardApplyButton = (props: Props) => {
   const isDev = role === CHECK_WALLET_ROLES.DEV;
   const isAnon = !isConnected || !isSignedIn;
 
-  const { mutate: mutateJobApply } = useSendJobApplyInteractionMutation();
-
   const { isSupported, subdomain } = getEcosystemSubdomain();
   const isEthdam = isSupported && subdomain === ECOSYSTEMS.ETHDAM;
   const isOneClick = hasUser || isEthdam;
 
   const queryClient = useQueryClient();
-  const { jobsApplied, isPendingJobsApplied } = useJobsApplied();
+  const { jobsApplied, isPendingJobsApplied, isFetchingJobsApplied } =
+    useJobsApplied();
+  const isLoadingJobsApplied = isPendingJobsApplied || isFetchingJobsApplied;
   const hasApplied = jobsApplied
     .map((job) => job.shortUUID)
     .includes(shortUUID);
 
-  // Bypass applied fetch when clicked - no need to wait for refetch response
-  const [isBypassApplied, setIsBypassApplied] = useState(false);
+  const showSpinner = isOneClick && isDev && isLoadingJobsApplied;
 
-  if (isPendingJobsApplied) return <Spinner size="sm" color="white" />;
+  const { mutate: mutateJobApply } =
+    useSendJobApplyInteractionMutation(isOneClick);
 
   const openApplyPage = () => {
     if (isAnon && isOneClick) {
@@ -89,7 +88,6 @@ export const RightPanelJobCardApplyButton = (props: Props) => {
 
     // Invalidate jobs applied fetch
     if (isDev && isOneClick) {
-      setIsBypassApplied(true);
       queryClient.invalidateQueries({
         queryKey: [mwVersion, 'jobs-applied', address],
       });
@@ -99,16 +97,22 @@ export const RightPanelJobCardApplyButton = (props: Props) => {
   };
 
   const text = isOneClick
-    ? hasApplied || isBypassApplied
+    ? hasApplied
       ? 'Already applied for this job'
       : '1-Click Apply'
     : 'Apply for this job';
 
   return (
-    <RightPanelCta
-      text={text}
-      isDisabled={hasApplied || isBypassApplied}
-      onClick={onClickApplyJob}
-    />
+    <div className="h-[40px] w-[112px] flex justify-center">
+      {showSpinner ? (
+        <Spinner size="sm" color="white" />
+      ) : (
+        <RightPanelCta
+          text={text}
+          isDisabled={hasApplied || isLoadingJobsApplied}
+          onClick={onClickApplyJob}
+        />
+      )}
+    </div>
   );
 };

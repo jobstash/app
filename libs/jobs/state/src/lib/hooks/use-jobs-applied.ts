@@ -10,12 +10,16 @@ export const useJobsApplied = () => {
 
   const mwVersion = getLSMwVersion();
 
-  const { data, isPending } = useQuery({
+  const { data, isPending, isFetching } = useQuery({
     queryKey: [mwVersion, 'jobs-applied', address],
     queryFn: () => getJobsApplied(),
     enabled: Boolean(address),
     staleTime: 1000 * 60 * 60,
   });
 
-  return { jobsApplied: data ?? [], isPendingJobsApplied: isPending };
+  return {
+    jobsApplied: data ?? [],
+    isPendingJobsApplied: isPending,
+    isFetchingJobsApplied: isFetching,
+  };
 };
