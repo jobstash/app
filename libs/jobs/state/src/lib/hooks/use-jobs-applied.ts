@@ -10,7 +10,7 @@ export const useJobsApplied = () => {
 
   const mwVersion = getLSMwVersion();
 
-  const { data, isPending, isFetching } = useQuery({
+  const { data, isPending, isFetching, refetch } = useQuery({
     queryKey: [mwVersion, 'jobs-applied', address],
     queryFn: () => getJobsApplied(),
     enabled: Boolean(address),
@@ -18,8 +18,9 @@ export const useJobsApplied = () => {
   });
 
   return {
-    jobsApplied: data ?? [],
+    appliedJobs: data ?? [],
     isPendingJobsApplied: isPending,
     isFetchingJobsApplied: isFetching,
+    refetchJobsApplied: refetch,
   };
 };

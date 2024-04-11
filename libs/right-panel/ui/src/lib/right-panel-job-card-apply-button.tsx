@@ -1,20 +1,16 @@
 /* eslint-disable camelcase */
 
 import { Spinner } from '@nextui-org/spinner';
-import { useQueryClient } from '@tanstack/react-query';
 import { useModal, useSIWE } from 'connectkit';
 import { useAccount } from 'wagmi';
 
 import { CHECK_WALLET_ROLES } from '@jobstash/auth/core';
 import { ECOSYSTEMS, GA_EVENT_ACTION } from '@jobstash/shared/core';
-import {
-  gaEvent,
-  getEcosystemSubdomain,
-  getLSMwVersion,
-} from '@jobstash/shared/utils';
+import { gaEvent, getEcosystemSubdomain } from '@jobstash/shared/utils';
 
 import { useAuthContext } from '@jobstash/auth/state';
 import {
+  useJobPost,
   useJobsApplied,
   useSendJobApplyInteractionMutation,
 } from '@jobstash/jobs/state';
@@ -32,7 +28,7 @@ interface Props {
 export const RightPanelJobCardApplyButton = (props: Props) => {
   const { url, shortUUID, orgName, hasUser, classification } = props;
 
-  const { isConnected, address } = useAccount();
+  const { isConnected } = useAccount();
   const { isSignedIn } = useSIWE();
   const { setOpen } = useModal();
 
@@ -43,19 +39,28 @@ export const RightPanelJobCardApplyButton = (props: Props) => {
   const { isSupported, subdomain } = getEcosystemSubdomain();
   const isEthdam = isSupported && subdomain === ECOSYSTEMS.ETHDAM;
   const isOneClick = hasUser || isEthdam;
+  const isDevOneClick = isOneClick && isDev;
 
-  const queryClient = useQueryClient();
-  const { jobsApplied, isPendingJobsApplied, isFetchingJobsApplied } =
+  const { data: jobPost, isPending: isPendingJobPost } = useJobPost(shortUUID);
+  const { appliedJobs, isPendingJobsApplied, isFetchingJobsApplied } =
     useJobsApplied();
   const isLoadingJobsApplied = isPendingJobsApplied || isFetchingJobsApplied;
-  const hasApplied = jobsApplied
+  const hasApplied = appliedJobs
     .map((job) => job.shortUUID)
     .includes(shortUUID);
 
-  const showSpinner = isOneClick && isDev && isLoadingJobsApplied;
+  const { mutate: mutateJobApply, isPendingMutation } =
+    useSendJobApplyInteractionMutation({
+      isDevOneClick,
+      jobPost,
+      appliedJobs,
+    });
 
-  const { mutate: mutateJobApply } =
-    useSendJobApplyInteractionMutation(isOneClick);
+  const showSpinner = [
+    isOneClick && isDev && isLoadingJobsApplied,
+    isPendingJobPost,
+    isPendingMutation,
+  ].includes(true);
 
   const openApplyPage = () => {
     if (isAnon && isOneClick) {
@@ -78,19 +83,11 @@ export const RightPanelJobCardApplyButton = (props: Props) => {
     });
   };
 
-  const mwVersion = getLSMwVersion();
   const onClickApplyJob = () => {
     sendAnalyticsEvent();
 
     if (isDev) {
       mutateJobApply(shortUUID);
-    }
-
-    // Invalidate jobs applied fetch
-    if (isDev && isOneClick) {
-      queryClient.invalidateQueries({
-        queryKey: [mwVersion, 'jobs-applied', address],
-      });
     }
 
     openApplyPage();
