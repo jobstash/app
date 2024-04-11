@@ -1,15 +1,24 @@
 /* eslint-disable camelcase */
 import { useState } from 'react';
 
+import { Spinner } from '@nextui-org/spinner';
+import { useQueryClient } from '@tanstack/react-query';
 import { useModal, useSIWE } from 'connectkit';
 import { useAccount } from 'wagmi';
 
 import { CHECK_WALLET_ROLES } from '@jobstash/auth/core';
 import { ECOSYSTEMS, GA_EVENT_ACTION } from '@jobstash/shared/core';
-import { gaEvent, getEcosystemSubdomain } from '@jobstash/shared/utils';
+import {
+  gaEvent,
+  getEcosystemSubdomain,
+  getLSMwVersion,
+} from '@jobstash/shared/utils';
 
 import { useAuthContext } from '@jobstash/auth/state';
-import { useSendJobApplyInteractionMutation } from '@jobstash/jobs/state';
+import {
+  useJobsApplied,
+  useSendJobApplyInteractionMutation,
+} from '@jobstash/jobs/state';
 
 import RightPanelCta from './right-panel-cta';
 
@@ -24,21 +33,30 @@ interface Props {
 export const RightPanelJobCardApplyButton = (props: Props) => {
   const { url, shortUUID, orgName, hasUser, classification } = props;
 
-  const { isConnected } = useAccount();
+  const { isConnected, address } = useAccount();
   const { isSignedIn } = useSIWE();
   const { setOpen } = useModal();
 
   const { role } = useAuthContext();
   const isDev = role === CHECK_WALLET_ROLES.DEV;
-
-  const [isDisabled, setIsDisabled] = useState(false);
-
   const isAnon = !isConnected || !isSignedIn;
+
+  const { mutate: mutateJobApply } = useSendJobApplyInteractionMutation();
 
   const { isSupported, subdomain } = getEcosystemSubdomain();
   const isEthdam = isSupported && subdomain === ECOSYSTEMS.ETHDAM;
-
   const isOneClick = hasUser || isEthdam;
+
+  const queryClient = useQueryClient();
+  const { jobsApplied, isPendingJobsApplied } = useJobsApplied();
+  const hasApplied = jobsApplied
+    .map((job) => job.shortUUID)
+    .includes(shortUUID);
+
+  // Bypass applied fetch when clicked - no need to wait for refetch response
+  const [isBypassApplied, setIsBypassApplied] = useState(false);
+
+  if (isPendingJobsApplied) return <Spinner size="sm" color="white" />;
 
   const openApplyPage = () => {
     if (isAnon && isOneClick) {
@@ -46,7 +64,8 @@ export const RightPanelJobCardApplyButton = (props: Props) => {
       return;
     }
 
-    if (typeof window !== 'undefined') {
+    // Open job-url in new tab (if not 1-click apply)
+    if (!isOneClick && typeof window !== 'undefined') {
       window.open(url, '_blank');
     }
   };
@@ -60,8 +79,7 @@ export const RightPanelJobCardApplyButton = (props: Props) => {
     });
   };
 
-  const { mutate: mutateJobApply } = useSendJobApplyInteractionMutation();
-
+  const mwVersion = getLSMwVersion();
   const onClickApplyJob = () => {
     sendAnalyticsEvent();
 
@@ -69,15 +87,19 @@ export const RightPanelJobCardApplyButton = (props: Props) => {
       mutateJobApply(shortUUID);
     }
 
-    if (!isAnon && isOneClick) {
-      setIsDisabled(true);
+    // Invalidate jobs applied fetch
+    if (isDev && isOneClick) {
+      setIsBypassApplied(true);
+      queryClient.invalidateQueries({
+        queryKey: [mwVersion, 'jobs-applied', address],
+      });
     }
 
     openApplyPage();
   };
 
   const text = isOneClick
-    ? isDisabled
+    ? hasApplied || isBypassApplied
       ? 'Already applied for this job'
       : '1-Click Apply'
     : 'Apply for this job';
@@ -85,7 +107,7 @@ export const RightPanelJobCardApplyButton = (props: Props) => {
   return (
     <RightPanelCta
       text={text}
-      isDisabled={isDisabled}
+      isDisabled={hasApplied || isBypassApplied}
       onClick={onClickApplyJob}
     />
   );

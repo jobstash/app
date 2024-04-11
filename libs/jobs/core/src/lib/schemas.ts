@@ -133,3 +133,10 @@ export const jobApplicantSchema = myzod.object({
   upcomingTalent: myzod.boolean(),
 });
 export type JobApplicant = Infer<typeof jobApplicantSchema>;
+
+export const jobsAppliedResponseSchema = myzod.object({
+  data: myzod.array(jobPostSchema),
+  success: myzod.boolean(),
+  message: myzod.string(),
+});
+export type JobsAppliedResponse = Infer<typeof jobsAppliedResponseSchema>;
