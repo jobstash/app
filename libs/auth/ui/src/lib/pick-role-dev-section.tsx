@@ -1,8 +1,8 @@
 import { useRouter } from 'next/router';
 
 import { useSetAtom } from 'jotai';
-import { lato } from '@jobstash/shared/core';
 
+import { lato } from '@jobstash/shared/core';
 import { MW_URL } from '@jobstash/shared/core';
 
 import { pickRoleSectionAtom } from '@jobstash/auth/state';
@@ -27,8 +27,9 @@ const PickRoleDevSection = () => {
 
   return (
     <PickRoleSection className={['']}>
-      
-      <h3 className={`${lato.className} font-semibold leading-none text-white text-[20px] lg:text-[24px] xl:text-[30px]`}>
+      <h3
+        className={`${lato.className} font-semibold leading-none text-white text-[20px] lg:text-[24px] xl:text-[30px]`}
+      >
         Candidate
       </h3>
       <div className="flex w-80 flex-col gap-y-4 pb-2">
@@ -36,7 +37,8 @@ const PickRoleDevSection = () => {
           You are looking for a job.
         </Text>
         <Text color="dimmed" size="md">
-          Please connect your github or your professional email, so we may validate your current and past contributions in crypto.
+          Please connect your github or your professional email, so we may
+          validate your current and past contributions in crypto.
         </Text>
       </div>
 
