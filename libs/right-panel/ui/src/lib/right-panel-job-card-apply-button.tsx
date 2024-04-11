@@ -97,6 +97,8 @@ export const RightPanelJobCardApplyButton = (props: Props) => {
     ? hasApplied
       ? 'Already applied for this job'
       : '1-Click Apply'
+    : isLoadingJobsApplied
+    ? 'Connect Your Wallet & Sign Up to Apply'
     : 'Apply for this job';
 
   return (
