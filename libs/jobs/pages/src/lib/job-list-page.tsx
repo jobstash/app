@@ -7,7 +7,7 @@ import { ROUTE_SECTION } from '@jobstash/shared/core';
 import { cn } from '@jobstash/shared/utils';
 
 import { activeJobAtom } from '@jobstash/jobs/state';
-import { useIsMobile } from '@jobstash/shared/state';
+import { useIsDesktop, useIsMobile } from '@jobstash/shared/state';
 
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import { PageWrapper } from '@jobstash/shared/ui';
@@ -26,7 +26,7 @@ const JobsRightPanel = dynamic(() =>
 
 export const JobListPage = () => {
   const activeJob = useAtomValue(activeJobAtom);
-  const isMobile = useIsMobile();
+  const isDesktop = useIsDesktop();
 
   return (
     <>
@@ -43,7 +43,7 @@ export const JobListPage = () => {
           <JobList initJob={null} activeJob={activeJob} />
         </div>
 
-        {activeJob && !isMobile && (
+        {activeJob && isDesktop && (
           <div
             className={cn(
               'hide-scrollbar fixed inset-0 h-screen overflow-y-auto bg-dark p-4 pt-6 transition-all lg:inset-auto lg:right-0 lg:top-0 lg:w-5/12 lg:px-6 lg:py-8 lg:pr-10 lg:mt-[100px]',
