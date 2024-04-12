@@ -34,9 +34,9 @@ const ProfileGotItCard = () => {
       </Text>
       <Text color="dimmed">
         <b>Skills & CV:</b> 👩‍💻 Below, flaunt your skills and tag any you could
-        teach with "Can Mentor Others". Elevate your job match game! Plus, drop
-        a link to your CV, portfolio or other things you built to spotlight your
-        expertise.
+        teach with &#34;Can Mentor Others&#34;. Elevate your job match game!
+        Plus, drop a link to your CV, portfolio or other things you built to
+        spotlight your expertise.
       </Text>
       <Text color="dimmed">
         Remember: a well-set profile is your ticket to the best job matches on
