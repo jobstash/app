@@ -55,7 +55,7 @@ export const createRightPanelProjectCardTags = (
       text: 'Website',
       icon: <GlobeSimpleIcon />,
       link,
-      showLinkIcon: false,
+      showLinkIcon: true,
       asLink: true,
     });
   }
@@ -66,7 +66,7 @@ export const createRightPanelProjectCardTags = (
       text: 'Github',
       icon: <GithubLogoOutlineIcon />,
       link: `https://github.com/${github}`,
-      showLinkIcon: false,
+      showLinkIcon: true,
       asLink: true,
     });
   }
@@ -76,8 +76,8 @@ export const createRightPanelProjectCardTags = (
       id: TAG_ELEMENT_ID.twitter,
       text: 'Twitter',
       icon: <TwitterIcon />,
-      link: twitter,
-      showLinkIcon: false,
+      link: `https://twitter.com/${twitter}`,
+      showLinkIcon: true,
       asLink: true,
     });
   }
@@ -88,7 +88,7 @@ export const createRightPanelProjectCardTags = (
       text: 'Telegram',
       icon: <TelegramIcon />,
       link: `https://telegram.me/${telegram}`,
-      showLinkIcon: false,
+      showLinkIcon: true,
       asLink: true,
     });
   }
@@ -99,7 +99,7 @@ export const createRightPanelProjectCardTags = (
       text: 'Discord',
       icon: <TelegramIcon />,
       link: discord,
-      showLinkIcon: false,
+      showLinkIcon: true,
       asLink: true,
     });
   }
@@ -110,7 +110,7 @@ export const createRightPanelProjectCardTags = (
       text: 'Documentation',
       icon: <DocsIcon />,
       link: docs,
-      showLinkIcon: false,
+      showLinkIcon: true,
       asLink: true,
     });
   }
