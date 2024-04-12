@@ -1,9 +1,10 @@
 import { useRouter } from 'next/router';
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useSIWE } from 'connectkit';
-import { useDisconnect } from 'wagmi';
 
+//
+// import { useSIWE } from 'connectkit';
+// import { useDisconnect } from 'wagmi';
 import { CHECK_WALLET_ROLES, GithubLoginPayload } from '@jobstash/auth/core';
 import { SENTRY_MW_NON_200_RESPONSE } from '@jobstash/shared/core';
 import {
@@ -19,8 +20,10 @@ import { useAuthContext } from './use-auth-context';
 export const useGithubLogin = () => {
   const router = useRouter();
   const { role } = useAuthContext();
-  const { disconnect } = useDisconnect();
-  const { signOut } = useSIWE();
+
+  //
+  // const { disconnect } = useDisconnect();
+  // const { signOut } = useSIWE();
 
   const queryClient = useQueryClient();
 
@@ -50,7 +53,14 @@ export const useGithubLogin = () => {
 
       sentryMessage(
         `githubLoginRes: ${SENTRY_MW_NON_200_RESPONSE}`,
-        JSON.stringify({ res, payload }),
+        JSON.stringify({
+          res: {
+            message: res.message ?? null,
+            stack: res.stack ?? null,
+            name: res.name ?? null,
+          },
+          payload,
+        }),
       );
 
       const isUser =
