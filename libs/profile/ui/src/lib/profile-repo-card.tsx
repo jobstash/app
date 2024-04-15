@@ -4,9 +4,9 @@ import { useSetAtom } from 'jotai';
 
 import { type ProfileRepo } from '@jobstash/profile/core';
 import { EVENT_CARD_CLICK } from '@jobstash/shared/core';
-import { disablePageScroll } from '@jobstash/shared/utils';
 
 import { activeProfileRepoAtom } from '@jobstash/profile/state';
+import { isDisabledPageScrollAtom } from '@jobstash/shared/state';
 
 import ProfileCardWrapper from './profile-card-wrapper';
 import ProfileRepoCardHeader from './profile-repo-card-header';
@@ -27,12 +27,13 @@ const ProfileRepoCard = (props: Props) => {
   } = profileRepo;
 
   const setActiveProfileRepo = useSetAtom(activeProfileRepoAtom);
+  const setIsDisabledPageScroll = useSetAtom(isDisabledPageScrollAtom);
 
   const onClick = useCallback(() => {
-    disablePageScroll(true);
+    setIsDisabledPageScroll(true);
     setActiveProfileRepo(profileRepo);
     document.dispatchEvent(new Event(EVENT_CARD_CLICK));
-  }, [profileRepo, setActiveProfileRepo]);
+  }, [profileRepo, setActiveProfileRepo, setIsDisabledPageScroll]);
 
   return (
     <ProfileCardWrapper

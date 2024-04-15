@@ -43,7 +43,7 @@ export const profileRepoListQueryPageSchema = myzod.object({
   data: myzod.array(profileRepoSchema),
 });
 
-const profileOrgSchema = myzod.object({
+export const profileOrgSchema = myzod.object({
   id: myzod.string().min(1),
   name: myzod.string().min(1),
   description: myzod.string().min(1),

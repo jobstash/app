@@ -21,6 +21,7 @@ import {
   profileOrgReviewSchema,
   profileOrgSalaryPayloadSchema,
   profileOrgSalaryResponseSchema,
+  profileOrgSchema,
   profileRepoContributionResponseSchema,
   profileRepoListQueryPageSchema,
   profileRepoSchema,
@@ -97,6 +98,8 @@ export type ProfileRepoContributionPayload = Infer<
 export type ProfileRepoContributionResponse = Infer<
   typeof profileRepoContributionResponseSchema
 >;
+
+export type ProfileOrg = Infer<typeof profileOrgSchema>;
 
 export type ProfileOrgSalaryPayload = Infer<
   typeof profileOrgSalaryPayloadSchema

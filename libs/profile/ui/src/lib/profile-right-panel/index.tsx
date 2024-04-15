@@ -2,6 +2,8 @@ import { type ReactNode } from 'react';
 
 import { ProfileRightPanelTab } from '@jobstash/profile/core';
 
+import { usePageScrollDisableSyncer } from '@jobstash/shared/state';
+
 import { RightPanelWrapper } from '@jobstash/right-panel/ui';
 import { Button, DraggableWrapper, Loader } from '@jobstash/shared/ui';
 
@@ -15,6 +17,8 @@ interface Props {
 
 export const ProfileRightPanel = (props: Props) => {
   const { isLoading, header, activeTab, tabs, card } = props;
+
+  usePageScrollDisableSyncer({ shouldDisable: true });
 
   if (isLoading) {
     return (

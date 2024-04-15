@@ -5,10 +5,10 @@ import { useSetAtom } from 'jotai';
 
 import { type ProfileOrgReview } from '@jobstash/profile/core';
 import { EVENT_CARD_CLICK } from '@jobstash/shared/core';
-import { disablePageScroll, getLogoUrl } from '@jobstash/shared/utils';
+import { getLogoUrl } from '@jobstash/shared/utils';
 
 import { activeProfileOrgReviewAtom } from '@jobstash/profile/state';
-import { useIsMobile } from '@jobstash/shared/state';
+import { isDisabledPageScrollAtom, useIsMobile } from '@jobstash/shared/state';
 
 import { Button, EditIcon, LogoTitle } from '@jobstash/shared/ui';
 
@@ -33,12 +33,13 @@ const ProfileOrgReviewCard = (props: Props) => {
   const overallRating = total / Object.keys(rating).length;
 
   const setActiveProfileOrgReview = useSetAtom(activeProfileOrgReviewAtom);
+  const setIsDisabledPageScroll = useSetAtom(isDisabledPageScrollAtom);
 
   const onClick = useCallback(() => {
-    disablePageScroll(true);
+    setIsDisabledPageScroll(true);
     setActiveProfileOrgReview(profileOrgReview);
     document.dispatchEvent(new Event(EVENT_CARD_CLICK));
-  }, [profileOrgReview, setActiveProfileOrgReview]);
+  }, [profileOrgReview, setActiveProfileOrgReview, setIsDisabledPageScroll]);
 
   return (
     <ProfileCardWrapper isActive={isActive} isLoading={false} onClick={onClick}>
@@ -62,7 +63,7 @@ const ProfileOrgReviewCard = (props: Props) => {
           </Button>
         </div>
 
-        <div>
+        <div className="z-0">
           <Rating readOnly fractions={2} value={overallRating} size="md" />
         </div>
 
