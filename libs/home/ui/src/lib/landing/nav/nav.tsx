@@ -24,12 +24,11 @@ const LandingNav = () => {
         },
       )}
     >
-      
       <Brand />
       <div className="hidden items-center space-x-6 font-bold lg:flex">
         <NavButton
           isTransparent
-          href="https://telegram.me/jobstash"
+          href="https://t.me/jobstash"
           text="TG Job Feed"
         />
         <NavButton
@@ -39,7 +38,7 @@ const LandingNav = () => {
         />
         <NavButton
           isTransparent
-          href="https://telegram.me/jobstashxyz"
+          href="https://t.me/jobstashxyz"
           text="Community"
         />
 

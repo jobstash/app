@@ -16,7 +16,7 @@ const LandingFooter = () => (
         </div>
 
         <div className="text-white/60">
-          <span>The Ultimate Crypto Native Job Aggregator</span>
+          <span>Crypto Native Jobs</span>
         </div>
       </div>
       <div className="flex flex-col space-y-6 pt-12 lg:pt-0">
@@ -28,7 +28,7 @@ const LandingFooter = () => (
 
             <div className="flex space-x-4">
               <a
-                href="https://telegram.me/jobstashxyz"
+                href="https://t.me/jobstashxyz"
                 target="_blank"
                 rel="noreferrer"
               >
