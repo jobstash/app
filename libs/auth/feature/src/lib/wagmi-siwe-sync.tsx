@@ -1,9 +1,13 @@
+import { useRouter } from 'next/router';
 import { memo, useEffect, useRef } from 'react';
 
 import { useSIWE } from 'connectkit';
 import { useAccount } from 'wagmi';
 
+import { walletDisconnectReload } from '@jobstash/shared/utils';
+
 const WagmiSiweSync = () => {
+  const router = useRouter();
   const { isConnected } = useAccount();
   const { isSignedIn, signOut } = useSIWE();
 
@@ -13,9 +17,10 @@ const WagmiSiweSync = () => {
     if (!isConnected && isSignedIn && !signOutRef.current) {
       signOutRef.current = true;
       signOut();
-      window.location.href = '/jobs';
+
+      walletDisconnectReload(router.asPath);
     }
-  }, [isConnected, isSignedIn, signOut]);
+  }, [isConnected, isSignedIn, router.asPath, signOut]);
 
   return null;
 };
