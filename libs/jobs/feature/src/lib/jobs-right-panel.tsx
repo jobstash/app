@@ -5,6 +5,7 @@ import { ROUTE_SECTION, TAB_SEGMENT } from '@jobstash/shared/core';
 
 import { useCompetitors } from '@jobstash/competitors/state';
 import { useOrgDetails } from '@jobstash/organizations/state';
+import { usePageScrollDisableSyncer } from '@jobstash/shared/state';
 
 import {
   RightPanel,
@@ -36,6 +37,8 @@ const JobsRightPanel = ({ jobPost, currentTab }: Props) => {
 
   // TODO: Repos fetch
   const isLoadingRepo = false;
+
+  usePageScrollDisableSyncer({ shouldDisable: true });
 
   if (!jobPost) {
     return (

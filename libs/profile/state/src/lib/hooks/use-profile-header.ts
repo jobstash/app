@@ -26,10 +26,8 @@ export const useProfileHeader = () => {
     country: string;
   }>({ city: '', country: '' });
 
-  const initRef = useRef(false);
   useEffect(() => {
-    if (profileInfoData && !initRef.current) {
-      initRef.current = true;
+    if (profileInfoData) {
       setIsAvailableForWork(Boolean(availableForWork));
       setPreferredContact(contact.preferred ?? CONTACT_DEFAULT_OPTIONS[0]);
       setSelectedContact(contact.value ?? '');
@@ -39,13 +37,15 @@ export const useProfileHeader = () => {
       });
     }
   }, [
-    contact,
-    preferredContact,
-    selectedContact,
     availableForWork,
+    contact.preferred,
+    contact.value,
+    location.city,
+    location.country,
     profileInfoData,
-    location,
   ]);
+
+  const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout | null>(null);
 
   const onChangePreferredContact = (v: string | null) => {
     const isContactPreferred = v === profileInfoData?.contact.preferred;
@@ -55,23 +55,6 @@ export const useProfileHeader = () => {
 
     setSelectedContact(newSelectedContact ?? '');
     setPreferredContact(v);
-  };
-
-  const onChangeSelectedContact: ChangeEventHandler<HTMLInputElement> = (e) => {
-    setSelectedContact(e.currentTarget.value);
-  };
-
-  const onChangeCountry: ChangeEventHandler<HTMLInputElement> = (e) => {
-    const { value } = e.currentTarget;
-    setCurrentLocation((prev) => ({ ...prev, country: value }));
-  };
-
-  const onChangeCity: ChangeEventHandler<HTMLInputElement> = (e) => {
-    const { value } = e.currentTarget;
-    setCurrentLocation((prev) => ({
-      ...prev,
-      city: value,
-    }));
   };
 
   const { isLoadingMutation, mutate } = useDevProfileInfoMutation();
@@ -88,6 +71,46 @@ export const useProfileHeader = () => {
       },
     });
   };
+
+  const startAutoSave = (value: string) => {
+    // Clear existing timeout, set new timeout
+    if (timeoutId) clearTimeout(timeoutId);
+    const newTimeoutId = setTimeout(() => {
+      if (value) {
+        saveProfileInfo();
+      }
+    }, AUTOSAVE_DELAY);
+    setTimeoutId(newTimeoutId);
+  };
+
+  const onChangeSelectedContact: ChangeEventHandler<HTMLInputElement> = (e) => {
+    const { value } = e.currentTarget;
+    setSelectedContact(value);
+    startAutoSave(value);
+  };
+
+  const onChangeCountry: ChangeEventHandler<HTMLInputElement> = (e) => {
+    const { value } = e.currentTarget;
+    setCurrentLocation((prev) => ({ ...prev, country: value }));
+    startAutoSave(value);
+  };
+
+  const onChangeCity: ChangeEventHandler<HTMLInputElement> = (e) => {
+    const { value } = e.currentTarget;
+    setCurrentLocation((prev) => ({
+      ...prev,
+      city: value,
+    }));
+    startAutoSave(value);
+  };
+
+  // Timeout cleanup
+  useEffect(
+    () => () => {
+      if (timeoutId) clearTimeout(timeoutId);
+    },
+    [timeoutId],
+  );
 
   const updateAvailability = (isChecked: boolean) => {
     setIsAvailableForWork(isChecked);
@@ -147,3 +170,5 @@ export const useProfileHeader = () => {
     onChangeCity,
   };
 };
+
+const AUTOSAVE_DELAY = 2400;

@@ -1,3 +1,6 @@
+//
+// import { fakeProfileRepoListQueryPage } from '@jobstash/profile/testutils';
+
 import {
   type ProfileRepoListQueryPage,
   profileRepoListQueryPageSchema,
@@ -21,4 +24,7 @@ export const getProfileRepoList = async (
   };
 
   return mwFetch<ProfileRepoListQueryPage>(url, options);
+
+  //
+  // return fakeProfileRepoListQueryPage();
 };

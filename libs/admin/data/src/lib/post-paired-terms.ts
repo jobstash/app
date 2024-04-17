@@ -1,12 +1,10 @@
+import myzod, { Infer } from 'myzod';
+
 import {
   PairedTermsPayload,
   pairedTermsPayloadSchema,
 } from '@jobstash/admin/core';
-import {
-  MessageResponse,
-  messageResponseSchema,
-  MW_URL,
-} from '@jobstash/shared/core';
+import { MW_URL, tagSchema } from '@jobstash/shared/core';
 
 import { mwFetch } from '@jobstash/shared/data';
 
@@ -15,7 +13,7 @@ export const postPairedTerms = async (payload: PairedTermsPayload) => {
 
   const options = {
     method: 'POST' as const,
-    responseSchema: messageResponseSchema,
+    responseSchema,
     sentryLabel: `postPairedTerms`,
     credentials: 'include' as RequestCredentials,
     mode: 'cors' as RequestMode,
@@ -27,7 +25,7 @@ export const postPairedTerms = async (payload: PairedTermsPayload) => {
   };
 
   const { success, message } = await mwFetch<
-    MessageResponse,
+    PairedTermsMutationResponse,
     PairedTermsPayload
   >(url, options);
 
@@ -35,3 +33,10 @@ export const postPairedTerms = async (payload: PairedTermsPayload) => {
 
   return { success, message };
 };
+
+const responseSchema = myzod.object({
+  success: myzod.boolean(),
+  message: myzod.string(),
+  data: myzod.array(tagSchema),
+});
+type PairedTermsMutationResponse = Infer<typeof responseSchema>;

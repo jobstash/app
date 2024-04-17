@@ -7,7 +7,7 @@ import { SiweMessage } from 'siwe';
 
 import { CHECK_WALLET_ROUTE, redirectFlowsSet } from '@jobstash/auth/core';
 import { MW_URL } from '@jobstash/shared/core';
-import { getLSMwVersion } from '@jobstash/shared/utils';
+import { getLSMwVersion, walletDisconnectReload } from '@jobstash/shared/utils';
 
 import { getCheckWallet } from '@jobstash/auth/data';
 
@@ -110,7 +110,7 @@ export const WalletProvider = ({ children }: Props) => {
       onSignOut={() => {
         if (!signOutRef.current) {
           signOutRef.current = true;
-          window.location.href = '/jobs';
+          walletDisconnectReload(asPath);
         }
       }}
     >

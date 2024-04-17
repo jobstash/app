@@ -24,12 +24,12 @@ import {
   ROUTE_SECTION,
   type RouteSection,
 } from '@jobstash/shared/core';
-import { disablePageScroll, gaEvent } from '@jobstash/shared/utils';
+import { gaEvent } from '@jobstash/shared/utils';
 
 import { jobCountAtom } from '@jobstash/jobs/state';
 import { orgCountAtom } from '@jobstash/organizations/state';
 import { projectCountAtom } from '@jobstash/projects/state';
-import { useIsMobile } from '@jobstash/shared/state';
+import { isDisabledPageScrollAtom, useIsMobile } from '@jobstash/shared/state';
 
 import { showFiltersAtom } from '../atoms/show-filters-atom';
 import { filterReducer } from '../reducers/filter-reducer';
@@ -65,11 +65,14 @@ export const useFilters = (routeSection: RouteSection) => {
     [isMobile, setShowFilters],
   );
 
+  const [, setIsDisabledPageScroll] = useAtom(isDisabledPageScrollAtom);
+
+  // Disable/Enable page scroll on mobile when filters are shown
   useEffect(() => {
-    if (showFilters && isMobile) {
-      disablePageScroll(true);
+    if (isMobile) {
+      setIsDisabledPageScroll(showFilters);
     }
-  }, [isMobile, showFilters]);
+  }, [isMobile, setIsDisabledPageScroll, showFilters]);
 
   // Handle case where device width changes and filters are active
   useEffect(() => {

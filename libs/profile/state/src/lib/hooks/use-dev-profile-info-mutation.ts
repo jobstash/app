@@ -32,7 +32,7 @@ export const useDevProfileInfoMutation = () => {
         ? payload.availableForWork
           ? 'You are now Available for Work!'
           : 'You turned off work availability.'
-        : 'Contacts added';
+        : 'Profile Info Updated!';
 
       const message =
         'You are able to update your availability both in the header and in your profile at any time.';
