@@ -1,6 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { type JobPost } from '@jobstash/jobs/core';
 import {
   getLSMwVersion,
   notifError,
@@ -15,7 +14,7 @@ export const useJobBookmarkMutation = (shouldDelete = false) => {
   const mwVersion = getLSMwVersion();
 
   const { isPending: isLoading, mutate } = useMutation({
-    mutationFn: ({ shortUUID }: JobPost) =>
+    mutationFn: (shortUUID: string) =>
       setJobBookmark({ payload: { shortUUID }, shouldDelete }),
     onSuccess() {
       notifSuccess({

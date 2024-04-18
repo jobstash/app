@@ -72,7 +72,7 @@ const JobList = ({ initJob, activeJob }: Props) => {
           filterParamsObj={filterParamsObj}
           bookmarkButton={
             <JobBookmarkButton
-              jobPost={jobPost}
+              shortUUID={jobPost.shortUUID}
               isBookmarked={bookmarkedJobs.has(jobPost.shortUUID)}
               isFetching={isFetchingBookmarks || isLoadingBookmarks}
             />

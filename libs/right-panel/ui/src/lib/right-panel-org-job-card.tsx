@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import React, { memo } from 'react';
 
 import { type OrgJob } from '@jobstash/organizations/core';
 import { REPORT_UI_CTX } from '@jobstash/shared/core';
@@ -13,10 +13,11 @@ import RightPanelJobCardSets from './right-panel-job-card-sets';
 interface Props {
   orgName: string;
   orgJob: OrgJob;
+  bookmarkButton: React.ReactNode;
 }
 
 const RightPanelOrgJobCard = (props: Props) => {
-  const { orgName, orgJob } = props;
+  const { orgName, orgJob, bookmarkButton } = props;
   const { title, shortUUID, summary } = orgJob;
 
   const onClickExploreJob = () => {
@@ -37,12 +38,17 @@ const RightPanelOrgJobCard = (props: Props) => {
               {title}
             </Heading>
 
-            <CardMenu>
-              <ReportMenuItem
-                ui={REPORT_UI_CTX.OTHER_JOBS_CARD}
-                other={other}
-              />
-            </CardMenu>
+            <div className="flex items-center gap-4">
+              <div className="flex items-center justify-center w-9 h-9">
+                {bookmarkButton}
+              </div>
+              <CardMenu>
+                <ReportMenuItem
+                  ui={REPORT_UI_CTX.OTHER_JOBS_CARD}
+                  other={other}
+                />
+              </CardMenu>
+            </div>
           </div>
 
           <RightPanelJobCardSets jobCardSet={orgJob} />

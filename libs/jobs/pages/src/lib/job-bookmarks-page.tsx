@@ -102,7 +102,7 @@ export const JobBookmarksPage = () => {
               jobPost={jobPost}
               bookmarkButton={
                 <JobBookmarkButton
-                  jobPost={jobPost}
+                  shortUUID={jobPost.shortUUID}
                   isFetching={isFetching}
                   isBookmarked={bookmarkedJobs.has(jobPost.shortUUID)}
                 />
