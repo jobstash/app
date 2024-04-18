@@ -83,6 +83,7 @@ export const RightPanelJobCardApplyButton = (props: Props) => {
       job_shortuuid: shortUUID,
       job_classification: classification ?? '',
       organization_name: orgName,
+      user_role: role,
     });
   };
 

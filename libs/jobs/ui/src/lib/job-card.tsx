@@ -13,6 +13,7 @@ import { getUrlWithParams } from '@jobstash/filters/utils';
 import { checkJobIsFeatured, createJobKey } from '@jobstash/jobs/utils';
 import { dispatchEvent, gaEvent } from '@jobstash/shared/utils';
 
+import { useAuthContext } from '@jobstash/auth/state';
 import { activeJobAtom } from '@jobstash/jobs/state';
 
 import { Heading } from '@jobstash/shared/ui';
@@ -50,6 +51,8 @@ const JobCard = ({
   } = jobPost;
   const { projects, name: orgName } = organization;
 
+  const { role } = useAuthContext();
+
   const setActiveJob = useSetAtom(activeJobAtom);
 
   const onClick = () => {
@@ -63,6 +66,7 @@ const JobCard = ({
       job_shortuuid: shortUUID,
       job_classification: classification ?? '',
       organization_name: orgName,
+      user_role: role,
     });
   };
 
