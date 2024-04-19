@@ -9,7 +9,7 @@ export const SignUpTooltipContent = () => (
       <ul className="space-y-1 list-disc list-outside pl-4">
         <li>
           <Text className="text-white/70">
-            Mark yourself as available in your profile hiring managers will
+            Mark yourself as available in your profile & hiring managers will
             reach out directly
           </Text>
         </li>
