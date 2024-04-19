@@ -4,13 +4,13 @@ export const SignUpTooltipContent = () => (
   <div className="flex flex-col gap-8 max-w-sm p-4 bg-darker-gray">
     <div className="flex flex-col gap-2">
       <Text fw="bold" size="lg">
-        Engage with Hiring Managers
+        Get Noticed by Hiring Managers & More
       </Text>
       <ul className="space-y-1 list-disc list-outside pl-4">
         <li>
           <Text className="text-white/70">
-            Mark yourself as available in the platform and have hiring managers
-            reach out to you directly
+            Mark yourself as available in your profile hiring managers will
+            reach out directly
           </Text>
         </li>
         <li>
@@ -20,8 +20,7 @@ export const SignUpTooltipContent = () => (
         </li>
         <li>
           <Text className="text-white/70">
-            Be able to get a customized stream of jobs based on your unique
-            skillset
+            Get a customized stream of jobs based on your unique skillset
           </Text>
         </li>
       </ul>
