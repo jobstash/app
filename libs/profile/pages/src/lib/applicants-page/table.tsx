@@ -14,6 +14,11 @@ import { openNewTab } from '@jobstash/shared/utils';
 import { useJobApplicants } from '@jobstash/jobs/state';
 import { useOrgProfileInfoContext } from '@jobstash/profile/state';
 
+import {
+  GithubCell,
+  githubCellRenderer,
+} from './custom-renderers/github-cell-renderer';
+
 export const ApplicantsTable = () => {
   const { profileInfoData } = useOrgProfileInfoContext();
 
@@ -121,6 +126,22 @@ export const ApplicantsTable = () => {
           };
         }
 
+        case 'githubx': {
+          if (!username) {
+            return getDefaultGridCell({ contentAlign: 'center' });
+          }
+
+          return {
+            kind: GridCellKind.Custom,
+            allowOverlay: false,
+            data: {
+              kind: 'github-cell',
+              image: avatar,
+              username,
+            },
+          } as GithubCell;
+        }
+
         default: {
           throw new Error('Invalid applicant table prop');
         }
@@ -163,6 +184,10 @@ export const ApplicantsTable = () => {
           bgBubble: 'rgb(52, 52, 52)',
           textBubble: 'white',
         }}
+        customRenderers={
+          // TODO: extract to exported const
+          [githubCellRenderer]
+        }
         onColumnResize={onColumnResize}
       />
       <pre>
@@ -183,6 +208,7 @@ const indexes = [
   'github',
   'availableForWork',
   'skills',
+  'githubx',
   // 'city',
   // 'country',
   // 'showcases',
@@ -224,6 +250,10 @@ const DEFAULT_COLUMNS: GridColumn[] = [
   {
     id: 'skills',
     title: 'Matching Skills',
+  },
+  {
+    id: 'githubx',
+    title: 'Github X',
   },
 ];
 
