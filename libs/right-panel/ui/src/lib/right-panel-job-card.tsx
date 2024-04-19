@@ -1,13 +1,11 @@
-import { memo } from 'react';
-
 import { JobInfo, REPORT_UI_CTX, type Tag } from '@jobstash/shared/core';
 import { slugify } from '@jobstash/shared/utils';
 
 import { CardMenu, Heading, ReportMenuItem } from '@jobstash/shared/ui';
 
+import { RightPanelJobCTA } from './right-panel-job-cta/right-panel-job-cta';
 import RightPanelCardBorder from './right-panel-card-border';
 import RightPanelCta from './right-panel-cta';
-import { RightPanelJobCardApplyButton } from './right-panel-job-card-apply-button';
 import RightPanelJobCardDescriptions from './right-panel-job-card-descriptions';
 import RightPanelJobCardSets from './right-panel-job-card-sets';
 import RightPanelJobCardSkills from './right-panel-job-card-skills';
@@ -60,7 +58,7 @@ const RightPanelJobCard = ({
 
           <RightPanelJobCardSets jobCardSet={jobInfo} />
 
-          <RightPanelJobCardApplyButton
+          <RightPanelJobCTA
             url={url}
             shortUUID={shortUUID}
             orgName={orgName}
@@ -87,4 +85,4 @@ const RightPanelJobCard = ({
   );
 };
 
-export default memo(RightPanelJobCard);
+export default RightPanelJobCard;

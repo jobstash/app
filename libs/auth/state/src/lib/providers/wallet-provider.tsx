@@ -85,7 +85,6 @@ export const WalletProvider = ({ children }: Props) => {
       }}
       onSignIn={async (data) => {
         const checkWalletResponse = await getCheckWallet();
-        console.log({ checkWalletResponse });
         queryClient.setQueryData(
           [mwVersion, 'check-wallet'],
           checkWalletResponse,
