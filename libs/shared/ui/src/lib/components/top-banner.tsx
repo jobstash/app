@@ -13,12 +13,12 @@ import { isOpenTopBannerAtom } from '@jobstash/shared/state';
 
 import Text from '../base/text';
 
-const bannerText = '🔥 We are live on RetroPGF3';
-const donateURL = `https://drive.google.com/file/d/1gSMCvhjxKfZTCIGr_4TKwTcEI4ZhRBCg/view`;
+const bannerText = '🔥 Please support us on GitCoin GG20';
+const donateURL = `https://explorer.gitcoin.co/#/round/42161/25/121`;
 
 const onClickDonate = () => {
   gaEvent(GA_EVENT_ACTION.DONATE_CLICK, {
-    donate_click_element: 'retropgf',
+    donate_click_element: 'gg20',
   });
 };
 
