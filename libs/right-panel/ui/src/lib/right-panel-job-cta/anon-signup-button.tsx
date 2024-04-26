@@ -32,5 +32,5 @@ export const AnonSignupButton = ({
   );
 };
 
-const ANON_TEXT = 'Sign Up & Join Talent Pool';
+const ANON_TEXT = 'Join Talent Pool';
 const ONE_CLICK_TEXT = 'Sign Up to 1-Click Apply';
