@@ -1,0 +1,1 @@
+export const RIGHT_PANEL_WRAPPER_ID = 'right-panel-wrapper'

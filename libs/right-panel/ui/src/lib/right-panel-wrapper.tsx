@@ -2,12 +2,11 @@ import { memo, type ReactNode, useEffect } from 'react';
 
 import { useAtomValue } from 'jotai';
 
+import { RIGHT_PANEL_WRAPPER_ID } from '@jobstash/right-panel/core';
 import { EVENT_CARD_CLICK } from '@jobstash/shared/core';
 import { cn } from '@jobstash/shared/utils';
 
 import { isOpenTopBannerAtom } from '@jobstash/shared/state';
-
-export const ID_TOP_RIGHT_PANEL = 'top-right-panel';
 
 interface Props {
   children: ReactNode;
@@ -16,7 +15,7 @@ interface Props {
 const RightPanelWrapper = ({ children }: Props) => {
   useEffect(() => {
     const scrollListener = () => {
-      const el = document.querySelector('#' + ID_TOP_RIGHT_PANEL);
+      const el = document.querySelector(`#${RIGHT_PANEL_WRAPPER_ID}`);
       if (el) {
         el.scrollIntoView({ behavior: 'auto', block: 'start' });
       }
@@ -30,7 +29,7 @@ const RightPanelWrapper = ({ children }: Props) => {
 
   return (
     <>
-      <div className="absolute top-0 h-0" id={ID_TOP_RIGHT_PANEL} />
+      <div className="absolute top-0 h-0" />
       {/* <div className={cn('flex flex-col gap-8 pb-24')}>{children}</div> */}
 
       <div

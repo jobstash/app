@@ -2,6 +2,8 @@ import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import { Tooltip } from '@nextui-org/tooltip';
 
+import { RIGHT_PANEL_WRAPPER_ID } from '@jobstash/right-panel/core';
+
 interface Props {
   children: React.ReactNode;
   content: React.ReactNode;
@@ -38,10 +40,15 @@ export const CTATooltip = ({
       handleScroll.current();
     };
 
+    // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+    const el = document.querySelector(`#${RIGHT_PANEL_WRAPPER_ID}`)!;
+
+    el.addEventListener('scroll', throttledHandleScroll);
     window.addEventListener('scroll', throttledHandleScroll);
 
     return () => {
       window.removeEventListener('scroll', throttledHandleScroll);
+      el.removeEventListener('scroll', throttledHandleScroll);
     };
   }, []);
 
