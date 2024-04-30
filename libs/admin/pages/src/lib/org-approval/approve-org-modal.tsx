@@ -12,7 +12,7 @@ import {
 import { Tab, Tabs } from '@nextui-org/tabs';
 import { useAtom } from 'jotai';
 
-import { OrgListItem } from '@jobstash/organizations/core';
+import { OrgItem } from '@jobstash/admin/core';
 import { getLogoUrl } from '@jobstash/shared/utils';
 
 import {
@@ -41,7 +41,7 @@ export const ApproveOrgModal = () => {
   const { data: allOrgs, isPending } = useAllOrgs();
 
   const [filteredItems, setFilteredItems] = useState<
-    (OrgListItem & { value: string })[]
+    (OrgItem & { value: string })[]
   >([]);
   const [isPendingFilter, startTransition] = useTransition();
 
@@ -184,14 +184,14 @@ export const ApproveOrgModal = () => {
                   onInputChange={onInputChange}
                   onSelectionChange={onSelectionChange}
                 >
-                  {({ value, name, location, url, logoUrl }) => (
+                  {({ value, name, location, website, logoUrl }) => (
                     <AutocompleteItem key={value}>
                       <LogoTitle
                         title={name}
                         location={location}
                         avatarProps={{
                           alt: name,
-                          src: getLogoUrl(url, logoUrl),
+                          src: getLogoUrl(website[0], logoUrl),
                         }}
                       />
                     </AutocompleteItem>

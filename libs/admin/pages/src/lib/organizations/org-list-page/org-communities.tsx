@@ -6,14 +6,14 @@ import { Spinner } from '@nextui-org/spinner';
 import { Tooltip } from '@nextui-org/tooltip';
 import { useAtom } from 'jotai';
 
-import { OrgListItem } from '@jobstash/organizations/core';
+import { OrgItem } from '@jobstash/admin/core';
 
 import { editCommunitiesAtom, useAllOrgs } from '@jobstash/admin/state';
 
 import { EditIcon } from './edit-icon';
 
 interface Props {
-  org: OrgListItem;
+  org: OrgItem;
 }
 
 export const OrgCommunities = ({ org }: Props) => {

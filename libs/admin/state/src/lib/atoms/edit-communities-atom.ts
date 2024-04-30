@@ -1,9 +1,9 @@
 import { atom } from 'jotai';
 
-import { OrgListItem } from '@jobstash/organizations/core';
+import { OrgItem } from '@jobstash/admin/core';
 
 export const editCommunitiesAtom = atom({
-  org: {} as OrgListItem,
+  org: {} as OrgItem,
   communities: [] as string[],
   isOpen: false,
 });

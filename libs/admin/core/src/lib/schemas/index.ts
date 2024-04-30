@@ -6,6 +6,7 @@ import { MessageResponse } from '@jobstash/shared/core';
 
 export * from './blocked-terms';
 export * from './jobs';
+export * from './orgs';
 export * from './paired-terms';
 export * from './preferred-terms';
 

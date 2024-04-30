@@ -59,6 +59,12 @@ dependencies:
   '@tanstack/react-table':
     specifier: ^8.10.7
     version: 8.10.7(react-dom@18.2.0)(react@18.2.0)
+  ag-grid-community:
+    specifier: ^31.2.1
+    version: 31.2.1
+  ag-grid-react:
+    specifier: ^31.2.1
+    version: 31.2.1(react-dom@18.2.0)(react@18.2.0)
   animate.css:
     specifier: ^4.1.1
     version: 4.1.1
@@ -10653,6 +10659,22 @@ packages:
 
   /aes-js@3.0.0:
     resolution: {integrity: sha512-H7wUZRn8WpTq9jocdxQ2c8x2sKo9ZVmzfRE13GiNJXfp7NcKYEdvl3vspKjXox6RIG2VtaRe4JFvxG4rqp2Zuw==}
+    dev: false
+
+  /ag-grid-community@31.2.1:
+    resolution: {integrity: sha512-D+gnUQ4dHZ/EQJmupQnDqcEKiCEeuK5ZxlsIpdPKgHg/23dmW+aEdivtB9nLpSc2IEK0RUpchcSxeUT37Boo5A==}
+    dev: false
+
+  /ag-grid-react@31.2.1(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-9UH3xxXRwZfW97oz58KboyCJl4t+zdetopieeHVcttsXX1DvGFDUIEz7A1sQaG8e1DAXLMf3IxoIPrfWheH4XA==}
+    peerDependencies:
+      react: ^16.3.0 || ^17.0.0 || ^18.0.0
+      react-dom: ^16.3.0 || ^17.0.0 || ^18.0.0
+    dependencies:
+      ag-grid-community: 31.2.1
+      prop-types: 15.8.1
+      react: 18.2.0
+      react-dom: 18.2.0(react@18.2.0)
     dev: false
 
   /agent-base@6.0.2:

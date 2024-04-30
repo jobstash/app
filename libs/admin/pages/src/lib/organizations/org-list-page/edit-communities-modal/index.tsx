@@ -22,7 +22,7 @@ export const EditCommunitiesModal = () => {
     isOpen,
     onOpenChange,
     hasCommunities,
-    org: { name, location, url, logoUrl },
+    org: { name, location, website, logoUrl },
     communities,
     addCommunity,
     removeCommunity,
@@ -56,7 +56,7 @@ export const EditCommunitiesModal = () => {
                 title={name}
                 location={location}
                 avatarProps={{
-                  src: getLogoUrl(url, logoUrl),
+                  src: getLogoUrl(website[0], logoUrl),
                   alt: name,
                 }}
               />

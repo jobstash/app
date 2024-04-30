@@ -11,7 +11,7 @@ import {
   TableRow,
 } from '@nextui-org/table';
 
-import { OrgListItem } from '@jobstash/organizations/core';
+import { OrgItem } from '@jobstash/admin/core';
 import { getLogoUrl } from '@jobstash/shared/utils';
 
 import { LogoTitle, SearchInputIcon, Text } from '@jobstash/shared/ui';
@@ -20,7 +20,7 @@ import { OrgAlias } from './org-alias';
 import { OrgCommunities } from './org-communities';
 
 interface Props {
-  data: OrgListItem[];
+  data: OrgItem[];
 }
 
 export const OrgListTable = ({ data }: Props) => {
@@ -50,25 +50,23 @@ export const OrgListTable = ({ data }: Props) => {
     return filteredItems.slice(start, end);
   }, [filteredItems, page]);
 
-  const renderCell = useCallback((org: OrgListItem, columnKey: React.Key) => {
-    const cellValue = org[columnKey as keyof OrgListItem];
-
+  const renderCell = useCallback((org: OrgItem, columnKey: React.Key) => {
     switch (columnKey) {
       case 'orgId': {
         return (
           <div className="flex justify-center w-10">
-            <Text>{cellValue}</Text>
+            <Text>{org.orgId}</Text>
           </div>
         );
       }
 
       case 'name': {
-        const { name, location, logoUrl, url } = org;
+        const { name, location, logoUrl, website } = org;
         return (
           <LogoTitle
             title={name}
             location={location}
-            avatarProps={{ alt: name, src: getLogoUrl(url, logoUrl) }}
+            avatarProps={{ alt: name, src: getLogoUrl(website[0], logoUrl) }}
           />
         );
       }
@@ -82,7 +80,7 @@ export const OrgListTable = ({ data }: Props) => {
       }
 
       default: {
-        return <p>{JSON.stringify(cellValue)}</p>;
+        return <p>{JSON.stringify(org[columnKey as keyof OrgItem])}</p>;
       }
     }
   }, []);
