@@ -2,6 +2,7 @@
 
 import { useRef, useState } from 'react';
 
+import { notifications } from '@mantine/notifications';
 import { useMutation } from '@tanstack/react-query';
 import {
   CellEditingStoppedEvent,
@@ -14,6 +15,8 @@ import { OrgItem } from '@jobstash/admin/core';
 import { notifError, notifLoading, notifSuccess } from '@jobstash/shared/utils';
 
 import { useAllOrgs } from '@jobstash/admin/state';
+
+import { JSONEditor } from './json-editor';
 
 const columnDefs: ColDef<OrgItem>[] = [
   {
@@ -83,69 +86,124 @@ const columnDefs: ColDef<OrgItem>[] = [
   },
   {
     headerName: 'Alias',
-    valueGetter: (p) => p.data?.aliases,
-    valueFormatter: (p) => JSON.stringify(p.data?.aliases),
+    field: 'aliases',
+    valueFormatter: (p) => JSON.stringify(p.data?.aliases ?? []),
+    valueParser: (p) => p.newValue,
+    suppressKeyboardEvent: (p) => p.editing && p.event.key === 'Enter',
     filter: true,
+    editable: true,
+    cellEditor: JSONEditor,
+    cellEditorPopup: true,
   },
   {
     headerName: 'Community',
-    valueGetter: (p) => p.data?.community,
-    valueFormatter: (p) => JSON.stringify(p.data?.community),
+    field: 'community',
+    valueFormatter: (p) => JSON.stringify(p.data?.community ?? []),
+    valueParser: (p) => p.newValue,
+    suppressKeyboardEvent: (p) => p.editing && p.event.key === 'Enter',
     filter: true,
+    editable: true,
+    cellEditor: JSONEditor,
+    cellEditorPopup: true,
   },
   {
     headerName: 'Website',
-    valueGetter: (p) => p.data?.website,
-    valueFormatter: (p) => JSON.stringify(p.data?.website),
+    field: 'website',
+    valueFormatter: (p) => JSON.stringify(p.data?.website ?? []),
+    valueParser: (p) => p.newValue,
+    suppressKeyboardEvent: (p) => p.editing && p.event.key === 'Enter',
     filter: true,
+    editable: true,
+    cellEditor: JSONEditor,
+    cellEditorPopup: true,
   },
   {
     headerName: 'Raw Website',
-    valueGetter: (p) => p.data?.rawWebsite,
-    valueFormatter: (p) => JSON.stringify(p.data?.rawWebsite),
+    field: 'rawWebsite',
+    valueFormatter: (p) => JSON.stringify(p.data?.rawWebsite ?? []),
+    valueParser: (p) => p.newValue,
+    suppressKeyboardEvent: (p) => p.editing && p.event.key === 'Enter',
     filter: true,
+    editable: true,
+    cellEditor: JSONEditor,
+    cellEditorPopup: true,
   },
   {
     headerName: 'Telegram',
-    valueGetter: (p) => p.data?.telegram,
-    valueFormatter: (p) => JSON.stringify(p.data?.telegram),
+    field: 'telegram',
+    valueFormatter: (p) => JSON.stringify(p.data?.telegram ?? []),
+    valueParser: (p) => p.newValue,
+    suppressKeyboardEvent: (p) => p.editing && p.event.key === 'Enter',
     filter: true,
+    editable: true,
+    cellEditor: JSONEditor,
+    cellEditorPopup: true,
   },
   {
     headerName: 'Github',
-    valueGetter: (p) => p.data?.github,
-    valueFormatter: (p) => JSON.stringify(p.data?.github),
+    field: 'github',
+    valueFormatter: (p) => JSON.stringify(p.data?.github ?? []),
+    valueParser: (p) => p.newValue,
+    suppressKeyboardEvent: (p) => p.editing && p.event.key === 'Enter',
     filter: true,
+    editable: true,
+    cellEditor: JSONEditor,
+    cellEditorPopup: true,
   },
   {
     headerName: 'Grant',
-    valueGetter: (p) => p.data?.grant,
-    valueFormatter: (p) => JSON.stringify(p.data?.grant),
+    field: 'grant',
+    valueFormatter: (p) => JSON.stringify(p.data?.grant ?? []),
+    valueParser: (p) => p.newValue,
+    suppressKeyboardEvent: (p) => p.editing && p.event.key === 'Enter',
     filter: true,
+    editable: true,
+    cellEditor: JSONEditor,
+    cellEditorPopup: true,
   },
   {
     headerName: 'Twitter',
-    valueGetter: (p) => p.data?.twitter,
-    valueFormatter: (p) => JSON.stringify(p.data?.twitter),
+    field: 'twitter',
+    valueFormatter: (p) => JSON.stringify(p.data?.twitter ?? []),
+    valueParser: (p) => p.newValue,
+    suppressKeyboardEvent: (p) => p.editing && p.event.key === 'Enter',
     filter: true,
+    editable: true,
+    cellEditor: JSONEditor,
+    cellEditorPopup: true,
   },
   {
     headerName: 'Docs',
-    valueGetter: (p) => p.data?.docs,
-    valueFormatter: (p) => JSON.stringify(p.data?.docs),
+    field: 'docs',
+    valueFormatter: (p) => JSON.stringify(p.data?.docs ?? []),
+    valueParser: (p) => p.newValue,
+    suppressKeyboardEvent: (p) => p.editing && p.event.key === 'Enter',
     filter: true,
+    editable: true,
+    cellEditor: JSONEditor,
+    cellEditorPopup: true,
   },
   {
     headerName: 'Jobsite',
-    valueGetter: (p) => p.data?.jobsite,
-    valueFormatter: (p) => JSON.stringify(p.data?.jobsite),
+    field: 'jobsite',
+    valueFormatter: (p) => JSON.stringify(p.data?.jobsite ?? []),
+    valueParser: (p) => p.newValue,
+    suppressKeyboardEvent: (p) => p.editing && p.event.key === 'Enter',
     filter: true,
+    editable: true,
+    cellEditor: JSONEditor,
+    cellEditorPopup: true,
   },
   {
     headerName: 'Detected Jobsite',
-    valueGetter: (p) => p.data?.detectedJobsite,
-    valueFormatter: (p) => JSON.stringify(p.data?.detectedJobsite),
+    field: 'detectedJobsite',
+    valueFormatter: (p) => JSON.stringify(p.data?.detectedJobsite ?? []),
+    valueParser: (p) => p.newValue,
+    suppressKeyboardEvent: (p) => p.editing && p.event.key === 'Enter',
     filter: true,
+    editable: true,
+    cellEditor: JSONEditor,
+    cellEditorPopup: true,
   },
 ];
 
@@ -167,14 +225,15 @@ export const useOrgListTable = () => {
   const onCellEditingStopped = (e: CellEditingStoppedEvent) => {
     const {
       node: { rowIndex },
-      valueChanged,
+      oldValue,
+      newValue,
     } = e;
+
+    const valueChanged = JSON.stringify(oldValue) !== JSON.stringify(newValue);
 
     if (valueChanged && rowIndex !== null) {
       mutate(undefined, {
         onError() {
-          const undoSize = gridRef.current!.api.getCurrentUndoSize();
-          console.log({ undoSize });
           gridRef.current!.api.undoCellEditing();
 
           reset();
@@ -199,13 +258,15 @@ export const useOrgListTable = () => {
 const fakeMutate = async () => {
   // eslint-disable-next-line no-promise-executor-return
   await new Promise((r) => setTimeout(r, 3000));
-  throw new Error('pakyu');
+  //
+  // throw new Error('pakyu');
 };
 
 const useFakeMutation = () =>
   useMutation({
     mutationFn: () => fakeMutate(),
     onMutate() {
+      notifications.clean();
       notifLoading({
         id: TOAST_ID,
         title: 'Updating Organization',

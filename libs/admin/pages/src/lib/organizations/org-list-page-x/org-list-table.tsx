@@ -31,6 +31,7 @@ export const OrgListTable = () => {
         ref={gridRef}
         stopEditingWhenCellsLoseFocus
         undoRedoCellEditing
+        reactiveCustomComponents
         rowData={rowData}
         getRowId={getRowId}
         columnDefs={columnDefs}
