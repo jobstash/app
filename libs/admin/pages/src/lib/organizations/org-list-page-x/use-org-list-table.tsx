@@ -9,13 +9,14 @@ import {
   ColDef,
   GetRowIdFunc,
 } from 'ag-grid-community';
-import { AgGridReact } from 'ag-grid-react';
+import { AgGridReact, CustomCellRendererProps } from 'ag-grid-react';
 
 import { OrgItem } from '@jobstash/admin/core';
 import { notifError, notifLoading, notifSuccess } from '@jobstash/shared/utils';
 
 import { useAllOrgs } from '@jobstash/admin/state';
 
+import { IFrameCell } from './iframe-cell';
 import { JSONEditor } from './json-editor';
 
 const columnDefs: ColDef<OrgItem>[] = [
@@ -35,6 +36,37 @@ const columnDefs: ColDef<OrgItem>[] = [
     field: 'name',
     filter: true,
     editable: true,
+  },
+  {
+    headerName: 'Website',
+    field: 'website',
+    valueFormatter: (p) => JSON.stringify(p.data?.website ?? []),
+    valueParser: (p) => p.newValue,
+    suppressKeyboardEvent: (p) => p.editing && p.event.key === 'Enter',
+    filter: true,
+    editable: true,
+    cellEditor: JSONEditor,
+    cellEditorPopup: true,
+  },
+  {
+    headerName: 'IFrame 1',
+    field: 'website',
+    width: 420,
+    minWidth: 300,
+    cellRenderer: (p: CustomCellRendererProps) => (
+      <IFrameCell index={0} website={p.value} />
+    ),
+    cellClass: ['overflow-y-auto'],
+  },
+  {
+    headerName: 'IFrame 2',
+    field: 'website',
+    width: 420,
+    minWidth: 300,
+    cellRenderer: (p: CustomCellRendererProps) => (
+      <IFrameCell index={1} website={p.value} />
+    ),
+    cellClass: ['overflow-y-auto'],
   },
   {
     headerName: 'Summary',
@@ -99,17 +131,6 @@ const columnDefs: ColDef<OrgItem>[] = [
     headerName: 'Community',
     field: 'community',
     valueFormatter: (p) => JSON.stringify(p.data?.community ?? []),
-    valueParser: (p) => p.newValue,
-    suppressKeyboardEvent: (p) => p.editing && p.event.key === 'Enter',
-    filter: true,
-    editable: true,
-    cellEditor: JSONEditor,
-    cellEditorPopup: true,
-  },
-  {
-    headerName: 'Website',
-    field: 'website',
-    valueFormatter: (p) => JSON.stringify(p.data?.website ?? []),
     valueParser: (p) => p.newValue,
     suppressKeyboardEvent: (p) => p.editing && p.event.key === 'Enter',
     filter: true,
