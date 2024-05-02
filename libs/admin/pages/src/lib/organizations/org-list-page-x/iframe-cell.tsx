@@ -8,9 +8,11 @@ interface Props {
 export const IFrameCell = memo(({ website, index }: Props) => {
   if (index >= website.length) return null;
 
-  const url = website[index];
+  const url = website[index].startsWith('http')
+    ? website[index]
+    : `https://${website[index]}`;
 
-  const src = url.startsWith('http') ? url : `https://${url}`;
+  const src = `/api/iframe-proxy?url=${url}`;
 
   return (
     <iframe
