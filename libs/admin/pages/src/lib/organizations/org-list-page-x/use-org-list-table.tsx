@@ -1,6 +1,7 @@
+/* eslint-disable max-params */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 
-import { useRef, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { notifications } from '@mantine/notifications';
 import { useMutation } from '@tanstack/react-query';
@@ -11,32 +12,36 @@ import {
 } from 'ag-grid-community';
 import { AgGridReact, CustomCellRendererProps } from 'ag-grid-react';
 
-import { OrgItem } from '@jobstash/admin/core';
+import {
+  OrgItem,
+  OrgRowItem,
+  OrgWebsiteStatusItem,
+} from '@jobstash/admin/core';
 import { notifError, notifLoading, notifSuccess } from '@jobstash/shared/utils';
 
 import { useAllOrgs } from '@jobstash/admin/state';
 
-import { IFrameCell } from './iframe-cell';
 import { JSONEditor } from './json-editor';
+import { WebsiteStatusCell } from './website-status-cell';
 
-const columnDefs: ColDef<OrgItem>[] = [
-  // {
-  //   headerName: 'ID',
-  //   field: 'id',
-  //   filter: true,
-  // },
-  // {
-  //   headerName: 'Org ID',
-  //   field: 'orgId',
-  //   filter: true,
-  //   editable: true,
-  // },
-  // {
-  //   headerName: 'Name',
-  //   field: 'name',
-  //   filter: true,
-  //   editable: true,
-  // },
+const columnDefs: ColDef<OrgRowItem>[] = [
+  {
+    headerName: 'ID',
+    field: 'id',
+    filter: true,
+  },
+  {
+    headerName: 'Org ID',
+    field: 'orgId',
+    filter: true,
+    editable: true,
+  },
+  {
+    headerName: 'Name',
+    field: 'name',
+    filter: true,
+    editable: true,
+  },
   {
     headerName: 'Website',
     field: 'website',
@@ -49,187 +54,230 @@ const columnDefs: ColDef<OrgItem>[] = [
     cellEditorPopup: true,
   },
   {
-    headerName: 'IFrame 1',
-    field: 'website',
-    width: 420,
+    headerName: 'Website Status',
+    field: 'websiteStatus',
+    width: 600,
     minWidth: 300,
-    cellRenderer: (p: CustomCellRendererProps) => (
-      <IFrameCell index={0} website={p.value} />
-    ),
-    cellClass: ['overflow-y-auto'],
+    cellRenderer: WebsiteStatusCell,
+    comparator(
+      valueA: OrgWebsiteStatusItem[],
+      valueB: OrgWebsiteStatusItem[],
+      _nodeA,
+      _nodeB,
+      isDescending,
+    ) {
+      const setA = new Set(valueA.flatMap((v) => v.status));
+      const setB = new Set(valueB.flatMap((v) => v.status));
+
+      const wA = getWeight(setA, isDescending);
+      const wB = getWeight(setB, isDescending);
+
+      if (wA === wB) return 0;
+
+      return isDescending && wB > wA ? 1 : -1;
+    },
+  },
+  // {
+  //   headerName: 'IFrame 1',
+  //   field: 'website',
+  //   width: 420,
+  //   minWidth: 300,
+  //   cellRenderer: (p: CustomCellRendererProps) => (
+  //     <IFrameCell index={0} website={p.value} />
+  //   ),
+  //   cellClass: ['overflow-y-auto'],
+  // },
+  // {
+  //   headerName: 'IFrame 2',
+  //   field: 'website',
+  //   width: 420,
+  //   minWidth: 300,
+  //   cellRenderer: (p: CustomCellRendererProps) => (
+  //     <IFrameCell index={1} website={p.value} />
+  //   ),
+  //   cellClass: ['overflow-y-auto'],
+  // },
+  {
+    headerName: 'Summary',
+    field: 'summary',
+    filter: true,
+    editable: true,
+    cellEditor: 'agLargeTextCellEditor',
+    cellEditorPopup: true,
   },
   {
-    headerName: 'IFrame 2',
-    field: 'website',
-    width: 420,
-    minWidth: 300,
-    cellRenderer: (p: CustomCellRendererProps) => (
-      <IFrameCell index={1} website={p.value} />
-    ),
-    cellClass: ['overflow-y-auto'],
+    headerName: 'Location',
+    field: 'location',
+    filter: true,
+    editable: true,
   },
-  // {
-  //   headerName: 'Summary',
-  //   field: 'summary',
-  //   filter: true,
-  //   editable: true,
-  //   cellEditor: 'agLargeTextCellEditor',
-  //   cellEditorPopup: true,
-  // },
-  // {
-  //   headerName: 'Location',
-  //   field: 'location',
-  //   filter: true,
-  //   editable: true,
-  // },
-  // {
-  //   headerName: 'Description',
-  //   field: 'description',
-  //   filter: true,
-  //   editable: true,
-  //   cellEditor: 'agLargeTextCellEditor',
-  //   cellEditorPopup: true,
-  // },
-  // {
-  //   headerName: 'Logo URL',
-  //   field: 'logoUrl',
-  //   filter: true,
-  //   editable: true,
-  // },
-  // {
-  //   headerName: 'Headcount',
-  //   field: 'headcountEstimate',
-  //   editable: true,
-  // },
-  // {
-  //   headerName: 'Created Timestamp',
-  //   field: 'createdTimestamp',
-  //   editable: true,
-  // },
-  // {
-  //   headerName: 'Updated Timestamp',
-  //   field: 'updatedTimestamp',
-  //   editable: true,
-  // },
-  // {
-  //   headerName: 'Job Count',
-  //   field: 'jobCount',
-  //   editable: true,
-  // },
-  // {
-  //   headerName: 'Alias',
-  //   field: 'aliases',
-  //   valueFormatter: (p) => JSON.stringify(p.data?.aliases ?? []),
-  //   valueParser: (p) => p.newValue,
-  //   suppressKeyboardEvent: (p) => p.editing && p.event.key === 'Enter',
-  //   filter: true,
-  //   editable: true,
-  //   cellEditor: JSONEditor,
-  //   cellEditorPopup: true,
-  // },
-  // {
-  //   headerName: 'Community',
-  //   field: 'community',
-  //   valueFormatter: (p) => JSON.stringify(p.data?.community ?? []),
-  //   valueParser: (p) => p.newValue,
-  //   suppressKeyboardEvent: (p) => p.editing && p.event.key === 'Enter',
-  //   filter: true,
-  //   editable: true,
-  //   cellEditor: JSONEditor,
-  //   cellEditorPopup: true,
-  // },
-  // {
-  //   headerName: 'Raw Website',
-  //   field: 'rawWebsite',
-  //   valueFormatter: (p) => JSON.stringify(p.data?.rawWebsite ?? []),
-  //   valueParser: (p) => p.newValue,
-  //   suppressKeyboardEvent: (p) => p.editing && p.event.key === 'Enter',
-  //   filter: true,
-  //   editable: true,
-  //   cellEditor: JSONEditor,
-  //   cellEditorPopup: true,
-  // },
-  // {
-  //   headerName: 'Telegram',
-  //   field: 'telegram',
-  //   valueFormatter: (p) => JSON.stringify(p.data?.telegram ?? []),
-  //   valueParser: (p) => p.newValue,
-  //   suppressKeyboardEvent: (p) => p.editing && p.event.key === 'Enter',
-  //   filter: true,
-  //   editable: true,
-  //   cellEditor: JSONEditor,
-  //   cellEditorPopup: true,
-  // },
-  // {
-  //   headerName: 'Github',
-  //   field: 'github',
-  //   valueFormatter: (p) => JSON.stringify(p.data?.github ?? []),
-  //   valueParser: (p) => p.newValue,
-  //   suppressKeyboardEvent: (p) => p.editing && p.event.key === 'Enter',
-  //   filter: true,
-  //   editable: true,
-  //   cellEditor: JSONEditor,
-  //   cellEditorPopup: true,
-  // },
-  // {
-  //   headerName: 'Grant',
-  //   field: 'grant',
-  //   valueFormatter: (p) => JSON.stringify(p.data?.grant ?? []),
-  //   valueParser: (p) => p.newValue,
-  //   suppressKeyboardEvent: (p) => p.editing && p.event.key === 'Enter',
-  //   filter: true,
-  //   editable: true,
-  //   cellEditor: JSONEditor,
-  //   cellEditorPopup: true,
-  // },
-  // {
-  //   headerName: 'Twitter',
-  //   field: 'twitter',
-  //   valueFormatter: (p) => JSON.stringify(p.data?.twitter ?? []),
-  //   valueParser: (p) => p.newValue,
-  //   suppressKeyboardEvent: (p) => p.editing && p.event.key === 'Enter',
-  //   filter: true,
-  //   editable: true,
-  //   cellEditor: JSONEditor,
-  //   cellEditorPopup: true,
-  // },
-  // {
-  //   headerName: 'Docs',
-  //   field: 'docs',
-  //   valueFormatter: (p) => JSON.stringify(p.data?.docs ?? []),
-  //   valueParser: (p) => p.newValue,
-  //   suppressKeyboardEvent: (p) => p.editing && p.event.key === 'Enter',
-  //   filter: true,
-  //   editable: true,
-  //   cellEditor: JSONEditor,
-  //   cellEditorPopup: true,
-  // },
-  // {
-  //   headerName: 'Jobsite',
-  //   field: 'jobsite',
-  //   valueFormatter: (p) => JSON.stringify(p.data?.jobsite ?? []),
-  //   valueParser: (p) => p.newValue,
-  //   suppressKeyboardEvent: (p) => p.editing && p.event.key === 'Enter',
-  //   filter: true,
-  //   editable: true,
-  //   cellEditor: JSONEditor,
-  //   cellEditorPopup: true,
-  // },
-  // {
-  //   headerName: 'Detected Jobsite',
-  //   field: 'detectedJobsite',
-  //   valueFormatter: (p) => JSON.stringify(p.data?.detectedJobsite ?? []),
-  //   valueParser: (p) => p.newValue,
-  //   suppressKeyboardEvent: (p) => p.editing && p.event.key === 'Enter',
-  //   filter: true,
-  //   editable: true,
-  //   cellEditor: JSONEditor,
-  //   cellEditorPopup: true,
-  // },
+  {
+    headerName: 'Description',
+    field: 'description',
+    filter: true,
+    editable: true,
+    cellEditor: 'agLargeTextCellEditor',
+    cellEditorPopup: true,
+  },
+  {
+    headerName: 'Logo URL',
+    field: 'logoUrl',
+    filter: true,
+    editable: true,
+  },
+  {
+    headerName: 'Headcount',
+    field: 'headcountEstimate',
+    editable: true,
+  },
+  {
+    headerName: 'Created Timestamp',
+    field: 'createdTimestamp',
+    editable: true,
+  },
+  {
+    headerName: 'Updated Timestamp',
+    field: 'updatedTimestamp',
+    editable: true,
+  },
+  {
+    headerName: 'Job Count',
+    field: 'jobCount',
+    editable: true,
+  },
+  {
+    headerName: 'Alias',
+    field: 'aliases',
+    valueFormatter: (p) => JSON.stringify(p.data?.aliases ?? []),
+    valueParser: (p) => p.newValue,
+    suppressKeyboardEvent: (p) => p.editing && p.event.key === 'Enter',
+    filter: true,
+    editable: true,
+    cellEditor: JSONEditor,
+    cellEditorPopup: true,
+  },
+  {
+    headerName: 'Community',
+    field: 'community',
+    valueFormatter: (p) => JSON.stringify(p.data?.community ?? []),
+    valueParser: (p) => p.newValue,
+    suppressKeyboardEvent: (p) => p.editing && p.event.key === 'Enter',
+    filter: true,
+    editable: true,
+    cellEditor: JSONEditor,
+    cellEditorPopup: true,
+  },
+  {
+    headerName: 'Raw Website',
+    field: 'rawWebsite',
+    valueFormatter: (p) => JSON.stringify(p.data?.rawWebsite ?? []),
+    valueParser: (p) => p.newValue,
+    suppressKeyboardEvent: (p) => p.editing && p.event.key === 'Enter',
+    filter: true,
+    editable: true,
+    cellEditor: JSONEditor,
+    cellEditorPopup: true,
+  },
+  {
+    headerName: 'Telegram',
+    field: 'telegram',
+    valueFormatter: (p) => JSON.stringify(p.data?.telegram ?? []),
+    valueParser: (p) => p.newValue,
+    suppressKeyboardEvent: (p) => p.editing && p.event.key === 'Enter',
+    filter: true,
+    editable: true,
+    cellEditor: JSONEditor,
+    cellEditorPopup: true,
+  },
+  {
+    headerName: 'Github',
+    field: 'github',
+    valueFormatter: (p) => JSON.stringify(p.data?.github ?? []),
+    valueParser: (p) => p.newValue,
+    suppressKeyboardEvent: (p) => p.editing && p.event.key === 'Enter',
+    filter: true,
+    editable: true,
+    cellEditor: JSONEditor,
+    cellEditorPopup: true,
+  },
+  {
+    headerName: 'Grant',
+    field: 'grant',
+    valueFormatter: (p) => JSON.stringify(p.data?.grant ?? []),
+    valueParser: (p) => p.newValue,
+    suppressKeyboardEvent: (p) => p.editing && p.event.key === 'Enter',
+    filter: true,
+    editable: true,
+    cellEditor: JSONEditor,
+    cellEditorPopup: true,
+  },
+  {
+    headerName: 'Twitter',
+    field: 'twitter',
+    valueFormatter: (p) => JSON.stringify(p.data?.twitter ?? []),
+    valueParser: (p) => p.newValue,
+    suppressKeyboardEvent: (p) => p.editing && p.event.key === 'Enter',
+    filter: true,
+    editable: true,
+    cellEditor: JSONEditor,
+    cellEditorPopup: true,
+  },
+  {
+    headerName: 'Docs',
+    field: 'docs',
+    valueFormatter: (p) => JSON.stringify(p.data?.docs ?? []),
+    valueParser: (p) => p.newValue,
+    suppressKeyboardEvent: (p) => p.editing && p.event.key === 'Enter',
+    filter: true,
+    editable: true,
+    cellEditor: JSONEditor,
+    cellEditorPopup: true,
+  },
+  {
+    headerName: 'Jobsite',
+    field: 'jobsite',
+    valueFormatter: (p) => JSON.stringify(p.data?.jobsite ?? []),
+    valueParser: (p) => p.newValue,
+    suppressKeyboardEvent: (p) => p.editing && p.event.key === 'Enter',
+    filter: true,
+    editable: true,
+    cellEditor: JSONEditor,
+    cellEditorPopup: true,
+  },
+  {
+    headerName: 'Detected Jobsite',
+    field: 'detectedJobsite',
+    valueFormatter: (p) => JSON.stringify(p.data?.detectedJobsite ?? []),
+    valueParser: (p) => p.newValue,
+    suppressKeyboardEvent: (p) => p.editing && p.event.key === 'Enter',
+    filter: true,
+    editable: true,
+    cellEditor: JSONEditor,
+    cellEditorPopup: true,
+  },
 ];
 
 export const useOrgListTable = () => {
   const { data, isPending } = useAllOrgs();
+
+  const [rowData, setRowData] = useState<OrgRowItem[] | undefined>();
+  useEffect(() => {
+    if (data && !rowData) {
+      setRowData(
+        data.map(
+          (d) =>
+            ({
+              ...d,
+              websiteStatus: d.website.map((w) => ({
+                website: w,
+                status: 'pending',
+                statusCode: undefined,
+              })),
+            } as OrgRowItem),
+        ),
+      );
+    }
+  }, [data, rowData]);
 
   const gridRef = useRef<AgGridReact>(null);
   const [isFocused, setIsFocused] = useState(false);
@@ -267,7 +315,7 @@ export const useOrgListTable = () => {
     isPending,
     isPendingMutation,
     gridRef,
-    rowData: data,
+    rowData,
     columnDefs,
     onBlur,
     onFocus,
@@ -311,3 +359,15 @@ const useFakeMutation = () =>
   });
 
 const TOAST_ID = 'org-list-mutation';
+
+const getWeight = (statuses: Set<string>, isDescending: boolean): number => {
+  if (statuses.has('pending')) {
+    return isDescending ? 3 : 1;
+  }
+
+  if (statuses.has('dead') || statuses.has('invalid')) {
+    return isDescending ? 1 : 3;
+  }
+
+  return 2;
+};

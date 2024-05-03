@@ -1,6 +1,6 @@
 import Document, { Head, Html, Main, NextScript } from 'next/document';
-import Script from 'next/script';
 
+// Import Script from 'next/script';
 import { createGetInitialProps } from '@mantine/next';
 
 const getInitialProps = createGetInitialProps();
@@ -15,7 +15,7 @@ export default class _Document extends Document {
         <body className="bg-gradient-to-l from-[#141317] to-[#121216] min-h-screen">
           <Main />
           <NextScript />
-          <Script
+          {/* <Script
             strategy="beforeInteractive"
             src="https://unpkg.com/@ungap/custom-elements-builtin"
           />
@@ -23,7 +23,7 @@ export default class _Document extends Document {
             strategy="beforeInteractive"
             type="module"
             src="https://unpkg.com/x-frame-bypass"
-          />
+          /> */}
         </body>
       </Html>
     );

@@ -41,3 +41,18 @@ export const orgItemSchema = myzod
   })
   .allowUnknownKeys(true);
 export type OrgItem = Infer<typeof orgItemSchema>;
+
+export const orgWebsiteStatusItemSchema = myzod.object({
+  website: myzod.string(),
+  status: myzod.literals('alive', 'dead', 'invalid', 'pending'),
+  statusCode: myzod.number().optional(),
+});
+export type OrgWebsiteStatusItem = Infer<typeof orgWebsiteStatusItemSchema>;
+
+export const orgRowItemSchema = myzod.intersection(
+  orgItemSchema,
+  myzod.object({
+    websiteStatus: myzod.array(orgWebsiteStatusItemSchema),
+  }),
+);
+export type OrgRowItem = Infer<typeof orgRowItemSchema>;

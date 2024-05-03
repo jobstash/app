@@ -32,7 +32,7 @@ export const OrgListTable = () => {
         stopEditingWhenCellsLoseFocus
         undoRedoCellEditing
         reactiveCustomComponents
-        rowData={rowData}
+        rowData={(rowData ?? []).slice(0, 200)}
         getRowId={getRowId}
         columnDefs={columnDefs}
         rowHeight={50}
