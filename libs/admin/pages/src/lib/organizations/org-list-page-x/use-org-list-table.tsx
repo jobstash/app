@@ -1,3 +1,4 @@
+/* eslint-disable max-params */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 
 import { useCallback, useEffect, useRef, useState } from 'react';
@@ -10,7 +11,7 @@ import {
   GetRowIdFunc,
   SelectionChangedEvent,
 } from 'ag-grid-community';
-import { AgGridReact, CustomCellRendererProps } from 'ag-grid-react';
+import { AgGridReact } from 'ag-grid-react';
 
 import {
   OrgItem,
@@ -292,25 +293,29 @@ export const useOrgListTable = () => {
 
   const { isPending: isPendingMutation, mutate, reset } = useFakeMutation();
 
-  const onCellEditingStopped = (e: CellEditingStoppedEvent) => {
-    const {
-      node: { rowIndex },
-      oldValue,
-      newValue,
-    } = e;
+  const onCellEditingStopped = useCallback(
+    (e: CellEditingStoppedEvent) => {
+      const {
+        node: { rowIndex },
+        oldValue,
+        newValue,
+      } = e;
 
-    const valueChanged = JSON.stringify(oldValue) !== JSON.stringify(newValue);
+      const valueChanged =
+        JSON.stringify(oldValue) !== JSON.stringify(newValue);
 
-    if (valueChanged && rowIndex !== null) {
-      mutate(undefined, {
-        onError() {
-          gridRef.current!.api.undoCellEditing();
+      if (valueChanged && rowIndex !== null) {
+        mutate(undefined, {
+          onError() {
+            gridRef.current!.api.undoCellEditing();
 
-          reset();
-        },
-      });
-    }
-  };
+            reset();
+          },
+        });
+      }
+    },
+    [mutate, reset],
+  );
 
   const [pastaString, setPastaString] = useState<string>('');
   const onSelectionChanged = useCallback(
