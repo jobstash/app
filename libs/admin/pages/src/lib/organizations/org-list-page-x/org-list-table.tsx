@@ -16,6 +16,7 @@ export const OrgListTable = () => {
     onFocus,
     onBlur,
     onCellEditingStopped,
+    onSelectionChanged,
   } = useOrgListTable();
 
   if (isPending) return <p>Loading table ...</p>;
@@ -32,11 +33,14 @@ export const OrgListTable = () => {
         stopEditingWhenCellsLoseFocus
         undoRedoCellEditing
         reactiveCustomComponents
+        rowMultiSelectWithClick
         rowData={(rowData ?? []).slice(0, 200)}
+        rowSelection="multiple"
         getRowId={getRowId}
         columnDefs={columnDefs}
         rowHeight={50}
         onCellEditingStopped={onCellEditingStopped}
+        onSelectionChanged={onSelectionChanged}
       />
     </div>
   );

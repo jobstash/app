@@ -8,13 +8,15 @@ import {
 
 import { mwFetch } from '@jobstash/shared/data';
 
-export const useWebsiteStatus = (websites: OrgWebsiteStatusItem[]) =>
-  useQuery({
-    queryKey: ['website-status', websites],
+export const useWebsiteStatus = (websites: OrgWebsiteStatusItem[]) => {
+  const urls = encodeURIComponent(
+    JSON.stringify(websites.flatMap(({ website }) => website)),
+  );
+
+  return useQuery({
+    queryKey: ['website-status', urls],
     async queryFn() {
-      const url = `/api/url-status-proxy?urls=${encodeURIComponent(
-        JSON.stringify(websites.flatMap(({ website }) => website)),
-      )}`;
+      const url = `/api/url-status-proxy?urls=${urls}`;
 
       const options = {
         responseSchema,
@@ -30,6 +32,7 @@ export const useWebsiteStatus = (websites: OrgWebsiteStatusItem[]) =>
     },
     staleTime: 1000 * 60 * 60,
   });
+};
 
 const responseSchema = myzod.object({
   success: myzod.boolean(),

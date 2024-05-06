@@ -1,7 +1,6 @@
-/* eslint-disable max-params */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { notifications } from '@mantine/notifications';
 import { useMutation } from '@tanstack/react-query';
@@ -9,6 +8,7 @@ import {
   CellEditingStoppedEvent,
   ColDef,
   GetRowIdFunc,
+  SelectionChangedEvent,
 } from 'ag-grid-community';
 import { AgGridReact, CustomCellRendererProps } from 'ag-grid-react';
 
@@ -17,6 +17,7 @@ import {
   OrgRowItem,
   OrgWebsiteStatusItem,
 } from '@jobstash/admin/core';
+import { prefixUrl } from '@jobstash/admin/utils';
 import { notifError, notifLoading, notifSuccess } from '@jobstash/shared/utils';
 
 import { useAllOrgs } from '@jobstash/admin/state';
@@ -311,6 +312,84 @@ export const useOrgListTable = () => {
     }
   };
 
+  const [pastaString, setPastaString] = useState<string>('');
+  const onSelectionChanged = useCallback(
+    (e: SelectionChangedEvent<OrgRowItem>) => {
+      setPastaString(
+        e.api
+          .getSelectedNodes()
+          .map((node) => {
+            const {
+              id,
+              orgId,
+              name,
+              location,
+              summary,
+              description,
+              logoUrl,
+              headcountEstimate,
+              createdTimestamp,
+              updatedTimestamp,
+              jobCount,
+              discord,
+              website,
+              rawWebsite,
+              telegram,
+              github,
+              aliases,
+              grant,
+              twitter,
+              docs,
+              community,
+              jobsite,
+              detectedJobsite,
+            } = node.data!;
+
+            return [
+              id,
+              orgId,
+              name,
+              location,
+              summary,
+              description,
+              logoUrl,
+              headcountEstimate,
+              createdTimestamp,
+              updatedTimestamp,
+              jobCount,
+              discord,
+              grant,
+              aliases,
+              community,
+              prefixUrl(website),
+              prefixUrl(rawWebsite),
+              prefixUrl(telegram, 'telegram.me'),
+              prefixUrl(github, 'github.com'),
+              prefixUrl(twitter, 'twitter.com'),
+              prefixUrl(docs),
+              JSON.stringify(jobsite),
+              JSON.stringify(detectedJobsite),
+            ].join('\t');
+          })
+          .join('\n'),
+      );
+    },
+    [],
+  );
+
+  useEffect(() => {
+    const handleCopy = () => {
+      if (typeof navigator !== 'undefined' && isFocused) {
+        navigator.clipboard.writeText(pastaString);
+      }
+    };
+
+    document.addEventListener('copy', handleCopy);
+    return () => {
+      document.removeEventListener('copy', handleCopy);
+    };
+  }, [isFocused, pastaString]);
+
   return {
     isPending,
     isPendingMutation,
@@ -321,6 +400,7 @@ export const useOrgListTable = () => {
     onFocus,
     getRowId,
     onCellEditingStopped,
+    onSelectionChanged,
   };
 };
 
