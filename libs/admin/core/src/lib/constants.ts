@@ -40,3 +40,9 @@ export const ADMIN_TABS = {
     },
   ],
 };
+
+export const URL_DOMAINS = {
+  TWITTER: 'twitter.com',
+  TELEGRAM: 'telegram.me',
+  GITHUB: 'github.com',
+} as const;

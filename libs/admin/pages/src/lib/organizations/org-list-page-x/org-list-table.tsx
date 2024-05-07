@@ -34,7 +34,7 @@ export const OrgListTable = () => {
         undoRedoCellEditing
         reactiveCustomComponents
         rowMultiSelectWithClick
-        rowData={(rowData ?? []).slice(0, 200)}
+        rowData={rowData}
         rowSelection="multiple"
         getRowId={getRowId}
         columnDefs={columnDefs}

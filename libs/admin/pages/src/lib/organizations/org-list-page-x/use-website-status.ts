@@ -1,22 +1,25 @@
 import { useQuery } from '@tanstack/react-query';
 import myzod, { Infer } from 'myzod';
 
-import {
-  OrgWebsiteStatusItem,
-  orgWebsiteStatusItemSchema,
-} from '@jobstash/admin/core';
+import { URL_DOMAINS, UrlStatus, urlStatusSchema } from '@jobstash/admin/core';
+import { FRONTEND_URL } from '@jobstash/shared/core';
 
 import { mwFetch } from '@jobstash/shared/data';
 
-export const useWebsiteStatus = (websites: OrgWebsiteStatusItem[]) => {
+export const useWebsiteStatus = (
+  websites: UrlStatus[],
+  domainPrefix?: typeof URL_DOMAINS[keyof typeof URL_DOMAINS],
+) => {
   const urls = encodeURIComponent(
-    JSON.stringify(websites.flatMap(({ website }) => website)),
+    JSON.stringify(websites.flatMap(({ url }) => url)),
   );
 
   return useQuery({
     queryKey: ['website-status', urls],
     async queryFn() {
-      const url = `/api/url-status-proxy?urls=${urls}`;
+      const url = new URL(`${FRONTEND_URL}/api/url-status-proxy`);
+      url.searchParams.set('urls', urls);
+      if (domainPrefix) url.searchParams.set('domainPrefix', domainPrefix);
 
       const options = {
         responseSchema,
@@ -24,7 +27,7 @@ export const useWebsiteStatus = (websites: OrgWebsiteStatusItem[]) => {
       };
 
       const response = await mwFetch<Infer<typeof responseSchema>>(
-        url,
+        url.toString(),
         options,
       );
 
@@ -36,5 +39,5 @@ export const useWebsiteStatus = (websites: OrgWebsiteStatusItem[]) => {
 
 const responseSchema = myzod.object({
   success: myzod.boolean(),
-  data: myzod.array(orgWebsiteStatusItemSchema),
+  data: myzod.array(urlStatusSchema),
 });

@@ -42,17 +42,22 @@ export const orgItemSchema = myzod
   .allowUnknownKeys(true);
 export type OrgItem = Infer<typeof orgItemSchema>;
 
-export const orgWebsiteStatusItemSchema = myzod.object({
-  website: myzod.string(),
+export const urlStatusSchema = myzod.object({
+  url: myzod.string(),
   status: myzod.literals('alive', 'dead', 'invalid', 'pending'),
   statusCode: myzod.number().optional(),
 });
-export type OrgWebsiteStatusItem = Infer<typeof orgWebsiteStatusItemSchema>;
+export type UrlStatus = Infer<typeof urlStatusSchema>;
 
 export const orgRowItemSchema = myzod.intersection(
   orgItemSchema,
   myzod.object({
-    websiteStatus: myzod.array(orgWebsiteStatusItemSchema),
+    websiteStatus: myzod.array(urlStatusSchema),
+    rawWebsiteStatus: myzod.array(urlStatusSchema),
+    telegramStatus: myzod.array(urlStatusSchema),
+    githubStatus: myzod.array(urlStatusSchema),
+    twitterStatus: myzod.array(urlStatusSchema),
+    docsStatus: myzod.array(urlStatusSchema),
   }),
 );
 export type OrgRowItem = Infer<typeof orgRowItemSchema>;
