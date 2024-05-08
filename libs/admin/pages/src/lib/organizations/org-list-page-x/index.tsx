@@ -10,6 +10,7 @@ import { SideBar } from '@jobstash/sidebar/feature';
 import { OrgListFocusSyncer } from './org-list-focus-syncer';
 import { OrgListTable } from './org-list-table';
 import { OrgListTableWrapper } from './org-list-table-wrapper';
+import { OrgUpdatePayloadSyncer } from './org-update-payload-syncer';
 
 export const OrgListPageX = () => (
   <>
@@ -27,6 +28,7 @@ export const OrgListPageX = () => (
           <OrgListTable />
         </OrgListTableWrapper>
         <OrgListFocusSyncer />
+        <OrgUpdatePayloadSyncer />
       </div>
     </AdminLayout>
   </>

@@ -1,3 +1,4 @@
+/* eslint-disable react/no-array-index-key */
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { memo, useEffect, useState } from 'react';
 
@@ -13,6 +14,7 @@ interface Props extends CustomCellRendererProps<OrgRowItem> {
     | 'rawWebsiteStatus'
     | 'telegramStatus'
     | 'githubStatus'
+    | 'discordStatus'
     | 'twitterStatus'
     | 'docsStatus';
   domainPrefix?: typeof URL_DOMAINS[keyof typeof URL_DOMAINS];
@@ -46,8 +48,8 @@ export const UrlStatusCell = memo(
     return (
       <div className="text-sm">
         {(initialized && data ? data : (value as UrlStatus[])).map(
-          ({ url, status, statusCode }) => (
-            <div key={url} className="flex gap-2">
+          ({ url, status, statusCode }, i) => (
+            <div key={`${url}${i}`} className="flex gap-2">
               <span>
                 {status === 'pending' ? '⏳' : status === 'alive' ? '✅' : '❌'}
               </span>

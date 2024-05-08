@@ -1,7 +1,8 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { memo, useCallback, useMemo, useRef } from 'react';
+import { memo, useCallback, useEffect, useMemo, useRef } from 'react';
 
 import {
+  CellEditingStoppedEvent,
   ColDef,
   GetRowIdFunc,
   IRowNode,
@@ -12,10 +13,19 @@ import {
 import { AgGridReact, CustomCellRendererProps } from 'ag-grid-react';
 import { useSetAtom } from 'jotai';
 
-import { OrgRowItem, URL_DOMAINS, UrlStatus } from '@jobstash/admin/core';
+import {
+  ORG_LIST_UNDO_EVENT,
+  OrgRowItem,
+  URL_DOMAINS,
+  UrlStatus,
+} from '@jobstash/admin/core';
 import { prefixUrl } from '@jobstash/admin/utils';
 
-import { orgListPastaStringAtom, useAllOrgs } from '@jobstash/admin/state';
+import {
+  orgListPastaStringAtom,
+  orgUpdateRowPayloadAtom,
+  useAllOrgs,
+} from '@jobstash/admin/state';
 
 import { JSONEditor } from './json-editor';
 import { UrlEditor } from './url-editor';
@@ -51,9 +61,6 @@ const getStatusWeight = (
   return highestPriority;
 };
 
-// TODO: use node in retrieving current data
-// TODO: add the key for comparator
-
 const getUrlStatusComparator =
   (
     statusKey:
@@ -61,6 +68,7 @@ const getUrlStatusComparator =
       | 'rawWebsiteStatus'
       | 'telegramStatus'
       | 'githubStatus'
+      | 'discordStatus'
       | 'twitterStatus'
       | 'docsStatus',
   ) =>
@@ -105,6 +113,7 @@ export const useOrgListTable = () => {
       rawWebsiteStatus: mapUrlStatus(d.rawWebsite),
       telegramStatus: mapUrlStatus(d.telegram),
       githubStatus: mapUrlStatus(d.github),
+      discordStatus: mapUrlStatus(d.discord),
       twitterStatus: mapUrlStatus(d.twitter),
       docsStatus: mapUrlStatus(d.docs),
     }));
@@ -127,6 +136,8 @@ export const useOrgListTable = () => {
         field: 'name',
         filter: true,
         editable: true,
+        cellEditor: 'agTextCellEditor',
+        valueParser: (p) => p.newValue,
       },
       {
         headerName: 'Website',
@@ -188,6 +199,22 @@ export const useOrgListTable = () => {
         ),
       },
       {
+        headerName: 'Discord',
+        field: 'discordStatus',
+        valueFormatter: (p: ValueFormatterParams<OrgRowItem, string>) =>
+          p.data?.discordStatus.flatMap((s) => s.status).join(',') ?? '',
+        filterValueGetter: (p: ValueGetterParams<OrgRowItem, string>) =>
+          p.data?.discordStatus.map((s) => s.url).join(','),
+        comparator: getUrlStatusComparator('discordStatus'),
+        cellRenderer: (p: CustomCellRendererProps) => (
+          <UrlStatusCell
+            {...p}
+            newItemKey="discordStatus"
+            domainPrefix={URL_DOMAINS.DISCORD}
+          />
+        ),
+      },
+      {
         headerName: 'Twitter',
         field: 'twitterStatus',
         valueFormatter: (p: ValueFormatterParams<OrgRowItem, string>) =>
@@ -235,6 +262,18 @@ export const useOrgListTable = () => {
         cellEditorPopup: true,
       },
       {
+        headerName: 'Job Count',
+        field: 'jobCount',
+      },
+      {
+        headerName: 'Open Engineering Jobs',
+        field: 'openEngineeringJobCount',
+      },
+      {
+        headerName: 'Total Engineering Jobs',
+        field: 'totalEngineeringJobCount',
+      },
+      {
         headerName: 'Logo URL',
         field: 'logoUrl',
         filter: true,
@@ -252,8 +291,10 @@ export const useOrgListTable = () => {
         field: 'updatedTimestamp',
       },
       {
-        headerName: 'Job Count',
-        field: 'jobCount',
+        headerName: 'Projects',
+        field: 'projects',
+        valueFormatter: (p: ValueFormatterParams<OrgRowItem, string>) =>
+          p.data!.projects.map((p) => p.id).join(', '),
       },
       {
         headerName: 'Alias',
@@ -286,16 +327,6 @@ export const useOrgListTable = () => {
         cellEditorPopup: true,
       },
       {
-        headerName: 'Twitter',
-        field: 'twitter',
-        valueFormatter: (p) => JSON.stringify(p.data?.twitter ?? []),
-        valueParser: (p) => p.newValue,
-        suppressKeyboardEvent: (p) => p.editing && p.event.key === 'Enter',
-        filter: true,
-        cellEditor: JSONEditor,
-        cellEditorPopup: true,
-      },
-      {
         headerName: 'Jobsite',
         field: 'jobsite',
         valueFormatter: (p) => JSON.stringify(p.data?.jobsite ?? []),
@@ -318,11 +349,6 @@ export const useOrgListTable = () => {
     ],
     [],
   );
-
-  //
-  // const [isFocused, setIsFocused] = useState(false);
-  // const onFocus = () => setIsFocused(true);
-  // const onBlur = () => setIsFocused(false);
 
   const setPastaString = useSetAtom(orgListPastaStringAtom);
   const onSelectionChanged = useCallback(
@@ -389,19 +415,41 @@ export const useOrgListTable = () => {
     [setPastaString],
   );
 
-  //
-  // useEffect(() => {
-  //   const handleCopy = () => {
-  //     if (typeof navigator !== 'undefined' && isFocused) {
-  //       navigator.clipboard.writeText(pastaString);
-  //     }
-  //   };
+  const setRowPayload = useSetAtom(orgUpdateRowPayloadAtom);
+  const onCellEditingStopped = useCallback(
+    (e: CellEditingStoppedEvent<OrgRowItem>) => {
+      const {
+        node: { rowIndex, data },
+        oldValue,
+        newValue,
+      } = e;
 
-  //   document.addEventListener('copy', handleCopy);
-  //   return () => {
-  //     document.removeEventListener('copy', handleCopy);
-  //   };
-  // }, [isFocused, pastaString]);
+      const valueChanged =
+        JSON.stringify(oldValue) !== JSON.stringify(newValue);
+
+      if (data && valueChanged && rowIndex !== null && newValue) {
+        // Using mutation directly here triggers a rerender on the table
+        // which reverts the edited cell to its original value
+        // hence syncing it externally
+        setRowPayload(data);
+      }
+    },
+
+    [setRowPayload],
+  );
+
+  // Handle revert edit
+  useEffect(() => {
+    const handleUndoEvent: EventListener = () => {
+      gridRef.current!.api.undoCellEditing();
+    };
+
+    window.addEventListener(ORG_LIST_UNDO_EVENT, handleUndoEvent);
+
+    return () => {
+      window.removeEventListener(ORG_LIST_UNDO_EVENT, handleUndoEvent);
+    };
+  }, []);
 
   return {
     gridRef,
@@ -409,5 +457,6 @@ export const useOrgListTable = () => {
     columnDefs,
     getRowId,
     onSelectionChanged,
+    onCellEditingStopped,
   };
 };

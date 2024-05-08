@@ -45,4 +45,7 @@ export const URL_DOMAINS = {
   TWITTER: 'twitter.com',
   TELEGRAM: 'telegram.me',
   GITHUB: 'github.com',
+  DISCORD: 'discord.gg',
 } as const;
+
+export const ORG_LIST_UNDO_EVENT = 'org-list-undo-event';

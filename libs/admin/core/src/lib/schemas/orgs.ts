@@ -13,6 +13,8 @@ export const orgItemSchema = myzod
     createdTimestamp: myzod.number().nullable(),
     updatedTimestamp: myzod.number().nullable(),
     jobCount: myzod.number(),
+    openEngineeringJobCount: myzod.number(),
+    totalEngineeringJobCount: myzod.number(),
     discord: myzod.array(myzod.string()),
     website: myzod.array(myzod.string()),
     rawWebsite: myzod.array(myzod.string()),
@@ -35,6 +37,14 @@ export const orgItemSchema = myzod
         type: myzod.string(),
       }),
     ),
+    projects: myzod.array(
+      myzod
+        .object({
+          id: myzod.string(),
+          name: myzod.string(),
+        })
+        .allowUnknownKeys(true),
+    ),
     // Projects
     // FundingRoudns
     // Investors
@@ -56,8 +66,29 @@ export const orgRowItemSchema = myzod.intersection(
     rawWebsiteStatus: myzod.array(urlStatusSchema),
     telegramStatus: myzod.array(urlStatusSchema),
     githubStatus: myzod.array(urlStatusSchema),
+    discordStatus: myzod.array(urlStatusSchema),
     twitterStatus: myzod.array(urlStatusSchema),
     docsStatus: myzod.array(urlStatusSchema),
   }),
 );
 export type OrgRowItem = Infer<typeof orgRowItemSchema>;
+
+export const orgUpdatePayloadSchema = myzod.object({
+  logoUrl: myzod.string().optional(),
+  name: myzod.string().optional(),
+  description: myzod.string().optional(),
+  summary: myzod.string().optional(),
+  headcountEstimate: myzod.number().optional(),
+  location: myzod.string().optional(),
+  aliases: myzod.array(myzod.string()).optional(),
+  website: myzod.array(myzod.string()).optional(),
+  twitter: myzod.array(myzod.string()).optional(),
+  github: myzod.array(myzod.string()).optional(),
+  discord: myzod.array(myzod.string()).optional(),
+  docs: myzod.array(myzod.string()).optional(),
+  telegram: myzod.array(myzod.string()).optional(),
+  grants: myzod.array(myzod.string()).optional(),
+  projects: myzod.array(myzod.string()).optional(),
+  communities: myzod.array(myzod.string()).optional(),
+});
+export type OrgUpdatePayload = Infer<typeof orgUpdatePayloadSchema>;
