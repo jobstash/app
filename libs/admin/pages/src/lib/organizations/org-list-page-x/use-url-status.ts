@@ -6,24 +6,24 @@ import { FRONTEND_URL } from '@jobstash/shared/core';
 
 import { mwFetch } from '@jobstash/shared/data';
 
-export const useWebsiteStatus = (
-  websites: UrlStatus[],
+export const useUrlStatus = (
+  urls: UrlStatus[],
   domainPrefix?: typeof URL_DOMAINS[keyof typeof URL_DOMAINS],
 ) => {
-  const urls = encodeURIComponent(
-    JSON.stringify(websites.flatMap(({ url }) => url)),
+  const urlsString = encodeURIComponent(
+    JSON.stringify(urls.flatMap(({ url }) => url)),
   );
 
   return useQuery({
-    queryKey: ['website-status', urls],
+    queryKey: ['url-status', urlsString],
     async queryFn() {
       const url = new URL(`${FRONTEND_URL}/api/url-status-proxy`);
-      url.searchParams.set('urls', urls);
+      url.searchParams.set('urls', urlsString);
       if (domainPrefix) url.searchParams.set('domainPrefix', domainPrefix);
 
       const options = {
         responseSchema,
-        sentryLabel: 'useWebsiteStatus',
+        sentryLabel: 'useUrlStatus',
       };
 
       const response = await mwFetch<Infer<typeof responseSchema>>(

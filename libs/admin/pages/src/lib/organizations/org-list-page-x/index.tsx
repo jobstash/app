@@ -1,9 +1,15 @@
+import 'ag-grid-community/styles/ag-grid.css';
+import 'ag-grid-community/styles/ag-theme-quartz.css';
+import './ag-grid-custom.css';
+
 import Head from 'next/head';
 
 import { AdminLayout } from '@jobstash/admin/ui';
 import { SideBar } from '@jobstash/sidebar/feature';
 
+import { OrgListFocusSyncer } from './org-list-focus-syncer';
 import { OrgListTable } from './org-list-table';
+import { OrgListTableWrapper } from './org-list-table-wrapper';
 
 export const OrgListPageX = () => (
   <>
@@ -17,7 +23,10 @@ export const OrgListPageX = () => (
       tabsSection={null}
     >
       <div className="w-full">
-        <OrgListTable />
+        <OrgListTableWrapper>
+          <OrgListTable />
+        </OrgListTableWrapper>
+        <OrgListFocusSyncer />
       </div>
     </AdminLayout>
   </>

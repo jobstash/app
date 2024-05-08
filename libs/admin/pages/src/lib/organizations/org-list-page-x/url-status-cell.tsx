@@ -5,11 +5,12 @@ import { CustomCellRendererProps } from 'ag-grid-react';
 
 import { OrgRowItem, URL_DOMAINS, UrlStatus } from '@jobstash/admin/core';
 
-import { useWebsiteStatus } from './use-website-status';
+import { useUrlStatus } from './use-url-status';
 
 interface Props extends CustomCellRendererProps<OrgRowItem> {
   newItemKey:
     | 'websiteStatus'
+    | 'rawWebsiteStatus'
     | 'telegramStatus'
     | 'githubStatus'
     | 'twitterStatus'
@@ -24,20 +25,23 @@ export const UrlStatusCell = memo(
     data: gridData,
     newItemKey = 'websiteStatus',
     domainPrefix,
+    node,
   }: Props) => {
     const [initialized, setInitialized] = useState(false);
-    const { data } = useWebsiteStatus(value, domainPrefix);
+    const { data } = useUrlStatus(value, domainPrefix);
 
     useEffect(() => {
       if (data && !initialized) {
         setInitialized(true);
-        const newItem = copyObject(gridData) as OrgRowItem;
+        // Note: copy from node.data not gridData
+        // gridData only contains update from most recent cell, the rest are initial values
+        const newItem = copyObject(node.data) as OrgRowItem;
         newItem[newItemKey] = data;
-        api.applyTransactionAsync({
+        api.applyTransaction({
           update: [newItem],
         });
       }
-    }, [api, data, gridData, initialized, newItemKey]);
+    }, [api, data, gridData, initialized, newItemKey, node.data]);
 
     return (
       <div className="text-sm">
@@ -47,6 +51,7 @@ export const UrlStatusCell = memo(
               <span>
                 {status === 'pending' ? '⏳' : status === 'alive' ? '✅' : '❌'}
               </span>
+              {/* <pre>{JSON.stringify({ value, data }, undefined, '\t')}</pre> */}
               <span>{`${url}${statusCode ? ` [${statusCode}]` : ''}`}</span>
             </div>
           ),

@@ -32,8 +32,9 @@ export const UrlEditor = forwardRef<HTMLDivElement, CustomCellEditorProps>(
         // For each status on value, change website into parsed
         for (let i = 0; i < (value as UrlStatus[]).length; i++) {
           newWebsiteStatus.push({
-            ...value[i],
             url: parsed[i],
+            status: 'pending',
+            statusCode: undefined,
           });
         }
 
