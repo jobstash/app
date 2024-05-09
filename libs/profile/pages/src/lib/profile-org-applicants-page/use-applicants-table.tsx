@@ -368,30 +368,6 @@ export const useApplicantsTable = () => {
       //   return <BooleanCell value={Boolean(applicant.user.availableForWork)} />;
       // }
 
-      if (columnKey === 'ecosystemActivations') {
-        const {
-          user: { wallet },
-        } = applicant;
-
-        return <CommunityCell wallet={wallet} />;
-      }
-
-      if (columnKey === 'job') {
-        const {
-          job: { title, classification },
-        } = applicant;
-        return (
-          <div className="flex flex-col gap-2">
-            <Text size="md" fw="bold">
-              {title}
-            </Text>
-            <Text size="sm" color="dimmed">
-              {classification}
-            </Text>
-          </div>
-        );
-      }
-
       //
       // if (columnKey === 'hired') {
       //   return (
@@ -463,8 +439,37 @@ export const useApplicantsTable = () => {
         );
       }
 
-      if (columnKey === 'cryptoAdjacent') return null;
-      if (columnKey === 'organizationHighlights') return null;
+      if (columnKey === 'cryptoAdjacent') {
+        return <EmptyCellPlaceholder isCentered text="None" />;
+      }
+
+      if (columnKey === 'organizationHighlights') {
+        return <EmptyCellPlaceholder isCentered text="None" />;
+      }
+
+      if (columnKey === 'ecosystemActivations') {
+        const {
+          user: { wallet },
+        } = applicant;
+
+        return <CommunityCell wallet={wallet} />;
+      }
+
+      if (columnKey === 'job') {
+        const {
+          job: { title, classification },
+        } = applicant;
+        return (
+          <div className="flex flex-col gap-2">
+            <Text size="md" fw="bold">
+              {title}
+            </Text>
+            <Text size="sm" color="dimmed">
+              {classification}
+            </Text>
+          </div>
+        );
+      }
 
       return <EmptyCellPlaceholder />;
     },
@@ -528,10 +533,10 @@ type CustomColumnKeys =
   | 'prevOrgs'
   | 'skills'
   // | 'cryptoVerticals'
-  | 'ecosystemActivations'
   | 'availableForWork'
   | 'cryptoAdjacent'
   | 'organizationHighlights'
+  | 'ecosystemActivations'
   // | 'hired'
   // | 'interviewed'
   // | 'fake'
@@ -543,11 +548,11 @@ const columns = [
   { key: 'skills', label: 'Skill Match' },
   { key: 'prevOrgs', label: 'Work History' },
   // { key: 'cryptoVerticals', label: 'Crypto Verticals' },
-  { key: 'ecosystemActivations', label: 'Ecosystem Activations' },
   // { key: 'availableForWork', label: 'Available' },
   { key: 'cryptoNative', label: 'Crypto Native' },
   { key: 'cryptoAdjacent', label: 'Crypto Adjacent' },
   { key: 'organizationHighlights', label: 'Organization Highlights' },
+  { key: 'ecosystemActivations', label: 'Ecosystem Activations' },
   // { key: 'oss', label: 'OSS' },
   // { key: 'attestations', label: 'Attestations' },
   // { key: 'hired', label: 'Hired' },
