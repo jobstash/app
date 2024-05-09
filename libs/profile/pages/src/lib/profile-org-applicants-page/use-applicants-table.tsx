@@ -1,6 +1,11 @@
 /* eslint-disable complexity */
 import { useCallback, useMemo, useState } from 'react';
 
+import {
+  ArchiveBoxIcon,
+  CalendarDaysIcon,
+  HeartIcon,
+} from '@heroicons/react/16/solid';
 import { Button } from '@nextui-org/button';
 import { Chip } from '@nextui-org/chip';
 import { Link } from '@nextui-org/link';
@@ -25,6 +30,7 @@ import {
 import { EmptyCellPlaceholder } from '@jobstash/profile/ui';
 import { LogoTitle, Text } from '@jobstash/shared/ui';
 
+import { ActionButton } from './action-button';
 import { BooleanCell } from './boolean-cell';
 import { CommunityCell } from './community-cell';
 import { WorkHistory } from './work-history';
@@ -362,7 +368,7 @@ export const useApplicantsTable = () => {
       //   return <BooleanCell value={Boolean(applicant.user.availableForWork)} />;
       // }
 
-      if (columnKey === 'community') {
+      if (columnKey === 'ecosystemActivations') {
         const {
           user: { wallet },
         } = applicant;
@@ -427,40 +433,42 @@ export const useApplicantsTable = () => {
       //   );
       // }
 
-      //
-      // if (columnKey === 'actions') {
-      //   return (
-      //     <div className="flex flex-col gap-2">
-      //       <div className="flex gap-2 w-full items-center justify-center">
-      //         <Tooltip content="Calendar Invite" delay={0}>
-      //           <Button isIconOnly>
-      //             <CalendarDaysIcon className="h-8 w-8" />
-      //           </Button>
-      //         </Tooltip>
-      //         <ActionButton
-      //           orgId={profileInfoData?.orgId}
-      //           wallet={applicant.user.wallet}
-      //           isPending={isPending}
-      //           mutate={mutate}
-      //           list="shortlisted"
-      //           icon={<HeartIcon className="h-8 w-8" />}
-      //         />
-      //         <ActionButton
-      //           orgId={profileInfoData?.orgId}
-      //           wallet={applicant.user.wallet}
-      //           isPending={isPending}
-      //           mutate={mutate}
-      //           list="archived"
-      //           icon={<ArchiveBoxIcon className="h-8 w-8" />}
-      //         />
-      //       </div>
-      //     </div>
-      //   );
-      // }
+      if (columnKey === 'actions') {
+        return (
+          <div className="flex flex-col gap-2">
+            <div className="flex gap-2 w-full items-center justify-center">
+              <Tooltip content="Calendar Invite" delay={0}>
+                <Button isIconOnly>
+                  <CalendarDaysIcon className="h-8 w-8" />
+                </Button>
+              </Tooltip>
+              <ActionButton
+                orgId={profileInfoData?.orgId}
+                wallet={applicant.user.wallet}
+                isPending={isPending}
+                mutate={mutate}
+                list="shortlisted"
+                icon={<HeartIcon className="h-8 w-8" />}
+              />
+              <ActionButton
+                orgId={profileInfoData?.orgId}
+                wallet={applicant.user.wallet}
+                isPending={isPending}
+                mutate={mutate}
+                list="archived"
+                icon={<ArchiveBoxIcon className="h-8 w-8" />}
+              />
+            </div>
+          </div>
+        );
+      }
+
+      if (columnKey === 'cryptoAdjacent') return null;
+      if (columnKey === 'organizationHighlights') return null;
 
       return <EmptyCellPlaceholder />;
     },
-    [],
+    [isPending, mutate, profileInfoData?.orgId],
   );
 
   const [selectedApplicants, setSelectedApplicants] = useState<Set<string>>(
@@ -520,13 +528,14 @@ type CustomColumnKeys =
   | 'prevOrgs'
   | 'skills'
   // | 'cryptoVerticals'
-  | 'community'
-  | 'availableForWork';
-// | 'cryptoAdjacent'
-// | 'hired'
-// | 'interviewed'
-// | 'fake'
-// | 'actions';
+  | 'ecosystemActivations'
+  | 'availableForWork'
+  | 'cryptoAdjacent'
+  | 'organizationHighlights'
+  // | 'hired'
+  // | 'interviewed'
+  // | 'fake'
+  | 'actions';
 
 const columns = [
   { key: 'job', label: 'Job' },
@@ -534,16 +543,17 @@ const columns = [
   { key: 'skills', label: 'Skill Match' },
   { key: 'prevOrgs', label: 'Work History' },
   // { key: 'cryptoVerticals', label: 'Crypto Verticals' },
-  { key: 'community', label: 'Community' },
+  { key: 'ecosystemActivations', label: 'Ecosystem Activations' },
   // { key: 'availableForWork', label: 'Available' },
   { key: 'cryptoNative', label: 'Crypto Native' },
-  // { key: 'cryptoAdjacent', label: 'Crypto Adjacent' },
+  { key: 'cryptoAdjacent', label: 'Crypto Adjacent' },
+  { key: 'organizationHighlights', label: 'Organization Highlights' },
   // { key: 'oss', label: 'OSS' },
   // { key: 'attestations', label: 'Attestations' },
   // { key: 'hired', label: 'Hired' },
   // { key: 'interviewed', label: 'Interviewed' },
   // { key: 'fake', label: 'Fake' },
-  // { key: 'actions', label: 'Actions' },
+  { key: 'actions', label: 'Actions' },
 ];
 
 const centeredSet = new Set([
@@ -551,9 +561,10 @@ const centeredSet = new Set([
   'cryptoVerticals',
   // 'oss',
   'cryptoNative',
-  // 'cryptoAdjacent',
+  'cryptoAdjacent',
+  'organizationHighlights',
   // 'availableForWork',
-  'community',
+  'ecosystemActivations',
   'actions',
   'attestations',
   'hired',
