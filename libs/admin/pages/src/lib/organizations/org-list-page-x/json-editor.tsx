@@ -19,6 +19,7 @@ export const JSONEditor = forwardRef<HTMLDivElement, CustomCellEditorProps>(
     const save = () => {
       try {
         const parsed = JSON.parse(currentValue);
+        if (!Array.isArray(parsed)) return;
         onValueChange(parsed);
       } catch {}
 

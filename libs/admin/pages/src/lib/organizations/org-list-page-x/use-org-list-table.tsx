@@ -137,7 +137,6 @@ export const useOrgListTable = () => {
         filter: true,
         editable: true,
         cellEditor: 'agTextCellEditor',
-        valueParser: (p) => p.newValue,
       },
       {
         headerName: 'Website',
@@ -147,12 +146,13 @@ export const useOrgListTable = () => {
         filter: true,
         filterValueGetter: (p: ValueGetterParams<OrgRowItem, string>) =>
           p.data?.websiteStatus.map((s) => s.url).join(','),
-        cellEditor: memo(UrlEditor),
-        cellEditorPopup: true,
         valueParser: (p) => p.newValue,
         suppressKeyboardEvent: (p) => p.editing && p.event.key === 'Enter',
         comparator: getUrlStatusComparator('websiteStatus'),
         cellRenderer: UrlStatusCell,
+        editable: true,
+        cellEditor: memo(UrlEditor),
+        cellEditorPopup: true,
       },
       {
         headerName: 'Raw Website',
@@ -181,6 +181,10 @@ export const useOrgListTable = () => {
             domainPrefix={URL_DOMAINS.TELEGRAM}
           />
         ),
+        editable: true,
+        cellEditor: memo(UrlEditor),
+        cellEditorPopup: true,
+        valueParser: (p) => p.newValue,
       },
       {
         headerName: 'Github',
@@ -197,6 +201,10 @@ export const useOrgListTable = () => {
             domainPrefix={URL_DOMAINS.GITHUB}
           />
         ),
+        editable: true,
+        cellEditor: memo(UrlEditor),
+        cellEditorPopup: true,
+        valueParser: (p) => p.newValue,
       },
       {
         headerName: 'Discord',
@@ -213,6 +221,10 @@ export const useOrgListTable = () => {
             domainPrefix={URL_DOMAINS.DISCORD}
           />
         ),
+        editable: true,
+        cellEditor: memo(UrlEditor),
+        cellEditorPopup: true,
+        valueParser: (p) => p.newValue,
       },
       {
         headerName: 'Twitter',
@@ -229,6 +241,10 @@ export const useOrgListTable = () => {
             domainPrefix={URL_DOMAINS.TWITTER}
           />
         ),
+        editable: true,
+        cellEditor: memo(UrlEditor),
+        cellEditorPopup: true,
+        valueParser: (p) => p.newValue,
       },
       {
         headerName: 'Docs',
@@ -241,11 +257,16 @@ export const useOrgListTable = () => {
         cellRenderer: (p: CustomCellRendererProps) => (
           <UrlStatusCell {...p} newItemKey="docsStatus" />
         ),
+        editable: true,
+        cellEditor: memo(UrlEditor),
+        cellEditorPopup: true,
+        valueParser: (p) => p.newValue,
       },
       {
         headerName: 'Summary',
         field: 'summary',
         filter: true,
+        editable: true,
         cellEditor: 'agLargeTextCellEditor',
         cellEditorPopup: true,
       },
@@ -253,11 +274,14 @@ export const useOrgListTable = () => {
         headerName: 'Location',
         field: 'location',
         filter: true,
+        editable: true,
+        cellEditor: 'agTextCellEditor',
       },
       {
         headerName: 'Description',
         field: 'description',
         filter: true,
+        editable: true,
         cellEditor: 'agLargeTextCellEditor',
         cellEditorPopup: true,
       },
@@ -277,10 +301,14 @@ export const useOrgListTable = () => {
         headerName: 'Logo URL',
         field: 'logoUrl',
         filter: true,
+        editable: true,
+        cellEditor: 'agTextCellEditor',
       },
       {
         headerName: 'Headcount',
         field: 'headcountEstimate',
+        editable: true,
+        cellEditor: 'agNumberCellEditor',
       },
       {
         headerName: 'Created Timestamp',
@@ -295,6 +323,13 @@ export const useOrgListTable = () => {
         field: 'projects',
         valueFormatter: (p: ValueFormatterParams<OrgRowItem, string>) =>
           p.data!.projects.map((p) => p.id).join(', '),
+        valueParser: (p) => p.newValue,
+        suppressKeyboardEvent: (p) => p.editing && p.event.key === 'Enter',
+        filter: true,
+        // TODO: Make this editable
+        // editable: true,
+        // cellEditor: JSONEditor,
+        // cellEditorPopup: true,
       },
       {
         headerName: 'Alias',
@@ -303,6 +338,7 @@ export const useOrgListTable = () => {
         valueParser: (p) => p.newValue,
         suppressKeyboardEvent: (p) => p.editing && p.event.key === 'Enter',
         filter: true,
+        editable: true,
         cellEditor: JSONEditor,
         cellEditorPopup: true,
       },
@@ -313,6 +349,7 @@ export const useOrgListTable = () => {
         valueParser: (p) => p.newValue,
         suppressKeyboardEvent: (p) => p.editing && p.event.key === 'Enter',
         filter: true,
+        editable: true,
         cellEditor: JSONEditor,
         cellEditorPopup: true,
       },
@@ -323,6 +360,7 @@ export const useOrgListTable = () => {
         valueParser: (p) => p.newValue,
         suppressKeyboardEvent: (p) => p.editing && p.event.key === 'Enter',
         filter: true,
+        editable: true,
         cellEditor: JSONEditor,
         cellEditorPopup: true,
       },
@@ -427,7 +465,11 @@ export const useOrgListTable = () => {
       const valueChanged =
         JSON.stringify(oldValue) !== JSON.stringify(newValue);
 
-      if (data && valueChanged && rowIndex !== null && newValue) {
+      const isStringValue =
+        typeof oldValue === 'string' || typeof newValue === 'string';
+      const hasValue = isStringValue ? valueChanged : Boolean(newValue);
+
+      if (data && valueChanged && rowIndex !== null && hasValue) {
         // Using mutation directly here triggers a rerender on the table
         // which reverts the edited cell to its original value
         // hence syncing it externally

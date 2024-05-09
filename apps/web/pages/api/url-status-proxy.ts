@@ -15,9 +15,14 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
       return res.status(400).json({ error: 'invalid url query' });
     }
 
-    const decoded = (JSON.parse(decodeURIComponent(urls)) as string[]).sort(
-      (a, b) => a.localeCompare(b),
-    );
+    const decoded = [
+      ...new Set(
+        (JSON.parse(decodeURIComponent(urls)) as string[]).sort((a, b) =>
+          a.localeCompare(b),
+        ),
+      ),
+    ];
+
     const prefixed = decoded.map((url) =>
       prefixUrl(url, domainPrefix as string | undefined),
     );

@@ -24,15 +24,14 @@ export const UrlEditor = forwardRef<HTMLDivElement, CustomCellEditorProps>(
 
     const save = () => {
       try {
-        // Parsed are website array input
+        const newWebsiteStatus: UrlStatus[] = [];
         const parsed = JSON.parse(currentValue) as string[];
 
-        const newWebsiteStatus: UrlStatus[] = [];
+        if (!Array.isArray(parsed)) return;
 
-        // For each status on value, change website into parsed
-        for (let i = 0; i < (value as UrlStatus[]).length; i++) {
+        for (const url of parsed) {
           newWebsiteStatus.push({
-            url: parsed[i],
+            url,
             status: 'pending',
             statusCode: undefined,
           });

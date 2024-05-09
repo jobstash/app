@@ -25,7 +25,6 @@ export const useUpdateOrg = () =>
         title: 'Updating Organization',
         message: 'Please wait ...',
       });
-      throw new Error('pakyu');
     },
     onSuccess({ message }) {
       notifSuccess({
