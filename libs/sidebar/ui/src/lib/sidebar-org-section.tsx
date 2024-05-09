@@ -22,6 +22,13 @@ const SidebarOrgSection = ({ isMobile }: Props) => {
   });
 
   if (flow === CHECK_WALLET_FLOWS.ORG_COMPLETE) {
+    if (IS_DEBUG) {
+      tabs.push({
+        text: 'ATS Settings',
+        path: '/profile/org/ats-settings',
+      });
+    }
+
     tabs.push({
       text: 'Applicants',
       path: '/profile/org/applicants',

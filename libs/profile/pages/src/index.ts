@@ -1,4 +1,5 @@
 export * from './lib/applicants-page';
+export * from './lib/ats-settings-page';
 export * from './lib/profile-org-applicants-page';
 export * from './lib/profile-org-talents-page';
 export * from './lib/profile-page';
