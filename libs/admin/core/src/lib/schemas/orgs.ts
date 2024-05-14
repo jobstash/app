@@ -69,6 +69,8 @@ export const orgRowItemSchema = myzod.intersection(
     discordStatus: myzod.array(urlStatusSchema),
     twitterStatus: myzod.array(urlStatusSchema),
     docsStatus: myzod.array(urlStatusSchema),
+    jobsiteStatus: myzod.array(urlStatusSchema),
+    detectedJobsiteStatus: myzod.array(urlStatusSchema),
   }),
 );
 export type OrgRowItem = Infer<typeof orgRowItemSchema>;

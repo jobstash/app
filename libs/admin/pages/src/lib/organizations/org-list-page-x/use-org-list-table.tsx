@@ -27,6 +27,7 @@ import {
   useAllOrgs,
 } from '@jobstash/admin/state';
 
+import { AvatarCell } from './avatar-cell';
 import { JSONEditor } from './json-editor';
 import { UrlEditor } from './url-editor';
 import { UrlStatusCell } from './url-status-cell';
@@ -70,7 +71,9 @@ const getUrlStatusComparator =
       | 'githubStatus'
       | 'discordStatus'
       | 'twitterStatus'
-      | 'docsStatus',
+      | 'docsStatus'
+      | 'jobsiteStatus'
+      | 'detectedJobsiteStatus',
   ) =>
   (
     _valueA: UrlStatus[],
@@ -116,6 +119,10 @@ export const useOrgListTable = () => {
       discordStatus: mapUrlStatus(d.discord),
       twitterStatus: mapUrlStatus(d.twitter),
       docsStatus: mapUrlStatus(d.docs),
+      jobsiteStatus: mapUrlStatus(d.jobsite.flatMap((j) => j.url)),
+      detectedJobsiteStatus: mapUrlStatus(
+        d.detectedJobsite.flatMap((j) => j.url),
+      ),
     }));
   }, [data]);
 
@@ -132,8 +139,20 @@ export const useOrgListTable = () => {
         filter: true,
       },
       {
+        headerName: 'Avatar',
+        width: 100,
+        cellRenderer: AvatarCell,
+      },
+      {
         headerName: 'Name',
         field: 'name',
+        filter: true,
+        editable: true,
+        cellEditor: 'agTextCellEditor',
+      },
+      {
+        headerName: 'Logo URL',
+        field: 'logoUrl',
         filter: true,
         editable: true,
         cellEditor: 'agTextCellEditor',
@@ -263,19 +282,19 @@ export const useOrgListTable = () => {
         valueParser: (p) => p.newValue,
       },
       {
+        headerName: 'Location',
+        field: 'location',
+        filter: true,
+        editable: true,
+        cellEditor: 'agTextCellEditor',
+      },
+      {
         headerName: 'Summary',
         field: 'summary',
         filter: true,
         editable: true,
         cellEditor: 'agLargeTextCellEditor',
         cellEditorPopup: true,
-      },
-      {
-        headerName: 'Location',
-        field: 'location',
-        filter: true,
-        editable: true,
-        cellEditor: 'agTextCellEditor',
       },
       {
         headerName: 'Description',
@@ -298,13 +317,6 @@ export const useOrgListTable = () => {
         field: 'totalEngineeringJobCount',
       },
       {
-        headerName: 'Logo URL',
-        field: 'logoUrl',
-        filter: true,
-        editable: true,
-        cellEditor: 'agTextCellEditor',
-      },
-      {
         headerName: 'Headcount',
         field: 'headcountEstimate',
         editable: true,
@@ -322,11 +334,11 @@ export const useOrgListTable = () => {
         headerName: 'Projects',
         field: 'projects',
         valueFormatter: (p: ValueFormatterParams<OrgRowItem, string>) =>
-          p.data!.projects.map((p) => p.id).join(', '),
+          p.data!.projects.map((p) => p.name).join(', '),
         valueParser: (p) => p.newValue,
         suppressKeyboardEvent: (p) => p.editing && p.event.key === 'Enter',
         filter: true,
-        // TODO: Make this editable
+        // TODO: Make this editable (only accepts id)
         // editable: true,
         // cellEditor: JSONEditor,
         // cellEditorPopup: true,
@@ -334,7 +346,7 @@ export const useOrgListTable = () => {
       {
         headerName: 'Alias',
         field: 'aliases',
-        valueFormatter: (p) => JSON.stringify(p.data?.aliases ?? []),
+        valueFormatter: (p) => (p.data?.aliases ?? []).join(', '),
         valueParser: (p) => p.newValue,
         suppressKeyboardEvent: (p) => p.editing && p.event.key === 'Enter',
         filter: true,
@@ -345,7 +357,7 @@ export const useOrgListTable = () => {
       {
         headerName: 'Community',
         field: 'community',
-        valueFormatter: (p) => JSON.stringify(p.data?.community ?? []),
+        valueFormatter: (p) => (p.data?.community ?? []).join(', '),
         valueParser: (p) => p.newValue,
         suppressKeyboardEvent: (p) => p.editing && p.event.key === 'Enter',
         filter: true,
@@ -356,7 +368,7 @@ export const useOrgListTable = () => {
       {
         headerName: 'Grant',
         field: 'grant',
-        valueFormatter: (p) => JSON.stringify(p.data?.grant ?? []),
+        valueFormatter: (p) => (p.data?.grant ?? []).join(', '),
         valueParser: (p) => p.newValue,
         suppressKeyboardEvent: (p) => p.editing && p.event.key === 'Enter',
         filter: true,
@@ -365,24 +377,47 @@ export const useOrgListTable = () => {
         cellEditorPopup: true,
       },
       {
-        headerName: 'Jobsite',
-        field: 'jobsite',
-        valueFormatter: (p) => JSON.stringify(p.data?.jobsite ?? []),
+        headerName: 'Jobsite Url',
+        field: 'jobsiteStatus',
+        valueFormatter: (p: ValueFormatterParams<OrgRowItem, string>) =>
+          p.data?.jobsiteStatus.flatMap((s) => s.status).join(',') ?? '',
+        filterValueGetter: (p: ValueGetterParams<OrgRowItem, string>) =>
+          p.data?.jobsiteStatus.map((s) => s.url).join(','),
+        comparator: getUrlStatusComparator('jobsiteStatus'),
+        cellRenderer: (p: CustomCellRendererProps) => (
+          <UrlStatusCell {...p} newItemKey="jobsiteStatus" />
+        ),
         valueParser: (p) => p.newValue,
-        suppressKeyboardEvent: (p) => p.editing && p.event.key === 'Enter',
-        filter: true,
-        cellEditor: JSONEditor,
-        cellEditorPopup: true,
       },
       {
-        headerName: 'Detected Jobsite',
-        field: 'detectedJobsite',
-        valueFormatter: (p) => JSON.stringify(p.data?.detectedJobsite ?? []),
-        valueParser: (p) => p.newValue,
-        suppressKeyboardEvent: (p) => p.editing && p.event.key === 'Enter',
+        headerName: 'Jobsite Type',
+        valueGetter: (p: ValueGetterParams<OrgRowItem>) =>
+          p.data?.jobsite.flatMap((j) => j.type).join(', '),
+        valueFormatter: (p) =>
+          (p.data?.jobsite ?? []).map((j) => j.type).join(', '),
         filter: true,
-        cellEditor: JSONEditor,
-        cellEditorPopup: true,
+      },
+      {
+        headerName: 'Detected Jobsite Url',
+        field: 'detectedJobsiteStatus',
+        valueFormatter: (p: ValueFormatterParams<OrgRowItem, string>) =>
+          p.data?.detectedJobsiteStatus.flatMap((s) => s.status).join(',') ??
+          '',
+        filterValueGetter: (p: ValueGetterParams<OrgRowItem, string>) =>
+          p.data?.detectedJobsiteStatus.map((s) => s.url).join(','),
+        comparator: getUrlStatusComparator('detectedJobsiteStatus'),
+        cellRenderer: (p: CustomCellRendererProps) => (
+          <UrlStatusCell {...p} newItemKey="detectedJobsiteStatus" />
+        ),
+        valueParser: (p) => p.newValue,
+      },
+      {
+        headerName: 'Detected Jobsite Type',
+        valueGetter: (p: ValueGetterParams<OrgRowItem>) =>
+          p.data?.detectedJobsite.flatMap((j) => j.type).join(', '),
+        valueFormatter: (p) =>
+          (p.data?.detectedJobsite ?? []).map((j) => j.type).join(', '),
+        filter: true,
       },
     ],
     [],
@@ -399,24 +434,27 @@ export const useOrgListTable = () => {
               id,
               orgId,
               name,
-              location,
-              summary,
-              description,
               logoUrl,
-              headcountEstimate,
-              createdTimestamp,
-              updatedTimestamp,
-              jobCount,
-              discord,
               website,
               rawWebsite,
               telegram,
               github,
-              aliases,
-              grant,
+              discord,
               twitter,
               docs,
+              location,
+              summary,
+              description,
+              jobCount,
+              openEngineeringJobCount,
+              totalEngineeringJobCount,
+              headcountEstimate,
+              createdTimestamp,
+              updatedTimestamp,
+              projects,
+              aliases,
               community,
+              grant,
               jobsite,
               detectedJobsite,
             } = node.data!;
@@ -425,26 +463,31 @@ export const useOrgListTable = () => {
               id,
               orgId,
               name,
-              location,
-              summary,
-              description,
               logoUrl,
-              headcountEstimate,
-              createdTimestamp,
-              updatedTimestamp,
-              jobCount,
-              discord,
-              grant,
-              aliases,
-              community,
               prefixUrl(website),
               prefixUrl(rawWebsite),
               prefixUrl(telegram, URL_DOMAINS.TELEGRAM),
               prefixUrl(github, URL_DOMAINS.GITHUB),
+              prefixUrl(discord, URL_DOMAINS.DISCORD),
               prefixUrl(twitter, URL_DOMAINS.TWITTER),
               prefixUrl(docs),
-              JSON.stringify(jobsite),
-              JSON.stringify(detectedJobsite),
+              location,
+              summary,
+              description,
+              jobCount,
+              openEngineeringJobCount,
+              totalEngineeringJobCount,
+              headcountEstimate,
+              createdTimestamp,
+              updatedTimestamp,
+              projects.flatMap((p) => p.name),
+              aliases,
+              community,
+              grant,
+              jobsite.flatMap((j) => j.url),
+              jobsite.flatMap((j) => j.type),
+              detectedJobsite.flatMap((j) => j.url),
+              detectedJobsite.flatMap((j) => j.type),
             ].join('\t');
           })
           .join('\n'),

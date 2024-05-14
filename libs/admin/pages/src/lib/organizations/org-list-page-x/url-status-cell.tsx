@@ -16,7 +16,9 @@ interface Props extends CustomCellRendererProps<OrgRowItem> {
     | 'githubStatus'
     | 'discordStatus'
     | 'twitterStatus'
-    | 'docsStatus';
+    | 'docsStatus'
+    | 'jobsiteStatus'
+    | 'detectedJobsiteStatus';
   domainPrefix?: typeof URL_DOMAINS[keyof typeof URL_DOMAINS];
 }
 
