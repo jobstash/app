@@ -14,7 +14,8 @@ export const OrgListFocusSyncer = () => {
   useEffect(() => {
     const handleCopy = () => {
       if (typeof navigator !== 'undefined' && isFocused) {
-        navigator.clipboard.writeText(pastaString);
+        const text = pastaString || window.getSelection()?.toString() || '';
+        navigator.clipboard.writeText(text);
       }
     };
 

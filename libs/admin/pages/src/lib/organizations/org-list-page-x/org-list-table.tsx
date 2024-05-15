@@ -20,8 +20,10 @@ export const OrgListTable = () => {
       debug
       undoRedoCellEditing
       reactiveCustomComponents
-      rowMultiSelectWithClick
+      enableCellTextSelection
+      ensureDomOrder
       stopEditingWhenCellsLoseFocus
+      suppressRowClickSelection
       getRowId={getRowId}
       //
       // rowData={rowData ? [rowData[201], rowData[6035]] : undefined}

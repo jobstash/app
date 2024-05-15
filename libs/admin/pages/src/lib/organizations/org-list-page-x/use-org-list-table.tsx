@@ -129,6 +129,7 @@ export const useOrgListTable = () => {
   const columnDefs: ColDef<OrgRowItem>[] = useMemo(
     () => [
       {
+        checkboxSelection: true,
         headerName: 'ID',
         field: 'id',
         filter: true,
