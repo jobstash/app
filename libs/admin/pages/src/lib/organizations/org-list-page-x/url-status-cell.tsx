@@ -2,9 +2,11 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { memo, useEffect, useState } from 'react';
 
+import { Link } from '@nextui-org/link';
 import { CustomCellRendererProps } from 'ag-grid-react';
 
 import { OrgRowItem, URL_DOMAINS, UrlStatus } from '@jobstash/admin/core';
+import { prefixUrl } from '@jobstash/admin/utils';
 
 import { useUrlStatus } from './use-url-status';
 
@@ -56,7 +58,14 @@ export const UrlStatusCell = memo(
                 {status === 'pending' ? '⏳' : status === 'alive' ? '✅' : '❌'}
               </span>
               {/* <pre>{JSON.stringify({ value, data }, undefined, '\t')}</pre> */}
-              <span>{`${url}${statusCode ? ` [${statusCode}]` : ''}`}</span>
+              <Link
+                href={prefixUrl(url, domainPrefix)}
+                size="sm"
+                underline="hover"
+                className="text-white/80"
+                target="_blank"
+                rel="noopener noreferrer"
+              >{`${url}${statusCode ? ` [${statusCode}]` : ''}`}</Link>
             </div>
           ),
         )}
