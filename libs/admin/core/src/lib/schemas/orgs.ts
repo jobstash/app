@@ -27,12 +27,14 @@ export const orgItemSchema = myzod
     community: myzod.array(myzod.string()),
     jobsite: myzod.array(
       myzod.object({
+        id: myzod.string(),
         url: myzod.string(),
         type: myzod.string(),
       }),
     ),
     detectedJobsite: myzod.array(
       myzod.object({
+        id: myzod.string(),
         url: myzod.string(),
         type: myzod.string(),
       }),
@@ -75,6 +77,25 @@ export const orgRowItemSchema = myzod.intersection(
 );
 export type OrgRowItem = Infer<typeof orgRowItemSchema>;
 
+const jobsitePayloadSchema = myzod.array(
+  myzod.object({
+    id: myzod.string(),
+    url: myzod.string(),
+    type: myzod.string(),
+  }),
+);
+
+export type JobsitePayload = Infer<typeof jobsitePayloadSchema>;
+
+const detectedJobsitePayloadSchema = myzod.array(
+  myzod.object({
+    id: myzod.string().nullable(),
+    url: myzod.string(),
+    type: myzod.string(),
+  }),
+);
+export type DetectedJobsitePayload = Infer<typeof detectedJobsitePayloadSchema>;
+
 export const orgUpdatePayloadSchema = myzod.object({
   logoUrl: myzod.string().optional(),
   name: myzod.string().optional(),
@@ -92,5 +113,10 @@ export const orgUpdatePayloadSchema = myzod.object({
   grants: myzod.array(myzod.string()).optional(),
   projects: myzod.array(myzod.string()).optional(),
   communities: myzod.array(myzod.string()).optional(),
+  jobsites: jobsitePayloadSchema.optional(),
+  detectedJobsites: detectedJobsitePayloadSchema.optional(),
 });
 export type OrgUpdatePayload = Infer<typeof orgUpdatePayloadSchema>;
+
+export type OrgEditPayload = OrgRowItem &
+  Pick<OrgUpdatePayload, 'jobsites' | 'detectedJobsites'>;

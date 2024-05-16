@@ -22,6 +22,7 @@ export * from './lib/num-formatter';
 export * from './lib/omit-keys';
 export * from './lib/open-new-tab';
 export * from './lib/pretty-timestamp';
+export * from './lib/remove-object-props';
 export * from './lib/sentry-message';
 export * from './lib/short-timestamp';
 export * from './lib/slugify';

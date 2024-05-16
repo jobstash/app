@@ -5,12 +5,12 @@ import { useAtom } from 'jotai';
 import { ORG_LIST_UNDO_EVENT } from '@jobstash/admin/core';
 import { makeOptional } from '@jobstash/shared/utils';
 
-import { orgUpdateRowPayloadAtom } from '@jobstash/admin/state';
+import { orgEditRowPayloadAtom } from '@jobstash/admin/state';
 
 import { useUpdateOrg } from './use-update-org';
 
 export const OrgUpdatePayloadSyncer = () => {
-  const [dataPayload, setDataPayload] = useAtom(orgUpdateRowPayloadAtom);
+  const [dataPayload, setDataPayload] = useAtom(orgEditRowPayloadAtom);
   const { mutate } = useUpdateOrg();
 
   useEffect(() => {
@@ -22,27 +22,43 @@ export const OrgUpdatePayloadSyncer = () => {
       const docs = dataPayload.docsStatus.flatMap((s) => s.url);
       const telegram = dataPayload.telegramStatus.flatMap((s) => s.url);
       const projects = dataPayload.projects.map((p) => p.id);
+      const {
+        orgId,
+        name,
+        logoUrl,
+        description,
+        summary,
+        headcountEstimate,
+        location,
+        aliases,
+        grant,
+        community,
+        jobsites,
+        detectedJobsites,
+      } = dataPayload;
 
       mutate(
         {
-          orgId: dataPayload.orgId,
+          orgId,
           payload: {
-            logoUrl: makeOptional(dataPayload.logoUrl),
-            name: dataPayload.name,
-            description: makeOptional(dataPayload.description),
-            summary: makeOptional(dataPayload.summary),
-            headcountEstimate: makeOptional(dataPayload.headcountEstimate),
-            location: makeOptional(dataPayload.location),
-            aliases: dataPayload.aliases,
+            logoUrl: makeOptional(logoUrl),
+            name,
+            description: makeOptional(description),
+            summary: makeOptional(summary),
+            headcountEstimate: makeOptional(headcountEstimate),
+            location: makeOptional(location),
+            aliases,
             website,
             twitter,
             github,
             discord,
             docs,
             telegram,
-            grants: dataPayload.grant,
-            communities: dataPayload.community,
+            grants: grant,
+            communities: community,
             projects,
+            jobsites,
+            detectedJobsites,
           },
         },
         {

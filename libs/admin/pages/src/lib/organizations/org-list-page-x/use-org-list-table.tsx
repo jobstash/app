@@ -10,7 +10,11 @@ import {
   ValueFormatterParams,
   ValueGetterParams,
 } from 'ag-grid-community';
-import { AgGridReact, CustomCellRendererProps } from 'ag-grid-react';
+import {
+  AgGridReact,
+  CustomCellEditorProps,
+  CustomCellRendererProps,
+} from 'ag-grid-react';
 import { useSetAtom } from 'jotai';
 
 import {
@@ -22,12 +26,13 @@ import {
 import { prefixUrl } from '@jobstash/admin/utils';
 
 import {
+  orgEditRowPayloadAtom,
   orgListPastaStringAtom,
-  orgUpdateRowPayloadAtom,
   useAllOrgs,
 } from '@jobstash/admin/state';
 
 import { AvatarCell } from './avatar-cell';
+import { JobsiteEditor } from './jobsite-editor';
 import { JSONEditor } from './json-editor';
 import { UrlEditor } from './url-editor';
 import { UrlStatusCell } from './url-status-cell';
@@ -128,22 +133,22 @@ export const useOrgListTable = () => {
 
   const columnDefs: ColDef<OrgRowItem>[] = useMemo(
     () => [
-      {
-        checkboxSelection: true,
-        headerName: 'ID',
-        field: 'id',
-        filter: true,
-      },
-      {
-        headerName: 'Org ID',
-        field: 'orgId',
-        filter: true,
-      },
-      {
-        headerName: 'Avatar',
-        width: 100,
-        cellRenderer: AvatarCell,
-      },
+      // {
+      //   checkboxSelection: true,
+      //   headerName: 'ID',
+      //   field: 'id',
+      //   filter: true,
+      // },
+      // {
+      //   headerName: 'Org ID',
+      //   field: 'orgId',
+      //   filter: true,
+      // },
+      // {
+      //   headerName: 'Avatar',
+      //   width: 100,
+      //   cellRenderer: AvatarCell,
+      // },
       {
         headerName: 'Name',
         field: 'name',
@@ -151,232 +156,232 @@ export const useOrgListTable = () => {
         editable: true,
         cellEditor: 'agTextCellEditor',
       },
-      {
-        headerName: 'Logo URL',
-        field: 'logoUrl',
-        filter: true,
-        editable: true,
-        cellEditor: 'agTextCellEditor',
-      },
-      {
-        headerName: 'Website',
-        field: 'websiteStatus',
-        valueFormatter: (p: ValueFormatterParams<OrgRowItem, string>) =>
-          p.data?.websiteStatus.flatMap((s) => s.status).join(',') ?? '',
-        filter: true,
-        filterValueGetter: (p: ValueGetterParams<OrgRowItem, string>) =>
-          p.data?.websiteStatus.map((s) => s.url).join(','),
-        valueParser: (p) => p.newValue,
-        suppressKeyboardEvent: (p) => p.editing && p.event.key === 'Enter',
-        comparator: getUrlStatusComparator('websiteStatus'),
-        cellRenderer: UrlStatusCell,
-        editable: true,
-        cellEditor: memo(UrlEditor),
-        cellEditorPopup: true,
-      },
-      {
-        headerName: 'Raw Website',
-        field: 'rawWebsiteStatus',
-        valueFormatter: (p: ValueFormatterParams<OrgRowItem, string>) =>
-          p.data?.rawWebsiteStatus.flatMap((s) => s.status).join(',') ?? '',
-        filterValueGetter: (p: ValueGetterParams<OrgRowItem, string>) =>
-          p.data?.rawWebsiteStatus.map((s) => s.url).join(','),
-        comparator: getUrlStatusComparator('rawWebsiteStatus'),
-        cellRenderer: (p: CustomCellRendererProps) => (
-          <UrlStatusCell {...p} newItemKey="rawWebsiteStatus" />
-        ),
-      },
-      {
-        headerName: 'Telegram',
-        field: 'telegramStatus',
-        valueFormatter: (p: ValueFormatterParams<OrgRowItem, string>) =>
-          p.data?.telegramStatus.flatMap((s) => s.status).join(',') ?? '',
-        filterValueGetter: (p: ValueGetterParams<OrgRowItem, string>) =>
-          p.data?.telegramStatus.map((s) => s.url).join(','),
-        comparator: getUrlStatusComparator('telegramStatus'),
-        cellRenderer: (p: CustomCellRendererProps) => (
-          <UrlStatusCell
-            {...p}
-            newItemKey="telegramStatus"
-            domainPrefix={URL_DOMAINS.TELEGRAM}
-          />
-        ),
-        editable: true,
-        cellEditor: memo(UrlEditor),
-        cellEditorPopup: true,
-        valueParser: (p) => p.newValue,
-      },
-      {
-        headerName: 'Github',
-        field: 'githubStatus',
-        valueFormatter: (p: ValueFormatterParams<OrgRowItem, string>) =>
-          p.data?.githubStatus.flatMap((s) => s.status).join(',') ?? '',
-        filterValueGetter: (p: ValueGetterParams<OrgRowItem, string>) =>
-          p.data?.githubStatus.map((s) => s.url).join(','),
-        comparator: getUrlStatusComparator('githubStatus'),
-        cellRenderer: (p: CustomCellRendererProps) => (
-          <UrlStatusCell
-            {...p}
-            newItemKey="githubStatus"
-            domainPrefix={URL_DOMAINS.GITHUB}
-          />
-        ),
-        editable: true,
-        cellEditor: memo(UrlEditor),
-        cellEditorPopup: true,
-        valueParser: (p) => p.newValue,
-      },
-      {
-        headerName: 'Discord',
-        field: 'discordStatus',
-        valueFormatter: (p: ValueFormatterParams<OrgRowItem, string>) =>
-          p.data?.discordStatus.flatMap((s) => s.status).join(',') ?? '',
-        filterValueGetter: (p: ValueGetterParams<OrgRowItem, string>) =>
-          p.data?.discordStatus.map((s) => s.url).join(','),
-        comparator: getUrlStatusComparator('discordStatus'),
-        cellRenderer: (p: CustomCellRendererProps) => (
-          <UrlStatusCell
-            {...p}
-            newItemKey="discordStatus"
-            domainPrefix={URL_DOMAINS.DISCORD}
-          />
-        ),
-        editable: true,
-        cellEditor: memo(UrlEditor),
-        cellEditorPopup: true,
-        valueParser: (p) => p.newValue,
-      },
-      {
-        headerName: 'Twitter',
-        field: 'twitterStatus',
-        valueFormatter: (p: ValueFormatterParams<OrgRowItem, string>) =>
-          p.data?.twitterStatus.flatMap((s) => s.status).join(',') ?? '',
-        filterValueGetter: (p: ValueGetterParams<OrgRowItem, string>) =>
-          p.data?.twitterStatus.map((s) => s.url).join(','),
-        comparator: getUrlStatusComparator('twitterStatus'),
-        cellRenderer: (p: CustomCellRendererProps) => (
-          <UrlStatusCell
-            {...p}
-            newItemKey="twitterStatus"
-            domainPrefix={URL_DOMAINS.TWITTER}
-          />
-        ),
-        editable: true,
-        cellEditor: memo(UrlEditor),
-        cellEditorPopup: true,
-        valueParser: (p) => p.newValue,
-      },
-      {
-        headerName: 'Docs',
-        field: 'docsStatus',
-        valueFormatter: (p: ValueFormatterParams<OrgRowItem, string>) =>
-          p.data?.docsStatus.flatMap((s) => s.status).join(',') ?? '',
-        filterValueGetter: (p: ValueGetterParams<OrgRowItem, string>) =>
-          p.data?.docsStatus.map((s) => s.url).join(','),
-        comparator: getUrlStatusComparator('docsStatus'),
-        cellRenderer: (p: CustomCellRendererProps) => (
-          <UrlStatusCell {...p} newItemKey="docsStatus" />
-        ),
-        editable: true,
-        cellEditor: memo(UrlEditor),
-        cellEditorPopup: true,
-        valueParser: (p) => p.newValue,
-      },
-      {
-        headerName: 'Location',
-        field: 'location',
-        filter: true,
-        editable: true,
-        cellEditor: 'agTextCellEditor',
-      },
-      {
-        headerName: 'Summary',
-        field: 'summary',
-        filter: true,
-        editable: true,
-        cellEditor: 'agLargeTextCellEditor',
-        cellEditorPopup: true,
-      },
-      {
-        headerName: 'Description',
-        field: 'description',
-        filter: true,
-        editable: true,
-        cellEditor: 'agLargeTextCellEditor',
-        cellEditorPopup: true,
-      },
-      {
-        headerName: 'Job Count',
-        field: 'jobCount',
-      },
-      {
-        headerName: 'Open Engineering Jobs',
-        field: 'openEngineeringJobCount',
-      },
-      {
-        headerName: 'Total Engineering Jobs',
-        field: 'totalEngineeringJobCount',
-      },
-      {
-        headerName: 'Headcount',
-        field: 'headcountEstimate',
-        editable: true,
-        cellEditor: 'agNumberCellEditor',
-      },
-      {
-        headerName: 'Created Timestamp',
-        field: 'createdTimestamp',
-      },
-      {
-        headerName: 'Updated Timestamp',
-        field: 'updatedTimestamp',
-      },
-      {
-        headerName: 'Projects',
-        field: 'projects',
-        valueFormatter: (p: ValueFormatterParams<OrgRowItem, string>) =>
-          p.data!.projects.map((p) => p.name).join(', '),
-        valueParser: (p) => p.newValue,
-        suppressKeyboardEvent: (p) => p.editing && p.event.key === 'Enter',
-        filter: true,
-        // TODO: Make this editable (only accepts id)
-        // editable: true,
-        // cellEditor: JSONEditor,
-        // cellEditorPopup: true,
-      },
-      {
-        headerName: 'Alias',
-        field: 'aliases',
-        valueFormatter: (p) => (p.data?.aliases ?? []).join(', '),
-        valueParser: (p) => p.newValue,
-        suppressKeyboardEvent: (p) => p.editing && p.event.key === 'Enter',
-        filter: true,
-        editable: true,
-        cellEditor: JSONEditor,
-        cellEditorPopup: true,
-      },
-      {
-        headerName: 'Community',
-        field: 'community',
-        valueFormatter: (p) => (p.data?.community ?? []).join(', '),
-        valueParser: (p) => p.newValue,
-        suppressKeyboardEvent: (p) => p.editing && p.event.key === 'Enter',
-        filter: true,
-        editable: true,
-        cellEditor: JSONEditor,
-        cellEditorPopup: true,
-      },
-      {
-        headerName: 'Grant',
-        field: 'grant',
-        valueFormatter: (p) => (p.data?.grant ?? []).join(', '),
-        valueParser: (p) => p.newValue,
-        suppressKeyboardEvent: (p) => p.editing && p.event.key === 'Enter',
-        filter: true,
-        editable: true,
-        cellEditor: JSONEditor,
-        cellEditorPopup: true,
-      },
+      // {
+      //   headerName: 'Logo URL',
+      //   field: 'logoUrl',
+      //   filter: true,
+      //   editable: true,
+      //   cellEditor: 'agTextCellEditor',
+      // },
+      // {
+      //   headerName: 'Website',
+      //   field: 'websiteStatus',
+      //   valueFormatter: (p: ValueFormatterParams<OrgRowItem, string>) =>
+      //     p.data?.websiteStatus.flatMap((s) => s.status).join(',') ?? '',
+      //   filter: true,
+      //   filterValueGetter: (p: ValueGetterParams<OrgRowItem, string>) =>
+      //     p.data?.websiteStatus.map((s) => s.url).join(','),
+      //   valueParser: (p) => p.newValue,
+      //   suppressKeyboardEvent: (p) => p.editing && p.event.key === 'Enter',
+      //   comparator: getUrlStatusComparator('websiteStatus'),
+      //   cellRenderer: UrlStatusCell,
+      //   editable: true,
+      //   cellEditor: memo(UrlEditor),
+      //   cellEditorPopup: true,
+      // },
+      // {
+      //   headerName: 'Raw Website',
+      //   field: 'rawWebsiteStatus',
+      //   valueFormatter: (p: ValueFormatterParams<OrgRowItem, string>) =>
+      //     p.data?.rawWebsiteStatus.flatMap((s) => s.status).join(',') ?? '',
+      //   filterValueGetter: (p: ValueGetterParams<OrgRowItem, string>) =>
+      //     p.data?.rawWebsiteStatus.map((s) => s.url).join(','),
+      //   comparator: getUrlStatusComparator('rawWebsiteStatus'),
+      //   cellRenderer: (p: CustomCellRendererProps) => (
+      //     <UrlStatusCell {...p} newItemKey="rawWebsiteStatus" />
+      //   ),
+      // },
+      // {
+      //   headerName: 'Telegram',
+      //   field: 'telegramStatus',
+      //   valueFormatter: (p: ValueFormatterParams<OrgRowItem, string>) =>
+      //     p.data?.telegramStatus.flatMap((s) => s.status).join(',') ?? '',
+      //   filterValueGetter: (p: ValueGetterParams<OrgRowItem, string>) =>
+      //     p.data?.telegramStatus.map((s) => s.url).join(','),
+      //   comparator: getUrlStatusComparator('telegramStatus'),
+      //   cellRenderer: (p: CustomCellRendererProps) => (
+      //     <UrlStatusCell
+      //       {...p}
+      //       newItemKey="telegramStatus"
+      //       domainPrefix={URL_DOMAINS.TELEGRAM}
+      //     />
+      //   ),
+      //   editable: true,
+      //   cellEditor: memo(UrlEditor),
+      //   cellEditorPopup: true,
+      //   valueParser: (p) => p.newValue,
+      // },
+      // {
+      //   headerName: 'Github',
+      //   field: 'githubStatus',
+      //   valueFormatter: (p: ValueFormatterParams<OrgRowItem, string>) =>
+      //     p.data?.githubStatus.flatMap((s) => s.status).join(',') ?? '',
+      //   filterValueGetter: (p: ValueGetterParams<OrgRowItem, string>) =>
+      //     p.data?.githubStatus.map((s) => s.url).join(','),
+      //   comparator: getUrlStatusComparator('githubStatus'),
+      //   cellRenderer: (p: CustomCellRendererProps) => (
+      //     <UrlStatusCell
+      //       {...p}
+      //       newItemKey="githubStatus"
+      //       domainPrefix={URL_DOMAINS.GITHUB}
+      //     />
+      //   ),
+      //   editable: true,
+      //   cellEditor: memo(UrlEditor),
+      //   cellEditorPopup: true,
+      //   valueParser: (p) => p.newValue,
+      // },
+      // {
+      //   headerName: 'Discord',
+      //   field: 'discordStatus',
+      //   valueFormatter: (p: ValueFormatterParams<OrgRowItem, string>) =>
+      //     p.data?.discordStatus.flatMap((s) => s.status).join(',') ?? '',
+      //   filterValueGetter: (p: ValueGetterParams<OrgRowItem, string>) =>
+      //     p.data?.discordStatus.map((s) => s.url).join(','),
+      //   comparator: getUrlStatusComparator('discordStatus'),
+      //   cellRenderer: (p: CustomCellRendererProps) => (
+      //     <UrlStatusCell
+      //       {...p}
+      //       newItemKey="discordStatus"
+      //       domainPrefix={URL_DOMAINS.DISCORD}
+      //     />
+      //   ),
+      //   editable: true,
+      //   cellEditor: memo(UrlEditor),
+      //   cellEditorPopup: true,
+      //   valueParser: (p) => p.newValue,
+      // },
+      // {
+      //   headerName: 'Twitter',
+      //   field: 'twitterStatus',
+      //   valueFormatter: (p: ValueFormatterParams<OrgRowItem, string>) =>
+      //     p.data?.twitterStatus.flatMap((s) => s.status).join(',') ?? '',
+      //   filterValueGetter: (p: ValueGetterParams<OrgRowItem, string>) =>
+      //     p.data?.twitterStatus.map((s) => s.url).join(','),
+      //   comparator: getUrlStatusComparator('twitterStatus'),
+      //   cellRenderer: (p: CustomCellRendererProps) => (
+      //     <UrlStatusCell
+      //       {...p}
+      //       newItemKey="twitterStatus"
+      //       domainPrefix={URL_DOMAINS.TWITTER}
+      //     />
+      //   ),
+      //   editable: true,
+      //   cellEditor: memo(UrlEditor),
+      //   cellEditorPopup: true,
+      //   valueParser: (p) => p.newValue,
+      // },
+      // {
+      //   headerName: 'Docs',
+      //   field: 'docsStatus',
+      //   valueFormatter: (p: ValueFormatterParams<OrgRowItem, string>) =>
+      //     p.data?.docsStatus.flatMap((s) => s.status).join(',') ?? '',
+      //   filterValueGetter: (p: ValueGetterParams<OrgRowItem, string>) =>
+      //     p.data?.docsStatus.map((s) => s.url).join(','),
+      //   comparator: getUrlStatusComparator('docsStatus'),
+      //   cellRenderer: (p: CustomCellRendererProps) => (
+      //     <UrlStatusCell {...p} newItemKey="docsStatus" />
+      //   ),
+      //   editable: true,
+      //   cellEditor: memo(UrlEditor),
+      //   cellEditorPopup: true,
+      //   valueParser: (p) => p.newValue,
+      // },
+      // {
+      //   headerName: 'Location',
+      //   field: 'location',
+      //   filter: true,
+      //   editable: true,
+      //   cellEditor: 'agTextCellEditor',
+      // },
+      // {
+      //   headerName: 'Summary',
+      //   field: 'summary',
+      //   filter: true,
+      //   editable: true,
+      //   cellEditor: 'agLargeTextCellEditor',
+      //   cellEditorPopup: true,
+      // },
+      // {
+      //   headerName: 'Description',
+      //   field: 'description',
+      //   filter: true,
+      //   editable: true,
+      //   cellEditor: 'agLargeTextCellEditor',
+      //   cellEditorPopup: true,
+      // },
+      // {
+      //   headerName: 'Job Count',
+      //   field: 'jobCount',
+      // },
+      // {
+      //   headerName: 'Open Engineering Jobs',
+      //   field: 'openEngineeringJobCount',
+      // },
+      // {
+      //   headerName: 'Total Engineering Jobs',
+      //   field: 'totalEngineeringJobCount',
+      // },
+      // {
+      //   headerName: 'Headcount',
+      //   field: 'headcountEstimate',
+      //   editable: true,
+      //   cellEditor: 'agNumberCellEditor',
+      // },
+      // {
+      //   headerName: 'Created Timestamp',
+      //   field: 'createdTimestamp',
+      // },
+      // {
+      //   headerName: 'Updated Timestamp',
+      //   field: 'updatedTimestamp',
+      // },
+      // {
+      //   headerName: 'Projects',
+      //   field: 'projects',
+      //   valueFormatter: (p: ValueFormatterParams<OrgRowItem, string>) =>
+      //     p.data!.projects.map((p) => p.name).join(', '),
+      //   valueParser: (p) => p.newValue,
+      //   suppressKeyboardEvent: (p) => p.editing && p.event.key === 'Enter',
+      //   filter: true,
+      //   // TODO: Make this editable (only accepts id)
+      //   // editable: true,
+      //   // cellEditor: JSONEditor,
+      //   // cellEditorPopup: true,
+      // },
+      // {
+      //   headerName: 'Alias',
+      //   field: 'aliases',
+      //   valueFormatter: (p) => (p.data?.aliases ?? []).join(', '),
+      //   valueParser: (p) => p.newValue,
+      //   suppressKeyboardEvent: (p) => p.editing && p.event.key === 'Enter',
+      //   filter: true,
+      //   editable: true,
+      //   cellEditor: JSONEditor,
+      //   cellEditorPopup: true,
+      // },
+      // {
+      //   headerName: 'Community',
+      //   field: 'community',
+      //   valueFormatter: (p) => (p.data?.community ?? []).join(', '),
+      //   valueParser: (p) => p.newValue,
+      //   suppressKeyboardEvent: (p) => p.editing && p.event.key === 'Enter',
+      //   filter: true,
+      //   editable: true,
+      //   cellEditor: JSONEditor,
+      //   cellEditorPopup: true,
+      // },
+      // {
+      //   headerName: 'Grant',
+      //   field: 'grant',
+      //   valueFormatter: (p) => (p.data?.grant ?? []).join(', '),
+      //   valueParser: (p) => p.newValue,
+      //   suppressKeyboardEvent: (p) => p.editing && p.event.key === 'Enter',
+      //   filter: true,
+      //   editable: true,
+      //   cellEditor: JSONEditor,
+      //   cellEditorPopup: true,
+      // },
       {
         headerName: 'Jobsite Url',
         field: 'jobsiteStatus',
@@ -389,6 +394,11 @@ export const useOrgListTable = () => {
           <UrlStatusCell {...p} newItemKey="jobsiteStatus" />
         ),
         valueParser: (p) => p.newValue,
+        editable: true,
+        cellEditor: (p: CustomCellEditorProps<OrgRowItem>) => (
+          <JobsiteEditor rowKey="jobsite" {...p} />
+        ),
+        cellEditorPopup: true,
       },
       {
         headerName: 'Jobsite Type',
@@ -497,7 +507,7 @@ export const useOrgListTable = () => {
     [setPastaString],
   );
 
-  const setRowPayload = useSetAtom(orgUpdateRowPayloadAtom);
+  const setRowPayload = useSetAtom(orgEditRowPayloadAtom);
   const onCellEditingStopped = useCallback(
     (e: CellEditingStoppedEvent<OrgRowItem>) => {
       const {
@@ -513,7 +523,20 @@ export const useOrgListTable = () => {
         typeof oldValue === 'string' || typeof newValue === 'string';
       const hasValue = isStringValue ? valueChanged : Boolean(newValue);
 
-      if (data && valueChanged && rowIndex !== null && hasValue) {
+      const isJobsitePayload =
+        Array.isArray(newValue) &&
+        newValue.length > 0 &&
+        typeof newValue[0] === 'object' &&
+        'url' in newValue[0] &&
+        'status' in newValue[0];
+
+      if (
+        data &&
+        valueChanged &&
+        rowIndex !== null &&
+        hasValue &&
+        !isJobsitePayload
+      ) {
         // Using mutation directly here triggers a rerender on the table
         // which reverts the edited cell to its original value
         // hence syncing it externally
