@@ -1,7 +1,10 @@
 import { notifications } from '@mantine/notifications';
 import { useMutation } from '@tanstack/react-query';
 
-import { OrgUpdatePayload, orgUpdatePayloadSchema } from '@jobstash/admin/core';
+import {
+  JobsiteActivatePayload,
+  jobsiteActivatePayloadSchema,
+} from '@jobstash/admin/core';
 import {
   MessageResponse,
   messageResponseSchema,
@@ -11,8 +14,8 @@ import { notifError, notifLoading, notifSuccess } from '@jobstash/shared/utils';
 
 import { mwFetch } from '@jobstash/shared/data';
 
-const updateOrg = async (orgId: string, payload: OrgUpdatePayload) => {
-  const url = `${MW_URL}/organizations/update/${orgId}`;
+const activateJobsite = async (payload: JobsiteActivatePayload) => {
+  const url = `${MW_URL}/organizations/jobsites/activate`;
 
   const options = {
     method: 'POST' as const,
@@ -21,44 +24,37 @@ const updateOrg = async (orgId: string, payload: OrgUpdatePayload) => {
     credentials: 'include' as RequestCredentials,
     mode: 'cors' as RequestMode,
     payload,
-    payloadSchema: orgUpdatePayloadSchema,
+    payloadSchema: jobsiteActivatePayloadSchema,
     headers: {
       'Content-Type': 'application/json',
     },
   };
 
-  const { success, message } = await mwFetch<MessageResponse, OrgUpdatePayload>(
-    url,
-    options,
-  );
+  const { success, message } = await mwFetch<
+    MessageResponse,
+    JobsiteActivatePayload
+  >(url, options);
 
   if (!success) throw new Error(message);
 
   return { success, message };
 };
 
-export const useUpdateOrg = () =>
+export const useActivateJobsite = () =>
   useMutation({
-    mutationFn: ({
-      orgId,
-      payload,
-    }: {
-      orgId: string;
-      payload: OrgUpdatePayload;
-    }) => updateOrg(orgId, payload),
-
+    mutationFn: (payload: JobsiteActivatePayload) => activateJobsite(payload),
     onMutate() {
       notifications.clean();
       notifLoading({
         id: TOAST_ID,
-        title: 'Updating Organization',
+        title: 'Activating Jobsite',
         message: 'Please wait ...',
       });
     },
     onSuccess({ message }) {
       notifSuccess({
         id: TOAST_ID,
-        title: 'Org Update Successful!',
+        title: 'Activation Successful!',
         message,
         autoClose: 10_000,
       });
@@ -66,7 +62,7 @@ export const useUpdateOrg = () =>
     onError(data) {
       notifError({
         id: TOAST_ID,
-        title: 'Org Update Failed!',
+        title: 'Activation Failed!',
         message: (data as Error).message,
       });
     },

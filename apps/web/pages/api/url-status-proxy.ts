@@ -16,11 +16,7 @@ const handler = async (req: NextApiRequest, res: NextApiResponse) => {
     }
 
     const decoded = [
-      ...new Set(
-        (JSON.parse(decodeURIComponent(urls)) as string[]).sort((a, b) =>
-          a.localeCompare(b),
-        ),
-      ),
+      ...new Set(urls.split(',').sort((a, b) => a.localeCompare(b))),
     ];
 
     const prefixed = decoded.map((url) =>

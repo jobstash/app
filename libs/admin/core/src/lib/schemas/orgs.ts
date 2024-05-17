@@ -61,22 +61,6 @@ export const urlStatusSchema = myzod.object({
 });
 export type UrlStatus = Infer<typeof urlStatusSchema>;
 
-export const orgRowItemSchema = myzod.intersection(
-  orgItemSchema,
-  myzod.object({
-    websiteStatus: myzod.array(urlStatusSchema),
-    rawWebsiteStatus: myzod.array(urlStatusSchema),
-    telegramStatus: myzod.array(urlStatusSchema),
-    githubStatus: myzod.array(urlStatusSchema),
-    discordStatus: myzod.array(urlStatusSchema),
-    twitterStatus: myzod.array(urlStatusSchema),
-    docsStatus: myzod.array(urlStatusSchema),
-    jobsiteStatus: myzod.array(urlStatusSchema),
-    detectedJobsiteStatus: myzod.array(urlStatusSchema),
-  }),
-);
-export type OrgRowItem = Infer<typeof orgRowItemSchema>;
-
 const jobsitePayloadSchema = myzod.array(
   myzod.object({
     id: myzod.string(),
@@ -86,15 +70,6 @@ const jobsitePayloadSchema = myzod.array(
 );
 
 export type JobsitePayload = Infer<typeof jobsitePayloadSchema>;
-
-const detectedJobsitePayloadSchema = myzod.array(
-  myzod.object({
-    id: myzod.string().nullable(),
-    url: myzod.string(),
-    type: myzod.string(),
-  }),
-);
-export type DetectedJobsitePayload = Infer<typeof detectedJobsitePayloadSchema>;
 
 export const orgUpdatePayloadSchema = myzod.object({
   logoUrl: myzod.string().optional(),
@@ -114,9 +89,13 @@ export const orgUpdatePayloadSchema = myzod.object({
   projects: myzod.array(myzod.string()).optional(),
   communities: myzod.array(myzod.string()).optional(),
   jobsites: jobsitePayloadSchema.optional(),
-  detectedJobsites: detectedJobsitePayloadSchema.optional(),
+  detectedJobsites: jobsitePayloadSchema.optional(),
 });
 export type OrgUpdatePayload = Infer<typeof orgUpdatePayloadSchema>;
 
-export type OrgEditPayload = OrgRowItem &
-  Pick<OrgUpdatePayload, 'jobsites' | 'detectedJobsites'>;
+export const jobsiteActivatePayloadSchema = myzod.object({
+  orgId: myzod.string(),
+  jobsiteIds: myzod.array(myzod.string()),
+});
+
+export type JobsiteActivatePayload = Infer<typeof jobsiteActivatePayloadSchema>;

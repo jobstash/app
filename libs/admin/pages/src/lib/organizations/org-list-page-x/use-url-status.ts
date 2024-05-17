@@ -1,24 +1,20 @@
 import { useQuery } from '@tanstack/react-query';
 import myzod, { Infer } from 'myzod';
 
-import { URL_DOMAINS, UrlStatus, urlStatusSchema } from '@jobstash/admin/core';
+import { URL_DOMAINS, urlStatusSchema } from '@jobstash/admin/core';
 import { FRONTEND_URL } from '@jobstash/shared/core';
 
 import { mwFetch } from '@jobstash/shared/data';
 
 export const useUrlStatus = (
-  urls: UrlStatus[],
+  urls: string,
   domainPrefix?: typeof URL_DOMAINS[keyof typeof URL_DOMAINS],
-) => {
-  const urlsString = encodeURIComponent(
-    JSON.stringify(urls.flatMap(({ url }) => url)),
-  );
-
-  return useQuery({
-    queryKey: ['url-status', urlsString],
+) =>
+  useQuery({
+    queryKey: ['url-status', urls],
     async queryFn() {
       const url = new URL(`${FRONTEND_URL}/api/url-status-proxy`);
-      url.searchParams.set('urls', urlsString);
+      url.searchParams.set('urls', urls);
       if (domainPrefix) url.searchParams.set('domainPrefix', domainPrefix);
 
       const options = {
@@ -34,8 +30,8 @@ export const useUrlStatus = (
       return response.data;
     },
     staleTime: 1000 * 60 * 60,
+    enabled: Boolean(urls),
   });
-};
 
 const responseSchema = myzod.object({
   success: myzod.boolean(),

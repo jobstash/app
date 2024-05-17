@@ -15,12 +15,6 @@ export const OrgUpdatePayloadSyncer = () => {
 
   useEffect(() => {
     if (dataPayload) {
-      const website = dataPayload.websiteStatus.flatMap((s) => s.url);
-      const twitter = dataPayload.twitterStatus.flatMap((s) => s.url);
-      const github = dataPayload.githubStatus.flatMap((s) => s.url);
-      const discord = dataPayload.discordStatus.flatMap((s) => s.url);
-      const docs = dataPayload.docsStatus.flatMap((s) => s.url);
-      const telegram = dataPayload.telegramStatus.flatMap((s) => s.url);
       const projects = dataPayload.projects.map((p) => p.id);
       const {
         orgId,
@@ -30,11 +24,17 @@ export const OrgUpdatePayloadSyncer = () => {
         summary,
         headcountEstimate,
         location,
+        website,
+        twitter,
+        github,
+        discord,
+        docs,
+        telegram,
         aliases,
         grant,
         community,
-        jobsites,
-        detectedJobsites,
+        jobsite,
+        detectedJobsite,
       } = dataPayload;
 
       mutate(
@@ -57,8 +57,8 @@ export const OrgUpdatePayloadSyncer = () => {
             grants: grant,
             communities: community,
             projects,
-            jobsites,
-            detectedJobsites,
+            jobsites: jobsite,
+            detectedJobsites: detectedJobsite,
           },
         },
         {
