@@ -5,6 +5,7 @@ import {
   CellEditingStoppedEvent,
   ColDef,
   GetRowIdFunc,
+  SelectionChangedEvent,
   ValueFormatterParams,
 } from 'ag-grid-community';
 import { AgGridReact, CustomCellRendererProps } from 'ag-grid-react';
@@ -16,8 +17,13 @@ import {
   OrgItem,
   URL_DOMAINS,
 } from '@jobstash/admin/core';
+import { prefixUrl } from '@jobstash/admin/utils';
 
-import { orgEditRowPayloadAtom, useAllOrgs } from '@jobstash/admin/state';
+import {
+  orgEditRowPayloadAtom,
+  orgListPastaStringAtom,
+  useAllOrgs,
+} from '@jobstash/admin/state';
 
 import { ActivateJobsiteRenderer } from './activate-jobsite-renderer';
 import { AvatarCell } from './avatar-cell';
@@ -404,6 +410,79 @@ export const useOrgListTable = () => {
     [],
   );
 
+  const setPastaString = useSetAtom(orgListPastaStringAtom);
+  const onSelectionChanged = useCallback(
+    (e: SelectionChangedEvent<OrgItem>) => {
+      setPastaString(
+        e.api
+          .getSelectedNodes()
+          .map((node) => {
+            const {
+              id,
+              orgId,
+              name,
+              logoUrl,
+              website,
+              rawWebsite,
+              telegram,
+              github,
+              discord,
+              twitter,
+              docs,
+              location,
+              summary,
+              description,
+              jobCount,
+              openEngineeringJobCount,
+              totalEngineeringJobCount,
+              headcountEstimate,
+              createdTimestamp,
+              updatedTimestamp,
+              projects,
+              aliases,
+              community,
+              grant,
+              jobsite,
+              detectedJobsite,
+            } = node.data!;
+
+            return [
+              id,
+              orgId,
+              name,
+              logoUrl,
+              prefixUrl(website),
+              prefixUrl(rawWebsite),
+              prefixUrl(telegram, URL_DOMAINS.TELEGRAM),
+              prefixUrl(github, URL_DOMAINS.GITHUB),
+              prefixUrl(discord, URL_DOMAINS.DISCORD),
+              prefixUrl(twitter, URL_DOMAINS.TWITTER),
+              prefixUrl(docs),
+              location,
+              summary,
+              description,
+              jobCount,
+              openEngineeringJobCount,
+              totalEngineeringJobCount,
+              headcountEstimate,
+              createdTimestamp,
+              updatedTimestamp,
+              projects.flatMap((p) => p.name),
+              aliases,
+              community,
+              grant,
+              jobsite.flatMap((j) => j.url),
+              jobsite.flatMap((j) => j.type),
+              detectedJobsite.flatMap((j) => j.url),
+              detectedJobsite.flatMap((j) => j.type),
+            ].join('\t');
+          })
+          .join('\n'),
+      );
+    },
+    [setPastaString],
+  );
+
   const setRowPayload = useSetAtom(orgEditRowPayloadAtom);
   const onCellEditingStopped = useCallback(
     (e: CellEditingStoppedEvent<OrgItem>) => {
@@ -443,6 +522,7 @@ export const useOrgListTable = () => {
     getRowId,
     rowData: data,
     columnDefs,
+    onSelectionChanged,
     onCellEditingStopped,
   };
 };
