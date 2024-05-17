@@ -12,8 +12,6 @@ export const OrgListTable = () => {
     onCellEditingStopped,
   } = useOrgListTable();
 
-  console.log({ rowData: rowData?.slice(0, 10) });
-
   if (!rowData) return <p>Loading table ...</p>;
 
   return (
@@ -28,8 +26,8 @@ export const OrgListTable = () => {
       getRowId={getRowId}
       //
       // rowData={rowData ? [rowData[201], rowData[6035]] : undefined}
-      // rowData={rowData}
-      rowData={rowData ? rowData.slice(0, 10) : undefined}
+      // rowData={rowData ? rowData.slice(0, 10) : undefined}
+      rowData={rowData}
       rowSelection="multiple"
       rowHeight={50}
       columnDefs={columnDefs}
