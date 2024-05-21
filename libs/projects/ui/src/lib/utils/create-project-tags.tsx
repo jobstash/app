@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 import {
   type ProjectInfo,
   TAG_ELEMENT_ID,
@@ -86,7 +87,7 @@ export const createProjectTags = (project: ProjectInfo) => {
       id: TAG_ELEMENT_ID.token,
       text: `Token: $${tokenSymbol}`,
       icon: <CurrencyCircleDollarIcon />,
-      link: website,
+      link: website || undefined,
     });
   }
 

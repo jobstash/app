@@ -134,7 +134,7 @@ export const projectInfoSchema = myzod.object(
   {
     id: myzod.string().min(1),
     name: myzod.string().min(1),
-    website: myzod.string().min(1),
+    website: myzod.string().min(1).nullable(),
     logo: myzod.string().nullable(),
 
     category: myzod.string().min(1).nullable(),

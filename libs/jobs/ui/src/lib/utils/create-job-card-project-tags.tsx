@@ -36,7 +36,7 @@ export const createJobCardProjectTags = (project: ProjectInfo) => {
       id: TAG_ELEMENT_ID.token,
       text: `Token: $${tokenSymbol}`,
       icon: <CurrencyCircleDollarIcon />,
-      link: website,
+      link: website || undefined,
     });
 
   if (category) {

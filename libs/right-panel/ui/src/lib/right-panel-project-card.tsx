@@ -43,7 +43,7 @@ const RightPanelProjectCard = ({ project, showCTA = true }: Props) => {
         <RightPanelProjectCardHeader
           id={id}
           name={name}
-          url={website}
+          url={website || ''}
           logo={logo}
           socials={projectSocialTags}
         />
