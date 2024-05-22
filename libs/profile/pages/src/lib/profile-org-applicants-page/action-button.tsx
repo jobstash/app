@@ -10,6 +10,7 @@ import { useJobApplicants } from '@jobstash/jobs/state';
 interface Props {
   orgId: string | null | undefined;
   wallet: string;
+  job: string;
   isPending: boolean;
   mutate: UpdateApplicantListMutFn;
   icon: React.ReactNode;
@@ -19,6 +20,7 @@ interface Props {
 export const ActionButton = ({
   orgId,
   wallet,
+  job,
   isPending,
   mutate,
   icon,
@@ -32,7 +34,7 @@ export const ActionButton = ({
   );
 
   const addToShortList = () => {
-    mutate({ applicants: [wallet], list });
+    mutate({ applicants: [{ wallet, job }], list });
   };
 
   return (

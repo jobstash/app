@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import { JobApplicant } from '@jobstash/jobs/core';
 import { UpdateApplicantListMutFn } from '@jobstash/profile/core';
 
 import { TableMultiSelectActionButton } from '@jobstash/profile/ui';
@@ -9,6 +10,7 @@ interface Props {
   isPending: boolean;
   mutate: UpdateApplicantListMutFn;
   selectedApplicants: Set<string>;
+  filteredItems: JobApplicant[];
 }
 
 export const MultiSelectActions = ({
@@ -16,16 +18,27 @@ export const MultiSelectActions = ({
   isPending,
   mutate,
   selectedApplicants,
+  filteredItems,
 }: Props) => {
-  const applicants = [...selectedApplicants];
-  const hasNoApplicants = applicants.length === 0;
+  const applicantWallets = [...selectedApplicants];
+  const hasNoApplicants = applicantWallets.length === 0;
 
   const [lastClicked, setLastClicked] = useState<
     'archived' | 'shortlisted' | null
   >(null);
 
+  const applicants = applicantWallets
+    .map((wallet) => ({
+      wallet,
+      job:
+        filteredItems.find((item) => item.user.wallet === wallet)?.job
+          .shortUUID ?? '',
+    }))
+    .filter((applicant) => Boolean(applicant.job));
+
   const updateShortlist = () => {
     setLastClicked('shortlisted');
+
     mutate({ applicants, list: 'shortlisted' });
   };
 

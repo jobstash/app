@@ -25,6 +25,7 @@ export const ApplicantsTable = () => {
   const {
     isLoading,
     items,
+    filteredItems,
     columns,
     centeredSet,
     renderCell,
@@ -86,6 +87,7 @@ export const ApplicantsTable = () => {
             isPending={isPending}
             mutate={mutate}
             selectedApplicants={selectedApplicants}
+            filteredItems={filteredItems}
           />
 
           <div className="flex flex-col gap-2 overflow-hidden">

@@ -244,7 +244,12 @@ export const profileOrgReviewResponseSchema = myzod.object({
 });
 
 export const updateApplicantListPayloadSchema = myzod.object({
-  applicants: myzod.array(myzod.string()),
+  applicants: myzod.array(
+    myzod.object({
+      wallet: myzod.string(),
+      job: myzod.string(),
+    }),
+  ),
   list: myzod.literals('shortlisted', 'archived'),
 });
 export type UpdateApplicantListPayload = Infer<

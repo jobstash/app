@@ -421,6 +421,7 @@ export const useApplicantsTable = () => {
               <ActionButton
                 orgId={profileInfoData?.orgId}
                 wallet={applicant.user.wallet}
+                job={applicant.job.shortUUID}
                 isPending={isPending}
                 mutate={mutate}
                 list="shortlisted"
@@ -429,6 +430,7 @@ export const useApplicantsTable = () => {
               <ActionButton
                 orgId={profileInfoData?.orgId}
                 wallet={applicant.user.wallet}
+                job={applicant.job.shortUUID}
                 isPending={isPending}
                 mutate={mutate}
                 list="archived"
@@ -498,6 +500,7 @@ export const useApplicantsTable = () => {
     isLoading: !profileInfoData || !data || isPendingQuery || isFetching,
     totalApplicantCount: data?.length,
     items,
+    filteredItems,
     renderCell,
     columns,
     centeredSet,

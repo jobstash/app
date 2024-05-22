@@ -20,14 +20,27 @@ export const ApplicantTabs = ({ activeList, setActiveList }: Props) => {
 
   const orgId = profileInfoData?.orgId;
 
-  const { data: allData } = useJobApplicants(orgId, 'all');
-  const { data: newData } = useJobApplicants(orgId, 'new');
-  const { data: shortlistedData } = useJobApplicants(orgId, 'shortlisted');
-  const { data: archivedData } = useJobApplicants(orgId, 'archived');
-
-  const isLoading = [allData, newData, shortlistedData, archivedData].includes(
-    undefined,
+  const { data: allData, isRefetching: isRefetchingAll } = useJobApplicants(
+    orgId,
+    'all',
   );
+  const { data: newData, isRefetching: isRefetchingNew } = useJobApplicants(
+    orgId,
+    'new',
+  );
+  const { data: shortlistedData, isRefetching: isRefetchingShortList } =
+    useJobApplicants(orgId, 'shortlisted');
+  const { data: archivedData, isRefetching: isRefetchingArchived } =
+    useJobApplicants(orgId, 'archived');
+
+  const isLoading =
+    [allData, newData, shortlistedData, archivedData].includes(undefined) ||
+    [
+      isRefetchingAll,
+      isRefetchingNew,
+      isRefetchingShortList,
+      isRefetchingArchived,
+    ].includes(true);
 
   return (
     <div className="pt-8 flex items-center gap-2">
