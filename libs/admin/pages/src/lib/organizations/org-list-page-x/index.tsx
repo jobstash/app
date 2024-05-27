@@ -30,7 +30,6 @@ export const OrgListPageX = () => (
         <OrgListFocusSyncer />
         <OrgUpdatePayloadSyncer />
       </div>
-      <OrgUpdatePayloadSyncer />
     </AdminLayout>
   </>
 );
