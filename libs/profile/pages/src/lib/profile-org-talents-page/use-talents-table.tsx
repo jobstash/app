@@ -45,10 +45,10 @@ export const useTalentsTable = () => {
       result = talents.filter((talent) =>
         checkSearchFilterValue(
           searchFilter,
-          talent.contact.value,
+          talent.contact?.value ?? '',
           talent.email,
-          talent.location.city,
-          talent.location.country,
+          talent.location?.city ?? '',
+          talent.location?.country ?? '',
           talent.username,
           talent.wallet,
         ),
@@ -102,10 +102,11 @@ export const useTalentsTable = () => {
           username,
           avatar,
           email,
-          location: { city, country },
+          location: locationData,
           contact,
           showcases,
         } = talent;
+        const { city, country } = locationData ?? { city: '', country: '' };
 
         // Devs have either username or email;
         const title = username ?? (email as string);
@@ -117,8 +118,8 @@ export const useTalentsTable = () => {
               }`;
 
         const contactLink = getContactLink(
-          contact.preferred as PreferredContact,
-          contact.value,
+          contact?.preferred as PreferredContact,
+          contact?.value ?? '',
         );
 
         return (
@@ -141,7 +142,7 @@ export const useTalentsTable = () => {
             />
 
             <div className="flex flex-col gap-0.5">
-              {contact.value && (
+              {contact?.value && (
                 <div className="flex gap-1">
                   {contactLink ? (
                     <Link
