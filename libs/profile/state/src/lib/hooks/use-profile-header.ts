@@ -29,28 +29,21 @@ export const useProfileHeader = () => {
   useEffect(() => {
     if (profileInfoData) {
       setIsAvailableForWork(Boolean(availableForWork));
-      setPreferredContact(contact.preferred ?? CONTACT_DEFAULT_OPTIONS[0]);
-      setSelectedContact(contact.value ?? '');
+      setPreferredContact(contact?.preferred ?? CONTACT_DEFAULT_OPTIONS[0]);
+      setSelectedContact(contact?.value ?? '');
       setCurrentLocation({
-        city: location.city ?? '',
-        country: location.country ?? '',
+        city: location?.city ?? '',
+        country: location?.country ?? '',
       });
     }
-  }, [
-    availableForWork,
-    contact.preferred,
-    contact.value,
-    location.city,
-    location.country,
-    profileInfoData,
-  ]);
+  }, [availableForWork, contact, location, profileInfoData]);
 
   const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout | null>(null);
 
   const onChangePreferredContact = (v: string | null) => {
-    const isContactPreferred = v === profileInfoData?.contact.preferred;
+    const isContactPreferred = v === profileInfoData?.contact?.preferred;
     const newSelectedContact = isContactPreferred
-      ? profileInfoData?.contact.value
+      ? profileInfoData?.contact?.value
       : null;
 
     setSelectedContact(newSelectedContact ?? '');
