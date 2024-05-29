@@ -51,23 +51,30 @@ export const DefaultHomePage = () => {
         />
         <script type="text/javascript">
           {`
-          const ONE_IN_3D = [1, 1, 1];
-          const c1 = [3.54585104, 2.93225262, 2.41593945];
-          const x1 = [0.69549072, 0.49228336, 0.27699880];
-          const y1 = [0.02312639, 0.15225084, 0.52607955];
-          const c2 = [3.90307140, 3.21182957, 3.96587128];
-          const x2 = [0.11748627, 0.86755042, 0.66077860];
-          const y2 = [0.84897130, 0.88445281, 0.73949448];
-          const saturate = (x) => Math.min(Math.max(x, 0), 1);
-          const to3d = (x) => [x, x, x];
-          const add3d = (x, y) => [x[0] + y[0], x[1] + y[1], x[2] + y[2]];
-          const subtract3d = (x, y) => [x[0] - y[0], x[1] - y[1], x[2] - y[2]];
-          const multiply3d = (x, y) => [x[0] * y[0], x[1] * y[1], x[2] * y[2]];
-          const pow23d = (x) => multiply3d(x, x);
-          const saturate3d = (x) => [saturate(x[0]), saturate(x[1]), saturate(x[2])];
-          const bump3y = (x, yoffset) => saturate3d(subtract3d(subtract3d(ONE_IN_3D, pow23d(x)), yoffset));
-          const spectral_zucconi6 = (x) => add3d(bump3y(multiply3d(c1, subtract3d(to3d(x), x1)), y1), bump3y(multiply3d(c2, subtract3d(to3d(x), x2)), y2));
-        `}
+          declareOnce('ONE_IN_3D', [1, 1, 1]);
+          declareOnce('c1', [3.54585104, 2.93225262, 2.41593945]);
+          declareOnce('x1', [0.69549072, 0.49228336, 0.27699880]);
+          declareOnce('y1', [0.02312639, 0.15225084, 0.52607955]);          
+					declareOnce('c2', [3.90307140, 3.21182957, 3.96587128]);          
+					declareOnce('x2', [0.11748627, 0.86755042, 0.66077860]);
+					declareOnce('y2', [0.84897130, 0.88445281, 0.73949448]);
+					declareOnce('saturate', (x) => Math.min(Math.max(x, 0), 1));
+					declareOnce('to3d', (x) => [x, x, x]);
+					declareOnce('add3d', (x, y) => [x[0] + y[0], x[1] + y[1], x[2] + y[2]]);
+					declareOnce('subtract3d', (x, y) => [x[0] - y[0], x[1] - y[1], x[2] - y[2]]);
+					declareOnce('multiply3d', (x, y) => [x[0] * y[0], x[1] * y[1], x[2] * y[2]]);
+					declareOnce('pow23d', (x) => multiply3d(x, x));
+					declareOnce('saturate3d', (x) => [saturate(x[0]), saturate(x[1]), saturate(x[2])]);
+					declareOnce('bump3y', (x, yoffset) => saturate3d(subtract3d(subtract3d(ONE_IN_3D, pow23d(x)), yoffset)));
+					declareOnce('spectral_zucconi6', (x) => add3d(bump3y(multiply3d(c1, subtract3d(to3d(x), x1)), y1), bump3y(multiply3d(c2, subtract3d(to3d(x), x2)), y2)));
+        
+					function declareOnce(variableName, defaultValue) {
+						if (typeof window[variableName] === 'undefined') {
+							window[variableName] = defaultValue;
+						}
+						return window[variableName];
+					}
+				`}
         </script>
 
         <script type="x-shader/x-fragment" id="feedback">
