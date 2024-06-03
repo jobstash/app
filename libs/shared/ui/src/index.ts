@@ -92,6 +92,7 @@ export { default as OrgCommunityTag } from './lib/components/org-community-tag';
 export { default as OrgReviewCardSets } from './lib/components/org-review-card-sets';
 export { default as ReportMenuItem } from './lib/components/report-menu-item';
 export { default as ReportModal } from './lib/components/report-modal';
+export { default as ShareMenuContent } from './lib/components/share-menu-content';
 export { default as Spinner } from './lib/components/spinner';
 export { default as TopBanner } from './lib/components/top-banner';
 

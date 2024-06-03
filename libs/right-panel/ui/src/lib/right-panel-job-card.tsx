@@ -1,9 +1,12 @@
+import { ShareIcon } from '@heroicons/react/16/solid';
+
 import { JobInfo, REPORT_UI_CTX, type Tag } from '@jobstash/shared/core';
 import { slugify } from '@jobstash/shared/utils';
 
 import { CardMenu, Heading, ReportMenuItem } from '@jobstash/shared/ui';
 
 import { RightPanelJobCTA } from './right-panel-job-cta/right-panel-job-cta';
+import { JobShareMenuContent } from './job-share-menu-content';
 import RightPanelCardBorder from './right-panel-card-border';
 import RightPanelCta from './right-panel-cta';
 import RightPanelJobCardDescriptions from './right-panel-job-card-descriptions';
@@ -48,12 +51,17 @@ const RightPanelJobCard = ({
             <Heading size="md" fw="semibold">
               {title}
             </Heading>
-            <CardMenu>
-              <ReportMenuItem
-                ui={REPORT_UI_CTX.JOB_DETAILS_CARD}
-                other={other}
-              />
-            </CardMenu>
+            <div className="flex items-center gap-4">
+              <CardMenu icon={<ShareIcon className="w-6 h-6 text-white/80" />}>
+                <JobShareMenuContent shortUUID={shortUUID} orgName={orgName} />
+              </CardMenu>
+              <CardMenu>
+                <ReportMenuItem
+                  ui={REPORT_UI_CTX.JOB_DETAILS_CARD}
+                  other={other}
+                />
+              </CardMenu>
+            </div>
           </div>
 
           <RightPanelJobCardSets jobCardSet={jobInfo} />

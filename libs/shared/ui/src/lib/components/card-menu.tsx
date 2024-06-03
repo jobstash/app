@@ -12,7 +12,7 @@ interface Props {
 const CardMenu = ({ icon, children, position = 'bottom-end' }: Props) => (
   <Menu
     position={position}
-    classNames={{ dropdown: 'bg-dark-gray', item: 'p-2' }}
+    classNames={{ dropdown: 'bg-dark-gray rounded-xl', item: 'p-2' }}
   >
     <Menu.Target>
       <Button isIcon>
