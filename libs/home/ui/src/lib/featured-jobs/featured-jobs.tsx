@@ -117,6 +117,7 @@ const fakeFeaturedJobs: JobPost[] = [
           docs: 'https://oasisprotocol.org/developers',
           hacks: [],
           name: 'Oasis',
+          normalizedName: 'oasis',
           id: 'e65d7d5f-68f6-41f2-badc-24cfb636c1c1',
           category: 'Network',
           audits: [
@@ -157,6 +158,7 @@ const fakeFeaturedJobs: JobPost[] = [
       discord: 'https://discord.com/invite/BQCxwhT5wS',
       docs: 'https://docs.oasis.io/',
       name: 'Oasis Protocol Foundation',
+      normalizedName: 'oasis-protocol-foundation',
       aliases: ['Oasis Labs'],
       location: 'Singapore',
       id: '0d1be7c3-f6b1-4ab6-a903-255e8f0784bf',
@@ -320,6 +322,7 @@ const fakeFeaturedJobs: JobPost[] = [
           docs: 'https://oasisprotocol.org/developers',
           hacks: [],
           name: 'Oasis',
+          normalizedName: 'oasis',
           id: 'e65d7d5f-68f6-41f2-badc-24cfb636c1c1',
           category: 'Network',
           audits: [
@@ -360,6 +363,7 @@ const fakeFeaturedJobs: JobPost[] = [
       discord: 'https://discord.com/invite/BQCxwhT5wS',
       docs: 'https://docs.oasis.io/',
       name: 'Oasis Protocol Foundation',
+      normalizedName: 'oasis-protocol-foundation',
       aliases: ['Oasis Labs'],
       location: 'Singapore',
       id: '0d1be7c3-f6b1-4ab6-a903-255e8f0784bf',

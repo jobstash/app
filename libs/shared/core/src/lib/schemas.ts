@@ -24,6 +24,7 @@ export const allTagsResponseSchema = myzod.object({
 export const investorSchema = myzod.object({
   id: myzod.string().min(1),
   name: myzod.string().min(1),
+  normalizedName: myzod.string().min(1),
 });
 
 export const fundingRoundSchema = myzod.object(
@@ -46,6 +47,7 @@ export const chainSchema = myzod
     id: myzod.string().min(1),
     name: myzod.string().min(1),
     logo: myzod.string().min(1).nullable(),
+    normalizedName: myzod.string().min(1),
   })
   .allowUnknownKeys(true);
 
@@ -110,6 +112,7 @@ export const orgInfoSchema = myzod.object(
   {
     id: myzod.string().min(1),
     name: myzod.string().min(1),
+    normalizedName: myzod.string().min(1),
     orgId: myzod.string().min(1),
     summary: myzod.string().min(1),
     location: myzod.string().min(1),
@@ -134,6 +137,7 @@ export const projectInfoSchema = myzod.object(
   {
     id: myzod.string().min(1),
     name: myzod.string().min(1),
+    normalizedName: myzod.string().min(1),
     website: myzod.string().min(1).nullable(),
     logo: myzod.string().nullable(),
 
