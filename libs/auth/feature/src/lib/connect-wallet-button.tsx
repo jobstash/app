@@ -13,7 +13,7 @@ import {
 
 import { cn } from '@jobstash/shared/utils';
 
-import { useIsMounted } from '@jobstash/shared/state';
+import { useIsMounted, useMwVersionContext } from '@jobstash/shared/state';
 
 import { Bartab } from '@jobstash/shared/ui';
 
@@ -22,12 +22,15 @@ interface Props {
 }
 
 const ConnectWalletButton = ({ isMobile }: Props) => {
+  const { isReady } = useMwVersionContext();
   const isMounted = useIsMounted();
   const { isSignedIn } = useSIWE();
 
+  const showButton = isMounted && isReady;
+
   return (
     <div style={{ minHeight: 40, position: 'relative' }}>
-      {isMounted ? (
+      {showButton ? (
         <ConnectKitButton.Custom>
           {({ address, show, isConnected, ensName, truncatedAddress }) => {
             const displayName = ensName ?? truncatedAddress;

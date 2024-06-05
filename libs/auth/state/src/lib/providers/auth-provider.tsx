@@ -11,7 +11,7 @@ import {
   redirectFlowsSet,
 } from '@jobstash/auth/core';
 
-import { useIsMounted } from '@jobstash/shared/state';
+import { useIsMounted, useMwVersionContext } from '@jobstash/shared/state';
 
 import { AuthContext } from '../contexts/auth-context';
 import { useCheckWallet } from '../hooks/use-check-wallet';
@@ -24,6 +24,7 @@ type Props = {
 export const AuthProvider = ({ children, screenLoader }: Props) => {
   const { push, asPath, pathname } = useRouter();
   const isMounted = useIsMounted();
+  const { isReady } = useMwVersionContext();
 
   const {
     data: checkWalletData,
@@ -47,7 +48,7 @@ export const AuthProvider = ({ children, screenLoader }: Props) => {
     }
   }, [signOut, isConnected, isSignedIn]);
 
-  const displayLoader = !isMounted || (isConnected && isLoading);
+  const displayLoader = !isMounted || (isConnected && isLoading) || !isReady;
 
   const value = useMemo(
     () => ({
