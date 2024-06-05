@@ -4,16 +4,15 @@ import { InfiniteData, useInfiniteQuery } from '@tanstack/react-query';
 
 import { OrgListQueryPage } from '@jobstash/organizations/core';
 import { createJobsFilterParamsObj } from '@jobstash/jobs/utils';
-import { getLSMwVersion } from '@jobstash/shared/utils';
 
+import { useMwVersionContext } from '@jobstash/shared/state';
 import { getOrgList } from '@jobstash/organizations/data';
 
 export const useOrgListQuery = () => {
   const router = useRouter();
+  const { mwVersion } = useMwVersionContext();
 
   const filterParamsObj = createJobsFilterParamsObj(router.query);
-
-  const mwVersion = getLSMwVersion();
 
   return useInfiniteQuery<
     OrgListQueryPage,

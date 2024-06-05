@@ -1,11 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { getLSMwVersion } from '@jobstash/shared/utils';
-
+import { useMwVersionContext } from '@jobstash/shared/state';
 import { sendOrgMagicLinkToken } from '@jobstash/auth/data';
 
 export const useOrgSendMagicLinkToken = (token: string | null) => {
-  const mwVersion = getLSMwVersion();
+  const { mwVersion } = useMwVersionContext();
 
   return useQuery({
     queryKey: [mwVersion, 'org-send-magic-link', token],

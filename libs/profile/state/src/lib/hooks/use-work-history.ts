@@ -1,11 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { getLSMwVersion } from '@jobstash/shared/utils';
-
+import { useMwVersionContext } from '@jobstash/shared/state';
 import { getWorkHistory } from '@jobstash/profile/data';
 
 export const useWorkHistory = (user: string) => {
-  const mwVersion = getLSMwVersion();
+  const { mwVersion } = useMwVersionContext();
 
   return useQuery({
     queryKey: [mwVersion, 'work-history', user],

@@ -7,9 +7,8 @@ import { useAtom, useSetAtom } from 'jotai';
 
 import { type OrgListItem } from '@jobstash/organizations/core';
 import { createOrgsFilterParamsObj } from '@jobstash/organizations/utils';
-import { getLSMwVersion } from '@jobstash/shared/utils';
 
-import { useIsMobile } from '@jobstash/shared/state';
+import { useIsMobile, useMwVersionContext } from '@jobstash/shared/state';
 import { getOrgDetails } from '@jobstash/organizations/data';
 
 import { activeOrgIdAtom } from '../state/active-org-atom';
@@ -29,8 +28,7 @@ export const useOrgList = (initOrg: OrgListItem | null) => {
     isFetchingNextPage,
     hasNextPage,
   } = useOrgListQuery();
-
-  const mwVersion = getLSMwVersion();
+  const { mwVersion } = useMwVersionContext();
 
   // Prefetch org items
   // (react-query breaking change v5 - removed onSuccess)

@@ -1,12 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { type Competitor } from '@jobstash/competitors/core';
-import { getLSMwVersion } from '@jobstash/shared/utils';
 
+import { useMwVersionContext } from '@jobstash/shared/state';
 import { getCompetitors } from '@jobstash/competitors/data';
 
 export const useCompetitors = (id: string | undefined) => {
-  const mwVersion = getLSMwVersion();
+  const { mwVersion } = useMwVersionContext();
 
   return useQuery<Competitor[]>({
     queryKey: [mwVersion, 'competitors', id],

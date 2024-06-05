@@ -2,12 +2,9 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAccount } from 'wagmi';
 
 import { JobPost } from '@jobstash/jobs/core';
-import {
-  getLSMwVersion,
-  notifError,
-  notifSuccess,
-} from '@jobstash/shared/utils';
+import { notifError, notifSuccess } from '@jobstash/shared/utils';
 
+import { useMwVersionContext } from '@jobstash/shared/state';
 import { sendJobApplyInteraction } from '@jobstash/jobs/data';
 
 interface Props {
@@ -23,7 +20,7 @@ export const useSendJobApplyInteractionMutation = ({
 }: Props) => {
   const { address } = useAccount();
   const queryClient = useQueryClient();
-  const mwVersion = getLSMwVersion();
+  const { mwVersion } = useMwVersionContext();
 
   const { mutate, isPending } = useMutation({
     mutationFn: (shortUUID: string) => sendJobApplyInteraction(shortUUID),

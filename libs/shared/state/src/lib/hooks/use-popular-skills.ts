@@ -1,11 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { getLSMwVersion } from '@jobstash/shared/utils';
-
 import { getPopularSkills } from '@jobstash/shared/data';
 
+import { useMwVersionContext } from './use-mw-version-context';
+
 export const usePopularSkills = (count?: number) => {
-  const mwVersion = getLSMwVersion();
+  const { mwVersion } = useMwVersionContext();
 
   return useQuery({
     queryKey: [mwVersion, 'popular-skills', count],

@@ -7,18 +7,16 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 // import { useDisconnect } from 'wagmi';
 import { CHECK_WALLET_ROLES, GithubLoginPayload } from '@jobstash/auth/core';
 import { SENTRY_MW_NON_200_RESPONSE } from '@jobstash/shared/core';
-import {
-  getLSMwVersion,
-  notifError,
-  sentryMessage,
-} from '@jobstash/shared/utils';
+import { notifError, sentryMessage } from '@jobstash/shared/utils';
 
+import { useMwVersionContext } from '@jobstash/shared/state';
 import { getCheckWallet, githubLogin } from '@jobstash/auth/data';
 
 import { useAuthContext } from './use-auth-context';
 
 export const useGithubLogin = () => {
   const router = useRouter();
+  const { mwVersion } = useMwVersionContext();
   const { role } = useAuthContext();
 
   //
@@ -26,8 +24,6 @@ export const useGithubLogin = () => {
   // const { signOut } = useSIWE();
 
   const queryClient = useQueryClient();
-
-  const mwVersion = getLSMwVersion();
 
   const { mutate, isPending } = useMutation({
     mutationFn: (payload: GithubLoginPayload) => githubLogin(payload),

@@ -1,12 +1,9 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { UpdateApplicantListPayload } from '@jobstash/profile/core';
-import {
-  getLSMwVersion,
-  notifError,
-  notifSuccess,
-} from '@jobstash/shared/utils';
+import { notifError, notifSuccess } from '@jobstash/shared/utils';
 
+import { useMwVersionContext } from '@jobstash/shared/state';
 import { updateApplicantList } from '@jobstash/profile/data';
 
 interface Props {
@@ -16,8 +13,7 @@ interface Props {
 
 export const useUpdateApplicantList = ({ orgId, successCb }: Props) => {
   const queryClient = useQueryClient();
-
-  const mwVersion = getLSMwVersion();
+  const { mwVersion } = useMwVersionContext();
 
   return useMutation({
     mutationFn: (payload: UpdateApplicantListPayload) =>

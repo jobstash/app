@@ -7,9 +7,8 @@ import { useAtom, useSetAtom } from 'jotai';
 
 import { type JobPost } from '@jobstash/jobs/core';
 import { createJobsFilterParamsObj } from '@jobstash/jobs/utils';
-import { getLSMwVersion } from '@jobstash/shared/utils';
 
-import { useIsMobile } from '@jobstash/shared/state';
+import { useIsMobile, useMwVersionContext } from '@jobstash/shared/state';
 import { getCompetitors } from '@jobstash/competitors/data';
 
 import { activeJobAtom } from '../atoms/active-job-atom';
@@ -36,7 +35,7 @@ export const useJobList = (initJob: JobPost | null) => {
     hasNextPage,
   } = useJobListQuery();
 
-  const mwVersion = getLSMwVersion();
+  const { mwVersion } = useMwVersionContext();
 
   // Prefetch job items
   // (react-query breaking change v5 - removed onSuccess)

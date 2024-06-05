@@ -1,11 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { getLSMwVersion } from '@jobstash/shared/utils';
-
+import { useMwVersionContext } from '@jobstash/shared/state';
 import { getOrgDetails } from '@jobstash/organizations/data';
 
 export const useOrgDetails = (orgId: string | null) => {
-  const mwVersion = getLSMwVersion();
+  const { mwVersion } = useMwVersionContext();
 
   return useQuery({
     queryKey: [mwVersion, 'org-details', orgId, undefined],

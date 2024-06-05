@@ -1,14 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
 import { useAccount } from 'wagmi';
 
-import { getLSMwVersion } from '@jobstash/shared/utils';
-
+import { useMwVersionContext } from '@jobstash/shared/state';
 import { getCheckWallet } from '@jobstash/auth/data';
 
 export const useCheckWallet = () => {
   const { address, isConnected, isConnecting } = useAccount();
-
-  const mwVersion = getLSMwVersion();
+  const { mwVersion } = useMwVersionContext();
 
   const { data, isLoading, refetch, isFetching } = useQuery({
     queryKey: [mwVersion, 'check-wallet'],

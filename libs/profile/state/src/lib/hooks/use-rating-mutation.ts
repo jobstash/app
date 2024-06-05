@@ -3,12 +3,9 @@ import { useAtom } from 'jotai';
 import { useAccount } from 'wagmi';
 
 import { type ProfileOrgRatingPayload } from '@jobstash/profile/core';
-import {
-  getLSMwVersion,
-  notifError,
-  notifSuccess,
-} from '@jobstash/shared/utils';
+import { notifError, notifSuccess } from '@jobstash/shared/utils';
 
+import { useMwVersionContext } from '@jobstash/shared/state';
 import { postProfileOrgRating } from '@jobstash/profile/data';
 
 import { activeProfileOrgReviewAtom } from '../atoms/active-profile-org-review-atom';
@@ -18,12 +15,11 @@ export const useRatingMutation = () => {
   const { setIsLoadingCard } = useProfileReviewsPageContext();
   const { address } = useAccount();
   const queryClient = useQueryClient();
+  const { mwVersion } = useMwVersionContext();
 
   const [activeProfileOrgReview, setActiveProfileOrgReview] = useAtom(
     activeProfileOrgReviewAtom,
   );
-
-  const mwVersion = getLSMwVersion();
 
   const { isPending: isLoading, mutate } = useMutation({
     mutationFn: (payload: ProfileOrgRatingPayload) =>

@@ -1,14 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
 import { useAccount } from 'wagmi';
 
-import { getLSMwVersion } from '@jobstash/shared/utils';
-
+import { useMwVersionContext } from '@jobstash/shared/state';
 import { getProfileOrgReviewList } from '@jobstash/profile/data';
 
 export const useProfileOrgReviewListQuery = () => {
   const { address } = useAccount();
-
-  const mwVersion = getLSMwVersion();
+  const { mwVersion } = useMwVersionContext();
 
   return useQuery({
     queryKey: [mwVersion, 'profile-org-review-list', address],

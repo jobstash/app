@@ -1,17 +1,13 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import {
-  getLSMwVersion,
-  notifError,
-  notifSuccess,
-} from '@jobstash/shared/utils';
+import { notifError, notifSuccess } from '@jobstash/shared/utils';
 
+import { useMwVersionContext } from '@jobstash/shared/state';
 import { setJobBookmark } from '@jobstash/jobs/data';
 
 export const useJobBookmarkMutation = (shouldDelete = false) => {
   const queryClient = useQueryClient();
-
-  const mwVersion = getLSMwVersion();
+  const { mwVersion } = useMwVersionContext();
 
   const { isPending: isLoading, mutate } = useMutation({
     mutationFn: (shortUUID: string) =>

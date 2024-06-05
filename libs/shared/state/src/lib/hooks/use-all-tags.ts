@@ -1,11 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { getLSMwVersion } from '@jobstash/shared/utils';
-
 import { getAllTags } from '@jobstash/shared/data';
 
+import { useMwVersionContext } from './use-mw-version-context';
+
 export const useAllTags = () => {
-  const mwVersion = getLSMwVersion();
+  const { mwVersion } = useMwVersionContext();
 
   return useQuery({
     queryKey: [mwVersion, 'all-technologies'],

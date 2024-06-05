@@ -7,9 +7,8 @@ import { useAtom, useSetAtom } from 'jotai';
 
 import { type ProjectInfo } from '@jobstash/shared/core';
 import { createProjectsFilterParamsObj } from '@jobstash/projects/utils';
-import { getLSMwVersion } from '@jobstash/shared/utils';
 
-import { useIsMobile } from '@jobstash/shared/state';
+import { useIsMobile, useMwVersionContext } from '@jobstash/shared/state';
 import { getProjectDetails } from '@jobstash/projects/data';
 
 import { activeProjectIdAtom } from '../atoms/active-project-id-atom';
@@ -20,6 +19,7 @@ import { useProjectListQuery } from './use-project-list-query';
 
 export const useProjectList = (initProject: ProjectInfo | null) => {
   const queryClient = useQueryClient();
+  const { mwVersion } = useMwVersionContext();
 
   const {
     data,
@@ -30,8 +30,6 @@ export const useProjectList = (initProject: ProjectInfo | null) => {
     isFetchingNextPage,
     hasNextPage,
   } = useProjectListQuery();
-
-  const mwVersion = getLSMwVersion();
 
   // Prefetch project items
   // (react-query breaking change v5 - removed onSuccess)

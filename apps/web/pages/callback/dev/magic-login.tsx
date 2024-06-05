@@ -4,20 +4,19 @@ import { useEffect } from 'react';
 import { LoadingPage, MagicLinkPage } from '@jobstash/shared/pages';
 import { useQueryClient } from '@tanstack/react-query';
 
-import { getLSMwVersion } from '@jobstash/shared/utils';
-
 import { useDevSendMagicLinkToken } from '@jobstash/auth/state';
+import { useMwVersionContext } from '@jobstash/shared/state';
 
 const MagicLoginCallbackPage = () => {
   const router = useRouter();
   const queryClient = useQueryClient();
 
+  const { mwVersion } = useMwVersionContext();
+
   const tokenParam = new URLSearchParams(window.location.search).get('token');
 
   const { isLoading, isError, isSuccess } =
     useDevSendMagicLinkToken(tokenParam);
-
-  const mwVersion = getLSMwVersion();
 
   // Invalidate check-wallet, handle org redirect
   // (react-query breaking change v5 - removed onSuccess)

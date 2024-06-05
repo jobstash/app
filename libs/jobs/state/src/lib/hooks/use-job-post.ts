@@ -1,11 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { getLSMwVersion } from '@jobstash/shared/utils';
-
+import { useMwVersionContext } from '@jobstash/shared/state';
 import { getJobPost } from '@jobstash/jobs/data';
 
 export const useJobPost = (shortUuid: string) => {
-  const mwVersion = getLSMwVersion();
+  const { mwVersion } = useMwVersionContext();
 
   return useQuery({
     queryKey: [mwVersion, 'job-post', shortUuid, undefined],

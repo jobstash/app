@@ -15,7 +15,6 @@ import { useIsMounted } from '@jobstash/shared/state';
 
 import { AuthContext } from '../contexts/auth-context';
 import { useCheckWallet } from '../hooks/use-check-wallet';
-import { useMwVersion } from '../hooks/use-mw-version';
 
 type Props = {
   children: ReactNode;
@@ -48,10 +47,7 @@ export const AuthProvider = ({ children, screenLoader }: Props) => {
     }
   }, [signOut, isConnected, isSignedIn]);
 
-  // Sync mw version
-  const { isReady, mwVersion } = useMwVersion();
-
-  const displayLoader = !isMounted || (isConnected && isLoading) || !isReady;
+  const displayLoader = !isMounted || (isConnected && isLoading);
 
   const value = useMemo(
     () => ({
@@ -63,7 +59,6 @@ export const AuthProvider = ({ children, screenLoader }: Props) => {
       isSignedIn,
       isFetching,
       refetch: () => refetch(),
-      mwVersion,
     }),
     [
       address,
@@ -74,7 +69,6 @@ export const AuthProvider = ({ children, screenLoader }: Props) => {
       isSignedIn,
       isFetching,
       refetch,
-      mwVersion,
     ],
   );
 

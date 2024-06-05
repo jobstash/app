@@ -12,6 +12,8 @@ export const useMwVersion = () => {
   const { data: mwVersion } = useQuery({
     queryKey: ['mw-version'],
     queryFn: () => getMwVersion(),
+    staleTime: 1000 * 60 * 30, // 30 minutes
+    refetchInterval: 1000 * 60 * 30, // 30 minutes
   });
 
   useEffect(() => {
@@ -30,5 +32,5 @@ export const useMwVersion = () => {
     }
   }, [mwVersion]);
 
-  return { mwVersion, isReady };
+  return { mwVersion: isReady && mwVersion ? mwVersion : null, isReady };
 };

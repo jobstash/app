@@ -71,3 +71,8 @@ export type NotFoundInfo = {
 };
 
 export type ReportPayload = Infer<typeof reportPayloadSchema>;
+
+export type MwVersionCtx = {
+  isReady: boolean;
+  mwVersion: string | null;
+};

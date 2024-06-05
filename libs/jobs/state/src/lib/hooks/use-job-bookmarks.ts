@@ -3,14 +3,12 @@ import { useMemo } from 'react';
 import { useQuery } from '@tanstack/react-query';
 import { useSIWE } from 'connectkit';
 
-import { getLSMwVersion } from '@jobstash/shared/utils';
-
+import { useMwVersionContext } from '@jobstash/shared/state';
 import { getJobBookmarks } from '@jobstash/jobs/data';
 
 export const useJobBookmarks = () => {
   const { isSignedIn } = useSIWE();
-
-  const mwVersion = getLSMwVersion();
+  const { mwVersion } = useMwVersionContext();
 
   const { isLoading, isError, data, isFetching } = useQuery({
     queryKey: [mwVersion, 'job-bookmarks', isSignedIn],

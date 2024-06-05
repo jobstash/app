@@ -1,11 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 
-import { getLSMwVersion } from '@jobstash/shared/utils';
-
+import { useMwVersionContext } from '@jobstash/shared/state';
 import { getPreferredTerms } from '@jobstash/admin/data';
 
 export const usePreferredTermsQuery = () => {
-  const mwVersion = getLSMwVersion();
+  const { mwVersion } = useMwVersionContext();
 
   const { isLoading, data, isFetching } = useQuery({
     queryKey: [mwVersion, 'preferredTerms'],

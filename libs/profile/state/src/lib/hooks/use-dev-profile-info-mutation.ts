@@ -2,12 +2,9 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAccount } from 'wagmi';
 
 import { type DevProfileInfoPayload } from '@jobstash/profile/core';
-import {
-  getLSMwVersion,
-  notifError,
-  notifSuccess,
-} from '@jobstash/shared/utils';
+import { notifError, notifSuccess } from '@jobstash/shared/utils';
 
+import { useMwVersionContext } from '@jobstash/shared/state';
 import { postDevProfileInfo } from '@jobstash/profile/data';
 
 type MutationPayload = {
@@ -18,8 +15,7 @@ type MutationPayload = {
 export const useDevProfileInfoMutation = () => {
   const { address } = useAccount();
   const queryClient = useQueryClient();
-
-  const mwVersion = getLSMwVersion();
+  const { mwVersion } = useMwVersionContext();
 
   const profileInfoQueryKey = [mwVersion, 'dev-profile-info', address];
 

@@ -1,18 +1,14 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { PairedTermsPayload } from '@jobstash/admin/core';
-import {
-  getLSMwVersion,
-  notifError,
-  notifSuccess,
-} from '@jobstash/shared/utils';
+import { notifError, notifSuccess } from '@jobstash/shared/utils';
 
+import { useMwVersionContext } from '@jobstash/shared/state';
 import { postPairedTerms } from '@jobstash/admin/data';
 
 export const usePairedTermsMutation = () => {
   const queryClient = useQueryClient();
-
-  const mwVersion = getLSMwVersion();
+  const { mwVersion } = useMwVersionContext();
 
   const { isPending, mutate } = useMutation({
     mutationFn: (payload: PairedTermsPayload) => postPairedTerms(payload),

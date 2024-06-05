@@ -7,8 +7,9 @@ import { SiweMessage } from 'siwe';
 
 import { CHECK_WALLET_ROUTE, redirectFlowsSet } from '@jobstash/auth/core';
 import { MW_URL } from '@jobstash/shared/core';
-import { getLSMwVersion, walletDisconnectReload } from '@jobstash/shared/utils';
+import { walletDisconnectReload } from '@jobstash/shared/utils';
 
+import { useMwVersionContext } from '@jobstash/shared/state';
 import { getCheckWallet } from '@jobstash/auth/data';
 
 interface Props {
@@ -21,7 +22,7 @@ export const WalletProvider = ({ children }: Props) => {
 
   const signOutRef = useRef(false);
 
-  const mwVersion = getLSMwVersion();
+  const { mwVersion } = useMwVersionContext();
 
   return (
     <SIWEProvider

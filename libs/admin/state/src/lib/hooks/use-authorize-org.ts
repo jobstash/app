@@ -1,18 +1,14 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { AuthorizeOrgPayload } from '@jobstash/admin/core';
-import {
-  getLSMwVersion,
-  notifError,
-  notifSuccess,
-} from '@jobstash/shared/utils';
+import { notifError, notifSuccess } from '@jobstash/shared/utils';
 
+import { useMwVersionContext } from '@jobstash/shared/state';
 import { postAuthorizeOrg } from '@jobstash/admin/data';
 
 export const useAuthorizeOrg = (successCb?: () => void) => {
   const queryClient = useQueryClient();
-
-  const mwVersion = getLSMwVersion();
+  const { mwVersion } = useMwVersionContext();
 
   const { isSuccess, isPending, mutate } = useMutation({
     mutationFn: (payload: AuthorizeOrgPayload) => postAuthorizeOrg(payload),

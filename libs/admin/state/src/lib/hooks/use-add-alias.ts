@@ -1,18 +1,14 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { AddAliasPayload } from '@jobstash/admin/core';
-import {
-  getLSMwVersion,
-  notifError,
-  notifSuccess,
-} from '@jobstash/shared/utils';
+import { notifError, notifSuccess } from '@jobstash/shared/utils';
 
+import { useMwVersionContext } from '@jobstash/shared/state';
 import { addAlias } from '@jobstash/admin/data';
 
 export const useAddAlias = (successCb?: () => void) => {
   const queryClient = useQueryClient();
-
-  const mwVersion = getLSMwVersion();
+  const { mwVersion } = useMwVersionContext();
 
   return useMutation({
     mutationFn: (payload: AddAliasPayload) => addAlias(payload),

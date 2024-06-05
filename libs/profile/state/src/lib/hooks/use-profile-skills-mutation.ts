@@ -4,13 +4,9 @@ import { useAtom } from 'jotai';
 import { useAccount } from 'wagmi';
 
 import { ProfileSkillsPayload } from '@jobstash/profile/core';
-import {
-  getLSMwVersion,
-  notifError,
-  notifLoading,
-  notifSuccess,
-} from '@jobstash/shared/utils';
+import { notifError, notifLoading, notifSuccess } from '@jobstash/shared/utils';
 
+import { useMwVersionContext } from '@jobstash/shared/state';
 import { postProfileSkills } from '@jobstash/profile/data';
 
 import { activeProfileRepoAtom } from '../atoms/active-profile-repo-atom';
@@ -20,8 +16,7 @@ const TOAST_ID = 'skills-mutation';
 export const useProfileSkillsMutation = () => {
   const { address } = useAccount();
   const queryClient = useQueryClient();
-
-  const mwVersion = getLSMwVersion();
+  const { mwVersion } = useMwVersionContext();
 
   const [activeRepo, setActiveRepo] = useAtom(activeProfileRepoAtom);
 

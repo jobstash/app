@@ -5,6 +5,7 @@ export * from './lib/atoms/top-banner-atom';
 
 // Providers
 export { default as MantineProvider } from './lib/providers/mantine-provider';
+export * from './lib/providers/mw-version-provider';
 export { default as ReactQueryProvider } from './lib/providers/react-query-provider';
 
 //  Hooks
@@ -14,6 +15,7 @@ export * from './lib/hooks/use-disable-scroll-listener';
 export * from './lib/hooks/use-is-mounted';
 export * from './lib/hooks/use-media-query';
 export * from './lib/hooks/use-mobile-disable-scroll-syncer';
+export * from './lib/hooks/use-mw-version-context';
 export * from './lib/hooks/use-page-scroll-disable-syncer';
 export * from './lib/hooks/use-popular-skills';
 export * from './lib/hooks/use-report-modal';

@@ -1,12 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { type RouteSection } from '@jobstash/shared/core';
-import { getLSMwVersion } from '@jobstash/shared/utils';
 
+import { useMwVersionContext } from '@jobstash/shared/state';
 import { getFilterConfig } from '@jobstash/filters/data';
 
 export const useFilterConfig = (routeSection: RouteSection) => {
-  const mwVersion = getLSMwVersion();
+  const { mwVersion } = useMwVersionContext();
 
   return useQuery({
     queryKey: [mwVersion, 'filter-config', routeSection],

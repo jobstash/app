@@ -2,7 +2,7 @@ import { useCallback, useState } from 'react';
 
 import { useQueryClient } from '@tanstack/react-query';
 
-import { getLSMwVersion } from '@jobstash/shared/utils';
+import { useMwVersionContext } from '@jobstash/shared/state';
 
 import { useTagsContext } from '../contexts/tags-context';
 
@@ -11,6 +11,7 @@ import { useBlockedTermsMutation } from './use-blocked-terms-mutation';
 import { useUnsetBlockedTermsMutation } from './use-unset-blocked-terms-mutation';
 
 export const useBlockedTermsForm = () => {
+  const { mwVersion } = useMwVersionContext();
   const { mappedTags: tags } = useTagsContext();
 
   const {
@@ -94,8 +95,6 @@ export const useBlockedTermsForm = () => {
     }
 
     await Promise.all(promises);
-
-    const mwVersion = getLSMwVersion();
 
     await queryClient.invalidateQueries({
       queryKey: [mwVersion, 'godmodeBlockedTags'],

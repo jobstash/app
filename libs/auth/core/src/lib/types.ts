@@ -39,7 +39,6 @@ export type AuthCtx = {
   isConnected: boolean;
   isSignedIn: boolean;
   isFetching: boolean;
-  mwVersion: string | undefined;
 } & AuthPageProps;
 
 export type GithubLoginPayload = Infer<typeof githubLoginPayloadSchema>;

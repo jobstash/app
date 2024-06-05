@@ -4,16 +4,16 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { type CheckWalletFlow } from '@jobstash/auth/core';
 import { MW_URL } from '@jobstash/shared/core';
-import { getLSMwVersion, sentryMessage } from '@jobstash/shared/utils';
+import { sentryMessage } from '@jobstash/shared/utils';
+
+import { useMwVersionContext } from '@jobstash/shared/state';
 
 import { useAuthContext } from './use-auth-context';
 
 export const useUpdateFlow = (successRoute?: string) => {
   const { push } = useRouter();
   const queryClient = useQueryClient();
-
-  const mwVersion = getLSMwVersion();
-
+  const { mwVersion } = useMwVersionContext();
   const { refetch } = useAuthContext();
   const {
     isPending: isLoading,

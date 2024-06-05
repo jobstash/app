@@ -2,14 +2,13 @@ import { InfiniteData, useInfiniteQuery } from '@tanstack/react-query';
 import { useAccount } from 'wagmi';
 
 import { ProfileRepoListQueryPage } from '@jobstash/profile/core';
-import { getLSMwVersion } from '@jobstash/shared/utils';
 
+import { useMwVersionContext } from '@jobstash/shared/state';
 import { getProfileRepoList } from '@jobstash/profile/data';
 
 export const useProfileRepoListQuery = () => {
   const { address } = useAccount();
-
-  const mwVersion = getLSMwVersion();
+  const { mwVersion } = useMwVersionContext();
 
   return useInfiniteQuery<
     ProfileRepoListQueryPage,

@@ -21,6 +21,7 @@ import {
 import {
   isOpenTopBannerAtom,
   MantineProvider,
+  MwVersionProvider,
   ReactQueryProvider,
   useDisableScrollListener,
 } from '@jobstash/shared/state';
@@ -78,20 +79,22 @@ const App = ({ Component, pageProps }: AppProps) => {
         <MantineProvider>
           <WagmiProvider>
             <ReactQueryProvider dehydratedState={pageProps.dehydratedState}>
-              <WalletProvider>
-                <AuthProvider screenLoader={<LoadingPage />}>
-                  {/* <Component {...pageProps} /> */}
+              <MwVersionProvider screenLoader={<LoadingPage />}>
+                <WalletProvider>
+                  <AuthProvider screenLoader={<LoadingPage />}>
+                    {/* <Component {...pageProps} /> */}
 
-                  {/* <TopBanner /> */}
-                  {/* <DonateModal /> */}
-                  <div className={cn({ 'pt-10': isOpenTopBanner })}>
-                    <Component {...pageProps} />
-                  </div>
+                    {/* <TopBanner /> */}
+                    {/* <DonateModal /> */}
+                    <div className={cn({ 'pt-10': isOpenTopBanner })}>
+                      <Component {...pageProps} />
+                    </div>
 
-                  <WagmiSiweSync />
-                  <ReportModal />
-                </AuthProvider>
-              </WalletProvider>
+                    <WagmiSiweSync />
+                    <ReportModal />
+                  </AuthProvider>
+                </WalletProvider>
+              </MwVersionProvider>
             </ReactQueryProvider>
           </WagmiProvider>
         </MantineProvider>
