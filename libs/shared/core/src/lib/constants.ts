@@ -142,4 +142,5 @@ export const ECOSYSTEM_HEADER_KEY = 'X-Ecosystem';
 
 export const SESSION_STORAGE_KEYS = {
   MW_VERSION: 'jobstash-mw-version',
+  SCHEMA_VALIDATION_RELOAD: 'schema-validation-reload',
 } as const;
