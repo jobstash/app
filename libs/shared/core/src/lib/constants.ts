@@ -140,6 +140,6 @@ export type Ecosystem = typeof ECOSYSTEMS[keyof typeof ECOSYSTEMS];
 export const ECOSYSTEMS_SET = new Set(Object.values(ECOSYSTEMS));
 export const ECOSYSTEM_HEADER_KEY = 'X-Ecosystem';
 
-export const LS_KEYS = {
+export const SESSION_STORAGE_KEYS = {
   MW_VERSION: 'jobstash-mw-version',
 } as const;
