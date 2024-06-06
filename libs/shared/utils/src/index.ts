@@ -13,7 +13,7 @@ export * from './lib/get-frontend-url';
 export * from './lib/get-google-logo-url';
 export * from './lib/get-logo-url';
 export * from './lib/get-plural-text';
-export * from './lib/get-session-storage-value';
+export * from './lib/get-storage-value';
 export * from './lib/get-website-text';
 export * from './lib/make-optional';
 export * from './lib/normalize-string';

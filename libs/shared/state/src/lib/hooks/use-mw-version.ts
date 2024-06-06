@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react';
 import { useQuery } from '@tanstack/react-query';
 
 import { SESSION_STORAGE_KEYS } from '@jobstash/shared/core';
+import { getSessionStorageValue } from '@jobstash/shared/utils';
 
 import { getMwVersion } from '@jobstash/shared/data';
 
@@ -18,7 +19,7 @@ export const useMwVersion = () => {
 
   useEffect(() => {
     if (mwVersion && typeof window !== 'undefined') {
-      const clientVersion = localStorage.getItem(
+      const clientVersion = getSessionStorageValue(
         SESSION_STORAGE_KEYS.MW_VERSION,
       );
 
@@ -26,7 +27,7 @@ export const useMwVersion = () => {
         setIsReady(true);
       } else {
         // Update client version
-        localStorage.setItem(SESSION_STORAGE_KEYS.MW_VERSION, mwVersion);
+        sessionStorage.setItem(SESSION_STORAGE_KEYS.MW_VERSION, mwVersion);
 
         // Force reload page
         window.location.reload();

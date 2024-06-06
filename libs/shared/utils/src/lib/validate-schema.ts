@@ -6,7 +6,7 @@ import {
   SESSION_STORAGE_KEYS,
 } from '@jobstash/shared/core';
 
-import { getSessionStorageValue } from './get-session-storage-value';
+import { getSessionStorageValue } from './get-storage-value';
 import { sentryMessage } from './sentry-message';
 
 export const validateSchema = <T>(
