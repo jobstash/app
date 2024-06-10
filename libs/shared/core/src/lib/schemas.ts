@@ -93,6 +93,7 @@ export const jobInfoSchema = myzod.intersection(
   myzod.object({
     id: myzod.string().min(1),
     url: myzod.string().min(1).nullable(),
+    access: myzod.literals('public', 'protected'),
     shortUUID: myzod.string().min(1),
     timestamp: myzod.number(),
     requirements: myzod.array(myzod.string().min(1)),

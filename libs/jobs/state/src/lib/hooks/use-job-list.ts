@@ -16,7 +16,10 @@ import { jobCountAtom } from '../atoms/job-count-atom';
 import { jobsPrevLinkAtom } from '../atoms/jobs-prev-link';
 
 import { useJobListQuery } from './use-job-list-query';
-export const useJobList = (initJob: JobPost | null) => {
+export const useJobList = (
+  initJob: JobPost | null,
+  access: JobPost['access'],
+) => {
   const queryClient = useQueryClient();
 
   const [activeJob, setActiveJob] = useAtom(activeJobAtom);
@@ -33,7 +36,7 @@ export const useJobList = (initJob: JobPost | null) => {
     fetchNextPage,
     isFetchingNextPage,
     hasNextPage,
-  } = useJobListQuery();
+  } = useJobListQuery(access);
 
   const { mwVersion } = useMwVersionContext();
 

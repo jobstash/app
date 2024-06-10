@@ -27,7 +27,7 @@ const JobList = ({ initJob, activeJob }: Props) => {
     hasNextPage,
     inViewRef,
     filterParamsObj,
-  } = useJobList(initJob);
+  } = useJobList(initJob, 'protected');
 
   const {
     isLoading: isLoadingBookmarks,
