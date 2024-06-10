@@ -1,3 +1,5 @@
+import Image from 'next/image';
+
 import { ROUTE_SECTION } from '@jobstash/shared/core';
 import { cn } from '@jobstash/shared/utils';
 
@@ -11,7 +13,11 @@ const discoverBartabs = [
   {
     text: 'Crypto Native Jobs',
     path: ROUTE_SECTION.CRYPTO_NATIVE_JOBS,
-    icon: <JobsSidebarIcon />,
+    icon: (
+      <div>
+        <Image priority src="/new-icon.webp" alt="New" width={16} height={16} />
+      </div>
+    ),
   },
   {
     text: 'Organizations',
