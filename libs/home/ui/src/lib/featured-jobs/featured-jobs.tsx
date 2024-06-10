@@ -6,6 +6,7 @@ const fakeFeaturedJobs: JobPost[] = [
   {
     id: '145780df-a352-4420-98f9-20adbb6cf630',
     url: 'https://boards.greenhouse.io/oasisnetwork/jobs/4298160005',
+    access: 'public',
     title: 'Senior Software Engineer, Core Platform',
     summary:
       'The Oasis Protocol Foundation is looking for a Senior Software Engineer to design, develop, test, deploy and maintain the systems of our blockchain ecosystem.',
@@ -172,6 +173,7 @@ const fakeFeaturedJobs: JobPost[] = [
   {
     id: '3b03f2e4-cefb-4df2-999d-79dabd70a720',
     url: 'https://boards.greenhouse.io/oasisnetwork/jobs/4307432005',
+    access: 'public',
     title: 'Developer Relations Manager',
     summary:
       'Oasis Network is looking for a Developer Relations Manager to help developers and projects build and launch dApps using the Oasis Privacy Layer and the Oasis Sapphire, respond to technical questions, and build a strong Oasis developer community.',

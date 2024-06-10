@@ -76,3 +76,7 @@ export type MwVersionCtx = {
   isReady: boolean;
   mwVersion: string | null;
 };
+
+export type JobsRouteSection =
+  | typeof ROUTE_SECTION.JOBS
+  | typeof ROUTE_SECTION.CRYPTO_NATIVE_JOBS;

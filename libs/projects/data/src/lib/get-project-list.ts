@@ -37,5 +37,5 @@ export const getProjectList = async ({
     },
   };
 
-  return mwFetch<ProjectListQueryPage>(url, options);
+  return mwFetch<ProjectListQueryPage>(url.toString(), options);
 };

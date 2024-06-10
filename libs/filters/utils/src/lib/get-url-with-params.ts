@@ -2,6 +2,7 @@ export const getUrlWithParams = (
   origin: string,
   path: string,
   params: Record<string, string>,
+  shouldReturnString = true,
 ) => {
   const url = new URL(`${origin}${path}`);
   if (Object.keys(params).length > 0) {
@@ -10,5 +11,9 @@ export const getUrlWithParams = (
     }
   }
 
-  return url.toString();
+  if (shouldReturnString) {
+    return url.toString();
+  }
+
+  return url;
 };

@@ -11,17 +11,19 @@ import { getJobList } from '@jobstash/jobs/data';
 export const useJobListQuery = (access: JobPost['access']) => {
   const router = useRouter();
   const { mwVersion } = useMwVersionContext();
-  const filterParamsObj = createJobsFilterParamsObj(router.query);
+  const filterParams = createJobsFilterParamsObj(router.query);
+  const isProtected = access === 'protected';
 
   return useInfiniteQuery<
     JobListQueryPage,
     Error,
     InfiniteData<JobListQueryPage, number>,
-    [string | null, string, Record<string, string>],
+    [string | null, string, Record<string, string>, boolean],
     number
   >({
-    queryKey: [mwVersion, 'job-posts', filterParamsObj],
-    queryFn: async ({ pageParam }) => getJobList(pageParam, filterParamsObj),
+    queryKey: [mwVersion, 'job-posts', filterParams, isProtected],
+    queryFn: async ({ pageParam }) =>
+      getJobList({ page: pageParam, filterParams, isProtected }),
     initialPageParam: 1,
     staleTime: 1000 * 60 * 60, // 1 hr
     getNextPageParam: ({ page }) => (page > 0 ? page + 1 : undefined),

@@ -1,10 +1,21 @@
 import { type FilterConfig, filterConfigSchema } from '@jobstash/filters/core';
-import { MW_URL, type RouteSection } from '@jobstash/shared/core';
+import {
+  MW_URL,
+  ROUTE_SECTION,
+  type RouteSection,
+} from '@jobstash/shared/core';
 
 import { mwFetch } from '@jobstash/shared/data';
 
 export const getFilterConfig = async (routeSection: RouteSection) => {
-  const url = `${MW_URL}${routeSection}/filters`;
+  // Crypto-native-jobs filter-configs are the same as jobs filter-configs
+  const finalRouteSection =
+    routeSection === ROUTE_SECTION.CRYPTO_NATIVE_JOBS
+      ? ROUTE_SECTION.JOBS
+      : routeSection;
+
+  const url = `${MW_URL}${finalRouteSection}/filters`;
+
   const options = {
     responseSchema: filterConfigSchema,
     sentryLabel: 'getFilterConfig',

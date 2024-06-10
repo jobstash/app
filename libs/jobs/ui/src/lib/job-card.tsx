@@ -8,6 +8,8 @@ import {
   EVENT_CARD_CLICK,
   FRONTEND_URL,
   GA_EVENT_ACTION,
+  JobsRouteSection,
+  ROUTE_SECTION,
 } from '@jobstash/shared/core';
 import { getUrlWithParams } from '@jobstash/filters/utils';
 import { checkJobIsFeatured, createJobKey } from '@jobstash/jobs/utils';
@@ -31,6 +33,7 @@ interface Props {
   isActive: boolean;
   filterParamsObj: Record<string, string>;
   bookmarkButton: ReactNode;
+  routeSection: JobsRouteSection;
 }
 
 const JobCard = ({
@@ -38,6 +41,7 @@ const JobCard = ({
   isActive,
   filterParamsObj,
   bookmarkButton,
+  routeSection = ROUTE_SECTION.JOBS,
 }: Props) => {
   const {
     organization,
@@ -73,12 +77,12 @@ const JobCard = ({
   const href = useMemo(() => {
     const url = getUrlWithParams(
       FRONTEND_URL,
-      `/jobs/${createJobKey(jobPost)}/details`,
+      `/${routeSection}/${createJobKey(jobPost)}/details`,
       filterParamsObj,
     );
 
     return url.toString();
-  }, [filterParamsObj, jobPost]);
+  }, [filterParamsObj, jobPost, routeSection]);
 
   const isFeatured = checkJobIsFeatured(featureStartDate, featureEndDate);
 

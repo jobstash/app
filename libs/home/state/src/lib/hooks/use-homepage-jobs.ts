@@ -8,7 +8,7 @@ export const useHomePageJobs = () => {
 
   return useQuery({
     queryKey: [mwVersion, 'home-page', 'jobs'],
-    queryFn: () => getJobList(1, undefined, 3),
+    queryFn: () => getJobList({ page: 1, limit: 3 }),
     staleTime: 1000 * 60 * 60, // 1hr
   });
 };

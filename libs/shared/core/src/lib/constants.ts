@@ -68,6 +68,7 @@ export const SENTRY_SCHEMA_VALIDATION_ERROR = 'Invalid Schema';
 
 export const ROUTE_SECTION = {
   JOBS: '/jobs' as const,
+  CRYPTO_NATIVE_JOBS: '/crypto-native-jobs' as const,
   ORGANIZATIONS: '/organizations' as const,
   PROJECTS: '/projects' as const,
   JOB_BOOKMARKS: '/bookmarks/jobs' as const,

@@ -3,7 +3,7 @@ import { useEffect, useMemo, useRef } from 'react';
 import { useInView } from 'react-intersection-observer';
 
 import { useQueryClient } from '@tanstack/react-query';
-import { useAtom, useSetAtom } from 'jotai';
+import { PrimitiveAtom, useAtom, useSetAtom } from 'jotai';
 
 import { type JobPost } from '@jobstash/jobs/core';
 import { createJobsFilterParamsObj } from '@jobstash/jobs/utils';
@@ -11,13 +11,13 @@ import { createJobsFilterParamsObj } from '@jobstash/jobs/utils';
 import { useIsMobile, useMwVersionContext } from '@jobstash/shared/state';
 import { getCompetitors } from '@jobstash/competitors/data';
 
-import { activeJobAtom } from '../atoms/active-job-atom';
-import { jobCountAtom } from '../atoms/job-count-atom';
 import { jobsPrevLinkAtom } from '../atoms/jobs-prev-link';
 
 import { useJobListQuery } from './use-job-list-query';
 export const useJobList = (
   initJob: JobPost | null,
+  jobCountAtom: PrimitiveAtom<number | null>,
+  activeJobAtom: PrimitiveAtom<JobPost | null>,
   access: JobPost['access'],
 ) => {
   const queryClient = useQueryClient();

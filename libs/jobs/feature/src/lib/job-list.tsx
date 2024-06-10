@@ -1,6 +1,9 @@
 import { memo } from 'react';
 
+import { PrimitiveAtom, useAtomValue } from 'jotai';
+
 import { type JobPost } from '@jobstash/jobs/core';
+import { ROUTE_SECTION } from '@jobstash/shared/core';
 
 import { useJobBookmarks, useJobList } from '@jobstash/jobs/state';
 
@@ -13,10 +16,18 @@ import { ListErrorMessage, Loader } from '@jobstash/shared/ui';
 
 interface Props {
   initJob: JobPost | null;
-  activeJob: JobPost | null;
+  jobCountAtom: PrimitiveAtom<number | null>;
+  activeJobAtom: PrimitiveAtom<JobPost | null>;
+  access?: JobPost['access'];
 }
 
-const JobList = ({ initJob, activeJob }: Props) => {
+const JobList = ({
+  initJob,
+  jobCountAtom,
+  activeJobAtom,
+  access = 'public',
+}: Props) => {
+  const activeJob = useAtomValue(activeJobAtom);
   const {
     push,
     isLoading,
@@ -27,13 +38,16 @@ const JobList = ({ initJob, activeJob }: Props) => {
     hasNextPage,
     inViewRef,
     filterParamsObj,
-  } = useJobList(initJob, 'protected');
+  } = useJobList(initJob, jobCountAtom, activeJobAtom, access);
 
   const {
     isLoading: isLoadingBookmarks,
     bookmarkedJobs,
     isFetching: isFetchingBookmarks,
   } = useJobBookmarks();
+
+  const routeSection =
+    access === 'public' ? ROUTE_SECTION.JOBS : ROUTE_SECTION.CRYPTO_NATIVE_JOBS;
 
   if (isLoading) {
     return (
@@ -45,6 +59,7 @@ const JobList = ({ initJob, activeJob }: Props) => {
             jobPost={initJob}
             filterParamsObj={filterParamsObj}
             bookmarkButton={null}
+            routeSection={routeSection}
           />
         )}
         <div className="flex h-full w-full items-center justify-center pt-12">
@@ -77,6 +92,7 @@ const JobList = ({ initJob, activeJob }: Props) => {
               isFetching={isFetchingBookmarks || isLoadingBookmarks}
             />
           }
+          routeSection={routeSection}
         />
       ))}
 

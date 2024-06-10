@@ -9,6 +9,11 @@ import SidebarBartab from './sidebar-bartab';
 const discoverBartabs = [
   { text: 'Jobs', path: ROUTE_SECTION.JOBS, icon: <JobsSidebarIcon /> },
   {
+    text: 'Crypto Native Jobs',
+    path: ROUTE_SECTION.CRYPTO_NATIVE_JOBS,
+    icon: <JobsSidebarIcon />,
+  },
+  {
     text: 'Organizations',
     path: ROUTE_SECTION.ORGANIZATIONS,
     icon: <OrgSidebarIcon />,

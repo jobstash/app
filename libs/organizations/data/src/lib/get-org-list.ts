@@ -39,5 +39,5 @@ export const getOrgList = async ({
     },
   };
 
-  return mwFetch<OrgListQueryPage>(url, options);
+  return mwFetch<OrgListQueryPage>(url.toString(), options);
 };

@@ -2,7 +2,11 @@ import { useCallback, useMemo } from 'react';
 
 import { type JobPost } from '@jobstash/jobs/core';
 import { type RightPanelTab } from '@jobstash/right-panel/core';
-import { FRONTEND_URL, TAB_SEGMENT } from '@jobstash/shared/core';
+import {
+  FRONTEND_URL,
+  JobsRouteSection,
+  TAB_SEGMENT,
+} from '@jobstash/shared/core';
 import { createJobKey } from '@jobstash/jobs/utils';
 import { getPluralText } from '@jobstash/shared/utils';
 
@@ -14,6 +18,7 @@ interface Props {
   jobPost: JobPost;
   competitorCount: number;
   orgJobsCount: number;
+  routeSection: JobsRouteSection;
 }
 
 const RightPanelJobTabs = ({
@@ -22,13 +27,16 @@ const RightPanelJobTabs = ({
   jobPost,
   competitorCount,
   orgJobsCount,
+  routeSection,
 }: Props) => {
   const {
     organization: { projects },
   } = jobPost;
 
   const paramsStr = typeof window === 'undefined' ? '' : window.location.search;
-  const partialRoute = `${FRONTEND_URL}/jobs/${createJobKey(jobPost)}`;
+  const partialRoute = `${FRONTEND_URL}/${routeSection}/${createJobKey(
+    jobPost,
+  )}`;
 
   const createTabHref = useCallback(
     (tabSegment: string) => `${partialRoute}/${tabSegment}${paramsStr}`,

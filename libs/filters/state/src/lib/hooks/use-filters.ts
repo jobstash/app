@@ -26,7 +26,7 @@ import {
 } from '@jobstash/shared/core';
 import { gaEvent } from '@jobstash/shared/utils';
 
-import { jobCountAtom } from '@jobstash/jobs/state';
+import { cryptoNativeJobCountAtom, jobCountAtom } from '@jobstash/jobs/state';
 import { orgCountAtom } from '@jobstash/organizations/state';
 import { projectCountAtom } from '@jobstash/projects/state';
 import { isDisabledPageScrollAtom, useIsMobile } from '@jobstash/shared/state';
@@ -194,15 +194,21 @@ export const useFilters = (routeSection: RouteSection) => {
   );
 
   const jobCount = useAtomValue(jobCountAtom);
+  const cryptoNativeJobCount = useAtomValue(cryptoNativeJobCountAtom);
   const orgCount = useAtomValue(orgCountAtom);
   const projectCount = useAtomValue(projectCountAtom);
   const filteredItemsCount = useMemo(() => {
     let count = null;
 
+    console.log('FILTERS', { routeSection, jobCount });
     switch (routeSection) {
       case ROUTE_SECTION.JOBS: {
         count = jobCount;
+        break;
+      }
 
+      case ROUTE_SECTION.CRYPTO_NATIVE_JOBS: {
+        count = cryptoNativeJobCount;
         break;
       }
 
@@ -221,7 +227,7 @@ export const useFilters = (routeSection: RouteSection) => {
     }
 
     return count && count > 0 ? count : null;
-  }, [routeSection, jobCount, orgCount, projectCount]);
+  }, [routeSection, jobCount, cryptoNativeJobCount, orgCount, projectCount]);
 
   return {
     state: state as FilterState | undefined,

@@ -1,7 +1,11 @@
 import { memo } from 'react';
 
 import { type JobPost } from '@jobstash/jobs/core';
-import { ROUTE_SECTION, TAB_SEGMENT } from '@jobstash/shared/core';
+import {
+  JobsRouteSection,
+  ROUTE_SECTION,
+  TAB_SEGMENT,
+} from '@jobstash/shared/core';
 
 import { useCompetitors } from '@jobstash/competitors/state';
 import { useOrgDetails } from '@jobstash/organizations/state';
@@ -22,9 +26,10 @@ import { Loader } from '@jobstash/shared/ui';
 interface Props {
   jobPost: JobPost | null;
   currentTab: string;
+  routeSection: JobsRouteSection;
 }
 
-const JobsRightPanel = ({ jobPost, currentTab }: Props) => {
+const JobsRightPanel = ({ jobPost, currentTab, routeSection }: Props) => {
   const { data: competitors, isLoading: isLoadingCompetitors } = useCompetitors(
     jobPost && jobPost.organization.projects.length > 0
       ? jobPost.organization.projects[0].id
@@ -76,6 +81,7 @@ const JobsRightPanel = ({ jobPost, currentTab }: Props) => {
           jobPost={jobPost}
           competitorCount={competitorCount}
           orgJobsCount={orgJobsCount}
+          routeSection={routeSection}
         />
       }
       backButton={<RightPanelBackButton backURL={ROUTE_SECTION.JOBS} />}

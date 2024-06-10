@@ -26,7 +26,7 @@ export const getServerSideProps: GetServerSideProps<JobPostPageSharedProps> =
           return {
             props: {
               notFoundInfo: {
-                link: ROUTE_SECTION.JOBS,
+                link: ROUTE_SECTION.CRYPTO_NATIVE_JOBS,
                 title: 'Job Not Found',
                 message: "The job you tried to find doesn't exist anymore",
                 buttonText: 'Back to Job List',
@@ -36,7 +36,7 @@ export const getServerSideProps: GetServerSideProps<JobPostPageSharedProps> =
         }
 
         sentryMessage(
-          `${ROUTE_SECTION.JOBS} SSR`,
+          `${ROUTE_SECTION.CRYPTO_NATIVE_JOBS} SSR`,
           `failed fetching first job details ${shortUuid}`,
         );
 
@@ -64,4 +64,4 @@ export const getServerSideProps: GetServerSideProps<JobPostPageSharedProps> =
     { props: { initJob: null, fromSSR: false } },
   );
 
-export { JobPostPage as default } from '@jobstash/jobs/pages';
+export { CryptoNativeJobPostPage as default } from '@jobstash/jobs/pages';
