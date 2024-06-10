@@ -66,13 +66,15 @@ const RightPanelJobCard = ({
 
           <RightPanelJobCardSets jobCardSet={jobInfo} />
 
-          <RightPanelJobCTA
-            url={url}
-            shortUUID={shortUUID}
-            orgName={orgName}
-            hasUser={hasUser}
-            classification={classification}
-          />
+          {url && (
+            <RightPanelJobCTA
+              url={url}
+              shortUUID={shortUUID}
+              orgName={orgName}
+              hasUser={hasUser}
+              classification={classification}
+            />
+          )}
         </div>
 
         <div className="flex h-4 flex-col justify-center">
