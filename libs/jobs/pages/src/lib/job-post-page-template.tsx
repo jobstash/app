@@ -66,7 +66,7 @@ const createCanonicalUrl = (
     return `${FRONTEND_URL}/projects/${projects[0].id}/details`;
   }
 
-  return `${FRONTEND_URL}/${routeSection}/${shortUUID}/details`;
+  return `${FRONTEND_URL}${routeSection}/${shortUUID}/details`;
 };
 
 export interface JobPostPageTemplateProps {

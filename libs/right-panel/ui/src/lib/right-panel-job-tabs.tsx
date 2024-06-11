@@ -34,7 +34,7 @@ const RightPanelJobTabs = ({
   } = jobPost;
 
   const paramsStr = typeof window === 'undefined' ? '' : window.location.search;
-  const partialRoute = `${FRONTEND_URL}/${routeSection}/${createJobKey(
+  const partialRoute = `${FRONTEND_URL}${routeSection}/${createJobKey(
     jobPost,
   )}`;
 

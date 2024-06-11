@@ -77,7 +77,7 @@ const JobCard = ({
   const href = useMemo(() => {
     const url = getUrlWithParams(
       FRONTEND_URL,
-      `/${routeSection}/${createJobKey(jobPost)}/details`,
+      `${routeSection}/${createJobKey(jobPost)}/details`,
       filterParamsObj,
     );
 

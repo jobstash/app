@@ -200,7 +200,6 @@ export const useFilters = (routeSection: RouteSection) => {
   const filteredItemsCount = useMemo(() => {
     let count = null;
 
-    console.log('FILTERS', { routeSection, jobCount });
     switch (routeSection) {
       case ROUTE_SECTION.JOBS: {
         count = jobCount;
