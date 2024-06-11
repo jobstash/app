@@ -30,6 +30,7 @@ export const checkWalletFlowsSchema = myzod.literals(
 export const checkWalletDataSchema = myzod.object({
   role: checkWalletRolesSchema,
   flow: checkWalletFlowsSchema,
+  cryptoNative: myzod.boolean(),
 });
 
 export const checkWalletResponseSchema = myzod.object({
