@@ -1,6 +1,8 @@
 /* eslint-disable react/no-unused-prop-types */
 import { Spinner } from '@nextui-org/spinner';
 
+import { CheckWalletRole } from '@jobstash/auth/core';
+
 import { AnonSignupButton } from './anon-signup-button';
 import { DirectApplyButton } from './direct-apply-button';
 import { OneClickApplyButton } from './one-click-apply-button';
@@ -9,9 +11,8 @@ import { useRightPanelJobCTA } from './use-right-panel-job-cta';
 interface Props {
   url: string;
   shortUUID: string;
-  orgName: string;
-  classification: string | null;
   hasUser?: boolean;
+  sendAnalyticsEvent: (role: CheckWalletRole) => void;
 }
 
 export const RightPanelJobCTA = (props: Props) => {
@@ -20,9 +21,9 @@ export const RightPanelJobCTA = (props: Props) => {
     isAnon,
     isOneClick,
     isDirect,
-    sendAnalyticsEvent,
     openModalIfAnon,
     devApplyMutation,
+    sendAnalytics,
     hasApplied,
     url,
   } = useRightPanelJobCTA(props);
@@ -31,14 +32,14 @@ export const RightPanelJobCTA = (props: Props) => {
     <OneClickApplyButton
       isAnon={isAnon}
       hasApplied={hasApplied}
-      sendAnalyticsEvent={sendAnalyticsEvent}
+      sendAnalyticsEvent={sendAnalytics}
       devApplyMutation={devApplyMutation}
       openModalIfAnon={openModalIfAnon}
     />
   ) : isDirect ? (
     <DirectApplyButton
       url={url}
-      sendAnalyticsEvent={sendAnalyticsEvent}
+      sendAnalyticsEvent={sendAnalytics}
       devApplyMutation={devApplyMutation}
     />
   ) : null;
@@ -52,7 +53,7 @@ export const RightPanelJobCTA = (props: Props) => {
           <AnonSignupButton
             isAnon={isAnon}
             isOneClick={isOneClick}
-            sendAnalyticsEvent={sendAnalyticsEvent}
+            sendAnalyticsEvent={sendAnalytics}
             openModalIfAnon={openModalIfAnon}
           />
           {applyButton}

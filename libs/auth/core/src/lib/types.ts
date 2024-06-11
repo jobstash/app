@@ -33,6 +33,7 @@ export type AuthPageProps = {
 };
 
 export type AuthCtx = {
+  isCryptoNative: boolean;
   isLoading: boolean;
   refetch: () => void;
   address: string | undefined;

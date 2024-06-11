@@ -55,6 +55,19 @@ export const jobBookmarksResponseSchema = myzod.intersection(
   }),
 );
 
+export const jobApplyInteractionResponseSchema = myzod
+  .object({
+    success: myzod.literal(false),
+    message: myzod.string(),
+  })
+  .or(
+    myzod.object({
+      success: myzod.literal(true),
+      message: myzod.string(),
+      data: myzod.string(),
+    }),
+  );
+
 export const jobApplyInteractionPayloadSchema = myzod.object({
   shortUUID: myzod.string(),
 });

@@ -1,10 +1,9 @@
-/* eslint-disable camelcase */
 import { useModal, useSIWE } from 'connectkit';
 import { useAccount } from 'wagmi';
 
-import { CHECK_WALLET_ROLES } from '@jobstash/auth/core';
-import { ECOSYSTEMS, GA_EVENT_ACTION } from '@jobstash/shared/core';
-import { gaEvent, getEcosystemSubdomain } from '@jobstash/shared/utils';
+import { CHECK_WALLET_ROLES, CheckWalletRole } from '@jobstash/auth/core';
+import { ECOSYSTEMS } from '@jobstash/shared/core';
+import { getEcosystemSubdomain } from '@jobstash/shared/utils';
 
 import { useAuthContext } from '@jobstash/auth/state';
 import {
@@ -16,13 +15,12 @@ import {
 interface Props {
   url: string;
   shortUUID: string;
-  orgName: string;
-  classification: string | null;
   hasUser?: boolean;
+  sendAnalyticsEvent: (role: CheckWalletRole) => void;
 }
 
 export const useRightPanelJobCTA = (props: Props) => {
-  const { url, shortUUID, orgName, hasUser = false, classification } = props;
+  const { url, shortUUID, hasUser = false, sendAnalyticsEvent } = props;
 
   const { isConnected } = useAccount();
   const { isSignedIn } = useSIWE();
@@ -66,16 +64,6 @@ export const useRightPanelJobCTA = (props: Props) => {
     isPendingMutation,
   ].includes(true);
 
-  const sendAnalyticsEvent = () => {
-    gaEvent(GA_EVENT_ACTION.JOB_APPLY, {
-      event_category: 'job',
-      job_shortuuid: shortUUID,
-      job_classification: classification ?? '',
-      organization_name: orgName,
-      user_role: role,
-    });
-  };
-
   const { setOpen } = useModal();
   const openModalIfAnon = () => {
     if (isAnon) {
@@ -83,14 +71,16 @@ export const useRightPanelJobCTA = (props: Props) => {
     }
   };
 
+  const sendAnalytics = () => sendAnalyticsEvent(role);
+
   return {
     isAnon,
     isOneClick,
     isDirect: !isOneClick && typeof window !== 'undefined',
     isLoading,
-    sendAnalyticsEvent,
     devApplyMutation,
     openModalIfAnon,
+    sendAnalytics,
     hasApplied,
     url,
   };

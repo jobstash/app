@@ -1,12 +1,10 @@
 import {
   JobApplyInteractionPayload,
   jobApplyInteractionPayloadSchema,
+  jobApplyInteractionResponseSchema,
+  JobApplyInterfactionResponse,
 } from '@jobstash/jobs/core';
-import {
-  messageResponseSchema,
-  MW_URL,
-  MwMessageResponse,
-} from '@jobstash/shared/core';
+import { MW_URL } from '@jobstash/shared/core';
 
 import { mwFetch } from '@jobstash/shared/data';
 
@@ -17,7 +15,7 @@ export const sendJobApplyInteraction = async (shortUUID: string) => {
 
   const options = {
     method: 'POST' as const,
-    responseSchema: messageResponseSchema,
+    responseSchema: jobApplyInteractionResponseSchema,
     sentryLabel: 'sendJobApplyInteraction',
     credentials: 'include' as RequestCredentials,
     mode: 'cors' as RequestMode,
@@ -28,5 +26,8 @@ export const sendJobApplyInteraction = async (shortUUID: string) => {
     },
   };
 
-  return mwFetch<MwMessageResponse, JobApplyInteractionPayload>(url, options);
+  return mwFetch<JobApplyInterfactionResponse, JobApplyInteractionPayload>(
+    url,
+    options,
+  );
 };

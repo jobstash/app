@@ -8,16 +8,16 @@ import { useMwVersionContext } from '@jobstash/shared/state';
 import { sendJobApplyInteraction } from '@jobstash/jobs/data';
 
 interface Props {
-  isDevOneClick: boolean;
-  jobPost: JobPost | undefined;
-  appliedJobs: JobPost[];
+  jobPost?: JobPost;
+  isDevOneClick?: boolean;
+  appliedJobs?: JobPost[];
 }
 
 export const useSendJobApplyInteractionMutation = ({
-  isDevOneClick,
   jobPost,
-  appliedJobs,
-}: Props) => {
+  isDevOneClick,
+  appliedJobs = [],
+}: Props = {}) => {
   const { address } = useAccount();
   const queryClient = useQueryClient();
   const { mwVersion } = useMwVersionContext();

@@ -10,6 +10,7 @@ export const AuthContext = createContext<AuthCtx>({
   isLoading: false,
   role: CHECK_WALLET_ROLES.DEFAULT,
   flow: CHECK_WALLET_FLOWS.DEFAULT,
+  isCryptoNative: false,
   address: undefined,
   isConnected: false,
   isSignedIn: false,

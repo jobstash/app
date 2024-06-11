@@ -54,6 +54,7 @@ export const AuthProvider = ({ children, screenLoader }: Props) => {
     () => ({
       role: checkWalletData?.role ?? CHECK_WALLET_ROLES.DEFAULT,
       flow: checkWalletData?.flow ?? CHECK_WALLET_FLOWS.DEFAULT,
+      isCryptoNative: Boolean(checkWalletData?.cryptoNative),
       isLoading,
       address,
       isConnected,
@@ -62,11 +63,12 @@ export const AuthProvider = ({ children, screenLoader }: Props) => {
       refetch: () => refetch(),
     }),
     [
-      address,
-      checkWalletData?.flow,
       checkWalletData?.role,
-      isConnected,
+      checkWalletData?.flow,
+      checkWalletData?.cryptoNative,
       isLoading,
+      address,
+      isConnected,
       isSignedIn,
       isFetching,
       refetch,

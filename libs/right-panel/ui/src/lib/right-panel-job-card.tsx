@@ -1,11 +1,19 @@
+/* eslint-disable camelcase */
 import { ShareIcon } from '@heroicons/react/16/solid';
 
-import { JobInfo, REPORT_UI_CTX, type Tag } from '@jobstash/shared/core';
-import { slugify } from '@jobstash/shared/utils';
+import { CheckWalletRole } from '@jobstash/auth/core';
+import {
+  GA_EVENT_ACTION,
+  JobInfo,
+  REPORT_UI_CTX,
+  type Tag,
+} from '@jobstash/shared/core';
+import { gaEvent, slugify } from '@jobstash/shared/utils';
 
 import { CardMenu, Heading, ReportMenuItem } from '@jobstash/shared/ui';
 
 import { RightPanelJobCTA } from './right-panel-job-cta/right-panel-job-cta';
+import { CryptoNativeJobCTA } from './crypto-native-job-cta';
 import { JobShareMenuContent } from './job-share-menu-content';
 import RightPanelCardBorder from './right-panel-card-border';
 import RightPanelCta from './right-panel-cta';
@@ -31,6 +39,7 @@ const RightPanelJobCard = ({
     url,
     shortUUID,
     classification,
+    access,
     organization: { hasUser },
   } = jobInfo;
 
@@ -39,6 +48,16 @@ const RightPanelJobCard = ({
     if (typeof window !== 'undefined') {
       window.location.href = link;
     }
+  };
+
+  const sendAnalyticsEvent = (role: CheckWalletRole) => {
+    gaEvent(GA_EVENT_ACTION.JOB_APPLY, {
+      event_category: 'job',
+      job_shortuuid: shortUUID,
+      job_classification: classification ?? '',
+      organization_name: orgName,
+      user_role: role,
+    });
   };
 
   const other = JSON.stringify({ job: { title, shortUUID } });
@@ -66,13 +85,19 @@ const RightPanelJobCard = ({
 
           <RightPanelJobCardSets jobCardSet={jobInfo} />
 
-          {url && (
+          {url && access === 'public' && (
             <RightPanelJobCTA
               url={url}
               shortUUID={shortUUID}
-              orgName={orgName}
               hasUser={hasUser}
-              classification={classification}
+              sendAnalyticsEvent={sendAnalyticsEvent}
+            />
+          )}
+
+          {!url && access === 'protected' && (
+            <CryptoNativeJobCTA
+              jobId={shortUUID}
+              sendAnalyticsEvent={sendAnalyticsEvent}
             />
           )}
         </div>
