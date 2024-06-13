@@ -10,6 +10,9 @@ import { NotFoundPage, PageWrapper } from '@jobstash/shared/ui';
 import { SideBar } from '@jobstash/sidebar/feature';
 
 import { ActiveATS } from './active-ats';
+//
+// import { Nfts } from './nfts';
+// import { OrgHighlights } from './org-highlights';
 
 export const ATSSettingsPage = () => {
   const { role, flow } = useAuthContext();

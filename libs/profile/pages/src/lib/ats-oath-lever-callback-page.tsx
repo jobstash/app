@@ -4,7 +4,6 @@ import { useEffect } from 'react';
 
 import { LoadingPage } from '@jobstash/shared/pages';
 
-import { CHECK_WALLET_ROLES } from '@jobstash/auth/core';
 import { ATS_PROVIDERS } from '@jobstash/profile/core';
 
 import { useLinkATSPlatform, useOrgProfileInfo } from '@jobstash/profile/state';
@@ -31,24 +30,13 @@ export const ATSOauthLeverCallbackPage = () => {
 
   useEffect(() => {
     if (!isLoading && isValidPayload) {
-      mutate(
-        {
-          platform: ATS_PROVIDERS.LEVER.platformName,
-          payload: {
-            clientId: client_id as string,
-            orgId,
-          },
+      mutate({
+        platform: ATS_PROVIDERS.LEVER.platformName,
+        payload: {
+          clientId: client_id as string,
+          orgId,
         },
-        {
-          onSuccess(data) {
-            console.log('SUCCESS', { data });
-            router.push('/profile/org/ats-settings');
-          },
-          onError(error, variables, context) {
-            console.log('ERROR', { error, variables, context });
-          },
-        },
-      );
+      });
     }
   }, [client_id, isLoading, isValidPayload, mutate, orgId, router]);
 

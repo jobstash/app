@@ -17,13 +17,18 @@ export const getATSClient = async () => {
 
   const response = await mwFetch<LeverUrlResponse>(url, options);
 
-  return response;
+  return response.data;
 };
 
 const leverUrlResponseSchema = myzod.object({
-  id: myzod.string(),
-  orgId: myzod.string(),
-  hasWebhooks: myzod.boolean(),
-  preferences: atsPreferenceSchema.nullable(),
+  success: myzod.boolean(),
+  message: myzod.string(),
+  data: myzod.object({
+    id: myzod.string().nullable(),
+    name: myzod.string().nullable(),
+    orgId: myzod.string().nullable(),
+    hasWebhooks: myzod.boolean(),
+    preferences: atsPreferenceSchema.nullable(),
+  }),
 });
 type LeverUrlResponse = Infer<typeof leverUrlResponseSchema>;
