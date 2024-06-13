@@ -13,6 +13,8 @@ import {
   tagSchema,
 } from '@jobstash/shared/core';
 
+import { ATS_PROVIDERS } from './constants';
+
 export const profileRepoTag = myzod.intersection(
   tagSchema,
   myzod.object({
@@ -271,3 +273,38 @@ export const devTalentSchema = myzod.intersection(
 );
 
 export const devTalentResponseSchema = myzod.array(devTalentSchema);
+
+export const atsTrackedNFTSchema = myzod.object({
+  id: myzod.string(),
+  name: myzod.string(),
+  contractAddress: myzod.string(),
+  network: myzod.literals(
+    'arbitrum',
+    'avalanche',
+    'base',
+    'blast',
+    'celo',
+    'ethereum',
+    'linea',
+    'optimism',
+    'palm',
+    'polygon',
+  ),
+});
+
+export const atsPreferenceSchema = myzod.object({
+  id: myzod.string(),
+  platformName: myzod.literals(
+    ATS_PROVIDERS.JOBSTASH.platformName,
+    ATS_PROVIDERS.LEVER.platformName,
+    ATS_PROVIDERS.GREENHOUSE.platformName,
+    ATS_PROVIDERS.WORKABLE.platformName,
+  ),
+  highlightOrgs: myzod.array(myzod.string()),
+  trackedNfts: myzod.array(atsTrackedNFTSchema),
+});
+
+export const linkATSPlatformPayloadSchema = myzod.object({
+  clientId: myzod.string(),
+  orgId: myzod.string(),
+});

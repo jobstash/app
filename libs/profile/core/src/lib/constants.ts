@@ -57,3 +57,23 @@ export const COMMUNITY_NFT_ADDRESSES = {
     chainId: mainnet.id,
   },
 } as const;
+
+export const ATS_PROVIDERS = {
+  DEFAULT: { label: 'None', siteLabel: 'Disable ATS', platformName: 'none' },
+  JOBSTASH: {
+    label: 'Jobstash',
+    siteLabel: 'jobstash.xyz',
+    platformName: 'jobstash',
+  },
+  GREENHOUSE: {
+    label: 'Greenhouse',
+    siteLabel: 'greenhouse.com',
+    platformName: 'greenhouse',
+  },
+  LEVER: { label: 'Lever', siteLabel: 'lever.co', platformName: 'lever' },
+  WORKABLE: {
+    label: 'Workable',
+    siteLabel: 'workable.com',
+    platformName: 'workable',
+  },
+} as const;
