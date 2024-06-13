@@ -5,6 +5,7 @@ import { MessageResponse } from '@jobstash/shared/core';
 
 import { ATS_PROVIDERS, PROFILE_RIGHT_PANEL_TABS } from './constants';
 import {
+  atsClientSchema,
   atsPreferenceSchema,
   devProfileInfoPayloadSchema,
   devProfileInfoResponseSchema,
@@ -36,6 +37,8 @@ import {
   profileSkillResponseSchema,
   profileSkillSchema,
   profileSkillsPayloadSchema,
+  registerATSClientPayloadSchema,
+  registerATSResponseSchema,
 } from './schemas';
 import { profileRepoContributionPayloadSchema } from './schemas';
 
@@ -136,10 +139,18 @@ export type ATSSiteLabel =
 export type ATSPlatform =
   typeof ATS_PROVIDERS[keyof typeof ATS_PROVIDERS]['platformName'];
 
-export type ATSPreference = Infer<typeof atsPreferenceSchema>;
-
-export type LinkATSPlatformPayload = Infer<typeof linkATSPlatformPayloadSchema>;
-export type LinkATSPlatform = Omit<
+export type ATSPlatformName = Omit<
   ATSPlatform,
   typeof ATS_PROVIDERS['DEFAULT']['platformName']
+>;
+
+export type ATSPreference = Infer<typeof atsPreferenceSchema>;
+
+export type ATSClient = Infer<typeof atsClientSchema>;
+
+export type LinkATSPlatformPayload = Infer<typeof linkATSPlatformPayloadSchema>;
+
+export type RegisterATSResponse = Infer<typeof registerATSResponseSchema>;
+export type RegisterATSClientPayload = Infer<
+  typeof registerATSClientPayloadSchema
 >;

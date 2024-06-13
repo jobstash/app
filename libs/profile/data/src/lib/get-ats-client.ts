@@ -1,9 +1,17 @@
 import myzod, { Infer } from 'myzod';
 
-import { atsPreferenceSchema } from '@jobstash/profile/core';
+import { atsClientSchema } from '@jobstash/profile/core';
 import { MW_URL } from '@jobstash/shared/core';
 
 import { mwFetch } from '@jobstash/shared/data';
+
+const leverUrlResponseSchema = myzod.object({
+  success: myzod.boolean(),
+  message: myzod.string(),
+  data: atsClientSchema,
+});
+
+type LeverUrlResponse = Infer<typeof leverUrlResponseSchema>;
 
 export const getATSClient = async () => {
   const url = `${MW_URL}/scorer/client`;
@@ -19,16 +27,3 @@ export const getATSClient = async () => {
 
   return response.data;
 };
-
-const leverUrlResponseSchema = myzod.object({
-  success: myzod.boolean(),
-  message: myzod.string(),
-  data: myzod.object({
-    id: myzod.string().nullable(),
-    name: myzod.string().nullable(),
-    orgId: myzod.string().nullable(),
-    hasWebhooks: myzod.boolean(),
-    preferences: atsPreferenceSchema.nullable(),
-  }),
-});
-type LeverUrlResponse = Infer<typeof leverUrlResponseSchema>;

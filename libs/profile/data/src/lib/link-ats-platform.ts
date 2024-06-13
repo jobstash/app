@@ -1,5 +1,5 @@
 import {
-  LinkATSPlatform,
+  ATSPlatformName,
   LinkATSPlatformPayload,
   linkATSPlatformPayloadSchema,
 } from '@jobstash/profile/core';
@@ -12,7 +12,7 @@ import {
 import { mwFetch } from '@jobstash/shared/data';
 
 export const linkATSPlatform = async (
-  platform: LinkATSPlatform,
+  platform: ATSPlatformName,
   payload: LinkATSPlatformPayload,
 ) => {
   const url = `${MW_URL}/scorer/link/org/${platform}`;

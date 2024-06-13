@@ -302,9 +302,31 @@ export const atsPreferenceSchema = myzod.object({
   ),
   highlightOrgs: myzod.array(myzod.string()),
   trackedNfts: myzod.array(atsTrackedNFTSchema),
+  applicationCreatedSignatureToken: myzod.string().optional(),
+  candidateHiredSignatureToken: myzod.string().optional(),
+});
+
+export const atsClientSchema = myzod.object({
+  id: myzod.string().nullable(),
+  name: myzod.string().nullable(),
+  orgId: myzod.string().nullable(),
+  hasWebhooks: myzod.boolean(),
+  preferences: atsPreferenceSchema.nullable(),
 });
 
 export const linkATSPlatformPayloadSchema = myzod.object({
   clientId: myzod.string(),
   orgId: myzod.string(),
+});
+
+export const registerATSResponseSchema = myzod.object({
+  success: myzod.boolean(),
+  message: myzod.string(),
+  data: atsClientSchema,
+});
+
+export const registerATSClientPayloadSchema = myzod.object({
+  apiToken: myzod.string().optional(),
+  userId: myzod.string().optional(),
+  workableUrl: myzod.string().optional(),
 });
