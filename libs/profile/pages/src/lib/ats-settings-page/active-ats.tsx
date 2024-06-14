@@ -17,6 +17,7 @@ import {
 import { Heading } from '@jobstash/shared/ui';
 
 import { CustomRadio } from './custom-radio';
+import { RegisterGreenhouseModal } from './register-greenhouse-modal';
 import { RegisterWorkableModal } from './register-workable-modal';
 
 const LEVER_OAUTH_URL = `${MW_URL}/scorer/oauth/lever`;
@@ -58,8 +59,14 @@ export const ActiveATS = () => {
 
   const {
     isOpen: isOpenWorkableModal,
-    onOpen: onOpenWorkableModal,
+    onOpen: openWorkableModal,
     onOpenChange: onOpenChangeWorkableModal,
+  } = useDisclosure();
+
+  const {
+    isOpen: isOpenGreenhouseModal,
+    onOpen: openGreenhouseModal,
+    onOpenChange: onOpenChangeGreenhouseModal,
   } = useDisclosure();
 
   const onValueChange = async (value: string) => {
@@ -98,7 +105,12 @@ export const ActiveATS = () => {
     }
 
     if (value === ATS_PROVIDERS.WORKABLE.platformName) {
-      onOpenWorkableModal();
+      openWorkableModal();
+      return;
+    }
+
+    if (value === ATS_PROVIDERS.GREENHOUSE.platformName) {
+      openGreenhouseModal();
       return;
     }
 
@@ -151,6 +163,14 @@ export const ActiveATS = () => {
           orgId={orgId}
           isOpen={isOpenWorkableModal}
           onOpenChange={onOpenChangeWorkableModal}
+        />
+      )}
+
+      {orgId && (
+        <RegisterGreenhouseModal
+          orgId={orgId}
+          isOpen={isOpenGreenhouseModal}
+          onOpenChange={onOpenChangeGreenhouseModal}
         />
       )}
     </div>
