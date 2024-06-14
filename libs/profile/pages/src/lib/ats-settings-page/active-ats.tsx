@@ -1,12 +1,11 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
-import { Radio, RadioGroup, RadioProps } from '@nextui-org/radio';
-import { Spinner } from '@nextui-org/react';
+import { RadioGroup } from '@nextui-org/radio';
+import { Spinner, useDisclosure } from '@nextui-org/react';
 
 import { ATS_PROVIDERS, ATSPlatform } from '@jobstash/profile/core';
 import { MW_URL } from '@jobstash/shared/core';
-import { cn } from '@jobstash/shared/utils';
 
 import {
   useATSClient,
@@ -16,6 +15,9 @@ import {
 } from '@jobstash/profile/state';
 
 import { Heading } from '@jobstash/shared/ui';
+
+import { CustomRadio } from './custom-radio';
+import { RegisterWorkableModal } from './register-workable-modal';
 
 const LEVER_OAUTH_URL = `${MW_URL}/scorer/oauth/lever`;
 
@@ -54,6 +56,12 @@ export const ActiveATS = () => {
   const { mutate: linkClient, isPending: isPendingLinkClient } =
     useLinkATSPlatform();
 
+  const {
+    isOpen: isOpenWorkableModal,
+    onOpen: onOpenWorkableModal,
+    onOpenChange: onOpenChangeWorkableModal,
+  } = useDisclosure();
+
   const onValueChange = async (value: string) => {
     if (value === ATS_PROVIDERS.DEFAULT.platformName) {
       // TODO: Disable Applicants Sidebar
@@ -89,6 +97,11 @@ export const ActiveATS = () => {
       return;
     }
 
+    if (value === ATS_PROVIDERS.WORKABLE.platformName) {
+      onOpenWorkableModal();
+      return;
+    }
+
     if (value === ATS_PROVIDERS.LEVER.platformName) {
       setIsLoadingManual(true);
       router.push(LEVER_OAUTH_URL);
@@ -115,7 +128,7 @@ export const ActiveATS = () => {
           defaultValue="jobstash"
           orientation="horizontal"
           classNames={{ wrapper: 'gap-4' }}
-          value={isLoading ? undefined : selected}
+          value={isLoading ? '' : selected}
           isDisabled={
             isLoading || selected !== ATS_PROVIDERS.DEFAULT.platformName
           }
@@ -132,36 +145,14 @@ export const ActiveATS = () => {
           ))}
         </RadioGroup>
       </div>
+
+      {orgId && (
+        <RegisterWorkableModal
+          orgId={orgId}
+          isOpen={isOpenWorkableModal}
+          onOpenChange={onOpenChangeWorkableModal}
+        />
+      )}
     </div>
-  );
-};
-
-interface CustomRadioProps extends RadioProps {
-  isLoading?: boolean;
-}
-
-export const CustomRadio = (props: CustomRadioProps) => {
-  const { children, isLoading, disabled, ...otherProps } = props;
-
-  return (
-    <Radio
-      {...otherProps}
-      disabled={disabled || isLoading}
-      classNames={{
-        base: cn(
-          'inline-flex m-0 bg-dark hover:bg-content2 items-center justify-between',
-          'flex-row-reverse w-[320px] cursor-pointer rounded-lg gap-16 px-2 pr-4 py-4 border-2 border-transparent',
-          'data-[selected=true]:border-secondary',
-          { 'opacity-60': isLoading },
-        ),
-      }}
-    >
-      <div className="flex items-center gap-4">
-        {children}
-        <div className="min-w-[28px] min-h-[28px] flex items-center justify-center">
-          {isLoading && <Spinner color="white" size="sm" />}
-        </div>
-      </div>
-    </Radio>
   );
 };
