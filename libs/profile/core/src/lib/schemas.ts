@@ -293,7 +293,7 @@ export const atsTrackedNFTSchema = myzod.object({
 });
 
 export const atsPreferenceSchema = myzod.object({
-  id: myzod.string(),
+  id: myzod.string().nullable(),
   platformName: myzod.literals(
     ATS_PROVIDERS.JOBSTASH.platformName,
     ATS_PROVIDERS.LEVER.platformName,
@@ -310,8 +310,8 @@ export const atsClientSchema = myzod.object({
   orgId: myzod.string().nullable(),
   hasWebhooks: myzod.boolean(),
   preferences: atsPreferenceSchema.nullable(),
-  applicationCreatedSignatureToken: myzod.string().optional(),
-  candidateHiredSignatureToken: myzod.string().optional(),
+  applicationCreatedSignatureToken: myzod.string().nullable().optional(),
+  candidateHiredSignatureToken: myzod.string().nullable().optional(),
 });
 
 export const linkATSPlatformPayloadSchema = myzod.object({
@@ -329,4 +329,9 @@ export const registerATSClientPayloadSchema = myzod.object({
   apiToken: myzod.string().optional(),
   userId: myzod.string().optional(),
   workableUrl: myzod.string().optional(),
+});
+
+export const updateATSPreferencePayloadSchema = myzod.object({
+  clientId: myzod.string(),
+  preferences: atsPreferenceSchema,
 });

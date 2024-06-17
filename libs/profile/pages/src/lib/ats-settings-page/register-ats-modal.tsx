@@ -2,7 +2,6 @@ import { useState } from 'react';
 
 import {
   Button,
-  Card,
   Input,
   Modal,
   ModalBody,
@@ -94,7 +93,7 @@ const RegisterAtsModal = ({
               <Heading size="sm">{headerText}</Heading>
             </ModalHeader>
             <ModalBody>
-              <Card className="p-4 gap-4">
+              <div className="p-4 gap-4 flex flex-col">
                 {formFields.map((field) => (
                   <Input
                     key={field.name}
@@ -106,7 +105,7 @@ const RegisterAtsModal = ({
                     onChange={onChange}
                   />
                 ))}
-              </Card>
+              </div>
             </ModalBody>
             <ModalFooter>
               <Button isLoading={isLoading} onClick={onClick}>

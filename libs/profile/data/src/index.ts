@@ -1,6 +1,7 @@
 export * from './lib/get-ats-client';
 export * from './lib/get-available-devs';
 export * from './lib/get-dev-profile-info';
+export * from './lib/get-highlight-org-options';
 export * from './lib/get-org-profile-info';
 export * from './lib/get-profile-org-review-list';
 export * from './lib/get-profile-repo-list';
@@ -20,3 +21,4 @@ export * from './lib/post-profile-showcase';
 export * from './lib/post-profile-skills';
 export * from './lib/register-ats-client';
 export * from './lib/update-applicant-list';
+export * from './lib/update-ats-preference';

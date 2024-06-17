@@ -39,6 +39,7 @@ import {
   profileSkillsPayloadSchema,
   registerATSClientPayloadSchema,
   registerATSResponseSchema,
+  updateATSPreferencePayloadSchema,
 } from './schemas';
 import { profileRepoContributionPayloadSchema } from './schemas';
 
@@ -153,4 +154,8 @@ export type LinkATSPlatformPayload = Infer<typeof linkATSPlatformPayloadSchema>;
 export type RegisterATSResponse = Infer<typeof registerATSResponseSchema>;
 export type RegisterATSClientPayload = Infer<
   typeof registerATSClientPayloadSchema
+>;
+
+export type UpdateATSPreferencePayload = Infer<
+  typeof updateATSPreferencePayloadSchema
 >;

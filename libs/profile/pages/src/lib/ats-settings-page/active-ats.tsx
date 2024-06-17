@@ -17,6 +17,7 @@ import {
 import { Heading } from '@jobstash/shared/ui';
 
 import { CustomRadio } from './custom-radio';
+import { OrgHighlights } from './org-highlights';
 import { RegisterGreenhouseModal } from './register-greenhouse-modal';
 import { RegisterWorkableModal } from './register-workable-modal';
 
@@ -129,50 +130,54 @@ export const ActiveATS = () => {
   ].includes(true);
 
   return (
-    <div className="flex flex-col gap-4 w-full">
-      <div className="flex items-center gap-4">
-        <Heading size="sm">Select Active ATS:</Heading>
-        {isLoading && <Spinner color="white" size="sm" />}
+    <>
+      <div className="flex flex-col gap-4 w-full">
+        <div className="flex items-center gap-4">
+          <Heading size="sm">Select Active ATS:</Heading>
+          {isLoading && <Spinner color="white" size="sm" />}
+        </div>
+
+        <div className="pl-4">
+          <RadioGroup
+            defaultValue="jobstash"
+            orientation="horizontal"
+            classNames={{ wrapper: 'gap-4' }}
+            value={isLoading ? '' : selected}
+            isDisabled={
+              isLoading || selected !== ATS_PROVIDERS.DEFAULT.platformName
+            }
+            onValueChange={onValueChange}
+          >
+            {atsProvidersArray.map((provider) => (
+              <CustomRadio
+                key={provider.platformName}
+                description={provider.siteLabel}
+                value={provider.platformName}
+              >
+                {provider.label}
+              </CustomRadio>
+            ))}
+          </RadioGroup>
+        </div>
+
+        {orgId && (
+          <RegisterWorkableModal
+            orgId={orgId}
+            isOpen={isOpenWorkableModal}
+            onOpenChange={onOpenChangeWorkableModal}
+          />
+        )}
+
+        {orgId && (
+          <RegisterGreenhouseModal
+            orgId={orgId}
+            isOpen={isOpenGreenhouseModal}
+            onOpenChange={onOpenChangeGreenhouseModal}
+          />
+        )}
       </div>
 
-      <div className="pl-4">
-        <RadioGroup
-          defaultValue="jobstash"
-          orientation="horizontal"
-          classNames={{ wrapper: 'gap-4' }}
-          value={isLoading ? '' : selected}
-          isDisabled={
-            isLoading || selected !== ATS_PROVIDERS.DEFAULT.platformName
-          }
-          onValueChange={onValueChange}
-        >
-          {atsProvidersArray.map((provider) => (
-            <CustomRadio
-              key={provider.platformName}
-              description={provider.siteLabel}
-              value={provider.platformName}
-            >
-              {provider.label}
-            </CustomRadio>
-          ))}
-        </RadioGroup>
-      </div>
-
-      {orgId && (
-        <RegisterWorkableModal
-          orgId={orgId}
-          isOpen={isOpenWorkableModal}
-          onOpenChange={onOpenChangeWorkableModal}
-        />
-      )}
-
-      {orgId && (
-        <RegisterGreenhouseModal
-          orgId={orgId}
-          isOpen={isOpenGreenhouseModal}
-          onOpenChange={onOpenChangeGreenhouseModal}
-        />
-      )}
-    </div>
+      {data && data.id && <OrgHighlights atsClient={data} />}
+    </>
   );
 };
