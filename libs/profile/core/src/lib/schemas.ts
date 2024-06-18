@@ -279,6 +279,7 @@ export const atsTrackedNFTSchema = myzod.object({
   name: myzod.string(),
   contractAddress: myzod.string(),
   network: myzod.literals(
+    '',
     'arbitrum',
     'avalanche',
     'base',

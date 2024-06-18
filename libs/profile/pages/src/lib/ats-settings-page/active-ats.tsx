@@ -17,6 +17,8 @@ import {
 import { Heading } from '@jobstash/shared/ui';
 
 import { CustomRadio } from './custom-radio';
+//
+// import { Nfts } from './nfts';
 import { OrgHighlights } from './org-highlights';
 import { RegisterGreenhouseModal } from './register-greenhouse-modal';
 import { RegisterWorkableModal } from './register-workable-modal';
@@ -177,7 +179,12 @@ export const ActiveATS = () => {
         )}
       </div>
 
-      {data && data.id && <OrgHighlights atsClient={data} />}
+      {data && data.id && (
+        <>
+          <OrgHighlights atsClient={data} />
+          {/* <Nfts atsClient={data} /> */}
+        </>
+      )}
     </>
   );
 };

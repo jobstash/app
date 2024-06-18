@@ -7,6 +7,7 @@ import { ATS_PROVIDERS, PROFILE_RIGHT_PANEL_TABS } from './constants';
 import {
   atsClientSchema,
   atsPreferenceSchema,
+  atsTrackedNFTSchema,
   devProfileInfoPayloadSchema,
   devProfileInfoResponseSchema,
   devProfileInfoSchema,
@@ -133,6 +134,8 @@ export type DevTalentResponse = Infer<typeof devTalentResponseSchema>;
 
 export type TableListOption = 'all' | 'new' | 'shortlisted' | 'archived';
 export type UpdateTableListOption = 'shortlisted' | 'archived';
+
+export type ATSTrackedNFT = Infer<typeof atsTrackedNFTSchema>;
 
 export type ATSSiteLabel =
   typeof ATS_PROVIDERS[keyof typeof ATS_PROVIDERS]['siteLabel'];

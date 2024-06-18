@@ -3,11 +3,7 @@ import { useEffect, useState } from 'react';
 import { Autocomplete } from '@mantine/core';
 import { Chip, Divider, Spinner } from '@nextui-org/react';
 
-import {
-  ATS_PROVIDERS,
-  ATSClient,
-  ATSPreference,
-} from '@jobstash/profile/core';
+import { ATSClient, DEFAULT_ATS_PREFERENCE } from '@jobstash/profile/core';
 
 import {
   useHighlightOrgOptions,
@@ -145,11 +141,4 @@ export const OrgHighlights = ({ atsClient }: Props) => {
       </div>
     </div>
   );
-};
-
-const DEFAULT_ATS_PREFERENCE: ATSPreference = {
-  id: null,
-  platformName: ATS_PROVIDERS.JOBSTASH.platformName,
-  highlightOrgs: [],
-  trackedNfts: [],
 };
