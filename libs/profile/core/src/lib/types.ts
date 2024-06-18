@@ -159,6 +159,10 @@ export type RegisterATSClientPayload = Infer<
   typeof registerATSClientPayloadSchema
 >;
 
+export type ATSTrackedNFTItem = ATSTrackedNFT & {
+  key: string;
+};
+
 export type UpdateATSPreferencePayload = Infer<
   typeof updateATSPreferencePayloadSchema
 >;

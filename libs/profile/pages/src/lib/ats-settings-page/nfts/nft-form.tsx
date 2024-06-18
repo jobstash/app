@@ -2,20 +2,34 @@ import { useState } from 'react';
 
 import { Card, CardBody, CardFooter, CardHeader } from '@nextui-org/card';
 import { Input } from '@nextui-org/input';
-import { Button } from '@nextui-org/react';
+import { Button, Select, SelectItem } from '@nextui-org/react';
 
-import { ATSTrackedNFT } from '@jobstash/profile/core';
+import { ATSTrackedNFTItem } from '@jobstash/profile/core';
 
 import { Heading } from '@jobstash/shared/ui';
 
+const NFT_NETWORKS = [
+  { label: 'Arbitrum', value: 'arbitrum' },
+  { label: 'Avalanche', value: 'avalanche' },
+  { label: 'Base', value: 'base' },
+  { label: 'Blast', value: 'blast' },
+  { label: 'Celo', value: 'celo' },
+  { label: 'Ethereum', value: 'ethereum' },
+  { label: 'Linea', value: 'linea' },
+  { label: 'Optimism', value: 'optimism' },
+  { label: 'Palm', value: 'palm' },
+  { label: 'Polygon', value: 'polygon' },
+];
+
 interface Props {
-  nft: ATSTrackedNFT;
-  save: (_: ATSTrackedNFT) => void;
-  remove: (_: ATSTrackedNFT) => void;
+  isPending: boolean;
+  nft: ATSTrackedNFTItem;
+  save: (_: ATSTrackedNFTItem) => void;
+  remove: (_: ATSTrackedNFTItem) => void;
 }
 
-export const NFTForm = ({ nft, save, remove }: Props) => {
-  const [formState, setFormState] = useState<ATSTrackedNFT>(nft);
+export const NFTForm = ({ isPending, nft, save, remove }: Props) => {
+  const [formState, setFormState] = useState<ATSTrackedNFTItem>(nft);
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
@@ -43,29 +57,45 @@ export const NFTForm = ({ nft, save, remove }: Props) => {
       </CardHeader>
       <CardBody className="flex flex-col gap-4">
         <Input
+          isDisabled={isPending}
           label="Name"
           value={formState.name}
           name="name"
           onChange={handleChange}
         />
         <Input
+          isDisabled={isPending}
           label="Contract Address"
           value={formState.contractAddress}
           name="contractAddress"
           onChange={handleChange}
         />
-        <Input
+        <Select
+          isDisabled={isPending}
           label="Network"
           value={formState.network}
           name="network"
-          onChange={handleChange}
-        />
+          onChange={(e) =>
+            setFormState((prev) => ({
+              ...prev,
+              network: e.target.value as ATSTrackedNFTItem['network'],
+            }))
+          }
+        >
+          {NFT_NETWORKS.map((network) => (
+            <SelectItem key={network.value} value={network.value}>
+              {network.label}
+            </SelectItem>
+          ))}
+        </Select>
       </CardBody>
       <CardFooter className="flex gap-4">
-        <Button isDisabled={isDisabledSave} onClick={onClickSave}>
+        <Button isDisabled={isDisabledSave || isPending} onClick={onClickSave}>
           Save
         </Button>
-        <Button onClick={onClickRemove}>Remove</Button>
+        <Button isDisabled={isPending} onClick={onClickRemove}>
+          Remove
+        </Button>
       </CardFooter>
     </Card>
   );
