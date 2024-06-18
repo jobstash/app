@@ -38,7 +38,7 @@ export const Nfts = ({ atsClient }: Props) => {
       setNfts(
         atsClient.preferences.trackedNfts.map((nft) => ({
           ...nft,
-          key: nft.id,
+          key: nft.id as string,
         })),
       );
     }
@@ -62,7 +62,8 @@ export const Nfts = ({ atsClient }: Props) => {
             | 'workable'
             | 'greenhouse',
           trackedNfts: trackedNfts.map(
-            ({ name, contractAddress, network }) => ({
+            ({ id, name, contractAddress, network }) => ({
+              id,
               name,
               contractAddress,
               network,

@@ -275,7 +275,7 @@ export const devTalentSchema = myzod.intersection(
 export const devTalentResponseSchema = myzod.array(devTalentSchema);
 
 export const atsTrackedNFTSchema = myzod.object({
-  id: myzod.string(),
+  id: myzod.string().nullable(),
   name: myzod.string(),
   contractAddress: myzod.string(),
   network: myzod.literals(
@@ -332,14 +332,7 @@ export const registerATSClientPayloadSchema = myzod.object({
   workableUrl: myzod.string().optional(),
 });
 
-const preferencePayloadSchema = myzod.intersection(
-  myzod.omit(atsPreferenceSchema, ['trackedNfts']),
-  myzod.object({
-    trackedNfts: myzod.array(myzod.omit(atsTrackedNFTSchema, ['id'])),
-  }),
-);
-
 export const updateATSPreferencePayloadSchema = myzod.object({
   clientId: myzod.string(),
-  preferences: preferencePayloadSchema,
+  preferences: atsPreferenceSchema,
 });

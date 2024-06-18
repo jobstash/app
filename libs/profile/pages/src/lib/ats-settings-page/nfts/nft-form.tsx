@@ -73,7 +73,7 @@ export const NFTForm = ({ isPending, nft, save, remove }: Props) => {
         <Select
           isDisabled={isPending}
           label="Network"
-          value={formState.network}
+          selectedKeys={[formState.network]}
           name="network"
           onChange={(e) =>
             setFormState((prev) => ({
