@@ -56,21 +56,8 @@ export const NFTForm = ({ isPending, nft, save, remove }: Props) => {
         <Heading size="xs">Tracked NFT</Heading>
       </CardHeader>
       <CardBody className="flex flex-col gap-4">
-        <Input
-          isDisabled={isPending}
-          label="Name"
-          value={formState.name}
-          name="name"
-          onChange={handleChange}
-        />
-        <Input
-          isDisabled={isPending}
-          label="Contract Address"
-          value={formState.contractAddress}
-          name="contractAddress"
-          onChange={handleChange}
-        />
         <Select
+          isRequired
           isDisabled={isPending}
           label="Network"
           selectedKeys={[formState.network]}
@@ -88,9 +75,26 @@ export const NFTForm = ({ isPending, nft, save, remove }: Props) => {
             </SelectItem>
           ))}
         </Select>
+        <Input
+          isDisabled={isPending}
+          label="Name"
+          value={formState.name}
+          name="name"
+          onChange={handleChange}
+        />
+        <Input
+          isDisabled={isPending}
+          label="Contract Address"
+          value={formState.contractAddress}
+          name="contractAddress"
+          onChange={handleChange}
+        />
       </CardBody>
       <CardFooter className="flex gap-4">
-        <Button isDisabled={isDisabledSave || isPending} onClick={onClickSave}>
+        <Button
+          isDisabled={isDisabledSave || isPending || !formState.network}
+          onClick={onClickSave}
+        >
           Save
         </Button>
         <Button isDisabled={isPending} onClick={onClickRemove}>
