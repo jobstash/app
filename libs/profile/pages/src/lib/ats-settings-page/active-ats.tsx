@@ -1,6 +1,7 @@
 import { useATSClient, useOrgProfileInfo } from '@jobstash/profile/state';
 
 import { ActiveATSForm } from './active-ats-form';
+import { Nfts } from './nfts';
 import { OrgHighlights } from './org-highlights';
 
 export const ActiveATS = () => {
@@ -18,7 +19,7 @@ export const ActiveATS = () => {
       {data && data.id && (
         <>
           <OrgHighlights atsClient={data} />
-          {/* <Nfts atsClient={data} /> */}
+          <Nfts atsClient={data} />
         </>
       )}
     </>
