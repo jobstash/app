@@ -4,7 +4,11 @@
   "overrides": [
     {
       "files": ["*.ts", "*.tsx", "*.js", "*.jsx"],
-      "rules": {}
+      "rules": {
+        // Nx and NextJS conflict BS
+        "jsx-a11y/no-noninteractive-element-interactions": "off",
+        "jsx-a11y/click-events-have-key-events": "off"
+      }
     },
     {
       "files": ["*.ts", "*.tsx"],

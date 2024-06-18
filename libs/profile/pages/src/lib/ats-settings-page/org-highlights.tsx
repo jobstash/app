@@ -6,7 +6,6 @@ import { Chip, Divider, Spinner } from '@nextui-org/react';
 import {
   ATS_PROVIDERS,
   ATSClient,
-  ATSPlatform,
   ATSPreference,
 } from '@jobstash/profile/core';
 
@@ -31,7 +30,7 @@ export const OrgHighlights = ({ atsClient }: Props) => {
     useHighlightOrgOptions();
   const [highlightedOrgs, setHighlightedOrgs] = useState<OptionProps[]>([]);
 
-  // Update values with atsClient.preferences and populat details using orgOptions
+  // Update values with atsClient.preferences and populate details using orgOptions
   useEffect(() => {
     if (
       atsClient.preferences &&
