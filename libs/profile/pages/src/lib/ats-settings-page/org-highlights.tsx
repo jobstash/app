@@ -47,28 +47,36 @@ export const OrgHighlights = ({ atsClient }: Props) => {
 
   const { mutate, isPending } = useUpdateATSPreference();
 
-  const updatePreferences = (highlightOrgs: string[]) => {
+  const updatePreferences = (
+    highlightOrgs: string[],
+    successCb: () => void,
+  ) => {
     if (atsClient.id && atsClient.name) {
-      mutate({
-        clientId: atsClient.id,
-        preferences: {
-          ...DEFAULT_ATS_PREFERENCE,
-          ...atsClient.preferences,
-          platformName: atsClient.name as
-            | 'jobstash'
-            | 'greenhouse'
-            | 'lever'
-            | 'workable',
-          highlightOrgs,
+      mutate(
+        {
+          clientId: atsClient.id,
+          preferences: {
+            ...DEFAULT_ATS_PREFERENCE,
+            ...atsClient.preferences,
+            platformName: atsClient.name as
+              | 'jobstash'
+              | 'greenhouse'
+              | 'lever'
+              | 'workable',
+            highlightOrgs,
+          },
         },
-      });
+        {
+          onSuccess: successCb,
+        },
+      );
     }
   };
 
   const onRemove = (id: string) => {
-    setHighlightedOrgs((prev) => prev.filter((v) => v.id !== id));
     updatePreferences(
       highlightedOrgs.filter((h) => h.id !== id).map((h) => h.id),
+      () => setHighlightedOrgs((prev) => prev.filter((v) => v.id !== id)),
     );
   };
 
@@ -77,9 +85,10 @@ export const OrgHighlights = ({ atsClient }: Props) => {
   const [inputValue, setInputValue] = useState('');
   const onChangeInput = (value: string) => setInputValue(value);
   const onItemSubmit = (item: { value: string; id: string }) => {
-    setHighlightedOrgs((prev) => [...prev, item]);
     setInputValue('');
-    updatePreferences([...highlightedOrgs.map((h) => h.id), item.id]);
+    updatePreferences([...highlightedOrgs.map((h) => h.id), item.id], () => {
+      setHighlightedOrgs((prev) => [...prev, item]);
+    });
   };
 
   const options = (allOrgs ?? []).filter(

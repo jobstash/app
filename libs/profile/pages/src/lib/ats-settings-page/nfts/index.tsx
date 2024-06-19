@@ -50,7 +50,10 @@ export const Nfts = ({ atsClient }: Props) => {
 
   const { mutate, isPending } = useUpdateATSPreference();
 
-  const updatePreferences = (trackedNfts: ATSTrackedNFT[]) => {
+  const updatePreferences = (
+    trackedNfts: ATSTrackedNFT[],
+    successCb: () => void,
+  ) => {
     if (atsClient.id && atsClient.name) {
       const payload: UpdateATSPreferencePayload = {
         clientId: atsClient.id,
@@ -72,7 +75,7 @@ export const Nfts = ({ atsClient }: Props) => {
         },
       };
 
-      mutate(payload);
+      mutate(payload, { onSuccess: successCb });
     }
   };
 
@@ -85,14 +88,12 @@ export const Nfts = ({ atsClient }: Props) => {
         ? [...nfts, newNFT]
         : nfts.map((item, i) => (i === index ? newNFT : item));
 
-    setNfts(newNfts);
-    updatePreferences(newNfts);
+    updatePreferences(newNfts, () => setNfts(newNfts));
   };
 
   const remove = (nft: ATSTrackedNFT) => {
     const newNfts = nfts.filter((n) => n.id !== nft.id);
-    setNfts(newNfts);
-    updatePreferences(newNfts);
+    updatePreferences(newNfts, () => setNfts(newNfts));
   };
 
   return (

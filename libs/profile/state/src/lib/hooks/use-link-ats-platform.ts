@@ -6,6 +6,7 @@ import {
   ATSPlatformName,
   LinkATSPlatformPayload,
 } from '@jobstash/profile/core';
+import { notifError, notifSuccess } from '@jobstash/shared/utils';
 
 import { useMwVersionContext } from '@jobstash/shared/state';
 import { linkATSPlatform } from '@jobstash/profile/data';
@@ -25,13 +26,23 @@ export const useLinkATSPlatform = (redirectPath = ATS_SETTINGS_PAGE) => {
   return useMutation({
     mutationFn: ({ platform, payload }: MutationParams) =>
       linkATSPlatform(platform, payload),
-    async onSuccess() {
+    async onSuccess(_, { platform }) {
+      notifSuccess({
+        title: 'ATS Selection Successful!',
+        message: `You have successfully linked your ${platform} account.`,
+      });
       await queryClient.invalidateQueries({
         queryKey: [mwVersion, 'get-ats-client'],
       });
       if (redirectPath) {
         router.push(redirectPath);
       }
+    },
+    onError(error) {
+      notifError({
+        title: 'ATS Selection Failed!',
+        message: error.message,
+      });
     },
   });
 };
