@@ -50,6 +50,8 @@ ENV NEXT_PUBLIC_QUERY_RETRY_COUNT=0
 ENV NEXT_PUBLIC_INFURA_ID=805a91964ce748f7b7b3d0c787ad7783
 ENV NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID=d6b3203f9238276df2440599c3497e69
 ENV NEXT_PUBLIC_GA_MEASUREMENT_ID=G-PQSHG9DB44
+ENV NEXT_PUBLIC_NEW_FEATURE_TITLE="Crypto Native Jobs"
+ENV NEXT_PUBLIC_NEW_FEATURE_DESCRIPTION="Discover opportunities tailored for the crypto industry. Our new feature, Crypto Native Jobs, connects you with job listings specifically in the blockchain and cryptocurrency sector, helping you find roles that match your skills and interests in this rapidly evolving field."
 
 RUN pnpm build
 # RUN yarn build

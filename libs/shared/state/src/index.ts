@@ -1,6 +1,7 @@
 // Atoms
 export * from './lib/atoms/is-disabled-page-scroll-atom';
 export * from './lib/atoms/is-open-fullscreen-nav-atom';
+export * from './lib/atoms/new-feature-atom';
 export * from './lib/atoms/top-banner-atom';
 
 // Providers

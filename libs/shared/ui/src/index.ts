@@ -87,6 +87,7 @@ export { default as IsMountedWrapper } from './lib/components/is-mounted-wrapper
 export { default as ListErrorMessage } from './lib/components/list-error-message';
 export { default as ListNextPageLoader } from './lib/components/list-next-page-loader';
 export { default as MetaData } from './lib/components/meta-data';
+export * from './lib/components/new-feature-modal';
 export { default as NotFoundSvg } from './lib/components/not-found-svg';
 export { default as OrgCommunityTag } from './lib/components/org-community-tag';
 export { default as OrgReviewCardSets } from './lib/components/org-review-card-sets';

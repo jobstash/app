@@ -1,8 +1,11 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
 import { Tooltip } from '@nextui-org/tooltip';
+import { useAtomValue } from 'jotai';
 
 import { RIGHT_PANEL_WRAPPER_ID } from '@jobstash/right-panel/core';
+
+import { newFeatureIsOpenAtom } from '@jobstash/shared/state';
 
 interface Props {
   children: React.ReactNode;
@@ -20,12 +23,13 @@ export const CTATooltip = ({
 
   const [initialized, setInitialized] = useState(false);
 
+  const newFeatureModalIsOpen = useAtomValue(newFeatureIsOpenAtom);
   useEffect(() => {
     if (!initialized) {
       if (!isOpen && defaultOpen) setIsOpen(true);
       setInitialized(true);
     }
-  }, [defaultOpen, initialized, isOpen]);
+  }, [defaultOpen, initialized, isOpen, newFeatureModalIsOpen]);
 
   const closeOnScroll = useCallback(() => {
     if (isOpen) setIsOpen(false);
@@ -63,7 +67,7 @@ export const CTATooltip = ({
       content={content}
       delay={0}
       closeDelay={0}
-      isOpen={isOpen}
+      isOpen={isOpen && !newFeatureModalIsOpen}
       onOpenChange={onOpenChange}
     >
       <div>{children}</div>

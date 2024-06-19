@@ -26,7 +26,7 @@ import {
   useDisableScrollListener,
 } from '@jobstash/shared/state';
 
-import { ReportModal } from '@jobstash/shared/ui';
+import { NewFeatureModal, ReportModal } from '@jobstash/shared/ui';
 import { WagmiSiweSync } from '@jobstash/auth/feature';
 
 const App = ({ Component, pageProps }: AppProps) => {
@@ -92,6 +92,7 @@ const App = ({ Component, pageProps }: AppProps) => {
 
                     <WagmiSiweSync />
                     <ReportModal />
+                    <NewFeatureModal />
                   </AuthProvider>
                 </WalletProvider>
               </MwVersionProvider>
