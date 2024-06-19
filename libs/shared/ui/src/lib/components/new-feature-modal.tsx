@@ -59,6 +59,8 @@ export const NewFeatureModal = () => {
     isOpen ? onOpen() : handleClose();
   };
 
+  if (!title) return null;
+
   return (
     <Modal
       hideCloseButton
@@ -92,7 +94,11 @@ export const NewFeatureModal = () => {
                   </span>
                 </Heading>
 
-                <span className="max-w-[56ch] text-center">{description}</span>
+                {description && (
+                  <span className="max-w-[56ch] text-center">
+                    {description}
+                  </span>
+                )}
               </div>
             </ModalBody>
             <ModalFooter>
