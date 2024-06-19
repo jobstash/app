@@ -114,7 +114,12 @@ export const Nfts = ({ atsClient }: Props) => {
           ))}
         </div>
       )}
-      <Button className="w-40" size="lg" onClick={appendNftForm}>
+      <Button
+        className="w-40"
+        size="lg"
+        isDisabled={isPending}
+        onClick={appendNftForm}
+      >
         Add NFT
       </Button>
     </div>

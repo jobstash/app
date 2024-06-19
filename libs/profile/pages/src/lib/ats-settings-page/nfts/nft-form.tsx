@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { Card, CardBody, CardFooter, CardHeader } from '@nextui-org/card';
 import { Input } from '@nextui-org/input';
-import { Button, Select, SelectItem } from '@nextui-org/react';
+import { Button, Chip, Select, SelectItem } from '@nextui-org/react';
 
 import { ATSTrackedNFTItem } from '@jobstash/profile/core';
 
@@ -47,13 +47,20 @@ export const NFTForm = ({ isPending, nft, save, remove }: Props) => {
     remove(formState);
   };
 
+  const isUpdated = JSON.stringify(nft) !== JSON.stringify(formState);
   const isDisabledSave =
-    !formState.name && !formState.contractAddress && !formState.network;
+    !isUpdated ||
+    (!formState.name && !formState.contractAddress && !formState.network);
 
   return (
     <Card className="max-w-sm p-4">
-      <CardHeader>
+      <CardHeader className="flex items-center gap-4 h-10">
         <Heading size="xs">Tracked NFT</Heading>
+        {!isDisabledSave && (
+          <Chip size="sm" radius="sm" color="warning" variant="dot">
+            Unsaved
+          </Chip>
+        )}
       </CardHeader>
       <CardBody className="flex flex-col gap-4">
         <Select
