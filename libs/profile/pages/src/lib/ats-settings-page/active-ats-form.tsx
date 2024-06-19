@@ -155,7 +155,7 @@ export const ActiveATSForm = ({ orgId, atsClient }: Props) => {
         {isLoading && <Spinner color="white" size="sm" />}
       </div>
 
-      <form className="pl-4 space-y-4" onSubmit={onSubmit}>
+      <form className="pl-4" onSubmit={onSubmit}>
         <RadioGroup
           defaultValue="jobstash"
           orientation="horizontal"
@@ -169,6 +169,9 @@ export const ActiveATSForm = ({ orgId, atsClient }: Props) => {
               key={provider.platformName}
               description={provider.siteLabel}
               value={provider.platformName}
+              isDisabled={isLoading || hasPreviousSelection}
+              infoUrl={provider.infoUrl}
+              setupGuideUrl={provider.setupGuideUrl}
             >
               {provider.label}
             </CustomRadio>

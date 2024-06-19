@@ -59,21 +59,39 @@ export const COMMUNITY_NFT_ADDRESSES = {
 } as const;
 
 export const ATS_PROVIDERS = {
-  DEFAULT: { label: 'None', siteLabel: 'Disable ATS', platformName: 'none' },
+  DEFAULT: {
+    label: 'None',
+    siteLabel: 'Disable ATS',
+    platformName: 'none',
+    infoUrl: null,
+    setupGuideUrl: null,
+  },
   JOBSTASH: {
     label: 'Jobstash',
     siteLabel: 'jobstash.xyz',
     platformName: 'jobstash',
+    infoUrl: '#',
+    setupGuideUrl: '#',
   },
   GREENHOUSE: {
     label: 'Greenhouse',
     siteLabel: 'greenhouse.com',
     platformName: 'greenhouse',
+    infoUrl: '#',
+    setupGuideUrl: '#',
   },
-  LEVER: { label: 'Lever', siteLabel: 'lever.co', platformName: 'lever' },
+  LEVER: {
+    label: 'Lever',
+    siteLabel: 'lever.co',
+    platformName: 'lever',
+    infoUrl: '#',
+    setupGuideUrl: '#',
+  },
   WORKABLE: {
     label: 'Workable',
     siteLabel: 'workable.com',
     platformName: 'workable',
+    infoUrl: '#',
+    setupGuideUrl: '#',
   },
 } as const;
