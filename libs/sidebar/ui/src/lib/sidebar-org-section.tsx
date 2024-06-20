@@ -1,8 +1,10 @@
 import { CHECK_WALLET_FLOWS } from '@jobstash/auth/core';
+import { ATS_PROVIDERS } from '@jobstash/profile/core';
 import { IS_DEBUG } from '@jobstash/shared/core';
 import { cn } from '@jobstash/shared/utils';
 
 import { useAuthContext } from '@jobstash/auth/state';
+import { useATSClient } from '@jobstash/profile/state';
 
 import { Text } from '@jobstash/shared/ui';
 
@@ -13,7 +15,12 @@ interface Props {
 }
 
 const SidebarOrgSection = ({ isMobile }: Props) => {
-  const { flow } = useAuthContext();
+  const { flow, isLoading: isLoadingAuth } = useAuthContext();
+  const { data: atsClient, isPending: isPendingATSClient } = useATSClient();
+
+  const isLoading = isLoadingAuth || isPendingATSClient;
+
+  if (isLoading) return null;
 
   const tabs: { text: string; path: string }[] = [];
   tabs.push({
@@ -29,10 +36,12 @@ const SidebarOrgSection = ({ isMobile }: Props) => {
       });
     }
 
-    tabs.push({
-      text: 'Applicants',
-      path: '/profile/org/applicants',
-    });
+    if (atsClient && atsClient.name === ATS_PROVIDERS.JOBSTASH.platformName) {
+      tabs.push({
+        text: 'Applicants',
+        path: '/profile/org/applicants',
+      });
+    }
 
     if (IS_DEBUG) {
       tabs.push({
