@@ -1,1 +1,1 @@
-export { NotFoundPage as default } from '@jobstash/shared/ui';
+export { NotFoundPage as default } from '@jobstash/shared/pages';

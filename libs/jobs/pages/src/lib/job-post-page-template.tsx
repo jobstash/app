@@ -45,7 +45,7 @@ const JobList = dynamic(
 );
 
 const NotFoundPage = dynamic(() =>
-  import('@jobstash/shared/ui').then((m) => m.NotFoundPage),
+  import('@jobstash/shared/pages').then((m) => m.NotFoundPage),
 );
 
 const createCanonicalUrl = (

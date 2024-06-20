@@ -99,7 +99,6 @@ export { default as TopBanner } from './lib/components/top-banner';
 
 // Pages
 export { default as MobileSupportPage } from './lib/pages/mobile-support-page';
-export { default as NotFoundPage } from './lib/pages/not-found-page';
 
 // Layouts
 export { default as PageWrapper } from './lib/layouts/page-wrapper';

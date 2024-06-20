@@ -2,14 +2,12 @@
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
-import { LoadingPage } from '@jobstash/shared/pages';
+import { LoadingPage, NotFoundPage } from '@jobstash/shared/pages';
 
 import { ATS_PROVIDERS } from '@jobstash/profile/core';
 
 import { useLinkATSPlatform, useOrgProfileInfo } from '@jobstash/profile/state';
 import { useDelayedAuthRender } from '@jobstash/shared/state';
-
-import { NotFoundPage } from '@jobstash/shared/ui';
 
 export const ATSOauthLeverCallbackPage = () => {
   const router = useRouter();

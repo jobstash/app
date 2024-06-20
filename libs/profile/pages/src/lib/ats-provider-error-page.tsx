@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 
-import { LoadingPage } from '@jobstash/shared/pages';
+import { LoadingPage, NotFoundPage } from '@jobstash/shared/pages';
 
 import { CHECK_WALLET_ROLES } from '@jobstash/auth/core';
 import { ERR_INTERNAL } from '@jobstash/shared/core';
@@ -8,13 +8,7 @@ import { ERR_INTERNAL } from '@jobstash/shared/core';
 import { useAuthContext } from '@jobstash/auth/state';
 import { useDelayedAuthRender } from '@jobstash/shared/state';
 
-import {
-  Button,
-  FoxSVG,
-  Heading,
-  NotFoundPage,
-  Text,
-} from '@jobstash/shared/ui';
+import { Button, FoxSVG, Heading, Text } from '@jobstash/shared/ui';
 import { SideBar } from '@jobstash/sidebar/feature';
 
 const ATS_SETTINGS_PATH = '/profile/org/ats-settings';

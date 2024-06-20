@@ -1,14 +1,11 @@
 import { ReactNode } from 'react';
 
 // eslint-disable-next-line @nx/enforce-module-boundaries
-import { LoadingPage } from '@jobstash/shared/pages';
+import { LoadingPage, NotFoundPage } from '@jobstash/shared/pages';
 
 import { CHECK_WALLET_ROLES } from '@jobstash/auth/core';
 
 import { useAuthContext } from '@jobstash/auth/state';
-import { useDelayedAuthRender } from '@jobstash/shared/state';
-
-import { NotFoundPage } from '@jobstash/shared/ui';
 
 import AdminHeader from './admin-header';
 

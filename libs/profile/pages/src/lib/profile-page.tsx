@@ -1,4 +1,4 @@
-import { LoadingPage } from '@jobstash/shared/pages';
+import { LoadingPage, NotFoundPage } from '@jobstash/shared/pages';
 
 import { CHECK_WALLET_ROLES } from '@jobstash/auth/core';
 
@@ -8,8 +8,6 @@ import {
   OrgProfileInfoProvider,
 } from '@jobstash/profile/state';
 import { useDelayedAuthRender } from '@jobstash/shared/state';
-
-import { NotFoundPage } from '@jobstash/shared/ui';
 
 import { ProfileDevPage } from './profile-dev-page';
 import { ProfileOrgPage } from './profile-org-page';

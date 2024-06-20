@@ -2,6 +2,7 @@ import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo } from 'react';
 
+import { NotFoundPage } from '@jobstash/shared/pages';
 import { useAtom, useAtomValue } from 'jotai';
 
 import { type OrgDetails, OrgListItem } from '@jobstash/organizations/core';
@@ -16,15 +17,7 @@ import { showFiltersAtom } from '@jobstash/filters/state';
 import { activeOrgIdAtom } from '@jobstash/organizations/state';
 import { useMobileDisableScrollSyncer } from '@jobstash/shared/state';
 
-import {
-  getFundingRoundsData,
-  NotFoundPage,
-  PageWrapper,
-} from '@jobstash/shared/ui';
-
-const Filters = dynamic(() =>
-  import('@jobstash/filters/feature').then((m) => m.Filters),
-);
+import { getFundingRoundsData, PageWrapper } from '@jobstash/shared/ui';
 
 const SideBar = dynamic(() =>
   import('@jobstash/sidebar/feature').then((m) => m.SideBar),

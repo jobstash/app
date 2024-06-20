@@ -2,6 +2,7 @@ import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 import { useEffect, useMemo } from 'react';
 
+import { NotFoundPage } from '@jobstash/shared/pages';
 import { useAtom, useAtomValue } from 'jotai';
 
 import { type ProjectDetails } from '@jobstash/projects/core';
@@ -16,7 +17,7 @@ import { showFiltersAtom } from '@jobstash/filters/state';
 import { activeProjectIdAtom } from '@jobstash/projects/state';
 import { useMobileDisableScrollSyncer } from '@jobstash/shared/state';
 
-import { NotFoundPage, PageWrapper } from '@jobstash/shared/ui';
+import { PageWrapper } from '@jobstash/shared/ui';
 
 const SideBar = dynamic(() =>
   import('@jobstash/sidebar/feature').then((m) => m.SideBar),
@@ -87,7 +88,7 @@ export const ProjectDetailsPage = ({
   return (
     <PageWrapper>
       <SideBar filtersRouteSection={ROUTE_SECTION.PROJECTS} />
-        
+
       <div
         className={cn('px-3.5 pt-[212px] lg:px-8 lg:pt-8', {
           'z-50': showFilters,
