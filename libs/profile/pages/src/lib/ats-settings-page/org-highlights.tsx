@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import { forwardRef, useEffect, useState } from 'react';
 
-import { Autocomplete } from '@mantine/core';
+import { Autocomplete, SelectItemProps } from '@mantine/core';
 import { Chip, Divider, Spinner } from '@nextui-org/react';
 
 import { ATSClient, DEFAULT_ATS_PREFERENCE } from '@jobstash/profile/core';
@@ -10,10 +10,11 @@ import {
   useUpdateATSPreference,
 } from '@jobstash/profile/state';
 
-import { Heading } from '@jobstash/shared/ui';
+import { Heading, Text } from '@jobstash/shared/ui';
 
 interface OptionProps {
-  id: string;
+  orgId: string;
+  name: string;
   value: string;
 }
 
@@ -35,7 +36,7 @@ export const OrgHighlights = ({ atsClient }: Props) => {
       const currentHighlightedOrgs: OptionProps[] = [];
 
       for (const value of atsClient.preferences.highlightOrgs) {
-        const org = allOrgs?.find((o) => o.id === value);
+        const org = allOrgs?.find((o) => o.orgId === value);
         if (org) {
           currentHighlightedOrgs.push(org);
         }
@@ -75,8 +76,8 @@ export const OrgHighlights = ({ atsClient }: Props) => {
 
   const onRemove = (id: string) => {
     updatePreferences(
-      highlightedOrgs.filter((h) => h.id !== id).map((h) => h.id),
-      () => setHighlightedOrgs((prev) => prev.filter((v) => v.id !== id)),
+      highlightedOrgs.filter((h) => h.orgId !== id).map((h) => h.orgId),
+      () => setHighlightedOrgs((prev) => prev.filter((v) => v.orgId !== id)),
     );
   };
 
@@ -84,11 +85,14 @@ export const OrgHighlights = ({ atsClient }: Props) => {
 
   const [inputValue, setInputValue] = useState('');
   const onChangeInput = (value: string) => setInputValue(value);
-  const onItemSubmit = (item: { value: string; id: string }) => {
+  const onItemSubmit = (item: OptionProps) => {
     setInputValue('');
-    updatePreferences([...highlightedOrgs.map((h) => h.id), item.id], () => {
-      setHighlightedOrgs((prev) => [...prev, item]);
-    });
+    updatePreferences(
+      [...highlightedOrgs.map((h) => h.orgId), item.orgId],
+      () => {
+        setHighlightedOrgs((prev) => [...prev, item]);
+      },
+    );
   };
 
   const options = (allOrgs ?? []).filter(
@@ -116,11 +120,15 @@ export const OrgHighlights = ({ atsClient }: Props) => {
           size="lg"
           placeholder="Search among 6k organizations in web3 ..."
           disabled={isLoading}
-          data={options}
           limit={300}
           maxDropdownHeight={300}
           dropdownPosition="bottom"
           value={inputValue}
+          data={options}
+          itemComponent={AutoCompleteItem}
+          filter={(value, item) =>
+            item.name.toLowerCase().includes(value.toLowerCase().trim())
+          }
           onChange={onChangeInput}
           onItemSubmit={onItemSubmit}
         />
@@ -132,16 +140,16 @@ export const OrgHighlights = ({ atsClient }: Props) => {
             <div className="flex gap-3 items-center flex-wrap">
               {[...highlightedOrgs]
                 .sort((a, b) => a.value.localeCompare(b.value))
-                .map(({ id, value }) => (
+                .map(({ orgId, name }) => (
                   <Chip
-                    key={id}
+                    key={orgId}
                     size="lg"
                     radius="sm"
                     variant="faded"
                     isDisabled={isPending}
-                    onClose={() => onRemove(id)}
+                    onClose={() => onRemove(orgId)}
                   >
-                    {value}
+                    {name}
                   </Chip>
                 ))}
             </div>
@@ -151,3 +159,18 @@ export const OrgHighlights = ({ atsClient }: Props) => {
     </div>
   );
 };
+
+interface ItemProps extends SelectItemProps {
+  orgId: string;
+  name: string;
+}
+
+const AutoCompleteItem = forwardRef<HTMLDivElement, ItemProps>(
+  ({ name, orgId, ...others }: ItemProps, ref) => (
+    <div ref={ref} {...others}>
+      <Text>{name}</Text>
+    </div>
+  ),
+);
+
+AutoCompleteItem.displayName = 'AutoCompleteItem';

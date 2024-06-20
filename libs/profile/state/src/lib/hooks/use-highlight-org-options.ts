@@ -10,6 +10,6 @@ export const useHighlightOrgOptions = () => {
     queryKey: [mwVersion, 'highlight-org-options'],
     queryFn: async () => getHighlightOrgOptions(),
     staleTime: 1000 * 60 * 60,
-    select: (data) => data.map((d) => ({ value: d.name, id: d.orgId })),
+    select: (data) => data.map((d) => ({ ...d, value: d.orgId })),
   });
 };
