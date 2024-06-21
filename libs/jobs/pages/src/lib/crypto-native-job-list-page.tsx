@@ -10,7 +10,7 @@ import { JobListPageTemplate } from './job-list-page-template';
 export const CryptoNativeJobListPage = () => (
   <JobListPageTemplate
     title="Crypto Native Jobs"
-    routeSection={ROUTE_SECTION.CRYPTO_NATIVE_JOBS}
+    routeSection={ROUTE_SECTION.ELITE_FAST_TRACK}
     access="protected"
     jobCountAtom={cryptoNativeJobCountAtom}
     activeJobAtom={activeCryptoNativeJobAtom}

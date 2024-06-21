@@ -11,8 +11,8 @@ import SidebarBartab from './sidebar-bartab';
 const discoverBartabs = [
   { text: 'Jobs', path: ROUTE_SECTION.JOBS, icon: <JobsSidebarIcon /> },
   {
-    text: 'Crypto Native Jobs',
-    path: ROUTE_SECTION.CRYPTO_NATIVE_JOBS,
+    text: 'Elite Fast Track',
+    path: ROUTE_SECTION.ELITE_FAST_TRACK,
     icon: (
       <div>
         <Image priority src="/new-icon.webp" alt="New" width={16} height={16} />

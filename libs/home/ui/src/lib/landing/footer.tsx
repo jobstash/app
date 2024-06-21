@@ -11,7 +11,7 @@ const LandingFooter = () => (
             src="/brand-footer.png"
             width={160}
             height={40}
-            alt="JobStash Crypto Developer Jobs"
+            alt="Crypto Native Jobs by JobStash"
           />
         </div>
 

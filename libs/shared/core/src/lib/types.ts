@@ -79,4 +79,4 @@ export type MwVersionCtx = {
 
 export type JobsRouteSection =
   | typeof ROUTE_SECTION.JOBS
-  | typeof ROUTE_SECTION.CRYPTO_NATIVE_JOBS;
+  | typeof ROUTE_SECTION.ELITE_FAST_TRACK;

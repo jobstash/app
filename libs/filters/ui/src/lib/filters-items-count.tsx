@@ -11,7 +11,7 @@ const FiltersItemsCount = () => {
   const { filteredItemsCount, routeSection, isLoading } = useFiltersContext();
 
   const text = (
-    routeSection === ROUTE_SECTION.CRYPTO_NATIVE_JOBS
+    routeSection === ROUTE_SECTION.ELITE_FAST_TRACK
       ? ROUTE_SECTION.JOBS
       : routeSection
   ).slice(1);

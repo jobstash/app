@@ -47,7 +47,7 @@ const JobList = ({
   } = useJobBookmarks();
 
   const routeSection =
-    access === 'public' ? ROUTE_SECTION.JOBS : ROUTE_SECTION.CRYPTO_NATIVE_JOBS;
+    access === 'public' ? ROUTE_SECTION.JOBS : ROUTE_SECTION.ELITE_FAST_TRACK;
 
   if (isLoading) {
     return (
