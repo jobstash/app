@@ -11,9 +11,9 @@ import { AnonTooltipContent } from './anon-tooltip-content';
 import { EligibleTooltipContent } from './eligible-tooltip-content';
 import { NotEligibleTooltipContent } from './not-eligible-tooltip-content';
 
-const ANON_TEXT = 'Check Fast-Track Access';
-const ELIGIBLE_TEXT = 'Fast-Track Apply';
-const NOT_ELIGIBLE_TEXT = 'Not eligible for Fast-Track';
+const ANON_TEXT = 'Check Fast Track Access';
+const ELIGIBLE_TEXT = 'Elite Fast Track Apply';
+const NOT_ELIGIBLE_TEXT = 'Not eligible for Elite Fast Track';
 
 interface Props {
   jobId: string;
