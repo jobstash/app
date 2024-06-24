@@ -1,11 +1,12 @@
 import { useModal, useSIWE } from 'connectkit';
+import { useSetAtom } from 'jotai';
 import { useAccount } from 'wagmi';
 
 import { CHECK_WALLET_ROLES, CheckWalletRole } from '@jobstash/auth/core';
 import { ECOSYSTEMS } from '@jobstash/shared/core';
 import { getEcosystemSubdomain } from '@jobstash/shared/utils';
 
-import { useAuthContext } from '@jobstash/auth/state';
+import { bypassDevSignupAtom, useAuthContext } from '@jobstash/auth/state';
 import {
   useJobPost,
   useJobsApplied,
@@ -65,9 +66,11 @@ export const useRightPanelJobCTA = (props: Props) => {
   ].includes(true);
 
   const { setOpen } = useModal();
+  const setBypassDevSignup = useSetAtom(bypassDevSignupAtom);
   const openModalIfAnon = () => {
     if (isAnon) {
       setOpen(true);
+      setBypassDevSignup(true);
     }
   };
 

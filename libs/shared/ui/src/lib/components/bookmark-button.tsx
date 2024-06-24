@@ -23,11 +23,19 @@ const BookmarkButton = ({
   isDisabled,
   onClick,
 }: Props) => {
-  const { isAuthd, roleClick } = useRoleClick(CHECK_WALLET_ROLES.DEV, () => {
+  const role = CHECK_WALLET_ROLES.DEV;
+  const bypassDevSignup = true;
+  const callback = () => {
     if (onClick) {
       setBookmarked((prev) => !prev);
       onClick();
     }
+  };
+
+  const { isAuthd, roleClick } = useRoleClick({
+    role,
+    bypassDevSignup,
+    callback,
   });
 
   const [bookmarked, setBookmarked] = useState(isBookmarked);

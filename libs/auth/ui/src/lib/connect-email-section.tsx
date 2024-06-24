@@ -24,9 +24,9 @@ const ConnectEmailSection = (props: Props) => {
   const onClickBack = () => setPickRoleSection(null);
 
   return (
-    <div className="flex items-center justify-center min-h-screen bg-white/5 pt-20 pb-10 md:pt-0">
+    <div className="flex items-center justify-center pt-20 pb-10 md:pt-20">
       <form
-        className="flex flex-col space-y-8 rounded-3xl bg-gradient-to-l from-[#141317] to-black/70 p-8 text-center"
+        className="flex flex-col space-y-8 rounded-3xl bg-white/5 p-8 text-center"
         onSubmit={onSubmit}
       >
         <SectionBackButton

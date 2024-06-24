@@ -26,7 +26,7 @@ const PickRoleDevSection = () => {
   const onClickConnect = () => setPickRoleSection('dev');
 
   return (
-    <PickRoleSection className={['']}>
+    <PickRoleSection>
       <h3
         className={`${lato.className} font-semibold leading-none text-white text-[20px] lg:text-[24px] xl:text-[30px]`}
       >

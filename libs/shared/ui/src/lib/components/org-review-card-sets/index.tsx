@@ -46,10 +46,10 @@ const OrgReviewCardSets = ({ org }: Props) => {
     push('/profile/reviews');
   };
 
-  const { isAuthd, roleClick } = useRoleClick(
-    CHECK_WALLET_ROLES.DEV,
-    openReviewsTab,
-  );
+  const { isAuthd, roleClick } = useRoleClick({
+    role: CHECK_WALLET_ROLES.DEV,
+    callback: openReviewsTab,
+  });
 
   const { hasReviewed, org: reviewedOrg } = useUserReview(orgId);
 

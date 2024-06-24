@@ -1,3 +1,4 @@
+export * from './lib/bypass-candidate-section';
 export { default as ConnectDevEmail } from './lib/connect-dev-email';
 export { default as ConnectEmailDone } from './lib/connect-email-done';
 export { default as ConnectOrgEmail } from './lib/connect-org-email';

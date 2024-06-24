@@ -38,10 +38,13 @@ export const RightPanelOrgJobBookmarkButton = (props: Props) => {
     mutate(shortUUID);
   };
 
-  const { isAuthd, roleClick } = useRoleClick(CHECK_WALLET_ROLES.DEV, () => {
+  const role = CHECK_WALLET_ROLES.DEV;
+  const callback = () => {
     setBookmarked((prev) => !prev);
     onClick();
-  });
+  };
+
+  const { isAuthd, roleClick } = useRoleClick({ role, callback });
 
   // Show spinner only when remove-bookmark until refetch done
   const showSpinner =

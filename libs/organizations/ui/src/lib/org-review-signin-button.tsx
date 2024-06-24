@@ -14,9 +14,12 @@ interface Props {
 
 const OrgReviewSigninButton = ({ orgId }: Props) => {
   const { push } = useRouter();
-  const { isAuthd, roleClick } = useRoleClick(CHECK_WALLET_ROLES.DEV, () => {
+  const role = CHECK_WALLET_ROLES.DEV;
+  const callback = () => {
     push('/profile/reviews');
-  });
+  };
+
+  const { isAuthd, roleClick } = useRoleClick({ role, callback });
 
   const { hasReviewed, isLoading } = useUserReview(orgId);
 

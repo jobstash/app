@@ -8,6 +8,7 @@ import { CHECK_WALLET_FLOWS } from '@jobstash/auth/core';
 import { lato } from '@jobstash/shared/core';
 
 import {
+  bypassDevSignupAtom,
   isPendingPickRoleAtom,
   pickRoleSectionAtom,
   useAuthContext,
@@ -15,6 +16,7 @@ import {
 import { useIsMounted } from '@jobstash/shared/state';
 
 import {
+  BypassCandidateSection,
   ConnectDevEmail,
   ConnectEmailDone,
   ConnectOrgEmail,
@@ -35,6 +37,7 @@ export const PickRolePage = () => {
 
   const shouldRenderPickRole = isMounted && !isLoadingAuth && isPickRoleFlow;
   const isPendingPickRole = useAtomValue(isPendingPickRoleAtom);
+  const isBypassDev = useAtomValue(bypassDevSignupAtom);
 
   // Refetch once
   const refetchRef = useRef(false);
@@ -63,6 +66,8 @@ export const PickRolePage = () => {
         <ConnectDevEmail />
       ) : section === 'org' ? (
         <ConnectOrgEmail />
+      ) : isBypassDev ? (
+        <BypassCandidateSection />
       ) : (
         <div className="pt-[80px] xl:pr-52">
           <div className="text-center px-4 pb-10 lg:pb-20">
