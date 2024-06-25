@@ -95,7 +95,7 @@ const TooltipContent = ({
             <GithubLogoOutlineIcon />
             <div className="flex items-center gap-2">
               <Link
-                href={`https://github.com/${login}/${repository.name}`}
+                href={`https://github.com/${repository.name}`}
                 size="sm"
                 underline="hover"
                 className="font-semibold text-white"
