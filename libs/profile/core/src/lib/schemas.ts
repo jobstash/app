@@ -309,6 +309,7 @@ export const atsClientSchema = myzod.object({
   id: myzod.string().nullable(),
   name: myzod.string().nullable(),
   orgId: myzod.string().nullable(),
+  hasTags: myzod.boolean(),
   hasWebhooks: myzod.boolean(),
   preferences: atsPreferenceSchema.nullable(),
   applicationCreatedSignatureToken: myzod.string().nullable().optional(),

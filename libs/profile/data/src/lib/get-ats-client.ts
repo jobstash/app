@@ -5,25 +5,25 @@ import { MW_URL } from '@jobstash/shared/core';
 
 import { mwFetch } from '@jobstash/shared/data';
 
-const leverUrlResponseSchema = myzod.object({
+const responseSchema = myzod.object({
   success: myzod.boolean(),
   message: myzod.string(),
   data: atsClientSchema,
 });
 
-type LeverUrlResponse = Infer<typeof leverUrlResponseSchema>;
+type AtsClientResponse = Infer<typeof responseSchema>;
 
 export const getATSClient = async () => {
   const url = `${MW_URL}/scorer/client`;
 
   const options = {
-    responseSchema: leverUrlResponseSchema,
+    responseSchema,
     sentryLabel: `getATSClient`,
     credentials: 'include' as RequestCredentials,
     mode: 'cors' as RequestMode,
   };
 
-  const response = await mwFetch<LeverUrlResponse>(url, options);
+  const response = await mwFetch<AtsClientResponse>(url, options);
 
   return response.data;
 };
