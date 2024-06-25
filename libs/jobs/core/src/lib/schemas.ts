@@ -64,7 +64,7 @@ export const jobApplyInteractionResponseSchema = myzod
     myzod.object({
       success: myzod.literal(true),
       message: myzod.string(),
-      data: myzod.string(),
+      data: myzod.string().optional(),
     }),
   );
 

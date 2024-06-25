@@ -59,7 +59,7 @@ export const useCryptoNativeJobCTA = (props: Props) => {
           console.log({ error, variables, context });
         },
         onSuccess(data) {
-          if (data.success) {
+          if (data.success && data.data) {
             openNewTab(data.data);
           }
         },
