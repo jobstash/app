@@ -13,26 +13,24 @@ const AddItemButton = () => {
 
   return (
     <Button isIcon isDisabled={isDisabled} onClick={addShowcase}>
-      <AddItemIcon />
+      <FloppyIcon />
     </Button>
   );
 };
 
 export default AddItemButton;
 
-const AddItemIcon = () => (
+const FloppyIcon = () => (
   <svg
     xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-    strokeWidth={1.5}
-    stroke="currentColor"
-    className="w-6 h-6"
+    width="1em"
+    height="1em"
+    viewBox="0 0 256 256"
+    className="w-7 h-7 fill-white"
   >
     <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      d="M12 4.5v15m7.5-7.5h-15"
+      fill="white"
+      d="M208 32H83.31A15.86 15.86 0 0 0 72 36.69L36.69 72A15.86 15.86 0 0 0 32 83.31V208a16 16 0 0 0 16 16h160a16 16 0 0 0 16-16V48a16 16 0 0 0-16-16M88 48h80v32H88Zm120 160H48V83.31l24-24V80a16 16 0 0 0 16 16h80a16 16 0 0 0 16-16V48h24Zm-80-96a40 40 0 1 0 40 40a40 40 0 0 0-40-40m0 64a24 24 0 1 1 24-24a24 24 0 0 1-24 24"
     />
   </svg>
 );
