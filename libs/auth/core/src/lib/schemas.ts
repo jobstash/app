@@ -33,11 +33,13 @@ export const checkWalletDataSchema = myzod.object({
   cryptoNative: myzod.boolean(),
 });
 
-export const checkWalletResponseSchema = myzod.object({
-  data: checkWalletDataSchema,
-  success: myzod.boolean(),
-  message: myzod.string(),
-});
+export const checkWalletResponseSchema = myzod
+  .object({
+    data: checkWalletDataSchema,
+    success: myzod.boolean(),
+    message: myzod.string(),
+  })
+  .allowUnknownKeys(true);
 
 export const siweNonceResponseSchema = myzod.intersection(
   mwMessageResponseSchema,
