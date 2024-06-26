@@ -13,7 +13,8 @@ const ProfileHeaderPreferredContactInput = () => {
   return (
     <div className="flex flex-col gap-2">
       <Heading size="xs" fw="bold">
-        Preferred way of Contact
+        Preferred way of Contact{' '}
+        <span className="text-red-500 font-bold text-lg">*</span>
       </Heading>
       <Select
         allowDeselect

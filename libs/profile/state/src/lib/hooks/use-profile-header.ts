@@ -65,27 +65,14 @@ export const useProfileHeader = () => {
     });
   };
 
-  const startAutoSave = (value: string) => {
-    // Clear existing timeout, set new timeout
-    if (timeoutId) clearTimeout(timeoutId);
-    const newTimeoutId = setTimeout(() => {
-      if (value) {
-        saveProfileInfo();
-      }
-    }, AUTOSAVE_DELAY);
-    setTimeoutId(newTimeoutId);
-  };
-
   const onChangeSelectedContact: ChangeEventHandler<HTMLInputElement> = (e) => {
     const { value } = e.currentTarget;
     setSelectedContact(value);
-    startAutoSave(value);
   };
 
   const onChangeCountry: ChangeEventHandler<HTMLInputElement> = (e) => {
     const { value } = e.currentTarget;
     setCurrentLocation((prev) => ({ ...prev, country: value }));
-    startAutoSave(value);
   };
 
   const onChangeCity: ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -94,7 +81,6 @@ export const useProfileHeader = () => {
       ...prev,
       city: value,
     }));
-    startAutoSave(value);
   };
 
   // Timeout cleanup
@@ -137,7 +123,13 @@ export const useProfileHeader = () => {
 
   const isEqualFetched = prevJSON === currentJSON;
 
-  const disableSave = isEqualFetched;
+  const hasMissingFields = [
+    !preferredContact,
+    !selectedContact,
+    !currentLocation.country,
+    !currentLocation.city,
+  ].includes(true);
+  const disableSave = isEqualFetched || hasMissingFields;
 
   const isLoading = isLoadingMutation || !profileInfoData;
 
@@ -156,6 +148,7 @@ export const useProfileHeader = () => {
     avatar,
     location: currentLocation,
     contact,
+    hasMissingFields,
     disableSave,
     onChangePreferredContact,
     onChangeSelectedContact,

@@ -19,7 +19,8 @@ const ProfileHeaderSelectedContactInput = () => {
     <div className="flex flex-col gap-2">
       <div>
         <Heading size="xs" fw="bold">
-          Address or Username
+          Address or Username{' '}
+          <span className="text-red-500 font-bold text-lg">*</span>
         </Heading>
       </div>
       <TextInput

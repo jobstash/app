@@ -14,7 +14,7 @@ const ProfileHeaderCountryInput = () => {
     <div className="flex flex-col gap-2">
       <div>
         <Heading size="xs" fw="bold">
-          Country
+          Country <span className="text-red-500 font-bold text-lg">*</span>
         </Heading>
       </div>
       <TextInput

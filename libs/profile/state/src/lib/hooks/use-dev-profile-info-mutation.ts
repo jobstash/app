@@ -45,9 +45,9 @@ export const useDevProfileInfoMutation = () => {
         message: 'Please try again later.',
       });
     },
-    onSettled() {
+    async onSettled() {
       // Always refetch after
-      queryClient.invalidateQueries({
+      await queryClient.invalidateQueries({
         queryKey: [mwVersion, 'dev-profile-info', address],
       });
     },

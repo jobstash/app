@@ -15,6 +15,7 @@ interface ProfileHeaderContextProps {
   location: { country: string | null; city: string | null };
   email: string | null;
   contact: DevProfileInfo['contact'];
+  hasMissingFields: boolean;
   disableSave: boolean;
   onChangePreferredContact: (v: string | null) => void;
   onChangeSelectedContact: ChangeEventHandler<HTMLInputElement>;
