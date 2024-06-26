@@ -15,7 +15,7 @@ const ConnectGithubAccount = () => {
       <div className="flex flex-col gap-4 py-4">
         <div className="text-center text-sm">
           <Text size="sm" color="dimmed">
-            If you would like to add Github account to your profile:
+            We verify your Github account to ensure you're a developer.
           </Text>
         </div>
 

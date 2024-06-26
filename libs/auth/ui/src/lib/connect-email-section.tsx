@@ -47,14 +47,14 @@ const ConnectEmailSection = (props: Props) => {
 
         <div className="flex max-w-sm flex-col gap-y-6">
           <Text color="dimmed">
-            We require a business email to associate you with a current or past
-            employer. If you don&#39;t have a business email anymore, use your
-            private email.
+            Please enter your business email address, this will help us verify
+            your current employment
           </Text>
           <Text color="dimmed">
-            Using a business email increases your chances to be hired as we will
-            present you as an employee of the organization and you will have
-            increased visibility.
+            If you don&#39;t have a business email anymore, use your private
+            email. We will only send a verification email to this address. To
+            receive job updates, please provide an email address in your profile
+            settings after this step.
           </Text>
         </div>
 

@@ -34,7 +34,7 @@ export const DevAccountCard = () => {
 
           {profileInfoData?.email && (
             <ConnectedAccount
-              label="Connected Email Account:"
+              label="Connected Business Email Account:"
               avatar={getEmailAvatar(profileInfoData.email)}
               text={profileInfoData.email}
             />
