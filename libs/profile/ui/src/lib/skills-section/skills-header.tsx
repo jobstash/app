@@ -4,7 +4,8 @@ import { Heading, Text } from '@jobstash/shared/ui';
 
 const DEFAULT_DESCRIPTION =
   'You have selected these skills to be visible in your profile';
-const EMPTY_DESCRIPTION = 'Start adding skills to be displayed in your profile';
+const EMPTY_DESCRIPTION =
+  "Ass skills to be displayed in your profile. Try picking only skills you'd like to use in the future";
 
 const SkillsHeader = () => {
   const { skills } = useProfileSkillsContext();
