@@ -8,7 +8,7 @@ const ShowcaseHeader = () => (
     </motion.div>
     <motion.div layout>
       <Text color="dimmed">
-        Add links to your CV, Portfolio and things you built
+        Add a link to your CV, Portfolio and things you built.
       </Text>
     </motion.div>
   </>

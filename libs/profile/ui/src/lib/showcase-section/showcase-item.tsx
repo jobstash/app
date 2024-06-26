@@ -38,7 +38,7 @@ const ShowcaseItem = ({ showcase }: Props) => {
       urlInput={
         <TextInput
           disabled
-          placeholder="Enter URL Link"
+          placeholder="Enter document URL"
           size="lg"
           classNames={{
             input: cn(

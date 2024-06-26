@@ -16,7 +16,9 @@ const UrlInput = () => {
 
   return (
     <TextInput
-      placeholder={isLoading.mutation ? editedShowcase.url : 'Enter URL Link'}
+      placeholder={
+        isLoading.mutation ? editedShowcase.url : 'Enter Document URL'
+      }
       size="lg"
       classNames={{
         input: cn(

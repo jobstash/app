@@ -14,7 +14,7 @@ const FormToggler = () => {
       isDisabled={isLoading.query || isLoading.mutation}
       onClick={onToggleForm}
     >
-      Add Links
+      Add Documents
     </Button>
   );
 };
