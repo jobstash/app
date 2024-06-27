@@ -40,6 +40,8 @@ import {
   profileSkillsPayloadSchema,
   registerATSClientPayloadSchema,
   registerATSResponseSchema,
+  retryWebhooksPayloadSchema,
+  retryWebhooksResponseSchema,
   updateATSPreferencePayloadSchema,
 } from './schemas';
 import { profileRepoContributionPayloadSchema } from './schemas';
@@ -166,3 +168,6 @@ export type ATSTrackedNFTItem = ATSTrackedNFT & {
 export type UpdateATSPreferencePayload = Infer<
   typeof updateATSPreferencePayloadSchema
 >;
+
+export type RetryWebhooksResponse = Infer<typeof retryWebhooksResponseSchema>;
+export type RetryWebhooksPayload = Infer<typeof retryWebhooksPayloadSchema>;

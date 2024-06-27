@@ -10,13 +10,17 @@ export const ActiveATS = () => {
 
   const { data } = useATSClient();
 
+  const showPreferences = data && data.id && data.hasWebhooks && data.hasTags;
+
   return (
     <>
+      <pre>{JSON.stringify(data, undefined, '\t')}</pre>
+
       <div className="flex flex-col gap-4 w-full">
         <ActiveATSForm orgId={orgId} atsClient={data} />
       </div>
 
-      {data && data.id && (
+      {showPreferences && (
         <>
           <OrgHighlights atsClient={data} />
           <Nfts atsClient={data} />

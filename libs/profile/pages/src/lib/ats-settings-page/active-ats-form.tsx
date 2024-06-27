@@ -22,6 +22,7 @@ import { Heading } from '@jobstash/shared/ui';
 import { CustomRadio } from './custom-radio';
 import { RegisterGreenhouseModal } from './register-greenhouse-modal';
 import { RegisterWorkableModal } from './register-workable-modal';
+import { RetryWorkable } from './retry-workable';
 
 const LEVER_OAUTH_URL = `${MW_URL}/scorer/oauth/lever`;
 
@@ -178,10 +179,22 @@ export const ActiveATSForm = ({ orgId, atsClient }: Props) => {
           ))}
         </RadioGroup>
 
-        <Button type="submit" isDisabled={isDisabledSave || isLoading}>
-          Save ATS Selection
-        </Button>
+        {isUnsaved && (
+          <Button type="submit" isDisabled={isDisabledSave || isLoading}>
+            Save ATS Selection
+          </Button>
+        )}
       </form>
+
+      {atsClient &&
+        atsClient.id &&
+        !atsClient.hasWebhooks &&
+        atsClient.name === ATS_PROVIDERS.WORKABLE.platformName && (
+          <RetryWorkable
+            clientId={atsClient.id}
+            platform={ATS_PROVIDERS.WORKABLE.platformName}
+          />
+        )}
 
       {orgId && (
         <RegisterWorkableModal

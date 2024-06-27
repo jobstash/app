@@ -9,6 +9,7 @@ import {
 } from '@jobstash/organizations/core';
 import {
   MessageResponse,
+  messageResponseSchema,
   repositoryInfoSchema,
   tagSchema,
 } from '@jobstash/shared/core';
@@ -336,4 +337,21 @@ export const registerATSClientPayloadSchema = myzod.object({
 export const updateATSPreferencePayloadSchema = myzod.object({
   clientId: myzod.string(),
   preferences: atsPreferenceSchema,
+});
+
+export const retryWebhooksResponseSchema = myzod.intersection(
+  messageResponseSchema,
+  myzod.object({
+    data: myzod
+      .object({
+        applicationCreatedSignatureToken: myzod.string(),
+        candidateHiredSignatureToken: myzod.string(),
+      })
+      .optional(),
+  }),
+);
+
+export const retryWebhooksPayloadSchema = myzod.object({
+  clientId: myzod.string(),
+  apiToken: myzod.string().nullable(),
 });
