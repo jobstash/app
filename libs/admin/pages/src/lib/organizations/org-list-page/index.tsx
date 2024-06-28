@@ -1,37 +1,35 @@
+import 'ag-grid-community/styles/ag-grid.css';
+import 'ag-grid-community/styles/ag-theme-quartz.css';
+import './ag-grid-custom.css';
+
 import Head from 'next/head';
-
-import { LoadingPage } from '@jobstash/shared/pages';
-
-import { useAllOrgs } from '@jobstash/admin/state';
 
 import { AdminLayout } from '@jobstash/admin/ui';
 import { SideBar } from '@jobstash/sidebar/feature';
 
-import { EditAliasModal } from './edit-alias-modal';
-import { EditCommunitiesModal } from './edit-communities-modal';
-import { OrgListTable } from './table';
+import { OrgListFocusSyncer } from './org-list-focus-syncer';
+import { OrgListTable } from './org-list-table';
+import { OrgListTableWrapper } from './org-list-table-wrapper';
+import { OrgUpdatePayloadSyncer } from './org-update-payload-syncer';
 
-export const OrgListPage = () => {
-  const { data, isLoading } = useAllOrgs();
-
-  if (isLoading) return <LoadingPage />;
-
-  return (
-    <>
-      <Head>
-        <title>Godmode | Organizations</title>
-      </Head>
-
-      <AdminLayout
-        hideHeader
-        breadCrumbs={null}
-        sidebar={<SideBar />}
-        tabsSection={null}
-      >
-        <OrgListTable data={data ?? []} />
-        <EditAliasModal />
-        <EditCommunitiesModal />
-      </AdminLayout>
-    </>
-  );
-};
+export const OrgListPage = () => (
+  <>
+    <Head>
+      <title>Godmode | Organizations</title>
+    </Head>
+    <AdminLayout
+      hideHeader
+      breadCrumbs={null}
+      sidebar={<SideBar />}
+      tabsSection={null}
+    >
+      <div className="w-full">
+        <OrgListTableWrapper>
+          <OrgListTable />
+        </OrgListTableWrapper>
+        <OrgListFocusSyncer />
+        <OrgUpdatePayloadSyncer />
+      </div>
+    </AdminLayout>
+  </>
+);
