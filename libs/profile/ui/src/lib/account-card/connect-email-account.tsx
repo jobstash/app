@@ -30,7 +30,7 @@ const ConnectEmailAccount = () => {
       <div className="flex flex-col gap-4 py-4">
         <div className="text-center text-sm">
           <Text size="sm" color="dimmed">
-            Connect Organization Email:
+            Verify your current employment by connecting your business email:
           </Text>
         </div>
 

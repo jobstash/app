@@ -4,7 +4,7 @@ const AccountCardTitle = () => (
   <div className="flex justify-center">
     <div className="max-w-[220px] text-center">
       <Heading size="lg" fw="semibold">
-        Your JobStash Account
+        Your professional credentials
       </Heading>
     </div>
   </div>

@@ -15,7 +15,7 @@ const ConnectGithubAccount = () => {
       <div className="flex flex-col gap-4 py-4">
         <div className="text-center text-sm">
           <Text size="sm" color="dimmed">
-            We verify your Github account to ensure you&#39;re a developer.
+            Link work history based on qualifying OSS code
           </Text>
         </div>
 
