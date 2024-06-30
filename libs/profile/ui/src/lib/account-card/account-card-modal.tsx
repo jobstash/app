@@ -53,8 +53,7 @@ const AccountCardModal = ({
           <div className="pt-2 pb-6">
             <Text color="dimmed">
               Are you sure you want to delete your profile? This action is
-              destructive and you will have to contact support to restore your
-              data.
+              destructive and you will lose your data.
             </Text>
           </div>
 
