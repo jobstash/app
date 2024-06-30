@@ -17,14 +17,22 @@ const ProfileOrgReviewEmptyList = () => (
     }
   >
     <Text color="dimmed">
-      We were unable to detect any past or present public development activity
-      based on your github profile, and were unable to match your verified email
-      with an organization in our database.
-    </Text>
-
-    <Text color="dimmed">
       We only allow verified past and current team members to leave a public
-      anonymoyus review.
+      anonymous review. If you haven&apos;t already, try connecting your GitHub
+      and business email if you still work at a crypto company. We&apos;ll
+      verify it but will never spam you there.
+    </Text>
+    <Text color="dimmed">
+      We were unable to detect any past or present public development activity
+      based on your GitHub profile, and we could not match your verified email
+      with any organization in our database. This prevents us from verifying
+      your eligibility to leave a review.
+    </Text>
+    <Text color="dimmed">
+      Is your organization missing? Fill out the &quot;request to be
+      listed&quot; form in the header. Once your organization is verified and
+      added to our database, you and your team members will be able to leave
+      public anonymous reviews.
     </Text>
   </GotItCard>
 );

@@ -7,20 +7,22 @@ import GotItCard from './got-it-card';
 const ProfileRepoEmptyList = () => (
   <GotItCard
     icon={<ProfileRepoEmptyIcon />}
-    title="No Publicly Relevant Repositories to Describe"
+    title="No public crypto OSS repositories found"
   >
     <Text color="dimmed">
-      We were unable to detect any publicly interesting repositories based on
-      your public GitHub activity.
+      We were unable to detect any open-source crypto software repositories at
+      projects we include in our dataset based on your public GitHub activity.
     </Text>
     <Text color="dimmed">
-      We only allow users to describe their contributions to public repositories
-      that are part of the Electric Capital dataset, and this includes
-      repositories for &gt; 4.5k organizations.
+      We track repositories that are public and are owned by organizations that
+      are included in our dataset. Is your organization missing? Fill out the
+      &quot;request to be listed&quot; form in the header
     </Text>
     <Text color="dimmed">
-      We will soon allow for repositories that are deemed as interesting by
-      other developers to be included in this list, so check back soon!
+      If you have any repositories that you think should be included in this
+      list, please make sure they are public and are owned by the github
+      accounts of organizations we track, and they will be included in the next
+      update.
     </Text>
   </GotItCard>
 );
