@@ -23,8 +23,10 @@ export const getPopularSkills = async (count?: number) => {
   return data;
 };
 
-const responseSchema = myzod.object({
-  success: myzod.boolean(),
-  message: myzod.string(),
-  data: myzod.array(tagSchema),
-});
+const responseSchema = myzod
+  .object({
+    success: myzod.boolean(),
+    message: myzod.string(),
+    data: myzod.array(tagSchema),
+  })
+  .allowUnknownKeys(true);

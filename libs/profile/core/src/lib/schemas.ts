@@ -23,21 +23,23 @@ export const profileRepoTag = myzod.intersection(
   }),
 );
 
-export const profileRepoSchema = myzod.intersection(
-  repositoryInfoSchema,
-  myzod.object({
-    org: myzod.object({
-      name: myzod.string().min(1),
-      logo: myzod.string().nullable(),
-      url: myzod.string().min(1),
+export const profileRepoSchema = myzod
+  .intersection(
+    repositoryInfoSchema,
+    myzod.object({
+      org: myzod.object({
+        name: myzod.string().min(1),
+        logo: myzod.string().nullable(),
+        url: myzod.string().min(1),
+      }),
+      tags: myzod.array(profileRepoTag),
+      contribution: myzod.object({
+        summary: myzod.string().nullable(),
+        count: myzod.number(),
+      }),
     }),
-    tags: myzod.array(profileRepoTag),
-    contribution: myzod.object({
-      summary: myzod.string().nullable(),
-      count: myzod.number(),
-    }),
-  }),
-);
+  )
+  .allowUnknownKeys(true);
 
 export const profileRepoListQueryPageSchema = myzod.object({
   page: myzod.number(),
@@ -99,11 +101,13 @@ export const devProfileInfoSchema = myzod.object({
   location: profileInfoLocationSchema.optional(),
 });
 
-export const devProfileInfoResponseSchema = myzod.object({
-  data: devProfileInfoSchema,
-  success: myzod.boolean(),
-  message: myzod.string(),
-});
+export const devProfileInfoResponseSchema = myzod
+  .object({
+    data: devProfileInfoSchema,
+    success: myzod.boolean(),
+    message: myzod.string(),
+  })
+  .allowUnknownKeys(true);
 
 export const devProfileInfoPayloadSchema = myzod.object({
   availableForWork: myzod.boolean(),
@@ -147,11 +151,13 @@ export const orgProfileInfoPayloadSchema = myzod.object({
   internalReference: orgInternalReferenceSchema,
 });
 
-export const profileSkillSchema = myzod.object({
-  id: myzod.string().min(1),
-  name: myzod.string().min(1),
-  canTeach: myzod.boolean(),
-});
+export const profileSkillSchema = myzod
+  .object({
+    id: myzod.string().min(1),
+    name: myzod.string().min(1),
+    canTeach: myzod.boolean(),
+  })
+  .allowUnknownKeys(true);
 
 export const profileSkillResponseSchema = myzod.object({
   data: myzod.array(profileSkillSchema),
