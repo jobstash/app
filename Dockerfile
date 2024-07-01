@@ -52,6 +52,7 @@ ENV NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID=d6b3203f9238276df2440599c3497e69
 ENV NEXT_PUBLIC_GA_MEASUREMENT_ID=G-PQSHG9DB44
 ENV NEXT_PUBLIC_NEW_FEATURE_TITLE="Elite Fast Track"
 ENV NEXT_PUBLIC_NEW_FEATURE_DESCRIPTION="Are you a veteran crypto builder, and are tired of being ignored when you apply for jobs? We have a solution for you. Our new feature, Elite Fast Track, connects you with job listings specifically aimed at elite builders, where you will be fast tracked in the hiring process. To find out if you're eligible, go to the Elite Fast Track page and create an account by connecting your wallet and github!"
+ENV CYPRESS_INSTALL_BINARY=0
 
 RUN pnpm build
 # RUN yarn build
