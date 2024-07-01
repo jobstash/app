@@ -16,9 +16,11 @@ const SkillsEdit = forwardRef<HTMLDivElement>((_props, ref) => {
 
   return (
     <div ref={ref} className="flex flex-col gap-4">
-      <div>
-        <hr className="border-t border-white/10" />
-      </div>
+      {skills.length > 0 && (
+        <div>
+          <hr className="border-t border-white/10" />
+        </div>
+      )}
 
       <div
         className={cn('flex flex-col gap-4 w-full', {

@@ -1,6 +1,6 @@
-import { useProfileShowcaseContext } from '@jobstash/profile/state';
+import { Button, Spinner } from '@nextui-org/react';
 
-import { Button, Spinner } from '@jobstash/shared/ui';
+import { useProfileShowcaseContext } from '@jobstash/profile/state';
 
 const AddItemButton = () => {
   const { editedShowcase, isLoading, addShowcase } =
@@ -9,11 +9,13 @@ const AddItemButton = () => {
   const isDisabled =
     !editedShowcase.label || !editedShowcase.url || isLoading.mutation;
 
-  if (isLoading.mutation) return <Spinner />;
-
   return (
-    <Button isIcon isDisabled={isDisabled} onClick={addShowcase}>
-      <FloppyIcon />
+    <Button isIconOnly isDisabled={isDisabled} onClick={addShowcase}>
+      {isLoading.mutation ? (
+        <Spinner size="sm" color="white" />
+      ) : (
+        <FloppyIcon />
+      )}
     </Button>
   );
 };

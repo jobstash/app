@@ -2,8 +2,10 @@
 export * from './lib/account-card';
 export * from './lib/compensation-form';
 export * from './lib/empty-cell-placeholder';
+export * from './lib/profile-accordion';
 export { default as ProfileGotItCard } from './lib/profile-got-it-card';
 export * from './lib/profile-header';
+export * from './lib/profile-header/profile-header-contact-info';
 export { default as ProfileOrgReviewCard } from './lib/profile-org-review-card';
 export { default as ProfileOrgReviewEmptyList } from './lib/profile-org-review-empty-list';
 export { default as ProfileRepoCard } from './lib/profile-repo-card';
@@ -17,7 +19,6 @@ export * from './lib/profile-reviews-tour';
 export { ProfileRightPanel } from './lib/profile-right-panel';
 export { ProfileRightPanelOrgHeader } from './lib/profile-right-panel/org-header';
 export { ProfileRightPanelRepoHeader } from './lib/profile-right-panel/repo-header';
-export { default as ProfileSubHeader } from './lib/profile-sub-header';
 export * from './lib/ratings';
 export { default as ProfileShowcaseSection } from './lib/showcase-section';
 export { default as ProfileSkillsSection } from './lib/skills-section';

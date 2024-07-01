@@ -1,7 +1,6 @@
 import { type ReactNode } from 'react';
 
 interface Props {
-  header: ReactNode;
   preferredInput: ReactNode;
   selectedInput: ReactNode;
   countryInput: ReactNode;
@@ -10,7 +9,6 @@ interface Props {
 }
 
 const ProfileHeaderLayout = ({
-  header,
   preferredInput,
   selectedInput,
   saveButton,
@@ -21,8 +19,6 @@ const ProfileHeaderLayout = ({
 
   return (
     <>
-      {header}
-
       <div className={inputWrapperClassName}>
         {preferredInput}
         {selectedInput}

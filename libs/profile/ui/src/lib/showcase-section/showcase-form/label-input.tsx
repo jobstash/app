@@ -23,6 +23,7 @@ const LabelInput = () => {
     <Select
       searchable
       creatable
+      withinPortal
       data={options}
       placeholder={isLoading.mutation ? editedShowcase.label : 'Select ...'}
       getCreateLabel={(query) => `+ Create "${query}"`}

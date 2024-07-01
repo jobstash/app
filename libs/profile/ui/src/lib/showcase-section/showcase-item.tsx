@@ -1,11 +1,10 @@
 import { Select, TextInput } from '@mantine/core';
+import { Button, Spinner } from '@nextui-org/react';
 
 import { ProfileShowcase } from '@jobstash/profile/core';
 import { cn } from '@jobstash/shared/utils';
 
 import { useProfileShowcaseContext } from '@jobstash/profile/state';
-
-import { Button, Spinner } from '@jobstash/shared/ui';
 
 import DeleteItemIcon from './delete-item-icon';
 import ShowcaseItemLayout from './showcase-item-layout';
@@ -49,13 +48,13 @@ const ShowcaseItem = ({ showcase }: Props) => {
         />
       }
       iconButton={
-        id === updatedId ? (
-          <Spinner />
-        ) : (
-          <Button isIcon isDisabled={isLoading.mutation} onClick={remove}>
+        <Button isIconOnly isDisabled={isLoading.mutation} onClick={remove}>
+          {id === updatedId ? (
+            <Spinner size="sm" color="white" />
+          ) : (
             <DeleteItemIcon />
-          </Button>
-        )
+          )}
+        </Button>
       }
     />
   );

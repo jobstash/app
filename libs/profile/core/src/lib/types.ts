@@ -171,3 +171,9 @@ export type UpdateATSPreferencePayload = Infer<
 
 export type RetryWebhooksResponse = Infer<typeof retryWebhooksResponseSchema>;
 export type RetryWebhooksPayload = Infer<typeof retryWebhooksPayloadSchema>;
+
+export interface ProfileGotItCardStatus {
+  profile: boolean;
+  repositories: boolean;
+  reviews: boolean;
+}

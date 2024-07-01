@@ -27,19 +27,16 @@ export const useProfileShowcaseMutation = (onSuccessCb: () => void) => {
         message: 'Please wait while we update your showcase',
       });
     },
-    onSuccess({ message }, vars) {
+    async onSuccess({ message }, vars) {
       notifSuccess({
         id: TOAST_ID,
         title: 'Showcase Updated',
         message,
       });
 
-      queryClient.setQueryData(
-        [mwVersion, 'profile-showcase', address],
-        vars.showcase,
-      );
-      queryClient.invalidateQueries({
-        queryKey: [mwVersion, 'profile-showcase', address],
+      const queryKey = [mwVersion, 'profile-showcase', address];
+      await queryClient.invalidateQueries({
+        queryKey,
       });
 
       onSuccessCb();

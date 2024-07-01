@@ -47,12 +47,12 @@ export const useProfileShowcase = (): ProfileShowcaseContextProps => {
 
   // Clear form inputs
   const clearForm = () => {
+    setDisplayForm(false);
     setEditedShowcase({
       id: '',
       label: '',
       url: '',
     });
-    setDisplayForm(false);
     if (updatedId) setUpdatedId('');
   };
 

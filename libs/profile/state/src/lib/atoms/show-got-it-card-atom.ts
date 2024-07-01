@@ -1,12 +1,8 @@
 import { atom } from 'jotai';
 
-type GotItCardStatus = {
-  profile: boolean;
-  repositories: boolean;
-  reviews: boolean;
-};
+import { ProfileGotItCardStatus } from '@jobstash/profile/core';
 
-export const showGotItCardAtom = atom<GotItCardStatus>({
+export const showGotItCardAtom = atom<ProfileGotItCardStatus>({
   profile: false,
   repositories: false,
   reviews: false,
