@@ -14,7 +14,7 @@ import {
   tagSchema,
 } from '@jobstash/shared/core';
 
-import { ATS_PROVIDERS } from './constants';
+import { ATS_PROVIDERS, CONTACT_FIELDS } from './constants';
 
 export const profileRepoTag = myzod.intersection(
   tagSchema,
@@ -82,8 +82,12 @@ export const profileOrgReviewListResponseSchema = myzod.object({
 });
 
 const profileInfoContactSchema = myzod.object({
-  preferred: myzod.string().nullable(),
-  value: myzod.string().nullable(),
+  email: myzod.string().nullable(),
+  twitter: myzod.string().nullable(),
+  discord: myzod.string().nullable(),
+  telegram: myzod.string().nullable(),
+  farcaster: myzod.string().nullable(),
+  lens: myzod.string().nullable(),
 });
 
 const profileInfoLocationSchema = myzod.object({
@@ -91,14 +95,17 @@ const profileInfoLocationSchema = myzod.object({
   city: myzod.string().nullable(),
 });
 
+export const preferredContactSchema = myzod.literals(...CONTACT_FIELDS);
+
 export const devProfileInfoSchema = myzod.object({
   wallet: myzod.string().min(1),
   avatar: myzod.string().min(1).nullable(),
   username: myzod.string().min(1).nullable(),
   email: myzod.string().min(1).nullable(),
   availableForWork: myzod.boolean().nullable(),
-  contact: profileInfoContactSchema.optional(),
-  location: profileInfoLocationSchema.optional(),
+  preferred: preferredContactSchema,
+  contact: profileInfoContactSchema,
+  location: profileInfoLocationSchema,
 });
 
 export const devProfileInfoResponseSchema = myzod
@@ -111,6 +118,7 @@ export const devProfileInfoResponseSchema = myzod
 
 export const devProfileInfoPayloadSchema = myzod.object({
   availableForWork: myzod.boolean(),
+  preferred: preferredContactSchema,
   contact: profileInfoContactSchema,
   location: profileInfoLocationSchema,
 });

@@ -1,26 +1,17 @@
-import { type ChangeEventHandler, createContext, useContext } from 'react';
+import { createContext, useContext } from 'react';
 
-import { DevProfileInfo } from '@jobstash/profile/core';
+import { DevProfileInfo, PreferredContact } from '@jobstash/profile/core';
 
 interface ProfileHeaderContextProps {
   isLoading: boolean;
   isAvailableForWork: boolean;
   setIsAvailableForWork: (isAvailableForWork: boolean) => void;
-  preferredContact: string | null;
-  selectedContact: string | null;
-  saveProfileInfo: () => void;
   updateAvailability: (isChecked: boolean) => void;
   avatar: string | null;
   username: string | null;
-  location: { country: string | null; city: string | null };
   email: string | null;
-  contact: DevProfileInfo['contact'];
-  hasMissingFields: boolean;
-  disableSave: boolean;
-  onChangePreferredContact: (v: string | null) => void;
-  onChangeSelectedContact: ChangeEventHandler<HTMLInputElement>;
-  onChangeCountry: ChangeEventHandler<HTMLInputElement>;
-  onChangeCity: ChangeEventHandler<HTMLInputElement>;
+  preferredContact: PreferredContact | null;
+  contact: DevProfileInfo['contact'] | null;
 }
 
 export const ProfileHeaderContext =

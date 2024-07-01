@@ -17,6 +17,7 @@ import {
   orgProfileInfoPayloadSchema,
   orgProfileInfoResponseSchema,
   orgProfileInfoSchema,
+  preferredContactSchema,
   profileOrgRatingPayloadSchema,
   profileOrgRatingResponseSchema,
   profileOrgReviewListResponseSchema,
@@ -177,3 +178,5 @@ export interface ProfileGotItCardStatus {
   repositories: boolean;
   reviews: boolean;
 }
+
+export type PreferredContact = Infer<typeof preferredContactSchema>;

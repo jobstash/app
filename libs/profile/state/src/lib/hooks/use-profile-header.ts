@@ -1,9 +1,6 @@
-import { type ChangeEventHandler, useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 
-import {
-  CONTACT_DEFAULT_OPTIONS,
-  DevProfileInfo,
-} from '@jobstash/profile/core';
+import { DevProfileInfo } from '@jobstash/profile/core';
 
 import { useDevProfileInfoContext } from '../contexts/dev-profile-info-context';
 
@@ -16,120 +13,29 @@ export const useProfileHeader = () => {
     profileInfoData ?? ({} as DevProfileInfo);
 
   const [isAvailableForWork, setIsAvailableForWork] = useState<boolean>(false);
-  const [preferredContact, setPreferredContact] = useState<string | null>(
-    CONTACT_DEFAULT_OPTIONS[0],
-  );
-  const [selectedContact, setSelectedContact] = useState<string>('');
-
-  const [currentLocation, setCurrentLocation] = useState<{
-    city: string;
-    country: string;
-  }>({ city: '', country: '' });
 
   useEffect(() => {
     if (profileInfoData) {
       setIsAvailableForWork(Boolean(availableForWork));
-      setPreferredContact(contact?.preferred ?? CONTACT_DEFAULT_OPTIONS[0]);
-      setSelectedContact(contact?.value ?? '');
-      setCurrentLocation({
-        city: location?.city ?? '',
-        country: location?.country ?? '',
-      });
     }
   }, [availableForWork, contact, location, profileInfoData]);
 
-  const [timeoutId, setTimeoutId] = useState<NodeJS.Timeout | null>(null);
-
-  const onChangePreferredContact = (v: string | null) => {
-    const isContactPreferred = v === profileInfoData?.contact?.preferred;
-    const newSelectedContact = isContactPreferred
-      ? profileInfoData?.contact?.value
-      : null;
-
-    setSelectedContact(newSelectedContact ?? '');
-    setPreferredContact(v);
-  };
-
   const { isLoadingMutation, mutate } = useDevProfileInfoMutation();
-
-  const saveProfileInfo = () => {
-    mutate({
-      payload: {
-        availableForWork: isAvailableForWork,
-        contact: {
-          preferred: preferredContact,
-          value: selectedContact,
-        },
-        location: currentLocation,
-      },
-    });
-  };
-
-  const onChangeSelectedContact: ChangeEventHandler<HTMLInputElement> = (e) => {
-    const { value } = e.currentTarget;
-    setSelectedContact(value);
-  };
-
-  const onChangeCountry: ChangeEventHandler<HTMLInputElement> = (e) => {
-    const { value } = e.currentTarget;
-    setCurrentLocation((prev) => ({ ...prev, country: value }));
-  };
-
-  const onChangeCity: ChangeEventHandler<HTMLInputElement> = (e) => {
-    const { value } = e.currentTarget;
-    setCurrentLocation((prev) => ({
-      ...prev,
-      city: value,
-    }));
-  };
-
-  // Timeout cleanup
-  useEffect(
-    () => () => {
-      if (timeoutId) clearTimeout(timeoutId);
-    },
-    [timeoutId],
-  );
 
   const updateAvailability = (isChecked: boolean) => {
     setIsAvailableForWork(isChecked);
-    mutate({
-      isToggleAvailability: true,
-      payload: {
-        availableForWork: isChecked,
-        contact: {
-          preferred: preferredContact,
-          value: selectedContact,
+    if (profileInfoData && profileInfoData.preferred) {
+      mutate({
+        isToggleAvailability: true,
+        payload: {
+          availableForWork: isChecked,
+          preferred: profileInfoData.preferred,
+          contact: profileInfoData.contact,
+          location: profileInfoData.location,
         },
-        location: currentLocation,
-      },
-    });
+      });
+    }
   };
-
-  const prevJSON = JSON.stringify({
-    preferredContact: contact?.preferred ?? CONTACT_DEFAULT_OPTIONS[0],
-    selectedContact: contact?.value ?? '',
-    currentLocation: {
-      city: location?.city ?? '',
-      country: location?.country ?? '',
-    },
-  });
-
-  const currentJSON = JSON.stringify({
-    preferredContact,
-    selectedContact,
-    currentLocation,
-  });
-
-  const isEqualFetched = prevJSON === currentJSON;
-
-  const hasMissingFields = [
-    !preferredContact,
-    !selectedContact,
-    !currentLocation.country,
-    !currentLocation.city,
-  ].includes(true);
-  const disableSave = isEqualFetched || hasMissingFields;
 
   const isLoading = isLoadingMutation || !profileInfoData;
 
@@ -137,23 +43,12 @@ export const useProfileHeader = () => {
     isLoading,
     isAvailableForWork,
     setIsAvailableForWork,
-    preferredContact,
-    setPreferredContact,
-    selectedContact,
-    setSelectedContact,
-    saveProfileInfo,
     updateAvailability,
     username,
     email,
     avatar,
-    location: currentLocation,
-    contact,
-    hasMissingFields,
-    disableSave,
-    onChangePreferredContact,
-    onChangeSelectedContact,
-    onChangeCountry,
-    onChangeCity,
+    preferredContact: profileInfoData?.preferred ?? null,
+    contact: profileInfoData?.contact ?? null,
   };
 };
 

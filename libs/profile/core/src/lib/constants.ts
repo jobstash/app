@@ -95,3 +95,14 @@ export const ATS_PROVIDERS = {
     setupGuideUrl: '#',
   },
 } as const;
+
+export const CONTACT_FIELDS = [
+  'email',
+  'discord',
+  'telegram',
+  'farcaster',
+  'lens',
+  'twitter',
+];
+
+export const LOCATION_FIELDS = ['city', 'country'];

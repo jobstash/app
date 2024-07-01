@@ -2,6 +2,7 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAccount } from 'wagmi';
 
 import { type DevProfileInfoPayload } from '@jobstash/profile/core';
+import { ERR_INTERNAL } from '@jobstash/shared/core';
 import { notifError, notifSuccess } from '@jobstash/shared/utils';
 
 import { useMwVersionContext } from '@jobstash/shared/state';
@@ -39,10 +40,11 @@ export const useDevProfileInfoMutation = () => {
         autoClose: 6000,
       });
     },
-    onError() {
+    onError(data) {
+      console.log('ERROR', { data });
       notifError({
-        title: 'Something went wrong :(',
-        message: 'Please try again later.',
+        title: 'Submission Failed!',
+        message: data.message ?? ERR_INTERNAL,
       });
     },
     async onSettled() {

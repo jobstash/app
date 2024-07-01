@@ -8,8 +8,6 @@ import ShowcaseItem from './showcase-item';
 const ProfileShowcaseSection = () => {
   const { showcases, isLoading } = useProfileShowcaseContext();
 
-  if (!isLoading.query && showcases.length === 0) return null;
-
   return (
     <div className="flex flex-col gap-4 relative px-1 pb-4">
       <div className="flex items-center gap-4">
@@ -19,7 +17,7 @@ const ProfileShowcaseSection = () => {
         </Text>
       </div>
 
-      {showcases.length > 0 && (
+      {!isLoading.query && showcases.length > 0 && (
         <div className="flex flex-col gap-8 sm:gap-4 pb-4 sm:pb-0">
           {showcases.map((showcase) => (
             <ShowcaseItem key={showcase.id} showcase={showcase} />

@@ -76,9 +76,16 @@ export const mwFetch = async <R, P = Undefined>(
       JSON.stringify({ status: res.status, statusText: res.statusText }),
     );
 
-    const is404 = res.status === 404;
+    if (res.status === 404) {
+      throw new Error(ERR_NOT_FOUND);
+    }
 
-    throw new Error(is404 ? ERR_NOT_FOUND : ERR_INTERNAL);
+    if (res.status === 400) {
+      const data = await res.json();
+      throw new Error(data.message ?? ERR_INTERNAL);
+    }
+
+    throw new Error(ERR_INTERNAL);
   }
 
   const isJsonResponse = (res.headers.get('content-type') ?? '').includes(
@@ -99,7 +106,6 @@ export const mwFetch = async <R, P = Undefined>(
   if (data && typeof data === 'object') {
     const result = messageResponseSchema.try(data);
     const isMessageResponse = !(result instanceof myzod.ValidationError);
-
     if (isMessageResponse && !result.success) {
       throw new Error(result.message);
     }
