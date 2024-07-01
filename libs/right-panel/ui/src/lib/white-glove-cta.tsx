@@ -1,3 +1,6 @@
+import { DUCK_TELEGRAM_URL } from '@jobstash/shared/core';
+import { openNewTab } from '@jobstash/shared/utils';
+
 import { Text } from '@jobstash/shared/ui';
 
 import { CTATooltip } from './right-panel-job-cta/cta-tooltip';
@@ -23,8 +26,10 @@ const TooltipContent = () => (
   </div>
 );
 
+const onClick = () => openNewTab(DUCK_TELEGRAM_URL);
+
 export const WhiteGloveCTA = () => (
   <CTATooltip defaultOpen={false} content={<TooltipContent />}>
-    <RightPanelCta text={TEXT} onClick={() => null} />
+    <RightPanelCta text={TEXT} onClick={onClick} />
   </CTATooltip>
 );
