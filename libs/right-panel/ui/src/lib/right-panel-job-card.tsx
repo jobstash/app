@@ -20,6 +20,7 @@ import RightPanelCta from './right-panel-cta';
 import RightPanelJobCardDescriptions from './right-panel-job-card-descriptions';
 import RightPanelJobCardSets from './right-panel-job-card-sets';
 import RightPanelJobCardSkills from './right-panel-job-card-skills';
+import { WhiteGloveCTA } from './white-glove-cta';
 
 interface Props {
   orgName: string;
@@ -95,10 +96,13 @@ const RightPanelJobCard = ({
           )}
 
           {!url && access === 'protected' && (
-            <CryptoNativeJobCTA
-              jobId={shortUUID}
-              sendAnalyticsEvent={sendAnalyticsEvent}
-            />
+            <div className="flex flex-col md:flex-row gap-4">
+              <CryptoNativeJobCTA
+                jobId={shortUUID}
+                sendAnalyticsEvent={sendAnalyticsEvent}
+              />
+              <WhiteGloveCTA />
+            </div>
           )}
         </div>
 

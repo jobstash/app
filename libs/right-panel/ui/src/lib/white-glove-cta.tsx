@@ -1,0 +1,30 @@
+import { Text } from '@jobstash/shared/ui';
+
+import { CTATooltip } from './right-panel-job-cta/cta-tooltip';
+import RightPanelCta from './right-panel-cta';
+
+const TEXT = 'White Glove Service';
+
+const TooltipContent = () => (
+  <div className="flex flex-col gap-8 max-w-sm p-4 bg-darker-gray">
+    <div className="flex flex-col gap-2">
+      <Text fw="bold" size="lg">
+        {TEXT}
+      </Text>
+      <Text className="text-white/70">
+        Before you submit your CV, get personalized feedback on whether this job
+        is a great match for you based on our insider knowledge.
+      </Text>
+      <Text className="text-white/70">
+        Ask us anything about the job, and let us help you tweak your profile
+        for this vacancy—all for free. No hidden costs, just honest help.
+      </Text>
+    </div>
+  </div>
+);
+
+export const WhiteGloveCTA = () => (
+  <CTATooltip defaultOpen={false} content={<TooltipContent />}>
+    <RightPanelCta text={TEXT} onClick={() => null} />
+  </CTATooltip>
+);
