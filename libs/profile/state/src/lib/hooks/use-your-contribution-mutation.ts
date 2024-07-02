@@ -42,10 +42,7 @@ export const useYourContributionMutation = () => {
       if (activeProfileRepo) {
         setActiveProfileRepo({
           ...activeProfileRepo,
-          contribution: {
-            ...activeProfileRepo.contribution,
-            summary: payload.contribution,
-          },
+          contribution: payload.contribution,
         });
       }
     },

@@ -33,10 +33,7 @@ export const profileRepoSchema = myzod
         url: myzod.string().min(1),
       }),
       tags: myzod.array(profileRepoTag),
-      contribution: myzod.object({
-        summary: myzod.string().nullable(),
-        count: myzod.number(),
-      }),
+      contribution: myzod.string().nullable(),
     }),
   )
   .allowUnknownKeys(true);

@@ -13,7 +13,7 @@ export const useYourContribution = () => {
   const { activeProfileRepo, profileRepo } = useProfileRepoPageContext();
 
   const [contribution, setContribution] = useState(
-    activeProfileRepo?.contribution.summary ?? '',
+    activeProfileRepo?.contribution ?? '',
   );
 
   const { mutate } = useYourContributionMutation();
@@ -27,7 +27,7 @@ export const useYourContribution = () => {
     }
   };
 
-  const disableSave = contribution === activeProfileRepo?.contribution.summary;
+  const disableSave = contribution === activeProfileRepo?.contribution;
 
   return {
     contribution,

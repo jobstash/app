@@ -4,11 +4,7 @@ import { Heading, LogoTitle, Text } from '@jobstash/shared/ui';
 
 const SubHeader = () => {
   const {
-    profileRepo: {
-      name,
-      description,
-      contribution: { count },
-    },
+    profileRepo: { name, description },
     username,
     avatar,
   } = useYourContributionContext();
@@ -29,11 +25,6 @@ const SubHeader = () => {
         <Text color="dimmed" className="text-sm shrink-0">
           {description}
         </Text>
-        <div className="min-w-[120px] text-right">
-          <Text color="dimmed" className="text-sm">
-            {`${count} Contributions`}
-          </Text>
-        </div>
       </div>
     </>
   );

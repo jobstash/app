@@ -78,7 +78,7 @@ export const jobCardSetSchema = myzod.object({
   seniority: myzod.string().min(1).nullable(),
   minimumSalary: myzod.number().nullable(),
   maximumSalary: myzod.number().nullable(),
-  salary: myzod.number().nullable(), // TODO: maybe unused
+  salary: myzod.number().nullable(),
   location: myzod.string().min(1).nullable(),
   locationType: myzod.string().min(1).nullable(),
   commitment: myzod.string().min(1).nullable(),
@@ -174,8 +174,6 @@ export const repositoryInfoSchema = myzod
     name: myzod.string().min(1),
     description: myzod.string().nullable(),
     timestamp: myzod.number().nullable(),
-    projectName: myzod.string().nullable(),
-    committers: myzod.number().nullable(),
   })
   .allowUnknownKeys(true);
 

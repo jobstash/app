@@ -3,20 +3,14 @@ import { memo } from 'react';
 import { type ProfileRepo } from '@jobstash/profile/core';
 import { prettyTimestamp } from '@jobstash/shared/utils';
 
-import {
-  CardSet,
-  CommitIcon,
-  Heading,
-  RepoProjectNameIcon,
-  Text,
-} from '@jobstash/shared/ui';
+import { Heading, Text } from '@jobstash/shared/ui';
 
 interface Props {
   profileRepo: ProfileRepo;
 }
 
 const ProfileRepoCardHeader = ({ profileRepo }: Props) => {
-  const { name, timestamp, description, projectName, committers } = profileRepo;
+  const { name, timestamp, description } = profileRepo;
 
   const ts = timestamp ? prettyTimestamp(timestamp) : null;
 
@@ -36,16 +30,6 @@ const ProfileRepoCardHeader = ({ profileRepo }: Props) => {
         <Text size="md" color="dimmed">
           {description}
         </Text>
-      </div>
-      <div className="flex gap-8 items-center">
-        {projectName && (
-          <CardSet
-            icon={<RepoProjectNameIcon />}
-          >{`Project: ${projectName}`}</CardSet>
-        )}
-        {committers && (
-          <CardSet icon={<CommitIcon />}>{`Committers: ${committers}`}</CardSet>
-        )}
       </div>
     </>
   );

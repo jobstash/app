@@ -55,7 +55,6 @@ export { default as ProjectsSidebarIcon } from './lib/icons/projects-sidebar-ico
 export { default as RefreshIcon } from './lib/icons/refresh-icon';
 export { default as RemoteIcon } from './lib/icons/remote-icon';
 export { default as RemoveTechIcon } from './lib/icons/remove-tech-icon';
-export { default as RepoProjectNameIcon } from './lib/icons/repo-project-name-icon';
 export { default as RevenueIcon } from './lib/icons/revenue-icon';
 export { default as SaveIcon } from './lib/icons/save-icon';
 export { default as SearchIcon } from './lib/icons/search-icon';
