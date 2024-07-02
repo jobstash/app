@@ -29,6 +29,7 @@ export const useAccountCard = () => {
   return {
     opened,
     open,
+    close,
     startDelete,
     onClickDelete,
   };

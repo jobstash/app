@@ -14,7 +14,7 @@ import ConnectGithubAccount from './connect-github-account';
 import ConnectedAccount from './connected-account';
 
 export const DevAccountCard = () => {
-  const { opened, open, startDelete, onClickDelete } = useAccountCard();
+  const { opened, open, startDelete, onClickDelete, close } = useAccountCard();
 
   const { profileInfoData } = useDevProfileInfoContext();
 
