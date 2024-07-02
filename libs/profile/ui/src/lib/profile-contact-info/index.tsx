@@ -172,7 +172,7 @@ export const ProfileHeaderContactInfo = () => {
             value={contact[name as keyof Contact] ?? ''}
             endContent={
               <PreferredButton
-                isDisabled={!contact[name as keyof Contact]}
+                isEmpty={!contact[name as keyof Contact]}
                 isLoading={isLoadingMutation && preferredMutated === name}
                 isPreferred={
                   preferred === name &&
