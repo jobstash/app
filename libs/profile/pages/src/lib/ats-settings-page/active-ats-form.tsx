@@ -20,6 +20,7 @@ import {
 import { Heading } from '@jobstash/shared/ui';
 
 import { CustomRadio } from './custom-radio';
+import { GreenhouseCopypasta } from './greenhouse-copypasta';
 import { RegisterGreenhouseModal } from './register-greenhouse-modal';
 import { RegisterWorkableModal } from './register-workable-modal';
 import { RetryWorkable } from './retry-workable';
@@ -186,15 +187,19 @@ export const ActiveATSForm = ({ orgId, atsClient }: Props) => {
         )}
       </form>
 
-      {atsClient &&
-        atsClient.id &&
-        !atsClient.hasWebhooks &&
-        atsClient.name === ATS_PROVIDERS.WORKABLE.platformName && (
-          <RetryWorkable
-            clientId={atsClient.id}
-            platform={ATS_PROVIDERS.WORKABLE.platformName}
-          />
-        )}
+      {atsClient && atsClient.id && !atsClient.hasWebhooks && (
+        <>
+          {atsClient.name === ATS_PROVIDERS.WORKABLE.platformName && (
+            <RetryWorkable
+              clientId={atsClient.id}
+              platform={ATS_PROVIDERS.WORKABLE.platformName}
+            />
+          )}
+          {atsClient.name === ATS_PROVIDERS.GREENHOUSE.platformName && (
+            <GreenhouseCopypasta atsClient={atsClient} />
+          )}
+        </>
+      )}
 
       {orgId && (
         <RegisterWorkableModal

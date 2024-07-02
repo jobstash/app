@@ -1,6 +1,10 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { ATSPlatformName, RetryWebhooksPayload } from '@jobstash/profile/core';
+import {
+  ATS_PROVIDERS,
+  ATSPlatformName,
+  RetryWebhooksPayload,
+} from '@jobstash/profile/core';
 import { notifError, notifSuccess } from '@jobstash/shared/utils';
 
 import { useMwVersionContext } from '@jobstash/shared/state';
@@ -12,14 +16,23 @@ export const useRetryWebhooks = (platform: ATSPlatformName) => {
   return useMutation({
     mutationFn: (payload: RetryWebhooksPayload) =>
       retryWebhooks(platform, payload),
-    async onSuccess() {
+    async onSuccess(data) {
       const queryKey = [mwVersion, 'get-ats-client'];
       await queryClient.invalidateQueries({ queryKey });
       await queryClient.refetchQueries({ queryKey });
-      notifSuccess({
-        title: 'Updated ATS Client',
-        message: `You have successfully integrated ${platform}`,
-      });
+
+      if (platform === ATS_PROVIDERS.GREENHOUSE.platformName) {
+        notifSuccess({
+          title: 'Tokens Received!',
+          message: `Please complete the integration by pasting the tokens in the respective fields.`,
+        });
+      }
+
+      // TODO: Handle toast for other platforms - maybe reuse
+      // notifSuccess({
+      //   title: 'Updated ATS Client',
+      //   message: `You have successfully integrated ${platform}`,
+      // });
     },
     onError(error) {
       notifError({
