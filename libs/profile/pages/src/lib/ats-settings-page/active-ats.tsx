@@ -14,8 +14,6 @@ export const ActiveATS = () => {
 
   return (
     <>
-      <pre>{JSON.stringify(data, undefined, '\t')}</pre>
-
       <div className="flex flex-col gap-4 w-full">
         <ActiveATSForm orgId={orgId} atsClient={data} />
       </div>
