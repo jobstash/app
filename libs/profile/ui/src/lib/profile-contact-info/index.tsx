@@ -64,7 +64,7 @@ export const ProfileHeaderContactInfo = () => {
     const { name, value } = e.target;
     setContact((prev) => ({
       ...prev,
-      [name]: value,
+      [name]: value || null,
     }));
   };
 
@@ -72,7 +72,7 @@ export const ProfileHeaderContactInfo = () => {
     const { name, value } = e.target;
     setLocation((prev) => ({
       ...prev,
-      [name]: value,
+      [name]: value || null,
     }));
   };
 
