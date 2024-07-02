@@ -8,9 +8,9 @@ import { Select, SelectItem } from '@nextui-org/select';
 import { Tab, Tabs } from '@nextui-org/tabs';
 
 import { CHECK_WALLET_FLOWS } from '@jobstash/auth/core';
-import { CONTACT_DEFAULT_OPTIONS } from '@jobstash/profile/core';
+import { CONTACT_FIELDS } from '@jobstash/profile/core';
 import { getEmailAvatar } from '@jobstash/profile/utils';
-import { cn, notifError } from '@jobstash/shared/utils';
+import { capitalize, cn } from '@jobstash/shared/utils';
 
 import { useAuthContext } from '@jobstash/auth/state';
 import {
@@ -173,9 +173,9 @@ export const ProfileOrgForm = () => {
                   setContact((prev) => ({ ...prev, preferred: e.target.value }))
                 }
               >
-                {CONTACT_DEFAULT_OPTIONS.map((option) => (
+                {CONTACT_FIELDS.map((option) => (
                   <SelectItem key={option} value={option}>
-                    {option}
+                    {capitalize(option)}
                   </SelectItem>
                 ))}
               </Select>

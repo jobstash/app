@@ -13,6 +13,7 @@ import {
   devProfileInfoSchema,
   devTalentResponseSchema,
   devTalentSchema,
+  legacyProfileInfoContactSchema,
   linkATSPlatformPayloadSchema,
   orgProfileInfoPayloadSchema,
   orgProfileInfoResponseSchema,
@@ -180,3 +181,7 @@ export interface ProfileGotItCardStatus {
 }
 
 export type PreferredContact = Infer<typeof preferredContactSchema>;
+
+export type LegacyProfileInfoContact = Infer<
+  typeof legacyProfileInfoContactSchema
+>;

@@ -38,13 +38,6 @@ export const LS_KEYS = {
 // We use this constant to target highlight the content
 export const TOUR_SELECTOR_ID = 'tour-selector-id';
 
-export const CONTACT_DEFAULT_OPTIONS = [
-  'Email',
-  'Telegram',
-  'Discord',
-  'Twitter',
-] as const;
-
 export const COMMUNITY_NFT_ADDRESSES = {
   [ECOSYSTEMS.ETHDAM]: {
     address: '0xb71df844faBa80EEcE907B421652E07FFFF505B4',

@@ -10,7 +10,6 @@ import { DevTalent } from '@jobstash/profile/core';
 import {
   checkSearchFilterValue,
   getContactLink,
-  PreferredContact,
   sanitizeShowcaseUrl,
 } from '@jobstash/profile/utils';
 import { capitalize } from '@jobstash/shared/utils';
@@ -45,10 +44,8 @@ export const useTalentsTable = () => {
       result = talents.filter((talent) =>
         checkSearchFilterValue(
           searchFilter,
-          talent.contact?.value ?? '',
-          talent.email,
-          talent.location?.city ?? '',
-          talent.location?.country ?? '',
+          ...Object.values(talent.contact),
+          ...Object.values(talent.location),
           talent.username,
           talent.wallet,
         ),
@@ -103,6 +100,7 @@ export const useTalentsTable = () => {
           avatar,
           email,
           location: locationData,
+          preferred,
           contact,
           showcases,
         } = talent;
@@ -118,8 +116,8 @@ export const useTalentsTable = () => {
               }`;
 
         const contactLink = getContactLink(
-          contact?.preferred as PreferredContact,
-          contact?.value ?? '',
+          preferred,
+          contact[preferred as keyof typeof contact],
         );
 
         return (
@@ -142,26 +140,23 @@ export const useTalentsTable = () => {
             />
 
             <div className="flex flex-col gap-0.5">
-              {contact?.value && (
+              {contactLink && (
                 <div className="flex gap-1">
-                  {contactLink ? (
-                    <Link
-                      href={contactLink}
-                      size="sm"
-                      underline="hover"
-                      className="font-semibold text-white/80 w-fit"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {contact.preferred === 'Email'
-                        ? 'Send Email'
-                        : `Open ${contact.preferred}`}
-                    </Link>
-                  ) : (
-                    <span>{`Contact: ${contact.value}`}</span>
-                  )}
+                  <Link
+                    href={contactLink}
+                    size="sm"
+                    underline="hover"
+                    className="font-semibold text-white/80"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {contact[preferred as keyof typeof contact] === 'Email'
+                      ? 'Send Email'
+                      : `Open ${capitalize(preferred)}`}
+                  </Link>
                 </div>
               )}
+
               {showcases.length > 0 &&
                 showcases.map(({ id, label, url }) => (
                   <Link

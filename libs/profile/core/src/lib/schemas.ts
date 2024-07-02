@@ -81,7 +81,12 @@ export const profileOrgReviewListResponseSchema = myzod.object({
   data: myzod.array(profileOrgReviewSchema),
 });
 
-const profileInfoContactSchema = myzod.object({
+export const legacyProfileInfoContactSchema = myzod.object({
+  preferred: myzod.string().nullable(),
+  value: myzod.string().nullable(),
+});
+
+export const profileInfoContactSchema = myzod.object({
   email: myzod.string().nullable(),
   twitter: myzod.string().nullable(),
   discord: myzod.string().nullable(),
@@ -90,7 +95,7 @@ const profileInfoContactSchema = myzod.object({
   lens: myzod.string().nullable(),
 });
 
-const profileInfoLocationSchema = myzod.object({
+export const profileInfoLocationSchema = myzod.object({
   country: myzod.string().nullable(),
   city: myzod.string().nullable(),
 });
@@ -138,7 +143,7 @@ export const orgProfileInfoSchema = myzod.object({
   linkedin: myzod.string().nullable(),
   calendly: myzod.string().nullable(),
   orgId: myzod.string().nullable(),
-  contact: profileInfoContactSchema,
+  contact: legacyProfileInfoContactSchema,
   subscriberStatus: myzod.object({
     status: myzod.boolean(),
     expires: myzod.number().nullable(),
@@ -153,7 +158,7 @@ export const orgProfileInfoResponseSchema = myzod.object({
 });
 
 export const orgProfileInfoPayloadSchema = myzod.object({
-  contact: profileInfoContactSchema,
+  contact: legacyProfileInfoContactSchema,
   linkedin: myzod.string(),
   calendly: myzod.string(),
   internalReference: orgInternalReferenceSchema,

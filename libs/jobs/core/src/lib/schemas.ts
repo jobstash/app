@@ -1,6 +1,11 @@
 import myzod, { Infer } from 'myzod';
 
 import {
+  preferredContactSchema,
+  profileInfoContactSchema,
+  profileInfoLocationSchema,
+} from '@jobstash/profile/core';
+import {
   fundingRoundSchema,
   investorSchema,
   jobInfoSchema,
@@ -80,14 +85,9 @@ export const jobApplicantSchema = myzod.object({
       username: myzod.string().min(1).nullable(),
       email: myzod.string().min(1).nullable(),
       availableForWork: myzod.boolean().nullable(),
-      location: myzod.object({
-        country: myzod.string().nullable(),
-        city: myzod.string().nullable(),
-      }),
-      contact: myzod.object({
-        preferred: myzod.string().nullable(),
-        value: myzod.string().nullable(),
-      }),
+      location: profileInfoLocationSchema,
+      preferred: preferredContactSchema,
+      contact: profileInfoContactSchema,
       skills: myzod.array(
         myzod.object({
           id: myzod.string().min(1),

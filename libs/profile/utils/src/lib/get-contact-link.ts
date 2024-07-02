@@ -1,6 +1,4 @@
-import { CONTACT_DEFAULT_OPTIONS } from '@jobstash/profile/core';
-
-export type PreferredContact = typeof CONTACT_DEFAULT_OPTIONS[number];
+import { PreferredContact } from '@jobstash/profile/core';
 
 export const getContactLink = (
   preferred: PreferredContact,
@@ -9,20 +7,28 @@ export const getContactLink = (
   if (!handle) return null;
 
   switch (preferred) {
-    case 'Email': {
+    case 'email': {
       return `mailto:${handle}`;
     }
 
-    case 'Telegram': {
+    case 'telegram': {
       return getContactLinkUrl('telegram.me', handle);
     }
 
-    case 'Twitter': {
+    case 'twitter': {
       return getContactLinkUrl('twitter.com', handle);
     }
 
-    case 'Discord': {
+    case 'discord': {
       return getContactLinkUrl('discord.gg', handle);
+    }
+
+    case 'farcaster': {
+      return getContactLinkUrl('warpcast.com', handle);
+    }
+
+    case 'lens': {
+      return getContactLinkUrl('lenster.xyz', handle);
     }
 
     default: {

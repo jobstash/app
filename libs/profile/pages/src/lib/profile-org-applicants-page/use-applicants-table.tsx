@@ -16,7 +16,6 @@ import { JobApplicant } from '@jobstash/jobs/core';
 import {
   checkSearchFilterValue,
   getContactLink,
-  PreferredContact,
   sanitizeShowcaseUrl,
 } from '@jobstash/profile/utils';
 import { capitalize } from '@jobstash/shared/utils';
@@ -163,6 +162,7 @@ export const useApplicantsTable = () => {
             avatar,
             email,
             location: { city, country },
+            preferred,
             contact,
             showcases,
           },
@@ -178,8 +178,8 @@ export const useApplicantsTable = () => {
               }`;
 
         const contactLink = getContactLink(
-          contact.preferred as PreferredContact,
-          contact.value,
+          preferred,
+          contact[preferred as keyof typeof contact],
         );
 
         return (
@@ -202,24 +202,20 @@ export const useApplicantsTable = () => {
             />
 
             <div className="flex flex-col gap-0.5">
-              {contact.value && (
+              {contactLink && (
                 <div className="flex gap-1">
-                  {contactLink ? (
-                    <Link
-                      href={contactLink}
-                      size="sm"
-                      underline="hover"
-                      className="font-semibold text-white/80"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                    >
-                      {contact.preferred === 'Email'
-                        ? 'Send Email'
-                        : `Open ${contact.preferred}`}
-                    </Link>
-                  ) : (
-                    <span>{`Contact: ${contact.value}`}</span>
-                  )}
+                  <Link
+                    href={contactLink}
+                    size="sm"
+                    underline="hover"
+                    className="font-semibold text-white/80"
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    {contact[preferred as keyof typeof contact] === 'Email'
+                      ? 'Send Email'
+                      : `Open ${capitalize(preferred)}`}
+                  </Link>
                 </div>
               )}
 
