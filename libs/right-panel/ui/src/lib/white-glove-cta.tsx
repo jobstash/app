@@ -1,5 +1,10 @@
+import { useSIWE } from 'connectkit';
+import { useAccount } from 'wagmi';
+
 import { DUCK_TELEGRAM_URL } from '@jobstash/shared/core';
 import { openNewTab } from '@jobstash/shared/utils';
+
+import { useAuthContext } from '@jobstash/auth/state';
 
 import { Text } from '@jobstash/shared/ui';
 
@@ -28,8 +33,18 @@ const TooltipContent = () => (
 
 const onClick = () => openNewTab(DUCK_TELEGRAM_URL);
 
-export const WhiteGloveCTA = () => (
-  <CTATooltip defaultOpen={false} content={<TooltipContent />}>
-    <RightPanelCta text={TEXT} onClick={onClick} />
-  </CTATooltip>
-);
+export const WhiteGloveCTA = () => {
+  const { isConnected } = useAccount();
+  const { isSignedIn } = useSIWE();
+  const { isCryptoNative, isLoading } = useAuthContext();
+
+  const isAnon = !isConnected || !isSignedIn;
+
+  if (isAnon || !isCryptoNative) return null;
+
+  return (
+    <CTATooltip defaultOpen={false} content={<TooltipContent />}>
+      <RightPanelCta text={TEXT} isDisabled={isLoading} onClick={onClick} />
+    </CTATooltip>
+  );
+};
