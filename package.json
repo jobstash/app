@@ -17,7 +17,6 @@
     "@cfx-kit/wallet-avatar": "^0.0.5",
     "@emotion/react": "11.11.1",
     "@emotion/server": "^11.11.0",
-    "@glideapps/glide-data-grid": "^6.0.3",
     "@heroicons/react": "^2.1.1",
     "@lukeed/uuid": "^2.0.1",
     "@mantine/core": "^6.0.11",
