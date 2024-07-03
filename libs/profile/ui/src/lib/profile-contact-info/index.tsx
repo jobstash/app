@@ -120,7 +120,7 @@ export const ProfileHeaderContactInfo = () => {
       // Default to the first field if no preferred contact is set
       const hasValueCount = Object.values(contact).filter(Boolean).length;
       const preferredContact =
-        hasValueCount === 1
+        hasValueCount > 0
           ? Object.keys(contact).find((key) =>
               Boolean(contact[key as keyof Contact]?.trim()),
             )
