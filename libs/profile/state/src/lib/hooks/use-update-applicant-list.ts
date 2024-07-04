@@ -25,7 +25,7 @@ export const useUpdateApplicantList = ({ orgId, successCb }: Props) => {
         autoClose: 10_000,
       });
 
-      for (const list of ['new', 'shortlisted', 'archived']) {
+      for (const list of ['all', 'new', 'shortlisted', 'archived']) {
         queryClient.invalidateQueries({
           queryKey: [mwVersion, 'job-applicants', orgId, list],
         });

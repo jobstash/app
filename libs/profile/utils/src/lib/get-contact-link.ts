@@ -7,6 +7,10 @@ export const getContactLink = (
   if (!handle) return null;
 
   switch (preferred) {
+    case 'github': {
+      return getContactLinkUrl('github.com', handle);
+    }
+
     case 'email': {
       return `mailto:${handle}`;
     }

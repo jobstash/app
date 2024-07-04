@@ -7,10 +7,7 @@ interface Props {
   isCentered?: boolean;
 }
 
-export const EmptyCellPlaceholder = ({
-  isCentered = true,
-  text = 'Coming Soon',
-}: Props) => (
+export const EmptyCellPlaceholder = ({ isCentered, text = 'None' }: Props) => (
   <div className={cn({ 'flex w-full justify-center': isCentered })}>
     <Text color="dimmed">{text}</Text>
   </div>
