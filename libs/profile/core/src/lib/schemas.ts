@@ -329,6 +329,8 @@ export const atsClientSchema = myzod.object({
   hasTags: myzod.boolean(),
   hasWebhooks: myzod.boolean(),
   preferences: atsPreferenceSchema.nullable(),
+  applicationCreatedSignatureToken: myzod.string().nullable().optional(),
+  candidateHiredSignatureToken: myzod.string().nullable().optional(),
 });
 
 export const linkATSPlatformPayloadSchema = myzod.object({
