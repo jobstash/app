@@ -14,7 +14,7 @@ interface Props {
 
 const OrgReviewSigninButton = ({ orgId }: Props) => {
   const { push } = useRouter();
-  const role = CHECK_WALLET_ROLES.DEV;
+  const role = [CHECK_WALLET_ROLES.DEV, CHECK_WALLET_ROLES.ORG];
   const callback = () => {
     push('/profile/reviews');
   };

@@ -8,7 +8,7 @@ import { bypassDevSignupAtom } from '../atoms/bypass-dev-signup-atom';
 import { useAuthContext } from './use-auth-context';
 
 interface Props {
-  role: CheckWalletRole;
+  role: CheckWalletRole | CheckWalletRole[];
   bypassDevSignup?: boolean;
   callback: () => void;
 }
@@ -20,7 +20,9 @@ export const useRoleClick = ({
 }: Props) => {
   const { setOpen } = useModal();
   const { role: currentRole } = useAuthContext();
-  const isAuthd = currentRole === role;
+  const isAuthd = Array.isArray(role)
+    ? role.includes(currentRole)
+    : currentRole === role;
 
   const setBypassDevSignup = useSetAtom(bypassDevSignupAtom);
   if (bypassDevSignup) {
