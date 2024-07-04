@@ -146,12 +146,12 @@ export const GreenhouseCopypasta = (props: Props) => {
               <>
                 <CopyPastaText
                   title="Candidate Hired Webhook URL"
-                  value={tokens.candidateHiredSignatureToken}
+                  value={`${URL_PREFIX}/hired/${atsClient.id}`}
                 />
 
                 <CopyPastaText
                   title="Candidate Hired Token"
-                  value={`${URL_PREFIX}/hired/${atsClient.id}`}
+                  value={tokens.candidateHiredSignatureToken}
                 />
               </>
             )}
