@@ -1,4 +1,6 @@
-import { Chip, Tooltip } from '@nextui-org/react';
+import { useMemo } from 'react';
+
+import { Chip } from '@nextui-org/react';
 
 import { Tag } from '@jobstash/shared/core';
 import { capitalize } from '@jobstash/shared/utils';
@@ -16,34 +18,31 @@ interface Props {
 }
 
 export const SkillsCell = ({ tags, skills, isMatched }: Props) => {
-  if (!skills) return null;
+  const displayedSkills = useMemo(() => {
+    if (!skills) return [];
+    if (!isMatched) return skills.map(({ name }) => name);
 
-  const skillSet = new Set<string>();
-  for (const skill of skills) {
-    skillSet.add(skill.name);
-  }
-
-  const matchingSkills = [];
-  for (const { name } of tags ?? []) {
-    if (skillSet.has(name)) {
-      matchingSkills.push(name);
+    const skillSet = new Set<string>();
+    for (const skill of skills) {
+      skillSet.add(skill.name);
     }
-  }
 
-  const displayedSkills = isMatched
-    ? matchingSkills
-    : skills.map(({ name }) => name);
+    const matchingSkills = [];
+    for (const { name } of tags ?? []) {
+      if (skillSet.has(name)) {
+        matchingSkills.push(name);
+      }
+    }
 
-  if (isMatched && matchingSkills.length === 0) {
+    return matchingSkills;
+  }, [isMatched, skills, tags]);
+
+  if (displayedSkills.length === 0) {
     return (
-      <Tooltip
-        content="Applicant skills did not match job description"
-        delay={0}
-      >
-        <div>
-          <EmptyCellPlaceholder isCentered={false} text="No Skills Matched" />
-        </div>
-      </Tooltip>
+      <EmptyCellPlaceholder
+        isCentered={false}
+        text={isMatched ? 'No Skills Matched' : 'None'}
+      />
     );
   }
 
