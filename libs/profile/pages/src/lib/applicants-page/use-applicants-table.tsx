@@ -4,15 +4,15 @@ import { ColDef, GetRowIdFunc } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
 
 import { JobApplicant } from '@jobstash/jobs/core';
+import { convertFalseStringValuesToNull } from '@jobstash/shared/utils';
+
+import { ShowcaseCell, SocialsCell, UserCell } from '@jobstash/profile/ui';
 
 import { ActionsCell } from './actions-cell';
 import { BooleanCell } from './boolean-cell';
 import { EcosystemActivationsCell } from './ecosystem-activation-cell';
 import { JobCell } from './job-cell';
-import { ShowcaseCell } from './showcase-cell';
-import { SocialsCell } from './socials-cell';
 import { CellProps } from './types';
-import { UserCell } from './user-cell';
 import { WorkHistoryCell } from './work-history-cell';
 
 export const useApplicantsTable = (orgId: string) => {
@@ -31,7 +31,9 @@ export const useApplicantsTable = (orgId: string) => {
       },
       {
         headerName: 'User',
-        cellRenderer: UserCell,
+        cellRenderer: (props: CellProps) => (
+          <UserCell user={props.data?.user} />
+        ),
         valueGetter: (p) => p.data?.user.username || p.data?.user.email,
         width: 280,
       },
@@ -43,12 +45,21 @@ export const useApplicantsTable = (orgId: string) => {
       {
         headerName: 'Socials',
         width: 320,
-        cellRenderer: SocialsCell,
+        cellRenderer: (props: CellProps) => (
+          <SocialsCell
+            socials={{
+              ...convertFalseStringValuesToNull(props.data?.user.contact),
+              github: props.data?.user.username ?? null,
+            }}
+          />
+        ),
       },
       {
         headerName: 'Showcase',
         width: 320,
-        cellRenderer: ShowcaseCell,
+        cellRenderer: (props: CellProps) => (
+          <ShowcaseCell showcases={props.data?.user.showcases} />
+        ),
       },
       {
         headerName: 'Crypto Native',

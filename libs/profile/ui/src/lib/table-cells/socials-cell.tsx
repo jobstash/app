@@ -3,25 +3,31 @@ import { Link } from '@nextui-org/react';
 import { getContactLink } from '@jobstash/profile/utils';
 import { capitalize } from '@jobstash/shared/utils';
 
-import { EmptyCellPlaceholder } from '@jobstash/profile/ui';
+import { EmptyCellPlaceholder } from '../empty-cell-placeholder';
 
-import { CellProps } from './types';
+interface Props {
+  socials?: {
+    github: string | null;
+    email: string | null;
+    discord: string | null;
+    telegram: string | null;
+    farcaster: string | null;
+    lens: string | null;
+    twitter: string | null;
+  };
+}
 
-export const SocialsCell = ({ data }: CellProps) => {
-  if (!data) return <EmptyCellPlaceholder />;
+export const SocialsCell = ({ socials }: Props) => {
+  if (!socials) return null;
 
-  const {
-    user: { username, contact },
-  } = data;
-
-  const hasSocials = Object.values(contact).some(Boolean);
+  const hasSocials = Object.values(socials).some(Boolean);
   if (!hasSocials) {
     return <EmptyCellPlaceholder />;
   }
 
   return (
     <div className="grid grid-cols-3 gap-x-8 gap-y-1 h-fit">
-      {Object.entries({ github: username, ...contact })
+      {Object.entries(socials)
         .filter(([, value]) => value !== null)
         .map(([key, value]) => {
           // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
