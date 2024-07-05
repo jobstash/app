@@ -20,12 +20,11 @@ import { SideBar } from '@jobstash/sidebar/feature';
 
 import { activeListAtom } from './active-list-atom';
 import { ApplicantsTable } from './table';
-import { TableWrapper } from './table-wrapper';
 import { ApplicantTabs } from './tabs';
 
 export const ApplicantsPage = () => {
   const { role, flow, isLoading: isLoadingAuth } = useAuthContext();
-  const { data: atsClient, isPending } = useATSClient();
+  const { data: atsClient } = useATSClient();
 
   const activeList = useAtomValue(activeListAtom);
   const { data: rowData, isFetching } = useJobApplicants(
@@ -33,9 +32,10 @@ export const ApplicantsPage = () => {
     activeList,
   );
 
-  const isLoading = isLoadingAuth || isPending;
+  const isLoading = isLoadingAuth || !atsClient;
 
   if (isLoading) return <LoadingPage />;
+  if (!atsClient.orgId) return <LoadingPage />;
 
   if (
     role !== CHECK_WALLET_ROLES.ORG ||
@@ -60,9 +60,7 @@ export const ApplicantsPage = () => {
               'opacity-50 pointer-events-none': isFetching || !rowData,
             })}
           >
-            <TableWrapper>
-              <ApplicantsTable rowData={rowData} />
-            </TableWrapper>
+            <ApplicantsTable orgId={atsClient.orgId} rowData={rowData} />
           </div>
         </PageWrapper>
       </OrgProfileInfoProvider>
