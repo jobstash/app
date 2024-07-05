@@ -7,6 +7,7 @@ interface Location {
 
 interface Props {
   user?: {
+    wallet: string;
     avatar: string | null;
     username: string | null;
     email: string | null;
@@ -25,7 +26,7 @@ const getLocationText = (location: Location) => {
 export const UserCell = ({ user }: Props) => {
   if (!user) return null;
 
-  const { avatar, username, email, location } = user;
+  const { wallet, avatar, username, email, location } = user;
 
   const title = username ?? (email as string);
   const locationText = getLocationText(location);
@@ -33,12 +34,13 @@ export const UserCell = ({ user }: Props) => {
   return (
     <LogoTitle
       key={title}
+      identiconFallback
       title={title}
       location={locationText}
       avatarProps={{
         src: avatar ?? '',
-        alt: username ?? email ?? '',
-        name: username ?? email ?? '',
+        alt: username ?? email ?? wallet,
+        name: username ?? email ?? wallet,
       }}
     />
   );

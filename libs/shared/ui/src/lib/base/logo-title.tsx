@@ -23,6 +23,7 @@ interface LogoTitleProps extends LogoTitleVariantProps {
   avatarProps: AvatarProps;
   location?: string;
   hasMinWidth?: boolean;
+  identiconFallback?: boolean;
 }
 
 const LogoTitle = ({
@@ -31,6 +32,7 @@ const LogoTitle = ({
   size = 'md',
   location,
   hasMinWidth,
+  identiconFallback,
 }: LogoTitleProps) => (
   <div
     className={cn('flex w-fit items-center gap-x-3', {
@@ -44,6 +46,7 @@ const LogoTitle = ({
       size={size}
       isRounded={isRounded}
       name={name}
+      identiconFallback={identiconFallback}
     />
     <div className="flex flex-col justify-center gap-1">
       <Heading size={size === 'lg' ? 'md' : 'sm'}>{title}</Heading>
