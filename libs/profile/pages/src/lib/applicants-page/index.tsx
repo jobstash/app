@@ -9,12 +9,13 @@ import { useAtomValue } from 'jotai';
 
 import { CHECK_WALLET_FLOWS, CHECK_WALLET_ROLES } from '@jobstash/auth/core';
 import { ATS_PROVIDERS } from '@jobstash/profile/core';
+import { cn } from '@jobstash/shared/utils';
 
 import { useAuthContext } from '@jobstash/auth/state';
 import { useJobApplicants } from '@jobstash/jobs/state';
 import { OrgProfileInfoProvider, useATSClient } from '@jobstash/profile/state';
 
-import { Loader, PageWrapper } from '@jobstash/shared/ui';
+import { PageWrapper } from '@jobstash/shared/ui';
 import { SideBar } from '@jobstash/sidebar/feature';
 
 import { activeListAtom } from './active-list-atom';
@@ -54,15 +55,15 @@ export const ApplicantsPage = () => {
 
           <ApplicantTabs />
 
-          {isFetching || !rowData ? (
-            <div className="px-12 w-full flex items-center justify-center h-60">
-              <Loader />
-            </div>
-          ) : (
+          <div
+            className={cn({
+              'opacity-50 pointer-events-none': isFetching || !rowData,
+            })}
+          >
             <TableWrapper>
               <ApplicantsTable rowData={rowData} />
             </TableWrapper>
-          )}
+          </div>
         </PageWrapper>
       </OrgProfileInfoProvider>
     </>

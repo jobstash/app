@@ -7,7 +7,7 @@ import { EmptyCellPlaceholder } from '@jobstash/profile/ui';
 import { useApplicantsTable } from './use-applicants-table';
 
 interface Props {
-  rowData: JobApplicant[];
+  rowData: JobApplicant[] | undefined;
 }
 
 export const ApplicantsTable = ({ rowData }: Props) => {
