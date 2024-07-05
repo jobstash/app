@@ -6,7 +6,7 @@ import { capitalize } from '@jobstash/shared/utils';
 import { EmptyCellPlaceholder } from '../empty-cell-placeholder';
 
 interface Props {
-  tags: Tag[];
+  tags?: Tag[];
   skills?: {
     id: string;
     name: string;
@@ -24,7 +24,7 @@ export const SkillsCell = ({ tags, skills, isMatched }: Props) => {
   }
 
   const matchingSkills = [];
-  for (const { name } of tags) {
+  for (const { name } of tags ?? []) {
     if (skillSet.has(name)) {
       matchingSkills.push(name);
     }

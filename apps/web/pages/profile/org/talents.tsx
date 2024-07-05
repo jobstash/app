@@ -1,1 +1,1 @@
-export { ProfileOrgTalentsPage as default } from '@jobstash/profile/pages';
+export { TalentsPage as default } from '@jobstash/profile/pages';

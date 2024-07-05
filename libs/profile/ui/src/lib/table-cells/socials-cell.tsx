@@ -26,7 +26,7 @@ export const SocialsCell = ({ socials }: Props) => {
   }
 
   return (
-    <div className="grid grid-cols-3 gap-x-8 gap-y-1 h-fit">
+    <div className="flex flex-wrap gap-x-4 gap-y-1 h-fit">
       {Object.entries(socials)
         .filter(([, value]) => value !== null)
         .map(([key, value]) => {

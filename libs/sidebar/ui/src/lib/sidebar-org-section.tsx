@@ -45,7 +45,7 @@ const SidebarOrgSection = ({ isMobile }: Props) => {
 
     if (IS_DEBUG) {
       tabs.push({
-        text: 'Available Talent',
+        text: 'Available Talents',
         path: '/profile/org/talents',
       });
     }
