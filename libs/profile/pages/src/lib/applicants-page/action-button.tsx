@@ -1,53 +1,56 @@
-import { useMemo } from 'react';
+import { useState } from 'react';
 
 import { Button } from '@nextui-org/button';
 import { Tooltip } from '@nextui-org/tooltip';
 
 import { UpdateApplicantListMutFn } from '@jobstash/profile/core';
 
-import { useJobApplicants } from '@jobstash/jobs/state';
-
 interface Props {
   orgId: string | null | undefined;
   wallet: string;
   jobId: string;
-  isPending: boolean;
   mutate: UpdateApplicantListMutFn;
   icon: React.ReactNode;
   list: 'shortlisted' | 'archived';
+  isListed: boolean;
+  isPending: boolean;
+  isDisabled: boolean;
 }
 
 export const ActionButton = ({
   orgId,
   wallet,
   jobId,
-  isPending,
   mutate,
   icon,
   list,
+  isListed,
+  isPending,
+  isDisabled,
 }: Props) => {
-  const { data, isFetching } = useJobApplicants(orgId, list);
-
-  const isInList = useMemo(
-    () => (data ?? []).some((applicant) => applicant.user.wallet === wallet),
-    [data, wallet],
-  );
+  const [isLoading, setIsLoading] = useState(false);
 
   const addToShortList = () => {
-    mutate({ applicants: [{ wallet, job: jobId }], list });
+    setIsLoading(true);
+    mutate(
+      { applicants: [{ wallet, job: jobId }], list },
+      {
+        onSettled: () => setIsLoading(false),
+      },
+    );
   };
 
   return (
     <Tooltip
-      content={isInList ? `Already ${list}` : `Add to ${list}`}
-      isDisabled={!data}
+      content={isListed ? `Already ${list}` : `Add to ${list}`}
+      isDisabled={isDisabled}
       delay={0}
     >
       <div className="flex h-max items-center">
         <Button
           isIconOnly
-          isLoading={!orgId || isPending}
-          isDisabled={!data || isInList || isFetching}
+          isLoading={!orgId || isLoading}
+          isDisabled={isDisabled || isPending}
           onClick={addToShortList}
         >
           {icon}
