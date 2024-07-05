@@ -23,6 +23,7 @@ export * from './lib/ratings';
 export { default as ProfileShowcaseSection } from './lib/showcase-section';
 export { default as ProfileSkillsSection } from './lib/skills-section';
 export * from './lib/table-cells/showcase-cell';
+export * from './lib/table-cells/skills-cell';
 export * from './lib/table-cells/socials-cell';
 export * from './lib/table-cells/user-cell';
 export * from './lib/table-multi-select-action-button';

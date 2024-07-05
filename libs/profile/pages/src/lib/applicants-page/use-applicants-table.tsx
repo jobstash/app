@@ -6,7 +6,12 @@ import { AgGridReact } from 'ag-grid-react';
 import { JobApplicant } from '@jobstash/jobs/core';
 import { convertFalseStringValuesToNull } from '@jobstash/shared/utils';
 
-import { ShowcaseCell, SocialsCell, UserCell } from '@jobstash/profile/ui';
+import {
+  ShowcaseCell,
+  SkillsCell,
+  SocialsCell,
+  UserCell,
+} from '@jobstash/profile/ui';
 
 import { ActionsCell } from './actions-cell';
 import { BooleanCell } from './boolean-cell';
@@ -59,6 +64,17 @@ export const useApplicantsTable = (orgId: string) => {
         width: 320,
         cellRenderer: (props: CellProps) => (
           <ShowcaseCell showcases={props.data?.user.showcases} />
+        ),
+      },
+      {
+        headerName: 'Skills',
+        width: 320,
+        cellRenderer: (props: CellProps) => (
+          <SkillsCell
+            isMatched
+            tags={props.data?.job.tags ?? []}
+            skills={props.data?.user.skills}
+          />
         ),
       },
       {
