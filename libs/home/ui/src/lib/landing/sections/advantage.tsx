@@ -16,16 +16,16 @@ interface Props {
 }
 
 export const Advantage = ({ icon, title, desc, advantages }: Props) => (
-  <div className="flex w-full items-start justify-center rounded-2xl first:mb-5 px-2 md:w-1/2 md:px-4">
-    <div className="flex w-full flex-col justify-center space-y-4 rounded-2xl bg-[#222224] p-5 md:p-6">
-      <div className="flex space-x-4 items-center">
+  <div className="flex items-start justify-center w-full px-2 rounded-2xl first:mb-5 md:w-1/2 md:px-4">
+    <div className="flex flex-col justify-center w-full p-5 space-y-4 bg-white rounded-2xl bg-opacity-5 md:p-6">
+      <div className="flex items-center space-x-4">
         <div>{icon}</div>
         <div>
           <Heading size="md">{title}</Heading>
         </div>
       </div>
       <div>
-        <Text size="md" className="text-white/70 inline-block mx-auto">
+        <Text size="md" className="inline-block mx-auto text-white/70">
           {desc}
         </Text>
       </div>
@@ -34,11 +34,11 @@ export const Advantage = ({ icon, title, desc, advantages }: Props) => (
         <hr className="h-px border-0 bg-white/40" />
       </div>
 
-      <div className="space-y-4 px-3 md:px-6">
+      <div className="px-3 space-y-4 md:px-6">
         {advantages.map((adv) => (
           <div key={adv.desc} className="flex items-center space-x-4">
             <span>{adv.emoji}</span>
-            <Text className="text-white/70 inline-block mx-auto">{adv.desc}</Text>
+            <Text className="inline-block mx-auto text-white/70">{adv.desc}</Text>
           </div>
         ))}
       </div>

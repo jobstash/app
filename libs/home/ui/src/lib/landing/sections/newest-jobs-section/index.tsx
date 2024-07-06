@@ -10,9 +10,9 @@ export const NewestJobsSection = () => {
   const { data } = useHomePageJobs();
 
   return (
-    <div className="z-10 w-full items-center lg:py-0 flex flex-col gap-6">
+    <div className="z-10 flex flex-wrap items-center w-full lg:py-0">
       <h3
-        className={`${lato.className} text-white !leading-tight font-black text-5xl md:text-6xl text-center`}
+        className={`${lato.className} text-white w-full text-center !leading-tight font-black text-5xl md:text-6xl text-center`}
       >
         Newest Jobs
       </h3>
@@ -22,7 +22,7 @@ export const NewestJobsSection = () => {
       </p>
 
       {data ? (
-        <div className="flex gap-6 flex-col md:flex-row">
+        <div className="flex flex-wrap mt-6 space-y-6 md:space-y-0 md:-mx-3">
           {data.data.map((job) => (
             <Card key={job.shortUUID} job={job} />
           ))}

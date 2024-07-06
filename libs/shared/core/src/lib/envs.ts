@@ -21,7 +21,8 @@ export const NEW_FEATURE_DESCRIPTION =
 export const ORG_SIGNUP_FORM_URL = 'https://forms.gle/HWP6bUf3CB8RyJnw5';
 export const TELEGRAM_URL = 'https://telegram.me/jobstash';
 export const DUCK_TELEGRAM_URL = 'https://telegram.me/duckdegen';
-
+export const PDF_SAFU_URL = 'https://drive.google.com/file/d/1VVoyR3vy9xrzy8hwzPUzxOAMvRQLZEQb/view';
+export const PDF_JOBSTASH_URL = 'https://drive.google.com/file/d/1yuVMUrqBe6EgdB76ZVusSt5AWM_QaYxo/view';
 export const ENABLE_BASIC_AUTH = process.env.ENABLE_BASIC_AUTH;
 
 export const FRONTEND_URL = (() => {
