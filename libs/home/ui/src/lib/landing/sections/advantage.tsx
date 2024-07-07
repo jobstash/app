@@ -44,7 +44,7 @@ export const Advantage = ({ icon, title, desc, advantages, buttonTitle, buttonUR
           </div>
         ))}
       </div>
-      <div className="pt-2 pb-2 w-[150px] mx-auto [&_span]:mx-auto">
+      <div className="pt-2 pb-2 mx-auto [&_span]:mx-auto">
         <HomePageButton
           hasBorder
           text={buttonTitle}
