@@ -1,9 +1,10 @@
 import Head from 'next/head';
-import { lato } from '@jobstash/shared/core';
+import { DUCK_TELEGRAM_URL, lato } from '@jobstash/shared/core';
 import { Button } from '@nextui-org/button';
 import { PageWrapper } from '@jobstash/shared/ui';
 import { SideBar } from '@jobstash/sidebar/feature';
 import { StatsGrid } from '@jobstash/shared/ui';
+import { HomePageButton } from 'libs/home/ui/src/lib/landing/sections/buttons/home-page-button';
 
 const OrganizationsPage = () => (
   <>
@@ -66,6 +67,13 @@ const OrganizationsPage = () => (
                   <li>Soon: Embeddable apply button & job board</li>
                   <li>Soon: Post jobs to your TG & Discord</li>
                 </ul>
+                <div className="px-6 pb-6">
+                  <HomePageButton
+                    hasBorder
+                    text="Get Started"
+                    url={DUCK_TELEGRAM_URL}
+                  />
+                </div>
               </div>
 
               {/* Advanced Plan */}
@@ -89,6 +97,13 @@ const OrganizationsPage = () => (
                   <li>Soon: Embeddable apply button & job board</li>
                   <li>Soon: Post jobs to your TG & Discord</li>
                 </ul>
+                <div className="px-6 pb-6">
+                  <HomePageButton
+                    hasBorder
+                    text="Get Started"
+                    url={DUCK_TELEGRAM_URL}
+                  />
+                </div>
               </div>
 
               {/* Pro Plan */}
@@ -110,6 +125,13 @@ const OrganizationsPage = () => (
                   <li>✅ 1 Seat license</li>
                   <li>Soon: Post jobs to your TG & Discord</li>
                 </ul>
+                <div className="px-6 pb-6">
+                  <HomePageButton
+                    hasBorder
+                    text="Get Started"
+                    url={DUCK_TELEGRAM_URL}
+                  />
+                </div>
               </div>
 
               {/* Elite Plan */}
@@ -131,6 +153,13 @@ const OrganizationsPage = () => (
                   <li>✅ 1 Seat license</li>
                   <li>Soon: Post jobs to your TG & Discord</li>
                 </ul>
+                <div className="px-6 pb-6">
+                  <HomePageButton
+                    hasBorder
+                    text="Get Started"
+                    url={DUCK_TELEGRAM_URL}
+                  />
+                </div>
               </div>
 
               {/* Enterprise Plan */}
@@ -152,6 +181,13 @@ const OrganizationsPage = () => (
                   <li>✅ Volume discounts on seats</li>
                   <li>Soon: Post jobs to your TG & Discord</li>
                 </ul>
+                <div className="px-6 pb-6">
+                  <HomePageButton
+                    hasBorder
+                    text="Get Started"
+                    url={DUCK_TELEGRAM_URL}
+                  />
+                </div>
               </div>
             </div>
           </div>
