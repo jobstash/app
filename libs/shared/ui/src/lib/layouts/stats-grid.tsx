@@ -9,10 +9,10 @@ const icons = {
 };
 
 const data = [
-  { title: 'Monthly Active Users', icon: 'users', value: '13,456', diff: 34 },
-  { title: 'Monthly Views', icon: 'eye', value: '4,145', diff: -13 },
-  { title: 'Applications Per Month', icon: 'app', value: '745', diff: 18 },
-  { title: 'Applicants Per Month', icon: 'calendar', value: '188', diff: -30 },
+  { title: 'Monthly Active Users', icon: 'users', value: '4,196', diff: +12 },
+  { title: 'Monthly Views', icon: 'eye', value: '37,145', diff: +10 },
+  { title: 'Applications Per Month', icon: 'app', value: '4291', diff: +10 },
+  { title: 'Applicants Per Month', icon: 'calendar', value: '1032', diff: +11 },
 ] as const;
 
 const useStyles = createStyles((theme) => ({

@@ -18,12 +18,10 @@ const OrganizationsPage = () => (
           <h3
             className={`${lato.className} text-white !leading-tight font-black text-5xl md:text-6xl text-center pb-4 md:pb-8`}
           >
-            Organisations
+            Hiring for Crypto Natives?
           </h3>
           <p className="text-white opacity-75 max-w-[640px] mx-auto text-lg text-center">
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
-            dignissim porta scelerisque. Praesent venenatis nisi quam, a malesuada
-            nunc scelerisque at.
+          Learn about our performance and ways we can improve impact on your job listings, as well as our ATS and Due Diligence services.
           </p>
         </section>
         <section className='pb-6 md:pb-14'>
@@ -32,18 +30,69 @@ const OrganizationsPage = () => (
           >
             Our Stats
           </h3>
-          <p className="text-white opacity-75 max-w-[640px] mx-auto text-lg text-center">
-            July '24
-          </p>
           <div className="mx-auto">
             <StatsGrid />
+          </div>
+        </section>
+        <section className="mx-auto">
+          <div>
+            <h3
+              className={`${lato.className} text-white !leading-tight font-black text-5xl md:text-6xl text-center`}
+            >
+              Services
+            </h3>
+            <div className="flex flex-row flex-wrap mx-auto mt-6 -mx-2 lg:max-w-6xl">
+              <div className="w-full px-2 mb-4 md:w-1/2">
+                <div className="flex flex-wrap justify-start h-full p-5 bg-white bg-opacity-5 rounded-3xl">
+                  <h3
+                    className={`${lato.className} justify-center text-3xl pb-3 font-bold text-white`}
+                  >
+                    Feature your Jobs & JobStash Impact and Performance
+                  </h3>
+                  <p className="text-left text-md text-white/75 grow">
+                    Get your jobs featured on JobStash and get 5x more candidates.
+                    Learn about the impact and performance of your job listings on JobStash.
+                  </p>
+                  <HomePageButton
+                      hasBorder
+                      text={'JobStash Overview Deck'}
+                      url={`https://drive.google.com/file/d/1yuVMUrqBe6EgdB76ZVusSt5AWM_QaYxo/preview`}
+                      external={false}
+                    />
+                  <Button className="self-end w-full mt-6 font-bold rounded-lg bg-gradient-to-l from-primary to-tertiary">
+
+                  </Button>
+                </div>
+              </div>
+              <div className="w-full px-2 mb-4 md:w-1/2">
+                <div className="flex flex-wrap justify-start h-full p-5 bg-white bg-opacity-5 rounded-3xl">
+                  <h3
+                    className={`${lato.className} justify-center text-3xl pb-3 font-bold text-white`}
+                  >
+                    SAFU ATS & Candidate Due Diligence
+                  </h3>
+                  <p className="text-left text-md text-white/75 grow">
+                    Safu ATS is a secure and efficient way to hire talent in the crypto space.
+                    It helps you identify genuine, crypto-native and crypto-adjacent talent, at scale,
+                    by relying on verifiable data. Safu ATS is designed to help you hire safer, better,
+                    and more efficiently.
+                  </p>
+                  <HomePageButton
+                      hasBorder
+                      text={'SAFU Overview Deck'}
+                      url={`https://drive.google.com/file/d/1VVoyR3vy9xrzy8hwzPUzxOAMvRQLZEQb/preview`}
+                      external={false}
+                    />
+                </div>
+              </div>
+            </div>
           </div>
         </section>
         <section className='pb-6 md:pb-14'>
           <h3
             className={`${lato.className} text-white !leading-tight font-black text-5xl md:text-6xl text-center pb-4 md:pb-8`}
           >
-            Our Pricing
+            ATS Prices & SAFU Plans
           </h3>
           <div className="mx-auto">
             <div className="grid grid-cols-1 gap-4 mb-4 place-content-center lg:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
@@ -192,83 +241,40 @@ const OrganizationsPage = () => (
             </div>
           </div>
         </section>
-        <section className="mx-auto">
-          <div>
-            <h3
-              className={`${lato.className} text-white !leading-tight font-black text-5xl md:text-6xl text-center`}
-            >
-              Services
-            </h3>
-            <div className="flex flex-row flex-wrap mx-auto mt-6 -mx-2 lg:max-w-6xl">
-              <div className="w-full px-2 mb-4 md:w-1/2">
-                <div className="flex flex-wrap justify-start h-full p-5 bg-white bg-opacity-5 rounded-3xl">
-                  <h3
-                    className={`${lato.className} justify-center text-3xl pb-3 font-bold text-white`}
-                  >
-                    Feature your Jobs & JobStash Impact and Performance
+
+        <section className='pb-6 md:pb-14'>
+          <h3
+            className={`${lato.className} text-white !leading-tight font-black text-5xl md:text-6xl text-center pb-4 md:pb-8`}
+          >
+            Featuring your Jobs
+          </h3>
+          <div className="mx-auto">
+            <div className="grid grid-cols-1 gap-4 mb-4 place-content-center lg:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5">
+              {/* Essential Plan */}
+              <div className="z-30 flex flex-col bg-white border rounded-md bg-opacity-5 border-primary">
+                <div className="p-6 border-b border-default">
+                  <h3 className={`${lato.className} text-center text-3xl pb-3 font-bold text-white`}>
+                    Comprehensive
                   </h3>
-                  <p className="text-left text-md text-white/75 grow">
-                    Get your jobs featured on JobStash and get 5x more candidates.
-                    Learn about the impact and performance of your job listings on JobStash.
-                  </p>
-                  <Button className="self-end w-full mt-6 font-bold rounded-lg bg-gradient-to-l from-primary to-tertiary">
-                    JobStash Overview Deck
-                  </Button>
-                </div>
-              </div>
-              <div className="w-full px-2 mb-4 md:w-1/2">
-                <div className="flex flex-wrap justify-start h-full p-5 bg-white bg-opacity-5 rounded-3xl">
-                  <h3
-                    className={`${lato.className} justify-center text-3xl pb-3 font-bold text-white`}
-                  >
-                    SAFU ATS and Candidate Due Diligence
+                  <p className="text-center text-md text-subtle">Job Feauturing</p>
+                  <h3 className={`${lato.className} text-center text-3xl pb-3 font-bold text-white`}>
+                    $300 <span className="text-lg">/ job</span>
                   </h3>
-                  <p className="text-left text-md text-white/75 grow">
-                    Safu ATS is a secure and efficient way to hire talent in the crypto space.
-                    It helps you identify genuine, crypto-native and crypto-adjacent talent, at scale,
-                    by relying on verifiable data. Safu ATS is designed to help you hire safer, better,
-                    and more efficiently.
-                  </p>
-                  <Button className="self-end w-full mt-6 font-bold rounded-lg bg-gradient-to-l from-primary to-tertiary">
-                    SAFU Overview Deck
-                  </Button>
                 </div>
-              </div>
-            </div>
-          </div>
-        </section>
-        <section className="relative flex flex-col items-center pt-16 lg:mx-auto lg:max-w-6xl">
-          <div className="flex flex-col items-center">
-            <h3 className="text-white !leading-tight font-black text-5xl md:text-6xl text-center pb-6">
-              Our Services
-              <span className="block text-secondary"></span>
-            </h3>
-          </div>
-          <div className="flex flex-wrap w-full pt-12 -mx-2 md:-mx-4">
-            <div className="w-full px-2 mb-4 md:w-1/2">
-              <div className="flex flex-col justify-center w-full p-5 space-y-4 bg-white rounded-2xl bg-opacity-5 md:p-6">
-                <h4 className="text-white !leading-tight font-bold text-3xl md:text-4xl text-center pb-4">
-                  SAFU ATS and Candidate Due Diligence
-                </h4>
-                <iframe
-                  src="https://drive.google.com/file/d/1VVoyR3vy9xrzy8hwzPUzxOAMvRQLZEQb/preview"
-                  width="100%"
-                  height="600"
-                  allow="autoplay"
-                ></iframe>
-              </div>
-            </div>
-            <div className="w-full px-2 mb-4 md:w-1/2">
-              <div className="flex flex-col justify-center w-full p-5 space-y-4 bg-white rounded-2xl bg-opacity-5 md:p-6">
-                <h4 className="text-white !leading-tight font-bold text-3xl md:text-4xl text-center pb-4">
-                  Feature your jobs & JobStash impact and performance
-                </h4>
-                <iframe
-                  src="https://drive.google.com/file/d/1yuVMUrqBe6EgdB76ZVusSt5AWM_QaYxo/preview"
-                  width="100%"
-                  height="600"
-                  allow="autoplay"
-                ></iframe>
+                <ul className="flex-grow p-6 space-y-2">
+                  <li>✅ 1 job featured for 7 days</li>
+                  <li>✅ 5x the applicants</li>
+                  <li>✅ Featured on our homepage</li>
+                  <li>✅ Telegram stories about your org, your project and the job</li>
+                  <li>✅ Crossposting</li>
+                </ul>
+                <div className="px-6 pb-6">
+                  <HomePageButton
+                    hasBorder
+                    text="Get Started"
+                    url={DUCK_TELEGRAM_URL}
+                  />
+                </div>
               </div>
             </div>
           </div>
