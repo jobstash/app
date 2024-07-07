@@ -16,9 +16,9 @@ import TestimonialSection from './testimonial-section';
 const LandingSections = () => (
   <main className={`${roboto.className} pt-[80px]`}>
     <LandingSection />
+    <CandidateDaoSection />
     <SearchCategorySection />
     <SetsUsSection />
-    <CandidateDaoSection />
     <TestimonialSection />
     <CoffeeSection />
     <SearchSkillSection />

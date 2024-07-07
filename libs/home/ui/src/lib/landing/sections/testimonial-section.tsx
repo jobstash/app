@@ -20,8 +20,8 @@ const TestimonialSection = () => (
       </p>
       <div className="flex flex-wrap mt-10">
         <div className="flex flex-wrap mb-4 space-y-5 md:mb-0 md:-mx-3 md:space-y-0">
-          <div className="w-full h-full px-3 md:w-1/3">
-            <div className="flex flex-col flex-wrap justify-start h-full p-5 bg-white rounded-3xl bg-opacity-5">
+          <div className="w-full px-3 md:h-full md:w-1/3">
+            <div className="flex flex-wrap justify-start p-5 bg-white md:h-full rounded-3xl bg-opacity-5">
               <div className="h-[60px] w-[60px] mx-auto mb-6">
                 <div className="aspect-w-1 aspect-h-1">
                   <Image
@@ -68,8 +68,8 @@ const TestimonialSection = () => (
               </div>
             </div>
           </div>
-          <div className="w-full h-full px-3 md:w-1/3">
-            <div className="flex flex-col flex-wrap justify-start h-full p-5 bg-white rounded-3xl bg-opacity-5">
+          <div className="w-full px-3 md:h-full md:w-1/3">
+            <div className="flex flex-wrap justify-start p-5 bg-white md:h-full rounded-3xl bg-opacity-5">
               <div className="h-[60px] w-[60px] mx-auto mb-6">
                 <div className="aspect-w-1 aspect-h-1">
                   <Image
@@ -105,8 +105,8 @@ const TestimonialSection = () => (
               </div>
             </div>
           </div>
-          <div className="w-full h-full px-3 md:w-1/3">
-            <div className="flex flex-col flex-wrap justify-start h-full p-5 bg-white rounded-3xl bg-opacity-5">
+          <div className="w-full px-3 md:h-full md:w-1/3">
+            <div className="flex flex-wrap justify-start p-5 bg-white md:h-full rounded-3xl bg-opacity-5">
               <div className="h-[60px] w-[60px] mx-auto mb-6">
                 <div className="aspect-w-1 aspect-h-1">
                   <Image

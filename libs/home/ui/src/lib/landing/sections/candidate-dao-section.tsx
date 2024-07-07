@@ -7,7 +7,7 @@ const CandidateDaoSection = () => (
     <div className="flex flex-col items-center">
       <h3 className="text-white !leading-tight font-black text-5xl md:text-6xl text-center pb-6">
         All Crypto Native Jobs in One Place.
-        <span className="text-secondary block">None of the BS</span>
+        <span className="block text-secondary">None of the BS</span>
       </h3>
     </div>
     <p className="text-white opacity-75 max-w-[500px] mx-auto text-md text-center">
@@ -16,12 +16,14 @@ const CandidateDaoSection = () => (
       and projects, we show financial metrics from DefiLlama, Hacks and Audits
       from De.Fi and enrich it with our own propietary data.
     </p>
-    <div className="flex flex-wrap w-full  pt-12 -mx-2 md:-mx-4">
+    <div className="flex flex-wrap w-full pt-12 -mx-2 md:-mx-4">
       <Advantage
         icon={<DevAdvIcon />}
         title={devsAdv.title}
         desc={devsAdv.desc}
         advantages={devsAdv.advantages}
+        buttonTitle='JobStash for candidates'
+        buttonURL='/candidates'
       />
 
       <Advantage
@@ -29,6 +31,8 @@ const CandidateDaoSection = () => (
         title={companiesAdv.title}
         desc={companiesAdv.desc}
         advantages={companiesAdv.advantages}
+        buttonTitle='JobStash for organizations'
+        buttonURL='/hiring'
       />
     </div>
   </section>
