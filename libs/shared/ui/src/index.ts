@@ -106,3 +106,6 @@ export { default as PageWrapper } from './lib/layouts/page-wrapper';
 // Utils
 export * from './lib/utils/create-funding-rounds-tags';
 export * from './lib/utils/create-job-tags';
+
+// Static Components
+export { StatsGrid } from './lib/layouts/stats-grid';

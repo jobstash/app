@@ -1,13 +1,38 @@
+import Head from 'next/head';
 import { lato } from '@jobstash/shared/core';
 import { Button } from '@nextui-org/button';
-
-import { PageWrapper, Text } from '@jobstash/shared/ui';
+import { PageWrapper } from '@jobstash/shared/ui';
 import { SideBar } from '@jobstash/sidebar/feature';
-const OrganisationsPage = () => (
+import { StatsGrid } from '@jobstash/shared/ui';
+
+const OrganizationsPage = () => (
   <>
+    <Head>
+      <title>JobStash | Organizations</title>
+    </Head>
     <PageWrapper>
       <SideBar />
       <div className="px-6 mt-16 md:px-10">
+        <h3
+          className={`${lato.className} text-white !leading-tight font-black text-5xl md:text-6xl text-center pb-6`}
+        >
+          Our Stats
+        </h3>
+        <div className="max-w-6xl pb-8 mx-auto">
+          <StatsGrid />
+        </div>
+        <svg
+            className="h-[94px] my-10 mx-auto"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 12 101"
+          >
+            <path
+              fill="#fff"
+              fillOpacity=".1"
+              d="M.667 95a5.333 5.333 0 1 1 10.666 0A5.333 5.333 0 0 1 .667 95ZM6 1V0h1v1H6ZM5 95V1h2v94H5ZM5 0h1v2H5V0Z"
+            />
+          </svg>
         <h3
           className={`${lato.className} text-white !leading-tight font-black text-5xl md:text-6xl text-center pb-6`}
         >
@@ -61,9 +86,7 @@ const OrganisationsPage = () => (
                     our index. This way you know you will never be sent to a
                     fake recruiter and risk having your safety compromised.
                   </p>
-                  <Button
-                    className="self-end w-full mt-6 font-bold rounded-lg  bg-gradient-to-l from-primary to-tertiary"
-                  >
+                  <Button className="self-end w-full mt-6 font-bold rounded-lg bg-gradient-to-l from-primary to-tertiary">
                     Explore Job
                   </Button>
                 </div>
@@ -84,9 +107,7 @@ const OrganisationsPage = () => (
                     data from DefiLlama and from De.Fi to give you a sense of
                     the financials and safety of a protocol.
                   </p>
-                  <Button
-                    className="self-end w-full mt-6 font-bold rounded-lg  bg-gradient-to-l from-primary to-tertiary"
-                  >
+                  <Button className="self-end w-full mt-6 font-bold rounded-lg bg-gradient-to-l from-primary to-tertiary">
                     Explore Job
                   </Button>
                 </div>
@@ -124,8 +145,8 @@ const OrganisationsPage = () => (
           suscipit elementum vitae eget magna.
         </p>
         <section className="relative mx-auto lg:max-w-6xl">
-          <div className="flex flex-row flex-wrap my-16 -mx-2 space-y-6 md:space-y-0">
-            <div className="w-full px-2 md:w-1/5">
+          <div className="flex flex-row flex-wrap my-16 -mx-2 space-y-6 md:justify-center md:space-y-0">
+            <div className="w-full px-2 mb-4 md:w-1/3 xl:w-1/5">
               <div className="p-5 bg-white bg-opacity-5 rounded-3xl">
                 <h3
                   className={`${lato.className} justify-center text-2xl pb-3 font-bold text-white`}
@@ -150,14 +171,12 @@ const OrganisationsPage = () => (
                   trusted personal network, as we believe that crypto teams are
                   built on reputation and trust.
                 </p>
-                <Button
-                  className="self-end w-full mt-6 font-bold rounded-lg  bg-gradient-to-l from-primary to-tertiary"
-                >
+                <Button className="self-end w-full mt-6 font-bold rounded-lg bg-gradient-to-l from-primary to-tertiary">
                   Explore Job
                 </Button>
               </div>
             </div>
-            <div className="w-full px-2 md:w-1/5">
+            <div className="w-full px-2 mb-4 md:w-1/3 xl:w-1/5">
               <div className="p-5 bg-white bg-opacity-5 rounded-3xl">
                 <h3
                   className={`${lato.className} justify-center text-2xl pb-3 font-bold text-white`}
@@ -182,14 +201,12 @@ const OrganisationsPage = () => (
                   trusted personal network, as we believe that crypto teams are
                   built on reputation and trust.
                 </p>
-                <Button
-                  className="self-end w-full mt-6 font-bold rounded-lg  bg-gradient-to-l from-primary to-tertiary"
-                >
+                <Button className="self-end w-full mt-6 font-bold rounded-lg bg-gradient-to-l from-primary to-tertiary">
                   Explore Job
                 </Button>
               </div>
             </div>
-            <div className="w-full px-2 md:w-1/5">
+            <div className="w-full px-2 mb-4 md:w-1/3 xl:w-1/5">
               <div className="p-5 bg-white bg-opacity-5 rounded-3xl">
                 <h3
                   className={`${lato.className} justify-center text-2xl pb-3 font-bold text-white`}
@@ -214,14 +231,12 @@ const OrganisationsPage = () => (
                   trusted personal network, as we believe that crypto teams are
                   built on reputation and trust.
                 </p>
-                <Button
-                  className="self-end w-full mt-6 font-bold rounded-lg  bg-gradient-to-l from-primary to-tertiary"
-                >
+                <Button className="self-end w-full mt-6 font-bold rounded-lg bg-gradient-to-l from-primary to-tertiary">
                   Explore Job
                 </Button>
               </div>
             </div>
-            <div className="w-full px-2 md:w-1/5">
+            <div className="w-full px-2 mb-4 md:w-1/3 xl:w-1/5">
               <div className="p-5 bg-white bg-opacity-5 rounded-3xl">
                 <h3
                   className={`${lato.className} justify-center text-2xl pb-3 font-bold text-white`}
@@ -246,14 +261,12 @@ const OrganisationsPage = () => (
                   trusted personal network, as we believe that crypto teams are
                   built on reputation and trust.
                 </p>
-                <Button
-                  className="self-end w-full mt-6 font-bold rounded-lg  bg-gradient-to-l from-primary to-tertiary"
-                >
+                <Button className="self-end w-full mt-6 font-bold rounded-lg bg-gradient-to-l from-primary to-tertiary">
                   Explore Job
                 </Button>
               </div>
             </div>
-            <div className="w-full px-2 md:w-1/5">
+            <div className="w-full px-2 mb-4 md:w-1/3 xl:w-1/5">
               <div className="p-5 bg-white bg-opacity-5 rounded-3xl">
                 <h3
                   className={`${lato.className} justify-center text-2xl pb-3 font-bold text-white`}
@@ -278,9 +291,7 @@ const OrganisationsPage = () => (
                   trusted personal network, as we believe that crypto teams are
                   built on reputation and trust.
                 </p>
-                <Button
-                  className="self-end w-full mt-6 font-bold rounded-lg  bg-gradient-to-l from-primary to-tertiary"
-                >
+                <Button className="self-end w-full mt-6 font-bold rounded-lg bg-gradient-to-l from-primary to-tertiary">
                   Explore Job
                 </Button>
               </div>
@@ -292,4 +303,4 @@ const OrganisationsPage = () => (
   </>
 );
 
-export default OrganisationsPage;
+export default OrganizationsPage;
