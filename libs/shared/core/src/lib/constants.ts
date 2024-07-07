@@ -132,7 +132,7 @@ export const ECOSYSTEMS = {
   ETHDAM: 'ethdam',
   ETHLONDON: 'ethlondon',
   LOBSTERDAO: 'lobsterdao',
-  AAMAFIA: 'AAMafia',
+  SUPERCHAIN: 'superchain',
   DEV: 'devcommunity',
   STAGING: 'stagingcommunity',
 } as const;
