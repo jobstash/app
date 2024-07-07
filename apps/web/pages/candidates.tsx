@@ -52,7 +52,7 @@ const CandidatesPage = () => (
                   >
                     Safety by Default
                   </h3>
-                  <p className="text-left text-md text-white/75 pb-">
+                  <p className="text-left text-md text-white/75 grow">
                     At JobStash we don&#39;t let random anons post jobs. Other
                     Job Platforms allow to &#34;post jobs&#34; for payment, but
                     we believe this creates perverse incentives. In contrast, we
@@ -78,7 +78,7 @@ const CandidatesPage = () => (
                   >
                     Accurate data where it matters
                   </h3>
-                  <p className="text-left text-md text-white/75 pb-">
+                  <p className="text-left text-md text-white/75 grow">
                     We built Jobstash from the ground up leveraging AI to
                     Structure Data so that jobposts can be presented in a
                     concise, uniform and filterable way. We are able to present
@@ -104,7 +104,7 @@ const CandidatesPage = () => (
                   >
                     Shining Light on Great Applicants
                   </h3>
-                  <p className="text-left text-md text-white/75 pb-">
+                  <p className="text-left text-md text-white/75 grow">
                     In todays market condition successful job posts get hundreds
                     if not thousands of job applicants, with a very low S/N
                     ratio. We understand that crypto is different than other
@@ -132,7 +132,7 @@ const CandidatesPage = () => (
                   >
                     No Middlemen
                   </h3>
-                  <p className="text-left text-md text-white/75 pb-">
+                  <p className="text-left text-md text-white/75 grow">
                     JobStash does not include jobs from agencies. We directly
                     connect talent with the hiring managers, and provide data
                     and ease of access to facilitate great talent introductions.
@@ -157,7 +157,7 @@ const CandidatesPage = () => (
                   >
                     We take the hard road
                   </h3>
-                  <p className="text-left text-md text-white/75 pb-">
+                  <p className="text-left text-md text-white/75 grow">
                     At JobStash we&#39;ve spent the past years obsessing over
                     how to build an amazing experience for talent specifically
                     in crypto. We have done crazy things, such as built data
