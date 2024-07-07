@@ -2,9 +2,10 @@ import { memo } from 'react';
 
 import {
   DUCK_TELEGRAM_URL,
-  PDF_SAFU_URL,
-  PDF_JOBSTASH_URL,
   lato,
+  ORG_SIGNUP_FORM_URL,
+  PDF_JOBSTASH_URL,
+  PDF_SAFU_URL,
 } from '@jobstash/shared/core';
 
 import { ExploreJobsButton } from './buttons/explore-jobs-button';
@@ -36,14 +37,17 @@ const LandingSection = () => (
       <GradientContainer className="flex flex-wrap w-full ">
         <div className="flex flex-col flex-wrap w-full gap-3 text-white grow">
           <span className={`${lato.className} text-xl font-bold`}>
-            Elevate Your Talent Search
+            JobStash - A Public Good
           </span>
           <div className="flex flex-col gap-0.5 max-w-3xl text-white/75">
             <span className="text-md">
-              JobStash redefines recruitment in crypto, guarding against fraud
-              and impostors, connecting you exclusively with genuine,
-              crypto-native and crypto-adjacent talent. Welcome to a new era of
-              talent discovery, where integrity meets innovation.
+              Jobstash operates as a public good, indexing and curating job
+              listings for thousands of organizations in crypto, absolutely
+              for free. To support our mission, we offer premium services to
+              organizations looking to elevate their hiring operations. You
+              can feature your job listings, advertise your organization, or
+              even sponsor our platform. Job Featuring is 300$ per week per
+              jobpost, and gives you 5x the applicants.
             </span>
           </div>
         </div>
@@ -54,36 +58,57 @@ const LandingSection = () => (
         />
         <HomePageButton
           hasBorder
-          text="Hire on JobStash ATS"
-          url={DUCK_TELEGRAM_URL}
+          text="Add your org to JobStash"
+          url={ORG_SIGNUP_FORM_URL}
         />
+        
       </GradientContainer>
       <GradientContainer className="flex flex-wrap w-full">
         <div className="flex flex-col flex-wrap w-full gap-3 text-white grow">
           <span className={`${lato.className} text-xl font-bold`}>
-            Elevate Your Talent Search
+            Hire talent safely with SAFU ATS
           </span>
           <div className="flex flex-col gap-0.5 max-w-3xl text-white/75">
             <span className="text-md">
-              JobStash redefines recruitment in crypto, guarding against fraud
-              and impostors, connecting you exclusively with genuine,
-              crypto-native and crypto-adjacent talent. Welcome to a new era of
-              talent discovery, where integrity meets innovation.
+              JobStash redefines hiring operations in crypto, guarding against
+              fraud and impostors, identifying genuine, crypto-native and
+              crypto-adjacent talent, at scale, by relying on verifiable data.
+              Our ATS (Applicant Tracking System) is designed to help you hire
+              safer, better, and more efficiently. Tired of sifting through a
+              sea of impostors? Try SAFU ATS today. Works with your existing
+              HR tools!
             </span>
           </div>
         </div>
         <HomePageButton
           hasBorder
-          text="Discover JobStash SAFU"
+          text="Discover SAFU ATS"
           url={PDF_SAFU_URL}
         />
         <HomePageButton
           hasBorder
-          text="Hire on JobStash ATS"
+          text="Request a demo"
           url={DUCK_TELEGRAM_URL}
         />
       </GradientContainer>
+      
     </div>
+
+    <GradientContainer className="mt-16">
+      <div className="flex flex-col gap-4 text-white grow">
+        <span className={`${lato.className} text-xl font-bold`}>
+          Did you Hire or Get Hired Using JobStash ?
+        </span>
+        <span className="text-md text-white/75">
+          Drop us a message and tell us how it went!
+        </span>
+      </div>
+      <HomePageButton
+          hasBorder
+          text="Get featured"
+          url={DUCK_TELEGRAM_URL}
+        />
+    </GradientContainer>
   </section>
 );
 

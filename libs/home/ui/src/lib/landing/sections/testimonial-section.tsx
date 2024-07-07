@@ -155,17 +155,6 @@ const TestimonialSection = () => (
       </div>
     </div>
 
-    <GradientContainer className="mt-16">
-      <div className="flex flex-col gap-4 text-white grow">
-        <span className={`${lato.className} text-xl font-bold`}>
-          Did you Hire or Get Hired Using JobStash ?
-        </span>
-        <span className="text-md text-white/75">
-          Drop us a message and tell us how it went!
-        </span>
-      </div>
-      <HomePageButton hasBorder text="Contact" url={DUCK_TELEGRAM_URL} />
-    </GradientContainer>
   </section>
 );
 
