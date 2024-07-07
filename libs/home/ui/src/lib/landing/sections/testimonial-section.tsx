@@ -21,7 +21,7 @@ const TestimonialSection = () => (
       <div className="flex flex-wrap mt-10">
         <div className="flex flex-wrap mb-4 space-y-5 md:mb-0 md:-mx-3 md:space-y-0">
           <div className="w-full px-3 md:h-full md:w-1/3">
-            <div className="flex flex-wrap justify-start p-5 bg-white md:h-full rounded-3xl bg-opacity-5">
+            <div className="flex flex-wrap justify-start p-5 bg-white md:flex-col md:h-full rounded-3xl bg-opacity-5">
               <div className="h-[60px] w-[60px] mx-auto mb-6">
                 <div className="aspect-w-1 aspect-h-1">
                   <Image
@@ -37,7 +37,7 @@ const TestimonialSection = () => (
                 are looking for your next opportunity, I highly recommend
                 checking out their platform!
               </p>
-              <hr className="mt-6 mb-3 border-t border-white/20" />
+              <hr className="w-full mt-6 mb-3 border-t border-white/20 " />
               <div className="min-h-[88px]">
                 <p className="font-semibold text-white text-md">
                   Najdana Majors
@@ -69,7 +69,7 @@ const TestimonialSection = () => (
             </div>
           </div>
           <div className="w-full px-3 md:h-full md:w-1/3">
-            <div className="flex flex-wrap justify-start p-5 bg-white md:h-full rounded-3xl bg-opacity-5">
+            <div className="flex flex-wrap justify-start p-5 bg-white md:flex-col md:h-full rounded-3xl bg-opacity-5">
               <div className="h-[60px] w-[60px] mx-auto mb-6">
                 <div className="aspect-w-1 aspect-h-1">
                   <Image
@@ -86,7 +86,7 @@ const TestimonialSection = () => (
                 featuring, which got us way more inbound and ultimately a
                 successful hire.
               </p>
-              <hr className="mt-6 mb-3 border-t border-white/20" />
+              <hr className="w-full mt-6 mb-3 border-t border-white/20 " />
               <div className="min-h-[88px]">
                 <p className="font-semibold text-white text-md">ivangbi</p>
                 <p className="font-semibold text-white text-md">
@@ -106,7 +106,7 @@ const TestimonialSection = () => (
             </div>
           </div>
           <div className="w-full px-3 md:h-full md:w-1/3">
-            <div className="flex flex-wrap justify-start p-5 bg-white md:h-full rounded-3xl bg-opacity-5">
+            <div className="flex flex-wrap justify-start p-5 bg-white md:flex-col md:h-full rounded-3xl bg-opacity-5">
               <div className="h-[60px] w-[60px] mx-auto mb-6">
                 <div className="aspect-w-1 aspect-h-1">
                   <Image
@@ -123,7 +123,7 @@ const TestimonialSection = () => (
                 authentic team that genuinely want to help match the best
                 talent. Really cool UX and free!
               </p>
-              <hr className="mt-6 mb-3 border-t border-white/20" />
+              <hr className="w-full mt-6 mb-3 border-t border-white/20 " />
               <div className="min-h-[88px]">
                 <p className="font-semibold text-white text-md">
                   James Glasscock
