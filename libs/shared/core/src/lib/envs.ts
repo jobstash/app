@@ -26,6 +26,7 @@ export const PDF_SAFU_URL =
 export const PDF_JOBSTASH_URL =
   'https://drive.google.com/file/d/1yuVMUrqBe6EgdB76ZVusSt5AWM_QaYxo/view';
 export const ENABLE_BASIC_AUTH = process.env.ENABLE_BASIC_AUTH;
+export const ORG_PAGE = '/hiring';
 
 export const FRONTEND_URL = (() => {
   const HOSTNAME = 'jobstash.xyz';

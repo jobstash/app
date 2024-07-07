@@ -22,7 +22,7 @@ const OrganizationsPage = () => (
           <p className="text-white opacity-75 max-w-[640px] mx-auto text-lg text-center">
             Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
             dignissim porta scelerisque. Praesent venenatis nisi quam, a malesuada
-            nunc scelerisque at. 
+            nunc scelerisque at.
           </p>
         </section>
         <section className='pb-6 md:pb-14'>
@@ -31,6 +31,9 @@ const OrganizationsPage = () => (
           >
             Our Stats
           </h3>
+          <p className="text-white opacity-75 max-w-[640px] mx-auto text-lg text-center">
+            July '24
+          </p>
           <div className="mx-auto">
             <StatsGrid />
           </div>
@@ -345,7 +348,7 @@ const OrganizationsPage = () => (
             <h3
               className={`${lato.className} text-white !leading-tight font-black text-5xl md:text-6xl text-center`}
             >
-              What Sets us Apart
+              Services
             </h3>
             <div className="flex flex-row flex-wrap mx-auto mt-6 -mx-2 lg:max-w-6xl">
               <div className="w-full px-2 mb-4 md:w-1/2">
@@ -353,7 +356,7 @@ const OrganizationsPage = () => (
                   <h3
                     className={`${lato.className} justify-center text-3xl pb-3 font-bold text-white`}
                   >
-                    Safety by Default
+                    Feature your Jobs
                   </h3>
                   <p className="text-left text-md text-white/75 grow">
                     At JobStash we don&#39;t let random anons post jobs. Other
@@ -389,6 +392,42 @@ const OrganizationsPage = () => (
                     Explore Job
                   </Button>
                 </div>
+              </div>
+            </div>
+          </div>
+        </section>
+        <section className="relative flex flex-col items-center pt-16 lg:mx-auto lg:max-w-6xl">
+          <div className="flex flex-col items-center">
+            <h3 className="text-white !leading-tight font-black text-5xl md:text-6xl text-center pb-6">
+              Our Services
+              <span className="block text-secondary"></span>
+            </h3>
+          </div>
+          <div className="flex flex-wrap w-full pt-12 -mx-2 md:-mx-4">
+            <div className="w-full px-2 mb-4 md:w-1/2">
+              <div className="flex flex-col justify-center w-full p-5 space-y-4 bg-white rounded-2xl bg-opacity-5 md:p-6">
+                <h4 className="text-white !leading-tight font-bold text-3xl md:text-4xl text-center pb-4">
+                  SAFU ATS and Candidate Due Diligence
+                </h4>
+                <iframe
+                  src="https://drive.google.com/file/d/1VVoyR3vy9xrzy8hwzPUzxOAMvRQLZEQb/preview"
+                  width="100%"
+                  height="600"
+                  allow="autoplay"
+                ></iframe>
+              </div>
+            </div>
+            <div className="w-full px-2 mb-4 md:w-1/2">
+              <div className="flex flex-col justify-center w-full p-5 space-y-4 bg-white rounded-2xl bg-opacity-5 md:p-6">
+                <h4 className="text-white !leading-tight font-bold text-3xl md:text-4xl text-center pb-4">
+                  Feature your jobs & JobStash impact and performance
+                </h4>
+                <iframe
+                  src="https://drive.google.com/file/d/1yuVMUrqBe6EgdB76ZVusSt5AWM_QaYxo/preview"
+                  width="100%"
+                  height="600"
+                  allow="autoplay"
+                ></iframe>
               </div>
             </div>
           </div>

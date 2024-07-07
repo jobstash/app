@@ -1,12 +1,6 @@
 import { memo } from 'react';
 
-import {
-  DUCK_TELEGRAM_URL,
-  lato,
-  ORG_SIGNUP_FORM_URL,
-  PDF_JOBSTASH_URL,
-  PDF_SAFU_URL,
-} from '@jobstash/shared/core';
+import { DUCK_TELEGRAM_URL, lato, ORG_PAGE } from '@jobstash/shared/core';
 
 import { ExploreJobsButton } from './buttons/explore-jobs-button';
 import { HomePageButton } from './buttons/home-page-button';
@@ -37,36 +31,24 @@ const LandingSection = () => (
       <GradientContainer className="flex flex-wrap w-full ">
         <div className="flex flex-col flex-wrap w-full gap-3 text-white grow">
           <span className={`${lato.className} text-xl font-bold`}>
-            JobStash - A Public Good
+            Feature your job listings on JobStash
           </span>
           <div className="flex flex-col gap-0.5 max-w-3xl text-white/75">
             <span className="text-md">
-              Jobstash operates as a public good, indexing and curating job
-              listings for thousands of organizations in crypto, absolutely
-              for free. To support our mission, we offer premium services to
-              organizations looking to elevate their hiring operations. You
-              can feature your job listings, advertise your organization, or
-              even sponsor our platform. Job Featuring is 300$ per week per
-              jobpost, and gives you 5x the applicants.
+              Get up to 5x more applicants by featuring your jobs with us. Job
+              Featuring is 300$ per week per jobpost, and includes a dedicated
+              job post, crossposting promotion, a sticky slot on our homepage
+              and custom telegram stories about your job, org and project. You
+              must have a verified org on JobStash to feature your job.
             </span>
           </div>
         </div>
-        <HomePageButton
-          hasBorder
-          text="JobStash Overview"
-          url={PDF_JOBSTASH_URL}
-        />
-        <HomePageButton
-          hasBorder
-          text="Add your org to JobStash"
-          url={ORG_SIGNUP_FORM_URL}
-        />
-        
+        <HomePageButton hasBorder text="Feature your job" url={ORG_PAGE} />
       </GradientContainer>
       <GradientContainer className="flex flex-wrap w-full">
         <div className="flex flex-col flex-wrap w-full gap-3 text-white grow">
           <span className={`${lato.className} text-xl font-bold`}>
-            Hire talent safely with SAFU ATS
+            Save time using SAFU ATS
           </span>
           <div className="flex flex-col gap-0.5 max-w-3xl text-white/75">
             <span className="text-md">
@@ -75,23 +57,13 @@ const LandingSection = () => (
               crypto-adjacent talent, at scale, by relying on verifiable data.
               Our ATS (Applicant Tracking System) is designed to help you hire
               safer, better, and more efficiently. Tired of sifting through a
-              sea of impostors? Try SAFU ATS today. Works with your existing
-              HR tools!
+              sea of impostors? Try SAFU ATS today. Works with your existing HR
+              tools, or as a standalone solution integrated with JobStash.
             </span>
           </div>
         </div>
-        <HomePageButton
-          hasBorder
-          text="Discover SAFU ATS"
-          url={PDF_SAFU_URL}
-        />
-        <HomePageButton
-          hasBorder
-          text="Request a demo"
-          url={DUCK_TELEGRAM_URL}
-        />
+        <HomePageButton hasBorder text="Discover SAFU ATS" url={ORG_PAGE} />
       </GradientContainer>
-      
     </div>
 
     <GradientContainer className="mt-16">
@@ -104,10 +76,10 @@ const LandingSection = () => (
         </span>
       </div>
       <HomePageButton
-          hasBorder
-          text="Get featured"
-          url={DUCK_TELEGRAM_URL}
-        />
+        hasBorder
+        text="DM us your story"
+        url={DUCK_TELEGRAM_URL}
+      />
     </GradientContainer>
   </section>
 );
