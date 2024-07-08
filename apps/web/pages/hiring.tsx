@@ -56,8 +56,7 @@ const OrganizationsPage = () => (
                   </h3>
                   <p className="text-left text-md text-white/75 grow">
                     Get 5x more applicants when you feature your jobs on JobStash.
-                    Learn about the impact and performance of JobStash.
-                    Learn how it all works.
+                    Learn how JobStash works and about the impact and performance of JobStash.
                   </p>
                   <HomePageButton
                     hasBorder
@@ -135,8 +134,9 @@ const OrganizationsPage = () => (
                   </h3>
                 </div>
                 <ul className="flex-grow p-6 space-y-2">
-                  <li>✅ Upgrade from Notion custom website</li>
+                  <li>✅ Access to our ATS</li>
                   <li>✅ Track all your applicants</li>
+                  <li>✅ Access our Talent Pool</li>
                   <li>✅ Applicants use 1-click apply</li>
                   <li>✅ Keep your hiring ops in one place</li>
                   <li>✅ Organization wide license</li>
@@ -170,8 +170,9 @@ const OrganizationsPage = () => (
                   </h3>
                 </div>
                 <ul className="flex-grow p-6 space-y-2">
-                  <li>✅ The upgrade choice from Notion</li>
+                  <li>✅ Access to our ATS</li>
                   <li>✅ Track all your applicants</li>
+                  <li>✅ Access our Talent Pool with SAFU data</li>
                   <li>✅ Applicants use 1-click apply</li>
                   <li>✅ Keep your hiring ops in one place</li>
                   <li>✅ Due Diligence data for candidates</li>
