@@ -15,3 +15,4 @@ export { default as HomeSearch } from './lib/home-search/home-search';
 export * from './lib/landing/sections/buttons/explore-jobs-button';
 export * from './lib/landing/sections/buttons/home-page-button';
 export * from './lib/landing/sections/buttons/subscribe-telegram';
+export * from './lib/landing/sections/gradient-container';

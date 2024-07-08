@@ -1,14 +1,11 @@
 import Head from 'next/head';
 
-import { Button } from '@nextui-org/button';
-
 import { DUCK_TELEGRAM_URL, lato } from '@jobstash/shared/core';
 
-import { HomePageButton } from '@jobstash/home/ui';
+import { GradientContainer, HomePageButton } from '@jobstash/home/ui';
 import { PageWrapper } from '@jobstash/shared/ui';
 import { StatsGrid } from '@jobstash/shared/ui';
 import { SideBar } from '@jobstash/sidebar/feature';
-import { GradientContainer } from 'libs/home/ui/src/lib/landing/sections/gradient-container';
 
 const OrganizationsPage = () => (
   <>
@@ -55,8 +52,9 @@ const OrganizationsPage = () => (
                     Job Featuring
                   </h3>
                   <p className="text-left text-md text-white/75 grow">
-                    Get 5x more applicants when you feature your jobs on JobStash.
-                    Learn how JobStash works and about the impact and performance of JobStash.
+                    Get 5x more applicants when you feature your jobs on
+                    JobStash. Learn how JobStash works and about the impact and
+                    performance of JobStash.
                   </p>
                   <HomePageButton
                     hasBorder
@@ -74,11 +72,11 @@ const OrganizationsPage = () => (
                     SAFU
                   </h3>
                   <p className="text-left text-md text-white/75 grow">
-                    Safu is a productivity tool to save time while hiring talent in the
-                    crypto space. It helps you identify genuine, crypto-native
-                    and upcoming talent, at scale, by relying on
-                    verifiable data instead of on CVs. Safu ATS is designed to help you hire
-                    safer, better, and more efficiently.
+                    Safu is a productivity tool to save time while hiring talent
+                    in the crypto space. It helps you identify genuine,
+                    crypto-native and upcoming talent, at scale, by relying on
+                    verifiable data instead of on CVs. Safu ATS is designed to
+                    help you hire safer, better, and more efficiently.
                   </p>
                   <HomePageButton
                     hasBorder
@@ -98,7 +96,7 @@ const OrganizationsPage = () => (
                 Need help?
               </span>
               <span className="text-md text-white/75">
-                We're here to help you with any questions you might have.
+                We&#39;re here to help you with any questions you might have.
               </span>
             </div>
             <HomePageButton
@@ -372,9 +370,7 @@ const OrganizationsPage = () => (
                   <li>✅ 1 job featured for 7 days</li>
                   <li>✅ 5x the applicants</li>
                   <li>✅ Featured on our homepage</li>
-                  <li>
-                    ✅ Telegram stories about org, project and job
-                  </li>
+                  <li>✅ Telegram stories about org, project and job</li>
                   <li>✅ Job Post bumping on Telegram</li>
                   <li>✅ Crossposting</li>
                 </ul>
