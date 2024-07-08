@@ -1,14 +1,11 @@
 import Head from 'next/head';
 
-import { Button } from '@nextui-org/button';
-
 import { DUCK_TELEGRAM_URL, lato } from '@jobstash/shared/core';
 
-import { HomePageButton } from '@jobstash/home/ui';
+import { GradientContainer, HomePageButton } from '@jobstash/home/ui';
 import { PageWrapper } from '@jobstash/shared/ui';
 import { StatsGrid } from '@jobstash/shared/ui';
 import { SideBar } from '@jobstash/sidebar/feature';
-import { GradientContainer } from 'libs/home/ui/src/lib/landing/sections/gradient-container';
 
 const OrganizationsPage = () => (
   <>
@@ -104,7 +101,7 @@ const OrganizationsPage = () => (
                 Need help?
               </span>
               <span className="text-md text-white/75">
-                We're here to help you with any questions you might have.
+                We&#39;re here to help you with any questions you might have.
               </span>
             </div>
             <HomePageButton
@@ -378,9 +375,7 @@ const OrganizationsPage = () => (
                   <li>✅ 1 job featured for 7 days</li>
                   <li>✅ 5x the applicants</li>
                   <li>✅ Featured on our homepage</li>
-                  <li>
-                    ✅ Telegram stories about org, project and job
-                  </li>
+                  <li>✅ Telegram stories about org, project and job</li>
                   <li>✅ Job Post bumping on Telegram</li>
                   <li>✅ Crossposting</li>
                 </ul>
