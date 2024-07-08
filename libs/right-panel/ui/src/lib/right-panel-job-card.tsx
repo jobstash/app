@@ -73,7 +73,11 @@ const RightPanelJobCard = ({
             </Heading>
             <div className="flex items-center gap-4">
               <CardMenu icon={<ShareIcon className="w-6 h-6 text-white/80" />}>
-                <JobShareMenuContent shortUUID={shortUUID} orgName={orgName} />
+                <JobShareMenuContent
+                  shortUUID={shortUUID}
+                  orgName={orgName}
+                  access={access}
+                />
               </CardMenu>
               <CardMenu>
                 <ReportMenuItem
