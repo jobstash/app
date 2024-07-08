@@ -63,21 +63,21 @@ export const useTalentsTable = () => {
           <SkillsCell isMatched={false} skills={props.data?.skills} />
         ),
       },
-      {
-        headerName: 'Attestations',
-      },
-      {
-        headerName: 'Hired',
-      },
-      {
-        headerName: 'Interviewed',
-      },
-      {
-        headerName: 'Fake',
-      },
-      {
-        headerName: 'Actions',
-      },
+      // {
+      //   headerName: 'Attestations',
+      // },
+      // {
+      //   headerName: 'Hired',
+      // },
+      // {
+      //   headerName: 'Interviewed',
+      // },
+      // {
+      //   headerName: 'Fake',
+      // },
+      // {
+      //   headerName: 'Actions',
+      // },
     ],
     [],
   );
