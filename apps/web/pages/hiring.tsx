@@ -8,6 +8,7 @@ import { HomePageButton } from '@jobstash/home/ui';
 import { PageWrapper } from '@jobstash/shared/ui';
 import { StatsGrid } from '@jobstash/shared/ui';
 import { SideBar } from '@jobstash/sidebar/feature';
+import { GradientContainer } from 'libs/home/ui/src/lib/landing/sections/gradient-container';
 
 const OrganizationsPage = () => (
   <>
@@ -51,12 +52,12 @@ const OrganizationsPage = () => (
                   <h3
                     className={`${lato.className} justify-center text-3xl pb-3 font-bold text-white`}
                   >
-                    Feature your Jobs & JobStash Impact and Performance
+                    Job Featuring
                   </h3>
                   <p className="text-left text-md text-white/75 grow">
-                    Get your jobs featured on JobStash and get 5x more
-                    candidates. Learn about the impact and performance of your
-                    job listings on JobStash.
+                    Get 5x more applicants when you feature your jobs on JobStash.
+                    Learn about the impact and performance of JobStash.
+                    Learn how it all works.
                   </p>
                   <HomePageButton
                     hasBorder
@@ -64,7 +65,6 @@ const OrganizationsPage = () => (
                     url="https://drive.google.com/file/d/1yuVMUrqBe6EgdB76ZVusSt5AWM_QaYxo/preview"
                     external={false}
                   />
-                  <Button className="self-end w-full mt-6 font-bold rounded-lg bg-gradient-to-l from-primary to-tertiary" />
                 </div>
               </div>
               <div className="w-full px-2 mb-4 md:w-1/2">
@@ -72,13 +72,13 @@ const OrganizationsPage = () => (
                   <h3
                     className={`${lato.className} justify-center text-3xl pb-3 font-bold text-white`}
                   >
-                    SAFU ATS & Candidate Due Diligence
+                    SAFU
                   </h3>
                   <p className="text-left text-md text-white/75 grow">
-                    Safu ATS is a secure and efficient way to hire talent in the
+                    Safu is a productivity tool to save time while hiring talent in the
                     crypto space. It helps you identify genuine, crypto-native
-                    and crypto-adjacent talent, at scale, by relying on
-                    verifiable data. Safu ATS is designed to help you hire
+                    and upcoming talent, at scale, by relying on
+                    verifiable data instead of on CVs. Safu ATS is designed to help you hire
                     safer, better, and more efficiently.
                   </p>
                   <HomePageButton
@@ -93,10 +93,27 @@ const OrganizationsPage = () => (
           </div>
         </section>
         <section className="pb-6 md:pb-14">
+          <GradientContainer className="mt-16">
+            <div className="flex flex-col gap-4 text-white grow">
+              <span className={`${lato.className} text-xl font-bold`}>
+                Need help?
+              </span>
+              <span className="text-md text-white/75">
+                We're here to help you with any questions you might have.
+              </span>
+            </div>
+            <HomePageButton
+              hasBorder
+              text="Slide into our DMs"
+              url={DUCK_TELEGRAM_URL}
+            />
+          </GradientContainer>
+        </section>
+        <section className="pb-6 md:pb-14">
           <h3
             className={`${lato.className} text-white !leading-tight font-black text-5xl md:text-6xl text-center pb-4 md:pb-8`}
           >
-            ATS Prices & SAFU Plans
+            SAFU Prices
           </h3>
           <div className="mx-auto">
             <div className="grid grid-cols-1 gap-4 mb-4 place-content-center lg:grid-cols-3 xl:grid-cols-5">
@@ -300,11 +317,40 @@ const OrganizationsPage = () => (
           <h3
             className={`${lato.className} text-white !leading-tight font-black text-5xl md:text-6xl text-center pb-4 md:pb-8`}
           >
-            Featuring your Jobs
+            Featuring Prices
           </h3>
           <div className="mx-auto">
             <div className="grid grid-cols-1 gap-4 mb-4 place-content-center lg:grid-cols-3 xl:grid-cols-5">
               {/* Essential Plan */}
+              <div className="z-30 flex flex-col bg-white border rounded-md bg-opacity-5 border-primary">
+                <div className="p-6 border-b border-default">
+                  <h3
+                    className={`${lato.className} text-center text-3xl pb-3 font-bold text-white`}
+                  >
+                    Comprehensive
+                  </h3>
+                  <p className="text-center text-md text-subtle">
+                    Job Feauturing
+                  </p>
+                  <h3
+                    className={`${lato.className} text-center text-3xl pb-3 font-bold text-white`}
+                  >
+                    $200 <span className="text-lg">/ job</span>
+                  </h3>
+                </div>
+                <ul className="flex-grow p-6 space-y-2">
+                  <li>✅ 1 job featured for 3 days</li>
+                  <li>✅ 2x the applicants</li>
+                  <li>✅ Featured on our homepage</li>
+                </ul>
+                <div className="px-6 pb-6">
+                  <HomePageButton
+                    hasBorder
+                    text="Get Started"
+                    url={DUCK_TELEGRAM_URL}
+                  />
+                </div>
+              </div>
               <div className="z-30 flex flex-col bg-white border rounded-md bg-opacity-5 border-primary">
                 <div className="p-6 border-b border-default">
                   <h3
@@ -326,8 +372,9 @@ const OrganizationsPage = () => (
                   <li>✅ 5x the applicants</li>
                   <li>✅ Featured on our homepage</li>
                   <li>
-                    ✅ Telegram stories about your org, your project and the job
+                    ✅ Telegram stories about org, project and job
                   </li>
+                  <li>✅ Job Post bumping on Telegram</li>
                   <li>✅ Crossposting</li>
                 </ul>
                 <div className="px-6 pb-6">
