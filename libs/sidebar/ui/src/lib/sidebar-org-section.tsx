@@ -1,6 +1,5 @@
 import { CHECK_WALLET_FLOWS } from '@jobstash/auth/core';
 import { ATS_PROVIDERS } from '@jobstash/profile/core';
-import { IS_DEBUG } from '@jobstash/shared/core';
 import { cn } from '@jobstash/shared/utils';
 
 import { useAuthContext } from '@jobstash/auth/state';
@@ -29,12 +28,10 @@ const SidebarOrgSection = ({ isMobile }: Props) => {
   });
 
   if (flow === CHECK_WALLET_FLOWS.ORG_COMPLETE) {
-    if (IS_DEBUG) {
-      tabs.push({
-        text: 'ATS Settings',
-        path: '/profile/org/ats-settings',
-      });
-    }
+    tabs.push({
+      text: 'ATS Settings',
+      path: '/profile/org/ats-settings',
+    });
 
     if (atsClient && atsClient.name === ATS_PROVIDERS.JOBSTASH.platformName) {
       tabs.push({
@@ -43,12 +40,10 @@ const SidebarOrgSection = ({ isMobile }: Props) => {
       });
     }
 
-    if (IS_DEBUG) {
-      tabs.push({
-        text: 'Available Talents',
-        path: '/profile/org/talents',
-      });
-    }
+    tabs.push({
+      text: 'Available Talents',
+      path: '/profile/org/talents',
+    });
   }
 
   const wrapperClassName = cn('space-y-2 pt-3', {
