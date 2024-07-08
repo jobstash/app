@@ -286,6 +286,33 @@ export const devTalentSchema = myzod.intersection(
   myzod.object({
     skills: myzod.array(profileSkillSchema),
     showcases: myzod.array(profileShowcaseSchema),
+    cryptoNative: myzod.boolean(),
+    cryptoAjacent: myzod.boolean(),
+    nfts: myzod.array(myzod.string()),
+    workHistory: myzod.array(
+      myzod.object({
+        login: myzod.string(),
+        name: myzod.string(),
+        url: myzod.string().nullable(),
+        logoUrl: myzod.string().nullable(),
+        createdAt: myzod.number(),
+        firstContributedAt: myzod.number(),
+        lastContributedAt: myzod.number(),
+        repositories: myzod.array(
+          myzod.object({
+            url: myzod.string(),
+            name: myzod.string(),
+            createdAt: myzod.number(),
+            firstContributedAt: myzod.number(),
+            lastContributedAt: myzod.number(),
+            commitsCount: myzod.number(),
+            cryptoNative: myzod.boolean(),
+          }),
+        ),
+      }),
+    ),
+    //
+    // notes: myzod.string().optional(),
   }),
 );
 
@@ -370,4 +397,9 @@ export const retryWebhooksResponseSchema = myzod.intersection(
 export const retryWebhooksPayloadSchema = myzod.object({
   clientId: myzod.string(),
   apiToken: myzod.string().nullable(),
+});
+
+export const updateNotesPayloadSchema = myzod.object({
+  wallet: myzod.string(),
+  notes: myzod.string(),
 });

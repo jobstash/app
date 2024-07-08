@@ -1,16 +1,24 @@
 import { useCallback, useMemo, useRef } from 'react';
 
-import { ColDef, GetRowIdFunc } from 'ag-grid-community';
+import {
+  CellEditingStoppedEvent,
+  ColDef,
+  GetRowIdFunc,
+} from 'ag-grid-community';
 import { AgGridReact, CustomCellRendererProps } from 'ag-grid-react';
 
 import { DevTalent } from '@jobstash/profile/core';
 import { convertFalseStringValuesToNull } from '@jobstash/shared/utils';
 
 import {
+  BooleanCell,
+  EcosystemActivationsCell,
+  // NotesCell,
   ShowcaseCell,
   SkillsCell,
   SocialsCell,
   UserCell,
+  WorkHistoryCell,
 } from '@jobstash/profile/ui';
 
 type CellProps = CustomCellRendererProps<DevTalent>;
@@ -38,6 +46,16 @@ export const useTalentsTable = () => {
         width: 280,
       },
       {
+        headerName: 'Work History',
+        cellRenderer: (props: CellProps) => (
+          <WorkHistoryCell
+            username={props.data?.username}
+            workHistory={props.data?.workHistory}
+          />
+        ),
+        width: 320,
+      },
+      {
         headerName: 'Socials',
         width: 240,
         cellRenderer: (props: CellProps) => (
@@ -63,6 +81,45 @@ export const useTalentsTable = () => {
           <SkillsCell isMatched={false} skills={props.data?.skills} />
         ),
       },
+      {
+        headerName: 'Crypto Native',
+        cellRenderer: (props: CellProps) => (
+          <BooleanCell value={Boolean(props.data?.cryptoNative)} />
+        ),
+      },
+      {
+        headerName: 'Crypto Adjacent',
+        cellRenderer: (props: CellProps) => (
+          <BooleanCell value={Boolean(props.data?.cryptoAjacent)} />
+        ),
+      },
+      {
+        headerName: 'Ecosystem Activations',
+        cellRenderer: (props: CellProps) => (
+          <EcosystemActivationsCell wallet={props.data?.wallet} />
+        ),
+      },
+      // {
+      //   headerName: 'Notes',
+      //   width: 320,
+      //   valueGetter: (p) => p.data?.notes,
+      //   valueSetter(p) {
+      //     console.log('save', { xxx: p.data.notes, newValue: p.newValue });
+      //     return true;
+      //   },
+      //   cellRenderer: (props: CellProps) => (
+      //     <NotesCell notes={props.data?.notes} />
+      //   ),
+      //   cellStyle: { whiteSpace: 'normal', lineHeight: '1.2' },
+      //   editable: true,
+      //   cellEditor: 'agLargeTextCellEditor',
+      //   cellEditorPopup: true,
+      //   cellEditorParams: {
+      //     maxLength: 1000,
+      //     rows: 15,
+      //     cols: 50,
+      //   },
+      // },
       // {
       //   headerName: 'Attestations',
       // },
@@ -82,9 +139,27 @@ export const useTalentsTable = () => {
     [],
   );
 
+  const onCellEditingStopped = useCallback(
+    (e: CellEditingStoppedEvent<DevTalent>) => {
+      const {
+        node: { data },
+        oldValue,
+        newValue,
+      } = e;
+
+      if (data && oldValue !== newValue) {
+        console.log({ newValue }, 'TODO');
+      }
+
+      console.log({ oldValue, newValue });
+    },
+    [],
+  );
+
   return {
     gridRef,
     getRowId,
     columnDefs,
+    onCellEditingStopped,
   };
 };

@@ -11,7 +11,8 @@ interface Props {
 }
 
 export const DevTalentsTable = ({ rowData }: Props) => {
-  const { gridRef, getRowId, columnDefs } = useTalentsTable();
+  const { gridRef, getRowId, columnDefs, onCellEditingStopped } =
+    useTalentsTable();
   return (
     <div className="ag-theme-quartz w-full px-12" style={{ height: 750 }}>
       <AgGridReact
@@ -30,6 +31,7 @@ export const DevTalentsTable = ({ rowData }: Props) => {
         defaultColDef={{
           cellRenderer: EmptyCellPlaceholder,
         }}
+        onCellEditingStopped={onCellEditingStopped}
       />
     </div>
   );

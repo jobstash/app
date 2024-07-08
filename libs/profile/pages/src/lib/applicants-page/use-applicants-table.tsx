@@ -7,18 +7,18 @@ import { JobApplicant } from '@jobstash/jobs/core';
 import { convertFalseStringValuesToNull } from '@jobstash/shared/utils';
 
 import {
+  BooleanCell,
+  EcosystemActivationsCell,
   ShowcaseCell,
   SkillsCell,
   SocialsCell,
   UserCell,
+  WorkHistoryCell,
 } from '@jobstash/profile/ui';
 
 import { ActionsCell } from './actions-cell';
-import { BooleanCell } from './boolean-cell';
-import { EcosystemActivationsCell } from './ecosystem-activation-cell';
 import { JobCell } from './job-cell';
 import { CellProps } from './types';
-import { WorkHistoryCell } from './work-history-cell';
 
 export const useApplicantsTable = (orgId: string) => {
   const gridRef = useRef<AgGridReact>(null);
@@ -44,7 +44,12 @@ export const useApplicantsTable = (orgId: string) => {
       },
       {
         headerName: 'Work History',
-        cellRenderer: WorkHistoryCell,
+        cellRenderer: (props: CellProps) => (
+          <WorkHistoryCell
+            username={props.data?.user.username}
+            workHistory={props.data?.user.workHistory}
+          />
+        ),
         width: 320,
       },
       {
@@ -91,7 +96,9 @@ export const useApplicantsTable = (orgId: string) => {
       },
       {
         headerName: 'Ecosystem Activations',
-        cellRenderer: EcosystemActivationsCell,
+        cellRenderer: (props: CellProps) => (
+          <EcosystemActivationsCell wallet={props.data?.user.wallet} />
+        ),
       },
       {
         headerName: 'Actions',

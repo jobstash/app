@@ -1,12 +1,12 @@
 import { Link, Tooltip } from '@nextui-org/react';
 
 import { JobApplicant } from '@jobstash/jobs/core';
+import { DevTalent } from '@jobstash/profile/core';
 import { getLogoUrl, shortTimestamp2 } from '@jobstash/shared/utils';
 
-import { EmptyCellPlaceholder } from '@jobstash/profile/ui';
 import { Avatar, GithubLogoOutlineIcon, Text } from '@jobstash/shared/ui';
 
-import { CellProps } from './types';
+import { EmptyCellPlaceholder } from '../empty-cell-placeholder';
 
 interface OrgLogoDateProps {
   src: string;
@@ -53,70 +53,6 @@ const OrgLogoDate = ({
     </div>
   </div>
 );
-
-export const WorkHistoryCell = ({ data }: CellProps) => {
-  if (!data) return <EmptyCellPlaceholder />;
-
-  const {
-    user: { username, workHistory },
-  } = data;
-
-  if (!username) {
-    return <EmptyCellPlaceholder />;
-  }
-
-  if (workHistory.length === 0) {
-    return <EmptyCellPlaceholder />;
-  }
-
-  return (
-    <div className="flex w-full h-max">
-      <div className="flex flex-col gap-2 self-start">
-        {workHistory.map((history) => {
-          const {
-            login,
-            name,
-            firstContributedAt,
-            lastContributedAt,
-            url,
-            logoUrl,
-            repositories,
-          } = history;
-
-          const src = getLogoUrl(url, logoUrl);
-          const orgTimestampText = `${shortTimestamp2(
-            firstContributedAt,
-          )} - ${shortTimestamp2(lastContributedAt)}`;
-
-          return (
-            <Tooltip
-              key={login}
-              delay={0}
-              content={
-                <TooltipContent
-                  src={src}
-                  orgTimestampText={orgTimestampText}
-                  workHistory={history}
-                />
-              }
-            >
-              <div className="flex gap-2 items-center min-w-[180px] w-fit">
-                <OrgLogoDate
-                  src={src}
-                  name={name}
-                  url={url}
-                  login={login}
-                  orgTimestampText={orgTimestampText}
-                  repoCount={repositories.length}
-                />
-              </div>
-            </Tooltip>
-          );
-        })}
-      </div>
-    </div>
-  );
-};
 
 interface TooltipContentProps {
   src: string;
@@ -173,6 +109,67 @@ const TooltipContent = ({
             </div>
           </div>
         ))}
+      </div>
+    </div>
+  );
+};
+
+interface Props {
+  username?: string | null;
+  workHistory?: DevTalent['workHistory'];
+}
+
+export const WorkHistoryCell = ({ username, workHistory }: Props) => {
+  if (!username) return <EmptyCellPlaceholder />;
+  if (!workHistory) return <EmptyCellPlaceholder />;
+  if (workHistory.length === 0) {
+    return <EmptyCellPlaceholder />;
+  }
+
+  return (
+    <div className="flex w-full h-max">
+      <div className="flex flex-col gap-2 self-start">
+        {workHistory.map((history) => {
+          const {
+            login,
+            name,
+            firstContributedAt,
+            lastContributedAt,
+            url,
+            logoUrl,
+            repositories,
+          } = history;
+
+          const src = getLogoUrl(url, logoUrl);
+          const orgTimestampText = `${shortTimestamp2(
+            firstContributedAt,
+          )} - ${shortTimestamp2(lastContributedAt)}`;
+
+          return (
+            <Tooltip
+              key={login}
+              delay={0}
+              content={
+                <TooltipContent
+                  src={src}
+                  orgTimestampText={orgTimestampText}
+                  workHistory={history}
+                />
+              }
+            >
+              <div className="flex gap-2 items-center min-w-[180px] w-fit">
+                <OrgLogoDate
+                  src={src}
+                  name={name}
+                  url={url}
+                  login={login}
+                  orgTimestampText={orgTimestampText}
+                  repoCount={repositories.length}
+                />
+              </div>
+            </Tooltip>
+          );
+        })}
       </div>
     </div>
   );

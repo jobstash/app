@@ -6,10 +6,9 @@ import { useReadContract } from 'wagmi';
 import { COMMUNITY_NFT_ADDRESSES } from '@jobstash/profile/core';
 import { cn } from '@jobstash/shared/utils';
 
-import { EmptyCellPlaceholder } from '@jobstash/profile/ui';
 import { Text } from '@jobstash/shared/ui';
 
-import { CellProps } from './types';
+import { EmptyCellPlaceholder } from '../empty-cell-placeholder';
 
 const FUNCTION_NAME = 'balanceOf';
 const COMMUNITY_KEYS = Object.keys(COMMUNITY_NFT_ADDRESSES) as CommunityKey[];
@@ -78,17 +77,17 @@ const CommunityFetcher = ({
   );
 };
 
-export const EcosystemActivationsCell = ({ data }: CellProps) => {
+interface Props {
+  wallet?: string;
+}
+
+export const EcosystemActivationsCell = ({ wallet }: Props) => {
   const [counts, setCounts] = useState({
     fetched: 0,
     communities: 0,
   });
 
-  if (!data) return <EmptyCellPlaceholder isCentered />;
-
-  const {
-    user: { wallet },
-  } = data;
+  if (!wallet) return <EmptyCellPlaceholder isCentered />;
 
   const incrementFetched = () =>
     setCounts((prev) => ({ ...prev, fetched: prev.fetched + 1 }));
