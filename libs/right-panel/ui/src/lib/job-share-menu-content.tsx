@@ -14,9 +14,10 @@ const LINK_COPIED_MESSAGE = 'You can now share the job link.';
 interface Props {
   shortUUID: string;
   orgName: string;
+  access: 'public' | 'protected';
 }
 
-export const JobShareMenuContent = ({ shortUUID, orgName }: Props) => {
+export const JobShareMenuContent = ({ shortUUID, orgName, access }: Props) => {
   const [filterByHiringOrg, setFilterByHiringOrg] = useState(false);
 
   const onValueChange = (isSelected: boolean) => {
@@ -24,7 +25,8 @@ export const JobShareMenuContent = ({ shortUUID, orgName }: Props) => {
   };
 
   const onClickCopyLink = () => {
-    const url = new URL(`${FRONTEND_URL}/jobs/${shortUUID}/details`);
+    const route = access === 'public' ? 'jobs' : 'elite-fast-track';
+    const url = new URL(`${FRONTEND_URL}/${route}/${shortUUID}/details`);
 
     if (filterByHiringOrg) {
       url.searchParams.append('organizations', normalizeString(orgName)!);
