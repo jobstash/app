@@ -13,16 +13,7 @@ const CandidatesPage = () => (
         Candidates
       </h3>
       <p className="text-white opacity-75 max-w-[500px] mx-auto text-md text-center">
-        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis dignissim
-        porta scelerisque. Praesent venenatis nisi quam, a malesuada nunc
-        scelerisque at. Curabitur imperdiet nibh sapien, a tempus est pretium
-        et. Nam quam est, suscipit eu magna vestibulum, rutrum viverra odio.
-        Curabitur at ipsum at odio dignissim pellentesque vel eu ante. Nullam et
-        lacus et erat rutrum blandit. Pellentesque id massa vel purus gravida
-        ultricies. Fusce urna dolor, consequat ac accumsan eget, laoreet id
-        metus. Nam sodales est a ex tempor, ac aliquet nunc porttitor. Vivamus a
-        maximus purus. Praesent sed diam ultrices nibh suscipit elementum vitae
-        eget magna.
+        Find the best jobs on JobStash
       </p>
       <section className="relative mx-auto lg:max-w-6xl">
         <svg
