@@ -35,7 +35,7 @@ const OrganizationsPage = () => (
           >
             Our Stats
           </h3>
-          <div className="mx-auto">
+          <div className="max-w-6xl mx-auto">
             <StatsGrid />
           </div>
         </section>
@@ -46,52 +46,58 @@ const OrganizationsPage = () => (
             >
               Services
             </h3>
-            <div className="flex flex-row flex-wrap mx-auto mt-6 lg:max-w-6xl">
-              <div className="w-full px-2 mb-4 md:w-1/2">
-                <div className="flex flex-wrap justify-start h-full p-5 bg-white bg-opacity-5 rounded-3xl">
-                  <h3
-                    className={`${lato.className} justify-center text-3xl pb-3 font-bold text-white`}
-                  >
-                    Job Featuring
-                  </h3>
-                  <p className="text-left text-md text-white/75 grow">
-                    Get 5x more applicants when you feature your jobs on JobStash.
-                    Learn how JobStash works and about the impact and performance of JobStash.
-                  </p>
-                  <HomePageButton
-                    hasBorder
-                    text="JobStash Overview Deck"
-                    url="https://drive.google.com/file/d/1yuVMUrqBe6EgdB76ZVusSt5AWM_QaYxo/preview"
-                    external={false}
-                  />
+            <div className="mx-auto mt-6 lg:max-w-6xl">
+              <div className='flex flex-row flex-wrap md:-mx-2'>
+                <div className="w-full mb-4 md:px-2 md:w-1/2">
+                  <div className="flex flex-wrap justify-start h-full p-5 bg-white md:flex-col bg-opacity-5 rounded-3xl">
+                    <h3
+                      className={`${lato.className} justify-center text-3xl pb-3 font-bold text-white`}
+                    >
+                      Job Featuring
+                    </h3>
+                    <p className="pb-6 text-left text-md text-white/75 grow">
+                      Get 5x more applicants when you feature your jobs on JobStash.
+                      Learn how JobStash works and about the impact and performance of JobStash.
+                    </p>
+                    <div className='flex justify-center w-full'>
+                      <HomePageButton
+                        hasBorder
+                        text="JobStash Overview Deck"
+                        url="https://drive.google.com/file/d/1yuVMUrqBe6EgdB76ZVusSt5AWM_QaYxo/preview"
+                        external={false}
+                      />
+                    </div>
+                  </div>
                 </div>
-              </div>
-              <div className="w-full px-2 mb-4 md:w-1/2">
-                <div className="flex flex-wrap justify-start h-full p-5 bg-white bg-opacity-5 rounded-3xl">
-                  <h3
-                    className={`${lato.className} justify-center text-3xl pb-3 font-bold text-white`}
-                  >
-                    SAFU
-                  </h3>
-                  <p className="text-left text-md text-white/75 grow">
-                    Safu is a productivity tool to save time while hiring talent in the
-                    crypto space. It helps you identify genuine, crypto-native
-                    and upcoming talent, at scale, by relying on
-                    verifiable data instead of on CVs. Safu ATS is designed to help you hire
-                    safer, better, and more efficiently.
-                  </p>
-                  <HomePageButton
-                    hasBorder
-                    text="SAFU Overview Deck"
-                    url="https://drive.google.com/file/d/1VVoyR3vy9xrzy8hwzPUzxOAMvRQLZEQb/preview"
-                    external={false}
-                  />
+                <div className="w-full mb-4 md:px-2 md:w-1/2">
+                  <div className="flex flex-wrap justify-start h-full p-5 bg-white md:flex-col bg-opacity-5 rounded-3xl">
+                    <h3
+                      className={`${lato.className} justify-center text-3xl pb-3 font-bold text-white`}
+                    >
+                      SAFU
+                    </h3>
+                    <p className="pb-6 text-left text-md text-white/75 grow">
+                      Safu is a productivity tool to save time while hiring talent in the
+                      crypto space. It helps you identify genuine, crypto-native
+                      and upcoming talent, at scale, by relying on
+                      verifiable data instead of on CVs. Safu ATS is designed to help you hire
+                      safer, better, and more efficiently.
+                    </p>
+                    <div className='flex justify-center w-full'>
+                      <HomePageButton
+                        hasBorder
+                        text="SAFU Overview Deck"
+                        url="https://drive.google.com/file/d/1VVoyR3vy9xrzy8hwzPUzxOAMvRQLZEQb/preview"
+                        external={false}
+                      />
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
         </section>
-        <section className="pb-6 md:pb-14">
+        <section className="max-w-6xl pb-6 mx-auto md:pb-14">
           <GradientContainer className="mt-16">
             <div className="flex flex-col gap-4 text-white grow">
               <span className={`${lato.className} text-xl font-bold`}>
@@ -143,7 +149,7 @@ const OrganizationsPage = () => (
                   <li>Soon: Embeddable apply button & job board</li>
                   <li>Soon: Post jobs to your TG & Discord</li>
                 </ul>
-                <div className="px-6 pb-6">
+                <div className="flex justify-center w-full px-6 pb-6">
                   <HomePageButton
                     hasBorder
                     text="Get Started"
@@ -180,7 +186,7 @@ const OrganizationsPage = () => (
                   <li>Soon: Embeddable apply button & job board</li>
                   <li>Soon: Post jobs to your TG & Discord</li>
                 </ul>
-                <div className="px-6 pb-6">
+                <div className="flex justify-center w-full px-6 pb-6">
                   <HomePageButton
                     hasBorder
                     text="Get Started"
@@ -220,7 +226,7 @@ const OrganizationsPage = () => (
                   <li>✅ 1 Seat license</li>
                   <li>Soon: Post jobs to your TG & Discord</li>
                 </ul>
-                <div className="px-6 pb-6">
+                <div className="flex justify-center w-full px-6 pb-6">
                   <HomePageButton
                     hasBorder
                     text="Get Started"
@@ -260,7 +266,7 @@ const OrganizationsPage = () => (
                   <li>✅ 1 Seat license</li>
                   <li>Soon: Post jobs to your TG & Discord</li>
                 </ul>
-                <div className="px-6 pb-6">
+                <div className="flex justify-center w-full px-6 pb-6">
                   <HomePageButton
                     hasBorder
                     text="Get Started"
@@ -302,7 +308,7 @@ const OrganizationsPage = () => (
                   <li>✅ Volume discounts on seats</li>
                   <li>Soon: Post jobs to your TG & Discord</li>
                 </ul>
-                <div className="px-6 pb-6">
+                <div className="flex justify-center w-full px-6 pb-6">
                   <HomePageButton
                     hasBorder
                     text="Get Started"
@@ -321,7 +327,7 @@ const OrganizationsPage = () => (
             Featuring Prices
           </h3>
           <div className="mx-auto">
-            <div className="grid grid-cols-1 gap-4 mb-4 place-content-center lg:grid-cols-3 xl:grid-cols-5">
+            <div className="grid grid-cols-1 gap-4 mx-auto mb-4 place-content-center lg:grid-cols-2 lg:w-2/3 xl:grid-cols-2 xl:w-2/5">
               {/* Essential Plan */}
               <div className="z-30 flex flex-col bg-white border rounded-md bg-opacity-5 border-primary">
                 <div className="p-6 border-b border-default">
@@ -344,7 +350,7 @@ const OrganizationsPage = () => (
                   <li>✅ 2x the applicants</li>
                   <li>✅ Featured on our homepage</li>
                 </ul>
-                <div className="px-6 pb-6">
+                <div className="flex justify-center w-full px-6 pb-6">
                   <HomePageButton
                     hasBorder
                     text="Get Started"
@@ -378,7 +384,7 @@ const OrganizationsPage = () => (
                   <li>✅ Job Post bumping on Telegram</li>
                   <li>✅ Crossposting</li>
                 </ul>
-                <div className="px-6 pb-6">
+                <div className="flex justify-center w-full px-6 pb-6">
                   <HomePageButton
                     hasBorder
                     text="Get Started"
