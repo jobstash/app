@@ -14,10 +14,10 @@ const icons = {
 };
 
 const data = [
-  { title: 'Monthly Active Users', icon: 'users', value: '4,196', diff: +12 },
-  { title: 'Monthly Views', icon: 'eye', value: '37,145', diff: +10 },
-  { title: 'Applications Per Month', icon: 'app', value: '4291', diff: +10 },
-  { title: 'Applicants Per Month', icon: 'calendar', value: '1032', diff: +11 },
+  { title: 'Monthly Active Users', icon: 'users', value: '3951', diff: +12 },
+  { title: 'Monthly Views', icon: 'eye', value: '36,911', diff: +10 },
+  { title: 'Applications Per Month', icon: 'app', value: '4,619', diff: +10 },
+  { title: 'Applicants Per Month', icon: 'calendar', value: '1,173', diff: +11 },
 ] as const;
 
 const useStyles = createStyles((theme) => ({
