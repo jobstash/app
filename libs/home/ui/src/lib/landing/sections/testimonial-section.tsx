@@ -1,10 +1,7 @@
 import Image from 'next/image';
 import { memo } from 'react';
 
-import { DUCK_TELEGRAM_URL, lato } from '@jobstash/shared/core';
-
-import { HomePageButton } from './buttons/home-page-button';
-import { GradientContainer } from './gradient-container';
+import { lato } from '@jobstash/shared/core';
 
 const TestimonialSection = () => (
   <section className="relative mx-auto mt-8 md:mt-16 lg:max-w-6xl">
@@ -154,7 +151,6 @@ const TestimonialSection = () => (
         </div>
       </div>
     </div>
-
   </section>
 );
 
