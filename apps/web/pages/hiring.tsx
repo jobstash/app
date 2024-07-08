@@ -243,7 +243,7 @@ const OrganizationsPage = () => (
                   <h3
                     className={`${lato.className} text-center text-3xl pb-3 font-bold text-white`}
                   >
-                    $999 <span className="text-lg">/ mo</span>
+                    $799 <span className="text-lg">/ mo</span>
                   </h3>
                 </div>
                 <ul className="flex-grow p-6 space-y-2">
@@ -328,7 +328,7 @@ const OrganizationsPage = () => (
                   <h3
                     className={`${lato.className} text-center text-3xl pb-3 font-bold text-white`}
                   >
-                    Comprehensive
+                    Flamboyant
                   </h3>
                   <p className="text-center text-md text-subtle">
                     Job Feauturing
@@ -357,7 +357,7 @@ const OrganizationsPage = () => (
                   <h3
                     className={`${lato.className} text-center text-3xl pb-3 font-bold text-white`}
                   >
-                    Comprehensive
+                    Neon
                   </h3>
                   <p className="text-center text-md text-subtle">
                     Job Feauturing
