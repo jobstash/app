@@ -34,9 +34,12 @@ export const Nfts = ({ atsClient }: Props) => {
 
   // Update nfts from atsClient.preferences
   useEffect(() => {
-    if (atsClient.preferences && atsClient.preferences.trackedNfts.length > 0) {
+    if (
+      atsClient.preferences &&
+      atsClient.preferences.ecosystemActivations.length > 0
+    ) {
       setNfts(
-        atsClient.preferences.trackedNfts.map((nft) => ({
+        atsClient.preferences.ecosystemActivations.map((nft) => ({
           ...nft,
           key: nft.id as string,
         })),
@@ -51,7 +54,7 @@ export const Nfts = ({ atsClient }: Props) => {
   const { mutate, isPending } = useUpdateATSPreference();
 
   const updatePreferences = (
-    trackedNfts: ATSTrackedNFT[],
+    ecosystemActivations: ATSTrackedNFT[],
     successCb: () => void,
   ) => {
     if (atsClient.id && atsClient.name) {
@@ -64,7 +67,7 @@ export const Nfts = ({ atsClient }: Props) => {
             | 'lever'
             | 'workable'
             | 'greenhouse',
-          trackedNfts: trackedNfts.map(
+          ecosystemActivations: ecosystemActivations.map(
             ({ id, name, contractAddress, network }) => ({
               id,
               name,

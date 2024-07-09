@@ -288,7 +288,7 @@ export const devTalentSchema = myzod.intersection(
     showcases: myzod.array(profileShowcaseSchema),
     cryptoNative: myzod.boolean(),
     cryptoAjacent: myzod.boolean(),
-    nfts: myzod.array(myzod.string()),
+    ecosystemActivations: myzod.array(myzod.string()),
     workHistory: myzod.array(
       myzod.object({
         login: myzod.string(),
@@ -349,7 +349,7 @@ export const atsPreferenceSchema = myzod.object({
     ATS_PROVIDERS.WORKABLE.platformName,
   ),
   highlightOrgs: myzod.array(myzod.string()),
-  trackedNfts: myzod.array(atsTrackedNFTSchema),
+  ecosystemActivations: myzod.array(atsTrackedNFTSchema),
 });
 
 export const atsClientSchema = myzod.object({

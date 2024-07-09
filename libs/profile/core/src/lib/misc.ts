@@ -5,5 +5,5 @@ export const DEFAULT_ATS_PREFERENCE: ATSPreference = {
   id: null,
   platformName: ATS_PROVIDERS.JOBSTASH.platformName,
   highlightOrgs: [],
-  trackedNfts: [],
+  ecosystemActivations: [],
 };
