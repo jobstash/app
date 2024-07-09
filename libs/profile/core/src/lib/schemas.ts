@@ -1,5 +1,6 @@
 import { UseMutateFunction } from '@tanstack/react-query';
 import myzod, { Infer } from 'myzod';
+import { isAddress } from 'viem';
 
 import {
   orgCompensationSchema,
@@ -324,7 +325,12 @@ export const devTalentResponseSchema = myzod.array(devTalentSchema);
 export const atsTrackedNFTSchema = myzod.object({
   id: myzod.string().nullable(),
   name: myzod.string(),
-  contractAddress: myzod.string(),
+  contractAddress: myzod
+    .string()
+    .withPredicate(
+      (address) => isAddress(address),
+      'Address is not a valid ethereum address',
+    ),
   network: myzod.literals(
     '',
     'arbitrum',

@@ -129,7 +129,9 @@ export const useApplicantsTable = (orgId: string) => {
       {
         headerName: 'Ecosystem Activations',
         cellRenderer: (props: CellProps) => (
-          <EcosystemActivationsCell wallet={props.data?.user.wallet} />
+          <EcosystemActivationsCell
+            ecosystemActivations={props.data?.ecosystemActivations}
+          />
         ),
       },
       {

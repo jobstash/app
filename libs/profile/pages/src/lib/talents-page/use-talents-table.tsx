@@ -120,7 +120,9 @@ export const useTalentsTable = () => {
       {
         headerName: 'Ecosystem Activations',
         cellRenderer: (props: CellProps) => (
-          <EcosystemActivationsCell wallet={props.data?.wallet} />
+          <EcosystemActivationsCell
+            ecosystemActivations={props.data?.ecosystemActivations}
+          />
         ),
       },
       // {

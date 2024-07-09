@@ -1,11 +1,10 @@
 import { useMemo } from 'react';
 
-import { Chip } from '@nextui-org/react';
-
 import { Tag } from '@jobstash/shared/core';
-import { capitalize } from '@jobstash/shared/utils';
 
 import { EmptyCellPlaceholder } from '../empty-cell-placeholder';
+
+import { ChipsCell } from './chips-cell';
 
 interface Props {
   tags?: Tag[];
@@ -46,15 +45,5 @@ export const SkillsCell = ({ tags, skills, isMatched }: Props) => {
     );
   }
 
-  return (
-    <div className="flex flex-col gap-1 h-fit self-start">
-      <div className="flex gap-2 w-full flex-wrap max-w-xs py-2">
-        {displayedSkills.map((name) => (
-          <Chip key={name} color="default" radius="sm">
-            {capitalize(name)}
-          </Chip>
-        ))}
-      </div>
-    </div>
-  );
+  return <ChipsCell values={displayedSkills} />;
 };
