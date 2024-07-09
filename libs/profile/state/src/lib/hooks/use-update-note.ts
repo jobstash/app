@@ -2,8 +2,9 @@ import { notifications } from '@mantine/notifications';
 import { useMutation } from '@tanstack/react-query';
 
 import {
-  UpdateNotesPayload,
-  updateNotesPayloadSchema,
+  NOTE_UPDATE_UNDO_EVENT,
+  UpdateNotePayload,
+  updateNotePayloadSchema,
 } from '@jobstash/profile/core';
 import {
   MessageResponse,
@@ -16,17 +17,17 @@ import { mwFetch } from '@jobstash/shared/data';
 
 const TOAST_ID = 'update-notes-toast';
 
-const updateNotes = async (payload: UpdateNotesPayload) => {
-  const url = `${MW_URL}/xxxxxx`;
+const updateNote = async (payload: UpdateNotePayload) => {
+  const url = `${MW_URL}/users/devs/note`;
 
   const options = {
     method: 'POST' as const,
     responseSchema: messageResponseSchema,
-    sentryLabel: `updateOrg`,
+    sentryLabel: `updateNotes`,
     credentials: 'include' as RequestCredentials,
     mode: 'cors' as RequestMode,
     payload,
-    payloadSchema: updateNotesPayloadSchema,
+    payloadSchema: updateNotePayloadSchema,
     headers: {
       'Content-Type': 'application/json',
     },
@@ -34,7 +35,7 @@ const updateNotes = async (payload: UpdateNotesPayload) => {
 
   const { success, message } = await mwFetch<
     MessageResponse,
-    UpdateNotesPayload
+    UpdateNotePayload
   >(url, options);
 
   if (!success) throw new Error(message);
@@ -42,9 +43,9 @@ const updateNotes = async (payload: UpdateNotesPayload) => {
   return { success, message };
 };
 
-export const useUpdateNotes = () =>
+export const useUpdateNote = () =>
   useMutation({
-    mutationFn: (payload: UpdateNotesPayload) => updateNotes(payload),
+    mutationFn: (payload: UpdateNotePayload) => updateNote(payload),
     onMutate() {
       notifications.clean();
       notifLoading({
@@ -67,5 +68,10 @@ export const useUpdateNotes = () =>
         title: 'Note Update Failed!',
         message: (data as Error).message,
       });
+
+      // Revert cell content
+      if (typeof window !== 'undefined') {
+        window.dispatchEvent(new CustomEvent(NOTE_UPDATE_UNDO_EVENT));
+      }
     },
   });

@@ -15,6 +15,7 @@ import { useAuthContext } from '@jobstash/auth/state';
 import { useJobApplicants } from '@jobstash/jobs/state';
 import { OrgProfileInfoProvider, useATSClient } from '@jobstash/profile/state';
 
+import { NoteUpdatePayloadSyncer } from '@jobstash/profile/ui';
 import { PageWrapper } from '@jobstash/shared/ui';
 import { SideBar } from '@jobstash/sidebar/feature';
 
@@ -62,6 +63,8 @@ export const ApplicantsPage = () => {
           >
             <ApplicantsTable orgId={atsClient.orgId} rowData={rowData} />
           </div>
+
+          <NoteUpdatePayloadSyncer />
         </PageWrapper>
       </OrgProfileInfoProvider>
     </>

@@ -45,7 +45,7 @@ import {
   retryWebhooksPayloadSchema,
   retryWebhooksResponseSchema,
   updateATSPreferencePayloadSchema,
-  updateNotesPayloadSchema,
+  updateNotePayloadSchema,
 } from './schemas';
 import { profileRepoContributionPayloadSchema } from './schemas';
 
@@ -187,4 +187,4 @@ export type LegacyProfileInfoContact = Infer<
   typeof legacyProfileInfoContactSchema
 >;
 
-export type UpdateNotesPayload = Infer<typeof updateNotesPayloadSchema>;
+export type UpdateNotePayload = Infer<typeof updateNotePayloadSchema>;

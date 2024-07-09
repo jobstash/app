@@ -99,3 +99,5 @@ export const CONTACT_FIELDS = [
 ];
 
 export const LOCATION_FIELDS = ['city', 'country'];
+
+export const NOTE_UPDATE_UNDO_EVENT = 'note-update-undo-event';

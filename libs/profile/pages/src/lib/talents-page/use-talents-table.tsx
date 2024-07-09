@@ -1,4 +1,5 @@
-import { useCallback, useMemo, useRef } from 'react';
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+import { useCallback, useEffect, useMemo, useRef } from 'react';
 
 import {
   CellEditingStoppedEvent,
@@ -6,13 +7,19 @@ import {
   GetRowIdFunc,
 } from 'ag-grid-community';
 import { AgGridReact, CustomCellRendererProps } from 'ag-grid-react';
+import { useSetAtom } from 'jotai';
 
-import { DevTalent } from '@jobstash/profile/core';
+import {
+  DevTalent,
+  NOTE_UPDATE_UNDO_EVENT,
+  noteUpdatePayloadAtom,
+} from '@jobstash/profile/core';
 import { convertFalseStringValuesToNull } from '@jobstash/shared/utils';
 
 import {
   BooleanCell,
   EcosystemActivationsCell,
+  NotesCell,
   // NotesCell,
   ShowcaseCell,
   SkillsCell,
@@ -82,6 +89,23 @@ export const useTalentsTable = () => {
         ),
       },
       {
+        headerName: 'Notes',
+        width: 320,
+        valueGetter: (p) => p.data?.note,
+        cellRenderer: (props: CellProps) => (
+          <NotesCell note={props.data?.note} />
+        ),
+        cellStyle: { whiteSpace: 'normal', lineHeight: '1.2' },
+        editable: true,
+        cellEditor: 'agLargeTextCellEditor',
+        cellEditorPopup: true,
+        cellEditorParams: {
+          maxLength: 1000,
+          rows: 15,
+          cols: 50,
+        },
+      },
+      {
         headerName: 'Crypto Native',
         cellRenderer: (props: CellProps) => (
           <BooleanCell value={Boolean(props.data?.cryptoNative)} />
@@ -99,27 +123,6 @@ export const useTalentsTable = () => {
           <EcosystemActivationsCell wallet={props.data?.wallet} />
         ),
       },
-      // {
-      //   headerName: 'Notes',
-      //   width: 320,
-      //   valueGetter: (p) => p.data?.notes,
-      //   valueSetter(p) {
-      //     console.log('save', { xxx: p.data.notes, newValue: p.newValue });
-      //     return true;
-      //   },
-      //   cellRenderer: (props: CellProps) => (
-      //     <NotesCell notes={props.data?.notes} />
-      //   ),
-      //   cellStyle: { whiteSpace: 'normal', lineHeight: '1.2' },
-      //   editable: true,
-      //   cellEditor: 'agLargeTextCellEditor',
-      //   cellEditorPopup: true,
-      //   cellEditorParams: {
-      //     maxLength: 1000,
-      //     rows: 15,
-      //     cols: 50,
-      //   },
-      // },
       // {
       //   headerName: 'Attestations',
       // },
@@ -139,6 +142,7 @@ export const useTalentsTable = () => {
     [],
   );
 
+  const setNotePayload = useSetAtom(noteUpdatePayloadAtom);
   const onCellEditingStopped = useCallback(
     (e: CellEditingStoppedEvent<DevTalent>) => {
       const {
@@ -147,14 +151,25 @@ export const useTalentsTable = () => {
         newValue,
       } = e;
 
-      if (data && oldValue !== newValue) {
-        console.log({ newValue }, 'TODO');
+      if (data && newValue && oldValue !== newValue) {
+        setNotePayload({ wallet: data.wallet, note: newValue });
       }
-
-      console.log({ oldValue, newValue });
     },
-    [],
+    [setNotePayload],
   );
+
+  // Handle revert edit
+  useEffect(() => {
+    const handleUndoEvent: EventListener = () => {
+      gridRef.current!.api.undoCellEditing();
+    };
+
+    window.addEventListener(NOTE_UPDATE_UNDO_EVENT, handleUndoEvent);
+
+    return () => {
+      window.removeEventListener(NOTE_UPDATE_UNDO_EVENT, handleUndoEvent);
+    };
+  }, []);
 
   return {
     gridRef,

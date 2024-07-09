@@ -1,14 +1,25 @@
-import { useCallback, useMemo, useRef } from 'react';
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+import { useCallback, useEffect, useMemo, useRef } from 'react';
 
-import { ColDef, GetRowIdFunc } from 'ag-grid-community';
+import {
+  CellEditingStoppedEvent,
+  ColDef,
+  GetRowIdFunc,
+} from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
+import { useSetAtom } from 'jotai';
 
 import { JobApplicant } from '@jobstash/jobs/core';
+import {
+  NOTE_UPDATE_UNDO_EVENT,
+  noteUpdatePayloadAtom,
+} from '@jobstash/profile/core';
 import { convertFalseStringValuesToNull } from '@jobstash/shared/utils';
 
 import {
   BooleanCell,
   EcosystemActivationsCell,
+  NotesCell,
   ShowcaseCell,
   SkillsCell,
   SocialsCell,
@@ -83,6 +94,27 @@ export const useApplicantsTable = (orgId: string) => {
         ),
       },
       {
+        headerName: 'Notes',
+        width: 320,
+        valueGetter: (p) => p.data?.note,
+        valueSetter(p) {
+          p.data.note = p.newValue;
+          return true;
+        },
+        cellRenderer: (props: CellProps) => (
+          <NotesCell note={props.data?.note} />
+        ),
+        cellStyle: { whiteSpace: 'normal', lineHeight: '1.2' },
+        editable: true,
+        cellEditor: 'agLargeTextCellEditor',
+        cellEditorPopup: true,
+        cellEditorParams: {
+          maxLength: 1000,
+          rows: 15,
+          cols: 50,
+        },
+      },
+      {
         headerName: 'Crypto Native',
         cellRenderer: (props: CellProps) => (
           <BooleanCell value={Boolean(props.data?.cryptoNative)} />
@@ -114,9 +146,39 @@ export const useApplicantsTable = (orgId: string) => {
     [orgId],
   );
 
+  const setNotePayload = useSetAtom(noteUpdatePayloadAtom);
+  const onCellEditingStopped = useCallback(
+    (e: CellEditingStoppedEvent<JobApplicant>) => {
+      const {
+        node: { data },
+        oldValue,
+        newValue,
+      } = e;
+
+      if (data && newValue && oldValue !== newValue) {
+        setNotePayload({ wallet: data.user.wallet, note: newValue });
+      }
+    },
+    [setNotePayload],
+  );
+
+  // Handle revert edit
+  useEffect(() => {
+    const handleUndoEvent: EventListener = () => {
+      gridRef.current!.api.undoCellEditing();
+    };
+
+    window.addEventListener(NOTE_UPDATE_UNDO_EVENT, handleUndoEvent);
+
+    return () => {
+      window.removeEventListener(NOTE_UPDATE_UNDO_EVENT, handleUndoEvent);
+    };
+  }, []);
+
   return {
     gridRef,
     getRowId,
     columnDefs,
+    onCellEditingStopped,
   };
 };

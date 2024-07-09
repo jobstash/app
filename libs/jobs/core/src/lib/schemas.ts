@@ -145,6 +145,7 @@ export const jobApplicantSchema = myzod.object({
   cryptoNative: myzod.boolean(),
   upcomingTalent: myzod.boolean(),
   nfts: myzod.array(myzod.string()),
+  note: myzod.string().nullable(),
 });
 export type JobApplicant = Infer<typeof jobApplicantSchema>;
 

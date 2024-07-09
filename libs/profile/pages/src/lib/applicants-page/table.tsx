@@ -12,7 +12,8 @@ interface Props {
 }
 
 export const ApplicantsTable = ({ orgId, rowData }: Props) => {
-  const { gridRef, getRowId, columnDefs } = useApplicantsTable(orgId);
+  const { gridRef, getRowId, columnDefs, onCellEditingStopped } =
+    useApplicantsTable(orgId);
 
   return (
     <div className="ag-theme-quartz w-full px-12" style={{ height: 700 }}>
@@ -32,6 +33,7 @@ export const ApplicantsTable = ({ orgId, rowData }: Props) => {
         defaultColDef={{
           cellRenderer: EmptyCellPlaceholder,
         }}
+        onCellEditingStopped={onCellEditingStopped}
       />
     </div>
   );

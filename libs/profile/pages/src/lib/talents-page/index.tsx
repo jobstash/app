@@ -7,6 +7,7 @@ import { CHECK_WALLET_FLOWS, CHECK_WALLET_ROLES } from '@jobstash/auth/core';
 import { useAuthContext } from '@jobstash/auth/state';
 import { OrgProfileInfoProvider, useDevTalents } from '@jobstash/profile/state';
 
+import { NoteUpdatePayloadSyncer } from '@jobstash/profile/ui';
 import { PageWrapper } from '@jobstash/shared/ui';
 import { SideBar } from '@jobstash/sidebar/feature';
 
@@ -39,6 +40,7 @@ export const TalentsPage = () => {
           <SideBar />
           <TalentTabs />
           <DevTalentsTable rowData={rowData} />
+          <NoteUpdatePayloadSyncer />
         </PageWrapper>
       </OrgProfileInfoProvider>
     </>

@@ -311,8 +311,7 @@ export const devTalentSchema = myzod.intersection(
         ),
       }),
     ),
-    //
-    // notes: myzod.string().optional(),
+    note: myzod.string().nullable(),
   }),
 );
 
@@ -399,7 +398,7 @@ export const retryWebhooksPayloadSchema = myzod.object({
   apiToken: myzod.string().nullable(),
 });
 
-export const updateNotesPayloadSchema = myzod.object({
+export const updateNotePayloadSchema = myzod.object({
   wallet: myzod.string(),
-  notes: myzod.string(),
+  note: myzod.string(),
 });
