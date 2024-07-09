@@ -312,6 +312,10 @@ export const devTalentSchema = myzod.intersection(
       }),
     ),
     note: myzod.string().nullable(),
+    attestations: myzod.object({
+      upvotes: myzod.number().nullable(),
+      downvotes: myzod.number().nullable(),
+    }),
   }),
 );
 
