@@ -14,6 +14,7 @@ import {
   NOTE_UPDATE_UNDO_EVENT,
   noteUpdatePayloadAtom,
 } from '@jobstash/profile/core';
+import { getWorkHistoryRepoCount } from '@jobstash/profile/utils';
 import { convertFalseStringValuesToNull } from '@jobstash/shared/utils';
 
 import {
@@ -86,6 +87,14 @@ export const useApplicantsTable = (orgId: string) => {
             .flatMap((w) => [w.name, ...w.repositories.map((r) => r.name)])
             .join(' ');
         },
+        sortable: true,
+        valueGetter: (p) => (p.data ? p.data.user.workHistory : []),
+        comparator(workHistoryA, workHistoryB) {
+          const repoCountA = getWorkHistoryRepoCount(workHistoryA);
+          const repoCountB = getWorkHistoryRepoCount(workHistoryB);
+          if (repoCountA === repoCountB) return 0;
+          return repoCountA - repoCountB;
+        },
       },
       {
         headerName: 'Socials',
@@ -105,6 +114,17 @@ export const useApplicantsTable = (orgId: string) => {
             .map(([key, value]) => `${key} ${value}`)
             .join(' ');
         },
+        sortable: true,
+        valueGetter: (p) =>
+          p.data
+            ? { github: p.data.user.username, ...p.data.user.contact }
+            : undefined,
+        comparator(contactA, contactB) {
+          const countA = Object.values(contactA).filter(Boolean).length;
+          const countB = Object.values(contactB).filter(Boolean).length;
+          console.log({ countA, contactA, countB, contactB });
+          return countA - countB;
+        },
       },
       {
         headerName: 'Showcase',
@@ -118,6 +138,10 @@ export const useApplicantsTable = (orgId: string) => {
             .map(({ label, url }) => `${label} ${url}`)
             .join(' ');
         },
+        sortable: true,
+        valueGetter: (p) => p.data?.user.showcases,
+        comparator: (showcaseA, showcaseB) =>
+          showcaseA.length - showcaseB.length,
       },
       {
         headerName: 'Skills',
@@ -133,6 +157,9 @@ export const useApplicantsTable = (orgId: string) => {
           if (!p.data) return '';
           return p.data.user.skills.map((s) => s.name).join(' ');
         },
+        sortable: true,
+        valueGetter: (p) => p.data?.user.skills,
+        comparator: (skillsA, skillsB) => skillsA.length - skillsB.length,
       },
       {
         headerName: 'Notes',
@@ -154,12 +181,24 @@ export const useApplicantsTable = (orgId: string) => {
           rows: 15,
           cols: 50,
         },
+        sortable: true,
+        comparator(noteA, noteB) {
+          console.log({ noteA, noteB });
+          if (noteA === noteB) return 0;
+          return (noteA || '').length - (noteB || '').length;
+        },
       },
       {
         headerName: 'Crypto Native',
         cellRenderer: (props: CellProps) => (
           <BooleanCell value={Boolean(props.data?.cryptoNative)} />
         ),
+        sortable: true,
+        valueGetter: (p) => p.data?.cryptoNative,
+        comparator(boolA, boolB) {
+          if (boolA === boolB) return 0;
+          return boolA ? -1 : 1;
+        },
       },
       {
         headerName: 'Crypto Adjacent',
@@ -178,6 +217,10 @@ export const useApplicantsTable = (orgId: string) => {
           if (!p.data) return '';
           return p.data.ecosystemActivations.join(' ');
         },
+        valueGetter: (p) => p.data?.ecosystemActivations,
+        sortable: true,
+        comparator: (activationsA, activationsB) =>
+          activationsA.length - activationsB.length,
       },
       {
         headerName: 'Actions',

@@ -43,6 +43,7 @@ export const DevTalentsTable = ({ rowData }: Props) => {
           columnDefs={columnDefs}
           defaultColDef={{
             cellRenderer: EmptyCellPlaceholder,
+            sortable: false,
           }}
           onCellEditingStopped={onCellEditingStopped}
         />

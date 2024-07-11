@@ -46,6 +46,7 @@ export const ApplicantsTable = ({ orgId, rowData }: Props) => {
           columnDefs={columnDefs}
           defaultColDef={{
             cellRenderer: EmptyCellPlaceholder,
+            sortable: false,
           }}
           onCellEditingStopped={onCellEditingStopped}
         />
