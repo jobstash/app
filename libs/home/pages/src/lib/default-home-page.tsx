@@ -36,8 +36,6 @@ export const DefaultHomePage = () => {
   // Component JSX
   return (
     <>
-      <LandingMetadata />
-
       <Head>
         <script
           type="text/javascript"
@@ -186,6 +184,8 @@ export const DefaultHomePage = () => {
         <script type="text/javascript" src={`${FRONTEND_URL}/init-shader.js`} />
       </Head>
       <LandingScripts />
+
+      <LandingMetadata />
 
       {/* <LandingBalls /> */}
 
