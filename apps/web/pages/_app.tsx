@@ -34,7 +34,7 @@ const NAME = 'JobStash';
 const DESCRIPTION = 'The Ultimate Job Aggregator for Crypto Developers';
 const WEBSITE_URL = 'https://www.jobstash.xyz';
 const IMAGE_URL =
-  'https://whi3td4y5t552pnenllviunljg23ggqza2dr7bwhciwlne7rphta.arweave.net/sdG5j5js-909pGrXVFGrSbWzGhkGhx-GxxIstpPxeeY';
+  'https://3qwrcmeggcdp2ifuwv457mcq26buf4iww22rp5r2apydzu5mflua.arweave.net/3C0RMIYwhv0gtLV537BQ14NC8Ra2tRf2OgPwPNOsKug';
 
 const App = ({ Component, pageProps }: AppProps) => {
   const router = useRouter();
