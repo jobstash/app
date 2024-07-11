@@ -8,6 +8,7 @@ import { FRONTEND_URL } from '@jobstash/shared/core';
 
 import {
   LandingFooter,
+  LandingMetadata,
   LandingScripts,
   LandingSections,
 } from '@jobstash/home/ui';
@@ -35,6 +36,8 @@ export const DefaultHomePage = () => {
   // Component JSX
   return (
     <>
+      <LandingMetadata />
+
       <Head>
         <script
           type="text/javascript"
