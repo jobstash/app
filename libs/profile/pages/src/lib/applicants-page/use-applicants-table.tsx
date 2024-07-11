@@ -44,6 +44,13 @@ export const useApplicantsTable = (orgId: string) => {
       {
         headerName: 'Job',
         cellRenderer: JobCell,
+        getQuickFilterText(p) {
+          if (!p.data) return '';
+          const {
+            job: { title, classification, shortUUID },
+          } = p.data;
+          return `${title} ${classification} ${shortUUID}`;
+        },
       },
       {
         headerName: 'User',
@@ -52,6 +59,17 @@ export const useApplicantsTable = (orgId: string) => {
         ),
         valueGetter: (p) => p.data?.user.username || p.data?.user.email,
         width: 280,
+        getQuickFilterText(p) {
+          if (!p.data) return '';
+          const {
+            user: {
+              username,
+              email,
+              location: { city, country },
+            },
+          } = p.data;
+          return `${username} ${email} ${city} ${country}`;
+        },
       },
       {
         headerName: 'Work History',
@@ -62,6 +80,12 @@ export const useApplicantsTable = (orgId: string) => {
           />
         ),
         width: 320,
+        getQuickFilterText(p) {
+          if (!p.data) return '';
+          return p.data.user.workHistory
+            .flatMap((w) => [w.name, ...w.repositories.map((r) => r.name)])
+            .join(' ');
+        },
       },
       {
         headerName: 'Socials',
@@ -74,6 +98,13 @@ export const useApplicantsTable = (orgId: string) => {
             }}
           />
         ),
+        getQuickFilterText(p) {
+          if (!p.data) return '';
+          return Object.entries(p.data.user.contact)
+            .filter(([_, value]) => value)
+            .map(([key, value]) => `${key} ${value}`)
+            .join(' ');
+        },
       },
       {
         headerName: 'Showcase',
@@ -81,6 +112,12 @@ export const useApplicantsTable = (orgId: string) => {
         cellRenderer: (props: CellProps) => (
           <ShowcaseCell showcases={props.data?.user.showcases} />
         ),
+        getQuickFilterText(p) {
+          if (!p.data) return '';
+          return p.data.user.showcases
+            .map(({ label, url }) => `${label} ${url}`)
+            .join(' ');
+        },
       },
       {
         headerName: 'Skills',
@@ -92,6 +129,10 @@ export const useApplicantsTable = (orgId: string) => {
             skills={props.data?.user.skills}
           />
         ),
+        getQuickFilterText(p) {
+          if (!p.data) return '';
+          return p.data.user.skills.map((s) => s.name).join(' ');
+        },
       },
       {
         headerName: 'Notes',
@@ -133,6 +174,10 @@ export const useApplicantsTable = (orgId: string) => {
             ecosystemActivations={props.data?.ecosystemActivations}
           />
         ),
+        getQuickFilterText(p) {
+          if (!p.data) return '';
+          return p.data.ecosystemActivations.join(' ');
+        },
       },
       {
         headerName: 'Actions',
@@ -177,10 +222,18 @@ export const useApplicantsTable = (orgId: string) => {
     };
   }, []);
 
+  const onChangeQuickFilter = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      gridRef.current!.api.setGridOption('quickFilterText', e.target.value);
+    },
+    [],
+  );
+
   return {
     gridRef,
     getRowId,
     columnDefs,
     onCellEditingStopped,
+    onChangeQuickFilter,
   };
 };

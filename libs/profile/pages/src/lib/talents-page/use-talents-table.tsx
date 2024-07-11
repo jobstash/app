@@ -51,6 +51,15 @@ export const useTalentsTable = () => {
         },
         valueGetter: (p) => p.data?.username || p.data?.email,
         width: 280,
+        getQuickFilterText(p) {
+          if (!p.data) return '';
+          const {
+            username,
+            email,
+            location: { city, country },
+          } = p.data;
+          return `${username} ${email} ${city} ${country}`;
+        },
       },
       {
         headerName: 'Work History',
@@ -61,6 +70,12 @@ export const useTalentsTable = () => {
           />
         ),
         width: 320,
+        getQuickFilterText(p) {
+          if (!p.data) return '';
+          return p.data.workHistory
+            .flatMap((w) => [w.name, ...w.repositories.map((r) => r.name)])
+            .join(' ');
+        },
       },
       {
         headerName: 'Socials',
@@ -73,6 +88,13 @@ export const useTalentsTable = () => {
             }}
           />
         ),
+        getQuickFilterText(p) {
+          if (!p.data) return '';
+          return Object.entries(p.data.contact)
+            .filter(([_, value]) => value)
+            .map(([key, value]) => `${key} ${value}`)
+            .join(' ');
+        },
       },
       {
         headerName: 'Showcase',
@@ -80,6 +102,12 @@ export const useTalentsTable = () => {
         cellRenderer: (props: CellProps) => (
           <ShowcaseCell showcases={props.data?.showcases} />
         ),
+        getQuickFilterText(p) {
+          if (!p.data) return '';
+          return p.data.showcases
+            .map(({ label, url }) => `${label} ${url}`)
+            .join(' ');
+        },
       },
       {
         headerName: 'Skills',
@@ -87,6 +115,10 @@ export const useTalentsTable = () => {
         cellRenderer: (props: CellProps) => (
           <SkillsCell isMatched={false} skills={props.data?.skills} />
         ),
+        getQuickFilterText(p) {
+          if (!p.data) return '';
+          return p.data.skills.map((s) => s.name).join(' ');
+        },
       },
       {
         headerName: 'Notes',
@@ -124,6 +156,10 @@ export const useTalentsTable = () => {
             ecosystemActivations={props.data?.ecosystemActivations}
           />
         ),
+        getQuickFilterText(p) {
+          if (!p.data) return '';
+          return p.data.ecosystemActivations.join(' ');
+        },
       },
       // {
       //   headerName: 'Attestations',
@@ -173,10 +209,18 @@ export const useTalentsTable = () => {
     };
   }, []);
 
+  const onChangeQuickFilter = useCallback(
+    (e: React.ChangeEvent<HTMLInputElement>) => {
+      gridRef.current!.api.setGridOption('quickFilterText', e.target.value);
+    },
+    [],
+  );
+
   return {
     gridRef,
     getRowId,
     columnDefs,
     onCellEditingStopped,
+    onChangeQuickFilter,
   };
 };

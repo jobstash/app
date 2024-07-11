@@ -3,7 +3,7 @@ import { Tab, Tabs } from '@nextui-org/react';
 export const TalentTabs = () => {
   console.log('TODO');
   return (
-    <div className="px-12 pt-4 pb-4">
+    <div className="px-12 py-4">
       <Tabs
         aria-label="Applicant Tabs"
         variant="underlined"
