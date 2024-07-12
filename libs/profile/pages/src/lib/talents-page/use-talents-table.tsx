@@ -149,6 +149,10 @@ export const useTalentsTable = () => {
         headerName: 'Notes',
         width: 320,
         valueGetter: (p) => p.data?.note,
+        valueSetter(p) {
+          p.data.note = p.newValue;
+          return true;
+        },
         cellRenderer: (props: CellProps) => (
           <NotesCell note={props.data?.note} />
         ),
