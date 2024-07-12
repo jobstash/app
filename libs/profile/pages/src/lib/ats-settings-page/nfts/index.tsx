@@ -22,7 +22,7 @@ const getDefaultNFT = (): ATSTrackedNFTItem => ({
   id: '',
   name: '',
   contractAddress: '',
-  network: '',
+  network: null,
 });
 
 interface Props {

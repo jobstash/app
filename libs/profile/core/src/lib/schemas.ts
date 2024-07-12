@@ -331,19 +331,20 @@ export const atsTrackedNFTSchema = myzod.object({
       (address) => isAddress(address),
       'Address is not a valid ethereum address',
     ),
-  network: myzod.literals(
-    '',
-    'arbitrum',
-    'avalanche',
-    'base',
-    'blast',
-    'celo',
-    'ethereum',
-    'linea',
-    'optimism',
-    'palm',
-    'polygon',
-  ),
+  network: myzod
+    .literals(
+      'arbitrum',
+      'avalanche',
+      'base',
+      'blast',
+      'celo',
+      'ethereum',
+      'linea',
+      'optimism',
+      'palm',
+      'polygon',
+    )
+    .nullable(),
 });
 
 export const atsPreferenceSchema = myzod.object({
