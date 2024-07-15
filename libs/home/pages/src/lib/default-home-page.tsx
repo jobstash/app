@@ -185,7 +185,7 @@ export const DefaultHomePage = () => {
       </Head>
       <LandingScripts />
 
-      <LandingMetadata />
+      {/* <LandingMetadata /> */}
 
       {/* <LandingBalls /> */}
 
