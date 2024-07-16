@@ -67,24 +67,24 @@ export const NewFeatureModal = () => {
       isOpen={isOpen}
       size="2xl"
       classNames={{
-        base: 'p-2 flex flex-col gap-4',
+        base: 'px-4 pt-2 pb-4 flex flex-col m-4 md:pb-8',
       }}
       style={{
         zIndex: 9999,
       }}
       onOpenChange={onOpenChange}
     >
-      <ModalContent>
+      <ModalContent className="md:gap-y-4">
         {() => (
           <>
-            <ModalHeader>
-              <Text color="dimmed" size="lg">
+            <ModalHeader className="pb-0">
+              <Text color="dimmed" className="w-full text-center md:text-[20px] md:pb-2">
                 {HEADER_TEXT}
               </Text>
             </ModalHeader>
             <ModalBody>
-              <div className="flex flex-col gap-4 w-full items-center justify-center">
-                <Heading size="xl" fw="bold" className="space-x-6">
+              <div className="flex flex-col items-center justify-center w-full">
+                <Heading size="md" fw="bold" className="pb-3 space-x-2 md:space-x-4 md:pb-8 md:text-[35px]">
                   <span role="img" aria-label="Shimmer">
                     ✨
                   </span>
@@ -95,14 +95,14 @@ export const NewFeatureModal = () => {
                 </Heading>
 
                 {description && (
-                  <span className="max-w-[56ch] text-center">
+                  <span className="text-center max-w-fit text-md md:text-lg">
                     {description}
                   </span>
                 )}
               </div>
             </ModalBody>
-            <ModalFooter>
-              <Button size="lg" onClick={onClose}>
+            <ModalFooter className="flex justify-center p-0 pt-2">
+              <Button size="md" onClick={onClose} className="md:w-1/3">
                 OK
               </Button>
             </ModalFooter>
