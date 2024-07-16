@@ -98,6 +98,9 @@ export const ProfileOrgForm = () => {
   const isMobile = useIsMobile();
 
   if (!profileInfoData) return null;
+  if (profileInfoData.email.length === 0) return null;
+
+  const { email } = profileInfoData.email[0];
 
   return (
     <div className="flex flex-col gap-4 w-full">
@@ -106,9 +109,9 @@ export const ProfileOrgForm = () => {
       <div className="flex justify-between items-center w-full">
         <div className="flex items-center gap-8">
           <LogoTitle
-            title={profileInfoData.email ?? ''}
+            title={email}
             avatarProps={{
-              src: getEmailAvatar(profileInfoData.email),
+              src: getEmailAvatar(email),
               alt: `${profileInfoData.email}'s avatar`,
               isRounded: true,
             }}

@@ -20,7 +20,7 @@ interface Props {
 
 const ProfileHeader = ({ gotItCard, gotItCardKey }: Props) => {
   const { username, avatar, email: emails } = useProfileHeaderContext();
-  const email = emails.length > 0 ? emails[0] : null;
+  const email = emails.length > 0 ? emails[0].email : null;
   return (
     <ProfileHeaderProvider>
       <div className="flex justify-between items-end md:items-center gap-4 md:gap-8">

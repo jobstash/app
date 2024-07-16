@@ -122,7 +122,9 @@ export const ApproveOrgModal = () => {
                   <Tab key="user" title="User">
                     <div className="flex flex-col gap-4 pt-4">
                       <Text>Wallet: {wallet ?? 'N/A'}</Text>
-                      <Text>Email: {email ?? 'N/A'}</Text>
+                      <Text>
+                        Email: {email.length > 0 ? email[0].email : 'N/A'}
+                      </Text>
                       <Text>LinkedIn: {linkedin ?? 'N/A'}</Text>
                       <Text>Calendly: {calendly ?? 'N/A'}</Text>
                       <Text>{`Contact (${contact.preferred}): ${contact.value}`}</Text>

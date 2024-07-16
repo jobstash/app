@@ -52,7 +52,7 @@ export const useTalentsTable = () => {
                 wallet,
                 avatar,
                 username,
-                email: email.length > 0 ? email[0] : null,
+                email,
                 location,
               }}
             />

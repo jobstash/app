@@ -100,11 +100,16 @@ export const profileInfoLocationSchema = myzod.object({
 
 export const preferredContactSchema = myzod.literals(...CONTACT_FIELDS);
 
+export const userEmailSchema = myzod.object({
+  email: myzod.string(),
+  main: myzod.boolean(),
+});
+
 export const devProfileInfoSchema = myzod.object({
   wallet: myzod.string().min(1),
   avatar: myzod.string().min(1).nullable(),
   username: myzod.string().min(1).nullable(),
-  email: myzod.array(myzod.string()),
+  email: myzod.array(userEmailSchema),
   availableForWork: myzod.boolean().nullable(),
   preferred: preferredContactSchema,
   contact: profileInfoContactSchema,
@@ -137,7 +142,7 @@ export const orgProfileInfoSchema = myzod.object({
   wallet: myzod.string().min(1),
   avatar: myzod.string().min(1).nullable(),
   username: myzod.string().min(1).nullable(),
-  email: myzod.string().min(1).nullable(),
+  email: myzod.array(userEmailSchema),
   linkedin: myzod.string().nullable(),
   calendly: myzod.string().nullable(),
   orgId: myzod.string().nullable(),

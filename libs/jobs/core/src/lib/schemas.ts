@@ -83,7 +83,12 @@ export const jobApplicantSchema = myzod.object({
       wallet: myzod.string().min(1),
       avatar: myzod.string().min(1).nullable(),
       username: myzod.string().min(1).nullable(),
-      email: myzod.string().min(1).nullable(),
+      email: myzod.array(
+        myzod.object({
+          email: myzod.string(),
+          main: myzod.boolean(),
+        }),
+      ),
       availableForWork: myzod.boolean().nullable(),
       location: profileInfoLocationSchema,
       preferred: preferredContactSchema,

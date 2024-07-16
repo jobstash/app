@@ -1,6 +1,10 @@
 import { createContext, useContext } from 'react';
 
-import { DevProfileInfo, PreferredContact } from '@jobstash/profile/core';
+import {
+  DevProfileInfo,
+  PreferredContact,
+  UserEmail,
+} from '@jobstash/profile/core';
 
 interface ProfileHeaderContextProps {
   isLoading: boolean;
@@ -9,7 +13,7 @@ interface ProfileHeaderContextProps {
   updateAvailability: (isChecked: boolean) => void;
   avatar: string | null;
   username: string | null;
-  email: string[];
+  email: UserEmail[];
   preferredContact: PreferredContact | null;
   contact: DevProfileInfo['contact'] | null;
 }

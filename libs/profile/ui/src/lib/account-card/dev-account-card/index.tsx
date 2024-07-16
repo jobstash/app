@@ -44,7 +44,6 @@ export const DevAccountCard = () => {
               />
             </div>
           )}
-          <hr className="border-t border-white/10" />
 
           <DevEmails />
         </div>

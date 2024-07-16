@@ -17,19 +17,22 @@ export const DevEmails = () => {
   if (!hasEmail) return null;
 
   return (
-    <div className="flex flex-col gap-4">
-      {hasEmail && (
-        <>
-          <Text size="lg" fw="bold">
-            Connected Email {getPluralText('Account', emails.length)}:
-          </Text>
-          <div className="flex flex-col gap-4 pt-2">
-            {emails.map((email) => (
-              <EmailAccountText key={email} email={email} />
-            ))}
-          </div>
-        </>
-      )}
-    </div>
+    <>
+      <hr className="border-t border-white/10" />
+      <div className="flex flex-col gap-4">
+        {hasEmail && (
+          <>
+            <Text size="lg" fw="bold">
+              Connected Email {getPluralText('Account', emails.length)}:
+            </Text>
+            <div className="flex flex-col gap-4 pt-2">
+              {emails.map(({ email }) => (
+                <EmailAccountText key={email} email={email} />
+              ))}
+            </div>
+          </>
+        )}
+      </div>
+    </>
   );
 };

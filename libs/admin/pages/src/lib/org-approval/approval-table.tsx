@@ -58,11 +58,13 @@ export const ApprovalTable = ({ data, showActions }: Props) => {
                 text={username}
                 tooltip="Github"
               />
-              <UserInfoItem
-                icon={<EnvelopeIcon className="w-3 h-3" />}
-                text={email}
-                tooltip="Email"
-              />
+              {email.length > 0 && (
+                <UserInfoItem
+                  icon={<EnvelopeIcon className="w-3 h-3" />}
+                  text={email[0].email}
+                  tooltip="Email"
+                />
+              )}
               <UserInfoItem
                 icon={<LinkedInIcon />}
                 text={linkedin}

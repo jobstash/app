@@ -46,6 +46,7 @@ import {
   retryWebhooksResponseSchema,
   updateATSPreferencePayloadSchema,
   updateNotePayloadSchema,
+  userEmailSchema,
 } from './schemas';
 import { profileRepoContributionPayloadSchema } from './schemas';
 
@@ -66,6 +67,8 @@ export type ProfileOrgReview = Infer<typeof profileOrgReviewSchema>;
 export type ProfileOrgReviewListResponse = Infer<
   typeof profileOrgReviewListResponseSchema
 >;
+
+export type UserEmail = Infer<typeof userEmailSchema>;
 
 export type DevProfileInfo = Infer<typeof devProfileInfoSchema>;
 export type DevProfileInfoPayload = Infer<typeof devProfileInfoPayloadSchema>;

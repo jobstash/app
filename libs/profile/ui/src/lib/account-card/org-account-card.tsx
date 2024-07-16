@@ -16,6 +16,9 @@ export const OrgAccountCard = () => {
 
   const { profileInfoData } = useOrgProfileInfoContext();
 
+  if (!profileInfoData) return null;
+  const { email } = profileInfoData;
+
   return (
     <>
       <AccountCardModal
@@ -30,11 +33,11 @@ export const OrgAccountCard = () => {
         <div className="flex flex-col gap-6 py-4 text-center">
           <AccountCardTitle />
 
-          {profileInfoData?.email && (
+          {email.length > 0 && (
             <ConnectedAccount
               label="Connected Email Account:"
-              avatar={getEmailAvatar(profileInfoData.email)}
-              text={profileInfoData.email}
+              avatar={getEmailAvatar(email[0].email)}
+              text={email[0].email}
             />
           )}
         </div>
