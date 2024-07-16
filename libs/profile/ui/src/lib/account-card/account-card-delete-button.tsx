@@ -1,33 +1,19 @@
-import { Button as MButton } from '@mantine/core';
-
-import { Text } from '@jobstash/shared/ui';
+import { Button } from '@nextui-org/react';
 
 interface Props {
   open: () => void;
 }
 
 const AccountCardDeleteButton = ({ open }: Props) => (
-  <>
-    <div className="text-center text-sm">
-      <Text size="sm" color="dimmed">
-        DANGER ZONE!
-      </Text>
-    </div>
-
-    <MButton
-      fullWidth
-      radius="md"
-      color="red"
-      className="bg-red-500"
-      size="lg"
-      classNames={{
-        inner: 'text-md',
-      }}
-      onClick={open}
-    >
-      Delete JobStash Account
-    </MButton>
-  </>
+  <Button
+    fullWidth
+    radius="md"
+    className="bg-red-500 text-md font-bold"
+    size="lg"
+    onClick={open}
+  >
+    Delete JobStash Account
+  </Button>
 );
 
 export default AccountCardDeleteButton;

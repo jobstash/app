@@ -47,7 +47,15 @@ export const useTalentsTable = () => {
           if (!props.data) return null;
           const { wallet, avatar, username, email, location } = props.data;
           return (
-            <UserCell user={{ wallet, avatar, username, email, location }} />
+            <UserCell
+              user={{
+                wallet,
+                avatar,
+                username,
+                email: email.length > 0 ? email[0] : null,
+                location,
+              }}
+            />
           );
         },
         valueGetter: (p) => p.data?.username || p.data?.email,

@@ -9,7 +9,7 @@ interface ProfileHeaderContextProps {
   updateAvailability: (isChecked: boolean) => void;
   avatar: string | null;
   username: string | null;
-  email: string | null;
+  email: string[];
   preferredContact: PreferredContact | null;
   contact: DevProfileInfo['contact'] | null;
 }

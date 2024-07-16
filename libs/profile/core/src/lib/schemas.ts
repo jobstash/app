@@ -104,7 +104,7 @@ export const devProfileInfoSchema = myzod.object({
   wallet: myzod.string().min(1),
   avatar: myzod.string().min(1).nullable(),
   username: myzod.string().min(1).nullable(),
-  email: myzod.string().min(1).nullable(),
+  email: myzod.array(myzod.string()),
   availableForWork: myzod.boolean().nullable(),
   preferred: preferredContactSchema,
   contact: profileInfoContactSchema,

@@ -26,6 +26,7 @@ export * from './lib/hooks/use-profile-reviews-page';
 export * from './lib/hooks/use-profile-skills-query';
 export * from './lib/hooks/use-rating-mutation';
 export * from './lib/hooks/use-register-ats-client';
+export * from './lib/hooks/use-remove-attached-email';
 export * from './lib/hooks/use-retry-webhooks';
 export * from './lib/hooks/use-salary-mutation';
 export * from './lib/hooks/use-tags-used-mutation';
