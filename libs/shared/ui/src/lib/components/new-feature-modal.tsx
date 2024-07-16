@@ -23,8 +23,6 @@ import { cn, getLocalStorageValue } from '@jobstash/shared/utils';
 
 import { newFeatureIsOpenAtom } from '@jobstash/shared/state';
 
-import BaseButton from '../base/button/button';
-import Heading from '../base/heading';
 import Text from '../base/text';
 
 const LS_KEY = 'new-feature-key';
@@ -68,6 +66,7 @@ export const NewFeatureModal = () => {
   const hasCTA = NEW_FEATURE_CTA_TEXT && NEW_FEATURE_CTA_URL;
   const onClickCTA = () => {
     if (hasCTA) {
+      handleClose();
       router.push(NEW_FEATURE_CTA_URL);
     }
   };
