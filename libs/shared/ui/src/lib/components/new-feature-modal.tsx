@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 import {
@@ -12,20 +13,25 @@ import {
 import { useAtom } from 'jotai';
 
 import {
+  lato,
+  NEW_FEATURE_CTA_TEXT,
+  NEW_FEATURE_CTA_URL,
   NEW_FEATURE_DESCRIPTION,
   NEW_FEATURE_TITLE,
 } from '@jobstash/shared/core';
-import { getLocalStorageValue } from '@jobstash/shared/utils';
+import { cn, getLocalStorageValue } from '@jobstash/shared/utils';
 
 import { newFeatureIsOpenAtom } from '@jobstash/shared/state';
 
+import BaseButton from '../base/button/button';
 import Heading from '../base/heading';
 import Text from '../base/text';
 
 const LS_KEY = 'new-feature-key';
-const HEADER_TEXT = 'EthGlobal partecipants now get Elite Status';
+const HEADER_TEXT = 'EthGlobal participants now get Elite Status';
 
 export const NewFeatureModal = () => {
+  const router = useRouter();
   const [isOpenAtom, setIsOpenAtom] = useAtom(newFeatureIsOpenAtom);
 
   const title = NEW_FEATURE_TITLE;
@@ -59,6 +65,13 @@ export const NewFeatureModal = () => {
     isOpen ? onOpen() : handleClose();
   };
 
+  const hasCTA = NEW_FEATURE_CTA_TEXT && NEW_FEATURE_CTA_URL;
+  const onClickCTA = () => {
+    if (hasCTA) {
+      router.push(NEW_FEATURE_CTA_URL);
+    }
+  };
+
   if (!title) return null;
 
   return (
@@ -87,19 +100,20 @@ export const NewFeatureModal = () => {
             </ModalHeader>
             <ModalBody>
               <div className="flex flex-col items-center justify-center w-full">
-                <Heading
-                  size="md"
-                  fw="bold"
-                  className="pb-3 space-x-2 md:space-x-4 md:pb-8 md:text-[35px]"
+                <div
+                  className={cn(
+                    'font-bold text-white flex items-center pb-3 space-x-2 md:space-x-4 md:pb-8 md:text-[35px]',
+                    lato.className,
+                  )}
                 >
                   <span role="img" aria-label="Shimmer">
                     ✨
                   </span>
-                  <span>{title}</span>
+                  <span className="leading-tight text-center">{title}</span>
                   <span role="img" aria-label="Shimmer">
                     ✨
                   </span>
-                </Heading>
+                </div>
 
                 {description && (
                   <span className="text-center max-w-fit text-md md:text-lg">
@@ -108,8 +122,21 @@ export const NewFeatureModal = () => {
                 )}
               </div>
             </ModalBody>
-            <ModalFooter className="flex justify-center p-0 pt-2">
-              <Button size="md" className="md:w-1/3" onClick={onClose}>
+            <ModalFooter className="flex items-center gap-4 justify-center p-0 pt-2">
+              {hasCTA && (
+                <Button
+                  size="md"
+                  className="md:w-1/5 bg-gradient-to-l from-primary to-tertiary font-bold"
+                  onClick={onClickCTA}
+                >
+                  {NEW_FEATURE_CTA_TEXT}
+                </Button>
+              )}
+              <Button
+                size="md"
+                className="md:w-1/5 font-bold"
+                onClick={onClose}
+              >
                 OK
               </Button>
             </ModalFooter>

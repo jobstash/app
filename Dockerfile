@@ -53,6 +53,8 @@ ENV NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID=d6b3203f9238276df2440599c3497e69
 ENV NEXT_PUBLIC_GA_MEASUREMENT_ID=G-PQSHG9DB44
 ENV NEXT_PUBLIC_NEW_FEATURE_TITLE="EthGlobal pack holders now qualify for Elite Fast Track"
 ENV NEXT_PUBLIC_NEW_FEATURE_DESCRIPTION="If you've got an EthGlobal pack, you can now qualify for the Elite Fast Track. This means you can apply to jobs which are reserved for veteran builders and you'll get our bestpoke advice, where we help you shape your CV and give you additional nonpublic information about specific vacancies to improve your odds of landing your dream job. Just connect your wallet, sign in, and apply to jobs in the Elite Fast Track section!"
+ENV NEXT_PUBLIC_NEW_FEATURE_CTA_TEXT="Check it out!"
+ENV NEXT_PUBLIC_NEW_FEATURE_CTA_LINK="/elite-fast-track"
 ENV CYPRESS_INSTALL_BINARY=0
 
 RUN pnpm build
