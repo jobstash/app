@@ -1,7 +1,12 @@
 import dynamic from 'next/dynamic';
 import { memo } from 'react';
 
-import { RouteSection } from '@jobstash/shared/core';
+import {
+  DUCK_TELEGRAM_URL,
+  ORG_SIGNUP_FORM_URL,
+  RouteSection,
+  TELEGRAM_URL,
+} from '@jobstash/shared/core';
 
 import { SidebarProvider } from '@jobstash/sidebar/state';
 
@@ -13,10 +18,9 @@ import {
 } from '@jobstash/shared/ui';
 import {
   Brand,
-  FollowTelegramButton,
+  HeaderLink,
   MobileMenuButton,
   MobileNavbarWrapper,
-  RequestToBeListedButton,
   SidebarBookmarksSection,
   SidebarCloseButton,
   SidebarDiscoverBartabs,
@@ -29,6 +33,9 @@ const Filters = dynamic(() =>
   import('@jobstash/filters/feature').then((m) => m.Filters),
 );
 
+const GET_LISTED_TEXT = 'Get Listed';
+const GET_HELP_TEXT = 'Get Help';
+const SUBSCRIBE_TG_TEXT = 'Subscribe on TG';
 interface Props {
   filtersRouteSection?: RouteSection;
 }
@@ -71,10 +78,9 @@ const Sidebar = ({ filtersRouteSection }: Props) => (
         </div>
         {filtersRouteSection && <Filters routeSection={filtersRouteSection} />}
         <div className="hidden space-x-6 lg:flex items-center lg:mr-0 lg:ml-auto lg:pr-4">
-          <IsMountedWrapper>
-            <RequestToBeListedButton />
-          </IsMountedWrapper>
-          <FollowTelegramButton />
+          <HeaderLink text={GET_LISTED_TEXT} link={ORG_SIGNUP_FORM_URL} />
+          <HeaderLink text={GET_HELP_TEXT} link={DUCK_TELEGRAM_URL} />
+          <HeaderLink text={SUBSCRIBE_TG_TEXT} link={TELEGRAM_URL} />
           <ConnectWalletButton />
         </div>
       </div>
@@ -130,10 +136,13 @@ const Sidebar = ({ filtersRouteSection }: Props) => (
 
         {/* MOBILE BOTTOM BARTABS */}
         <div className="inset-x-0 bottom-0 space-y-4 p-4 lg:relative lg:hidden flex flex-col">
-          <IsMountedWrapper>
-            <RequestToBeListedButton isMobile />
-          </IsMountedWrapper>
-          <FollowTelegramButton isMobile />
+          <HeaderLink
+            isMobile
+            text={GET_LISTED_TEXT}
+            link={ORG_SIGNUP_FORM_URL}
+          />
+          <HeaderLink isMobile text={GET_HELP_TEXT} link={DUCK_TELEGRAM_URL} />
+          <HeaderLink isMobile text={SUBSCRIBE_TG_TEXT} link={TELEGRAM_URL} />
 
           <ConnectWalletButton isMobile />
         </div>
