@@ -78,13 +78,20 @@ export const NewFeatureModal = () => {
         {() => (
           <>
             <ModalHeader className="pb-0">
-              <Text color="dimmed" className="w-full text-center md:text-[20px] md:pb-2">
+              <Text
+                color="dimmed"
+                className="w-full text-center md:text-[20px] md:pb-2"
+              >
                 {HEADER_TEXT}
               </Text>
             </ModalHeader>
             <ModalBody>
               <div className="flex flex-col items-center justify-center w-full">
-                <Heading size="md" fw="bold" className="pb-3 space-x-2 md:space-x-4 md:pb-8 md:text-[35px]">
+                <Heading
+                  size="md"
+                  fw="bold"
+                  className="pb-3 space-x-2 md:space-x-4 md:pb-8 md:text-[35px]"
+                >
                   <span role="img" aria-label="Shimmer">
                     ✨
                   </span>
@@ -102,7 +109,7 @@ export const NewFeatureModal = () => {
               </div>
             </ModalBody>
             <ModalFooter className="flex justify-center p-0 pt-2">
-              <Button size="md" onClick={onClose} className="md:w-1/3">
+              <Button size="md" className="md:w-1/3" onClick={onClose}>
                 OK
               </Button>
             </ModalFooter>
