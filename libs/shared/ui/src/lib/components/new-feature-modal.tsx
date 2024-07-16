@@ -23,7 +23,7 @@ import Heading from '../base/heading';
 import Text from '../base/text';
 
 const LS_KEY = 'new-feature-key';
-const HEADER_TEXT = 'Hey! check out our new feature:';
+const HEADER_TEXT = 'EthGlobal partecipants now get Elite Status';
 
 export const NewFeatureModal = () => {
   const [isOpenAtom, setIsOpenAtom] = useAtom(newFeatureIsOpenAtom);
