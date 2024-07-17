@@ -29,13 +29,18 @@ export const useRemoveAttachedEmail = () => {
 
   return useMutation({
     mutationFn: (email: string) => removeAttachedEmail(email),
-    onSuccess(_data, email) {
+    async onSuccess(_data, email) {
       notifSuccess({
         title: 'Email Removed!',
         message: `${email} has been removed from your account.`,
       });
-      const queryKey = [mwVersion, 'dev-profile-info'];
-      queryClient.invalidateQueries({ queryKey });
+
+      await queryClient.invalidateQueries({
+        queryKey: [mwVersion, 'dev-profile-info'],
+      });
+      await queryClient.invalidateQueries({
+        queryKey: [mwVersion, 'check-wallet'],
+      });
     },
     onError(error) {
       notifError({
