@@ -1,16 +1,23 @@
 import { memo } from 'react';
 
-import { Button } from '@jobstash/shared/ui';
+import { Button } from '@nextui-org/react';
 
 interface Props {
   text: string;
   onClick: () => void;
+  isLoading?: boolean;
   isDisabled?: boolean;
 }
 
-const RightPanelCta = ({ text, onClick, isDisabled }: Props) => (
+const RightPanelCta = ({ text, onClick, isLoading, isDisabled }: Props) => (
   <div className="flex w-full justify-between">
-    <Button variant="primary" isDisabled={isDisabled} onClick={onClick}>
+    <Button
+      isLoading={isLoading}
+      isDisabled={isDisabled}
+      className="bg-gradient-to-l from-primary to-tertiary"
+      radius="sm"
+      onClick={onClick}
+    >
       {text}
     </Button>
     {/* <div className="flex items-start space-x-2 lg:hidden">

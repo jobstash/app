@@ -1,9 +1,10 @@
+import { useRouter } from 'next/router';
+
 import { useModal, useSIWE } from 'connectkit';
 import { useSetAtom } from 'jotai';
 import { useAccount } from 'wagmi';
 
 import { CHECK_WALLET_ROLES, CheckWalletRole } from '@jobstash/auth/core';
-import { openNewTab } from '@jobstash/shared/utils';
 
 import { bypassDevSignupAtom, useAuthContext } from '@jobstash/auth/state';
 import { useSendJobApplyInteractionMutation } from '@jobstash/jobs/state';
@@ -52,6 +53,7 @@ export const useCryptoNativeJobCTA = (props: Props) => {
   const isDisabled =
     isLoadingAuth || isPendingMutation || (!isCryptoNative && !isAnon);
 
+  const router = useRouter();
   const devApplyMutation = () => {
     if (isDev && isCryptoNative) {
       mutateJobApply(jobId, {
@@ -60,7 +62,7 @@ export const useCryptoNativeJobCTA = (props: Props) => {
         },
         onSuccess(data) {
           if (data.success && data.data) {
-            openNewTab(data.data);
+            router.push(data.data);
           }
         },
       });
@@ -80,5 +82,12 @@ export const useCryptoNativeJobCTA = (props: Props) => {
     <NotEligibleTooltipContent />
   );
 
-  return { isCryptoNative, text, onClick, isDisabled, tooltipContent };
+  return {
+    isCryptoNative,
+    text,
+    onClick,
+    isLoading: isPendingMutation,
+    isDisabled,
+    tooltipContent,
+  };
 };

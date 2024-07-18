@@ -12,12 +12,17 @@ interface Props {
 }
 
 export const CryptoNativeJobCTA = (props: Props) => {
-  const { text, onClick, isDisabled, tooltipContent } =
+  const { text, onClick, isLoading, isDisabled, tooltipContent } =
     useCryptoNativeJobCTA(props);
 
   return (
     <CTATooltip content={tooltipContent}>
-      <RightPanelCta isDisabled={isDisabled} text={text} onClick={onClick} />
+      <RightPanelCta
+        isLoading={isLoading}
+        isDisabled={isDisabled}
+        text={text}
+        onClick={onClick}
+      />
     </CTATooltip>
   );
 };
