@@ -10,12 +10,12 @@ import { notifError, notifSuccess } from '@jobstash/shared/utils';
 import { useMwVersionContext } from '@jobstash/shared/state';
 import { mwFetch } from '@jobstash/shared/data';
 
-const removeAttachedEmail = async (email: string) => {
-  const url = `${MW_URL}/auth/remove-email?email=${email}`;
+const updateMainEmail = async (email: string) => {
+  const url = `${MW_URL}/auth/update-main-email?email=${email}`;
   const options = {
-    method: 'DELETE' as const,
+    method: 'POST' as const,
     responseSchema: mwMessageResponseSchema,
-    sentryLabel: 'removeAttachedEmail',
+    sentryLabel: 'updateMainEmail',
     credentials: 'include' as RequestCredentials,
     mode: 'cors' as RequestMode,
   };
@@ -23,26 +23,20 @@ const removeAttachedEmail = async (email: string) => {
   return mwFetch<MwMessageResponse>(url, options);
 };
 
-export const useRemoveAttachedEmail = () => {
+export const useUpdateMainEmail = (email: string) => {
   const queryClient = useQueryClient();
   const { mwVersion } = useMwVersionContext();
-
   return useMutation({
-    mutationFn: (email: string) => removeAttachedEmail(email),
-    async onSuccess(_data, email) {
+    mutationFn: () => updateMainEmail(email),
+    async onSuccess(_data) {
       notifSuccess({
-        title: 'Email Removed!',
-        message: `${email} has been removed from your account.`,
+        title: 'Main Email Updated!',
+        message: `${email} has been updated as your main email.`,
       });
 
-      await Promise.all([
-        queryClient.invalidateQueries({
-          queryKey: [mwVersion, 'dev-profile-info'],
-        }),
-        queryClient.invalidateQueries({
-          queryKey: [mwVersion, 'check-wallet'],
-        }),
-      ]);
+      await queryClient.invalidateQueries({
+        queryKey: [mwVersion, 'dev-profile-info'],
+      });
     },
     onError(error) {
       notifError({

@@ -17,6 +17,9 @@ importers:
       '@emotion/server':
         specifier: ^11.11.0
         version: 11.11.0
+      '@formkit/auto-animate':
+        specifier: ^0.8.2
+        version: 0.8.2
       '@heroicons/react':
         specifier: ^2.1.1
         version: 2.1.1(react@18.2.0)
@@ -1975,6 +1978,9 @@ packages:
 
   '@formatjs/intl-localematcher@0.5.4':
     resolution: {integrity: sha512-zTwEpWOzZ2CiKcB93BLngUX59hQkuZjT2+SAQEscSm52peDW/getsawMcWF1rGRpMCX6D7nSJA3CzJ8gn13N/g==}
+
+  '@formkit/auto-animate@0.8.2':
+    resolution: {integrity: sha512-SwPWfeRa5veb1hOIBMdzI+73te5puUBHmqqaF1Bu7FjvxlYSz/kJcZKSa9Cg60zL0uRNeJL2SbRxV6Jp6Q1nFQ==}
 
   '@hapi/hoek@9.3.0':
     resolution: {integrity: sha512-/c6rf4UJlmHlC9b5BaNvzAcFv7HZ2QHaV0D4/HNlBdvFnvQq8RI4kYdhyPCl7Xj+oWvTWQ8ujhqS53LIgAe6KQ==}
@@ -14144,6 +14150,8 @@ snapshots:
   '@formatjs/intl-localematcher@0.5.4':
     dependencies:
       tslib: 2.5.2
+
+  '@formkit/auto-animate@0.8.2': {}
 
   '@hapi/hoek@9.3.0': {}
 

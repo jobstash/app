@@ -1,44 +1,84 @@
-import { Button, Tooltip } from '@nextui-org/react';
+import { useMemo } from 'react';
+
+import { EllipsisVerticalIcon } from '@heroicons/react/16/solid';
+import {
+  Button,
+  Dropdown,
+  DropdownItem,
+  DropdownMenu,
+  DropdownTrigger,
+} from '@nextui-org/react';
 
 import { getEmailAvatar } from '@jobstash/profile/utils';
 
-import { useRemoveAttachedEmail } from '@jobstash/profile/state';
+import {
+  useRemoveAttachedEmail,
+  useUpdateMainEmail,
+} from '@jobstash/profile/state';
+
+import { Text } from '@jobstash/shared/ui';
 
 import { AccountText } from './account-text';
 
 interface Props {
   email: string;
+  isMain?: boolean;
+  hasGithub?: boolean;
 }
 
-export const EmailAccountText = ({ email }: Props) => {
-  const { isPending, mutate: detachEmail } = useRemoveAttachedEmail();
+export const EmailAccountText = ({ email, isMain, hasGithub }: Props) => {
+  const { isPending: isPendingDetach, mutate: detachEmail } =
+    useRemoveAttachedEmail();
+  const { isPending: isPendingUpdateMainEmail, mutate: updateMainEmail } =
+    useUpdateMainEmail(email);
+
+  const menuItems = useMemo(() => {
+    const items: { label: string; onClick: () => void }[] = [];
+
+    if (!isMain) {
+      items.push({
+        label: 'Set as Main Account',
+        onClick: updateMainEmail,
+      });
+    }
+
+    items.push({
+      label: 'Detach Email',
+      onClick: () => detachEmail(email),
+    });
+
+    return items;
+  }, [detachEmail, email, isMain, updateMainEmail]);
+
+  // TODO: If there's one email left, allow detach email only if has github
+
+  const isLoading = isPendingDetach || isPendingUpdateMainEmail;
 
   return (
-    <div className="flex items-center w-full justify-between">
-      <AccountText text={email} avatar={getEmailAvatar(email)} />
-      <Tooltip content="Detach Email">
-        <Button
-          isIconOnly
-          size="sm"
-          isLoading={isPending}
-          onClick={() => detachEmail(email)}
-        >
-          <svg
-            strokeWidth={1.5}
-            stroke="currentColor"
-            viewBox="0 0 24 24"
-            xmlns="http://www.w3.org/2000/svg"
-            aria-hidden="true"
-            className="w-5 h-5"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              d="m14.74 9-.346 9m-4.788 0L9.26 9m9.968-3.21c.342.052.682.107 1.022.166m-1.022-.165L18.16 19.673a2.25 2.25 0 0 1-2.244 2.077H8.084a2.25 2.25 0 0 1-2.244-2.077L4.772 5.79m14.456 0a48.108 48.108 0 0 0-3.478-.397m-12 .562c.34-.059.68-.114 1.022-.165m0 0a48.11 48.11 0 0 1 3.478-.397m7.5 0v-.916c0-1.18-.91-2.164-2.09-2.201a51.964 51.964 0 0 0-3.32 0c-1.18.037-2.09 1.022-2.09 2.201v.916m7.5 0a48.667 48.667 0 0 0-7.5 0"
-            />
-          </svg>
-        </Button>
-      </Tooltip>
+    <div className="flex items-center w-full justify-between h-10">
+      <AccountText
+        text={email}
+        avatar={getEmailAvatar(email)}
+        subText={
+          isMain ? (
+            <Text className="text-sm text-white/70">Main Account</Text>
+          ) : null
+        }
+      />
+      <Dropdown placement="bottom-end">
+        <DropdownTrigger>
+          <Button isIconOnly size="sm" isLoading={isLoading} variant="light">
+            <EllipsisVerticalIcon className="w-6 h-6 stroke-1 fill-white/50" />
+          </Button>
+        </DropdownTrigger>
+        <DropdownMenu aria-label="Email Actions">
+          {menuItems.map(({ label, onClick }) => (
+            <DropdownItem key={label} onClick={onClick}>
+              {label}
+            </DropdownItem>
+          ))}
+        </DropdownMenu>
+      </Dropdown>
     </div>
   );
 };
