@@ -1,10 +1,11 @@
-import { useRouter } from 'next/router';
+import { useState } from 'react';
 
 import { useModal, useSIWE } from 'connectkit';
 import { useSetAtom } from 'jotai';
 import { useAccount } from 'wagmi';
 
 import { CHECK_WALLET_ROLES, CheckWalletRole } from '@jobstash/auth/core';
+import { notifLoading, notifSuccess } from '@jobstash/shared/utils';
 
 import { bypassDevSignupAtom, useAuthContext } from '@jobstash/auth/state';
 import { useSendJobApplyInteractionMutation } from '@jobstash/jobs/state';
@@ -14,8 +15,12 @@ import { EligibleTooltipContent } from './eligible-tooltip-content';
 import { NotEligibleTooltipContent } from './not-eligible-tooltip-content';
 
 const ANON_TEXT = 'Check Fast Track Access';
-const ELIGIBLE_TEXT = 'Elite Fast Track Apply';
+const ELIGIBLE_TEXT = 'Get Elite Fast Track Access';
 const NOT_ELIGIBLE_TEXT = 'Not eligible for Elite Fast Track';
+const TOAST_ID = 'crypto-native-job-cta';
+const LOADING_MESSAGE = 'We are curating your profile. Please wait!';
+const SUCCESS_TITLE = 'You have been curated!';
+const SUCCESS_MESSAGE = 'You can now apply to this job.';
 
 interface Props {
   jobId: string;
@@ -53,16 +58,26 @@ export const useCryptoNativeJobCTA = (props: Props) => {
   const isDisabled =
     isLoadingAuth || isPendingMutation || (!isCryptoNative && !isAnon);
 
-  const router = useRouter();
+  const [link, setLink] = useState('');
   const devApplyMutation = () => {
     if (isDev && isCryptoNative) {
+      notifLoading({
+        id: TOAST_ID,
+        title: ELIGIBLE_TEXT,
+        message: LOADING_MESSAGE,
+      });
       mutateJobApply(jobId, {
         onError(error, variables, context) {
           console.log({ error, variables, context });
         },
         onSuccess(data) {
+          notifSuccess({
+            id: TOAST_ID,
+            title: SUCCESS_TITLE,
+            message: SUCCESS_MESSAGE,
+          });
           if (data.success && data.data) {
-            router.push(data.data);
+            setLink(data.data);
           }
         },
       });
@@ -83,6 +98,7 @@ export const useCryptoNativeJobCTA = (props: Props) => {
   );
 
   return {
+    link,
     isCryptoNative,
     text,
     onClick,

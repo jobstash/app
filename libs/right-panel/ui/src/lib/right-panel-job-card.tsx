@@ -102,6 +102,7 @@ const RightPanelJobCard = ({
           {!url && access === 'protected' && (
             <div className="flex flex-col md:flex-row gap-4">
               <CryptoNativeJobCTA
+                key={shortUUID}
                 jobId={shortUUID}
                 sendAnalyticsEvent={sendAnalyticsEvent}
               />

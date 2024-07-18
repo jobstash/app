@@ -1,4 +1,6 @@
 /* eslint-disable react/no-unused-prop-types */
+import { Button, Link } from '@nextui-org/react';
+
 import { CheckWalletRole } from '@jobstash/auth/core';
 
 import RightPanelCta from '../right-panel-cta';
@@ -12,8 +14,23 @@ interface Props {
 }
 
 export const CryptoNativeJobCTA = (props: Props) => {
-  const { text, onClick, isLoading, isDisabled, tooltipContent } =
+  const { link, text, onClick, isLoading, isDisabled, tooltipContent } =
     useCryptoNativeJobCTA(props);
+
+  if (link) {
+    return (
+      <Button
+        as={Link}
+        href={link}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="bg-gradient-to-l from-primary to-tertiary"
+        radius="sm"
+      >
+        Elite Fast Track Apply
+      </Button>
+    );
+  }
 
   return (
     <CTATooltip content={tooltipContent}>
