@@ -65,7 +65,6 @@ const OrgsRightPanel = ({ orgId, currentTab, hasTitle }: Props) => {
       {currentTab === TAB_SEGMENT.jobs && (
         <RightPanelOrgJobCards
           orgName={orgDetails.name}
-          orgNormalizedName={orgDetails.normalizedName}
           orgJobs={orgDetails.jobs}
         />
       )}

@@ -12,19 +12,20 @@ import RightPanelJobCardSets from './right-panel-job-card-sets';
 
 interface Props {
   orgName: string;
-  orgNormalizedName: string;
   orgJob: OrgJob;
   bookmarkButton: React.ReactNode;
 }
 
 const RightPanelOrgJobCard = (props: Props) => {
-  const { orgName, orgNormalizedName, orgJob, bookmarkButton } = props;
+  const { orgName, orgJob, bookmarkButton } = props;
   const { title, shortUUID, summary } = orgJob;
 
   const onClickExploreJob = () => {
-    const link = `/jobs/${slugify(
-      `${orgName} ${title}`,
-    )}-${shortUUID}/details?organizations=${orgNormalizedName}`;
+    const link = encodeURI(
+      `/jobs/${slugify(
+        `${orgName} ${title}`,
+      )}-${shortUUID}/details?organizations=${orgName.toLowerCase()}`,
+    );
     if (typeof window !== 'undefined') {
       window.location.href = link;
     }
