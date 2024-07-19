@@ -24,12 +24,14 @@ import { WhiteGloveCTA } from './white-glove-cta';
 
 interface Props {
   orgName: string;
+  orgNormalizedName: string;
   jobInfo: JobInfo & { organization: { hasUser?: boolean } };
   tags: Tag[];
   showExploreJob?: boolean;
 }
 
 const RightPanelJobCard = ({
+  orgNormalizedName,
   orgName,
   jobInfo,
   tags,
@@ -45,7 +47,9 @@ const RightPanelJobCard = ({
   } = jobInfo;
 
   const onClickExploreJob = () => {
-    const link = `/jobs/${slugify(`${orgName} ${title}`)}-${shortUUID}/details`;
+    const link = `/jobs/${slugify(
+      `${orgName} ${title}`,
+    )}-${shortUUID}/details?organizations=${orgNormalizedName}`;
     if (typeof window !== 'undefined') {
       window.location.href = link;
     }

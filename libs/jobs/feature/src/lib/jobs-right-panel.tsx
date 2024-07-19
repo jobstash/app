@@ -54,7 +54,7 @@ const JobsRightPanel = ({ jobPost, currentTab, routeSection }: Props) => {
   }
 
   const { id, organization, tags } = jobPost;
-  const { projects } = organization;
+  const { projects, name: orgName, normalizedName } = organization;
 
   const hasProject = projects.length > 0;
 
@@ -88,7 +88,8 @@ const JobsRightPanel = ({ jobPost, currentTab, routeSection }: Props) => {
     >
       {currentTab === TAB_SEGMENT.details && (
         <RightPanelJobCard
-          orgName={organization.name}
+          orgName={orgName}
+          orgNormalizedName={normalizedName}
           jobInfo={jobPost}
           tags={tags}
           showExploreJob={false}
@@ -111,7 +112,11 @@ const JobsRightPanel = ({ jobPost, currentTab, routeSection }: Props) => {
       )}
 
       {orgDetails && currentTab === TAB_SEGMENT.otherJobs && (
-        <RightPanelOrgJobCards orgName={orgDetails.name} orgJobs={orgJobs} />
+        <RightPanelOrgJobCards
+          orgName={orgDetails.name}
+          orgNormalizedName={normalizedName}
+          orgJobs={orgJobs}
+        />
       )}
     </RightPanel>
   );

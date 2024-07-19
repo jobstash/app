@@ -9,10 +9,15 @@ import RightPanelOrgJobCard from './right-panel-org-job-card';
 
 interface Props {
   orgName: string;
+  orgNormalizedName: string;
   orgJobs: OrgJob[];
 }
 
-const RightPanelOrgJobCards = ({ orgName, orgJobs }: Props) => {
+const RightPanelOrgJobCards = ({
+  orgName,
+  orgNormalizedName,
+  orgJobs,
+}: Props) => {
   const { isLoading, bookmarkedJobs, isFetching } = useJobBookmarks();
 
   if (orgJobs.length === 0) return null;
@@ -23,6 +28,7 @@ const RightPanelOrgJobCards = ({ orgName, orgJobs }: Props) => {
         <RightPanelOrgJobCard
           key={orgJob.id}
           orgName={orgName}
+          orgNormalizedName={orgNormalizedName}
           orgJob={orgJob}
           bookmarkButton={
             <RightPanelOrgJobBookmarkButton

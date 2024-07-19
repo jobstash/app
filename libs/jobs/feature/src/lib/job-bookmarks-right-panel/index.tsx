@@ -24,7 +24,7 @@ interface Props {
 
 const JobBookmarksRightPanel = ({ jobPost, onClickBack }: Props) => {
   const { organization, tags } = jobPost;
-  const { projects } = organization;
+  const { projects, name: orgName, normalizedName } = organization;
 
   const projectId = projects[0]?.id;
   const { data: competitors, isLoading: isLoadingCompetitors } =
@@ -47,7 +47,8 @@ const JobBookmarksRightPanel = ({ jobPost, onClickBack }: Props) => {
     >
       {currentTab === TAB_SEGMENT.details && (
         <RightPanelJobCard
-          orgName={organization.name}
+          orgName={orgName}
+          orgNormalizedName={normalizedName}
           jobInfo={jobPost}
           tags={tags}
           showExploreJob={false}
