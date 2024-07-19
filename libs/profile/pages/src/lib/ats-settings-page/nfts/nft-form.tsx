@@ -137,10 +137,11 @@ export const NFTForm = ({ isPending, nft, save, remove }: Props) => {
           isInvalid={
             (!isValidAddress || !isValidNft) &&
             !isPendingForm &&
-            Boolean(formState.contractAddress)
+            Boolean(formState.contractAddress) &&
+            Boolean(formState.network)
           }
           errorMessage={
-            isPendingForm || !formState.contractAddress
+            isPendingForm || !formState.contractAddress || !formState.network
               ? undefined
               : isValidNft
               ? isValidAddress
