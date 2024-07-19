@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { type ReactNode, useEffect, useMemo, useRef } from 'react';
 
-import { useSIWE } from 'connectkit';
+import { useModal, useSIWE } from 'connectkit';
 
 import {
   CHECK_WALLET_FLOWS,
@@ -25,6 +25,7 @@ export const AuthProvider = ({ children, screenLoader }: Props) => {
   const { push, asPath, pathname } = useRouter();
   const isMounted = useIsMounted();
   const { isReady } = useMwVersionContext();
+  const { setOpen } = useModal();
 
   const {
     data: checkWalletData,
@@ -61,6 +62,7 @@ export const AuthProvider = ({ children, screenLoader }: Props) => {
       isSignedIn,
       isFetching,
       refetch: () => refetch(),
+      showModal: (show: boolean) => setOpen(show),
     }),
     [
       checkWalletData?.role,
@@ -72,6 +74,7 @@ export const AuthProvider = ({ children, screenLoader }: Props) => {
       isSignedIn,
       isFetching,
       refetch,
+      setOpen,
     ],
   );
 
