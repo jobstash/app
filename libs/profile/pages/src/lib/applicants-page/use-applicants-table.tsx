@@ -36,7 +36,7 @@ export const useApplicantsTable = (orgId: string) => {
   const gridRef = useRef<AgGridReact>(null);
 
   const getRowId: GetRowIdFunc<JobApplicant> = useCallback(
-    ({ data: { user } }) => user.wallet,
+    ({ data: { user, job } }) => `${user.wallet}-${job.shortUUID}`,
     [],
   );
 
