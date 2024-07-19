@@ -31,7 +31,7 @@ interface Props {
 }
 
 export const useIsValidNft = ({ address, chainId, enabled }: Props) => {
-  const { isSuccess: isSuccess721, isPending: isPending721 } = useReadContract({
+  const { isSuccess: isSuccess721, isLoading: isLoading721 } = useReadContract({
     address,
     abi: ABI,
     functionName: FUNCTION_NAME,
@@ -42,7 +42,7 @@ export const useIsValidNft = ({ address, chainId, enabled }: Props) => {
     },
   });
 
-  const { isSuccess: isSuccess1155, isPending: isPending1155 } =
+  const { isSuccess: isSuccess1155, isLoading: isLoading1155 } =
     useReadContract({
       address,
       abi: ABI,
@@ -55,7 +55,7 @@ export const useIsValidNft = ({ address, chainId, enabled }: Props) => {
     });
 
   return {
-    isPending: (isPending721 || isPending1155) && Boolean(chainId),
+    isLoading: (isLoading721 || isLoading1155) && Boolean(chainId),
     isValid: isSuccess721 || isSuccess1155,
   };
 };

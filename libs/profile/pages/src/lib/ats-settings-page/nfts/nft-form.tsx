@@ -85,14 +85,14 @@ export const NFTForm = ({ isPending, nft, save, remove }: Props) => {
   ].includes(true);
 
   // Add hook to check for valid nft
-  const { isPending: isPendingNftValidation, isValid: isValidNft } =
+  const { isLoading: isLoadingNftValidation, isValid: isValidNft } =
     useIsValidNft({
       address: debouncedAddress as `0x${string}`,
       chainId: chainId!,
       enabled: Boolean(chainId),
     });
 
-  const isPendingForm = isPending || isPendingNftValidation;
+  const isPendingForm = isPending || isLoadingNftValidation;
 
   return (
     <Card className="max-w-sm p-4">
