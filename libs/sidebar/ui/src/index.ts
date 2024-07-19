@@ -1,6 +1,7 @@
 export { default as Brand } from './lib/brand';
 export { default as HeaderLink } from './lib/header-link';
 export { default as JobsSidebarIcon } from './lib/jobs-sidebar-icon';
+export * from './lib/join-talent-pool';
 export { default as MobileMenuButton } from './lib/mobile-menu-button';
 export { default as MobileNavbarWrapper } from './lib/mobile-navbar-wrapper';
 export { default as SidebarBookmarksSection } from './lib/sidebar-bookmarks-section';

@@ -3,7 +3,6 @@ import { Spinner } from '@nextui-org/spinner';
 
 import { CheckWalletRole } from '@jobstash/auth/core';
 
-import { AnonSignupButton } from './anon-signup-button';
 import { DirectApplyButton } from './direct-apply-button';
 import { OneClickApplyButton } from './one-click-apply-button';
 import { useRightPanelJobCTA } from './use-right-panel-job-cta';
@@ -46,19 +45,7 @@ export const RightPanelJobCTA = (props: Props) => {
 
   return (
     <div className="h-[40px] flex justify-center gap-4">
-      {isLoading ? (
-        <Loading />
-      ) : (
-        <>
-          <AnonSignupButton
-            isAnon={isAnon}
-            isOneClick={isOneClick}
-            sendAnalyticsEvent={sendAnalytics}
-            openModalIfAnon={openModalIfAnon}
-          />
-          {applyButton}
-        </>
-      )}
+      {isLoading ? <Loading /> : applyButton}
     </div>
   );
 };

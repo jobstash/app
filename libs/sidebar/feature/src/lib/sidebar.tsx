@@ -1,9 +1,7 @@
 import dynamic from 'next/dynamic';
-import { memo } from 'react';
 
 import {
   DUCK_TELEGRAM_URL,
-  ORG_SIGNUP_FORM_URL,
   RouteSection,
   TELEGRAM_URL,
 } from '@jobstash/shared/core';
@@ -19,6 +17,7 @@ import {
 import {
   Brand,
   HeaderLink,
+  JoinTalentPool,
   MobileMenuButton,
   MobileNavbarWrapper,
   SidebarBookmarksSection,
@@ -33,7 +32,6 @@ const Filters = dynamic(() =>
   import('@jobstash/filters/feature').then((m) => m.Filters),
 );
 
-const GET_LISTED_TEXT = 'Get Listed';
 const GET_HELP_TEXT = 'Get Help';
 const SUBSCRIBE_TG_TEXT = 'Subscribe on TG';
 interface Props {
@@ -78,7 +76,7 @@ const Sidebar = ({ filtersRouteSection }: Props) => (
         </div>
         {filtersRouteSection && <Filters routeSection={filtersRouteSection} />}
         <div className="hidden space-x-6 lg:flex items-center lg:mr-0 lg:ml-auto lg:pr-4">
-          <HeaderLink text={GET_LISTED_TEXT} link={ORG_SIGNUP_FORM_URL} />
+          <JoinTalentPool />
           <HeaderLink text={GET_HELP_TEXT} link={DUCK_TELEGRAM_URL} />
           <HeaderLink text={SUBSCRIBE_TG_TEXT} link={TELEGRAM_URL} />
           <ConnectWalletButton />
@@ -136,11 +134,7 @@ const Sidebar = ({ filtersRouteSection }: Props) => (
 
         {/* MOBILE BOTTOM BARTABS */}
         <div className="inset-x-0 bottom-0 space-y-4 p-4 lg:relative lg:hidden flex flex-col">
-          <HeaderLink
-            isMobile
-            text={GET_LISTED_TEXT}
-            link={ORG_SIGNUP_FORM_URL}
-          />
+          <JoinTalentPool isMobile />
           <HeaderLink isMobile text={GET_HELP_TEXT} link={DUCK_TELEGRAM_URL} />
           <HeaderLink isMobile text={SUBSCRIBE_TG_TEXT} link={TELEGRAM_URL} />
 
@@ -170,7 +164,7 @@ const Sidebar = ({ filtersRouteSection }: Props) => (
   </SidebarProvider>
 );
 
-export default memo(Sidebar);
+export default Sidebar;
 
 const TelegramIcon = () => (
   <svg
