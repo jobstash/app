@@ -148,6 +148,7 @@ export const jobApplicantSchema = myzod.object({
   oss: myzod.boolean(),
   interviewed: myzod.boolean(),
   cryptoNative: myzod.boolean(),
+  cryptoAdjacent: myzod.boolean(),
   upcomingTalent: myzod.boolean(),
   ecosystemActivations: myzod.array(myzod.string()),
   note: myzod.string().nullable(),
