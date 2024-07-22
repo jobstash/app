@@ -22,7 +22,7 @@ const FiltersItemsCount = () => {
     <Text
       className="inline-block whitespace-nowrap"
       color="dimmed"
-    >{`${capitalize(text)} Found: ${filteredItemsCount}`}</Text>
+    >{`Live ${capitalize(text)}: ${filteredItemsCount}`}</Text>
   );
 };
 

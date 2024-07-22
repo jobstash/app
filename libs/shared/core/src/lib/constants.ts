@@ -96,7 +96,7 @@ export const featuredGradientBorderStyle: React.CSSProperties = {
   background:
     'linear-gradient(90deg, #1e1e1e, #1e1e1e) padding-box, linear-gradient(270deg, #D68800, #8743FF) border-box',
   border: '3px solid transparent',
-  borderRadius: '1.5rem',
+  borderRadius: '1.7em',
   boxSizing: 'border-box',
   backgroundSize: '400% 400%',
   cursor: 'pointer',
