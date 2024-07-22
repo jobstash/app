@@ -62,7 +62,7 @@ const JobList = ({
             routeSection={routeSection}
           />
         )}
-        <div className="flex h-full w-full items-center justify-center pt-12">
+        <div className="flex items-center justify-center w-full h-full pt-12">
           <Loader />
         </div>
       </div>
@@ -71,14 +71,12 @@ const JobList = ({
 
   if (jobPosts.length === 0 && !error) {
     return (
-      <div className="py-8">
-        <JobListEmptyResult prevLink={jobsPrevLink} push={push} />
-      </div>
+      <JobListEmptyResult prevLink={jobsPrevLink} push={push} />
     );
   }
 
   return (
-    <div className="flex flex-col gap-y-4 lg:gap-y-8 pb-4">
+    <div className="flex flex-col pb-4 gap-y-4 lg:gap-y-8">
       {jobPosts.map((jobPost) => (
         <JobCard
           key={jobPost.shortUUID}
