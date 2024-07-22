@@ -32,8 +32,8 @@ const Filters = dynamic(() =>
   import('@jobstash/filters/feature').then((m) => m.Filters),
 );
 
-const GET_HELP_TEXT = 'Get Help';
-const SUBSCRIBE_TG_TEXT = 'Subscribe on TG';
+const GET_HELP_TEXT = 'Help';
+const SUBSCRIBE_TG_TEXT = 'TG Job Feed';
 interface Props {
   filtersRouteSection?: RouteSection;
 }
@@ -51,7 +51,7 @@ const Sidebar = ({ filtersRouteSection }: Props) => (
               href="https://telegram.me/jobstashxyz"
               target="_blank"
               rel="noreferrer"
-              className="hover:opacity-50 transition-all"
+              className="transition-all hover:opacity-50"
             >
               <TelegramIcon />
             </a>
@@ -60,7 +60,7 @@ const Sidebar = ({ filtersRouteSection }: Props) => (
               href="https://twitter.com/jobstash_xyz"
               target="_blank"
               rel="noreferrer"
-              className="hover:opacity-50 transition-all"
+              className="transition-all hover:opacity-50"
             >
               <TwitterIcon />
             </a>
@@ -68,17 +68,17 @@ const Sidebar = ({ filtersRouteSection }: Props) => (
               href="https://warpcast.com/~/channel/jobstash"
               target="_blank"
               rel="noreferrer"
-              className="hover:opacity-50 transition-all"
+              className="transition-all hover:opacity-50"
             >
               <FarcasterIcon />
             </a>
           </div>
         </div>
         {filtersRouteSection && <Filters routeSection={filtersRouteSection} />}
-        <div className="hidden space-x-6 lg:flex items-center lg:mr-0 lg:ml-auto lg:pr-4">
+        <div className="items-center hidden space-x-6 lg:flex lg:mr-0 lg:ml-auto lg:pr-4">
           <JoinTalentPool />
-          <HeaderLink text={GET_HELP_TEXT} link={DUCK_TELEGRAM_URL} />
           <HeaderLink text={SUBSCRIBE_TG_TEXT} link={TELEGRAM_URL} />
+          <HeaderLink text={GET_HELP_TEXT} link={DUCK_TELEGRAM_URL} />
           <ConnectWalletButton />
         </div>
       </div>
@@ -90,12 +90,12 @@ const Sidebar = ({ filtersRouteSection }: Props) => (
             <CloseIcon />
           </SidebarCloseButton>
         </div>
-        <div className="gap-x-7 flex -mt-2">
+        <div className="flex -mt-2 gap-x-7">
           <a
             href="https://telegram.me/jobstashxyz"
             target="_blank"
             rel="noreferrer"
-            className="hover:opacity-50 transition-all"
+            className="transition-all hover:opacity-50"
           >
             <TelegramIcon />
           </a>
@@ -104,7 +104,7 @@ const Sidebar = ({ filtersRouteSection }: Props) => (
             href="https://twitter.com/jobstash_xyz"
             target="_blank"
             rel="noreferrer"
-            className="hover:opacity-50 transition-all"
+            className="transition-all hover:opacity-50"
           >
             <TwitterIcon />
           </a>
@@ -112,7 +112,7 @@ const Sidebar = ({ filtersRouteSection }: Props) => (
             href="https://warpcast.com/~/channel/jobstash"
             target="_blank"
             rel="noreferrer"
-            className="hover:opacity-50 transition-all"
+            className="transition-all hover:opacity-50"
           >
             <FarcasterIcon />
           </a>
@@ -133,7 +133,7 @@ const Sidebar = ({ filtersRouteSection }: Props) => (
         <div className="grow" />
 
         {/* MOBILE BOTTOM BARTABS */}
-        <div className="inset-x-0 bottom-0 space-y-4 p-4 lg:relative lg:hidden flex flex-col">
+        <div className="inset-x-0 bottom-0 flex flex-col p-4 space-y-4 lg:relative lg:hidden">
           <JoinTalentPool isMobile />
           <HeaderLink isMobile text={GET_HELP_TEXT} link={DUCK_TELEGRAM_URL} />
           <HeaderLink isMobile text={SUBSCRIBE_TG_TEXT} link={TELEGRAM_URL} />
@@ -141,14 +141,14 @@ const Sidebar = ({ filtersRouteSection }: Props) => (
           <ConnectWalletButton isMobile />
         </div>
       </MobileNavbarWrapper>
-      <div className="-mr-4 ml-auto lg:hidden">
+      <div className="ml-auto -mr-4 lg:hidden">
         <MobileMenuButton>
           <HamburgerIcon />
         </MobileMenuButton>
       </div>
 
       {/* DESKTOP BARTABS */}
-      <div className="mt-24 hidden lg:flex flex-col space-y-6">
+      <div className="flex-col hidden mt-24 space-y-6 lg:flex">
         <div className="flex-col">
           <Text color="dimmed">Discover</Text>
           <SidebarDiscoverBartabs />

@@ -28,7 +28,7 @@ const SearchFilter = () => {
         size="lg"
         rightSectionWidth={140}
         rightSection={
-          <div className="hidden items-center gap-x-2 lg:flex">
+          <div className="items-center hidden gap-x-2 lg:flex">
             {/* <Button isIcon isDisabled={isLoading} onClick={clearSearch}>
               <CloseIcon />
             </Button> */}
