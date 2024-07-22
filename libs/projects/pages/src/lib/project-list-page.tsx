@@ -43,7 +43,7 @@ export const ProjectListPage = ({ initActiveProject }: Props) => {
         <SideBar filtersRouteSection={ROUTE_SECTION.PROJECTS} />
 
         <div
-          className={cn('px-3.5 pt-[212px] lg:px-8 lg:pt-8 lg:pr-[calc(44vw)]')}
+          className={cn('px-3.5 pt-[292px] lg:px-8 lg:pt-8 lg:pr-[calc(44vw)]')}
         >
           {/* <div
             className={cn({

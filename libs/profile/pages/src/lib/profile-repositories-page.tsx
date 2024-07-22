@@ -30,7 +30,7 @@ export const ProfileRepositoriesPage = () => {
         <PageWrapper>
           <SideBar />
 
-          <div className="px-3.5 pt-[212px] lg:px-12 lg:pt-6 lg:pr-[calc(44vw)]   flex flex-col gap-6">
+          <div className="px-3.5 pt-[292px] lg:px-12 lg:pt-6 lg:pr-[calc(44vw)]   flex flex-col gap-6">
             <ProfileHeader gotItCard={null} gotItCardKey={null} />
             <ProfileRepoSubHeader />
             <ProfileRepoGotItCard />

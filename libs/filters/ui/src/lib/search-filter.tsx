@@ -8,6 +8,8 @@ import { useFiltersContext } from '@jobstash/filters/state';
 
 import { Button, CloseIcon, SearchInputIcon } from '@jobstash/shared/ui';
 
+import { roboto } from '@jobstash/shared/core';
+
 const SearchFilter = () => {
   const {
     state,
@@ -21,38 +23,41 @@ const SearchFilter = () => {
   const searchQuery = state?.filterValues?.query;
 
   return (
-    <form onSubmit={onSubmitSearch}>
-      <TextInput
-        icon={<SearchInputIcon />}
-        placeholder={`Search ${capitalize(routeSection.slice(1))}`}
-        size="lg"
-        rightSectionWidth={140}
-        rightSection={
-          <div className="hidden items-center gap-x-2 lg:flex">
-            {/* <Button isIcon isDisabled={isLoading} onClick={clearSearch}>
-              <CloseIcon />
-            </Button> */}
-            <Button type="submit" isDisabled={isLoading}>
-              Search
-            </Button>
-          </div>
-        }
-        value={searchQuery ?? ''}
-        disabled={isLoading}
-        radius="md"
-        styles={{
-          input: {
-            background: 'rgba(255, 255, 255, 0.1)',
-            fontSize: 16,
-            border: 'transparent',
-          },
-        }}
-        classNames={{
-          input: 'py-7 bg-white/10',
-        }}
-        onChange={onChangeSearch}
-      />
-    </form>
+    <div className='pb-4 border-b border-white'>
+      <h2 className={`${roboto.variable} font-roboto antialiased mt-20 text-[40px] md:text-[56px] leading-10 text-white mb-8 font-medium`}>Explore</h2>
+      <form onSubmit={onSubmitSearch}>
+        <TextInput
+          icon={<SearchInputIcon />}
+          placeholder={routeSection === '/jobs' as string ? 'Discover exciting job opportunities.' : `Search ${capitalize(routeSection.slice(1))}`}
+          size="25px"
+          rightSectionWidth={0}
+          rightSection={
+            <div className="items-center hidden lg:flex">
+              {/* <Button isIcon isDisabled={isLoading} onClick={clearSearch}>
+                <CloseIcon />
+              </Button> */}
+              <Button type="submit" isDisabled={isLoading}>
+                Search
+              </Button>
+            </div>
+          }
+          value={searchQuery ?? ''}
+          disabled={isLoading}
+          radius="md"
+          styles={{
+            input: {
+              // background: 'rgba(255, 255, 255, 0.1)',
+              // fontSize: 16,
+              border: 'transparent',
+            },
+          }}
+          classNames={{
+            input: `bg-transparent text-[18px] text-white !pl-10 ${roboto.variable} font-roboto placeholder:text-white md:text-[20px]`,
+          }}
+          onChange={onChangeSearch}
+        />
+      </form>
+    </div>
   );
 };
 

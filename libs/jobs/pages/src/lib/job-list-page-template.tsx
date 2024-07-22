@@ -53,7 +53,7 @@ export const JobListPageTemplate: React.FC<JobsPageTemplateProps> = ({
         <SideBar filtersRouteSection={routeSection} />
 
         <div
-          className={cn('px-3.5 pt-[212px] lg:px-8 lg:pt-8 lg:pr-[calc(44vw)]')}
+          className={cn('px-3.5 pt-[292px] lg:px-8 lg:pt-8 lg:pr-[calc(44vw)]')}
         >
           <JobList
             initJob={null}

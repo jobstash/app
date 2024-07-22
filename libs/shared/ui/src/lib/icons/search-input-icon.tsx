@@ -1,20 +1,10 @@
 import { memo } from 'react';
 
 const SearchInputIcon = () => (
-  <svg
-    xmlns="http://www.w3.org/2000/svg"
-    fill="none"
-    viewBox="0 0 24 24"
-    strokeWidth={1.5}
-    stroke="currentColor"
-    className="h-6 w-6"
-  >
-    <path
-      strokeLinecap="round"
-      strokeLinejoin="round"
-      d="M21 21l-5.197-5.197m0 0A7.5 7.5 0 105.196 5.196a7.5 7.5 0 0010.607 10.607z"
-    />
+  <svg width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M11.6943 0C5.23572 0 0 5.12005 0 11.436C0 17.7519 5.23572 22.8719 11.6943 22.8719C14.4566 22.8719 16.9952 21.9353 18.9962 20.3692L22.7968 24.0762L22.8979 24.1613C23.2509 24.4167 23.7512 24.3876 24.0705 24.0745C24.4217 23.7301 24.421 23.1725 24.0688 22.829L20.3129 19.1656C22.2228 17.1302 23.3886 14.4162 23.3886 11.436C23.3886 5.12005 18.1529 0 11.6943 0ZM11.7161 2.40329C16.8593 2.40329 21.0288 6.43826 21.0288 11.4156C21.0288 16.393 16.8593 20.428 11.7161 20.428C6.57276 20.428 2.40329 16.393 2.40329 11.4156C2.40329 6.43826 6.57276 2.40329 11.7161 2.40329Z" fill="white"/>
   </svg>
+  
 );
 
 export default memo(SearchInputIcon);

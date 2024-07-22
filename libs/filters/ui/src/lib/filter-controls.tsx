@@ -7,7 +7,7 @@ const FilterControls = () => (
   <div className="flex flex-wrap items-center justify-between gap-x-6 gap-y-2">
     <FiltersToggleButton />
     {/* <DesktopSortFilters /> */}
-    <FiltersItemsCount />
+    {/* <FiltersItemsCount /> */}
   </div>
 );
 

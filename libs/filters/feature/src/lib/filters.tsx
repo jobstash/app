@@ -28,7 +28,7 @@ const Filters = ({ routeSection }: Props) => {
     <FiltersContext.Provider value={value}>
       <FiltersWrapper>
         <SearchFilter />
-        <FilterControls />
+        {/* <FilterControls /> */}
         <FilterContents />
       </FiltersWrapper>
       <FullscreenrenFilterModal />
