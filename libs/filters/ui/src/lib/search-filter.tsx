@@ -26,7 +26,7 @@ const SearchFilter = () => {
         <TextInput
           icon={<SearchInputIcon />}
           placeholder={`Search ${capitalize(routeSection.slice(1))}`}
-          size="25"
+          size="25px"
           value={searchQuery ?? ''}
           disabled={isLoading}
           radius="md"
@@ -38,7 +38,7 @@ const SearchFilter = () => {
             },
           }}
           classNames={{
-            input: 'pl-10 bg-transparent text-white placeholder:text-white',
+            input: '!pl-10 !pr-0 !bg-transparent text-white placeholder:text-white',
           }}
           onChange={onChangeSearch}
         />
