@@ -1,4 +1,4 @@
-import { memo } from 'react';
+import { memo, useMemo } from 'react';
 
 import { TextInput } from '@mantine/core';
 
@@ -6,29 +6,27 @@ import { capitalize } from '@jobstash/shared/utils';
 
 import { useFiltersContext } from '@jobstash/filters/state';
 
-import { Button, CloseIcon, SearchInputIcon } from '@jobstash/shared/ui';
+import { SearchInputIcon } from '@jobstash/shared/ui';
 
 const SearchFilter = () => {
-  const {
-    state,
-    isLoading,
-    onSubmitSearch,
-    clearSearch,
-    onChangeSearch,
-    routeSection,
-  } = useFiltersContext();
+  const { state, onSubmitSearch, onChangeSearch, routeSection } =
+    useFiltersContext();
+
+  const rawQuery = useMemo(() => {
+    const params = new URLSearchParams(window.location.search);
+    return params.get('query');
+  }, []);
 
   const searchQuery = state?.filterValues?.query;
 
   return (
-    <div className='py-4 border-b border-white lg:border-transparent'>
+    <div className="py-4 border-b border-white lg:border-transparent">
       <form onSubmit={onSubmitSearch}>
         <TextInput
           icon={<SearchInputIcon />}
           placeholder={`Search ${capitalize(routeSection.slice(1))}`}
           size="25px"
-          value={searchQuery ?? ''}
-          disabled={isLoading}
+          value={searchQuery ?? rawQuery ?? ''}
           radius="md"
           styles={{
             input: {
@@ -38,7 +36,8 @@ const SearchFilter = () => {
             },
           }}
           classNames={{
-            input: '!pl-10 !pr-0 !bg-transparent text-white placeholder:text-white',
+            input:
+              '!pl-10 !pr-0 !bg-transparent text-white placeholder:text-white',
           }}
           onChange={onChangeSearch}
         />
