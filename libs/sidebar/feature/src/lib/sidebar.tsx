@@ -141,7 +141,8 @@ const Sidebar = ({ filtersRouteSection }: Props) => (
           <ConnectWalletButton isMobile />
         </div>
       </MobileNavbarWrapper>
-      <div className="ml-auto -mr-4 lg:hidden">
+      <div className="flex ml-auto -mr-4 lg:hidden">
+        <ConnectWalletButton isHeaderMobile />
         <MobileMenuButton>
           <HamburgerIcon />
         </MobileMenuButton>

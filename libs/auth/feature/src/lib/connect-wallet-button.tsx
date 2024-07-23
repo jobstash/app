@@ -19,9 +19,10 @@ import { Bartab } from '@jobstash/shared/ui';
 
 interface Props {
   isMobile?: boolean;
+  isHeaderMobile?: boolean;
 }
 
-const ConnectWalletButton = ({ isMobile }: Props) => {
+const ConnectWalletButton = ({ isMobile, isHeaderMobile }: Props) => {
   const { isReady } = useMwVersionContext();
   const isMounted = useIsMounted();
   const { isSignedIn } = useSIWE();
@@ -29,7 +30,7 @@ const ConnectWalletButton = ({ isMobile }: Props) => {
   const showButton = isMounted && isReady;
 
   return (
-    <div style={{ minHeight: 40, position: 'relative' }}>
+    <div style={{ minHeight: '40px', position: 'relative' }}>
       {showButton ? (
         <ConnectKitButton.Custom>
           {({ address, show, isConnected, ensName, truncatedAddress }) => {
@@ -70,7 +71,62 @@ const ConnectWalletButton = ({ isMobile }: Props) => {
                     onClick={onClick}
                   >
                     <div className={innerClassName}>
-                      <div className="flex items-center gap-4 md:gap-2 text-white text-xl">
+                      <div className="flex items-center gap-4 text-xl text-white md:gap-2">
+                        {isConnected ? (
+                          isSignedIn ? (
+                            <Avatar
+                              address={address}
+                              name={displayName}
+                              size={28}
+                            />
+                          ) : (
+                            <SiweAvatar isSignedIn={isSignedIn} />
+                          )
+                        ) : null}
+
+                        {displayName ?? 'Connect Wallet'}
+                      </div>
+                    </div>
+                  </button>
+                </div>
+              );
+            }
+
+            if (isHeaderMobile) {
+              const btnClassName = cn(
+                'flex w-full max-w-md items-center justify-center rounded-lg hover:brightness-110',
+                {
+                  'w-full items-center  justify-center rounded-md bg-gradient-to-r from-[#8743FF] to-[#D68800] p-0.5':
+                    isSignedIn,
+                },
+              );
+
+              const btnStyle = isSignedIn
+                ? undefined
+                : {
+                    background:
+                      'linear-gradient(0deg, #1E1E1E, #1E1E1E) padding-box, linear-gradient(90deg, #8743FF, #D68800) border-box',
+                    border: '2px solid transparent',
+                  };
+
+              const innerClassName = cn(
+                'flex h-full w-full items-center justify-center text-sm font-semibold',
+                {
+                  'flex h-full w-full items-center justify-center rounded-md bg-transparent text-sm font-semibold transition-all duration-300 hover:bg-dark-gray hover:brightness-110':
+                    isSignedIn,
+                },
+              );
+
+              return (
+                <div className="flex justify-center w-full">
+                  <button
+                    type="button"
+                    className={btnClassName}
+                    style={btnStyle}
+                    onClick={onClick}
+                  >
+                    <div className={innerClassName}>
+                      <div className="flex items-center gap-1 p-1 text-sm text-white md:gap-2 [&>div]:w-5 [&>div]:h-5 [&_svg]:w-4 [&_svg]:h-5">
                         {isConnected ? (
                           isSignedIn ? (
                             <Avatar
@@ -97,17 +153,7 @@ const ConnectWalletButton = ({ isMobile }: Props) => {
                 withinPortal
                 opened={isConnected && !isSignedIn}
                 label={
-                  <div className="px-2 py-1 flex flex-col gap-0 text-white text-sm">
-                    <span className="">
-                      You&#39;re not signed in to this app.
-                    </span>
-                    <span>
-                      <span className="font-bold mr-1">
-                        Sign In With Ethereum
-                      </span>
-                      to continue.
-                    </span>
-                  </div>
+                 <div></div>
                 }
                 disabled={!(isConnected && !isSignedIn)}
                 classNames={{
