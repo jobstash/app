@@ -118,7 +118,7 @@ const ConnectWalletButton = ({ isMobile, isHeaderMobile }: Props) => {
               );
 
               return (
-                <div className="flex justify-center w-full">
+                <div className="flex justify-center w-full md:-mt-1">
                   <button
                     type="button"
                     className={btnClassName}
@@ -126,7 +126,7 @@ const ConnectWalletButton = ({ isMobile, isHeaderMobile }: Props) => {
                     onClick={onClick}
                   >
                     <div className={innerClassName}>
-                      <div className="flex items-center gap-1 p-1 text-sm text-white md:gap-2 [&>div]:w-5 [&>div]:h-5 [&_svg]:w-4 [&_svg]:h-5">
+                      <div className="flex items-center gap-1 py-1 px-2 md:py-1.5 md:px-3 text-sm text-white md:gap-2 [&>div]:w-5 [&>div]:h-5 [&_svg]:w-4 [&_svg]:h-5">
                         {isConnected ? (
                           isSignedIn ? (
                             <Avatar
