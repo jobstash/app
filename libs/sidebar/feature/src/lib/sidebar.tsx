@@ -138,7 +138,7 @@ const Sidebar = ({ filtersRouteSection }: Props) => (
           <HeaderLink isMobile text={GET_HELP_TEXT} link={DUCK_TELEGRAM_URL} />
           <HeaderLink isMobile text={SUBSCRIBE_TG_TEXT} link={TELEGRAM_URL} />
 
-          <ConnectWalletButton isMobile />
+         
         </div>
       </MobileNavbarWrapper>
       <div className="flex ml-auto -mr-4 lg:hidden">

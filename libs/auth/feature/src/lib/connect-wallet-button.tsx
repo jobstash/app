@@ -167,12 +167,12 @@ const ConnectWalletButton = ({ isMobile, isHeaderMobile }: Props) => {
                 }
                 disabled={!(isConnected && !isSignedIn)}
                 classNames={{
-                  tooltip: 'bg-[#1A88F8] rounded-xl',
-                  arrow: 'bg-[#1A88F8]',
+                  tooltip: 'bg-[#1A88F8] rounded-xl !left-auto !right-[12px] !top-[60px] lg:!top-[85px]',
+                  arrow: 'bg-[#1A88F8] !left-auto !right-[62px] ',
                 }}
                 arrowSize={12}
                 portalProps={{
-                  className: 'bg-red-50',
+                  className: '',
                 }}
               >
                 <Bartab
