@@ -153,7 +153,17 @@ const ConnectWalletButton = ({ isMobile, isHeaderMobile }: Props) => {
                 withinPortal
                 opened={isConnected && !isSignedIn}
                 label={
-                 <div></div>
+                  <div className="flex flex-col gap-0 px-2 py-1 text-sm text-white">
+                    <span className="">
+                      You&#39;re not signed in to this app.
+                    </span>
+                    <span>
+                      <span className="mr-1 font-bold">
+                        Sign In With Ethereum
+                      </span>
+                      to continue.
+                    </span>
+                  </div>
                 }
                 disabled={!(isConnected && !isSignedIn)}
                 classNames={{
