@@ -18,7 +18,7 @@ const AccountCardWrapper = ({ children }: Props) => (
       borderRadius: '1.5rem',
       gap: '1rem',
     }}
-    className="w-full [&>*]:w-full [&_button]:max-w-[250px] [&_button]:mx-auto"
+    className="flex [&>*]:w-full [&_button]:max-w-[250px] [&_button]:mx-auto mx-5"
   >
     {children}
   </div>

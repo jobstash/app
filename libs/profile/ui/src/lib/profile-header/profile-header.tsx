@@ -23,8 +23,8 @@ const ProfileHeader = ({ gotItCard, gotItCardKey }: Props) => {
   const email = emails.length > 0 ? emails[0].email : null;
   return (
     <ProfileHeaderProvider>
-      <div className="flex justify-between items-end md:items-center gap-4 md:gap-8">
-        <div className="flex flex-col md:flex-row md:items-center gap-4">
+      <div className="flex items-end justify-between gap-4 md:items-center md:gap-8">
+        <div className="flex flex-col gap-4 md:flex-row md:items-center">
           <LogoTitle
             title={username ?? email ?? ''}
             avatarProps={{

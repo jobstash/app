@@ -32,9 +32,9 @@ export const ProfileDevPage = () => {
       {profileInfoData ? (
         <PageWrapper>
           <SideBar />
-          <div className="flex flex-col gap-3 lg:flex-row min-h-screen w-full">
-            <div className="flex-1">
-              <div className="pt-20 lg:px-12 lg:pt-6 flex flex-col gap-6 lg:pb-40">
+          <div className="flex flex-col w-full min-h-screen gap-12 xl:py-10 xl:px-10 xl:flex-row">
+            <div className="xl:basis-2/3">
+              <div className="flex flex-col gap-6 px-5 pt-20 xl:px-0 xl:pt-0">
                 <ProfileHeader
                   gotItCard={<ProfileGotItCard />}
                   gotItCardKey="profile"
@@ -58,10 +58,7 @@ export const ProfileDevPage = () => {
                 />
               </div>
             </div>
-
-            <div className="hidden lg:flex lg:flex-1" />
-
-            <div className="hide-scrollbar flex items-center justify-center lg:fixed lg:h-screen overflow-y-auto p-4 transition-all inset-auto lg:right-0 lg:top-10 lg:w-5/12 lg:px-6 lg:py-8 lg:pr-10">
+            <div className="">
               <DevAccountCard />
             </div>
           </div>
