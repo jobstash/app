@@ -34,7 +34,7 @@ export const ProfileOrgPage = () => {
               <div className='xl:basis-2/3'>
                 <ProfileOrgForm />
               </div>
-              <div className='flex items-center self-start w-full px-2 mt-10 xl:mt-0 xl:justify-center xl:basis-1/3'>
+              <div className='flex justify-center w-full xl:self-start xl:mt-0 xl:justify-center xl:basis-1/3'>
                 <OrgAccountCard />
               </div>
           </div>

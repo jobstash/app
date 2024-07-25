@@ -58,7 +58,7 @@ export const ProfileDevPage = () => {
                 />
               </div>
             </div>
-            <div className="">
+            <div className="mx-3 xl:mx-0">
               <DevAccountCard />
             </div>
           </div>
