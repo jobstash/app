@@ -22,6 +22,8 @@ export const NEW_FEATURE_CTA_TEXT =
 export const NEW_FEATURE_CTA_URL =
   process.env.NEXT_PUBLIC_NEW_FEATURE_CTA_LINK!;
 
+export const PRIVY_APP_ID = process.env.NEXT_PUBLIC_PRIVY_APP_ID!;
+
 // TODO: put hardcode string in env
 export const ORG_SIGNUP_FORM_URL = 'https://forms.gle/HWP6bUf3CB8RyJnw5';
 export const TELEGRAM_URL = 'https://telegram.me/jobstash';

@@ -7,6 +7,7 @@ export * from './lib/atoms/top-banner-atom';
 // Providers
 export { default as MantineProvider } from './lib/providers/mantine-provider';
 export * from './lib/providers/mw-version-provider';
+export * from './lib/providers/privy-provider';
 export { default as ReactQueryProvider } from './lib/providers/react-query-provider';
 
 //  Hooks
