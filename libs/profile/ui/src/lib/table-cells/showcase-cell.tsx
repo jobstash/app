@@ -36,21 +36,6 @@ export const ShowcaseCell = ({ showcases }: Props) => {
           </Link>
         </div>
       ))}
-      {showcases.map(({ id, label, url }) => (
-        <div key={id} className="flex gap-2">
-          <Text fw="bold">{capitalize(label)}:</Text>
-          <Link
-            href={getWebsiteText(url).link}
-            size="sm"
-            underline="hover"
-            className="text-sm text-white/80"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            {url}
-          </Link>
-        </div>
-      ))}
     </div>
   );
 };
