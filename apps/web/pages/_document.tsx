@@ -10,7 +10,8 @@ export default class _Document extends Document {
 
   render() {
     return (
-      <Html lang="en" className="scroll-smooth">
+      // !overflow-y-visible needed to override default styles from Privy, that hides scrollbar resulting in layout shift
+      <Html lang="en" className="!overflow-y-visible scroll-smooth">
         <Head />
         <body className="bg-gradient-to-l from-[#141317] to-[#121216] min-h-screen">
           <Main />
