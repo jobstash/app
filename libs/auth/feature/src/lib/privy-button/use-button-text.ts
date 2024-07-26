@@ -5,6 +5,7 @@ import { useEnsName } from 'wagmi';
 import { useAuthContext } from '@jobstash/auth/state';
 
 const NAME_CHAR_LIMIT = 16;
+const DEFAULT_TEXT = 'Login / Sign Up';
 
 const formatName = (name = '') =>
   name.length > NAME_CHAR_LIMIT
@@ -13,6 +14,9 @@ const formatName = (name = '') =>
 
 const formatEmail = (email?: string) =>
   email ? `${formatName(email?.split('@')[0])}` : undefined;
+
+const formatGithub = (github?: string | null) =>
+  github ? `github.com/${github}` : undefined;
 
 export const useButtonText = () => {
   const { user, isAuthenticated, isLoading: isLoadingAuth } = useAuthContext();
@@ -56,19 +60,21 @@ export const useButtonText = () => {
     }
   }, [addresses.length, currentAddressIndex, isLoading, fetchedName]);
 
-  const getDisplayName = useCallback(() => {
-    if (!isAuthenticated) return 'Connect Wallet';
+  const getTexts = useCallback(() => {
+    if (!isAuthenticated) return { text: DEFAULT_TEXT, fullText: '' };
 
-    const email = formatEmail(user?.email?.address);
+    const email = user?.email?.address;
     const github = user?.github?.username;
     const wallet = addresses[0];
-    const embedded = user?.wallet?.address;
 
-    return formatName(ensName ?? email ?? github ?? wallet ?? embedded);
+    return {
+      text: formatName(ensName ?? formatEmail(email) ?? github ?? wallet),
+      fullText: ensName ?? email ?? formatGithub(github) ?? wallet,
+    };
   }, [isAuthenticated, user, ensName, addresses]);
 
   return {
     isLoading,
-    text: getDisplayName(),
+    ...getTexts(),
   };
 };
