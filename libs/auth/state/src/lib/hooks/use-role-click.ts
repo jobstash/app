@@ -1,4 +1,3 @@
-import { useModal } from 'connectkit';
 import { useSetAtom } from 'jotai';
 
 import { type CheckWalletRole } from '@jobstash/auth/core';
@@ -18,8 +17,7 @@ export const useRoleClick = ({
   callback,
   bypassDevSignup = false,
 }: Props) => {
-  const { setOpen } = useModal();
-  const { role: currentRole } = useAuthContext();
+  const { role: currentRole, showLoginModal } = useAuthContext();
   const isAuthd = Array.isArray(role)
     ? role.includes(currentRole)
     : currentRole === role;
@@ -31,6 +29,6 @@ export const useRoleClick = ({
 
   return {
     isAuthd,
-    roleClick: () => (isAuthd ? callback() : setOpen(true)),
+    roleClick: isAuthd ? callback : showLoginModal,
   };
 };

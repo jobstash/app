@@ -1,4 +1,3 @@
-import { useModal } from 'connectkit';
 import { useSetAtom } from 'jotai';
 
 import { bypassDevSignupAtom, useAuthContext } from '@jobstash/auth/state';
@@ -10,16 +9,14 @@ interface Props {
 }
 
 export const JoinTalentPool = ({ isMobile }: Props) => {
-  const { isConnected, isSignedIn, showModal } = useAuthContext();
+  const { isAuthenticated, showLoginModal } = useAuthContext();
   const setBypassDevSignup = useSetAtom(bypassDevSignupAtom);
 
-  const isAnon = !isConnected || !isSignedIn;
-
-  if (!isAnon) return null;
+  if (isAuthenticated) return null;
 
   const onClick = () => {
     setBypassDevSignup(true);
-    showModal(true);
+    showLoginModal();
   };
 
   const textClassName = isMobile ? 'text-2xl' : 'text-md whitespace-nowrap';

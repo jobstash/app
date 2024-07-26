@@ -1,20 +1,7 @@
-import { useRouter } from 'next/router';
-import { type ReactNode, useEffect, useMemo, useRef } from 'react';
-
-import { useModal, useSIWE } from 'connectkit';
-
-import {
-  CHECK_WALLET_FLOWS,
-  CHECK_WALLET_ROLES,
-  CHECK_WALLET_ROUTE,
-  ignoredPathnameRedirectSet,
-  redirectFlowsSet,
-} from '@jobstash/auth/core';
-
-import { useIsMounted, useMwVersionContext } from '@jobstash/shared/state';
+import { type ReactNode } from 'react';
 
 import { AuthContext } from '../contexts/auth-context';
-import { useCheckWallet } from '../hooks/use-check-wallet';
+import { useAuthProvider } from '../hooks/use-auth-provider';
 
 type Props = {
   children: ReactNode;
@@ -22,87 +9,14 @@ type Props = {
 };
 
 export const AuthProvider = ({ children, screenLoader }: Props) => {
-  const { push, asPath, pathname } = useRouter();
-  const isMounted = useIsMounted();
-  const { isReady } = useMwVersionContext();
-  const { setOpen } = useModal();
+  const value = useAuthProvider();
 
-  const {
-    data: checkWalletData,
-    refetch,
-    isLoading,
-    address,
-    isConnected,
-    isFetching,
-  } = useCheckWallet();
-
-  // If current wallet is signedIn to Ethereum but wallet is not currently connected,
-  // e.g. during client machine restart (SIWE uses cookies), we manually disconnect
-  const { signOut, isSignedIn } = useSIWE();
-  useEffect(() => {
-    const execDisconnect = async () => {
-      await signOut();
-    };
-
-    if (!isConnected && isSignedIn) {
-      execDisconnect();
-    }
-  }, [signOut, isConnected, isSignedIn]);
-
-  const displayLoader = !isMounted || (isConnected && isLoading) || !isReady;
-
-  const value = useMemo(
-    () => ({
-      role: checkWalletData?.role ?? CHECK_WALLET_ROLES.DEFAULT,
-      flow: checkWalletData?.flow ?? CHECK_WALLET_FLOWS.DEFAULT,
-      isCryptoNative: Boolean(checkWalletData?.cryptoNative),
-      isLoading,
-      address,
-      isConnected,
-      isSignedIn,
-      isFetching,
-      refetch: () => refetch(),
-      showModal: (show: boolean) => setOpen(show),
-    }),
-    [
-      checkWalletData?.role,
-      checkWalletData?.flow,
-      checkWalletData?.cryptoNative,
-      isLoading,
-      address,
-      isConnected,
-      isSignedIn,
-      isFetching,
-      refetch,
-      setOpen,
-    ],
-  );
-
-  const redirectRef = useRef(false);
-
-  // Redirect if flow-route needs to and ref is still false
-  useEffect(() => {
-    const { flow } = value;
-    const flowRoute = CHECK_WALLET_ROUTE[flow];
-    if (
-      !redirectRef.current &&
-      redirectFlowsSet.has(flow) &&
-      !ignoredPathnameRedirectSet.has(pathname) &&
-      asPath !== flowRoute
-    ) {
-      redirectRef.current = true;
-
-      setTimeout(() => {
-        if (isConnected) {
-          push(CHECK_WALLET_ROUTE[flow]);
-        }
-      }, 500);
-    }
-  }, [asPath, isConnected, pathname, push, value]);
+  // TODO: Redirect to the correct page based on the flow
+  // Note: Consider users who login based on auth click
 
   return (
     <AuthContext.Provider value={value}>
-      {displayLoader ? screenLoader : children}
+      {value.isLoading ? screenLoader : children}
     </AuthContext.Provider>
   );
 };

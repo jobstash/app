@@ -17,6 +17,7 @@ import {
 import {
   Brand,
   HeaderLink,
+  JoinTalentPool,
   // JoinTalentPool,
   MobileMenuButton,
   MobileNavbarWrapper,
@@ -26,7 +27,7 @@ import {
   SidebarUserSection,
   SidebarWrapper,
 } from '@jobstash/sidebar/ui';
-// Import { ConnectWalletButton } from '@jobstash/auth/feature';
+import { PrivyButton } from '@jobstash/auth/feature';
 
 const Filters = dynamic(() =>
   import('@jobstash/filters/feature').then((m) => m.Filters),
@@ -76,10 +77,10 @@ const Sidebar = ({ filtersRouteSection }: Props) => (
         </div>
         {filtersRouteSection && <Filters routeSection={filtersRouteSection} />}
         <div className="items-center hidden space-x-6 lg:flex lg:mr-0 lg:ml-auto lg:pr-4">
-          {/* <JoinTalentPool /> */}
+          <JoinTalentPool />
           <HeaderLink text={SUBSCRIBE_TG_TEXT} link={TELEGRAM_URL} />
           <HeaderLink text={GET_HELP_TEXT} link={DUCK_TELEGRAM_URL} />
-          {/* <ConnectWalletButton /> */}
+          <PrivyButton />
         </div>
       </div>
       {/* MOBILE BARTABS */}
@@ -140,7 +141,7 @@ const Sidebar = ({ filtersRouteSection }: Props) => (
         </div>
       </MobileNavbarWrapper>
       <div className="flex ml-auto -mr-4 lg:hidden">
-        {/* <ConnectWalletButton isHeaderMobile /> */}
+        <PrivyButton />
         <MobileMenuButton>
           <HamburgerIcon />
         </MobileMenuButton>

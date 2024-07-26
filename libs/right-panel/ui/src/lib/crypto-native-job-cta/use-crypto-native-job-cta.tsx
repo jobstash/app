@@ -1,8 +1,6 @@
 import { useState } from 'react';
 
-import { useModal, useSIWE } from 'connectkit';
 import { useSetAtom } from 'jotai';
-import { useAccount } from 'wagmi';
 
 import { CHECK_WALLET_ROLES, CheckWalletRole } from '@jobstash/auth/core';
 import { notifLoading, notifSuccess } from '@jobstash/shared/utils';
@@ -29,11 +27,15 @@ interface Props {
 
 export const useCryptoNativeJobCTA = (props: Props) => {
   const { sendAnalyticsEvent, jobId } = props;
-  const { isConnected } = useAccount();
-  const { isSignedIn } = useSIWE();
-  const isAnon = !isConnected || !isSignedIn;
 
-  const { role, isCryptoNative, isLoading: isLoadingAuth } = useAuthContext();
+  const {
+    role,
+    isCryptoNative,
+    isLoading: isLoadingAuth,
+    isAuthenticated,
+    showLoginModal,
+  } = useAuthContext();
+  const isAnon = !isAuthenticated;
   const isDev = role === CHECK_WALLET_ROLES.DEV;
   const isEligible = isCryptoNative && isDev;
 
@@ -43,11 +45,10 @@ export const useCryptoNativeJobCTA = (props: Props) => {
     ? ELIGIBLE_TEXT
     : NOT_ELIGIBLE_TEXT;
 
-  const { setOpen } = useModal();
   const setBypassDevSignup = useSetAtom(bypassDevSignupAtom);
   const openModalIfAnon = () => {
     if (isAnon) {
-      setOpen(true);
+      showLoginModal();
       setBypassDevSignup(true);
     }
   };

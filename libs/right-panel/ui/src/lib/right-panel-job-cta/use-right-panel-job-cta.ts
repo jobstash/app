@@ -1,6 +1,4 @@
-import { useModal, useSIWE } from 'connectkit';
 import { useSetAtom } from 'jotai';
-import { useAccount } from 'wagmi';
 
 import { CHECK_WALLET_ROLES, CheckWalletRole } from '@jobstash/auth/core';
 import { ECOSYSTEMS } from '@jobstash/shared/core';
@@ -23,12 +21,9 @@ interface Props {
 export const useRightPanelJobCTA = (props: Props) => {
   const { url, shortUUID, hasUser = false, sendAnalyticsEvent } = props;
 
-  const { isConnected } = useAccount();
-  const { isSignedIn } = useSIWE();
-
-  const { role } = useAuthContext();
+  const { role, isAuthenticated, showLoginModal } = useAuthContext();
   const isDev = role === CHECK_WALLET_ROLES.DEV;
-  const isAnon = !isConnected || !isSignedIn;
+  const isAnon = !isAuthenticated;
 
   const { isSupported, subdomain } = getEcosystemSubdomain();
   const isEthdam = isSupported && subdomain === ECOSYSTEMS.ETHDAM;
@@ -65,11 +60,10 @@ export const useRightPanelJobCTA = (props: Props) => {
     isPendingMutation,
   ].includes(true);
 
-  const { setOpen } = useModal();
   const setBypassDevSignup = useSetAtom(bypassDevSignupAtom);
   const openModalIfAnon = () => {
     if (isAnon) {
-      setOpen(true);
+      showLoginModal();
       setBypassDevSignup(true);
     }
   };

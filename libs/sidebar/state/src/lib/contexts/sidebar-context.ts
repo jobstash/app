@@ -4,7 +4,6 @@ import { type CheckWalletRole } from '@jobstash/auth/core';
 
 interface SidebarContextProps {
   sidebarOpen: boolean;
-  isSignedIn: boolean;
   role: CheckWalletRole;
 }
 

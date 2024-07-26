@@ -13,11 +13,7 @@ import { useAtomValue } from 'jotai';
 import { ANALYTICS_ID } from '@jobstash/shared/core';
 import { cn } from '@jobstash/shared/utils';
 
-import {
-  AuthProvider,
-  WagmiProvider,
-  WalletProvider,
-} from '@jobstash/auth/state';
+import { AuthProvider, WagmiProvider } from '@jobstash/auth/state';
 import {
   isOpenTopBannerAtom,
   MantineProvider,
@@ -28,7 +24,6 @@ import {
 } from '@jobstash/shared/state';
 
 import { NewFeatureModal, ReportModal } from '@jobstash/shared/ui';
-import { WagmiSiweSync } from '@jobstash/auth/feature';
 
 const NAME = 'JobStash';
 const DESCRIPTION = 'The Ultimate Job Aggregator for Crypto Developers';
@@ -136,21 +131,16 @@ const App = ({ Component, pageProps }: AppProps) => {
             <ReactQueryProvider dehydratedState={pageProps.dehydratedState}>
               <MwVersionProvider screenLoader={<LoadingPage />}>
                 <PrivyProvider screenLoader={<LoadingPage />}>
-                  <WalletProvider>
-                    <AuthProvider screenLoader={<LoadingPage />}>
-                      {/* <Component {...pageProps} /> */}
+                  <AuthProvider screenLoader={<LoadingPage />}>
+                    {/* <TopBanner /> */}
+                    {/* <DonateModal /> */}
+                    <div className={cn({ 'pt-10': isOpenTopBanner })}>
+                      <Component {...pageProps} />
+                    </div>
 
-                      {/* <TopBanner /> */}
-                      {/* <DonateModal /> */}
-                      <div className={cn({ 'pt-10': isOpenTopBanner })}>
-                        <Component {...pageProps} />
-                      </div>
-
-                      <WagmiSiweSync />
-                      <ReportModal />
-                      <NewFeatureModal />
-                    </AuthProvider>
-                  </WalletProvider>
+                    <ReportModal />
+                    <NewFeatureModal />
+                  </AuthProvider>
                 </PrivyProvider>
               </MwVersionProvider>
             </ReactQueryProvider>

@@ -14,7 +14,6 @@ export const useUpdateFlow = (successRoute?: string) => {
   const { push } = useRouter();
   const queryClient = useQueryClient();
   const { mwVersion } = useMwVersionContext();
-  const { refetch } = useAuthContext();
   const {
     isPending: isLoading,
     mutate,
@@ -40,7 +39,6 @@ export const useUpdateFlow = (successRoute?: string) => {
         message: 'Wallet checked successfully',
         data: { role, flow },
       });
-      refetch();
 
       if (successRoute) {
         push(successRoute);

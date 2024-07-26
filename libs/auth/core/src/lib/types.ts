@@ -1,3 +1,4 @@
+import { User as PrivyUser } from '@privy-io/react-auth';
 import { type Infer } from 'myzod';
 
 import {
@@ -27,20 +28,16 @@ export type SiweVerifyResponse = Infer<typeof siweVerifyResponseSchema>;
 export type CheckWalletRole = Infer<typeof checkWalletRolesSchema>;
 export type CheckWalletFlow = Infer<typeof checkWalletFlowsSchema>;
 
-export type AuthPageProps = {
+export type AuthCtx = {
+  user: PrivyUser | null;
   role: CheckWalletRole;
   flow: CheckWalletFlow;
-};
-
-export type AuthCtx = {
   isCryptoNative: boolean;
   isLoading: boolean;
-  refetch: () => void;
-  address: string | undefined;
-  isConnected: boolean;
-  isSignedIn: boolean;
-  isFetching: boolean;
-  showModal: (show: boolean) => void;
-} & AuthPageProps;
+  isLoadingLogout: boolean;
+  isAuthenticated: boolean;
+  showLoginModal: () => void;
+  logout: () => Promise<void>;
+};
 
 export type GithubLoginPayload = Infer<typeof githubLoginPayloadSchema>;

@@ -7,7 +7,8 @@ import {
   ModalFooter,
   ModalHeader,
 } from '@nextui-org/react';
-import { usePrivy } from '@privy-io/react-auth';
+
+import { useAuthContext } from '@jobstash/auth/state';
 
 interface Props {
   isOpen: boolean;
@@ -16,10 +17,10 @@ interface Props {
 }
 
 export const ActiveModal = ({ isOpen, onOpenChange, onClose }: Props) => {
-  const { logout } = usePrivy();
+  const { logout, isLoadingLogout } = useAuthContext();
 
-  const onLogout = () => {
-    logout();
+  const onLogout = async () => {
+    await logout();
     onClose();
   };
 
@@ -44,7 +45,7 @@ export const ActiveModal = ({ isOpen, onOpenChange, onClose }: Props) => {
           </p>
         </ModalBody>
         <ModalFooter>
-          <Button fullWidth onPress={onLogout}>
+          <Button fullWidth isLoading={isLoadingLogout} onPress={onLogout}>
             Logout
           </Button>
         </ModalFooter>

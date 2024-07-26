@@ -1,4 +1,3 @@
-import { getDefaultConfig } from 'connectkit';
 import {
   createConfig,
   fallback,
@@ -7,30 +6,20 @@ import {
 } from 'wagmi';
 import { mainnet, optimism, polygon } from 'wagmi/chains';
 
-import {
-  FRONTEND_URL,
-  INFRURA_ID,
-  WALLETCONNECT_PROJECT_ID,
-} from '@jobstash/shared/core';
+import { INFRURA_ID } from '@jobstash/shared/core';
 
-const config = createConfig(
-  getDefaultConfig({
-    appName: 'JobStash',
-    appDescription: 'The Ultimate Crypto Native Job Aggregator',
-    appUrl: FRONTEND_URL,
-    appIcon: `${FRONTEND_URL}/apple-touch-icon.png`,
-    walletConnectProjectId: WALLETCONNECT_PROJECT_ID,
-    chains: [mainnet, polygon, optimism],
-    transports: {
-      [mainnet.id]: fallback([
-        http(`https://mainnet.infura.io/v3/${INFRURA_ID}`),
-        http(), // Public fallback
-      ]),
-      [polygon.id]: fallback([http()]),
-    },
-    ssr: true,
-  }),
-);
+const config = createConfig({
+  chains: [mainnet, polygon, optimism],
+  transports: {
+    [mainnet.id]: fallback([
+      http(`https://mainnet.infura.io/v3/${INFRURA_ID}`),
+      http(), // Public fallback
+    ]),
+    [polygon.id]: fallback([http()]),
+    [optimism.id]: fallback([http()]),
+  },
+  ssr: true,
+});
 
 interface Props {
   children: React.ReactNode;

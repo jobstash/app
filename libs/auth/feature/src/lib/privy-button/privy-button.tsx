@@ -1,10 +1,11 @@
-import { Button, useDisclosure } from '@nextui-org/react';
-import { usePrivy } from '@privy-io/react-auth';
+import { Button, Spinner, useDisclosure } from '@nextui-org/react';
 
 import { cn } from '@jobstash/shared/utils';
 
+import { useAuthContext } from '@jobstash/auth/state';
+
 import { ActiveModal } from './active-modal';
-import { usePrivyName } from './use-privy-name';
+import { useButtonText } from './use-button-text';
 
 const wrapperStyle = {
   background:
@@ -13,14 +14,11 @@ const wrapperStyle = {
 };
 
 export const PrivyButton = () => {
+  const { isAuthenticated, showLoginModal } = useAuthContext();
   const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
 
-  const { authenticated, login } = usePrivy();
-
-  const name = usePrivyName();
-
-  const text = authenticated ? name : 'Login';
-  const onClick = authenticated ? onOpen : login;
+  const { text, isLoading } = useButtonText();
+  const onClick = isAuthenticated ? onOpen : showLoginModal;
 
   return (
     <>
@@ -31,7 +29,7 @@ export const PrivyButton = () => {
           className="font-bold h-full bg-transparent"
           onClick={onClick}
         >
-          {text}
+          {isLoading ? <Spinner size="sm" color="white" /> : text}
         </Button>
       </div>
       <ActiveModal

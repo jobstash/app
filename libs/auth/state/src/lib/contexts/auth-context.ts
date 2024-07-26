@@ -7,14 +7,13 @@ import {
 } from '@jobstash/auth/core';
 
 export const AuthContext = createContext<AuthCtx>({
-  isLoading: false,
-  role: CHECK_WALLET_ROLES.DEFAULT,
+  user: null,
+  role: CHECK_WALLET_ROLES.ANON,
   flow: CHECK_WALLET_FLOWS.DEFAULT,
   isCryptoNative: false,
-  address: undefined,
-  isConnected: false,
-  isSignedIn: false,
-  isFetching: false,
-  refetch: () => null,
-  showModal: () => null,
+  isLoading: false,
+  isLoadingLogout: false,
+  isAuthenticated: false,
+  showLoginModal: () => null,
+  logout: () => Promise.resolve(),
 });

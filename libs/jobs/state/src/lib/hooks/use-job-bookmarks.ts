@@ -1,18 +1,18 @@
 import { useMemo } from 'react';
 
 import { useQuery } from '@tanstack/react-query';
-import { useSIWE } from 'connectkit';
 
+import { useAuthContext } from '@jobstash/auth/state';
 import { useMwVersionContext } from '@jobstash/shared/state';
 import { getJobBookmarks } from '@jobstash/jobs/data';
 
 export const useJobBookmarks = () => {
-  const { isSignedIn } = useSIWE();
+  const { isAuthenticated } = useAuthContext();
   const { mwVersion } = useMwVersionContext();
 
   const { isLoading, isError, data, isFetching } = useQuery({
-    queryKey: [mwVersion, 'job-bookmarks', isSignedIn],
-    queryFn: () => getJobBookmarks(isSignedIn),
+    queryKey: [mwVersion, 'job-bookmarks', isAuthenticated],
+    queryFn: () => getJobBookmarks(isAuthenticated),
     staleTime: 1000 * 60 * 60,
   });
 

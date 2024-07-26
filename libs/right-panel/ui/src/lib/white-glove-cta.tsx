@@ -1,4 +1,3 @@
-import { useSIWE } from 'connectkit';
 import { useAccount } from 'wagmi';
 
 import { DUCK_TELEGRAM_URL } from '@jobstash/shared/core';
@@ -35,10 +34,9 @@ const onClick = () => openNewTab(DUCK_TELEGRAM_URL);
 
 export const WhiteGloveCTA = () => {
   const { isConnected } = useAccount();
-  const { isSignedIn } = useSIWE();
-  const { isCryptoNative, isLoading } = useAuthContext();
+  const { isCryptoNative, isLoading, isAuthenticated } = useAuthContext();
 
-  const isAnon = !isConnected || !isSignedIn;
+  const isAnon = !isConnected || !isAuthenticated;
 
   if (isAnon || !isCryptoNative) return null;
 

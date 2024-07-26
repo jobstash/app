@@ -5,7 +5,7 @@ import { mwMessageResponseSchema } from '@jobstash/shared/core';
 import { CHECK_WALLET_FLOWS, CHECK_WALLET_ROLES } from './constants';
 
 export const checkWalletRolesSchema = myzod.literals(
-  CHECK_WALLET_ROLES.DEFAULT,
+  CHECK_WALLET_ROLES.ANON,
   CHECK_WALLET_ROLES.ADMIN,
   CHECK_WALLET_ROLES.DEV,
   CHECK_WALLET_ROLES.ORG,

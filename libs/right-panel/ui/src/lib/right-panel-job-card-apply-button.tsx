@@ -1,7 +1,6 @@
 /* eslint-disable camelcase */
 
 import { Spinner } from '@nextui-org/spinner';
-import { useModal, useSIWE } from 'connectkit';
 import { useAccount } from 'wagmi';
 
 import { CHECK_WALLET_ROLES } from '@jobstash/auth/core';
@@ -29,12 +28,10 @@ export const RightPanelJobCardApplyButton = (props: Props) => {
   const { url, shortUUID, orgName, hasUser, classification } = props;
 
   const { isConnected } = useAccount();
-  const { isSignedIn } = useSIWE();
-  const { setOpen } = useModal();
 
-  const { role } = useAuthContext();
+  const { role, isAuthenticated, showLoginModal } = useAuthContext();
   const isDev = role === CHECK_WALLET_ROLES.DEV;
-  const isAnon = !isConnected || !isSignedIn;
+  const isAnon = !isConnected || !isAuthenticated;
 
   const { isSupported, subdomain } = getEcosystemSubdomain();
   const isEthdam = isSupported && subdomain === ECOSYSTEMS.ETHDAM;
@@ -67,7 +64,7 @@ export const RightPanelJobCardApplyButton = (props: Props) => {
 
   const openApplyPage = () => {
     if (isAnon) {
-      setOpen(true);
+      showLoginModal();
       return;
     }
 

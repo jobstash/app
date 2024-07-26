@@ -2,9 +2,6 @@ import { useRouter } from 'next/router';
 
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-//
-// import { useSIWE } from 'connectkit';
-// import { useDisconnect } from 'wagmi';
 import { CHECK_WALLET_ROLES, GithubLoginPayload } from '@jobstash/auth/core';
 import { SENTRY_MW_NON_200_RESPONSE } from '@jobstash/shared/core';
 import { notifError, sentryMessage } from '@jobstash/shared/utils';
@@ -18,10 +15,6 @@ export const useGithubLogin = () => {
   const router = useRouter();
   const { mwVersion } = useMwVersionContext();
   const { role } = useAuthContext();
-
-  //
-  // const { disconnect } = useDisconnect();
-  // const { signOut } = useSIWE();
 
   const queryClient = useQueryClient();
 
@@ -61,13 +54,6 @@ export const useGithubLogin = () => {
 
       const isUser =
         role !== CHECK_WALLET_ROLES.DEV && role !== CHECK_WALLET_ROLES.ORG;
-
-      //
-      // Commented this out to troubleshoot issue where user is signed out when signing in with github, as he's not a dev yet, or if the github comes back with some error.
-      // if (!isGithubAccountUsed || !isUser) {
-      //   disconnect();
-      //   signOut();
-      // }
 
       const redirectUrl = isGithubAccountUsed && isUser ? '/profile' : '/';
       setTimeout(() => {

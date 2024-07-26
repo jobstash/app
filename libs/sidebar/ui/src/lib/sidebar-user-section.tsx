@@ -1,5 +1,6 @@
 import { CHECK_WALLET_ROLES } from '@jobstash/auth/core';
 
+import { useAuthContext } from '@jobstash/auth/state';
 import { DevProfileInfoProvider } from '@jobstash/profile/state';
 import { useSidebarContext } from '@jobstash/sidebar/state';
 
@@ -12,9 +13,10 @@ interface Props {
 }
 
 const SidebarUserSection = ({ isMobile }: Props) => {
-  const { isSignedIn, role } = useSidebarContext();
+  const { isAuthenticated } = useAuthContext();
+  const { role } = useSidebarContext();
 
-  if (!isSignedIn) return null;
+  if (!isAuthenticated) return null;
 
   switch (role) {
     case CHECK_WALLET_ROLES.DEV: {
