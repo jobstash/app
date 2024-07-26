@@ -103,11 +103,11 @@ export const ProfileOrgForm = () => {
   const { email } = profileInfoData.email[0];
 
   return (
-    <div className="flex flex-col gap-4 w-full">
+    <div className="flex flex-col w-full gap-4">
       {/* <Heading size="xl">Setup Profile</Heading> */}
 
-      <div className="flex justify-between items-center w-full">
-        <div className="flex items-center gap-8">
+      <div className="flex items-center justify-between w-full">
+        <div className="flex flex-wrap items-center gap-4">
           <LogoTitle
             title={email}
             avatarProps={{
@@ -139,7 +139,7 @@ export const ProfileOrgForm = () => {
           classNames={{ panel: 'pl-2' }}
         >
           <Tab key="contact" title="Contact Info">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               <Input
                 isDisabled={isPending}
                 label="LinkedIn Page URL"
@@ -198,7 +198,7 @@ export const ProfileOrgForm = () => {
             </div>
           </Tab>
           <Tab key="reference" title="Reference">
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
               <Input
                 isDisabled={isPending}
                 label="Reference Name"
