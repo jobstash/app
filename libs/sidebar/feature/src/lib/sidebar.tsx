@@ -140,7 +140,7 @@ const Sidebar = ({ filtersRouteSection }: Props) => (
           <HeaderLink isMobile text={SUBSCRIBE_TG_TEXT} link={TELEGRAM_URL} />
         </div>
       </MobileNavbarWrapper>
-      <div className="flex ml-auto -mr-4 lg:hidden">
+      <div className="flex items-center ml-auto -mr-4 lg:hidden">
         <PrivyButton />
         <MobileMenuButton>
           <HamburgerIcon />

@@ -11,7 +11,7 @@ interface Props {
 }
 
 export const ButtonWrapper = ({ children }: Props) => (
-  <div className={cn('h-10 w-36 rounded-xl')} style={wrapperStyle}>
+  <div className={cn('h-8 lg:h-10 rounded-xl w-36')} style={wrapperStyle}>
     {children}
   </div>
 );
