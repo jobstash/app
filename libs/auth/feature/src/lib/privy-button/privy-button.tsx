@@ -7,11 +7,11 @@ import { ButtonWrapper } from './button-wrapper';
 import { useButtonText } from './use-button-text';
 
 export const PrivyButton = () => {
-  const { isAuthenticated, showLoginModal } = useAuthContext();
+  const { isLoggedIn, showLoginModal } = useAuthContext();
   const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
 
   const { text, fullText, isLoading } = useButtonText();
-  const onClick = isAuthenticated ? onOpen : showLoginModal;
+  const onClick = isLoggedIn ? onOpen : showLoginModal;
 
   return (
     <>

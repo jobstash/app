@@ -29,5 +29,4 @@ export * from './lib/short-timestamp';
 export * from './lib/slugify';
 export * from './lib/validate-payload';
 export * from './lib/validate-schema';
-export * from './lib/wallet-disconnect-reload';
 export * from './lib/with-csr';

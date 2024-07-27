@@ -9,7 +9,6 @@ export * from './lib/providers/wagmi-provider';
 
 // Hooks
 export * from './lib/hooks/use-auth-context';
-export * from './lib/hooks/use-check-wallet';
 export * from './lib/hooks/use-connect-dev-email';
 export * from './lib/hooks/use-connect-org-email';
 export * from './lib/hooks/use-dev-magic-link-token';

@@ -2,7 +2,6 @@ import { User as PrivyUser } from '@privy-io/react-auth';
 import { type Infer } from 'myzod';
 
 import {
-  checkWalletDataSchema,
   checkWalletResponseSchema,
   githubLoginPayloadSchema,
   siweCreateMessageResponseSchema,
@@ -14,7 +13,6 @@ import {
 import { checkWalletRolesSchema } from './schemas';
 import { checkWalletFlowsSchema } from './schemas';
 
-export type CheckWalletData = Infer<typeof checkWalletDataSchema>;
 export type CheckWalletResponse = Infer<typeof checkWalletResponseSchema>;
 
 export type SiweNonceResponse = Infer<typeof siweNonceResponseSchema>;
@@ -35,6 +33,7 @@ export type AuthCtx = {
   isCryptoNative: boolean;
   isLoading: boolean;
   isLoadingLogout: boolean;
+  isLoggedIn: boolean;
   isAuthenticated: boolean;
   showLoginModal: () => void;
   logout: () => Promise<void>;

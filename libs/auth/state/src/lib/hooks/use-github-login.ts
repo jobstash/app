@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 
+import { usePrivy } from '@privy-io/react-auth';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { CHECK_WALLET_ROLES, GithubLoginPayload } from '@jobstash/auth/core';
@@ -18,10 +19,14 @@ export const useGithubLogin = () => {
 
   const queryClient = useQueryClient();
 
+  const { getAccessToken } = usePrivy();
+
   const { mutate, isPending } = useMutation({
     mutationFn: (payload: GithubLoginPayload) => githubLogin(payload),
     async onSuccess() {
-      const checkWalletData = await getCheckWallet();
+      const accessToken = await getAccessToken();
+      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
+      const checkWalletData = await getCheckWallet(accessToken!);
       queryClient.setQueryData([mwVersion, 'check-wallet'], checkWalletData);
 
       router.push('/profile');
@@ -62,7 +67,7 @@ export const useGithubLogin = () => {
     },
   });
 
-  return { mutate, isLoadin: isPending };
+  return { mutate, isLoading: isPending };
 };
 
 const GH_ACCOUNT_USED_MESSAGE =

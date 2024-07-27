@@ -1,38 +1,75 @@
-import { usePrivy } from '@privy-io/react-auth';
+import { useEffect, useState } from 'react';
+
+import { getAccessToken, useLogin, usePrivy } from '@privy-io/react-auth';
 import { useMutation } from '@tanstack/react-query';
 
-import { CheckWalletFlow, CheckWalletRole } from '@jobstash/auth/core';
+import {
+  CHECK_WALLET_FLOWS,
+  CHECK_WALLET_ROLES,
+  CheckWalletFlow,
+  CheckWalletResponse,
+  CheckWalletRole,
+} from '@jobstash/auth/core';
+import { LOCAL_STORAGE_KEYS } from '@jobstash/shared/core';
 
-import { useCheckWallet } from './use-check-wallet';
+import { getCheckWallet } from '@jobstash/auth/data';
 
-const useLogout = (privyLogout: () => Promise<void>) =>
-  useMutation({
+const DEFAULT_CHECK_WALLET_RESPONSE: CheckWalletResponse = {
+  role: CHECK_WALLET_ROLES.ANON,
+  flow: CHECK_WALLET_FLOWS.DEFAULT,
+  cryptoNative: false,
+  token: '',
+};
+
+export const useAuthProvider = () => {
+  const [checkWalletResponse, setCheckWalletResponse] =
+    useState<CheckWalletResponse>(DEFAULT_CHECK_WALLET_RESPONSE);
+  const { role, flow, cryptoNative } = checkWalletResponse;
+
+  const { authenticated: isLoggedIn, user, logout: privyLogout } = usePrivy();
+
+  const { mutate: setupLocal, isPending: isLoading } = useMutation({
     async mutationFn() {
-      await privyLogout();
-      // TODO: Do mw logout
+      const accessToken = await getAccessToken();
+      const response = await getCheckWallet(accessToken);
+      localStorage.setItem(LOCAL_STORAGE_KEYS.AUTH_JWT, response.token);
+      setCheckWalletResponse(response);
     },
   });
 
-export const useAuthProvider = () => {
-  const { authenticated, login, user, logout: privyLogout } = usePrivy();
+  // Setup local after privy login
+  const { login } = useLogin({
+    onComplete() {
+      setupLocal();
+    },
+  });
 
-  const { mutateAsync: logout, isPending: isLoadingLogout } =
-    useLogout(privyLogout);
+  // Setup local on page blur
+  useEffect(() => {
+    if (isLoggedIn && role === CHECK_WALLET_ROLES.ANON) {
+      setupLocal();
+    }
+  }, []);
 
-  const { data: checkWalletData, isLoading } = useCheckWallet(authenticated);
+  const isAuthenticated = isLoggedIn && role !== CHECK_WALLET_ROLES.ANON;
+
+  const { mutateAsync: logout, isPending: isLoadingLogout } = useMutation({
+    async mutationFn() {
+      await privyLogout();
+      localStorage.removeItem(LOCAL_STORAGE_KEYS.AUTH_JWT);
+      setCheckWalletResponse(DEFAULT_CHECK_WALLET_RESPONSE);
+    },
+  });
 
   return {
     user,
-    role: checkWalletData?.role as CheckWalletRole,
-    flow: checkWalletData?.flow as CheckWalletFlow,
-    isCryptoNative: checkWalletData?.cryptoNative ?? false,
+    role,
+    flow,
+    isCryptoNative: cryptoNative,
     isLoading,
     isLoadingLogout,
-    isAuthenticated: authenticated,
-    // TODO: Uncomment these after mw integration
-    // &&
-    // checkWalletData !== undefined &&
-    // checkWalletData.role !== CHECK_WALLET_ROLES.ANON,
+    isLoggedIn,
+    isAuthenticated,
     showLoginModal: login,
     logout,
   };

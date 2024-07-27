@@ -27,19 +27,12 @@ export const checkWalletFlowsSchema = myzod.literals(
   CHECK_WALLET_FLOWS.ORG_REJECTED,
 );
 
-export const checkWalletDataSchema = myzod.object({
+export const checkWalletResponseSchema = myzod.object({
   role: checkWalletRolesSchema,
   flow: checkWalletFlowsSchema,
   cryptoNative: myzod.boolean(),
+  token: myzod.string(),
 });
-
-export const checkWalletResponseSchema = myzod
-  .object({
-    data: checkWalletDataSchema,
-    success: myzod.boolean(),
-    message: myzod.string(),
-  })
-  .allowUnknownKeys(true);
 
 export const siweNonceResponseSchema = myzod.intersection(
   mwMessageResponseSchema,

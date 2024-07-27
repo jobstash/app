@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 import myzod, { type Type } from 'myzod';
 
 import {
@@ -5,6 +6,7 @@ import {
   ERR_INTERNAL,
   ERR_NOT_FOUND,
   ERR_OFFLINE,
+  LOCAL_STORAGE_KEYS,
   messageResponseSchema,
   SENTRY_MW_INVALID_JSON_RESPONSE,
   SENTRY_MW_NON_200_RESPONSE,
@@ -58,6 +60,15 @@ export const mwFetch = async <R, P = Undefined>(
   const hasEcosystemHeader = headerOptionKeys.has(ECOSYSTEM_HEADER_KEY);
   const clientEcosystemHeader = hasEcosystemHeader ? {} : getEcosystemHeader();
 
+  // Get token from local storage
+  const hasAuthHeader = headerOptionKeys.has('Authorization');
+  const token =
+    typeof window === 'undefined'
+      ? null
+      : localStorage.getItem(LOCAL_STORAGE_KEYS.AUTH_JWT);
+  const authHeader =
+    token && !hasAuthHeader ? { Authorization: `Bearer ${token}` } : undefined;
+
   const res = await fetch(url, {
     method,
     body,
@@ -66,6 +77,7 @@ export const mwFetch = async <R, P = Undefined>(
     headers: {
       ...headers,
       ...clientEcosystemHeader,
+      ...authHeader,
     },
     cache: 'no-cache',
   });

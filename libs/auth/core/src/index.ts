@@ -3,7 +3,6 @@ export * from './lib/constants';
 
 // Schemas
 export {
-  checkWalletDataSchema,
   checkWalletResponseSchema,
   githubLoginPayloadSchema,
   siweCreateMessageResponseSchema,

@@ -1,7 +1,7 @@
 import { CHECK_WALLET_ROLES } from '@jobstash/auth/core';
 import { cn } from '@jobstash/shared/utils';
 
-import { useSidebarContext } from '@jobstash/sidebar/state';
+import { useAuthContext } from '@jobstash/auth/state';
 
 import {
   BookmarkSidebarIcon,
@@ -30,7 +30,7 @@ interface Props {
 }
 
 const SidebarBookmarksSection = ({ isMobile }: Props) => {
-  const { role } = useSidebarContext();
+  const { role } = useAuthContext();
 
   const isDev = role === CHECK_WALLET_ROLES.DEV;
 

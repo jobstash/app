@@ -145,3 +145,7 @@ export const SESSION_STORAGE_KEYS = {
   MW_VERSION: 'jobstash-mw-version',
   SCHEMA_VALIDATION_RELOAD: 'schema-validation-reload',
 } as const;
+
+export const LOCAL_STORAGE_KEYS = {
+  AUTH_JWT: 'jobstash:jwt',
+} as const;

@@ -107,6 +107,7 @@ export const userEmailSchema = myzod.object({
 
 export const devProfileInfoSchema = myzod.object({
   wallet: myzod.string().min(1),
+  linkedWallets: myzod.array(myzod.string()),
   avatar: myzod.string().min(1).nullable(),
   username: myzod.string().min(1).nullable(),
   email: myzod.array(userEmailSchema),

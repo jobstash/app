@@ -85,9 +85,18 @@ export const ActiveModal = ({
         </ModalHeader>
         <ModalBody>
           <div className="flex items-center justify-between py-2">
-            <div className="flex items-center gap-2">
+            <div
+              className={cn('flex items-center gap-2', {
+                'opacity-40': isLoadingLogout,
+              })}
+            >
               <ButtonWrapper>
-                <Button fullWidth radius="md" className="font-bold h-full">
+                <Button
+                  fullWidth
+                  isDisabled={isLoadingLogout}
+                  radius="md"
+                  className="font-bold h-full"
+                >
                   {text}
                 </Button>
               </ButtonWrapper>

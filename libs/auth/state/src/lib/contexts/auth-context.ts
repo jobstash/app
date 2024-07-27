@@ -13,6 +13,7 @@ export const AuthContext = createContext<AuthCtx>({
   isCryptoNative: false,
   isLoading: false,
   isLoadingLogout: false,
+  isLoggedIn: false,
   isAuthenticated: false,
   showLoginModal: () => null,
   logout: () => Promise.resolve(),

@@ -1,10 +1,7 @@
 import { createContext, useContext } from 'react';
 
-import { type CheckWalletRole } from '@jobstash/auth/core';
-
 interface SidebarContextProps {
   sidebarOpen: boolean;
-  role: CheckWalletRole;
 }
 
 export const SidebarContext = createContext<SidebarContextProps | null>(null);

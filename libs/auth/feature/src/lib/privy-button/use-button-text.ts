@@ -19,7 +19,7 @@ const formatGithub = (github?: string | null) =>
   github ? `github.com/${github}` : undefined;
 
 export const useButtonText = () => {
-  const { user, isAuthenticated, isLoading: isLoadingAuth } = useAuthContext();
+  const { user, isLoggedIn, isLoading: isLoadingAuth } = useAuthContext();
 
   // Get wallet address except embedded privy wallet
   const addresses = useMemo(() => {
@@ -48,8 +48,8 @@ export const useButtonText = () => {
 
   // Reset ensName if user is not authenticated
   useEffect(() => {
-    if (!isAuthenticated && Boolean(ensName)) setEnsName(null);
-  }, [isAuthenticated, ensName]);
+    if (!isLoggedIn && Boolean(ensName)) setEnsName(null);
+  }, [isLoggedIn, ensName]);
 
   // Update ensName if fetchedName is available or move to next address
   useEffect(() => {
@@ -61,7 +61,7 @@ export const useButtonText = () => {
   }, [addresses.length, currentAddressIndex, isLoading, fetchedName]);
 
   const getTexts = useCallback(() => {
-    if (!isAuthenticated) return { text: DEFAULT_TEXT, fullText: '' };
+    if (!isLoggedIn) return { text: DEFAULT_TEXT, fullText: '' };
 
     const email = user?.email?.address;
     const github = user?.github?.username;
@@ -71,7 +71,7 @@ export const useButtonText = () => {
       text: formatName(ensName ?? formatEmail(email) ?? github ?? wallet),
       fullText: ensName ?? email ?? formatGithub(github) ?? wallet,
     };
-  }, [isAuthenticated, user, ensName, addresses]);
+  }, [isLoggedIn, user, ensName, addresses]);
 
   return {
     isLoading,
