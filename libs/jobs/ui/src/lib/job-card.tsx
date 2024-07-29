@@ -1,7 +1,7 @@
 /* eslint-disable camelcase */
 import { memo, type ReactNode, useMemo } from 'react';
 
-import { useSetAtom } from 'jotai';
+import { PrimitiveAtom, useSetAtom } from 'jotai';
 
 import { type JobPost } from '@jobstash/jobs/core';
 import {
@@ -16,7 +16,6 @@ import { checkJobIsFeatured, createJobKey } from '@jobstash/jobs/utils';
 import { dispatchEvent, gaEvent } from '@jobstash/shared/utils';
 
 import { useAuthContext } from '@jobstash/auth/state';
-import { activeJobAtom } from '@jobstash/jobs/state';
 
 import { Heading } from '@jobstash/shared/ui';
 
@@ -34,6 +33,7 @@ interface Props {
   filterParamsObj: Record<string, string>;
   bookmarkButton: ReactNode;
   routeSection: JobsRouteSection;
+  activeJobAtom: PrimitiveAtom<JobPost | null>;
 }
 
 const JobCard = ({
@@ -42,6 +42,7 @@ const JobCard = ({
   filterParamsObj,
   bookmarkButton,
   routeSection = ROUTE_SECTION.JOBS,
+  activeJobAtom,
 }: Props) => {
   const {
     organization,
