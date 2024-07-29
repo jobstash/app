@@ -97,7 +97,7 @@ export const JobPostPageTemplate: React.FC<JobPostPageTemplateProps> = ({
 
   // (react-query breaking change v5 - removed onSuccess)
   useEffect(() => {
-    if (jobPost && !initJob) {
+    if (jobPost && !initJob && fromSSR) {
       setActiveJob(jobPost);
     }
   });
