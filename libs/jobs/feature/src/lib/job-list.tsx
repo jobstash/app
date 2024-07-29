@@ -60,6 +60,7 @@ const JobList = ({
             filterParamsObj={filterParamsObj}
             bookmarkButton={null}
             routeSection={routeSection}
+            activeJobAtom={activeJobAtom}
           />
         )}
         <div className="flex items-center justify-center w-full h-full pt-12">
@@ -70,9 +71,7 @@ const JobList = ({
   }
 
   if (jobPosts.length === 0 && !error) {
-    return (
-      <JobListEmptyResult prevLink={jobsPrevLink} push={push} />
-    );
+    return <JobListEmptyResult prevLink={jobsPrevLink} push={push} />;
   }
 
   return (
@@ -91,6 +90,7 @@ const JobList = ({
             />
           }
           routeSection={routeSection}
+          activeJobAtom={activeJobAtom}
         />
       ))}
 
