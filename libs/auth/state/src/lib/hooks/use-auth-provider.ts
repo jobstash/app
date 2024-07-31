@@ -1,14 +1,17 @@
 import { useEffect, useState } from 'react';
 
-import { getAccessToken, useLogin, usePrivy } from '@privy-io/react-auth';
+import {
+  getAccessToken,
+  useLogin,
+  useLogout,
+  usePrivy,
+} from '@privy-io/react-auth';
 import { useMutation } from '@tanstack/react-query';
 
 import {
   CHECK_WALLET_FLOWS,
   CHECK_WALLET_ROLES,
-  CheckWalletFlow,
   CheckWalletResponse,
-  CheckWalletRole,
 } from '@jobstash/auth/core';
 import { LOCAL_STORAGE_KEYS } from '@jobstash/shared/core';
 
@@ -26,7 +29,7 @@ export const useAuthProvider = () => {
     useState<CheckWalletResponse>(DEFAULT_CHECK_WALLET_RESPONSE);
   const { role, flow, cryptoNative } = checkWalletResponse;
 
-  const { authenticated: isLoggedIn, user, logout: privyLogout } = usePrivy();
+  const { authenticated: isLoggedIn, user, getAccessToken } = usePrivy();
 
   const { mutate: setupLocal, isPending: isLoading } = useMutation({
     async mutationFn() {
@@ -54,11 +57,16 @@ export const useAuthProvider = () => {
 
   const isAuthenticated = isLoggedIn && role !== CHECK_WALLET_ROLES.ANON;
 
+  const { logout: privyLogout } = useLogout({
+    async onSuccess() {
+      setCheckWalletResponse(DEFAULT_CHECK_WALLET_RESPONSE);
+      localStorage.removeItem(LOCAL_STORAGE_KEYS.AUTH_JWT);
+    },
+  });
+
   const { mutateAsync: logout, isPending: isLoadingLogout } = useMutation({
     async mutationFn() {
       await privyLogout();
-      localStorage.removeItem(LOCAL_STORAGE_KEYS.AUTH_JWT);
-      setCheckWalletResponse(DEFAULT_CHECK_WALLET_RESPONSE);
     },
   });
 

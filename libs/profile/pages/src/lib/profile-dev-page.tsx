@@ -1,4 +1,5 @@
 import Head from 'next/head';
+import { useRouter } from 'next/router';
 
 import { LoadingPage } from '@jobstash/shared/pages';
 
@@ -23,6 +24,9 @@ import { SideBar } from '@jobstash/sidebar/feature';
 
 export const ProfileDevPage = () => {
   const { profileInfoData } = useDevProfileInfo();
+  const { isReady } = useRouter();
+
+  if (!isReady) return <LoadingPage />;
 
   return (
     <>
