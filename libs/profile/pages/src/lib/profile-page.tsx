@@ -7,16 +7,14 @@ import {
   DevProfileInfoProvider,
   OrgProfileInfoProvider,
 } from '@jobstash/profile/state';
-import { useDelayedAuthRender } from '@jobstash/shared/state';
 
 import { ProfileDevPage } from './profile-dev-page';
 import { ProfileOrgPage } from './profile-org-page';
 
 export const ProfilePage = () => {
-  const { isLoading, role } = useAuthContext();
-  const { canRender } = useDelayedAuthRender({ requireConnected: true });
+  const { isLoading, role, isAuthenticated } = useAuthContext();
 
-  if (!canRender || isLoading) return <LoadingPage />;
+  if (!isAuthenticated || isLoading) return <LoadingPage />;
 
   const isDev = role === CHECK_WALLET_ROLES.DEV;
   const isOrg = role === CHECK_WALLET_ROLES.ORG;

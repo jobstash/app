@@ -39,7 +39,8 @@ export const useAuthProvider = () => {
 
   // Setup local after privy login
   const { login } = useLogin({
-    onComplete() {
+    onComplete(_user) {
+      // TODO: check user and do JOB-666
       setupLocal();
     },
   });
@@ -49,7 +50,7 @@ export const useAuthProvider = () => {
     if (isLoggedIn && role === CHECK_WALLET_ROLES.ANON) {
       setupLocal();
     }
-  }, []);
+  }, [isLoggedIn, role, setupLocal]);
 
   const isAuthenticated = isLoggedIn && role !== CHECK_WALLET_ROLES.ANON;
 

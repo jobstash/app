@@ -6,7 +6,6 @@ import { CHECK_WALLET_ROLES } from '@jobstash/auth/core';
 
 import { useAuthContext } from '@jobstash/auth/state';
 import { ProfileReviewsPageProvider } from '@jobstash/profile/state';
-import { useDelayedAuthRender } from '@jobstash/shared/state';
 
 import {
   ProfileHeader,
@@ -21,12 +20,9 @@ import {
 import { SideBar } from '@jobstash/sidebar/feature';
 
 export const ProfileReviewsPage = () => {
-  const { role, isLoading } = useAuthContext();
-  const { canRender } = useDelayedAuthRender({
-    requireConnected: true,
-  });
+  const { role, isLoading, isAuthenticated } = useAuthContext();
 
-  if (!canRender || isLoading) return <LoadingPage />;
+  if (!isAuthenticated || isLoading) return <LoadingPage />;
 
   if (role !== CHECK_WALLET_ROLES.DEV) {
     return <NotFoundPage />;

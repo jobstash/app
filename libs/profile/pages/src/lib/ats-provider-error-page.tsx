@@ -6,7 +6,6 @@ import { CHECK_WALLET_ROLES } from '@jobstash/auth/core';
 import { ERR_INTERNAL } from '@jobstash/shared/core';
 
 import { useAuthContext } from '@jobstash/auth/state';
-import { useDelayedAuthRender } from '@jobstash/shared/state';
 
 import { Button, FoxSVG, Heading, Text } from '@jobstash/shared/ui';
 import { SideBar } from '@jobstash/sidebar/feature';
@@ -17,10 +16,9 @@ const DEFAULT_MESSAGE =
 
 export const ATSProviderErrorPage = () => {
   const router = useRouter();
-  const { isLoading, role } = useAuthContext();
-  const { canRender } = useDelayedAuthRender({ requireConnected: true });
+  const { isLoading, role, isAuthenticated } = useAuthContext();
 
-  if (!canRender || isLoading) return <LoadingPage />;
+  if (!isAuthenticated || isLoading) return <LoadingPage />;
   if (role !== CHECK_WALLET_ROLES.ORG) return <NotFoundPage />;
 
   const { title = ERR_INTERNAL, message = DEFAULT_MESSAGE } = router.query;

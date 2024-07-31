@@ -2,14 +2,14 @@ import Head from 'next/head';
 
 import { ADMIN_BREADCRUMBS, ADMIN_TABS } from '@jobstash/admin/core';
 
-import { useDelayedAuthRender } from '@jobstash/shared/state';
+import { useAuthContext } from '@jobstash/auth/state';
 
 import { AdminLayout, AdminTabs } from '@jobstash/admin/ui';
 import { BreadCrumbs, Loader } from '@jobstash/shared/ui';
 import { SideBar } from '@jobstash/sidebar/feature';
 
 export const TagApprovalsPage = () => {
-  const { canRender } = useDelayedAuthRender({ requireConnected: true });
+  const { isAuthenticated } = useAuthContext();
 
   return (
     <>
@@ -24,7 +24,7 @@ export const TagApprovalsPage = () => {
         sidebar={<SideBar />}
         tabsSection={<AdminTabs tabs={ADMIN_TABS.TECHNOLOGIES} />}
       >
-        {canRender ? <p>TODO</p> : <Loader />}
+        {isAuthenticated ? <p>TODO</p> : <Loader />}
       </AdminLayout>
     </>
   );

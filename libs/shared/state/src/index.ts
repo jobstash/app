@@ -13,7 +13,6 @@ export { default as ReactQueryProvider } from './lib/providers/react-query-provi
 //  Hooks
 export * from './lib/hooks/use-all-tags';
 export * from './lib/hooks/use-debounced-value';
-export * from './lib/hooks/use-delayed-auth-render';
 export * from './lib/hooks/use-disable-scroll-listener';
 export * from './lib/hooks/use-is-mounted';
 export * from './lib/hooks/use-media-query';

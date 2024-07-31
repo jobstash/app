@@ -6,19 +6,18 @@ import { LoadingPage, NotFoundPage } from '@jobstash/shared/pages';
 
 import { ATS_PROVIDERS } from '@jobstash/profile/core';
 
+import { useAuthContext } from '@jobstash/auth/state';
 import { useLinkATSPlatform, useOrgProfileInfo } from '@jobstash/profile/state';
-import { useDelayedAuthRender } from '@jobstash/shared/state';
 
 export const ATSOauthLeverCallbackPage = () => {
+  const { isAuthenticated } = useAuthContext();
   const router = useRouter();
   const { client_id } = router.query;
-
-  const { canRender } = useDelayedAuthRender({ requireConnected: true });
 
   const { profileInfoData, isLoading: isLoadingProfile } = useOrgProfileInfo();
   const orgId = profileInfoData?.orgId;
 
-  const isLoading = !canRender || isLoadingProfile;
+  const isLoading = !isAuthenticated || isLoadingProfile;
 
   const { mutate } = useLinkATSPlatform();
 
