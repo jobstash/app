@@ -1,5 +1,4 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useAccount } from 'wagmi';
 
 import { JobPost } from '@jobstash/jobs/core';
 import { notifError, notifSuccess } from '@jobstash/shared/utils';
@@ -18,7 +17,6 @@ export const useSendJobApplyInteractionMutation = ({
   isDevOneClick,
   appliedJobs = [],
 }: Props = {}) => {
-  const { address } = useAccount();
   const queryClient = useQueryClient();
   const { mwVersion } = useMwVersionContext();
 
@@ -26,7 +24,7 @@ export const useSendJobApplyInteractionMutation = ({
     mutationFn: (shortUUID: string) => sendJobApplyInteraction(shortUUID),
     onSuccess() {
       if (isDevOneClick && Boolean(jobPost)) {
-        const queryKey = [mwVersion, 'jobs-applied', address];
+        const queryKey = [mwVersion, 'jobs-applied'];
         queryClient.setQueryData(queryKey, [...appliedJobs, jobPost]);
         queryClient.invalidateQueries({
           queryKey,

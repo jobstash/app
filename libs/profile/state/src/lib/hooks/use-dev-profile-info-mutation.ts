@@ -1,5 +1,4 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useAccount } from 'wagmi';
 
 import { type DevProfileInfoPayload } from '@jobstash/profile/core';
 import { ERR_INTERNAL } from '@jobstash/shared/core';
@@ -14,11 +13,10 @@ type MutationPayload = {
 };
 
 export const useDevProfileInfoMutation = () => {
-  const { address } = useAccount();
   const queryClient = useQueryClient();
   const { mwVersion } = useMwVersionContext();
 
-  const profileInfoQueryKey = [mwVersion, 'dev-profile-info', address];
+  const profileInfoQueryKey = [mwVersion, 'dev-profile-info'];
 
   const { isPending: isLoadingMutation, mutate } = useMutation({
     mutationFn: ({ payload }: MutationPayload) => postDevProfileInfo(payload),
@@ -50,7 +48,7 @@ export const useDevProfileInfoMutation = () => {
     async onSettled() {
       // Always refetch after
       await queryClient.invalidateQueries({
-        queryKey: [mwVersion, 'dev-profile-info', address],
+        queryKey: [mwVersion, 'dev-profile-info'],
       });
     },
   });

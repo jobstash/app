@@ -1,6 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
-import { useAccount } from 'wagmi';
 
 import { type ProfileOrgReviewPayload } from '@jobstash/profile/core';
 import { notifError, notifSuccess } from '@jobstash/shared/utils';
@@ -13,7 +12,6 @@ import { useProfileReviewsPageContext } from '../contexts/profile-reviews-page-c
 
 export const useYourReviewMutation = () => {
   const { setIsLoadingCard } = useProfileReviewsPageContext();
-  const { address } = useAccount();
   const queryClient = useQueryClient();
   const { mwVersion } = useMwVersionContext();
 
@@ -34,7 +32,7 @@ export const useYourReviewMutation = () => {
 
       // Invalidate profile-org-review-list
       queryClient.invalidateQueries({
-        queryKey: [mwVersion, 'profile-org-review-list', address],
+        queryKey: [mwVersion, 'profile-org-review-list'],
       });
 
       if (activeProfileOrgReview) {

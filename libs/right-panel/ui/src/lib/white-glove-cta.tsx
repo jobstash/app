@@ -1,5 +1,3 @@
-import { useAccount } from 'wagmi';
-
 import { DUCK_TELEGRAM_URL } from '@jobstash/shared/core';
 import { openNewTab } from '@jobstash/shared/utils';
 
@@ -33,10 +31,9 @@ const TooltipContent = () => (
 const onClick = () => openNewTab(DUCK_TELEGRAM_URL);
 
 export const WhiteGloveCTA = () => {
-  const { isConnected } = useAccount();
   const { isCryptoNative, isLoading, isAuthenticated } = useAuthContext();
 
-  const isAnon = !isConnected || !isAuthenticated;
+  const isAnon = !isAuthenticated;
 
   if (isAnon || !isCryptoNative) return null;
 

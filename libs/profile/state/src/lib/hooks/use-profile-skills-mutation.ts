@@ -1,7 +1,6 @@
 import { notifications } from '@mantine/notifications';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
-import { useAccount } from 'wagmi';
 
 import { ProfileSkillsPayload } from '@jobstash/profile/core';
 import { notifError, notifLoading, notifSuccess } from '@jobstash/shared/utils';
@@ -14,7 +13,6 @@ import { activeProfileRepoAtom } from '../atoms/active-profile-repo-atom';
 const TOAST_ID = 'skills-mutation';
 
 export const useProfileSkillsMutation = () => {
-  const { address } = useAccount();
   const queryClient = useQueryClient();
   const { mwVersion } = useMwVersionContext();
 
@@ -37,10 +35,7 @@ export const useProfileSkillsMutation = () => {
         message,
       });
 
-      queryClient.setQueryData(
-        [mwVersion, 'profile-skills', address],
-        vars.skills,
-      );
+      queryClient.setQueryData([mwVersion, 'profile-skills'], vars.skills);
 
       // Sync active profile repo skills
       // Active repo is only assigned on initial load or when selection changes
@@ -71,7 +66,7 @@ export const useProfileSkillsMutation = () => {
     },
     onSettled() {
       queryClient.invalidateQueries({
-        queryKey: [mwVersion, 'profile-skills', address],
+        queryKey: [mwVersion, 'profile-skills'],
       });
       queryClient.invalidateQueries({
         queryKey: [mwVersion, 'profile-repo-list'],

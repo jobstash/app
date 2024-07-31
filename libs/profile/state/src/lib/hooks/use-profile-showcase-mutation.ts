@@ -1,6 +1,5 @@
 import { notifications } from '@mantine/notifications';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useAccount } from 'wagmi';
 
 import { type ProfileShowcasePayload } from '@jobstash/profile/core';
 import { notifError, notifLoading, notifSuccess } from '@jobstash/shared/utils';
@@ -11,7 +10,6 @@ import { postProfileShowcase } from '@jobstash/profile/data';
 const TOAST_ID = 'showcase-mutation';
 
 export const useProfileShowcaseMutation = (onSuccessCb: () => void) => {
-  const { address } = useAccount();
   const queryClient = useQueryClient();
   const { mwVersion } = useMwVersionContext();
 
@@ -34,7 +32,7 @@ export const useProfileShowcaseMutation = (onSuccessCb: () => void) => {
         message,
       });
 
-      const queryKey = [mwVersion, 'profile-showcase', address];
+      const queryKey = [mwVersion, 'profile-showcase'];
       await queryClient.invalidateQueries({
         queryKey,
       });

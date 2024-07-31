@@ -8,6 +8,7 @@ import { CHECK_WALLET_ROLES } from '@jobstash/auth/core';
 import { useGithubLogin } from '@jobstash/auth/state';
 
 const DevGithubCallbackPage = () => {
+  // TODO: use privy wallet address
   const { address } = useAccount();
   const { mutate } = useGithubLogin();
 

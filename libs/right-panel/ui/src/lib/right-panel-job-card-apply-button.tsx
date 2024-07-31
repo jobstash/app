@@ -1,7 +1,6 @@
 /* eslint-disable camelcase */
 
 import { Spinner } from '@nextui-org/spinner';
-import { useAccount } from 'wagmi';
 
 import { CHECK_WALLET_ROLES } from '@jobstash/auth/core';
 import { ECOSYSTEMS, GA_EVENT_ACTION } from '@jobstash/shared/core';
@@ -27,11 +26,9 @@ interface Props {
 export const RightPanelJobCardApplyButton = (props: Props) => {
   const { url, shortUUID, orgName, hasUser, classification } = props;
 
-  const { isConnected } = useAccount();
-
   const { role, isAuthenticated, showLoginModal } = useAuthContext();
   const isDev = role === CHECK_WALLET_ROLES.DEV;
-  const isAnon = !isConnected || !isAuthenticated;
+  const isAnon = !isAuthenticated;
 
   const { isSupported, subdomain } = getEcosystemSubdomain();
   const isEthdam = isSupported && subdomain === ECOSYSTEMS.ETHDAM;

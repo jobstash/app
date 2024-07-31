@@ -1,5 +1,4 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useAccount } from 'wagmi';
 
 import { CHECK_WALLET_FLOWS } from '@jobstash/auth/core';
 import { OrgProfileInfoPayload } from '@jobstash/profile/core';
@@ -10,7 +9,6 @@ import { useMwVersionContext } from '@jobstash/shared/state';
 import { postOrgProfileInfo } from '@jobstash/profile/data';
 
 export const useOrgProfileInfoMutation = () => {
-  const { address } = useAccount();
   const queryClient = useQueryClient();
   const { mwVersion } = useMwVersionContext();
   const { flow } = useAuthContext();
@@ -18,7 +16,7 @@ export const useOrgProfileInfoMutation = () => {
     flow === CHECK_WALLET_FLOWS.ORG_PROFILE ||
     flow === CHECK_WALLET_FLOWS.ORG_APPROVAL;
 
-  const profileInfoQueryKey = [mwVersion, 'org-profile-info', address];
+  const profileInfoQueryKey = [mwVersion, 'org-profile-info'];
 
   const { isPending, mutate } = useMutation({
     mutationFn: (payload: OrgProfileInfoPayload) => postOrgProfileInfo(payload),
@@ -46,7 +44,7 @@ export const useOrgProfileInfoMutation = () => {
     onSettled() {
       // Always refetch after
       queryClient.invalidateQueries({
-        queryKey: [mwVersion, 'org-profile-info', address],
+        queryKey: [mwVersion, 'org-profile-info'],
       });
       queryClient.invalidateQueries({
         queryKey: [mwVersion, 'check-wallet'],
