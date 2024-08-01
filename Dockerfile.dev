@@ -54,7 +54,7 @@ ENV NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID=d6b3203f9238276df2440599c3497e69
 ENV ENABLE_BASIC_AUTH=true
 
 ENV NEXT_PUBLIC_NEW_FEATURE_TITLE="Introducing our Job Concierge!"
-ENV NEXT_PUBLIC_NEW_FEATURE_DESCRIPTION="If you've got an EthGlobal pack, you can now qualify for the Job Concierge. This means you can apply to jobs which are reserved for veteran builders and you'll get our bestpoke advice, where we help you shape your CV and give you additional nonpublic information about specific vacancies to improve your odds of landing your dream job. Just connect your wallet, sign in, and apply to jobs in the Job Concierge section!"
+ENV NEXT_PUBLIC_NEW_FEATURE_DESCRIPTION="Job Concierge offers exclusive access to jobs reserved for expert builders.\n\nBenefits include:\n\n- Bespoke Advice: Personalized guidance and CV fine-tuning through a one-on-one call.\n- Private Job Information: Access non-public vacancy details to enhance your applications.\n- Founders' Insight: We advocate on your behalf to increase your chances of landing the job.\n\nTo qualify, you need an EthGlobal Community pack (Builder tier+), be an EthGlobal finalist, or have verified work history via GitHub or a professional email.\n\nConnect your wallet, sign in, and start applying to exclusive jobs in the Job Concierge section!"
 ENV NEXT_PUBLIC_NEW_FEATURE_CTA_TEXT="Check it out!"
 ENV NEXT_PUBLIC_NEW_FEATURE_CTA_LINK="/job-concierge"
 
