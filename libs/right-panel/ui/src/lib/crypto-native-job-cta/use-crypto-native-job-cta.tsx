@@ -14,12 +14,12 @@ import { AnonTooltipContent } from './anon-tooltip-content';
 import { EligibleTooltipContent } from './eligible-tooltip-content';
 import { NotEligibleTooltipContent } from './not-eligible-tooltip-content';
 
-const ANON_TEXT = 'Check Fast Track Access';
+const ANON_TEXT = 'Check Job Concierge Access';
 const ELIGIBLE_TEXT = 'Get Job Concierge Access';
 const NOT_ELIGIBLE_TEXT = 'Not eligible for Job Concierge';
 const TOAST_ID = 'crypto-native-job-cta';
-const LOADING_MESSAGE = 'We are curating your profile. Please wait!';
-const SUCCESS_TITLE = 'You have been curated!';
+const LOADING_MESSAGE = 'Analyzing your profile...';
+const SUCCESS_TITLE = 'You qualify for Job Concierge!';
 const SUCCESS_MESSAGE = 'You can now apply to this job.';
 
 interface Props {

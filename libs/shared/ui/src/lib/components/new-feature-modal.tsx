@@ -26,7 +26,7 @@ import { newFeatureIsOpenAtom } from '@jobstash/shared/state';
 import Text from '../base/text';
 
 const LS_KEY = 'new-feature-key';
-const HEADER_TEXT = 'EthGlobal participants now get Elite Status';
+const HEADER_TEXT = 'EthGlobal pack holders qualify for Job Concierge!';
 
 export const NewFeatureModal = () => {
   const router = useRouter();
