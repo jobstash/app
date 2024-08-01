@@ -3,7 +3,7 @@ import Head from 'next/head';
 import Script from 'next/script';
 
 const NAME = 'JobStash';
-const DESCRIPTION = 'The Ultimate Job Aggregator for Crypto Developers';
+const DESCRIPTION = 'Crypto Native Jobs';
 const WEBSITE_URL = 'https://www.jobstash.xyz';
 const IMAGE_URL =
   'https://whi3td4y5t552pnenllviunljg23ggqza2dr7bwhciwlne7rphta.arweave.net/sdG5j5js-909pGrXVFGrSbWzGhkGhx-GxxIstpPxeeY';

@@ -30,7 +30,7 @@ import { NewFeatureModal, ReportModal } from '@jobstash/shared/ui';
 import { WagmiSiweSync } from '@jobstash/auth/feature';
 
 const NAME = 'JobStash';
-const DESCRIPTION = 'The Ultimate Job Aggregator for Crypto Developers';
+const DESCRIPTION = 'Crypto Native Jobs';
 const WEBSITE_URL = 'https://www.jobstash.xyz';
 const IMAGE_URL =
   'https://ytjreygb5x3jlwhdfzouuyx4ahhupibro6rb2ibqlyq7l3kze7da.arweave.net/xNMSYMHt9pXY4y5dSmL8Ac9HoDF3oh0gMF4h9e1ZJ8Y';
