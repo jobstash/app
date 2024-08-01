@@ -51,10 +51,10 @@ ENV NEXT_PUBLIC_QUERY_RETRY_COUNT=0
 ENV NEXT_PUBLIC_INFURA_ID=805a91964ce748f7b7b3d0c787ad7783
 ENV NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID=d6b3203f9238276df2440599c3497e69
 ENV NEXT_PUBLIC_GA_MEASUREMENT_ID=G-PQSHG9DB44
-ENV NEXT_PUBLIC_NEW_FEATURE_TITLE="EthGlobal pack holders now qualify for Elite Fast Track"
-ENV NEXT_PUBLIC_NEW_FEATURE_DESCRIPTION="If you've got an EthGlobal pack, you can now qualify for the Elite Fast Track. This means you can apply to jobs which are reserved for veteran builders and you'll get our bestpoke advice, where we help you shape your CV and give you additional nonpublic information about specific vacancies to improve your odds of landing your dream job. Just connect your wallet, sign in, and apply to jobs in the Elite Fast Track section!"
+ENV NEXT_PUBLIC_NEW_FEATURE_TITLE="EthGlobal pack holders now qualify for our Job Concierge!"
+ENV NEXT_PUBLIC_NEW_FEATURE_DESCRIPTION="If you have an EthGlobal Community pack starting from the Builder tier, were an EthGlobal finalist, or have previously worked in the industry, you can now qualify for Job Concierge by connecting your GitHub or professional email for verification. This exclusive service allows you to apply for jobs reserved for expert builders and receive bespoke advice. We'll help you shape your CV and provide additional non-public information about specific vacancies to improve your chances of landing your dream job. Simply connect your wallet, sign in, and start applying to jobs in the Job Concierge section!"
 ENV NEXT_PUBLIC_NEW_FEATURE_CTA_TEXT="Check it out!"
-ENV NEXT_PUBLIC_NEW_FEATURE_CTA_LINK="/elite-fast-track"
+ENV NEXT_PUBLIC_NEW_FEATURE_CTA_LINK="/job-concierge"
 ENV CYPRESS_INSTALL_BINARY=0
 
 RUN pnpm build

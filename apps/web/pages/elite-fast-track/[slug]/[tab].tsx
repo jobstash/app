@@ -26,7 +26,7 @@ export const getServerSideProps: GetServerSideProps<JobPostPageSharedProps> =
           return {
             props: {
               notFoundInfo: {
-                link: ROUTE_SECTION.ELITE_FAST_TRACK,
+                link: ROUTE_SECTION.JOB_CONCIERGE,
                 title: 'Job Not Found',
                 message: "The job you tried to find doesn't exist anymore",
                 buttonText: 'Back to Job List',
@@ -36,7 +36,7 @@ export const getServerSideProps: GetServerSideProps<JobPostPageSharedProps> =
         }
 
         sentryMessage(
-          `${ROUTE_SECTION.ELITE_FAST_TRACK} SSR`,
+          `${ROUTE_SECTION.JOB_CONCIERGE} SSR`,
           `failed fetching first job details ${shortUuid}`,
         );
 
