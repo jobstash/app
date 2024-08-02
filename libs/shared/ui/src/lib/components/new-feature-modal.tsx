@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 import {
   Button,
@@ -7,18 +7,11 @@ import {
   ModalBody,
   ModalContent,
   ModalFooter,
-  ModalHeader,
   useDisclosure,
 } from '@nextui-org/react';
 import { useAtom } from 'jotai';
 
-import {
-  lato,
-  NEW_FEATURE_CTA_TEXT,
-  NEW_FEATURE_CTA_URL,
-  NEW_FEATURE_DESCRIPTION,
-  NEW_FEATURE_TITLE,
-} from '@jobstash/shared/core';
+import { lato, NEW_FEATURE_DIFF } from '@jobstash/shared/core';
 import { cn, getLocalStorageValue } from '@jobstash/shared/utils';
 
 import { newFeatureIsOpenAtom } from '@jobstash/shared/state';
@@ -26,15 +19,16 @@ import { newFeatureIsOpenAtom } from '@jobstash/shared/state';
 import Text from '../base/text';
 
 const LS_KEY = 'new-feature-key';
-const HEADER_TEXT = 'EthGlobal pack holders qualify for Job Concierge!';
+
+const TITLE = 'Introducing our Job Concierge!';
+const CTA_TEXT = 'Check it out!';
+const CTA_LINK = '/elite-fast-track';
 
 export const NewFeatureModal = () => {
   const router = useRouter();
   const [isOpenAtom, setIsOpenAtom] = useAtom(newFeatureIsOpenAtom);
 
-  const title = NEW_FEATURE_TITLE;
-  const description = NEW_FEATURE_DESCRIPTION;
-  const current = JSON.stringify({ title, description });
+  const current = JSON.stringify({ diff: NEW_FEATURE_DIFF });
   const lastSeen = getLocalStorageValue(LS_KEY);
   const defaultOpen = current !== lastSeen;
 
@@ -63,15 +57,13 @@ export const NewFeatureModal = () => {
     isOpen ? onOpen() : handleClose();
   };
 
-  const hasCTA = NEW_FEATURE_CTA_TEXT && NEW_FEATURE_CTA_URL;
+  const hasCTA = CTA_TEXT && CTA_LINK;
   const onClickCTA = () => {
     if (hasCTA) {
       handleClose();
-      router.push(NEW_FEATURE_CTA_URL);
+      router.push(CTA_LINK);
     }
   };
-
-  if (!title) return null;
 
   return (
     <Modal
@@ -79,7 +71,7 @@ export const NewFeatureModal = () => {
       isOpen={isOpen}
       size="2xl"
       classNames={{
-        base: 'px-4 pt-2 pb-4 flex flex-col m-4 md:pb-8',
+        base: 'px-1 md:px-4 pt-2 pb-4 flex flex-col m-4 md:pb-8',
       }}
       style={{
         zIndex: 9999,
@@ -89,36 +81,66 @@ export const NewFeatureModal = () => {
       <ModalContent className="md:gap-y-4">
         {() => (
           <>
-            <ModalHeader className="pb-0">
-              <Text
-                color="dimmed"
-                className="w-full text-center md:text-[20px] md:pb-2"
-              >
-                {HEADER_TEXT}
-              </Text>
-            </ModalHeader>
             <ModalBody>
-              <div className="flex flex-col items-center justify-center w-full">
+              <div className="flex flex-col w-full pt-0 sm:pt-4">
                 <div
                   className={cn(
-                    'font-bold text-white flex items-center pb-3 space-x-2 md:space-x-4 md:pb-8 md:text-[35px]',
+                    'font-bold text-white text-xl sm:text-3xl flex items-center justify-center space-x-2 md:space-x-4 pb-6 md:pb-8',
                     lato.className,
                   )}
                 >
                   <span role="img" aria-label="Shimmer">
                     ✨
                   </span>
-                  <span className="leading-tight text-center">{title}</span>
+                  <span className="leading-tight text-lg sm:text-3xl text-center shrink-0">
+                    {TITLE}
+                  </span>
                   <span role="img" aria-label="Shimmer">
                     ✨
                   </span>
                 </div>
 
-                {description && (
-                  <span className="text-center max-w-fit text-md md:text-lg">
-                    {description}
-                  </span>
-                )}
+                <div className="max-w-fit flex flex-col gap-4">
+                  <ContentText>
+                    Job Concierge offers exclusive access to jobs reserved for
+                    expert builders.
+                  </ContentText>
+
+                  <div className="flex flex-col gap-2">
+                    <ContentText>Benefits include: </ContentText>
+                    <ul className="space-y-1 list-disc list-outside pl-6">
+                      <li>
+                        <ContentText>
+                          Bespoke Advice: Personalized guidance and CV
+                          fine-tuning through a one-on-one call.
+                        </ContentText>
+                      </li>
+                      <li>
+                        <ContentText>
+                          Private Job Information: Access non-public vacancy
+                          details to enhance your applications.
+                        </ContentText>
+                      </li>
+                      <li>
+                        <ContentText>
+                          Founders&#39; Insight: We advocate on your behalf to
+                          increase your chances of landing the job.
+                        </ContentText>
+                      </li>
+                    </ul>
+                  </div>
+
+                  <ContentText>
+                    To qualify, you need an EthGlobal Community pack (Builder
+                    tier+), be an EthGlobal finalist, or have verified work
+                    history via GitHub or a professional email.
+                  </ContentText>
+
+                  <ContentText>
+                    Connect your wallet, sign in, and start applying to
+                    exclusive jobs in the Job Concierge section!
+                  </ContentText>
+                </div>
               </div>
             </ModalBody>
             <ModalFooter className="flex items-center gap-4 justify-center p-0 pt-2">
@@ -128,7 +150,7 @@ export const NewFeatureModal = () => {
                   className="md:w-1/5 bg-gradient-to-l from-primary to-tertiary font-bold"
                   onClick={onClickCTA}
                 >
-                  {NEW_FEATURE_CTA_TEXT}
+                  {CTA_TEXT}
                 </Button>
               )}
               <Button
@@ -145,3 +167,7 @@ export const NewFeatureModal = () => {
     </Modal>
   );
 };
+
+const ContentText = ({ children }: { children: React.ReactNode }) => (
+  <Text className="text-sm sm:text-lg">{children}</Text>
+);

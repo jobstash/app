@@ -13,14 +13,8 @@ export const INFRURA_ID = process.env.NEXT_PUBLIC_INFURA_ID!;
 export const WALLETCONNECT_PROJECT_ID =
   process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID!;
 export const IS_DEBUG = process.env.NEXT_PUBLIC_IS_DEBUG === 'true';
-export const NEW_FEATURE_TITLE = process.env.NEXT_PUBLIC_NEW_FEATURE_TITLE!;
-export const NEW_FEATURE_DESCRIPTION =
-  process.env.NEXT_PUBLIC_NEW_FEATURE_DESCRIPTION!;
 
-export const NEW_FEATURE_CTA_TEXT =
-  process.env.NEXT_PUBLIC_NEW_FEATURE_CTA_TEXT!;
-export const NEW_FEATURE_CTA_URL =
-  process.env.NEXT_PUBLIC_NEW_FEATURE_CTA_LINK!;
+export const NEW_FEATURE_DIFF = process.env.NEXT_PUBLIC_NEW_FEATURE_DIFF!;
 
 // TODO: put hardcode string in env
 export const ORG_SIGNUP_FORM_URL = 'https://forms.gle/HWP6bUf3CB8RyJnw5';
