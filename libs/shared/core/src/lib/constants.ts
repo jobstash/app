@@ -68,7 +68,7 @@ export const SENTRY_SCHEMA_VALIDATION_ERROR = 'Invalid Schema';
 
 export const ROUTE_SECTION = {
   JOBS: '/jobs' as const,
-  ELITE_FAST_TRACK: '/elite-fast-track' as const,
+  JOB_CONCIERGE: '/job-concierge' as const,
   ORGANIZATIONS: '/organizations' as const,
   PROJECTS: '/projects' as const,
   JOB_BOOKMARKS: '/bookmarks/jobs' as const,
@@ -136,7 +136,7 @@ export const ECOSYSTEMS = {
   DEV: 'devcommunity',
   STAGING: 'stagingcommunity',
 } as const;
-export type Ecosystem = typeof ECOSYSTEMS[keyof typeof ECOSYSTEMS];
+export type Ecosystem = (typeof ECOSYSTEMS)[keyof typeof ECOSYSTEMS];
 
 export const ECOSYSTEMS_SET = new Set(Object.values(ECOSYSTEMS));
 export const ECOSYSTEM_HEADER_KEY = 'X-Ecosystem';

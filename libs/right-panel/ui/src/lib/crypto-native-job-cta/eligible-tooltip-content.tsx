@@ -4,10 +4,10 @@ export const EligibleTooltipContent = () => (
   <div className="flex flex-col gap-8 max-w-sm p-4 bg-darker-gray">
     <div className="flex flex-col gap-2">
       <Text fw="bold" size="lg">
-        Elite Fast Track Apply
+        Job Concierge Apply
       </Text>
       <Text className="text-white/70">
-        Congratulations! You are eligible for Elite Fast Track application! Upon
+        Congratulations! You are eligible for Job Concierge application! Upon
         filling out the application form, you will be introduced to the
         organization using a different process which will put you at a
         significant advantage over other applicants.

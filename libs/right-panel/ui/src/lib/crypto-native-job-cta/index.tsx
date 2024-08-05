@@ -27,7 +27,7 @@ export const CryptoNativeJobCTA = (props: Props) => {
         className="bg-gradient-to-l from-primary to-tertiary"
         radius="sm"
       >
-        Elite Fast Track Apply
+        Job Concierge Apply
       </Button>
     );
   }

@@ -61,7 +61,7 @@ export type RepositoryInfo = Infer<typeof repositoryInfoSchema>;
 
 export type MwMessageResponse = Infer<typeof mwMessageResponseSchema>;
 
-export type RouteSection = typeof ROUTE_SECTION[keyof typeof ROUTE_SECTION];
+export type RouteSection = (typeof ROUTE_SECTION)[keyof typeof ROUTE_SECTION];
 
 export type NotFoundInfo = {
   link: string;
@@ -79,4 +79,4 @@ export type MwVersionCtx = {
 
 export type JobsRouteSection =
   | typeof ROUTE_SECTION.JOBS
-  | typeof ROUTE_SECTION.ELITE_FAST_TRACK;
+  | typeof ROUTE_SECTION.JOB_CONCIERGE;

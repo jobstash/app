@@ -25,7 +25,7 @@ export const JobShareMenuContent = ({ shortUUID, orgName, access }: Props) => {
   };
 
   const onClickCopyLink = () => {
-    const route = access === 'public' ? 'jobs' : 'elite-fast-track';
+    const route = access === 'public' ? 'jobs' : 'job-concierge';
     const url = new URL(`${FRONTEND_URL}/${route}/${shortUUID}/details`);
 
     if (filterByHiringOrg) {
