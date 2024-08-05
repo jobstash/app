@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { ProfileGotItCardStatus } from '@jobstash/profile/core';
-import { getEmailAvatar } from '@jobstash/profile/utils';
+import { getAvatarSrc } from '@jobstash/shared/utils';
 
 import {
   ProfileHeaderProvider,
@@ -19,7 +19,7 @@ interface Props {
 }
 
 const ProfileHeader = ({ gotItCard, gotItCardKey }: Props) => {
-  const { username, avatar, email: emails } = useProfileHeaderContext();
+  const { wallet, username, avatar, email: emails } = useProfileHeaderContext();
   const email = (emails ?? []).length > 0 ? emails[0].email : null;
   return (
     <ProfileHeaderProvider>
@@ -28,7 +28,7 @@ const ProfileHeader = ({ gotItCard, gotItCardKey }: Props) => {
           <LogoTitle
             title={username ?? email ?? ''}
             avatarProps={{
-              src: avatar ?? getEmailAvatar(email),
+              src: avatar ?? getAvatarSrc(wallet) ?? '',
               alt: `${username ?? email ?? ''}`,
               isRounded: true,
             }}

@@ -1,4 +1,5 @@
-import { getEmailAvatar } from '@jobstash/profile/utils';
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
+import { getAvatarSrc } from '@jobstash/shared/utils';
 
 import {
   useAccountCard,
@@ -36,7 +37,7 @@ export const OrgAccountCard = () => {
           {email.length > 0 && (
             <ConnectedAccount
               label="Connected Email Account:"
-              avatar={getEmailAvatar(email[0].email)}
+              avatar={getAvatarSrc(email[0].email)!}
               text={email[0].email}
             />
           )}

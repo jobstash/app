@@ -9,8 +9,15 @@ import { useDevProfileInfoMutation } from './use-dev-profile-info-mutation';
 export const useProfileHeader = () => {
   const { profileInfoData } = useDevProfileInfoContext();
 
-  const { availableForWork, username, email, avatar, contact, location } =
-    profileInfoData ?? ({} as DevProfileInfo);
+  const {
+    availableForWork,
+    wallet,
+    username,
+    email,
+    avatar,
+    contact,
+    location,
+  } = profileInfoData ?? ({} as DevProfileInfo);
 
   const [isAvailableForWork, setIsAvailableForWork] = useState<boolean>(false);
 
@@ -44,6 +51,7 @@ export const useProfileHeader = () => {
     isAvailableForWork,
     setIsAvailableForWork,
     updateAvailability,
+    wallet,
     username,
     email,
     avatar,
@@ -51,5 +59,3 @@ export const useProfileHeader = () => {
     contact: profileInfoData?.contact ?? null,
   };
 };
-
-const AUTOSAVE_DELAY = 2400;

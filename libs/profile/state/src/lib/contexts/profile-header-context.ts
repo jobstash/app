@@ -11,6 +11,7 @@ interface ProfileHeaderContextProps {
   isAvailableForWork: boolean;
   setIsAvailableForWork: (isAvailableForWork: boolean) => void;
   updateAvailability: (isChecked: boolean) => void;
+  wallet: string;
   avatar: string | null;
   username: string | null;
   email: UserEmail[];

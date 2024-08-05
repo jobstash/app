@@ -9,8 +9,7 @@ import { Tab, Tabs } from '@nextui-org/tabs';
 
 import { CHECK_WALLET_FLOWS } from '@jobstash/auth/core';
 import { CONTACT_FIELDS } from '@jobstash/profile/core';
-import { getEmailAvatar } from '@jobstash/profile/utils';
-import { capitalize, cn } from '@jobstash/shared/utils';
+import { capitalize, cn, getAvatarSrc } from '@jobstash/shared/utils';
 
 import { useAuthContext } from '@jobstash/auth/state';
 import {
@@ -111,7 +110,7 @@ export const ProfileOrgForm = () => {
           <LogoTitle
             title={email}
             avatarProps={{
-              src: getEmailAvatar(email),
+              src: getAvatarSrc(email) ?? '',
               alt: `${profileInfoData.email}'s avatar`,
               isRounded: true,
             }}

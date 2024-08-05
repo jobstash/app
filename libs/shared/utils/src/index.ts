@@ -8,6 +8,7 @@ export * from './lib/disable-page-scroll';
 export * from './lib/dispatch-event';
 export * from './lib/ga-event';
 export * from './lib/generate-xml-url';
+export * from './lib/get-avatar-src';
 export * from './lib/get-ecosystem-header';
 export * from './lib/get-ecosystem-subdomain';
 export * from './lib/get-frontend-url';

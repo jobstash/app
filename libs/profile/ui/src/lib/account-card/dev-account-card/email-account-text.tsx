@@ -9,7 +9,7 @@ import {
   DropdownTrigger,
 } from '@nextui-org/react';
 
-import { getEmailAvatar } from '@jobstash/profile/utils';
+import { getAvatarSrc } from '@jobstash/shared/utils';
 
 import {
   useRemoveAttachedEmail,
@@ -58,7 +58,7 @@ export const EmailAccountText = ({ email, isMain, hasGithub }: Props) => {
     <div className="flex items-center w-full justify-between h-10">
       <AccountText
         text={email}
-        avatar={getEmailAvatar(email)}
+        avatar={getAvatarSrc(email) ?? ''}
         subText={
           isMain ? (
             <Text className="text-sm text-white/70">Main Account</Text>
