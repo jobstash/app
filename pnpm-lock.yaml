@@ -45,8 +45,8 @@ importers:
         specifier: ^2.2.9
         version: 2.2.9(@types/react@18.2.33)(framer-motion@10.16.4(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(tailwind-variants@0.2.0(tailwindcss@3.2.7(postcss@8.4.21)(ts-node@10.9.1(@swc/core@1.3.107(@swc/helpers@0.5.6))(@types/node@18.16.9)(typescript@5.3.3))))(tailwindcss@3.2.7(postcss@8.4.21)(ts-node@10.9.1(@swc/core@1.3.107(@swc/helpers@0.5.6))(@types/node@18.16.9)(typescript@5.3.3)))
       '@privy-io/react-auth':
-        specifier: ^1.76.1
-        version: 1.76.1(@babel/core@7.22.1)(@types/react@18.2.33)(bufferutil@4.0.8)(react-dom@18.2.0(react@18.2.0))(react-is@18.2.0)(react@18.2.0)(typescript@5.3.3)(utf-8-validate@5.0.10)(zod@3.23.8)
+        specifier: ^1.77.0
+        version: 1.77.0(@babel/core@7.22.1)(@types/react@18.2.33)(bufferutil@4.0.8)(react-dom@18.2.0(react@18.2.0))(react-is@18.2.0)(react@18.2.0)(typescript@5.3.3)(utf-8-validate@5.0.10)(zod@3.23.8)
       '@reactour/tour':
         specifier: ^3.5.0
         version: 3.5.0(react@18.2.0)
@@ -3185,15 +3185,15 @@ packages:
     resolution: {integrity: sha512-z9G7Kd/Mz/t8Frl6DTIzGHcu0ITF+eG4BHw+XzExuxmTH/iljDJWQwGoiosbu2k2T1p4OEOqZhaxhgRTA6CeaA==}
     engines: {node: '>=18.0.0', npm: '>=8.0.0'}
 
-  '@privy-io/js-sdk-core@0.24.1':
-    resolution: {integrity: sha512-pGFU0U4vZ25fXzlah2j/TFelbFB32p2/RsirlJZ8piFjppAq1p9kbXgtbu0SCrJ8sZBjqIGVbqJihJ09nhUgkg==}
+  '@privy-io/js-sdk-core@0.26.0':
+    resolution: {integrity: sha512-pEdyi7VpuxSn0YaN3SpmiZcQ5N/YAGcIfpHKJ1kOm29DAwuhOtqCVEWsb+GynVYJjt/Ec2KKgPTBkQjF+JsWbQ==}
 
-  '@privy-io/public-api@2.7.1':
-    resolution: {integrity: sha512-DGLr9laAfzHFnELZiMD1HnlEspqNH1nSKKj2BVTUnRZ2t7AfdTJYjtBUJDRV8+uHIBB/dbKIUV47NOb4lxm6AQ==}
+  '@privy-io/public-api@2.8.3':
+    resolution: {integrity: sha512-CYmITfRNnAOpbUaRE9ehPPGHV3hDQuI4soOYJdmFra568QWGmhFRCu7Q+7vpezq/i3dr5eLk9ljZuYHw9ZwxWg==}
     engines: {node: '>=18.0.0', npm: '>=8.0.0'}
 
-  '@privy-io/react-auth@1.76.1':
-    resolution: {integrity: sha512-F4tHyl3fOygHUw/d3NyZoqaVmzXvHawLRf1y7Wp80H9idIxktpVrEb9AuoAfnjsuvi3CmDAwa6CY5zJdzcj1Yg==}
+  '@privy-io/react-auth@1.77.0':
+    resolution: {integrity: sha512-EbrRZhstEHAMJVH7ilpLoYJW1ZtiMPmEZUrjPX7+rEa0ecwyLpyCGfRG/9/Wqj5l74gRSyIJEtS2CQDCMDm4sg==}
     peerDependencies:
       react: ^18
       react-dom: ^18
@@ -6579,6 +6579,7 @@ packages:
 
   ethereum-bloom-filters@1.1.0:
     resolution: {integrity: sha512-J1gDRkLpuGNvWYzWslBQR9cDV4nd4kfvVTE/Wy4Kkm4yb3EYRSlyi0eB/inTsSTTVyA0+HyzHgbr95Fn/Z1fSw==}
+    deprecated: do not use this package use package versions above as this can miss some topics
 
   ethereum-cryptography@2.2.0:
     resolution: {integrity: sha512-hsm9JhfytIf8QME/3B7j4bc8V+VdTU+Vas1aJlvIS96ffoNAosudXvGoEvWmc7QZYdkC8mrMJz9r0fcbw7GyCA==}
@@ -16790,7 +16791,7 @@ snapshots:
     dependencies:
       zod: 3.23.8
 
-  '@privy-io/js-sdk-core@0.24.1(bufferutil@4.0.8)(utf-8-validate@5.0.10)':
+  '@privy-io/js-sdk-core@0.26.0(bufferutil@4.0.8)(utf-8-validate@5.0.10)':
     dependencies:
       '@ethersproject/abstract-signer': 5.7.0
       '@ethersproject/bignumber': 5.7.0
@@ -16799,7 +16800,7 @@ snapshots:
       '@ethersproject/transactions': 5.7.0
       '@ethersproject/units': 5.7.0
       '@privy-io/api-base': 1.2.2
-      '@privy-io/public-api': 2.7.1(bufferutil@4.0.8)(utf-8-validate@5.0.10)
+      '@privy-io/public-api': 2.8.3(bufferutil@4.0.8)(utf-8-validate@5.0.10)
       eventemitter3: 5.0.1
       fetch-retry: 5.0.6
       jose: 4.15.9
@@ -16810,7 +16811,7 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  '@privy-io/public-api@2.7.1(bufferutil@4.0.8)(utf-8-validate@5.0.10)':
+  '@privy-io/public-api@2.8.3(bufferutil@4.0.8)(utf-8-validate@5.0.10)':
     dependencies:
       '@privy-io/api-base': 1.2.2
       ethers: 5.7.2(bufferutil@4.0.8)(utf-8-validate@5.0.10)
@@ -16820,7 +16821,7 @@ snapshots:
       - bufferutil
       - utf-8-validate
 
-  '@privy-io/react-auth@1.76.1(@babel/core@7.22.1)(@types/react@18.2.33)(bufferutil@4.0.8)(react-dom@18.2.0(react@18.2.0))(react-is@18.2.0)(react@18.2.0)(typescript@5.3.3)(utf-8-validate@5.0.10)(zod@3.23.8)':
+  '@privy-io/react-auth@1.77.0(@babel/core@7.22.1)(@types/react@18.2.33)(bufferutil@4.0.8)(react-dom@18.2.0(react@18.2.0))(react-is@18.2.0)(react@18.2.0)(typescript@5.3.3)(utf-8-validate@5.0.10)(zod@3.23.8)':
     dependencies:
       '@coinbase/wallet-sdk': 4.0.3
       '@ethersproject/abstract-signer': 5.7.0
@@ -16837,7 +16838,7 @@ snapshots:
       '@heroicons/react': 2.1.1(react@18.2.0)
       '@marsidev/react-turnstile': 0.4.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@metamask/eth-sig-util': 6.0.2
-      '@privy-io/js-sdk-core': 0.24.1(bufferutil@4.0.8)(utf-8-validate@5.0.10)
+      '@privy-io/js-sdk-core': 0.26.0(bufferutil@4.0.8)(utf-8-validate@5.0.10)
       '@simplewebauthn/browser': 9.0.1
       '@walletconnect/ethereum-provider': 2.14.0(@types/react@18.2.33)(bufferutil@4.0.8)(encoding@0.1.13)(react@18.2.0)(utf-8-validate@5.0.10)
       '@walletconnect/modal': 2.6.2(@types/react@18.2.33)(react@18.2.0)
