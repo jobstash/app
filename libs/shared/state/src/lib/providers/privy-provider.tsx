@@ -1,6 +1,6 @@
 import { PrivyProvider as BaseProvider, usePrivy } from '@privy-io/react-auth';
 
-import { PRIVY_APP_ID } from '@jobstash/shared/core';
+import { PRIVY_APP_ID, PRIVY_CLIENT_ID } from '@jobstash/shared/core';
 
 const THEME = 'dark';
 const ACCENT_COLOR = '#676FFF';
@@ -21,6 +21,7 @@ const LoadingWrapper = ({ screenLoader, children }: Props) => {
 export const PrivyProvider = ({ screenLoader, children }: Props) => (
   <BaseProvider
     appId={PRIVY_APP_ID}
+    clientId={PRIVY_CLIENT_ID}
     config={{
       // Customize Privy's appearance in your app
       appearance: {

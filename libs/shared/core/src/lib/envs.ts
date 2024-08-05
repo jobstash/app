@@ -17,6 +17,7 @@ export const IS_DEBUG = process.env.NEXT_PUBLIC_IS_DEBUG === 'true';
 export const NEW_FEATURE_DIFF = process.env.NEXT_PUBLIC_NEW_FEATURE_DIFF!;
 
 export const PRIVY_APP_ID = process.env.NEXT_PUBLIC_PRIVY_APP_ID!;
+export const PRIVY_CLIENT_ID = process.env.NEXT_PUBLIC_PRIVY_CLIENT_ID!;
 
 // TODO: put hardcode string in env
 export const ORG_SIGNUP_FORM_URL = 'https://forms.gle/HWP6bUf3CB8RyJnw5';
