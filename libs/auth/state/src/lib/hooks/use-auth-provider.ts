@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
 import {
@@ -64,9 +65,11 @@ export const useAuthProvider = () => {
     },
   });
 
+  const router = useRouter();
   const { mutateAsync: logout, isPending: isLoadingLogout } = useMutation({
     async mutationFn() {
       await privyLogout();
+      router.push('/jobs');
     },
   });
 
