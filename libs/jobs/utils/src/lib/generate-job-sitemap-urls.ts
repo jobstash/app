@@ -25,7 +25,8 @@ export const generateJobSiteMapUrls = async (feUrl: string) => {
   const prefix = `${feUrl}/jobs`;
 
   const orgIds = new Set<string>();
-  const competitorsPromises = [];
+
+  const fetchPromises = [];
 
   // Iterate jobs then generate urls
   for (const { key, orgId, projects, lastmod } of jobs) {
@@ -43,11 +44,21 @@ export const generateJobSiteMapUrls = async (feUrl: string) => {
       orgIds.add(orgId);
 
       // Fetch competitor - if not empty, add to urls
-      competitorsPromises.push(
+      fetchPromises.push(
         fetch(`${MW_URL}/projects/competitors/${projects[0].id}`)
-          .then((res) => res.json() as Promise<{ data: Competitor[] }>)
-          .then((jsonRes) => {
-            if (jsonRes.data.length > 0) {
+          .then(async (res) => {
+            const result = await res.json();
+
+            // Not sure why data is unreliable (sometimes array sometimes undefined)
+            // Ensure defaults to empty array
+            if (!result.data) {
+              return { data: [] };
+            }
+
+            return result as { data: Competitor[] };
+          })
+          .then(({ data }) => {
+            if (data.length > 0) {
               urls.push(
                 generateXmlUrl(`${prefix}/${key}/competitors`, lastmod),
               );
@@ -57,15 +68,14 @@ export const generateJobSiteMapUrls = async (feUrl: string) => {
     }
   }
 
-  await Promise.all(competitorsPromises);
-
-  const orgDetailsPromises = [];
-
   // Fetch org details -> create /other-jobs url for each job
   for (const orgId of orgIds) {
-    orgDetailsPromises.push(
+    fetchPromises.push(
       fetch(`${MW_URL}/organizations/details/${orgId}`)
-        .then((res) => res.json() as Promise<OrgDetails>)
+        .then(async (res) => {
+          const result = await res.json();
+          return result as OrgDetails;
+        })
         .then((org) => {
           if (org.jobs.length > 0) {
             for (const job of org.jobs) {
@@ -82,7 +92,7 @@ export const generateJobSiteMapUrls = async (feUrl: string) => {
     );
   }
 
-  await Promise.all(orgDetailsPromises);
+  await Promise.all(fetchPromises);
 
   return urls;
 };
