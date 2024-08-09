@@ -79,4 +79,4 @@ export type MwVersionCtx = {
 
 export type JobsRouteSection =
   | typeof ROUTE_SECTION.JOBS
-  | typeof ROUTE_SECTION.JOB_CONCIERGE;
+  | typeof ROUTE_SECTION.JOBS_FOR_EXPERTS;

@@ -206,7 +206,7 @@ export const useFilters = (routeSection: RouteSection) => {
         break;
       }
 
-      case ROUTE_SECTION.JOB_CONCIERGE: {
+      case ROUTE_SECTION.JOBS_FOR_EXPERTS: {
         count = cryptoNativeJobCount;
         break;
       }

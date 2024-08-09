@@ -25,7 +25,7 @@ export const JobShareMenuContent = ({ shortUUID, orgName, access }: Props) => {
   };
 
   const onClickCopyLink = () => {
-    const route = access === 'public' ? 'jobs' : 'job-concierge';
+    const route = access === 'public' ? 'jobs' : 'jobs-for-experts';
     const url = new URL(`${FRONTEND_URL}/${route}/${shortUUID}/details`);
 
     if (filterByHiringOrg) {

@@ -12,7 +12,7 @@ const discoverBartabs = [
   { text: 'Jobs', path: ROUTE_SECTION.JOBS, icon: <JobsSidebarIcon /> },
   {
     text: 'Job Concierge',
-    path: ROUTE_SECTION.JOB_CONCIERGE,
+    path: ROUTE_SECTION.JOBS_FOR_EXPERTS,
     icon: (
       <div>
         <Image priority src="/new-icon.webp" alt="New" width={16} height={16} />

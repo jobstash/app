@@ -11,7 +11,7 @@ const FiltersItemsCount = () => {
   const { filteredItemsCount, routeSection, isLoading } = useFiltersContext();
 
   const text = (
-    routeSection === ROUTE_SECTION.JOB_CONCIERGE
+    routeSection === ROUTE_SECTION.JOBS_FOR_EXPERTS
       ? ROUTE_SECTION.JOBS
       : routeSection
   ).slice(1);

@@ -19,7 +19,7 @@ export const CryptoNativeJobPostPage = (props: Props) => (
     {...props}
     activeJobAtom={activeCryptoNativeJobAtom}
     jobCountAtom={cryptoNativeJobCountAtom}
-    routeSection={ROUTE_SECTION.JOB_CONCIERGE}
+    routeSection={ROUTE_SECTION.JOBS_FOR_EXPERTS}
     access="protected"
   />
 );
