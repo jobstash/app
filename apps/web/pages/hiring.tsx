@@ -44,7 +44,7 @@ const OrganizationsPage = () => (
               Services
             </h3>
             <div className="mx-auto mt-6 lg:max-w-6xl">
-              <div className='flex flex-row flex-wrap md:-mx-2'>
+              <div className="flex flex-row flex-wrap md:-mx-2">
                 <div className="w-full mb-4 md:px-2 md:w-1/2">
                   <div className="flex flex-wrap justify-start h-full p-5 bg-white md:flex-col bg-opacity-5 rounded-3xl">
                     <h3
@@ -53,10 +53,11 @@ const OrganizationsPage = () => (
                       Job Featuring
                     </h3>
                     <p className="pb-6 text-left text-md text-white/75 grow">
-                      Get 5x more applicants when you feature your jobs on JobStash.
-                      Learn how JobStash works and about the impact and performance of JobStash.
+                      Get 5x more applicants when you feature your jobs on
+                      JobStash. Learn how JobStash works and about the impact
+                      and performance of JobStash.
                     </p>
-                    <div className='flex justify-center w-full'>
+                    <div className="flex justify-center w-full">
                       <HomePageButton
                         hasBorder
                         text="JobStash Overview Deck"
@@ -74,13 +75,13 @@ const OrganizationsPage = () => (
                       SAFU
                     </h3>
                     <p className="pb-6 text-left text-md text-white/75 grow">
-                      Safu is a productivity tool to save time while hiring talent in the
-                      crypto space. It helps you identify genuine, crypto-native
-                      and upcoming talent, at scale, by relying on
-                      verifiable data instead of on CVs. Safu ATS is designed to help you hire
-                      safer, better, and more efficiently.
+                      Safu is a productivity tool to save time while hiring
+                      talent in the crypto space. It helps you identify genuine,
+                      crypto-native and upcoming talent, at scale, by relying on
+                      verifiable data instead of on CVs. Safu ATS is designed to
+                      help you hire safer, better, and more efficiently.
                     </p>
-                    <div className='flex justify-center w-full'>
+                    <div className="flex justify-center w-full">
                       <HomePageButton
                         hasBorder
                         text="SAFU Overview Deck"
@@ -133,7 +134,7 @@ const OrganizationsPage = () => (
                   <h3
                     className={`${lato.className} text-center text-3xl pb-3 font-bold text-white`}
                   >
-                    $199 <span className="text-lg">/ mo</span>
+                    $99 <span className="text-lg">/ mo</span>
                   </h3>
                 </div>
                 <ul className="flex-grow p-6 space-y-2">
@@ -169,7 +170,7 @@ const OrganizationsPage = () => (
                   <h3
                     className={`${lato.className} text-center text-3xl pb-3 font-bold text-white`}
                   >
-                    $299 <span className="text-lg">/ mo</span>
+                    $199 <span className="text-lg">/ mo</span>
                   </h3>
                 </div>
                 <ul className="flex-grow p-6 space-y-2">
@@ -206,7 +207,7 @@ const OrganizationsPage = () => (
                   <h3
                     className={`${lato.className} text-center text-3xl pb-3 font-bold text-white`}
                   >
-                    $499 <span className="text-lg">/ mo</span>
+                    $99 <span className="text-lg">/ mo</span>
                   </h3>
                 </div>
                 <ul className="flex-grow p-6 space-y-2">
@@ -246,7 +247,7 @@ const OrganizationsPage = () => (
                   <h3
                     className={`${lato.className} text-center text-3xl pb-3 font-bold text-white`}
                   >
-                    $799 <span className="text-lg">/ mo</span>
+                    $199 <span className="text-lg">/ mo</span>
                   </h3>
                 </div>
                 <ul className="flex-grow p-6 space-y-2">
