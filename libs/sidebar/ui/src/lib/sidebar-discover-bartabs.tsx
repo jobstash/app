@@ -11,7 +11,7 @@ import SidebarBartab from './sidebar-bartab';
 const discoverBartabs = [
   { text: 'Jobs', path: ROUTE_SECTION.JOBS, icon: <JobsSidebarIcon /> },
   {
-    text: 'Job Concierge',
+    text: 'Jobs for Experts',
     path: ROUTE_SECTION.JOBS_FOR_EXPERTS,
     icon: (
       <div>
