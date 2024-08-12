@@ -11,8 +11,8 @@ import SidebarBartab from './sidebar-bartab';
 const discoverBartabs = [
   { text: 'Jobs', path: ROUTE_SECTION.JOBS, icon: <JobsSidebarIcon /> },
   {
-    text: 'Job Concierge',
-    path: ROUTE_SECTION.JOB_CONCIERGE,
+    text: 'Jobs for Experts',
+    path: ROUTE_SECTION.JOBS_FOR_EXPERTS,
     icon: (
       <div>
         <Image priority src="/new-icon.webp" alt="New" width={16} height={16} />
@@ -50,14 +50,6 @@ const SidebarDiscoverBartabs = ({ isMobile }: Props) => {
           path={path}
           icon={icon}
           text={text}
-          isActiveFn={(pathname) => {
-            const pathLength = path.length;
-            const pathString =
-              pathname.length > pathLength
-                ? pathname.slice(0, pathLength)
-                : pathname;
-            return pathString === path;
-          }}
         />
       ))}
     </div>

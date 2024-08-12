@@ -24,7 +24,10 @@ const SearchFilter = () => {
       <form onSubmit={onSubmitSearch}>
         <TextInput
           icon={<SearchInputIcon />}
-          placeholder={`Search ${capitalize(routeSection.slice(1))}`}
+          placeholder={`Search ${routeSection
+            .slice(1)
+            .toLowerCase()
+            .replaceAll('-', ' ')}`}
           size="25px"
           value={searchQuery ?? rawQuery ?? ''}
           radius="md"

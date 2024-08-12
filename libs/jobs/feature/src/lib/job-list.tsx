@@ -47,7 +47,7 @@ const JobList = ({
   } = useJobBookmarks();
 
   const routeSection =
-    access === 'public' ? ROUTE_SECTION.JOBS : ROUTE_SECTION.JOB_CONCIERGE;
+    access === 'public' ? ROUTE_SECTION.JOBS : ROUTE_SECTION.JOBS_FOR_EXPERTS;
 
   if (isLoading) {
     return (
