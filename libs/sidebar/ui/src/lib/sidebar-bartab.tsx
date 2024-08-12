@@ -19,20 +19,12 @@ interface Props {
   icon?: ReactNode;
   isMobile?: boolean;
   isDisabled?: boolean;
-  isActiveFn?: (pathname: string) => boolean;
 }
 
-const SidebarBartab = ({
-  text,
-  path,
-  icon,
-  isMobile,
-  isDisabled,
-  isActiveFn,
-}: Props) => {
+const SidebarBartab = ({ text, path, icon, isMobile, isDisabled }: Props) => {
   const { pathname, push } = useRouter();
 
-  const isActive = isActiveFn ? isActiveFn(pathname) : pathname === path;
+  const isActive = pathname === path || pathname.startsWith(`${path}/`);
 
   const setIsOpenNav = useSetAtom(isOpenFullscreenNavAtom);
   const setActiveJob = useSetAtom(activeJobAtom);
