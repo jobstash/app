@@ -14,7 +14,7 @@ const SidebarDevSection = ({ isMobile }: Props) => {
   const { profileInfoData } = useDevProfileInfoContext();
 
   const tabs = [
-    { text: 'Profile', path: '/profile' },
+    { text: 'Profile', path: '/profile', isExactPath: true },
     ...(profileInfoData?.username
       ? [{ text: 'Your Repositories', path: '/profile/repositories' }]
       : []),
@@ -30,12 +30,13 @@ const SidebarDevSection = ({ isMobile }: Props) => {
     <div className="flex-col">
       <Text color="dimmed">Your Profile</Text>
       <div className={wrapperClassName}>
-        {tabs.map(({ path, text }) => (
+        {tabs.map(({ path, text, isExactPath }) => (
           <SidebarBartab
             key={text}
             isMobile={isMobile}
             path={path}
             text={text}
+            isExactPath={isExactPath}
           />
         ))}
       </div>
