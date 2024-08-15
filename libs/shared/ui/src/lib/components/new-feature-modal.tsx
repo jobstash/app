@@ -22,7 +22,7 @@ const LS_KEY = 'new-feature-key';
 
 const TITLE = 'Introducing our Job Concierge!';
 const CTA_TEXT = 'Check it out!';
-const CTA_LINK = '/elite-fast-track';
+const CTA_LINK = '/jobs-for-experts';
 
 export const NewFeatureModal = () => {
   const router = useRouter();
