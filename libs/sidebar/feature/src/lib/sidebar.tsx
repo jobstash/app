@@ -1,11 +1,15 @@
 import dynamic from 'next/dynamic';
 
+import { useAtomValue } from 'jotai';
+
 import {
   DUCK_TELEGRAM_URL,
   RouteSection,
   TELEGRAM_URL,
 } from '@jobstash/shared/core';
+import { cn } from '@jobstash/shared/utils';
 
+import { isOpenTopBannerAtom } from '@jobstash/shared/state';
 import { SidebarProvider } from '@jobstash/sidebar/state';
 
 import {
@@ -38,15 +42,69 @@ interface Props {
   filtersRouteSection?: RouteSection;
 }
 
-const Sidebar = ({ filtersRouteSection }: Props) => (
-  <SidebarProvider>
-    <SidebarWrapper>
-      <div className="lg:z-[999] lg:w-screen lg:fixed lg:top-0 lg:left-0 lg:px-4 lg:bg-gradient-to-l lg:from-[#141317] lg:to-[#121216] lg:h-[100px] lg:border-b lg:border-white/5  lg:flex lg:items-center">
-        <div className="lg:w-[191px]">
-          <div className="lg:pt-5">
-            <Brand />
+const Sidebar = ({ filtersRouteSection }: Props) => {
+  const isOpenTopBanner = useAtomValue(isOpenTopBannerAtom);
+
+  return (
+    <SidebarProvider>
+      <SidebarWrapper>
+        <div
+          className={cn(
+            'lg:z-[999] lg:w-screen lg:fixed lg:top-0 lg:left-0 lg:px-4 lg:bg-gradient-to-l lg:from-[#141317] lg:to-[#121216] lg:h-[100px] lg:border-b lg:border-white/5  lg:flex lg:items-center',
+            { 'lg:pt-10 lg:h-[140px]': isOpenTopBanner },
+          )}
+        >
+          <div className="lg:w-[191px]">
+            <div className="lg:pt-5">
+              <Brand />
+            </div>
+            <div className="items-center w-[165px] gap-x-7 pt-3.5 pb-4 hidden lg:flex">
+              <a
+                href="https://telegram.me/jobstashxyz"
+                target="_blank"
+                rel="noreferrer"
+                className="transition-all hover:opacity-50"
+              >
+                <TelegramIcon />
+              </a>
+
+              <a
+                href="https://twitter.com/jobstash_xyz"
+                target="_blank"
+                rel="noreferrer"
+                className="transition-all hover:opacity-50"
+              >
+                <TwitterIcon />
+              </a>
+              <a
+                href="https://warpcast.com/~/channel/jobstash"
+                target="_blank"
+                rel="noreferrer"
+                className="transition-all hover:opacity-50"
+              >
+                <FarcasterIcon />
+              </a>
+            </div>
           </div>
-          <div className="items-center w-[165px] gap-x-7 pt-3.5 pb-4 hidden lg:flex">
+          {filtersRouteSection && (
+            <Filters routeSection={filtersRouteSection} />
+          )}
+          <div className="items-center hidden space-x-6 lg:flex lg:mr-0 lg:ml-auto lg:pr-4">
+            <JoinTalentPool />
+            <HeaderLink text={SUBSCRIBE_TG_TEXT} link={TELEGRAM_URL} />
+            <HeaderLink text={GET_HELP_TEXT} link={DUCK_TELEGRAM_URL} />
+            <ConnectWalletButton />
+          </div>
+        </div>
+        {/* MOBILE BARTABS */}
+        <MobileNavbarWrapper>
+          <div className="flex justify-between -mr-2">
+            <Brand />
+            <SidebarCloseButton>
+              <CloseIcon />
+            </SidebarCloseButton>
+          </div>
+          <div className="flex -mt-2 gap-x-7">
             <a
               href="https://telegram.me/jobstashxyz"
               target="_blank"
@@ -73,97 +131,56 @@ const Sidebar = ({ filtersRouteSection }: Props) => (
               <FarcasterIcon />
             </a>
           </div>
-        </div>
-        {filtersRouteSection && <Filters routeSection={filtersRouteSection} />}
-        <div className="items-center hidden space-x-6 lg:flex lg:mr-0 lg:ml-auto lg:pr-4">
-          <JoinTalentPool />
-          <HeaderLink text={SUBSCRIBE_TG_TEXT} link={TELEGRAM_URL} />
-          <HeaderLink text={GET_HELP_TEXT} link={DUCK_TELEGRAM_URL} />
-          <ConnectWalletButton />
-        </div>
-      </div>
-      {/* MOBILE BARTABS */}
-      <MobileNavbarWrapper>
-        <div className="flex justify-between -mr-2">
-          <Brand />
-          <SidebarCloseButton>
-            <CloseIcon />
-          </SidebarCloseButton>
-        </div>
-        <div className="flex -mt-2 gap-x-7">
-          <a
-            href="https://telegram.me/jobstashxyz"
-            target="_blank"
-            rel="noreferrer"
-            className="transition-all hover:opacity-50"
-          >
-            <TelegramIcon />
-          </a>
+          <div className="flex flex-col">
+            <Text color="dimmed" className="block">
+              Discover
+            </Text>
+            <SidebarDiscoverBartabs isMobile />
+          </div>
 
-          <a
-            href="https://twitter.com/jobstash_xyz"
-            target="_blank"
-            rel="noreferrer"
-            className="transition-all hover:opacity-50"
-          >
-            <TwitterIcon />
-          </a>
-          <a
-            href="https://warpcast.com/~/channel/jobstash"
-            target="_blank"
-            rel="noreferrer"
-            className="transition-all hover:opacity-50"
-          >
-            <FarcasterIcon />
-          </a>
-        </div>
-        <div className="flex flex-col">
-          <Text color="dimmed" className="block">
-            Discover
-          </Text>
-          <SidebarDiscoverBartabs isMobile />
+          <SidebarBookmarksSection isMobile />
+
+          <IsMountedWrapper>
+            <SidebarUserSection isMobile />
+          </IsMountedWrapper>
+
+          <div className="grow" />
+
+          {/* MOBILE BOTTOM BARTABS */}
+          <div className="inset-x-0 bottom-0 flex flex-col p-4 space-y-4 lg:relative lg:hidden">
+            <JoinTalentPool isMobile />
+            <HeaderLink
+              isMobile
+              text={GET_HELP_TEXT}
+              link={DUCK_TELEGRAM_URL}
+            />
+            <HeaderLink isMobile text={SUBSCRIBE_TG_TEXT} link={TELEGRAM_URL} />
+          </div>
+        </MobileNavbarWrapper>
+        <div className="flex ml-auto -mr-4 lg:hidden">
+          <ConnectWalletButton isHeaderMobile />
+          <MobileMenuButton>
+            <HamburgerIcon />
+          </MobileMenuButton>
         </div>
 
-        <SidebarBookmarksSection isMobile />
+        {/* DESKTOP BARTABS */}
+        <div className="flex-col hidden mt-24 space-y-6 lg:flex">
+          <div className="flex-col">
+            <Text color="dimmed">Discover</Text>
+            <SidebarDiscoverBartabs />
+          </div>
 
-        <IsMountedWrapper>
-          <SidebarUserSection isMobile />
-        </IsMountedWrapper>
+          <SidebarBookmarksSection />
 
-        <div className="grow" />
-
-        {/* MOBILE BOTTOM BARTABS */}
-        <div className="inset-x-0 bottom-0 flex flex-col p-4 space-y-4 lg:relative lg:hidden">
-          <JoinTalentPool isMobile />
-          <HeaderLink isMobile text={GET_HELP_TEXT} link={DUCK_TELEGRAM_URL} />
-          <HeaderLink isMobile text={SUBSCRIBE_TG_TEXT} link={TELEGRAM_URL} />
-
-         
+          <IsMountedWrapper>
+            <SidebarUserSection />
+          </IsMountedWrapper>
         </div>
-      </MobileNavbarWrapper>
-      <div className="flex ml-auto -mr-4 lg:hidden">
-        <ConnectWalletButton isHeaderMobile />
-        <MobileMenuButton>
-          <HamburgerIcon />
-        </MobileMenuButton>
-      </div>
-
-      {/* DESKTOP BARTABS */}
-      <div className="flex-col hidden mt-24 space-y-6 lg:flex">
-        <div className="flex-col">
-          <Text color="dimmed">Discover</Text>
-          <SidebarDiscoverBartabs />
-        </div>
-
-        <SidebarBookmarksSection />
-
-        <IsMountedWrapper>
-          <SidebarUserSection />
-        </IsMountedWrapper>
-      </div>
-    </SidebarWrapper>
-  </SidebarProvider>
-);
+      </SidebarWrapper>
+    </SidebarProvider>
+  );
+};
 
 export default Sidebar;
 

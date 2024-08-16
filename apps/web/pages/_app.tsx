@@ -26,7 +26,7 @@ import {
   useDisableScrollListener,
 } from '@jobstash/shared/state';
 
-import { NewFeatureModal, ReportModal } from '@jobstash/shared/ui';
+import { NewFeatureModal, ReportModal, TopBanner } from '@jobstash/shared/ui';
 import { WagmiSiweSync } from '@jobstash/auth/feature';
 
 const NAME = 'JobStash';
@@ -138,7 +138,7 @@ const App = ({ Component, pageProps }: AppProps) => {
                   <AuthProvider screenLoader={<LoadingPage />}>
                     {/* <Component {...pageProps} /> */}
 
-                    {/* <TopBanner /> */}
+                    <TopBanner />
                     {/* <DonateModal /> */}
                     <div className={cn({ 'pt-10': isOpenTopBanner })}>
                       <Component {...pageProps} />

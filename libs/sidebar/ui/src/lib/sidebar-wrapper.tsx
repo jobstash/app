@@ -21,7 +21,7 @@ const SidebarWrapper = ({ children }: Props) => {
       className={cn(
         'fixed left-0 z-50 flex h-16 w-full justify-between bg-gradient-to-l from-[#141317] to-[#121216] p-4 lg:inset-y-0 lg:h-auto lg:min-h-screen lg:w-52 lg:flex-col lg:justify-start lg:border-r lg:border-white/5 lg:bg-transparent',
         { 'z-[60]': sidebarOpen },
-        { 'pt-8 sm:pt-4 lg:pt-12 pb-12': isOpenTopBanner },
+        { 'pt-8 sm:pt-4 lg:pt-16 pb-12': isOpenTopBanner },
       )}
     >
       {children}
