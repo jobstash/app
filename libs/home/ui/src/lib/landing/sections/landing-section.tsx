@@ -48,7 +48,7 @@ const LandingSection = () => (
       <GradientContainer className="flex flex-wrap w-full">
         <div className="flex flex-col flex-wrap w-full gap-3 text-white grow">
           <span className={`${lato.className} text-xl font-bold`}>
-            Save time using SAFU ATS
+            Save time using JobStash ATS
           </span>
           <div className="flex flex-col gap-0.5 max-w-3xl text-white/75">
             <span className="text-md">
@@ -57,12 +57,16 @@ const LandingSection = () => (
               crypto-adjacent talent, at scale, by relying on verifiable data.
               Our ATS (Applicant Tracking System) is designed to help you hire
               safer, better, and more efficiently. Tired of sifting through a
-              sea of impostors? Try SAFU ATS today. Works with your existing HR
-              tools, or as a standalone solution integrated with JobStash.
+              sea of impostors? Try JobStash ATS today. Works with your existing
+              HR tools, or as a standalone solution integrated with JobStash.
             </span>
           </div>
         </div>
-        <HomePageButton hasBorder text="Discover SAFU ATS" url={ORG_PAGE} />
+        <HomePageButton
+          hasBorder
+          text="Discover the JobStash ATS"
+          url={ORG_PAGE}
+        />
       </GradientContainer>
     </div>
 

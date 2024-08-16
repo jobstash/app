@@ -20,7 +20,7 @@ import Text from '../base/text';
 
 const LS_KEY = 'new-feature-key';
 
-const TITLE = 'Introducing our Job Concierge!';
+const TITLE = 'Introducing Jobs For Experts!';
 const CTA_TEXT = 'Check it out!';
 const CTA_LINK = '/jobs-for-experts';
 
@@ -102,8 +102,10 @@ export const NewFeatureModal = () => {
 
                 <div className="max-w-fit flex flex-col gap-4">
                   <ContentText>
-                    Job Concierge offers exclusive access to jobs reserved for
-                    expert builders.
+                    Jobs For Experts are jobs which are reserved for candidates
+                    who have demonstrated their expertise in the Crypto
+                    ecosystem, allowing companies to receive applications from
+                    only the most qualified individuals.
                   </ContentText>
 
                   <div className="flex flex-col gap-2">
