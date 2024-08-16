@@ -49,7 +49,7 @@ const FiltersWrapper = ({ children }: Props) => {
     <div
       className={cn(
         'fixed left-0 right-0 px-4 flex flex-col py-4 gap-y-4 bg-[#121216] z-40 transition-all duration-1000 lg:px-8 lg:items-center lg:py-0 lg:gap-x-4 lg:pt-0 lg:flex-row lg:relative lg:flex lg:right-auto lg:left-auto',
-        { 'top-[108px] sm:top-[92px] lg:top-0': isOpenTopBanner },
+        { 'top-[108px] sm:top-[90px] lg:top-0': isOpenTopBanner },
       )}
     >
       {children}

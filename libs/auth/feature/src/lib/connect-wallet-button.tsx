@@ -167,7 +167,7 @@ const ConnectWalletButton = ({ isMobile, isHeaderMobile }: Props) => {
                 }
                 disabled={!(isConnected && !isSignedIn)}
                 classNames={{
-                  tooltip: 'bg-[#1A88F8] rounded-xl !left-auto !right-[12px] !top-[60px] lg:!top-[85px]',
+                  tooltip: 'bg-[#1A88F8] rounded-xl !fixed !left-auto !right-[12px] !top-[120px] sm:!top-[100px] lg:!top-[5px]',
                   arrow: 'bg-[#1A88F8] !left-auto !right-[62px] ',
                 }}
                 arrowSize={12}

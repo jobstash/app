@@ -140,7 +140,7 @@ const App = ({ Component, pageProps }: AppProps) => {
 
                     <TopBanner />
                     {/* <DonateModal /> */}
-                    <div className={cn({ 'pt-10': isOpenTopBanner })}>
+                    <div className={cn({ 'pt-[58px] sm:pt-[40px]': isOpenTopBanner })}>
                       <Component {...pageProps} />
                     </div>
 

@@ -29,11 +29,11 @@ const TopBanner = () => {
 
   return (
     <>
-      <div className="z-[70] fixed top-0 w-full flex justify-center h-10 bg-gradient-to-l from-primary to-tertiary items-center py-8 pb-6 sm:py-0 sm:gap-1 flex-col sm:flex-row ">
-        <Text className="text-center text-sm sm:text-md">{bannerText}</Text>
+      <div className="z-[70] fixed top-0 w-full py-2 flex justify-center bg-gradient-to-l from-primary to-tertiary items-center sm:gap-1 flex-col sm:flex-row ">
+        <Text className="text-sm text-center sm:text-md">{bannerText}</Text>
         <Link passHref legacyBehavior href={donateURL} onClick={onClickDonate}>
           <a target="_blank">
-            <Text className="underline text-sm sm:text-md">
+            <Text className="text-sm underline sm:text-md">
               We&#39;re building a new platform
             </Text>
           </a>

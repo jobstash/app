@@ -119,7 +119,7 @@ const OrganizationsPage = () => (
             Veri Prices
           </h3>
           <div className="mx-auto">
-            <div className="grid grid-cols-1 gap-4 mb-4 place-content-center lg:grid-cols-3 xl:grid-cols-5">
+            <div className="grid grid-cols-1 gap-4 mx-auto mb-4 place-content-center lg:grid-cols-3 xl:w-4/5">
               {/* Essential Plan */}
               <div className="z-30 flex flex-col bg-white border rounded-md bg-opacity-5 border-primary">
                 <div className="p-6 border-b border-default">
@@ -243,7 +243,7 @@ const OrganizationsPage = () => (
             Featuring Prices
           </h3>
           <div className="mx-auto">
-            <div className="grid grid-cols-1 gap-4 mx-auto mb-4 place-content-center lg:grid-cols-2 lg:w-2/3 xl:grid-cols-2 xl:w-2/5">
+            <div className="grid grid-cols-1 gap-4 mx-auto mb-4 place-content-center lg:grid-cols-2 lg:w-2/3 xl:grid-cols-2 xl:w-1/2">
               {/* Essential Plan */}
               <div className="z-30 flex flex-col bg-white border rounded-md bg-opacity-5 border-primary">
                 <div className="p-6 border-b border-default">
