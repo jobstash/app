@@ -10,10 +10,15 @@ import {
   ConnectKitButton,
   useSIWE,
 } from 'connectkit';
+import { useAtomValue } from 'jotai';
 
 import { cn } from '@jobstash/shared/utils';
 
-import { useIsMounted, useMwVersionContext } from '@jobstash/shared/state';
+import {
+  isOpenTopBannerAtom,
+  useIsMounted,
+  useMwVersionContext,
+} from '@jobstash/shared/state';
 
 import { Bartab } from '@jobstash/shared/ui';
 
@@ -26,6 +31,7 @@ const ConnectWalletButton = ({ isMobile, isHeaderMobile }: Props) => {
   const { isReady } = useMwVersionContext();
   const isMounted = useIsMounted();
   const { isSignedIn } = useSIWE();
+  const isOpen = useAtomValue(isOpenTopBannerAtom);
 
   const showButton = isMounted && isReady;
 
@@ -161,13 +167,20 @@ const ConnectWalletButton = ({ isMobile, isHeaderMobile }: Props) => {
                       <span className="mr-1 font-bold">
                         Sign In With Ethereum
                       </span>
-                      to continue.
+                      to continuexxx.
                     </span>
                   </div>
                 }
                 disabled={!(isConnected && !isSignedIn)}
                 classNames={{
-                  tooltip: 'bg-[#1A88F8] rounded-xl !fixed !left-auto !right-[12px] !top-[120px] sm:!top-[100px] lg:!top-[5px]',
+                  tooltip: cn(
+                    'bg-[#1A88F8] rounded-xl !left-auto !right-[12px]',
+                    {
+                      '!fixed !top-[120px] sm:!top-[100px] lg:!top-[5px]':
+                        isOpen,
+                      '!top-[60px] lg:!top-[85px]': !isOpen,
+                    },
+                  ),
                   arrow: 'bg-[#1A88F8] !left-auto !right-[62px] ',
                 }}
                 arrowSize={12}
