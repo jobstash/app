@@ -21,10 +21,11 @@ const SidebarOrgSection = ({ isMobile }: Props) => {
 
   if (isLoading) return null;
 
-  const tabs: { text: string; path: string }[] = [];
+  const tabs: { text: string; path: string; isExactPath?: boolean }[] = [];
   tabs.push({
     text: `${flow === CHECK_WALLET_FLOWS.ORG_PROFILE ? 'Setup ' : ''}Profile`,
     path: '/profile',
+    isExactPath: true,
   });
 
   if (flow === CHECK_WALLET_FLOWS.ORG_COMPLETE) {
@@ -55,12 +56,13 @@ const SidebarOrgSection = ({ isMobile }: Props) => {
     <div className="flex-col">
       <Text color="dimmed">Your Profile</Text>
       <div className={wrapperClassName}>
-        {tabs.map(({ path, text }) => (
+        {tabs.map(({ path, text, isExactPath }) => (
           <SidebarBartab
             key={text}
             isMobile={isMobile}
             path={path}
             text={text}
+            isExactPath={isExactPath}
           />
         ))}
       </div>

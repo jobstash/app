@@ -167,7 +167,7 @@ const ConnectWalletButton = ({ isMobile, isHeaderMobile }: Props) => {
                       <span className="mr-1 font-bold">
                         Sign In With Ethereum
                       </span>
-                      to continuexxx.
+                      to continue.
                     </span>
                   </div>
                 }
