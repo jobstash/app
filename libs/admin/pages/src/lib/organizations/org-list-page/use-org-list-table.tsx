@@ -188,6 +188,9 @@ export const useOrgListTable = () => {
         editable: true,
         cellEditor: 'agLargeTextCellEditor',
         cellEditorPopup: true,
+        cellEditorParams: {
+          maxLength: 20_000,
+        },
       },
       {
         headerName: 'Description',
@@ -196,6 +199,9 @@ export const useOrgListTable = () => {
         editable: true,
         cellEditor: 'agLargeTextCellEditor',
         cellEditorPopup: true,
+        cellEditorParams: {
+          maxLength: 20_000,
+        },
       },
       {
         headerName: 'Job Count',

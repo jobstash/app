@@ -169,7 +169,7 @@ export const useTalentsTable = () => {
         cellEditor: 'agLargeTextCellEditor',
         cellEditorPopup: true,
         cellEditorParams: {
-          maxLength: 1000,
+          maxLength: 20_000,
           rows: 15,
           cols: 50,
         },
