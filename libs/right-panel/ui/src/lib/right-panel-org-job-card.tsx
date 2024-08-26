@@ -2,7 +2,7 @@ import React, { memo } from 'react';
 
 import { type OrgJob } from '@jobstash/organizations/core';
 import { REPORT_UI_CTX } from '@jobstash/shared/core';
-import { slugify } from '@jobstash/shared/utils';
+import { normalizeString, slugify } from '@jobstash/shared/utils';
 
 import { CardMenu, Heading, ReportMenuItem, Text } from '@jobstash/shared/ui';
 
@@ -24,7 +24,7 @@ const RightPanelOrgJobCard = (props: Props) => {
     const link = encodeURI(
       `/jobs/${slugify(
         `${orgName} ${title}`,
-      )}-${shortUUID}/details?organizations=${orgName.toLowerCase()}`,
+      )}-${shortUUID}/details?organizations=${normalizeString(orgName)}`,
     );
     if (typeof window !== 'undefined') {
       window.location.href = link;

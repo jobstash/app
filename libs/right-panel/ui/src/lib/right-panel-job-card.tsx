@@ -8,7 +8,7 @@ import {
   REPORT_UI_CTX,
   type Tag,
 } from '@jobstash/shared/core';
-import { gaEvent, slugify } from '@jobstash/shared/utils';
+import { gaEvent, normalizeString, slugify } from '@jobstash/shared/utils';
 
 import { CardMenu, Heading, ReportMenuItem } from '@jobstash/shared/ui';
 
@@ -48,7 +48,7 @@ const RightPanelJobCard = ({
     const link = encodeURI(
       `/jobs/${slugify(
         `${orgName} ${title}`,
-      )}-${shortUUID}/details?organizations=${orgName.toLowerCase()}`,
+      )}-${shortUUID}/details?organizations=${normalizeString(orgName)}`,
     );
     if (typeof window !== 'undefined') {
       window.location.href = link;
