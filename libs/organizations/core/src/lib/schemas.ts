@@ -129,9 +129,9 @@ const candidateReportUserSchema = myzod.object({
   github: myzod.string(),
   cryptoNative: myzod.boolean(),
   averageTenure: myzod.number().nullable(),
-  stars: myzod.number(),
+  stars: myzod.number().nullable(),
   tags: myzod.array(myzod.string()),
-  avatar: myzod.string().optional().nullable(),
+  avatar: myzod.string().nullable(),
 });
 export type CandidateReportUser = Infer<typeof candidateReportUserSchema>;
 
@@ -165,11 +165,11 @@ export type CandidateReportAdjacentRepo = Infer<
 >;
 
 const candidateReportOrganizationSchema = myzod.object({
-  name: myzod.string().optional().nullable(),
+  name: myzod.string().nullable(),
   avatar: myzod.string(),
   tenure: myzod.number(),
   commits: myzod.number(),
-  url: myzod.string().optional().nullable(),
+  url: myzod.string().nullable(),
   github: myzod.string(),
   repositories: myzod.array(candidateReportRepositorySchema),
   cryptoNative: myzod.boolean(),
@@ -179,7 +179,7 @@ export type CandidateReportOrganization = Infer<
 >;
 
 export const candidateTopOrgItemSchema = myzod.object({
-  name: myzod.string().optional().nullable(),
+  name: myzod.string().nullable(),
   github: myzod.string(),
   avatar: myzod.string(),
   tenure: myzod.number(),
