@@ -41,10 +41,16 @@ const SidebarOrgSection = ({ isMobile }: Props) => {
       });
     }
 
-    tabs.push({
-      text: 'Available Talents',
-      path: '/profile/org/talents',
-    });
+    tabs.push(
+      {
+        text: 'Available Talents',
+        path: '/profile/org/talents',
+      },
+      {
+        text: 'Candidate Report',
+        path: '/candidate-report',
+      },
+    );
   }
 
   const wrapperClassName = cn('space-y-2 pt-3', {
