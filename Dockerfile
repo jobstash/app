@@ -41,7 +41,7 @@ COPY --from=deps /jobstash/node_modules ./node_modules
 COPY . .
 
 ENV NODE_ENV=production
-ENV NEXT_PUBLIC_MW_URL=https://middleware.jobstash.xyz
+ENV NEXT_PUBLIC_MW_URL=https://middleware.ecosystem.vision
 ENV NEXT_PUBLIC_FRONTEND_URL=https://jobstash.xyz
 ENV NEXT_PUBLIC_EDGE_URL=https://edge-staging.vercel.app
 ENV NEXT_PUBLIC_JOB_FRAME_URL=https://job-frame.vercel.app
