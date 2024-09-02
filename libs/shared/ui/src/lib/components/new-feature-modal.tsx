@@ -20,9 +20,9 @@ import Text from '../base/text';
 
 const LS_KEY = 'new-feature-key';
 
-const TITLE = 'Introducing Jobs For Experts!';
-const CTA_TEXT = 'Check it out!';
-const CTA_LINK = '/jobs-for-experts';
+const TITLE = 'Infra upgrades in progress!';
+const CTA_TEXT = 'Thanks!';
+const CTA_LINK = '/';
 
 export const NewFeatureModal = () => {
   const router = useRouter();
@@ -102,13 +102,12 @@ export const NewFeatureModal = () => {
 
                 <div className="max-w-fit flex flex-col gap-4">
                   <ContentText>
-                    Jobs For Experts are jobs which are reserved for candidates
-                    who have demonstrated their expertise in the Crypto
-                    ecosystem, allowing companies to receive applications from
-                    only the most qualified individuals.
+                    We are currently upgrading our infrastructure to provide you
+                    with a better experience. Some services, like the Job
+                    Concierge, are currently unavailable.
                   </ContentText>
 
-                  <div className="flex flex-col gap-2">
+                  {/* <div className="flex flex-col gap-2">
                     <ContentText>Benefits include: </ContentText>
                     <ul className="space-y-1 list-disc list-outside pl-6">
                       <li>
@@ -141,12 +140,12 @@ export const NewFeatureModal = () => {
                   <ContentText>
                     Connect your wallet, sign in, and start applying to
                     exclusive jobs in the Job Concierge section!
-                  </ContentText>
+                  </ContentText> */}
                 </div>
               </div>
             </ModalBody>
             <ModalFooter className="flex items-center gap-4 justify-center p-0 pt-2">
-              {hasCTA && (
+              {/* {hasCTA && (
                 <Button
                   size="md"
                   className="md:w-1/5 bg-gradient-to-l from-primary to-tertiary font-bold"
@@ -154,7 +153,7 @@ export const NewFeatureModal = () => {
                 >
                   {CTA_TEXT}
                 </Button>
-              )}
+              )} */}
               <Button
                 size="md"
                 className="md:w-1/5 font-bold"
