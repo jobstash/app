@@ -103,8 +103,9 @@ export const NewFeatureModal = () => {
                 <div className="max-w-fit flex flex-col gap-4">
                   <ContentText>
                     We are currently upgrading our infrastructure to provide you
-                    with a better experience. Some services, like the Job
-                    Concierge, are currently unavailable.
+                    with a better experience. Some services, like the Jobs For
+                    Experts section, are currently unavailable. We expect to be
+                    back fully online in the next days.
                   </ContentText>
 
                   {/* <div className="flex flex-col gap-2">
