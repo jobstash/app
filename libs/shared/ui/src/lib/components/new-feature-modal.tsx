@@ -20,9 +20,9 @@ import Text from '../base/text';
 
 const LS_KEY = 'new-feature-key';
 
-const TITLE = 'Infra upgrades in progress!';
-const CTA_TEXT = 'Thanks!';
-const CTA_LINK = '/';
+const TITLE = 'Leave an anonymous review for your last job!';
+const CTA_TEXT = 'To reviews..';
+const CTA_LINK = '/organizations';
 
 export const NewFeatureModal = () => {
   const router = useRouter();
@@ -102,51 +102,43 @@ export const NewFeatureModal = () => {
 
                 <div className="max-w-fit flex flex-col gap-4">
                   <ContentText>
-                    We are currently upgrading our infrastructure to provide you
-                    with a better experience. Some services, like the Jobs For
-                    Experts section, are currently unavailable. We expect to be
-                    back fully online in the next days.
+                    On JobStash you can leave an anonymous review for your last
+                    job to help others make better decisions.
                   </ContentText>
 
-                  {/* <div className="flex flex-col gap-2">
-                    <ContentText>Benefits include: </ContentText>
+                  <div className="flex flex-col gap-2">
+                    <ContentText>You can tell others about: </ContentText>
                     <ul className="space-y-1 list-disc list-outside pl-6">
                       <li>
                         <ContentText>
-                          Bespoke Advice: Personalized guidance and CV
-                          fine-tuning through a one-on-one call.
+                          Companensation: What you got payed and if it included
+                          token allocations
                         </ContentText>
                       </li>
                       <li>
                         <ContentText>
-                          Private Job Information: Access non-public vacancy
-                          details to enhance your applications.
-                        </ContentText>
-                      </li>
-                      <li>
-                        <ContentText>
-                          Founders&#39; Insight: We advocate on your behalf to
-                          increase your chances of landing the job.
+                          Rating: A star rating from 1 to 5 on various metrics
                         </ContentText>
                       </li>
                     </ul>
                   </div>
 
                   <ContentText>
-                    To qualify, you need an EthGlobal Community pack (Builder
-                    tier+), be an EthGlobal finalist, or have verified work
-                    history via GitHub or a professional email.
+                    To qualify, you need a currently valid professional email
+                    for that organization, or have github activity in public
+                    repos owned by that organization
                   </ContentText>
 
                   <ContentText>
-                    Connect your wallet, sign in, and start applying to
-                    exclusive jobs in the Job Concierge section!
-                  </ContentText> */}
+                    In the organization page, pick an organization, and go to
+                    the review tab, and click on the "Leave a review" button to
+                    get started!
+                  </ContentText>
                 </div>
               </div>
             </ModalBody>
             <ModalFooter className="flex items-center gap-4 justify-center p-0 pt-2">
-              {/* {hasCTA && (
+              {hasCTA && (
                 <Button
                   size="md"
                   className="md:w-1/5 bg-gradient-to-l from-primary to-tertiary font-bold"
@@ -154,7 +146,7 @@ export const NewFeatureModal = () => {
                 >
                   {CTA_TEXT}
                 </Button>
-              )} */}
+              )}
               <Button
                 size="md"
                 className="md:w-1/5 font-bold"
