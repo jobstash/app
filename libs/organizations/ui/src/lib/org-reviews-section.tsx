@@ -60,6 +60,7 @@ const AggregateSection = ({ org }: { org: OrgDetails }) => (
       <OrgRatingList orgRating={org.aggregateRatings} />
 
       <OrgReviewSigninButton orgId={org.orgId} />
+      <OrgReviewShareButton org={org} />
     </div>
   </RightPanelCardBorder>
 );
