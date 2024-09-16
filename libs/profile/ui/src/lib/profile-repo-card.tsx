@@ -6,7 +6,7 @@ import { type ProfileRepo } from '@jobstash/profile/core';
 import { EVENT_CARD_CLICK } from '@jobstash/shared/core';
 
 import { activeProfileRepoAtom } from '@jobstash/profile/state';
-import { isDisabledPageScrollAtom } from '@jobstash/shared/state';
+import { isDisabledPageScrollAtom, useIsDesktop } from '@jobstash/shared/state';
 
 import ProfileCardWrapper from './profile-card-wrapper';
 import ProfileRepoCardHeader from './profile-repo-card-header';
@@ -26,14 +26,18 @@ const ProfileRepoCard = (props: Props) => {
     org: { name: orgName, logo: orgLogo, url: orgUrl },
   } = profileRepo;
 
+  const isDesktop = useIsDesktop();
   const setActiveProfileRepo = useSetAtom(activeProfileRepoAtom);
   const setIsDisabledPageScroll = useSetAtom(isDisabledPageScrollAtom);
 
   const onClick = useCallback(() => {
-    setIsDisabledPageScroll(true);
+    if (!isDesktop) {
+      setIsDisabledPageScroll(true);
+    }
+
     setActiveProfileRepo(profileRepo);
     document.dispatchEvent(new Event(EVENT_CARD_CLICK));
-  }, [profileRepo, setActiveProfileRepo, setIsDisabledPageScroll]);
+  }, [isDesktop, profileRepo, setActiveProfileRepo, setIsDisabledPageScroll]);
 
   return (
     <ProfileCardWrapper

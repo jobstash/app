@@ -8,7 +8,11 @@ import { EVENT_CARD_CLICK } from '@jobstash/shared/core';
 import { getLogoUrl } from '@jobstash/shared/utils';
 
 import { activeProfileOrgReviewAtom } from '@jobstash/profile/state';
-import { isDisabledPageScrollAtom, useIsMobile } from '@jobstash/shared/state';
+import {
+  isDisabledPageScrollAtom,
+  useIsDesktop,
+  useIsMobile,
+} from '@jobstash/shared/state';
 
 import { Button, EditIcon, LogoTitle } from '@jobstash/shared/ui';
 
@@ -32,14 +36,23 @@ const ProfileOrgReviewCard = (props: Props) => {
 
   const overallRating = total / Object.keys(rating).length;
 
+  const isDesktop = useIsDesktop();
   const setActiveProfileOrgReview = useSetAtom(activeProfileOrgReviewAtom);
   const setIsDisabledPageScroll = useSetAtom(isDisabledPageScrollAtom);
 
   const onClick = useCallback(() => {
-    setIsDisabledPageScroll(true);
+    if (!isDesktop) {
+      setIsDisabledPageScroll(true);
+    }
+
     setActiveProfileOrgReview(profileOrgReview);
     document.dispatchEvent(new Event(EVENT_CARD_CLICK));
-  }, [profileOrgReview, setActiveProfileOrgReview, setIsDisabledPageScroll]);
+  }, [
+    isDesktop,
+    profileOrgReview,
+    setActiveProfileOrgReview,
+    setIsDisabledPageScroll,
+  ]);
 
   return (
     <ProfileCardWrapper isActive={isActive} isLoading={false} onClick={onClick}>
