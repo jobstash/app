@@ -16,5 +16,6 @@ export * from './lib/hooks/use-github-login';
 export * from './lib/hooks/use-org-magic-link-token';
 export * from './lib/hooks/use-role-click';
 export * from './lib/hooks/use-send-magic-link';
+export * from './lib/hooks/use-session-name';
 export * from './lib/hooks/use-target-role-close-window';
 export * from './lib/hooks/use-update-flow';

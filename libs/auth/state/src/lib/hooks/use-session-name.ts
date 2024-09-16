@@ -2,7 +2,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { useEnsName } from 'wagmi';
 
-import { useAuthContext } from '@jobstash/auth/state';
+import { useAuthContext } from './use-auth-context';
 
 const NAME_CHAR_LIMIT = 16;
 const DEFAULT_TEXT = 'Login / Sign Up';
@@ -18,7 +18,7 @@ const formatEmail = (email?: string) =>
 const formatGithub = (github?: string | null) =>
   github ? `github.com/${github}` : undefined;
 
-export const useButtonText = () => {
+export const useSessionName = () => {
   const { user, isLoggedIn, isLoading: isLoadingAuth } = useAuthContext();
 
   // Get wallet address except embedded privy wallet
