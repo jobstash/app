@@ -46,6 +46,7 @@ ENV NEXT_PUBLIC_FRONTEND_URL=https://jobstash.xyz
 ENV NEXT_PUBLIC_EDGE_URL=https://edge-staging.vercel.app
 ENV NEXT_PUBLIC_JOB_FRAME_URL=https://job-frame.vercel.app
 ENV NEXT_PUBLIC_SCORER_URL=https://scorer.jobstash.xyz
+ENV NEXT_PUBLIC_VERI_URL=https://veri-candidate-report.vercel.app
 ENV NEXT_PUBLIC_PAGE_SIZE=20
 ENV NEXT_PUBLIC_QUERY_RETRY_COUNT=0
 ENV NEXT_PUBLIC_INFURA_ID=805a91964ce748f7b7b3d0c787ad7783

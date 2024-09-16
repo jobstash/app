@@ -3,7 +3,7 @@ export const orgDynamicSlugSet = new Set(['slug', 'tab']);
 export const ORG_RATING_LABELS = {
   benefits: 'Benefits' as const,
   careerGrowth: 'Career Growth' as const,
-  diversityInclusion: 'Diversity & Inclusion' as const,
+  diversityInclusion: 'DEI' as const,
   management: 'Management' as const,
   product: 'Product' as const,
   compensation: 'Compensation' as const,

@@ -72,19 +72,19 @@ const OrganizationsPage = () => (
                     <h3
                       className={`${lato.className} justify-center text-3xl pb-3 font-bold text-white`}
                     >
-                      SAFU
+                      Veri
                     </h3>
                     <p className="pb-6 text-left text-md text-white/75 grow">
-                      Safu is a productivity tool to save time while hiring
+                      Veri is a set of data tools to save time while hiring
                       talent in the crypto space. It helps you identify genuine,
                       crypto-native and upcoming talent, at scale, by relying on
-                      verifiable data instead of on CVs. Safu ATS is designed to
+                      verifiable data instead of on CVs. Veri is designed to
                       help you hire safer, better, and more efficiently.
                     </p>
                     <div className="flex justify-center w-full">
                       <HomePageButton
                         hasBorder
-                        text="SAFU Overview Deck"
+                        text="Veri Overview Deck"
                         url="https://drive.google.com/file/d/1VVoyR3vy9xrzy8hwzPUzxOAMvRQLZEQb/preview"
                         external={false}
                       />
@@ -116,10 +116,10 @@ const OrganizationsPage = () => (
           <h3
             className={`${lato.className} text-white !leading-tight font-black text-5xl md:text-6xl text-center pb-4 md:pb-8`}
           >
-            SAFU Prices
+            Veri Prices
           </h3>
           <div className="mx-auto">
-            <div className="grid grid-cols-1 gap-4 mb-4 place-content-center lg:grid-cols-3 xl:grid-cols-5">
+            <div className="grid grid-cols-1 gap-4 mx-auto mb-4 place-content-center lg:grid-cols-3 xl:w-4/5">
               {/* Essential Plan */}
               <div className="z-30 flex flex-col bg-white border rounded-md bg-opacity-5 border-primary">
                 <div className="p-6 border-b border-default">
@@ -165,7 +165,7 @@ const OrganizationsPage = () => (
                     Advanced
                   </h3>
                   <p className="text-center text-md text-subtle">
-                    JobStash ATS + Safu
+                    JobStash ATS + Veri Data
                   </p>
                   <h3
                     className={`${lato.className} text-center text-3xl pb-3 font-bold text-white`}
@@ -176,7 +176,7 @@ const OrganizationsPage = () => (
                 <ul className="flex-grow p-6 space-y-2">
                   <li>✅ Access to our ATS</li>
                   <li>✅ Track all your applicants</li>
-                  <li>✅ Access our Talent Pool with SAFU data</li>
+                  <li>✅ Access our Talent Pool + Veri Data</li>
                   <li>✅ Applicants use 1-click apply</li>
                   <li>✅ Keep your hiring ops in one place</li>
                   <li>✅ Due Diligence data for candidates</li>
@@ -202,7 +202,7 @@ const OrganizationsPage = () => (
                     Pro
                   </h3>
                   <p className="text-center text-md text-subtle">
-                    ATS Integration + Safu
+                    ATS Integration + Veri Data
                   </p>
                   <h3
                     className={`${lato.className} text-center text-3xl pb-3 font-bold text-white`}
@@ -232,88 +232,6 @@ const OrganizationsPage = () => (
                   />
                 </div>
               </div>
-
-              {/* Elite Plan */}
-              <div className="z-30 flex flex-col bg-white border rounded-md bg-opacity-5 border-primary">
-                <div className="p-6 border-b border-default">
-                  <h3
-                    className={`${lato.className} text-center text-3xl pb-3 font-bold text-white`}
-                  >
-                    Elite
-                  </h3>
-                  <p className="text-center text-md text-subtle">
-                    ATS Integration + Safu
-                  </p>
-                  <h3
-                    className={`${lato.className} text-center text-3xl pb-3 font-bold text-white`}
-                  >
-                    $199 <span className="text-lg">/ mo</span>
-                  </h3>
-                </div>
-                <ul className="flex-grow p-6 space-y-2">
-                  <li>✅ Integrated into any ATS</li>
-                  <li>
-                    ✅ Automatically receive due diligence data on all your
-                    applicants directly in your ATS
-                  </li>
-                  <li>
-                    ✅ Candidate Report, an in depth analysis of the
-                    candidate&#39;s data
-                  </li>
-                  <li>✅ Due Diligence data for 10000 applicants/mo</li>
-                  <li>✅ 1 Seat license</li>
-                  <li>Soon: Post jobs to your TG & Discord</li>
-                </ul>
-                <div className="flex justify-center w-full px-6 pb-6">
-                  <HomePageButton
-                    hasBorder
-                    text="Get Started"
-                    url={DUCK_TELEGRAM_URL}
-                  />
-                </div>
-              </div>
-
-              {/* Enterprise Plan */}
-              <div className="z-30 flex flex-col bg-white border rounded-md bg-opacity-5 border-primary">
-                <div className="p-6 border-b border-default">
-                  <h3
-                    className={`${lato.className} text-center text-3xl pb-3 font-bold text-white`}
-                  >
-                    Enterprise
-                  </h3>
-                  <p className="text-center text-md text-subtle">
-                    ATS Integration + Safu
-                  </p>
-                  <h3
-                    className={`${lato.className} text-center text-3xl pb-3 font-bold text-white`}
-                  >
-                    Custom
-                  </h3>
-                </div>
-                <ul className="flex-grow p-6 space-y-2">
-                  <li>✅ Integrated into any ATS</li>
-                  <li>
-                    ✅ Automatically receive due diligence data on all your
-                    applicants directly in your ATS
-                  </li>
-                  <li>
-                    ✅ Candidate Report, an in depth analysis of the
-                    candidate&#39;s data
-                  </li>
-                  <li>
-                    ✅ Due Diligence data for more than 10000 applicants/mo
-                  </li>
-                  <li>✅ Volume discounts on seats</li>
-                  <li>Soon: Post jobs to your TG & Discord</li>
-                </ul>
-                <div className="flex justify-center w-full px-6 pb-6">
-                  <HomePageButton
-                    hasBorder
-                    text="Get Started"
-                    url={DUCK_TELEGRAM_URL}
-                  />
-                </div>
-              </div>
             </div>
           </div>
         </section>
@@ -325,7 +243,7 @@ const OrganizationsPage = () => (
             Featuring Prices
           </h3>
           <div className="mx-auto">
-            <div className="grid grid-cols-1 gap-4 mx-auto mb-4 place-content-center lg:grid-cols-2 lg:w-2/3 xl:grid-cols-2 xl:w-2/5">
+            <div className="grid grid-cols-1 gap-4 mx-auto mb-4 place-content-center lg:grid-cols-2 lg:w-2/3 xl:grid-cols-2 xl:w-1/2">
               {/* Essential Plan */}
               <div className="z-30 flex flex-col bg-white border rounded-md bg-opacity-5 border-primary">
                 <div className="p-6 border-b border-default">
@@ -344,7 +262,7 @@ const OrganizationsPage = () => (
                   </h3>
                 </div>
                 <ul className="flex-grow p-6 space-y-2">
-                  <li>✅ 1 job featured for 3 days</li>
+                  <li>✅ 1 job featured for 7 days</li>
                   <li>✅ 2x the applicants</li>
                   <li>✅ Featured on our homepage</li>
                 </ul>

@@ -41,16 +41,18 @@ const AggregateSection = ({ org }: { org: OrgDetails }) => (
   <RightPanelCardBorder>
     <div className="flex flex-col p-6 gap-6">
       <Heading size="lg" fw="semibold">
-        Aggregate Ratings
+        Aggregate Ratings from verified staff
       </Heading>
 
       <Text color="dimmed">
-        Only devs associated with the org can review it.
+        Here is what verified staff have to say about their experience at this
+        organization.
       </Text>
 
       <Text color="dimmed">
-        If you know anyone who works or worked here here, please invite them to
-        review this organization. It&#39;s easy: Share the link above with them!
+        If you worked here and have public commit history in this organizations
+        github, or have an organization email account, please leave an anonymous
+        review for this organization. It&#39;s easy: Click the button below!
       </Text>
 
       <hr className="border-t border-white/10" />
@@ -58,6 +60,7 @@ const AggregateSection = ({ org }: { org: OrgDetails }) => (
       <OrgRatingList orgRating={org.aggregateRatings} />
 
       <OrgReviewSigninButton orgId={org.orgId} />
+      <OrgReviewShareButton org={org} />
     </div>
   </RightPanelCardBorder>
 );
@@ -70,12 +73,14 @@ const LeaveReviewSection = ({ org }: { org: OrgDetails }) => (
       </Heading>
 
       <Text color="dimmed">
-        Only devs associated with the org can review it.
+        Only current and former staff associated with the org can leave
+        anonymous reviews.
       </Text>
 
       <Text color="dimmed">
-        If you know anyone who works or worked here here, please invite them to
-        review this organization. It&#39;s easy: Share the link above with them!
+        If you worked here and have public commit history in this organizations
+        github, or have an organization email account, please leave an anonymous
+        review for this organization. It&#39;s easy: Click the button below!
       </Text>
 
       <div className="flex gap-x-4">

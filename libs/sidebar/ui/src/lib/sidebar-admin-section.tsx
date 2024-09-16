@@ -27,6 +27,7 @@ const SidebarAdminSection = ({ isMobile }: Props) => {
           isMobile={isMobile}
         />
         <SidebarBartab
+          isExactPath
           isMobile={isMobile}
           path={ADMIN_PATHS.ORG_LIST}
           text="Organizations"

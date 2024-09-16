@@ -20,9 +20,9 @@ import Text from '../base/text';
 
 const LS_KEY = 'new-feature-key';
 
-const TITLE = 'Introducing our Job Concierge!';
-const CTA_TEXT = 'Check it out!';
-const CTA_LINK = '/elite-fast-track';
+const TITLE = 'Leave an anonymous review for your last job!';
+const CTA_TEXT = 'To reviews..';
+const CTA_LINK = '/organizations';
 
 export const NewFeatureModal = () => {
   const router = useRouter();
@@ -102,43 +102,37 @@ export const NewFeatureModal = () => {
 
                 <div className="max-w-fit flex flex-col gap-4">
                   <ContentText>
-                    Job Concierge offers exclusive access to jobs reserved for
-                    expert builders.
+                    On JobStash you can leave an anonymous review for your last
+                    job to help others make better decisions.
                   </ContentText>
 
                   <div className="flex flex-col gap-2">
-                    <ContentText>Benefits include: </ContentText>
+                    <ContentText>You can tell others about: </ContentText>
                     <ul className="space-y-1 list-disc list-outside pl-6">
                       <li>
                         <ContentText>
-                          Bespoke Advice: Personalized guidance and CV
-                          fine-tuning through a one-on-one call.
+                          Companensation: What you got payed and if it included
+                          token allocations
                         </ContentText>
                       </li>
                       <li>
                         <ContentText>
-                          Private Job Information: Access non-public vacancy
-                          details to enhance your applications.
-                        </ContentText>
-                      </li>
-                      <li>
-                        <ContentText>
-                          Founders&#39; Insight: We advocate on your behalf to
-                          increase your chances of landing the job.
+                          Rating: A star rating from 1 to 5 on various metrics
                         </ContentText>
                       </li>
                     </ul>
                   </div>
 
                   <ContentText>
-                    To qualify, you need an EthGlobal Community pack (Builder
-                    tier+), be an EthGlobal finalist, or have verified work
-                    history via GitHub or a professional email.
+                    To qualify, you need a currently valid professional email
+                    for that organization, or have github activity in public
+                    repos owned by that organization
                   </ContentText>
 
                   <ContentText>
-                    Connect your wallet, sign in, and start applying to
-                    exclusive jobs in the Job Concierge section!
+                    In the organization page, pick an organization, and go to
+                    the review tab, and click on the &#34;Leave a review&#34;
+                    button to get started!
                   </ContentText>
                 </div>
               </div>

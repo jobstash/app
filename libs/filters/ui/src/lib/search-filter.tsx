@@ -2,8 +2,6 @@ import { memo, useMemo } from 'react';
 
 import { TextInput } from '@mantine/core';
 
-import { capitalize } from '@jobstash/shared/utils';
-
 import { useFiltersContext } from '@jobstash/filters/state';
 
 import { SearchInputIcon } from '@jobstash/shared/ui';
