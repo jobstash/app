@@ -78,7 +78,7 @@ export const NewFeatureModal = () => {
       }}
       onOpenChange={onOpenChange}
     >
-      <ModalContent className="md:gap-y-4">
+      <ModalContent className="md:gap-y-4 overflow-x-hidden">
         {() => (
           <>
             <ModalBody>
@@ -92,7 +92,7 @@ export const NewFeatureModal = () => {
                   <span role="img" aria-label="Shimmer">
                     ✨
                   </span>
-                  <span className="leading-tight text-lg sm:text-3xl text-center shrink-0">
+                  <span className="leading-tight text-lg sm:text-3xl md:text-2xl text-center shrink-0">
                     {TITLE}
                   </span>
                   <span role="img" aria-label="Shimmer">
