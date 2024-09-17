@@ -19,6 +19,8 @@ export const DevAccountCard = () => {
   const { opened, open, startDelete, onClickDelete, close } = useAccountCard();
 
   const { profileInfoData } = useDevProfileInfoContext();
+  const showTopDivider =
+    profileInfoData?.username || (profileInfoData?.email.length ?? 0) > 0;
 
   return (
     <>
@@ -31,7 +33,7 @@ export const DevAccountCard = () => {
       <AccountCardWrapper>
         <div className="flex flex-col gap-6 pb-4">
           <AccountCardTitle />
-          <hr className="border-t border-white/10" />
+          {showTopDivider && <hr className="border-t border-white/10" />}
 
           {profileInfoData?.username && profileInfoData?.avatar && (
             <div className="flex flex-col gap-4">
@@ -48,11 +50,15 @@ export const DevAccountCard = () => {
           <DevEmails />
         </div>
 
-        {profileInfoData && !profileInfoData.username && (
-          <ConnectGithubAccount />
-        )}
+        <div className="opacity-40 pointer-events-none">
+          {profileInfoData && !profileInfoData.username && (
+            <ConnectGithubAccount />
+          )}
+        </div>
 
-        <ConnectEmailForm />
+        <div className="opacity-40 pointer-events-none">
+          <ConnectEmailForm />
+        </div>
 
         <hr className="border-t border-white/10" />
 
