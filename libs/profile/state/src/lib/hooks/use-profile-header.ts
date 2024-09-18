@@ -57,5 +57,6 @@ export const useProfileHeader = () => {
     avatar,
     preferredContact: profileInfoData?.preferred ?? null,
     contact: profileInfoData?.contact ?? null,
+    location: profileInfoData?.location ?? null,
   };
 };

@@ -12,6 +12,7 @@ import {
 import { LogoTitle } from '@jobstash/shared/ui';
 
 import { ProfileHeaderInfoButton } from './profile-header-info-button';
+import { ProfileHeaderLocation } from './profile-header-location';
 import ProfileHeaderSwitch from './profile-header-switch';
 
 interface Props {
@@ -30,6 +31,7 @@ const ProfileHeader = ({ gotItCard, gotItCardKey }: Props) => {
           {sessionName && !isLoading && (
             <LogoTitle
               title={sessionName}
+              location={<ProfileHeaderLocation />}
               avatarProps={{
                 src: avatar ?? getAvatarSrc(wallet) ?? '',
                 alt: `${username ?? email ?? ''}`,

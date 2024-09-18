@@ -17,6 +17,7 @@ interface ProfileHeaderContextProps {
   email: UserEmail[];
   preferredContact: PreferredContact | null;
   contact: DevProfileInfo['contact'] | null;
+  location: DevProfileInfo['location'] | null;
 }
 
 export const ProfileHeaderContext =

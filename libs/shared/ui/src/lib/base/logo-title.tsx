@@ -21,7 +21,7 @@ type LogoTitleVariantProps = VariantProps<typeof logoTitle>;
 interface LogoTitleProps extends LogoTitleVariantProps {
   title: string;
   avatarProps: AvatarProps;
-  location?: string;
+  location?: React.ReactNode;
   hasMinWidth?: boolean;
   identiconFallback?: boolean;
 }
@@ -48,13 +48,16 @@ const LogoTitle = ({
       name={name}
       identiconFallback={identiconFallback}
     />
-    <div className="flex flex-col justify-center gap-1">
+    <div className="flex flex-col justify-center">
       <Heading size={size === 'lg' ? 'md' : 'sm'}>{title}</Heading>
-      {location && (
-        <Text size="sm" color="dimmed">
-          {location}
-        </Text>
-      )}
+      {location &&
+        (typeof location === 'string' ? (
+          <Text size="sm" color="dimmed">
+            {location}
+          </Text>
+        ) : (
+          location
+        ))}
     </div>
   </div>
 );
