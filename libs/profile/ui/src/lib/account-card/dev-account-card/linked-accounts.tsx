@@ -20,8 +20,14 @@ export const LinkedAccounts = () => {
   const { profileInfoData } = useDevProfileInfoContext();
   const [isEditing, toggleEdit] = useReducer((prev) => !prev, false);
 
-  const { user, unlinkGithub, unlinkGoogle, unlinkFarcaster, unlinkWallet } =
-    usePrivy();
+  const {
+    user,
+    unlinkEmail,
+    unlinkGithub,
+    unlinkGoogle,
+    unlinkFarcaster,
+    unlinkWallet,
+  } = usePrivy();
 
   const {
     linkEmail,
@@ -164,6 +170,15 @@ export const LinkedAccounts = () => {
             avatar={profileInfoData?.avatar}
             label="Github"
             unlink={async () => unlinkGithub(github.subject)}
+          />
+        )}
+
+        {email && (
+          <AccountItem
+            canRemove={canRemove}
+            text={email.address}
+            label="Email"
+            unlink={async () => unlinkEmail(email.address)}
           />
         )}
 
