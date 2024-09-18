@@ -294,7 +294,7 @@ export const devTalentSchema = myzod.intersection(
     skills: myzod.array(profileSkillSchema),
     showcases: myzod.array(profileShowcaseSchema),
     cryptoNative: myzod.boolean(),
-    cryptoAjacent: myzod.boolean(),
+    cryptoAdjacent: myzod.boolean(),
     ecosystemActivations: myzod.array(myzod.string()),
     workHistory: myzod.array(
       myzod.object({

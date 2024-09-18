@@ -195,10 +195,10 @@ export const useTalentsTable = () => {
       {
         headerName: 'Crypto Adjacent',
         cellRenderer: (props: CellProps) => (
-          <BooleanCell value={Boolean(props.data?.cryptoAjacent)} />
+          <BooleanCell value={Boolean(props.data?.cryptoAdjacent)} />
         ),
         sortable: true,
-        valueGetter: (p) => p.data?.cryptoAjacent,
+        valueGetter: (p) => p.data?.cryptoAdjacent,
         comparator(boolA, boolB) {
           if (boolA === boolB) return 0;
           return boolA ? -1 : 1;
