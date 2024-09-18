@@ -12,12 +12,6 @@ const formatName = (name = '') =>
     ? `${name?.slice(0, 6)}...${name?.slice(-4)}`
     : name;
 
-const formatEmail = (email?: string) =>
-  email ? `${formatName(email?.split('@')[0])}` : undefined;
-
-const formatGithub = (github?: string | null) =>
-  github ? `github.com/${github}` : undefined;
-
 export const useSessionName = () => {
   const { user, isLoggedIn, isLoading: isLoadingAuth } = useAuthContext();
 
@@ -65,11 +59,15 @@ export const useSessionName = () => {
 
     const email = user?.email?.address;
     const github = user?.github?.username;
+    const google = user?.google?.email;
+    const farcaster = user?.farcaster?.username;
     const wallet = addresses[0];
 
     return {
-      text: formatName(ensName ?? formatEmail(email) ?? github ?? wallet),
-      fullText: ensName ?? email ?? formatGithub(github) ?? wallet,
+      text: formatName(
+        ensName ?? email ?? github ?? google ?? farcaster ?? wallet,
+      ),
+      fullText: ensName ?? email ?? github ?? google ?? farcaster ?? wallet,
     };
   }, [isLoggedIn, user, ensName, addresses]);
 

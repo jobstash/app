@@ -21,7 +21,7 @@ interface Props {
 }
 
 const ProfileHeader = ({ gotItCard, gotItCardKey }: Props) => {
-  const { text: sessionName, isLoading } = useSessionName();
+  const { fullText: sessionName, isLoading } = useSessionName();
   const { wallet, username, avatar, email: emails } = useProfileHeaderContext();
   const email = (emails ?? []).length > 0 ? emails[0].email : null;
   return (
