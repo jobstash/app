@@ -2,18 +2,16 @@ import { Accordion, AccordionItem } from '@nextui-org/react';
 
 import { Heading } from '@jobstash/shared/ui';
 
-const CONTACT_TITLE = 'Contact Information';
 const SHOWCASE_TITLE = 'Resume, Portfolio & More';
 const SKILLS_TITLE = 'Your Skills';
 
 interface Props {
-  contact: React.ReactNode;
   showcase: React.ReactNode;
   skills: React.ReactNode;
 }
 
 export const ProfileAccordion = (props: Props) => {
-  const { contact, showcase, skills } = props;
+  const { showcase, skills } = props;
   return (
     <Accordion
       keepContentMounted
@@ -22,13 +20,6 @@ export const ProfileAccordion = (props: Props) => {
       defaultExpandedKeys={['contact', 'skills', 'showcase']}
       className="gap-4 p-0"
     >
-      <AccordionItem
-        key="contact"
-        textValue={CONTACT_TITLE}
-        title={<Heading size="md">{CONTACT_TITLE}</Heading>}
-      >
-        {contact}
-      </AccordionItem>
       <AccordionItem
         key="skills"
         textValue={SHOWCASE_TITLE}

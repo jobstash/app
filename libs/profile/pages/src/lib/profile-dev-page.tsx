@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 import { LoadingPage } from '@jobstash/shared/pages';
 
 import {
-  ProfileHeaderProvider,
   ProfileShowcaseProvider,
   ProfileSkillsProvider,
   useDevProfileInfo,
@@ -15,7 +14,6 @@ import {
   ProfileAccordion,
   ProfileGotItCard,
   ProfileHeader,
-  ProfileHeaderContactInfo,
   ProfileShowcaseSection,
   ProfileSkillsSection,
 } from '@jobstash/profile/ui';
@@ -44,11 +42,6 @@ export const ProfileDevPage = () => {
                   gotItCardKey="profile"
                 />
                 <ProfileAccordion
-                  contact={
-                    <ProfileHeaderProvider>
-                      <ProfileHeaderContactInfo />
-                    </ProfileHeaderProvider>
-                  }
                   showcase={
                     <ProfileShowcaseProvider>
                       <ProfileShowcaseSection />
