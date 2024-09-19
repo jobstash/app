@@ -4,7 +4,7 @@ import { DevProfileInfo } from '@jobstash/profile/core';
 
 import { useDevProfileInfoContext } from '../contexts/dev-profile-info-context';
 
-import { useDevProfileInfoMutation } from './use-dev-profile-info-mutation';
+import { useUpdateAvailability } from './use-update-availability';
 
 export const useProfileHeader = () => {
   const { profileInfoData } = useDevProfileInfoContext();
@@ -27,24 +27,21 @@ export const useProfileHeader = () => {
     }
   }, [availableForWork, contact, location, profileInfoData]);
 
-  const { isLoadingMutation, mutate } = useDevProfileInfoMutation();
-
+  const { mutate: mutateAvailability, isPending: isLoadingAvailability } =
+    useUpdateAvailability();
   const updateAvailability = (isChecked: boolean) => {
     setIsAvailableForWork(isChecked);
-    if (profileInfoData && profileInfoData.preferred) {
-      mutate({
-        isToggleAvailability: true,
-        payload: {
-          availableForWork: isChecked,
-          preferred: profileInfoData.preferred,
-          contact: profileInfoData.contact,
-          location: profileInfoData.location,
+    mutateAvailability(
+      { availability: isChecked },
+      {
+        onError() {
+          setIsAvailableForWork(!isChecked);
         },
-      });
-    }
+      },
+    );
   };
 
-  const isLoading = isLoadingMutation || !profileInfoData;
+  const isLoading = !profileInfoData || isLoadingAvailability;
 
   return {
     isLoading,
