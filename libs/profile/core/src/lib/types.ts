@@ -8,7 +8,6 @@ import {
   atsClientSchema,
   atsPreferenceSchema,
   atsTrackedNFTSchema,
-  devProfileInfoPayloadSchema,
   devProfileInfoResponseSchema,
   devProfileInfoSchema,
   devTalentResponseSchema,
@@ -18,7 +17,6 @@ import {
   orgProfileInfoPayloadSchema,
   orgProfileInfoResponseSchema,
   orgProfileInfoSchema,
-  preferredContactSchema,
   profileOrgRatingPayloadSchema,
   profileOrgRatingResponseSchema,
   profileOrgReviewListResponseSchema,
@@ -71,7 +69,6 @@ export type ProfileOrgReviewListResponse = Infer<
 export type UserEmail = Infer<typeof userEmailSchema>;
 
 export type DevProfileInfo = Infer<typeof devProfileInfoSchema>;
-export type DevProfileInfoPayload = Infer<typeof devProfileInfoPayloadSchema>;
 export type DevProfileInfoResponse = Infer<typeof devProfileInfoResponseSchema>;
 
 export type OrgProfileInfo = Infer<typeof orgProfileInfoSchema>;
@@ -183,8 +180,6 @@ export interface ProfileGotItCardStatus {
   repositories: boolean;
   reviews: boolean;
 }
-
-export type PreferredContact = Infer<typeof preferredContactSchema>;
 
 export type LegacyProfileInfoContact = Infer<
   typeof legacyProfileInfoContactSchema

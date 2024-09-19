@@ -11,7 +11,6 @@ export * from './lib/hooks/use-all-jobs-query';
 export * from './lib/hooks/use-ats-client';
 export * from './lib/hooks/use-compensation-form';
 export * from './lib/hooks/use-dev-profile-info';
-export * from './lib/hooks/use-dev-profile-info-mutation';
 export * from './lib/hooks/use-dev-talents';
 export * from './lib/hooks/use-highlight-org-options';
 export * from './lib/hooks/use-link-ats-platform';
