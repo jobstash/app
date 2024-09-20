@@ -55,46 +55,48 @@ export const useApplicantsTable = (orgId: string) => {
       },
       {
         headerName: 'User',
-        cellRenderer: (props: CellProps) => (
-          <UserCell user={props.data?.user} />
-        ),
-        valueGetter: (p) => p.data?.user.username || p.data?.user.email,
-        width: 280,
-        getQuickFilterText(p) {
-          if (!p.data) return '';
-          const {
-            user: {
-              username,
-              email,
-              location: { city, country },
-            },
-          } = p.data;
-          return `${username} ${email} ${city} ${country}`;
-        },
+        //
+        // cellRenderer: (props: CellProps) => (
+        //   <UserCell user={props.data?.user} />
+        // ),
+        // valueGetter: (p) => p.data?.user.username || p.data?.user.email,
+        // width: 280,
+        // getQuickFilterText(p) {
+        //   if (!p.data) return '';
+        //   const {
+        //     user: {
+        //       username,
+        //       email,
+        //       location: { city, country },
+        //     },
+        //   } = p.data;
+        //   return `${username} ${email} ${city} ${country}`;
+        // },
       },
       {
         headerName: 'Work History',
-        cellRenderer: (props: CellProps) => (
-          <WorkHistoryCell
-            username={props.data?.user.username}
-            workHistory={props.data?.user.workHistory}
-          />
-        ),
-        width: 320,
-        getQuickFilterText(p) {
-          if (!p.data) return '';
-          return p.data.user.workHistory
-            .flatMap((w) => [w.name, ...w.repositories.map((r) => r.name)])
-            .join(' ');
-        },
-        sortable: true,
-        valueGetter: (p) => (p.data ? p.data.user.workHistory : []),
-        comparator(workHistoryA, workHistoryB) {
-          const repoCountA = getWorkHistoryRepoCount(workHistoryA);
-          const repoCountB = getWorkHistoryRepoCount(workHistoryB);
-          if (repoCountA === repoCountB) return 0;
-          return repoCountA - repoCountB;
-        },
+        //
+        // cellRenderer: (props: CellProps) => (
+        //   <WorkHistoryCell
+        //     username={props.data?.user.username}
+        //     workHistory={props.data?.user.workHistory}
+        //   />
+        // ),
+        // width: 320,
+        // getQuickFilterText(p) {
+        //   if (!p.data) return '';
+        //   return p.data.user.workHistory
+        //     .flatMap((w) => [w.name, ...w.repositories.map((r) => r.name)])
+        //     .join(' ');
+        // },
+        // sortable: true,
+        // valueGetter: (p) => (p.data ? p.data.user.workHistory : []),
+        // comparator(workHistoryA, workHistoryB) {
+        //   const repoCountA = getWorkHistoryRepoCount(workHistoryA);
+        //   const repoCountB = getWorkHistoryRepoCount(workHistoryB);
+        //   if (repoCountA === repoCountB) return 0;
+        //   return repoCountA - repoCountB;
+        // },
       },
       {
         headerName: 'Socials',
