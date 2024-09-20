@@ -73,7 +73,7 @@ const TooltipContent = ({
         <OrgLogoDate
           hideCount
           src={src}
-          name={name}
+          name={name ?? ''}
           url={url}
           login={login}
           orgTimestampText={orgTimestampText}
@@ -115,12 +115,10 @@ const TooltipContent = ({
 };
 
 interface Props {
-  username?: string | null;
   workHistory?: DevTalent['workHistory'];
 }
 
-export const WorkHistoryCell = ({ username, workHistory }: Props) => {
-  if (!username) return <EmptyCellPlaceholder />;
+export const WorkHistoryCell = ({ workHistory }: Props) => {
   if (!workHistory) return <EmptyCellPlaceholder />;
   if (workHistory.length === 0) {
     return <EmptyCellPlaceholder />;
@@ -160,7 +158,7 @@ export const WorkHistoryCell = ({ username, workHistory }: Props) => {
               <div className="flex gap-2 items-center min-w-[180px] w-fit">
                 <OrgLogoDate
                   src={src}
-                  name={name}
+                  name={name ?? ''}
                   url={url}
                   login={login}
                   orgTimestampText={orgTimestampText}

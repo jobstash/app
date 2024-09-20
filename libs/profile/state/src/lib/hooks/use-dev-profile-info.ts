@@ -7,7 +7,6 @@ import { getDevProfileInfo } from '@jobstash/profile/data';
 export const useDevProfileInfo = () => {
   const { mwVersion } = useMwVersionContext();
   const { authenticated } = usePrivy();
-  console.log({ AUTHENTICATED: authenticated });
 
   const { isLoading, data: profileInfoData } = useQuery({
     queryKey: [mwVersion, 'dev-profile-info'],

@@ -104,7 +104,7 @@ export const jobApplicantSchema = myzod.object({
       workHistory: myzod.array(
         myzod.object({
           login: myzod.string(),
-          name: myzod.string(),
+          name: myzod.string().nullable(),
           url: myzod.string().nullable(),
           logoUrl: myzod.string().nullable(),
           createdAt: myzod.number(),
@@ -113,7 +113,7 @@ export const jobApplicantSchema = myzod.object({
           repositories: myzod.array(
             myzod.object({
               url: myzod.string(),
-              name: myzod.string(),
+              name: myzod.string().nullable(),
               createdAt: myzod.number(),
               firstContributedAt: myzod.number(),
               lastContributedAt: myzod.number(),

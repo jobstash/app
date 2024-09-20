@@ -99,32 +99,32 @@ export const useApplicantsTable = (orgId: string) => {
       {
         headerName: 'Socials',
         width: 320,
-        cellRenderer: (props: CellProps) => (
-          <SocialsCell
-            socials={{
-              ...convertFalseStringValuesToNull(props.data?.user.contact),
-              github: props.data?.user.username ?? null,
-            }}
-          />
-        ),
-        getQuickFilterText(p) {
-          if (!p.data) return '';
-          return Object.entries(p.data.user.contact)
-            .filter(([_, value]) => value)
-            .map(([key, value]) => `${key} ${value}`)
-            .join(' ');
-        },
-        sortable: true,
-        valueGetter: (p) =>
-          p.data
-            ? { github: p.data.user.username, ...p.data.user.contact }
-            : undefined,
-        comparator(contactA, contactB) {
-          const countA = Object.values(contactA).filter(Boolean).length;
-          const countB = Object.values(contactB).filter(Boolean).length;
-          console.log({ countA, contactA, countB, contactB });
-          return countA - countB;
-        },
+        //
+        // cellRenderer: (props: CellProps) => (
+        //   // <SocialsCell
+        //   //   socials={{
+        //   //     ...convertFalseStringValuesToNull(props.data?.user.contact),
+        //   //     github: props.data?.user.username ?? null,
+        //   //   }}
+        //   // />
+        // ),
+        // getQuickFilterText(p) {
+        //   if (!p.data) return '';
+        //   return Object.entries(p.data.user.contact)
+        //     .filter(([_, value]) => value)
+        //     .map(([key, value]) => `${key} ${value}`)
+        //     .join(' ');
+        // },
+        // sortable: true,
+        // valueGetter: (p) =>
+        //   p.data
+        //     ? { github: p.data.user.username, ...p.data.user.contact }
+        //     : undefined,
+        // comparator(contactA, contactB) {
+        //   const countA = Object.values(contactA).filter(Boolean).length;
+        //   const countB = Object.values(contactB).filter(Boolean).length;
+        //   return countA - countB;
+        // },
       },
       {
         headerName: 'Showcase',
@@ -183,7 +183,6 @@ export const useApplicantsTable = (orgId: string) => {
         },
         sortable: true,
         comparator(noteA, noteB) {
-          console.log({ noteA, noteB });
           if (noteA === noteB) return 0;
           return (noteA || '').length - (noteB || '').length;
         },

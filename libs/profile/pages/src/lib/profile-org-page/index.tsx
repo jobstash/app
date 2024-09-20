@@ -31,12 +31,12 @@ export const ProfileOrgPage = () => {
         <PageWrapper>
           <SideBar />
           <div className="flex flex-col w-full gap-12 px-4 py-20 xl:flex-row xl:min-h-screen xl:px-10 xl:py-10">
-              <div className='xl:basis-2/3'>
-                <ProfileOrgForm />
-              </div>
-              <div className='flex justify-center w-full xl:self-start xl:mt-0 xl:justify-center xl:basis-1/3'>
-                <OrgAccountCard />
-              </div>
+            <div className="xl:basis-2/3">
+              <ProfileOrgForm />
+            </div>
+            <div className="flex justify-center w-full xl:self-start xl:mt-0 xl:justify-center xl:basis-1/3">
+              <OrgAccountCard />
+            </div>
           </div>
           <NoticeModal />
         </PageWrapper>

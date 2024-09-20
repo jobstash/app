@@ -1,3 +1,7 @@
+import { DevTalent } from '@jobstash/profile/core';
+import { getNameFromTalent } from '@jobstash/profile/utils';
+import { formatWalletAddress, getAvatarSrc } from '@jobstash/shared/utils';
+
 import { LogoTitle } from '@jobstash/shared/ui';
 
 import { EmptyCellPlaceholder } from '../empty-cell-placeholder';
@@ -8,13 +12,7 @@ interface Location {
 }
 
 interface Props {
-  user?: {
-    wallet: string;
-    avatar: string | null;
-    username: string | null;
-    email: { email: string; main: boolean }[];
-    location: Location;
-  };
+  data: DevTalent;
 }
 
 const getLocationText = (location: Location) => {
@@ -25,14 +23,15 @@ const getLocationText = (location: Location) => {
     : `${city ? `${city}` : ''}${city && country ? ', ' : ' '}${country ?? ''}`;
 };
 
-export const UserCell = ({ user }: Props) => {
-  if (!user) return <EmptyCellPlaceholder />;
+export const UserCell = ({ data }: Props) => {
+  const { location, githubAvatar, name, alternateEmails, linkedAccounts } =
+    data;
 
-  const { wallet, avatar, username, email: emails, location } = user;
-  const email = emails.length > 0 ? emails[0].email : undefined;
+  const title = getNameFromTalent({ name, alternateEmails, linkedAccounts });
 
-  const title = username ?? email;
   const locationText = getLocationText(location);
+
+  const avatar = githubAvatar ?? getAvatarSrc(title);
 
   if (!title) return <EmptyCellPlaceholder />;
 
@@ -40,12 +39,12 @@ export const UserCell = ({ user }: Props) => {
     <LogoTitle
       key={title}
       identiconFallback
-      title={title ?? ''}
+      title={title}
       location={locationText}
       avatarProps={{
-        src: avatar ?? '',
-        alt: username ?? email ?? wallet,
-        name: username ?? email ?? wallet,
+        src: avatar,
+        alt: title,
+        name: title,
       }}
     />
   );

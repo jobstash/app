@@ -1,9 +1,4 @@
-import { PreferredContact } from '@jobstash/profile/core';
-
-export const getContactLink = (
-  preferred: PreferredContact,
-  handle: string | null,
-) => {
+export const getContactLink = (preferred: string, handle: string | null) => {
   if (!handle) return null;
 
   switch (preferred) {
@@ -12,6 +7,10 @@ export const getContactLink = (
     }
 
     case 'email': {
+      return `mailto:${handle}`;
+    }
+
+    case 'google': {
       return `mailto:${handle}`;
     }
 
@@ -31,8 +30,8 @@ export const getContactLink = (
       return getContactLinkUrl('warpcast.com', handle);
     }
 
-    case 'lens': {
-      return getContactLinkUrl('lenster.xyz', handle);
+    case 'wallet': {
+      return `https://etherscan.io/address/${handle}`;
     }
 
     default: {

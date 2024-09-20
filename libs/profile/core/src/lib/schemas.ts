@@ -94,6 +94,18 @@ export const userEmailSchema = myzod.object({
   main: myzod.boolean(),
 });
 
+export const linkedAccountsSchema = myzod.object({
+  discord: myzod.string().nullable(),
+  telegram: myzod.string().nullable(),
+  google: myzod.string().nullable(),
+  apple: myzod.string().nullable(),
+  github: myzod.string().nullable(),
+  farcaster: myzod.string().nullable(),
+  twitter: myzod.string().nullable(),
+  email: myzod.string().nullable(),
+  wallets: myzod.array(myzod.string()),
+});
+
 export const devProfileInfoSchema = myzod.object({
   wallet: myzod.string().min(1),
   githubAvatar: myzod.string().min(1).nullable(),
@@ -101,17 +113,7 @@ export const devProfileInfoSchema = myzod.object({
   alternateEmails: myzod.array(myzod.string()),
   location: profileInfoLocationSchema,
   availableForWork: myzod.boolean().nullable(),
-  linkedAccounts: myzod.object({
-    discord: myzod.string().nullable(),
-    telegram: myzod.string().nullable(),
-    google: myzod.string().nullable(),
-    apple: myzod.string().nullable(),
-    github: myzod.string().nullable(),
-    farcaster: myzod.string().nullable(),
-    twitter: myzod.string().nullable(),
-    email: myzod.string().nullable(),
-    wallets: myzod.array(myzod.string()),
-  }),
+  linkedAccounts: linkedAccountsSchema,
 });
 
 export const devProfileInfoResponseSchema = myzod
@@ -143,6 +145,7 @@ export const orgProfileInfoSchema = myzod.object({
     expires: myzod.number().nullable(),
   }),
   internalReference: orgInternalReferenceSchema,
+  linkedWallets: myzod.array(myzod.string()),
 });
 
 export const orgProfileInfoResponseSchema = myzod.object({
@@ -289,21 +292,29 @@ export const devTalentSchema = myzod.intersection(
     workHistory: myzod.array(
       myzod.object({
         login: myzod.string(),
-        name: myzod.string(),
-        url: myzod.string().nullable(),
+        name: myzod.string().nullable(),
         logoUrl: myzod.string().nullable(),
+        description: myzod.string().nullable(),
+        url: myzod.string().nullable(),
         createdAt: myzod.number(),
         firstContributedAt: myzod.number(),
         lastContributedAt: myzod.number(),
+        commitsCount: myzod.number().nullable(),
+        tenure: myzod.number(),
+        cryptoNative: myzod.boolean(),
         repositories: myzod.array(
           myzod.object({
+            name: myzod.string().nullable(),
             url: myzod.string(),
-            name: myzod.string(),
-            createdAt: myzod.number(),
+            cryptoNative: myzod.boolean(),
             firstContributedAt: myzod.number(),
             lastContributedAt: myzod.number(),
+            description: myzod.string().nullable(),
             commitsCount: myzod.number(),
-            cryptoNative: myzod.boolean(),
+            skills: myzod.array(myzod.string()),
+            tenure: myzod.number(),
+            stars: myzod.number(),
+            createdAt: myzod.number(),
           }),
         ),
       }),

@@ -14,8 +14,10 @@ import {
   NOTE_UPDATE_UNDO_EVENT,
   noteUpdatePayloadAtom,
 } from '@jobstash/profile/core';
-import { getWorkHistoryRepoCount } from '@jobstash/profile/utils';
-import { convertFalseStringValuesToNull } from '@jobstash/shared/utils';
+import {
+  getNameFromTalent,
+  getWorkHistoryRepoCount,
+} from '@jobstash/profile/utils';
 
 import {
   BooleanCell,
@@ -43,42 +45,59 @@ export const useTalentsTable = () => {
     () => [
       {
         headerName: 'User',
+        width: 280,
         cellRenderer(props: CellProps) {
           if (!props.data) return null;
-          const { wallet, avatar, username, email, location } = props.data;
-          return (
-            <UserCell
-              user={{
-                wallet,
-                avatar,
-                username,
-                email,
-                location,
-              }}
-            />
-          );
+          return <UserCell data={props.data} />;
         },
-        valueGetter: (p) => p.data?.username || p.data?.email,
-        width: 280,
+        valueGetter(p) {
+          if (!p.data) return '';
+          return getNameFromTalent(p.data);
+        },
         getQuickFilterText(p) {
           if (!p.data) return '';
           const {
-            username,
-            email,
+            name,
+            alternateEmails,
             location: { city, country },
+            linkedAccounts: {
+              github,
+              email,
+              google,
+              telegram,
+              farcaster,
+              wallets,
+              discord,
+              twitter,
+              apple,
+            },
           } = p.data;
-          return `${username} ${email} ${city} ${country}`;
+
+          const names = [
+            name,
+            ...alternateEmails,
+            city,
+            country,
+            github,
+            email,
+            google,
+            telegram,
+            farcaster,
+            discord,
+            twitter,
+            apple,
+            ...wallets,
+          ];
+          return names.filter(Boolean).join(' ');
         },
       },
       {
         headerName: 'Work History',
-        cellRenderer: (props: CellProps) => (
-          <WorkHistoryCell
-            username={props.data?.username}
-            workHistory={props.data?.workHistory}
-          />
-        ),
         width: 320,
+        cellRenderer(props: CellProps) {
+          if (!props.data) return null;
+          return <WorkHistoryCell workHistory={props.data?.workHistory} />;
+        },
         getQuickFilterText(p) {
           if (!p.data) return '';
           return p.data.workHistory
@@ -97,28 +116,58 @@ export const useTalentsTable = () => {
       {
         headerName: 'Socials',
         width: 240,
-        cellRenderer: (props: CellProps) => (
-          <SocialsCell
-            socials={{
-              ...convertFalseStringValuesToNull(props.data?.contact),
-              github: props.data?.username ?? null,
-            }}
-          />
-        ),
-        getQuickFilterText(p) {
-          if (!p.data) return '';
-          return Object.entries(p.data.contact)
-            .filter(([_, value]) => value)
-            .map(([key, value]) => `${key} ${value}`)
-            .join(' ');
+        cellRenderer(props: CellProps) {
+          if (!props.data) return null;
+
+          return (
+            <SocialsCell
+              alternateEmails={props.data.alternateEmails}
+              linkedAccounts={props.data.linkedAccounts}
+            />
+          );
         },
         sortable: true,
-        valueGetter: (p) =>
-          p.data ? { github: p.data.username, ...p.data.contact } : undefined,
+        getQuickFilterText(p) {
+          if (!p.data) return '';
+          const {
+            alternateEmails,
+            linkedAccounts: {
+              github,
+              email,
+              google,
+              telegram,
+              farcaster,
+              wallets,
+              discord,
+              twitter,
+              apple,
+            },
+          } = p.data;
+
+          const names = [
+            ...alternateEmails,
+            github,
+            email,
+            google,
+            telegram,
+            farcaster,
+            discord,
+            twitter,
+            apple,
+            ...wallets,
+          ];
+          return names.filter(Boolean).join(' ');
+        },
+        valueGetter(p) {
+          if (!p.data) return '';
+          return getNameFromTalent(p.data);
+        },
+        //
+        // valueGetter: (p) =>
+        //   p.data ? { github: p.data.username, ...p.data.contact } : undefined,
         comparator(contactA, contactB) {
           const countA = Object.values(contactA).filter(Boolean).length;
           const countB = Object.values(contactB).filter(Boolean).length;
-          console.log({ countA, contactA, countB, contactB });
           return countA - countB;
         },
       },
@@ -175,7 +224,6 @@ export const useTalentsTable = () => {
         },
         sortable: true,
         comparator(noteA, noteB) {
-          console.log({ noteA, noteB });
           if (noteA === noteB) return 0;
           return (noteA || '').length - (noteB || '').length;
         },

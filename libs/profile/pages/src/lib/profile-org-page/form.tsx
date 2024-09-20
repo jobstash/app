@@ -4,6 +4,7 @@ import { Button } from '@nextui-org/button';
 import { Chip } from '@nextui-org/chip';
 import { Divider } from '@nextui-org/divider';
 import { Input } from '@nextui-org/input';
+import { Avatar } from '@nextui-org/react';
 import { Select, SelectItem } from '@nextui-org/select';
 import { Tab, Tabs } from '@nextui-org/tabs';
 
@@ -11,14 +12,14 @@ import { CHECK_WALLET_FLOWS } from '@jobstash/auth/core';
 import { CONTACT_FIELDS } from '@jobstash/profile/core';
 import { capitalize, cn, getAvatarSrc } from '@jobstash/shared/utils';
 
-import { useAuthContext } from '@jobstash/auth/state';
+import { useAuthContext, useSessionInfo } from '@jobstash/auth/state';
 import {
   useOrgProfileInfo,
   useOrgProfileInfoMutation,
 } from '@jobstash/profile/state';
 import { useIsMobile } from '@jobstash/shared/state';
 
-import { LogoTitle } from '@jobstash/shared/ui';
+import { Heading, LogoTitle } from '@jobstash/shared/ui';
 
 export const ProfileOrgForm = () => {
   const { isLoading: isLoadingAuth, flow } = useAuthContext();
@@ -95,11 +96,9 @@ export const ProfileOrgForm = () => {
   };
 
   const isMobile = useIsMobile();
+  const { isLoading, name, avatar } = useSessionInfo();
 
-  if (!profileInfoData) return null;
-  if (profileInfoData.email.length === 0) return null;
-
-  const { email } = profileInfoData.email[0];
+  if (!profileInfoData || isLoading) return null;
 
   return (
     <div className="flex flex-col w-full gap-4">
@@ -107,15 +106,16 @@ export const ProfileOrgForm = () => {
 
       <div className="flex items-center justify-between w-full">
         <div className="flex flex-wrap items-center gap-4">
-          <LogoTitle
-            title={email}
-            avatarProps={{
-              src: getAvatarSrc(email) ?? '',
-              alt: `${profileInfoData.email}'s avatar`,
-              isRounded: true,
-            }}
-            size={isMobile ? 'sm' : 'lg'}
-          />
+          {name && !isLoading && (
+            <div className="flex w-fit items-center gap-x-3">
+              <Avatar
+                src={avatar ?? getAvatarSrc(name)}
+                alt={name}
+                className="w-14 h-14 text-large"
+              />
+              <Heading size="md">{name}</Heading>
+            </div>
+          )}
           <Chip
             size={isMobile ? 'md' : 'lg'}
             radius="sm"

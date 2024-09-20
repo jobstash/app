@@ -14,6 +14,7 @@ import {
   devTalentSchema,
   legacyProfileInfoContactSchema,
   linkATSPlatformPayloadSchema,
+  linkedAccountsSchema,
   orgProfileInfoPayloadSchema,
   orgProfileInfoResponseSchema,
   orgProfileInfoSchema,
@@ -133,6 +134,8 @@ export type ProfileOrgReviewPayload = Infer<
 export type ProfileOrgReviewResponse = Infer<
   typeof profileOrgReviewResponseSchema
 >;
+
+export type LinkedAccounts = Infer<typeof linkedAccountsSchema>;
 
 export type DevTalent = Infer<typeof devTalentSchema>;
 export type DevTalentResponse = Infer<typeof devTalentResponseSchema>;
