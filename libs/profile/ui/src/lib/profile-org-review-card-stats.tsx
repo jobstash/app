@@ -17,7 +17,7 @@ interface Props {
 
 export const ProfileOrgReviewCardStats = ({ profileOrgReview }: Props) => {
   const { profileInfoData } = useDevProfileInfoContext();
-  const isConnectedToGithub = Boolean(profileInfoData?.username);
+  const isConnectedToGithub = Boolean(profileInfoData?.linkedAccounts.github);
 
   const cardSets = createCardSets(profileOrgReview, isConnectedToGithub);
 

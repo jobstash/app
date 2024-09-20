@@ -4,7 +4,7 @@ import { useLinkAccount, usePrivy } from '@privy-io/react-auth';
 import { Github as GithubIcon } from 'lucide-react';
 
 import { ERR_INTERNAL } from '@jobstash/shared/core';
-import { notifError } from '@jobstash/shared/utils';
+import { notifError, notifSuccess } from '@jobstash/shared/utils';
 
 import {
   EmailIcon,
@@ -14,23 +14,38 @@ import {
   WalletIcon,
 } from './icons';
 
+const SUCCESS_TITLE = 'Account Connected!';
+const SUCCESS_MESSAGE =
+  "You've successfully linked your account, enhancing your profile visibility.";
+
+const ERR_EXITED_LINK_FLOW = 'exited_link_flow';
+const ERR_CANNOT_LINK_MORE = 'cannot_link_more_of_type';
+const ERR_TOAST_TITLE = 'Failed to link account!';
+const ERR_ACCOUNT_ALREADY_ADDED = 'Account already added';
 interface AvailableAccount {
   onClick: () => void;
   label: string;
   icon: JSX.Element;
 }
 
-export const useAvailableAccounts = (onSuccess: () => void) => {
+export const useAvailableAccounts = () => {
   const { user } = usePrivy();
+
+  const onSuccess = useCallback(() => {
+    notifSuccess({
+      title: SUCCESS_TITLE,
+      message: SUCCESS_MESSAGE,
+    });
+  }, []);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onError = useCallback((error: any) => {
-    if (error !== 'exited_link_flow') {
+    if (error !== ERR_EXITED_LINK_FLOW) {
       notifError({
-        title: 'Failed to link account!',
+        title: ERR_TOAST_TITLE,
         message:
-          error === 'cannot_link_more_of_type'
-            ? 'Account already added'
+          error === ERR_CANNOT_LINK_MORE
+            ? ERR_ACCOUNT_ALREADY_ADDED
             : ERR_INTERNAL,
       });
     }

@@ -15,7 +15,7 @@ const SidebarDevSection = ({ isMobile }: Props) => {
 
   const tabs = [
     { text: 'Profile', path: '/profile', isExactPath: true },
-    ...(profileInfoData?.username
+    ...(profileInfoData?.linkedAccounts?.github
       ? [{ text: 'Your Repositories', path: '/profile/repositories' }]
       : []),
     { text: 'Organization Reviews', path: '/profile/reviews' },

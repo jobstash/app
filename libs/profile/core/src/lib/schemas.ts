@@ -15,7 +15,7 @@ import {
   tagSchema,
 } from '@jobstash/shared/core';
 
-import { ATS_PROVIDERS, CONTACT_FIELDS } from './constants';
+import { ATS_PROVIDERS } from './constants';
 
 export const profileRepoTag = myzod.intersection(
   tagSchema,
@@ -84,21 +84,10 @@ export const legacyProfileInfoContactSchema = myzod.object({
   value: myzod.string().nullable(),
 });
 
-export const profileInfoContactSchema = myzod.object({
-  email: myzod.string().nullable(),
-  twitter: myzod.string().nullable(),
-  discord: myzod.string().nullable(),
-  telegram: myzod.string().nullable(),
-  farcaster: myzod.string().nullable(),
-  lens: myzod.string().nullable(),
-});
-
 export const profileInfoLocationSchema = myzod.object({
   country: myzod.string().nullable(),
   city: myzod.string().nullable(),
 });
-
-export const preferredContactSchema = myzod.literals(...CONTACT_FIELDS);
 
 export const userEmailSchema = myzod.object({
   email: myzod.string(),
@@ -107,14 +96,22 @@ export const userEmailSchema = myzod.object({
 
 export const devProfileInfoSchema = myzod.object({
   wallet: myzod.string().min(1),
-  linkedWallets: myzod.array(myzod.string()),
-  avatar: myzod.string().min(1).nullable(),
-  username: myzod.string().min(1).nullable(),
-  email: myzod.array(userEmailSchema),
-  availableForWork: myzod.boolean().nullable(),
-  preferred: preferredContactSchema,
-  contact: profileInfoContactSchema,
+  githubAvatar: myzod.string().min(1).nullable(),
+  name: myzod.string().min(1).nullable(),
+  alternateEmails: myzod.array(myzod.string()),
   location: profileInfoLocationSchema,
+  availableForWork: myzod.boolean().nullable(),
+  linkedAccounts: myzod.object({
+    discord: myzod.string().nullable(),
+    telegram: myzod.string().nullable(),
+    google: myzod.string().nullable(),
+    apple: myzod.string().nullable(),
+    github: myzod.string().nullable(),
+    farcaster: myzod.string().nullable(),
+    twitter: myzod.string().nullable(),
+    email: myzod.string().nullable(),
+    wallets: myzod.array(myzod.string()),
+  }),
 });
 
 export const devProfileInfoResponseSchema = myzod
@@ -124,13 +121,6 @@ export const devProfileInfoResponseSchema = myzod
     message: myzod.string(),
   })
   .allowUnknownKeys(true);
-
-export const devProfileInfoPayloadSchema = myzod.object({
-  availableForWork: myzod.boolean(),
-  preferred: preferredContactSchema,
-  contact: profileInfoContactSchema,
-  location: profileInfoLocationSchema,
-});
 
 const orgInternalReferenceSchema = myzod.object({
   referencePersonName: myzod.string().nullable(),

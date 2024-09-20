@@ -7,8 +7,8 @@ import { useYourContributionMutation } from './use-your-contribution-mutation';
 
 export const useYourContribution = () => {
   const { profileInfoData } = useDevProfileInfoContext();
-  const username = profileInfoData?.username ?? '';
-  const avatar = profileInfoData?.avatar ?? '';
+  const username = profileInfoData?.linkedAccounts.github ?? '';
+  const avatar = profileInfoData?.githubAvatar ?? '';
 
   const { activeProfileRepo, profileRepo } = useProfileRepoPageContext();
 

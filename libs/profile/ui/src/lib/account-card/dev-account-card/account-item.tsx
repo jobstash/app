@@ -2,8 +2,10 @@ import { useState } from 'react';
 
 import { Avatar, Button, Tooltip } from '@nextui-org/react';
 import { User } from '@privy-io/react-auth';
+import { normalize } from 'viem/ens';
+import { useEnsAvatar, useEnsName } from 'wagmi';
 
-import { notifError } from '@jobstash/shared/utils';
+import { formatWalletAddress, notifError } from '@jobstash/shared/utils';
 
 import { Text } from '@jobstash/shared/ui';
 
@@ -25,6 +27,23 @@ export const AccountItem = ({
   unlink,
 }: Props) => {
   const [isLoading, setIsLoading] = useState(false);
+
+  const isWallet = label === 'Wallet';
+  const enableEns = isWallet && Boolean(text);
+
+  const { data: ensName } = useEnsName({
+    address: text as `0x${string}`,
+    query: {
+      enabled: enableEns,
+    },
+  });
+
+  const { data: ensAvatar } = useEnsAvatar({
+    name: ensName ? normalize(ensName) : undefined,
+    query: {
+      enabled: enableEns,
+    },
+  });
 
   if (!text) return null;
 
@@ -69,9 +88,11 @@ export const AccountItem = ({
         </div>
       </div>
       <div className="flex items-center gap-3 pl-1">
-        <Avatar src={src} alt={text} className="w-6 h-6" />
+        <Avatar src={ensAvatar ?? src} alt={text} className="w-6 h-6" />
         <div className="flex flex-col">
-          <Text fw="bold">{text}</Text>
+          <Text fw="bold">
+            {ensName ?? (isWallet ? formatWalletAddress(text) : text)}
+          </Text>
         </div>
       </div>
     </div>

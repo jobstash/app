@@ -9,15 +9,8 @@ import { useUpdateAvailability } from './use-update-availability';
 export const useProfileHeader = () => {
   const { profileInfoData } = useDevProfileInfoContext();
 
-  const {
-    availableForWork,
-    wallet,
-    username,
-    email,
-    avatar,
-    contact,
-    location,
-  } = profileInfoData ?? ({} as DevProfileInfo);
+  const { availableForWork, wallet, location, githubAvatar } =
+    profileInfoData ?? ({} as DevProfileInfo);
 
   const [isAvailableForWork, setIsAvailableForWork] = useState<boolean>(false);
 
@@ -25,7 +18,7 @@ export const useProfileHeader = () => {
     if (profileInfoData) {
       setIsAvailableForWork(Boolean(availableForWork));
     }
-  }, [availableForWork, contact, location, profileInfoData]);
+  }, [availableForWork, location, profileInfoData]);
 
   const { mutate: mutateAvailability, isPending: isLoadingAvailability } =
     useUpdateAvailability();
@@ -46,14 +39,9 @@ export const useProfileHeader = () => {
   return {
     isLoading,
     isAvailableForWork,
-    setIsAvailableForWork,
     updateAvailability,
     wallet,
-    username,
-    email,
-    avatar,
-    preferredContact: profileInfoData?.preferred ?? null,
-    contact: profileInfoData?.contact ?? null,
+    githubAvatar,
     location: profileInfoData?.location ?? null,
   };
 };

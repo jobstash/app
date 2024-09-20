@@ -10,7 +10,7 @@ import { useEnsInfo } from './use-ens-info';
 import { useLinkedWallets } from './use-linked-wallets';
 
 export const useSessionInfo = () => {
-  const { user } = usePrivy();
+  const { user, authenticated } = usePrivy();
   const { isLoading: isLoadingEns, ensName, ensAvatar } = useEnsInfo();
   const wallets = useLinkedWallets() as string[];
 
@@ -18,6 +18,7 @@ export const useSessionInfo = () => {
   const { isLoading: isLoadingProfileInfo, data: profileInfoData } = useQuery({
     queryKey: [mwVersion, 'dev-profile-info'],
     queryFn: () => getDevProfileInfo(),
+    enabled: authenticated,
   });
 
   if (!user) return { isLoading: false, name: null, avatar: null };

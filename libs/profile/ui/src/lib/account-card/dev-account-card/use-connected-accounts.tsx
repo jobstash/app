@@ -1,7 +1,8 @@
-import { useMemo } from 'react';
+import { useMemo, useReducer } from 'react';
 
-import { usePrivy, User, Wallet } from '@privy-io/react-auth';
+import { usePrivy, User } from '@privy-io/react-auth';
 
+import { useLinkedWallets } from '@jobstash/auth/state';
 import { useDevProfileInfoContext } from '@jobstash/profile/state';
 
 interface ConnectedAccount {
@@ -12,6 +13,8 @@ interface ConnectedAccount {
 }
 
 export const useConnectedAccounts = () => {
+  const [isEditing, toggleEdit] = useReducer((prev) => !prev, false);
+
   const { profileInfoData } = useDevProfileInfoContext();
 
   const {
@@ -24,23 +27,18 @@ export const useConnectedAccounts = () => {
     unlinkWallet,
   } = usePrivy();
 
-  return useMemo(() => {
+  const wallets = useLinkedWallets();
+
+  const connectedAccounts = useMemo(() => {
     if (!user) return [];
 
-    const { email, farcaster, github, google, telegram, linkedAccounts } = user;
-
-    const wallets = linkedAccounts
-      .filter(
-        (account) =>
-          account.type === 'wallet' && account.walletClientType !== 'privy',
-      )
-      .map((wallet) => (wallet as Wallet).address);
+    const { email, farcaster, github, google, telegram } = user;
 
     const connectedAccounts = [
       github && {
         text: github.username,
         label: 'Github',
-        avatar: profileInfoData?.avatar,
+        avatar: profileInfoData?.githubAvatar,
         unlink: () => unlinkGithub(github.subject),
       },
       email && {
@@ -66,7 +64,7 @@ export const useConnectedAccounts = () => {
           unlink: () => unlinkFarcaster(farcaster.fid as number),
         },
       ...wallets.map((wallet) => ({
-        text: formatAddress(wallet),
+        text: wallet,
         label: 'Wallet',
         unlink: () => unlinkWallet(wallet),
       })),
@@ -74,7 +72,7 @@ export const useConnectedAccounts = () => {
 
     return connectedAccounts as ConnectedAccount[];
   }, [
-    profileInfoData?.avatar,
+    profileInfoData?.githubAvatar,
     unlinkEmail,
     unlinkFarcaster,
     unlinkGithub,
@@ -82,8 +80,14 @@ export const useConnectedAccounts = () => {
     unlinkTelegram,
     unlinkWallet,
     user,
+    wallets,
   ]);
-};
 
-const formatAddress = (address: string) =>
-  `${address.slice(0, 6)}...${address.slice(-4)}`;
+  return {
+    isEditing,
+    toggleEdit,
+    connectedAccounts,
+    hasAccount: connectedAccounts.length > 1,
+    canRemove: isEditing && connectedAccounts.length > 1,
+  };
+};
