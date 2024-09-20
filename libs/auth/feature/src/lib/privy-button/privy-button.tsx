@@ -1,16 +1,20 @@
 import { Button, Spinner, useDisclosure } from '@nextui-org/react';
 
-import { useAuthContext, useSessionName } from '@jobstash/auth/state';
+import { useAuthContext, useSessionInfo } from '@jobstash/auth/state';
 
 import { ActiveModal } from './active-modal';
 import { ButtonWrapper } from './button-wrapper';
+
+const DEFAULT_TEXT = 'Login / Sign Up';
 
 export const PrivyButton = () => {
   const { isLoggedIn, showLoginModal } = useAuthContext();
   const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
 
-  const { text, fullText, isLoading } = useSessionName();
   const onClick = isLoggedIn ? onOpen : showLoginModal;
+
+  const { isLoading, name } = useSessionInfo();
+  const text = name ?? DEFAULT_TEXT;
 
   return (
     <>
@@ -26,7 +30,6 @@ export const PrivyButton = () => {
       </ButtonWrapper>
       <ActiveModal
         text={text}
-        fullText={fullText}
         isOpen={isOpen}
         onClose={onClose}
         onOpenChange={onOpenChange}

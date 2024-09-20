@@ -1,15 +1,14 @@
 import React from 'react';
 
+import { Avatar } from '@nextui-org/react';
+
 import { ProfileGotItCardStatus } from '@jobstash/profile/core';
 import { getAvatarSrc } from '@jobstash/shared/utils';
 
-import { useSessionName } from '@jobstash/auth/state';
-import {
-  ProfileHeaderProvider,
-  useProfileHeaderContext,
-} from '@jobstash/profile/state';
+import { useSessionInfo } from '@jobstash/auth/state';
+import { ProfileHeaderProvider } from '@jobstash/profile/state';
 
-import { LogoTitle } from '@jobstash/shared/ui';
+import { Heading } from '@jobstash/shared/ui';
 
 import { ProfileHeaderInfoButton } from './profile-header-info-button';
 import { ProfileHeaderLocation } from './profile-header-location';
@@ -21,24 +20,24 @@ interface Props {
 }
 
 const ProfileHeader = ({ gotItCard, gotItCardKey }: Props) => {
-  const { fullText: sessionName, isLoading } = useSessionName();
-  const { wallet, username, avatar, email: emails } = useProfileHeaderContext();
-  const email = (emails ?? []).length > 0 ? emails[0].email : null;
+  const { isLoading, name, avatar } = useSessionInfo();
+
   return (
     <ProfileHeaderProvider>
       <div className="flex items-end justify-between gap-4 md:items-center md:gap-8">
-        <div className="flex flex-col gap-4 md:flex-row md:items-center">
-          {sessionName && !isLoading && (
-            <LogoTitle
-              title={sessionName}
-              location={<ProfileHeaderLocation />}
-              avatarProps={{
-                src: avatar ?? getAvatarSrc(wallet) ?? '',
-                alt: `${username ?? email ?? ''}`,
-                isRounded: true,
-              }}
-              size="lg"
-            />
+        <div className="flex flex-col gap-6 md:flex-row md:items-center">
+          {name && !isLoading && (
+            <div className="flex w-fit items-center gap-x-3">
+              <Avatar
+                src={avatar ?? getAvatarSrc(name)}
+                alt={name}
+                className="w-14 h-14 text-large"
+              />
+              <div className="flex flex-col justify-center">
+                <Heading size="md">{name}</Heading>
+                <ProfileHeaderLocation />
+              </div>
+            </div>
           )}
           <ProfileHeaderSwitch />
         </div>

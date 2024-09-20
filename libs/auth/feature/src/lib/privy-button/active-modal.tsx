@@ -33,19 +33,12 @@ const LOGOUT_TOOLTIP = 'Logout';
 
 interface Props {
   text: string;
-  fullText: string;
   isOpen: boolean;
   onClose: () => void;
   onOpenChange: () => void;
 }
 
-export const ActiveModal = ({
-  text,
-  fullText,
-  isOpen,
-  onOpenChange,
-  onClose,
-}: Props) => {
+export const ActiveModal = ({ text, isOpen, onOpenChange, onClose }: Props) => {
   const { logout, isLoadingLogout } = useAuthContext();
 
   const onLogout = async () => {
@@ -54,10 +47,10 @@ export const ActiveModal = ({
   };
 
   const onCopy = () => {
-    navigator.clipboard.writeText(fullText);
+    navigator.clipboard.writeText(text);
     notifSuccess({
       title: `Copied to clipboard!`,
-      message: `"${fullText}"`,
+      message: `"${text}"`,
     });
   };
 

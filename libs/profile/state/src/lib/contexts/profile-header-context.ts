@@ -1,22 +1,13 @@
 import { createContext, useContext } from 'react';
 
-import {
-  DevProfileInfo,
-  PreferredContact,
-  UserEmail,
-} from '@jobstash/profile/core';
+import { DevProfileInfo } from '@jobstash/profile/core';
 
 interface ProfileHeaderContextProps {
   isLoading: boolean;
   isAvailableForWork: boolean;
-  setIsAvailableForWork: (isAvailableForWork: boolean) => void;
   updateAvailability: (isChecked: boolean) => void;
   wallet: string;
-  avatar: string | null;
-  username: string | null;
-  email: UserEmail[];
-  preferredContact: PreferredContact | null;
-  contact: DevProfileInfo['contact'] | null;
+  githubAvatar: string | null;
   location: DevProfileInfo['location'] | null;
 }
 

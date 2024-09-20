@@ -6,6 +6,7 @@ export * from './lib/create-fetch-deets';
 export * from './lib/dedupe';
 export * from './lib/disable-page-scroll';
 export * from './lib/dispatch-event';
+export * from './lib/format-wallet-address';
 export * from './lib/ga-event';
 export * from './lib/generate-xml-url';
 export * from './lib/get-avatar-src';
