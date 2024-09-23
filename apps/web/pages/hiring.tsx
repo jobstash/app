@@ -150,13 +150,15 @@ const GradientCtaSection = ({
   description: string;
   cta: React.ReactNode;
 }) => (
-  <GradientContainer className="mt-16">
-    <div className="flex flex-col gap-4 text-white grow">
-      <span className={`${lato.className} text-xl font-bold`}>{title}</span>
-      <span className="text-md text-white/75">{description}</span>
-    </div>
-    {cta}
-  </GradientContainer>
+  <section className="max-w-6xl pb-6 mx-auto md:pb-14">
+    <GradientContainer className="mt-16">
+      <div className="flex flex-col gap-2 text-white grow">
+        <span className={`${lato.className} text-2xl font-bold`}>{title}</span>
+        <span className="text-md text-white/90">{description}</span>
+      </div>
+      {cta}
+    </GradientContainer>
+  </section>
 );
 
 const PricingItem = ({
@@ -200,7 +202,7 @@ const OrganizationsPage = () => (
     <PageWrapper>
       <SideBar />
       <div className="px-6 py-16 md:py-12 md:px-10">
-        <section className="pb-6 md:pb-14">
+        <section>
           <h3
             className={`${lato.className} text-white !leading-tight font-black text-5xl md:text-6xl text-center pb-4 md:pb-8`}
           >
@@ -211,6 +213,19 @@ const OrganizationsPage = () => (
             job listings, as well as our ATS and Due Diligence services.
           </p>
         </section>
+
+        <GradientCtaSection
+          title="Maximize Your Reach on JobStash"
+          description="Reach thousands of qualified candidates by posting your job openings on JobStash today."
+          cta={
+            <HomePageButton
+              hasBorder
+              text="Start Hiring Now"
+              url="https://forms.gle/HWP6bUf3CB8RyJnw5"
+            />
+          }
+        />
+
         <section className="pb-6 md:pb-14">
           <h3
             className={`${lato.className} text-white !leading-tight font-black text-5xl md:text-6xl text-center pb-4 md:pb-8`}
@@ -237,21 +252,13 @@ const OrganizationsPage = () => (
             </div>
           </div>
         </section>
-        <section className="max-w-6xl pb-6 mx-auto md:pb-14">
-          <GradientCtaSection
-            title="Need help?"
-            description={
-              "We're here to help you with any questions you might have."
-            }
-            cta={
-              <HomePageButton
-                hasBorder
-                text="Slide into our DMs"
-                url={DUCK_TELEGRAM_URL}
-              />
-            }
-          />
-        </section>
+
+        <GradientCtaSection
+          title="Exclusive Data Services"
+          description="Sign up now to take advantage of JobStash’s data-driven recruitment solutions."
+          cta={<HomePageButton hasBorder text="Access Data Services" url="#" />}
+        />
+
         <section className="pb-6 md:pb-14">
           <h3
             className={`${lato.className} text-white !leading-tight font-black text-5xl md:text-6xl text-center pb-4 md:pb-8`}
@@ -281,6 +288,20 @@ const OrganizationsPage = () => (
             </div>
           </div>
         </section>
+
+        <GradientCtaSection
+          title="Need help?"
+          description={
+            "We're here to help you with any questions you might have."
+          }
+          cta={
+            <HomePageButton
+              hasBorder
+              text="Slide into our DMs"
+              url={DUCK_TELEGRAM_URL}
+            />
+          }
+        />
       </div>
     </PageWrapper>
   </>
