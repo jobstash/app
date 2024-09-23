@@ -7,6 +7,191 @@ import { PageWrapper } from '@jobstash/shared/ui';
 import { StatsGrid } from '@jobstash/shared/ui';
 import { SideBar } from '@jobstash/sidebar/feature';
 
+interface ServiceItemProps {
+  title: string;
+  description: string;
+  cta: { text: string; url: string };
+}
+
+const SERVICES: ServiceItemProps[] = [
+  {
+    title: 'Job Featuring',
+    description:
+      'Get 5x more applicants when you feature your jobs on JobStash. Learn how JobStash works and about the impact and performance of JobStash.',
+    cta: {
+      text: 'JobStash Overview Deck',
+      url: 'https://drive.google.com/file/d/1yuVMUrqBe6EgdB76ZVusSt5AWM_QaYxo/preview',
+    },
+  },
+  {
+    title: 'Veri',
+    description:
+      'Veri is a set of data tools to save time while hiring talent in the crypto space. It helps you identify genuine, crypto-native and upcoming talent, at scale, by relying on verifiable data instead of on CVs. Veri is designed to help you hire safer, better, and more efficiently.',
+    cta: {
+      text: 'Veri Overview Deck',
+      url: 'https://drive.google.com/file/d/1VVoyR3vy9xrzy8hwzPUzxOAMvRQLZEQb/preview',
+    },
+  },
+];
+
+interface PricingItemProps {
+  title: string;
+  subtitle: string;
+  price: string;
+  unit?: string;
+  features: string[];
+  cta?: {
+    text: string;
+    url: string;
+  };
+}
+
+const VERI_PRICES: PricingItemProps[] = [
+  {
+    title: 'Essential',
+    subtitle: 'JobStash ATS',
+    price: '99',
+    features: [
+      '✅ Access to our ATS',
+      '✅ Track all your applicants',
+      '✅ Access our Talent Pool',
+      '✅ Applicants use 1-click apply',
+      '✅ Keep your hiring ops in one place',
+      '✅ Organization wide license',
+      'Soon: Embeddable apply button & job board',
+      'Soon: Post jobs to your TG & Discord',
+    ],
+  },
+  {
+    title: 'Advanced',
+    subtitle: 'JobStash ATS + Veri Data',
+    price: '199',
+    features: [
+      '✅ Access to our ATS',
+      '✅ Track all your applicants',
+      '✅ Access our Talent Pool + Veri Data',
+      '✅ Applicants use 1-click apply',
+      '✅ Keep your hiring ops in one place',
+      '✅ Due Diligence data for candidates',
+      '✅ Organization wide license',
+      'Soon: Embeddable apply button & job board',
+      'Soon: Post jobs to your TG & Discord',
+    ],
+  },
+  {
+    title: 'Pro',
+    subtitle: 'ATS Integration + Veri Data',
+    price: '99',
+    features: [
+      '✅ Integrated into any ATS',
+      '✅ Automatically receive due diligence data on all your applicants directly in your ATS',
+      "✅ Candidate Report, an in depth analysis of the candidate's data",
+      '✅ Due Diligence data for 3000 applicants/mo',
+      '✅ 1 Seat license',
+      'Soon: Post jobs to your TG & Discord',
+    ],
+  },
+];
+
+const FEATUREING_PRICES: PricingItemProps[] = [
+  {
+    title: 'Flamboyant',
+    subtitle: 'Job Featuring',
+    price: '200',
+    unit: 'job',
+    features: [
+      '✅ 1 job featured for 7 days',
+      '✅ 2x the applicants',
+      '✅ Featured on our homepage',
+    ],
+  },
+  {
+    title: 'Neon',
+    subtitle: 'Job Featuring',
+    price: '300',
+    unit: 'job',
+    features: [
+      '✅ 1 job featured for 7 days',
+      '✅ 5x the applicants',
+      '✅ Featured on our homepage',
+      '✅ Telegram stories about org, project and job',
+      '✅ Job Post bumping on Telegram',
+      '✅ Crossposting',
+    ],
+  },
+];
+
+const ServiceItem = ({
+  title,
+  description,
+  cta: { text, url },
+}: ServiceItemProps) => (
+  <div className="w-full mb-4 md:px-2 md:w-1/2">
+    <div className="flex flex-wrap justify-start h-full p-5 bg-white md:flex-col bg-opacity-5 rounded-3xl">
+      <h3
+        className={`${lato.className} justify-center text-3xl pb-3 font-bold text-white`}
+      >
+        {title}
+      </h3>
+      <p className="pb-6 text-left text-md text-white/75 grow">{description}</p>
+      <div className="flex justify-center w-full">
+        <HomePageButton hasBorder text={text} url={url} external={false} />
+      </div>
+    </div>
+  </div>
+);
+
+const GradientCtaSection = ({
+  title,
+  description,
+  cta,
+}: {
+  title: string;
+  description: string;
+  cta: React.ReactNode;
+}) => (
+  <GradientContainer className="mt-16">
+    <div className="flex flex-col gap-4 text-white grow">
+      <span className={`${lato.className} text-xl font-bold`}>{title}</span>
+      <span className="text-md text-white/75">{description}</span>
+    </div>
+    {cta}
+  </GradientContainer>
+);
+
+const PricingItem = ({
+  title,
+  subtitle,
+  price,
+  unit = 'mo',
+  features,
+  cta = { text: 'Get Started', url: DUCK_TELEGRAM_URL },
+}: PricingItemProps) => (
+  <div className="z-30 flex flex-col bg-white border rounded-md bg-opacity-5 border-primary">
+    <div className="p-6 border-b border-default">
+      <h3
+        className={`${lato.className} text-center text-3xl pb-3 font-bold text-white`}
+      >
+        {title}
+      </h3>
+      <p className="text-center text-md text-subtle">{subtitle}</p>
+      <h3
+        className={`${lato.className} text-center text-3xl pb-3 font-bold text-white`}
+      >
+        ${price} <span className="text-lg">/ {unit}</span>
+      </h3>
+    </div>
+    <ul className="flex-grow p-6 space-y-2">
+      {features.map((feature) => (
+        <li key={feature}>{feature}</li>
+      ))}
+    </ul>
+    <div className="flex justify-center w-full px-6 pb-6">
+      <HomePageButton hasBorder text={cta.text} url={cta.url} />
+    </div>
+  </div>
+);
+
 const OrganizationsPage = () => (
   <>
     <Head>
@@ -45,72 +230,27 @@ const OrganizationsPage = () => (
             </h3>
             <div className="mx-auto mt-6 lg:max-w-6xl">
               <div className="flex flex-row flex-wrap md:-mx-2">
-                <div className="w-full mb-4 md:px-2 md:w-1/2">
-                  <div className="flex flex-wrap justify-start h-full p-5 bg-white md:flex-col bg-opacity-5 rounded-3xl">
-                    <h3
-                      className={`${lato.className} justify-center text-3xl pb-3 font-bold text-white`}
-                    >
-                      Job Featuring
-                    </h3>
-                    <p className="pb-6 text-left text-md text-white/75 grow">
-                      Get 5x more applicants when you feature your jobs on
-                      JobStash. Learn how JobStash works and about the impact
-                      and performance of JobStash.
-                    </p>
-                    <div className="flex justify-center w-full">
-                      <HomePageButton
-                        hasBorder
-                        text="JobStash Overview Deck"
-                        url="https://drive.google.com/file/d/1yuVMUrqBe6EgdB76ZVusSt5AWM_QaYxo/preview"
-                        external={false}
-                      />
-                    </div>
-                  </div>
-                </div>
-                <div className="w-full mb-4 md:px-2 md:w-1/2">
-                  <div className="flex flex-wrap justify-start h-full p-5 bg-white md:flex-col bg-opacity-5 rounded-3xl">
-                    <h3
-                      className={`${lato.className} justify-center text-3xl pb-3 font-bold text-white`}
-                    >
-                      Veri
-                    </h3>
-                    <p className="pb-6 text-left text-md text-white/75 grow">
-                      Veri is a set of data tools to save time while hiring
-                      talent in the crypto space. It helps you identify genuine,
-                      crypto-native and upcoming talent, at scale, by relying on
-                      verifiable data instead of on CVs. Veri is designed to
-                      help you hire safer, better, and more efficiently.
-                    </p>
-                    <div className="flex justify-center w-full">
-                      <HomePageButton
-                        hasBorder
-                        text="Veri Overview Deck"
-                        url="https://drive.google.com/file/d/1VVoyR3vy9xrzy8hwzPUzxOAMvRQLZEQb/preview"
-                        external={false}
-                      />
-                    </div>
-                  </div>
-                </div>
+                {SERVICES.map((service) => (
+                  <ServiceItem key={service.title} {...service} />
+                ))}
               </div>
             </div>
           </div>
         </section>
         <section className="max-w-6xl pb-6 mx-auto md:pb-14">
-          <GradientContainer className="mt-16">
-            <div className="flex flex-col gap-4 text-white grow">
-              <span className={`${lato.className} text-xl font-bold`}>
-                Need help?
-              </span>
-              <span className="text-md text-white/75">
-                We&#39;re here to help you with any questions you might have.
-              </span>
-            </div>
-            <HomePageButton
-              hasBorder
-              text="Slide into our DMs"
-              url={DUCK_TELEGRAM_URL}
-            />
-          </GradientContainer>
+          <GradientCtaSection
+            title="Need help?"
+            description={
+              "We're here to help you with any questions you might have."
+            }
+            cta={
+              <HomePageButton
+                hasBorder
+                text="Slide into our DMs"
+                url={DUCK_TELEGRAM_URL}
+              />
+            }
+          />
         </section>
         <section className="pb-6 md:pb-14">
           <h3
@@ -120,118 +260,9 @@ const OrganizationsPage = () => (
           </h3>
           <div className="mx-auto">
             <div className="grid grid-cols-1 gap-4 mx-auto mb-4 place-content-center lg:grid-cols-3 xl:w-4/5">
-              {/* Essential Plan */}
-              <div className="z-30 flex flex-col bg-white border rounded-md bg-opacity-5 border-primary">
-                <div className="p-6 border-b border-default">
-                  <h3
-                    className={`${lato.className} text-center text-3xl pb-3 font-bold text-white`}
-                  >
-                    Essential
-                  </h3>
-                  <p className="text-center text-md text-subtle">
-                    JobStash ATS
-                  </p>
-                  <h3
-                    className={`${lato.className} text-center text-3xl pb-3 font-bold text-white`}
-                  >
-                    $99 <span className="text-lg">/ mo</span>
-                  </h3>
-                </div>
-                <ul className="flex-grow p-6 space-y-2">
-                  <li>✅ Access to our ATS</li>
-                  <li>✅ Track all your applicants</li>
-                  <li>✅ Access our Talent Pool</li>
-                  <li>✅ Applicants use 1-click apply</li>
-                  <li>✅ Keep your hiring ops in one place</li>
-                  <li>✅ Organization wide license</li>
-                  <li>Soon: Embeddable apply button & job board</li>
-                  <li>Soon: Post jobs to your TG & Discord</li>
-                </ul>
-                <div className="flex justify-center w-full px-6 pb-6">
-                  <HomePageButton
-                    hasBorder
-                    text="Get Started"
-                    url={DUCK_TELEGRAM_URL}
-                  />
-                </div>
-              </div>
-
-              {/* Advanced Plan */}
-              <div className="z-30 flex flex-col bg-white border rounded-md bg-opacity-5 border-primary">
-                <div className="p-6 border-b border-default">
-                  <h3
-                    className={`${lato.className} text-center text-3xl pb-3 font-bold text-white`}
-                  >
-                    Advanced
-                  </h3>
-                  <p className="text-center text-md text-subtle">
-                    JobStash ATS + Veri Data
-                  </p>
-                  <h3
-                    className={`${lato.className} text-center text-3xl pb-3 font-bold text-white`}
-                  >
-                    $199 <span className="text-lg">/ mo</span>
-                  </h3>
-                </div>
-                <ul className="flex-grow p-6 space-y-2">
-                  <li>✅ Access to our ATS</li>
-                  <li>✅ Track all your applicants</li>
-                  <li>✅ Access our Talent Pool + Veri Data</li>
-                  <li>✅ Applicants use 1-click apply</li>
-                  <li>✅ Keep your hiring ops in one place</li>
-                  <li>✅ Due Diligence data for candidates</li>
-                  <li>✅ Organization wide license</li>
-                  <li>Soon: Embeddable apply button & job board</li>
-                  <li>Soon: Post jobs to your TG & Discord</li>
-                </ul>
-                <div className="flex justify-center w-full px-6 pb-6">
-                  <HomePageButton
-                    hasBorder
-                    text="Get Started"
-                    url={DUCK_TELEGRAM_URL}
-                  />
-                </div>
-              </div>
-
-              {/* Pro Plan */}
-              <div className="z-30 flex flex-col bg-white border rounded-md bg-opacity-5 border-primary">
-                <div className="p-6 border-b border-default">
-                  <h3
-                    className={`${lato.className} text-center text-3xl pb-3 font-bold text-white`}
-                  >
-                    Pro
-                  </h3>
-                  <p className="text-center text-md text-subtle">
-                    ATS Integration + Veri Data
-                  </p>
-                  <h3
-                    className={`${lato.className} text-center text-3xl pb-3 font-bold text-white`}
-                  >
-                    $99 <span className="text-lg">/ mo</span>
-                  </h3>
-                </div>
-                <ul className="flex-grow p-6 space-y-2">
-                  <li>✅ Integrated into any ATS</li>
-                  <li>
-                    ✅ Automatically receive due diligence data on all your
-                    applicants directly in your ATS
-                  </li>
-                  <li>
-                    ✅ Candidate Report, an in depth analysis of the
-                    candidate&#39;s data
-                  </li>
-                  <li>✅ Due Diligence data for 3000 applicants/mo</li>
-                  <li>✅ 1 Seat license</li>
-                  <li>Soon: Post jobs to your TG & Discord</li>
-                </ul>
-                <div className="flex justify-center w-full px-6 pb-6">
-                  <HomePageButton
-                    hasBorder
-                    text="Get Started"
-                    url={DUCK_TELEGRAM_URL}
-                  />
-                </div>
-              </div>
+              {VERI_PRICES.map((pricing) => (
+                <PricingItem key={pricing.title} {...pricing} />
+              ))}
             </div>
           </div>
         </section>
@@ -244,68 +275,9 @@ const OrganizationsPage = () => (
           </h3>
           <div className="mx-auto">
             <div className="grid grid-cols-1 gap-4 mx-auto mb-4 place-content-center lg:grid-cols-2 lg:w-2/3 xl:grid-cols-2 xl:w-1/2">
-              {/* Essential Plan */}
-              <div className="z-30 flex flex-col bg-white border rounded-md bg-opacity-5 border-primary">
-                <div className="p-6 border-b border-default">
-                  <h3
-                    className={`${lato.className} text-center text-3xl pb-3 font-bold text-white`}
-                  >
-                    Flamboyant
-                  </h3>
-                  <p className="text-center text-md text-subtle">
-                    Job Feauturing
-                  </p>
-                  <h3
-                    className={`${lato.className} text-center text-3xl pb-3 font-bold text-white`}
-                  >
-                    $200 <span className="text-lg">/ job</span>
-                  </h3>
-                </div>
-                <ul className="flex-grow p-6 space-y-2">
-                  <li>✅ 1 job featured for 7 days</li>
-                  <li>✅ 2x the applicants</li>
-                  <li>✅ Featured on our homepage</li>
-                </ul>
-                <div className="flex justify-center w-full px-6 pb-6">
-                  <HomePageButton
-                    hasBorder
-                    text="Get Started"
-                    url={DUCK_TELEGRAM_URL}
-                  />
-                </div>
-              </div>
-              <div className="z-30 flex flex-col bg-white border rounded-md bg-opacity-5 border-primary">
-                <div className="p-6 border-b border-default">
-                  <h3
-                    className={`${lato.className} text-center text-3xl pb-3 font-bold text-white`}
-                  >
-                    Neon
-                  </h3>
-                  <p className="text-center text-md text-subtle">
-                    Job Feauturing
-                  </p>
-                  <h3
-                    className={`${lato.className} text-center text-3xl pb-3 font-bold text-white`}
-                  >
-                    $300 <span className="text-lg">/ job</span>
-                  </h3>
-                </div>
-                <ul className="flex-grow p-6 space-y-2">
-                  <li>✅ 1 job featured for 7 days</li>
-                  <li>✅ 5x the applicants</li>
-                  <li>✅ Featured on our homepage</li>
-                  <li>✅ Telegram stories about org, project and job</li>
-                  <li>✅ Job Post bumping on Telegram</li>
-                  <li>✅ Crossposting</li>
-                </ul>
-                <div className="flex justify-center w-full px-6 pb-6">
-                  <HomePageButton
-                    hasBorder
-                    text="Get Started"
-                    url={DUCK_TELEGRAM_URL}
-                  />
-                </div>
-              </div>
+              {FEATUREING_PRICES.map((pricing) => (
+                <PricingItem key={pricing.title} {...pricing} />
+              ))}
             </div>
           </div>
         </section>
