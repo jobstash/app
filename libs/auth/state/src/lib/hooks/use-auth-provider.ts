@@ -1,13 +1,9 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
-import {
-  getAccessToken,
-  useLogin,
-  useLogout,
-  usePrivy,
-} from '@privy-io/react-auth';
+import { useLogin, useLogout, usePrivy } from '@privy-io/react-auth';
 import { useMutation } from '@tanstack/react-query';
+import { useAtom } from 'jotai';
 
 import {
   CHECK_WALLET_FLOWS,
@@ -17,6 +13,8 @@ import {
 import { LOCAL_STORAGE_KEYS } from '@jobstash/shared/core';
 
 import { getCheckWallet } from '@jobstash/auth/data';
+
+import { isOrgCheckWalletAtom } from '../atoms/is-org-check-wallet-atom';
 
 const DEFAULT_CHECK_WALLET_RESPONSE: CheckWalletResponse = {
   role: CHECK_WALLET_ROLES.ANON,
@@ -32,10 +30,11 @@ export const useAuthProvider = () => {
 
   const { authenticated: isLoggedIn, user, getAccessToken } = usePrivy();
 
+  const [isOrgCheckWallet, setIsOrgCheckWallet] = useAtom(isOrgCheckWalletAtom);
   const { mutate: setupLocal, isPending: isLoading } = useMutation({
     async mutationFn() {
       const accessToken = await getAccessToken();
-      const response = await getCheckWallet(accessToken);
+      const response = await getCheckWallet(accessToken, isOrgCheckWallet);
       localStorage.setItem(LOCAL_STORAGE_KEYS.AUTH_JWT, response.token);
       setCheckWalletResponse(response);
     },
@@ -68,6 +67,8 @@ export const useAuthProvider = () => {
   const router = useRouter();
   const { mutateAsync: logout, isPending: isLoadingLogout } = useMutation({
     async mutationFn() {
+      setIsOrgCheckWallet(false);
+      setCheckWalletResponse(DEFAULT_CHECK_WALLET_RESPONSE);
       await privyLogout();
       router.push('/jobs');
     },

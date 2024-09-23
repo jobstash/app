@@ -5,6 +5,7 @@ import { DUCK_TELEGRAM_URL, lato } from '@jobstash/shared/core';
 import { GradientContainer, HomePageButton } from '@jobstash/home/ui';
 import { PageWrapper } from '@jobstash/shared/ui';
 import { StatsGrid } from '@jobstash/shared/ui';
+import { PrivyButton } from '@jobstash/auth/feature';
 import { SideBar } from '@jobstash/sidebar/feature';
 
 interface ServiceItemProps {
@@ -256,7 +257,7 @@ const OrganizationsPage = () => (
         <GradientCtaSection
           title="Exclusive Data Services"
           description="Sign up now to take advantage of JobStash’s data-driven recruitment solutions."
-          cta={<HomePageButton hasBorder text="Access Data Services" url="#" />}
+          cta={<PrivyButton isOrg text="Org Sign Up" />}
         />
 
         <section className="pb-6 md:pb-14">

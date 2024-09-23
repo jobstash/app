@@ -1,5 +1,6 @@
 // Atoms
 export * from './lib/atoms/bypass-dev-signup-atom';
+export * from './lib/atoms/is-org-check-wallet-atom';
 export * from './lib/atoms/is-pending-pick-role-atom';
 export * from './lib/atoms/pick-role-section-atom';
 
