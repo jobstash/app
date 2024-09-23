@@ -1,4 +1,5 @@
 import { Button, Spinner, useDisclosure } from '@nextui-org/react';
+import { usePrivy } from '@privy-io/react-auth';
 import { useSetAtom } from 'jotai';
 
 import {
@@ -6,6 +7,7 @@ import {
   useAuthContext,
   useSessionInfo,
 } from '@jobstash/auth/state';
+import { useDebouncedValue } from '@jobstash/shared/state';
 
 import { ActiveModal } from './active-modal';
 import { ButtonWrapper } from './button-wrapper';
@@ -18,6 +20,7 @@ interface Props {
 }
 
 export const PrivyButton = ({ isOrg = false, text: title }: Props) => {
+  const { ready } = usePrivy();
   const { isLoggedIn, showLoginModal } = useAuthContext();
   const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
 
@@ -30,8 +33,11 @@ export const PrivyButton = ({ isOrg = false, text: title }: Props) => {
 
   const onClick = isLoggedIn ? onOpen : openLoginModal;
 
-  const { isLoading, name } = useSessionInfo();
+  const { isLoading: isLoadingSession, name } = useSessionInfo();
   const text = title ?? name ?? DEFAULT_TEXT;
+
+  const isLoading = isLoadingSession || !ready;
+  const debouncedLoading = useDebouncedValue(isLoading, 300);
 
   return (
     <>
@@ -40,9 +46,10 @@ export const PrivyButton = ({ isOrg = false, text: title }: Props) => {
           fullWidth
           radius="md"
           className="font-bold h-full"
+          isDisabled={debouncedLoading}
           onClick={onClick}
         >
-          {isLoading ? <Spinner size="sm" color="white" /> : text}
+          {debouncedLoading ? <Spinner size="sm" color="white" /> : text}
         </Button>
       </ButtonWrapper>
       <ActiveModal
