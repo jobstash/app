@@ -1,10 +1,13 @@
 import { useCallback } from 'react';
 
 import { useLinkAccount, usePrivy } from '@privy-io/react-auth';
+import { useQueryClient } from '@tanstack/react-query';
 import { Github as GithubIcon } from 'lucide-react';
 
 import { ERR_INTERNAL } from '@jobstash/shared/core';
 import { notifError, notifSuccess } from '@jobstash/shared/utils';
+
+import { useMwVersionContext } from '@jobstash/shared/state';
 
 import {
   EmailIcon,
@@ -31,12 +34,18 @@ interface AvailableAccount {
 export const useAvailableAccounts = () => {
   const { user } = usePrivy();
 
+  const { mwVersion } = useMwVersionContext();
+  const queryClient = useQueryClient();
+
   const onSuccess = useCallback(() => {
+    const queryKey = [mwVersion, 'dev-profile-info'];
+    queryClient.invalidateQueries({ queryKey });
+
     notifSuccess({
       title: SUCCESS_TITLE,
       message: SUCCESS_MESSAGE,
     });
-  }, []);
+  }, [mwVersion, queryClient]);
 
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const onError = useCallback((error: any) => {

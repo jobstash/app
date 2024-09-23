@@ -1,9 +1,13 @@
-import { useMemo, useReducer } from 'react';
+import { useCallback, useMemo, useReducer } from 'react';
 
 import { usePrivy, User } from '@privy-io/react-auth';
+import { useQueryClient } from '@tanstack/react-query';
+
+import { notifError } from '@jobstash/shared/utils';
 
 import { useLinkedWallets } from '@jobstash/auth/state';
 import { useDevProfileInfoContext } from '@jobstash/profile/state';
+import { useMwVersionContext } from '@jobstash/shared/state';
 
 interface ConnectedAccount {
   text: string;
@@ -29,6 +33,28 @@ export const useConnectedAccounts = () => {
 
   const wallets = useLinkedWallets();
 
+  const { mwVersion } = useMwVersionContext();
+  const queryClient = useQueryClient();
+
+  const unlink = useCallback(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    async <T extends any[]>(
+      unlinkFn: (...args: T) => Promise<User>,
+      ...args: T
+    ) => {
+      try {
+        const result = await unlinkFn(...args);
+
+        const queryKey = [mwVersion, 'dev-profile-info'];
+        queryClient.invalidateQueries({ queryKey });
+        return result;
+      } catch (error) {
+        notifError({ message: (error as Error).message });
+      }
+    },
+    [mwVersion, queryClient],
+  );
+
   const connectedAccounts = useMemo(() => {
     if (!user) return [];
 
@@ -39,40 +65,41 @@ export const useConnectedAccounts = () => {
         text: github.username,
         label: 'Github',
         avatar: profileInfoData?.githubAvatar,
-        unlink: () => unlinkGithub(github.subject),
+        unlink: () => unlink(unlinkGithub, github.subject),
       },
       email && {
         text: email.address,
         label: 'Email',
-        unlink: () => unlinkEmail(email.address),
+        unlink: () => unlink(unlinkEmail, email.address),
       },
       telegram && {
         text: telegram.username,
         label: 'Telegram',
-        unlink: () => unlinkTelegram(telegram.telegramUserId),
+        unlink: () => unlink(unlinkTelegram, telegram.telegramUserId),
       },
       google && {
         text: google.email,
         label: 'Google',
-        unlink: () => unlinkGoogle(google.subject),
+        unlink: () => unlink(unlinkGoogle, google.email),
       },
       farcaster &&
-        farcaster.fid !== null && {
+        typeof farcaster.fid === 'number' && {
           text: farcaster.username,
           label: 'Farcaster',
           avatar: farcaster.pfp,
-          unlink: () => unlinkFarcaster(farcaster.fid as number),
+          unlink: () => unlink(unlinkFarcaster, farcaster.fid as number),
         },
       ...wallets.map((wallet) => ({
         text: wallet,
         label: 'Wallet',
-        unlink: () => unlinkWallet(wallet),
+        unlink: () => unlink(unlinkWallet, wallet),
       })),
     ].filter(Boolean);
 
     return connectedAccounts as ConnectedAccount[];
   }, [
     profileInfoData?.githubAvatar,
+    unlink,
     unlinkEmail,
     unlinkFarcaster,
     unlinkGithub,
