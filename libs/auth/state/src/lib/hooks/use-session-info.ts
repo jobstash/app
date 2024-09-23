@@ -25,7 +25,7 @@ export const useSessionInfo = () => {
 
   const accountInfos = [
     { name: ensName, avatar: ensAvatar },
-    { name: user.github?.name, avatar: profileInfoData?.githubAvatar },
+    { name: user.github?.username, avatar: profileInfoData?.githubAvatar },
     { name: user.email?.address, avatar: null },
     { name: user.google?.email, avatar: null },
     { name: user.farcaster?.username, avatar: user.farcaster?.pfp },
