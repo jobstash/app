@@ -132,13 +132,8 @@ const Sidebar = ({ filtersRouteSection }: Props) => {
               <FarcasterIcon />
             </a>
           </div>
-          <div className="flex flex-col">
-            <Text color="dimmed" className="block">
-              Discover
-            </Text>
-            <SidebarDiscoverBartabs isMobile />
-          </div>
 
+          <SidebarDiscoverBartabs isMobile />
           <SidebarBookmarksSection isMobile />
 
           <IsMountedWrapper>
@@ -167,11 +162,7 @@ const Sidebar = ({ filtersRouteSection }: Props) => {
 
         {/* DESKTOP BARTABS */}
         <div className="flex-col hidden mt-24 space-y-6 lg:flex">
-          <div className="flex-col">
-            <Text color="dimmed">Discover</Text>
-            <SidebarDiscoverBartabs />
-          </div>
-
+          <SidebarDiscoverBartabs />
           <SidebarBookmarksSection />
 
           <IsMountedWrapper>

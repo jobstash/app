@@ -13,7 +13,7 @@ import { isOpenFullscreenNavAtom } from '@jobstash/shared/state';
 
 import { Bartab } from '@jobstash/shared/ui';
 
-interface Props {
+export interface SidebarBartabProps {
   text: string;
   path: string;
   icon?: ReactNode;
@@ -29,7 +29,7 @@ const SidebarBartab = ({
   icon,
   isMobile,
   isDisabled,
-}: Props) => {
+}: SidebarBartabProps) => {
   const { pathname, push } = useRouter();
 
   const isActive = isExactPath
