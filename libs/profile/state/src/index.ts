@@ -31,6 +31,7 @@ export * from './lib/hooks/use-salary-mutation';
 export * from './lib/hooks/use-tags-used-mutation';
 export * from './lib/hooks/use-update-applicant-list';
 export * from './lib/hooks/use-update-ats-preference';
+export * from './lib/hooks/use-update-location';
 export * from './lib/hooks/use-update-main-email';
 export * from './lib/hooks/use-update-note';
 export * from './lib/hooks/use-update-note';

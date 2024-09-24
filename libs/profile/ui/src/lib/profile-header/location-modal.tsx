@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { use, useState } from 'react';
 
 import {
   Button,
@@ -13,7 +13,10 @@ import {
 import { DevProfileInfo, LOCATION_FIELDS } from '@jobstash/profile/core';
 import { capitalize } from '@jobstash/shared/utils';
 
-import { useDevProfileInfoContext } from '@jobstash/profile/state';
+import {
+  useDevProfileInfoContext,
+  useUpdateLocation,
+} from '@jobstash/profile/state';
 
 import { Heading } from '@jobstash/shared/ui';
 
@@ -46,9 +49,18 @@ export const LocationModal = (props: Props) => {
     });
   };
 
-  // eslint-disable-next-line unicorn/consistent-function-scoping
+  const { isPending, mutate } = useUpdateLocation();
+
   const onSave = () => {
-    console.log('TODO');
+    if (location) {
+      mutate(location, {
+        onSuccess() {
+          if (isOpen) {
+            onOpenChange(false);
+          }
+        },
+      });
+    }
   };
 
   return (
@@ -73,7 +85,7 @@ export const LocationModal = (props: Props) => {
                     size="sm"
                     value={(location as Location)[name as keyof Location] ?? ''}
                     //
-                    // isDisabled={isLoadingMutation}
+                    isDisabled={isPending}
                     onChange={onChangeLocation}
                   />
                 </div>
@@ -81,8 +93,8 @@ export const LocationModal = (props: Props) => {
             </ModalBody>
             <ModalFooter>
               <Button
-                //
-                // isLoading={isLoadingMutation}
+                isLoading={isPending}
+                isDisabled={!hasLocation || isPending}
                 onClick={onSave}
               >
                 Save
