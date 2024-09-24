@@ -6,11 +6,8 @@ import { MW_URL } from '@jobstash/shared/core';
 
 import { mwFetch } from '@jobstash/shared/data';
 
-export const getCheckWallet = async (
-  accessToken: string | null,
-  isOrg: boolean, // Distinguish org signups (needed only for initial org signup)
-) => {
-  const url = `${MW_URL}/privy/check-${isOrg ? 'org-' : ''}wallet`;
+export const getCheckWallet = async (accessToken: string | null) => {
+  const url = `${MW_URL}/privy/check-wallet`;
 
   const options = {
     responseSchema: checkWalletResponseSchema,

@@ -1,5 +1,7 @@
 import Head from 'next/head';
 
+import { usePrivy } from '@privy-io/react-auth';
+
 import { DUCK_TELEGRAM_URL, lato } from '@jobstash/shared/core';
 
 import { GradientContainer, HomePageButton } from '@jobstash/home/ui';
@@ -257,7 +259,7 @@ const OrganizationsPage = () => (
         <GradientCtaSection
           title="Exclusive Data Services"
           description="Sign up now to take advantage of JobStash’s data-driven recruitment solutions."
-          cta={<PrivyButton isOrg text="Org Sign Up" />}
+          cta={<SignUpButton />}
         />
 
         <section className="pb-6 md:pb-14">
@@ -307,5 +309,13 @@ const OrganizationsPage = () => (
     </PageWrapper>
   </>
 );
+
+const SignUpButton = () => {
+  const { authenticated } = usePrivy();
+
+  if (!authenticated) return <PrivyButton text="Sign Up Now" />;
+
+  return <HomePageButton hasBorder text="Go to Profile" url="/profile" />;
+};
 
 export default OrganizationsPage;
