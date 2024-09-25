@@ -6,14 +6,16 @@ import { DevProfileInfoProvider } from '@jobstash/profile/state';
 import SidebarAdminSection from './sidebar-admin-section';
 import SidebarDevSection from './sidebar-dev-section';
 import SidebarOrgSection from './sidebar-org-section';
+import { SidebarSectionSkeleton } from './sidebar-section';
 
 interface Props {
   isMobile?: boolean;
 }
 
 const SidebarUserSection = ({ isMobile }: Props) => {
-  const { role, isAuthenticated } = useAuthContext();
+  const { role, isAuthenticated, isLoading } = useAuthContext();
 
+  if (isLoading) return <SidebarSectionSkeleton />;
   if (!isAuthenticated) return null;
 
   switch (role) {

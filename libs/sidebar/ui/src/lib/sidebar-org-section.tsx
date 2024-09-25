@@ -51,7 +51,12 @@ const SidebarOrgSection = ({ isMobile }: Props) => {
   }
 
   return (
-    <SidebarSection title="Your Profile" isMobile={isMobile} bartabs={tabs} />
+    <SidebarSection
+      isMountedWrapped
+      title="Your Profile"
+      isMobile={isMobile}
+      bartabs={tabs}
+    />
   );
 };
 

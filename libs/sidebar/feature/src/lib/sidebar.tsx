@@ -12,12 +12,7 @@ import { cn } from '@jobstash/shared/utils';
 import { isOpenTopBannerAtom } from '@jobstash/shared/state';
 import { SidebarProvider } from '@jobstash/sidebar/state';
 
-import {
-  CloseIcon,
-  HamburgerIcon,
-  IsMountedWrapper,
-  Text,
-} from '@jobstash/shared/ui';
+import { CloseIcon, HamburgerIcon } from '@jobstash/shared/ui';
 import {
   Brand,
   HeaderLink,
@@ -135,10 +130,7 @@ const Sidebar = ({ filtersRouteSection }: Props) => {
 
           <SidebarDiscoverBartabs isMobile />
           <SidebarBookmarksSection isMobile />
-
-          <IsMountedWrapper>
-            <SidebarUserSection isMobile />
-          </IsMountedWrapper>
+          <SidebarUserSection isMobile />
 
           <div className="grow" />
 
@@ -164,10 +156,7 @@ const Sidebar = ({ filtersRouteSection }: Props) => {
         <div className="flex-col hidden mt-24 space-y-6 lg:flex">
           <SidebarDiscoverBartabs />
           <SidebarBookmarksSection />
-
-          <IsMountedWrapper>
-            <SidebarUserSection />
-          </IsMountedWrapper>
+          <SidebarUserSection />
         </div>
       </SidebarWrapper>
     </SidebarProvider>

@@ -1,6 +1,7 @@
 // Base
 export { default as Avatar } from './lib/base/avatar';
 export { default as Bartab } from './lib/base/bartab';
+export * from './lib/base/bartab-skeleton';
 export { default as Button } from './lib/base/button/button';
 export { default as LinkButton } from './lib/base/button/link-button';
 export { default as CardSet } from './lib/base/card-set';
