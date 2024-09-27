@@ -67,7 +67,9 @@ export const ActiveModal = ({ text, isOpen, onOpenChange, onClose }: Props) => {
       isOpen={isOpen}
       onOpenChange={onOpenChange}
     >
-      <ModalContent>
+      <ModalContent
+        className='self-center mx-6 md:mx-0'
+      >
         <div className="absolute top-3 right-2">
           <Button isIconOnly variant="light" size="sm" onPress={onClose}>
             <XMarkIcon className="w-5 h-5" />
