@@ -49,7 +49,7 @@ export const Card = ({ job }: Props) => {
             <LogoTitle
               title={organization.name}
               avatarProps={{ src: getLogoUrl( organization.website, organization.logoUrl), alt: organization.name }}
-              size="xs"
+              size="sm"
             />
           </div>
           <p className="text-left text-md text-white/75">{summary}</p>
