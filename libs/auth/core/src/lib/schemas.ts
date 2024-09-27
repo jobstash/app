@@ -74,3 +74,8 @@ export const githubLoginPayloadSchema = myzod.object({
   wallet: myzod.string(),
   role: myzod.string(),
 });
+
+export const userOrgSchema = myzod.object({
+  id: myzod.string(),
+  name: myzod.string(),
+});

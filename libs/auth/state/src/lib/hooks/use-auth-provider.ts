@@ -13,6 +13,8 @@ import { LOCAL_STORAGE_KEYS } from '@jobstash/shared/core';
 
 import { getCheckWallet } from '@jobstash/auth/data';
 
+import { useUserOrg } from './use-user-org';
+
 const DEFAULT_CHECK_WALLET_RESPONSE: CheckWalletResponse = {
   role: CHECK_WALLET_ROLES.ANON,
   flow: CHECK_WALLET_FLOWS.DEFAULT,
@@ -53,6 +55,9 @@ export const useAuthProvider = () => {
 
   const isAuthenticated = isLoggedIn && role !== CHECK_WALLET_ROLES.ANON;
 
+  const { data: userOrgs, isLoading: isLoadingUserOrgFetch } = useUserOrg();
+  const isLoadingUserOrg = isAuthenticated && isLoadingUserOrgFetch;
+
   const { logout: privyLogout } = useLogout({
     async onSuccess() {
       setCheckWalletResponse(DEFAULT_CHECK_WALLET_RESPONSE);
@@ -74,11 +79,12 @@ export const useAuthProvider = () => {
     role,
     flow,
     isCryptoNative: cryptoNative,
-    isLoading: isLoadingSetup || !ready,
+    isLoading: isLoadingSetup || !ready || isLoadingUserOrg,
     isLoadingLogout,
     isLoggedIn,
     isAuthenticated,
     showLoginModal: login,
     logout,
+    orgs: userOrgs ?? [],
   };
 };

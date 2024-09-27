@@ -20,3 +20,4 @@ export * from './lib/hooks/use-send-magic-link';
 export * from './lib/hooks/use-session-info';
 export * from './lib/hooks/use-target-role-close-window';
 export * from './lib/hooks/use-update-flow';
+export * from './lib/hooks/use-user-org';

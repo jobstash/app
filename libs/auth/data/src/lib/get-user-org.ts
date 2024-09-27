@@ -1,23 +1,15 @@
 import myzod, { Infer } from 'myzod';
 
+import { userOrgSchema } from '@jobstash/auth/core';
 import { MW_URL } from '@jobstash/shared/core';
 
 import { mwFetch } from '@jobstash/shared/data';
 
-const userOrgDtoSchema = myzod.array(
-  myzod.object({
-    success: myzod.boolean(),
-    message: myzod.string(),
-    data: myzod
-      .array(
-        myzod.object({
-          id: myzod.string(),
-          name: myzod.string(),
-        }),
-      )
-      .optional(),
-  }),
-);
+const userOrgDtoSchema = myzod.object({
+  success: myzod.boolean(),
+  message: myzod.string(),
+  data: myzod.array(userOrgSchema),
+});
 
 type UserOrgDto = Infer<typeof userOrgDtoSchema>;
 
@@ -31,5 +23,10 @@ export const getUserOrg = async () => {
     mode: 'cors' as RequestMode,
   };
 
-  return mwFetch<UserOrgDto>(url, options);
+  const { success, message, data } = await mwFetch<UserOrgDto>(url, options);
+  if (!success) {
+    throw new Error(message);
+  }
+
+  return data;
 };

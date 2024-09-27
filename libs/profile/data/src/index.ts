@@ -7,7 +7,6 @@ export * from './lib/get-profile-org-review-list';
 export * from './lib/get-profile-repo-list';
 export * from './lib/get-profile-showcase';
 export * from './lib/get-profile-skills';
-export * from './lib/get-user-org';
 export * from './lib/get-work-history';
 export * from './lib/link-ats-platform';
 export * from './lib/post-delete-profile';

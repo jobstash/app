@@ -35,7 +35,6 @@ export * from './lib/hooks/use-update-location';
 export * from './lib/hooks/use-update-main-email';
 export * from './lib/hooks/use-update-note';
 export * from './lib/hooks/use-update-note';
-export * from './lib/hooks/use-user-org';
 export * from './lib/hooks/use-user-review';
 export * from './lib/hooks/use-work-history';
 export * from './lib/hooks/use-your-contribution-mutation';

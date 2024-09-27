@@ -17,4 +17,5 @@ export const AuthContext = createContext<AuthCtx>({
   isAuthenticated: false,
   showLoginModal: () => null,
   logout: () => Promise.resolve(),
+  orgs: [],
 });
