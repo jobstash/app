@@ -40,11 +40,6 @@ export const Card = ({ job }: Props) => {
               </Text>
             </div>
           )}
-          <h3
-            className={`${lato.className} justify-center text-xl font-bold text-white shrink w-full`}
-          >
-            {title} 
-          </h3>
           <div className='w-full'>
             <LogoTitle
               title={organization.name}
@@ -52,24 +47,32 @@ export const Card = ({ job }: Props) => {
               size="sm"
             />
           </div>
+          <h3
+            className={`${lato.className} justify-center text-xl font-bold text-white shrink -mt-1 w-full`}
+          >
+            {title} 
+          </h3>
+          
           <p className="text-left text-md text-white/75">{summary}</p>
-          <div className="max-w-xs">
-            <div className="flex flex-wrap gap-x-4 gap-y-0">
-              {tags.map(({ id, text, link, icon }) => (
-                <CardSet key={id} link={link} icon={icon}>
-                  {text}
-                </CardSet>
-              ))}
-            </div>
-          </div>
+          
         </div>
-
-        <Button
-          className="self-end w-full font-bold rounded-lg bg-gradient-to-l from-primary to-tertiary"
-          onClick={() => openJob(job)}
-        >
-          Explore Job
-        </Button>
+        <div className='flex flex-col self-end gap-4'>
+          <div className="max-w-xs">
+              <div className="flex flex-wrap gap-x-4 gap-y-0">
+                {tags.map(({ id, text, link, icon }) => (
+                  <CardSet key={id} link={link} icon={icon}>
+                    {text}
+                  </CardSet>
+                ))}
+              </div>
+            </div>
+          <Button
+            className="w-full font-bold rounded-lg bg-gradient-to-l from-primary to-tertiary"
+            onClick={() => openJob(job)}
+          >
+            Explore Job
+          </Button>
+        </div>
       </div>
     </div>
   );
