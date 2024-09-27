@@ -204,7 +204,7 @@ const OrganizationsPage = () => (
     </Head>
     <PageWrapper>
       <SideBar />
-      <div className="px-6 py-16 md:py-12 md:px-10">
+      <div className="px-6 py-16 lg:py-12 md:px-10">
         <section>
           <h3
             className={`${lato.className} text-white !leading-tight font-black text-5xl md:text-6xl text-center pb-4 md:pb-8`}
