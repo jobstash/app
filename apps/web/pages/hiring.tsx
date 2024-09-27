@@ -9,7 +9,9 @@ import { PageWrapper } from '@jobstash/shared/ui';
 import { StatsGrid } from '@jobstash/shared/ui';
 import { PrivyButton } from '@jobstash/auth/feature';
 import { SideBar } from '@jobstash/sidebar/feature';
-
+import {
+  LandingFooter,
+} from '@jobstash/home/ui';
 interface ServiceItemProps {
   title: string;
   description: string;
@@ -305,6 +307,9 @@ const OrganizationsPage = () => (
             />
           }
         />
+      </div>
+      <div className="px-6 md:px-10"> 
+        <LandingFooter />
       </div>
     </PageWrapper>
   </>
