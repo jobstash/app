@@ -32,11 +32,11 @@ export const PrivyButton = ({ text: title }: Props) => {
         <Button
           fullWidth
           radius="md"
-          className="font-bold h-full"
+          className="h-full font-bold"
           isDisabled={debouncedLoading}
           onClick={onClick}
         >
-          {debouncedLoading ? <Spinner size="sm" color="white" /> : text}
+          <span className='truncate'>{debouncedLoading ? <Spinner size="sm" color="white" /> : text} </span>
         </Button>
       </ButtonWrapper>
       <ActiveModal
