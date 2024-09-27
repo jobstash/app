@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic';
 import Head from 'next/head';
 
 import { LoadingPage, NotFoundPage } from '@jobstash/shared/pages';
@@ -9,10 +10,13 @@ import { OrgProfileInfoProvider, useDevTalents } from '@jobstash/profile/state';
 
 import { NoteUpdatePayloadSyncer } from '@jobstash/profile/ui';
 import { PageWrapper } from '@jobstash/shared/ui';
-import { SideBar } from '@jobstash/sidebar/feature';
 
 import { DevTalentsTable } from './table';
 import { TalentTabs } from './tabs';
+
+const SideBar = dynamic(() =>
+  import('@jobstash/sidebar/feature').then((m) => m.SideBar),
+);
 
 export const TalentsPage = () => {
   const { role, flow, isLoading: isLoadingAuth } = useAuthContext();

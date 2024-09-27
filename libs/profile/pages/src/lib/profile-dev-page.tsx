@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 
@@ -18,7 +19,10 @@ import {
   ProfileSkillsSection,
 } from '@jobstash/profile/ui';
 import { PageWrapper } from '@jobstash/shared/ui';
-import { SideBar } from '@jobstash/sidebar/feature';
+
+const SideBar = dynamic(() =>
+  import('@jobstash/sidebar/feature').then((m) => m.SideBar),
+);
 
 export const ProfileDevPage = () => {
   const { profileInfoData } = useDevProfileInfo();

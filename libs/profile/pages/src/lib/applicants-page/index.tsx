@@ -2,6 +2,7 @@ import 'ag-grid-community/styles/ag-grid.css';
 import 'ag-grid-community/styles/ag-theme-quartz.css';
 import './ag-grid-custom.css';
 
+import dynamic from 'next/dynamic';
 import Head from 'next/head';
 
 import { LoadingPage, NotFoundPage } from '@jobstash/shared/pages';
@@ -17,11 +18,14 @@ import { OrgProfileInfoProvider, useATSClient } from '@jobstash/profile/state';
 
 import { NoteUpdatePayloadSyncer } from '@jobstash/profile/ui';
 import { PageWrapper } from '@jobstash/shared/ui';
-import { SideBar } from '@jobstash/sidebar/feature';
 
 import { activeListAtom } from './active-list-atom';
 import { ApplicantsTable } from './table';
 import { ApplicantTabs } from './tabs';
+
+const SideBar = dynamic(() =>
+  import('@jobstash/sidebar/feature').then((m) => m.SideBar),
+);
 
 export const ApplicantsPage = () => {
   const { role, flow, isLoading: isLoadingAuth } = useAuthContext();
