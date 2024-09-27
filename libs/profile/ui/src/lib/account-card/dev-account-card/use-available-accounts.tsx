@@ -37,9 +37,14 @@ export const useAvailableAccounts = () => {
   const { mwVersion } = useMwVersionContext();
   const queryClient = useQueryClient();
 
-  const onSuccess = useCallback(() => {
-    const queryKey = [mwVersion, 'dev-profile-info'];
-    queryClient.invalidateQueries({ queryKey });
+  const onSuccess = useCallback(async () => {
+    // Invalidate related queries
+    await queryClient.invalidateQueries({
+      queryKey: [mwVersion, 'dev-profile-info'],
+    });
+    await queryClient.invalidateQueries({
+      queryKey: [mwVersion, 'affiliated-orgs'],
+    });
 
     notifSuccess({
       title: SUCCESS_TITLE,

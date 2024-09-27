@@ -14,6 +14,8 @@ export const ConnectedAccounts = () => {
 
   return (
     <>
+      <hr className="border-t border-white/10" />
+
       <div className="flex flex-col gap-2">
         <div className="flex items-center justify-between">
           <Text size="lg" fw="bold">

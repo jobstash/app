@@ -5,6 +5,7 @@ import AccountCardModal from '../account-card-modal';
 import AccountCardTitle from '../account-card-title';
 import AccountCardWrapper from '../account-card-wrapper';
 
+import { AffiliatedOrganizations } from './affiliated-organizations';
 import { AvailableAccounts } from './available-accounts';
 import { ConnectedAccounts } from './connected-accounts';
 
@@ -22,11 +23,11 @@ export const DevAccountCard = () => {
       <AccountCardWrapper>
         <div className="flex flex-col gap-6 pb-4">
           <AccountCardTitle />
-          <hr className="border-t border-white/10" />
 
           <div className="flex flex-col gap-6">
-            <ConnectedAccounts />
             <AvailableAccounts />
+            <ConnectedAccounts />
+            <AffiliatedOrganizations />
           </div>
         </div>
 

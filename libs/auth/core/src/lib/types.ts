@@ -2,6 +2,7 @@ import { User as PrivyUser } from '@privy-io/react-auth';
 import { type Infer } from 'myzod';
 
 import {
+  affiliatedOrgSchema,
   checkWalletResponseSchema,
   githubLoginPayloadSchema,
   siweCreateMessageResponseSchema,
@@ -9,7 +10,6 @@ import {
   siweSessionResponseSchema,
   siweVerifyPayloadSchema,
   siweVerifyResponseSchema,
-  userOrgSchema,
 } from './schemas';
 import { checkWalletRolesSchema } from './schemas';
 import { checkWalletFlowsSchema } from './schemas';
@@ -38,9 +38,9 @@ export type AuthCtx = {
   isAuthenticated: boolean;
   showLoginModal: () => void;
   logout: () => Promise<void>;
-  orgs: UserOrg[];
+  orgs: AffilatedOrganization[];
 };
 
 export type GithubLoginPayload = Infer<typeof githubLoginPayloadSchema>;
 
-export type UserOrg = Infer<typeof userOrgSchema>;
+export type AffilatedOrganization = Infer<typeof affiliatedOrgSchema>;
