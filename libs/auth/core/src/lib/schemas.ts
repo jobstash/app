@@ -75,7 +75,11 @@ export const githubLoginPayloadSchema = myzod.object({
   role: myzod.string(),
 });
 
-export const userOrgSchema = myzod.object({
+export const affiliatedOrgSchema = myzod.object({
   id: myzod.string(),
   name: myzod.string(),
+  slug: myzod.string(),
+  url: myzod.string(),
+  logo: myzod.string().nullable(),
+  account: myzod.string(),
 });

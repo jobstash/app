@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic';
 import Head from 'next/head';
 
 import { LoadingPage } from '@jobstash/shared/pages';
@@ -9,10 +10,13 @@ import { useOrgProfileInfo } from '@jobstash/profile/state';
 
 import { OrgAccountCard } from '@jobstash/profile/ui';
 import { PageWrapper } from '@jobstash/shared/ui';
-import { SideBar } from '@jobstash/sidebar/feature';
 
 import { ProfileOrgForm } from './form';
 import { NoticeModal } from './notice-modal';
+
+const SideBar = dynamic(() =>
+  import('@jobstash/sidebar/feature').then((m) => m.SideBar),
+);
 
 export const ProfileOrgPage = () => {
   const { flow } = useAuthContext();

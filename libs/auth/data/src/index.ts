@@ -1,5 +1,5 @@
+export * from './lib/get-affiliated-orgs';
 export * from './lib/get-check-wallet';
-export * from './lib/get-user-org';
 export * from './lib/github-login';
 export * from './lib/send-dev-magic-link-token';
 export * from './lib/send-magic-link';

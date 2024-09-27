@@ -13,7 +13,7 @@ import { LOCAL_STORAGE_KEYS } from '@jobstash/shared/core';
 
 import { getCheckWallet } from '@jobstash/auth/data';
 
-import { useUserOrg } from './use-user-org';
+import { useAffiliatedOrgs } from './use-affiliated-orgs';
 
 const DEFAULT_CHECK_WALLET_RESPONSE: CheckWalletResponse = {
   role: CHECK_WALLET_ROLES.ANON,
@@ -55,7 +55,8 @@ export const useAuthProvider = () => {
 
   const isAuthenticated = isLoggedIn && role !== CHECK_WALLET_ROLES.ANON;
 
-  const { data: userOrgs, isLoading: isLoadingUserOrgFetch } = useUserOrg();
+  const { data: userOrgs, isLoading: isLoadingUserOrgFetch } =
+    useAffiliatedOrgs();
   const isLoadingUserOrg = isAuthenticated && isLoadingUserOrgFetch;
 
   const { logout: privyLogout } = useLogout({

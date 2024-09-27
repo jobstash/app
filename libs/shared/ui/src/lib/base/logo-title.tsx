@@ -48,7 +48,7 @@ const LogoTitle = ({
       name={name}
       identiconFallback={identiconFallback}
     />
-    <div className="flex flex-col justify-center">
+    <div className="flex flex-col justify-center gap-0.5">
       <Heading size={size === 'lg' ? 'md' : 'sm'}>{title}</Heading>
       {location &&
         (typeof location === 'string' ? (

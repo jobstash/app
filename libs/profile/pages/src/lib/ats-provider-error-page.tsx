@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
 
 import { LoadingPage, NotFoundPage } from '@jobstash/shared/pages';
@@ -8,7 +9,10 @@ import { ERR_INTERNAL } from '@jobstash/shared/core';
 import { useAuthContext } from '@jobstash/auth/state';
 
 import { Button, FoxSVG, Heading, Text } from '@jobstash/shared/ui';
-import { SideBar } from '@jobstash/sidebar/feature';
+
+const SideBar = dynamic(() =>
+  import('@jobstash/sidebar/feature').then((m) => m.SideBar),
+);
 
 const ATS_SETTINGS_PATH = '/profile/org/ats-settings';
 const DEFAULT_MESSAGE =

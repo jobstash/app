@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic';
 import Head from 'next/head';
 
 import { NotFoundPage } from '@jobstash/shared/pages';
@@ -8,9 +9,12 @@ import { useAuthContext } from '@jobstash/auth/state';
 import { OrgProfileInfoProvider } from '@jobstash/profile/state';
 
 import { PageWrapper } from '@jobstash/shared/ui';
-import { SideBar } from '@jobstash/sidebar/feature';
 
 import { ActiveATS } from './active-ats';
+
+const SideBar = dynamic(() =>
+  import('@jobstash/sidebar/feature').then((m) => m.SideBar),
+);
 
 export const ATSSettingsPage = () => {
   const { role, flow } = useAuthContext();

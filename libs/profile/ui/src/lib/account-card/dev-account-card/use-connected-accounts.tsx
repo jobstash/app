@@ -45,8 +45,14 @@ export const useConnectedAccounts = () => {
       try {
         const result = await unlinkFn(...args);
 
-        const queryKey = [mwVersion, 'dev-profile-info'];
-        queryClient.invalidateQueries({ queryKey });
+        // Invalidate related queries
+        await queryClient.invalidateQueries({
+          queryKey: [mwVersion, 'dev-profile-info'],
+        });
+        await queryClient.invalidateQueries({
+          queryKey: [mwVersion, 'affiliated-orgs'],
+        });
+
         return result;
       } catch (error) {
         notifError({ message: (error as Error).message });

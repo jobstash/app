@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic';
 import Head from 'next/head';
 
 import { LoadingPage, NotFoundPage } from '@jobstash/shared/pages';
@@ -17,7 +18,10 @@ import {
   ProfileRepoList,
   ProfileRepoRightPanel,
 } from '@jobstash/profile/feature';
-import { SideBar } from '@jobstash/sidebar/feature';
+
+const SideBar = dynamic(() =>
+  import('@jobstash/sidebar/feature').then((m) => m.SideBar),
+);
 
 export const ProfileRepositoriesPage = () => {
   const { role, isLoading, isAuthenticated } = useAuthContext();

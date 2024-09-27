@@ -1,9 +1,8 @@
-import { CHECK_WALLET_FLOWS } from '@jobstash/auth/core';
-import { ATS_PROVIDERS } from '@jobstash/profile/core';
+import { getPluralText, normalizeString } from '@jobstash/shared/utils';
 
 import { useAuthContext } from '@jobstash/auth/state';
-import { useATSClient } from '@jobstash/profile/state';
 
+import { SidebarBartabProps } from './sidebar-bartab';
 import { SidebarSection } from './sidebar-section';
 
 interface Props {
@@ -11,49 +10,30 @@ interface Props {
 }
 
 const SidebarOrgSection = ({ isMobile }: Props) => {
-  const { flow, isLoading: isLoadingAuth } = useAuthContext();
-  const { data: atsClient, isPending: isPendingATSClient } = useATSClient();
-
-  const isLoading = isLoadingAuth || isPendingATSClient;
+  const { isLoading, orgs } = useAuthContext();
 
   if (isLoading) return null;
 
-  const tabs: { text: string; path: string; isExactPath?: boolean }[] = [];
-  tabs.push({
-    text: `${flow === CHECK_WALLET_FLOWS.ORG_PROFILE ? 'Setup ' : ''}Profile`,
-    path: '/profile',
-    isExactPath: true,
-  });
+  const tabs: SidebarBartabProps[] = orgs.map(({ id, name }) => ({
+    text: name,
+    path: `/profile/organizations/${normalizeString(name)}`,
+  }));
 
-  if (flow === CHECK_WALLET_FLOWS.ORG_COMPLETE) {
-    tabs.push({
-      text: 'ATS Settings',
-      path: '/profile/org/ats-settings',
-    });
-
-    if (atsClient && atsClient.name === ATS_PROVIDERS.JOBSTASH.platformName) {
-      tabs.push({
-        text: 'Applicants',
-        path: '/profile/org/applicants',
-      });
-    }
-
-    tabs.push(
-      {
-        text: 'Available Talents',
-        path: '/profile/org/talents',
-      },
-      {
-        text: 'Candidate Report',
-        path: '/candidate-report',
-      },
-    );
-  }
+  tabs.push(
+    {
+      text: 'Available Talents',
+      path: '/profile/org/talents',
+    },
+    {
+      text: 'Candidate Report',
+      path: '/candidate-report',
+    },
+  );
 
   return (
     <SidebarSection
       isMountedWrapped
-      title="Your Profile"
+      title={`Your ${getPluralText('Organization', orgs.length)}`}
       isMobile={isMobile}
       bartabs={tabs}
     />
