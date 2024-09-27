@@ -13,32 +13,24 @@ interface Props {
 }
 
 const SidebarUserSection = ({ isMobile }: Props) => {
-  const { role, isAuthenticated, isLoading } = useAuthContext();
+  const { role, isAuthenticated, isLoading, orgs } = useAuthContext();
 
   if (isLoading) return <SidebarSectionSkeleton />;
   if (!isAuthenticated) return null;
 
-  switch (role) {
-    case CHECK_WALLET_ROLES.DEV: {
-      return (
+  return (
+    <>
+      {role !== CHECK_WALLET_ROLES.ADMIN && (
         <DevProfileInfoProvider>
           <SidebarDevSection isMobile={isMobile} />
         </DevProfileInfoProvider>
-      );
-    }
+      )}
 
-    case CHECK_WALLET_ROLES.ORG: {
-      return <SidebarOrgSection isMobile={isMobile} />;
-    }
+      {orgs.length > 0 && <SidebarOrgSection isMobile={isMobile} />}
 
-    case CHECK_WALLET_ROLES.ADMIN: {
-      return <SidebarAdminSection />;
-    }
-
-    default: {
-      return null;
-    }
-  }
+      {role === CHECK_WALLET_ROLES.ADMIN && <SidebarAdminSection />}
+    </>
+  );
 };
 
 export default SidebarUserSection;
