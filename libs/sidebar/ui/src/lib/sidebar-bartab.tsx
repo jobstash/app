@@ -30,11 +30,11 @@ const SidebarBartab = ({
   isMobile,
   isDisabled,
 }: SidebarBartabProps) => {
-  const { pathname, push } = useRouter();
+  const { asPath, push } = useRouter();
 
   const isActive = isExactPath
-    ? pathname === path
-    : pathname === path || pathname.startsWith(`${path}/`);
+    ? asPath === path
+    : asPath === path || asPath.startsWith(`${path}/`);
 
   const setIsOpenNav = useSetAtom(isOpenFullscreenNavAtom);
   const setActiveJob = useSetAtom(activeJobAtom);
@@ -44,7 +44,7 @@ const SidebarBartab = ({
   const setActiveProfileRepo = useSetAtom(activeProfileRepoAtom);
 
   const onClick = () => {
-    if (pathname !== path) {
+    if (asPath !== path) {
       if (path === ROUTE_SECTION.JOBS) {
         setActiveJob(null);
       }
