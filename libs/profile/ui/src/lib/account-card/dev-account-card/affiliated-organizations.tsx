@@ -1,11 +1,9 @@
-import { Button, Spinner, Tooltip } from '@nextui-org/react';
-import { SlidersHorizontal as ManageOrgIcon } from 'lucide-react';
+import { Spinner } from '@nextui-org/react';
 
 import { getGoogleLogoUrl } from '@jobstash/shared/utils';
 
 import { LogoTitle, Text } from '@jobstash/shared/ui';
 
-import { EditIcon, LeftIcon } from './icons';
 import { useAffiliatedOrganizations } from './use-affiliated-organizations';
 
 const AFFILIATED_ORG_TITLE = 'Affiliated Organizations';
@@ -17,8 +15,7 @@ const ADD_AFFILIATED_DESCRIPTION =
   "You're on your way to being recognized as an expert. Continue connecting your professional accounts to affiliate with organizations. The more accounts you link, the more you'll be perceived as an expert when collaborating with different organizations.";
 
 export const AffiliatedOrganizations = () => {
-  const { data, isEditing, toggleEdit, hasOrg, getOnManageFn } =
-    useAffiliatedOrganizations();
+  const { data, hasOrg } = useAffiliatedOrganizations();
 
   if (!data)
     return (
@@ -41,7 +38,7 @@ export const AffiliatedOrganizations = () => {
           <Text size="lg" fw="bold">
             {title}
           </Text>
-          {hasOrg && (
+          {/* {hasOrg && (
             <div>
               <Button
                 size="sm"
@@ -52,7 +49,7 @@ export const AffiliatedOrganizations = () => {
                 {isEditing ? 'Done' : 'Manage Affiliations'}
               </Button>
             </div>
-          )}
+          )} */}
         </div>
 
         <Text color="dimmed">{description}</Text>
@@ -75,7 +72,7 @@ export const AffiliatedOrganizations = () => {
                 }}
                 location={account}
               />
-              {isEditing && (
+              {/* {isEditing && (
                 <div>
                   <Tooltip content="Manage Organization">
                     <Button
@@ -88,7 +85,7 @@ export const AffiliatedOrganizations = () => {
                     </Button>
                   </Tooltip>
                 </div>
-              )}
+              )} */}
             </div>
           ))}
         </div>
