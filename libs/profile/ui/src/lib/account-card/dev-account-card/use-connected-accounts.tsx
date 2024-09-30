@@ -86,7 +86,7 @@ export const useConnectedAccounts = () => {
       google && {
         text: google.email,
         label: 'Google',
-        unlink: () => unlink(unlinkGoogle, google.email),
+        unlink: () => unlink(unlinkGoogle, google.subject),
       },
       farcaster &&
         typeof farcaster.fid === 'number' && {
