@@ -21,7 +21,6 @@ export const useAffiliatedOrganizations = () => {
     isEditing,
     toggleEdit,
     data,
-    orgCount,
     hasOrg,
     getOnManageFn,
   };

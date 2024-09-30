@@ -1,16 +1,35 @@
 import { Button, Spinner, Tooltip } from '@nextui-org/react';
 import { SlidersHorizontal as ManageOrgIcon } from 'lucide-react';
 
-import { getGoogleLogoUrl, getPluralText } from '@jobstash/shared/utils';
+import { getGoogleLogoUrl } from '@jobstash/shared/utils';
 
 import { LogoTitle, Text } from '@jobstash/shared/ui';
 
 import { EditIcon, LeftIcon } from './icons';
 import { useAffiliatedOrganizations } from './use-affiliated-organizations';
 
+const AFFILIATED_ORG_TITLE = 'Affiliated Organizations';
+const ADD_AFFILIATED_ORG_TITLE = 'Add Professional Affiliations';
+const AFFILIATED_DESCRIPTION =
+  'These are the organizations associated with your accounts. Unlock premium features designed for organizational impact.';
+const ADD_AFFILIATED_DESCRIPTION =
+  "Connect your professional accounts to affiliate with organizations you're involved in. This helps you be recognized as an expert associated with these organizations and unlocks features designed for your professional growth.";
+
 export const AffiliatedOrganizations = () => {
-  const { data, isEditing, toggleEdit, orgCount, hasOrg, getOnManageFn } =
+  const { data, isEditing, toggleEdit, hasOrg, getOnManageFn } =
     useAffiliatedOrganizations();
+
+  if (!data)
+    return (
+      <div className="flex items-center justify-center w-full h-40">
+        <Spinner size="sm" color="white" />
+      </div>
+    );
+
+  const title = hasOrg ? AFFILIATED_ORG_TITLE : ADD_AFFILIATED_ORG_TITLE;
+  const description = hasOrg
+    ? AFFILIATED_DESCRIPTION
+    : ADD_AFFILIATED_DESCRIPTION;
 
   return (
     <>
@@ -19,7 +38,7 @@ export const AffiliatedOrganizations = () => {
       <div className="flex flex-col gap-2">
         <div className="flex items-center justify-between">
           <Text size="lg" fw="bold">
-            {`Affiliated ${getPluralText('Organization', orgCount)}`}
+            {title}
           </Text>
           {hasOrg && (
             <div>
@@ -35,13 +54,10 @@ export const AffiliatedOrganizations = () => {
           )}
         </div>
 
-        <Text color="dimmed">
-          These are the organizations associated with your accounts. Unlock
-          premium features designed for organizational impact.
-        </Text>
+        <Text color="dimmed">{description}</Text>
       </div>
 
-      {data ? (
+      {hasOrg && (
         <div className="flex flex-col gap-6 pl-4">
           {data.map(({ id, name, url, logo, account, slug }) => (
             <div
@@ -74,10 +90,6 @@ export const AffiliatedOrganizations = () => {
               )}
             </div>
           ))}
-        </div>
-      ) : (
-        <div className="flex w-full h-20 items-center justify-center">
-          <Spinner size="sm" color="white" />
         </div>
       )}
     </>
