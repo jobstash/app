@@ -9,11 +9,11 @@ import { EditIcon, LeftIcon } from './icons';
 import { useAffiliatedOrganizations } from './use-affiliated-organizations';
 
 const AFFILIATED_ORG_TITLE = 'Affiliated Organizations';
-const ADD_AFFILIATED_ORG_TITLE = 'Add Professional Affiliations';
+const ADD_AFFILIATED_ORG_TITLE = 'Elevate to Expert Status';
 const AFFILIATED_DESCRIPTION =
   'These are the organizations associated with your accounts. Unlock premium features designed for organizational impact.';
 const ADD_AFFILIATED_DESCRIPTION =
-  "Connect your professional accounts to affiliate with organizations you're involved in. This helps you be recognized as an expert associated with these organizations and unlocks features designed for your professional growth.";
+  "You're on your way to being recognized as an expert. Continue connecting your professional accounts to affiliate with organizations. The more accounts you link, the more you'll be perceived as an expert when collaborating with different organizations.";
 
 export const AffiliatedOrganizations = () => {
   const { data, isEditing, toggleEdit, hasOrg, getOnManageFn } =
