@@ -14,27 +14,6 @@ const userOrgDtoSchema = myzod.object({
 type UserOrgDto = Infer<typeof userOrgDtoSchema>;
 
 export const getAffiliatedOrgs = async () => {
-  // eslint-disable-next-line no-promise-executor-return
-  await new Promise((r) => setTimeout(r, 300));
-  return [
-    {
-      id: '345',
-      name: 'JobStash',
-      slug: 'jobstash',
-      url: 'https://jobstash.xyz',
-      logo: null,
-      account: 'johnshift',
-    },
-    {
-      id: '9579',
-      name: 'Ecosystem Vision',
-      slug: 'ecosystem-vision',
-      url: 'https://ecosystem.vision',
-      logo: null,
-      account: 'john@ecosystem.vision',
-    },
-  ];
-
   const url = `${MW_URL}/profile/organizations/verified`;
 
   const options = {
