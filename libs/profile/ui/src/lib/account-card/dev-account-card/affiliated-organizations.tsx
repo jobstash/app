@@ -11,7 +11,8 @@ import { useAffiliatedOrganizations } from './use-affiliated-organizations';
 const AFFILIATED_ORG_TITLE = 'Affiliated Organizations';
 const ADD_AFFILIATED_ORG_TITLE = 'Elevate to Expert Status';
 const AFFILIATED_DESCRIPTION =
-  'These are the organizations associated with your accounts. Unlock premium features designed for organizational impact.';
+  'These are the organizations associated with your accounts. Displaying your affiliations helps build credibility within your industry.';
+// 'These are the organizations associated with your accounts. Unlock premium features designed for organizational impact.';
 const ADD_AFFILIATED_DESCRIPTION =
   "You're on your way to being recognized as an expert. Continue connecting your professional accounts to affiliate with organizations. The more accounts you link, the more you'll be perceived as an expert when collaborating with different organizations.";
 
