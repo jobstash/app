@@ -24,6 +24,8 @@ const SideBar = dynamic(() =>
 );
 
 export const ProfileReviewsPage = () => {
+  return <NotFoundPage />;
+
   const { role, isLoading, isAuthenticated } = useAuthContext();
 
   if (!isAuthenticated || isLoading) return <LoadingPage />;

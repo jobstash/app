@@ -16,6 +16,8 @@ const SideBar = dynamic(() =>
 );
 
 export const CandidateReportPage = () => {
+  return <NotFoundPage />;
+
   const { isLoading, role, flow } = useAuthContext();
 
   if (isLoading) return <LoadingPage />;

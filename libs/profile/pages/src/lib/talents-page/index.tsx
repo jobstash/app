@@ -19,6 +19,8 @@ const SideBar = dynamic(() =>
 );
 
 export const TalentsPage = () => {
+  return <NotFoundPage />;
+
   const { role, flow, isLoading: isLoadingAuth } = useAuthContext();
 
   const { data: rowData, isPending } = useDevTalents();

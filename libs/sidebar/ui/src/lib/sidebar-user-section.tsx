@@ -5,7 +5,6 @@ import { DevProfileInfoProvider } from '@jobstash/profile/state';
 
 import SidebarAdminSection from './sidebar-admin-section';
 import SidebarDevSection from './sidebar-dev-section';
-import SidebarOrgSection from './sidebar-org-section';
 import { SidebarSectionSkeleton } from './sidebar-section';
 
 interface Props {
@@ -13,7 +12,7 @@ interface Props {
 }
 
 const SidebarUserSection = ({ isMobile }: Props) => {
-  const { role, isAuthenticated, isLoading, orgs } = useAuthContext();
+  const { role, isAuthenticated, isLoading } = useAuthContext();
 
   if (isLoading) return <SidebarSectionSkeleton />;
   if (!isAuthenticated) return null;
@@ -26,7 +25,7 @@ const SidebarUserSection = ({ isMobile }: Props) => {
         </DevProfileInfoProvider>
       )}
 
-      {orgs.length > 0 && <SidebarOrgSection isMobile={isMobile} />}
+      {/* {orgs.length > 0 && <SidebarOrgSection isMobile={isMobile} />} */}
 
       {role === CHECK_WALLET_ROLES.ADMIN && <SidebarAdminSection />}
     </>
