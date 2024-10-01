@@ -9,8 +9,9 @@ import {
 } from '@jobstash/shared/core';
 import { checkJobIsFeatured } from '@jobstash/jobs/utils';
 import { openNewTab } from '@jobstash/shared/utils';
-import { LogoTitle } from '@jobstash/shared/ui';
 import { getLogoUrl } from '@jobstash/shared/utils';
+
+import { LogoTitle } from '@jobstash/shared/ui';
 import { CardSet, createJobTags, Text } from '@jobstash/shared/ui';
 
 interface Props {
