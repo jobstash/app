@@ -15,7 +15,7 @@ const ADD_AFFILIATED_DESCRIPTION =
   "You're on your way to being recognized as an expert. Continue connecting your professional accounts to affiliate with organizations. The more accounts you link, the more you'll be perceived as an expert when collaborating with different organizations.";
 
 export const AffiliatedOrganizations = () => {
-  const { data, hasOrg } = useAffiliatedOrganizations();
+  const { data, hasOrg, isRefetching } = useAffiliatedOrganizations();
 
   if (!data)
     return (
@@ -35,9 +35,12 @@ export const AffiliatedOrganizations = () => {
 
       <div className="flex flex-col gap-2">
         <div className="flex items-center justify-between">
-          <Text size="lg" fw="bold">
-            {title}
-          </Text>
+          <div className="flex items-center gap-4">
+            <Text size="lg" fw="bold">
+              {title}
+            </Text>
+            {isRefetching && <Spinner size="sm" color="white" />}
+          </div>
           {/* {hasOrg && (
             <div>
               <Button

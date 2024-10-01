@@ -6,7 +6,7 @@ import { useAffiliatedOrgs } from '@jobstash/auth/state';
 export const useAffiliatedOrganizations = () => {
   const [isEditing, toggleEdit] = useReducer((prev) => !prev, false);
 
-  const { data } = useAffiliatedOrgs();
+  const { data, isRefetching } = useAffiliatedOrgs();
 
   const orgCount = (data ?? []).length;
   const hasOrg = orgCount > 0;
@@ -23,5 +23,6 @@ export const useAffiliatedOrganizations = () => {
     data,
     hasOrg,
     getOnManageFn,
+    isRefetching,
   };
 };

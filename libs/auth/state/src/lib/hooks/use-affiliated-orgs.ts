@@ -12,5 +12,6 @@ export const useAffiliatedOrgs = () => {
     queryKey: [mwVersion, 'affiliated-orgs'],
     queryFn: () => getAffiliatedOrgs(),
     enabled: authenticated,
+    refetchOnWindowFocus: false,
   });
 };
