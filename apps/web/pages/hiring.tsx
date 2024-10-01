@@ -9,7 +9,9 @@ import { PageWrapper } from '@jobstash/shared/ui';
 import { StatsGrid } from '@jobstash/shared/ui';
 import { PrivyButton } from '@jobstash/auth/feature';
 import { SideBar } from '@jobstash/sidebar/feature';
-
+import {
+  LandingFooter,
+} from '@jobstash/home/ui';
 interface ServiceItemProps {
   title: string;
   description: string;
@@ -204,7 +206,7 @@ const OrganizationsPage = () => (
     </Head>
     <PageWrapper>
       <SideBar />
-      <div className="px-6 py-16 md:py-12 md:px-10">
+      <div className="px-6 py-16 lg:py-12 md:px-10">
         <section>
           <h3
             className={`${lato.className} text-white !leading-tight font-black text-5xl md:text-6xl text-center pb-4 md:pb-8`}
@@ -305,6 +307,9 @@ const OrganizationsPage = () => (
             />
           }
         />
+      </div>
+      <div className="px-6 md:px-10"> 
+        <LandingFooter />
       </div>
     </PageWrapper>
   </>

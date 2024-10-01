@@ -16,13 +16,13 @@ export const NewestJobsSection = () => {
       >
         Newest Jobs
       </h3>
-      <p className="text-white opacity-75 max-w-[500px] mx-auto text-md text-center">
+      <p className="text-white opacity-75 max-w-[600px] mx-auto text-md  md:text-lg md:mt-2 text-center">
         JobStash Curates Crypto Native Jobs Across the Entire Crypto Ecosystem,
         Powered by AI and Enhanced by Unique Data Insights—As a Public Good.
       </p>
 
       {data ? (
-        <div className="flex flex-wrap mt-6 space-y-6 md:space-y-0 md:-mx-3">
+        <div className="flex flex-wrap mt-6 space-y-6 md:mt-10 md:space-y-0 md:-mx-3">
           {data.data.map((job) => (
             <Card key={job.shortUUID} job={job} />
           ))}

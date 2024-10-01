@@ -67,10 +67,12 @@ export const ActiveModal = ({ text, isOpen, onOpenChange, onClose }: Props) => {
       isOpen={isOpen}
       onOpenChange={onOpenChange}
     >
-      <ModalContent>
+      <ModalContent
+        className='self-center mx-6 md:mx-0'
+      >
         <div className="absolute top-3 right-2">
           <Button isIconOnly variant="light" size="sm" onPress={onClose}>
-            <XMarkIcon className="h-5 w-5" />
+            <XMarkIcon className="w-5 h-5" />
           </Button>
         </div>
         <ModalHeader>
@@ -88,9 +90,9 @@ export const ActiveModal = ({ text, isOpen, onOpenChange, onClose }: Props) => {
                   fullWidth
                   isDisabled={isLoadingLogout}
                   radius="md"
-                  className="font-bold h-full"
+                  className="h-full font-bold"
                 >
-                  {text}
+                  <span className='truncate'>{text}</span>
                 </Button>
               </ButtonWrapper>
               <Tooltip content={COPY_TOOLTIP}>
@@ -128,7 +130,7 @@ export const ActiveModal = ({ text, isOpen, onOpenChange, onClose }: Props) => {
           <Button
             fullWidth
             size="lg"
-            className="justify-start text-md font-bold px-3"
+            className="justify-start px-3 font-bold text-md"
             style={{
               background: 'linear-gradient(90deg, #8743FF, #D68800)',
             }}
@@ -138,7 +140,7 @@ export const ActiveModal = ({ text, isOpen, onOpenChange, onClose }: Props) => {
             }
             onPress={onExploreProfile}
           >
-            <div className="flex items-center w-full justify-between">
+            <div className="flex items-center justify-between w-full">
               <span>Explore your profile</span>
               <ChevronRightIcon className="w-5 h-5 stroke-2" />
             </div>
