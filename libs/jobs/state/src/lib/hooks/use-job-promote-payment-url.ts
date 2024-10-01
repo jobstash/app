@@ -1,26 +1,54 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useState } from 'react';
+
+import { useMutation } from '@tanstack/react-query';
 
 import { ERR_INTERNAL } from '@jobstash/shared/core';
-import { notifError, notifSuccess } from '@jobstash/shared/utils';
+import { notifError, notifSuccess, openNewTab } from '@jobstash/shared/utils';
 
-import { useMwVersionContext } from '@jobstash/shared/state';
 import { getJobPromotePaymentUrl } from '@jobstash/jobs/data';
 
-export const useJobPromotePaymentUrl = (uuid: string) => {
-  const queryClient = useQueryClient();
-  const { mwVersion } = useMwVersionContext();
+import { useJobPromotePoll } from './use-job-promote-poll';
 
-  return useMutation({
-    mutationFn: () => getJobPromotePaymentUrl(uuid),
-    onSuccess() {
+const SUCCESS_TITLE = 'Finalize Your Purchase';
+const SUCCESS_MESSAGE =
+  'The payment process is ready in the new tab. Please complete it to proceed.';
+
+interface Props {
+  id: string;
+  isProtected: boolean;
+  filterParams: Record<string, string>;
+  endDate: number | null;
+}
+
+export const useJobPromotePaymentUrl = ({
+  id,
+  isProtected,
+  filterParams,
+  endDate,
+}: Props) => {
+  const [enabled, setEnabled] = useState(false);
+
+  const { isEnabled, isUpdating } = useJobPromotePoll({
+    id,
+    enabled,
+    setEnabled,
+    isProtected,
+    filterParams,
+    endDate,
+  });
+
+  const { mutate, isPending } = useMutation({
+    mutationFn: () => getJobPromotePaymentUrl(id),
+    onSuccess({ data }) {
       notifSuccess({
-        title: 'Finalize Your Purchase',
-        message:
-          'The payment process is ready in the new tab. Please complete it to proceed.',
+        title: SUCCESS_TITLE,
+        message: SUCCESS_MESSAGE,
       });
 
-      // TODO: Poll job-list page where uuid belongs
-      // TODO: Stop poll after x mins
+      if (data) {
+        openNewTab(data.url);
+        setEnabled(true);
+      }
     },
     onError(error) {
       notifError({
@@ -29,4 +57,9 @@ export const useJobPromotePaymentUrl = (uuid: string) => {
       });
     },
   });
+
+  return {
+    isLoading: isPending || isEnabled || isUpdating,
+    getPaymentUrl: mutate,
+  };
 };

@@ -57,7 +57,7 @@ const JobBookmarkCard = ({
           {title}
         </Heading>
       )}
-      <JobCardTags jobPost={jobPost} />
+      <JobCardTags jobPost={jobPost} promoteButton={null} />
       <JobCardOrg org={organization} />
       <JobCardTechs techs={tags} />
       <JobCardProjects projects={projects} />

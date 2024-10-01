@@ -32,6 +32,7 @@ interface Props {
   isActive: boolean;
   filterParamsObj: Record<string, string>;
   bookmarkButton: ReactNode;
+  promoteButton: ReactNode;
   routeSection: JobsRouteSection;
   activeJobAtom: PrimitiveAtom<JobPost | null>;
 }
@@ -41,6 +42,7 @@ const JobCard = ({
   isActive,
   filterParamsObj,
   bookmarkButton,
+  promoteButton,
   routeSection = ROUTE_SECTION.JOBS,
   activeJobAtom,
 }: Props) => {
@@ -105,7 +107,7 @@ const JobCard = ({
           {title}
         </Heading>
       )}
-      <JobCardTags jobPost={jobPost} />
+      <JobCardTags jobPost={jobPost} promoteButton={promoteButton} />
       <JobCardOrg org={organization} />
       <JobCardTechs techs={tags} />
       <JobCardProjects projects={projects} />

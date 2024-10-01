@@ -4,12 +4,14 @@ import { PrimitiveAtom, useAtomValue } from 'jotai';
 
 import { type JobPost } from '@jobstash/jobs/core';
 import { ROUTE_SECTION } from '@jobstash/shared/core';
+import { checkJobIsFeatured } from '@jobstash/jobs/utils';
 
 import { useJobBookmarks, useJobList } from '@jobstash/jobs/state';
 
 import {
   JobBookmarkButton,
   JobCard,
+  JobCardPromoteButton,
   JobListEmptyResult,
 } from '@jobstash/jobs/ui';
 import { ListErrorMessage, Loader } from '@jobstash/shared/ui';
@@ -59,6 +61,7 @@ const JobList = ({
             jobPost={initJob}
             filterParamsObj={filterParamsObj}
             bookmarkButton={null}
+            promoteButton={null}
             routeSection={routeSection}
             activeJobAtom={activeJobAtom}
           />
@@ -87,6 +90,18 @@ const JobList = ({
               shortUUID={jobPost.shortUUID}
               isBookmarked={bookmarkedJobs.has(jobPost.shortUUID)}
               isFetching={isFetchingBookmarks || isLoadingBookmarks}
+            />
+          }
+          promoteButton={
+            <JobCardPromoteButton
+              id={jobPost.shortUUID}
+              isFeatured={checkJobIsFeatured(
+                jobPost.featureStartDate,
+                jobPost.featureEndDate,
+              )}
+              endDate={jobPost.featureEndDate}
+              filterParams={filterParamsObj}
+              isProtected={jobPost.access === 'protected'}
             />
           }
           routeSection={routeSection}

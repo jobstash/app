@@ -6,9 +6,10 @@ import { CardSet, createJobTags } from '@jobstash/shared/ui';
 
 interface Props {
   jobPost: JobPost;
+  promoteButton: React.ReactNode;
 }
 
-const JobCardTags = ({ jobPost }: Props) => {
+const JobCardTags = ({ jobPost, promoteButton }: Props) => {
   const tags = createJobTags(jobPost);
 
   return (
@@ -18,6 +19,8 @@ const JobCardTags = ({ jobPost }: Props) => {
           {text}
         </CardSet>
       ))}
+
+      {promoteButton}
     </div>
   );
 };
