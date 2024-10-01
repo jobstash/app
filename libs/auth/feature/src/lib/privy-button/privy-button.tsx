@@ -26,6 +26,14 @@ export const PrivyButton = ({ text: title }: Props) => {
   const isLoading = isLoadingSession || !ready;
   const debouncedLoading = useDebouncedValue(isLoading, 300);
 
+  const content = debouncedLoading ? (
+    <div className="flex h-full items-center">
+      <Spinner size="sm" color="white" />
+    </div>
+  ) : (
+    text
+  );
+
   return (
     <>
       <ButtonWrapper>
@@ -36,7 +44,7 @@ export const PrivyButton = ({ text: title }: Props) => {
           isDisabled={debouncedLoading}
           onClick={onClick}
         >
-          <span className='truncate'>{debouncedLoading ? <Spinner size="sm" color="white" /> : text} </span>
+          <span className="truncate">{content}</span>
         </Button>
       </ButtonWrapper>
       <ActiveModal
