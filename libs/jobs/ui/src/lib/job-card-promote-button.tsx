@@ -1,5 +1,3 @@
-import { MouseEventHandler } from 'react';
-
 import { Button, Spinner, Tooltip } from '@nextui-org/react';
 import { Sparkles as SparklesIcon } from 'lucide-react';
 
@@ -26,17 +24,12 @@ export const JobCardPromoteButton = ({
   filterParams,
   endDate,
 }: Props) => {
-  const { getPaymentUrl, isLoading } = useJobPromotePaymentUrl({
+  const { isLoading, onClick } = useJobPromotePaymentUrl({
     id,
     isProtected,
     filterParams,
     endDate,
   });
-
-  const onClick: MouseEventHandler = (e) => {
-    e.preventDefault();
-    getPaymentUrl();
-  };
 
   const text = isFeatured ? 'Extend Promotion' : 'Promote';
   const icon = (

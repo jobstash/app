@@ -1,9 +1,9 @@
-import { useState } from 'react';
+import { MouseEventHandler, useRef, useState } from 'react';
 
 import { useMutation } from '@tanstack/react-query';
 
 import { ERR_INTERNAL } from '@jobstash/shared/core';
-import { notifError, notifSuccess, openNewTab } from '@jobstash/shared/utils';
+import { notifError, notifSuccess } from '@jobstash/shared/utils';
 
 import { getJobPromotePaymentUrl } from '@jobstash/jobs/data';
 
@@ -37,6 +37,7 @@ export const useJobPromotePaymentUrl = ({
     endDate,
   });
 
+  const newWindowRef = useRef<Window | null>(null);
   const { mutate, isPending } = useMutation({
     mutationFn: () => getJobPromotePaymentUrl(id),
     onSuccess({ data }) {
@@ -45,8 +46,8 @@ export const useJobPromotePaymentUrl = ({
         message: SUCCESS_MESSAGE,
       });
 
-      if (data) {
-        openNewTab(data.url);
+      if (data && newWindowRef.current) {
+        newWindowRef.current.location.href = data.url;
         setEnabled(true);
       }
     },
@@ -58,8 +59,50 @@ export const useJobPromotePaymentUrl = ({
     },
   });
 
+  const onClick: MouseEventHandler = (e) => {
+    e.preventDefault();
+    const newWindow = window.open('', '_blank');
+    newWindow?.document.write(DEFAULT_HTML);
+    newWindowRef.current = newWindow;
+    mutate();
+  };
+
   return {
     isLoading: isPending || isEnabled || isUpdating,
-    getPaymentUrl: mutate,
+    onClick,
   };
 };
+
+const DEFAULT_HTML = `
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+      <title>Loading...</title>
+      <style>
+        body {
+          margin: 0;
+          background-color: #131217;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100vh;
+        }
+        .spinner {
+          border: 6px solid rgba(255, 255, 255, 0.2);
+          border-top: 6px solid rgba(255, 255, 255, 0.4);
+          border-radius: 50%;
+          width: 36px;
+          height: 36px;
+          animation: spin 0.7s linear infinite;
+        }
+        @keyframes spin {
+          0% { transform: rotate(0deg); }
+          100% { transform: rotate(360deg); }
+        }
+      </style>
+    </head>
+    <body>
+      <div class="spinner"></div>
+    </body>
+    </html>
+  `;
