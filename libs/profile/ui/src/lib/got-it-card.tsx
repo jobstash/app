@@ -17,8 +17,8 @@ const GotItCard = (props: Props) => {
 
   return (
     <div className="flex flex-col gap-12">
-      <div className="flex border border-white/10 rounded-3xl p-6 md:p-0 md:pr-8 bg-dark">
-        <div className="hidden md:flex md:-ml-4 items-center justify-center">
+      <div className=" p-6 border @lg:flex border-white/10 rounded-3xl md:px-8 bg-dark">
+        <div className="items-center justify-center hidden md:flex md:-ml-4">
           <Hexagon icon={icon} />
         </div>
         <div className="flex flex-col gap-4 md:gap-4 md:py-8">
@@ -29,7 +29,7 @@ const GotItCard = (props: Props) => {
           {children}
 
           {onClick && (
-            <div className="flex w-full md:justify-end pt-2">
+            <div className="flex w-full pt-2 md:justify-end">
               <button
                 type="button"
                 className={cn(
