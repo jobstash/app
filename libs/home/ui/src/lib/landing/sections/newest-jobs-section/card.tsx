@@ -57,7 +57,7 @@ export const Card = ({ job }: Props) => {
           <p className="text-left text-md text-white/75">{summary}</p>
           
         </div>
-        <div className='flex flex-col self-end gap-4'>
+        <div className='flex flex-col self-end w-full gap-4'>
           <div className="max-w-xs">
               <div className="flex flex-wrap gap-x-4 gap-y-0">
                 {tags.map(({ id, text, link, icon }) => (
