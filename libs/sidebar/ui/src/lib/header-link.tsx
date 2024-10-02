@@ -10,7 +10,7 @@ interface Props {
 }
 
 const HeaderLink = ({ text, link, isMobile }: Props) => {
-  const textClassName = isMobile ? 'text-2xl' : 'text-md whitespace-nowrap';
+  const textClassName = isMobile ? 'font-medium' : 'text-md whitespace-nowrap';
   return (
     <Link target="_blank" href={link} rel="noopener noreferrer">
       <Text className={textClassName}>{text}</Text>
