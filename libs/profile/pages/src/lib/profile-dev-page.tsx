@@ -38,9 +38,9 @@ export const ProfileDevPage = () => {
       {profileInfoData ? (
         <PageWrapper>
           <SideBar />
-          <div className="flex flex-col w-full min-h-screen gap-12 xl:py-10 xl:px-10 xl:flex-row">
-            <div className="xl:basis-2/3">
-              <div className="flex flex-col gap-6 px-5 pt-20 xl:px-0 xl:pt-0">
+          <div className="flex flex-col w-full min-h-screen gap-12 xl:py-10 xl:px-10 xl:flex-row ">
+            <div className="xl:basis-2/3 ">
+              <div className="flex flex-col gap-6 px-5 pt-20 xl:px-0 xl:pt-0 @container">
                 <ProfileHeader
                   gotItCard={<ProfileGotItCard />}
                   gotItCardKey="profile"
