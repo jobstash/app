@@ -3,7 +3,7 @@ import { Link } from '@nextui-org/link';
 
 import { Text } from '@jobstash/shared/ui';
 
-interface Props {
+export interface HomePageButtonProps {
   text: string;
   url?: string;
   hasBorder?: boolean;
@@ -15,7 +15,7 @@ export const HomePageButton = ({
   url,
   hasBorder,
   external = true,
-}: Props) => {
+}: HomePageButtonProps) => {
   const content = <Text fw="bold">{text}</Text>;
   const style = {
     border: '2px solid transparent',

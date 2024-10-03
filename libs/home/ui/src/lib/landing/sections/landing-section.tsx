@@ -4,6 +4,7 @@ import { DUCK_TELEGRAM_URL, lato, ORG_PAGE } from '@jobstash/shared/core';
 
 import { ExploreJobsButton } from './buttons/explore-jobs-button';
 import { HomePageButton } from './buttons/home-page-button';
+import { PostYourJobButton } from './buttons/post-your-job-button';
 import { SubscribeTelegram } from './buttons/subscribe-telegram';
 import { GradientContainer } from './gradient-container';
 import { NewestJobsSection } from './newest-jobs-section';
@@ -19,9 +20,10 @@ const LandingSection = () => (
           <span className="font-bold opacity-50">tl;dr:</span> Crypto Native Job
           Board
         </h2>
-        <div className="mx-auto flex flex-wrap items-center justify-center gap-y-4 gap-x-4 mt-6 max-w-[400px]">
+        <div className="flex flex-wrap items-center justify-center gap-y-4 gap-x-4 mt-6">
           <ExploreJobsButton />
           <SubscribeTelegram />
+          <PostYourJobButton />
         </div>
       </div>
     </div>
