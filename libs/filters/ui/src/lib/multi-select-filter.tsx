@@ -98,7 +98,7 @@ const MultiSelectFilter = ({
           ),
           searchInput: 'placeholder-white',
           itemsWrapper: 'bg-dark',
-          item: '[&[data-hovered]]:bg-dark-gray [&[data-selected]]:bg-gray',
+          item: '[&[data-hovered]]:bg-dark-gray [&[data-selected]]:bg-gray lowercase first-letter:uppercase',
           values: cn('overflow-hidden [&>*]:-mr-1', {
             'flex-nowrap': isMobile,
           }),
