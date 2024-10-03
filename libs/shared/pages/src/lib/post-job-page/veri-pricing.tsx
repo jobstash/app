@@ -69,7 +69,7 @@ export const VeriPricing = () => (
       </span>
     </div>
     <p className="mx-auto mt-6 max-w-2xl text-center text-lg leading-8 text-gray-600">
-      While our platform offers essential hiring tools for free, Veriand#39;s
+      While our platform offers essential hiring tools for free, Veriand#&39;s
       premium plans provide advanced features like due diligence data and ATS
       integrations, bringing greater visibility and efficiency to your
       recruitment process.

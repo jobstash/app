@@ -4,6 +4,8 @@ import Link from 'next/link';
 import { ChevronRightIcon } from '@heroicons/react/20/solid';
 import { Button } from '@nextui-org/react';
 
+import { ORG_SIGNUP_FORM_URL } from '@jobstash/shared/core';
+
 export const HeroSection = () => (
   <div className="max-w-7xl px-6 pt-10 lg:flex lg:px-8">
     <div className="mx-auto max-w-2xl flex-shrink-0 lg:mx-0 lg:max-w-xl lg:pt-8 flex flex-col gap-8">
@@ -47,6 +49,8 @@ export const HeroSection = () => (
 
       <div className="flex items-center gap-x-6">
         <Button
+          as={Link}
+          href={ORG_SIGNUP_FORM_URL}
           className="bg-gradient-to-l from-primary to-tertiary font-bold"
           radius="sm"
         >

@@ -2,6 +2,8 @@ import Link from 'next/link';
 
 import { Button } from '@nextui-org/react';
 
+import { ORG_SIGNUP_FORM_URL } from '@jobstash/shared/core';
+
 export const LastCtaSection = () => (
   <div className="flex flex-col items-center px-6 gap-10">
     <div className="max-w-2xl text-center flex flex-col gap-6">
@@ -16,6 +18,8 @@ export const LastCtaSection = () => (
     </div>
     <div className="flex items-center gap-x-6">
       <Button
+        as={Link}
+        href={ORG_SIGNUP_FORM_URL}
         className="bg-gradient-to-l from-primary to-tertiary font-bold"
         radius="sm"
       >
