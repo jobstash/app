@@ -6,6 +6,7 @@ import { SideBar } from '@jobstash/sidebar/feature';
 import { BestPractices } from './best-practices';
 import { GradientBackground } from './gradient-background';
 import { HeroSection } from './hero-section';
+import { JobFeaturePricing } from './job-feature-pricing';
 import { LastCtaSection } from './last-cta-section';
 import { OrgCriteria } from './org-criteria';
 import { ReachTopTalent } from './reach-top-talent';
@@ -28,6 +29,7 @@ export const PostJobPage = () => (
         <OrgCriteria />
         <LastCtaSection />
         <VeriPricing />
+        <JobFeaturePricing />
       </div>
     </PageWrapper>
   </>
