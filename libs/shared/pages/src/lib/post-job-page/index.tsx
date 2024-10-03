@@ -4,6 +4,7 @@ import { PageWrapper } from '@jobstash/shared/ui';
 import { SideBar } from '@jobstash/sidebar/feature';
 
 import { BestPractices } from './best-practices';
+import { CareerPageCriteria } from './career-page-criteria';
 import { GradientBackground } from './gradient-background';
 import { HeroSection } from './hero-section';
 import { JobFeaturePricing } from './job-feature-pricing';
@@ -27,9 +28,10 @@ export const PostJobPage = () => (
         <BestPractices />
         <Security />
         <OrgCriteria />
-        <LastCtaSection />
+        <CareerPageCriteria />
         <VeriPricing />
         <JobFeaturePricing />
+        <LastCtaSection />
       </div>
     </PageWrapper>
   </>

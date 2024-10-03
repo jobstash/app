@@ -19,7 +19,7 @@ export const LastCtaSection = () => (
         className="bg-gradient-to-l from-primary to-tertiary font-bold"
         radius="sm"
       >
-        Post Your Job
+        Get Started Now
       </Button>
       <Button variant="light" radius="sm" as={Link} href="/hiring">
         Learn more <span aria-hidden="true">→</span>
