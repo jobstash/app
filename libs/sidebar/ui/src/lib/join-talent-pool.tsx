@@ -19,7 +19,7 @@ export const JoinTalentPool = ({ isMobile }: Props) => {
     showLoginModal();
   };
 
-  const textClassName = isMobile ? 'text-2xl' : 'text-md whitespace-nowrap';
+  const textClassName = isMobile ? 'font-medium' : 'text-md whitespace-nowrap';
 
   return (
     <div className="cursor-pointer" onClick={onClick}>
