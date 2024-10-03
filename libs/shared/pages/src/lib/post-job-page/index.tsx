@@ -8,6 +8,7 @@ import { GradientBackground } from './gradient-background';
 import { HeroSection } from './hero-section';
 import { LastCtaSection } from './last-cta-section';
 import { ReachTopTalent } from './reach-top-talent';
+import { Security } from './security';
 
 export const PostJobPage = () => (
   <>
@@ -21,6 +22,7 @@ export const PostJobPage = () => (
         <HeroSection />
         <ReachTopTalent />
         <BestPractices />
+        <Security />
         <LastCtaSection />
       </div>
     </PageWrapper>
