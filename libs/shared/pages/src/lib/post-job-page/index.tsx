@@ -7,6 +7,7 @@ import { BestPractices } from './best-practices';
 import { GradientBackground } from './gradient-background';
 import { HeroSection } from './hero-section';
 import { LastCtaSection } from './last-cta-section';
+import { OrgCriteria } from './org-criteria';
 import { ReachTopTalent } from './reach-top-talent';
 import { Security } from './security';
 
@@ -23,6 +24,7 @@ export const PostJobPage = () => (
         <ReachTopTalent />
         <BestPractices />
         <Security />
+        <OrgCriteria />
         <LastCtaSection />
       </div>
     </PageWrapper>

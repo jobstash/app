@@ -43,12 +43,14 @@ export const BestPractices = () => (
   <div className="max-w-7xl mx-auto md:px-6 lg:px-8">
     <div className="grid grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:grid-cols-2 lg:items-start">
       <div className="flex flex-col gap-6 px-6 lg:px-0 lg:pr-4 lg:pt-4">
-        <h2 className="text-base font-semibold leading-7 text-indigo-400">
-          Post Effectively
-        </h2>
-        <h2 className="bg-gradient-to-r from-white to-secondary bg-clip-text text-4xl font-bold text-transparent">
-          Job Post That Stands Out
-        </h2>
+        <div className="flex flex-col gap-2">
+          <span className="text-base font-semibold text-indigo-400">
+            Post Effectively
+          </span>
+          <h2 className="bg-gradient-to-r from-white to-secondary bg-clip-text text-4xl font-bold text-transparent">
+            Job Post That Stands Out
+          </h2>
+        </div>
         <p className="text-lg leading-8 text-white/90">
           A well-structured job post helps you stand out and reach the right
           candidates. Here&#39;s how to create an engaging, informative listing
