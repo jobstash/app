@@ -22,14 +22,27 @@ export const HeroSection = () => (
         </a>
       </div>
 
-      <h1 className="bg-gradient-to-r from-white to-secondary bg-clip-text text-8xl font-bold text-transparent">
-        Find Your Next Great Hire
-      </h1>
+      <div className="flex flex-col gap-2">
+        <h1 className="bg-gradient-to-r from-white to-secondary quinary bg-clip-text text-8xl font-bold text-transparent">
+          Find Your Next Great Hire
+        </h1>
+        <div className="flex gap-2 items-center">
+          <h2 className="bg-gradient-to-r from-white to-secondary quinary bg-clip-text text-3xl font-bold text-transparent">
+            for{' '}
+            <span className="text-5xl font-bold bg-gradient-to-r from-secondary/10 via-secondary/40 to-[#D68800]/80 bg-clip-text text-3xl font-bold text-transparent">
+              FREE
+            </span>
+          </h2>
+          <span role="img" aria-label="flame" className="text-3xl">
+            🔥
+          </span>
+        </div>
+      </div>
 
       <p className="text-xl leading-7 text-white/90">
         Reach a vast network of talented professionals eager to join your team.
-        Our platform connects you with the right candidates quickly and
-        efficiently.
+        Post your job at <span className="font-bold">zero</span> cost and
+        connect with the right candidates quickly and efficiently.
       </p>
 
       <div className="flex items-center gap-x-6">
