@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { useLogin, useLogout, usePrivy } from '@privy-io/react-auth';
 import { useMutation } from '@tanstack/react-query';
@@ -10,6 +10,7 @@ import {
   CheckWalletResponse,
 } from '@jobstash/auth/core';
 import { LOCAL_STORAGE_KEYS } from '@jobstash/shared/core';
+import { sentryMessage } from '@jobstash/shared/utils';
 
 import { getCheckWallet } from '@jobstash/auth/data';
 
@@ -27,7 +28,13 @@ export const useAuthProvider = () => {
     useState<CheckWalletResponse>(DEFAULT_CHECK_WALLET_RESPONSE);
   const { role, flow, cryptoNative } = checkWalletResponse;
 
-  const { authenticated: isLoggedIn, user, getAccessToken, ready } = usePrivy();
+  const {
+    authenticated: isLoggedIn,
+    user,
+    getAccessToken,
+    ready,
+    createWallet,
+  } = usePrivy();
 
   const { mutate: setupLocal, isPending: isLoadingSetup } = useMutation({
     async mutationFn() {
@@ -38,10 +45,36 @@ export const useAuthProvider = () => {
     },
   });
 
+  const [isCreatingWallet, setIsCreatingWallet] = useState(false);
+
+  const createEmbeddedWallet = useCallback(async () => {
+    setIsCreatingWallet(true);
+    try {
+      await createWallet();
+    } catch (error) {
+      sentryMessage('createEmbedWallet', (error as Error).message);
+      window?.location.reload();
+    } finally {
+      setIsCreatingWallet(false);
+    }
+  }, [createWallet]);
+
+  useEffect(() => {
+    if (!ready || !user || isCreatingWallet) return;
+
+    const hasPrivy = user.linkedAccounts.some(
+      (account) =>
+        account.type === 'wallet' && account.walletClientType === 'privy',
+    );
+
+    if (hasPrivy) return;
+
+    createEmbeddedWallet();
+  }, [createEmbeddedWallet, isCreatingWallet, ready, user]);
+
   // Setup local after privy login
   const { login } = useLogin({
     onComplete(_user) {
-      // TODO: check user and do JOB-666
       setupLocal();
     },
   });
@@ -80,7 +113,7 @@ export const useAuthProvider = () => {
     role,
     flow,
     isCryptoNative: cryptoNative,
-    isLoading: isLoadingSetup || !ready || isLoadingUserOrg,
+    isLoading: isLoadingSetup || !ready || isLoadingUserOrg || isCreatingWallet,
     isLoadingLogout,
     isLoggedIn,
     isAuthenticated,
