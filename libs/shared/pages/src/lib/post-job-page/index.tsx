@@ -10,6 +10,7 @@ import { LastCtaSection } from './last-cta-section';
 import { OrgCriteria } from './org-criteria';
 import { ReachTopTalent } from './reach-top-talent';
 import { Security } from './security';
+import { VeriPricing } from './veri-pricing';
 
 export const PostJobPage = () => (
   <>
@@ -26,6 +27,7 @@ export const PostJobPage = () => (
         <Security />
         <OrgCriteria />
         <LastCtaSection />
+        <VeriPricing />
       </div>
     </PageWrapper>
   </>
