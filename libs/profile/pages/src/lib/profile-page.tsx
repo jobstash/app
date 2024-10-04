@@ -14,7 +14,8 @@ import { ProfileOrgPage } from './profile-org-page';
 export const ProfilePage = () => {
   const { isLoading, role, isAuthenticated } = useAuthContext();
 
-  if (!isAuthenticated || isLoading) return <LoadingPage />;
+  if (isLoading) return <LoadingPage />;
+  if (!isAuthenticated) return <NotFoundPage />;
 
   const isDev = role === CHECK_WALLET_ROLES.DEV;
   const isOrg = role === CHECK_WALLET_ROLES.ORG;

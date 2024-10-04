@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { useLogin, useLogout, usePrivy } from '@privy-io/react-auth';
 import { useMutation } from '@tanstack/react-query';
@@ -36,6 +36,15 @@ export const useAuthProvider = () => {
     createWallet,
   } = usePrivy();
 
+  const hasEmbeddedWallet = useMemo(() => {
+    if (!user) return false;
+
+    return user.linkedAccounts.some(
+      (account) =>
+        account.type === 'wallet' && account.walletClientType === 'privy',
+    );
+  }, [user]);
+
   const { mutate: setupLocal, isPending: isLoadingSetup } = useMutation({
     async mutationFn() {
       const accessToken = await getAccessToken();
@@ -54,23 +63,17 @@ export const useAuthProvider = () => {
     } catch (error) {
       sentryMessage('createEmbedWallet', (error as Error).message);
       window?.location.reload();
-    } finally {
-      setIsCreatingWallet(false);
     }
+
+    setIsCreatingWallet(false);
   }, [createWallet]);
 
+  // Create embedded wallet if user is logged in and doesn't have one
   useEffect(() => {
-    if (!ready || !user || isCreatingWallet) return;
-
-    const hasPrivy = user.linkedAccounts.some(
-      (account) =>
-        account.type === 'wallet' && account.walletClientType === 'privy',
-    );
-
-    if (hasPrivy) return;
-
-    createEmbeddedWallet();
-  }, [createEmbeddedWallet, isCreatingWallet, ready, user]);
+    if (!hasEmbeddedWallet && !isCreatingWallet && isLoggedIn) {
+      createEmbeddedWallet();
+    }
+  }, [createEmbeddedWallet, hasEmbeddedWallet, isCreatingWallet, isLoggedIn]);
 
   // Setup local after privy login
   const { login } = useLogin({
