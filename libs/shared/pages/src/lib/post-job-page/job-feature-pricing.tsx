@@ -2,15 +2,15 @@ import Link from 'next/link';
 
 import { CheckIcon } from '@heroicons/react/20/solid';
 import { Button } from '@nextui-org/react';
+import { MoveRightIcon } from 'lucide-react';
 
 import { DUCK_TELEGRAM_URL } from '@jobstash/shared/core';
 import { cn } from '@jobstash/shared/utils';
 
 const tiers = [
   {
-    name: 'Neon',
-    id: 'tier-Neon',
-    href: '#',
+    name: 'Extra',
+    id: 'tier-extra',
     pricePerJob: '$300',
     description:
       'Elevate your job listing to the next level with 7 days of homepage visibility, 5x the applicants, and added promotion through Telegram stories, post bumping, and crossposting across key channels.',
@@ -25,9 +25,8 @@ const tiers = [
     featured: true,
   },
   {
-    name: 'Flamboyant',
-    id: 'tier-flamboyant',
-    href: '#',
+    name: 'Basic',
+    id: 'tier-basic',
     pricePerJob: '$200',
     description:
       'Feature your job for 7 days on our homepage and boost visibility to attract 2x the applicants. Perfect for getting more attention on your listing without the extras.',
@@ -50,7 +49,7 @@ export const JobFeaturePricing = () => (
         Attract More Talent with Premium
       </span>
     </div>
-    <p className="mx-auto mt-6 max-w-2xl text-center text-lg leading-8 text-gray-600">
+    <p className="mx-auto mt-6 max-w-2xl text-center text-lg leading-8 text-white/90">
       Maximize your job&#39;s reach with our featuring options. Whether you need
       2x or 5x the applicants, our plans ensure your listing stands out on our
       homepage, in Telegram stories, and across key channels to attract the best
@@ -87,10 +86,10 @@ export const JobFeaturePricing = () => (
             </span>
             <span className="text-base text-gray-500">/ job</span>
           </p>
-          <p className="mt-6 text-base leading-7 text-gray-600">
+          <p className="mt-6 text-base leading-7 text-white/90">
             {tier.description}
           </p>
-          <ul className="mt-8 space-y-3 leading-6 text-gray-600 sm:mt-10">
+          <ul className="mt-8 space-y-3 leading-6 text-white/90 sm:mt-10">
             {tier.features.map((feature) => (
               <li key={feature} className="flex gap-x-3">
                 <CheckIcon
@@ -102,18 +101,35 @@ export const JobFeaturePricing = () => (
             ))}
           </ul>
 
-          <div className="w-full items-center flex justify-center pt-8">
-            <Button
-              as={Link}
-              href={DUCK_TELEGRAM_URL}
-              className={cn('w-5/6', {
-                'bg-gradient-to-l from-primary to-tertiary font-bold':
-                  tierIdx === 0,
-              })}
-            >
-              Buy Plan
-            </Button>
-          </div>
+          {tierIdx === 0 ? (
+            <div className="w-full items-center flex justify-center pt-8">
+              <Button
+                as={Link}
+                href={DUCK_TELEGRAM_URL}
+                className={cn('w-5/6', {
+                  'bg-gradient-to-l from-primary to-tertiary font-bold':
+                    tierIdx === 0,
+                })}
+              >
+                Buy Plan
+              </Button>
+            </div>
+          ) : (
+            <div className="pt-8">
+              <Button
+                variant="light"
+                radius="sm"
+                as={Link}
+                href="/jobs"
+                className="font-bold pl-0"
+              >
+                Promote directly from the job feed
+                <span aria-hidden="true">
+                  <MoveRightIcon className="w-4 h-4" />
+                </span>
+              </Button>
+            </div>
+          )}
         </div>
       ))}
     </div>

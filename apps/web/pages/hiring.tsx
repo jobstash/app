@@ -1,6 +1,9 @@
 import Head from 'next/head';
+import Link from 'next/link';
 
+import { Button } from '@nextui-org/react';
 import { usePrivy } from '@privy-io/react-auth';
+import { MoveRightIcon } from 'lucide-react';
 
 import { DUCK_TELEGRAM_URL, lato } from '@jobstash/shared/core';
 
@@ -96,9 +99,9 @@ const VERI_PRICES: PricingItemProps[] = [
   },
 ];
 
-const FEATUREING_PRICES: PricingItemProps[] = [
+const FEATURING_PRICES: PricingItemProps[] = [
   {
-    title: 'Flamboyant',
+    title: 'Basic',
     subtitle: 'Job Featuring',
     price: '200',
     unit: 'job',
@@ -107,9 +110,13 @@ const FEATUREING_PRICES: PricingItemProps[] = [
       '✅ 2x the applicants',
       '✅ Featured on our homepage',
     ],
+    cta: {
+      url: DUCK_TELEGRAM_URL,
+      text: 'Promote directly from job feed',
+    },
   },
   {
-    title: 'Neon',
+    title: 'Extra',
     subtitle: 'Job Featuring',
     price: '300',
     unit: 'job',
@@ -121,6 +128,10 @@ const FEATUREING_PRICES: PricingItemProps[] = [
       '✅ Job Post bumping on Telegram',
       '✅ Crossposting',
     ],
+    cta: {
+      url: DUCK_TELEGRAM_URL,
+      text: 'Get Started',
+    },
   },
 ];
 
@@ -285,7 +296,7 @@ const OrganizationsPage = () => (
           </h3>
           <div className="mx-auto">
             <div className="grid grid-cols-1 gap-4 mx-auto mb-4 place-content-center lg:grid-cols-2 lg:w-2/3 xl:grid-cols-2 xl:w-1/2">
-              {FEATUREING_PRICES.map((pricing) => (
+              {FEATURING_PRICES.map((pricing) => (
                 <PricingItem key={pricing.title} {...pricing} />
               ))}
             </div>
