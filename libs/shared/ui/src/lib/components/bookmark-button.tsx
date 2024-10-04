@@ -24,7 +24,6 @@ const BookmarkButton = ({
   onClick,
 }: Props) => {
   const role = CHECK_WALLET_ROLES.DEV;
-  const bypassDevSignup = true;
   const callback = () => {
     if (onClick) {
       setBookmarked((prev) => !prev);
@@ -34,7 +33,6 @@ const BookmarkButton = ({
 
   const { isAuthd, roleClick } = useRoleClick({
     role,
-    bypassDevSignup,
     callback,
   });
 

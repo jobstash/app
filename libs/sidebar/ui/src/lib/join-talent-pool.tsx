@@ -1,6 +1,4 @@
-import { useSetAtom } from 'jotai';
-
-import { bypassDevSignupAtom, useAuthContext } from '@jobstash/auth/state';
+import { useAuthContext } from '@jobstash/auth/state';
 
 import { Text } from '@jobstash/shared/ui';
 
@@ -10,12 +8,10 @@ interface Props {
 
 export const JoinTalentPool = ({ isMobile }: Props) => {
   const { isAuthenticated, showLoginModal } = useAuthContext();
-  const setBypassDevSignup = useSetAtom(bypassDevSignupAtom);
 
   if (isAuthenticated) return null;
 
   const onClick = () => {
-    setBypassDevSignup(true);
     showLoginModal();
   };
 

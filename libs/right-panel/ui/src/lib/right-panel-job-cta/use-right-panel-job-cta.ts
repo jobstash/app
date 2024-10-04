@@ -4,7 +4,7 @@ import { CheckWalletRole } from '@jobstash/auth/core';
 import { ECOSYSTEMS } from '@jobstash/shared/core';
 import { getEcosystemSubdomain } from '@jobstash/shared/utils';
 
-import { bypassDevSignupAtom, useAuthContext } from '@jobstash/auth/state';
+import { useAuthContext } from '@jobstash/auth/state';
 import {
   useJobPost,
   useJobsApplied,
@@ -55,11 +55,9 @@ export const useRightPanelJobCTA = (props: Props) => {
     isPendingMutation,
   ].includes(true);
 
-  const setBypassDevSignup = useSetAtom(bypassDevSignupAtom);
   const openModalIfAnon = () => {
     if (isAnon) {
       showLoginModal();
-      setBypassDevSignup(true);
     }
   };
 

@@ -5,7 +5,7 @@ import { useSetAtom } from 'jotai';
 import { CHECK_WALLET_ROLES, CheckWalletRole } from '@jobstash/auth/core';
 import { notifLoading, notifSuccess } from '@jobstash/shared/utils';
 
-import { bypassDevSignupAtom, useAuthContext } from '@jobstash/auth/state';
+import { useAuthContext } from '@jobstash/auth/state';
 import { useSendJobApplyInteractionMutation } from '@jobstash/jobs/state';
 
 import { AnonTooltipContent } from './anon-tooltip-content';
@@ -45,11 +45,9 @@ export const useCryptoNativeJobCTA = (props: Props) => {
     ? ELIGIBLE_TEXT
     : NOT_ELIGIBLE_TEXT;
 
-  const setBypassDevSignup = useSetAtom(bypassDevSignupAtom);
   const openModalIfAnon = () => {
     if (isAnon) {
       showLoginModal();
-      setBypassDevSignup(true);
     }
   };
 
