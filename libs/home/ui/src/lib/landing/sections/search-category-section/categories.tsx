@@ -14,12 +14,12 @@ export const Categories = () => {
   const { data } = useFilterConfig(ROUTE_SECTION.JOBS);
 
   if (!data) return <LoadingSection />;
-  const categories = (data['category'] as MultiSelectFilterConfig).options.map(
-    (category) => ({
-      category,
-      label: sanitizeOption(category.value.toString()),
-    }),
-  );
+  const categories = (
+    data['classifications'] as MultiSelectFilterConfig
+  ).options.map((category) => ({
+    category,
+    label: sanitizeOption(category.value.toString()),
+  }));
 
   return (
     <>
@@ -31,7 +31,7 @@ export const Categories = () => {
             as={Link}
             href={`${FRONTEND_URL}${
               ROUTE_SECTION.JOBS
-            }?category=${normalizeString(category.value.toString())}`}
+            }?classifications=${normalizeString(category.value.toString())}`}
             target="_blank"
             rel="noopener noreferrer"
             variant="bordered"
