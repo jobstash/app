@@ -51,7 +51,7 @@ export const multiSelectFilterConfigSchema = myzod.intersection(
       myzod.literal(FILTER_KIND.MULTI_SELECT_WITH_SEARCH),
     ]),
     paramKey: myzod.string().min(1),
-    options: myzod.array(myzod.string()),
+    options: selectOptionsSchema,
   }),
 );
 

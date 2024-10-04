@@ -5,6 +5,7 @@ import { MultiSelect } from '@mantine/core';
 
 import {
   type FilterValue,
+  SelectOptions,
   seniorityMapping,
   type SetMultiSelectFilterValueAction,
 } from '@jobstash/filters/core';
@@ -19,7 +20,7 @@ interface Props {
   label: string;
   value: FilterValue;
   paramKey: string;
-  options: string[];
+  options: SelectOptions;
   dispatch: Dispatch<SetMultiSelectFilterValueAction>;
   gaEventName: string | null;
 }
@@ -77,9 +78,9 @@ const MultiSelectFilter = ({
               seniorityMapping[key as keyof typeof seniorityMapping],
             ) as string,
           }))
-        : options.map((option) => ({
-            label: option,
-            value: normalizeString(option) as string,
+        : options.map(({ label, value }) => ({
+            label,
+            value: value.toString(),
           })),
     [label, options],
   );
