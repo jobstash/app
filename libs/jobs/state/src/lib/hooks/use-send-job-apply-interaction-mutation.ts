@@ -8,30 +8,27 @@ import { sendJobApplyInteraction } from '@jobstash/jobs/data';
 
 interface Props {
   jobPost?: JobPost;
-  isDevOneClick?: boolean;
+  isOneClick?: boolean;
   appliedJobs?: JobPost[];
 }
 
 export const useSendJobApplyInteractionMutation = ({
   jobPost,
-  isDevOneClick,
+  isOneClick,
   appliedJobs = [],
 }: Props = {}) => {
   const queryClient = useQueryClient();
   const { mwVersion } = useMwVersionContext();
+  const queryKey = [mwVersion, 'jobs-applied'];
 
   const { mutate, isPending } = useMutation({
     mutationFn: (shortUUID: string) => sendJobApplyInteraction(shortUUID),
     onSuccess() {
-      if (isDevOneClick && Boolean(jobPost)) {
-        const queryKey = [mwVersion, 'jobs-applied'];
-        queryClient.setQueryData(queryKey, [...appliedJobs, jobPost]);
-        queryClient.invalidateQueries({
-          queryKey,
-        });
-      }
+      if (isOneClick) {
+        if (jobPost) {
+          queryClient.setQueryData(queryKey, [...appliedJobs, jobPost]);
+        }
 
-      if (isDevOneClick) {
         notifSuccess({
           title: 'Job Application Successful!',
           message: 'You have directly applied through jobstash!',
@@ -39,9 +36,12 @@ export const useSendJobApplyInteractionMutation = ({
       }
     },
     onError(error) {
-      if (isDevOneClick) {
-        notifError({ title: 'Job Application Failed', message: error.message });
-      }
+      notifError({ title: 'Job Application Failed', message: error.message });
+    },
+    onSettled() {
+      queryClient.invalidateQueries({
+        queryKey,
+      });
     },
   });
 

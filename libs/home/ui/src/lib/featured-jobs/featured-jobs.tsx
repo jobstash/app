@@ -97,6 +97,7 @@ const fakeFeaturedJobs: JobPost[] = [
     classification: 'ENGINEERING',
     organization: {
       hasUser: false,
+      atsClient: null,
       summary:
         'Oasis Protocol Foundation is the legal entity behind the Oasis Protocol',
       github: null,
@@ -303,6 +304,7 @@ const fakeFeaturedJobs: JobPost[] = [
     classification: 'DEVREL',
     organization: {
       hasUser: false,
+      atsClient: null,
       summary:
         'Oasis Protocol Foundation is the legal entity behind the Oasis Protocol',
       github: null,

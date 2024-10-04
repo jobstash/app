@@ -1,6 +1,6 @@
 import { useSetAtom } from 'jotai';
 
-import { CHECK_WALLET_ROLES, CheckWalletRole } from '@jobstash/auth/core';
+import { CheckWalletRole } from '@jobstash/auth/core';
 import { ECOSYSTEMS } from '@jobstash/shared/core';
 import { getEcosystemSubdomain } from '@jobstash/shared/utils';
 
@@ -14,48 +14,43 @@ import {
 interface Props {
   url: string;
   shortUUID: string;
-  hasUser?: boolean;
   sendAnalyticsEvent: (role: CheckWalletRole) => void;
 }
 
 export const useRightPanelJobCTA = (props: Props) => {
-  const { url, shortUUID, hasUser = false, sendAnalyticsEvent } = props;
+  const { url, shortUUID, sendAnalyticsEvent } = props;
 
   const { role, isAuthenticated, showLoginModal } = useAuthContext();
-  const isDev = role === CHECK_WALLET_ROLES.DEV;
   const isAnon = !isAuthenticated;
 
   const { isSupported, subdomain } = getEcosystemSubdomain();
   const isEthdam = isSupported && subdomain === ECOSYSTEMS.ETHDAM;
-  const isOneClick = hasUser || isEthdam;
-  const isDevOneClick = isOneClick && isDev;
 
   const { data: jobPost, isPending: isPendingJobPost } = useJobPost(shortUUID);
   const { appliedJobs, isPendingJobsApplied, isFetchingJobsApplied } =
     useJobsApplied();
-  const isLoadingJobsApplied =
-    isDev && (isPendingJobsApplied || isFetchingJobsApplied);
+  const isLoadingJobsApplied = isPendingJobsApplied || isFetchingJobsApplied;
 
-  const hasApplied =
-    isDev &&
-    hasUser &&
-    appliedJobs.map((job) => job.shortUUID).includes(shortUUID);
+  const isJobastashATS = jobPost?.organization.atsClient === 'jobstash';
+  const isOneClick = isJobastashATS || isEthdam;
+
+  const hasApplied = appliedJobs
+    .map((job) => job.shortUUID)
+    .includes(shortUUID);
 
   const { mutate: mutateJobApply, isPendingMutation } =
     useSendJobApplyInteractionMutation({
-      isDevOneClick,
+      isOneClick,
       jobPost,
       appliedJobs,
     });
 
   const devApplyMutation = () => {
-    if (isDev) {
-      mutateJobApply(shortUUID);
-    }
+    mutateJobApply(shortUUID);
   };
 
   const isLoading = [
-    isOneClick && isDev && isLoadingJobsApplied,
+    isOneClick && isLoadingJobsApplied,
     isPendingJobPost,
     isPendingMutation,
   ].includes(true);
