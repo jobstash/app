@@ -85,7 +85,7 @@ const VERI_PRICES: PricingItemProps[] = [
     ],
   },
   {
-    title: 'Pro',
+    title: 'Data Only ATS Integration',
     subtitle: 'ATS Integration + Veri Data',
     price: '99',
     features: [

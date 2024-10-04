@@ -115,6 +115,14 @@ module.exports = {
           transform: 'translateX(0px)',
         },
       },
+      animatedgradient: {
+        '0%': { backgroundPosition: '0% 50%' },
+        '50%': { backgroundPosition: '100% 50%' },
+        '100%': { backgroundPosition: '0% 50%' },
+      },
+    },
+    backgroundSize: {
+      '300%': '300%',
     },
     animation: {
       'pulse-tw': 'pulse-tw 2s cubic-bezier(0.4, 0, 0.6, 1) infinite',
@@ -124,6 +132,7 @@ module.exports = {
       'reverse-spin': 'reverse-spin 2.4s linear infinite',
       shake: 'shake 0.82s cubic-bezier(.36,.07,.19,.97) both',
       'fade-in-left': 'fade-in-left 0.3s linear',
+      gradient: 'animatedgradient 6s ease infinite alternate',
     },
   },
   darkMode: 'class',

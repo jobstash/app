@@ -41,7 +41,7 @@ const tiers = [
     mostPopular: true,
   },
   {
-    name: 'Pro',
+    name: 'Data Only ATS Integration',
     id: 'tier-pro',
     priceMonthly: '$99',
     description:

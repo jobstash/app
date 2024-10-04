@@ -7,7 +7,7 @@ import { useJobPromotePaymentUrl } from '@jobstash/jobs/state';
 
 import { Text } from '@jobstash/shared/ui';
 
-const PROMOTE_TOOLTIP = 'Feature this job for a week';
+import { BasicFeatureTooltipContent } from './basic-feature-tooltip-content';
 
 interface Props {
   id: string;
@@ -48,11 +48,11 @@ export const JobCardPromoteButton = ({
       <span>(Expires in {getTimeLeftText(endDate)})</span>
     </div>
   ) : (
-    PROMOTE_TOOLTIP
+    <BasicFeatureTooltipContent />
   );
 
   return (
-    <Tooltip content={tooltipContent}>
+    <Tooltip className="p-0" content={tooltipContent}>
       <Button
         size="sm"
         isDisabled={isLoading}

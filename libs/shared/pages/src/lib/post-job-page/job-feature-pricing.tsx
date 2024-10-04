@@ -7,10 +7,12 @@ import { MoveRightIcon } from 'lucide-react';
 import { DUCK_TELEGRAM_URL } from '@jobstash/shared/core';
 import { cn } from '@jobstash/shared/utils';
 
+import { GradientText } from '@jobstash/shared/ui';
+
 const tiers = [
   {
-    name: 'Extra',
-    id: 'tier-extra',
+    name: 'Advanced',
+    id: 'tier-advanced',
     pricePerJob: '$300',
     description:
       'Elevate your job listing to the next level with 7 days of homepage visibility, 5x the applicants, and added promotion through Telegram stories, post bumping, and crossposting across key channels.',
@@ -80,12 +82,36 @@ export const JobFeaturePricing = () => (
           >
             {tier.name}
           </h3>
-          <p className="mt-4 flex items-baseline gap-x-2">
-            <span className="text-5xl font-bold tracking-tight text-gray-900">
-              {tier.pricePerJob}
-            </span>
-            <span className="text-base text-gray-500">/ job</span>
-          </p>
+
+          {tierIdx === 0 ? (
+            <p className="mt-4 flex items-baseline gap-x-2">
+              <span className="text-5xl font-bold tracking-tight text-gray-900">
+                {tier.pricePerJob}
+              </span>
+              <span className="text-base text-gray-500">/ job</span>
+            </p>
+          ) : (
+            <div className="flex flex-col gap-0">
+              <span className="flex items-baseline gap-x-2 -mb-2">
+                <span className="text-5xl font-bold tracking-tight text-white/90">
+                  <span className="line-through text-white/60">
+                    {tier.pricePerJob}
+                  </span>
+                </span>
+
+                <span className="text-5xl font-bold tracking-tight text-white/90">
+                  $50
+                </span>
+
+                <span className="text-base text-gray-500">/ job</span>
+              </span>
+
+              <div className="flex gap-x-2">
+                <GradientText text="75% OFF" className="text-2xl font-bold" />
+              </div>
+            </div>
+          )}
+
           <p className="mt-6 text-base leading-7 text-white/90">
             {tier.description}
           </p>
