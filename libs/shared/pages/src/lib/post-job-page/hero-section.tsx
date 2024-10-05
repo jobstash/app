@@ -56,7 +56,7 @@ export const HeroSection = () => (
         >
           Post Your Job
         </Button>
-        <Button variant="light" radius="sm" as={Link} href="/hiring">
+        <Button variant="light" radius="sm" as={Link} href="/employers">
           Learn more <span aria-hidden="true">→</span>
         </Button>
       </div>

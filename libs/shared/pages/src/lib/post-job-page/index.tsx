@@ -3,16 +3,15 @@ import Head from 'next/head';
 import { PageWrapper } from '@jobstash/shared/ui';
 import { SideBar } from '@jobstash/sidebar/feature';
 
+import { GradientBackground } from '../components/gradient-background';
+
 import { BestPractices } from './best-practices';
 import { CareerPageCriteria } from './career-page-criteria';
-import { GradientBackground } from './gradient-background';
 import { HeroSection } from './hero-section';
-import { JobFeaturePricing } from './job-feature-pricing';
 import { LastCtaSection } from './last-cta-section';
 import { OrgCriteria } from './org-criteria';
 import { ReachTopTalent } from './reach-top-talent';
 import { Security } from './security';
-import { VeriPricing } from './veri-pricing';
 
 export const PostJobPage = () => (
   <>
@@ -29,8 +28,6 @@ export const PostJobPage = () => (
         <Security />
         <OrgCriteria />
         <CareerPageCriteria />
-        <VeriPricing />
-        <JobFeaturePricing />
         <LastCtaSection />
       </div>
     </PageWrapper>
