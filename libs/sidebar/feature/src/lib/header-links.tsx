@@ -4,9 +4,10 @@ import { HeaderLink, JoinTalentPool } from '@jobstash/sidebar/ui';
 import { PrivyButton } from '@jobstash/auth/feature';
 
 const LINKS = [
+  { text: 'For Employers', link: '/employers' },
   { text: 'TG Job Feed', link: TELEGRAM_URL },
   { text: 'Post Your Job', link: '/post-job' },
-  { text: 'Help', link: DUCK_TELEGRAM_URL },
+  { text: 'Contact Support', link: DUCK_TELEGRAM_URL },
 ];
 
 const MOBILE_CLASSNAME =

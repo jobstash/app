@@ -1,4 +1,4 @@
-import { type ReactNode } from 'react';
+import { type ReactNode, useEffect, useState } from 'react';
 
 import { AuthContext } from '../contexts/auth-context';
 import { useAuthProvider } from '../hooks/use-auth-provider';
@@ -11,12 +11,21 @@ type Props = {
 export const AuthProvider = ({ children, screenLoader }: Props) => {
   const value = useAuthProvider();
 
-  // TODO: Redirect to the correct page based on the flow
-  // Note: Consider users who login based on auth click
+  const [isReady, setIsReady] = useState(false);
+
+  useEffect(() => {
+    const timeout = setTimeout(() => {
+      setIsReady(true);
+    }, 300);
+
+    return () => {
+      clearTimeout(timeout);
+    };
+  }, []);
 
   return (
     <AuthContext.Provider value={value}>
-      {value.isLoading ? screenLoader : children}
+      {value.isLoading || !isReady ? screenLoader : children}
     </AuthContext.Provider>
   );
 };

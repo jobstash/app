@@ -69,6 +69,10 @@ const nextConfig = {
       },
       {
         protocol: 'https',
+        hostname: 'placeholder.co',
+      },
+      {
+        protocol: 'https',
         hostname: 'twitter.com',
       },
     ],
