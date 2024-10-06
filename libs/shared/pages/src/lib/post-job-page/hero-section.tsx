@@ -26,10 +26,10 @@ export const HeroSection = () => (
       </div>
 
       <p className="text-xl leading-7 text-white/90">
-        We import and publish your jobs from any source fully automatically
-        without any required action from you. Post all your jobs at{' '}
-        <span className="font-bold">zero</span> cost and connect with the right
-        candidates quickly and efficiently.
+        JobStash is built different. We belive that posting jobs should be easy
+        and free for everyone. This way, you can focus on building your dream
+        team without worrying about the cost. Get started now and post all your
+        jobs at <span className="font-bold">zero</span> cost.
       </p>
 
       <div className="flex items-center gap-x-6">

@@ -5,36 +5,36 @@ import { ListCheck } from 'lucide-react';
 
 const features = [
   {
-    name: 'No Centralized Exchanges',
-    description:
-      'Centralized exchanges are not eligible for listing. We focus on decentralized projects that uphold integrity and autonomy in the blockchain space.',
-    icon: CloudArrowUpIcon,
-  },
-  {
     name: 'Support Decentralization',
     description:
       'Your organization must actively contribute to decentralization. This should be reflected in your products, services, or overall mission.',
     icon: LockClosedIcon,
   },
   {
-    name: 'Verified Crypto Organization',
+    name: 'No Centralized Exchanges',
     description:
-      'Organizations must demonstrate legitimacy with real-world use cases and transparent structures that align with crypto industry standards.',
+      'Centralized exchanges are not eligible for listing. We focus on decentralized projects that uphold the values of decentalization of the blockchain space.',
+    icon: CloudArrowUpIcon,
   },
   {
-    name: 'Active Community Engagement',
+    name: 'Have a functioning product, or be clear about your roadmap',
     description:
-      'Organizations must demonstrate ongoing engagement with their community. A strong, active user base is a key indicator of legitimacy and long-term sustainability.',
+      'Organizations must demonstrate they have a working product or service, or have a clear roadmap for development. Projects that are in the early stages of development are also eligible.',
   },
   {
-    name: 'Security Best Practices',
+    name: 'Have clear social media presence, and have documentation or a whitepaper',
     description:
-      'Your organization must prioritize security, implementing industry-standard practices to safeguard users and assets. Projects that have undergone audits or have security measures in place are preferred.',
+      'Your organization must have multiple active social media accounts, or a well structured docs page or whitepaper. This ensures that your organization is transparent allows us to verify your legitimacy.',
   },
   {
-    name: 'Transparency in Governance',
+    name: 'Have a Github Organization account',
     description:
-      'Your organization should practice transparent governance, ensuring that decision-making processes are clear and inclusive of all stakeholders.',
+      'Your organization should have a Github Organization account, even if currently set to private. This allows us to verify your organization and ensure that you are a legitimate project.',
+  },
+  {
+    name: 'Maintain Job Integrity',
+    description:
+      'We require all organizationa to maintain the integrity of their job listings. This includes ensuring that all job listings are accurate, up-to-date, and reflect the true nature of the job. Malicious or deceptive postings will result in a ban.',
   },
 ];
 
@@ -44,7 +44,7 @@ export const OrgCriteria = () => (
       <div className="flex flex-col gap-6 px-6 lg:px-0 lg:pr-4 lg:pt-4">
         <div className="flex flex-col gap-2">
           <span className="text-base font-semibold text-indigo-400">
-            Who We Work With
+            What we require from your organization
           </span>
           <h2 className="bg-gradient-to-r from-white to-secondary bg-clip-text text-4xl font-bold text-transparent">
             Organization Eligibility
@@ -54,7 +54,8 @@ export const OrgCriteria = () => (
           We are committed to fostering decentralization and working with
           organizations that align with the ethos of the crypto space. To be
           listed on our platform, your organization must meet the following
-          criteria.
+          criteria. This ensures that we curate only legitimate projects, and
+          allows us to safeguard our users from potential threats.
         </p>
         <dl className="space-y-8 text-base leading-7 text-white/90">
           {features.map((feature) => (

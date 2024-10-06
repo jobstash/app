@@ -9,16 +9,10 @@ import {
 
 const features = [
   {
-    name: 'Post your job',
+    name: 'Register as an organization',
     description:
-      'Easily create and submit your job listings with a few simple steps. Our platform helps you structure job data and enhance visibility across multiple channels, ensuring you reach the best candidates.',
+      'Fill out a simple form to register your organization on JobStash. Once verified, we will import your jobs right away, no action required on your end.',
     icon: ListTodo,
-  },
-  {
-    name: 'Multi-platform distribution',
-    description:
-      'Your job is published across various channels, including our web app, Telegram, Twitter, and Discord. Get your job in front of thousands of potential candidates in no time.',
-    icon: Rss,
   },
   {
     name: 'Smart data enrichment',
@@ -27,35 +21,25 @@ const features = [
     icon: BotMessageSquare,
   },
   {
-    name: 'Real-time insights',
+    name: 'Sit back while we distribute your jobs',
     description:
-      'Track the performance of your job listings in real time. Get detailed insights on how many people viewed and applied for the position, helping you make data-driven decisions.',
-    icon: Zap,
-  },
-  {
-    name: 'Automatic unpublishing',
-    description:
-      'Once your position is filled, we automatically remove the job listing, ensuring your listings stay up to date without any extra effort.',
-    icon: BookX,
-  },
-  {
-    name: 'Curation for crypto-native jobs',
-    description:
-      'Our platform is specifically designed to cater to the crypto space, providing curated listings for organizations and projects within the Web3 ecosystem.',
-    icon: Wallet,
+      'Your job is published across various channels, including our web app, Telegram, Twitter, and Warpcast. Get your job in front of thousands of potential crypto native candidates in no time.',
+    icon: Rss,
   },
 ];
 
-export const ReachTopTalent = () => (
+export const GettingStartedWithJobStash = () => (
   <div className="flex flex-col items-center px-6 gap-16">
     <div className="max-w-2xl text-center flex flex-col gap-6">
       <h2 className="bg-gradient-to-r from-white to-secondary bg-clip-text text-6xl font-bold text-transparent">
-        Reach Top Talent
+        How to get started posting on JobStash
       </h2>
       <p className="text-lg leading-8 text-white/90">
-        With a few clicks, your job listing can reach thousands of potential
-        candidates. Manage applicants, find the right candidates faster, and
-        attract top talent in the crypto space.
+        Just provide a link to your career page, and our AI-powered platform
+        will handle the rest. We streamline the process of automatically
+        detecting new jobs, unpublishing old jobs, while also transforming raw
+        jobposts into concise, structured listings with over 20 key datapoints
+        which our users love.
       </p>
     </div>
     <div className="max-w-7xl mx-auto px-2 lg:px-20">

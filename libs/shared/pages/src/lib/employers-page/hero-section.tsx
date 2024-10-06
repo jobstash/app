@@ -15,7 +15,7 @@ export const HeroSection = () => (
             Simplify Hiring
           </span>
           <span className="inline-flex items-center space-x-2 text-sm font-medium leading-6 text-white/90">
-            <span>Post your job</span>
+            <span>Post your job for free</span>
             <ChevronRightIcon
               aria-hidden="true"
               className="h-5 w-5 text-gray-500"

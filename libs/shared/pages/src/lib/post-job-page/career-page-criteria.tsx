@@ -9,25 +9,25 @@ const features = [
   {
     name: 'Job Listings Page',
     description:
-      'The career page must include a list of job titles, each linking to a dedicated detail page for more information.',
+      'The career page must include a list of job titles, each linking to a dedicated detail page for more information. We recommend a simple list format for easy indexing. Technical requirements are that a job listing page must be available at a URL, and present each job as a separate item as a list of job titles with a link to the job detail page.',
     icon: ListBulletIcon,
   },
   {
     name: 'Individual Job Detail Pages',
     description:
-      "Every job must have its own URL where the job's details can be found. The structure of these pages is entirely up to you.",
+      "Every job must have its own URL where the job's details can be found. The structure of these pages is entirely up to you. We do not support having multiple jobs on one URL, as we use the URL to uniquely identify each job.",
     icon: DocumentTextIcon,
   },
   {
     name: 'Job Import via LLMs',
     description:
-      'We utilize large language models (LLMs) to automatically import job details from the raw vacancy, ensuring up-to-date information.',
+      'We utilize large language models (LLMs) to automatically import job details from the raw vacancy, complete metadata about your jobposts. Our platform uses this data to create structured job listings, making it easier for candidates to find, evaluate and apply for your jobs.',
     icon: CommandLineIcon,
   },
   {
     name: 'Daily Page Monitoring',
     description:
-      'We ping your career page daily to check for updates and new job listings, ensuring that your latest vacancies are always visible to potential candidates.',
+      'We crawl your career page daily to check for new job listings or to check if a job listing went offline, ensuring that your latest vacancies are always visible to potential candidates. If a job listing gets removed from the career page, we will automatically unpublish it from our platform.',
     icon: RssIcon,
   },
 ];

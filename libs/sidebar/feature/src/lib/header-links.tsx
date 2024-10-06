@@ -4,10 +4,10 @@ import { HeaderLink, JoinTalentPool } from '@jobstash/sidebar/ui';
 import { PrivyButton } from '@jobstash/auth/feature';
 
 const LINKS = [
-  { text: 'Post Your Job', link: '/post-job' },
+  { text: 'Post Your Job For Free', link: '/post-job' },
   { text: 'For Employers', link: '/employers' },
-  { text: 'Contact Support', link: SUPPORT_TELEGRAM_URL },
   { text: 'Subscribe On Telegram', link: TELEGRAM_URL },
+  { text: 'Contact Support', link: SUPPORT_TELEGRAM_URL },
 ];
 
 const MOBILE_CLASSNAME =
