@@ -29,7 +29,7 @@ const LandingNav = () => {
         <NavButton
           isTransparent
           href="https://t.me/jobstash"
-          text="TG Job Feed"
+          text="Subscribe on Telegram"
         />
         <NavButton
           isTransparent

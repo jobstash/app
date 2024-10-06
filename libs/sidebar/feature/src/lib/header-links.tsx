@@ -5,7 +5,7 @@ import { PrivyButton } from '@jobstash/auth/feature';
 
 const LINKS = [
   { text: 'For Employers', link: '/employers' },
-  { text: 'TG Job Feed', link: TELEGRAM_URL },
+  { text: 'Subscribe On Telegram', link: TELEGRAM_URL },
   { text: 'Post Your Job', link: '/post-job' },
   { text: 'Contact Support', link: DUCK_TELEGRAM_URL },
 ];
