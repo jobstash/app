@@ -1,6 +1,8 @@
 import {
+  ClipboardDocumentListIcon,
   CommandLineIcon,
   DocumentTextIcon,
+  LinkIcon,
   ListBulletIcon,
   RssIcon,
 } from '@heroicons/react/24/outline';
@@ -9,32 +11,38 @@ const features = [
   {
     name: 'Job Listings Page',
     description:
-      'The career page must include a list of job titles, each linking to a dedicated detail page for more information. We recommend a simple list format for easy indexing. Technical requirements are that a job listing page must be available at a URL, and present each job as a separate item as a list of job titles with a link to the job detail page. We support any website and template out there, as well as all leading ATS platforms. If you use an ATS in-house, please provide us with the link to the ATS job list. We are unable to support jobs published on social media platforms like LinkedIn or Facebook, or AngelList/Angel.co/Wellfound due to their lack of open APIs and aggressive anti-scraping measures.',
-    icon: ListBulletIcon,
-  },
-  {
-    name: 'Job Listings Page Format',
-    description:
-      'The format is entirely up to you. We use AI models to extract job list items from your career page, so the structure of the page is not important. However, we recommend a simple list format for easy indexing. If you don\'t have a career page yet and dont want to build a custom webpage, we suggest you use a notion page. There is a notion template called "Job Board" that you can use to create a job board in minutes. Please don\'t use Google Docs, Google Sheets or PDFs as we cannot extract data from these formats. Please refrain from listing your team structure and job titles of your colleagues on the job board, as this will confuse our AI models.',
+      'Create a career page that lists job titles, each linking to a detailed job page. We support all websites, leading ATS platforms, but cannot work with jobs listed on LinkedIn, Facebook, or AngelList due to API restrictions.',
     icon: ListBulletIcon,
   },
   {
     name: 'Individual Job Detail Pages',
     description:
-      "Every job must have its own URL where the job's details can be found. The structure of these pages is entirely up to you. We do not support having multiple jobs on one URL, as we use the URL to uniquely identify each job.",
+      'Each job must have its own URL for detailed information. We cannot support multiple jobs on one URL as each job needs a unique identifier for tracking.',
     icon: DocumentTextIcon,
+  },
+  {
+    name: 'Job Listings Page Format',
+    description:
+      'We use AI to extract job listings from your career page, regardless of structure. A simple list format is recommended. If you lack a career page, consider using the Notion "Job Board" template for quick setup. Avoid using Google Docs, Sheets, or PDFs as they are not supported.',
+    icon: ClipboardDocumentListIcon,
   },
   {
     name: 'Job Import via LLMs',
     description:
-      'We utilize large language models (LLMs) to automatically import job details from the raw vacancy, complete metadata about your jobposts. Our platform uses this data to create structured job listings, making it easier for candidates to find, evaluate and apply for your jobs.',
+      'Our system uses large language models (LLMs) to automatically import job details, complete metadata, and create structured listings, making jobs easy to find and apply for.',
     icon: CommandLineIcon,
   },
   {
     name: 'Daily Page Monitoring',
     description:
-      'We crawl your career page daily to check for new job listings or to check if a job listing went offline, ensuring that your latest vacancies are always visible to potential candidates. If a job listing gets removed from the career page, we will automatically unpublish it from our platform.',
+      'We monitor your career page daily to detect new jobs or removals, ensuring your latest vacancies are always up-to-date. Removed listings are automatically unpublished.',
     icon: RssIcon,
+  },
+  {
+    name: 'ATS Integration',
+    description:
+      'If your career page is hosted on an ATS, simply provide us with the job listing link. We are compatible with all major ATS platforms for seamless integration.',
+    icon: LinkIcon,
   },
 ];
 
