@@ -21,7 +21,7 @@ export const PRIVY_APP_ID = process.env.NEXT_PUBLIC_PRIVY_APP_ID!;
 export const PRIVY_CLIENT_ID = process.env.NEXT_PUBLIC_PRIVY_CLIENT_ID!;
 
 // TODO: put hardcode string in env
-export const ORG_SIGNUP_FORM_URL = 'https://forms.gle/HWP6bUf3CB8RyJnw5';
+export const ORG_SIGNUP_FORM_URL = 'https://tally.so/r/wvO21l';
 export const TELEGRAM_URL = 'https://telegram.me/jobstash';
 export const DUCK_TELEGRAM_URL = 'https://t.me/+24r67MsBXT00ODE8';
 export const PDF_VERI_URL =
