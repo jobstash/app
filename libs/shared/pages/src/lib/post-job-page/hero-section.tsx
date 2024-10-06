@@ -10,7 +10,7 @@ export const HeroSection = () => (
     <div className="mx-auto max-w-2xl flex-shrink-0 lg:mx-0 lg:max-w-xl lg:pt-8 flex flex-col gap-8">
       <div className="mt-24 sm:mt-32 lg:mt-16 flex flex-col gap-2">
         <h1 className="bg-gradient-to-r from-white to-secondary quinary bg-clip-text text-8xl font-bold text-transparent">
-          Post jobs for your organization
+          Post your Jobs
         </h1>
         <div className="flex gap-2 items-center">
           <h2 className="bg-gradient-to-r from-white to-secondary quinary bg-clip-text text-3xl font-bold text-transparent">
@@ -20,16 +20,15 @@ export const HeroSection = () => (
             </span>
           </h2>
           <span role="img" aria-label="flame" className="text-3xl">
-            🔥
+            🔥 - Attract Top Talent Instantly!
           </span>
         </div>
       </div>
 
       <p className="text-xl leading-7 text-white/90">
-        JobStash is built different. We belive that posting jobs should be easy
-        and free for everyone. This way, you can focus on building your dream
-        team without worrying about the cost. Get started now and post all your
-        jobs at <span className="font-bold">zero</span> cost.
+        Why Choose JobStash? Post Jobs for{' '}
+        <span className="font-bold">Free</span>, Reach Thousands of
+        Crypto-Native Candidates, and Let Our AI Do the Heavy Lifting!
       </p>
 
       <div className="flex items-center gap-x-6">
@@ -42,7 +41,7 @@ export const HeroSection = () => (
           Post Your Jobs For Free
         </Button>
         <Button variant="light" radius="sm" as={Link} href="/employers">
-          Learn more <span aria-hidden="true">→</span>
+          Additional services for Employers <span aria-hidden="true">→</span>
         </Button>
       </div>
     </div>
