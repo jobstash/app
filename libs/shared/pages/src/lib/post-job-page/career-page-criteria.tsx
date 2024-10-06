@@ -9,7 +9,13 @@ const features = [
   {
     name: 'Job Listings Page',
     description:
-      'The career page must include a list of job titles, each linking to a dedicated detail page for more information. We recommend a simple list format for easy indexing. Technical requirements are that a job listing page must be available at a URL, and present each job as a separate item as a list of job titles with a link to the job detail page.',
+      'The career page must include a list of job titles, each linking to a dedicated detail page for more information. We recommend a simple list format for easy indexing. Technical requirements are that a job listing page must be available at a URL, and present each job as a separate item as a list of job titles with a link to the job detail page. We support any website and template out there, as well as all leading ATS platforms. If you use an ATS in-house, please provide us with the link to the ATS job list. We are unable to support jobs published on social media platforms like LinkedIn or Facebook, or AngelList/Angel.co/Wellfound due to their lack of open APIs and aggressive anti-scraping measures.',
+    icon: ListBulletIcon,
+  },
+  {
+    name: 'Job Listings Page Format',
+    description:
+      'The format is entirely up to you. We use AI models to extract job list items from your career page, so the structure of the page is not important. However, we recommend a simple list format for easy indexing. If you don\'t have a career page yet and dont want to build a custom webpage, we suggest you use a notion page. There is a notion template called "Job Board" that you can use to create a job board in minutes. Please don\'t use Google Docs, Google Sheets or PDFs as we cannot extract data from these formats. Please refrain from listing your team structure and job titles of your colleagues on the job board, as this will confuse our AI models.',
     icon: ListBulletIcon,
   },
   {
