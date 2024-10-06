@@ -10,7 +10,7 @@ export const HeroSection = () => (
     <div className="mx-auto max-w-2xl flex-shrink-0 lg:mx-0 lg:max-w-xl lg:pt-8 flex flex-col gap-8">
       <div className="mt-24 sm:mt-32 lg:mt-16 flex flex-col gap-2">
         <h1 className="bg-gradient-to-r from-white to-secondary quinary bg-clip-text text-8xl font-bold text-transparent">
-          Post your Jobs
+          Post unlimited Jobs
         </h1>
         <div className="flex gap-2 items-center">
           <h2 className="bg-gradient-to-r from-white to-secondary quinary bg-clip-text text-3xl font-bold text-transparent">
@@ -26,10 +26,13 @@ export const HeroSection = () => (
       </div>
 
       <p className="text-xl leading-7 text-white/90">
-        Post all of your Organizations Jobs for{' '}
-        <span className="font-bold">Free</span>, enjoy effortless formatting and
-        distribution of your posts, and reach thousands of crypto-native
-        candidates. Attract Top Talent Instantly with JobStash!
+        JobStash is different. We let every reputable organization in the space
+        post all of their jobs for <span className="font-bold">Free</span>. Our
+        audience of thousands of crypto-native candidates is looking for their
+        next big opportunity. We take care of showcasing the potential of
+        joining your organization, formatting your jobposts and distributing
+        them, ensuring fair ordering of posts and the safety of our users by
+        keeping malicious actors out.
       </p>
 
       <div className="flex items-center gap-x-6">

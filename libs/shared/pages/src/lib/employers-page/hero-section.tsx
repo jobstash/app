@@ -1,15 +1,16 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { ChevronRightIcon } from '@heroicons/react/20/solid';
+// eslint-disable-next-line capitalized-comments
+// import { ChevronRightIcon } from '@heroicons/react/20/solid';
 import { Button } from '@nextui-org/react';
 
-import { SUPPORT_TELEGRAM_URL, PDF_JOBSTASH_URL } from '@jobstash/shared/core';
+import { PDF_JOBSTASH_URL, SUPPORT_TELEGRAM_URL } from '@jobstash/shared/core';
 
 export const HeroSection = () => (
   <div className="max-w-7xl px-6 pt-10 lg:flex lg:px-8">
     <div className="mx-auto max-w-2xl flex-shrink-0 lg:mx-0 lg:max-w-xl lg:pt-8 flex flex-col gap-8">
-      <div className="mt-24 sm:mt-32 lg:mt-16">
+      {/* <div className="mt-24 sm:mt-32 lg:mt-16">
         <a href="/post-job" className="inline-flex space-x-6">
           <span className="rounded-full bg-secondary/10 px-3 py-1 text-sm font-semibold leading-6 text-indigo-400 ring-1 ring-inset ring-secondary/20">
             Simplify Hiring
@@ -22,18 +23,19 @@ export const HeroSection = () => (
             />
           </span>
         </a>
-      </div>
+      </div> */}
 
       <div className="flex flex-col gap-2">
         <h1 className="bg-gradient-to-r from-white to-secondary quinary bg-clip-text text-8xl font-bold text-transparent">
-          Streamline Crypto Hiring Process
+          Reduce Time To Hire and Cost Per Hire
         </h1>
       </div>
 
       <p className="text-xl leading-7 text-white/90">
-        Enhance your hiring process with our tailored ATS integration and
-        comprehensive due diligence, designed specifically for the crypto
-        industry.
+        Get more visibility for your job listings and identify the best talent,
+        at scale. Enhance your hiring process with our ATS integrations and our
+        candidate due diligence reports, designed specifically for the crypto
+        industry. No AI, no gimmicks, just pure data.
       </p>
 
       <div className="flex items-center gap-x-6">
@@ -43,7 +45,7 @@ export const HeroSection = () => (
           className="bg-gradient-to-l from-primary to-tertiary font-bold"
           radius="sm"
         >
-          Get Started Now
+          Contact Sales
         </Button>
         <Button variant="light" radius="sm" as={Link} href={PDF_JOBSTASH_URL}>
           Learn more <span aria-hidden="true">→</span>
