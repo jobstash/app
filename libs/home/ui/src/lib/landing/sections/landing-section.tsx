@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-import { DUCK_TELEGRAM_URL, lato, ORG_PAGE } from '@jobstash/shared/core';
+import { SUPPORT_TELEGRAM_URL, lato, ORG_PAGE } from '@jobstash/shared/core';
 
 import { ExploreJobsButton } from './buttons/explore-jobs-button';
 import { HomePageButton } from './buttons/home-page-button';
@@ -84,7 +84,7 @@ const LandingSection = () => (
       <HomePageButton
         hasBorder
         text="DM us your story"
-        url={DUCK_TELEGRAM_URL}
+        url={SUPPORT_TELEGRAM_URL}
       />
     </GradientContainer>
   </section>

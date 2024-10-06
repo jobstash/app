@@ -1,4 +1,4 @@
-import { DUCK_TELEGRAM_URL } from '@jobstash/shared/core';
+import { SUPPORT_TELEGRAM_URL } from '@jobstash/shared/core';
 import { openNewTab } from '@jobstash/shared/utils';
 
 import { useAuthContext } from '@jobstash/auth/state';
@@ -28,7 +28,7 @@ const TooltipContent = () => (
   </div>
 );
 
-const onClick = () => openNewTab(DUCK_TELEGRAM_URL);
+const onClick = () => openNewTab(SUPPORT_TELEGRAM_URL);
 
 export const WhiteGloveCTA = () => {
   const { isCryptoNative, isLoading, isAuthenticated } = useAuthContext();

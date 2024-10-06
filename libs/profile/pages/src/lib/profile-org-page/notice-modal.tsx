@@ -6,7 +6,7 @@ import { Button } from '@nextui-org/button';
 import { Modal, ModalBody, ModalContent } from '@nextui-org/modal';
 
 import { CHECK_WALLET_FLOWS } from '@jobstash/auth/core';
-import { DUCK_TELEGRAM_URL } from '@jobstash/shared/core';
+import { SUPPORT_TELEGRAM_URL } from '@jobstash/shared/core';
 
 import { useAuthContext } from '@jobstash/auth/state';
 
@@ -83,7 +83,7 @@ export const NoticeModal = () => {
 
 const openTelegramLink = () => {
   if (typeof window !== 'undefined') {
-    window.open(DUCK_TELEGRAM_URL, '_blank');
+    window.open(SUPPORT_TELEGRAM_URL, '_blank');
   }
 };
 

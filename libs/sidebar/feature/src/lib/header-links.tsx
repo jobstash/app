@@ -1,13 +1,13 @@
-import { DUCK_TELEGRAM_URL, TELEGRAM_URL } from '@jobstash/shared/core';
+import { SUPPORT_TELEGRAM_URL, TELEGRAM_URL } from '@jobstash/shared/core';
 
 import { HeaderLink, JoinTalentPool } from '@jobstash/sidebar/ui';
 import { PrivyButton } from '@jobstash/auth/feature';
 
 const LINKS = [
-  { text: 'For Employers', link: '/employers' },
-  { text: 'Subscribe On Telegram', link: TELEGRAM_URL },
   { text: 'Post Your Job', link: '/post-job' },
-  { text: 'Contact Support', link: DUCK_TELEGRAM_URL },
+  { text: 'For Employers', link: '/employers' },
+  { text: 'Contact Support', link: SUPPORT_TELEGRAM_URL },
+  { text: 'Subscribe On Telegram', link: TELEGRAM_URL },
 ];
 
 const MOBILE_CLASSNAME =

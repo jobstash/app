@@ -4,7 +4,7 @@ import { CheckIcon } from '@heroicons/react/20/solid';
 import { Button } from '@nextui-org/react';
 import { MoveRightIcon } from 'lucide-react';
 
-import { DUCK_TELEGRAM_URL } from '@jobstash/shared/core';
+import { SUPPORT_TELEGRAM_URL } from '@jobstash/shared/core';
 import { cn } from '@jobstash/shared/utils';
 
 import { GradientText } from '@jobstash/shared/ui';
@@ -131,7 +131,7 @@ export const JobFeaturePricing = () => (
             <div className="w-full items-center flex justify-center pt-8">
               <Button
                 as={Link}
-                href={DUCK_TELEGRAM_URL}
+                href={SUPPORT_TELEGRAM_URL}
                 className={cn('w-5/6', {
                   'bg-gradient-to-l from-primary to-tertiary font-bold':
                     tierIdx === 0,
