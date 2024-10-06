@@ -1,3 +1,5 @@
+import Link from 'next/link';
+
 import {
   ClipboardDocumentListIcon,
   CommandLineIcon,
@@ -6,6 +8,9 @@ import {
   ListBulletIcon,
   RssIcon,
 } from '@heroicons/react/24/outline';
+import { Button } from '@nextui-org/react';
+
+import { ORG_SIGNUP_FORM_URL } from '@jobstash/shared/core';
 
 const features = [
   {
@@ -83,6 +88,19 @@ export const CareerPageCriteria = () => (
           </div>
         ))}
       </dl>
+    </div>
+    <div className="flex items-center gap-x-6">
+      <Button
+        as={Link}
+        href={ORG_SIGNUP_FORM_URL}
+        className="bg-gradient-to-l from-primary to-tertiary font-bold"
+        radius="sm"
+      >
+        Submit Career Page
+      </Button>
+      <Button variant="light" radius="sm" as={Link} href="/employers">
+        Premium Services<span aria-hidden="true">→</span>
+      </Button>
     </div>
   </div>
 );

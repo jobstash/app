@@ -58,7 +58,7 @@ export const GettingStartedWithJobStash = () => (
         className="bg-gradient-to-l from-primary to-tertiary font-bold"
         radius="sm"
       >
-        Post Jobs For Free
+        Start Posting Jobs
       </Button>
       <Button variant="light" radius="sm" as={Link} href="/employers">
         Premium Services<span aria-hidden="true">→</span>
