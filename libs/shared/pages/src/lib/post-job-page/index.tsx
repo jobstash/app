@@ -24,10 +24,10 @@ export const PostJobPage = () => (
         <GradientBackground />
         <HeroSection />
         <GettingStartedWithJobStash />
-        <OrgCriteria />
         <CareerPageCriteria />
         <BestPractices />
         <Security />
+        <OrgCriteria />
         <LastCtaSection />
       </div>
     </PageWrapper>
