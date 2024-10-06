@@ -20,15 +20,16 @@ export const HeroSection = () => (
             </span>
           </h2>
           <span role="img" aria-label="flame" className="text-3xl">
-            🔥 - Attract Top Talent Instantly!
+            🔥
           </span>
         </div>
       </div>
 
       <p className="text-xl leading-7 text-white/90">
-        Why Choose JobStash? Post Jobs for{' '}
-        <span className="font-bold">Free</span>, Reach Thousands of
-        Crypto-Native Candidates, and Let Our AI Do the Heavy Lifting!
+        Post all of your Organizations Jobs for{' '}
+        <span className="font-bold">Free</span>, enjoy effortless formatting and
+        distribution of your posts, and reach thousands of crypto-native
+        candidates. Attract Top Talent Instantly with JobStash!
       </p>
 
       <div className="flex items-center gap-x-6">
@@ -38,10 +39,10 @@ export const HeroSection = () => (
           className="bg-gradient-to-l from-primary to-tertiary font-bold"
           radius="sm"
         >
-          Post Your Jobs For Free
+          Post Jobs For Free
         </Button>
         <Button variant="light" radius="sm" as={Link} href="/employers">
-          Additional services for Employers <span aria-hidden="true">→</span>
+          Premium Services<span aria-hidden="true">→</span>
         </Button>
       </div>
     </div>
