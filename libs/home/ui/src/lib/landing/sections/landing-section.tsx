@@ -57,15 +57,18 @@ const LandingSection = () => (
       <GradientContainer className="flex flex-wrap w-full">
         <div className="flex flex-col flex-wrap w-full gap-3 text-white grow">
           <span className={`${lato.className} text-xl font-bold`}>
-            Service for Employers
+            Services for Employers
           </span>
           <div className="flex flex-col gap-0.5 max-w-3xl text-white/75">
             <span className="text-md">
-              JobStash streamlines your hiring process by connecting you with
-              verified, crypto-native talent. Our ATS protects against fraud and
-              impostors, ensuring you hire confidently. Whether integrated with
-              your existing HR tools or used as a standalone solution, JobStash
-              ATS helps you save time and hire smarter.
+              Use our promotional services to increase your reach up to 5x. We
+              also offer services for small teams which get buried in candidates
+              want to commit to a full-time recruiter. Our Applicant Tracking
+              Service (ATS) is designed to help you streamline your hiring
+              process and connect with verified, crypto-native talent.
+              Additionally, our candidate report service offers you insight into
+              the truthfulness of a technical candidate resume, within seconds,
+              at a price anyone can afford.
             </span>
           </div>
         </div>
