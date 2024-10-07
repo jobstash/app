@@ -18,10 +18,12 @@ import {
   Spinner,
   Tooltip,
 } from '@nextui-org/react';
+import { useQueryClient } from '@tanstack/react-query';
 
 import { notifSuccess } from '@jobstash/shared/utils';
 
 import { useAuthContext } from '@jobstash/auth/state';
+import { useMwVersionContext } from '@jobstash/shared/state';
 
 import { Heading } from '@jobstash/shared/ui';
 
@@ -41,8 +43,19 @@ interface Props {
 export const ActiveModal = ({ text, isOpen, onOpenChange, onClose }: Props) => {
   const { logout, isLoadingLogout } = useAuthContext();
 
+  const { mwVersion } = useMwVersionContext();
+  const queryClient = useQueryClient();
+
   const onLogout = async () => {
     await logout();
+
+    await queryClient.invalidateQueries({
+      queryKey: [mwVersion, 'dev-profile-info'],
+    });
+    await queryClient.invalidateQueries({
+      queryKey: [mwVersion, 'affiliated-orgs'],
+    });
+
     onClose();
   };
 
@@ -67,9 +80,7 @@ export const ActiveModal = ({ text, isOpen, onOpenChange, onClose }: Props) => {
       isOpen={isOpen}
       onOpenChange={onOpenChange}
     >
-      <ModalContent
-        className='self-center mx-6 md:mx-0'
-      >
+      <ModalContent className="self-center mx-6 md:mx-0">
         <div className="absolute top-3 right-2">
           <Button isIconOnly variant="light" size="sm" onPress={onClose}>
             <XMarkIcon className="w-5 h-5" />
@@ -92,7 +103,7 @@ export const ActiveModal = ({ text, isOpen, onOpenChange, onClose }: Props) => {
                   radius="md"
                   className="h-full font-bold"
                 >
-                  <span className='truncate'>{text}</span>
+                  <span className="truncate">{text}</span>
                 </Button>
               </ButtonWrapper>
               <Tooltip content={COPY_TOOLTIP}>
