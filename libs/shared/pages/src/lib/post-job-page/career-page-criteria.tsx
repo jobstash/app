@@ -28,7 +28,7 @@ const features = [
   {
     name: 'Job Listings Page Format',
     description:
-      'We use AI to extract job listings from your career page, regardless of structure. A simple list format is recommended. If you lack a career page, consider using the Notion "Job Board" template for quick setup. Avoid using Google Docs, Sheets, or PDFs as they are not supported.',
+      'We use AI to extract job listings from your career page, regardless of structure. A simple list format is recommended. If you lack a career page, consider using the Notion "Job Board" template (https://www.notion.so/gallery/templates/job-board) for quick setup. Avoid using Google Docs, Sheets, or PDFs as they are not supported.',
     icon: ClipboardDocumentListIcon,
   },
   {
