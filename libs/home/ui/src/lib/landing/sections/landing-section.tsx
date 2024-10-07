@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-import { SUPPORT_TELEGRAM_URL, lato, ORG_PAGE } from '@jobstash/shared/core';
+import { lato, ORG_PAGE, SUPPORT_TELEGRAM_URL } from '@jobstash/shared/core';
 
 import { ExploreJobsButton } from './buttons/explore-jobs-button';
 import { HomePageButton } from './buttons/home-page-button';
@@ -33,41 +33,47 @@ const LandingSection = () => (
       <GradientContainer className="flex flex-wrap w-full ">
         <div className="flex flex-col flex-wrap w-full gap-3 text-white grow">
           <span className={`${lato.className} text-xl font-bold`}>
-            Feature your job listings on JobStash
+            Post a Job
           </span>
           <div className="flex flex-col gap-0.5 max-w-3xl text-white/75">
             <span className="text-md">
-              Get up to 5x more applicants by featuring your jobs with us. Job
-              Featuring is 300$ per week per jobpost, and includes a dedicated
-              job post, crossposting promotion, a sticky slot on our homepage
-              and custom telegram stories about your job, org and project. You
-              must have a verified org on JobStash to feature your job.
-            </span>
-          </div>
-        </div>
-        <HomePageButton hasBorder text="Feature your job" url={ORG_PAGE} />
-      </GradientContainer>
-      <GradientContainer className="flex flex-wrap w-full">
-        <div className="flex flex-col flex-wrap w-full gap-3 text-white grow">
-          <span className={`${lato.className} text-xl font-bold`}>
-            Save time using JobStash ATS
-          </span>
-          <div className="flex flex-col gap-0.5 max-w-3xl text-white/75">
-            <span className="text-md">
-              JobStash redefines hiring operations in crypto, guarding against
-              fraud and impostors, identifying genuine, crypto-native and
-              crypto-adjacent talent, at scale, by relying on verifiable data.
-              Our ATS (Applicant Tracking System) is designed to help you hire
-              safer, better, and more efficiently. Tired of sifting through a
-              sea of impostors? Try JobStash ATS today. Works with your existing
-              HR tools, or as a standalone solution integrated with JobStash.
+              Posting your job on JobStash is completely free, giving you access
+              to a wide network of talented candidates at no cost. Simply verify
+              your organization and start listing your job openings right away.
+              If you want to increase visibility, you can choose to feature your
+              job for $300 per week, which includes homepage placement,
+              crossposting, and custom Telegram stories to attract more
+              applicants.
             </span>
           </div>
         </div>
         <HomePageButton
           hasBorder
-          text="Discover the JobStash ATS"
-          url={ORG_PAGE}
+          text="Post Your Job For FREE"
+          url="/post-job"
+          external={false}
+        />
+      </GradientContainer>
+      <GradientContainer className="flex flex-wrap w-full">
+        <div className="flex flex-col flex-wrap w-full gap-3 text-white grow">
+          <span className={`${lato.className} text-xl font-bold`}>
+            Service for Employers
+          </span>
+          <div className="flex flex-col gap-0.5 max-w-3xl text-white/75">
+            <span className="text-md">
+              JobStash streamlines your hiring process by connecting you with
+              verified, crypto-native talent. Our ATS protects against fraud and
+              impostors, ensuring you hire confidently. Whether integrated with
+              your existing HR tools or used as a standalone solution, JobStash
+              ATS helps you save time and hire smarter.
+            </span>
+          </div>
+        </div>
+        <HomePageButton
+          hasBorder
+          text="Streamline Hiring Process"
+          url="/employers"
+          external={false}
         />
       </GradientContainer>
     </div>
