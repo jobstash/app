@@ -20,8 +20,8 @@ const RightPanelHeaderTags = ({ org }: Props) => {
   const tags: TagElement[] = createRightPanelOrgTags(org);
 
   return (
-    <div className='flex flex-wrap gap-4'>
-      <OrgReviewCardSets org={org} />
+    <div className="flex flex-wrap gap-4">
+      {/* <OrgReviewCardSets org={org} /> */}
 
       {tags.map(({ id, text, icon, link }) => (
         <CardSet key={id} link={link} icon={icon}>
