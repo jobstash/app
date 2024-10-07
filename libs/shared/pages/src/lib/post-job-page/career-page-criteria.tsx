@@ -52,7 +52,7 @@ const features = [
 ];
 
 export const CareerPageCriteria = () => (
-  <div className="mx-auto max-w-7xl px-6 lg:px-8">
+  <div className="max-w-7xl px-6 lg:px-8 flex flex-col self-center gap-12">
     <div className="mx-auto max-w-2xl lg:text-center">
       <div className="mx-auto max-w-4xl text-center">
         <h2 className="text-base font-semibold leading-7 text-indigo-400 pb-4">
@@ -69,7 +69,7 @@ export const CareerPageCriteria = () => (
         visible to the right candidates.
       </p>
     </div>
-    <div className="mx-auto mt-16 max-w-4xl sm:mt-20 lg:mt-24">
+    <div className="mx-auto max-w-4xl">
       <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-10 lg:max-w-none lg:grid-cols-2 lg:gap-y-16">
         {features.map((feature) => (
           <div key={feature.name} className="relative pl-16">
@@ -89,7 +89,7 @@ export const CareerPageCriteria = () => (
         ))}
       </dl>
     </div>
-    <div className="flex items-center gap-x-6">
+    <div className="flex items-center gap-x-6 w-full justify-center">
       <Button
         as={Link}
         href={ORG_SIGNUP_FORM_URL}

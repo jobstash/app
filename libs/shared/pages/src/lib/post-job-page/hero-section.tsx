@@ -10,10 +10,10 @@ export const HeroSection = () => (
     <div className="mx-auto max-w-2xl flex-shrink-0 lg:mx-0 lg:max-w-xl lg:pt-8 flex flex-col gap-8">
       <div className="mt-24 sm:mt-32 lg:mt-16 flex flex-col gap-2">
         <h1 className="bg-gradient-to-r from-white to-secondary quinary bg-clip-text text-8xl font-bold text-transparent">
-          Post unlimited Jobs
+          Post Unlimited Jobs
         </h1>
         <div className="flex gap-2 items-center">
-          <h2 className="bg-gradient-to-r from-white to-secondary quinary bg-clip-text text-3xl font-bold text-transparent">
+          <h2 className="bg-gradient-to-r from-white to-secondary quinary bg-clip-text text-4xl font-bold text-transparent">
             for{' '}
             <span className="bg-gradient-to-r from-secondary/10 via-secondary/40 to-[#D68800]/80 bg-clip-text text-3xl font-bold text-transparent">
               FREE
