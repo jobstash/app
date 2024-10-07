@@ -53,29 +53,10 @@ export const WygVeri = () => (
   <div className="flex flex-col items-center px-6 gap-16 -mt-16">
     <div className="max-w-2xl text-center flex flex-col gap-6">
       <div className="flex flex-col gap-4">
-        <div className="pt-0">
-          <a href={PDF_VERI_URL} className="inline-flex space-x-6">
-            <span className="rounded-full bg-secondary/10 px-3 py-1 text-sm font-semibold leading-6 text-indigo-400 ring-1 ring-inset ring-secondary/20">
-              VERI - Due Diligence
-            </span>
-            <span className="inline-flex items-center space-x-2 text-sm font-medium leading-6 text-white/90">
-              <span>Learn more</span>
-              <ChevronRightIcon
-                aria-hidden="true"
-                className="h-5 w-5 text-gray-500"
-              />
-            </span>
-          </a>
-        </div>
         <span className="bg-gradient-to-r from-white to-secondary bg-clip-text text-6xl font-bold text-transparent">
           What You&#39;re Getting
         </span>
       </div>
-      {/* <span className="text-lg leading-8 text-white/90">
-        We provide data tools to simplify crypto hiring, helping you find
-        authentic, crypto-native, and emerging talent using verifiable data
-        instead of CVs.
-      </span> */}
     </div>
     <div className="max-w-7xl mx-auto px-2 lg:px-20">
       <dl className="grid grid-cols-1 gap-x-8 gap-y-12 md:gap-y-16 lg:grid-cols-3">

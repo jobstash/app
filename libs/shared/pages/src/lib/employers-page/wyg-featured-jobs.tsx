@@ -1,6 +1,4 @@
-import { ChevronRightIcon, LayoutList, Rss, Sparkle } from 'lucide-react';
-
-import { PDF_JOBSTASH_URL } from '@jobstash/shared/core';
+import { LayoutList, Rss, Sparkle } from 'lucide-react';
 
 const features = [
   {
@@ -27,29 +25,10 @@ export const WygFeaturedJobs = () => (
   <div className="mx-auto max-w-7xl px-6 lg:px-8 -mt-16">
     <div className="mx-auto max-w-2xl lg:text-center">
       <div className="flex flex-col gap-4">
-        <div className="pt-4">
-          <a href={PDF_JOBSTASH_URL} className="inline-flex space-x-6">
-            <span className="rounded-full bg-secondary/10 px-3 py-1 text-sm font-semibold leading-6 text-indigo-400 ring-1 ring-inset ring-secondary/20">
-              Featured Jobs
-            </span>
-            <span className="inline-flex items-center space-x-2 text-sm font-medium leading-6 text-white/90">
-              <span>Learn more</span>
-              <ChevronRightIcon
-                aria-hidden="true"
-                className="h-5 w-5 text-gray-500"
-              />
-            </span>
-          </a>
-        </div>
         <span className="bg-gradient-to-r from-white to-secondary bg-clip-text text-6xl font-bold text-transparent">
           What You&#39;re Getting
         </span>
       </div>
-      {/* <p className="mt-6 text-lg leading-8 text-white/90">
-        Discover how our platform enhances your job listings, streamlines ATS
-        integration, and ensures legitimacy through due diligence, all tailored
-        for the crypto industry.
-      </p> */}
     </div>
     <div className="mx-auto mt-12 max-w-2xl lg:max-w-none">
       <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-3">
