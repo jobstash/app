@@ -11,31 +11,29 @@ import { GradientText } from '@jobstash/shared/ui';
 
 const tiers = [
   {
-    name: 'Advanced',
-    id: 'tier-advanced',
-    pricePerJob: '$300',
-    description:
-      'Elevate your job listing to the next level with 7 days of homepage visibility, 5x the applicants, and added promotion through Telegram stories, post bumping, and crossposting across key channels.',
-    features: [
-      '1 job featured for 7 days',
-      '5x the applicants',
-      'Featured on our homepage',
-      'Telegram stories about org, project and job',
-      'Job Post bumping on Telegram',
-      'Crossposting',
-    ],
-    featured: true,
-  },
-  {
     name: 'Basic',
     id: 'tier-basic',
     pricePerJob: '$200',
     description:
-      'Feature your job for 7 days on our homepage and boost visibility to attract 2x the applicants. Perfect for getting more attention on your listing without the extras.',
+      'Feature your job for 7 days on our homepage and boost visibility to attract 2x the applicants. Perfect for getting more attention on your listing without the extras. Maximize exposure and ensure your job reaches the right candidates faster.',
     features: [
       '1 job featured for 7 days',
       '2x the applicants',
       'Featured on our homepage',
+    ],
+    featured: true,
+  },
+  {
+    name: 'Advanced',
+    id: 'tier-advanced',
+    pricePerJob: '$300',
+    description:
+      'Get everything in Basic and more! Perfect for increasing your chances of finding top talent with enhanced visibility',
+    features: [
+      'Everything in Basic Plan',
+      'Telegram stories about org, project and job',
+      'Job Post bumping on Telegram',
+      'Crossposting',
     ],
     featured: false,
   },
@@ -84,32 +82,35 @@ export const JobFeaturePricing = () => (
           </h3>
 
           {tierIdx === 0 ? (
+            <div className="flex flex-col mt-6 gap-1">
+              <div className="flex items-center gap-2">
+                <span className="text-xl text-white/80 font-bold tracking-tight flex items-end gap-2">
+                  From
+                  <span className="line-through text-2xl text-white/60">
+                    {tier.pricePerJob}
+                  </span>
+                  to
+                </span>
+              </div>
+
+              <span className="flex items-center gap-x-2">
+                <GradientText text="$50" className="text-8xl font-bold" />
+                <span className="text-2xl text-white/80 font-bold">/ job</span>
+              </span>
+
+              <span className="text-md text-white/70">
+                Offer valid until Oct. 31
+              </span>
+
+              <span />
+            </div>
+          ) : (
             <p className="mt-4 flex items-baseline gap-x-2">
               <span className="text-5xl font-bold tracking-tight text-gray-900">
                 {tier.pricePerJob}
               </span>
-              <span className="text-base text-gray-500">/ job</span>
+              <span className="text-base text-white/90">/ job</span>
             </p>
-          ) : (
-            <div className="flex flex-col gap-0">
-              <span className="flex items-baseline gap-x-2 -mb-2">
-                <span className="text-5xl font-bold tracking-tight text-white/90">
-                  <span className="line-through text-white/60">
-                    {tier.pricePerJob}
-                  </span>
-                </span>
-
-                <span className="text-5xl font-bold tracking-tight text-white/90">
-                  $50
-                </span>
-
-                <span className="text-base text-gray-500">/ job</span>
-              </span>
-
-              <div className="flex gap-x-2">
-                <GradientText text="75% OFF" className="text-2xl font-bold" />
-              </div>
-            </div>
           )}
 
           <p className="mt-6 text-base leading-7 text-white/90">
@@ -128,19 +129,6 @@ export const JobFeaturePricing = () => (
           </ul>
 
           {tierIdx === 0 ? (
-            <div className="w-full items-center flex justify-center pt-8">
-              <Button
-                as={Link}
-                href={SUPPORT_TELEGRAM_URL}
-                className={cn('w-5/6', {
-                  'bg-gradient-to-l from-primary to-tertiary font-bold':
-                    tierIdx === 0,
-                })}
-              >
-                Buy Plan
-              </Button>
-            </div>
-          ) : (
             <div className="pt-8">
               <Button
                 variant="light"
@@ -153,6 +141,19 @@ export const JobFeaturePricing = () => (
                 <span aria-hidden="true">
                   <MoveRightIcon className="w-4 h-4" />
                 </span>
+              </Button>
+            </div>
+          ) : (
+            <div className="w-full items-center flex justify-center pt-12">
+              <Button
+                as={Link}
+                href={SUPPORT_TELEGRAM_URL}
+                className={cn('w-5/6', {
+                  'bg-gradient-to-l from-primary to-tertiary font-bold':
+                    tierIdx === 0,
+                })}
+              >
+                Buy Plan
               </Button>
             </div>
           )}
