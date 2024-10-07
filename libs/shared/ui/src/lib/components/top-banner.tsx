@@ -13,8 +13,10 @@ import { isOpenTopBannerAtom } from '@jobstash/shared/state';
 
 import Text from '../base/text';
 
-const bannerText = '🔥 Please support us on GitCoin GG21';
-const donateURL = `https://explorer.gitcoin.co/#/round/42161/385/52`;
+const BANNER_TEXT =
+  '🎯 October Launch Special: Promote Jobs for only $50/week!';
+const CTA_URL = `/employers#pricing`;
+const CTA_TEXT = 'Explore This Offer';
 
 const onClickDonate = () => {
   gaEvent(GA_EVENT_ACTION.DONATE_CLICK, {
@@ -30,12 +32,10 @@ const TopBanner = () => {
   return (
     <>
       <div className="z-[70] fixed top-0 w-full py-2 flex justify-center bg-gradient-to-l from-primary to-tertiary items-center sm:gap-1 flex-col sm:flex-row ">
-        <Text className="text-sm text-center sm:text-md">{bannerText}</Text>
-        <Link passHref legacyBehavior href={donateURL} onClick={onClickDonate}>
-          <a target="_blank">
-            <Text className="text-sm underline sm:text-md">
-              We&#39;re building a new platform
-            </Text>
+        <Text className="text-sm text-center sm:text-md">{BANNER_TEXT}</Text>
+        <Link passHref legacyBehavior href={CTA_URL} onClick={onClickDonate}>
+          <a>
+            <Text className="text-sm underline sm:text-md">{CTA_TEXT}</Text>
           </a>
         </Link>
       </div>

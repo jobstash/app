@@ -40,7 +40,7 @@ const tiers = [
 ];
 
 export const JobFeaturePricing = () => (
-  <div className="relative isolate px-6 lg:px-8">
+  <div id="pricing" className="relative isolate px-6 lg:px-8">
     <div className="mx-auto max-w-4xl text-center">
       <h2 className="text-base font-semibold leading-7 text-indigo-400 pb-4">
         Boost Job Listing Now
@@ -55,7 +55,7 @@ export const JobFeaturePricing = () => (
       homepage, in Telegram stories, and across key channels to attract the best
       talent.
     </p>
-    <div className="mx-auto mt-16 grid max-w-lg grid-cols-1 items-center gap-y-6 sm:mt-20 sm:gap-y-0 lg:max-w-4xl lg:grid-cols-2">
+    <div className="mx-auto mt-8 grid max-w-lg grid-cols-1 items-center gap-y-6 sm:gap-y-0 lg:max-w-4xl lg:grid-cols-2">
       {tiers.map((tier, tierIdx) => (
         <div
           key={tier.id}
