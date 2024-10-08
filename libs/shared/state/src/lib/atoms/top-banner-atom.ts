@@ -1,3 +1,3 @@
 import { atom } from 'jotai';
 
-export const isOpenTopBannerAtom = atom<boolean>(false);
+export const isOpenTopBannerAtom = atom<boolean>(true);
