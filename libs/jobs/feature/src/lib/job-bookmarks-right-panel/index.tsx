@@ -35,6 +35,7 @@ const JobBookmarksRightPanel = ({ jobPost, onClickBack }: Props) => {
 
   return (
     <RightPanel
+      hideMenu
       org={organization}
       tabs={
         <JobBookmarksRightPanelTabs

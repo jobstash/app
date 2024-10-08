@@ -13,16 +13,19 @@ interface Props {
   tabs: ReactNode;
   children: ReactNode;
   backButton: ReactNode;
+  hideMenu?: boolean;
 }
 
-const RightPanel = ({ org, tabs, children, backButton }: Props) => (
+const RightPanel = ({ org, tabs, children, backButton, hideMenu }: Props) => (
   <RightPanelWrapper>
     {/* MOBILE NAV */}
     <div className="flex justify-between items-center lg:hidden">
       {backButton}
-      <MobileMenuButton>
-        <HamburgerIcon />
-      </MobileMenuButton>
+      {!hideMenu && (
+        <MobileMenuButton>
+          <HamburgerIcon />
+        </MobileMenuButton>
+      )}
     </div>
 
     <RightPanelHeader org={org} />

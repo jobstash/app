@@ -1,10 +1,10 @@
 /* eslint-disable @nx/enforce-module-boundaries */
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { useEffect, useRef } from 'react';
 
 import { LoadingPage } from '@jobstash/shared/pages';
-import { useAtom, useSetAtom } from 'jotai';
+import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 
 import { type JobPost } from '@jobstash/jobs/core';
 import { RIGHT_PANEL_WRAPPER_ID } from '@jobstash/right-panel/core';
@@ -12,7 +12,11 @@ import { EVENT_CARD_CLICK } from '@jobstash/shared/core';
 import { cn, dispatchEvent } from '@jobstash/shared/utils';
 
 import { activeJobBookmarkAtom, useJobBookmarks } from '@jobstash/jobs/state';
-import { isDisabledPageScrollAtom, useIsMobile } from '@jobstash/shared/state';
+import {
+  isDisabledPageScrollAtom,
+  isOpenTopBannerAtom,
+  useIsDesktop,
+} from '@jobstash/shared/state';
 
 import { JobBookmarkButton, JobBookmarkCard } from '@jobstash/jobs/ui';
 import {
@@ -39,20 +43,30 @@ export const JobBookmarksPage = () => {
     activeJobBookmarkAtom,
   );
 
-  const isMobile = useIsMobile();
+  const isDesktop = useIsDesktop();
 
   // Set first item as active if null (on desktop)
+  const initRef = useRef(false);
   useEffect(() => {
-    if (!activeJobBookmark && data && data.length > 0 && !isMobile) {
+    if (
+      !activeJobBookmark &&
+      data &&
+      data.length > 0 &&
+      isDesktop &&
+      !initRef.current
+    ) {
+      initRef.current = true;
       setActiveJobBookmark(data[0]);
     }
-  }, [activeJobBookmark, data, isMobile, setActiveJobBookmark]);
+  }, [activeJobBookmark, data, isDesktop, setActiveJobBookmark]);
 
   const onClickBack = () => {
     setActiveJobBookmark(null);
 
     // Handle bookmarks (opening/closing cards for bookmark is not route-based)
-    setIsDisabledScroll(false);
+    if (!isDesktop) {
+      setIsDisabledScroll(false);
+    }
   };
 
   const setIsDisabledScroll = useSetAtom(isDisabledPageScrollAtom);
@@ -64,7 +78,9 @@ export const JobBookmarksPage = () => {
     dispatchEvent(EVENT_CARD_CLICK);
 
     // Handle bookmarks (opening/closing cards for bookmark is not route-based)
-    setIsDisabledScroll(true);
+    if (!isDesktop) {
+      setIsDisabledScroll(true);
+    }
   };
 
   const { push } = useRouter();
@@ -72,13 +88,15 @@ export const JobBookmarksPage = () => {
     push('/', undefined, { scroll: false });
   };
 
+  const isOpenTopBanner = useAtomValue(isOpenTopBannerAtom);
+
   if (isLoading) return <LoadingPage />;
 
   return (
     <PageWrapper>
       <SideBar />
 
-      <div className="px-3.5 pt-16 lg:p-8 lg:pr-[calc(44vw)]   flex flex-col gap-4">
+      <div className="px-3.5 pt-16 lg:p-8 lg:pr-[calc(44vw)] flex flex-col gap-4">
         {data && data.length === 0 && (
           <EmptyResult
             description="You have not added any bookmarks yet."
@@ -120,7 +138,8 @@ export const JobBookmarksPage = () => {
         <div
           id={RIGHT_PANEL_WRAPPER_ID}
           className={cn(
-            'hide-scrollbar fixed inset-0 h-screen overflow-y-auto bg-dark p-4 pt-6 transition-all lg:inset-auto lg:right-0 lg:top-0 lg:w-5/12 lg:px-6 lg:py-8 lg:pr-10 lg:mt-[100px] z-50',
+            'hide-scrollbar fixed inset-0 h-screen overflow-y-auto bg-dark p-4 pt-20 transition-all lg:inset-auto lg:right-0 lg:top-0 lg:w-5/12 lg:px-6 lg:py-8 lg:pr-10 lg:mt-[100px]',
+            { 'pt-24': isOpenTopBanner },
           )}
         >
           {isLoading && (
