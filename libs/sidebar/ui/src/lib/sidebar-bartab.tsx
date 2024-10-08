@@ -66,9 +66,7 @@ const SidebarBartab = ({
       }
     }
 
-    if (isMobile) {
-      setIsOpenNav((prev) => !prev);
-    }
+    setIsOpenNav(false);
 
     push(path, undefined, { shallow: false, scroll: true });
   };
