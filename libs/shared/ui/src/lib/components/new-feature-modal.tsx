@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect } from 'react';
 
@@ -9,9 +10,14 @@ import {
   ModalFooter,
   useDisclosure,
 } from '@nextui-org/react';
+import { ClassValue } from 'clsx';
 import { useAtom } from 'jotai';
 
-import { lato, NEW_FEATURE_DIFF } from '@jobstash/shared/core';
+import {
+  lato,
+  NEW_FEATURE_DIFF,
+  SUPPORT_TELEGRAM_URL,
+} from '@jobstash/shared/core';
 import { cn, getLocalStorageValue } from '@jobstash/shared/utils';
 
 import { newFeatureIsOpenAtom } from '@jobstash/shared/state';
@@ -20,7 +26,7 @@ import Text from '../base/text';
 
 const LS_KEY = 'new-feature-key';
 
-const TITLE = 'Leave an anonymous review for your last job!';
+const TITLE = 'The New JobStash Experience';
 const CTA_TEXT = 'To reviews..';
 const CTA_LINK = '/organizations';
 
@@ -30,7 +36,7 @@ export const NewFeatureModal = () => {
 
   const current = JSON.stringify({ diff: NEW_FEATURE_DIFF });
   const lastSeen = getLocalStorageValue(LS_KEY);
-  const defaultOpen = current !== lastSeen;
+  const defaultOpen = current !== lastSeen || lastSeen === '{}';
 
   const { isOpen, onClose, onOpen } = useDisclosure({
     defaultOpen,
@@ -67,6 +73,7 @@ export const NewFeatureModal = () => {
 
   return (
     <Modal
+      isDismissable
       hideCloseButton
       isOpen={isOpen}
       size="2xl"
@@ -90,55 +97,99 @@ export const NewFeatureModal = () => {
                   )}
                 >
                   <span role="img" aria-label="Shimmer">
-                    ✨
+                    🔥
                   </span>
-                  <span className="leading-tight text-lg sm:text-3xl md:text-2xl text-center shrink-0">
+                  <span className="leading-tight text-lg sm:text-3xl md:text-2xl lg:text-4xl font-bold text-center shrink-0">
                     {TITLE}
                   </span>
                   <span role="img" aria-label="Shimmer">
-                    ✨
+                    🔥
                   </span>
                 </div>
 
                 <div className="max-w-fit flex flex-col gap-4">
                   <ContentText>
-                    On JobStash you can leave an anonymous review for your last
-                    job to help others make better decisions.
+                    We&#39;ve upgraded JobStash with new features and a seamless
+                    login experience to make things faster and easier for you.
                   </ContentText>
 
-                  <div className="flex flex-col gap-2">
-                    <ContentText>You can tell others about: </ContentText>
+                  <div className="pl-2 flex flex-col gap-2">
+                    <ContentText className="font-bold">
+                      Improved Login Options:
+                    </ContentText>
                     <ul className="space-y-1 list-disc list-outside pl-6">
                       <li>
                         <ContentText>
-                          Companensation: What you got payed and if it included
-                          token allocations
-                        </ContentText>
-                      </li>
-                      <li>
-                        <ContentText>
-                          Rating: A star rating from 1 to 5 on various metrics
+                          Sick and tired of SIWE logins bugging out? Well,
+                          we&#39;ve integrated Privy, so now you can log in with
+                          your wallet, google account, farcaster, and a few
+                          others.
                         </ContentText>
                       </li>
                     </ul>
                   </div>
 
-                  <ContentText>
-                    To qualify, you need a currently valid professional email
-                    for that organization, or have github activity in public
-                    repos owned by that organization
-                  </ContentText>
+                  <div className="pl-2 flex flex-col gap-2">
+                    <ContentText className="font-bold">
+                      Job Promotion Made Easy:
+                    </ContentText>
+                    <ul className="space-y-1 list-disc list-outside pl-6">
+                      <li>
+                        <ContentText>
+                          We revamped our job promotion mechanism, and
+                          integrated payments via LlamaPay, so now anyone can
+                          promote a job permissionlessly without creating an
+                          account.
+                        </ContentText>
+                      </li>
+                      <li>
+                        <ContentText>
+                          <span className="font-bold">October Special</span>:
+                          75% off basic job promotions – bump your listing to
+                          the top and feature it on the homepage!
+                        </ContentText>
+                      </li>
+                    </ul>
+                  </div>
 
-                  <ContentText>
-                    In the organization page, pick an organization, and go to
-                    the review tab, and click on the &#34;Leave a review&#34;
-                    button to get started!
-                  </ContentText>
+                  <div className="pl-2 flex flex-col gap-2">
+                    <ContentText className="font-bold">
+                      Enhanced Profiles:
+                    </ContentText>
+                    <ul className="space-y-1 list-disc list-outside pl-6">
+                      <li>
+                        <ContentText>
+                          We&#39;ve revamped profiles, streamlined filters, and
+                          made it clear which accounts earn{' '}
+                          <span className="font-bold">EXPERT</span> status and
+                          organization affiliation.
+                        </ContentText>
+                      </li>
+                    </ul>
+                  </div>
+                  {/* 
+                  <div className="pt-4">
+                    <ContentText>
+                      Found any bugs? Let us know at @jobstashxyz
+                    </ContentText>
+                  </div> */}
                 </div>
               </div>
             </ModalBody>
             <ModalFooter className="flex items-center gap-4 justify-center p-0 pt-2">
-              {hasCTA && (
+              <div>
+                <span className="text-md text-white/80">
+                  Found any bugs? Let us know at{' '}
+                  <Link
+                    href={SUPPORT_TELEGRAM_URL}
+                    className="hover:underline text-indigo-400"
+                  >
+                    {' '}
+                    @jobstashxyz
+                  </Link>
+                </span>
+              </div>
+              {/* {hasCTA && (
                 <Button
                   size="md"
                   className="md:w-1/5 bg-gradient-to-l from-primary to-tertiary font-bold"
@@ -153,7 +204,7 @@ export const NewFeatureModal = () => {
                 onClick={onClose}
               >
                 OK
-              </Button>
+              </Button> */}
             </ModalFooter>
           </>
         )}
@@ -162,6 +213,10 @@ export const NewFeatureModal = () => {
   );
 };
 
-const ContentText = ({ children }: { children: React.ReactNode }) => (
-  <Text className="text-sm sm:text-lg">{children}</Text>
-);
+const ContentText = ({
+  children,
+  className,
+}: {
+  children: React.ReactNode;
+  className?: ClassValue;
+}) => <Text className={cn('text-sm sm:text-lg', className)}>{children}</Text>;
