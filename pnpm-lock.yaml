@@ -45,8 +45,8 @@ importers:
         specifier: ^2.2.9
         version: 2.2.9(@types/react@18.2.33)(framer-motion@10.16.4(react-dom@18.2.0(react@18.2.0))(react@18.2.0))(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(tailwind-variants@0.2.0(tailwindcss@3.2.7(postcss@8.4.21)(ts-node@10.9.1(@swc/core@1.3.107(@swc/helpers@0.5.6))(@types/node@18.16.9)(typescript@5.3.3))))(tailwindcss@3.2.7(postcss@8.4.21)(ts-node@10.9.1(@swc/core@1.3.107(@swc/helpers@0.5.6))(@types/node@18.16.9)(typescript@5.3.3)))
       '@privy-io/react-auth':
-        specifier: ^1.88.2
-        version: 1.88.2(@solana/web3.js@1.95.3(bufferutil@4.0.8)(encoding@0.1.13)(utf-8-validate@5.0.10))(@types/react@18.2.33)(bs58@5.0.0)(bufferutil@4.0.8)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(typescript@5.3.3)(utf-8-validate@5.0.10)(zod@3.23.8)
+        specifier: ^1.88.4
+        version: 1.88.4(@solana/web3.js@1.95.3(bufferutil@4.0.8)(encoding@0.1.13)(utf-8-validate@5.0.10))(@types/react@18.2.33)(bs58@5.0.0)(bufferutil@4.0.8)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(typescript@5.3.3)(utf-8-validate@5.0.10)(zod@3.23.8)
       '@reactour/tour':
         specifier: ^3.5.0
         version: 3.5.0(react@18.2.0)
@@ -3498,15 +3498,15 @@ packages:
     resolution: {integrity: sha512-Sp0ZuV46a8xNneXgXixwhvlyoWTRVSN7meji8m5RDw9JpLCidujsRvihclYuy3eg0ikk1BQnP3+l/Mau8X28xQ==}
     engines: {node: '>=18.0.0', npm: '>=8.0.0'}
 
-  '@privy-io/js-sdk-core@0.28.5':
-    resolution: {integrity: sha512-B3A7Lt44YFok4/8y5j+R5YYn0g9Zrz2kcouBsswoRrzJIS2axl0OLafJLExwVeUSyMayAWWCzazWNzGOjX0BoA==}
+  '@privy-io/js-sdk-core@0.28.7':
+    resolution: {integrity: sha512-Dzez/xdSyMvV1SxRHbAuztNH2yc+2eNxmZADVVfrxRLF1m36ebpoNkzz4znxeh6er6Bt84AGWbjfuCJXt0XciA==}
 
-  '@privy-io/public-api@2.10.4':
-    resolution: {integrity: sha512-3SZK7Ts4rvNi8sjAzmnVf3G28+yK12TFDeEutB1t3UyJMu6BUi2twqU7qKGuskwU/CxgwFhPFMzjx+w4IYrHaA==}
+  '@privy-io/public-api@2.10.5':
+    resolution: {integrity: sha512-UwL9WEb2C/mxxVGcuUJGXurCO3XJkFfhs2xa2y55uS0CTcynzZBqFL31FH8Wdb7Hr36DZewSX1MvIFdqc2SH5A==}
     engines: {node: '>=18.0.0', npm: '>=8.0.0'}
 
-  '@privy-io/react-auth@1.88.2':
-    resolution: {integrity: sha512-rhrOHtJWPfr+CnN3uYqDyhiZqzkAo5Pbv1Kc+2r2nFvJm/WtnJopaHD8RcM+T2fhTz77BfK+WTJylCz9Sx9aTg==}
+  '@privy-io/react-auth@1.88.4':
+    resolution: {integrity: sha512-aRX3Lj7Tzan+a6PFDoOZZKk2/U7qxlseTqJow7Ibpo1JylkqfsXFmEimZEdEwdsEGG+4ovTyMbB6O8p2CDLMBQ==}
     peerDependencies:
       react: ^18
       react-dom: ^18
@@ -5886,8 +5886,8 @@ packages:
   caniuse-lite@1.0.30001588:
     resolution: {integrity: sha512-+hVY9jE44uKLkH0SrUTqxjxqNTOWHsbnQDIKjwkZ3lNTzUUVdBLBGXtj/q5Mp5u98r3droaZAewQuEDzjQdZlQ==}
 
-  caniuse-lite@1.0.30001666:
-    resolution: {integrity: sha512-gD14ICmoV5ZZM1OdzPWmpx+q4GyefaK06zi8hmfHV5xe4/2nOQX3+Dw5o+fSqOws2xVwL9j+anOPFwHzdEdV4g==}
+  caniuse-lite@1.0.30001667:
+    resolution: {integrity: sha512-7LTwJjcRkzKFmtqGsibMeuXmvFDfZq/nzIjnmgCGzKKRVzjD72selLDK1oPF/Oxzmt4fNcPvTDvGqSDG4tCALw==}
 
   caseless@0.12.0:
     resolution: {integrity: sha512-4tYFyifaFfGacoiObjJegolkwSU4xQNGbVgUiNYVUxbQ2x2lUsFvY4hVgVzGiIe6WLOPqycWXA40l+PWsxthUw==}
@@ -6723,8 +6723,8 @@ packages:
   electron-to-chromium@1.4.676:
     resolution: {integrity: sha512-uHt4FB8SeYdhcOsj2ix/C39S7sPSNFJpzShjxGOm1KdF4MHyGqGi389+T5cErsodsijojXilYaHIKKqJfqh7uQ==}
 
-  electron-to-chromium@1.5.31:
-    resolution: {integrity: sha512-QcDoBbQeYt0+3CWcK/rEbuHvwpbT/8SV9T3OSgs6cX1FlcUAkgrkqbg9zLnDrMM/rLamzQwal4LYFCiWk861Tg==}
+  electron-to-chromium@1.5.33:
+    resolution: {integrity: sha512-+cYTcFB1QqD4j4LegwLfpCNxifb6dDFUAwk6RsLusCwIaZI6or2f+q8rs5tTB2YC53HhOlIbEaqHMAAC8IOIwA==}
 
   elliptic@6.5.4:
     resolution: {integrity: sha512-iLhC6ULemrljPZb+QutR5TQGB+pdW6KGD5RSegS+8sorOZT+rdQFbsQFJgvN3eRqNALqJer4oQ16YvJHlU8hzQ==}
@@ -8737,8 +8737,8 @@ packages:
     resolution: {integrity: sha512-+bT2uH4E5LGE7h/n3evcS/sQlJXCpIp6ym8OWJ5eV6+67Dsql/LaaT7qJBAt2rzfoa/5QBGBhxDix1dMt2kQKQ==}
     engines: {node: '>= 0.8.0'}
 
-  libphonenumber-js@1.11.10:
-    resolution: {integrity: sha512-yHEtzDlG2VbhuxMIo/sAUY+lyL5YThqD+gHT3YyelaRWRQv1VeyEk94jDvviRT4PYmLJR9cHxvtrx9h2f4OAIQ==}
+  libphonenumber-js@1.11.11:
+    resolution: {integrity: sha512-mF3KaORjJQR6JBNcOkluDcJKhtoQT4VTLRMrX1v/wlBayL4M8ybwEDeryyPcrSEJmD0rVwHUbBarpZwN5NfPFQ==}
 
   license-webpack-plugin@4.0.2:
     resolution: {integrity: sha512-771TFWFD70G1wLTC4oU2Cw4qvtmNrIw+wRvBtn+okgHl7slJVi7zfNcdmqDL72BojM30VNJ2UHylr1o77U37Jw==}
@@ -10078,6 +10078,9 @@ packages:
   preact@10.24.1:
     resolution: {integrity: sha512-PnBAwFI3Yjxxcxw75n6VId/5TFxNW/81zexzWD9jn1+eSrOP84NdsS38H5IkF/UH3frqRPT+MvuCoVHjTDTnDw==}
 
+  preact@10.24.2:
+    resolution: {integrity: sha512-1cSoF0aCC8uaARATfrlz4VCBqE8LwZwRfLgkxJOQwAlQt6ayTmi0D9OF7nXid1POI5SZidFuG9CnlXbDfLqY/Q==}
+
   prebuild-install@7.1.1:
     resolution: {integrity: sha512-jAXscXWMcCK8GgCoHOfIr0ODh5ai8mj63L2nWrjuAgXE6tDyYGnx4/8o/rCgU+B4JSyZBKbeZqzhtwtC3ovxjw==}
     engines: {node: '>=10'}
@@ -10514,8 +10517,8 @@ packages:
     resolution: {integrity: sha512-qx+xQGZVsy55CH0a1hiVwHmqjLryfh7wQyF5HO07XJ9f7dQMY/gPQHhlyDkIzJKC+x2fUCpCcUODUUUFrm7SHA==}
     hasBin: true
 
-  regjsparser@0.11.0:
-    resolution: {integrity: sha512-vTbzVAjQDzwQdKuvj7qEq6OlAprCjE656khuGQ4QaBLg7abQ9I9ISpmLuc6inWe7zP75AECjqUa4g4sdQvOXhg==}
+  regjsparser@0.11.1:
+    resolution: {integrity: sha512-1DHODs4B8p/mQHU9kr+jv8+wIC9mtG4eBHxWxIq5mhjE3D5oORhCc6deRKzTjs9DcfRFmj9BHSDguZklqCGFWQ==}
     hasBin: true
 
   regjsparser@0.9.1:
@@ -11308,8 +11311,8 @@ packages:
   tailwind-merge@1.14.0:
     resolution: {integrity: sha512-3mFKyCo/MBcgyOTlrY8T7odzZFx+w+qKSMAmdFzRvqBfLlSigU6TZnlFHK0lkMwj9Bj8OYU+9yW9lmGuS0QEnQ==}
 
-  tailwind-merge@2.5.2:
-    resolution: {integrity: sha512-kjEBm+pvD+6eAwzJL2Bi+02/9LFLal1Gs61+QB7HvTfQQ0aXwC5LGT8PEt1gS0CWKktKe6ysPTAy3cBC5MeiIg==}
+  tailwind-merge@2.5.3:
+    resolution: {integrity: sha512-d9ZolCAIzom1nf/5p4LdD5zvjmgSxY0BGgdSvmXIoMYAiPdAW/dSpP7joCDYFY7r/HkEa2qmPtkgsu0xjQeQtw==}
 
   tailwind-variants@0.1.20:
     resolution: {integrity: sha512-AMh7x313t/V+eTySKB0Dal08RHY7ggYK0MSn/ad8wKWOrDUIzyiWNayRUm2PIJ4VRkvRnfNuyRuKbLV3EN+ewQ==}
@@ -15092,7 +15095,7 @@ snapshots:
       eth-json-rpc-filters: 6.0.1
       eventemitter3: 5.0.1
       keccak: 3.0.4
-      preact: 10.24.1
+      preact: 10.24.2
       sha.js: 2.4.11
     transitivePeerDependencies:
       - supports-color
@@ -17997,7 +18000,7 @@ snapshots:
     dependencies:
       zod: 3.23.8
 
-  '@privy-io/js-sdk-core@0.28.5(bufferutil@4.0.8)(utf-8-validate@5.0.10)':
+  '@privy-io/js-sdk-core@0.28.7(bufferutil@4.0.8)(utf-8-validate@5.0.10)':
     dependencies:
       '@ethersproject/abstract-signer': 5.7.0
       '@ethersproject/bignumber': 5.7.0
@@ -18006,30 +18009,30 @@ snapshots:
       '@ethersproject/transactions': 5.7.0
       '@ethersproject/units': 5.7.0
       '@privy-io/api-base': 1.3.1
-      '@privy-io/public-api': 2.10.4(bufferutil@4.0.8)(utf-8-validate@5.0.10)
+      '@privy-io/public-api': 2.10.5(bufferutil@4.0.8)(utf-8-validate@5.0.10)
       eventemitter3: 5.0.1
       fetch-retry: 5.0.6
       jose: 4.15.9
       js-cookie: 3.0.5
-      libphonenumber-js: 1.11.10
+      libphonenumber-js: 1.11.11
       set-cookie-parser: 2.7.0
       uuid: 9.0.1
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
 
-  '@privy-io/public-api@2.10.4(bufferutil@4.0.8)(utf-8-validate@5.0.10)':
+  '@privy-io/public-api@2.10.5(bufferutil@4.0.8)(utf-8-validate@5.0.10)':
     dependencies:
       '@privy-io/api-base': 1.3.1
       bs58: 5.0.0
       ethers: 5.7.2(bufferutil@4.0.8)(utf-8-validate@5.0.10)
-      libphonenumber-js: 1.11.10
+      libphonenumber-js: 1.11.11
       zod: 3.23.8
     transitivePeerDependencies:
       - bufferutil
       - utf-8-validate
 
-  '@privy-io/react-auth@1.88.2(@solana/web3.js@1.95.3(bufferutil@4.0.8)(encoding@0.1.13)(utf-8-validate@5.0.10))(@types/react@18.2.33)(bs58@5.0.0)(bufferutil@4.0.8)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(typescript@5.3.3)(utf-8-validate@5.0.10)(zod@3.23.8)':
+  '@privy-io/react-auth@1.88.4(@solana/web3.js@1.95.3(bufferutil@4.0.8)(encoding@0.1.13)(utf-8-validate@5.0.10))(@types/react@18.2.33)(bs58@5.0.0)(bufferutil@4.0.8)(react-dom@18.2.0(react@18.2.0))(react@18.2.0)(typescript@5.3.3)(utf-8-validate@5.0.10)(zod@3.23.8)':
     dependencies:
       '@coinbase/wallet-sdk': 4.0.3
       '@ethersproject/abstract-signer': 5.7.0
@@ -18047,7 +18050,7 @@ snapshots:
       '@heroicons/react': 2.1.1(react@18.2.0)
       '@marsidev/react-turnstile': 0.4.1(react-dom@18.2.0(react@18.2.0))(react@18.2.0)
       '@metamask/eth-sig-util': 6.0.2
-      '@privy-io/js-sdk-core': 0.28.5(bufferutil@4.0.8)(utf-8-validate@5.0.10)
+      '@privy-io/js-sdk-core': 0.28.7(bufferutil@4.0.8)(utf-8-validate@5.0.10)
       '@simplewebauthn/browser': 9.0.1
       '@solana/wallet-adapter-base': 0.9.23(@solana/web3.js@1.95.3(bufferutil@4.0.8)(encoding@0.1.13)(utf-8-validate@5.0.10))
       '@solana/wallet-standard-wallet-adapter-base': 1.1.2(@solana/web3.js@1.95.3(bufferutil@4.0.8)(encoding@0.1.13)(utf-8-validate@5.0.10))(bs58@5.0.0)
@@ -19668,7 +19671,7 @@ snapshots:
 
   '@swc/helpers@0.4.14':
     dependencies:
-      tslib: 2.7.0
+      tslib: 2.6.2
 
   '@swc/helpers@0.4.36':
     dependencies:
@@ -21202,7 +21205,7 @@ snapshots:
 
   async-mutex@0.2.6:
     dependencies:
-      tslib: 2.7.0
+      tslib: 2.3.0
 
   async@2.6.4:
     dependencies:
@@ -21612,8 +21615,8 @@ snapshots:
 
   browserslist@4.24.0:
     dependencies:
-      caniuse-lite: 1.0.30001666
-      electron-to-chromium: 1.5.31
+      caniuse-lite: 1.0.30001667
+      electron-to-chromium: 1.5.33
       node-releases: 2.0.18
       update-browserslist-db: 1.1.1(browserslist@4.24.0)
 
@@ -21747,7 +21750,7 @@ snapshots:
 
   caniuse-lite@1.0.30001588: {}
 
-  caniuse-lite@1.0.30001666: {}
+  caniuse-lite@1.0.30001667: {}
 
   caseless@0.12.0: {}
 
@@ -22644,7 +22647,7 @@ snapshots:
 
   electron-to-chromium@1.4.676: {}
 
-  electron-to-chromium@1.5.31: {}
+  electron-to-chromium@1.5.33: {}
 
   elliptic@6.5.4:
     dependencies:
@@ -25392,7 +25395,7 @@ snapshots:
       prelude-ls: 1.2.1
       type-check: 0.4.0
 
-  libphonenumber-js@1.11.10: {}
+  libphonenumber-js@1.11.11: {}
 
   license-webpack-plugin@4.0.2(webpack@5.84.1(@swc/core@1.3.107(@swc/helpers@0.5.6))):
     dependencies:
@@ -26859,6 +26862,8 @@ snapshots:
 
   preact@10.24.1: {}
 
+  preact@10.24.2: {}
+
   prebuild-install@7.1.1:
     dependencies:
       detect-libc: 2.0.1
@@ -27369,7 +27374,7 @@ snapshots:
       regenerate: 1.4.2
       regenerate-unicode-properties: 10.2.0
       regjsgen: 0.8.0
-      regjsparser: 0.11.0
+      regjsparser: 0.11.1
       unicode-match-property-ecmascript: 2.0.0
       unicode-match-property-value-ecmascript: 2.2.0
 
@@ -27379,7 +27384,7 @@ snapshots:
     dependencies:
       jsesc: 0.5.0
 
-  regjsparser@0.11.0:
+  regjsparser@0.11.1:
     dependencies:
       jsesc: 3.0.2
 
@@ -28270,7 +28275,7 @@ snapshots:
 
   tailwind-merge@1.14.0: {}
 
-  tailwind-merge@2.5.2: {}
+  tailwind-merge@2.5.3: {}
 
   tailwind-variants@0.1.20(tailwindcss@3.2.7(postcss@8.4.21)(ts-node@10.9.1(@swc/core@1.3.107(@swc/helpers@0.5.6))(@types/node@18.16.9)(typescript@5.3.3))):
     dependencies:
@@ -28279,7 +28284,7 @@ snapshots:
 
   tailwind-variants@0.2.0(tailwindcss@3.2.7(postcss@8.4.21)(ts-node@10.9.1(@swc/core@1.3.107(@swc/helpers@0.5.6))(@types/node@18.16.9)(typescript@5.3.3))):
     dependencies:
-      tailwind-merge: 2.5.2
+      tailwind-merge: 2.5.3
       tailwindcss: 3.2.7(postcss@8.4.21)(ts-node@10.9.1(@swc/core@1.3.107(@swc/helpers@0.5.6))(@types/node@18.16.9)(typescript@5.3.3))
 
   tailwindcss@3.2.7(postcss@8.4.21)(ts-node@10.9.1(@swc/core@1.3.107(@swc/helpers@0.5.6))(@types/node@18.16.9)(typescript@5.3.3)):
