@@ -64,10 +64,16 @@ export const useAuthProvider = () => {
 
   // Create embedded wallet if user is logged in and doesn't have one
   useEffect(() => {
-    if (!hasEmbeddedWallet && !isCreatingWallet && isLoggedIn) {
+    if (!hasEmbeddedWallet && !isCreatingWallet && isLoggedIn && ready) {
       createEmbeddedWallet();
     }
-  }, [createEmbeddedWallet, hasEmbeddedWallet, isCreatingWallet, isLoggedIn]);
+  }, [
+    createEmbeddedWallet,
+    hasEmbeddedWallet,
+    isCreatingWallet,
+    isLoggedIn,
+    ready,
+  ]);
 
   // Setup local after privy login
   const { login } = useLogin({
