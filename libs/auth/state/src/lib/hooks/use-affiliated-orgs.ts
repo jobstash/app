@@ -1,17 +1,18 @@
-import { usePrivy } from '@privy-io/react-auth';
 import { useQuery } from '@tanstack/react-query';
 
 import { useMwVersionContext } from '@jobstash/shared/state';
 import { getAffiliatedOrgs } from '@jobstash/auth/data';
 
+import { useAuthContext } from './use-auth-context';
+
 export const useAffiliatedOrgs = () => {
   const { mwVersion } = useMwVersionContext();
-  const { authenticated } = usePrivy();
+  const { isAuthenticated } = useAuthContext();
 
   return useQuery({
     queryKey: [mwVersion, 'affiliated-orgs'],
     queryFn: () => getAffiliatedOrgs(),
-    enabled: authenticated,
+    enabled: isAuthenticated,
     refetchOnWindowFocus: false,
   });
 };

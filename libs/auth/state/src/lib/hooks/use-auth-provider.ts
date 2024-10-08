@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import { useLogin, useLogout, usePrivy } from '@privy-io/react-auth';
 import { useMutation } from '@tanstack/react-query';
@@ -15,6 +15,7 @@ import { sentryMessage } from '@jobstash/shared/utils';
 import { getCheckWallet } from '@jobstash/auth/data';
 
 import { useAffiliatedOrgs } from './use-affiliated-orgs';
+import { useHasEmbeddedWallet } from './use-has-embedded-wallet';
 
 const DEFAULT_CHECK_WALLET_RESPONSE: CheckWalletResponse = {
   role: CHECK_WALLET_ROLES.ANON,
@@ -36,14 +37,7 @@ export const useAuthProvider = () => {
     createWallet,
   } = usePrivy();
 
-  const hasEmbeddedWallet = useMemo(() => {
-    if (!user) return false;
-
-    return user.linkedAccounts.some(
-      (account) =>
-        account.type === 'wallet' && account.walletClientType === 'privy',
-    );
-  }, [user]);
+  const hasEmbeddedWallet = useHasEmbeddedWallet();
 
   const { mutate: setupLocal, isPending: isLoadingSetup } = useMutation({
     async mutationFn() {
@@ -89,7 +83,8 @@ export const useAuthProvider = () => {
     }
   }, [isLoggedIn, role, setupLocal]);
 
-  const isAuthenticated = isLoggedIn && role !== CHECK_WALLET_ROLES.ANON;
+  const isAuthenticated =
+    isLoggedIn && role !== CHECK_WALLET_ROLES.ANON && hasEmbeddedWallet;
 
   const { data: userOrgs, isLoading: isLoadingUserOrgFetch } =
     useAffiliatedOrgs();
