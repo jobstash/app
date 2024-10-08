@@ -64,7 +64,7 @@ module.exports = {
       '4xl': ['34.8px', '50px'],
       '5xl': ['41px', '56px'],
       '6xl': ['48px', '42px'],
-      '8xl': ['3.75rem', '1'],
+      '8xl': ['3.75rem', '1.1'],
     },
     keyframes: {
       'pulse-tw': {
