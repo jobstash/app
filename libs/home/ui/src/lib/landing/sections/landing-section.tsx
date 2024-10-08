@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-import { lato, ORG_PAGE, SUPPORT_TELEGRAM_URL } from '@jobstash/shared/core';
+import { lato, SUPPORT_TELEGRAM_URL } from '@jobstash/shared/core';
 
 import { ExploreJobsButton } from './buttons/explore-jobs-button';
 import { HomePageButton } from './buttons/home-page-button';
@@ -29,6 +29,7 @@ const LandingSection = () => (
     </div>
 
     <NewestJobsSection />
+
     <div className="mt-16 space-y-6 md:flex md:gap-6 md:space-y-0">
       <GradientContainer className="flex flex-wrap w-full ">
         <div className="flex flex-col flex-wrap w-full gap-3 text-white grow">
