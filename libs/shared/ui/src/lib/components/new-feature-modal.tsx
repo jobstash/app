@@ -85,7 +85,7 @@ export const NewFeatureModal = () => {
       }}
       onOpenChange={onOpenChange}
     >
-      <ModalContent className="md:gap-y-4 overflow-x-hidden">
+      <ModalContent className="overflow-x-hidden md:gap-y-4">
         {() => (
           <>
             <ModalBody>
@@ -99,7 +99,7 @@ export const NewFeatureModal = () => {
                   <span role="img" aria-label="Shimmer">
                     🔥
                   </span>
-                  <span className="leading-tight text-lg sm:text-3xl md:text-2xl lg:text-4xl font-bold text-center shrink-0">
+                  <span className="text-lg font-bold leading-tight text-center sm:text-3xl md:text-2xl lg:text-4xl">
                     {TITLE}
                   </span>
                   <span role="img" aria-label="Shimmer">
@@ -107,82 +107,71 @@ export const NewFeatureModal = () => {
                   </span>
                 </div>
 
-                <div className="max-w-fit flex flex-col gap-4">
+                <div className="flex flex-col gap-4 max-w-fit">
                   <ContentText>
-                    We&#39;ve upgraded JobStash with new features and a seamless
-                    login experience to make things faster and easier for you.
+                    We've upgraded JobStash with new features to make your
+                    experience faster and easier.
                   </ContentText>
 
-                  <div className="pl-2 flex flex-col gap-2">
+                  <div className="flex flex-col gap-2 pl-2">
                     <ContentText className="font-bold">
                       Improved Login Options:
                     </ContentText>
-                    <ul className="space-y-1 list-disc list-outside pl-6">
+                    <ul className="pl-6 space-y-1 list-disc list-outside">
                       <li>
                         <ContentText>
-                          Sick and tired of SIWE logins bugging out? Well,
-                          we&#39;ve integrated Privy, so now you can log in with
-                          your wallet, google account, farcaster, and a few
-                          others.
+                          Log in with your wallet, Google account, Farcaster,
+                          and more, thanks to our integration with Privy.
                         </ContentText>
                       </li>
                     </ul>
                   </div>
 
-                  <div className="pl-2 flex flex-col gap-2">
+                  <div className="flex flex-col gap-2 pl-2">
                     <ContentText className="font-bold">
                       Job Promotion Made Easy:
                     </ContentText>
-                    <ul className="space-y-1 list-disc list-outside pl-6">
+                    <ul className="pl-6 space-y-1 list-disc list-outside">
                       <li>
                         <ContentText>
-                          We revamped our job promotion mechanism, and
-                          integrated payments via LlamaPay, so now anyone can
-                          promote a job permissionlessly without creating an
-                          account.
+                          Promote jobs permissionlessly with LlamaPay, no
+                          account needed.
                         </ContentText>
                       </li>
                       <li>
                         <ContentText>
-                          <span className="font-bold">October Special</span>:
-                          75% off basic job promotions – bump your listing to
-                          the top and feature it on the homepage!
+                          <span className="font-bold">October Special:</span>{' '}
+                          75% off basic job promotions—feature your listing on
+                          the homepage!
                         </ContentText>
                       </li>
                     </ul>
                   </div>
 
-                  <div className="pl-2 flex flex-col gap-2">
+                  <div className="flex flex-col gap-2 pl-2">
                     <ContentText className="font-bold">
                       Enhanced Profiles:
                     </ContentText>
-                    <ul className="space-y-1 list-disc list-outside pl-6">
+                    <ul className="pl-6 space-y-1 list-disc list-outside">
                       <li>
                         <ContentText>
-                          We&#39;ve revamped profiles, streamlined filters, and
-                          made it clear which accounts earn{' '}
-                          <span className="font-bold">EXPERT</span> status and
-                          organization affiliation.
+                          Streamlined profiles and filters, with clear
+                          indications of EXPERT status and organization
+                          affiliations.
                         </ContentText>
                       </li>
                     </ul>
                   </div>
-                  {/* 
-                  <div className="pt-4">
-                    <ContentText>
-                      Found any bugs? Let us know at @jobstashxyz
-                    </ContentText>
-                  </div> */}
                 </div>
               </div>
             </ModalBody>
-            <ModalFooter className="flex items-center gap-4 justify-center p-0 pt-2">
+            <ModalFooter className="flex items-center justify-center gap-4 p-0 pt-2">
               <div>
                 <span className="text-md text-white/80">
                   Found any bugs? Let us know at{' '}
                   <Link
                     href={SUPPORT_TELEGRAM_URL}
-                    className="hover:underline text-indigo-400"
+                    className="text-indigo-400 hover:underline"
                   >
                     {' '}
                     @jobstashxyz
@@ -192,7 +181,7 @@ export const NewFeatureModal = () => {
               {/* {hasCTA && (
                 <Button
                   size="md"
-                  className="md:w-1/5 bg-gradient-to-l from-primary to-tertiary font-bold"
+                  className="font-bold md:w-1/5 bg-gradient-to-l from-primary to-tertiary"
                   onClick={onClickCTA}
                 >
                   {CTA_TEXT}
@@ -200,7 +189,7 @@ export const NewFeatureModal = () => {
               )}
               <Button
                 size="md"
-                className="md:w-1/5 font-bold"
+                className="font-bold md:w-1/5"
                 onClick={onClose}
               >
                 OK
