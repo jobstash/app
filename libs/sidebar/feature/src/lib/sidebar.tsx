@@ -134,7 +134,7 @@ const Sidebar = ({ filtersRouteSection }: Props) => {
         </div>
 
         {/* DESKTOP BARTABS */}
-        <div className="flex-col hidden mt-24 space-y-6 lg:flex">
+        <div className="flex-col hidden space-y-6 mt-36 lg:flex">
           <SidebarDiscoverBartabs />
           <SidebarBookmarksSection />
           <SidebarUserSection />
