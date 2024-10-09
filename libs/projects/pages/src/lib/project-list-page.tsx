@@ -9,7 +9,7 @@ import { cn } from '@jobstash/shared/utils';
 
 import { showFiltersAtom } from '@jobstash/filters/state';
 import { activeProjectIdAtom } from '@jobstash/projects/state';
-import { useIsMobile } from '@jobstash/shared/state';
+import { useIsDesktop } from '@jobstash/shared/state';
 
 import { PageWrapper } from '@jobstash/shared/ui';
 
@@ -32,7 +32,7 @@ interface Props {
 export const ProjectListPage = ({ initActiveProject }: Props) => {
   const activeProjectId = useAtomValue(activeProjectIdAtom);
   const showFilters = useAtomValue(showFiltersAtom);
-  const isMobile = useIsMobile();
+  const isDesktop = useIsDesktop();
 
   return (
     <>
@@ -54,7 +54,7 @@ export const ProjectListPage = ({ initActiveProject }: Props) => {
           {/* </div> */}
         </div>
 
-        {activeProjectId && !isMobile && (
+        {activeProjectId && isDesktop && (
           <div
             className={cn(
               'hide-scrollbar fixed inset-0 h-screen overflow-y-auto bg-dark p-4 pt-6 transition-all lg:inset-auto lg:right-0 lg:top-0 lg:w-5/12 lg:px-6 lg:py-8 lg:pr-10 lg:mt-[100px]')}

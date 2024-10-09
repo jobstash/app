@@ -33,7 +33,7 @@ const RightPanelWrapper = ({ children }: Props) => {
       {/* <div className={cn('flex flex-col gap-8 pb-24')}>{children}</div> */}
 
       <div
-        className={cn('flex flex-col gap-8 py-8 lg:py-0')}
+        className={cn('flex flex-col gap-8 py-8')}
       >
         {children}
       </div>
