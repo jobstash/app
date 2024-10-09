@@ -27,11 +27,8 @@ import Text from '../base/text';
 const LS_KEY = 'new-feature-key';
 
 const TITLE = 'The New JobStash Experience';
-const CTA_TEXT = 'To reviews..';
-const CTA_LINK = '/organizations';
 
 export const NewFeatureModal = () => {
-  const router = useRouter();
   const [isOpenAtom, setIsOpenAtom] = useAtom(newFeatureIsOpenAtom);
 
   const current = JSON.stringify({ diff: NEW_FEATURE_DIFF });
@@ -61,14 +58,6 @@ export const NewFeatureModal = () => {
 
   const onOpenChange = (isOpen: boolean) => {
     isOpen ? onOpen() : handleClose();
-  };
-
-  const hasCTA = CTA_TEXT && CTA_LINK;
-  const onClickCTA = () => {
-    if (hasCTA) {
-      handleClose();
-      router.push(CTA_LINK);
-    }
   };
 
   return (
@@ -109,7 +98,7 @@ export const NewFeatureModal = () => {
 
                 <div className="flex flex-col gap-4 max-w-fit">
                   <ContentText>
-                    We've upgraded JobStash with new features to make your
+                    We&#39;ve upgraded JobStash with new features to make your
                     experience faster and easier.
                   </ContentText>
 
