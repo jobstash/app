@@ -9,7 +9,7 @@ import { cn } from '@jobstash/shared/utils';
 
 import { showFiltersAtom } from '@jobstash/filters/state';
 import { activeOrgIdAtom } from '@jobstash/organizations/state';
-import { useIsMobile } from '@jobstash/shared/state';
+import { useIsDesktop } from '@jobstash/shared/state';
 
 import { PageWrapper } from '@jobstash/shared/ui';
 
@@ -32,7 +32,7 @@ interface Props {
 export const OrgListPage = ({ initActiveOrg }: Props) => {
   const activeOrgId = useAtomValue(activeOrgIdAtom);
   const showFilters = useAtomValue(showFiltersAtom);
-  const isMobile = useIsMobile();
+  const isDesktop = useIsDesktop();
 
   return (
     <>
@@ -55,10 +55,10 @@ export const OrgListPage = ({ initActiveOrg }: Props) => {
           {/* </div> */}
         </div>
 
-        {activeOrgId && !isMobile && (
+        {activeOrgId && isDesktop && (
           <div
             className={cn(
-              'hide-scrollbar fixed inset-0 h-screen overflow-y-auto bg-dark p-4 pt-6 transition-all lg:inset-auto lg:right-0 lg:top-0 lg:w-5/12 lg:px-6 lg:py-8 lg:pr-10 lg:mt-[100px]'
+              'hide-scrollbar fixed inset-0 h-dvh overflow-y-auto bg-dark px-4 md:px-5 pt-[58px] sm:pt-[40px] lg:pt-0 transition-all lg:inset-auto lg:right-0 lg:top-0 lg:w-5/12 lg:px-6 lg:pr-10 lg:h-[calc(100vh-140px)] lg:mt-[140px]',
             )}
           >
             <OrgsRightPanel
