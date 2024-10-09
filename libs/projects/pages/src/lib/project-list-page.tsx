@@ -57,7 +57,7 @@ export const ProjectListPage = ({ initActiveProject }: Props) => {
         {activeProjectId && isDesktop && (
           <div
             className={cn(
-              'hide-scrollbar fixed inset-0 h-screen overflow-y-auto bg-dark p-4 pt-6 transition-all lg:inset-auto lg:right-0 lg:top-0 lg:w-5/12 lg:px-6 lg:py-8 lg:pr-10 lg:mt-[100px]')}
+              'hide-scrollbar fixed inset-0 h-dvh overflow-y-auto bg-dark px-4 transition-all lg:inset-auto lg:right-0 lg:top-0 lg:w-5/12 lg:px-6 lg:pr-10 lg:mt-[140px] lg:h-[calc(100vh-140px)]')}
           >
             <ProjectsRightPanel
               projectId={initActiveProject?.id ?? activeProjectId}
