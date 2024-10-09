@@ -127,12 +127,12 @@ const App = ({ Component, pageProps }: AppProps) => {
       )}
       <NextUIProvider>
         <MantineProvider>
+          <TopBanner />
           <WagmiProvider>
             <ReactQueryProvider dehydratedState={pageProps.dehydratedState}>
               <MwVersionProvider screenLoader={<LoadingPage />}>
                 <PrivyProvider screenLoader={<LoadingPage />}>
                   <AuthProvider screenLoader={<LoadingPage />}>
-                    <TopBanner />
                     {/* <DonateModal /> */}
                     <div
                       className={cn({
