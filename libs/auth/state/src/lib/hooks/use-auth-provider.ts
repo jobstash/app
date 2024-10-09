@@ -54,13 +54,14 @@ export const useAuthProvider = () => {
     setIsCreatingWallet(true);
     try {
       await createWallet();
+      setupLocal();
     } catch (error) {
       sentryMessage('createEmbedWallet', (error as Error).message);
       window?.location.reload();
     }
 
     setIsCreatingWallet(false);
-  }, [createWallet]);
+  }, [createWallet, setupLocal]);
 
   // Create embedded wallet if user is logged in and doesn't have one
   useEffect(() => {
