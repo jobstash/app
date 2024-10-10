@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic';
 import Head from 'next/head';
 
 import { LoadingPage } from '@jobstash/shared/pages';
@@ -6,10 +7,13 @@ import { Tab, Tabs } from '@nextui-org/tabs';
 import { useApprovalOrgList } from '@jobstash/admin/state';
 
 import { AdminLayout } from '@jobstash/admin/ui';
-import { SideBar } from '@jobstash/sidebar/feature';
 
 import { ApprovalTable } from './approval-table';
 import { ApproveOrgModal } from './approve-org-modal';
+
+const SideBar = dynamic(() =>
+  import('@jobstash/sidebar/feature').then((m) => m.SideBar),
+);
 
 export const OrgApprovalPage = () => {
   const { isLoading: isLoadingPendingOrgs, data: pendingOrgsData } =

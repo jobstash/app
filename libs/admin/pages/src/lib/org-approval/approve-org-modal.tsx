@@ -67,7 +67,7 @@ export const ApproveOrgModal = () => {
     });
   }, [allOrgs, fieldState.inputValue]);
 
-  const onSelectionChange = (key: React.Key) => {
+  const onSelectionChange = (key: React.Key | null) => {
     setFieldState(() => {
       const item = filteredItems.find((org) => org.orgId === key);
       setSelectedOrg(item?.orgId ?? null);

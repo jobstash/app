@@ -1,9 +1,13 @@
+import dynamic from 'next/dynamic';
 import Head from 'next/head';
 
 import { useAllJobsQuery } from '@jobstash/profile/state';
 
 import { AdminLayout, AllJobsTable } from '@jobstash/admin/ui';
-import { SideBar } from '@jobstash/sidebar/feature';
+
+const SideBar = dynamic(() =>
+  import('@jobstash/sidebar/feature').then((m) => m.SideBar),
+);
 
 export const AllJobsPage = () => {
   const { data, isLoading } = useAllJobsQuery();
