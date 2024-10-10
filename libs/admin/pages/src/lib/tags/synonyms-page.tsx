@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic';
 import Head from 'next/head';
 
 import { ADMIN_BREADCRUMBS, ADMIN_TABS } from '@jobstash/admin/core';
@@ -16,7 +17,10 @@ import {
   PreferredTermsForm,
 } from '@jobstash/admin/ui';
 import { BreadCrumbs } from '@jobstash/shared/ui';
-import { SideBar } from '@jobstash/sidebar/feature';
+
+const SideBar = dynamic(() =>
+  import('@jobstash/sidebar/feature').then((m) => m.SideBar),
+);
 
 export const SynonymsPage = () => (
   <>

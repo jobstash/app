@@ -1,3 +1,4 @@
+import dynamic from 'next/dynamic';
 import Head from 'next/head';
 
 import { ADMIN_BREADCRUMBS, ADMIN_TABS } from '@jobstash/admin/core';
@@ -6,7 +7,10 @@ import { useAuthContext } from '@jobstash/auth/state';
 
 import { AdminLayout, AdminTabs } from '@jobstash/admin/ui';
 import { BreadCrumbs, Loader } from '@jobstash/shared/ui';
-import { SideBar } from '@jobstash/sidebar/feature';
+
+const SideBar = dynamic(() =>
+  import('@jobstash/sidebar/feature').then((m) => m.SideBar),
+);
 
 export const TagApprovalsPage = () => {
   const { isAuthenticated } = useAuthContext();
