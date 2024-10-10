@@ -7,6 +7,7 @@ import { JobPost } from '@jobstash/jobs/core';
 import { RIGHT_PANEL_WRAPPER_ID } from '@jobstash/right-panel/core';
 import { JobsRouteSection } from '@jobstash/shared/core';
 import { cn } from '@jobstash/shared/utils';
+import { isOpenTopBannerAtom } from '@jobstash/shared/state';
 
 import { useIsDesktop } from '@jobstash/shared/state';
 
@@ -42,6 +43,7 @@ export const JobListPageTemplate: React.FC<JobsPageTemplateProps> = ({
 }) => {
   const activeJob = useAtomValue(activeJobAtom);
   const isDesktop = useIsDesktop();
+  const isOpenTopBanner = useAtomValue(isOpenTopBannerAtom);
 
   return (
     <>
@@ -67,7 +69,8 @@ export const JobListPageTemplate: React.FC<JobsPageTemplateProps> = ({
           <div
             id={RIGHT_PANEL_WRAPPER_ID}
             className={cn(
-              'hide-scrollbar fixed inset-0 h-dvh overflow-y-auto bg-dark px-4 transition-all lg:inset-auto lg:right-0 lg:top-0 lg:w-5/12 lg:px-6 lg:pr-10 lg:mt-[140px] lg:h-[calc(100vh-140px)]',
+              'hide-scrollbar fixed inset-0 h-dvh overflow-y-auto bg-dark px-4 transition-all lg:inset-auto lg:right-0 lg:top-0 lg:w-5/12 lg:px-6 lg:pr-10 lg:mt-[100px] lg:h-[calc(100vh-100px)]',
+              { 'lg:mt-[140px] lg:h-[calc(100vh-140px)]': isOpenTopBanner }
             )}
           >
             <JobsRightPanel

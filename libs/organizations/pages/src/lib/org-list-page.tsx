@@ -2,6 +2,7 @@ import dynamic from 'next/dynamic';
 import Head from 'next/head';
 
 import { useAtomValue } from 'jotai';
+import { isOpenTopBannerAtom } from '@jobstash/shared/state';
 
 import { type OrgDetails } from '@jobstash/organizations/core';
 import { ROUTE_SECTION, TAB_SEGMENT } from '@jobstash/shared/core';
@@ -33,6 +34,7 @@ export const OrgListPage = ({ initActiveOrg }: Props) => {
   const activeOrgId = useAtomValue(activeOrgIdAtom);
   const showFilters = useAtomValue(showFiltersAtom);
   const isDesktop = useIsDesktop();
+  const isOpenTopBanner = useAtomValue(isOpenTopBannerAtom);
 
   return (
     <>
@@ -58,7 +60,8 @@ export const OrgListPage = ({ initActiveOrg }: Props) => {
         {activeOrgId && isDesktop && (
           <div
             className={cn(
-              'hide-scrollbar fixed inset-0 h-dvh overflow-y-auto bg-dark px-4 md:px-5 pt-[58px] sm:pt-[40px] lg:pt-0 transition-all lg:inset-auto lg:right-0 lg:top-0 lg:w-5/12 lg:px-6 lg:pr-10 lg:h-[calc(100vh-140px)] lg:mt-[140px]',
+              'hide-scrollbar fixed inset-0 h-dvh overflow-y-auto bg-dark px-4 transition-all lg:inset-auto lg:right-0 lg:top-0 lg:w-5/12 lg:px-6 lg:pr-10 lg:mt-[100px] lg:h-[calc(100vh-100px)]',
+              { 'lg:mt-[140px] lg:h-[calc(100vh-140px)]': isOpenTopBanner }
             )}
           >
             <OrgsRightPanel

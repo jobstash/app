@@ -3,6 +3,7 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 import { PrimitiveAtom, useAtom, useAtomValue } from 'jotai';
+import { isOpenTopBannerAtom } from '@jobstash/shared/state';
 
 import { JobPost } from '@jobstash/jobs/core';
 import { RIGHT_PANEL_WRAPPER_ID } from '@jobstash/right-panel/core';
@@ -140,6 +141,7 @@ export const JobPostPageTemplate: React.FC<JobPostPageTemplateProps> = ({
     createJobCardOgDetails(jobPost);
 
   const currentJobPost = jobPost ?? activeJob;
+  const isOpenTopBanner = useAtomValue(isOpenTopBannerAtom);
 
   return (
     <>
@@ -189,10 +191,11 @@ export const JobPostPageTemplate: React.FC<JobPostPageTemplateProps> = ({
         <div
           id={RIGHT_PANEL_WRAPPER_ID}
           className={cn(
-            'hide-scrollbar fixed inset-0 h-dvh overflow-y-auto bg-dark px-4 md:px-5 pt-[58px] sm:pt-[40px] lg:pt-0 transition-all lg:inset-auto lg:right-0 lg:top-0 lg:w-5/12 lg:px-6 lg:pr-10 lg:h-[calc(100vh-140px)] lg:mt-[140px]',
+            'hide-scrollbar fixed inset-0 h-dvh overflow-y-auto bg-dark px-4 md:px-5 lg:pt-0 transition-all lg:inset-auto lg:right-0 lg:top-0 lg:w-5/12 lg:px-6 lg:pr-10 lg:mt-[100px] lg:h-[calc(100vh-100px)]',
             { active: activeJob === initJob },
             { 'z-50': !showFilters },
             { '-z-50': showFilters },
+            { 'lg:mt-[140px] lg:h-[calc(100vh-140px)]': isOpenTopBanner }
           )}
         >
           <JobsRightPanel
