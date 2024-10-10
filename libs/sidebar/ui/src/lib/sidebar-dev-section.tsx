@@ -14,6 +14,8 @@ const SidebarDevSection = ({ isMobile }: Props) => {
     ...(profileInfoData?.linkedAccounts?.github
       ? [{ text: 'Your Repositories', path: '/profile/repositories' }]
       : []),
+
+    // Temporarily removed
     // { text: 'Organization Reviews', path: '/profile/reviews' },
   ];
 

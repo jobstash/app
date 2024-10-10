@@ -6,6 +6,7 @@ export const CHECK_WALLET_ROLES = {
   ADMIN: 'ADMIN',
   DEV: 'DEV',
   ORG: 'ORG',
+  DATA_JANITOR: 'DATA_JANITOR',
 } as const;
 
 export const CHECK_WALLET_FLOWS = {

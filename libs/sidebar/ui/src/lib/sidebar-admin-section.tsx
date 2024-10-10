@@ -1,44 +1,49 @@
 import { ADMIN_PATHS } from '@jobstash/admin/core';
-import { cn } from '@jobstash/shared/utils';
+import { CHECK_WALLET_ROLES } from '@jobstash/auth/core';
 
-import { Text } from '@jobstash/shared/ui';
+import { useAuthContext } from '@jobstash/auth/state';
 
-import SidebarBartab from './sidebar-bartab';
+import { SidebarBartabProps } from './sidebar-bartab';
+import { SidebarSection } from './sidebar-section';
 interface Props {
   isMobile?: boolean;
 }
+
 const SidebarAdminSection = ({ isMobile }: Props) => {
-  const wrapperClassName = cn('space-y-2 pt-3', {
-    'flex flex-col justify-start items-start [&>*]:bg-transparent [&>*]:bg-none [&>*]:hover:bg-transparent':
-      isMobile,
-  });
+  const { role } = useAuthContext();
+
+  const isAdmin = role === CHECK_WALLET_ROLES.ADMIN;
+  const isDataEngineer = role === CHECK_WALLET_ROLES.DATA_JANITOR;
+
+  if (!isAdmin && !isDataEngineer) {
+    return null;
+  }
+
+  const tabs: SidebarBartabProps[] = [];
+
+  if (isAdmin || isDataEngineer) {
+    tabs.push({
+      text: 'Manage Organizations',
+      path: '/godmode/organizations/manage',
+    });
+  }
+
+  if (isAdmin) {
+    tabs.push(
+      { text: 'Org Approvals', path: ADMIN_PATHS.ORG_APPROVALS },
+      { text: 'Tags', path: ADMIN_PATHS.SYNONYMS },
+      { text: 'Organizations', path: ADMIN_PATHS.ORG_LIST, isExactPath: true },
+      { text: 'All Jobs', path: ADMIN_PATHS.ALL_JOBS },
+    );
+  }
+
   return (
-    <div className={wrapperClassName}>
-      <Text color="dimmed">Admin Tasks</Text>
-      <div className="space-y-3 pt-3">
-        <SidebarBartab
-          isMobile={isMobile}
-          path={ADMIN_PATHS.ORG_APPROVALS}
-          text="Org Approvals"
-        />
-        <SidebarBartab
-          path={ADMIN_PATHS.SYNONYMS}
-          text="Tags"
-          isMobile={isMobile}
-        />
-        <SidebarBartab
-          isExactPath
-          isMobile={isMobile}
-          path={ADMIN_PATHS.ORG_LIST}
-          text="Organizations"
-        />
-        <SidebarBartab
-          isMobile={isMobile}
-          path={ADMIN_PATHS.ALL_JOBS}
-          text="All Jobs"
-        />
-      </div>
-    </div>
+    <SidebarSection
+      isMountedWrapped
+      title="Admin Tasks"
+      isMobile={isMobile}
+      bartabs={tabs}
+    />
   );
 };
 

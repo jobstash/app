@@ -9,6 +9,7 @@ export const checkWalletRolesSchema = myzod.literals(
   CHECK_WALLET_ROLES.ADMIN,
   CHECK_WALLET_ROLES.DEV,
   CHECK_WALLET_ROLES.ORG,
+  CHECK_WALLET_ROLES.DATA_JANITOR,
 );
 
 export const checkWalletFlowsSchema = myzod.literals(
