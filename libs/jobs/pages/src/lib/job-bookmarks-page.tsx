@@ -5,7 +5,6 @@ import { useEffect, useRef } from 'react';
 
 import { LoadingPage } from '@jobstash/shared/pages';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
-
 import { type JobPost } from '@jobstash/jobs/core';
 import { RIGHT_PANEL_WRAPPER_ID } from '@jobstash/right-panel/core';
 import { EVENT_CARD_CLICK } from '@jobstash/shared/core';
@@ -83,12 +82,12 @@ export const JobBookmarksPage = () => {
     }
   };
 
+  const isOpenTopBanner = useAtomValue(isOpenTopBannerAtom);
+
   const { push } = useRouter();
   const onClickBrowse = () => {
     push('/', undefined, { scroll: false });
   };
-
-  const isOpenTopBanner = useAtomValue(isOpenTopBannerAtom);
 
   if (isLoading) return <LoadingPage />;
 
@@ -96,7 +95,7 @@ export const JobBookmarksPage = () => {
     <PageWrapper>
       <SideBar />
 
-      <div className="px-3.5 pt-16 lg:p-8 lg:pr-[calc(44vw)] flex flex-col gap-4">
+      <div className="px-3.5 pt-[69px] lg:p-8 lg:pr-[calc(44vw)] flex flex-col gap-4">
         {data && data.length === 0 && (
           <EmptyResult
             description="You have not added any bookmarks yet."
@@ -138,12 +137,12 @@ export const JobBookmarksPage = () => {
         <div
           id={RIGHT_PANEL_WRAPPER_ID}
           className={cn(
-            'hide-scrollbar fixed inset-0 h-screen overflow-y-auto bg-dark p-4 pt-20 transition-all lg:inset-auto lg:right-0 lg:top-0 lg:w-5/12 lg:px-6 lg:py-8 lg:pr-10 lg:mt-[100px]',
-            { 'pt-24': isOpenTopBanner },
+            'hide-scrollbar fixed inset-0 h-dvh overflow-y-auto bg-dark px-4 transition-all lg:inset-auto lg:right-0 lg:top-0 lg:w-5/12 lg:px-6 lg:pr-10 lg:mt-[100px] lg:h-[calc(100vh-100px)] z-50',
+            { 'lg:mt-[140px] lg:h-[calc(100vh-140px)]': isOpenTopBanner }
           )}
         >
           {isLoading && (
-            <div className="flex h-full w-full items-center justify-center">
+            <div className="flex items-center justify-center w-full h-full">
               <Loader />
             </div>
           )}

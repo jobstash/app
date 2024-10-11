@@ -4,6 +4,7 @@ import { useEffect, useMemo } from 'react';
 
 import { NotFoundPage } from '@jobstash/shared/pages';
 import { useAtom, useAtomValue } from 'jotai';
+import { isOpenTopBannerAtom } from '@jobstash/shared/state';
 
 import { type ProjectDetails } from '@jobstash/projects/core';
 import {
@@ -85,6 +86,8 @@ export const ProjectDetailsPage = ({
     return <NotFoundPage notFoundInfo={notFoundInfo} />;
   }
 
+  const isOpenTopBanner = useAtomValue(isOpenTopBannerAtom);
+
   return (
     <PageWrapper>
       <SideBar filtersRouteSection={ROUTE_SECTION.PROJECTS} />
@@ -108,10 +111,11 @@ export const ProjectDetailsPage = ({
       </div>
 
       <div
-        className={cn(
-          'hide-scrollbar fixed inset-0 h-screen overflow-y-auto bg-dark p-4 pt-6 transition-all lg:inset-auto lg:right-0 lg:top-0 lg:w-5/12 lg:px-6 lg:py-8 lg:pr-10 lg:mt-[100px]',
+         className={cn(
+          'hide-scrollbar fixed inset-0 h-dvh overflow-y-auto bg-dark px-4 transition-all lg:inset-auto lg:right-0 lg:top-0 lg:w-5/12 lg:px-6 lg:pr-10 lg:mt-[100px] lg:h-[calc(100vh-100px)]',
           { 'z-50': !showFilters },
           { '-z-50': showFilters },
+          { 'lg:mt-[140px] lg:h-[calc(100vh-140px)]': isOpenTopBanner }
         )}
       >
         <ProjectsRightPanel

@@ -2,6 +2,7 @@ import dynamic from 'next/dynamic';
 import Head from 'next/head';
 
 import { useAtomValue } from 'jotai';
+import { isOpenTopBannerAtom } from '@jobstash/shared/state';
 
 import { type OrgDetails } from '@jobstash/organizations/core';
 import { ROUTE_SECTION, TAB_SEGMENT } from '@jobstash/shared/core';
@@ -9,7 +10,7 @@ import { cn } from '@jobstash/shared/utils';
 
 import { showFiltersAtom } from '@jobstash/filters/state';
 import { activeOrgIdAtom } from '@jobstash/organizations/state';
-import { useIsMobile } from '@jobstash/shared/state';
+import { useIsDesktop } from '@jobstash/shared/state';
 
 import { PageWrapper } from '@jobstash/shared/ui';
 
@@ -32,7 +33,8 @@ interface Props {
 export const OrgListPage = ({ initActiveOrg }: Props) => {
   const activeOrgId = useAtomValue(activeOrgIdAtom);
   const showFilters = useAtomValue(showFiltersAtom);
-  const isMobile = useIsMobile();
+  const isDesktop = useIsDesktop();
+  const isOpenTopBanner = useAtomValue(isOpenTopBannerAtom);
 
   return (
     <>
@@ -55,10 +57,11 @@ export const OrgListPage = ({ initActiveOrg }: Props) => {
           {/* </div> */}
         </div>
 
-        {activeOrgId && !isMobile && (
+        {activeOrgId && isDesktop && (
           <div
             className={cn(
-              'hide-scrollbar fixed inset-0 h-screen overflow-y-auto bg-dark p-4 pt-6 transition-all lg:inset-auto lg:right-0 lg:top-0 lg:w-5/12 lg:px-6 lg:py-8 lg:pr-10 lg:mt-[100px]'
+              'hide-scrollbar fixed inset-0 h-dvh overflow-y-auto bg-dark px-4 transition-all lg:inset-auto lg:right-0 lg:top-0 lg:w-5/12 lg:px-6 lg:pr-10 lg:mt-[100px] lg:h-[calc(100vh-100px)]',
+              { 'lg:mt-[140px] lg:h-[calc(100vh-140px)]': isOpenTopBanner }
             )}
           >
             <OrgsRightPanel

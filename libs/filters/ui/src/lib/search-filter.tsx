@@ -9,6 +9,7 @@ import { SearchInputIcon } from '@jobstash/shared/ui';
 const SearchFilter = () => {
   const { state, onSubmitSearch, onChangeSearch, routeSection } =
     useFiltersContext();
+  const { filteredItemsCount, isLoading } = useFiltersContext();
 
   const rawQuery = useMemo(() => {
     const params = new URLSearchParams(window.location.search);
@@ -17,15 +18,21 @@ const SearchFilter = () => {
 
   const searchQuery = state?.filterValues?.query;
 
+  // Prepare filtered count for the placeholder
+  const filteredCount = isLoading || filteredItemsCount === null || filteredItemsCount === undefined 
+    ? '' // Set to an empty string when loading
+    : filteredItemsCount.toString();
+
+
   return (
     <div className="py-4 border-b border-white lg:border-transparent">
       <form onSubmit={onSubmitSearch}>
         <TextInput
           icon={<SearchInputIcon />}
-          placeholder={`Search ${routeSection
+          placeholder={`Search ${filteredCount} ${routeSection
             .slice(1)
             .toLowerCase()
-            .replaceAll('-', ' ')}`}
+            .replaceAll('-', ' ')} `}
           size="25px"
           value={searchQuery ?? rawQuery ?? ''}
           radius="md"
@@ -38,7 +45,7 @@ const SearchFilter = () => {
           }}
           classNames={{
             input:
-              '!pl-10 !pr-0 !bg-transparent text-white placeholder:text-white',
+              '!pl-10 !pr-0 !bg-transparent min-w-[250px] text-white placeholder:text-white',
           }}
           onChange={onChangeSearch}
         />
