@@ -7,7 +7,7 @@ import { LoadingPage } from '@jobstash/shared/pages';
 import {
   ProfileShowcaseProvider,
   ProfileSkillsProvider,
-  useDevProfileInfo,
+  useProfileInfo,
 } from '@jobstash/profile/state';
 
 import {
@@ -25,7 +25,7 @@ const SideBar = dynamic(() =>
 );
 
 export const ProfileDevPage = () => {
-  const { profileInfoData } = useDevProfileInfo();
+  const { profileInfoData } = useProfileInfo();
   const { isReady } = useRouter();
 
   if (!isReady) return <LoadingPage />;

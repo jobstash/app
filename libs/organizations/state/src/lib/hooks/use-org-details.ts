@@ -10,6 +10,6 @@ export const useOrgDetails = (orgId: string | null) => {
     queryKey: [mwVersion, 'org-details', orgId, undefined],
     queryFn: () => getOrgDetails({ orgId: orgId as string }),
     staleTime: 1000 * 60 * 60, // 1 hr,
-    enabled: Boolean(orgId),
+    enabled: Boolean(orgId) && typeof orgId === 'string',
   });
 };

@@ -6,7 +6,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { notifError } from '@jobstash/shared/utils';
 
 import { useLinkedWallets } from '@jobstash/auth/state';
-import { useDevProfileInfoContext } from '@jobstash/profile/state';
+import { useProfileInfoContext } from '@jobstash/profile/state';
 import { useMwVersionContext } from '@jobstash/shared/state';
 
 interface ConnectedAccount {
@@ -19,7 +19,7 @@ interface ConnectedAccount {
 export const useConnectedAccounts = () => {
   const [isEditing, toggleEdit] = useReducer((prev) => !prev, false);
 
-  const { profileInfoData } = useDevProfileInfoContext();
+  const { profileInfoData } = useProfileInfoContext();
 
   const {
     user,
@@ -27,7 +27,6 @@ export const useConnectedAccounts = () => {
     unlinkGithub,
     unlinkGoogle,
     unlinkFarcaster,
-    unlinkTelegram,
     unlinkWallet,
   } = usePrivy();
 
@@ -47,7 +46,7 @@ export const useConnectedAccounts = () => {
 
         // Invalidate related queries
         await queryClient.invalidateQueries({
-          queryKey: [mwVersion, 'dev-profile-info'],
+          queryKey: [mwVersion, 'profile-info'],
         });
         await queryClient.invalidateQueries({
           queryKey: [mwVersion, 'affiliated-orgs'],
@@ -78,11 +77,12 @@ export const useConnectedAccounts = () => {
         label: 'Email',
         unlink: () => unlink(unlinkEmail, email.address),
       },
-      telegram && {
-        text: telegram.username,
-        label: 'Telegram',
-        unlink: () => unlink(unlinkTelegram, telegram.telegramUserId),
-      },
+      // Temporary disable Telegram
+      // telegram && {
+      //   text: telegram.username,
+      //   label: 'Telegram',
+      //   unlink: () => unlink(unlinkTelegram, telegram.telegramUserId),
+      // },
       google && {
         text: google.email,
         label: 'Google',
@@ -110,7 +110,6 @@ export const useConnectedAccounts = () => {
     unlinkFarcaster,
     unlinkGithub,
     unlinkGoogle,
-    unlinkTelegram,
     unlinkWallet,
     user,
     wallets,

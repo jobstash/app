@@ -1,22 +1,22 @@
 import {
-  type DevProfileInfoResponse,
-  devProfileInfoResponseSchema,
+  type ProfileInfoResponse,
+  profileInfoResponseSchema,
 } from '@jobstash/profile/core';
 import { MW_URL } from '@jobstash/shared/core';
 
 import { mwFetch } from '@jobstash/shared/data';
 
-export const getDevProfileInfo = async () => {
-  const url = `${MW_URL}/profile/dev/info`;
+export const getProfileInfo = async () => {
+  const url = `${MW_URL}/profile/info`;
 
   const options = {
-    responseSchema: devProfileInfoResponseSchema,
+    responseSchema: profileInfoResponseSchema,
     sentryLabel: `getDevProfileInfo`,
     credentials: 'include' as RequestCredentials,
     mode: 'cors' as RequestMode,
   };
 
-  const response = await mwFetch<DevProfileInfoResponse>(url, options);
+  const response = await mwFetch<ProfileInfoResponse>(url, options);
 
   return response.data;
 };

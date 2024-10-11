@@ -106,7 +106,7 @@ export const linkedAccountsSchema = myzod.object({
   wallets: myzod.array(myzod.string()),
 });
 
-export const devProfileInfoSchema = myzod.object({
+export const profileInfoSchema = myzod.object({
   wallet: myzod.string().min(1),
   githubAvatar: myzod.string().min(1).nullable(),
   name: myzod.string().min(1).nullable(),
@@ -116,9 +116,9 @@ export const devProfileInfoSchema = myzod.object({
   linkedAccounts: linkedAccountsSchema,
 });
 
-export const devProfileInfoResponseSchema = myzod
+export const profileInfoResponseSchema = myzod
   .object({
-    data: devProfileInfoSchema,
+    data: profileInfoSchema,
     success: myzod.boolean(),
     message: myzod.string(),
   })
@@ -282,7 +282,7 @@ export type UpdateApplicantListMutFn = UseMutateFunction<
 >;
 
 export const devTalentSchema = myzod.intersection(
-  devProfileInfoSchema,
+  profileInfoSchema,
   myzod.object({
     skills: myzod.array(profileSkillSchema),
     showcases: myzod.array(profileShowcaseSchema),

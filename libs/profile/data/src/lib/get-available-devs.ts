@@ -7,7 +7,7 @@ import { MW_URL } from '@jobstash/shared/core';
 import { mwFetch } from '@jobstash/shared/data';
 
 export const getAvailableDevs = async () => {
-  const url = `${MW_URL}/users/devs/available`;
+  const url = `${MW_URL}/users/available`;
 
   const options = {
     responseSchema: devTalentResponseSchema,

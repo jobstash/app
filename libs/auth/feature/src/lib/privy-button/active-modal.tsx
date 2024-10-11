@@ -50,7 +50,7 @@ export const ActiveModal = ({ text, isOpen, onOpenChange, onClose }: Props) => {
     await logout();
 
     await queryClient.invalidateQueries({
-      queryKey: [mwVersion, 'dev-profile-info'],
+      queryKey: [mwVersion, 'profile-info'],
     });
     await queryClient.invalidateQueries({
       queryKey: [mwVersion, 'affiliated-orgs'],

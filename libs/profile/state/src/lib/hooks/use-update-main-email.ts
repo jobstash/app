@@ -35,7 +35,7 @@ export const useUpdateMainEmail = (email: string) => {
       });
 
       await queryClient.invalidateQueries({
-        queryKey: [mwVersion, 'dev-profile-info'],
+        queryKey: [mwVersion, 'profile-info'],
       });
     },
     onError(error) {

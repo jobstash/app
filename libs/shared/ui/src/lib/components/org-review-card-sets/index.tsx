@@ -2,7 +2,7 @@ import { useRouter } from 'next/router';
 
 import { useSetAtom } from 'jotai';
 
-import { CHECK_WALLET_ROLES } from '@jobstash/auth/core';
+import { PERMISSIONS } from '@jobstash/auth/core';
 import { ROUTE_SECTION } from '@jobstash/shared/core';
 import { createOrgReviewPath } from '@jobstash/organizations/utils';
 
@@ -46,8 +46,8 @@ const OrgReviewCardSets = ({ org }: Props) => {
     push('/profile/reviews');
   };
 
-  const { isAuthd, roleClick } = useRoleClick({
-    role: CHECK_WALLET_ROLES.DEV,
+  const { hasPermission: isAuthd, roleClick } = useRoleClick({
+    allowed: PERMISSIONS.USER,
     callback: openReviewsTab,
   });
 

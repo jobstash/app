@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Spinner } from '@nextui-org/spinner';
 import { useAtom } from 'jotai';
 
-import { CHECK_WALLET_ROLES } from '@jobstash/auth/core';
+import { PERMISSIONS } from '@jobstash/auth/core';
 
 import { useRoleClick } from '@jobstash/auth/state';
 import {
@@ -38,13 +38,15 @@ export const RightPanelOrgJobBookmarkButton = (props: Props) => {
     mutate(shortUUID);
   };
 
-  const role = CHECK_WALLET_ROLES.DEV;
   const callback = () => {
     setBookmarked((prev) => !prev);
     onClick();
   };
 
-  const { isAuthd, roleClick } = useRoleClick({ role, callback });
+  const { hasPermission: isAuthd, roleClick } = useRoleClick({
+    allowed: PERMISSIONS.USER,
+    callback,
+  });
 
   // Show spinner only when remove-bookmark until refetch done
   const showSpinner =

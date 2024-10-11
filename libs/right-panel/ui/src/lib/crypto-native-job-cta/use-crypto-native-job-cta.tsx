@@ -1,11 +1,9 @@
 import { useState } from 'react';
 
-import { useSetAtom } from 'jotai';
-
-import { CHECK_WALLET_ROLES, CheckWalletRole } from '@jobstash/auth/core';
+import { PERMISSIONS } from '@jobstash/auth/core';
 import { notifLoading, notifSuccess } from '@jobstash/shared/utils';
 
-import { useAuthContext } from '@jobstash/auth/state';
+import { useAuthContext, useHasPermission } from '@jobstash/auth/state';
 import { useSendJobApplyInteractionMutation } from '@jobstash/jobs/state';
 
 import { AnonTooltipContent } from './anon-tooltip-content';
@@ -22,22 +20,21 @@ const SUCCESS_MESSAGE = 'You can now apply to this job.';
 
 interface Props {
   jobId: string;
-  sendAnalyticsEvent: (role: CheckWalletRole) => void;
+  sendAnalyticsEvent: () => void;
 }
 
 export const useCryptoNativeJobCTA = (props: Props) => {
   const { sendAnalyticsEvent, jobId } = props;
 
   const {
-    role,
     isCryptoNative,
     isLoading: isLoadingAuth,
     isAuthenticated,
     showLoginModal,
   } = useAuthContext();
   const isAnon = !isAuthenticated;
-  const isDev = role === CHECK_WALLET_ROLES.DEV;
-  const isEligible = isCryptoNative && isDev;
+  const isUser = useHasPermission(PERMISSIONS.USER);
+  const isEligible = isCryptoNative && isUser;
 
   const text = isAnon
     ? ANON_TEXT
@@ -59,16 +56,13 @@ export const useCryptoNativeJobCTA = (props: Props) => {
 
   const [link, setLink] = useState('');
   const devApplyMutation = () => {
-    if (isDev && isCryptoNative) {
+    if (isUser && isCryptoNative) {
       notifLoading({
         id: TOAST_ID,
         title: ELIGIBLE_TEXT,
         message: LOADING_MESSAGE,
       });
       mutateJobApply(jobId, {
-        onError(error, variables, context) {
-          console.log({ error, variables, context });
-        },
         onSuccess(data) {
           notifSuccess({
             id: TOAST_ID,
@@ -84,7 +78,7 @@ export const useCryptoNativeJobCTA = (props: Props) => {
   };
 
   const onClick = () => {
-    sendAnalyticsEvent(role);
+    sendAnalyticsEvent();
     isAnon ? openModalIfAnon() : devApplyMutation();
   };
 

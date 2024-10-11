@@ -1,4 +1,4 @@
-import { useDevProfileInfoContext } from '@jobstash/profile/state';
+import { useProfileInfoContext } from '@jobstash/profile/state';
 
 import { SidebarSection } from './sidebar-section';
 
@@ -7,13 +7,15 @@ interface Props {
 }
 
 const SidebarDevSection = ({ isMobile }: Props) => {
-  const { profileInfoData } = useDevProfileInfoContext();
+  const { profileInfoData } = useProfileInfoContext();
 
   const tabs = [
     { text: 'Profile', path: '/profile', isExactPath: true },
     ...(profileInfoData?.linkedAccounts?.github
       ? [{ text: 'Your Repositories', path: '/profile/repositories' }]
       : []),
+
+    // Temporarily removed
     // { text: 'Organization Reviews', path: '/profile/reviews' },
   ];
 

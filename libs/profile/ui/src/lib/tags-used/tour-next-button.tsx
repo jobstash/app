@@ -1,18 +1,15 @@
 import { useTour } from '@reactour/tour';
 
-import { CHECK_WALLET_FLOWS } from '@jobstash/auth/core';
 import { LS_KEYS } from '@jobstash/profile/core';
-
-import { useUpdateFlow } from '@jobstash/auth/state';
 
 import { Button } from '@jobstash/shared/ui';
 
 const TourNextButton = () => {
-  const { isLoading, mutateAsync } = useUpdateFlow();
   const { setIsOpen } = useTour();
 
   const onClick = async () => {
-    await mutateAsync(CHECK_WALLET_FLOWS.ONBOARD_REVIEWS);
+    //
+    // await mutateAsync(CHECK_WALLET_FLOWS.ONBOARD_REVIEWS);
     setIsOpen(false);
 
     if (typeof localStorage !== 'undefined') {
@@ -22,12 +19,7 @@ const TourNextButton = () => {
 
   return (
     <div className="w-full flex justify-end">
-      <Button
-        variant="primary"
-        className="py-1.5"
-        isDisabled={isLoading}
-        onClick={onClick}
-      >
+      <Button variant="primary" className="py-1.5" onClick={onClick}>
         Got It
       </Button>
     </div>

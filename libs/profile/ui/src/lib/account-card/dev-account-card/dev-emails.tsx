@@ -2,14 +2,14 @@ import { useAutoAnimate } from '@formkit/auto-animate/react';
 
 import { getPluralText } from '@jobstash/shared/utils';
 
-import { useDevProfileInfoContext } from '@jobstash/profile/state';
+import { useProfileInfoContext } from '@jobstash/profile/state';
 
 import { Text } from '@jobstash/shared/ui';
 
 import { EmailAccountText } from './email-account-text';
 
 export const DevEmails = () => {
-  const { profileInfoData } = useDevProfileInfoContext();
+  const { profileInfoData } = useProfileInfoContext();
   const [listRef] = useAutoAnimate();
 
   if (!profileInfoData) return null;

@@ -1,4 +1,6 @@
 export * from './lib/all-jobs/all-jobs-page';
+export * from './lib/data-janitor/pages/org-manage-page';
+export * from './lib/data-janitor/pages/org-search-page';
 export * from './lib/org-approval/org-approval-page';
 export * from './lib/organizations/org-list-page';
 export * from './lib/tags/blocked-terms-page';

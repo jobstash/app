@@ -1,7 +1,6 @@
 /* eslint-disable camelcase */
 import { ShareIcon } from '@heroicons/react/16/solid';
 
-import { CheckWalletRole } from '@jobstash/auth/core';
 import {
   GA_EVENT_ACTION,
   JobInfo,
@@ -9,6 +8,8 @@ import {
   type Tag,
 } from '@jobstash/shared/core';
 import { gaEvent, normalizeString, slugify } from '@jobstash/shared/utils';
+
+import { useAuthContext } from '@jobstash/auth/state';
 
 import { CardMenu, Heading, ReportMenuItem } from '@jobstash/shared/ui';
 
@@ -35,6 +36,8 @@ const RightPanelJobCard = ({
   tags,
   showExploreJob = true,
 }: Props) => {
+  const { permissions } = useAuthContext();
+
   const {
     title,
     url,
@@ -55,13 +58,13 @@ const RightPanelJobCard = ({
     }
   };
 
-  const sendAnalyticsEvent = (role: CheckWalletRole) => {
+  const sendAnalyticsEvent = () => {
     gaEvent(GA_EVENT_ACTION.JOB_APPLY, {
       event_category: 'job',
       job_shortuuid: shortUUID,
       job_classification: classification ?? '',
       organization_name: orgName,
-      user_role: role,
+      user_role: JSON.stringify(permissions),
     });
   };
 

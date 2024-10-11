@@ -4,11 +4,7 @@ import { useCallback, useEffect, useState } from 'react';
 import { useLogin, useLogout, usePrivy } from '@privy-io/react-auth';
 import { useMutation } from '@tanstack/react-query';
 
-import {
-  CHECK_WALLET_FLOWS,
-  CHECK_WALLET_ROLES,
-  CheckWalletResponse,
-} from '@jobstash/auth/core';
+import { CheckWalletResponse } from '@jobstash/auth/core';
 import { LOCAL_STORAGE_KEYS } from '@jobstash/shared/core';
 import { sentryMessage } from '@jobstash/shared/utils';
 
@@ -18,16 +14,16 @@ import { useAffiliatedOrgs } from './use-affiliated-orgs';
 import { useHasEmbeddedWallet } from './use-has-embedded-wallet';
 
 const DEFAULT_CHECK_WALLET_RESPONSE: CheckWalletResponse = {
-  role: CHECK_WALLET_ROLES.ANON,
-  flow: CHECK_WALLET_FLOWS.DEFAULT,
   cryptoNative: false,
   token: '',
+  permissions: [],
 };
 
 export const useAuthProvider = () => {
   const [checkWalletResponse, setCheckWalletResponse] =
     useState<CheckWalletResponse>(DEFAULT_CHECK_WALLET_RESPONSE);
-  const { role, flow, cryptoNative } = checkWalletResponse;
+  const { cryptoNative, permissions } = checkWalletResponse;
+  const hasPermission = permissions.length > 0;
 
   const {
     authenticated: isLoggedIn,
@@ -85,13 +81,12 @@ export const useAuthProvider = () => {
 
   // Setup local on page blur
   useEffect(() => {
-    if (isLoggedIn && role === CHECK_WALLET_ROLES.ANON) {
+    if (isLoggedIn && !hasPermission) {
       setupLocal();
     }
-  }, [isLoggedIn, role, setupLocal]);
+  }, [isLoggedIn, hasPermission, setupLocal]);
 
-  const isAuthenticated =
-    isLoggedIn && role !== CHECK_WALLET_ROLES.ANON && hasEmbeddedWallet;
+  const isAuthenticated = isLoggedIn && hasPermission && hasEmbeddedWallet;
 
   const { data: userOrgs, isLoading: isLoadingUserOrgFetch } =
     useAffiliatedOrgs();
@@ -115,8 +110,7 @@ export const useAuthProvider = () => {
 
   return {
     user,
-    role,
-    flow,
+    permissions,
     isCryptoNative: cryptoNative,
     isLoading: isLoadingSetup || !ready || isLoadingUserOrg || isCreatingWallet,
     isLoadingLogout,

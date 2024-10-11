@@ -1,6 +1,6 @@
-import { CHECK_WALLET_ROLES } from '@jobstash/auth/core';
+import { PERMISSIONS } from '@jobstash/auth/core';
 
-import { useAuthContext } from '@jobstash/auth/state';
+import { useHasPermission } from '@jobstash/auth/state';
 
 import { BookmarkSidebarIcon } from '@jobstash/shared/ui';
 
@@ -25,11 +25,9 @@ interface Props {
 }
 
 const SidebarBookmarksSection = ({ isMobile }: Props) => {
-  const { role } = useAuthContext();
+  const hasPermission = useHasPermission(PERMISSIONS.USER);
 
-  const isDev = role === CHECK_WALLET_ROLES.DEV;
-
-  if (!isDev) return null;
+  if (!hasPermission) return null;
 
   return (
     <SidebarSection

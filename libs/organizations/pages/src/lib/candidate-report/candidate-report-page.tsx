@@ -1,44 +1,27 @@
-import dynamic from 'next/dynamic';
-import Head from 'next/head';
+import { NotFoundPage } from '@jobstash/shared/pages';
+export const CandidateReportPage = () => <NotFoundPage />;
 
-import { LoadingPage, NotFoundPage } from '@jobstash/shared/pages';
+//
+// const { isLoading, role, flow } = useAuthContext();
 
-import { CHECK_WALLET_FLOWS, CHECK_WALLET_ROLES } from '@jobstash/auth/core';
+// if (isLoading) return <LoadingPage />;
 
-import { useAuthContext } from '@jobstash/auth/state';
+// const isOrg = role === CHECK_WALLET_ROLES.ORG;
+// const isComplete = flow === CHECK_WALLET_FLOWS.ORG_COMPLETE;
 
-import { PageWrapper } from '@jobstash/shared/ui';
+// if (!isOrg || !isComplete) {
+//   return <NotFoundPage />;
+// }
 
-import { CandidateReportForm } from './candidate-report-form';
+// return (
+//   <>
+//     <Head>
+//       <title>Candidate Report</title>
+//     </Head>
 
-const SideBar = dynamic(() =>
-  import('@jobstash/sidebar/feature').then((m) => m.SideBar),
-);
-
-export const CandidateReportPage = () => {
-  return <NotFoundPage />;
-
-  const { isLoading, role, flow } = useAuthContext();
-
-  if (isLoading) return <LoadingPage />;
-
-  const isOrg = role === CHECK_WALLET_ROLES.ORG;
-  const isComplete = flow === CHECK_WALLET_FLOWS.ORG_COMPLETE;
-
-  if (!isOrg || !isComplete) {
-    return <NotFoundPage />;
-  }
-
-  return (
-    <>
-      <Head>
-        <title>Candidate Report</title>
-      </Head>
-
-      <PageWrapper>
-        <SideBar />
-        <CandidateReportForm />
-      </PageWrapper>
-    </>
-  );
-};
+//     <PageWrapper>
+//       <SideBar />
+//       <CandidateReportForm />
+//     </PageWrapper>
+//   </>
+// );
