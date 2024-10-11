@@ -23,9 +23,9 @@ const FiltersToggleButton = () => {
       isActive={showFilters}
       isDisabled={isLoading}
       onClick={toggleFilters}
-      className={`px-2 gap-x-0 ${filterCount > 0 ? '[&>span]:pl-1' : ''}`}
+      className={`px-2 gap-x-0 ${filterCount > 0 ? '[&>svg]:mr-1' : ''}`}
     >
-      {getToggleFilterText(filterCount)}
+      <span className="text-[14px]">{getToggleFilterText(filterCount)}</span>
       <Text className="inline-block pl-2 whitespace-nowrap lg:hidden" color="dimmed">
         Filters and Sorting
       </Text>

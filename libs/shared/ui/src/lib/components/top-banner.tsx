@@ -34,8 +34,8 @@ const TopBanner = () => {
       <div className="z-[70] fixed top-0 w-full py-2 flex justify-center bg-gradient-to-l from-primary to-tertiary items-center sm:gap-1 flex-col sm:flex-row ">
         <Text className="text-sm text-center sm:text-md">{BANNER_TEXT}</Text>
         <Link passHref legacyBehavior href={CTA_URL}>
-          <a onClick={onClickDonate}>
-            <Text className="text-sm underline sm:text-md">{CTA_TEXT}</Text>
+          <a className="text-sm underline sm:text-md" onClick={onClickDonate}>
+            <Text>{CTA_TEXT}</Text>
           </a>
         </Link>
       </div>

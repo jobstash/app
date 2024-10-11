@@ -1,6 +1,6 @@
 import { SUPPORT_TELEGRAM_URL, TELEGRAM_URL } from '@jobstash/shared/core';
 
-import { HeaderLink, JoinTalentPool } from '@jobstash/sidebar/ui';
+import { HeaderLink } from '@jobstash/sidebar/ui';
 import { PrivyButton } from '@jobstash/auth/feature';
 
 const LINKS = [
@@ -25,7 +25,6 @@ export const HeaderLinks = ({ isMobile = false }: Props) => {
 
   return (
     <div className={className}>
-      <JoinTalentPool isMobile={isMobile} />
       {LINKS.map(({ text, link }) => (
         <HeaderLink key={link} text={text} link={link} isMobile={isMobile} />
       ))}
