@@ -9,13 +9,7 @@ import { notifError, notifSuccess } from '@jobstash/shared/utils';
 
 import { useMwVersionContext } from '@jobstash/shared/state';
 
-import {
-  EmailIcon,
-  FarcasterIcon,
-  GoogleIcon,
-  TelegramIcon,
-  WalletIcon,
-} from './icons';
+import { EmailIcon, FarcasterIcon, GoogleIcon, WalletIcon } from './icons';
 
 const SUCCESS_TITLE = 'Account Connected!';
 const SUCCESS_MESSAGE =
@@ -65,21 +59,15 @@ export const useAvailableAccounts = () => {
     }
   }, []);
 
-  const {
-    linkEmail,
-    linkFarcaster,
-    linkGithub,
-    linkGoogle,
-    linkTelegram,
-    linkWallet,
-  } = useLinkAccount({
-    onSuccess,
-    onError,
-  });
+  const { linkEmail, linkFarcaster, linkGithub, linkGoogle, linkWallet } =
+    useLinkAccount({
+      onSuccess,
+      onError,
+    });
 
   if (!user) return [];
 
-  const { email, farcaster, github, google, telegram } = user;
+  const { email, farcaster, github, google } = user;
 
   const availableAccounts = [
     !email && {
@@ -97,16 +85,17 @@ export const useAvailableAccounts = () => {
       label: 'Google',
       icon: <GoogleIcon />,
     },
-    !telegram && {
-      onClick: linkTelegram,
-      label: 'Telegram',
-      icon: <TelegramIcon />,
-    },
     !farcaster && {
       onClick: linkFarcaster,
       label: 'Farcaster',
       icon: <FarcasterIcon />,
     },
+    // Temporary disable Telegram
+    // !telegram && {
+    //   onClick: linkTelegram,
+    //   label: 'Telegram',
+    //   icon: <TelegramIcon />,
+    // },
     {
       onClick: linkWallet,
       label: 'Wallet',
