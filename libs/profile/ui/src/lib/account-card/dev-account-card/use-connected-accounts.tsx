@@ -6,7 +6,7 @@ import { useQueryClient } from '@tanstack/react-query';
 import { notifError } from '@jobstash/shared/utils';
 
 import { useLinkedWallets } from '@jobstash/auth/state';
-import { useDevProfileInfoContext } from '@jobstash/profile/state';
+import { useProfileInfoContext } from '@jobstash/profile/state';
 import { useMwVersionContext } from '@jobstash/shared/state';
 
 interface ConnectedAccount {
@@ -19,7 +19,7 @@ interface ConnectedAccount {
 export const useConnectedAccounts = () => {
   const [isEditing, toggleEdit] = useReducer((prev) => !prev, false);
 
-  const { profileInfoData } = useDevProfileInfoContext();
+  const { profileInfoData } = useProfileInfoContext();
 
   const {
     user,
@@ -46,7 +46,7 @@ export const useConnectedAccounts = () => {
 
         // Invalidate related queries
         await queryClient.invalidateQueries({
-          queryKey: [mwVersion, 'dev-profile-info'],
+          queryKey: [mwVersion, 'profile-info'],
         });
         await queryClient.invalidateQueries({
           queryKey: [mwVersion, 'affiliated-orgs'],

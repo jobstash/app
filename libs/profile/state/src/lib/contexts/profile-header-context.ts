@@ -1,6 +1,6 @@
 import { createContext, useContext } from 'react';
 
-import { DevProfileInfo } from '@jobstash/profile/core';
+import { ProfileInfo } from '@jobstash/profile/core';
 
 interface ProfileHeaderContextProps {
   isLoading: boolean;
@@ -8,7 +8,7 @@ interface ProfileHeaderContextProps {
   updateAvailability: (isChecked: boolean) => void;
   wallet: string;
   githubAvatar: string | null;
-  location: DevProfileInfo['location'] | null;
+  location: ProfileInfo['location'] | null;
 }
 
 export const ProfileHeaderContext =

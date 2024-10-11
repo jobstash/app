@@ -4,7 +4,7 @@ import { useQuery } from '@tanstack/react-query';
 import { formatWalletAddress } from '@jobstash/shared/utils';
 
 import { useMwVersionContext } from '@jobstash/shared/state';
-import { getDevProfileInfo } from '@jobstash/profile/data';
+import { getProfileInfo } from '@jobstash/profile/data';
 
 import { useAuthContext } from './use-auth-context';
 import { useEnsInfo } from './use-ens-info';
@@ -19,8 +19,8 @@ export const useSessionInfo = () => {
 
   const { mwVersion } = useMwVersionContext();
   const { isLoading: isLoadingProfileInfo, data: profileInfoData } = useQuery({
-    queryKey: [mwVersion, 'dev-profile-info'],
-    queryFn: () => getDevProfileInfo(),
+    queryKey: [mwVersion, 'profile-info'],
+    queryFn: () => getProfileInfo(),
     enabled: isAuthenticated,
   });
 

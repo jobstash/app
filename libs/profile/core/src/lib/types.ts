@@ -8,8 +8,6 @@ import {
   atsClientSchema,
   atsPreferenceSchema,
   atsTrackedNFTSchema,
-  devProfileInfoResponseSchema,
-  devProfileInfoSchema,
   devTalentResponseSchema,
   devTalentSchema,
   legacyProfileInfoContactSchema,
@@ -18,6 +16,8 @@ import {
   orgProfileInfoPayloadSchema,
   orgProfileInfoResponseSchema,
   orgProfileInfoSchema,
+  profileInfoResponseSchema,
+  profileInfoSchema,
   profileOrgRatingPayloadSchema,
   profileOrgRatingResponseSchema,
   profileOrgReviewListResponseSchema,
@@ -69,8 +69,8 @@ export type ProfileOrgReviewListResponse = Infer<
 
 export type UserEmail = Infer<typeof userEmailSchema>;
 
-export type DevProfileInfo = Infer<typeof devProfileInfoSchema>;
-export type DevProfileInfoResponse = Infer<typeof devProfileInfoResponseSchema>;
+export type ProfileInfo = Infer<typeof profileInfoSchema>;
+export type ProfileInfoResponse = Infer<typeof profileInfoResponseSchema>;
 
 export type OrgProfileInfo = Infer<typeof orgProfileInfoSchema>;
 export type OrgProfileInfoPayload = Infer<typeof orgProfileInfoPayloadSchema>;

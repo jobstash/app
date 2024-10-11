@@ -1,7 +1,7 @@
 import { CHECK_WALLET_ROLES } from '@jobstash/auth/core';
 
 import { useAuthContext } from '@jobstash/auth/state';
-import { DevProfileInfoProvider } from '@jobstash/profile/state';
+import { ProfileInfoProvider } from '@jobstash/profile/state';
 
 import SidebarAdminSection from './sidebar-admin-section';
 import SidebarDevSection from './sidebar-dev-section';
@@ -20,9 +20,9 @@ const SidebarUserSection = ({ isMobile }: Props) => {
   return (
     <>
       {role !== CHECK_WALLET_ROLES.ADMIN && (
-        <DevProfileInfoProvider>
+        <ProfileInfoProvider>
           <SidebarDevSection isMobile={isMobile} />
-        </DevProfileInfoProvider>
+        </ProfileInfoProvider>
       )}
 
       {/* {orgs.length > 0 && <SidebarOrgSection isMobile={isMobile} />} */}

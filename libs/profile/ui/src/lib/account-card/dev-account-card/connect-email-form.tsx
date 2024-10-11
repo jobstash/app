@@ -3,7 +3,7 @@ import { useState } from 'react';
 import { Button, Input } from '@nextui-org/react';
 
 import { useSendMagicLink } from '@jobstash/auth/state';
-import { useDevProfileInfoContext } from '@jobstash/profile/state';
+import { useProfileInfoContext } from '@jobstash/profile/state';
 
 import { Text } from '@jobstash/shared/ui';
 
@@ -13,7 +13,7 @@ const FORM_TEXT =
 const DESCRIPTION_TEXT = 'A magic link will be sent to verify your email.';
 
 export const ConnectEmailForm = () => {
-  const { profileInfoData } = useDevProfileInfoContext();
+  const { profileInfoData } = useProfileInfoContext();
   const { isPending, mutate, isSuccess } = useSendMagicLink('dev');
   const [email, setEmail] = useState('');
 

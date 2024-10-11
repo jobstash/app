@@ -18,7 +18,7 @@ const payloadSchema = myzod.object({
 type Payload = Infer<typeof payloadSchema>;
 
 const updateAvailability = async (availability: boolean) => {
-  const url = `${MW_URL}/profile/dev/availability`;
+  const url = `${MW_URL}/profile/availability`;
 
   const options = {
     method: 'POST' as const,
@@ -42,7 +42,7 @@ export const useUpdateAvailability = () => {
   const queryClient = useQueryClient();
   const { mwVersion } = useMwVersionContext();
 
-  const profileInfoQueryKey = [mwVersion, 'dev-profile-info'];
+  const profileInfoQueryKey = [mwVersion, 'profile-info'];
 
   return useMutation({
     mutationFn: ({ availability }: Payload) => updateAvailability(availability),

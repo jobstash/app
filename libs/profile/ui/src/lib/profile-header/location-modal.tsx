@@ -1,4 +1,4 @@
-import { use, useState } from 'react';
+import { useState } from 'react';
 
 import {
   Button,
@@ -10,17 +10,17 @@ import {
   ModalHeader,
 } from '@nextui-org/react';
 
-import { DevProfileInfo, LOCATION_FIELDS } from '@jobstash/profile/core';
+import { LOCATION_FIELDS, ProfileInfo } from '@jobstash/profile/core';
 import { capitalize } from '@jobstash/shared/utils';
 
 import {
-  useDevProfileInfoContext,
+  useProfileInfoContext,
   useUpdateLocation,
 } from '@jobstash/profile/state';
 
 import { Heading } from '@jobstash/shared/ui';
 
-type Location = DevProfileInfo['location'];
+type Location = ProfileInfo['location'];
 interface Props {
   isOpen: boolean;
   onOpenChange: (isOpen: boolean) => void;
@@ -29,10 +29,10 @@ interface Props {
 export const LocationModal = (props: Props) => {
   const { isOpen, onOpenChange } = props;
 
-  const { profileInfoData } = useDevProfileInfoContext();
-  const [location, setLocation] = useState<
-    DevProfileInfo['location'] | undefined
-  >(profileInfoData?.location);
+  const { profileInfoData } = useProfileInfoContext();
+  const [location, setLocation] = useState<ProfileInfo['location'] | undefined>(
+    profileInfoData?.location,
+  );
 
   const hasLocation = Boolean(location?.city) || Boolean(location?.country);
   const title = `${hasLocation ? 'Update' : 'Add'} Location`;

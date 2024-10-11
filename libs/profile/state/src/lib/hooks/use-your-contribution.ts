@@ -1,12 +1,12 @@
 import { useState } from 'react';
 
-import { useDevProfileInfoContext } from '../contexts/dev-profile-info-context';
+import { useProfileInfoContext } from '../contexts/profile-info-context';
 import { useProfileRepoPageContext } from '../contexts/profile-repo-page-context';
 
 import { useYourContributionMutation } from './use-your-contribution-mutation';
 
 export const useYourContribution = () => {
-  const { profileInfoData } = useDevProfileInfoContext();
+  const { profileInfoData } = useProfileInfoContext();
   const username = profileInfoData?.linkedAccounts.github ?? '';
   const avatar = profileInfoData?.githubAvatar ?? '';
 

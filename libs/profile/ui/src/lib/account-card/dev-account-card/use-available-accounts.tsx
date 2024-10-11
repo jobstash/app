@@ -34,7 +34,7 @@ export const useAvailableAccounts = () => {
   const onSuccess = useCallback(async () => {
     // Invalidate related queries
     await queryClient.invalidateQueries({
-      queryKey: [mwVersion, 'dev-profile-info'],
+      queryKey: [mwVersion, 'profile-info'],
     });
     await queryClient.invalidateQueries({
       queryKey: [mwVersion, 'affiliated-orgs'],

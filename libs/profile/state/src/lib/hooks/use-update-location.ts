@@ -15,7 +15,7 @@ const payloadSchema = myzod.object({
 type Payload = Infer<typeof payloadSchema>;
 
 const updateLocation = (payload: Payload) => {
-  const url = `${MW_URL}/profile/dev/location`;
+  const url = `${MW_URL}/profile/location`;
 
   const options = {
     method: 'POST' as const,
@@ -36,7 +36,7 @@ const updateLocation = (payload: Payload) => {
 export const useUpdateLocation = () => {
   const queryClient = useQueryClient();
   const { mwVersion } = useMwVersionContext();
-  const profileInfoQueryKey = [mwVersion, 'dev-profile-info'];
+  const profileInfoQueryKey = [mwVersion, 'profile-info'];
 
   return useMutation({
     mutationFn: (payload: Payload) => updateLocation(payload),

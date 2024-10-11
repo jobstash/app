@@ -4,8 +4,8 @@ import { CHECK_WALLET_ROLES } from '@jobstash/auth/core';
 
 import { useAuthContext } from '@jobstash/auth/state';
 import {
-  DevProfileInfoProvider,
   OrgProfileInfoProvider,
+  ProfileInfoProvider,
 } from '@jobstash/profile/state';
 
 import { ProfileDevPage } from './profile-dev-page';
@@ -26,9 +26,9 @@ export const ProfilePage = () => {
 
   if (isDev)
     return (
-      <DevProfileInfoProvider>
+      <ProfileInfoProvider>
         <ProfileDevPage />
-      </DevProfileInfoProvider>
+      </ProfileInfoProvider>
     );
 
   if (isOrg) {

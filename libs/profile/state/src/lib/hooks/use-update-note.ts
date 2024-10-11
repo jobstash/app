@@ -18,7 +18,7 @@ import { mwFetch } from '@jobstash/shared/data';
 const TOAST_ID = 'update-notes-toast';
 
 const updateNote = async (payload: UpdateNotePayload) => {
-  const url = `${MW_URL}/users/devs/note`;
+  const url = `${MW_URL}/users/note`;
 
   const options = {
     method: 'POST' as const,

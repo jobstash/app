@@ -37,7 +37,7 @@ export const useRemoveAttachedEmail = () => {
 
       await Promise.all([
         queryClient.invalidateQueries({
-          queryKey: [mwVersion, 'dev-profile-info'],
+          queryKey: [mwVersion, 'profile-info'],
         }),
         queryClient.invalidateQueries({
           queryKey: [mwVersion, 'check-wallet'],
