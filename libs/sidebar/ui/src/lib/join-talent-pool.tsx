@@ -19,7 +19,7 @@ export const JoinTalentPool = ({ isMobile }: Props) => {
 
   return (
     <div className="cursor-pointer" onClick={onClick}>
-      {/* <Text className={textClassName}>Join Talent Pool</Text> */}
+      <Text className={textClassName}>Join Talent Pool</Text>
     </div>
   );
 };
