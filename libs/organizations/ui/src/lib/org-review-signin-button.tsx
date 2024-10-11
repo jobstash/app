@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import { ReactNode } from 'react';
 
-import { CHECK_WALLET_ROLES } from '@jobstash/auth/core';
+import { PERMISSIONS } from '@jobstash/auth/core';
 
 import { useRoleClick } from '@jobstash/auth/state';
 import { useUserReview } from '@jobstash/profile/state';
@@ -14,12 +14,14 @@ interface Props {
 
 const OrgReviewSigninButton = ({ orgId }: Props) => {
   const { push } = useRouter();
-  const role = [CHECK_WALLET_ROLES.DEV, CHECK_WALLET_ROLES.ORG];
   const callback = () => {
     push('/profile/reviews');
   };
 
-  const { isAuthd, roleClick } = useRoleClick({ role, callback });
+  const { hasPermission: isAuthd, roleClick } = useRoleClick({
+    allowed: PERMISSIONS.USER,
+    callback,
+  });
 
   const { hasReviewed, isLoading } = useUserReview(orgId);
 

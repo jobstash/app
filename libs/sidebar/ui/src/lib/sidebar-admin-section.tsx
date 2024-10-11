@@ -1,7 +1,7 @@
 import { ADMIN_PATHS } from '@jobstash/admin/core';
-import { CHECK_WALLET_ROLES } from '@jobstash/auth/core';
+import { PERMISSIONS } from '@jobstash/auth/core';
 
-import { useAuthContext } from '@jobstash/auth/state';
+import { useAuthContext, useHasPermission } from '@jobstash/auth/state';
 
 import { SidebarBartabProps } from './sidebar-bartab';
 import { SidebarSection } from './sidebar-section';
@@ -10,25 +10,26 @@ interface Props {
 }
 
 const SidebarAdminSection = ({ isMobile }: Props) => {
-  const { role } = useAuthContext();
+  const { permissions } = useAuthContext();
 
-  const isAdmin = role === CHECK_WALLET_ROLES.ADMIN;
-  const isDataEngineer = role === CHECK_WALLET_ROLES.DATA_JANITOR;
+  const hasPermission = useHasPermission(PERMISSIONS.ADMIN);
 
-  if (!isAdmin && !isDataEngineer) {
+  const isSuperAdmin = permissions.includes(PERMISSIONS.SUPER_ADMIN);
+
+  if (!hasPermission) {
     return null;
   }
 
   const tabs: SidebarBartabProps[] = [];
 
-  if (isAdmin || isDataEngineer) {
+  if (hasPermission) {
     tabs.push({
       text: 'Manage Organizations',
       path: '/godmode/organizations/manage',
     });
   }
 
-  if (isAdmin) {
+  if (isSuperAdmin) {
     tabs.push(
       { text: 'Org Approvals', path: ADMIN_PATHS.ORG_APPROVALS },
       { text: 'Tags', path: ADMIN_PATHS.SYNONYMS },

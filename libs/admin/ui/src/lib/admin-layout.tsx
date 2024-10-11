@@ -3,9 +3,9 @@ import { ReactNode } from 'react';
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import { LoadingPage, NotFoundPage } from '@jobstash/shared/pages';
 
-import { CHECK_WALLET_ROLES } from '@jobstash/auth/core';
+import { PERMISSIONS } from '@jobstash/auth/core';
 
-import { useAuthContext } from '@jobstash/auth/state';
+import { useAuthContext, useHasPermission } from '@jobstash/auth/state';
 
 import AdminHeader from './admin-header';
 
@@ -24,11 +24,14 @@ const AdminLayout = ({
   children,
   hideHeader,
 }: Props) => {
-  const { isLoading, role } = useAuthContext();
-  if (isLoading) return <LoadingPage />;
+  const { isLoading } = useAuthContext();
+  const hasPermission = useHasPermission([
+    PERMISSIONS.SUPER_ADMIN,
+    PERMISSIONS.ADMIN,
+  ]);
 
-  const isAdmin = role === CHECK_WALLET_ROLES.ADMIN;
-  if (!isAdmin) return <NotFoundPage />;
+  if (isLoading) return <LoadingPage />;
+  if (!hasPermission) return <NotFoundPage />;
 
   return (
     <div className="w-screen overflow-x-hidden lg:pl-52 lg:pt-[100px] z-20 relative">

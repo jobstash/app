@@ -3,9 +3,9 @@ import Head from 'next/head';
 
 import { LoadingPage, NotFoundPage } from '@jobstash/shared/pages';
 
-import { CHECK_WALLET_ROLES } from '@jobstash/auth/core';
+import { PERMISSIONS } from '@jobstash/auth/core';
 
-import { useAuthContext } from '@jobstash/auth/state';
+import { useAuthContext, useHasPermission } from '@jobstash/auth/state';
 import { ProfileRepoPageProvider } from '@jobstash/profile/state';
 
 import {
@@ -24,11 +24,12 @@ const SideBar = dynamic(() =>
 );
 
 export const ProfileRepositoriesPage = () => {
-  const { role, isLoading, isAuthenticated } = useAuthContext();
+  const { isLoading, isAuthenticated } = useAuthContext();
+  const hasPermission = useHasPermission(PERMISSIONS.USER);
 
   if (!isAuthenticated || isLoading) return <LoadingPage />;
 
-  if (role !== CHECK_WALLET_ROLES.DEV) {
+  if (!hasPermission) {
     return <NotFoundPage />;
   }
 

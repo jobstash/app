@@ -1,54 +1,35 @@
-import dynamic from 'next/dynamic';
-import Head from 'next/head';
+import { NotFoundPage } from '@jobstash/shared/pages';
 
-import { LoadingPage, NotFoundPage } from '@jobstash/shared/pages';
+export const TalentsPage = () => <NotFoundPage />;
 
-import { CHECK_WALLET_FLOWS, CHECK_WALLET_ROLES } from '@jobstash/auth/core';
+//
+// const { role, flow, isLoading: isLoadingAuth } = useAuthContext();
 
-import { useAuthContext } from '@jobstash/auth/state';
-import { OrgProfileInfoProvider, useDevTalents } from '@jobstash/profile/state';
+// const { data: rowData, isPending } = useDevTalents();
 
-import { NoteUpdatePayloadSyncer } from '@jobstash/profile/ui';
-import { PageWrapper } from '@jobstash/shared/ui';
+// const isLoading = isLoadingAuth || isPending;
 
-import { DevTalentsTable } from './table';
-import { TalentTabs } from './tabs';
+// if (isLoading) return <LoadingPage />;
 
-const SideBar = dynamic(() =>
-  import('@jobstash/sidebar/feature').then((m) => m.SideBar),
-);
+// if (
+//   role !== CHECK_WALLET_ROLES.ORG ||
+//   flow !== CHECK_WALLET_FLOWS.ORG_COMPLETE
+// ) {
+//   return <NotFoundPage />;
+// }
 
-export const TalentsPage = () => {
-  return <NotFoundPage />;
-
-  const { role, flow, isLoading: isLoadingAuth } = useAuthContext();
-
-  const { data: rowData, isPending } = useDevTalents();
-
-  const isLoading = isLoadingAuth || isPending;
-
-  if (isLoading) return <LoadingPage />;
-
-  if (
-    role !== CHECK_WALLET_ROLES.ORG ||
-    flow !== CHECK_WALLET_FLOWS.ORG_COMPLETE
-  ) {
-    return <NotFoundPage />;
-  }
-
-  return (
-    <>
-      <Head>
-        <title>Available Talents</title>
-      </Head>
-      <OrgProfileInfoProvider>
-        <PageWrapper>
-          <SideBar />
-          <TalentTabs />
-          <DevTalentsTable rowData={rowData} />
-          <NoteUpdatePayloadSyncer />
-        </PageWrapper>
-      </OrgProfileInfoProvider>
-    </>
-  );
-};
+// return (
+//   <>
+//     <Head>
+//       <title>Available Talents</title>
+//     </Head>
+//     <OrgProfileInfoProvider>
+//       <PageWrapper>
+//         <SideBar />
+//         <TalentTabs />
+//         <DevTalentsTable rowData={rowData} />
+//         <NoteUpdatePayloadSyncer />
+//       </PageWrapper>
+//     </OrgProfileInfoProvider>
+//   </>
+// );

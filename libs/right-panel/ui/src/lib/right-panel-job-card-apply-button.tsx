@@ -2,11 +2,11 @@
 
 import { Spinner } from '@nextui-org/spinner';
 
-import { CHECK_WALLET_ROLES } from '@jobstash/auth/core';
+import { PERMISSIONS } from '@jobstash/auth/core';
 import { ECOSYSTEMS, GA_EVENT_ACTION } from '@jobstash/shared/core';
 import { gaEvent, getEcosystemSubdomain } from '@jobstash/shared/utils';
 
-import { useAuthContext } from '@jobstash/auth/state';
+import { useAuthContext, useHasPermission } from '@jobstash/auth/state';
 import {
   useJobPost,
   useJobsApplied,
@@ -26,41 +26,39 @@ interface Props {
 export const RightPanelJobCardApplyButton = (props: Props) => {
   const { url, shortUUID, orgName, hasUser, classification } = props;
 
-  const { role, isAuthenticated, showLoginModal } = useAuthContext();
-  const isDev = role === CHECK_WALLET_ROLES.DEV;
-  const isAnon = !isAuthenticated;
+  const { isAuthenticated, showLoginModal, permissions } = useAuthContext();
+  const hasPermission = useHasPermission(PERMISSIONS.USER);
 
   const { isSupported, subdomain } = getEcosystemSubdomain();
   const isEthdam = isSupported && subdomain === ECOSYSTEMS.ETHDAM;
   const isOneClick = hasUser || isEthdam;
-  const isDevOneClick = isOneClick && isDev;
 
   const { data: jobPost, isPending: isPendingJobPost } = useJobPost(shortUUID);
   const { appliedJobs, isPendingJobsApplied, isFetchingJobsApplied } =
     useJobsApplied();
   const isLoadingJobsApplied =
-    isDev && (isPendingJobsApplied || isFetchingJobsApplied);
+    hasPermission && (isPendingJobsApplied || isFetchingJobsApplied);
 
   const hasApplied =
-    isDev &&
+    hasPermission &&
     hasUser &&
     appliedJobs.map((job) => job.shortUUID).includes(shortUUID);
 
   const { mutate: mutateJobApply, isPendingMutation } =
     useSendJobApplyInteractionMutation({
-      isDevOneClick,
+      isOneClick: isOneClick && hasPermission,
       jobPost,
       appliedJobs,
     });
 
   const showSpinner = [
-    isOneClick && isDev && isLoadingJobsApplied,
+    isOneClick && hasPermission && isLoadingJobsApplied,
     isPendingJobPost,
     isPendingMutation,
   ].includes(true);
 
   const openApplyPage = () => {
-    if (isAnon) {
+    if (!isAuthenticated) {
       showLoginModal();
       return;
     }
@@ -77,14 +75,14 @@ export const RightPanelJobCardApplyButton = (props: Props) => {
       job_shortuuid: shortUUID,
       job_classification: classification ?? '',
       organization_name: orgName,
-      user_role: role,
+      user_role: JSON.stringify(permissions),
     });
   };
 
   const onClickApplyJob = () => {
     sendAnalyticsEvent();
 
-    if (isDev) {
+    if (hasPermission) {
       mutateJobApply(shortUUID);
     }
 
@@ -95,7 +93,7 @@ export const RightPanelJobCardApplyButton = (props: Props) => {
     ? 'Already applied for this job'
     : isOneClick
     ? '1-Click Apply'
-    : isDev
+    : hasPermission
     ? 'Apply for this job'
     : 'Connect Your Wallet & Sign Up to Apply';
 

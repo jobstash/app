@@ -2,37 +2,16 @@ import myzod from 'myzod';
 
 import { mwMessageResponseSchema } from '@jobstash/shared/core';
 
-import { CHECK_WALLET_FLOWS, CHECK_WALLET_ROLES } from './constants';
+import { PERMISSIONS } from './constants';
 
-export const checkWalletRolesSchema = myzod.literals(
-  CHECK_WALLET_ROLES.ANON,
-  CHECK_WALLET_ROLES.ADMIN,
-  CHECK_WALLET_ROLES.DEV,
-  CHECK_WALLET_ROLES.ORG,
-  CHECK_WALLET_ROLES.DATA_JANITOR,
-);
-
-export const checkWalletFlowsSchema = myzod.literals(
-  CHECK_WALLET_FLOWS.DEFAULT,
-  CHECK_WALLET_FLOWS.PICK_ROLE,
-  CHECK_WALLET_FLOWS.ADD_GITHUB_REPO,
-  CHECK_WALLET_FLOWS.ONBOARD_PROFILE,
-  CHECK_WALLET_FLOWS.ONBOARD_REPO,
-  CHECK_WALLET_FLOWS.ONBOARD_REVIEWS,
-  CHECK_WALLET_FLOWS.SIGNUP_COMPLETE,
-  CHECK_WALLET_FLOWS.ADMIN_SYNONYMS,
-  CHECK_WALLET_FLOWS.ADMIN_COMPLETE,
-  CHECK_WALLET_FLOWS.ORG_PROFILE,
-  CHECK_WALLET_FLOWS.ORG_APPROVAL,
-  CHECK_WALLET_FLOWS.ORG_COMPLETE,
-  CHECK_WALLET_FLOWS.ORG_REJECTED,
+export const checkWalletPermissionSchema = myzod.literals(
+  ...Object.values(PERMISSIONS),
 );
 
 export const checkWalletResponseSchema = myzod.object({
-  role: checkWalletRolesSchema,
-  flow: checkWalletFlowsSchema,
-  cryptoNative: myzod.boolean(),
   token: myzod.string(),
+  cryptoNative: myzod.boolean(),
+  permissions: myzod.array(checkWalletPermissionSchema),
 });
 
 export const siweNonceResponseSchema = myzod.intersection(

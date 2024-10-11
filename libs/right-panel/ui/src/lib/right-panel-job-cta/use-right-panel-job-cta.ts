@@ -1,6 +1,3 @@
-import { useSetAtom } from 'jotai';
-
-import { CheckWalletRole } from '@jobstash/auth/core';
 import { ECOSYSTEMS } from '@jobstash/shared/core';
 import { getEcosystemSubdomain } from '@jobstash/shared/utils';
 
@@ -14,13 +11,13 @@ import {
 interface Props {
   url: string;
   shortUUID: string;
-  sendAnalyticsEvent: (role: CheckWalletRole) => void;
+  sendAnalyticsEvent: () => void;
 }
 
 export const useRightPanelJobCTA = (props: Props) => {
-  const { url, shortUUID, sendAnalyticsEvent } = props;
+  const { url, shortUUID, sendAnalyticsEvent: sendAnalytics } = props;
 
-  const { role, isAuthenticated, showLoginModal } = useAuthContext();
+  const { isAuthenticated, showLoginModal } = useAuthContext();
   const isAnon = !isAuthenticated;
 
   const { isSupported, subdomain } = getEcosystemSubdomain();
@@ -60,8 +57,6 @@ export const useRightPanelJobCTA = (props: Props) => {
       showLoginModal();
     }
   };
-
-  const sendAnalytics = () => sendAnalyticsEvent(role);
 
   return {
     isAnon,

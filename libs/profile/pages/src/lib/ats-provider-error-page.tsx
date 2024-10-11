@@ -3,10 +3,10 @@ import { useRouter } from 'next/router';
 
 import { LoadingPage, NotFoundPage } from '@jobstash/shared/pages';
 
-import { CHECK_WALLET_ROLES } from '@jobstash/auth/core';
+import { PERMISSIONS } from '@jobstash/auth/core';
 import { ERR_INTERNAL } from '@jobstash/shared/core';
 
-import { useAuthContext } from '@jobstash/auth/state';
+import { useAuthContext, useHasPermission } from '@jobstash/auth/state';
 
 import { Button, FoxSVG, Heading, Text } from '@jobstash/shared/ui';
 
@@ -20,10 +20,11 @@ const DEFAULT_MESSAGE =
 
 export const ATSProviderErrorPage = () => {
   const router = useRouter();
-  const { isLoading, role, isAuthenticated } = useAuthContext();
+  const { isLoading, isAuthenticated } = useAuthContext();
+  const hasPermission = useHasPermission(PERMISSIONS.ORG_MANAGER);
 
   if (!isAuthenticated || isLoading) return <LoadingPage />;
-  if (role !== CHECK_WALLET_ROLES.ORG) return <NotFoundPage />;
+  if (!hasPermission) return <NotFoundPage />;
 
   const { title = ERR_INTERNAL, message = DEFAULT_MESSAGE } = router.query;
 

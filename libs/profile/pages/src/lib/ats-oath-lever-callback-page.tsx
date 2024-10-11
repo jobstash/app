@@ -4,40 +4,39 @@ import { useEffect } from 'react';
 
 import { LoadingPage, NotFoundPage } from '@jobstash/shared/pages';
 
+import { PERMISSIONS } from '@jobstash/auth/core';
 import { ATS_PROVIDERS } from '@jobstash/profile/core';
 
-import { useAuthContext } from '@jobstash/auth/state';
-import { useLinkATSPlatform, useOrgProfileInfo } from '@jobstash/profile/state';
+import { useAuthContext, useHasPermission } from '@jobstash/auth/state';
+import { useLinkATSPlatform } from '@jobstash/profile/state';
 
 export const ATSOauthLeverCallbackPage = () => {
-  const { isAuthenticated } = useAuthContext();
   const router = useRouter();
   const { client_id } = router.query;
 
-  const { profileInfoData, isLoading: isLoadingProfile } = useOrgProfileInfo();
-  const orgId = profileInfoData?.orgId;
+  const { isLoading } = useAuthContext();
 
-  const isLoading = !isAuthenticated || isLoadingProfile;
+  const hasPermission = useHasPermission(PERMISSIONS.ORG_MANAGER);
 
   const { mutate } = useLinkATSPlatform();
 
   const isValidClientId = Boolean(client_id) && typeof client_id === 'string';
-  const isValidOrgId = typeof orgId === 'string';
+  const isValidOrgId = true; // TODO
   const isValidPayload = isValidClientId && isValidOrgId;
 
   useEffect(() => {
-    if (!isLoading && isValidPayload) {
+    if (!isLoading && isValidPayload && hasPermission) {
       mutate({
         platform: ATS_PROVIDERS.LEVER.platformName,
         payload: {
           clientId: client_id as string,
-          orgId,
+          orgId: 'TODO',
         },
       });
     }
-  }, [client_id, isLoading, isValidPayload, mutate, orgId, router]);
+  }, [client_id, hasPermission, isLoading, isValidPayload, mutate]);
 
-  if (!client_id) return <NotFoundPage />;
+  if (!client_id || hasPermission) return <NotFoundPage />;
 
   return <LoadingPage />;
 };

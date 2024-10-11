@@ -1,29 +1,22 @@
 export const EVENT_SIWE_LOGIN = 'siwe-login';
 export const EVENT_SIWE_LOGOUT = 'siwe-logout';
 
-export const CHECK_WALLET_ROLES = {
-  ANON: 'ANON',
-  ADMIN: 'ADMIN',
-  DEV: 'DEV',
-  ORG: 'ORG',
-  DATA_JANITOR: 'DATA_JANITOR',
-} as const;
-
-export const CHECK_WALLET_FLOWS = {
-  DEFAULT: 'LOGIN',
-  PICK_ROLE: 'PICK-ROLE',
-  ADD_GITHUB_REPO: 'ADD-GITHUB-REPO',
-  ONBOARD_PROFILE: 'ONBOARD-PROFILE',
-  ONBOARD_REPO: 'ONBOARD-REPO',
-  ONBOARD_REVIEWS: 'ONBOARD-REVIEWS',
-  SIGNUP_COMPLETE: 'SIGNUP-COMPLETE',
-  ADMIN_SYNONYMS: 'SYNONYMS',
-  ADMIN_COMPLETE: 'ADMIN-COMPLETE',
-  ORG_PROFILE: 'ORG-PROFILE',
-  ORG_APPROVAL: 'ORG-APPROVAL-PENDING',
-  ORG_COMPLETE: 'ORG-COMPLETE',
-  ORG_REJECTED: 'ORG-REJECTED',
-} as const;
+export const PERMISSIONS = {
+  // Base tier user, used to gatekeep certain stuff for only auth users
+  USER: 'USER' as const,
+  // Has access to all pages
+  SUPER_ADMIN: 'SUPER_ADMIN' as const,
+  // Base tier admin, requires further perms to do anything
+  ADMIN: 'ADMIN' as const,
+  // Has access to org related user functionality like talent list etc.
+  ORG_AFFILIATE: 'ORG_AFFILIATE' as const,
+  // Has access to project related admin functionality
+  PROJECT_MANAGER: 'PROJECT_MANAGER' as const,
+  // Has access to org related admin functionality
+  ORG_MANAGER: 'ORG_MANAGER' as const,
+  // Has access to tags related admin functionality
+  TAGS_MANAGER: 'TAGS_MANAGER' as const,
+};
 
 export const ignoredPathnameRedirectSet = new Set<string>([
   '/callback/dev',

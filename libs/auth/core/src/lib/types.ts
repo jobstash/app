@@ -3,6 +3,7 @@ import { type Infer } from 'myzod';
 
 import {
   affiliatedOrgSchema,
+  checkWalletPermissionSchema,
   checkWalletResponseSchema,
   githubLoginPayloadSchema,
   siweCreateMessageResponseSchema,
@@ -11,8 +12,6 @@ import {
   siweVerifyPayloadSchema,
   siweVerifyResponseSchema,
 } from './schemas';
-import { checkWalletRolesSchema } from './schemas';
-import { checkWalletFlowsSchema } from './schemas';
 
 export type CheckWalletResponse = Infer<typeof checkWalletResponseSchema>;
 
@@ -24,13 +23,11 @@ export type SiweCreateMessageResponse = Infer<
 export type SiweVerifyPayload = Infer<typeof siweVerifyPayloadSchema>;
 export type SiweVerifyResponse = Infer<typeof siweVerifyResponseSchema>;
 
-export type CheckWalletRole = Infer<typeof checkWalletRolesSchema>;
-export type CheckWalletFlow = Infer<typeof checkWalletFlowsSchema>;
+export type CheckWalletPermission = Infer<typeof checkWalletPermissionSchema>;
 
 export type AuthCtx = {
   user: PrivyUser | null;
-  role: CheckWalletRole;
-  flow: CheckWalletFlow;
+  permissions: CheckWalletPermission[];
   isCryptoNative: boolean;
   isLoading: boolean;
   isLoadingLogout: boolean;

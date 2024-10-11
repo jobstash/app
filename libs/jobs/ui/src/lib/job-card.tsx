@@ -58,7 +58,7 @@ const JobCard = ({
   } = jobPost;
   const { projects, name: orgName } = organization;
 
-  const { role } = useAuthContext();
+  const { permissions } = useAuthContext();
 
   const setActiveJob = useSetAtom(activeJobAtom);
 
@@ -73,7 +73,7 @@ const JobCard = ({
       job_shortuuid: shortUUID,
       job_classification: classification ?? '',
       organization_name: orgName,
-      user_role: role,
+      user_role: JSON.stringify(permissions),
     });
   };
 

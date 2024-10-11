@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 import { Spinner } from '@nextui-org/spinner';
 
-import { CHECK_WALLET_ROLES } from '@jobstash/auth/core';
+import { PERMISSIONS } from '@jobstash/auth/core';
 
 import { useRoleClick } from '@jobstash/auth/state';
 
@@ -23,7 +23,6 @@ const BookmarkButton = ({
   isDisabled,
   onClick,
 }: Props) => {
-  const role = CHECK_WALLET_ROLES.DEV;
   const callback = () => {
     if (onClick) {
       setBookmarked((prev) => !prev);
@@ -31,8 +30,8 @@ const BookmarkButton = ({
     }
   };
 
-  const { isAuthd, roleClick } = useRoleClick({
-    role,
+  const { hasPermission: isAuthd, roleClick } = useRoleClick({
+    allowed: PERMISSIONS.USER,
     callback,
   });
 

@@ -8,13 +8,13 @@ import Head from 'next/head';
 import { LoadingPage, NotFoundPage } from '@jobstash/shared/pages';
 import { useAtomValue } from 'jotai';
 
-import { CHECK_WALLET_FLOWS, CHECK_WALLET_ROLES } from '@jobstash/auth/core';
+import { PERMISSIONS } from '@jobstash/auth/core';
 import { ATS_PROVIDERS } from '@jobstash/profile/core';
 import { cn } from '@jobstash/shared/utils';
 
-import { useAuthContext } from '@jobstash/auth/state';
+import { useAuthContext, useHasPermission } from '@jobstash/auth/state';
 import { useJobApplicants } from '@jobstash/jobs/state';
-import { OrgProfileInfoProvider, useATSClient } from '@jobstash/profile/state';
+import { useATSClient } from '@jobstash/profile/state';
 
 import { NoteUpdatePayloadSyncer } from '@jobstash/profile/ui';
 import { PageWrapper } from '@jobstash/shared/ui';
@@ -28,7 +28,7 @@ const SideBar = dynamic(() =>
 );
 
 export const ApplicantsPage = () => {
-  const { role, flow, isLoading: isLoadingAuth } = useAuthContext();
+  const { isLoading } = useAuthContext();
   const { data: atsClient } = useATSClient();
 
   const activeList = useAtomValue(activeListAtom);
@@ -37,40 +37,39 @@ export const ApplicantsPage = () => {
     activeList,
   );
 
-  const isLoading = isLoadingAuth || !atsClient;
+  const hasPermission = useHasPermission(PERMISSIONS.ORG_MANAGER);
 
   if (isLoading) return <LoadingPage />;
-  if (!atsClient.orgId) return <LoadingPage />;
 
   if (
-    role !== CHECK_WALLET_ROLES.ORG ||
-    flow !== CHECK_WALLET_FLOWS.ORG_COMPLETE ||
+    !hasPermission ||
     (atsClient && atsClient.name !== ATS_PROVIDERS.JOBSTASH.platformName)
-  )
+  ) {
     return <NotFoundPage />;
+  }
+
+  if (!atsClient?.orgId) return <LoadingPage />;
 
   return (
     <>
       <Head>
         <title>Job Applicants</title>
       </Head>
-      <OrgProfileInfoProvider>
-        <PageWrapper>
-          <SideBar />
+      <PageWrapper>
+        <SideBar />
 
-          <ApplicantTabs />
+        <ApplicantTabs />
 
-          <div
-            className={cn({
-              'opacity-50 pointer-events-none': isFetching || !rowData,
-            })}
-          >
-            <ApplicantsTable orgId={atsClient.orgId} rowData={rowData} />
-          </div>
+        <div
+          className={cn({
+            'opacity-50 pointer-events-none': isFetching || !rowData,
+          })}
+        >
+          <ApplicantsTable orgId={atsClient.orgId} rowData={rowData} />
+        </div>
 
-          <NoteUpdatePayloadSyncer />
-        </PageWrapper>
-      </OrgProfileInfoProvider>
+        <NoteUpdatePayloadSyncer />
+      </PageWrapper>
     </>
   );
 };

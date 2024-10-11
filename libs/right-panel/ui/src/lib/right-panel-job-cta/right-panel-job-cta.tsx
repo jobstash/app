@@ -1,8 +1,6 @@
 /* eslint-disable react/no-unused-prop-types */
 import { Spinner } from '@nextui-org/spinner';
 
-import { CheckWalletRole } from '@jobstash/auth/core';
-
 import { DirectApplyButton } from './direct-apply-button';
 import { OneClickApplyButton } from './one-click-apply-button';
 import { useRightPanelJobCTA } from './use-right-panel-job-cta';
@@ -11,7 +9,7 @@ interface Props {
   url: string;
   shortUUID: string;
   hasUser?: boolean;
-  sendAnalyticsEvent: (role: CheckWalletRole) => void;
+  sendAnalyticsEvent: () => void;
 }
 
 export const RightPanelJobCTA = (props: Props) => {

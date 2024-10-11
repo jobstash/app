@@ -29,6 +29,10 @@ const nextConfig = {
       },
       {
         protocol: 'https',
+        hostname: 'jobstash.xyz',
+      },
+      {
+        protocol: 'https',
         hostname: 'app.jobstash.xyz',
       },
       {

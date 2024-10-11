@@ -4,9 +4,9 @@ import React from 'react';
 import { LoadingPage, NotFoundPage } from '@jobstash/shared/pages';
 import { usePrivy } from '@privy-io/react-auth';
 
-import { CHECK_WALLET_ROLES, CheckWalletRole } from '@jobstash/auth/core';
+import { PERMISSIONS } from '@jobstash/auth/core';
 
-import { useAuthContext } from '@jobstash/auth/state';
+import { useAuthContext, useHasPermission } from '@jobstash/auth/state';
 
 import { PageWrapper } from '@jobstash/shared/ui';
 
@@ -18,17 +18,14 @@ interface Props {
   children: React.ReactNode;
 }
 
-const ALLOWED_ROLES = new Set<CheckWalletRole>([
-  CHECK_WALLET_ROLES.ADMIN,
-  CHECK_WALLET_ROLES.DATA_JANITOR,
-]);
-
 export const ManageLayout = ({ children }: Props) => {
-  const { role, isLoading } = useAuthContext();
   const { ready } = usePrivy();
+  const { isLoading } = useAuthContext();
+
+  const hasPermission = useHasPermission(PERMISSIONS.ADMIN);
 
   if (isLoading || !ready) return <LoadingPage />;
-  if (!ALLOWED_ROLES.has(role)) return <NotFoundPage />;
+  if (!hasPermission) return <NotFoundPage />;
 
   return (
     <PageWrapper>
