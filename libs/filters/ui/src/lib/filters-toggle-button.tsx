@@ -8,6 +8,8 @@ import { useFiltersContext } from '@jobstash/filters/state';
 
 import { Button, FilterIcon } from '@jobstash/shared/ui';
 
+import { Text } from '@jobstash/shared/ui';
+
 const FiltersToggleButton = () => {
   const { showFilters, isLoading, filterCount, toggleFilters } =
     useFiltersContext();
@@ -21,8 +23,12 @@ const FiltersToggleButton = () => {
       isActive={showFilters}
       isDisabled={isLoading}
       onClick={toggleFilters}
+      className={`px-2 gap-x-0 ${filterCount > 0 ? '[&>span]:pl-1' : ''}`}
     >
       {getToggleFilterText(filterCount)}
+      <Text className="inline-block pl-2 whitespace-nowrap lg:hidden" color="dimmed">
+        Filters and Sorting
+      </Text>
     </Button>
   );
 };

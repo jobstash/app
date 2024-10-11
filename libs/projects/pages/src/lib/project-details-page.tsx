@@ -115,7 +115,7 @@ export const ProjectDetailsPage = ({
           'hide-scrollbar fixed inset-0 h-dvh overflow-y-auto bg-dark px-4 transition-all lg:inset-auto lg:right-0 lg:top-0 lg:w-5/12 lg:px-6 lg:pr-10 lg:mt-[100px] lg:h-[calc(100vh-100px)]',
           { 'z-50': !showFilters },
           { '-z-50': showFilters },
-          { 'lg:mt-[100px] lg:h-[calc(100vh-100px)]': isOpenTopBanner }
+          { 'lg:mt-[140px] lg:h-[calc(100vh-140px)]': isOpenTopBanner }
         )}
       >
         <ProjectsRightPanel
