@@ -3,7 +3,6 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
 import { PrimitiveAtom, useAtom, useAtomValue } from 'jotai';
-import { isOpenTopBannerAtom } from '@jobstash/shared/state';
 
 import { JobPost } from '@jobstash/jobs/core';
 import { RIGHT_PANEL_WRAPPER_ID } from '@jobstash/right-panel/core';
@@ -23,6 +22,7 @@ import { cn, sentryMessage } from '@jobstash/shared/utils';
 
 import { showFiltersAtom } from '@jobstash/filters/state';
 import { useJobPost } from '@jobstash/jobs/state';
+import { isOpenTopBannerAtom } from '@jobstash/shared/state';
 import { useMobileDisableScrollSyncer } from '@jobstash/shared/state';
 
 // eslint-disable-next-line @nx/enforce-module-boundaries
@@ -89,6 +89,7 @@ export const JobPostPageTemplate: React.FC<JobPostPageTemplateProps> = ({
   activeJobAtom,
   routeSection = ROUTE_SECTION.JOBS,
 }) => {
+  const isOpenTopBanner = useAtomValue(isOpenTopBannerAtom);
   const [activeJob, setActiveJob] = useAtom(activeJobAtom);
 
   const router = useRouter();
@@ -141,7 +142,6 @@ export const JobPostPageTemplate: React.FC<JobPostPageTemplateProps> = ({
     createJobCardOgDetails(jobPost);
 
   const currentJobPost = jobPost ?? activeJob;
-  const isOpenTopBanner = useAtomValue(isOpenTopBannerAtom);
 
   return (
     <>
@@ -195,7 +195,7 @@ export const JobPostPageTemplate: React.FC<JobPostPageTemplateProps> = ({
             { active: activeJob === initJob },
             { 'z-50': !showFilters },
             { '-z-50': showFilters },
-            { 'lg:mt-[140px] lg:h-[calc(100vh-140px)]': isOpenTopBanner }
+            { 'lg:mt-[140px] lg:h-[calc(100vh-140px)]': isOpenTopBanner },
           )}
         >
           <JobsRightPanel

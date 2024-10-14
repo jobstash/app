@@ -4,7 +4,6 @@ import { useEffect, useMemo } from 'react';
 
 import { NotFoundPage } from '@jobstash/shared/pages';
 import { useAtom, useAtomValue } from 'jotai';
-import { isOpenTopBannerAtom } from '@jobstash/shared/state';
 
 import { type ProjectDetails } from '@jobstash/projects/core';
 import {
@@ -16,6 +15,7 @@ import { cn, sentryMessage } from '@jobstash/shared/utils';
 
 import { showFiltersAtom } from '@jobstash/filters/state';
 import { activeProjectIdAtom } from '@jobstash/projects/state';
+import { isOpenTopBannerAtom } from '@jobstash/shared/state';
 import { useMobileDisableScrollSyncer } from '@jobstash/shared/state';
 
 import { PageWrapper } from '@jobstash/shared/ui';
@@ -44,6 +44,8 @@ export const ProjectDetailsPage = ({
   notFoundInfo,
 }: ProjectDetailsPageProps) => {
   const [activeProjectId, setActiveProjectId] = useAtom(activeProjectIdAtom);
+
+  const isOpenTopBanner = useAtomValue(isOpenTopBannerAtom);
 
   useEffect(() => {
     if (initProjectDetails && !activeProjectId) {
@@ -86,8 +88,6 @@ export const ProjectDetailsPage = ({
     return <NotFoundPage notFoundInfo={notFoundInfo} />;
   }
 
-  const isOpenTopBanner = useAtomValue(isOpenTopBannerAtom);
-
   return (
     <PageWrapper>
       <SideBar filtersRouteSection={ROUTE_SECTION.PROJECTS} />
@@ -111,11 +111,11 @@ export const ProjectDetailsPage = ({
       </div>
 
       <div
-         className={cn(
+        className={cn(
           'hide-scrollbar fixed inset-0 h-dvh overflow-y-auto bg-dark px-4 transition-all lg:inset-auto lg:right-0 lg:top-0 lg:w-5/12 lg:px-6 lg:pr-10 lg:mt-[100px] lg:h-[calc(100vh-100px)]',
           { 'z-50': !showFilters },
           { '-z-50': showFilters },
-          { 'lg:mt-[140px] lg:h-[calc(100vh-140px)]': isOpenTopBanner }
+          { 'lg:mt-[140px] lg:h-[calc(100vh-140px)]': isOpenTopBanner },
         )}
       >
         <ProjectsRightPanel

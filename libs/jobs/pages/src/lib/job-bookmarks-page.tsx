@@ -5,6 +5,7 @@ import { useEffect, useRef } from 'react';
 
 import { LoadingPage } from '@jobstash/shared/pages';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
+
 import { type JobPost } from '@jobstash/jobs/core';
 import { RIGHT_PANEL_WRAPPER_ID } from '@jobstash/right-panel/core';
 import { EVENT_CARD_CLICK } from '@jobstash/shared/core';
@@ -138,7 +139,7 @@ export const JobBookmarksPage = () => {
           id={RIGHT_PANEL_WRAPPER_ID}
           className={cn(
             'hide-scrollbar fixed inset-0 h-dvh overflow-y-auto bg-dark px-4 transition-all lg:inset-auto lg:right-0 lg:top-0 lg:w-5/12 lg:px-6 lg:pr-10 lg:mt-[100px] lg:h-[calc(100vh-100px)] z-50',
-            { 'lg:mt-[140px] lg:h-[calc(100vh-140px)]': isOpenTopBanner }
+            { 'lg:mt-[140px] lg:h-[calc(100vh-140px)]': isOpenTopBanner },
           )}
         >
           {isLoading && (
