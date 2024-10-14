@@ -1,6 +1,7 @@
 export * from './lib/add-alias';
 export * from './lib/get-all-jobs';
 export * from './lib/get-all-orgs';
+export * from './lib/get-all-projects';
 export * from './lib/get-approval-org-list';
 export * from './lib/get-blocked-tags';
 export * from './lib/get-paired-terms';

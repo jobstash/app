@@ -9,6 +9,7 @@ export * from './jobs';
 export * from './orgs';
 export * from './paired-terms';
 export * from './preferred-terms';
+export * from './projects';
 
 export const orgProfileListSchema = myzod.array(orgProfileInfoSchema);
 export type OrgProfileList = Infer<typeof orgProfileListSchema>;

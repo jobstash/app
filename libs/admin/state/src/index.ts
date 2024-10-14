@@ -8,6 +8,7 @@ export * from './lib/atoms/org-list-atoms';
 export * from './lib/hooks/use-add-alias';
 export * from './lib/hooks/use-all-jobs-mutation';
 export * from './lib/hooks/use-all-orgs';
+export * from './lib/hooks/use-all-projects';
 export * from './lib/hooks/use-approval-org-list';
 export * from './lib/hooks/use-authorize-org';
 export * from './lib/hooks/use-blocked-tags-query';

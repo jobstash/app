@@ -23,10 +23,16 @@ const SidebarAdminSection = ({ isMobile }: Props) => {
   const tabs: SidebarBartabProps[] = [];
 
   if (hasPermission) {
-    tabs.push({
-      text: 'Manage Organizations',
-      path: '/godmode/organizations/manage',
-    });
+    tabs.push(
+      {
+        text: 'Manage Organizations',
+        path: '/godmode/organizations/manage',
+      },
+      {
+        text: 'Manage Projects',
+        path: '/godmode/projects/manage',
+      },
+    );
   }
 
   if (isSuperAdmin) {

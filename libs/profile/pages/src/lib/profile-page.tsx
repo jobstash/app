@@ -1,14 +1,13 @@
 import { LoadingPage, NotFoundPage } from '@jobstash/shared/pages';
 
-import { PERMISSIONS } from '@jobstash/auth/core';
-
-import { useAuthContext, useHasPermission } from '@jobstash/auth/state';
+import { useAuthContext } from '@jobstash/auth/state';
 import { ProfileInfoProvider } from '@jobstash/profile/state';
 
 import { ProfileDevPage } from './profile-dev-page';
 
 export const ProfilePage = () => {
-  const hasPermission = useHasPermission(PERMISSIONS.USER);
+  const { permissions } = useAuthContext();
+  const hasPermission = permissions.length > 0;
   const { isLoading } = useAuthContext();
 
   if (isLoading) return <LoadingPage />;
