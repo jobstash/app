@@ -6,10 +6,9 @@ import { useAtomValue } from 'jotai';
 import { type ProjectDetails } from '@jobstash/projects/core';
 import { ROUTE_SECTION, TAB_SEGMENT } from '@jobstash/shared/core';
 import { cn } from '@jobstash/shared/utils';
-import { isOpenTopBannerAtom } from '@jobstash/shared/state';
 
-import { showFiltersAtom } from '@jobstash/filters/state';
 import { activeProjectIdAtom } from '@jobstash/projects/state';
+import { isOpenTopBannerAtom } from '@jobstash/shared/state';
 import { useIsDesktop } from '@jobstash/shared/state';
 
 import { PageWrapper } from '@jobstash/shared/ui';
@@ -32,7 +31,6 @@ interface Props {
 
 export const ProjectListPage = ({ initActiveProject }: Props) => {
   const activeProjectId = useAtomValue(activeProjectIdAtom);
-  const showFilters = useAtomValue(showFiltersAtom);
   const isDesktop = useIsDesktop();
   const isOpenTopBanner = useAtomValue(isOpenTopBannerAtom);
 

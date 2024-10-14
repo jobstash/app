@@ -4,7 +4,6 @@ import { useEffect, useMemo } from 'react';
 
 import { NotFoundPage } from '@jobstash/shared/pages';
 import { useAtom, useAtomValue } from 'jotai';
-import { isOpenTopBannerAtom } from '@jobstash/shared/state';
 
 import { type OrgDetails, OrgListItem } from '@jobstash/organizations/core';
 import {
@@ -16,6 +15,7 @@ import { cn, sentryMessage } from '@jobstash/shared/utils';
 
 import { showFiltersAtom } from '@jobstash/filters/state';
 import { activeOrgIdAtom } from '@jobstash/organizations/state';
+import { isOpenTopBannerAtom } from '@jobstash/shared/state';
 import { useMobileDisableScrollSyncer } from '@jobstash/shared/state';
 
 import { getFundingRoundsData, PageWrapper } from '@jobstash/shared/ui';
@@ -43,6 +43,7 @@ export const OrgDetailsPage = ({
   initOrgDetails,
   notFoundInfo,
 }: OrgDetailsPageProps) => {
+  const isOpenTopBanner = useAtomValue(isOpenTopBannerAtom);
   const [activeOrgId, setActiveOrgId] = useAtom(activeOrgIdAtom);
 
   useEffect(() => {
@@ -105,8 +106,6 @@ export const OrgDetailsPage = ({
 
   // TODO: image meta data
   // TODO: org meta data
-  const isOpenTopBanner = useAtomValue(isOpenTopBannerAtom);
-
 
   return (
     <>
@@ -135,7 +134,7 @@ export const OrgDetailsPage = ({
             'hide-scrollbar fixed inset-0 h-dvh overflow-y-auto bg-dark px-4 transition-all lg:inset-auto lg:right-0 lg:top-0 lg:w-5/12 lg:px-6 lg:pr-10 lg:mt-[100px] lg:h-[calc(100vh-100px)]',
             { 'z-50': !showFilters },
             { '-z-50': showFilters },
-            { 'lg:mt-[140px] lg:h-[calc(100vh-140px)]': isOpenTopBanner }
+            { 'lg:mt-[140px] lg:h-[calc(100vh-140px)]': isOpenTopBanner },
           )}
         >
           <OrgsRightPanel hasTitle orgId={orgId} currentTab={tab as string} />
