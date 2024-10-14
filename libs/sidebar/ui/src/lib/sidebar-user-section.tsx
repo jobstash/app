@@ -19,7 +19,7 @@ const SidebarUserSection = ({ isMobile }: Props) => {
   if (isLoading) return <SidebarSectionSkeleton />;
   if (!isAuthenticated) return null;
 
-  if (isAdmin) <SidebarAdminSection />;
+  if (isAdmin) return <SidebarAdminSection />;
 
   return (
     <ProfileInfoProvider>
