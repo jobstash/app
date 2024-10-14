@@ -1,26 +1,36 @@
-import { Button, Divider, Tooltip } from '@nextui-org/react';
-import { useAtom } from 'jotai';
+import Link from 'next/link';
+
+import { Button, Divider, Spinner, Tooltip } from '@nextui-org/react';
 import { ListStart, RefreshCcw, Trash2 } from 'lucide-react';
 
 import { getLogoUrl } from '@jobstash/shared/utils';
 
-import { Heading, LogoTitle } from '@jobstash/shared/ui';
+import { useOrgDetails } from '@jobstash/organizations/state';
 
-import { selectedOrgAtom } from '../core/atoms';
+import { Heading, LogoTitle } from '@jobstash/shared/ui';
 
 import { OrgProjectInfo } from './org-project-info';
 
-export const OrgInfo = () => {
-  const [org, setOrg] = useAtom(selectedOrgAtom);
+interface Props {
+  id: string;
+}
 
-  if (!org) return null;
+export const OrgInfo = ({ id }: Props) => {
+  const { data } = useOrgDetails(id);
 
-  const { name, website, logoUrl, location, projects } = org;
+  if (!data) {
+    return (
+      <div className="w-80 h-40 flex items-center justify-center">
+        <Spinner size="sm" color="white" />
+      </div>
+    );
+  }
 
-  const reset = () => setOrg(null);
+  const { name, website, logoUrl, location, projects } = data;
 
   return (
-    <>
+    <div className="flex flex-col gap-8">
+      <Heading size="lg">Manage Organization</Heading>
       <div className="flex items-center gap-8">
         <LogoTitle
           size="lg"
@@ -28,17 +38,22 @@ export const OrgInfo = () => {
           location={location}
           avatarProps={{
             alt: name,
-            src: getLogoUrl(website.length > 0 ? website[0] : null, logoUrl),
+            src: getLogoUrl(website, logoUrl),
           }}
         />
         <Tooltip content="Choose another organization">
-          <Button isIconOnly size="sm" onClick={reset}>
+          <Button
+            isIconOnly
+            as={Link}
+            href="/godmode/organizations/manage"
+            size="sm"
+          >
             <ListStart className="h-5 w-5" />
           </Button>
         </Tooltip>
       </div>
 
-      <div className="flex gap-4 items-center ">
+      <div className="flex gap-4 -mt-4 items-center ">
         <Button
           size="sm"
           className="font-bold"
@@ -74,6 +89,6 @@ export const OrgInfo = () => {
           </>
         )}
       </div>
-    </>
+    </div>
   );
 };

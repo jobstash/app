@@ -1,58 +1,39 @@
-import { useEffect, useState, useTransition } from 'react';
+import { useRouter } from 'next/router';
+import { useEffect, useState } from 'react';
 
 import { useDebouncedValue } from '@mantine/hooks';
-import { PrimitiveAtom, useSetAtom } from 'jotai';
 
-interface Item {
-  value: string;
+interface Props<T extends { name: string }> {
+  data?: T[];
+  getItemUrl: (item: T) => string;
 }
 
-interface Props<T> {
-  data: T[];
-  atom: PrimitiveAtom<(T & { value: string }) | null>;
-  getItemKey: (item: T) => string;
-  getItemValue: (item: T) => string;
-  onSelect: (Item: T) => void;
-}
-
-export const useSearchInput = <T>({
+export const useSearchInput = <T extends { name: string }>({
   data,
-  getItemKey,
-  getItemValue,
-  atom,
-  onSelect,
+  getItemUrl,
 }: Props<T>) => {
-  const [inputState, setInputState] = useState({
-    selectedKey: '' as string | null,
-    inputValue: '',
-  });
+  const router = useRouter();
 
-  const setSelectedItem = useSetAtom(atom);
+  const [selectedKey, setSelectedKey] = useState<string | null>(null);
+  const [value, setValue] = useState('');
+  const [debouncedValue] = useDebouncedValue(value, 200);
 
-  const { selectedKey, inputValue } = inputState;
-  const [debouncedInputValue] = useDebouncedValue(inputValue, 200);
+  const onInputChange = (value: string) => {
+    setValue(value);
+  };
 
-  const [filteredItems, setFilteredItems] = useState<(T & Item)[]>([]);
-
-  const [showSpinner, startSpinner] = useTransition();
-  const [debouncedShowSpinner] = useDebouncedValue(showSpinner, 50);
+  const [filteredItems, setFilteredItems] = useState<T[]>([]);
 
   useEffect(() => {
-    startSpinner(() => {
-      const filteredOrgs =
-        data && debouncedInputValue.length > 1
-          ? data
-              .map((item) => ({ ...item, value: getItemValue(item) }))
-              .filter((item) =>
-                getItemKey(item)
-                  .toLowerCase()
-                  .includes(debouncedInputValue.toLowerCase()),
-              )
-          : [];
+    const items =
+      data && debouncedValue.length > 1
+        ? data.filter((item) =>
+            item.name.toLowerCase().includes(debouncedValue.toLowerCase()),
+          )
+        : [];
 
-      setFilteredItems(filteredOrgs);
-    });
-  }, [data, debouncedInputValue, getItemKey, getItemValue]);
+    setFilteredItems(items);
+  }, [data, debouncedValue]);
 
   const [isLoading, setIsLoading] = useState(false);
   const onSelectionChange = async (key: React.Key | null) => {
@@ -60,31 +41,20 @@ export const useSearchInput = <T>({
       setIsLoading(true);
     }
 
-    const filteredItem = filteredItems.find((item) => getItemKey(item) === key);
+    const filteredItem = filteredItems.find((item) => item.name === key);
 
-    setSelectedItem(filteredItem ?? null);
-    setInputState(() => ({
-      inputValue: filteredItem ? getItemValue(filteredItem) : '',
-      selectedKey: key as string | null,
-    }));
+    setSelectedKey(key as string | null);
+    setValue(filteredItem ? filteredItem.name : '');
 
     if (filteredItem) {
       // eslint-disable-next-line no-promise-executor-return
       await new Promise((r) => setTimeout(r, 400)); // Fake loading feels nice lel
-      onSelect(filteredItem);
+      router.push(getItemUrl(filteredItem));
     }
-  };
-
-  const onInputChange = (value: string) => {
-    setInputState((prev) => ({
-      inputValue: value,
-      selectedKey: value ? prev.selectedKey : null,
-    }));
   };
 
   return {
     isLoadingInput: isLoading,
-    showSpinner: debouncedShowSpinner,
     items: filteredItems,
     selectedKey,
     onInputChange,
