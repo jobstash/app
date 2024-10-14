@@ -5,6 +5,7 @@ export * from './lib/get-all-orgs';
 export * from './lib/get-all-projects';
 export * from './lib/get-approval-org-list';
 export * from './lib/get-blocked-tags';
+export * from './lib/get-org-id-by-url';
 export * from './lib/get-paired-terms';
 export * from './lib/get-preferred-terms';
 export * from './lib/post-all-jobs';
