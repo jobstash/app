@@ -1,27 +1,29 @@
 import Link from 'next/link';
 
 import { Button, Divider, Spinner, Tooltip } from '@nextui-org/react';
-import { ListStart, RefreshCcw, Trash2 } from 'lucide-react';
+import { ListStart, RefreshCcw } from 'lucide-react';
 
+import { OrgDetails } from '@jobstash/organizations/core';
 import { getLogoUrl } from '@jobstash/shared/utils';
 
 import { useOrgDetails } from '@jobstash/organizations/state';
 
 import { Heading, LogoTitle } from '@jobstash/shared/ui';
 
+import { DeleteOrgModal } from './delete-org-modal';
 import { OrgProjectInfo } from './org-project-info';
 
 interface Props {
-  id: string;
+  org: OrgDetails;
 }
 
-export const OrgInfo = ({ id }: Props) => {
-  const { data } = useOrgDetails(id);
+export const OrgInfo = ({ org }: Props) => {
+  const { data } = useOrgDetails(org.orgId);
 
   if (!data) {
     return (
       <div className="w-80 h-40 flex items-center justify-center">
-        <Spinner size="sm" color="white" />
+        <Spinner size="lg" color="white" />
       </div>
     );
   }
@@ -61,13 +63,7 @@ export const OrgInfo = ({ id }: Props) => {
         >
           Convert to Project
         </Button>
-        <Button
-          size="sm"
-          className="bg-red-700 font-bold"
-          startContent={<Trash2 className="h-4 w-4 -mt-0.5" />}
-        >
-          Delete
-        </Button>
+        <DeleteOrgModal id={org.orgId} isDisabled={!data} />
       </div>
 
       <div className="space-y-8">

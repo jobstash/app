@@ -6,10 +6,6 @@ import { NotFoundInfo } from '@jobstash/shared/core';
 import { Button, Heading, NotFoundSvg, Text } from '@jobstash/shared/ui';
 import { SideBar } from '@jobstash/sidebar/feature';
 
-interface Props {
-  notFoundInfo?: NotFoundInfo;
-}
-
 const DEFAULT_NOT_FOUND_INFO = {
   link: '/',
   title: 'Nothing Here',
@@ -17,9 +13,11 @@ const DEFAULT_NOT_FOUND_INFO = {
   buttonText: 'Go to Home Page',
 };
 
-export const NotFoundPage = ({ notFoundInfo }: Props) => {
-  const { link, title, message, buttonText } =
-    notFoundInfo ?? DEFAULT_NOT_FOUND_INFO;
+export const NotFoundPage = (props: Partial<NotFoundInfo>) => {
+  const { link, title, message, buttonText } = {
+    ...DEFAULT_NOT_FOUND_INFO,
+    ...props,
+  };
 
   const router = useRouter();
   const onClick = useCallback(() => {

@@ -14,6 +14,7 @@ export * from './lib/hooks/use-authorize-org';
 export * from './lib/hooks/use-blocked-tags-query';
 export * from './lib/hooks/use-blocked-terms-mutation';
 export * from './lib/hooks/use-create-preference-mutation';
+export * from './lib/hooks/use-delete-org';
 export * from './lib/hooks/use-paired-terms-mutation';
 export * from './lib/hooks/use-paired-terms-query';
 export * from './lib/hooks/use-set-communities';
