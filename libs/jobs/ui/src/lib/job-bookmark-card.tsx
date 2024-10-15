@@ -39,7 +39,7 @@ const JobBookmarkCard = ({
 
   const isFeatured = checkJobIsFeatured(featureStartDate, featureEndDate);
   const timestampText = isFeatured
-    ? 'Urgent Hiring'
+    ? 'Urgently hiring'
     : prettyTimestamp(timestamp);
 
   return (
