@@ -9,6 +9,7 @@ import { useEffect } from 'react';
 import { LoadingPage } from '@jobstash/shared/pages';
 import { NextUIProvider } from '@nextui-org/react';
 import { useAtomValue } from 'jotai';
+import { Provider as JotaiProvider } from 'jotai';
 
 import { ANALYTICS_ID } from '@jobstash/shared/core';
 import { cn } from '@jobstash/shared/utils';
@@ -139,7 +140,9 @@ const App = ({ Component, pageProps }: AppProps) => {
                         'pt-[58px] sm:pt-[40px]': isOpenTopBanner,
                       })}
                     >
-                      <Component {...pageProps} />
+                      <JotaiProvider>
+                        <Component {...pageProps} />
+                      </JotaiProvider>
                     </div>
 
                     <ReportModal />

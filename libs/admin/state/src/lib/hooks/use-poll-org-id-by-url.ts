@@ -4,7 +4,7 @@ import { useAuthContext } from '@jobstash/auth/state';
 import { useMwVersionContext } from '@jobstash/shared/state';
 import { getOrgIdByUrl } from '@jobstash/admin/data';
 
-export const usePollOrgIdByUrl = (url: string) => {
+export const usePollOrgIdByUrl = (url: string, enabled: boolean) => {
   const { isLoading } = useAuthContext();
   const { mwVersion } = useMwVersionContext();
 
@@ -13,6 +13,6 @@ export const usePollOrgIdByUrl = (url: string) => {
     queryFn: async () => getOrgIdByUrl(url),
     refetchInterval: 5000,
     refetchOnWindowFocus: false,
-    enabled: !isLoading,
+    enabled: !isLoading && enabled,
   });
 };

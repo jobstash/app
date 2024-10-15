@@ -10,7 +10,7 @@ export const getOrgIdByUrl = async (url: string) => {
   try {
     domain = new URL(url).hostname;
   } catch {
-    throw new Error('Url is not valid');
+    throw new Error('Invalid Org URL');
   }
 
   const options = {

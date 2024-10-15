@@ -25,6 +25,10 @@ const SidebarAdminSection = ({ isMobile }: Props) => {
   if (hasPermission) {
     tabs.push(
       {
+        text: 'Import Organization',
+        path: '/godmode/organizations/import',
+      },
+      {
         text: 'Manage Organizations',
         path: '/godmode/organizations/manage',
       },
