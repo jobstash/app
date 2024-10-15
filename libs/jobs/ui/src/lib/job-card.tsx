@@ -13,7 +13,11 @@ import {
 } from '@jobstash/shared/core';
 import { getUrlWithParams } from '@jobstash/filters/utils';
 import { checkJobIsFeatured, createJobKey } from '@jobstash/jobs/utils';
-import { dispatchEvent, gaEvent } from '@jobstash/shared/utils';
+import {
+  dispatchEvent,
+  gaEvent,
+  prettyTimestamp,
+} from '@jobstash/shared/utils';
 
 import { useAuthContext } from '@jobstash/auth/state';
 
@@ -88,6 +92,9 @@ const JobCard = ({
   }, [filterParamsObj, jobPost, routeSection]);
 
   const isFeatured = checkJobIsFeatured(featureStartDate, featureEndDate);
+  const timestampText = isFeatured
+    ? 'Urgent Hiring'
+    : prettyTimestamp(timestamp);
 
   return (
     <JobCardWrapper
@@ -98,7 +105,7 @@ const JobCard = ({
     >
       <JobCardHeader
         title={title}
-        ts={timestamp}
+        timestampText={timestampText}
         isFeatured={isFeatured}
         bookmarkButton={bookmarkButton}
       />
@@ -112,8 +119,8 @@ const JobCard = ({
       <JobCardTechs techs={tags} />
       <JobCardProjects projects={projects} />
       <JobCardFooter
-        shortUUID={shortUUID}
-        ts={timestamp}
+        isFeatured={isFeatured}
+        timestampText={timestampText}
         bookmarkButton={bookmarkButton}
       />
     </JobCardWrapper>

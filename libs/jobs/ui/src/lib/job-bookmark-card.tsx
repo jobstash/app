@@ -2,6 +2,7 @@ import { type ReactNode } from 'react';
 
 import { type JobPost } from '@jobstash/jobs/core';
 import { checkJobIsFeatured } from '@jobstash/jobs/utils';
+import { prettyTimestamp } from '@jobstash/shared/utils';
 
 import { Heading } from '@jobstash/shared/ui';
 
@@ -31,13 +32,15 @@ const JobBookmarkCard = ({
     tags,
     title,
     timestamp,
-    shortUUID,
     featureStartDate,
     featureEndDate,
   } = jobPost;
   const { projects } = organization;
 
   const isFeatured = checkJobIsFeatured(featureStartDate, featureEndDate);
+  const timestampText = isFeatured
+    ? 'Urgent Hiring'
+    : prettyTimestamp(timestamp);
 
   return (
     <JobCardWrapper
@@ -48,7 +51,7 @@ const JobBookmarkCard = ({
     >
       <JobCardHeader
         title={title}
-        ts={timestamp}
+        timestampText={timestampText}
         isFeatured={isFeatured}
         bookmarkButton={bookmarkButton}
       />
@@ -62,8 +65,8 @@ const JobBookmarkCard = ({
       <JobCardTechs techs={tags} />
       <JobCardProjects projects={projects} />
       <JobCardFooter
-        shortUUID={shortUUID}
-        ts={timestamp}
+        isFeatured={isFeatured}
+        timestampText={timestampText}
         bookmarkButton={bookmarkButton}
       />
     </JobCardWrapper>
