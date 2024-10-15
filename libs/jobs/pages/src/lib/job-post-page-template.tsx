@@ -122,7 +122,7 @@ export const JobPostPageTemplate: React.FC<JobPostPageTemplateProps> = ({
   useMobileDisableScrollSyncer({ shouldDisable: true });
 
   if (notFoundInfo) {
-    return <NotFoundPage notFoundInfo={notFoundInfo} />;
+    return <NotFoundPage {...notFoundInfo} />;
   }
 
   const { slug, tab } = router.query;

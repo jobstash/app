@@ -83,7 +83,7 @@ export const OrgDetailsPage = ({
   const showFilters = useAtomValue(showFiltersAtom);
 
   if (notFoundInfo) {
-    return <NotFoundPage notFoundInfo={notFoundInfo} />;
+    return <NotFoundPage {...notFoundInfo} />;
   }
 
   const { lastFundingAmount, lastFundingDate } = getFundingRoundsData(

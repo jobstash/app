@@ -85,7 +85,7 @@ export const ProjectDetailsPage = ({
   useMobileDisableScrollSyncer({ shouldDisable: true });
 
   if (notFoundInfo) {
-    return <NotFoundPage notFoundInfo={notFoundInfo} />;
+    return <NotFoundPage {...notFoundInfo} />;
   }
 
   return (
