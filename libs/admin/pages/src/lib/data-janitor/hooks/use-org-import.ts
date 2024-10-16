@@ -20,13 +20,6 @@ export const useOrgImport = (shouldPersist = true) => {
   return useMutation({
     mutationFn: (payload: Payload) => importOrg(payload),
     onSuccess(_data, { name, url }) {
-      // ALTERNATIVE: Only unique urls
-      // setOrgImportItems((prev?: Map<string, OrgImportItem>) => {
-      //   const updatedMap = new Map(prev instanceof Map ? prev : undefined);
-      //   updatedMap.set(url, { name, url, status: 'pending', ts: Date.now() });
-      //   return updatedMap;
-      // });
-
       // Allow duplicate urls
       if (shouldPersist) {
         setOrgImportItems((prev: OrgImportItem[]) => {

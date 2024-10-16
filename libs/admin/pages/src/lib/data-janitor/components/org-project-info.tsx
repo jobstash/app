@@ -3,18 +3,19 @@ import Link from 'next/link';
 import { Button, Spinner, Tooltip } from '@nextui-org/react';
 import { Settings, Trash2 } from 'lucide-react';
 
+import { OrgDetails } from '@jobstash/organizations/core';
 import { getLogoUrl } from '@jobstash/shared/utils';
 
 import { useProjectDetails } from '@jobstash/projects/state';
 
 import { Heading, LogoTitle } from '@jobstash/shared/ui';
 
-interface Props {
+interface OrgProjectInfoItemProps {
   id: string;
   name: string;
 }
 
-export const OrgProjectInfo = ({ id, name }: Props) => {
+const OrgProjectInfoItem = ({ id, name }: OrgProjectInfoItemProps) => {
   const { data } = useProjectDetails(id);
   const manageLink = `/godmode/projects/manage/${data?.id ?? ''}`;
 
@@ -51,6 +52,28 @@ export const OrgProjectInfo = ({ id, name }: Props) => {
           <Spinner size="sm" color="white" />
         )}
       </div>
+    </div>
+  );
+};
+
+interface OrgProjectInfoProps {
+  projects: OrgDetails['projects'];
+}
+
+export const OrgProjectInfo = ({ projects }: OrgProjectInfoProps) => {
+  const addProjectText = `Link ${
+    projects.length > 0 ? 'Another' : 'a'
+  } Project`;
+
+  return (
+    <div className="space-y-8">
+      {projects.map(({ id, name }) => (
+        <OrgProjectInfoItem key={id} id={id} name={name} />
+      ))}
+
+      <Button size="sm" className="font-bold">
+        {addProjectText}
+      </Button>
     </div>
   );
 };

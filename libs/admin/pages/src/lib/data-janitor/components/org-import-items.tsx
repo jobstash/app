@@ -1,4 +1,5 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useRouter } from 'next/router';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 import {
@@ -25,8 +26,13 @@ import { OrgImportItem as IOrgImportItem, OrgImportItem } from '../core/types';
 import { useOrgImport } from '../hooks/use-org-import';
 
 const ItemMenu = ({ orgId }: { orgId?: string }) => {
+  const { push } = useRouter();
+  const openManagePage = () => push(`/godmode/organizations/manage/${orgId}`);
+
   const menuItems = [
-    ...(orgId ? [{ label: 'Manage organization' }] : []),
+    ...(orgId
+      ? [{ label: 'Manage organization', onClick: openManagePage }]
+      : []),
     { label: 'Remove from tracklist' },
   ];
 
@@ -39,7 +45,9 @@ const ItemMenu = ({ orgId }: { orgId?: string }) => {
       </DropdownTrigger>
       <DropdownMenu aria-label="Static Actions">
         {menuItems.map((item) => (
-          <DropdownItem key={item.label}>{item.label}</DropdownItem>
+          <DropdownItem key={item.label} onClick={item.onClick}>
+            {item.label}
+          </DropdownItem>
         ))}
       </DropdownMenu>
     </Dropdown>
@@ -56,13 +64,16 @@ const OrgImportItem = ({ item }: Props) => {
 
   const [orgImportItems, setOrgImportItems] = useAtom(orgImportItemsAtom);
 
-  const updateItemStatus = (status: OrgImportItem['status']) => {
-    const updatedItems = orgImportItems.map((orgImportItem) =>
-      item.id === orgImportItem.id ? { ...item, status } : orgImportItem,
-    );
+  const updateItemStatus = useCallback(
+    (status: OrgImportItem['status']) => {
+      const updatedItems = orgImportItems.map((orgImportItem) =>
+        item.id === orgImportItem.id ? { ...item, status } : orgImportItem,
+      );
 
-    setOrgImportItems(updatedItems);
-  };
+      setOrgImportItems(updatedItems);
+    },
+    [item, orgImportItems, setOrgImportItems],
+  );
 
   const { mutate: importOrg, isPending: isImporting } = useOrgImport(false);
   const onRetry = () => {
@@ -90,7 +101,7 @@ const OrgImportItem = ({ item }: Props) => {
     }
 
     return () => clearTimeout(timeout);
-  }, [isPending]);
+  }, [isPending, updateItemStatus]);
 
   const { data: orgId } = usePollOrgIdByUrl(item.url, isPending);
 
@@ -98,7 +109,7 @@ const OrgImportItem = ({ item }: Props) => {
     if (isPending && typeof orgId === 'string') {
       updateItemStatus('done');
     }
-  }, [orgId, isPending]);
+  }, [isPending, orgId, updateItemStatus]);
 
   const [orgIdDone, setOrgIdDone] = useState<string | null>(null);
   useEffect(() => {
@@ -110,7 +121,7 @@ const OrgImportItem = ({ item }: Props) => {
 
       fetchId();
     }
-  }, [isDone, orgIdDone]);
+  }, [isDone, item.url, orgIdDone]);
 
   return (
     <div className="p-4 border border-zinc-800 rounded-xl flex flex-col gap-2 min-w-xs">

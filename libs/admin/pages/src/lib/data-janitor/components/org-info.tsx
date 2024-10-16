@@ -1,24 +1,95 @@
-import Link from 'next/link';
+import { useEffect, useState } from 'react';
 
-import { Button, Divider, Spinner, Tooltip } from '@nextui-org/react';
-import { ListStart, RefreshCcw } from 'lucide-react';
+import {
+  Accordion,
+  AccordionItem,
+  Button,
+  Input,
+  Spinner,
+  Textarea,
+} from '@nextui-org/react';
 
 import { OrgDetails } from '@jobstash/organizations/core';
-import { getLogoUrl } from '@jobstash/shared/utils';
 
 import { useOrgDetails } from '@jobstash/organizations/state';
 
-import { Heading, LogoTitle } from '@jobstash/shared/ui';
-
-import { DeleteOrgModal } from './delete-org-modal';
-import { OrgProjectInfo } from './org-project-info';
+import { useOrgDetailsForm } from '../hooks/use-org-details-form';
 
 interface Props {
   org: OrgDetails;
 }
 
+interface OrgField {
+  label: string;
+  value: string;
+  placeholder?: string;
+  isTextarea?: boolean;
+  onChange: (value: string) => void;
+}
+
+const OrgInputField = ({
+  label,
+  value,
+  placeholder = 'N/A',
+  isTextarea = false,
+  onChange,
+}: OrgField) =>
+  isTextarea ? (
+    <Textarea
+      label={label}
+      placeholder={placeholder}
+      value={value}
+      variant="bordered"
+      radius="sm"
+      onChange={(e) => onChange(e.target.value)}
+    />
+  ) : (
+    <Input
+      label={label}
+      placeholder={placeholder}
+      value={value}
+      variant="bordered"
+      radius="sm"
+      onChange={(e) => onChange(e.target.value)}
+    />
+  );
+
 export const OrgInfo = ({ org }: Props) => {
   const { data } = useOrgDetails(org.orgId);
+  const [formState, setFormState] = useState<Record<string, string>>({});
+  const [isDisabled, setIsDisabled] = useState(true);
+
+  useOrgDetailsForm(org.orgId);
+
+  useEffect(() => {
+    if (data) {
+      setFormState({
+        name: data.name || '',
+        website: data.website || '',
+        location: data.location || '',
+        logoUrl: data.logoUrl || '',
+        summary: data.summary || '',
+        description: data.description || '',
+        headcountEstimate: data.headcountEstimate?.toString() || '',
+        discord: data.discord || '',
+        telegram: data.telegram || '',
+        github: data.github || '',
+        docs: data.docs || '',
+        twitter: data.twitter || '',
+      });
+    }
+  }, [data]);
+
+  useEffect(() => {
+    if (data) {
+      const hasChanges = Object.keys(formState).some(
+        (key) =>
+          formState[key].trim() !==
+          (data[key as keyof typeof data]?.toString().trim() ?? ''),
+      );
+      setIsDisabled(!hasChanges);
+    }
+  }, [formState, data]);
 
   if (!data) {
     return (
@@ -28,63 +99,87 @@ export const OrgInfo = ({ org }: Props) => {
     );
   }
 
-  const { name, website, logoUrl, location, projects } = data;
+  const accordionData = [
+    {
+      key: 'info',
+      title: 'Info',
+      fields: [
+        { label: 'Name', key: 'name', value: formState.name },
+        { label: 'Website', key: 'website', value: formState.website },
+        { label: 'Location', key: 'location', value: formState.location },
+        { label: 'Logo Url', key: 'logoUrl', value: formState.logoUrl },
+        {
+          label: 'Summary',
+          key: 'summary',
+          value: formState.summary,
+          isTextarea: true,
+        },
+        {
+          label: 'Description',
+          key: 'description',
+          value: formState.description,
+          isTextarea: true,
+        },
+        {
+          label: 'Employees',
+          key: 'headcountEstimate',
+          value: formState.headcountEstimate,
+        },
+      ],
+    },
+    {
+      key: 'socials',
+      title: 'Socials',
+      fields: [
+        { label: 'Discord', key: 'discord', value: formState.discord },
+        { label: 'Telegram', key: 'telegram', value: formState.telegram },
+        { label: 'Github', key: 'github', value: formState.github },
+        { label: 'Docs', key: 'docs', value: formState.docs },
+        { label: 'Twitter', key: 'twitter', value: formState.twitter },
+      ],
+    },
+  ];
+
+  const handleFieldChange = (key: string, value: string) => {
+    setFormState((prevState) => ({
+      ...prevState,
+      [key]: value,
+    }));
+  };
+
+  const handleSave = () => {
+    if (Number(formState.headcountEstimate))
+      console.log('Saving changes...', formState);
+  };
 
   return (
-    <div className="flex flex-col gap-8">
-      <Heading size="lg">Manage Organization</Heading>
-      <div className="flex items-center gap-8">
-        <LogoTitle
-          size="lg"
-          title={name}
-          location={location}
-          avatarProps={{
-            alt: name,
-            src: getLogoUrl(website, logoUrl),
-          }}
-        />
-        <Tooltip content="Choose another organization">
-          <Button
-            isIconOnly
-            as={Link}
-            href="/godmode/organizations/manage"
-            size="sm"
-          >
-            <ListStart className="h-5 w-5" />
-          </Button>
-        </Tooltip>
-      </div>
-
-      <div className="flex gap-4 -mt-4 items-center ">
-        <Button
-          size="sm"
-          className="font-bold"
-          startContent={<RefreshCcw className="h-4 w-4 -mt-0.5" />}
-        >
-          Convert to Project
-        </Button>
-        <DeleteOrgModal id={org.orgId} isDisabled={!data} />
-      </div>
-
-      <div className="space-y-8">
-        {projects.length > 0 && (
-          <>
-            <div className="pt-4">
-              <Divider />
+    <div className="flex flex-col gap-8 max-w-lg pb-40">
+      <Accordion variant="splitted">
+        {accordionData.map(({ key, title, fields }) => (
+          <AccordionItem key={key} title={title} aria-label={`Org ${title}`}>
+            <div className="flex flex-col gap-4">
+              {fields.map(({ label, value, key: fieldKey, isTextarea }) => (
+                <OrgInputField
+                  key={fieldKey}
+                  label={label}
+                  value={value}
+                  isTextarea={isTextarea}
+                  onChange={(newValue) => handleFieldChange(fieldKey, newValue)}
+                />
+              ))}
             </div>
+          </AccordionItem>
+        ))}
+      </Accordion>
 
-            <Heading size="md">Linked Projects:</Heading>
-
-            {projects.map(({ id, name }) => (
-              <OrgProjectInfo key={id} id={id} name={name} />
-            ))}
-
-            <Button size="sm" className="font-bold">
-              Link Another Project
-            </Button>
-          </>
-        )}
-      </div>
+      <Button
+        isDisabled={isDisabled}
+        radius="sm"
+        className="font-bold w-fit"
+        onPress={handleSave}
+      >
+        Save Changes
+      </Button>
     </div>
   );
 };
