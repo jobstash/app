@@ -8,6 +8,7 @@ import { useJobPromotePaymentUrl } from '@jobstash/jobs/state';
 import { Text } from '@jobstash/shared/ui';
 
 import { BasicFeatureTooltipContent } from './basic-feature-tooltip-content';
+import { ExtendPromotionTooltipContent } from './extend-promotion-tooltip-content';
 
 interface Props {
   id: string;
@@ -42,11 +43,21 @@ export const JobCardPromoteButton = ({
     </div>
   );
 
+  const timeLeft = getTimeLeftText(endDate);
+  const oneWeekText = getOneWeekText(endDate);
+
   const tooltipContent = isFeatured ? (
-    <div className="flex flex-col text-center">
-      <span>Extend promotion to {getOneWeekText(endDate)}</span>
-      <span>(Expires in {getTimeLeftText(endDate)})</span>
-    </div>
+    // <div className="flex flex-col p-2 w-[320px]">
+    //   <h3 className={cn('text-xl font-bold leading-8 text-white/90')}>
+    //     Extend Promotion
+    //   </h3>
+    //   <span>Current promotion ends in {getOneWeekText(endDate)}</span>
+    //   <span>(Expires in {getTimeLeftText(endDate)})</span>
+    // </div>
+    <ExtendPromotionTooltipContent
+      timeLeft={timeLeft}
+      oneWeekText={oneWeekText}
+    />
   ) : (
     <BasicFeatureTooltipContent />
   );
