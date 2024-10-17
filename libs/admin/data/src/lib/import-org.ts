@@ -1,3 +1,5 @@
+import myzod, { Infer } from 'myzod';
+
 import {
   MessageResponse,
   messageResponseSchema,
@@ -6,10 +8,11 @@ import {
 
 import { mwFetch } from '@jobstash/shared/data';
 
-interface Payload {
-  name: string;
-  url: string;
-}
+const payloadSchema = myzod.object({
+  name: myzod.string().min(1),
+  url: myzod.string().min(1),
+});
+type Payload = Infer<typeof payloadSchema>;
 
 export const importOrg = async ({ name, url }: Payload) => {
   if (!name) throw new Error('Organization name is required');
@@ -23,28 +26,24 @@ export const importOrg = async ({ name, url }: Payload) => {
     throw new Error('Invalid Org URL');
   }
 
-  // eslint-disable-next-line no-promise-executor-return
-  await new Promise((r) => setTimeout(r, 1000));
-
-  return {
-    success: true,
-    message: '',
-  };
-
   const options = {
     method: 'POST' as const,
     responseSchema: messageResponseSchema,
-    sentryLabel: `getPairedTerms`,
+    sentryLabel: `importOrg`,
     credentials: 'include' as RequestCredentials,
     mode: 'cors' as RequestMode,
-    paylaod: {
+    payload: {
       name,
       url: domain,
     },
+    payloadSchema,
+    headers: {
+      'Content-Type': 'application/json',
+    },
   };
 
-  const response = await mwFetch<MessageResponse>(
-    `${MW_URL}/organizations/id/${domain}`,
+  const response = await mwFetch<MessageResponse, Payload>(
+    `${MW_URL}/organizations/add-by-url`,
     options,
   );
 

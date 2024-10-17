@@ -25,15 +25,32 @@ import { orgImportItemsAtom, orgImportTabAtom } from '../core/atoms';
 import { OrgImportItem as IOrgImportItem, OrgImportItem } from '../core/types';
 import { useOrgImport } from '../hooks/use-org-import';
 
-const ItemMenu = ({ orgId }: { orgId?: string }) => {
+const POLL_TIMEOUT = 300_000; // 5 mins
+
+const ItemMenu = ({ id, assignedId }: { id: string; assignedId?: string }) => {
   const { push } = useRouter();
-  const openManagePage = () => push(`/godmode/organizations/manage/${orgId}`);
+
+  const [orgImportItems, setOrgImportItems] = useAtom(orgImportItemsAtom);
+
+  const onDelete = () => {
+    const updatedItems = orgImportItems.filter(
+      (orgImportItem) => id !== orgImportItem.id,
+    );
+    console.log({ updatedItems });
+    setOrgImportItems(updatedItems);
+  };
+
+  const openManagePage = () => {
+    if (assignedId) {
+      push(`/godmode/organizations/manage/${assignedId}`);
+    }
+  };
 
   const menuItems = [
-    ...(orgId
+    ...(assignedId
       ? [{ label: 'Manage organization', onClick: openManagePage }]
       : []),
-    { label: 'Remove from tracklist' },
+    { label: 'Remove from tracklist', onClick: onDelete },
   ];
 
   return (
@@ -97,7 +114,7 @@ const OrgImportItem = ({ item }: Props) => {
     if (isPending) {
       timeout = setTimeout(() => {
         updateItemStatus('stale');
-      }, 120_000);
+      }, POLL_TIMEOUT);
     }
 
     return () => clearTimeout(timeout);
@@ -156,7 +173,7 @@ const OrgImportItem = ({ item }: Props) => {
               </Button>
             </Tooltip>
           )}
-          <ItemMenu orgId={orgIdDone ?? orgId} />
+          <ItemMenu id={item.id} assignedId={orgIdDone ?? orgId} />
         </div>
       </div>
     </div>
