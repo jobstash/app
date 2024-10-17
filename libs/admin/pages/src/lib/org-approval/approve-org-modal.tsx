@@ -186,14 +186,17 @@ export const ApproveOrgModal = () => {
                   onInputChange={onInputChange}
                   onSelectionChange={onSelectionChange}
                 >
-                  {({ value, name, location, website, logoUrl }) => (
+                  {({ value, name, location, websites, logoUrl }) => (
                     <AutocompleteItem key={value}>
                       <LogoTitle
                         title={name}
                         location={location}
                         avatarProps={{
                           alt: name,
-                          src: getLogoUrl(website[0], logoUrl),
+                          src: getLogoUrl(
+                            websites.length > 0 ? websites[0] : '',
+                            logoUrl,
+                          ),
                         }}
                       />
                     </AutocompleteItem>

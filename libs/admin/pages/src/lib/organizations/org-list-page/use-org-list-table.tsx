@@ -73,9 +73,9 @@ export const useOrgListTable = () => {
         headerName: 'Website',
         filter: true,
         editable: true,
-        valueGetter: (p) => p.data?.website.join(','),
+        valueGetter: (p) => p.data?.websites.join(','),
         valueSetter(p) {
-          p.data.website = p.newValue
+          p.data.websites = p.newValue
             .split(',')
             .map((s: string) => s.trim())
             .filter(Boolean);
@@ -83,27 +83,27 @@ export const useOrgListTable = () => {
         },
         cellRenderer: UrlStatusRenderer,
       },
-      {
-        headerName: 'Raw Website',
-        filter: true,
-        editable: true,
-        valueGetter: (p) => p.data?.rawWebsite.join(','),
-        valueSetter(p) {
-          p.data.rawWebsite = p.newValue
-            .split(',')
-            .map((s: string) => s.trim())
-            .filter(Boolean);
-          return true;
-        },
-        cellRenderer: UrlStatusRenderer,
-      },
+      // {
+      //   headerName: 'Raw Website',
+      //   filter: true,
+      //   editable: true,
+      //   valueGetter: (p) => p.data?.rawWebsites.join(','),
+      //   valueSetter(p) {
+      //     p.data.rawWebsites = p.newValue
+      //       .split(',')
+      //       .map((s: string) => s.trim())
+      //       .filter(Boolean);
+      //     return true;
+      //   },
+      //   cellRenderer: UrlStatusRenderer,
+      // },
       {
         headerName: 'Telegram',
         filter: true,
         editable: true,
-        valueGetter: (p) => p.data?.telegram.join(','),
+        valueGetter: (p) => p.data?.telegrams.join(','),
         valueSetter(p) {
-          p.data.telegram = p.newValue
+          p.data.telegrams = p.newValue
             .split(',')
             .map((s: string) => s.trim())
             .filter(Boolean);
@@ -117,9 +117,9 @@ export const useOrgListTable = () => {
         headerName: 'Github',
         filter: true,
         editable: true,
-        valueGetter: (p) => p.data?.github.join(','),
+        valueGetter: (p) => p.data?.githubs.join(','),
         valueSetter(p) {
-          p.data.github = p.newValue
+          p.data.githubs = p.newValue
             .split(',')
             .map((s: string) => s.trim())
             .filter(Boolean);
@@ -133,9 +133,9 @@ export const useOrgListTable = () => {
         headerName: 'Discord',
         filter: true,
         editable: true,
-        valueGetter: (p) => p.data?.discord.join(','),
+        valueGetter: (p) => p.data?.discords.join(','),
         valueSetter(p) {
-          p.data.discord = p.newValue
+          p.data.discords = p.newValue
             .split(',')
             .map((s: string) => s.trim())
             .filter(Boolean);
@@ -149,9 +149,9 @@ export const useOrgListTable = () => {
         headerName: 'Twitter',
         filter: true,
         editable: true,
-        valueGetter: (p) => p.data?.twitter.join(','),
+        valueGetter: (p) => p.data?.twitters.join(','),
         valueSetter(p) {
-          p.data.twitter = p.newValue
+          p.data.twitters = p.newValue
             .split(',')
             .map((s: string) => s.trim())
             .filter(Boolean);
@@ -203,18 +203,18 @@ export const useOrgListTable = () => {
           maxLength: 20_000,
         },
       },
-      {
-        headerName: 'Job Count',
-        field: 'jobCount',
-      },
-      {
-        headerName: 'Open Engineering Jobs',
-        field: 'openEngineeringJobCount',
-      },
-      {
-        headerName: 'Total Engineering Jobs',
-        field: 'totalEngineeringJobCount',
-      },
+      // {
+      //   headerName: 'Job Count',
+      //   field: 'jobCount',
+      // },
+      // {
+      //   headerName: 'Open Engineering Jobs',
+      //   field: 'openEngineeringJobCount',
+      // },
+      // {
+      //   headerName: 'Total Engineering Jobs',
+      //   field: 'totalEngineeringJobCount',
+      // },
       {
         headerName: 'Headcount',
         field: 'headcountEstimate',
@@ -250,9 +250,9 @@ export const useOrgListTable = () => {
       {
         headerName: 'Community',
         editable: true,
-        valueGetter: (p) => p.data?.community.join(','),
+        valueGetter: (p) => p.data?.communities.join(','),
         valueSetter(p) {
-          p.data.community = p.newValue
+          p.data.communities = p.newValue
             .split(',')
             .map((s: string) => s.trim())
             .filter(Boolean);
@@ -262,9 +262,9 @@ export const useOrgListTable = () => {
       {
         headerName: 'Grant',
         editable: true,
-        valueGetter: (p) => p.data?.grant.join(','),
+        valueGetter: (p) => p.data?.grants.join(','),
         valueSetter(p) {
-          p.data.grant = p.newValue
+          p.data.grants = p.newValue
             .split(',')
             .map((s: string) => s.trim())
             .filter(Boolean);
@@ -275,8 +275,8 @@ export const useOrgListTable = () => {
         headerName: 'Jobsite Url',
         // We don't have support for creating jobsites
         // Edit is only available if there's data
-        editable: (p) => (p.data?.jobsite ?? []).length > 0,
-        valueGetter: (p) => p.data?.jobsite.flatMap((j) => j.url).join(','),
+        editable: (p) => (p.data?.jobsites ?? []).length > 0,
+        valueGetter: (p) => p.data?.jobsites.flatMap((j) => j.url).join(','),
         valueSetter(p) {
           const editedValue = p.newValue
             .split(',')
@@ -284,9 +284,9 @@ export const useOrgListTable = () => {
             .find(Boolean);
 
           // Only save first element
-          p.data.jobsite = [
+          p.data.jobsites = [
             {
-              ...p.data.jobsite[0],
+              ...p.data.jobsites[0],
               url: editedValue,
             },
           ];
@@ -301,8 +301,8 @@ export const useOrgListTable = () => {
         headerName: 'Jobsite Type',
         // We don't have support for creating jobsites
         // Edit is only available if there's data
-        editable: (p) => (p.data?.jobsite ?? []).length > 0,
-        valueGetter: (p) => p.data?.jobsite.flatMap((j) => j.type).join(','),
+        editable: (p) => (p.data?.jobsites ?? []).length > 0,
+        valueGetter: (p) => p.data?.jobsites.flatMap((j) => j.type).join(','),
         valueSetter(p) {
           const editedValue = p.newValue
             .split(',')
@@ -310,9 +310,9 @@ export const useOrgListTable = () => {
             .find(Boolean);
 
           // Only save first element
-          p.data.jobsite = [
+          p.data.jobsites = [
             {
-              ...p.data.jobsite[0],
+              ...p.data.jobsites[0],
               type: editedValue,
             },
           ];
@@ -324,18 +324,18 @@ export const useOrgListTable = () => {
         headerName: 'Detected Jobsite Url',
         editable: true,
         valueGetter: (p) =>
-          p.data?.detectedJobsite.flatMap((j) => j.url).join(','),
+          p.data?.detectedJobsites.flatMap((j) => j.url).join(','),
         valueSetter(p) {
           const editedValue = p.newValue
             .split(',')
             .map((s: string) => s.trim())
             .find(Boolean);
 
-          const oldJobsite = p.data.detectedJobsite[0];
+          const oldJobsite = p.data.detectedJobsites[0];
 
           // Create
-          if ((p.data?.detectedJobsite ?? []).length === 0 && editedValue) {
-            p.data.detectedJobsite = [
+          if ((p.data?.detectedJobsites ?? []).length === 0 && editedValue) {
+            p.data.detectedJobsites = [
               {
                 id: v4(),
                 url: editedValue,
@@ -347,12 +347,12 @@ export const useOrgListTable = () => {
 
           // Delete
           if ((oldJobsite ? !oldJobsite.type : true) && !editedValue) {
-            p.data.detectedJobsite = [];
+            p.data.detectedJobsites = [];
             return true;
           }
 
           // Update
-          p.data.detectedJobsite = [
+          p.data.detectedJobsites = [
             {
               ...oldJobsite,
               url: editedValue,
@@ -369,18 +369,18 @@ export const useOrgListTable = () => {
         headerName: 'Detected Jobsite Type',
         editable: true,
         valueGetter: (p) =>
-          p.data?.detectedJobsite.flatMap((j) => j.type).join(','),
+          p.data?.detectedJobsites.flatMap((j) => j.type).join(','),
         valueSetter(p) {
           const editedValue = p.newValue
             .split(',')
             .map((s: string) => s.trim())
             .find(Boolean);
 
-          const oldJobsite = p.data.detectedJobsite[0];
+          const oldJobsite = p.data.detectedJobsites[0];
 
           // Create
-          if ((p.data?.detectedJobsite ?? []).length === 0 && editedValue) {
-            p.data.detectedJobsite = [
+          if ((p.data?.detectedJobsites ?? []).length === 0 && editedValue) {
+            p.data.detectedJobsites = [
               {
                 id: v4(),
                 url: '',
@@ -392,12 +392,12 @@ export const useOrgListTable = () => {
 
           // Delete
           if ((oldJobsite ? !oldJobsite.url : true) && !editedValue) {
-            p.data.detectedJobsite = [];
+            p.data.detectedJobsites = [];
             return true;
           }
 
           // Update
-          p.data.detectedJobsite = [
+          p.data.detectedJobsites = [
             {
               ...oldJobsite,
               type: editedValue,
@@ -428,28 +428,29 @@ export const useOrgListTable = () => {
               orgId,
               name,
               logoUrl,
-              website,
-              rawWebsite,
-              telegram,
-              github,
-              discord,
-              twitter,
+              websites,
+              telegrams,
+              githubs,
+              discords,
+              twitters,
               docs,
               location,
               summary,
               description,
-              jobCount,
-              openEngineeringJobCount,
-              totalEngineeringJobCount,
               headcountEstimate,
               createdTimestamp,
               updatedTimestamp,
               projects,
               aliases,
-              community,
-              grant,
-              jobsite,
-              detectedJobsite,
+              communities,
+              grants,
+              jobsites,
+              detectedJobsites,
+              //
+              // rawWebsite,
+              // jobCount,
+              // openEngineeringJobCount,
+              // totalEngineeringJobCount,
             } = node.data!;
 
             return [
@@ -457,30 +458,31 @@ export const useOrgListTable = () => {
               orgId,
               name,
               logoUrl,
-              prefixUrl(website),
-              prefixUrl(rawWebsite),
-              prefixUrl(telegram, URL_DOMAINS.TELEGRAM),
-              prefixUrl(github, URL_DOMAINS.GITHUB),
-              prefixUrl(discord, URL_DOMAINS.DISCORD),
-              prefixUrl(twitter, URL_DOMAINS.TWITTER),
+              prefixUrl(websites),
+              prefixUrl(telegrams, URL_DOMAINS.TELEGRAM),
+              prefixUrl(githubs, URL_DOMAINS.GITHUB),
+              prefixUrl(discords, URL_DOMAINS.DISCORD),
+              prefixUrl(twitters, URL_DOMAINS.TWITTER),
               prefixUrl(docs),
               location,
               summary,
               description,
-              jobCount,
-              openEngineeringJobCount,
-              totalEngineeringJobCount,
               headcountEstimate,
               createdTimestamp,
               updatedTimestamp,
               projects.flatMap((p) => p.name),
               aliases,
-              community,
-              grant,
-              jobsite.flatMap((j) => j.url),
-              jobsite.flatMap((j) => j.type),
-              detectedJobsite.flatMap((j) => j.url),
-              detectedJobsite.flatMap((j) => j.type),
+              communities,
+              grants,
+              jobsites.flatMap((j) => j.url),
+              jobsites.flatMap((j) => j.type),
+              detectedJobsites.flatMap((j) => j.url),
+              detectedJobsites.flatMap((j) => j.type),
+              //
+              // prefixUrl(rawWebsites),
+              // jobCount,
+              // openEngineeringJobCount,
+              // totalEngineeringJobCount,
             ].join('\t');
           })
           .join('\n'),

@@ -8,7 +8,7 @@ import { getLogoUrl } from '@jobstash/shared/utils';
 export const AvatarCell = (props: CustomCellRendererProps<OrgItem>) => {
   const { data } = props;
 
-  const url = data && data.website.length > 0 ? data.website[0] : '';
+  const url = data && data.websites.length > 0 ? data.websites[0] : '';
   const logoUrl = data?.logoUrl;
   const src = getLogoUrl(url, logoUrl);
   const name = data?.name ?? '';

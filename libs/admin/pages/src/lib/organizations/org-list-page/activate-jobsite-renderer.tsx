@@ -14,19 +14,19 @@ export const ActivateJobsiteRenderer = (
   const { mutate, isPending } = useActivateJobsite();
 
   const isNotApplicable =
-    (data?.detectedJobsite ?? []).flatMap((j) => j.url).filter(Boolean)
-      .length === 0 || (data?.jobsite ?? []).length > 0;
+    (data?.detectedJobsites ?? []).flatMap((j) => j.url).filter(Boolean)
+      .length === 0 || (data?.jobsites ?? []).length > 0;
 
   const onClick = () => {
     const orgId = data?.orgId;
-    const jobsiteIds = (data?.detectedJobsite ?? []).flatMap((j) => j.id);
+    const jobsiteIds = (data?.detectedJobsites ?? []).flatMap((j) => j.id);
     if (orgId && jobsiteIds.length > 0) {
       mutate(
         { orgId, jobsiteIds },
         {
           onSuccess() {
             const newItem = copyObject(node.data) as OrgItem;
-            newItem.jobsite = [data.detectedJobsite[0]];
+            newItem.jobsites = [data.detectedJobsites[0]];
             api.applyTransaction({
               update: [newItem],
             });
