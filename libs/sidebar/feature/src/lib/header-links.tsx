@@ -6,8 +6,8 @@ import { PrivyButton } from '@jobstash/auth/feature';
 const LINKS = [
   { text: 'Post Jobs for Free', link: '/post-job' },
   { text: 'Employers', link: '/employers' },
-  { text: 'Subscribe', link: TELEGRAM_URL },
-  { text: 'Help', link: SUPPORT_TELEGRAM_URL },
+  { text: 'Subscribe', link: TELEGRAM_URL, isExternal: true },
+  { text: 'Help', link: SUPPORT_TELEGRAM_URL, isExternal: true },
 ];
 
 const MOBILE_CLASSNAME =
@@ -25,8 +25,14 @@ export const HeaderLinks = ({ isMobile = false }: Props) => {
 
   return (
     <div className={className}>
-      {LINKS.map(({ text, link }) => (
-        <HeaderLink key={link} text={text} link={link} isMobile={isMobile} />
+      {LINKS.map(({ text, link, isExternal }) => (
+        <HeaderLink
+          key={link}
+          text={text}
+          link={link}
+          isMobile={isMobile}
+          isExternal={isExternal}
+        />
       ))}
       {!isMobile && <PrivyButton />}
     </div>
