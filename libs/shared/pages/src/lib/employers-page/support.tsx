@@ -25,7 +25,7 @@ export const SupportSection = () => (
         Contact Support
       </Button>
       <Button variant="light" radius="sm" as={Link} href="/post-job">
-        Learn more <span aria-hidden="true">→</span>
+        Post a job for free <span aria-hidden="true">→</span>
       </Button>
     </div>
   </div>

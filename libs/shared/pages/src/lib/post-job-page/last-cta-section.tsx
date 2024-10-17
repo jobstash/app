@@ -26,7 +26,7 @@ export const LastCtaSection = () => (
         Get Started Now
       </Button>
       <Button variant="light" radius="sm" as={Link} href="/employers">
-        Learn more <span aria-hidden="true">→</span>
+        Services for Employers <span aria-hidden="true">→</span>
       </Button>
     </div>
   </div>
