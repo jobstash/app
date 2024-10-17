@@ -11,12 +11,13 @@ import {
   Spinner,
   Tooltip,
 } from '@nextui-org/react';
+import { useQueryClient } from '@tanstack/react-query';
 import { useAtom, useAtomValue } from 'jotai';
 import { Check, EllipsisVertical, RefreshCcw } from 'lucide-react';
 
 import { getLogoUrl } from '@jobstash/shared/utils';
 
-import { usePollOrgIdByUrl } from '@jobstash/admin/state';
+import { useMwVersionContext } from '@jobstash/shared/state';
 import { getOrgIdByUrl } from '@jobstash/admin/data';
 
 import { LogoTitle } from '@jobstash/shared/ui';
@@ -24,10 +25,17 @@ import { LogoTitle } from '@jobstash/shared/ui';
 import { orgImportItemsAtom, orgImportTabAtom } from '../core/atoms';
 import { OrgImportItem as IOrgImportItem, OrgImportItem } from '../core/types';
 import { useOrgImport } from '../hooks/use-org-import';
+import { usePollOrgIdByUrl } from '../hooks/use-poll-org-id-by-url';
 
 const POLL_TIMEOUT = 300_000; // 5 mins
 
-const ItemMenu = ({ id, assignedId }: { id: string; assignedId?: string }) => {
+const ItemMenu = ({
+  id,
+  assignedId,
+}: {
+  id: string;
+  assignedId?: string | null;
+}) => {
   const { push } = useRouter();
 
   const [orgImportItems, setOrgImportItems] = useAtom(orgImportItemsAtom);
@@ -98,9 +106,6 @@ const OrgImportItem = ({ item }: Props) => {
     importOrg(
       { name: item.name, url: item.url },
       {
-        onSuccess() {
-          updateItemStatus('done');
-        },
         onError() {
           updateItemStatus('stale');
         },
@@ -122,11 +127,16 @@ const OrgImportItem = ({ item }: Props) => {
 
   const { data: orgId } = usePollOrgIdByUrl(item.url, isPending);
 
+  const queryClient = useQueryClient();
+  const { mwVersion } = useMwVersionContext();
   useEffect(() => {
     if (isPending && typeof orgId === 'string') {
       updateItemStatus('done');
+      queryClient.invalidateQueries({
+        queryKey: [mwVersion, 'all-orgs'],
+      });
     }
-  }, [isPending, orgId, updateItemStatus]);
+  }, [isPending, mwVersion, orgId, queryClient, updateItemStatus]);
 
   const [orgIdDone, setOrgIdDone] = useState<string | null>(null);
   useEffect(() => {

@@ -13,7 +13,7 @@ import { Trash2 } from 'lucide-react';
 
 import { notifSuccess } from '@jobstash/shared/utils';
 
-import { useDeleteOrg } from '@jobstash/admin/state';
+import { useDeleteOrg } from '../hooks/use-delete-org';
 
 interface Props {
   id: string;

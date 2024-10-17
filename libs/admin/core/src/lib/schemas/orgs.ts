@@ -12,27 +12,23 @@ export const orgItemSchema = myzod
     headcountEstimate: myzod.number().nullable(),
     createdTimestamp: myzod.number().nullable(),
     updatedTimestamp: myzod.number().nullable(),
-    jobCount: myzod.number(),
-    openEngineeringJobCount: myzod.number(),
-    totalEngineeringJobCount: myzod.number(),
-    discord: myzod.array(myzod.string()),
-    website: myzod.array(myzod.string()),
-    rawWebsite: myzod.array(myzod.string()),
-    telegram: myzod.array(myzod.string()),
-    github: myzod.array(myzod.string()),
+    discords: myzod.array(myzod.string()),
+    websites: myzod.array(myzod.string()),
+    telegrams: myzod.array(myzod.string()),
+    githubs: myzod.array(myzod.string()),
     aliases: myzod.array(myzod.string()),
-    grant: myzod.array(myzod.string()),
-    twitter: myzod.array(myzod.string()),
+    grants: myzod.array(myzod.string()),
+    twitters: myzod.array(myzod.string()),
     docs: myzod.array(myzod.string()),
-    community: myzod.array(myzod.string()),
-    jobsite: myzod.array(
+    communities: myzod.array(myzod.string()),
+    jobsites: myzod.array(
       myzod.object({
         id: myzod.string(),
         url: myzod.string(),
         type: myzod.string(),
       }),
     ),
-    detectedJobsite: myzod.array(
+    detectedJobsites: myzod.array(
       myzod.object({
         id: myzod.string(),
         url: myzod.string(),

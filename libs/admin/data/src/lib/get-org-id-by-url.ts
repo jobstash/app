@@ -15,19 +15,23 @@ export const getOrgIdByUrl = async (url: string) => {
 
   const options = {
     responseSchema,
-    sentryLabel: `getPairedTerms`,
+    sentryLabel: `getOrgIdByUrl`,
     credentials: 'include' as RequestCredentials,
     mode: 'cors' as RequestMode,
   };
 
-  const response = await mwFetch<IResponse>(
-    `${MW_URL}/organizations/id/${domain}`,
-    options,
-  );
-
-  if (!response.success) throw new Error(response.message);
-
-  return response.data;
+  try {
+    const response = await mwFetch<IResponse>(
+      `${MW_URL}/organizations/id/${domain}`,
+      options,
+    );
+    return response.data;
+  } catch {
+    // Fail silently, we're only polling
+    // throw new Error(response.message);
+    console.log(`Poll: still waiting for orgId for ${domain}`);
+    return null;
+  }
 };
 
 const responseSchema = messageResponseSchema.and(

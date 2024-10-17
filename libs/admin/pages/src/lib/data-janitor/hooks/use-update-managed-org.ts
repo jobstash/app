@@ -1,7 +1,6 @@
 import { notifications } from '@mantine/notifications';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { OrgUpdatePayload, orgUpdatePayloadSchema } from '@jobstash/admin/core';
 import {
   MessageResponse,
   messageResponseSchema,
@@ -12,8 +11,10 @@ import { notifError, notifLoading, notifSuccess } from '@jobstash/shared/utils';
 import { useMwVersionContext } from '@jobstash/shared/state';
 import { mwFetch } from '@jobstash/shared/data';
 
-const updateOrg = async (orgId: string, payload: OrgUpdatePayload) => {
-  const url = `${MW_URL}/organizations/update/${orgId}`;
+import { ManagedOrg, managedOrgSchema } from '../core/schemas';
+
+const updateManagedOrg = async (payload: ManagedOrg) => {
+  const url = `${MW_URL}/organizations/update/${payload.orgId}`;
 
   const options = {
     method: 'POST' as const,
@@ -22,13 +23,13 @@ const updateOrg = async (orgId: string, payload: OrgUpdatePayload) => {
     credentials: 'include' as RequestCredentials,
     mode: 'cors' as RequestMode,
     payload,
-    payloadSchema: orgUpdatePayloadSchema,
+    payloadSchema: managedOrgSchema,
     headers: {
       'Content-Type': 'application/json',
     },
   };
 
-  const { success, message } = await mwFetch<MessageResponse, OrgUpdatePayload>(
+  const { success, message } = await mwFetch<MessageResponse, ManagedOrg>(
     url,
     options,
   );
@@ -38,18 +39,14 @@ const updateOrg = async (orgId: string, payload: OrgUpdatePayload) => {
   return { success, message };
 };
 
-export const useUpdateOrg = () => {
+const TOAST_ID = 'update-managed-org-toast';
+
+export const useUpdateManagedOrg = () => {
   const queryClient = useQueryClient();
   const { mwVersion } = useMwVersionContext();
 
   return useMutation({
-    mutationFn: ({
-      orgId,
-      payload,
-    }: {
-      orgId: string;
-      payload: OrgUpdatePayload;
-    }) => updateOrg(orgId, payload),
+    mutationFn: (payload: ManagedOrg) => updateManagedOrg(payload),
 
     onMutate() {
       notifications.clean();
@@ -68,11 +65,11 @@ export const useUpdateOrg = () => {
       });
 
       queryClient.invalidateQueries({
-        queryKey: [mwVersion, 'all-orgs'],
+        queryKey: [mwVersion, 'get-managed-org', orgId],
       });
 
       queryClient.invalidateQueries({
-        queryKey: [mwVersion, 'org-details', orgId, undefined],
+        queryKey: [mwVersion, 'all-orgs'],
       });
     },
     onError(data) {
@@ -84,5 +81,3 @@ export const useUpdateOrg = () => {
     },
   });
 };
-
-const TOAST_ID = 'org-list-mutation';

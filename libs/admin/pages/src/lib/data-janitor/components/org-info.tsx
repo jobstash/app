@@ -13,7 +13,7 @@ import { OrgDetails } from '@jobstash/organizations/core';
 
 import { useOrgDetails } from '@jobstash/organizations/state';
 
-import { useOrgDetailsForm } from '../hooks/use-org-details-form';
+import { useManagedOrgForm } from '../hooks/use-managed-org-form';
 
 interface Props {
   org: OrgDetails;
@@ -59,7 +59,7 @@ export const OrgInfo = ({ org }: Props) => {
   const [formState, setFormState] = useState<Record<string, string>>({});
   const [isDisabled, setIsDisabled] = useState(true);
 
-  useOrgDetailsForm(org.orgId);
+  useManagedOrgForm(org.orgId);
 
   useEffect(() => {
     if (data) {

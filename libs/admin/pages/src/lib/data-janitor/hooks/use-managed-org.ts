@@ -5,19 +5,19 @@ import { MW_URL } from '@jobstash/shared/core';
 import { useMwVersionContext } from '@jobstash/shared/state';
 import { mwFetch } from '@jobstash/shared/data';
 
-import { ManagedOrg, managedOrgSchema } from '../core/schemas';
+import { ManagedOrgResponse, managedOrgResponseSchema } from '../core/schemas';
 
 const getManagedOrg = async (orgId: string) => {
-  const url = `${MW_URL}/replace-me-when-its-up/${orgId}`;
+  const url = `${MW_URL}/organizations/${orgId}`;
 
   const options = {
-    responseSchema: managedOrgSchema,
+    responseSchema: managedOrgResponseSchema,
     sentryLabel: `getManagedOrg`,
     credentials: 'include' as RequestCredentials,
     mode: 'cors' as RequestMode,
   };
 
-  return mwFetch<ManagedOrg>(url, options);
+  return mwFetch<ManagedOrgResponse>(url, options);
 };
 
 export const useManagedOrg = (orgId: string) => {
@@ -28,5 +28,6 @@ export const useManagedOrg = (orgId: string) => {
     queryFn: () => getManagedOrg(orgId),
     staleTime: 1000 * 60 * 60, // 1 hr,
     enabled: Boolean(orgId) && typeof orgId === 'string',
+    select: (data) => data.data,
   });
 };

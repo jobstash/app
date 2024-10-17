@@ -17,14 +17,17 @@ export const OrgSearchInput = () => {
       size="lg"
       data={data ?? []}
       getItemUrl={(item) => `/godmode/organizations/manage/${item.orgId}`}
-      renderItem={({ name, location, website, logoUrl }) => (
+      renderItem={({ name, location, websites, logoUrl }) => (
         <AutocompleteItem key={name} textValue={name}>
           <LogoTitle
             title={name}
             location={location}
             avatarProps={{
               alt: name,
-              src: getLogoUrl(website.length > 0 ? website[0] : null, logoUrl),
+              src: getLogoUrl(
+                websites.length > 0 ? websites[0] : null,
+                logoUrl,
+              ),
             }}
           />
         </AutocompleteItem>
