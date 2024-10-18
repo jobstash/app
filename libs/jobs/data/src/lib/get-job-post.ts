@@ -1,6 +1,6 @@
 import { type JobPost, jobPostSchema } from '@jobstash/jobs/core';
 import { MW_URL } from '@jobstash/shared/core';
-import { getEcosystemHeader } from '@jobstash/shared/utils';
+import { getCommunityHeader } from '@jobstash/shared/utils';
 
 import { mwFetch } from '@jobstash/shared/data';
 
@@ -17,7 +17,7 @@ export const getJobPost = async ({ shortUuid, ssrHost }: Props) => {
     credentials: 'include' as RequestCredentials,
     mode: 'cors' as RequestMode,
     headers: {
-      ...getEcosystemHeader(ssrHost),
+      ...getCommunityHeader(ssrHost),
     },
   };
 

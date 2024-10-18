@@ -3,8 +3,8 @@
 import { Spinner } from '@nextui-org/spinner';
 
 import { PERMISSIONS } from '@jobstash/auth/core';
-import { ECOSYSTEMS, GA_EVENT_ACTION } from '@jobstash/shared/core';
-import { gaEvent, getEcosystemSubdomain } from '@jobstash/shared/utils';
+import { COMMUNITIES, GA_EVENT_ACTION } from '@jobstash/shared/core';
+import { gaEvent, getCommunitySubdomain } from '@jobstash/shared/utils';
 
 import { useAuthContext, useHasPermission } from '@jobstash/auth/state';
 import {
@@ -29,8 +29,8 @@ export const RightPanelJobCardApplyButton = (props: Props) => {
   const { isAuthenticated, showLoginModal, permissions } = useAuthContext();
   const hasPermission = useHasPermission(PERMISSIONS.USER);
 
-  const { isSupported, subdomain } = getEcosystemSubdomain();
-  const isEthdam = isSupported && subdomain === ECOSYSTEMS.ETHDAM;
+  const { isSupported, subdomain } = getCommunitySubdomain();
+  const isEthdam = isSupported && subdomain === COMMUNITIES.ETHDAM;
   const isOneClick = hasUser || isEthdam;
 
   const { data: jobPost, isPending: isPendingJobPost } = useJobPost(shortUUID);

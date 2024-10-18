@@ -1,5 +1,5 @@
-import { ECOSYSTEMS } from '@jobstash/shared/core';
-import { getEcosystemSubdomain } from '@jobstash/shared/utils';
+import { COMMUNITIES } from '@jobstash/shared/core';
+import { getCommunitySubdomain } from '@jobstash/shared/utils';
 
 import { useAuthContext } from '@jobstash/auth/state';
 import {
@@ -20,8 +20,8 @@ export const useRightPanelJobCTA = (props: Props) => {
   const { isAuthenticated, showLoginModal } = useAuthContext();
   const isAnon = !isAuthenticated;
 
-  const { isSupported, subdomain } = getEcosystemSubdomain();
-  const isEthdam = isSupported && subdomain === ECOSYSTEMS.ETHDAM;
+  const { isSupported, subdomain } = getCommunitySubdomain();
+  const isEthdam = isSupported && subdomain === COMMUNITIES.ETHDAM;
 
   const { data: jobPost, isPending: isPendingJobPost } = useJobPost(shortUUID);
   const { appliedJobs, isPendingJobsApplied, isFetchingJobsApplied } =

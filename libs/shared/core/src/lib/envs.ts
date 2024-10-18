@@ -1,7 +1,7 @@
 /* eslint-disable prefer-destructuring */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 
-import { ECOSYSTEMS, ECOSYSTEMS_SET } from './constants';
+import { COMMUNITIES, COMMUNITY_SET } from './constants';
 
 export const MW_URL = process.env.NEXT_PUBLIC_MW_URL!;
 export const EDGE_URL = process.env.NEXT_PUBLIC_EDGE_URL!;
@@ -38,8 +38,8 @@ export const FRONTEND_URL = (() => {
   if (typeof window === 'undefined') return frontendEnv;
 
   const subdomain = window.location.hostname.split('.')[0];
-  const isSupported = ECOSYSTEMS_SET.has(
-    subdomain as typeof ECOSYSTEMS[keyof typeof ECOSYSTEMS],
+  const isSupported = COMMUNITY_SET.has(
+    subdomain as typeof COMMUNITIES[keyof typeof COMMUNITIES],
   );
 
   // Return as usual if subdomain is not supported, or instance is not deployed

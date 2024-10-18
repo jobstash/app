@@ -1,11 +1,11 @@
-import { Ecosystem, ECOSYSTEMS_SET, FRONTEND_URL } from '@jobstash/shared/core';
+import { Community, COMMUNITY_SET, FRONTEND_URL } from '@jobstash/shared/core';
 
-import { getEcosystemSubdomain } from './get-ecosystem-subdomain';
+import { getCommunitySubdomain } from './get-ecosystem-subdomain';
 
 const JOBSTASH_HOSTNAME = 'jobstash.xyz';
 
 export const getFrontendUrl = () => {
-  const { subdomain, isSupported } = getEcosystemSubdomain();
+  const { subdomain, isSupported } = getCommunitySubdomain();
 
   // Return as usual if subdomain is not supported, or instance is not deployed
   if (!isSupported || !FRONTEND_URL.includes(JOBSTASH_HOSTNAME))
@@ -24,7 +24,7 @@ export const getFrontendUrlSSR = (host?: string) => {
   if (parts.length < 3) return FRONTEND_URL;
 
   const subdomain = parts.slice(0, -2).join('.');
-  const isSupported = ECOSYSTEMS_SET.has(subdomain as Ecosystem);
+  const isSupported = COMMUNITY_SET.has(subdomain as Community);
 
   if (!isSupported) return FRONTEND_URL;
 

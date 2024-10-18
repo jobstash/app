@@ -3,7 +3,7 @@ import {
   orgDetailsSchema,
 } from '@jobstash/organizations/core';
 import { MW_URL } from '@jobstash/shared/core';
-import { getEcosystemHeader } from '@jobstash/shared/utils';
+import { getCommunityHeader } from '@jobstash/shared/utils';
 
 import { mwFetch } from '@jobstash/shared/data';
 
@@ -21,7 +21,7 @@ export const getOrgDetails = async ({ orgId, ssrHost }: Props) => {
     credentials: 'include' as RequestCredentials,
     mode: 'cors' as RequestMode,
     headers: {
-      ...getEcosystemHeader(ssrHost),
+      ...getCommunityHeader(ssrHost),
     },
   };
 

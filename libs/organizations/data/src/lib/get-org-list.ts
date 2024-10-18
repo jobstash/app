@@ -4,7 +4,7 @@ import {
 } from '@jobstash/organizations/core';
 import { MW_URL, PAGE_SIZE } from '@jobstash/shared/core';
 import { getUrlWithParams } from '@jobstash/filters/utils';
-import { getEcosystemHeader } from '@jobstash/shared/utils';
+import { getCommunityHeader } from '@jobstash/shared/utils';
 
 import { mwFetch } from '@jobstash/shared/data';
 
@@ -35,7 +35,7 @@ export const getOrgList = async ({
     credentials: 'include' as RequestCredentials,
     mode: 'cors' as RequestMode,
     headers: {
-      ...getEcosystemHeader(ssrHost),
+      ...getCommunityHeader(ssrHost),
     },
   };
 

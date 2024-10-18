@@ -2,7 +2,7 @@
 import myzod, { type Type } from 'myzod';
 
 import {
-  ECOSYSTEM_HEADER_KEY,
+  COMMUNITY_HEADER_KEY,
   ERR_INTERNAL,
   ERR_NOT_FOUND,
   ERR_OFFLINE,
@@ -15,7 +15,7 @@ import {
 } from '@jobstash/shared/core';
 import {
   createFetchDeets,
-  getEcosystemHeader,
+  getCommunityHeader,
   sentryMessage,
   validatePayload,
   validateSchema,
@@ -57,8 +57,8 @@ export const mwFetch = async <R, P = Undefined>(
 
   // Only add client ecosystem header if ecosystem is not set in options
   const headerOptionKeys = new Set(Object.keys(headers ?? {}));
-  const hasEcosystemHeader = headerOptionKeys.has(ECOSYSTEM_HEADER_KEY);
-  const clientEcosystemHeader = hasEcosystemHeader ? {} : getEcosystemHeader();
+  const hasCommunityHeader = headerOptionKeys.has(COMMUNITY_HEADER_KEY);
+  const clientCommunityHeader = hasCommunityHeader ? {} : getCommunityHeader();
 
   // Get token from local storage
   const hasAuthHeader = headerOptionKeys.has('Authorization');
@@ -76,7 +76,7 @@ export const mwFetch = async <R, P = Undefined>(
     mode,
     headers: {
       ...headers,
-      ...clientEcosystemHeader,
+      ...clientCommunityHeader,
       ...authHeader,
     },
     cache: 'no-cache',

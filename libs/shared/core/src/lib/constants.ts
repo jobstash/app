@@ -128,7 +128,7 @@ export const REPORT_UI_CTX = {
   ORG_REVIEW_CARD: 'Org Review Card',
 } as const;
 
-export const ECOSYSTEMS = {
+export const COMMUNITIES = {
   ETHDAM: 'ethdam',
   ETHLONDON: 'ethlondon',
   LOBSTERDAO: 'lobsterdao',
@@ -136,10 +136,10 @@ export const ECOSYSTEMS = {
   DEV: 'devcommunity',
   STAGING: 'stagingcommunity',
 } as const;
-export type Ecosystem = (typeof ECOSYSTEMS)[keyof typeof ECOSYSTEMS];
+export type Community = typeof COMMUNITIES[keyof typeof COMMUNITIES];
 
-export const ECOSYSTEMS_SET = new Set(Object.values(ECOSYSTEMS));
-export const ECOSYSTEM_HEADER_KEY = 'X-Ecosystem';
+export const COMMUNITY_SET = new Set(Object.values(COMMUNITIES));
+export const COMMUNITY_HEADER_KEY = 'X-Community';
 
 export const SESSION_STORAGE_KEYS = {
   MW_VERSION: 'jobstash-mw-version',
