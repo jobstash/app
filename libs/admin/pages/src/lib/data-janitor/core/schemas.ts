@@ -98,10 +98,26 @@ export const dataToFormState = (data: ManagedOrg): ManagedOrgFormState => ({
   // rawWebsite: data.rawWebsites.join(', '),
 });
 
-export const formStateToData = (
+export const managedOrgPayloadSchema = myzod.intersection(
+  myzod.omit(managedOrgSchema, ['projects']),
+  myzod.object({
+    projects: myzod.array(myzod.string()),
+  }),
+);
+
+export type ManagedOrgPayload = Infer<typeof managedOrgPayloadSchema>;
+
+type Payload = Omit<ManagedOrg, 'projects'> & { projects: string[] };
+
+const parseList = (value: string) =>
+  value
+    .split(',')
+    .map((s) => s.trim())
+    .filter(Boolean);
+
+export const formStateToPayload = (
   formState: ManagedOrgFormState,
-  projects: ManagedOrg['projects'],
-): ManagedOrg => ({
+): Payload => ({
   orgId: formState.orgId,
   name: formState.name,
   location: formState.location,
@@ -109,60 +125,18 @@ export const formStateToData = (
   description: formState.description,
   summary: formState.summary,
   headcountEstimate: Number(formState.headcountEstimate),
-  aliases: formState.aliases
-    .split(',')
-    .map((s) => s.trim())
-    .filter(Boolean),
-  websites: formState.website
-    .split(',')
-    .map((s) => s.trim())
-    .filter(Boolean),
-  discords: formState.discord
-    .split(',')
-    .map((s) => s.trim())
-    .filter(Boolean),
-  telegrams: formState.telegram
-    .split(',')
-    .map((s) => s.trim())
-    .filter(Boolean),
-  githubs: formState.github
-    .split(',')
-    .map((s) => s.trim())
-    .filter(Boolean),
-  docs: formState.docs
-    .split(',')
-    .map((s) => s.trim())
-    .filter(Boolean),
-  twitters: formState.twitter
-    .split(',')
-    .map((s) => s.trim())
-    .filter(Boolean),
-  grants: formState.grants
-    .split(',')
-    .map((s) => s.trim())
-    .filter(Boolean),
-  communities: formState.communities
-    .split(',')
-    .map((s) => s.trim())
-    .filter(Boolean),
+  aliases: parseList(formState.aliases),
+  websites: parseList(formState.website),
+  discords: parseList(formState.discord),
+  telegrams: parseList(formState.telegram),
+  githubs: parseList(formState.github),
+  docs: parseList(formState.docs),
+  twitters: parseList(formState.twitter),
+  grants: parseList(formState.grants),
+  communities: parseList(formState.communities),
   jobsites: JSON.parse(formState.jobsites),
   detectedJobsites: JSON.parse(formState.jobsites),
-  projects: (() => {
-    const projectIds = new Set(
-      formState.projects
-        .split(',')
-        .map((s) => s.trim())
-        .filter(Boolean),
-    );
-
-    return projects.filter((p) => projectIds.has(p.id));
-  })(),
-  //
-  // altName: formState.altName,
-  // rawWebsites: formState.rawWebsite
-  //   .split(',')
-  //   .map((s) => s.trim())
-  //   .filter(Boolean),
+  projects: parseList(formState.projects),
 });
 
 export const managedOrgResponseSchema = myzod.intersection(

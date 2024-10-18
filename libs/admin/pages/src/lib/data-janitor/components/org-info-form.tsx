@@ -5,6 +5,7 @@ import { Button, Tab, Tabs } from '@nextui-org/react';
 import { useManagedOrgForm } from '../hooks/use-managed-org-form';
 
 import { OrgInputMapper } from './org-input-mapper';
+import { OrgProjectsForm } from './org-projects-form';
 
 export const OrgInfoForm = ({ id }: { id: string }) => {
   const {
@@ -16,6 +17,8 @@ export const OrgInfoForm = ({ id }: { id: string }) => {
     onChangeTab,
     isPending,
     onSubmit,
+    onUnlinkProject,
+    onAddProject,
   } = useManagedOrgForm(id);
 
   return (
@@ -33,10 +36,21 @@ export const OrgInfoForm = ({ id }: { id: string }) => {
       >
         {inputSections.map(({ key, title, fields }) => (
           <Tab key={key} title={title}>
-            <div className="flex flex-col gap-4 ">
+            <div className="flex flex-col gap-4 max-w-lg">
               {fields.map(({ label, key, kind }) => {
                 const fieldKey = key as keyof typeof formState;
                 const value = formState[fieldKey]!;
+
+                if (kind === 'projects') {
+                  return (
+                    <OrgProjectsForm
+                      key={fieldKey}
+                      formStateProjects={value}
+                      onUnlink={onUnlinkProject}
+                      onAddProject={onAddProject}
+                    />
+                  );
+                }
 
                 return (
                   <OrgInputMapper

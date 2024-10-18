@@ -11,9 +11,14 @@ import { notifError, notifLoading, notifSuccess } from '@jobstash/shared/utils';
 import { useMwVersionContext } from '@jobstash/shared/state';
 import { mwFetch } from '@jobstash/shared/data';
 
-import { ManagedOrg, managedOrgSchema } from '../core/schemas';
+import {
+  ManagedOrg,
+  ManagedOrgPayload,
+  managedOrgPayloadSchema,
+  managedOrgSchema,
+} from '../core/schemas';
 
-const updateManagedOrg = async (payload: ManagedOrg) => {
+const updateManagedOrg = async (payload: ManagedOrgPayload) => {
   const url = `${MW_URL}/organizations/update/${payload.orgId}`;
 
   const options = {
@@ -23,16 +28,16 @@ const updateManagedOrg = async (payload: ManagedOrg) => {
     credentials: 'include' as RequestCredentials,
     mode: 'cors' as RequestMode,
     payload,
-    payloadSchema: managedOrgSchema,
+    payloadSchema: managedOrgPayloadSchema,
     headers: {
       'Content-Type': 'application/json',
     },
   };
 
-  const { success, message } = await mwFetch<MessageResponse, ManagedOrg>(
-    url,
-    options,
-  );
+  const { success, message } = await mwFetch<
+    MessageResponse,
+    ManagedOrgPayload
+  >(url, options);
 
   if (!success) throw new Error(message);
 
@@ -46,7 +51,7 @@ export const useUpdateManagedOrg = () => {
   const { mwVersion } = useMwVersionContext();
 
   return useMutation({
-    mutationFn: (payload: ManagedOrg) => updateManagedOrg(payload),
+    mutationFn: (payload: ManagedOrgPayload) => updateManagedOrg(payload),
 
     onMutate() {
       notifications.clean();

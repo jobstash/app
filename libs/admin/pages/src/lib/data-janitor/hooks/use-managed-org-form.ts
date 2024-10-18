@@ -5,7 +5,7 @@ import { useAtom } from 'jotai';
 import { orgManageTabAtom } from '../core/atoms';
 import {
   dataToFormState,
-  formStateToData,
+  formStateToPayload,
   ManagedOrgFormState,
 } from '../core/schemas';
 
@@ -104,6 +104,11 @@ const inputSections = [
       { label: 'Detected Jobsites', key: 'detectedJobsites', kind: 'jobsite' },
     ],
   },
+  {
+    key: 'projects',
+    title: 'Projects',
+    fields: [{ label: 'Projects', key: 'projects', kind: 'projects' }],
+  },
 ];
 
 export const useManagedOrgForm = (orgId: string) => {
@@ -138,7 +143,7 @@ export const useManagedOrgForm = (orgId: string) => {
 
   const onSubmit = () => {
     if (data) {
-      const payload = formStateToData(formState, data.projects);
+      const payload = formStateToPayload(formState);
       updateOrg(payload);
     }
   };
@@ -147,8 +152,28 @@ export const useManagedOrgForm = (orgId: string) => {
   const next = JSON.stringify(formState);
   const hasChanges = prev !== next;
 
-  //
-  // console.log({ prev, next, hasChanges, formState, data });
+  const onUnlinkProject = (projectId: string) => {
+    const newProjectIds = formState.projects
+      .split(',')
+      .map((id) => id.trim())
+      .filter((id) => id !== projectId)
+      .join(', ');
+
+    handleFieldChange('projects', newProjectIds);
+  };
+
+  const onAddProject = (projectId: string) => {
+    const currentProjects = formState.projects
+      .split(',')
+      .map((id) => id.trim())
+      .filter(Boolean);
+
+    if (!currentProjects.includes(projectId)) {
+      currentProjects.push(projectId);
+    }
+
+    handleFieldChange('projects', currentProjects.join(', '));
+  };
 
   return {
     formState,
@@ -159,5 +184,7 @@ export const useManagedOrgForm = (orgId: string) => {
     onChangeTab,
     isPending,
     onSubmit,
+    onUnlinkProject,
+    onAddProject,
   };
 };

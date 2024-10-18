@@ -1,3 +1,5 @@
+import { useRouter } from 'next/router';
+
 import { AutocompleteItem } from '@nextui-org/react';
 
 import { OrgItem } from '@jobstash/admin/core';
@@ -10,13 +12,13 @@ import { LogoTitle } from '@jobstash/shared/ui';
 import { SearchInput } from './search-input';
 
 export const OrgSearchInput = () => {
+  const { push } = useRouter();
   const { data, isLoading } = useAllOrgs();
 
   return (
     <SearchInput<OrgItem>
       size="lg"
       data={data ?? []}
-      getItemUrl={(item) => `/godmode/organizations/manage/${item.orgId}`}
       renderItem={({ name, location, websites, logoUrl }) => (
         <AutocompleteItem key={name} textValue={name}>
           <LogoTitle
@@ -35,6 +37,7 @@ export const OrgSearchInput = () => {
       labelText="Enter Organization Name"
       emptyContentText="Type at least 2 letters to show results"
       isLoading={isLoading}
+      onSelect={(item) => push(`/godmode/organizations/manage/${item.orgId}`)}
     />
   );
 };

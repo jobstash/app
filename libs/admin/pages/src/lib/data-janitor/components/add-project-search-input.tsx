@@ -1,4 +1,4 @@
-import { useRouter } from 'next/router';
+import { useMemo } from 'react';
 
 import { AutocompleteItem } from '@nextui-org/react';
 
@@ -10,14 +10,25 @@ import { LogoTitle } from '@jobstash/shared/ui';
 
 import { SearchInput } from './search-input';
 
-export const ProjectSearchInput = () => {
-  const { push } = useRouter();
+interface Props {
+  stateIds: string[];
+  onAddProject: (id: string) => void;
+}
+
+export const AddProjectSearchInput = ({ stateIds, onAddProject }: Props) => {
   const { data, isLoading } = useAllProjects();
+
+  const items = useMemo(() => {
+    if (!data) return [];
+
+    return data.filter((item) => !stateIds.includes(item.id));
+  }, [data, stateIds]);
 
   return (
     <SearchInput<ProjectItem>
-      size="lg"
-      data={data ?? []}
+      clearSelectionOnSelect
+      size="sm"
+      data={items ?? []}
       renderItem={({ name, logo }) => (
         <AutocompleteItem key={name} textValue={name}>
           <LogoTitle
@@ -32,7 +43,8 @@ export const ProjectSearchInput = () => {
       labelText="Enter Project Name"
       emptyContentText="Type at least 2 letters to show results"
       isLoading={isLoading}
-      onSelect={(item) => push(`/godmode/projects/manage/${item.id}`)}
+      showSpinnerOnSelect={false}
+      onSelect={(item) => onAddProject(item.id)}
     />
   );
 };

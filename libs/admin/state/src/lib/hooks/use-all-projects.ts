@@ -9,7 +9,7 @@ export const useAllProjects = () => {
   const { mwVersion } = useMwVersionContext();
 
   return useQuery({
-    queryKey: [mwVersion, 'all-orgs'],
+    queryKey: [mwVersion, 'all-projects'],
     queryFn: async () => getAllProjects(),
     staleTime: 1000 * 60 * 60,
     enabled: !isLoading,

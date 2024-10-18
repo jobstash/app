@@ -10,7 +10,6 @@ import { getLogoUrl } from '@jobstash/shared/utils';
 
 import { InternalErrorResult, LogoTitle } from '@jobstash/shared/ui';
 
-import { CreateOrgSection } from '../components/create-org-section';
 import { DeleteOrgModal } from '../components/delete-org-modal';
 import { OrgInfoForm } from '../components/org-info-form';
 import { useManagedOrg } from '../hooks/use-managed-org';
@@ -49,21 +48,18 @@ export const OrgManagePage = () => {
   return (
     <ManageLayout>
       <div className="flex flex-col gap-4 pt-8 w-full">
-        <div className="flex items-center justify-between w-full">
-          <div className="flex flex-col md:flex-row md:items-center gap-4">
-            <span className="text-2xl font-bold">Manage Organization</span>
-            <Tooltip content="Choose another organization">
-              <Button
-                isIconOnly
-                as={Link}
-                href="/godmode/organizations/manage"
-                size="sm"
-              >
-                <ListStart className="h-5 w-5" />
-              </Button>
-            </Tooltip>
-          </div>
-          <CreateOrgSection />
+        <div className="flex flex-col md:flex-row md:items-center gap-4">
+          <span className="text-2xl font-bold">Manage Organization</span>
+          <Tooltip content="Choose another organization">
+            <Button
+              isIconOnly
+              as={Link}
+              href="/godmode/organizations/manage"
+              size="sm"
+            >
+              <ListStart className="h-5 w-5" />
+            </Button>
+          </Tooltip>
         </div>
         <div className="flex flex-col gap-4 rounded-2xl">
           <span className="text-md text-white/90 max-w-lg">

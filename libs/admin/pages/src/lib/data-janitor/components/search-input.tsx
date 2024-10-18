@@ -6,22 +6,26 @@ import { useSearchInput } from '../hooks/use-search-input';
 
 interface SearchInputProps<T> {
   data: T[];
-  getItemUrl: (item: T) => string;
   renderItem: (item: T) => JSX.Element;
   labelText: string;
   emptyContentText: string;
   size?: AutocompleteProps['size'];
   isLoading?: boolean;
+  onSelect: (item: T) => void;
+  showSpinnerOnSelect?: boolean;
+  clearSelectionOnSelect?: boolean;
 }
 
 export const SearchInput = <T extends { name: string }>({
   data,
-  getItemUrl,
   renderItem,
   labelText,
   emptyContentText,
   size = 'sm',
   isLoading = false,
+  onSelect,
+  showSpinnerOnSelect,
+  clearSelectionOnSelect,
 }: SearchInputProps<T>) => {
   const searchData = useMemo(() => data ?? [], [data]);
 
@@ -33,7 +37,9 @@ export const SearchInput = <T extends { name: string }>({
     onSelectionChange,
   } = useSearchInput<T>({
     data: searchData,
-    getItemUrl,
+    onSelect,
+    showSpinnerOnSelect,
+    clearSelectionOnSelect,
   });
 
   const hasSpinner = isLoading || isLoadingInput;
