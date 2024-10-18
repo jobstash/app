@@ -12,6 +12,7 @@ import { InternalErrorResult, LogoTitle } from '@jobstash/shared/ui';
 
 import { DeleteOrgModal } from '../components/delete-org-modal';
 import { OrgInfoForm } from '../components/org-info-form';
+import { useConvertOrgToProject } from '../hooks/use-convert-org-to-project';
 import { useManagedOrg } from '../hooks/use-managed-org';
 
 import { ManageLayout } from './manage-page-layout';
@@ -22,6 +23,9 @@ export const OrgManagePage = () => {
 
   const { data, error, isError, isLoading } = useManagedOrg(orgId as string);
   const isNotFound = error?.message === ERR_NOT_FOUND;
+
+  const { mutate: convertOrg, isPending: isPendingConvert } =
+    useConvertOrgToProject();
 
   if (typeof orgId !== 'string') return <NotFoundPage />;
 
@@ -86,6 +90,8 @@ export const OrgManagePage = () => {
               size="sm"
               className="font-bold"
               startContent={<RefreshCcw className="h-4 w-4 -mt-0.5" />}
+              isLoading={isPendingConvert}
+              onClick={() => convertOrg(data.orgId)}
             >
               Convert to Project
             </Button>
