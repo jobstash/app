@@ -13,21 +13,18 @@ interface Props {
 }
 
 const RightPanelTabs = ({ isLoading, currentTab, tabs }: Props) => (
-  <>
-    <hr className="border-t border-white/10 -my-2" />
-    <div className='flex flex-wrap gap-2'>
-      {tabs.map(({ text, tabSegment, href }) => (
-        <RightPanelTabButton
-          key={text}
-          text={text}
-          currentTab={currentTab}
-          tabSegment={tabSegment}
-          href={href}
-        />
-      ))}
-      {isLoading && <Spinner />}
-    </div>
-  </>
+  <div className="flex flex-wrap gap-2">
+    {tabs.map(({ text, tabSegment, href }) => (
+      <RightPanelTabButton
+        key={text}
+        text={text}
+        currentTab={currentTab}
+        tabSegment={tabSegment}
+        href={href}
+      />
+    ))}
+    {isLoading && <Spinner />}
+  </div>
 );
 
 export default memo(RightPanelTabs);

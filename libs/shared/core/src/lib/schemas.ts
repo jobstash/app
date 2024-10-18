@@ -143,7 +143,7 @@ export const projectInfoSchema = myzod.object(
     logo: myzod.string().nullable(),
 
     category: myzod.string().min(1).nullable(),
-    isMainnet: myzod.boolean(),
+    isMainnet: myzod.boolean().nullable(),
     tokenSymbol: myzod.string().min(1).nullable(),
 
     tvl: myzod.number().nullable(),
@@ -160,7 +160,7 @@ export const projectInfoSchema = myzod.object(
 );
 
 export const projectMoreInfoSchema = myzod.object({
-  description: myzod.string().min(1),
+  description: myzod.string().min(1).nullable(),
   github: myzod.string().min(1).nullable(), // Rename this to github
   twitter: myzod.string().min(1).nullable(),
   discord: myzod.string().min(1).nullable(),

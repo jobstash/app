@@ -3,12 +3,7 @@ import { memo } from 'react';
 import { type RightPanelOrg } from '@jobstash/right-panel/core';
 import { type TagElement } from '@jobstash/shared/core';
 
-import {
-  CardSet,
-  DraggableWrapper,
-  OrgCommunityTag,
-  OrgReviewCardSets,
-} from '@jobstash/shared/ui';
+import { CardSet, OrgCommunityTag } from '@jobstash/shared/ui';
 
 import { createRightPanelOrgTags } from './utils/create-right-panel-org-tags';
 

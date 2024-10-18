@@ -47,7 +47,9 @@ const RightPanelProjectCard = ({ project, showCTA = true }: Props) => {
           logo={logo}
           socials={projectSocialTags}
         />
-        <RightPanelProjectCardDescription description={description} />
+        {description && (
+          <RightPanelProjectCardDescription description={description} />
+        )}
         <RightPanelProjectCardTags tags={projectTags} />
         <RightPanelProjectCardTvlTags tvlTags={projectTvlTags} />
         <RightPanelProjectCardAuditTags auditTags={projectAuditTags} />

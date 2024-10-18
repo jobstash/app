@@ -25,9 +25,9 @@ export const ProjectInfo = ({ id }: Props) => {
   }
 
   const { name, website, logo, organization } = data;
-  const orgManageLink = `/godmode/organizations/manage/${
-    organization.orgId ?? ''
-  }`;
+  const orgManageLink = organization
+    ? `/godmode/organizations/manage/${organization.orgId}`
+    : '';
 
   return (
     <div className="flex flex-col gap-8">
@@ -70,41 +70,43 @@ export const ProjectInfo = ({ id }: Props) => {
         </Button>
       </div>
 
-      <div className="space-y-8">
-        <div className="pt-4">
-          <Divider />
-        </div>
+      {organization && (
+        <div className="space-y-8">
+          <div className="pt-4">
+            <Divider />
+          </div>
 
-        <Heading size="md">Linked Organization:</Heading>
+          <Heading size="md">Linked Organization:</Heading>
 
-        <div className="flex items-center gap-4">
-          <LogoTitle
-            size="md"
-            title={
-              <Link className="[&>*]:hover:underline" href={orgManageLink}>
-                <Heading size="sm">{organization.name}</Heading>
-              </Link>
-            }
-            location={organization.location}
-            avatarProps={{
-              alt: organization.name,
-              src: getLogoUrl(organization.website, organization.logoUrl),
-            }}
-          />
-          <div className="gap-2 flex items-center">
-            <Tooltip content={<span>Manage Organization</span>}>
-              <Button isIconOnly as={Link} href={orgManageLink} size="sm">
-                <Settings className="h-4 w-4" />
-              </Button>
-            </Tooltip>
-            <Tooltip content={<span>Unlink Organization</span>}>
-              <Button isIconOnly size="sm">
-                <Trash2 className="h-4 w-4 text-red-500" />
-              </Button>
-            </Tooltip>
+          <div className="flex items-center gap-4">
+            <LogoTitle
+              size="md"
+              title={
+                <Link className="[&>*]:hover:underline" href={orgManageLink}>
+                  <Heading size="sm">{organization.name}</Heading>
+                </Link>
+              }
+              location={organization.location}
+              avatarProps={{
+                alt: organization.name,
+                src: getLogoUrl(organization.website, organization.logoUrl),
+              }}
+            />
+            <div className="gap-2 flex items-center">
+              <Tooltip content={<span>Manage Organization</span>}>
+                <Button isIconOnly as={Link} href={orgManageLink} size="sm">
+                  <Settings className="h-4 w-4" />
+                </Button>
+              </Tooltip>
+              <Tooltip content={<span>Unlink Organization</span>}>
+                <Button isIconOnly size="sm">
+                  <Trash2 className="h-4 w-4 text-red-500" />
+                </Button>
+              </Tooltip>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 };

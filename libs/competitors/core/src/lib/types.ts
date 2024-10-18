@@ -8,7 +8,7 @@ export interface Competitor {
   description: string;
   isMainnet: boolean;
   telegram: string;
-  orgId: string;
+  orgId: string | null;
   twitter: string;
   discord: string;
   docs: string;

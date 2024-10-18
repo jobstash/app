@@ -24,22 +24,26 @@ const ProjectRightPanelTabs = ({ currentTab, projectDetails }: Props) => {
   );
 
   const tabs: RightPanelTab[] = useMemo(() => {
-    const tabs = [
+    const tabs: RightPanelTab[] = [
       {
         text: 'Project Details',
         tabSegment: TAB_SEGMENT.details,
         href: createProjectHref(TAB_SEGMENT.details),
       },
+    ];
 
-      {
+    if (projectDetails.organization) {
+      tabs.push({
         text: 'Organization',
         tabSegment: TAB_SEGMENT.organization,
         href: createProjectHref(TAB_SEGMENT.organization),
-      },
-    ];
+      });
+    }
 
     return tabs;
-  }, [createProjectHref]);
+  }, [createProjectHref, projectDetails.organization]);
+
+  if (tabs.length === 1 && tabs[0].tabSegment === 'details') return null;
 
   return (
     <RightPanelTabs isLoading={false} currentTab={currentTab} tabs={tabs} />

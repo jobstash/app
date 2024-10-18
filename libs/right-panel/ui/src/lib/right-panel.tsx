@@ -9,7 +9,7 @@ import RightPanelHeader from './right-panel-header';
 import RightPanelWrapper from './right-panel-wrapper';
 
 interface Props {
-  org: RightPanelOrg;
+  org: RightPanelOrg | null;
   tabs: ReactNode;
   children: ReactNode;
   backButton: ReactNode;
@@ -28,8 +28,12 @@ const RightPanel = ({ org, tabs, children, backButton, hideMenu }: Props) => (
       )}
     </div>
 
-    <RightPanelHeader org={org} />
+    {org && <RightPanelHeader org={org} />}
+
+    {org && tabs && <hr className="border-t border-white/10 -my-2" />}
+
     {tabs}
+
     {children}
   </RightPanelWrapper>
 );

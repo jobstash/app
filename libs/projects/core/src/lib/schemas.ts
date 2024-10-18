@@ -31,7 +31,7 @@ export const projectDetailsSchema = myzod
   .intersection(
     projectAllInfoSchema,
     myzod.object({
-      organization: projectOrgSchema,
+      organization: projectOrgSchema.nullable(),
     }),
   )
   .allowUnknownKeys(true);
