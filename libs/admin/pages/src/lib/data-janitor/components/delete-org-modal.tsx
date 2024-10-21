@@ -11,8 +11,6 @@ import {
 } from '@nextui-org/react';
 import { Trash2 } from 'lucide-react';
 
-import { notifSuccess } from '@jobstash/shared/utils';
-
 import { useDeleteOrg } from '../hooks/use-delete-org';
 
 interface Props {
@@ -24,15 +22,11 @@ export const DeleteOrgModal = ({ id, isDisabled }: Props) => {
   const router = useRouter();
   const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
-  const { mutate: deleteOrg, isPending: isDeleting } = useDeleteOrg(id);
+  const { mutate: deleteOrg, isPending: isDeleting } = useDeleteOrg();
 
   const onDelete = () => {
-    deleteOrg(undefined, {
-      onSuccess({ message }) {
-        notifSuccess({
-          title: 'Organization Deleted',
-          message,
-        });
+    deleteOrg(id, {
+      onSuccess() {
         onOpenChange();
         router.push('/godmode/organizations/manage');
       },

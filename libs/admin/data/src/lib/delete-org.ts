@@ -12,12 +12,9 @@ export const deleteOrg = async (orgId: string) => {
   const options = {
     method: 'DELETE' as const,
     responseSchema: messageResponseSchema,
-    sentryLabel: `postDeletePreference`,
+    sentryLabel: `deleteOrg`,
     credentials: 'include' as RequestCredentials,
     mode: 'cors' as RequestMode,
-    headers: {
-      'Content-Type': 'application/json',
-    },
   };
 
   const response = await mwFetch<MessageResponse>(url, options);
