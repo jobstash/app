@@ -4,8 +4,8 @@ interface OrgField {
   label: string;
   value: string | boolean | string[];
   placeholder?: string;
-  kind?: 'text' | 'textarea' | 'list' | 'jobsite' | 'boolean';
-  onChange: (value: string | boolean) => void;
+  kind?: 'text' | 'textarea' | 'list' | 'jobsite' | 'boolean' | 'number';
+  onChange: (value: string | boolean | number) => void;
 }
 
 export const FormInputMapper = ({
@@ -68,6 +68,24 @@ export const FormInputMapper = ({
         variant="bordered"
         radius="sm"
         onChange={(e) => onChange(e.target.value)}
+      />
+    );
+  }
+
+  if (kind === 'number') {
+    return (
+      <Input
+        label={label}
+        type="number"
+        placeholder={placeholder}
+        value={(value as string) || '0'}
+        variant="bordered"
+        radius="sm"
+        onChange={(e) => {
+          const { value: inputValue } = e.target;
+          const newValue = Number.isNaN(inputValue) ? 0 : Number(inputValue);
+          onChange(newValue);
+        }}
       />
     );
   }

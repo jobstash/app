@@ -50,11 +50,15 @@ const inputSections = [
     key: 'financials',
     title: 'Financials',
     fields: [
-      { label: 'TVL', key: 'tvl' },
-      { label: 'Monthly Fees', key: 'monthlyFees' },
-      { label: 'Monthly Volume', key: 'monthlyVolume' },
-      { label: 'Monthly Revenue', key: 'monthlyRevenue' },
-      { label: 'Monthly Active Users', key: 'monthlyActiveUsers' },
+      { label: 'TVL', key: 'tvl', kind: 'number' },
+      { label: 'Monthly Fees', key: 'monthlyFees', kind: 'number' },
+      { label: 'Monthly Volume', key: 'monthlyVolume', kind: 'number' },
+      { label: 'Monthly Revenue', key: 'monthlyRevenue', kind: 'number' },
+      {
+        label: 'Monthly Active Users',
+        key: 'monthlyActiveUsers',
+        kind: 'number',
+      },
     ],
   },
   {
@@ -112,7 +116,7 @@ export const useManagedProjectForm = (projectId: string) => {
 
   const handleFieldChange = (
     key: keyof UpdateProjectPayload,
-    value: string | boolean,
+    value: string | boolean | number,
   ) => {
     setFormState((prevState) => ({
       ...prevState,

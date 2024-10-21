@@ -50,6 +50,7 @@ const inputSections = [
       {
         label: 'Employees',
         key: 'headcountEstimate',
+        kind: 'number',
       },
     ],
   },
@@ -127,7 +128,10 @@ export const useManagedOrgForm = (orgId: string) => {
   }, [data]);
 
   // Handle form field changes
-  const handleFieldChange = (key: keyof ManagedOrgFormState, value: string) => {
+  const handleFieldChange = (
+    key: keyof ManagedOrgFormState,
+    value: string | boolean | number,
+  ) => {
     setFormState((prevState) => ({
       ...prevState,
       [key]: value,
