@@ -9,6 +9,8 @@ import { useProjectDetails } from '@jobstash/projects/state';
 
 import { Heading, LogoTitle } from '@jobstash/shared/ui';
 
+import { DeleteProjectModal } from '../components/delete-project-modal';
+
 interface Props {
   id: string;
 }
@@ -61,13 +63,7 @@ export const ProjectInfo = ({ id }: Props) => {
         >
           Convert to Organization
         </Button>
-        <Button
-          size="sm"
-          className="bg-red-700 font-bold"
-          startContent={<Trash2 className="h-4 w-4 -mt-0.5" />}
-        >
-          Delete
-        </Button>
+        <DeleteProjectModal id={data.id} isDisabled={!data} />
       </div>
 
       {organization && (
