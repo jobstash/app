@@ -166,6 +166,10 @@ export const projectMoreInfoSchema = myzod.object({
   discord: myzod.string().min(1).nullable(),
   telegram: myzod.string().min(1).nullable(),
   docs: myzod.string().min(1).nullable(),
+
+  defiLlamaId: myzod.string().nullable(),
+  defiLlamaSlug: myzod.string().nullable(),
+  defiLlamaParent: myzod.string().nullable(),
 });
 
 export const repositoryInfoSchema = myzod

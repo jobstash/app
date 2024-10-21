@@ -1,3 +1,5 @@
+import { useRouter } from 'next/router';
+
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 
@@ -35,6 +37,7 @@ const convertOrgToProject = async (orgId: string) => {
 };
 
 export const useConvertOrgToProject = () => {
+  const { push } = useRouter();
   const queryClient = useQueryClient();
   const { mwVersion } = useMwVersionContext();
 
@@ -42,7 +45,7 @@ export const useConvertOrgToProject = () => {
 
   return useMutation({
     mutationFn: (orgId: string) => convertOrgToProject(orgId),
-    onSuccess({ message }, orgId) {
+    onSuccess(_data, orgId) {
       queryClient.invalidateQueries({
         queryKey: [mwVersion, 'all-orgs'],
       });
@@ -59,10 +62,12 @@ export const useConvertOrgToProject = () => {
       );
       setOrgImportItems(updatedItems);
 
-      notifSuccess({
-        title: 'Convert Org to Project',
-        message,
-        autoClose: 10_000,
+      push('/godmode/projects/manage').then(() => {
+        notifSuccess({
+          title: 'Organizations Converted!',
+          message: 'Search for the organization in the projects list.',
+          autoClose: 10_000,
+        });
       });
     },
     onError({ message }) {

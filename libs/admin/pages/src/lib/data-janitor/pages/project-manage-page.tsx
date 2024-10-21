@@ -2,8 +2,8 @@ import { useRouter } from 'next/router';
 
 import { NotFoundPage } from '@jobstash/shared/pages';
 
-import { CreateProjectSection } from '../components/create-project-section';
 import { ProjectInfo } from '../components/project-info';
+import { ProjectUpdateForm } from '../components/project-update-form';
 
 import { ManageLayout } from './manage-page-layout';
 
@@ -15,9 +15,9 @@ export const ProjectManagePage = () => {
 
   return (
     <ManageLayout>
-      <div className="flex justify-between">
+      <div className="flex flex-col gap-4 pt-8 w-full">
         <ProjectInfo id={id} />
-        <CreateProjectSection />
+        <ProjectUpdateForm projectId={id} />
       </div>
     </ManageLayout>
   );

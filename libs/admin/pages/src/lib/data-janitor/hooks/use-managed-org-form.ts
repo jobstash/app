@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { useAtom } from 'jotai';
 
-import { orgManageTabAtom } from '../core/atoms';
+import { OrgManageTab, orgManageTabAtom } from '../core/atoms';
 import {
   dataToFormState,
   formStateToPayload,
@@ -136,7 +136,7 @@ export const useManagedOrgForm = (orgId: string) => {
 
   const [tab, setTab] = useAtom(orgManageTabAtom);
   const onChangeTab = (key: React.Key) => {
-    setTab(key as 'details' | 'projects');
+    setTab(key as OrgManageTab);
   };
 
   const { mutate: updateOrg, isPending } = useUpdateManagedOrg();

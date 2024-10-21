@@ -8,7 +8,7 @@ interface OrgField {
   onChange: (value: string) => void;
 }
 
-export const OrgInputMapper = ({
+export const FormInputMapper = ({
   label,
   value,
   placeholder = 'N/A',

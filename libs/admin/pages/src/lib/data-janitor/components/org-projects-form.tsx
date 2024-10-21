@@ -73,6 +73,8 @@ export const OrgProjectsForm = ({
     [formStateProjects],
   );
 
+  const hasProject = projectIds.length > 0;
+
   const [animateRef] = useAutoAnimate();
 
   return (
@@ -84,14 +86,16 @@ export const OrgProjectsForm = ({
           onAddProject={onAddProject}
         />
       </div>
-      <Divider />
-      <Heading size="md">Linked Projects</Heading>
-      {projectIds.length > 0 && (
-        <div ref={animateRef} className="flex flex-col gap-4">
-          {projectIds.map((id) => (
-            <OrgProjectsFormItem key={id} id={id} onUnlink={onUnlink} />
-          ))}
-        </div>
+      {hasProject && (
+        <>
+          <Divider />
+          <Heading size="md">Linked Projects</Heading>
+          <div ref={animateRef} className="flex flex-col gap-4">
+            {projectIds.map((id) => (
+              <OrgProjectsFormItem key={id} id={id} onUnlink={onUnlink} />
+            ))}
+          </div>
+        </>
       )}
     </div>
   );

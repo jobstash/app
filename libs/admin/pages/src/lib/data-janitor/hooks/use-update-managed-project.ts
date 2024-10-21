@@ -11,19 +11,25 @@ import { notifError, notifLoading, notifSuccess } from '@jobstash/shared/utils';
 import { useMwVersionContext } from '@jobstash/shared/state';
 import { mwFetch } from '@jobstash/shared/data';
 
-import { ManagedOrgPayload, managedOrgPayloadSchema } from '../core/schemas';
+import {
+  UpdateProjectPayload,
+  updateProjectPayloadSchema,
+} from '../core/schemas';
 
-const updateManagedOrg = async (payload: ManagedOrgPayload) => {
-  const url = `${MW_URL}/organizations/update/${payload.orgId}`;
+const updateManagedProject = async (
+  projectId: string,
+  payload: UpdateProjectPayload,
+) => {
+  const url = `${MW_URL}/projects/update/${projectId}`;
 
   const options = {
     method: 'POST' as const,
     responseSchema: messageResponseSchema,
-    sentryLabel: `updateOrg`,
+    sentryLabel: `updateManagedProject`,
     credentials: 'include' as RequestCredentials,
     mode: 'cors' as RequestMode,
     payload,
-    payloadSchema: managedOrgPayloadSchema,
+    payloadSchema: updateProjectPayloadSchema,
     headers: {
       'Content-Type': 'application/json',
     },
@@ -31,7 +37,7 @@ const updateManagedOrg = async (payload: ManagedOrgPayload) => {
 
   const { success, message } = await mwFetch<
     MessageResponse,
-    ManagedOrgPayload
+    UpdateProjectPayload
   >(url, options);
 
   if (!success) throw new Error(message);
@@ -39,43 +45,44 @@ const updateManagedOrg = async (payload: ManagedOrgPayload) => {
   return { success, message };
 };
 
-const TOAST_ID = 'update-managed-org-toast';
+const TOAST_ID = 'update-managed-project-toast';
 
-export const useUpdateManagedOrg = () => {
+export const useUpdateManagedProject = (projectId: string) => {
   const queryClient = useQueryClient();
   const { mwVersion } = useMwVersionContext();
 
   return useMutation({
-    mutationFn: (payload: ManagedOrgPayload) => updateManagedOrg(payload),
+    mutationFn: (payload: UpdateProjectPayload) =>
+      updateManagedProject(projectId, payload),
 
     onMutate() {
       notifications.clean();
       notifLoading({
         id: TOAST_ID,
-        title: 'Updating Organization',
+        title: 'Updating Project',
         message: 'Please wait ...',
       });
     },
-    onSuccess({ message }, { orgId }) {
+    onSuccess({ message }) {
       notifSuccess({
         id: TOAST_ID,
-        title: 'Org Update Successful!',
+        title: 'Project Update Successful!',
         message,
         autoClose: 10_000,
       });
 
       queryClient.invalidateQueries({
-        queryKey: [mwVersion, 'get-managed-org', orgId],
+        queryKey: [mwVersion, 'project-details', projectId, undefined],
       });
 
       queryClient.invalidateQueries({
-        queryKey: [mwVersion, 'all-orgs'],
+        queryKey: [mwVersion, 'all-projects'],
       });
     },
     onError(data) {
       notifError({
         id: TOAST_ID,
-        title: 'Org Update Failed!',
+        title: 'Project Update Failed!',
         message: (data as Error).message,
       });
     },

@@ -1,5 +1,6 @@
 import myzod, { Infer } from 'myzod';
 
+import { ProjectDetails } from '@jobstash/projects/core';
 import { messageResponseSchema } from '@jobstash/shared/core';
 
 export const jobsitesSchema = myzod.array(
@@ -147,3 +148,57 @@ export const managedOrgResponseSchema = myzod.intersection(
 );
 
 export type ManagedOrgResponse = Infer<typeof managedOrgResponseSchema>;
+
+export const updateProjectPayloadSchema = myzod.object({
+  orgId: myzod.string().nullable(),
+  name: myzod.string(),
+  description: myzod.string().nullable(),
+  category: myzod.string().nullable(),
+  logo: myzod.string().nullable(),
+  isMainnet: myzod.boolean().nullable(),
+  tvl: myzod.number().nullable(),
+  monthlyFees: myzod.number().nullable(),
+  monthlyVolume: myzod.number().nullable(),
+  monthlyRevenue: myzod.number().nullable(),
+  monthlyActiveUsers: myzod.number().nullable(),
+  website: myzod.string().nullable(),
+  docs: myzod.string().nullable(),
+  twitter: myzod.string().nullable(),
+  discord: myzod.string().nullable(),
+  github: myzod.string().nullable(),
+  telegram: myzod.string().nullable(),
+  tokenAddress: myzod.string().nullable(),
+  tokenSymbol: myzod.string().nullable(),
+  defiLlamaId: myzod.string().nullable(),
+  defiLlamaSlug: myzod.string().nullable(),
+  defiLlamaParent: myzod.string().nullable(),
+});
+
+export type UpdateProjectPayload = Infer<typeof updateProjectPayloadSchema>;
+
+export const dataToProjectPayload = (
+  data: ProjectDetails,
+): UpdateProjectPayload => ({
+  orgId: data.organization?.orgId ?? null,
+  name: data.name,
+  description: data.description,
+  category: data.category,
+  logo: data.logo,
+  isMainnet: data.isMainnet,
+  tvl: data.tvl,
+  monthlyFees: data.monthlyFees,
+  monthlyVolume: data.monthlyVolume,
+  monthlyRevenue: data.monthlyRevenue,
+  monthlyActiveUsers: data.monthlyActiveUsers,
+  website: data.website,
+  docs: data.docs,
+  twitter: data.twitter,
+  discord: data.discord,
+  github: data.github,
+  telegram: data.telegram,
+  tokenAddress: null,
+  tokenSymbol: data.tokenSymbol,
+  defiLlamaId: data.defiLlamaId,
+  defiLlamaSlug: data.defiLlamaSlug,
+  defiLlamaParent: data.defiLlamaParent,
+});

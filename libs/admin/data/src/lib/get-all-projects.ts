@@ -10,7 +10,7 @@ export const getAllProjects = async () => {
 
   const options = {
     responseSchema,
-    sentryLabel: 'getAllOrgs',
+    sentryLabel: 'getAllProjects',
     credentials: 'include' as RequestCredentials,
     mode: 'cors' as RequestMode,
   };

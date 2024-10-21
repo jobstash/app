@@ -2,12 +2,10 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Button, Tab, Tabs } from '@nextui-org/react';
 
-import { useManagedOrgForm } from '../hooks/use-managed-org-form';
+import { FormInputMapper } from '../components/form-input-mapper';
+import { useManagedProjectForm } from '../hooks/use-managed-project-form';
 
-import { FormInputMapper } from './form-input-mapper';
-import { OrgProjectsForm } from './org-projects-form';
-
-export const OrgInfoForm = ({ id }: { id: string }) => {
+export const ProjectUpdateForm = ({ projectId }: { projectId: string }) => {
   const {
     formState,
     hasChanges,
@@ -17,9 +15,7 @@ export const OrgInfoForm = ({ id }: { id: string }) => {
     onChangeTab,
     isPending,
     onSubmit,
-    onUnlinkProject,
-    onAddProject,
-  } = useManagedOrgForm(id);
+  } = useManagedProjectForm(projectId);
 
   return (
     <div className="flex flex-col gap-8 pb-40 min-h-[1000px] max-w-3xl">
@@ -40,17 +36,6 @@ export const OrgInfoForm = ({ id }: { id: string }) => {
               {fields.map(({ label, key, kind }) => {
                 const fieldKey = key as keyof typeof formState;
                 const value = formState[fieldKey]!;
-
-                if (kind === 'projects') {
-                  return (
-                    <OrgProjectsForm
-                      key={fieldKey}
-                      formStateProjects={value}
-                      onUnlink={onUnlinkProject}
-                      onAddProject={onAddProject}
-                    />
-                  );
-                }
 
                 return (
                   <FormInputMapper

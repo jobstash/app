@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 import { Button, Divider, Spinner, Tooltip } from '@nextui-org/react';
-import { ListStart, RefreshCcw, Settings, Trash2 } from 'lucide-react';
+import { ListStart, Settings, Trash2 } from 'lucide-react';
 
 import { getLogoUrl } from '@jobstash/shared/utils';
 
@@ -33,17 +33,9 @@ export const ProjectInfo = ({ id }: Props) => {
 
   return (
     <div className="flex flex-col gap-8">
-      <Heading size="lg">Manage Project</Heading>
-      <div className="flex items-center gap-8">
-        <LogoTitle
-          size="lg"
-          title={name}
-          avatarProps={{
-            alt: name,
-            src: getLogoUrl(website, logo),
-          }}
-        />
-        <Tooltip content="Choose another organization">
+      <div className="flex flex-col md:flex-row md:items-center gap-4">
+        <span className="text-2xl font-bold">Manage Project</span>
+        <Tooltip content="Choose another project">
           <Button
             isIconOnly
             as={Link}
@@ -55,15 +47,23 @@ export const ProjectInfo = ({ id }: Props) => {
         </Tooltip>
       </div>
 
-      <div className="flex gap-4 -mt-4 items-center ">
-        <Button
-          size="sm"
-          className="font-bold"
-          startContent={<RefreshCcw className="h-4 w-4 -mt-0.5" />}
-        >
-          Convert to Organization
-        </Button>
-        <DeleteProjectModal id={data.id} isDisabled={!data} />
+      <div className="flex flex-col gap-4 rounded-2xl">
+        <span className="text-md text-white/90 max-w-lg">
+          Update and manage key details of your projects, including linked
+          organizations and critical information. Make sure data remains
+          accurate and legitimate.
+        </span>
+        <div className="flex flex-col md:items-center md:flex-row gap-8 py-4">
+          <LogoTitle
+            size="lg"
+            title={name}
+            avatarProps={{
+              alt: name,
+              src: getLogoUrl(website, logo),
+            }}
+          />
+          <DeleteProjectModal id={data.id} isDisabled={!data} />
+        </div>
       </div>
 
       {organization && (
