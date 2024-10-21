@@ -39,7 +39,6 @@ const inputSections = [
     key: 'details',
     title: 'Details',
     fields: [
-      { label: 'Organization ID', key: 'orgId' },
       { label: 'Name', key: 'name' },
       { label: 'Category', key: 'category' },
       { label: 'Description', key: 'description', kind: 'textarea' },
