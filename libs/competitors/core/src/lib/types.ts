@@ -22,4 +22,5 @@ export interface Competitor {
   monthlyFees?: number;
 
   chains: Chain[];
+  ecoSystems: string[];
 }

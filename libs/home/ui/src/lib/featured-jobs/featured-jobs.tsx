@@ -105,6 +105,7 @@ const fakeFeaturedJobs: JobPost[] = [
       aggregateRating: 4.2,
       reviewCount: 69,
       community: [],
+      ecosystems: [],
       projects: [
         {
           github: null,
@@ -139,6 +140,10 @@ const fakeFeaturedJobs: JobPost[] = [
           monthlyRevenue: null,
           monthlyActiveUsers: null,
           logo: null,
+          ecosystems: [],
+          defiLlamaId: null,
+          defiLlamaSlug: null,
+          defiLlamaParent: null,
         },
       ],
       createdTimestamp: 1_696_420_033_962,
@@ -312,6 +317,7 @@ const fakeFeaturedJobs: JobPost[] = [
       aggregateRating: 4.2,
       reviewCount: 69,
       community: [],
+      ecosystems: [],
       projects: [
         {
           github: null,
@@ -346,6 +352,10 @@ const fakeFeaturedJobs: JobPost[] = [
           monthlyRevenue: null,
           monthlyActiveUsers: null,
           logo: null,
+          ecosystems: [],
+          defiLlamaId: null,
+          defiLlamaSlug: null,
+          defiLlamaParent: null,
         },
       ],
       createdTimestamp: 1_696_420_033_962,

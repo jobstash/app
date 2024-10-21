@@ -130,6 +130,7 @@ export const orgInfoSchema = myzod.object(
     docs: myzod.string().min(1).nullable(),
     twitter: myzod.string().min(1).nullable(),
     community: myzod.array(myzod.string()),
+    ecosystems: myzod.array(myzod.string()),
   },
   { allowUnknown: true },
 );
@@ -155,6 +156,8 @@ export const projectInfoSchema = myzod.object(
     chains: myzod.array(chainSchema),
     hacks: myzod.array(hackSchema),
     audits: myzod.array(auditSchema),
+
+    ecosystems: myzod.array(myzod.string()),
   },
   { allowUnknown: true },
 );

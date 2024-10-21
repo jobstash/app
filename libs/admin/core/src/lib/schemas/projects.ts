@@ -13,6 +13,8 @@ export const projectItemSchema = myzod.object({
   monthlyVolume: myzod.number().nullable().optional(),
   monthlyRevenue: myzod.number().nullable().optional(),
   monthlyActiveUsers: myzod.number().nullable().optional(),
+  //
+  // ecosystems: myzod.array(myzod.string()),
 });
 
 export type ProjectItem = Infer<typeof projectItemSchema>;
