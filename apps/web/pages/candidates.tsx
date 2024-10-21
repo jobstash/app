@@ -158,7 +158,9 @@ const CandidatesPage = () => (
                   We verify every single bit of data, and strive for accuracy
                   and completeness. We don&#39;t simply operate as a job board.
                   We are an intelligence hub for people operations in crypto,
-                  and base this on
+                  and base this on a foundation of rigorous data verification,
+                  comprehensive analytics, and deep insights into the Web3
+                  talent landscape.
                 </p>
                 {/* <div className="mt-6 aspect-w-16 aspect-h-6">
               <Image
