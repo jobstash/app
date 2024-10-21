@@ -112,7 +112,7 @@ export const useManagedProjectForm = (projectId: string) => {
 
   const handleFieldChange = (
     key: keyof UpdateProjectPayload,
-    value: string,
+    value: string | boolean,
   ) => {
     setFormState((prevState) => ({
       ...prevState,

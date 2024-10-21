@@ -1,11 +1,11 @@
-import { Input, Textarea } from '@nextui-org/react';
+import { Input, Switch, Textarea } from '@nextui-org/react';
 
 interface OrgField {
   label: string;
-  value: string | string[];
+  value: string | boolean | string[];
   placeholder?: string;
-  kind?: 'text' | 'textarea' | 'list' | 'jobsite';
-  onChange: (value: string) => void;
+  kind?: 'text' | 'textarea' | 'list' | 'jobsite' | 'boolean';
+  onChange: (value: string | boolean) => void;
 }
 
 export const FormInputMapper = ({
@@ -20,11 +20,29 @@ export const FormInputMapper = ({
       <Textarea
         label={`${label} (comma separated)`}
         placeholder={placeholder}
-        value={value ? (Array.isArray(value) ? value.join(', ') : value) : ''}
+        value={
+          value
+            ? Array.isArray(value)
+              ? value.join(', ')
+              : (value as string) || ''
+            : ''
+        }
         variant="bordered"
         radius="sm"
         onChange={(e) => onChange(e.target.value)}
       />
+    );
+  }
+
+  if (kind === 'boolean') {
+    return (
+      <Switch
+        color="secondary"
+        isSelected={value as boolean}
+        onValueChange={(newValue) => onChange(newValue)}
+      >
+        {label}
+      </Switch>
     );
   }
 
@@ -33,7 +51,7 @@ export const FormInputMapper = ({
       <Textarea
         label={label}
         placeholder={placeholder}
-        value={value as string}
+        value={(value as string) || ''}
         variant="bordered"
         radius="sm"
         onChange={(e) => onChange(e.target.value)}
@@ -46,7 +64,7 @@ export const FormInputMapper = ({
       <Textarea
         label={label}
         placeholder={placeholder}
-        value={value as string}
+        value={(value as string) || ''}
         variant="bordered"
         radius="sm"
         onChange={(e) => onChange(e.target.value)}
@@ -58,7 +76,7 @@ export const FormInputMapper = ({
     <Input
       label={label}
       placeholder={placeholder}
-      value={value as string}
+      value={(value as string) || ''}
       variant="bordered"
       radius="sm"
       onChange={(e) => onChange(e.target.value)}
