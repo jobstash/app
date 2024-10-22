@@ -29,6 +29,10 @@ const SidebarAdminSection = ({ isMobile }: Props) => {
         path: '/godmode/organizations/import',
       },
       {
+        text: 'Import Project',
+        path: '/godmode/projects/import',
+      },
+      {
         text: 'Manage Organizations',
         path: '/godmode/organizations/manage',
       },

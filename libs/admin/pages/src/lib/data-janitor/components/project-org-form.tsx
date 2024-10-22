@@ -30,7 +30,11 @@ export const ProjectOrgForm = ({
     return (
       <div className="flex flex-col gap-4">
         <Heading size="md">Link Organization</Heading>
-        <AddOrgSearchInput isPending={isPending} onAddOrg={onAddOrg} />
+        <AddOrgSearchInput
+          clearSelectionOnSelect
+          isPending={isPending}
+          onAddOrg={onAddOrg}
+        />
       </div>
     );
   }

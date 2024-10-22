@@ -14,6 +14,7 @@ interface SearchInputProps<T> {
   onSelect: (item: T) => void;
   showSpinnerOnSelect?: boolean;
   clearSelectionOnSelect?: boolean;
+  variant?: AutocompleteProps['variant'];
 }
 
 export const SearchInput = <T extends { name: string }>({
@@ -26,6 +27,7 @@ export const SearchInput = <T extends { name: string }>({
   onSelect,
   showSpinnerOnSelect,
   clearSelectionOnSelect,
+  variant = 'bordered',
 }: SearchInputProps<T>) => {
   const searchData = useMemo(() => data ?? [], [data]);
 
@@ -55,7 +57,7 @@ export const SearchInput = <T extends { name: string }>({
           emptyContent: emptyContentText,
         }}
         isDisabled={isLoading || isLoadingInput}
-        variant="bordered"
+        variant={variant}
         selectedKey={selectedKey}
         defaultItems={items}
         onInputChange={onInputChange}

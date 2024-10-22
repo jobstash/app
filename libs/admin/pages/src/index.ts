@@ -2,6 +2,7 @@ export * from './lib/all-jobs/all-jobs-page';
 export * from './lib/data-janitor/pages/org-import-page';
 export * from './lib/data-janitor/pages/org-manage-page';
 export * from './lib/data-janitor/pages/org-search-page';
+export * from './lib/data-janitor/pages/project-import-page';
 export * from './lib/data-janitor/pages/project-manage-page';
 export * from './lib/data-janitor/pages/project-search-page';
 export * from './lib/org-approval/org-approval-page';

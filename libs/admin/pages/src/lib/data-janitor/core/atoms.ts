@@ -1,9 +1,9 @@
 import { atom } from 'jotai';
 import { atomWithStorage, createJSONStorage } from 'jotai/utils';
 
-import { OrgImportItem, OrgImportStatus } from '../core/types';
+import { ImportItem, ImportStatus } from '../core/types';
 
-export const orgImportTabAtom = atom<OrgImportStatus>('all');
+export const orgImportTabAtom = atom<ImportStatus>('all');
 export type OrgManageTab =
   | 'details'
   | 'description'
@@ -14,12 +14,9 @@ export type OrgManageTab =
   | 'projects';
 export const orgManageTabAtom = atom<OrgManageTab>('details');
 
-export const ORG_IMPORT_ITEMS_KEY = 'org-import-items';
-const ORG_IMPORT_ITEMS_DEFAULT_VALUE: OrgImportItem[] = [];
-
-export const orgImportItemsAtom = atomWithStorage<OrgImportItem[]>(
-  ORG_IMPORT_ITEMS_KEY,
-  ORG_IMPORT_ITEMS_DEFAULT_VALUE,
+export const orgImportItemsAtom = atomWithStorage<ImportItem[]>(
+  'org-import-items',
+  [],
   createJSONStorage(() => localStorage),
 );
 
@@ -32,3 +29,11 @@ export type ProjectManageTab =
   | 'tokens'
   | 'defillama';
 export const projectManageTabAtom = atom<ProjectManageTab>('details');
+
+export const projectImportTabAtom = atom<ImportStatus>('all');
+
+export const projectImportItemsAtom = atomWithStorage<ImportItem[]>(
+  'project-import-items',
+  [],
+  createJSONStorage(() => localStorage),
+);

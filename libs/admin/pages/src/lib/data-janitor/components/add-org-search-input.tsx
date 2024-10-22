@@ -1,4 +1,4 @@
-import { AutocompleteItem } from '@nextui-org/react';
+import { AutocompleteItem, AutocompleteProps } from '@nextui-org/react';
 
 import { OrgItem } from '@jobstash/admin/core';
 import { getLogoUrl } from '@jobstash/shared/utils';
@@ -12,16 +12,27 @@ import { SearchInput } from './search-input';
 interface Props {
   isPending: boolean;
   onAddOrg: (id: string) => void;
+  labelText?: string;
+  variant?: AutocompleteProps['variant'];
+  showSpinnerOnSelect?: boolean;
+  clearSelectionOnSelect?: boolean;
 }
 
-export const AddOrgSearchInput = ({ onAddOrg, isPending }: Props) => {
+export const AddOrgSearchInput = ({
+  onAddOrg,
+  isPending,
+  labelText = 'Enter Organization Name',
+  variant,
+  showSpinnerOnSelect,
+  clearSelectionOnSelect,
+}: Props) => {
   const { data, isLoading } = useAllOrgs();
 
   const items = data ?? [];
 
   return (
     <SearchInput<OrgItem>
-      clearSelectionOnSelect
+      clearSelectionOnSelect={clearSelectionOnSelect}
       size="sm"
       data={items ?? []}
       renderItem={({ name, location, websites, logoUrl }) => (
@@ -39,9 +50,11 @@ export const AddOrgSearchInput = ({ onAddOrg, isPending }: Props) => {
           />
         </AutocompleteItem>
       )}
-      labelText="Enter Organization Name"
+      labelText={labelText}
+      variant={variant}
       emptyContentText="Type at least 2 letters to show results"
       isLoading={isLoading || isPending}
+      showSpinnerOnSelect={showSpinnerOnSelect}
       onSelect={(item) => onAddOrg(item.orgId)}
     />
   );

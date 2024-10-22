@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useMemo } from 'react';
 
 import { useAutoAnimate } from '@formkit/auto-animate/react';
 import {
@@ -21,29 +21,28 @@ import { useMwVersionContext } from '@jobstash/shared/state';
 
 import { LogoTitle } from '@jobstash/shared/ui';
 
-import { orgImportItemsAtom, orgImportTabAtom } from '../core/atoms';
-import { ImportItem, ImportItem as IOrgImportItem } from '../core/types';
-import { useOrgImport } from '../hooks/use-org-import';
-import { usePollOrgIdByUrl } from '../hooks/use-poll-org-id-by-url';
+import { projectImportItemsAtom, projectImportTabAtom } from '../core/atoms';
+import { ImportItem } from '../core/types';
+import { usePollProjectIdyByUrl } from '../hooks/use-poll-project-id-by-url';
+import { useProjectImport } from '../hooks/use-project-import';
 
 const POLL_TIMEOUT = 300_000; // 5 mins
 
-const ItemMenu = ({
-  id,
-  assignedId,
-}: {
+interface ItemMenuProps {
   id: string;
   assignedId?: string | null;
-}) => {
+}
+
+const ItemMenu = ({ id, assignedId }: ItemMenuProps) => {
   const { push } = useRouter();
 
-  const [orgImportItems, setOrgImportItems] = useAtom(orgImportItemsAtom);
+  const [importItems, setImportItems] = useAtom(projectImportItemsAtom);
 
   const onDelete = () => {
-    const updatedItems = orgImportItems.filter(
-      (orgImportItem) => id !== orgImportItem.id,
+    const updatedItems = importItems.filter(
+      (importItem) => id !== importItem.id,
     );
-    setOrgImportItems(updatedItems);
+    setImportItems(updatedItems);
   };
 
   const openManagePage = () => {
@@ -77,31 +76,36 @@ const ItemMenu = ({
   );
 };
 
-interface Props {
-  item: IOrgImportItem;
+interface ProjectImportItemProps {
+  item: ImportItem;
 }
 
-const OrgImportItem = ({ item }: Props) => {
+const ProjectImportItem = ({ item }: ProjectImportItemProps) => {
+  const queryClient = useQueryClient();
+  const { mwVersion } = useMwVersionContext();
+
   const isPending = item.status === 'pending';
   const isDone = item.status === 'done';
 
-  const [orgImportItems, setOrgImportItems] = useAtom(orgImportItemsAtom);
+  const [importItems, setImportItems] = useAtom(projectImportItemsAtom);
 
   const updateItemStatus = useCallback(
     (status: ImportItem['status']) => {
-      const updatedItems = orgImportItems.map((orgImportItem) =>
-        item.id === orgImportItem.id ? { ...item, status } : orgImportItem,
+      const updatedItems = importItems.map((importItem) =>
+        item.id === importItem.id ? { ...item, status } : importItem,
       );
 
-      setOrgImportItems(updatedItems);
+      setImportItems(updatedItems);
     },
-    [item, orgImportItems, setOrgImportItems],
+    [importItems, item, setImportItems],
   );
 
-  const { mutate: importOrg, isPending: isImporting } = useOrgImport(false);
+  const { mutate: importProject, isPending: isImporting } =
+    useProjectImport(false);
+
   const onRetry = () => {
     updateItemStatus('pending');
-    importOrg(
+    importProject(
       { name: item.name, url: item.url },
       {
         onError() {
@@ -111,6 +115,7 @@ const OrgImportItem = ({ item }: Props) => {
     );
   };
 
+  // Terminate poll if it takes too long
   useEffect(() => {
     let timeout: NodeJS.Timeout;
 
@@ -123,18 +128,17 @@ const OrgImportItem = ({ item }: Props) => {
     return () => clearTimeout(timeout);
   }, [isPending, updateItemStatus]);
 
-  const { data: orgId } = usePollOrgIdByUrl(item.url, isPending);
+  const { data: projectId } = usePollProjectIdyByUrl(item.url, isPending);
 
-  const queryClient = useQueryClient();
-  const { mwVersion } = useMwVersionContext();
+  // Invalidate cache and update status if import is done
   useEffect(() => {
-    if (isPending && typeof orgId === 'string') {
+    if (isPending && typeof projectId === 'string') {
       updateItemStatus('done');
       queryClient.invalidateQueries({
-        queryKey: [mwVersion, 'all-orgs'],
+        queryKey: [mwVersion, 'all-projects'],
       });
     }
-  }, [isPending, mwVersion, orgId, queryClient, updateItemStatus]);
+  }, [isPending, mwVersion, projectId, queryClient, updateItemStatus]);
 
   return (
     <div className="p-4 border border-zinc-800 rounded-xl flex flex-col gap-2 min-w-xs">
@@ -169,25 +173,23 @@ const OrgImportItem = ({ item }: Props) => {
               </Button>
             </Tooltip>
           )}
-          <ItemMenu id={item.id} assignedId={orgId} />
+          <ItemMenu id={item.id} assignedId={projectId} />
         </div>
       </div>
     </div>
   );
 };
 
-export const OrgImportItems = () => {
-  const orgImportItems = useAtomValue(orgImportItemsAtom);
-  const orgImportTab = useAtomValue(orgImportTabAtom);
+export const ProjectImportItems = () => {
+  const importItems = useAtomValue(projectImportItemsAtom);
+  const importTab = useAtomValue(projectImportTabAtom);
 
   const items = useMemo(
     () =>
-      orgImportItems
-        .filter(
-          (item) => orgImportTab === 'all' || item.status === orgImportTab,
-        )
+      importItems
+        .filter((item) => importTab === 'all' || item.status === importTab)
         .sort((a, b) => b.ts - a.ts),
-    [orgImportItems, orgImportTab],
+    [importItems, importTab],
   );
 
   const [animateRef] = useAutoAnimate();
@@ -197,7 +199,7 @@ export const OrgImportItems = () => {
       {items.length > 0 ? (
         <>
           {items.map((item) => (
-            <OrgImportItem key={`${item.id}-${item.status}`} item={item} />
+            <ProjectImportItem key={`${item.id}-${item.status}`} item={item} />
           ))}
         </>
       ) : (

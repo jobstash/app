@@ -4,25 +4,25 @@ import { v4 } from 'uuid';
 
 import { notifError, notifSuccess } from '@jobstash/shared/utils';
 
-import { importOrg } from '@jobstash/admin/data';
+import { importProject } from '@jobstash/admin/data';
 
-import { orgImportItemsAtom } from '../core/atoms';
+import { projectImportItemsAtom } from '../core/atoms';
 import { ImportItem } from '../core/types';
-
 interface Payload {
-  name: string;
   url: string;
+  name: string;
+  orgId?: string;
+  defiLlamaSlug?: string;
 }
 
-export const useOrgImport = (shouldPersist = true) => {
-  const setOrgImportItems = useSetAtom(orgImportItemsAtom);
+export const useProjectImport = (shouldPersist = true) => {
+  const setImportItems = useSetAtom(projectImportItemsAtom);
 
   return useMutation({
-    mutationFn: (payload: Payload) => importOrg(payload),
-    onSuccess(_data, { name, url }) {
-      // Allow duplicate urls
+    mutationFn: (payload: Payload) => importProject(payload),
+    onSuccess(_, { name, url }) {
       if (shouldPersist) {
-        setOrgImportItems((prev: ImportItem[]) => {
+        setImportItems((prev: ImportItem[]) => {
           const updateditems = [...prev];
           updateditems.push({
             id: v4(),
@@ -37,7 +37,7 @@ export const useOrgImport = (shouldPersist = true) => {
 
       notifSuccess({
         title: 'Success!',
-        message: 'Organization has been queued for import',
+        message: 'Project has been queued for import',
         autoClose: 10_000,
       });
     },

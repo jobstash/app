@@ -1,10 +1,10 @@
 import { OrgItem } from '@jobstash/admin/core';
 
-export type OrgImportStatus = 'all' | 'pending' | 'stale' | 'done';
-export interface OrgImportItem {
+export type ImportStatus = 'all' | 'pending' | 'stale' | 'done';
+export interface ImportItem {
   id: string;
   name: string;
-  status: OrgImportStatus;
+  status: ImportStatus;
   url: string;
   ts: number;
 }

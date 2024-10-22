@@ -1,11 +1,9 @@
-import React from 'react';
-
 import { Tab, Tabs } from '@nextui-org/react';
 import { useAtom } from 'jotai';
 
-import { OrgImportItems } from '../components/org-import-items';
-import { OrgImportModal } from '../components/org-import-modal';
-import { orgImportTabAtom } from '../core/atoms';
+import { ProjectImportItems } from '../components/project-import-items';
+import { ProjectImportModal } from '../components/project-import-modal';
+import { projectImportTabAtom } from '../core/atoms';
 import { ImportStatus } from '../core/types';
 
 import { ManageLayout } from './manage-page-layout';
@@ -17,8 +15,8 @@ const tabs = [
   { key: 'done', title: 'Done' },
 ];
 
-export const OrgImportPage = () => {
-  const [tab, setTab] = useAtom(orgImportTabAtom);
+export const ProjectImportPage = () => {
+  const [tab, setTab] = useAtom(projectImportTabAtom);
   const onSelectionChange = (key: React.Key) => {
     setTab(key as ImportStatus);
   };
@@ -28,7 +26,7 @@ export const OrgImportPage = () => {
       <div className="flex flex-col gap-8 pt-8">
         <div className="flex items-center justify-between">
           <span className="text-2xl font-bold">Tracked Queued Imports</span>
-          <OrgImportModal />
+          <ProjectImportModal />
         </div>
         <div className="flex flex-col gap-8 max-w-lg rounded-2xl">
           <span className="text-md text-white/90">
@@ -50,7 +48,7 @@ export const OrgImportPage = () => {
           </Tabs>
         </div>
 
-        <OrgImportItems />
+        <ProjectImportItems />
       </div>
     </ManageLayout>
   );
