@@ -137,7 +137,7 @@ const App = ({ Component, pageProps }: AppProps) => {
                     {/* <DonateModal /> */}
                     <div
                       className={cn({
-                        'pt-[58px] sm:pt-[40px]': isOpenTopBanner,
+                        'pt-[54px] sm:pt-[40px]': isOpenTopBanner,
                       })}
                     >
                       <JotaiProvider>
