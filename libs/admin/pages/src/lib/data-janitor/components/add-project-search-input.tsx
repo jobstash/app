@@ -6,8 +6,7 @@ import { ProjectItem } from '@jobstash/admin/core';
 
 import { useAllProjects } from '@jobstash/admin/state';
 
-import { LogoTitle } from '@jobstash/shared/ui';
-
+import { ProjectSearchItem } from './project-search-item';
 import { SearchInput } from './search-input';
 
 interface Props {
@@ -29,15 +28,9 @@ export const AddProjectSearchInput = ({ stateIds, onAddProject }: Props) => {
       clearSelectionOnSelect
       size="sm"
       data={items ?? []}
-      renderItem={({ name, logo }) => (
+      renderItem={({ id, name, logo }) => (
         <AutocompleteItem key={name} textValue={name}>
-          <LogoTitle
-            title={name}
-            avatarProps={{
-              alt: name,
-              src: logo ?? '',
-            }}
-          />
+          <ProjectSearchItem id={id} name={name} logo={logo} />
         </AutocompleteItem>
       )}
       labelText="Enter Project Name"

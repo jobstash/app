@@ -1,3 +1,4 @@
+import { T } from '@privy-io/react-auth/dist/dts/types';
 import myzod, { Infer } from 'myzod';
 
 import { ProjectDetails } from '@jobstash/projects/core';
@@ -176,29 +177,38 @@ export const updateProjectPayloadSchema = myzod.object({
 
 export type UpdateProjectPayload = Infer<typeof updateProjectPayloadSchema>;
 
+const nullable = <T>(value: T) => value || null;
+
 export const dataToProjectPayload = (
   data: ProjectDetails,
 ): UpdateProjectPayload => ({
-  orgId: data.organization?.orgId ?? null,
+  orgId: nullable(data.organization?.orgId),
   name: data.name,
-  description: data.description,
+  description: nullable(data.description),
   category: data.category,
-  logo: data.logo,
-  isMainnet: data.isMainnet,
-  tvl: data.tvl,
-  monthlyFees: data.monthlyFees,
-  monthlyVolume: data.monthlyVolume,
-  monthlyRevenue: data.monthlyRevenue,
-  monthlyActiveUsers: data.monthlyActiveUsers,
-  website: data.website,
-  docs: data.docs,
-  twitter: data.twitter,
-  discord: data.discord,
-  github: data.github,
-  telegram: data.telegram,
+  logo: nullable(data.logo),
+  isMainnet: nullable(data.isMainnet),
+  tvl: nullable(data.tvl),
+  monthlyFees: nullable(data.monthlyFees),
+  monthlyVolume: nullable(data.monthlyVolume),
+  monthlyRevenue: nullable(data.monthlyRevenue),
+  monthlyActiveUsers: nullable(data.monthlyActiveUsers),
+  website: nullable(data.website),
+  docs: nullable(data.docs),
+  twitter: nullable(data.twitter),
+  discord: nullable(data.discord),
+  github: nullable(data.github),
+  telegram: nullable(data.telegram),
   tokenAddress: null,
-  tokenSymbol: data.tokenSymbol,
-  defiLlamaId: data.defiLlamaId,
-  defiLlamaSlug: data.defiLlamaSlug,
-  defiLlamaParent: data.defiLlamaParent,
+  tokenSymbol: nullable(data.tokenSymbol),
+  defiLlamaId: nullable(data.defiLlamaId),
+  defiLlamaSlug: nullable(data.defiLlamaSlug),
+  defiLlamaParent: nullable(data.defiLlamaParent),
+});
+
+export const sanitizeProjectFormState = (
+  formState: UpdateProjectPayload,
+): UpdateProjectPayload => ({
+  ...formState,
+  isMainnet: nullable(formState.isMainnet),
 });

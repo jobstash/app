@@ -2,7 +2,7 @@ import { Input, Switch, Textarea } from '@nextui-org/react';
 
 interface OrgField {
   label: string;
-  value: string | boolean | string[];
+  value: string | boolean | string[] | null;
   placeholder?: string;
   kind?: 'text' | 'textarea' | 'list' | 'jobsite' | 'boolean' | 'number';
   onChange: (value: string | boolean | number) => void;
@@ -78,7 +78,7 @@ export const FormInputMapper = ({
         label={label}
         type="number"
         placeholder={placeholder}
-        value={(value as string) || '0'}
+        value={(value as string) || ''}
         variant="bordered"
         radius="sm"
         onChange={(e) => {

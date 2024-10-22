@@ -5,7 +5,12 @@ import { useAtom } from 'jotai';
 import { useProjectDetails } from '@jobstash/projects/state';
 
 import { ProjectManageTab, projectManageTabAtom } from '../core/atoms';
-import { dataToProjectPayload, UpdateProjectPayload } from '../core/schemas';
+import {
+  dataToProjectPayload,
+  sanitizeProjectFormState,
+  UpdateProjectPayload,
+} from '../core/schemas';
+import { useUpdateProjectRel } from '../hooks/use-update-project-rel';
 
 import { useUpdateManagedProject } from './use-update-managed-project';
 
@@ -45,6 +50,11 @@ const inputSections = [
       { label: 'Logo URL', key: 'logo' },
       { label: 'Is Mainnet', key: 'isMainnet', kind: 'boolean' },
     ],
+  },
+  {
+    key: 'org',
+    title: 'Organization',
+    fields: [{ label: 'Organization', key: 'org', kind: 'org' }],
   },
   {
     key: 'financials',
@@ -129,17 +139,51 @@ export const useManagedProjectForm = (projectId: string) => {
     setTab(key as ProjectManageTab);
   };
 
-  const { mutate: updateOrg, isPending } = useUpdateManagedProject(projectId);
+  const { mutate: updateOrg, isPending: isPendingUpdate } =
+    useUpdateManagedProject(projectId);
 
   const onSubmit = () => {
-    updateOrg(formState);
+    updateOrg(sanitizeProjectFormState(formState));
+  };
+
+  const { mutate: updateProjectRel, isPending: isPendingProjectRel } =
+    useUpdateProjectRel();
+
+  const onUnlinkOrg = (orgId: string) => {
+    handleFieldChange('orgId', '');
+    updateProjectRel(
+      { op: 'remove', projectId, orgId },
+      {
+        onError() {
+          handleFieldChange('orgId', orgId);
+        },
+      },
+    );
+  };
+
+  const onAddOrg = (orgId: string) => {
+    handleFieldChange('orgId', orgId);
+    updateProjectRel(
+      {
+        orgId,
+        projectId,
+      },
+      {
+        onError() {
+          handleFieldChange('orgId', '');
+        },
+      },
+    );
   };
 
   const prev = JSON.stringify(initFormState);
-  const next = JSON.stringify(formState);
+  const next = JSON.stringify(sanitizeProjectFormState(formState));
   const hasChanges = prev !== next;
 
+  const isPending = isPendingUpdate || isPendingProjectRel;
+
   return {
+    isLoading: !data,
     formState,
     hasChanges,
     handleFieldChange,
@@ -148,5 +192,7 @@ export const useManagedProjectForm = (projectId: string) => {
     onChangeTab,
     isPending,
     onSubmit,
+    onUnlinkOrg,
+    onAddOrg,
   };
 };

@@ -3,10 +3,12 @@
 import { Button, Tab, Tabs } from '@nextui-org/react';
 
 import { FormInputMapper } from '../components/form-input-mapper';
+import { ProjectOrgForm } from '../components/project-org-form';
 import { useManagedProjectForm } from '../hooks/use-managed-project-form';
 
 export const ProjectUpdateForm = ({ projectId }: { projectId: string }) => {
   const {
+    isLoading,
     formState,
     hasChanges,
     handleFieldChange,
@@ -15,7 +17,11 @@ export const ProjectUpdateForm = ({ projectId }: { projectId: string }) => {
     onChangeTab,
     isPending,
     onSubmit,
+    onUnlinkOrg,
+    onAddOrg,
   } = useManagedProjectForm(projectId);
+
+  if (isLoading) return null;
 
   return (
     <div className="flex flex-col gap-8 pb-40 min-h-[1000px] max-w-3xl">
@@ -37,6 +43,18 @@ export const ProjectUpdateForm = ({ projectId }: { projectId: string }) => {
                 const fieldKey = key as keyof typeof formState;
                 const value = formState[fieldKey]!;
 
+                if (kind === 'org') {
+                  return (
+                    <ProjectOrgForm
+                      key={fieldKey}
+                      orgId={formState.orgId}
+                      isPending={isPending}
+                      onAddOrg={onAddOrg}
+                      onUnlinkOrg={onUnlinkOrg}
+                    />
+                  );
+                }
+
                 return (
                   <FormInputMapper
                     key={fieldKey}
@@ -55,10 +73,10 @@ export const ProjectUpdateForm = ({ projectId }: { projectId: string }) => {
       </Tabs>
 
       <Button
-        isDisabled={!hasChanges}
+        isDisabled={!hasChanges || isPending}
         radius="sm"
         className="font-bold w-fit"
-        isLoading={isPending}
+        isLoading={isPending && tab !== 'org'}
         onClick={onSubmit}
       >
         Save Changes

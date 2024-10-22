@@ -25,6 +25,7 @@ export const orgImportItemsAtom = atomWithStorage<OrgImportItem[]>(
 
 export type ProjectManageTab =
   | 'details'
+  | 'org'
   | 'financials'
   | 'websites'
   | 'socials'

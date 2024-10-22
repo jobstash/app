@@ -19,3 +19,4 @@ export * from './lib/post-paired-terms';
 export * from './lib/post-set-blocked-terms';
 export * from './lib/post-unset-blocked-terms';
 export * from './lib/set-communities';
+export * from './lib/update-project-rel';
