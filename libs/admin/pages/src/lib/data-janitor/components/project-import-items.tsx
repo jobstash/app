@@ -47,13 +47,13 @@ const ItemMenu = ({ id, assignedId }: ItemMenuProps) => {
 
   const openManagePage = () => {
     if (assignedId) {
-      push(`/godmode/organizations/manage/${assignedId}`);
+      push(`/godmode/projects/manage/${assignedId}`);
     }
   };
 
   const menuItems = [
     ...(assignedId
-      ? [{ label: 'Manage organization', onClick: openManagePage }]
+      ? [{ label: 'Manage project', onClick: openManagePage }]
       : []),
     { label: 'Remove from tracklist', onClick: onDelete },
   ];
