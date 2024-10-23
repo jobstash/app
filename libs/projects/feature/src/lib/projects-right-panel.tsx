@@ -37,7 +37,7 @@ const ProjectsRightPanel = ({ projectId, currentTab, hasTitle }: Props) => {
 
   return (
     <RightPanel
-      org={projectDetails.organizations}
+      org={org}
       tabs={
         <ProjectRightPanelTabs
           currentTab={currentTab}
