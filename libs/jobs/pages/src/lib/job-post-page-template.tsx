@@ -181,7 +181,6 @@ export const JobPostPageTemplate: React.FC<JobPostPageTemplateProps> = ({
           >
             <JobList
               initJob={initJob}
-              access={access}
               jobCountAtom={jobCountAtom}
               activeJobAtom={activeJobAtom}
             />

@@ -9,6 +9,7 @@ import { cn } from '@jobstash/shared/utils';
 interface Props {
   href: string | null;
   isActive: boolean;
+  isForExperts: boolean;
   isFeatured: boolean;
   children: ReactNode;
   onClick: () => void;
@@ -32,6 +33,7 @@ const jobCard = cva(
 const JobCardWrapper = ({
   href,
   isActive,
+  isForExperts,
   isFeatured,
   children,
   onClick,
@@ -39,7 +41,11 @@ const JobCardWrapper = ({
   if (!href)
     return (
       <div onClick={onClick}>
-        <InnerWrapper isActive={isActive} isFeatured={isFeatured}>
+        <InnerWrapper
+          isActive={isActive}
+          isFeatured={isFeatured}
+          isForExperts={isForExperts}
+        >
           {children}
         </InnerWrapper>
       </div>
@@ -47,7 +53,11 @@ const JobCardWrapper = ({
 
   return (
     <Link href={href} scroll={false} onClick={onClick}>
-      <InnerWrapper isActive={isActive} isFeatured={isFeatured}>
+      <InnerWrapper
+        isActive={isActive}
+        isFeatured={isFeatured}
+        isForExperts={isForExperts}
+      >
         {children}
       </InnerWrapper>
     </Link>
@@ -56,16 +66,22 @@ const JobCardWrapper = ({
 
 export default memo(JobCardWrapper);
 
-const InnerWrapper = ({
-  isActive,
-  isFeatured,
-  children,
-}: {
+interface InnerWrapperProps {
   isActive: boolean;
+  isForExperts: boolean;
   isFeatured: boolean;
   children: ReactNode;
-}) => (
-  <div style={isFeatured ? featuredGradientBorderStyle : undefined}>
+}
+
+const InnerWrapper = ({
+  isActive,
+  isForExperts,
+  isFeatured,
+  children,
+}: InnerWrapperProps) => (
+  <div
+    style={isFeatured || isForExperts ? featuredGradientBorderStyle : undefined}
+  >
     <div className={cn(jobCard({ isActive }))}>{children}</div>
   </div>
 );

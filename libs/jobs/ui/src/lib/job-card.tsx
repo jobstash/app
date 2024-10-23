@@ -59,6 +59,7 @@ const JobCard = ({
     classification,
     featureStartDate,
     featureEndDate,
+    access,
   } = jobPost;
   const { projects, name: orgName } = organization;
 
@@ -91,6 +92,7 @@ const JobCard = ({
     return url.toString();
   }, [filterParamsObj, jobPost, routeSection]);
 
+  const isForExperts = access === 'protected';
   const isFeatured = checkJobIsFeatured(featureStartDate, featureEndDate);
   const timestampText = isFeatured
     ? 'Urgently hiring'
@@ -100,12 +102,14 @@ const JobCard = ({
     <JobCardWrapper
       href={href}
       isActive={isActive}
+      isForExperts={isForExperts}
       isFeatured={isFeatured}
       onClick={onClick}
     >
       <JobCardHeader
         title={title}
         timestampText={timestampText}
+        isForExperts={isForExperts}
         isFeatured={isFeatured}
         bookmarkButton={bookmarkButton}
       />

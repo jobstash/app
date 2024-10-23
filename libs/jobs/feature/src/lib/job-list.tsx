@@ -20,15 +20,9 @@ interface Props {
   initJob: JobPost | null;
   jobCountAtom: PrimitiveAtom<number | null>;
   activeJobAtom: PrimitiveAtom<JobPost | null>;
-  access?: JobPost['access'];
 }
 
-const JobList = ({
-  initJob,
-  jobCountAtom,
-  activeJobAtom,
-  access = 'public',
-}: Props) => {
+const JobList = ({ initJob, jobCountAtom, activeJobAtom }: Props) => {
   const activeJob = useAtomValue(activeJobAtom);
   const {
     push,
@@ -40,16 +34,13 @@ const JobList = ({
     hasNextPage,
     inViewRef,
     filterParamsObj,
-  } = useJobList(initJob, jobCountAtom, activeJobAtom, access);
+  } = useJobList(initJob, jobCountAtom, activeJobAtom);
 
   const {
     isLoading: isLoadingBookmarks,
     bookmarkedJobs,
     isFetching: isFetchingBookmarks,
   } = useJobBookmarks();
-
-  const routeSection =
-    access === 'public' ? ROUTE_SECTION.JOBS : ROUTE_SECTION.JOBS_FOR_EXPERTS;
 
   if (isLoading) {
     return (
@@ -62,7 +53,7 @@ const JobList = ({
             filterParamsObj={filterParamsObj}
             bookmarkButton={null}
             promoteButton={null}
-            routeSection={routeSection}
+            routeSection={ROUTE_SECTION.JOBS}
             activeJobAtom={activeJobAtom}
           />
         )}
@@ -104,7 +95,7 @@ const JobList = ({
               isProtected={jobPost.access === 'protected'}
             />
           }
-          routeSection={routeSection}
+          routeSection={ROUTE_SECTION.JOBS}
           activeJobAtom={activeJobAtom}
         />
       ))}

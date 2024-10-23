@@ -106,13 +106,17 @@ export const featuredGradientBorderStyle: React.CSSProperties = {
 };
 
 export const featuredButtonStyle: React.CSSProperties = {
-  width: '113px',
-  height: '29px',
+  width: 'fit-content',
+  minWidth: '96px',
+  paddingLeft: '0.75rem',
+  paddingRight: '0.75rem',
+  height: '32px',
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
   borderRadius: '8px',
-  background: 'linear-gradient(270deg, #D58701, #8743FF, #4436F1)',
+  background:
+    'linear-gradient(270deg, rgba(253, 179, 49, 0.8), #8743FF, #4436F1)',
   backgroundSize: '400% 400%',
   animation: 'featuredbg 5s ease infinite',
   WebkitAnimation: 'featuredbg 5s ease infinite',

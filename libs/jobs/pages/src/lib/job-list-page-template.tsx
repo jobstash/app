@@ -31,13 +31,11 @@ interface JobsPageTemplateProps {
   routeSection: JobsRouteSection;
   jobCountAtom: PrimitiveAtom<number | null>;
   activeJobAtom: PrimitiveAtom<JobPost | null>;
-  access?: JobPost['access'];
 }
 
 export const JobListPageTemplate: React.FC<JobsPageTemplateProps> = ({
   title,
   routeSection,
-  access,
   jobCountAtom,
   activeJobAtom,
 }) => {
@@ -61,7 +59,6 @@ export const JobListPageTemplate: React.FC<JobsPageTemplateProps> = ({
             initJob={null}
             jobCountAtom={jobCountAtom}
             activeJobAtom={activeJobAtom}
-            access={access}
           />
         </div>
 

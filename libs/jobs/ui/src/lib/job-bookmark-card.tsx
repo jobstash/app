@@ -34,9 +34,11 @@ const JobBookmarkCard = ({
     timestamp,
     featureStartDate,
     featureEndDate,
+    access,
   } = jobPost;
   const { projects } = organization;
 
+  const isForExperts = access === 'protected';
   const isFeatured = checkJobIsFeatured(featureStartDate, featureEndDate);
   const timestampText = isFeatured
     ? 'Urgently hiring'
@@ -46,12 +48,14 @@ const JobBookmarkCard = ({
     <JobCardWrapper
       href={null}
       isActive={isActive}
+      isForExperts={isForExperts}
       isFeatured={isFeatured}
       onClick={() => onClick(jobPost)}
     >
       <JobCardHeader
         title={title}
         timestampText={timestampText}
+        isForExperts={isForExperts}
         isFeatured={isFeatured}
         bookmarkButton={bookmarkButton}
       />

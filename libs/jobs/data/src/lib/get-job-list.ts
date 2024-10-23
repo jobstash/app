@@ -8,14 +8,12 @@ interface Params {
   page: number;
   filterParams?: Record<string, string>;
   limit?: number;
-  isProtected?: boolean;
 }
 
 export const getJobList = async ({
   page,
   filterParams,
   limit,
-  isProtected,
 }: Params): Promise<JobListQueryPage> => {
   const params: Record<string, string> = {
     ...filterParams,
@@ -24,12 +22,6 @@ export const getJobList = async ({
   };
 
   const url = getUrlWithParams(MW_URL, '/jobs/list', params, false) as URL;
-
-  if (isProtected) {
-    url.searchParams.set('isProtected', 'true');
-  } else {
-    url.searchParams.delete('isProtected');
-  }
 
   const options = {
     responseSchema: jobListQueryPageSchema,

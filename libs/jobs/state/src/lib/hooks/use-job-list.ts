@@ -18,7 +18,6 @@ export const useJobList = (
   initJob: JobPost | null,
   jobCountAtom: PrimitiveAtom<number | null>,
   activeJobAtom: PrimitiveAtom<JobPost | null>,
-  access: JobPost['access'],
 ) => {
   const queryClient = useQueryClient();
 
@@ -36,7 +35,7 @@ export const useJobList = (
     fetchNextPage,
     isFetchingNextPage,
     hasNextPage,
-  } = useJobListQuery(access);
+  } = useJobListQuery();
 
   const { mwVersion } = useMwVersionContext();
 
