@@ -7,17 +7,17 @@ export const NotEligibleTooltipContent = () => (
         Not Eligible for Job Concierge
       </Text>
       <Text className="text-white/70">
-        It looks like your work history or your ecosystem participation does not
-        qualify you as crypto native. To become eligible for our Job Concierge
-        service, you must have previous work history in the space as proven by
-        public OSS commits in repos owned by reputable organizations, an email
-        that associates you with a reputable organization, or be a holder of an
-        EthGlobal pack starting from the builder tier.
+        It looks like your work history or ecosystem participation does not
+        qualify you as crypto-native. To become eligible for our Job Concierge
+        service, you must have a proven work history in the space, as
+        demonstrated by public OSS commits in repos owned by reputable
+        organizations, an email associated with a reputable organization, or
+        holding an EthGlobal builder-tier pack or a Nouns DAO NFT.
       </Text>
       <Text className="text-white/70">
-        Participate in Web3 projects, contribute to decentralized applications,
-        attend EthGlobal events, and build your presence in the crypto community
-        to enhance your profile.
+        Participate in Web3 projects, own a Noun, contribute to decentralized
+        applications, attend EthGlobal events, and build your presence in the
+        crypto community to enhance your profile.
       </Text>
     </div>
   </div>

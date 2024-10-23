@@ -7,18 +7,18 @@ export const AnonTooltipContent = () => (
         Check if you qualify as Expert
       </Text>
       <Text className="text-white/70">
-        Qualifying candidates get free personalized advice on how to
-        successfully apply for this job, and have us advocate for you with the
-        hiring manager. To find out if you are eligible, connect your wallet and
-        your github account, or verify your current work email, we will check
-        your work history and automatically approve you if you qualify.
+        Qualifying candidates receive free personalized advice on how to apply
+        successfully for this job, along with our advocacy with the hiring
+        manager. To determine your eligibility, connect your wallet and GitHub
+        account, or verify your current work email. We will review your work
+        history and automatically approve you if you qualify.
       </Text>
       <Text className="text-white/70">
         Qualification criteria: You must have verified OSS contributions in a
-        repo which is owned by one of the organizations we track, or have a
-        verified work email from one of the organizations we track. We also
-        Hackathon NFT Packs issued by EthGlobal, and accept any tier above and
-        including the Pioneer tier.
+        repository owned by one of the organizations we track, or a verified
+        work email from one of these organizations. We also accept Hackathon NFT
+        Packs issued by EthGlobal, starting from the builder tier, or a Nouns
+        DAO NFT.
       </Text>
     </div>
   </div>

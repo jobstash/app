@@ -29,7 +29,7 @@ const JobCardHeader = ({
           <Text size="sm" fw="bold">
             {isForExperts ? (
               <div className="flex items-center gap-1">
-                Jobs for Experts
+                Job for Experts
                 <Glasses />
               </div>
             ) : (

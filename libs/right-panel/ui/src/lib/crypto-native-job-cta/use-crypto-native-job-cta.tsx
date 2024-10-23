@@ -12,7 +12,7 @@ import { NotEligibleTooltipContent } from './not-eligible-tooltip-content';
 
 const ANON_TEXT = 'Check Jobs For Experts Access';
 const ELIGIBLE_TEXT = 'Get Job Concierge Access';
-const NOT_ELIGIBLE_TEXT = 'Not eligible for Jobs For Experts';
+const NOT_ELIGIBLE_TEXT = 'Not eligible for Job for Experts';
 const TOAST_ID = 'crypto-native-job-cta';
 const LOADING_MESSAGE = 'Analyzing your profile...';
 const SUCCESS_TITLE = 'You qualify for Jobs For Experts!';
