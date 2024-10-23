@@ -4,7 +4,7 @@ export { default as RightPanelCardBorder } from './lib/right-panel-card-border';
 export { default as RightPanelCompetitorCards } from './lib/right-panel-competitor-cards';
 export { default as RightPanelJobCard } from './lib/right-panel-job-card';
 export { default as RightPanelJobTabs } from './lib/right-panel-job-tabs';
-export { default as RightPanelOrgCard } from './lib/right-panel-org-card';
+export * from './lib/right-panel-org-card';
 export { default as RightPanelOrgJobCards } from './lib/right-panel-org-job-cards';
 export { default as RightPanelProjectCard } from './lib/right-panel-project-card';
 export { default as RightPanelProjectCards } from './lib/right-panel-project-cards';

@@ -4,6 +4,7 @@ import { ProjectDetails } from '@jobstash/projects/core';
 import { RightPanelTab } from '@jobstash/right-panel/core';
 import { FRONTEND_URL, TAB_SEGMENT } from '@jobstash/shared/core';
 import { createProjectKey } from '@jobstash/projects/utils';
+import { getPluralText } from '@jobstash/shared/utils';
 
 import { RightPanelTabs } from '@jobstash/right-panel/ui';
 
@@ -32,16 +33,19 @@ const ProjectRightPanelTabs = ({ currentTab, projectDetails }: Props) => {
       },
     ];
 
-    if (projectDetails.organization) {
+    const orgCount = projectDetails.organizations.length;
+    const hasOrg = orgCount > 0;
+
+    if (hasOrg) {
       tabs.push({
-        text: 'Organization',
-        tabSegment: TAB_SEGMENT.organization,
-        href: createProjectHref(TAB_SEGMENT.organization),
+        text: getPluralText('Organization', orgCount),
+        tabSegment: TAB_SEGMENT.organizations,
+        href: createProjectHref(TAB_SEGMENT.organizations),
       });
     }
 
     return tabs;
-  }, [createProjectHref, projectDetails.organization]);
+  }, [createProjectHref, projectDetails.organizations]);
 
   if (tabs.length === 1 && tabs[0].tabSegment === 'details') return null;
 

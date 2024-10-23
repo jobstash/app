@@ -78,6 +78,7 @@ export const ROUTE_SECTION = {
 export const TAB_SEGMENT = {
   details: 'details' as const,
   organization: 'organization' as const,
+  organizations: 'organizations' as const,
   projects: 'projects' as const,
   jobs: 'jobs' as const,
   otherJobs: 'other-jobs' as const,

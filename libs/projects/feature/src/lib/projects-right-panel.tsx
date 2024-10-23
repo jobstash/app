@@ -10,7 +10,7 @@ import { ProjectRightPanelTabs } from '@jobstash/projects/ui';
 import {
   RightPanel,
   RightPanelBackButton,
-  RightPanelOrgCard,
+  RightPanelOrgCards,
   RightPanelProjectCard,
 } from '@jobstash/right-panel/ui';
 import { Loader } from '@jobstash/shared/ui';
@@ -32,11 +32,12 @@ const ProjectsRightPanel = ({ projectId, currentTab, hasTitle }: Props) => {
     );
   }
 
-  const org = projectDetails.organization;
+  const hasOrg = projectDetails.organizations.length > 0;
+  const org = hasOrg ? projectDetails.organizations[0] : null;
 
   return (
     <RightPanel
-      org={org}
+      org={projectDetails.organizations}
       tabs={
         <ProjectRightPanelTabs
           currentTab={currentTab}
@@ -56,8 +57,11 @@ const ProjectsRightPanel = ({ projectId, currentTab, hasTitle }: Props) => {
       {currentTab === TAB_SEGMENT.details && (
         <RightPanelProjectCard project={projectDetails} showCTA={false} />
       )}
-      {currentTab === TAB_SEGMENT.organization && org && (
-        <RightPanelOrgCard org={org} routeSection={ROUTE_SECTION.PROJECTS} />
+      {currentTab === TAB_SEGMENT.organizations && org && (
+        <RightPanelOrgCards
+          orgs={projectDetails.organizations}
+          routeSection={ROUTE_SECTION.PROJECTS}
+        />
       )}
     </RightPanel>
   );

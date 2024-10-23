@@ -17,8 +17,7 @@ export const ProjectUpdateForm = ({ projectId }: { projectId: string }) => {
     onChangeTab,
     isPending,
     onSubmit,
-    onUnlinkOrg,
-    onAddOrg,
+    organizations,
   } = useManagedProjectForm(projectId);
 
   if (isLoading) return null;
@@ -47,10 +46,8 @@ export const ProjectUpdateForm = ({ projectId }: { projectId: string }) => {
                   return (
                     <ProjectOrgForm
                       key={fieldKey}
-                      orgId={formState.orgId}
-                      isPending={isPending}
-                      onAddOrg={onAddOrg}
-                      onUnlinkOrg={onUnlinkOrg}
+                      projectId={projectId}
+                      organizations={organizations}
                     />
                   );
                 }

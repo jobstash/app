@@ -14,44 +14,67 @@ import RightPanelOrgCardFundingRounds from './right-panel-org-card-funding-round
 import RightPanelOrgCardHeader from './right-panel-org-card-header';
 import RightPanelOrgCardInvestors from './right-panel-org-card-investors';
 
-interface Props {
+interface RightPanelOrgCardProps {
   org: RightPanelOrg;
   showCTA?: boolean;
   routeSection: RouteSection;
 }
 
-const RightPanelOrgCard = ({ org, showCTA = true, routeSection }: Props) => {
-  const { name, description, fundingRounds, investors, orgId } = org;
+export const RightPanelOrgCard = memo(
+  ({ org, showCTA = true, routeSection }: RightPanelOrgCardProps) => {
+    const { name, description, fundingRounds, investors, orgId } = org;
 
-  const sortedFundingRounds = fundingRounds.sort((a, b) => a.date - b.date);
+    const sortedFundingRounds = fundingRounds.sort((a, b) => a.date - b.date);
 
-  const slug = slugify(`${name} ${orgId}`);
-  const link = `${ROUTE_SECTION.ORGANIZATIONS}/${slug}/${TAB_SEGMENT.details}`;
+    const slug = slugify(`${name} ${orgId}`);
+    const link = `${ROUTE_SECTION.ORGANIZATIONS}/${slug}/${TAB_SEGMENT.details}`;
 
-  const onClick = () => {
-    if (typeof window !== 'undefined') {
-      window.location.href = link;
-    }
-  };
+    const onClick = () => {
+      if (typeof window !== 'undefined') {
+        window.location.href = link;
+      }
+    };
 
-  return (
-    <RightPanelCardBorder>
-      <div className="flex flex-col p-6">
-        <div className="flex flex-col gap-4">
-          <RightPanelOrgCardHeader name={name} description={description} />
-          <RightPanelOrgCardFundingRounds fundingRounds={sortedFundingRounds} />
-          <RightPanelOrgCardInvestors
-            investors={investors}
-            routeSection={routeSection}
-          />
+    return (
+      <RightPanelCardBorder>
+        <div className="flex flex-col p-6">
+          <div className="flex flex-col gap-4">
+            <RightPanelOrgCardHeader name={name} description={description} />
+            <RightPanelOrgCardFundingRounds
+              fundingRounds={sortedFundingRounds}
+            />
+            <RightPanelOrgCardInvestors
+              investors={investors}
+              routeSection={routeSection}
+            />
 
-          {showCTA && (
-            <RightPanelCta text="Explore Organization" onClick={onClick} />
-          )}
+            {showCTA && (
+              <RightPanelCta text="Explore Organization" onClick={onClick} />
+            )}
+          </div>
         </div>
-      </div>
-    </RightPanelCardBorder>
-  );
-};
+      </RightPanelCardBorder>
+    );
+  },
+);
 
-export default memo(RightPanelOrgCard);
+RightPanelOrgCard.displayName = 'RightPanelOrgCard';
+
+interface Props {
+  orgs: RightPanelOrg[];
+  showCTA?: boolean;
+  routeSection: RouteSection;
+}
+
+export const RightPanelOrgCards = ({ orgs, showCTA, routeSection }: Props) => (
+  <div className="flex flex-col gap-4">
+    {orgs.map((org) => (
+      <RightPanelOrgCard
+        key={org.orgId}
+        org={org}
+        showCTA={showCTA}
+        routeSection={routeSection}
+      />
+    ))}
+  </div>
+);

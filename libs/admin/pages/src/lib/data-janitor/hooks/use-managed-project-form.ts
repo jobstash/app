@@ -10,12 +10,10 @@ import {
   sanitizeProjectFormState,
   UpdateProjectPayload,
 } from '../core/schemas';
-import { useUpdateProjectRel } from '../hooks/use-update-project-rel';
 
 import { useUpdateManagedProject } from './use-update-managed-project';
 
 const DEFAULT_FORM_STATE: UpdateProjectPayload = {
-  orgId: null,
   name: '',
   description: null,
   category: null,
@@ -146,41 +144,9 @@ export const useManagedProjectForm = (projectId: string) => {
     updateOrg(sanitizeProjectFormState(formState));
   };
 
-  const { mutate: updateProjectRel, isPending: isPendingProjectRel } =
-    useUpdateProjectRel();
-
-  const onUnlinkOrg = (orgId: string) => {
-    handleFieldChange('orgId', '');
-    updateProjectRel(
-      { op: 'remove', projectId, orgId },
-      {
-        onError() {
-          handleFieldChange('orgId', orgId);
-        },
-      },
-    );
-  };
-
-  const onAddOrg = (orgId: string) => {
-    handleFieldChange('orgId', orgId);
-    updateProjectRel(
-      {
-        orgId,
-        projectId,
-      },
-      {
-        onError() {
-          handleFieldChange('orgId', '');
-        },
-      },
-    );
-  };
-
   const prev = JSON.stringify(initFormState);
   const next = JSON.stringify(sanitizeProjectFormState(formState));
   const hasChanges = prev !== next;
-
-  const isPending = isPendingUpdate || isPendingProjectRel;
 
   return {
     isLoading: !data,
@@ -190,9 +156,8 @@ export const useManagedProjectForm = (projectId: string) => {
     inputSections,
     tab,
     onChangeTab,
-    isPending,
+    isPending: isPendingUpdate,
     onSubmit,
-    onUnlinkOrg,
-    onAddOrg,
+    organizations: data?.organizations ?? [],
   };
 };

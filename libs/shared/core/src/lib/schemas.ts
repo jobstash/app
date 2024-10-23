@@ -158,6 +158,7 @@ export const projectInfoSchema = myzod.object(
     audits: myzod.array(auditSchema),
 
     ecosystems: myzod.array(myzod.string()),
+    orgIds: myzod.array(myzod.string()),
   },
   { allowUnknown: true },
 );

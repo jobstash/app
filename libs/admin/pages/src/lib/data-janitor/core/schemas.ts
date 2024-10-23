@@ -151,7 +151,6 @@ export const managedOrgResponseSchema = myzod.intersection(
 export type ManagedOrgResponse = Infer<typeof managedOrgResponseSchema>;
 
 export const updateProjectPayloadSchema = myzod.object({
-  orgId: myzod.string().nullable(),
   name: myzod.string(),
   description: myzod.string().nullable(),
   category: myzod.string().nullable(),
@@ -182,7 +181,6 @@ const nullable = <T>(value: T) => value || null;
 export const dataToProjectPayload = (
   data: ProjectDetails,
 ): UpdateProjectPayload => ({
-  orgId: nullable(data.organization?.orgId),
   name: data.name,
   description: nullable(data.description),
   category: data.category,
