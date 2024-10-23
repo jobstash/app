@@ -7,7 +7,7 @@ export const NotEligibleTooltipContent = () => (
         Not Eligible for Job Concierge
       </Text>
       <Text className="text-white/70">
-        It looks like your work history or your ecosystem partecipation does not
+        It looks like your work history or your ecosystem participation does not
         qualify you as crypto native. To become eligible for our Job Concierge
         service, you must have previous work history in the space as proven by
         public OSS commits in repos owned by reputable organizations, an email
