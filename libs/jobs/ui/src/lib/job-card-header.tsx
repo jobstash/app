@@ -23,7 +23,7 @@ const JobCardHeader = ({
   const isEmphasized = isForExperts || isFeatured;
 
   return (
-    <div className="sm:flex items-center justify-between">
+    <div className="flex items-center justify-between">
       {isEmphasized ? (
         <div style={featuredButtonStyle}>
           <Text size="sm" fw="bold">
@@ -65,9 +65,7 @@ const Glasses = () => (
     version="1.1"
     xmlns="http://www.w3.org/2000/svg"
     viewBox="0 0 160 60"
-    //
-    // width="160" height="60"
-    className="w-fit h-[8px]"
+    className="h-[8px]"
   >
     <path
       d="M0 0 C19.8 0 39.6 0 60 0 C60 6.6 60 13.2 60 20 C63.3 20 66.6 20 70 20 C70 13.4 70 6.8 70 0 C89.8 0 109.6 0 130 0 C130 19.8 130 39.6 130 60 C110.2 60 90.4 60 70 60 C70 50.1 70 40.2 70 30 C66.7 30 63.4 30 60 30 C60 39.9 60 49.8 60 60 C40.2 60 20.4 60 0 60 C0 50.1 0 40.2 0 30 C-6.6 30 -13.2 30 -20 30 C-20 36.6 -20 43.2 -20 50 C-23.3 50 -26.6 50 -30 50 C-30 40.1 -30 30.2 -30 20 C-20.1 20 -10.2 20 0 20 C0 13.4 0 6.8 0 0 Z "
