@@ -137,7 +137,7 @@ export const formStateToPayload = (
   grants: parseList(formState.grants),
   communities: parseList(formState.communities),
   jobsites: JSON.parse(formState.jobsites),
-  detectedJobsites: JSON.parse(formState.jobsites),
+  detectedJobsites: JSON.parse(formState.detectedJobsites),
   projects: parseList(formState.projects),
 });
 
