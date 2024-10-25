@@ -2,9 +2,12 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Button, Tab, Tabs } from '@nextui-org/react';
 
+import { Jobsite } from '../core/schemas';
 import { useManagedOrgForm } from '../hooks/use-managed-org-form';
 
 import { FormInputMapper } from './form-input-mapper';
+import { OrgDetectedJobsitesForm } from './org-detected-jobsites-form';
+import { OrgJobsitesForm } from './org-jobsites-form';
 import { OrgProjectsForm } from './org-projects-form';
 
 export const OrgInfoForm = ({ id }: { id: string }) => {
@@ -19,6 +22,7 @@ export const OrgInfoForm = ({ id }: { id: string }) => {
     onSubmit,
     onUnlinkProject,
     onAddProject,
+    onChangeJobsite,
   } = useManagedOrgForm(id);
 
   return (
@@ -45,9 +49,35 @@ export const OrgInfoForm = ({ id }: { id: string }) => {
                   return (
                     <OrgProjectsForm
                       key={fieldKey}
-                      formStateProjects={value}
+                      formStateProjects={value as string}
                       onUnlink={onUnlinkProject}
                       onAddProject={onAddProject}
+                    />
+                  );
+                }
+
+                if (kind === 'jobsite') {
+                  return (
+                    <OrgJobsitesForm
+                      key={fieldKey}
+                      orgId={id}
+                      value={value as Jobsite[]}
+                      isPending={isPending}
+                      onChangeJobsite={onChangeJobsite}
+                      onSubmit={onSubmit}
+                    />
+                  );
+                }
+
+                if (kind === 'detected-jobsite') {
+                  return (
+                    <OrgDetectedJobsitesForm
+                      key={fieldKey}
+                      orgId={id}
+                      value={value as Jobsite[]}
+                      isPending={isPending}
+                      onChangeJobsite={onChangeJobsite}
+                      onSubmit={onSubmit}
                     />
                   );
                 }
@@ -69,15 +99,17 @@ export const OrgInfoForm = ({ id }: { id: string }) => {
         ))}
       </Tabs>
 
-      <Button
-        isDisabled={!hasChanges}
-        radius="sm"
-        className="font-bold w-fit"
-        isLoading={isPending}
-        onClick={onSubmit}
-      >
-        Save Changes
-      </Button>
+      {tab !== 'jobsites' && (
+        <Button
+          isDisabled={!hasChanges}
+          radius="sm"
+          className="font-bold w-fit"
+          isLoading={isPending}
+          onClick={() => onSubmit()}
+        >
+          Save Changes
+        </Button>
+      )}
     </div>
   );
 };

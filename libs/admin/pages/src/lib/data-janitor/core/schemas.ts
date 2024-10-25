@@ -1,16 +1,14 @@
-import { T } from '@privy-io/react-auth/dist/dts/types';
 import myzod, { Infer } from 'myzod';
 
 import { ProjectDetails } from '@jobstash/projects/core';
 import { messageResponseSchema } from '@jobstash/shared/core';
 
-export const jobsitesSchema = myzod.array(
-  myzod.object({
-    id: myzod.string(),
-    url: myzod.string(),
-    type: myzod.string(),
-  }),
-);
+export const jobsiteSchema = myzod.object({
+  id: myzod.string(),
+  url: myzod.string(),
+  type: myzod.string(),
+});
+export type Jobsite = Infer<typeof jobsiteSchema>;
 
 export const managedOrgSchema = myzod
   .object({
@@ -30,8 +28,8 @@ export const managedOrgSchema = myzod
     telegrams: myzod.array(myzod.string()),
     grants: myzod.array(myzod.string()),
     communities: myzod.array(myzod.string()),
-    jobsites: jobsitesSchema,
-    detectedJobsites: jobsitesSchema,
+    jobsites: myzod.array(jobsiteSchema),
+    detectedJobsites: myzod.array(jobsiteSchema),
     projects: myzod.array(
       myzod
         .object({
@@ -65,8 +63,8 @@ export const managedOrgFormStateSchema = myzod.object({
   telegram: myzod.string(),
   grants: myzod.string(),
   communities: myzod.string(),
-  jobsites: myzod.string(),
-  detectedJobsites: myzod.string(),
+  jobsites: myzod.array(jobsiteSchema),
+  detectedJobsites: myzod.array(jobsiteSchema),
   projects: myzod.string(),
   //
   // altName: myzod.string(),
@@ -92,8 +90,8 @@ export const dataToFormState = (data: ManagedOrg): ManagedOrgFormState => ({
   twitter: data.twitters.join(', '),
   grants: data.grants.join(', '),
   communities: data.communities.join(', '),
-  jobsites: JSON.stringify(data.jobsites, undefined, 2),
-  detectedJobsites: JSON.stringify(data.detectedJobsites, undefined, 2),
+  jobsites: data.jobsites,
+  detectedJobsites: data.detectedJobsites,
   projects: data.projects.map((p) => p.id).join(', '),
   //
   // altName: data.altName ?? '',
@@ -136,8 +134,8 @@ export const formStateToPayload = (
   twitters: parseList(formState.twitter),
   grants: parseList(formState.grants),
   communities: parseList(formState.communities),
-  jobsites: JSON.parse(formState.jobsites),
-  detectedJobsites: JSON.parse(formState.detectedJobsites),
+  jobsites: formState.jobsites,
+  detectedJobsites: formState.detectedJobsites,
   projects: parseList(formState.projects),
 });
 

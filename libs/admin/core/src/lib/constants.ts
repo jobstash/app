@@ -49,3 +49,12 @@ export const URL_DOMAINS = {
 } as const;
 
 export const ORG_LIST_UNDO_EVENT = 'org-list-undo-event';
+
+export const JOBSITE_TYPES = [
+  'custom',
+  'greenhouse',
+  'hirechain',
+  'workable',
+  'lever',
+  'wellfound',
+];

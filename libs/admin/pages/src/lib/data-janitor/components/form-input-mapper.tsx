@@ -4,7 +4,7 @@ interface OrgField {
   label: string;
   value: string | boolean | string[] | null;
   placeholder?: string;
-  kind?: 'text' | 'textarea' | 'list' | 'jobsite' | 'boolean' | 'number';
+  kind?: 'text' | 'textarea' | 'list' | 'boolean' | 'number';
   onChange: (value: string | boolean | number) => void;
 }
 
@@ -47,19 +47,6 @@ export const FormInputMapper = ({
   }
 
   if (kind === 'textarea') {
-    return (
-      <Textarea
-        label={label}
-        placeholder={placeholder}
-        value={(value as string) || ''}
-        variant="bordered"
-        radius="sm"
-        onChange={(e) => onChange(e.target.value)}
-      />
-    );
-  }
-
-  if (kind === 'jobsite') {
     return (
       <Textarea
         label={label}

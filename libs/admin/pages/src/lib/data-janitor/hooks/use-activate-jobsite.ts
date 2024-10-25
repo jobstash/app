@@ -1,7 +1,7 @@
 import { notifications } from '@mantine/notifications';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import myzod, { Infer } from 'myzod';
 
-import { OrgUpdatePayload, orgUpdatePayloadSchema } from '@jobstash/admin/core';
 import {
   MessageResponse,
   messageResponseSchema,
@@ -12,8 +12,17 @@ import { notifError, notifLoading, notifSuccess } from '@jobstash/shared/utils';
 import { useMwVersionContext } from '@jobstash/shared/state';
 import { mwFetch } from '@jobstash/shared/data';
 
-const updateOrg = async (orgId: string, payload: OrgUpdatePayload) => {
-  const url = `${MW_URL}/organizations/update/${orgId}`;
+const TOAST_ID = 'activate-jobsite-toast';
+
+const payloadSchema = myzod.object({
+  orgId: myzod.string(),
+  jobsiteIds: myzod.array(myzod.string()),
+});
+
+type Payload = Infer<typeof payloadSchema>;
+
+const activateJobsite = async (payload: Payload) => {
+  const url = `${MW_URL}/organizations/jobsites/activate`;
 
   const options = {
     method: 'POST' as const,
@@ -22,13 +31,13 @@ const updateOrg = async (orgId: string, payload: OrgUpdatePayload) => {
     credentials: 'include' as RequestCredentials,
     mode: 'cors' as RequestMode,
     payload,
-    payloadSchema: orgUpdatePayloadSchema,
+    payloadSchema,
     headers: {
       'Content-Type': 'application/json',
     },
   };
 
-  const { success, message } = await mwFetch<MessageResponse, OrgUpdatePayload>(
+  const { success, message } = await mwFetch<MessageResponse, Payload>(
     url,
     options,
   );
@@ -38,19 +47,12 @@ const updateOrg = async (orgId: string, payload: OrgUpdatePayload) => {
   return { success, message };
 };
 
-export const useUpdateOrg = () => {
+export const useActivateJobsite = () => {
   const queryClient = useQueryClient();
   const { mwVersion } = useMwVersionContext();
 
   return useMutation({
-    mutationFn: ({
-      orgId,
-      payload,
-    }: {
-      orgId: string;
-      payload: OrgUpdatePayload;
-    }) => updateOrg(orgId, payload),
-
+    mutationFn: (payload: Payload) => activateJobsite(payload),
     onMutate() {
       notifications.clean();
       notifLoading({
@@ -62,13 +64,9 @@ export const useUpdateOrg = () => {
     onSuccess({ message }, { orgId }) {
       notifSuccess({
         id: TOAST_ID,
-        title: 'Org Update Successful!',
+        title: 'Jobsite Activation Successful!',
         message,
         autoClose: 10_000,
-      });
-
-      queryClient.invalidateQueries({
-        queryKey: [mwVersion, 'all-orgs'],
       });
 
       queryClient.invalidateQueries({
@@ -78,15 +76,17 @@ export const useUpdateOrg = () => {
       queryClient.invalidateQueries({
         queryKey: [mwVersion, 'get-managed-org', orgId],
       });
+
+      queryClient.invalidateQueries({
+        queryKey: [mwVersion, 'all-orgs'],
+      });
     },
     onError(data) {
       notifError({
         id: TOAST_ID,
-        title: 'Org Update Failed!',
+        title: 'Jobsite Activation Failed!',
         message: (data as Error).message,
       });
     },
   });
 };
-
-const TOAST_ID = 'org-list-mutation';

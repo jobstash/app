@@ -1,11 +1,12 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
-import { useAtom } from 'jotai';
+import { atom, useAtom } from 'jotai';
 
 import { OrgManageTab, orgManageTabAtom } from '../core/atoms';
 import {
   dataToFormState,
   formStateToPayload,
+  Jobsite,
   ManagedOrgFormState,
 } from '../core/schemas';
 
@@ -29,8 +30,8 @@ const DEFAULT_FORM_STATE: ManagedOrgFormState = {
   twitter: '',
   grants: '',
   communities: '',
-  jobsites: '[]',
-  detectedJobsites: '[]',
+  jobsites: [],
+  detectedJobsites: [],
   projects: '',
   //
   // altName: '',
@@ -99,10 +100,14 @@ const inputSections = [
   },
   {
     key: 'jobsites',
-    title: 'JobSites',
+    title: 'Jobsites',
     fields: [
       { label: 'Jobsites', key: 'jobsites', kind: 'jobsite' },
-      { label: 'Detected Jobsites', key: 'detectedJobsites', kind: 'jobsite' },
+      {
+        label: 'Detected Jobsites',
+        key: 'detectedJobsites',
+        kind: 'detected-jobsite',
+      },
     ],
   },
   {
@@ -112,12 +117,13 @@ const inputSections = [
   },
 ];
 
+const formStateAtom = atom<ManagedOrgFormState>(DEFAULT_FORM_STATE);
+
 export const useManagedOrgForm = (orgId: string) => {
   const { data } = useManagedOrg(orgId);
 
   const [initFormState, setInitFormState] = useState(DEFAULT_FORM_STATE);
-  const [formState, setFormState] =
-    useState<ManagedOrgFormState>(DEFAULT_FORM_STATE);
+  const [formState, setFormState] = useAtom(formStateAtom);
 
   useEffect(() => {
     if (data) {
@@ -125,31 +131,29 @@ export const useManagedOrgForm = (orgId: string) => {
       setInitFormState(initFormState);
       setFormState(initFormState);
     }
-  }, [data]);
+  }, [data, setFormState]);
 
   // Handle form field changes
   const handleFieldChange = (
     key: keyof ManagedOrgFormState,
-    value: string | boolean | number,
+    value: string | boolean | number | Jobsite[],
   ) => {
-    setFormState((prevState) => ({
-      ...prevState,
-      [key]: value,
-    }));
+    if (key === 'detectedJobsites' && (value as Jobsite[]).length === 0) {
+      setFormState((prev) => ({
+        ...prev,
+        detectedJobsites: [],
+      }));
+    } else {
+      setFormState((prevState) => ({
+        ...prevState,
+        [key]: value,
+      }));
+    }
   };
 
   const [tab, setTab] = useAtom(orgManageTabAtom);
   const onChangeTab = (key: React.Key) => {
     setTab(key as OrgManageTab);
-  };
-
-  const { mutate: updateOrg, isPending } = useUpdateManagedOrg();
-
-  const onSubmit = () => {
-    if (data) {
-      const payload = formStateToPayload(formState);
-      updateOrg(payload);
-    }
   };
 
   const prev = JSON.stringify(initFormState);
@@ -179,6 +183,74 @@ export const useManagedOrgForm = (orgId: string) => {
     handleFieldChange('projects', currentProjects.join(', '));
   };
 
+  const onChangeJobsite = (
+    key: 'jobsites' | 'detectedJobsites',
+    newJobsite: Jobsite,
+    op = 'update' as 'create' | 'update' | 'delete',
+  ) => {
+    switch (op) {
+      case 'update': {
+        const newJobsites = formState[key].map((jobsite) => {
+          if (jobsite.id === newJobsite.id) {
+            return newJobsite;
+          }
+
+          return jobsite;
+        });
+
+        handleFieldChange(key, newJobsites);
+        break;
+      }
+
+      case 'create': {
+        const newJobsites = [...formState[key], newJobsite];
+        handleFieldChange(key, newJobsites);
+        break;
+      }
+
+      case 'delete': {
+        const newJobsites = formState[key].filter(
+          (jobsite) => jobsite.id !== newJobsite.id,
+        );
+        handleFieldChange(key, newJobsites);
+        break;
+      }
+
+      default: {
+        throw new Error('invalid op');
+      }
+    }
+  };
+
+  const { mutate: updateOrg, isPending } = useUpdateManagedOrg();
+
+  const successCbRef = useRef<() => void>();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  useEffect(() => {
+    if (isSubmitting) {
+      const payload = formStateToPayload(formState);
+
+      updateOrg(payload, {
+        onSuccess() {
+          setIsSubmitting(false);
+          if (successCbRef.current) {
+            successCbRef.current();
+            successCbRef.current = undefined;
+          }
+        },
+      });
+    }
+  }, [formState, isSubmitting, updateOrg]);
+
+  const onSubmit = (onSuccess?: () => void) => {
+    if (data) {
+      setIsSubmitting(true);
+      if (onSuccess) {
+        successCbRef.current = onSuccess;
+      }
+    }
+  };
+
   return {
     formState,
     hasChanges,
@@ -190,5 +262,6 @@ export const useManagedOrgForm = (orgId: string) => {
     onSubmit,
     onUnlinkProject,
     onAddProject,
+    onChangeJobsite,
   };
 };
