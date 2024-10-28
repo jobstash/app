@@ -113,7 +113,7 @@ const JobCard = ({
         isFeatured={isFeatured}
         bookmarkButton={bookmarkButton}
       />
-      {isFeatured && (
+      {(isFeatured || isForExperts) && (
         <Heading size="md" fw="semibold">
           {title}
         </Heading>
