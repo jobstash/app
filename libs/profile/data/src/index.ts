@@ -17,6 +17,7 @@ export * from './lib/post-profile-repo-tag';
 export * from './lib/post-profile-showcase';
 export * from './lib/post-profile-skills';
 export * from './lib/register-ats-client';
+export * from './lib/request-org-admin-permission';
 export * from './lib/retry-webhooks';
 export * from './lib/update-applicant-list';
 export * from './lib/update-ats-preference';
