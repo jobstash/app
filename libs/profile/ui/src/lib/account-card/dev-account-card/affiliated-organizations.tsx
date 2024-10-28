@@ -4,13 +4,14 @@ import { getGoogleLogoUrl } from '@jobstash/shared/utils';
 
 import { LogoTitle, Text } from '@jobstash/shared/ui';
 
+import { RequestAccessModal } from './request-access-modal';
 import { useAffiliatedOrganizations } from './use-affiliated-organizations';
 
 const AFFILIATED_ORG_TITLE = 'Affiliated Organizations';
 const ADD_AFFILIATED_ORG_TITLE = 'Elevate to Expert Status';
 const AFFILIATED_DESCRIPTION =
   'These are the organizations associated with your accounts. Displaying your affiliations helps build credibility within your industry.';
-// 'These are the organizations associated with your accounts. Unlock premium features designed for organizational impact.';
+
 const ADD_AFFILIATED_DESCRIPTION =
   "You're on your way to being recognized as an expert. Continue connecting your professional accounts to affiliate with organizations. The more accounts you link, the more you'll be perceived as an expert when collaborating with different organizations.";
 
@@ -41,18 +42,6 @@ export const AffiliatedOrganizations = () => {
             </Text>
             {isRefetching && <Spinner size="sm" color="white" />}
           </div>
-          {/* {hasOrg && (
-            <div>
-              <Button
-                size="sm"
-                variant="flat"
-                startContent={isEditing ? <LeftIcon /> : <EditIcon />}
-                onClick={toggleEdit}
-              >
-                {isEditing ? 'Done' : 'Manage Affiliations'}
-              </Button>
-            </div>
-          )} */}
         </div>
 
         <Text color="dimmed">{description}</Text>
@@ -60,35 +49,23 @@ export const AffiliatedOrganizations = () => {
 
       {hasOrg && (
         <div className="flex flex-col gap-6 pl-4">
-          {data.map(({ id, name, url, logo, account, slug }) => (
+          {data.map((org) => (
             <div
-              key={id}
-              className="flex items-center justify-between w-full max-w-[260px]"
+              key={org.id}
+              className="flex items-center justify-between w-full max-w-[320px]"
             >
               <LogoTitle
-                title={name}
+                title={org.name}
                 avatarProps={{
-                  src: logo ?? getGoogleLogoUrl(url),
-                  alt: name,
+                  src: org.logo ?? getGoogleLogoUrl(org.url),
+                  alt: org.name,
                   isRounded: true,
-                  name,
+                  name: org.name,
                 }}
-                location={account}
+                location={org.account}
               />
-              {/* {isEditing && (
-                <div>
-                  <Tooltip content="Manage Organization">
-                    <Button
-                      isIconOnly
-                      size="sm"
-                      variant="flat"
-                      onClick={getOnManageFn(slug)}
-                    >
-                      <ManageOrgIcon className="text-white/80" size={20} />
-                    </Button>
-                  </Tooltip>
-                </div>
-              )} */}
+
+              <RequestAccessModal org={org} />
             </div>
           ))}
         </div>
