@@ -67,31 +67,61 @@ const jobsitePayloadSchema = myzod.array(
 
 export type JobsitePayload = Infer<typeof jobsitePayloadSchema>;
 
-export const orgUpdatePayloadSchema = myzod.object({
-  logoUrl: myzod.string().optional(),
-  name: myzod.string().optional(),
-  description: myzod.string().optional(),
-  summary: myzod.string().optional(),
-  headcountEstimate: myzod.number().optional(),
-  location: myzod.string().optional(),
-  aliases: myzod.array(myzod.string()).optional(),
-  website: myzod.array(myzod.string()).optional(),
-  twitter: myzod.array(myzod.string()).optional(),
-  github: myzod.array(myzod.string()).optional(),
-  discord: myzod.array(myzod.string()).optional(),
-  docs: myzod.array(myzod.string()).optional(),
-  telegram: myzod.array(myzod.string()).optional(),
-  grants: myzod.array(myzod.string()).optional(),
-  projects: myzod.array(myzod.string()).optional(),
-  communities: myzod.array(myzod.string()).optional(),
-  jobsites: jobsitePayloadSchema.optional(),
-  detectedJobsites: jobsitePayloadSchema.optional(),
-});
-export type OrgUpdatePayload = Infer<typeof orgUpdatePayloadSchema>;
-
 export const jobsiteActivatePayloadSchema = myzod.object({
   orgId: myzod.string(),
   jobsiteIds: myzod.array(myzod.string()),
 });
 
 export type JobsiteActivatePayload = Infer<typeof jobsiteActivatePayloadSchema>;
+
+export const jobsiteSchema = myzod.object({
+  id: myzod.string(),
+  url: myzod.string(),
+  type: myzod.string(),
+});
+export type Jobsite = Infer<typeof jobsiteSchema>;
+
+export const managedOrgSchema = myzod
+  .object({
+    orgId: myzod.string(),
+    name: myzod.string().nullable(),
+    location: myzod.string().nullable(),
+    logoUrl: myzod.string().nullable(),
+    description: myzod.string().nullable(),
+    summary: myzod.string().nullable(),
+    headcountEstimate: myzod.number().nullable(),
+    websites: myzod.array(myzod.string()),
+    aliases: myzod.array(myzod.string()),
+    twitters: myzod.array(myzod.string()),
+    githubs: myzod.array(myzod.string()),
+    discords: myzod.array(myzod.string()),
+    docs: myzod.array(myzod.string()),
+    telegrams: myzod.array(myzod.string()),
+    grants: myzod.array(myzod.string()),
+    communities: myzod.array(myzod.string()),
+    jobsites: myzod.array(jobsiteSchema),
+    detectedJobsites: myzod.array(jobsiteSchema),
+    projects: myzod.array(
+      myzod
+        .object({
+          id: myzod.string(),
+          name: myzod.string(),
+        })
+        .allowUnknownKeys(true),
+    ),
+    //
+    // altName: myzod.string().nullable(),
+    // rawWebsites: myzod.array(myzod.string()),
+  })
+  .allowUnknownKeys(true);
+
+export type ManagedOrg = Infer<typeof managedOrgSchema>;
+
+export const managedOrgPayloadSchema = myzod.intersection(
+  myzod.omit(managedOrgSchema, ['projects']),
+  myzod.object({
+    projects: myzod.array(myzod.string()),
+  }),
+);
+
+export type ManagedOrgPayload = Infer<typeof managedOrgPayloadSchema>;

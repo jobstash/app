@@ -1,50 +1,12 @@
 import myzod, { Infer } from 'myzod';
 
+import {
+  jobsiteSchema,
+  ManagedOrg,
+  managedOrgSchema,
+} from '@jobstash/admin/core';
 import { ProjectDetails } from '@jobstash/projects/core';
 import { messageResponseSchema } from '@jobstash/shared/core';
-
-export const jobsiteSchema = myzod.object({
-  id: myzod.string(),
-  url: myzod.string(),
-  type: myzod.string(),
-});
-export type Jobsite = Infer<typeof jobsiteSchema>;
-
-export const managedOrgSchema = myzod
-  .object({
-    orgId: myzod.string(),
-    name: myzod.string().nullable(),
-    location: myzod.string().nullable(),
-    logoUrl: myzod.string().nullable(),
-    description: myzod.string().nullable(),
-    summary: myzod.string().nullable(),
-    headcountEstimate: myzod.number().nullable(),
-    websites: myzod.array(myzod.string()),
-    aliases: myzod.array(myzod.string()),
-    twitters: myzod.array(myzod.string()),
-    githubs: myzod.array(myzod.string()),
-    discords: myzod.array(myzod.string()),
-    docs: myzod.array(myzod.string()),
-    telegrams: myzod.array(myzod.string()),
-    grants: myzod.array(myzod.string()),
-    communities: myzod.array(myzod.string()),
-    jobsites: myzod.array(jobsiteSchema),
-    detectedJobsites: myzod.array(jobsiteSchema),
-    projects: myzod.array(
-      myzod
-        .object({
-          id: myzod.string(),
-          name: myzod.string(),
-        })
-        .allowUnknownKeys(true),
-    ),
-    //
-    // altName: myzod.string().nullable(),
-    // rawWebsites: myzod.array(myzod.string()),
-  })
-  .allowUnknownKeys(true);
-
-export type ManagedOrg = Infer<typeof managedOrgSchema>;
 
 export const managedOrgFormStateSchema = myzod.object({
   orgId: myzod.string(),
@@ -97,15 +59,6 @@ export const dataToFormState = (data: ManagedOrg): ManagedOrgFormState => ({
   // altName: data.altName ?? '',
   // rawWebsite: data.rawWebsites.join(', '),
 });
-
-export const managedOrgPayloadSchema = myzod.intersection(
-  myzod.omit(managedOrgSchema, ['projects']),
-  myzod.object({
-    projects: myzod.array(myzod.string()),
-  }),
-);
-
-export type ManagedOrgPayload = Infer<typeof managedOrgPayloadSchema>;
 
 type Payload = Omit<ManagedOrg, 'projects'> & { projects: string[] };
 

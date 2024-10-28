@@ -18,6 +18,7 @@ export * from './lib/hooks/use-paired-terms-mutation';
 export * from './lib/hooks/use-paired-terms-query';
 export * from './lib/hooks/use-set-communities';
 export * from './lib/hooks/use-unset-blocked-terms-mutation';
+export * from './lib/hooks/use-update-org';
 
 // Context & Providers
 export * from './lib/contexts/blocked-terms-form-context';

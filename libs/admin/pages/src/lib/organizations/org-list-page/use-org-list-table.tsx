@@ -43,25 +43,38 @@ export const useOrgListTable = () => {
     () => [
       {
         checkboxSelection: true,
-        headerName: 'ID',
-        field: 'id',
-        filter: true,
-      },
-      {
         headerName: 'Org ID',
         field: 'orgId',
-        filter: true,
+        filter: 'agNumberColumnFilter',
+        valueGetter: (p) => Number(p.data?.orgId), // Sort as numbers not string
+        filterParams: {
+          inRangeInclusive: true,
+          filterOptions: [
+            'inRange',
+            'lessThan',
+            'greaterThan',
+            'contains',
+            'blank',
+            'notBlank',
+          ],
+        },
+        pinned: 'left',
       },
       {
-        headerName: 'Avatar',
-        width: 100,
-        cellRenderer: AvatarCell,
+        headerName: 'Internal Uuid',
+        field: 'id',
+        filter: true,
       },
       {
         headerName: 'Name',
         field: 'name',
         filter: true,
         editable: true,
+      },
+      {
+        headerName: 'Avatar',
+        width: 100,
+        cellRenderer: AvatarCell,
       },
       {
         headerName: 'Logo URL',
@@ -71,6 +84,7 @@ export const useOrgListTable = () => {
       },
       {
         headerName: 'Website',
+        autoHeight: true,
         filter: true,
         editable: true,
         valueGetter: (p) => p.data?.websites.join(','),
@@ -99,6 +113,7 @@ export const useOrgListTable = () => {
       // },
       {
         headerName: 'Telegram',
+        autoHeight: true,
         filter: true,
         editable: true,
         valueGetter: (p) => p.data?.telegrams.join(','),
@@ -115,6 +130,7 @@ export const useOrgListTable = () => {
       },
       {
         headerName: 'Github',
+        autoHeight: true,
         filter: true,
         editable: true,
         valueGetter: (p) => p.data?.githubs.join(','),
@@ -131,6 +147,7 @@ export const useOrgListTable = () => {
       },
       {
         headerName: 'Discord',
+        autoHeight: true,
         filter: true,
         editable: true,
         valueGetter: (p) => p.data?.discords.join(','),
@@ -147,6 +164,7 @@ export const useOrgListTable = () => {
       },
       {
         headerName: 'Twitter',
+        autoHeight: true,
         filter: true,
         editable: true,
         valueGetter: (p) => p.data?.twitters.join(','),
@@ -163,6 +181,7 @@ export const useOrgListTable = () => {
       },
       {
         headerName: 'Docs',
+        autoHeight: true,
         filter: true,
         editable: true,
         valueGetter: (p) => p.data?.docs.join(','),
@@ -231,12 +250,14 @@ export const useOrgListTable = () => {
       },
       {
         headerName: 'Projects',
+        autoHeight: true,
         field: 'projects',
         valueFormatter: (p: ValueFormatterParams<OrgItem, string>) =>
           p.data!.projects.map((p) => p.name).join(', '),
       },
       {
         headerName: 'Aliases',
+        autoHeight: true,
         editable: true,
         valueGetter: (p) => p.data?.aliases.join(','),
         valueSetter(p) {
@@ -249,6 +270,7 @@ export const useOrgListTable = () => {
       },
       {
         headerName: 'Community',
+        autoHeight: true,
         editable: true,
         valueGetter: (p) => p.data?.communities.join(','),
         valueSetter(p) {
@@ -261,6 +283,7 @@ export const useOrgListTable = () => {
       },
       {
         headerName: 'Grant',
+        autoHeight: true,
         editable: true,
         valueGetter: (p) => p.data?.grants.join(','),
         valueSetter(p) {
@@ -273,6 +296,7 @@ export const useOrgListTable = () => {
       },
       {
         headerName: 'Jobsite Url',
+        autoHeight: true,
         // We don't have support for creating jobsites
         // Edit is only available if there's data
         editable: (p) => (p.data?.jobsites ?? []).length > 0,
@@ -319,9 +343,19 @@ export const useOrgListTable = () => {
 
           return true;
         },
+        cellRenderer: (props: CustomCellRendererProps<OrgItem>) => (
+          <div className="flex flex-col gap-0">
+            {props.value.split(',').map((value: string) => (
+              <span key={value} className="text-sm text-white/80">
+                {value}
+              </span>
+            ))}
+          </div>
+        ),
       },
       {
         headerName: 'Detected Jobsite Url',
+        autoHeight: true,
         editable: true,
         valueGetter: (p) =>
           p.data?.detectedJobsites.flatMap((j) => j.url).join(','),
@@ -367,6 +401,7 @@ export const useOrgListTable = () => {
       },
       {
         headerName: 'Detected Jobsite Type',
+        autoHeight: true,
         editable: true,
         valueGetter: (p) =>
           p.data?.detectedJobsites.flatMap((j) => j.type).join(','),
@@ -500,7 +535,7 @@ export const useOrgListTable = () => {
         newValue,
       } = e;
 
-      const hasChanged = oldValue !== newValue;
+      const hasChanged = Boolean(newValue) && oldValue !== newValue;
 
       if (data && hasChanged) {
         // Using mutation directly here triggers a rerender on the table

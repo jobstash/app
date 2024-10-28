@@ -27,7 +27,7 @@ const activateJobsite = async (payload: Payload) => {
   const options = {
     method: 'POST' as const,
     responseSchema: messageResponseSchema,
-    sentryLabel: `updateOrg`,
+    sentryLabel: `activateJobsite`,
     credentials: 'include' as RequestCredentials,
     mode: 'cors' as RequestMode,
     payload,

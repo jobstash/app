@@ -3,11 +3,9 @@ import { useEffect } from 'react';
 import { useAtom } from 'jotai';
 
 import { ORG_LIST_UNDO_EVENT } from '@jobstash/admin/core';
-import { makeOptional } from '@jobstash/shared/utils';
+import { makeNullable } from '@jobstash/shared/utils';
 
-import { orgEditRowPayloadAtom } from '@jobstash/admin/state';
-
-import { useUpdateOrg } from './use-update-org';
+import { orgEditRowPayloadAtom, useUpdateOrg } from '@jobstash/admin/state';
 
 export const OrgUpdatePayloadSyncer = () => {
   const [dataPayload, setDataPayload] = useAtom(orgEditRowPayloadAtom);
@@ -40,26 +38,24 @@ export const OrgUpdatePayloadSyncer = () => {
       mutate(
         {
           orgId,
-          payload: {
-            logoUrl: makeOptional(logoUrl),
-            name,
-            description: makeOptional(description),
-            summary: makeOptional(summary),
-            headcountEstimate: makeOptional(headcountEstimate),
-            location: makeOptional(location),
-            aliases,
-            website: websites,
-            twitter: twitters,
-            github: githubs,
-            discord: discords,
-            docs,
-            telegram: telegrams,
-            grants,
-            communities,
-            projects,
-            jobsites,
-            detectedJobsites,
-          },
+          name,
+          location: makeNullable(location),
+          logoUrl,
+          description: makeNullable(description),
+          summary: makeNullable(summary),
+          headcountEstimate,
+          websites,
+          aliases,
+          twitters,
+          githubs,
+          discords,
+          docs,
+          telegrams,
+          grants,
+          communities,
+          jobsites,
+          detectedJobsites,
+          projects,
         },
         {
           onError() {

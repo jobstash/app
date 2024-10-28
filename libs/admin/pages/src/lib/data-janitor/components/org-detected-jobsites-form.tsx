@@ -2,12 +2,11 @@ import { ChangeEventHandler, useState } from 'react';
 
 import { Button, Chip, Divider } from '@nextui-org/react';
 
-import { JOBSITE_TYPES } from '@jobstash/admin/core';
+import { Jobsite, JOBSITE_TYPES } from '@jobstash/admin/core';
 import { capitalize, cn } from '@jobstash/shared/utils';
 
 import { Heading } from '@jobstash/shared/ui';
 
-import { Jobsite } from '../core/schemas';
 import { useActivateJobsite } from '../hooks/use-activate-jobsite';
 
 import { OrgJobsiteFormFields } from './org-jobsite-form-fields';

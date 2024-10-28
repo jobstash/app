@@ -2,7 +2,8 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Button, Tab, Tabs } from '@nextui-org/react';
 
-import { Jobsite } from '../core/schemas';
+import { Jobsite } from '@jobstash/admin/core';
+
 import { useManagedOrgForm } from '../hooks/use-managed-org-form';
 
 import { FormInputMapper } from './form-input-mapper';

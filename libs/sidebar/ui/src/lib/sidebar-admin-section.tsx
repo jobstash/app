@@ -40,6 +40,11 @@ const SidebarAdminSection = ({ isMobile }: Props) => {
         text: 'Manage Projects',
         path: '/godmode/projects/manage',
       },
+      {
+        text: 'Organizations Grid',
+        path: ADMIN_PATHS.ORG_LIST,
+        isExactPath: true,
+      },
     );
   }
 
@@ -47,7 +52,6 @@ const SidebarAdminSection = ({ isMobile }: Props) => {
     tabs.push(
       { text: 'Org Approvals', path: ADMIN_PATHS.ORG_APPROVALS },
       { text: 'Tags', path: ADMIN_PATHS.SYNONYMS },
-      { text: 'Organizations', path: ADMIN_PATHS.ORG_LIST, isExactPath: true },
       { text: 'All Jobs', path: ADMIN_PATHS.ALL_JOBS },
     );
   }

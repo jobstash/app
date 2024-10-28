@@ -2,16 +2,18 @@ import { useEffect, useRef, useState } from 'react';
 
 import { atom, useAtom } from 'jotai';
 
+import { Jobsite } from '@jobstash/admin/core';
+
+import { useUpdateOrg } from '@jobstash/admin/state';
+
 import { OrgManageTab, orgManageTabAtom } from '../core/atoms';
 import {
   dataToFormState,
   formStateToPayload,
-  Jobsite,
   ManagedOrgFormState,
 } from '../core/schemas';
 
 import { useManagedOrg } from './use-managed-org';
-import { useUpdateManagedOrg } from './use-update-managed-org';
 
 const DEFAULT_FORM_STATE: ManagedOrgFormState = {
   orgId: '',
@@ -222,7 +224,7 @@ export const useManagedOrgForm = (orgId: string) => {
     }
   };
 
-  const { mutate: updateOrg, isPending } = useUpdateManagedOrg();
+  const { mutate: updateOrg, isPending } = useUpdateOrg();
 
   const successCbRef = useRef<() => void>();
   const [isSubmitting, setIsSubmitting] = useState(false);

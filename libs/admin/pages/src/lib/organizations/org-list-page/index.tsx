@@ -5,6 +5,8 @@ import './ag-grid-custom.css';
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 
+import { PERMISSIONS } from '@jobstash/auth/core';
+
 import { AdminLayout } from '@jobstash/admin/ui';
 
 import { OrgListFocusSyncer } from './org-list-focus-syncer';
@@ -26,6 +28,7 @@ export const OrgListPage = () => (
       breadCrumbs={null}
       sidebar={<SideBar />}
       tabsSection={null}
+      requiredPermissions={[PERMISSIONS.SUPER_ADMIN, PERMISSIONS.ADMIN]}
     >
       <div className="w-full">
         <OrgListTableWrapper>

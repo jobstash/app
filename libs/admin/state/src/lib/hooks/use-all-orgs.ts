@@ -14,5 +14,6 @@ export const useAllOrgs = () => {
     staleTime: 1000 * 60 * 60,
     enabled: !isLoading,
     refetchOnWindowFocus: false,
+    select: (data) => data.sort((a, b) => Number(a.orgId) - Number(b.orgId)),
   });
 };

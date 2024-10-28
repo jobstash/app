@@ -2,10 +2,8 @@ import { ChangeEventHandler } from 'react';
 
 import { Autocomplete, AutocompleteItem, Input } from '@nextui-org/react';
 
-import { JOBSITE_TYPES } from '@jobstash/admin/core';
+import { Jobsite, JOBSITE_TYPES } from '@jobstash/admin/core';
 import { capitalize } from '@jobstash/shared/utils';
-
-import { Jobsite } from '../core/schemas';
 
 interface Props {
   formState: Omit<Jobsite, 'id'>;

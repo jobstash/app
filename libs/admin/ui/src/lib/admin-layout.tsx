@@ -3,7 +3,7 @@ import { ReactNode } from 'react';
 // eslint-disable-next-line @nx/enforce-module-boundaries
 import { LoadingPage, NotFoundPage } from '@jobstash/shared/pages';
 
-import { PERMISSIONS } from '@jobstash/auth/core';
+import { CheckWalletPermission, PERMISSIONS } from '@jobstash/auth/core';
 
 import { useAuthContext, useHasPermission } from '@jobstash/auth/state';
 
@@ -15,6 +15,7 @@ interface Props {
   tabsSection: ReactNode;
   children: ReactNode;
   hideHeader?: boolean;
+  requiredPermissions?: CheckWalletPermission[];
 }
 
 const AdminLayout = ({
@@ -23,12 +24,10 @@ const AdminLayout = ({
   tabsSection,
   children,
   hideHeader,
+  requiredPermissions = [PERMISSIONS.SUPER_ADMIN],
 }: Props) => {
   const { isLoading } = useAuthContext();
-  const hasPermission = useHasPermission([
-    PERMISSIONS.SUPER_ADMIN,
-    PERMISSIONS.ADMIN,
-  ]);
+  const hasPermission = useHasPermission(requiredPermissions);
 
   if (isLoading) return <LoadingPage />;
   if (!hasPermission) return <NotFoundPage />;

@@ -35,7 +35,7 @@ export const UrlStatusRenderer = (props: Props) => {
             href={prefixUrl(url, domainPrefix)}
             size="sm"
             underline="hover"
-            className="text-white/80"
+            className="text-white/80 text-base"
             target="_blank"
             rel="noopener noreferrer"
           >{`${url}${statusCode ? ` [${statusCode}]` : ''}`}</Link>
