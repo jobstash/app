@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 
 import { useAtom } from 'jotai';
 
-import { ORG_LIST_UNDO_EVENT } from '@jobstash/admin/core';
+import { GRID_UNDO_EVENT } from '@jobstash/admin/core';
 import { makeNullable } from '@jobstash/shared/utils';
 
 import { orgEditRowPayloadAtom, useUpdateOrg } from '@jobstash/admin/state';
@@ -61,7 +61,7 @@ export const OrgUpdatePayloadSyncer = () => {
           onError() {
             // Revert cell content if mutation fails
             if (typeof window !== 'undefined') {
-              window.dispatchEvent(new CustomEvent(ORG_LIST_UNDO_EVENT));
+              window.dispatchEvent(new CustomEvent(GRID_UNDO_EVENT.ORGS));
             }
           },
           onSettled() {

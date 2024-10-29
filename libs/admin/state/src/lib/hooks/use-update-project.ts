@@ -1,59 +1,21 @@
 import { notifications } from '@mantine/notifications';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import {
-  MessageResponse,
-  messageResponseSchema,
-  MW_URL,
-} from '@jobstash/shared/core';
+import { UpdateProjectPayload } from '@jobstash/admin/core';
 import { notifError, notifLoading, notifSuccess } from '@jobstash/shared/utils';
 
 import { useMwVersionContext } from '@jobstash/shared/state';
-import { mwFetch } from '@jobstash/shared/data';
+import { updateProject } from '@jobstash/admin/data';
 
-import {
-  UpdateProjectPayload,
-  updateProjectPayloadSchema,
-} from '../core/schemas';
+const TOAST_ID = 'update-project-toast';
 
-const updateManagedProject = async (
-  projectId: string,
-  payload: UpdateProjectPayload,
-) => {
-  const url = `${MW_URL}/projects/update/${projectId}`;
-
-  const options = {
-    method: 'POST' as const,
-    responseSchema: messageResponseSchema,
-    sentryLabel: `updateManagedProject`,
-    credentials: 'include' as RequestCredentials,
-    mode: 'cors' as RequestMode,
-    payload,
-    payloadSchema: updateProjectPayloadSchema,
-    headers: {
-      'Content-Type': 'application/json',
-    },
-  };
-
-  const { success, message } = await mwFetch<
-    MessageResponse,
-    UpdateProjectPayload
-  >(url, options);
-
-  if (!success) throw new Error(message);
-
-  return { success, message };
-};
-
-const TOAST_ID = 'update-managed-project-toast';
-
-export const useUpdateManagedProject = (projectId: string) => {
+export const useUpdateProject = (projectId: string) => {
   const queryClient = useQueryClient();
   const { mwVersion } = useMwVersionContext();
 
   return useMutation({
     mutationFn: (payload: UpdateProjectPayload) =>
-      updateManagedProject(projectId, payload),
+      updateProject(projectId, payload),
 
     onMutate() {
       notifications.clean();

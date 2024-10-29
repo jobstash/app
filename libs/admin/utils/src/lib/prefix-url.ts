@@ -1,4 +1,8 @@
-export const prefixUrl = (handle: string | string[], prefix = ''): string => {
+export const prefixUrl = (
+  handle: string | string[] | null,
+  prefix = '',
+): string => {
+  if (!handle) return '';
   if (Array.isArray(handle)) {
     return handle.map((h) => getPrefixUrl(h, prefix)).join(',');
   }

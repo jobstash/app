@@ -2,16 +2,16 @@ import { useEffect, useState } from 'react';
 
 import { useAtom } from 'jotai';
 
+import { UpdateProjectPayload } from '@jobstash/admin/core';
+
+import { useUpdateProject } from '@jobstash/admin/state';
 import { useProjectDetails } from '@jobstash/projects/state';
 
 import { ProjectManageTab, projectManageTabAtom } from '../core/atoms';
 import {
   dataToProjectPayload,
   sanitizeProjectFormState,
-  UpdateProjectPayload,
 } from '../core/schemas';
-
-import { useUpdateManagedProject } from './use-update-managed-project';
 
 const DEFAULT_FORM_STATE: UpdateProjectPayload = {
   name: '',
@@ -137,11 +137,11 @@ export const useManagedProjectForm = (projectId: string) => {
     setTab(key as ProjectManageTab);
   };
 
-  const { mutate: updateOrg, isPending: isPendingUpdate } =
-    useUpdateManagedProject(projectId);
+  const { mutate: updateProject, isPending: isPendingUpdate } =
+    useUpdateProject(projectId);
 
   const onSubmit = () => {
-    updateOrg(sanitizeProjectFormState(formState));
+    updateProject(sanitizeProjectFormState(formState));
   };
 
   const prev = JSON.stringify(initFormState);

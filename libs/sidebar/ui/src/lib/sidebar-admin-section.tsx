@@ -42,7 +42,12 @@ const SidebarAdminSection = ({ isMobile }: Props) => {
       },
       {
         text: 'Organizations Grid',
-        path: ADMIN_PATHS.ORG_LIST,
+        path: ADMIN_PATHS.ORGS_GRID,
+        isExactPath: true,
+      },
+      {
+        text: 'Projects Grid',
+        path: ADMIN_PATHS.PROJECTS_GRID,
         isExactPath: true,
       },
     );

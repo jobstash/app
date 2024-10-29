@@ -1,6 +1,7 @@
 export const GODMODE_PATH_PREFIX = {
   TAGS: '/godmode/tags',
   ORGANIZATIONS: '/godmode/organizations',
+  PROJECTS: '/godmode/projects',
   ALL_JOBS: '/godmode/jobs',
 };
 
@@ -9,7 +10,8 @@ export const ADMIN_PATHS = {
   PAIRED_TERMS: `${GODMODE_PATH_PREFIX.TAGS}/paired-terms`,
   SYNONYMS: `${GODMODE_PATH_PREFIX.TAGS}/synonyms`,
   TAG_APPROVALS: `${GODMODE_PATH_PREFIX.TAGS}/approvals`,
-  ORG_LIST: GODMODE_PATH_PREFIX.ORGANIZATIONS,
+  ORGS_GRID: GODMODE_PATH_PREFIX.ORGANIZATIONS,
+  PROJECTS_GRID: GODMODE_PATH_PREFIX.PROJECTS,
   ORG_CREATE: `${GODMODE_PATH_PREFIX.ORGANIZATIONS}/create`,
   ORG_APPROVALS: `${GODMODE_PATH_PREFIX.ORGANIZATIONS}/approvals`,
   ALL_JOBS: GODMODE_PATH_PREFIX.ALL_JOBS,
@@ -22,9 +24,9 @@ export const ADMIN_BREADCRUMBS = {
   TECHNOLOGY_APPROVALS: [
     { title: 'Tag Approvals', href: ADMIN_PATHS.TAG_APPROVALS },
   ],
-  ORG_LIST: [{ title: 'Organizations', href: ADMIN_PATHS.ORG_LIST }],
+  ORG_LIST: [{ title: 'Organizations', href: ADMIN_PATHS.ORGS_GRID }],
   ORG_CREATE: [
-    { title: 'Organizations', href: ADMIN_PATHS.ORG_LIST },
+    { title: 'Organizations', href: ADMIN_PATHS.ORGS_GRID },
     { title: 'Create Organization', href: ADMIN_PATHS.ORG_CREATE },
   ],
 };
@@ -48,7 +50,10 @@ export const URL_DOMAINS = {
   DISCORD: 'discord.gg',
 } as const;
 
-export const ORG_LIST_UNDO_EVENT = 'org-list-undo-event';
+export const GRID_UNDO_EVENT = {
+  ORGS: 'org-list-undo-event',
+  PROJECTS: 'projects-grid-undo-event',
+};
 
 export const JOBSITE_TYPES = [
   'custom',
@@ -57,4 +62,5 @@ export const JOBSITE_TYPES = [
   'workable',
   'lever',
   'wellfound',
+  'onepage',
 ];

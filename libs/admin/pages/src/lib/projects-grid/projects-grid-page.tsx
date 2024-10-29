@@ -1,15 +1,11 @@
-import 'ag-grid-community/styles/ag-grid.css';
-import 'ag-grid-community/styles/ag-theme-quartz.css';
-import './ag-grid-custom.css';
-
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 
 import { PERMISSIONS } from '@jobstash/auth/core';
 
 import {
-  orgListIsFocusedAtom,
-  orgListPastaStringAtom,
+  projectsGridIsFocusedAtom,
+  projectsGridPastaStringAtom,
 } from '@jobstash/admin/state';
 
 import {
@@ -18,17 +14,17 @@ import {
   GridFocusWrapper,
 } from '@jobstash/admin/ui';
 
-import { OrgListTable } from './org-list-table';
-import { OrgUpdatePayloadSyncer } from './org-update-payload-syncer';
+import { ProjectsGridPayloadSyncer } from './payload-syncer';
+import { ProjectsGrid } from './projects-grid';
 
 const SideBar = dynamic(() =>
   import('@jobstash/sidebar/feature').then((m) => m.SideBar),
 );
 
-export const OrgListPage = () => (
+export const ProjectsGridPage = () => (
   <>
     <Head>
-      <title>Godmode | Organizations</title>
+      <title>Godmode | Projects Grid</title>
     </Head>
     <AdminLayout
       hideHeader
@@ -38,14 +34,14 @@ export const OrgListPage = () => (
       requiredPermissions={[PERMISSIONS.SUPER_ADMIN, PERMISSIONS.ADMIN]}
     >
       <div className="w-full">
-        <GridFocusWrapper isFocusedAtom={orgListIsFocusedAtom}>
-          <OrgListTable />
+        <GridFocusWrapper isFocusedAtom={projectsGridIsFocusedAtom}>
+          <ProjectsGrid />
         </GridFocusWrapper>
         <GridFocusSyncer
-          pastaAtom={orgListPastaStringAtom}
-          focusAtom={orgListIsFocusedAtom}
+          pastaAtom={projectsGridPastaStringAtom}
+          focusAtom={projectsGridIsFocusedAtom}
         />
-        <OrgUpdatePayloadSyncer />
+        <ProjectsGridPayloadSyncer />
       </div>
     </AdminLayout>
   </>

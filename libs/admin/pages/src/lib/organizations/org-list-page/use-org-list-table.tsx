@@ -12,11 +12,7 @@ import { AgGridReact, CustomCellRendererProps } from 'ag-grid-react';
 import { useSetAtom } from 'jotai';
 import { v4 } from 'uuid';
 
-import {
-  ORG_LIST_UNDO_EVENT,
-  OrgItem,
-  URL_DOMAINS,
-} from '@jobstash/admin/core';
+import { GRID_UNDO_EVENT, OrgItem, URL_DOMAINS } from '@jobstash/admin/core';
 import { prefixUrl } from '@jobstash/admin/utils';
 
 import {
@@ -25,9 +21,12 @@ import {
   useAllOrgs,
 } from '@jobstash/admin/state';
 
+import {
+  GridAvatarCellRenderer,
+  GridUrlStatusRenderer,
+} from '@jobstash/admin/ui';
+
 import { ActivateJobsiteRenderer } from './activate-jobsite-renderer';
-import { AvatarCell } from './avatar-cell';
-import { UrlStatusRenderer } from './url-status-renderer';
 
 export const useOrgListTable = () => {
   const { data } = useAllOrgs();
@@ -74,7 +73,13 @@ export const useOrgListTable = () => {
       {
         headerName: 'Avatar',
         width: 100,
-        cellRenderer: AvatarCell,
+        cellRenderer: ({ data }: CustomCellRendererProps<OrgItem>) => (
+          <GridAvatarCellRenderer
+            url={data && data.websites.length > 0 ? data.websites[0] : ''}
+            logo={data?.logoUrl}
+            name={data?.name}
+          />
+        ),
       },
       {
         headerName: 'Logo URL',
@@ -95,7 +100,9 @@ export const useOrgListTable = () => {
             .filter(Boolean);
           return true;
         },
-        cellRenderer: UrlStatusRenderer,
+        cellRenderer: (props: CustomCellRendererProps<OrgItem>) => (
+          <GridUrlStatusRenderer<OrgItem> {...props} />
+        ),
       },
       // {
       //   headerName: 'Raw Website',
@@ -109,7 +116,7 @@ export const useOrgListTable = () => {
       //       .filter(Boolean);
       //     return true;
       //   },
-      //   cellRenderer: UrlStatusRenderer,
+      //   cellRenderer: GridUrlStatusRenderer,
       // },
       {
         headerName: 'Telegram',
@@ -125,7 +132,10 @@ export const useOrgListTable = () => {
           return true;
         },
         cellRenderer: (props: CustomCellRendererProps<OrgItem>) => (
-          <UrlStatusRenderer {...props} domainPrefix={URL_DOMAINS.TELEGRAM} />
+          <GridUrlStatusRenderer<OrgItem>
+            {...props}
+            domainPrefix={URL_DOMAINS.TELEGRAM}
+          />
         ),
       },
       {
@@ -142,7 +152,10 @@ export const useOrgListTable = () => {
           return true;
         },
         cellRenderer: (props: CustomCellRendererProps<OrgItem>) => (
-          <UrlStatusRenderer {...props} domainPrefix={URL_DOMAINS.GITHUB} />
+          <GridUrlStatusRenderer<OrgItem>
+            {...props}
+            domainPrefix={URL_DOMAINS.GITHUB}
+          />
         ),
       },
       {
@@ -159,7 +172,10 @@ export const useOrgListTable = () => {
           return true;
         },
         cellRenderer: (props: CustomCellRendererProps<OrgItem>) => (
-          <UrlStatusRenderer {...props} domainPrefix={URL_DOMAINS.DISCORD} />
+          <GridUrlStatusRenderer<OrgItem>
+            {...props}
+            domainPrefix={URL_DOMAINS.DISCORD}
+          />
         ),
       },
       {
@@ -176,7 +192,10 @@ export const useOrgListTable = () => {
           return true;
         },
         cellRenderer: (props: CustomCellRendererProps<OrgItem>) => (
-          <UrlStatusRenderer {...props} domainPrefix={URL_DOMAINS.TWITTER} />
+          <GridUrlStatusRenderer<OrgItem>
+            {...props}
+            domainPrefix={URL_DOMAINS.TWITTER}
+          />
         ),
       },
       {
@@ -192,7 +211,9 @@ export const useOrgListTable = () => {
             .filter(Boolean);
           return true;
         },
-        cellRenderer: UrlStatusRenderer,
+        cellRenderer: (props: CustomCellRendererProps<OrgItem>) => (
+          <GridUrlStatusRenderer<OrgItem> {...props} />
+        ),
       },
       {
         headerName: 'Location',
@@ -318,7 +339,7 @@ export const useOrgListTable = () => {
           return true;
         },
         cellRenderer: (props: CustomCellRendererProps<OrgItem>) => (
-          <UrlStatusRenderer {...props} />
+          <GridUrlStatusRenderer<OrgItem> {...props} />
         ),
       },
       {
@@ -396,7 +417,7 @@ export const useOrgListTable = () => {
           return true;
         },
         cellRenderer: (props: CustomCellRendererProps<OrgItem>) => (
-          <UrlStatusRenderer {...props} />
+          <GridUrlStatusRenderer<OrgItem> {...props} />
         ),
       },
       {
@@ -553,10 +574,10 @@ export const useOrgListTable = () => {
       gridRef.current!.api.undoCellEditing();
     };
 
-    window.addEventListener(ORG_LIST_UNDO_EVENT, handleUndoEvent);
+    window.addEventListener(GRID_UNDO_EVENT.ORGS, handleUndoEvent);
 
     return () => {
-      window.removeEventListener(ORG_LIST_UNDO_EVENT, handleUndoEvent);
+      window.removeEventListener(GRID_UNDO_EVENT.ORGS, handleUndoEvent);
     };
   }, []);
 

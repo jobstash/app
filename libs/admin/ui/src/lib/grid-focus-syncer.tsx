@@ -1,15 +1,15 @@
 import { useEffect } from 'react';
 
-import { useAtomValue } from 'jotai';
+import { PrimitiveAtom, useAtomValue } from 'jotai';
 
-import {
-  orgListIsFocusedAtom,
-  orgListPastaStringAtom,
-} from '@jobstash/admin/state';
+interface Props {
+  pastaAtom: PrimitiveAtom<string>;
+  focusAtom: PrimitiveAtom<boolean>;
+}
 
-export const OrgListFocusSyncer = () => {
-  const isFocused = useAtomValue(orgListIsFocusedAtom);
-  const pastaString = useAtomValue(orgListPastaStringAtom);
+export const GridFocusSyncer = ({ pastaAtom, focusAtom }: Props) => {
+  const isFocused = useAtomValue(focusAtom);
+  const pastaString = useAtomValue(pastaAtom);
 
   useEffect(() => {
     const handleCopy = () => {

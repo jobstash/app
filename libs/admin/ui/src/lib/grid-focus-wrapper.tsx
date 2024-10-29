@@ -1,15 +1,14 @@
-import { useCallback } from 'react';
+import React, { useCallback } from 'react';
 
-import { useSetAtom } from 'jotai';
-
-import { orgListIsFocusedAtom } from '@jobstash/admin/state';
+import { PrimitiveAtom, useSetAtom } from 'jotai';
 
 interface Props {
   children: React.ReactNode;
+  isFocusedAtom: PrimitiveAtom<boolean>;
 }
 
-export const OrgListTableWrapper = ({ children }: Props) => {
-  const setIsFocused = useSetAtom(orgListIsFocusedAtom);
+export const GridFocusWrapper = ({ children, isFocusedAtom }: Props) => {
+  const setIsFocused = useSetAtom(isFocusedAtom);
   const onFocus = useCallback(() => setIsFocused(true), [setIsFocused]);
   const onBlur = useCallback(() => setIsFocused(false), [setIsFocused]);
 

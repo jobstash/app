@@ -17,9 +17,9 @@ export const ProjectSearchInput = () => {
     <SearchInput<ProjectItem>
       size="lg"
       data={data ?? []}
-      renderItem={({ id, name, logo }) => (
+      renderItem={({ id, name, logoUrl }) => (
         <AutocompleteItem key={name} textValue={name}>
-          <ProjectSearchItem id={id} name={name} logo={logo} />
+          <ProjectSearchItem id={id} name={name} logo={logoUrl} />
         </AutocompleteItem>
       )}
       labelText="Enter Project Name"

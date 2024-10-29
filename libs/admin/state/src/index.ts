@@ -3,6 +3,7 @@ export * from './lib/atoms/edit-alias-atom';
 export * from './lib/atoms/edit-communities-atom';
 export * from './lib/atoms/org-approval-profile-atom';
 export * from './lib/atoms/org-list-atoms';
+export * from './lib/atoms/projects-grid-atoms';
 
 // Hooks
 export * from './lib/hooks/use-add-alias';
@@ -19,6 +20,7 @@ export * from './lib/hooks/use-paired-terms-query';
 export * from './lib/hooks/use-set-communities';
 export * from './lib/hooks/use-unset-blocked-terms-mutation';
 export * from './lib/hooks/use-update-org';
+export * from './lib/hooks/use-update-project';
 
 // Context & Providers
 export * from './lib/contexts/blocked-terms-form-context';

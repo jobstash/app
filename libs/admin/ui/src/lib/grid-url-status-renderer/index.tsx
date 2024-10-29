@@ -1,16 +1,16 @@
 import { Link } from '@nextui-org/link';
 import { CustomCellRendererProps } from 'ag-grid-react';
 
-import { OrgItem, URL_DOMAINS } from '@jobstash/admin/core';
+import { URL_DOMAINS } from '@jobstash/admin/core';
 import { prefixUrl } from '@jobstash/admin/utils';
 
 import { useUrlStatus } from './use-url-status';
 
-interface Props extends CustomCellRendererProps<OrgItem, string> {
+interface Props<T> extends CustomCellRendererProps<T, string> {
   domainPrefix?: typeof URL_DOMAINS[keyof typeof URL_DOMAINS];
 }
 
-export const UrlStatusRenderer = (props: Props) => {
+export const GridUrlStatusRenderer = <T,>(props: Props<T>) => {
   const { domainPrefix, value } = props;
 
   const { data } = useUrlStatus(value ?? '', domainPrefix);
