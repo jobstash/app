@@ -4,11 +4,13 @@ import { Button, Tab, Tabs } from '@nextui-org/react';
 
 import { Jobsite } from '@jobstash/admin/core';
 
+import { useCreateOrgJobsite } from '../hooks/use-create-org-jobsite';
 import { useManagedOrgForm } from '../hooks/use-managed-org-form';
 
 import { FormInputMapper } from './form-input-mapper';
+import { JobsiteModal } from './jobsite-modal';
+import { JobsitesForm } from './jobsites-form';
 import { OrgDetectedJobsitesForm } from './org-detected-jobsites-form';
-import { OrgJobsitesForm } from './org-jobsites-form';
 import { OrgProjectsForm } from './org-projects-form';
 
 export const OrgInfoForm = ({ id }: { id: string }) => {
@@ -59,11 +61,13 @@ export const OrgInfoForm = ({ id }: { id: string }) => {
 
                 if (kind === 'jobsite') {
                   return (
-                    <OrgJobsitesForm
+                    <JobsitesForm
                       key={fieldKey}
-                      orgId={id}
                       value={value as Jobsite[]}
                       isPending={isPending}
+                      modal={
+                        <JobsiteModal useCreateJobsite={useCreateOrgJobsite} />
+                      }
                       onChangeJobsite={onChangeJobsite}
                       onSubmit={onSubmit}
                     />

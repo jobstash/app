@@ -12,7 +12,7 @@ import { notifError, notifLoading, notifSuccess } from '@jobstash/shared/utils';
 import { useMwVersionContext } from '@jobstash/shared/state';
 import { mwFetch } from '@jobstash/shared/data';
 
-const TOAST_ID = 'activate-jobsite-toast';
+const TOAST_ID = 'activate-org-jobsite-toast';
 
 const payloadSchema = myzod.object({
   orgId: myzod.string(),
@@ -21,7 +21,7 @@ const payloadSchema = myzod.object({
 
 type Payload = Infer<typeof payloadSchema>;
 
-const activateJobsite = async (payload: Payload) => {
+const activateOrgJobsite = async (payload: Payload) => {
   const url = `${MW_URL}/organizations/jobsites/activate`;
 
   const options = {
@@ -47,12 +47,12 @@ const activateJobsite = async (payload: Payload) => {
   return { success, message };
 };
 
-export const useActivateJobsite = () => {
+export const useActivateOrgJobsite = () => {
   const queryClient = useQueryClient();
   const { mwVersion } = useMwVersionContext();
 
   return useMutation({
-    mutationFn: (payload: Payload) => activateJobsite(payload),
+    mutationFn: (payload: Payload) => activateOrgJobsite(payload),
     onMutate() {
       notifications.clean();
       notifLoading({

@@ -12,7 +12,7 @@ interface Props {
   onChangeJobsiteType: (selectedKey: string) => void;
 }
 
-export const OrgJobsiteFormFields = ({
+export const JobsiteFormFields = ({
   formState: { url, type },
   isDisabled,
   onChangeUrl,

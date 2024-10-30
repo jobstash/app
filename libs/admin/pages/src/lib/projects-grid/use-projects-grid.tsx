@@ -215,6 +215,22 @@ export const useProjectsGrid = () => {
         field: 'isMainnet',
         editable: true,
       },
+      {
+        headerName: 'Jobsite Url',
+        autoHeight: true,
+      },
+      {
+        headerName: 'Jobsite Type',
+        autoHeight: true,
+      },
+      {
+        headerName: 'Detected Jobsite Url',
+        autoHeight: true,
+      },
+      {
+        headerName: 'Detected Jobsite Type',
+        autoHeight: true,
+      },
     ],
     [],
   );

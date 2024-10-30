@@ -10,31 +10,26 @@ import {
   ModalHeader,
   useDisclosure,
 } from '@nextui-org/react';
+import { UseMutationResult } from '@tanstack/react-query';
 
-import { useCreateJobsite } from '../hooks/use-create-jobsite';
+import { Jobsite } from '@jobstash/admin/core';
 
-import { OrgJobsiteFormFields } from './org-jobsite-form-fields';
+import { JobsiteFormFields } from './jobsite-form-fields';
 
-interface Payload {
-  orgId: string;
-  url: string;
-  type: string;
+const DEFAULT_FORM_STATE: Jobsite = {
+  id: '',
+  url: '',
+  type: '',
+};
+
+interface Props<R> {
+  useCreateJobsite: () => UseMutationResult<R, Error, Jobsite, unknown>;
 }
 
-interface Props {
-  orgId: string;
-}
-
-export const OrgJobsiteModal = ({ orgId }: Props) => {
-  const DEFAULT_FORM_STATE: Payload = {
-    orgId,
-    url: '',
-    type: '',
-  };
-
+export const JobsiteModal = <R,>({ useCreateJobsite }: Props<R>) => {
   const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
 
-  const [formState, setFormState] = useState<Payload>(DEFAULT_FORM_STATE);
+  const [formState, setFormState] = useState<Jobsite>(DEFAULT_FORM_STATE);
 
   const onChangeUrl = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormState((prev) => ({ ...prev, url: e.target.value }));
@@ -53,15 +48,12 @@ export const OrgJobsiteModal = ({ orgId }: Props) => {
     onClose();
   };
 
-  const { mutate: createJobsite, isPending } = useCreateJobsite();
+  const { mutate, isPending } = useCreateJobsite();
 
   const onSubmit = () => {
-    createJobsite(
-      { ...formState, orgId },
-      {
-        onSuccess: onCancel,
-      },
-    );
+    mutate(formState, {
+      onSuccess: onCancel,
+    });
   };
 
   return (
@@ -93,7 +85,7 @@ export const OrgJobsiteModal = ({ orgId }: Props) => {
               other relevant details.
             </span>
 
-            <OrgJobsiteFormFields
+            <JobsiteFormFields
               formState={{
                 url: formState.url,
                 type: formState.type,

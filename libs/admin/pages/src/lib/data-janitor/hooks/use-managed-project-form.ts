@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { useAtom } from 'jotai';
 
-import { UpdateProjectPayload } from '@jobstash/admin/core';
+import { Jobsite, UpdateProjectPayload } from '@jobstash/admin/core';
 
 import { useUpdateProject } from '@jobstash/admin/state';
 import { useProjectDetails } from '@jobstash/projects/state';
@@ -104,6 +104,18 @@ const inputSections = [
       { label: 'DefiLlama Parent', key: 'defiLlamaParent' },
     ],
   },
+  {
+    key: 'jobsites',
+    title: 'Jobsites',
+    fields: [
+      { label: 'Jobsites', key: 'jobsites', kind: 'jobsite' },
+      {
+        label: 'Detected Jobsites',
+        key: 'detectedJobsites',
+        kind: 'detected-jobsite',
+      },
+    ],
+  },
 ];
 
 export const useManagedProjectForm = (projectId: string) => {
@@ -140,6 +152,15 @@ export const useManagedProjectForm = (projectId: string) => {
   const { mutate: updateProject, isPending: isPendingUpdate } =
     useUpdateProject(projectId);
 
+  const onChangeJobsite = (
+    key: 'jobsites' | 'detectedJobsites',
+    newJobsite: Jobsite,
+    op = 'update' as 'create' | 'update' | 'delete',
+    // eslint-disable-next-line unicorn/consistent-function-scoping
+  ) => {
+    console.log('TODO');
+  };
+
   const onSubmit = () => {
     updateProject(sanitizeProjectFormState(formState));
   };
@@ -157,6 +178,7 @@ export const useManagedProjectForm = (projectId: string) => {
     tab,
     onChangeTab,
     isPending: isPendingUpdate,
+    onChangeJobsite,
     onSubmit,
     organizations: data?.organizations ?? [],
   };

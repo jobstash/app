@@ -7,8 +7,10 @@ import { capitalize, cn } from '@jobstash/shared/utils';
 
 import { Heading } from '@jobstash/shared/ui';
 
-import { OrgJobsiteFormFields } from './org-jobsite-form-fields';
-import { OrgJobsiteModal } from './org-jobsite-modal';
+import { useCreateProjectJobsite } from '../hooks/use-create-project-jobsite';
+
+import { JobsiteFormFields } from './jobsite-form-fields';
+import { JobsiteModal } from './jobsite-modal';
 
 type OnChangeJobsite = (
   key: 'jobsites' | 'detectedJobsites',
@@ -16,15 +18,15 @@ type OnChangeJobsite = (
 ) => void;
 
 interface Props {
-  orgId: string;
+  id: string;
   value: Jobsite[];
   isPending: boolean;
   onChangeJobsite: OnChangeJobsite;
   onSubmit: (onSuccess?: () => void) => void;
 }
 
-export const OrgJobsitesForm = ({
-  orgId,
+export const ProjectJobsitesForm = ({
+  id,
   value,
   isPending,
   onChangeJobsite,
@@ -33,7 +35,7 @@ export const OrgJobsitesForm = ({
   <div className="flex flex-col gap-4 pb-8">
     <div className="flex gap-4 items-center">
       {value.length > 0 && <Heading size="md">Jobsites:</Heading>}
-      <OrgJobsiteModal orgId={orgId} />
+      <JobsiteModal useCreateJobsite={useCreateProjectJobsite} />
     </div>
     {value.map((jobsite, index) => (
       <div key={jobsite.id} className="space-y-4 pl-4 max-w-sm">
@@ -108,7 +110,7 @@ const JobsiteItem = ({
   return (
     <div key={id} className={cn('flex flex-col pb-4', { 'gap-4': isEditing })}>
       {isEditing ? (
-        <OrgJobsiteFormFields
+        <JobsiteFormFields
           formState={jobsite}
           isDisabled={isPending}
           onChangeUrl={onChangeUrl}

@@ -1,13 +1,12 @@
 import { ChangeEventHandler, useState } from 'react';
 
 import { Button, Chip, Divider } from '@nextui-org/react';
+import { UseMutationResult } from '@tanstack/react-query';
 
 import { Jobsite, JOBSITE_TYPES } from '@jobstash/admin/core';
 import { capitalize, cn } from '@jobstash/shared/utils';
 
 import { Heading } from '@jobstash/shared/ui';
-
-import { useActivateOrgJobsite } from '../hooks/use-activate-org-jobsite';
 
 import { JobsiteFormFields } from './jobsite-form-fields';
 
@@ -17,21 +16,21 @@ type OnChangeJobsite = (
   op?: 'create' | 'update' | 'delete',
 ) => void;
 
-interface Props {
-  orgId: string;
+interface Props<R, P> {
   value: Jobsite[];
   isPending: boolean;
+  useActivateJobsite: () => UseMutationResult<R, Error, P, unknown>;
   onChangeJobsite: OnChangeJobsite;
   onSubmit: (onSuccess?: () => void) => void;
 }
 
-export const OrgDetectedJobsitesForm = ({
-  orgId,
+export const DetectedJobsitesForm = <R, P>({
   value,
   isPending,
+  useActivateJobsite,
   onChangeJobsite,
   onSubmit,
-}: Props) =>
+}: Props<R, P>) =>
   value.length > 0 ? (
     <div className="flex flex-col gap-4 pb-8">
       <div className="flex gap-4 items-center">
@@ -41,9 +40,9 @@ export const OrgDetectedJobsitesForm = ({
         <div key={jobsite.id} className="space-y-4 pl-4 max-w-sm">
           <Divider />
           <DetectedJobsiteItem
-            orgId={orgId}
             jobsite={jobsite}
             isPending={isPending}
+            useActivateJobsite={useActivateJobsite}
             onChangeJobsite={onChangeJobsite}
             onSubmit={onSubmit}
           />
@@ -53,22 +52,22 @@ export const OrgDetectedJobsitesForm = ({
     </div>
   ) : null;
 
-interface ItemProps {
-  orgId: string;
+interface ItemProps<R, P> {
   jobsite: Jobsite;
   isPending: boolean;
+  useActivateJobsite: () => UseMutationResult<R, Error, P, unknown>;
   onChangeJobsite: OnChangeJobsite;
   onSubmit: (onSuccess?: () => void) => void;
 }
 
-const DetectedJobsiteItem = ({
-  orgId,
+const DetectedJobsiteItem = <R, P>({
   jobsite,
   isPending,
+  useActivateJobsite,
   onChangeJobsite,
   onSubmit,
-}: ItemProps) => {
-  const { id, url, type } = jobsite;
+}: ItemProps<R, P>) => {
+  const { id: jobsiteId, url, type } = jobsite;
 
   const [prevState, setPrevState] = useState(jobsite);
   const [isEditing, setIsEditing] = useState(false);
@@ -113,12 +112,11 @@ const DetectedJobsiteItem = ({
   };
 
   const { mutate: activateJobsite, isPending: isPendingActivation } =
-    useActivateOrgJobsite();
+    useActivateJobsite();
+
+  // eslint-disable-next-line unicorn/consistent-function-scoping
   const onActivate = () => {
-    activateJobsite({
-      orgId,
-      jobsiteIds: [id],
-    });
+    console.log('TODO');
   };
 
   const isDisabledSave =
@@ -126,7 +124,6 @@ const DetectedJobsiteItem = ({
 
   return (
     <div
-      key={id}
       className={cn(
         'flex flex-col pb-4',
         { 'gap-4': isEditing },

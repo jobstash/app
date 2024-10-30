@@ -1,6 +1,5 @@
 import myzod, { Infer } from 'myzod';
 
-import { JOBSITE_TYPES } from '@jobstash/admin/core';
 import {
   MessageResponse,
   messageResponseSchema,
@@ -12,11 +11,11 @@ import { mwFetch } from '@jobstash/shared/data';
 const payloadSchema = myzod.object({
   orgId: myzod.string().min(1),
   url: myzod.string().min(1),
-  type: myzod.literals(...JOBSITE_TYPES),
+  type: myzod.string(),
 });
 type Payload = Infer<typeof payloadSchema>;
 
-export const createJobsite = async (payload: Payload) => {
+export const createOrgJobsite = async (payload: Payload) => {
   const parseResult = payloadSchema.try(payload);
   if (parseResult instanceof myzod.ValidationError) {
     throw new TypeError('Invalid url or jobsite type');
@@ -25,7 +24,7 @@ export const createJobsite = async (payload: Payload) => {
   const options = {
     method: 'POST' as const,
     responseSchema: messageResponseSchema,
-    sentryLabel: `createJobsite`,
+    sentryLabel: `createOrgJobsite`,
     credentials: 'include' as RequestCredentials,
     mode: 'cors' as RequestMode,
     payload: parseResult,

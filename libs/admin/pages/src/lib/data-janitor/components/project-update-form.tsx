@@ -2,9 +2,13 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Button, Tab, Tabs } from '@nextui-org/react';
 
-import { FormInputMapper } from '../components/form-input-mapper';
-import { ProjectOrgForm } from '../components/project-org-form';
+import { Jobsite } from '@jobstash/admin/core';
+
 import { useManagedProjectForm } from '../hooks/use-managed-project-form';
+
+import { FormInputMapper } from './form-input-mapper';
+import { JobsitesForm } from './jobsites-form';
+import { ProjectOrgForm } from './project-org-form';
 
 export const ProjectUpdateForm = ({ projectId }: { projectId: string }) => {
   const {
@@ -16,6 +20,7 @@ export const ProjectUpdateForm = ({ projectId }: { projectId: string }) => {
     tab,
     onChangeTab,
     isPending,
+    onChangeJobsite,
     onSubmit,
     organizations,
   } = useManagedProjectForm(projectId);
@@ -48,6 +53,19 @@ export const ProjectUpdateForm = ({ projectId }: { projectId: string }) => {
                       key={fieldKey}
                       projectId={projectId}
                       organizations={organizations}
+                    />
+                  );
+                }
+
+                if (kind === 'jobsite') {
+                  return (
+                    <JobsitesForm
+                      key={fieldKey}
+                      value={value as unknown as Jobsite[]}
+                      isPending={isPending}
+                      modal={<p>TODO MODAL</p>}
+                      onChangeJobsite={onChangeJobsite}
+                      onSubmit={onSubmit}
                     />
                   );
                 }
