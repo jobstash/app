@@ -24,7 +24,12 @@ import {
   useDisableScrollListener,
 } from '@jobstash/shared/state';
 
-import { NewFeatureModal, ReportModal, TopBanner } from '@jobstash/shared/ui';
+import {
+  DonateModal,
+  NewFeatureModal,
+  ReportModal,
+  TopBanner,
+} from '@jobstash/shared/ui';
 
 const NAME = 'JobStash';
 const DESCRIPTION = 'Crypto Native Jobs';
@@ -134,13 +139,13 @@ const App = ({ Component, pageProps }: AppProps) => {
               <MwVersionProvider screenLoader={<LoadingPage />}>
                 <PrivyProvider screenLoader={<LoadingPage />}>
                   <AuthProvider screenLoader={<LoadingPage />}>
-                    {/* <DonateModal /> */}
                     <div
                       className={cn({
                         'pt-[54px] sm:pt-[40px]': isOpenTopBanner,
                       })}
                     >
                       <JotaiProvider>
+                        <DonateModal />
                         <Component {...pageProps} />
                       </JotaiProvider>
                     </div>
