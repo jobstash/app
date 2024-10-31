@@ -39,7 +39,7 @@ const Sidebar = ({ filtersRouteSection }: Props) => {
       <SidebarWrapper>
         <div
           className={cn(
-            'lg:z-[999] lg:w-screen shrink-0 lg:fixed lg:top-0 lg:left-0 lg:px-4 lg:bg-gradient-to-l lg:from-[#141317] lg:to-[#121216] lg:h-[100px] lg:border-b lg:border-white/5  lg:flex lg:items-center',
+            'lg:z-[999] lg:w-screen shrink-0 lg:fixed lg:top-0 lg:left-0 lg:px-4 lg:bg-gradient-to-l lg:from-[#141317] lg:to-[#121216] lg:h-[100px] lg:border-b lg:border-white/5 lg:flex lg:items-center',
             { 'lg:pt-10 lg:h-[140px]': isOpenTopBanner },
           )}
         >
@@ -134,7 +134,11 @@ const Sidebar = ({ filtersRouteSection }: Props) => {
         </div>
 
         {/* DESKTOP BARTABS */}
-        <div className="flex-col hidden space-y-6 mt-36 lg:flex">
+        <div
+          className={cn('flex-col hidden space-y-6 mt-28 lg:flex', {
+            'mt-36': isOpenTopBanner,
+          })}
+        >
           <SidebarDiscoverBartabs />
           <SidebarBookmarksSection />
           <SidebarUserSection />

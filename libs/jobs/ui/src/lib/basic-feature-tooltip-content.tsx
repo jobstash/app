@@ -5,8 +5,6 @@ import { CheckIcon, MoveRightIcon } from 'lucide-react';
 
 import { cn } from '@jobstash/shared/utils';
 
-import { GradientText } from '@jobstash/shared/ui';
-
 const tier = {
   name: 'Basic',
   pricePerJob: '$200',
@@ -28,7 +26,10 @@ export const BasicFeatureTooltipContent = () => (
       </h3>
 
       <div className="flex flex-col gap-0">
-        <span className="flex items-baseline gap-x-2 -mb-2">
+        <span className="text-5xl font-bold tracking-tight text-white/90">
+          {tier.pricePerJob}
+        </span>
+        {/* <span className="flex items-baseline gap-x-2 -mb-2">
           <span className="text-5xl font-bold tracking-tight text-white/90">
             <span className="line-through text-white/60">
               {tier.pricePerJob}
@@ -41,10 +42,9 @@ export const BasicFeatureTooltipContent = () => (
 
           <span className="text-base text-gray-500">/ job</span>
         </span>
-
         <div className="flex gap-x-2">
           <GradientText text="75% OFF" className="text-2xl font-bold" />
-        </div>
+        </div> */}
       </div>
     </div>
     <p className="text-base leading-7 text-white/90">{tier.description}</p>
