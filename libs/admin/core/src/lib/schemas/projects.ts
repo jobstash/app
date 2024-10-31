@@ -1,5 +1,7 @@
 import myzod, { Infer } from 'myzod';
 
+import { jobsiteSchema } from '@jobstash/shared/core';
+
 export const projectItemSchema = myzod
   .object({
     id: myzod.string(),
@@ -25,11 +27,12 @@ export const projectItemSchema = myzod
     defiLlamaId: myzod.string().nullable(),
     defiLlamaSlug: myzod.string().nullable(),
     defiLlamaParent: myzod.string().nullable(),
-
     aliases: myzod.array(myzod.string()),
     createdTimestamp: myzod.number().nullable(),
     orgIds: myzod.array(myzod.string()),
     updatedTimestamp: myzod.number().nullable(),
+    jobsites: myzod.array(jobsiteSchema),
+    detectedJobsites: myzod.array(jobsiteSchema),
   })
   .allowUnknownKeys(true);
 
@@ -57,6 +60,8 @@ export const updateProjectPayloadSchema = myzod.object({
   defiLlamaId: myzod.string().nullable(),
   defiLlamaSlug: myzod.string().nullable(),
   defiLlamaParent: myzod.string().nullable(),
+  jobsites: myzod.array(jobsiteSchema),
+  detectedJobsites: myzod.array(jobsiteSchema),
 });
 
 export type UpdateProjectPayload = Infer<typeof updateProjectPayloadSchema>;

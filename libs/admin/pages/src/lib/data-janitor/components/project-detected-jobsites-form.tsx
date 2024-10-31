@@ -8,7 +8,7 @@ import { capitalize, cn } from '@jobstash/shared/utils';
 
 import { Heading } from '@jobstash/shared/ui';
 
-import { useActivateOrgJobsite } from '../hooks/use-activate-org-jobsite';
+import { useActivateProjectJobsite } from '../hooks/use-activate-project-jobsite';
 
 import { JobsiteFormFields } from './jobsite-form-fields';
 
@@ -19,15 +19,15 @@ type OnChangeJobsite = (
 ) => void;
 
 interface Props {
-  orgId: string;
+  projectId: string;
   value: Jobsite[];
   isPending: boolean;
   onChangeJobsite: OnChangeJobsite;
   onSubmit: (onSuccess?: () => void) => void;
 }
 
-export const OrgDetectedJobsitesForm = ({
-  orgId,
+export const ProjectDetectedJobsitesForm = ({
+  projectId,
   value,
   isPending,
   onChangeJobsite,
@@ -42,7 +42,7 @@ export const OrgDetectedJobsitesForm = ({
         <div key={jobsite.id} className="space-y-4 pl-4 max-w-sm">
           <Divider />
           <DetectedJobsiteItem
-            orgId={orgId}
+            projectId={projectId}
             jobsite={jobsite}
             isPending={isPending}
             onChangeJobsite={onChangeJobsite}
@@ -55,7 +55,7 @@ export const OrgDetectedJobsitesForm = ({
   ) : null;
 
 interface ItemProps {
-  orgId: string;
+  projectId: string;
   jobsite: Jobsite;
   isPending: boolean;
   onChangeJobsite: OnChangeJobsite;
@@ -63,7 +63,7 @@ interface ItemProps {
 }
 
 const DetectedJobsiteItem = ({
-  orgId,
+  projectId,
   jobsite,
   isPending,
   onChangeJobsite,
@@ -114,10 +114,10 @@ const DetectedJobsiteItem = ({
   };
 
   const { mutate: activateJobsite, isPending: isPendingActivation } =
-    useActivateOrgJobsite();
+    useActivateProjectJobsite();
   const onActivate = () => {
     activateJobsite({
-      orgId,
+      id: projectId,
       jobsiteIds: [id],
     });
   };

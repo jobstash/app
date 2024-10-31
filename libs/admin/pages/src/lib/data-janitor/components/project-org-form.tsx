@@ -4,32 +4,37 @@ import { useAutoAnimate } from '@formkit/auto-animate/react';
 import { Button, Divider, Tooltip } from '@nextui-org/react';
 import { Unlink2 } from 'lucide-react';
 
-import { ProjectDetails } from '@jobstash/projects/core';
 import { getLogoUrl } from '@jobstash/shared/utils';
 
 import { Heading, LogoTitle } from '@jobstash/shared/ui';
 
+import { useManagedOrg } from '../hooks/use-managed-org';
 import { useUpdateProjectRel } from '../hooks/use-update-project-rel';
 
 import { AddOrgSearchInput } from './add-org-search-input';
 
 interface ProjectOrgsFormItemProps {
   projectId: string;
-  org: ProjectDetails['organizations'][number];
+  id: string;
 }
 
-const ProjectOrgsFormItem = ({ projectId, org }: ProjectOrgsFormItemProps) => {
-  const { orgId, website, logoUrl, name } = org;
-
-  const avatarProps = {
-    src: getLogoUrl(website, logoUrl),
-    alt: name,
-  };
-
-  const manageLink = `/godmode/organizations/manage/${orgId ?? ''}`;
+const ProjectOrgsFormItem = ({ projectId, id }: ProjectOrgsFormItemProps) => {
+  const { data } = useManagedOrg(id);
 
   const { mutate: updateProjectRel, isPending: isPendingProjectRel } =
     useUpdateProjectRel();
+
+  if (!data) return null;
+
+  const { orgId, websites, logoUrl, name } = data;
+
+  const website = websites.length > 0 ? websites[0] : '';
+  const avatarProps = {
+    src: getLogoUrl(website, logoUrl),
+    alt: name ?? '',
+  };
+
+  const manageLink = `/godmode/organizations/manage/${orgId ?? ''}`;
 
   const onUnlink = () => {
     updateProjectRel({ op: 'remove', orgId, projectId });
@@ -64,11 +69,11 @@ const ProjectOrgsFormItem = ({ projectId, org }: ProjectOrgsFormItemProps) => {
 
 interface Props {
   projectId: string;
-  organizations: ProjectDetails['organizations'];
+  orgIds: string[];
 }
 
-export const ProjectOrgForm = ({ projectId, organizations }: Props) => {
-  const hasOrg = organizations.length > 0;
+export const ProjectOrgForm = ({ projectId, orgIds }: Props) => {
+  const hasOrg = orgIds.length > 0;
   const [animateRef] = useAutoAnimate();
 
   const { mutate: updateProjectRel, isPending: isPendingProjectRel } =
@@ -98,11 +103,11 @@ export const ProjectOrgForm = ({ projectId, organizations }: Props) => {
           <Divider />
           <Heading size="md">Linked Organizations</Heading>
           <div ref={animateRef} className="flex flex-col gap-4">
-            {organizations.map((org) => (
+            {orgIds.map((orgId) => (
               <ProjectOrgsFormItem
-                key={org.orgId}
+                key={orgId}
                 projectId={projectId}
-                org={org}
+                id={orgId}
               />
             ))}
           </div>

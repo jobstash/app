@@ -1,6 +1,7 @@
 import myzod, { Infer } from 'myzod';
 
 import {
+  Jobsite,
   MessageResponse,
   messageResponseSchema,
   MW_URL,
@@ -15,7 +16,12 @@ const payloadSchema = myzod.object({
 });
 type Payload = Infer<typeof payloadSchema>;
 
-export const createOrgJobsite = async (payload: Payload) => {
+export const createOrgJobsite = async ({ id, url, type }: Jobsite) => {
+  const payload = {
+    orgId: id,
+    url,
+    type,
+  };
   const parseResult = payloadSchema.try(payload);
   if (parseResult instanceof myzod.ValidationError) {
     throw new TypeError('Invalid url or jobsite type');

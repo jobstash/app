@@ -9,6 +9,7 @@ import {
 } from 'ag-grid-community';
 import { AgGridReact, CustomCellRendererProps } from 'ag-grid-react';
 import { useSetAtom } from 'jotai';
+import { v4 } from 'uuid';
 
 import {
   GRID_UNDO_EVENT,
@@ -28,6 +29,8 @@ import {
   GridUrlStatusRenderer,
 } from '@jobstash/admin/ui';
 
+import { ActivateJobsiteRenderer } from './activate-jobsite-renderer';
+
 export const useProjectsGrid = () => {
   const { data } = useAllProjects();
 
@@ -45,6 +48,7 @@ export const useProjectsGrid = () => {
         pinned: 'left',
         editable: true,
         checkboxSelection: true,
+        filter: true,
       },
       {
         headerName: 'ID',
@@ -218,18 +222,156 @@ export const useProjectsGrid = () => {
       {
         headerName: 'Jobsite Url',
         autoHeight: true,
+        // We don't have support for creating jobsites
+        // Edit is only available if there's data
+        editable: (p) => (p.data?.jobsites ?? []).length === 1,
+        valueGetter: (p) => p.data?.jobsites.flatMap((j) => j.url).join(','),
+        valueSetter(p) {
+          const editedValue = p.newValue
+            .split(',')
+            .map((s: string) => s.trim())
+            .find(Boolean);
+
+          // Only save first element
+          p.data.jobsites = [
+            {
+              ...p.data.jobsites[0],
+              url: editedValue,
+            },
+          ];
+
+          return true;
+        },
+        cellRenderer: (props: CustomCellRendererProps<ProjectItem>) => (
+          <GridUrlStatusRenderer<ProjectItem> {...props} />
+        ),
       },
       {
         headerName: 'Jobsite Type',
         autoHeight: true,
+        // We don't have support for creating jobsites
+        // Edit is only available if there's data
+        editable: (p) => (p.data?.jobsites ?? []).length === 1,
+        valueGetter: (p) => p.data?.jobsites.flatMap((j) => j.type).join(','),
+        valueSetter(p) {
+          const editedValue = p.newValue
+            .split(',')
+            .map((s: string) => s.trim())
+            .find(Boolean);
+
+          // Only save first element
+          p.data.jobsites = [
+            {
+              ...p.data.jobsites[0],
+              type: editedValue,
+            },
+          ];
+
+          return true;
+        },
+        cellRenderer: (props: CustomCellRendererProps<ProjectItem>) => (
+          <div className="flex flex-col gap-0">
+            {props.value.split(',').map((value: string) => (
+              <span key={value} className="text-sm text-white/80">
+                {value}
+              </span>
+            ))}
+          </div>
+        ),
       },
       {
         headerName: 'Detected Jobsite Url',
         autoHeight: true,
+        editable: (p) => (p.data?.detectedJobsites ?? []).length === 1,
+        valueGetter: (p) =>
+          p.data?.detectedJobsites.flatMap((j) => j.url).join(','),
+        valueSetter(p) {
+          const editedValue = p.newValue
+            .split(',')
+            .map((s: string) => s.trim())
+            .find(Boolean);
+
+          const oldJobsite = p.data.detectedJobsites[0];
+
+          // Create
+          if ((p.data?.detectedJobsites ?? []).length === 0 && editedValue) {
+            p.data.detectedJobsites = [
+              {
+                id: v4(),
+                url: editedValue,
+                type: '',
+              },
+            ];
+            return true;
+          }
+
+          // Delete
+          if ((oldJobsite ? !oldJobsite.type : true) && !editedValue) {
+            p.data.detectedJobsites = [];
+            return true;
+          }
+
+          // Update
+          p.data.detectedJobsites = [
+            {
+              ...oldJobsite,
+              url: editedValue,
+            },
+          ];
+
+          return true;
+        },
+        cellRenderer: (props: CustomCellRendererProps<ProjectItem>) => (
+          <GridUrlStatusRenderer<ProjectItem> {...props} />
+        ),
       },
       {
         headerName: 'Detected Jobsite Type',
         autoHeight: true,
+        editable: (p) => (p.data?.detectedJobsites ?? []).length === 1,
+        valueGetter: (p) =>
+          p.data?.detectedJobsites.flatMap((j) => j.type).join(','),
+        valueSetter(p) {
+          const editedValue = p.newValue
+            .split(',')
+            .map((s: string) => s.trim())
+            .find(Boolean);
+
+          const oldJobsite = p.data.detectedJobsites[0];
+
+          // Create
+          if ((p.data?.detectedJobsites ?? []).length === 0 && editedValue) {
+            p.data.detectedJobsites = [
+              {
+                id: v4(),
+                url: '',
+                type: editedValue,
+              },
+            ];
+            return true;
+          }
+
+          // Delete
+          if ((oldJobsite ? !oldJobsite.url : true) && !editedValue) {
+            p.data.detectedJobsites = [];
+            return true;
+          }
+
+          // Update
+          p.data.detectedJobsites = [
+            {
+              ...oldJobsite,
+              type: editedValue,
+            },
+          ];
+
+          return true;
+        },
+      },
+      {
+        headerName: 'Activate Jobsite',
+        width: 144,
+        cellRenderer: ActivateJobsiteRenderer,
       },
     ],
     [],

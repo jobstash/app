@@ -2,12 +2,15 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Button, Tab, Tabs } from '@nextui-org/react';
 
-import { Jobsite } from '@jobstash/admin/core';
+import { Jobsite } from '@jobstash/shared/core';
 
+import { useCreateProjectJobsite } from '../hooks/use-create-project-jobsite';
 import { useManagedProjectForm } from '../hooks/use-managed-project-form';
 
 import { FormInputMapper } from './form-input-mapper';
+import { JobsiteModal } from './jobsite-modal';
 import { JobsitesForm } from './jobsites-form';
+import { ProjectDetectedJobsitesForm } from './project-detected-jobsites-form';
 import { ProjectOrgForm } from './project-org-form';
 
 export const ProjectUpdateForm = ({ projectId }: { projectId: string }) => {
@@ -22,7 +25,7 @@ export const ProjectUpdateForm = ({ projectId }: { projectId: string }) => {
     isPending,
     onChangeJobsite,
     onSubmit,
-    organizations,
+    orgIds,
   } = useManagedProjectForm(projectId);
 
   if (isLoading) return null;
@@ -52,7 +55,7 @@ export const ProjectUpdateForm = ({ projectId }: { projectId: string }) => {
                     <ProjectOrgForm
                       key={fieldKey}
                       projectId={projectId}
-                      organizations={organizations}
+                      orgIds={orgIds}
                     />
                   );
                 }
@@ -63,7 +66,25 @@ export const ProjectUpdateForm = ({ projectId }: { projectId: string }) => {
                       key={fieldKey}
                       value={value as unknown as Jobsite[]}
                       isPending={isPending}
-                      modal={<p>TODO MODAL</p>}
+                      modal={
+                        <JobsiteModal
+                          id={projectId}
+                          useCreateJobsite={useCreateProjectJobsite}
+                        />
+                      }
+                      onChangeJobsite={onChangeJobsite}
+                      onSubmit={onSubmit}
+                    />
+                  );
+                }
+
+                if (kind === 'detected-jobsite') {
+                  return (
+                    <ProjectDetectedJobsitesForm
+                      key={fieldKey}
+                      projectId={projectId}
+                      value={value as Jobsite[]}
+                      isPending={isPending}
                       onChangeJobsite={onChangeJobsite}
                       onSubmit={onSubmit}
                     />
@@ -92,7 +113,7 @@ export const ProjectUpdateForm = ({ projectId }: { projectId: string }) => {
         radius="sm"
         className="font-bold w-fit"
         isLoading={isPending && tab !== 'org'}
-        onClick={onSubmit}
+        onClick={() => onSubmit()}
       >
         Save Changes
       </Button>

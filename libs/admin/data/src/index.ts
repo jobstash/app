@@ -12,6 +12,7 @@ export * from './lib/get-org-id-by-url';
 export * from './lib/get-paired-terms';
 export * from './lib/get-preferred-terms';
 export * from './lib/get-project-id-by-url';
+export * from './lib/get-project-item';
 export * from './lib/import-org';
 export * from './lib/import-project';
 export * from './lib/post-all-jobs';

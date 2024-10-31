@@ -1,7 +1,8 @@
 import myzod from 'myzod';
 
-import { Jobsite, jobsiteSchema } from '@jobstash/admin/core';
 import {
+  Jobsite,
+  jobsiteSchema,
   MessageResponse,
   messageResponseSchema,
   MW_URL,

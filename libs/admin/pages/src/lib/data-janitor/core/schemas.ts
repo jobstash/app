@@ -1,13 +1,12 @@
 import myzod, { Infer } from 'myzod';
 
 import {
-  jobsiteSchema,
   ManagedOrg,
   managedOrgSchema,
+  ProjectItem,
   UpdateProjectPayload,
 } from '@jobstash/admin/core';
-import { ProjectDetails } from '@jobstash/projects/core';
-import { messageResponseSchema } from '@jobstash/shared/core';
+import { jobsiteSchema, messageResponseSchema } from '@jobstash/shared/core';
 
 export const managedOrgFormStateSchema = myzod.object({
   orgId: myzod.string(),
@@ -105,12 +104,12 @@ export type ManagedOrgResponse = Infer<typeof managedOrgResponseSchema>;
 const nullable = <T>(value: T) => value || null;
 
 export const dataToProjectPayload = (
-  data: ProjectDetails,
+  data: ProjectItem,
 ): UpdateProjectPayload => ({
   name: data.name,
   description: nullable(data.description),
   category: data.category,
-  logo: nullable(data.logo),
+  logo: nullable(data.logoUrl),
   isMainnet: nullable(data.isMainnet),
   tvl: nullable(data.tvl),
   monthlyFees: nullable(data.monthlyFees),
@@ -128,6 +127,8 @@ export const dataToProjectPayload = (
   defiLlamaId: nullable(data.defiLlamaId),
   defiLlamaSlug: nullable(data.defiLlamaSlug),
   defiLlamaParent: nullable(data.defiLlamaParent),
+  jobsites: data.jobsites,
+  detectedJobsites: data.detectedJobsites,
 });
 
 export const sanitizeProjectFormState = (

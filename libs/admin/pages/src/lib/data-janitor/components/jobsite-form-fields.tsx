@@ -2,7 +2,8 @@ import { ChangeEventHandler } from 'react';
 
 import { Autocomplete, AutocompleteItem, Input } from '@nextui-org/react';
 
-import { Jobsite, JOBSITE_TYPES } from '@jobstash/admin/core';
+import { JOBSITE_TYPES } from '@jobstash/admin/core';
+import { Jobsite } from '@jobstash/shared/core';
 import { capitalize } from '@jobstash/shared/utils';
 
 interface Props {

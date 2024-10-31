@@ -2,30 +2,30 @@
 import { Button } from '@nextui-org/button';
 import { CustomCellRendererProps } from 'ag-grid-react';
 
-import { OrgItem } from '@jobstash/admin/core';
+import { ProjectItem } from '@jobstash/admin/core';
 
-import { useActivateOrgJobsite } from '../../data-janitor/hooks/use-activate-org-jobsite';
+import { useActivateProjectJobsite } from '../data-janitor/hooks/use-activate-project-jobsite';
 
 export const ActivateJobsiteRenderer = (
-  props: CustomCellRendererProps<OrgItem>,
+  props: CustomCellRendererProps<ProjectItem>,
 ) => {
   const { data, node, api } = props;
 
-  const { mutate, isPending } = useActivateOrgJobsite();
+  const { mutate, isPending } = useActivateProjectJobsite();
 
   const isNotApplicable =
     (data?.detectedJobsites ?? []).flatMap((j) => j.url).filter(Boolean)
       .length === 0 || (data?.jobsites ?? []).length > 0;
 
   const onClick = () => {
-    const orgId = data?.orgId;
+    const projectId = data?.id;
     const jobsiteIds = (data?.detectedJobsites ?? []).flatMap((j) => j.id);
-    if (orgId && jobsiteIds.length > 0) {
+    if (projectId && jobsiteIds.length > 0) {
       mutate(
-        { orgId, jobsiteIds },
+        { id: projectId, jobsiteIds },
         {
           onSuccess() {
-            const newItem = copyObject(node.data) as OrgItem;
+            const newItem = copyObject(node.data) as ProjectItem;
             const activatedJobsite = data.detectedJobsites[0];
             newItem.jobsites = [...data.jobsites, activatedJobsite];
             newItem.detectedJobsites = data.detectedJobsites.filter(

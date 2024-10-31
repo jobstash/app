@@ -25,4 +25,6 @@ export const projectItemToPayload = (
   defiLlamaId: item.defiLlamaId,
   defiLlamaSlug: item.defiLlamaSlug,
   defiLlamaParent: item.defiLlamaParent,
+  jobsites: item.jobsites,
+  detectedJobsites: item.detectedJobsites,
 });

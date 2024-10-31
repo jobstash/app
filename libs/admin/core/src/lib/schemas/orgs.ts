@@ -1,5 +1,7 @@
 import myzod, { Infer } from 'myzod';
 
+import { jobsiteSchema } from '@jobstash/shared/core';
+
 export const orgItemSchema = myzod
   .object({
     id: myzod.string(),
@@ -73,13 +75,6 @@ export const jobsiteActivatePayloadSchema = myzod.object({
 });
 
 export type JobsiteActivatePayload = Infer<typeof jobsiteActivatePayloadSchema>;
-
-export const jobsiteSchema = myzod.object({
-  id: myzod.string(),
-  url: myzod.string(),
-  type: myzod.string(),
-});
-export type Jobsite = Infer<typeof jobsiteSchema>;
 
 export const managedOrgSchema = myzod
   .object({

@@ -1,11 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { useAtom } from 'jotai';
 
-import { Jobsite, UpdateProjectPayload } from '@jobstash/admin/core';
+import { UpdateProjectPayload } from '@jobstash/admin/core';
+import { Jobsite } from '@jobstash/shared/core';
 
-import { useUpdateProject } from '@jobstash/admin/state';
-import { useProjectDetails } from '@jobstash/projects/state';
+import { useProjectItem, useUpdateProject } from '@jobstash/admin/state';
 
 import { ProjectManageTab, projectManageTabAtom } from '../core/atoms';
 import {
@@ -35,6 +35,8 @@ const DEFAULT_FORM_STATE: UpdateProjectPayload = {
   defiLlamaId: null,
   defiLlamaSlug: null,
   defiLlamaParent: null,
+  jobsites: [],
+  detectedJobsites: [],
 };
 
 const inputSections = [
@@ -119,7 +121,7 @@ const inputSections = [
 ];
 
 export const useManagedProjectForm = (projectId: string) => {
-  const { data } = useProjectDetails(projectId);
+  const { data } = useProjectItem(projectId);
 
   const [initFormState, setInitFormState] =
     useState<UpdateProjectPayload>(DEFAULT_FORM_STATE);
@@ -136,7 +138,7 @@ export const useManagedProjectForm = (projectId: string) => {
 
   const handleFieldChange = (
     key: keyof UpdateProjectPayload,
-    value: string | boolean | number,
+    value: string | boolean | number | Jobsite[],
   ) => {
     setFormState((prevState) => ({
       ...prevState,
@@ -156,13 +158,66 @@ export const useManagedProjectForm = (projectId: string) => {
     key: 'jobsites' | 'detectedJobsites',
     newJobsite: Jobsite,
     op = 'update' as 'create' | 'update' | 'delete',
-    // eslint-disable-next-line unicorn/consistent-function-scoping
   ) => {
-    console.log('TODO');
+    switch (op) {
+      case 'update': {
+        const newJobsites = formState[key].map((jobsite) => {
+          if (jobsite.id === newJobsite.id) {
+            return newJobsite;
+          }
+
+          return jobsite;
+        });
+
+        handleFieldChange(key, newJobsites);
+        break;
+      }
+
+      case 'create': {
+        const newJobsites = [...formState[key], newJobsite];
+        handleFieldChange(key, newJobsites);
+        break;
+      }
+
+      case 'delete': {
+        const newJobsites = formState[key].filter(
+          (jobsite) => jobsite.id !== newJobsite.id,
+        );
+        handleFieldChange(key, newJobsites);
+        break;
+      }
+
+      default: {
+        throw new Error('invalid op');
+      }
+    }
   };
 
-  const onSubmit = () => {
-    updateProject(sanitizeProjectFormState(formState));
+  const successCbRef = useRef<() => void>();
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  useEffect(() => {
+    if (isSubmitting) {
+      const payload = sanitizeProjectFormState(formState);
+
+      updateProject(payload, {
+        onSuccess() {
+          if (successCbRef.current) {
+            successCbRef.current();
+            successCbRef.current = undefined;
+          }
+        },
+        onSettled() {
+          setIsSubmitting(false);
+        },
+      });
+    }
+  }, [formState, isSubmitting, updateProject]);
+
+  const onSubmit = (onSuccess?: () => void) => {
+    setIsSubmitting(true);
+    if (onSuccess) {
+      successCbRef.current = onSuccess;
+    }
   };
 
   const prev = JSON.stringify(initFormState);
@@ -177,9 +232,9 @@ export const useManagedProjectForm = (projectId: string) => {
     inputSections,
     tab,
     onChangeTab,
-    isPending: isPendingUpdate,
+    isPending: isPendingUpdate || isSubmitting,
     onChangeJobsite,
     onSubmit,
-    organizations: data?.organizations ?? [],
+    orgIds: data?.orgIds ?? [],
   };
 };

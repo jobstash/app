@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 
 import { atom, useAtom } from 'jotai';
 
-import { Jobsite } from '@jobstash/admin/core';
+import { Jobsite } from '@jobstash/shared/core';
 
 import { useUpdateOrg } from '@jobstash/admin/state';
 
@@ -234,11 +234,13 @@ export const useManagedOrgForm = (orgId: string) => {
 
       updateOrg(payload, {
         onSuccess() {
-          setIsSubmitting(false);
           if (successCbRef.current) {
             successCbRef.current();
             successCbRef.current = undefined;
           }
+        },
+        onSettled() {
+          setIsSubmitting(false);
         },
       });
     }
@@ -260,7 +262,7 @@ export const useManagedOrgForm = (orgId: string) => {
     inputSections,
     tab,
     onChangeTab,
-    isPending,
+    isPending: isPending || isSubmitting,
     onSubmit,
     onUnlinkProject,
     onAddProject,

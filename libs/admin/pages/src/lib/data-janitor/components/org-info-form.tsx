@@ -2,7 +2,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Button, Tab, Tabs } from '@nextui-org/react';
 
-import { Jobsite } from '@jobstash/admin/core';
+import { Jobsite } from '@jobstash/shared/core';
 
 import { useCreateOrgJobsite } from '../hooks/use-create-org-jobsite';
 import { useManagedOrgForm } from '../hooks/use-managed-org-form';
@@ -13,7 +13,7 @@ import { JobsitesForm } from './jobsites-form';
 import { OrgDetectedJobsitesForm } from './org-detected-jobsites-form';
 import { OrgProjectsForm } from './org-projects-form';
 
-export const OrgInfoForm = ({ id }: { id: string }) => {
+export const OrgInfoForm = ({ orgId }: { orgId: string }) => {
   const {
     formState,
     hasChanges,
@@ -26,7 +26,7 @@ export const OrgInfoForm = ({ id }: { id: string }) => {
     onUnlinkProject,
     onAddProject,
     onChangeJobsite,
-  } = useManagedOrgForm(id);
+  } = useManagedOrgForm(orgId);
 
   return (
     <div className="flex flex-col gap-8 pb-40 min-h-[1000px] max-w-3xl">
@@ -66,7 +66,10 @@ export const OrgInfoForm = ({ id }: { id: string }) => {
                       value={value as Jobsite[]}
                       isPending={isPending}
                       modal={
-                        <JobsiteModal useCreateJobsite={useCreateOrgJobsite} />
+                        <JobsiteModal
+                          id={orgId}
+                          useCreateJobsite={useCreateOrgJobsite}
+                        />
                       }
                       onChangeJobsite={onChangeJobsite}
                       onSubmit={onSubmit}
@@ -78,7 +81,7 @@ export const OrgInfoForm = ({ id }: { id: string }) => {
                   return (
                     <OrgDetectedJobsitesForm
                       key={fieldKey}
-                      orgId={id}
+                      orgId={orgId}
                       value={value as Jobsite[]}
                       isPending={isPending}
                       onChangeJobsite={onChangeJobsite}

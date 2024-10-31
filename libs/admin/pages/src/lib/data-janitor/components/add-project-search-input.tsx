@@ -28,9 +28,9 @@ export const AddProjectSearchInput = ({ stateIds, onAddProject }: Props) => {
       clearSelectionOnSelect
       size="sm"
       data={items ?? []}
-      renderItem={({ id, name, logoUrl }) => (
+      renderItem={({ website, name, logoUrl }) => (
         <AutocompleteItem key={name} textValue={name}>
-          <ProjectSearchItem id={id} name={name} logo={logoUrl} />
+          <ProjectSearchItem website={website} name={name} logo={logoUrl} />
         </AutocompleteItem>
       )}
       labelText="Enter Project Name"

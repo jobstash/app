@@ -109,6 +109,12 @@ export const jobInfoSchema = myzod.intersection(
   }),
 );
 
+export const jobsiteSchema = myzod.object({
+  id: myzod.string(),
+  url: myzod.string(),
+  type: myzod.string(),
+});
+
 export const orgInfoSchema = myzod.object(
   {
     id: myzod.string().min(1),

@@ -2,7 +2,8 @@ import { ChangeEventHandler, useState } from 'react';
 
 import { Button, Chip, Divider } from '@nextui-org/react';
 
-import { Jobsite, JOBSITE_TYPES } from '@jobstash/admin/core';
+import { JOBSITE_TYPES } from '@jobstash/admin/core';
+import { Jobsite } from '@jobstash/shared/core';
 import { capitalize, cn } from '@jobstash/shared/utils';
 
 import { Heading } from '@jobstash/shared/ui';

@@ -13,6 +13,7 @@ import {
   investorSchema,
   jobCardSetSchema,
   jobInfoSchema,
+  jobsiteSchema,
   messageResponseSchema,
   mwMessageResponseSchema,
   orgInfoSchema,
@@ -61,7 +62,7 @@ export type RepositoryInfo = Infer<typeof repositoryInfoSchema>;
 
 export type MwMessageResponse = Infer<typeof mwMessageResponseSchema>;
 
-export type RouteSection = (typeof ROUTE_SECTION)[keyof typeof ROUTE_SECTION];
+export type RouteSection = typeof ROUTE_SECTION[keyof typeof ROUTE_SECTION];
 
 export type NotFoundInfo = {
   link: string;
@@ -80,3 +81,5 @@ export type MwVersionCtx = {
 export type JobsRouteSection =
   | typeof ROUTE_SECTION.JOBS
   | typeof ROUTE_SECTION.JOBS_FOR_EXPERTS;
+
+export type Jobsite = Infer<typeof jobsiteSchema>;

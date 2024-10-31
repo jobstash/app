@@ -15,8 +15,13 @@ export const useDeleteProject = () => {
       queryClient.invalidateQueries({
         queryKey: [mwVersion, 'all-projects'],
       });
+
       queryClient.invalidateQueries({
         queryKey: [mwVersion, 'project-details', id, undefined],
+      });
+
+      queryClient.invalidateQueries({
+        queryKey: [mwVersion, 'project-item', id],
       });
 
       notifSuccess({

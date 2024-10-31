@@ -99,7 +99,7 @@ export const OrgManagePage = () => {
           </div>
         </div>
 
-        <OrgInfoForm id={data.orgId} />
+        <OrgInfoForm orgId={data.orgId} />
       </div>
     </ManageLayout>
   );

@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { Jobsite } from '@jobstash/admin/core';
+import { Jobsite } from '@jobstash/shared/core';
 import { notifError, notifSuccess } from '@jobstash/shared/utils';
 
 import { useMwVersionContext } from '@jobstash/shared/state';
@@ -20,7 +20,7 @@ export const useCreateProjectJobsite = () => {
       });
 
       queryClient.invalidateQueries({
-        queryKey: [mwVersion, 'project-details', id, undefined],
+        queryKey: [mwVersion, 'project-item', id],
       });
 
       queryClient.invalidateQueries({

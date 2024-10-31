@@ -12,22 +12,22 @@ import {
 } from '@nextui-org/react';
 import { UseMutationResult } from '@tanstack/react-query';
 
-import { Jobsite } from '@jobstash/admin/core';
+import { Jobsite } from '@jobstash/shared/core';
 
 import { JobsiteFormFields } from './jobsite-form-fields';
-
-const DEFAULT_FORM_STATE: Jobsite = {
-  id: '',
-  url: '',
-  type: '',
-};
-
 interface Props<R> {
+  id: string;
   useCreateJobsite: () => UseMutationResult<R, Error, Jobsite, unknown>;
 }
 
-export const JobsiteModal = <R,>({ useCreateJobsite }: Props<R>) => {
+export const JobsiteModal = <R,>({ id, useCreateJobsite }: Props<R>) => {
   const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
+
+  const DEFAULT_FORM_STATE = {
+    id,
+    url: '',
+    type: '',
+  };
 
   const [formState, setFormState] = useState<Jobsite>(DEFAULT_FORM_STATE);
 

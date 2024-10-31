@@ -320,7 +320,7 @@ export const useOrgListTable = () => {
         autoHeight: true,
         // We don't have support for creating jobsites
         // Edit is only available if there's data
-        editable: (p) => (p.data?.jobsites ?? []).length > 0,
+        editable: (p) => (p.data?.jobsites ?? []).length === 1,
         valueGetter: (p) => p.data?.jobsites.flatMap((j) => j.url).join(','),
         valueSetter(p) {
           const editedValue = p.newValue
@@ -346,7 +346,7 @@ export const useOrgListTable = () => {
         headerName: 'Jobsite Type',
         // We don't have support for creating jobsites
         // Edit is only available if there's data
-        editable: (p) => (p.data?.jobsites ?? []).length > 0,
+        editable: (p) => (p.data?.jobsites ?? []).length === 1,
         valueGetter: (p) => p.data?.jobsites.flatMap((j) => j.type).join(','),
         valueSetter(p) {
           const editedValue = p.newValue
@@ -377,7 +377,7 @@ export const useOrgListTable = () => {
       {
         headerName: 'Detected Jobsite Url',
         autoHeight: true,
-        editable: true,
+        editable: (p) => (p.data?.detectedJobsites ?? []).length === 1,
         valueGetter: (p) =>
           p.data?.detectedJobsites.flatMap((j) => j.url).join(','),
         valueSetter(p) {
@@ -423,7 +423,7 @@ export const useOrgListTable = () => {
       {
         headerName: 'Detected Jobsite Type',
         autoHeight: true,
-        editable: true,
+        editable: (p) => (p.data?.detectedJobsites ?? []).length === 1,
         valueGetter: (p) =>
           p.data?.detectedJobsites.flatMap((j) => j.type).join(','),
         valueSetter(p) {

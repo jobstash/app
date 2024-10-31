@@ -70,7 +70,7 @@ export const useActivateProjectJobsite = () => {
       });
 
       queryClient.invalidateQueries({
-        queryKey: [mwVersion, 'project-details', id, undefined],
+        queryKey: [mwVersion, 'project-item', id],
       });
 
       queryClient.invalidateQueries({

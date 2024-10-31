@@ -7,7 +7,7 @@ import { Unlink2 } from 'lucide-react';
 
 import { getLogoUrl } from '@jobstash/shared/utils';
 
-import { useProjectDetails } from '@jobstash/projects/state';
+import { useProjectItem } from '@jobstash/admin/state';
 
 import { Heading, LogoTitle } from '@jobstash/shared/ui';
 
@@ -19,14 +19,14 @@ interface OrgProjectsFormItemProps {
 }
 
 const OrgProjectsFormItem = ({ id, onUnlink }: OrgProjectsFormItemProps) => {
-  const { data } = useProjectDetails(id);
+  const { data } = useProjectItem(id);
 
   return (
     <div className="flex items-center gap-4">
       <LogoTitle
         size="md"
         avatarProps={{
-          src: getLogoUrl(data?.website ?? null, data?.logo),
+          src: getLogoUrl(data?.website ?? null, data?.logoUrl),
           alt: data?.name || '',
         }}
         title={

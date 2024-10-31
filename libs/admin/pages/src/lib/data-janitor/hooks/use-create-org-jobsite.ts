@@ -1,24 +1,17 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { JOBSITE_TYPES } from '@jobstash/admin/core';
+import { Jobsite } from '@jobstash/shared/core';
 import { notifError, notifSuccess } from '@jobstash/shared/utils';
 
 import { useMwVersionContext } from '@jobstash/shared/state';
 import { createOrgJobsite } from '@jobstash/admin/data';
-
-interface Payload {
-  id: string;
-  url: string;
-  type: typeof JOBSITE_TYPES[number];
-}
 
 export const useCreateOrgJobsite = () => {
   const queryClient = useQueryClient();
   const { mwVersion } = useMwVersionContext();
 
   return useMutation({
-    mutationFn: ({ id, url, type }: Payload) =>
-      createOrgJobsite({ orgId: id, url, type }),
+    mutationFn: (payload: Jobsite) => createOrgJobsite(payload),
     onSuccess({ message }, { id }) {
       notifSuccess({
         title: 'Success!',
