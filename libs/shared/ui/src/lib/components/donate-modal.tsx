@@ -11,7 +11,7 @@ import {
 } from '@nextui-org/react';
 import { useAtom } from 'jotai';
 
-import { isOpenDonateModalAtom } from '@jobstash/shared/state';
+import { isOpenDonateModalAtom, useIsMobile } from '@jobstash/shared/state';
 
 import { FoxSVG } from './fox-svg';
 
@@ -30,32 +30,34 @@ export const DonateModal = () => {
   const onClose = () => setIsOpen(false);
   const onOpenChange = (open: boolean) => setIsOpen(open);
 
+  const isMobile = useIsMobile();
+
   return (
     <Modal
       isDismissable
       hideCloseButton
       isOpen={isOpen}
-      className="text-white p-4"
+      className="text-white p-1 md:p-4"
       backdrop="blur"
       size="xl"
       onOpenChange={onOpenChange}
     >
       <ModalContent>
-        <ModalBody className="flex flex-col gap-4">
-          <span className="text-3xl font-bold pb-4 text-center">
+        <ModalBody className="flex flex-col gap-4 text-md md:text-lg">
+          <span className="text-xl md:text-3xl font-bold py-4 text-center w-full">
             <span role="img" aria-label="Shimmer">
               ❤️
             </span>{' '}
             Support Our Free Platform
           </span>
           <div className="w-full flex justify-center">
-            <FoxSVG isMobile={false} />
+            <FoxSVG isMobile={isMobile} />
           </div>
-          <span className="text-lg text-left">
+          <span>
             Enjoying direct links to job applications? To keep this service free
             and continually improving, we rely on community support.
           </span>
-          <span className="text-lg text-left">
+          <span>
             If you find value in what we offer, please consider making a small
             donation to one of our projects below:
           </span>
@@ -84,7 +86,7 @@ export const DonateModal = () => {
               </li>
             </ul>
           </div>
-          <span className="text-lg text-left">
+          <span>
             Thank you for helping us keep this platform free and accessible!
           </span>
         </ModalBody>

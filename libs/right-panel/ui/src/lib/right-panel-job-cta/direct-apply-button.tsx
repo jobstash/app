@@ -1,7 +1,3 @@
-import { useSetAtom } from 'jotai';
-
-import { isOpenDonateModalAtom } from '@jobstash/shared/state';
-
 import RightPanelCta from '../right-panel-cta';
 
 import { CTATooltip } from './cta-tooltip';
@@ -18,9 +14,7 @@ export const DirectApplyButton = ({
   sendAnalyticsEvent,
   devApplyMutation,
 }: Props) => {
-  const setOpenDonateModal = useSetAtom(isOpenDonateModalAtom);
   const onClick = () => {
-    setOpenDonateModal(true);
     sendAnalyticsEvent();
     devApplyMutation();
     if (typeof window !== 'undefined') {
