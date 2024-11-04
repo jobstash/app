@@ -83,7 +83,7 @@ export const JobFeaturePricing = () => (
 
           {tierIdx === 0 ? (
             <div className="flex flex-col mt-6 gap-1">
-              <div className="flex items-center gap-2">
+              {/* <div className="flex items-center gap-2">
                 <span className="text-xl text-white/80 font-bold tracking-tight flex items-end gap-2">
                   From
                   <span className="line-through text-2xl text-white/60">
@@ -91,16 +91,16 @@ export const JobFeaturePricing = () => (
                   </span>
                   to
                 </span>
-              </div>
+              </div> */}
 
               <span className="flex items-center gap-x-2">
-                <GradientText text="$50" className="text-8xl font-bold" />
-                <span className="text-2xl text-white/80 font-bold">/ job</span>
+                <GradientText text="$200" className="text-6xl font-bold" />
+                <span className="text-2xl text-white/80">/ job</span>
               </span>
 
-              <span className="text-md text-white/70">
+              {/* <span className="text-md text-white/70">
                 Offer valid until Oct. 31
-              </span>
+              </span> */}
 
               <span />
             </div>
