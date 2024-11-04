@@ -1,4 +1,4 @@
-import myzod from 'myzod';
+import myzod, { Infer } from 'myzod';
 
 export const undefinedSchema = myzod.undefined();
 
@@ -211,3 +211,18 @@ export const reportPayloadSchema = myzod.object({
     }),
   ),
 });
+
+export const affiliationRequestItemSchema = myzod.object({
+  wallet: myzod.string(),
+  orgId: myzod.string(),
+  status: myzod.literals('pending', 'approved', 'rejected'),
+  timestamp: myzod.number(),
+});
+export type AffiliationRequestItem = Infer<typeof affiliationRequestItemSchema>;
+
+export const affiliationRequestResponseSchema = myzod.array(
+  affiliationRequestItemSchema,
+);
+export type AffiliationRequestsResponse = Infer<
+  typeof affiliationRequestResponseSchema
+>;

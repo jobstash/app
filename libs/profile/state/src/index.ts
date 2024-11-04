@@ -7,6 +7,7 @@ export * from './lib/atoms/show-got-it-card-atom';
 
 // Hooks
 export * from './lib/hooks/use-account-card';
+export * from './lib/hooks/use-affiliation-requests';
 export * from './lib/hooks/use-all-jobs-query';
 export * from './lib/hooks/use-ats-client';
 export * from './lib/hooks/use-compensation-form';

@@ -1,3 +1,4 @@
+export * from './lib/get-affiliation-requests';
 export * from './lib/get-ats-client';
 export * from './lib/get-available-devs';
 export * from './lib/get-highlight-org-options';
