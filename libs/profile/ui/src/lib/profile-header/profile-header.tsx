@@ -25,7 +25,7 @@ const ProfileHeader = ({ gotItCard, gotItCardKey }: Props) => {
   return (
     <ProfileHeaderProvider>
       <div className="flex items-center justify-between gap-4 md:gap-8">
-        <div className="flex flex-col @xl:flex-row gap-6  @xl:items-center">
+        <div className="flex flex-col @xl:flex-row gap-6 @xl:items-center">
           {name && !isLoading && (
             <div className="flex items-center w-fit gap-x-3">
               <Avatar

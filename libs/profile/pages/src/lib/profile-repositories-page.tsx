@@ -8,11 +8,7 @@ import { PERMISSIONS } from '@jobstash/auth/core';
 import { useAuthContext, useHasPermission } from '@jobstash/auth/state';
 import { ProfileRepoPageProvider } from '@jobstash/profile/state';
 
-import {
-  ProfileHeader,
-  ProfileRepoGotItCard,
-  ProfileRepoSubHeader,
-} from '@jobstash/profile/ui';
+import { ProfileHeader, ProfileRepoGotItCard } from '@jobstash/profile/ui';
 import { PageWrapper } from '@jobstash/shared/ui';
 import {
   ProfileRepoList,
@@ -42,10 +38,12 @@ export const ProfileRepositoriesPage = () => {
       <PageWrapper>
         <SideBar />
 
-        <div className="px-3.5 pt-[212px] lg:px-12 lg:pt-6 lg:pr-[calc(44vw)]   flex flex-col gap-6">
-          <ProfileHeader gotItCard={null} gotItCardKey={null} />
-          <ProfileRepoSubHeader />
-          <ProfileRepoGotItCard />
+        <div className="px-3.5 pt-[212px] lg:px-12 lg:pt-6 lg:pr-[calc(44vw)] flex flex-col gap-6 @container">
+          <ProfileHeader
+            gotItCard={<ProfileRepoGotItCard />}
+            gotItCardKey="repositories"
+          />
+
           <ProfileRepoList />
         </div>
 
