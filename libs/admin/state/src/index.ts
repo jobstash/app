@@ -7,6 +7,7 @@ export * from './lib/atoms/projects-grid-atoms';
 
 // Hooks
 export * from './lib/hooks/use-add-alias';
+export * from './lib/hooks/use-admin-affiliation-requests';
 export * from './lib/hooks/use-all-jobs-mutation';
 export * from './lib/hooks/use-all-orgs';
 export * from './lib/hooks/use-all-projects';

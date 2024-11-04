@@ -3,6 +3,7 @@ export * from './lib/create-org-jobsite';
 export * from './lib/create-project-jobsite';
 export * from './lib/delete-org';
 export * from './lib/delete-project';
+export * from './lib/get-admin-affiliation-requests';
 export * from './lib/get-all-jobs';
 export * from './lib/get-all-orgs';
 export * from './lib/get-all-projects';
