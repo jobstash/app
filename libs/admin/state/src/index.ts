@@ -13,6 +13,7 @@ export * from './lib/hooks/use-all-orgs';
 export * from './lib/hooks/use-all-projects';
 export * from './lib/hooks/use-approval-org-list';
 export * from './lib/hooks/use-authorize-org';
+export * from './lib/hooks/use-authorize-org-affiliation';
 export * from './lib/hooks/use-blocked-tags-query';
 export * from './lib/hooks/use-blocked-terms-mutation';
 export * from './lib/hooks/use-create-preference-mutation';

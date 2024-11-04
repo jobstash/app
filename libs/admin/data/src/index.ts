@@ -1,4 +1,5 @@
 export * from './lib/add-alias';
+export * from './lib/authorize-org-affilliation';
 export * from './lib/create-org-jobsite';
 export * from './lib/create-project-jobsite';
 export * from './lib/delete-org';

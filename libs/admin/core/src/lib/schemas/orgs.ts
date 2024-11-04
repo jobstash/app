@@ -120,3 +120,13 @@ export const managedOrgPayloadSchema = myzod.intersection(
 );
 
 export type ManagedOrgPayload = Infer<typeof managedOrgPayloadSchema>;
+
+export const authorizeOrgAffiliationPayloadSchema = myzod.object({
+  wallet: myzod.string(),
+  verdict: myzod.literals('approve', 'reject'),
+  orgId: myzod.string(),
+});
+
+export type AuthorizeOrgAffiliationPayload = Infer<
+  typeof authorizeOrgAffiliationPayloadSchema
+>;
