@@ -1,54 +1,46 @@
 import dynamic from 'next/dynamic';
 import Head from 'next/head';
 
-import { LoadingPage } from '@jobstash/shared/pages';
-import { Tab, Tabs } from '@nextui-org/tabs';
+import { LoadingPage, NotFoundPage } from '@jobstash/shared/pages';
+import { usePrivy } from '@privy-io/react-auth';
 
-import { useApprovalOrgList } from '@jobstash/admin/state';
+import { PERMISSIONS } from '@jobstash/auth/core';
 
-import { AdminLayout } from '@jobstash/admin/ui';
+import { useAuthContext, useHasPermission } from '@jobstash/auth/state';
 
-import { ApprovalTable } from './approval-table';
+import { PageWrapper } from '@jobstash/shared/ui';
+
 import { ApproveOrgModal } from './approve-org-modal';
+import { OrgApprovalTable } from './table';
+import { OrgApprovalTabs } from './tabs';
 
 const SideBar = dynamic(() =>
   import('@jobstash/sidebar/feature').then((m) => m.SideBar),
 );
 
 export const OrgApprovalPage = () => {
-  const { isLoading: isLoadingPendingOrgs, data: pendingOrgsData } =
-    useApprovalOrgList('pending');
-  const { isLoading: isLoadingApprovedOrgs, data: approvedOrgsData } =
-    useApprovalOrgList('approved');
+  const { ready } = usePrivy();
+  const { isLoading } = useAuthContext();
 
-  if (isLoadingPendingOrgs || isLoadingApprovedOrgs) return <LoadingPage />;
+  const hasPermission = useHasPermission(PERMISSIONS.SUPER_ADMIN);
+
+  if (isLoading || !ready) return <LoadingPage />;
+  if (!hasPermission) return <NotFoundPage />;
 
   return (
     <>
       <Head>
-        <title>Godmode | All Jobs</title>
+        <title>Godmode | Org Approvals</title>
       </Head>
 
-      <AdminLayout breadCrumbs={null} sidebar={<SideBar />} tabsSection={null}>
-        <div className="flex flex-col gap-4 w-full">
-          <Tabs
-            aria-label="Approval Status"
-            color="secondary"
-            classNames={{
-              cursor: 'bg-gradient-to-l from-primary to-tertiary',
-              tabContent: 'font-bold',
-            }}
-          >
-            <Tab key="pending" title="Pending">
-              <ApprovalTable showActions data={pendingOrgsData ?? []} />
-            </Tab>
-            <Tab key="approved" title="Approved">
-              <ApprovalTable data={approvedOrgsData ?? []} />
-            </Tab>
-          </Tabs>
+      <PageWrapper>
+        <SideBar />
+        <div className="pt-20 xl:pt-2 p-4 md:p-8 space-y-8 h-screen text-white min-h-screen">
+          <OrgApprovalTabs />
+          <OrgApprovalTable />
+          <ApproveOrgModal />
         </div>
-        <ApproveOrgModal />
-      </AdminLayout>
+      </PageWrapper>
     </>
   );
 };

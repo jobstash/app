@@ -1,16 +1,15 @@
-import { Avatar } from '@nextui-org/avatar';
-import { Tooltip } from '@nextui-org/react';
+import { Button, Tooltip } from '@nextui-org/react';
+import { CopyIcon } from 'lucide-react';
 
 import { notifSuccess } from '@jobstash/shared/utils';
 
 import { Text } from '@jobstash/shared/ui';
 
 interface Props {
-  avatar: string | null;
   wallet: string;
 }
 
-export const WalletItem = ({ avatar, wallet }: Props) => {
+export const WalletItem = ({ wallet }: Props) => {
   const onClick = () => {
     if (navigator) {
       navigator.clipboard.writeText(wallet);
@@ -23,11 +22,11 @@ export const WalletItem = ({ avatar, wallet }: Props) => {
 
   return (
     <div className="flex items-center gap-4">
-      <Avatar showFallback src={avatar ?? ''} />
+      <Text>{`${wallet.slice(0, 6)} ... ${wallet.slice(-4)}`}</Text>
       <Tooltip content="Copy Wallet">
-        <div className="cursor-pointer" onClick={onClick}>
-          <Text>{`${wallet.slice(0, 6)} ... ${wallet.slice(-4)}`}</Text>
-        </div>
+        <Button isIconOnly size="sm" variant="light" onClick={onClick}>
+          <CopyIcon size={12} />
+        </Button>
       </Tooltip>
     </div>
   );
