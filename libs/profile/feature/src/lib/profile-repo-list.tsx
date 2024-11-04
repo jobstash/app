@@ -7,9 +7,11 @@ import {
 
 import { ProfileRepoCard, ProfileRepoEmptyList } from '@jobstash/profile/ui';
 import {
-  ListErrorMessage,
+  Heading,
   ListNextPageLoader,
   Loader,
+  NotFoundSvg,
+  Text,
 } from '@jobstash/shared/ui';
 
 const ProfileRepoList = () => {
@@ -50,7 +52,22 @@ const ProfileRepoList = () => {
         text="No more repositories to load"
       />
 
-      <ListErrorMessage error={error} />
+      {error && (
+        <div className="flex flex-col gap-4 items-center justify-center py-12">
+          <NotFoundSvg />
+          <div className="flex flex-col items-center gap-y-2 pt-4">
+            <Heading size="xl" fw="semibold">
+              Dataset Update in Progress
+            </Heading>
+            <div className="max-w-lg text-center w-full">
+              <Text color="dimmed">
+                We&#39;re working to bring you an updated experience. Service
+                will be restored soon.
+              </Text>
+            </div>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
