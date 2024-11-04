@@ -50,10 +50,7 @@ export const AffiliatedOrganizations = () => {
       {hasOrg && (
         <div className="flex flex-col gap-6 pl-4">
           {data.map((org) => (
-            <div
-              key={org.id}
-              className="flex items-center justify-between w-full max-w-[320px]"
-            >
+            <div key={org.id} className="flex items-center gap-8">
               <LogoTitle
                 title={org.name}
                 avatarProps={{

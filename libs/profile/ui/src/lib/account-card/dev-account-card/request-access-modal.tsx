@@ -7,19 +7,19 @@ import {
   ModalContent,
   ModalFooter,
   ModalHeader,
-  Tooltip,
   useDisclosure,
 } from '@nextui-org/react';
 
 import { AffilatedOrganization } from '@jobstash/auth/core';
+import { CALENDLY_SCHEDULE_LINK } from '@jobstash/shared/core';
 
 import { useRequestOrgAdminPermission } from '@jobstash/profile/state';
+
+import { RequestAccessTrigger } from './request-access-trigger';
 
 interface Props {
   org: AffilatedOrganization;
 }
-
-const SCHEDULE_LINK = 'https://calendly.com/jobstash-intro/30min';
 
 export const RequestAccessModal = ({ org }: Props) => {
   const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
@@ -33,16 +33,13 @@ export const RequestAccessModal = ({ org }: Props) => {
 
   return (
     <>
-      <Tooltip content="Request permissions to manage organization">
-        <Button
-          size="sm"
-          variant="flat"
-          className="text-white font-bold"
-          onPress={onOpen}
-        >
-          Request Access
-        </Button>
-      </Tooltip>
+      <div className="block">
+        <RequestAccessTrigger
+          orgId={org.id}
+          slug={org.slug}
+          openModal={onOpen}
+        />
+      </div>
       <Modal
         hideCloseButton
         isOpen={isOpen}
@@ -77,7 +74,7 @@ export const RequestAccessModal = ({ org }: Props) => {
                 </Button>
                 <Button
                   as={Link}
-                  href={SCHEDULE_LINK}
+                  href={CALENDLY_SCHEDULE_LINK}
                   target="_blank"
                   rel="noreferrer"
                   className="font-bold"

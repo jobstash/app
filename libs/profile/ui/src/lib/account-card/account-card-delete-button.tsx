@@ -12,7 +12,7 @@ const AccountCardDeleteButton = ({ open }: Props) => (
     size="lg"
     onClick={open}
   >
-    Delete JobStash Account
+    Delete Account
   </Button>
 );
 

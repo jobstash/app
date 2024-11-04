@@ -1,13 +1,20 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { notifError, notifSuccess } from '@jobstash/shared/utils';
 
+import { useMwVersionContext } from '@jobstash/shared/state';
 import { requestOrgAdminPermission } from '@jobstash/profile/data';
 
-export const useRequestOrgAdminPermission = (orgId: string) =>
-  useMutation({
+export const useRequestOrgAdminPermission = (orgId: string) => {
+  const queryClient = useQueryClient();
+  const { mwVersion } = useMwVersionContext();
+
+  return useMutation({
     mutationFn: () => requestOrgAdminPermission(orgId),
     onSuccess() {
+      queryClient.invalidateQueries({
+        queryKey: [mwVersion, 'get-affiliation-requests', orgId],
+      });
       notifSuccess({
         title: 'Request Sent',
         message:
@@ -22,3 +29,4 @@ export const useRequestOrgAdminPermission = (orgId: string) =>
       });
     },
   });
+};
