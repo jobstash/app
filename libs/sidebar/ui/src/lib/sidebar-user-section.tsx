@@ -5,6 +5,7 @@ import { ProfileInfoProvider } from '@jobstash/profile/state';
 
 import SidebarAdminSection from './sidebar-admin-section';
 import SidebarDevSection from './sidebar-dev-section';
+import SidebarOrgSection from './sidebar-org-section';
 import { SidebarSectionSkeleton } from './sidebar-section';
 
 interface Props {
@@ -24,6 +25,7 @@ const SidebarUserSection = ({ isMobile }: Props) => {
   return (
     <ProfileInfoProvider>
       <SidebarDevSection isMobile={isMobile} />
+      <SidebarOrgSection isMobile={isMobile} />
     </ProfileInfoProvider>
   );
 };

@@ -1,1 +1,1 @@
-export { UserOrgPage as default } from '@jobstash/profile/pages';
+export { OrgAdminPage as default } from '@jobstash/organizations/pages';

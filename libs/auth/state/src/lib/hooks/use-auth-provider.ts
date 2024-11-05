@@ -10,7 +10,6 @@ import { sentryMessage } from '@jobstash/shared/utils';
 
 import { getCheckWallet } from '@jobstash/auth/data';
 
-import { useAffiliatedOrgs } from './use-affiliated-orgs';
 import { useHasEmbeddedWallet } from './use-has-embedded-wallet';
 
 const DEFAULT_CHECK_WALLET_RESPONSE: CheckWalletResponse = {
@@ -88,10 +87,6 @@ export const useAuthProvider = () => {
 
   const isAuthenticated = isLoggedIn && hasPermission && hasEmbeddedWallet;
 
-  const { data: userOrgs, isLoading: isLoadingUserOrgFetch } =
-    useAffiliatedOrgs();
-  const isLoadingUserOrg = isAuthenticated && isLoadingUserOrgFetch;
-
   const { logout: privyLogout } = useLogout({
     async onSuccess() {
       setCheckWalletResponse(DEFAULT_CHECK_WALLET_RESPONSE);
@@ -112,12 +107,11 @@ export const useAuthProvider = () => {
     user,
     permissions,
     isCryptoNative: cryptoNative,
-    isLoading: isLoadingSetup || !ready || isLoadingUserOrg || isCreatingWallet,
+    isLoading: isLoadingSetup || !ready || isCreatingWallet,
     isLoadingLogout,
     isLoggedIn,
     isAuthenticated,
     showLoginModal: login,
     logout,
-    orgs: userOrgs ?? [],
   };
 };

@@ -11,9 +11,7 @@ import { createOrgsFilterParamsObj } from '@jobstash/organizations/utils';
 import { useIsMobile, useMwVersionContext } from '@jobstash/shared/state';
 import { getOrgDetails } from '@jobstash/organizations/data';
 
-import { activeOrgIdAtom } from '../state/active-org-atom';
-import { orgCountAtom } from '../state/org-count-atom';
-import { orgsPrevLinkAtom } from '../state/orgs-prev-link-atom';
+import { activeOrgIdAtom, orgCountAtom, orgsPrevLinkAtom } from '../atoms';
 
 import { useOrgListQuery } from './use-org-list-query';
 

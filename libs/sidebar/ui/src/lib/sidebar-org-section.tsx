@@ -1,39 +1,47 @@
+import { useMemo } from 'react';
+
 import { getPluralText, normalizeString } from '@jobstash/shared/utils';
 
-import { useAuthContext } from '@jobstash/auth/state';
+import { useAffiliatedOrgs, useAuthContext } from '@jobstash/auth/state';
 
 import { SidebarBartabProps } from './sidebar-bartab';
-import { SidebarSection } from './sidebar-section';
+import { SidebarSection, SidebarSectionSkeleton } from './sidebar-section';
 
 interface Props {
   isMobile?: boolean;
 }
 
 const SidebarOrgSection = ({ isMobile }: Props) => {
-  const { isLoading, orgs } = useAuthContext();
+  const { isLoading: isLoadingAuth } = useAuthContext();
+  const { data: orgs, isLoading: isLoadingAffiliatedOrgs } =
+    useAffiliatedOrgs();
+  const isLoading = isLoadingAuth || isLoadingAffiliatedOrgs;
 
-  if (isLoading) return null;
+  const tabs: SidebarBartabProps[] = useMemo(() => {
+    if (!orgs) return [];
 
-  const tabs: SidebarBartabProps[] = orgs.map(({ id, name }) => ({
-    text: name,
-    path: `/profile/organizations/${normalizeString(name)}`,
-  }));
+    return [
+      ...orgs.map(({ id, name }) => ({
+        text: name,
+        path: `/profile/organizations/${normalizeString(name)}`,
+      })),
+      {
+        text: 'Available Talents',
+        path: '/profile/org/talents',
+      },
+      {
+        text: 'Candidate Report',
+        path: '/candidate-report',
+      },
+    ];
+  }, [orgs]);
 
-  tabs.push(
-    {
-      text: 'Available Talents',
-      path: '/profile/org/talents',
-    },
-    {
-      text: 'Candidate Report',
-      path: '/candidate-report',
-    },
-  );
+  if (isLoading) return <SidebarSectionSkeleton />;
 
   return (
     <SidebarSection
       isMountedWrapped
-      title={`Your ${getPluralText('Organization', orgs.length)}`}
+      title={`Your ${getPluralText('Organization', (orgs ?? []).length)}`}
       isMobile={isMobile}
       bartabs={tabs}
     />

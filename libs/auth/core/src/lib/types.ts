@@ -35,7 +35,6 @@ export type AuthCtx = {
   isAuthenticated: boolean;
   showLoginModal: () => void;
   logout: () => Promise<void>;
-  orgs: AffilatedOrganization[];
 };
 
 export type GithubLoginPayload = Infer<typeof githubLoginPayloadSchema>;

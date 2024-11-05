@@ -1,7 +1,5 @@
 // Atoms
-export * from './lib/state/active-org-atom';
-export * from './lib/state/org-count-atom';
-export * from './lib/state/orgs-prev-link-atom';
+export * from './lib/atoms';
 
 // Hooks
 export * from './lib/hooks/use-org-details';
