@@ -2,8 +2,7 @@ import { useRouter } from 'next/router';
 
 import { NotFoundPage } from '@jobstash/shared/pages';
 
-import { ProjectInfo } from '../components/project-info';
-import { ProjectUpdateForm } from '../components/project-update-form';
+import { ProjectInfo, ProjectUpdateForm } from '@jobstash/admin/ui';
 
 import { ManageLayout } from './manage-page-layout';
 

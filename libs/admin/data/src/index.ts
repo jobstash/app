@@ -1,5 +1,8 @@
+export * from './lib/activate-org-jobsite';
+export * from './lib/activate-project-jobsite';
 export * from './lib/add-alias';
 export * from './lib/authorize-org-affilliation';
+export * from './lib/convert-org-to-project';
 export * from './lib/create-org-jobsite';
 export * from './lib/create-project-jobsite';
 export * from './lib/delete-org';
@@ -10,6 +13,7 @@ export * from './lib/get-all-orgs';
 export * from './lib/get-all-projects';
 export * from './lib/get-approval-org-list';
 export * from './lib/get-blocked-tags';
+export * from './lib/get-managed-org';
 export * from './lib/get-org-id-by-url';
 export * from './lib/get-paired-terms';
 export * from './lib/get-preferred-terms';

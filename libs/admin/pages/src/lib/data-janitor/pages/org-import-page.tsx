@@ -3,10 +3,11 @@ import React from 'react';
 import { Tab, Tabs } from '@nextui-org/react';
 import { useAtom } from 'jotai';
 
-import { OrgImportItems } from '../components/org-import-items';
-import { OrgImportModal } from '../components/org-import-modal';
-import { orgImportTabAtom } from '../core/atoms';
-import { ImportStatus } from '../core/types';
+import { ImportStatus } from '@jobstash/admin/core';
+
+import { orgImportTabAtom } from '@jobstash/admin/state';
+
+import { OrgImportItems, OrgImportModal } from '@jobstash/admin/ui';
 
 import { ManageLayout } from './manage-page-layout';
 

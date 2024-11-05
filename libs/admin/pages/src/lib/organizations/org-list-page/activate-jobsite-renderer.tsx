@@ -4,7 +4,7 @@ import { CustomCellRendererProps } from 'ag-grid-react';
 
 import { OrgItem } from '@jobstash/admin/core';
 
-import { useActivateOrgJobsite } from '../../data-janitor/hooks/use-activate-org-jobsite';
+import { useActivateOrgJobsite } from '@jobstash/admin/state';
 
 export const ActivateJobsiteRenderer = (
   props: CustomCellRendererProps<OrgItem>,

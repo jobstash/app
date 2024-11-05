@@ -8,12 +8,10 @@ import { ListStart, RefreshCcw } from 'lucide-react';
 import { ERR_NOT_FOUND } from '@jobstash/shared/core';
 import { getLogoUrl } from '@jobstash/shared/utils';
 
-import { InternalErrorResult, LogoTitle } from '@jobstash/shared/ui';
+import { useConvertOrgToProject, useManagedOrg } from '@jobstash/admin/state';
 
-import { DeleteOrgModal } from '../components/delete-org-modal';
-import { OrgInfoForm } from '../components/org-info-form';
-import { useConvertOrgToProject } from '../hooks/use-convert-org-to-project';
-import { useManagedOrg } from '../hooks/use-managed-org';
+import { DeleteOrgModal, OrgInfoForm } from '@jobstash/admin/ui';
+import { InternalErrorResult, LogoTitle } from '@jobstash/shared/ui';
 
 import { ManageLayout } from './manage-page-layout';
 

@@ -4,7 +4,7 @@ import { CustomCellRendererProps } from 'ag-grid-react';
 
 import { ProjectItem } from '@jobstash/admin/core';
 
-import { useActivateProjectJobsite } from '../data-janitor/hooks/use-activate-project-jobsite';
+import { useActivateProjectJobsite } from '@jobstash/admin/state';
 
 export const ActivateJobsiteRenderer = (
   props: CustomCellRendererProps<ProjectItem>,
