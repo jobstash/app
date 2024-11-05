@@ -14,7 +14,12 @@ import { OrgProjectsForm } from '../org-projects-form';
 
 import { useOrgInfoForm } from './use-org-info-form';
 
-export const OrgInfoForm = ({ orgId }: { orgId: string }) => {
+interface Props {
+  orgId: string;
+  disabledLabels?: string[];
+}
+
+export const OrgInfoForm = ({ orgId, disabledLabels }: Props) => {
   const {
     formState,
     hasChanges,
@@ -97,6 +102,7 @@ export const OrgInfoForm = ({ orgId }: { orgId: string }) => {
                     label={label}
                     kind={kind as any}
                     value={value as any}
+                    disabledLabels={disabledLabels}
                     onChange={(newValue) =>
                       handleFieldChange(fieldKey, newValue)
                     }

@@ -27,11 +27,11 @@ const SidebarOrgSection = ({ isMobile }: Props) => {
       })),
       {
         text: 'Available Talents',
-        path: '/profile/org/talents',
+        path: '/profile/organizations/available-talents',
       },
       {
         text: 'Candidate Report',
-        path: '/candidate-report',
+        path: '/profile/organizations/candidate-report',
       },
     ];
   }, [orgs]);

@@ -10,8 +10,10 @@ export const OrgAdminEditOrgContent = ({ orgId }: Props) => {
   console.log('TODO');
   return (
     <div className="flex flex-col gap-4">
-      <OrgAdminEditOrgHeader orgId={orgId} />
-      <OrgInfoForm orgId={orgId} />
+      <div className="min-h-[88px]">
+        <OrgAdminEditOrgHeader orgId={orgId} />
+      </div>
+      <OrgInfoForm disabledLabels={['Name', 'Website']} orgId={orgId} />
     </div>
   );
 };
