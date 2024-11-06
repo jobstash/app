@@ -10,7 +10,7 @@ import {
   useDisclosure,
 } from '@nextui-org/react';
 
-import { AffilatedOrganization } from '@jobstash/auth/core';
+import { AffiliatedOrganization } from '@jobstash/auth/core';
 import { CALENDLY_SCHEDULE_LINK } from '@jobstash/shared/core';
 
 import { useRequestOrgAdminPermission } from '@jobstash/profile/state';
@@ -18,7 +18,7 @@ import { useRequestOrgAdminPermission } from '@jobstash/profile/state';
 import { RequestAccessTrigger } from './request-access-trigger';
 
 interface Props {
-  org: AffilatedOrganization;
+  org: AffiliatedOrganization;
 }
 
 export const RequestAccessModal = ({ org }: Props) => {

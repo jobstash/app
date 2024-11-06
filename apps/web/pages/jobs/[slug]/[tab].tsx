@@ -2,8 +2,12 @@ import { GetServerSideProps } from 'next';
 
 import { dehydrate, QueryClient } from '@tanstack/react-query';
 
-import { JobPost, JobPostPageSharedProps } from '@jobstash/jobs/core';
-import { ERR_NOT_FOUND, ROUTE_SECTION } from '@jobstash/shared/core';
+import {
+  ERR_NOT_FOUND,
+  JobPost,
+  JobPostPageSharedProps,
+  ROUTE_SECTION,
+} from '@jobstash/shared/core';
 import { sentryMessage, withCSR } from '@jobstash/shared/utils';
 
 import { getJobPost } from '@jobstash/jobs/data';

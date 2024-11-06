@@ -1,5 +1,4 @@
-import { type JobPost, jobPostSchema } from '@jobstash/jobs/core';
-import { MW_URL } from '@jobstash/shared/core';
+import { JobPost, jobPostSchema, MW_URL } from '@jobstash/shared/core';
 import { getCommunityHeader } from '@jobstash/shared/utils';
 
 import { mwFetch } from '@jobstash/shared/data';

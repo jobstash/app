@@ -1,5 +1,8 @@
-import { JobPost } from '@jobstash/jobs/core';
-import { TAG_ELEMENT_ID, type TagElement } from '@jobstash/shared/core';
+import {
+  JobPost,
+  TAG_ELEMENT_ID,
+  type TagElement,
+} from '@jobstash/shared/core';
 
 import { createFundingRoundsTags, UsersThreeIcon } from '@jobstash/shared/ui';
 

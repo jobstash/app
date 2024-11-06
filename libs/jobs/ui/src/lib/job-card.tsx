@@ -3,11 +3,11 @@ import { memo, type ReactNode, useMemo } from 'react';
 
 import { PrimitiveAtom, useSetAtom } from 'jotai';
 
-import { type JobPost } from '@jobstash/jobs/core';
 import {
   EVENT_CARD_CLICK,
   FRONTEND_URL,
   GA_EVENT_ACTION,
+  JobPost,
   JobsRouteSection,
   ROUTE_SECTION,
 } from '@jobstash/shared/core';

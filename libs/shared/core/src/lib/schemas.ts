@@ -226,3 +226,32 @@ export const affiliationRequestResponseSchema = myzod.array(
 export type AffiliationRequestsResponse = Infer<
   typeof affiliationRequestResponseSchema
 >;
+
+export const jobPostSchema = myzod
+  .intersection(
+    jobInfoSchema,
+    myzod.object({
+      organization: myzod
+        .intersection(
+          orgInfoSchema,
+          myzod.object({
+            fundingRounds: myzod.array(fundingRoundSchema),
+            investors: myzod.array(investorSchema),
+            projects: myzod.array(
+              myzod
+                .intersection(projectInfoSchema, projectMoreInfoSchema)
+                .allowUnknownKeys(true),
+            ),
+            aggregateRating: myzod.number().min(0).max(5),
+            reviewCount: myzod.number(),
+            hasUser: myzod.boolean(),
+            atsClient: myzod
+              .literals('jobstash', 'greenhouse', 'lever', 'workable')
+              .nullable(),
+          }),
+        )
+        .allowUnknownKeys(true),
+      tags: myzod.array(tagSchema),
+    }),
+  )
+  .allowUnknownKeys(true);

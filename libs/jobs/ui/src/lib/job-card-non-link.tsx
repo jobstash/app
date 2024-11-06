@@ -1,6 +1,6 @@
 import { type ReactNode } from 'react';
 
-import { type JobPost } from '@jobstash/jobs/core';
+import { JobPost } from '@jobstash/shared/core';
 import { checkJobIsFeatured } from '@jobstash/jobs/utils';
 import { prettyTimestamp } from '@jobstash/shared/utils';
 

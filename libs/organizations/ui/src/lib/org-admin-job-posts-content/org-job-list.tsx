@@ -1,8 +1,7 @@
 import { Spinner } from '@nextui-org/react';
 import { useAtom } from 'jotai';
 
-import { JobPost } from '@jobstash/jobs/core';
-import { EVENT_CARD_CLICK } from '@jobstash/shared/core';
+import { EVENT_CARD_CLICK, JobPost } from '@jobstash/shared/core';
 import { dispatchEvent } from '@jobstash/shared/utils';
 
 import { activeOrgJobAtom, useOrgJobList } from '@jobstash/organizations/state';

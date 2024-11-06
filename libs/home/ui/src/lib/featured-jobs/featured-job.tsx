@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
 
-import { type JobPost } from '@jobstash/jobs/core';
-import { TagElement } from '@jobstash/shared/core';
+import { JobPost, TagElement } from '@jobstash/shared/core';
 import { getLogoUrl, prettyTimestamp } from '@jobstash/shared/utils';
 
 import { CardSet, createJobTags, LogoTitle } from '@jobstash/shared/ui';

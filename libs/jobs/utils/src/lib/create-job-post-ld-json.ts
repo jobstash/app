@@ -1,5 +1,4 @@
-import { type JobPost } from '@jobstash/jobs/core';
-import { EDGE_URL } from '@jobstash/shared/core';
+import { EDGE_URL, JobPost } from '@jobstash/shared/core';
 import { getLogoUrl } from '@jobstash/shared/utils';
 
 const getTextSectionString = (title: string, text: string) =>

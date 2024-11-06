@@ -1,7 +1,7 @@
 import { memo } from 'react';
 
-import { type JobPost } from '@jobstash/jobs/core';
 import {
+  JobPost,
   JobsRouteSection,
   ROUTE_SECTION,
   TAB_SEGMENT,

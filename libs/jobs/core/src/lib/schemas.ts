@@ -2,44 +2,10 @@ import myzod, { Infer } from 'myzod';
 
 import { profileInfoLocationSchema } from '@jobstash/profile/core';
 import {
-  fundingRoundSchema,
-  investorSchema,
-  jobInfoSchema,
+  jobPostSchema,
   mwMessageResponseSchema,
-  orgInfoSchema,
-  projectInfoSchema,
-  projectMoreInfoSchema,
   tagSchema,
 } from '@jobstash/shared/core';
-
-export const jobPostSchema = myzod
-  .intersection(
-    jobInfoSchema,
-    myzod.object({
-      organization: myzod
-        .intersection(
-          orgInfoSchema,
-          myzod.object({
-            fundingRounds: myzod.array(fundingRoundSchema),
-            investors: myzod.array(investorSchema),
-            projects: myzod.array(
-              myzod
-                .intersection(projectInfoSchema, projectMoreInfoSchema)
-                .allowUnknownKeys(true),
-            ),
-            aggregateRating: myzod.number().min(0).max(5),
-            reviewCount: myzod.number(),
-            hasUser: myzod.boolean(),
-            atsClient: myzod
-              .literals('jobstash', 'greenhouse', 'lever', 'workable')
-              .nullable(),
-          }),
-        )
-        .allowUnknownKeys(true),
-      tags: myzod.array(tagSchema),
-    }),
-  )
-  .allowUnknownKeys(true);
 
 export const jobListQueryPageSchema = myzod.object({
   page: myzod.number(),

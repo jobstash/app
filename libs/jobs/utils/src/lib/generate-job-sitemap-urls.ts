@@ -1,7 +1,6 @@
 import { Competitor } from '@jobstash/competitors/core';
-import { JobPost } from '@jobstash/jobs/core';
 import { OrgDetails } from '@jobstash/organizations/core';
-import { MW_URL } from '@jobstash/shared/core';
+import { JobPost, MW_URL } from '@jobstash/shared/core';
 import { generateXmlUrl, slugify } from '@jobstash/shared/utils';
 
 import { createJobKey } from './create-job-key';

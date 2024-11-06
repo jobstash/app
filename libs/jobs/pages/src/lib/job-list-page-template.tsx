@@ -3,9 +3,8 @@ import Head from 'next/head';
 
 import { PrimitiveAtom, useAtomValue } from 'jotai';
 
-import { JobPost } from '@jobstash/jobs/core';
 import { RIGHT_PANEL_WRAPPER_ID } from '@jobstash/right-panel/core';
-import { JobsRouteSection } from '@jobstash/shared/core';
+import { JobPost, JobsRouteSection } from '@jobstash/shared/core';
 import { cn } from '@jobstash/shared/utils';
 
 import { isOpenTopBannerAtom } from '@jobstash/shared/state';

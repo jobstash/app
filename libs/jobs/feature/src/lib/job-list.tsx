@@ -2,8 +2,7 @@ import { memo } from 'react';
 
 import { PrimitiveAtom, useAtomValue } from 'jotai';
 
-import { type JobPost } from '@jobstash/jobs/core';
-import { ROUTE_SECTION } from '@jobstash/shared/core';
+import { JobPost, ROUTE_SECTION } from '@jobstash/shared/core';
 import { checkJobIsFeatured } from '@jobstash/jobs/utils';
 
 import { useJobBookmarks, useJobList } from '@jobstash/jobs/state';

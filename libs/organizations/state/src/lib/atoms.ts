@@ -1,6 +1,6 @@
 import { atom } from 'jotai';
 
-import { JobPost } from '@jobstash/jobs/core';
+import { JobPost } from '@jobstash/shared/core';
 
 export const activeOrgIdAtom = atom<string | null>(null);
 export const orgCountAtom = atom<number | null>(null);

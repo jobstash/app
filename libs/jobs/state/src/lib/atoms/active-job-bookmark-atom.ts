@@ -1,5 +1,5 @@
 import { atom } from 'jotai';
 
-import { type JobPost } from '@jobstash/jobs/core';
+import { JobPost } from '@jobstash/shared/core';
 
 export const activeJobBookmarkAtom = atom<JobPost | null>(null);

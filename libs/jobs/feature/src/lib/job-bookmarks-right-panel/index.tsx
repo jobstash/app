@@ -1,7 +1,6 @@
 import { useAtomValue } from 'jotai';
 
-import { type JobPost } from '@jobstash/jobs/core';
-import { ROUTE_SECTION, TAB_SEGMENT } from '@jobstash/shared/core';
+import { JobPost, ROUTE_SECTION, TAB_SEGMENT } from '@jobstash/shared/core';
 
 import { useCompetitors } from '@jobstash/competitors/state';
 import { activeJobBookmarkTabAtom } from '@jobstash/jobs/state';

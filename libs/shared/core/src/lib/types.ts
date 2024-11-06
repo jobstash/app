@@ -13,6 +13,7 @@ import {
   investorSchema,
   jobCardSetSchema,
   jobInfoSchema,
+  jobPostSchema,
   jobsiteSchema,
   messageResponseSchema,
   mwMessageResponseSchema,
@@ -83,3 +84,11 @@ export type JobsRouteSection =
   | typeof ROUTE_SECTION.JOBS_FOR_EXPERTS;
 
 export type Jobsite = Infer<typeof jobsiteSchema>;
+
+export type JobPost = Infer<typeof jobPostSchema>;
+
+export interface JobPostPageSharedProps {
+  initJob: JobPost;
+  fromSSR: boolean;
+  notFoundInfo?: NotFoundInfo;
+}

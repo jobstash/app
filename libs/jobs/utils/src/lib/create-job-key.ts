@@ -1,4 +1,4 @@
-import { type JobPost } from '@jobstash/jobs/core';
+import { JobPost } from '@jobstash/shared/core';
 import { slugify } from '@jobstash/shared/utils';
 
 export const createJobKey = ({

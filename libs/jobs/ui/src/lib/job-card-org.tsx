@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-import { type JobPost } from '@jobstash/jobs/core';
+import { JobPost } from '@jobstash/shared/core';
 import { getLogoUrl } from '@jobstash/shared/utils';
 
 import { CardSet, LogoTitle, OrgCommunityTag } from '@jobstash/shared/ui';

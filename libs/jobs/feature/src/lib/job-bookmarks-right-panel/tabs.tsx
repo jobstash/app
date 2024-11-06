@@ -1,7 +1,6 @@
 import { useAtom } from 'jotai';
 
-import { type JobPost } from '@jobstash/jobs/core';
-import { TAB_SEGMENT } from '@jobstash/shared/core';
+import { JobPost, TAB_SEGMENT } from '@jobstash/shared/core';
 import { getPluralText } from '@jobstash/shared/utils';
 
 import { activeJobBookmarkTabAtom } from '@jobstash/jobs/state';

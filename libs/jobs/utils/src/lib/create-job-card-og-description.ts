@@ -1,4 +1,4 @@
-import { type JobPost } from '@jobstash/jobs/core';
+import { JobPost } from '@jobstash/shared/core';
 import { numFormatter } from '@jobstash/shared/utils';
 
 import { createJobPageTitle } from './create-job-page-title';

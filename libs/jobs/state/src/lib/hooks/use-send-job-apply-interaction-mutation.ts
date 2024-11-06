@@ -1,6 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { JobPost } from '@jobstash/jobs/core';
+import { JobPost } from '@jobstash/shared/core';
 import { notifError, notifSuccess } from '@jobstash/shared/utils';
 
 import { useMwVersionContext } from '@jobstash/shared/state';

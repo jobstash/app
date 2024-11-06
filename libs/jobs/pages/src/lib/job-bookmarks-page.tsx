@@ -6,9 +6,8 @@ import { useEffect, useRef } from 'react';
 import { LoadingPage } from '@jobstash/shared/pages';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 
-import { type JobPost } from '@jobstash/jobs/core';
 import { RIGHT_PANEL_WRAPPER_ID } from '@jobstash/right-panel/core';
-import { EVENT_CARD_CLICK } from '@jobstash/shared/core';
+import { EVENT_CARD_CLICK, JobPost } from '@jobstash/shared/core';
 import { cn, dispatchEvent } from '@jobstash/shared/utils';
 
 import { activeJobBookmarkAtom, useJobBookmarks } from '@jobstash/jobs/state';

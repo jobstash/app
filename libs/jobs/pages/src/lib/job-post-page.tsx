@@ -1,5 +1,4 @@
-import { JobPost } from '@jobstash/jobs/core';
-import { NotFoundInfo } from '@jobstash/shared/core';
+import { JobPost, NotFoundInfo } from '@jobstash/shared/core';
 
 import { activeJobAtom, jobCountAtom } from '@jobstash/jobs/state';
 

@@ -1,4 +1,4 @@
-import { JobPost } from '@jobstash/jobs/core';
+import { JobPost } from '@jobstash/shared/core';
 
 import FeaturedJob from './featured-job';
 

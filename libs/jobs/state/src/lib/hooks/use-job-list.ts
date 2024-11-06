@@ -5,7 +5,7 @@ import { useInView } from 'react-intersection-observer';
 import { useQueryClient } from '@tanstack/react-query';
 import { PrimitiveAtom, useAtom, useSetAtom } from 'jotai';
 
-import { type JobPost } from '@jobstash/jobs/core';
+import { JobPost } from '@jobstash/shared/core';
 import { createJobsFilterParamsObj } from '@jobstash/jobs/utils';
 
 import { useIsMobile, useMwVersionContext } from '@jobstash/shared/state';

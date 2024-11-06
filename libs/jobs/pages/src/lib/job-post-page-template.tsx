@@ -4,12 +4,12 @@ import { useEffect } from 'react';
 
 import { PrimitiveAtom, useAtom, useAtomValue } from 'jotai';
 
-import { JobPost } from '@jobstash/jobs/core';
 import { RIGHT_PANEL_WRAPPER_ID } from '@jobstash/right-panel/core';
 import {
   EDGE_URL,
   ERR_INTERNAL,
   FRONTEND_URL,
+  JobPost,
   JobsRouteSection,
   type NotFoundInfo,
   ROUTE_SECTION,

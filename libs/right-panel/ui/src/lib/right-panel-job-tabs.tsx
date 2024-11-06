@@ -1,9 +1,9 @@
 import { useCallback, useMemo } from 'react';
 
-import { type JobPost } from '@jobstash/jobs/core';
 import { type RightPanelTab } from '@jobstash/right-panel/core';
 import {
   FRONTEND_URL,
+  JobPost,
   JobsRouteSection,
   TAB_SEGMENT,
 } from '@jobstash/shared/core';

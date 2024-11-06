@@ -1,10 +1,10 @@
 import { Button } from '@nextui-org/button';
 
-import { JobPost } from '@jobstash/jobs/core';
 import {
   featuredButtonStyle,
   featuredGradientBorderStyle,
   FRONTEND_URL,
+  JobPost,
   lato,
 } from '@jobstash/shared/core';
 import { checkJobIsFeatured } from '@jobstash/jobs/utils';
@@ -19,7 +19,8 @@ interface Props {
 }
 
 export const Card = ({ job }: Props) => {
-  const { title, summary, featureStartDate, featureEndDate, organization } = job;
+  const { title, summary, featureStartDate, featureEndDate, organization } =
+    job;
   const tags = createJobTags(job);
 
   const isFeatured = checkJobIsFeatured(featureStartDate, featureEndDate);
@@ -33,7 +34,7 @@ export const Card = ({ job }: Props) => {
           cursor: 'default',
         }}
       >
-        <div className='flex flex-col grow gap-y-4'>
+        <div className="flex flex-col grow gap-y-4">
           {isFeatured && (
             <div style={featuredButtonStyle}>
               <Text size="sm" fw="bold">
@@ -41,32 +42,34 @@ export const Card = ({ job }: Props) => {
               </Text>
             </div>
           )}
-          <div className='w-full'>
+          <div className="w-full">
             <LogoTitle
               title={organization.name}
-              avatarProps={{ src: getLogoUrl( organization.website, organization.logoUrl), alt: organization.name }}
+              avatarProps={{
+                src: getLogoUrl(organization.website, organization.logoUrl),
+                alt: organization.name,
+              }}
               size="sm"
             />
           </div>
           <h3
             className={`${lato.className} justify-center text-xl font-bold text-white shrink -mt-1 w-full`}
           >
-            {title} 
+            {title}
           </h3>
-          
+
           <p className="text-left text-md text-white/75">{summary}</p>
-          
         </div>
-        <div className='flex flex-col self-end w-full gap-4'>
+        <div className="flex flex-col self-end w-full gap-4">
           <div className="max-w-xs">
-              <div className="flex flex-wrap gap-x-4 gap-y-0">
-                {tags.map(({ id, text, link, icon }) => (
-                  <CardSet key={id} link={link} icon={icon}>
-                    {text}
-                  </CardSet>
-                ))}
-              </div>
+            <div className="flex flex-wrap gap-x-4 gap-y-0">
+              {tags.map(({ id, text, link, icon }) => (
+                <CardSet key={id} link={link} icon={icon}>
+                  {text}
+                </CardSet>
+              ))}
             </div>
+          </div>
           <Button
             className="w-full font-bold rounded-lg bg-gradient-to-l from-primary to-tertiary"
             onClick={() => openJob(job)}
