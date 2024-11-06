@@ -58,7 +58,7 @@ const JobBookmarksRightPanelTabs = ({
   }
 
   return (
-    <div className="flex items-center flex-wrap gap-4 border-t border-white/10 pt-8">
+    <div className="flex items-center flex-wrap gap-4">
       {tabs.map(({ text, tabSegment }) => (
         <Button
           key={text}

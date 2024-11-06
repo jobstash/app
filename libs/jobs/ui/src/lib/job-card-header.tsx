@@ -10,7 +10,7 @@ interface Props {
   timestampText: string;
   isForExperts: boolean;
   isFeatured: boolean;
-  bookmarkButton: ReactNode;
+  topRightAction: ReactNode;
 }
 
 const JobCardHeader = ({
@@ -18,7 +18,7 @@ const JobCardHeader = ({
   timestampText,
   isForExperts,
   isFeatured,
-  bookmarkButton,
+  topRightAction,
 }: Props) => {
   const isEmphasized = isForExperts || isFeatured;
 
@@ -52,7 +52,7 @@ const JobCardHeader = ({
           {timestampText}
         </span>
 
-        {bookmarkButton}
+        {topRightAction}
       </div>
     </div>
   );

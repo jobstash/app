@@ -111,7 +111,7 @@ const JobCard = ({
         timestampText={timestampText}
         isForExperts={isForExperts}
         isFeatured={isFeatured}
-        bookmarkButton={bookmarkButton}
+        topRightAction={bookmarkButton}
       />
       {(isFeatured || isForExperts) && (
         <Heading size="md" fw="semibold">
@@ -125,7 +125,7 @@ const JobCard = ({
       <JobCardFooter
         isFeatured={isFeatured}
         timestampText={timestampText}
-        bookmarkButton={bookmarkButton}
+        topRightAction={bookmarkButton}
       />
     </JobCardWrapper>
   );

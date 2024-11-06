@@ -2,7 +2,7 @@ import dynamic from 'next/dynamic';
 
 import { useAtomValue } from 'jotai';
 
-import { RouteSection } from '@jobstash/shared/core';
+import { PORTAL_IDS, RouteSection } from '@jobstash/shared/core';
 import { cn } from '@jobstash/shared/utils';
 
 import { isOpenTopBannerAtom } from '@jobstash/shared/state';
@@ -75,9 +75,11 @@ const Sidebar = ({ filtersRouteSection }: Props) => {
               </a>
             </div>
           </div>
+
           {filtersRouteSection && (
             <Filters routeSection={filtersRouteSection} />
           )}
+          <div id={PORTAL_IDS.TOP_NAV_MAIN} className="pl-4" />
 
           <HeaderLinks />
         </div>

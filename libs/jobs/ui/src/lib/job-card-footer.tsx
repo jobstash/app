@@ -5,13 +5,13 @@ import { cn } from '@jobstash/shared/utils';
 interface Props {
   isFeatured: boolean;
   timestampText: string;
-  bookmarkButton: ReactNode;
+  topRightAction: ReactNode;
 }
 
 const JobCardFooter = ({
   timestampText,
   isFeatured,
-  bookmarkButton,
+  topRightAction,
 }: Props) => (
   <div className="sm:hidden flex-col gap-4">
     <hr className="border-t border-white/10 h-2" />
@@ -25,7 +25,7 @@ const JobCardFooter = ({
         {timestampText}
       </span>
 
-      {bookmarkButton}
+      {topRightAction}
     </div>
   </div>
 );

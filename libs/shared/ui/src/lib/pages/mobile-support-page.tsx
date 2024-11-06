@@ -25,17 +25,18 @@ const MobileSupportPage = () => {
     <div className="flex flex-col lg:hidden items-center justify-center text-center min-h-screen px-4 gap-4">
       <FoxSVG isMobile />
 
-      <Heading size="md">
-        Mobile devices are not supported yet for this feature
-      </Heading>
+      <Heading size="md">Feature Not Available on Smaller Devices</Heading>
 
-      <Text color="dimmed" size="sm">
-        Please access the site from a desktop device to use this functionality
-      </Text>
+      <div className="max-w-md pb-4">
+        <Text color="dimmed" size="sm">
+          This feature is currently optimized for desktop. Please switch to a
+          desktop device to access all functionalities.
+        </Text>
+      </div>
 
       <Button variant="primary" onClick={onClick}>
         <Text fw="semibold" size="sm">
-          Copy URL
+          Copy Page URL
         </Text>
       </Button>
     </div>

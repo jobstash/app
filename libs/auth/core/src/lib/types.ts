@@ -39,4 +39,4 @@ export type AuthCtx = {
 
 export type GithubLoginPayload = Infer<typeof githubLoginPayloadSchema>;
 
-export type AffilatedOrganization = Infer<typeof affiliatedOrgSchema>;
+export type AffiliatedOrganization = Infer<typeof affiliatedOrgSchema>;

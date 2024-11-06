@@ -1,8 +1,8 @@
-import { AffilatedOrganization } from '@jobstash/auth/core';
+import { AffiliatedOrganization } from '@jobstash/auth/core';
 import { normalizeString } from '@jobstash/shared/utils';
 
 export const getUserOrgBySlug = (
-  orgs: AffilatedOrganization[],
+  orgs: AffiliatedOrganization[],
   slug: unknown,
 ) => {
   if (typeof slug !== 'string') return;

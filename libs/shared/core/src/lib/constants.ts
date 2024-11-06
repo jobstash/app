@@ -157,3 +157,7 @@ export const LOCAL_STORAGE_KEYS = {
 
 export const CALENDLY_SCHEDULE_LINK =
   'https://calendly.com/jobstash-intro/30min';
+
+export const PORTAL_IDS = {
+  TOP_NAV_MAIN: 'top-nav-main',
+};

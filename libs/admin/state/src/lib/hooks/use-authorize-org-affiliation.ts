@@ -24,10 +24,11 @@ export const useAuthorizeOrgAffiliation = () => {
         message: 'Please wait ...',
       });
     },
-    onSuccess({ message }, { verdict }) {
-      queryClient.invalidateQueries({
+    async onSuccess({ message }, { verdict }) {
+      await queryClient.invalidateQueries({
         queryKey: [mwVersion, 'get-admin-affiliation-requests'],
       });
+
       notifSuccess({
         id: TOAST_ID,
         title: verdict === 'approve' ? 'Org Approved!' : 'Org Rejected',

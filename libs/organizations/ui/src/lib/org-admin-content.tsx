@@ -1,26 +1,27 @@
 import { useAtomValue } from 'jotai';
 
+import { AffiliatedOrganization } from '@jobstash/auth/core';
+
 import {
   ORG_ADMIN_TABS,
   orgAdminActiveTabAtom,
 } from '@jobstash/organizations/state';
 
-import { OrgAdminEditOrgContent } from './org-admin-edit-org-content/content';
+import { OrgAdminEditOrgContent } from './org-admin-edit-org-content';
 import { OrgAdminEditJobPostsContent } from './org-admin-job-posts-content';
-
 interface Props {
-  orgId: string;
+  org: AffiliatedOrganization;
 }
 
-export const OrgAdminContent = ({ orgId }: Props) => {
+export const OrgAdminContent = ({ org }: Props) => {
   const activeTab = useAtomValue(orgAdminActiveTabAtom);
 
   if (activeTab === ORG_ADMIN_TABS.ORGANIZATION) {
-    return <OrgAdminEditOrgContent orgId={orgId} />;
+    return <OrgAdminEditOrgContent org={org} />;
   }
 
   if (activeTab === ORG_ADMIN_TABS.JOBS) {
-    return <OrgAdminEditJobPostsContent />;
+    return <OrgAdminEditJobPostsContent org={org} />;
   }
 
   //

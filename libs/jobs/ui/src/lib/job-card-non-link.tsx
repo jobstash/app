@@ -16,14 +16,14 @@ import JobCardWrapper from './job-card-wrapper';
 
 interface Props {
   jobPost: JobPost;
-  bookmarkButton: ReactNode;
+  topRightAction: ReactNode;
   isActive: boolean;
   onClick: (jobPost: JobPost) => void;
 }
 
-const JobBookmarkCard = ({
+const JobCardNonLink = ({
   jobPost,
-  bookmarkButton,
+  topRightAction,
   isActive,
   onClick,
 }: Props) => {
@@ -57,7 +57,7 @@ const JobBookmarkCard = ({
         timestampText={timestampText}
         isForExperts={isForExperts}
         isFeatured={isFeatured}
-        bookmarkButton={bookmarkButton}
+        topRightAction={topRightAction}
       />
       {(isFeatured || isForExperts) && (
         <Heading size="md" fw="semibold">
@@ -71,10 +71,10 @@ const JobBookmarkCard = ({
       <JobCardFooter
         isFeatured={isFeatured}
         timestampText={timestampText}
-        bookmarkButton={bookmarkButton}
+        topRightAction={topRightAction}
       />
     </JobCardWrapper>
   );
 };
 
-export default JobBookmarkCard;
+export default JobCardNonLink;

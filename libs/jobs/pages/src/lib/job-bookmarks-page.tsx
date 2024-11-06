@@ -18,7 +18,7 @@ import {
   useIsDesktop,
 } from '@jobstash/shared/state';
 
-import { JobBookmarkButton, JobBookmarkCard } from '@jobstash/jobs/ui';
+import { JobBookmarkButton, JobCardNonLink } from '@jobstash/jobs/ui';
 import {
   Button,
   EmptyResult,
@@ -116,10 +116,10 @@ export const JobBookmarksPage = () => {
         {data &&
           data.length > 0 &&
           data?.map((jobPost) => (
-            <JobBookmarkCard
+            <JobCardNonLink
               key={jobPost.id}
               jobPost={jobPost}
-              bookmarkButton={
+              topRightAction={
                 <JobBookmarkButton
                   shortUUID={jobPost.shortUUID}
                   isFetching={isFetching}

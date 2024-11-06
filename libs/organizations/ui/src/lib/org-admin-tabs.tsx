@@ -1,5 +1,9 @@
+import { createPortal } from 'react-dom';
+
 import { Tab, Tabs } from '@nextui-org/react';
 import { useAtom } from 'jotai';
+
+import { PORTAL_IDS } from '@jobstash/shared/core';
 
 import {
   ORG_ADMIN_TABS,
@@ -10,7 +14,11 @@ import {
 export const OrgAdminTabs = () => {
   const [activeTab, setActiveTab] = useAtom(orgAdminActiveTabAtom);
 
-  return (
+  // eslint-disable-next-line unicorn/prefer-query-selector
+  const portal = document.getElementById(PORTAL_IDS.TOP_NAV_MAIN);
+  if (!portal) return null;
+
+  return createPortal(
     <div className="py-4">
       <Tabs
         aria-label="Approval Status"
@@ -28,6 +36,7 @@ export const OrgAdminTabs = () => {
           <Tab key={tab} title={tab} />
         ))}
       </Tabs>
-    </div>
+    </div>,
+    portal,
   );
 };
