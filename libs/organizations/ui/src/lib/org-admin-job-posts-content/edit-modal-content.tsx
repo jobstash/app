@@ -84,24 +84,28 @@ export const EditModalContent = ({ orgJob }: Props) => {
         <EditModalMain
           formState={formState}
           handleFieldChange={handleFieldChange}
+          isPending={isPending}
         />
       ),
       [EDIT_ACTIVE_TABS.DETAILS]: (
         <EditModalDetails
           formState={formState}
           handleFieldChange={handleFieldChange}
+          isPending={isPending}
         />
       ),
       [EDIT_ACTIVE_TABS.COMPENSATION]: (
         <EditModalCompensation
           formState={formState}
           handleFieldChange={handleFieldChange}
+          isPending={isPending}
         />
       ),
       [EDIT_ACTIVE_TABS.SPECIFICATIONS]: (
         <EditModalSpecifications
           formState={formState}
           handleFieldChange={handleFieldChange}
+          isPending={isPending}
         />
       ),
       // [EDIT_ACTIVE_TABS.SKILLS]: (
@@ -111,7 +115,7 @@ export const EditModalContent = ({ orgJob }: Props) => {
       //   />
       // ),
     }),
-    [formState, handleFieldChange],
+    [formState, handleFieldChange, isPending],
   );
 
   const content = contentMap[activeTab];

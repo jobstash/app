@@ -6,9 +6,14 @@ import { HandleFieldChange } from './types';
 interface Props {
   formState: UpdateOrgJobPayload;
   handleFieldChange: HandleFieldChange;
+  isPending: boolean;
 }
 
-export const EditModalDetails = ({ formState, handleFieldChange }: Props) => (
+export const EditModalDetails = ({
+  formState,
+  handleFieldChange,
+  isPending,
+}: Props) => (
   <>
     <EditModalTextarea
       label="Summary"
@@ -17,6 +22,7 @@ export const EditModalDetails = ({ formState, handleFieldChange }: Props) => (
       placeholder="Summarize the main duties and expectations for this position."
       formValue={formState.summary}
       handleFieldChange={handleFieldChange}
+      isDisabled={isPending}
     />
 
     <EditModalTextarea
@@ -26,6 +32,7 @@ export const EditModalDetails = ({ formState, handleFieldChange }: Props) => (
       placeholder="Describe the role's responsibilities, required qualifications, and impact on the team."
       formValue={formState.description}
       handleFieldChange={handleFieldChange}
+      isDisabled={isPending}
     />
 
     <EditModalTextarea
@@ -35,6 +42,7 @@ export const EditModalDetails = ({ formState, handleFieldChange }: Props) => (
       placeholder="Explain what makes the company's culture unique and how this role fits within it."
       formValue={formState.culture}
       handleFieldChange={handleFieldChange}
+      isDisabled={isPending}
     />
   </>
 );

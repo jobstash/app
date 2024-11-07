@@ -19,6 +19,7 @@ type FormListKey = 'requirements' | 'responsibilities' | 'benefits';
 interface Props {
   formState: UpdateOrgJobPayload;
   handleFieldChange: HandleFieldChange;
+  isPending: boolean;
 }
 
 const sectionConfig = [
@@ -47,6 +48,7 @@ const sectionConfig = [
 export const EditModalSpecifications = ({
   formState,
   handleFieldChange,
+  isPending,
 }: Props) => {
   const [activeItem, setActiveItem] = useState<{
     formKey: FormListKey;
@@ -128,6 +130,7 @@ export const EditModalSpecifications = ({
 
   return (
     <Accordion
+      isDisabled={isPending}
       variant="splitted"
       selectionMode="single"
       itemClasses={{
@@ -161,6 +164,7 @@ export const EditModalSpecifications = ({
                       classNames={{
                         inputWrapper: 'bg-white/5 rounded-md',
                       }}
+                      isDisabled={isPending}
                       onChange={(e) => setEditingValue(e.target.value)}
                     />
                     <div className="w-full flex justify-between">

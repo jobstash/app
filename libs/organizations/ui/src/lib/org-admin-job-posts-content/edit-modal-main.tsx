@@ -62,9 +62,14 @@ const GROUPED_CLASSNAME = 'flex gap-4 [&>*]:w-1/2 items-center';
 interface Props {
   formState: UpdateOrgJobPayload;
   handleFieldChange: HandleFieldChange;
+  isPending: boolean;
 }
 
-export const EditModalMain = ({ formState, handleFieldChange }: Props) => {
+export const EditModalMain = ({
+  formState,
+  handleFieldChange,
+  isPending,
+}: Props) => {
   const activeTab = useAtomValue(editActiveTabAtom);
 
   if (activeTab !== EDIT_ACTIVE_TABS.MAIN) return null;
@@ -78,6 +83,7 @@ export const EditModalMain = ({ formState, handleFieldChange }: Props) => {
         placeholder="Senior Software Developer"
         formValue={formState.title}
         handleFieldChange={handleFieldChange}
+        isDisabled={isPending}
       />
 
       <div className={GROUPED_CLASSNAME}>
@@ -88,6 +94,7 @@ export const EditModalMain = ({ formState, handleFieldChange }: Props) => {
           placeholder="https://companysite.com"
           formValue={formState.url}
           handleFieldChange={handleFieldChange}
+          isDisabled={isPending}
         />
         <EditModalSelectInput
           label="Classification"
@@ -97,6 +104,7 @@ export const EditModalMain = ({ formState, handleFieldChange }: Props) => {
           formValue={formState.classification}
           options={CLASSIFICATION_OPTIONS}
           handleFieldChange={handleFieldChange}
+          isDisabled={isPending}
         />
       </div>
       <div className={GROUPED_CLASSNAME}>
@@ -107,6 +115,7 @@ export const EditModalMain = ({ formState, handleFieldChange }: Props) => {
           placeholder="San Francisco, CA"
           formValue={formState.location}
           handleFieldChange={handleFieldChange}
+          isDisabled={isPending}
         />
         <EditModalSelectInput
           label="Location Type"
@@ -116,6 +125,7 @@ export const EditModalMain = ({ formState, handleFieldChange }: Props) => {
           formValue={formState.locationType}
           options={LOCATION_TYPE_OPTIONS}
           handleFieldChange={handleFieldChange}
+          isDisabled={isPending}
         />
       </div>
       <div className={GROUPED_CLASSNAME}>
@@ -127,6 +137,7 @@ export const EditModalMain = ({ formState, handleFieldChange }: Props) => {
           formValue={formState.seniority}
           options={SENIORITY_OPTIONS}
           handleFieldChange={handleFieldChange}
+          isDisabled={isPending}
         />
         <EditModalSelectInput
           label="Commitment"
@@ -136,6 +147,7 @@ export const EditModalMain = ({ formState, handleFieldChange }: Props) => {
           formValue={formState.commitment}
           options={COMMITMENT_OPTIONS}
           handleFieldChange={handleFieldChange}
+          isDisabled={isPending}
         />
       </div>
 
@@ -144,6 +156,7 @@ export const EditModalMain = ({ formState, handleFieldChange }: Props) => {
           title="Block Job Post"
           subtitle="Restrict access to this job post and flag it as malicious"
           isSelected={Boolean(formState.paysInCrypto)}
+          isDisabled={isPending}
           onValueChange={(value) => handleFieldChange('paysInCrypto', value)}
         />
       </div>

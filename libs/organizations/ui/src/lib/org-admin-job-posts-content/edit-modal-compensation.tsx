@@ -21,11 +21,13 @@ const COMMON_INPUT_PROPS: Partial<InputProps> = {
 interface Props {
   formState: UpdateOrgJobPayload;
   handleFieldChange: HandleFieldChange;
+  isPending: boolean;
 }
 
 export const EditModalCompensation = ({
   formState,
   handleFieldChange,
+  isPending,
 }: Props) => {
   const [animateRef] = useAutoAnimate();
 
@@ -48,6 +50,7 @@ export const EditModalCompensation = ({
         title="Use Salary Range"
         subtitle="Prefer range with minimum and maximum values"
         isSelected={preferRange}
+        isDisabled={isPending}
         onValueChange={onTogglePreferRange}
       />
       <Input
@@ -55,6 +58,7 @@ export const EditModalCompensation = ({
         label="Currency"
         placeholder="USD, EUR, USDT, BTC, ETH, etc."
         value={formState.salaryCurrency || ''}
+        isDisabled={isPending}
         onChange={(e) => handleFieldChange('salaryCurrency', e.target.value)}
       />
 
@@ -68,6 +72,7 @@ export const EditModalCompensation = ({
             value={
               formState.minimumSalary ? formState.minimumSalary.toString() : ''
             }
+            isDisabled={isPending}
             onChange={(e) =>
               handleFieldChange('minimumSalary', Number(e.target.value) || null)
             }
@@ -80,6 +85,7 @@ export const EditModalCompensation = ({
             value={
               formState.maximumSalary ? formState.maximumSalary.toString() : ''
             }
+            isDisabled={isPending}
             onChange={(e) =>
               handleFieldChange('maximumSalary', Number(e.target.value) || null)
             }
@@ -92,6 +98,7 @@ export const EditModalCompensation = ({
           type="number"
           placeholder="Enter exact salary amount"
           value={formState.salary ? formState.salary.toString() : ''}
+          isDisabled={isPending}
           onChange={(e) =>
             handleFieldChange('salary', Number(e.target.value) || null)
           }
@@ -102,12 +109,14 @@ export const EditModalCompensation = ({
         title="Pays In Crypto"
         subtitle="Salary paid in cryptocurrency"
         isSelected={Boolean(formState.paysInCrypto)}
+        isDisabled={isPending}
         onValueChange={(value) => handleFieldChange('paysInCrypto', value)}
       />
       <EditModalSwitch
         title="Offer Token Allocation"
         subtitle="Salary includes allocation of tokens"
         isSelected={Boolean(formState.offersTokenAllocation)}
+        isDisabled={isPending}
         onValueChange={(value) =>
           handleFieldChange('offersTokenAllocation', value)
         }

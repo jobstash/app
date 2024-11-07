@@ -24,16 +24,16 @@ export const useUpdateOrgJob = (jobId: string) => {
         message: 'Please wait ...',
       });
     },
-    onSuccess({ message }) {
+    async onSuccess({ message }) {
+      await queryClient.invalidateQueries({
+        queryKey: [mwVersion, 'org-job-list'],
+      });
+
       notifSuccess({
         id: TOAST_ID,
         title: 'Job Update Successful!',
         message,
         autoClose: 10_000,
-      });
-
-      queryClient.invalidateQueries({
-        queryKey: [mwVersion, 'org-job-list'],
       });
     },
     onError(data) {
