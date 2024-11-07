@@ -20,14 +20,14 @@ export const useUpdateOrgJob = (jobId: string) => {
       notifications.clean();
       notifLoading({
         id: TOAST_ID,
-        title: 'Updating Project',
+        title: 'Updating Job',
         message: 'Please wait ...',
       });
     },
     onSuccess({ message }) {
       notifSuccess({
         id: TOAST_ID,
-        title: 'Project Update Successful!',
+        title: 'Job Update Successful!',
         message,
         autoClose: 10_000,
       });
@@ -39,7 +39,7 @@ export const useUpdateOrgJob = (jobId: string) => {
     onError(data) {
       notifError({
         id: TOAST_ID,
-        title: 'Project Update Failed!',
+        title: 'Job Update Failed!',
         message: (data as Error).message,
       });
     },
