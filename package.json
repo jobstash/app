@@ -10,7 +10,8 @@
     "lint": "nx affected:lint --uncommitted --parallel=8",
     "lint:all": "nx run-many --target=lint --all --parallel=8",
     "test": "nx affected:test --codeCoverage",
-    "test:all": "nx run-many --target=test --all --codeCoverage"
+    "test:all": "nx run-many --target=test --all --codeCoverage",
+    "prepare": "husky"
   },
   "private": true,
   "dependencies": {
