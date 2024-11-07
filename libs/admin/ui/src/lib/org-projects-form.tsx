@@ -80,7 +80,7 @@ export const OrgProjectsForm = ({
   return (
     <div className="flex flex-col gap-8 max-w-lg">
       <div className="flex flex-col gap-4">
-        <Heading size="md">Add Project</Heading>
+        <Heading size="md">Link Project</Heading>
         <AddProjectSearchInput
           stateIds={projectIds}
           onAddProject={onAddProject}

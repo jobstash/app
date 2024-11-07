@@ -6,3 +6,4 @@ export * from './lib/hooks/use-org-details';
 export * from './lib/hooks/use-org-job-list';
 export * from './lib/hooks/use-org-list';
 export * from './lib/hooks/use-org-list-query';
+export * from './lib/hooks/use-update-org-job';

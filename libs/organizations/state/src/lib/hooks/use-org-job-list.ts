@@ -7,7 +7,7 @@ import { useMwVersionContext } from '@jobstash/shared/state';
 
 import { useOrgJobListQuery } from './use-org-job-list-query';
 
-export const useOrgJobList = (slug: string) => {
+export const useOrgJobList = (orgId: string) => {
   const queryClient = useQueryClient();
   const { mwVersion } = useMwVersionContext();
 
@@ -19,7 +19,7 @@ export const useOrgJobList = (slug: string) => {
     fetchNextPage,
     isFetchingNextPage,
     hasNextPage,
-  } = useOrgJobListQuery(slug);
+  } = useOrgJobListQuery(orgId);
 
   // Prefetch job items
   useEffect(() => {

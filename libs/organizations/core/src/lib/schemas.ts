@@ -4,10 +4,12 @@ import {
   fundingRoundSchema,
   investorSchema,
   jobCardSetSchema,
+  jobPostSchema,
   messageResponseSchema,
   orgInfoSchema,
   projectInfoSchema,
   projectMoreInfoSchema,
+  tagSchema,
 } from '@jobstash/shared/core';
 
 import {
@@ -206,3 +208,58 @@ export const candidateReportResponseSchema = myzod.intersection(
 export type CandidateReportResponse = Infer<
   typeof candidateReportResponseSchema
 >;
+
+export const updateOrgJobPayloadSchema = myzod.object({
+  title: myzod.string().nullable(),
+  url: myzod.string(),
+  classification: myzod.string().nullable(),
+  location: myzod.string().nullable(),
+  locationType: myzod.string().nullable(),
+  seniority: myzod.string().nullable(),
+  commitment: myzod.string().nullable(),
+
+  summary: myzod.string().nullable(),
+  description: myzod.string().nullable(),
+  culture: myzod.string().nullable(),
+
+  requirements: myzod.array(myzod.string()),
+  responsibilities: myzod.array(myzod.string()),
+  benefits: myzod.array(myzod.string()),
+
+  salary: myzod.number().nullable(),
+  minimumSalary: myzod.number().nullable(),
+  maximumSalary: myzod.number().nullable(),
+  salaryCurrency: myzod.string().nullable(),
+  paysInCrypto: myzod.boolean().nullable(),
+  offersTokenAllocation: myzod.boolean().nullable(),
+
+  project: myzod.string().nullable(),
+  isBlocked: myzod.boolean(),
+  isOnline: myzod.boolean(),
+  tags: myzod.array(tagSchema),
+});
+
+export type UpdateOrgJobPayload = Infer<typeof updateOrgJobPayloadSchema>;
+
+const orgJobProjectSchema = myzod.object({
+  id: myzod.string(),
+  name: myzod.string(),
+});
+
+export const orgJobItemSchema = myzod.intersection(
+  jobPostSchema,
+  myzod.object({
+    isBlocked: myzod.boolean(),
+    isOnline: myzod.boolean(),
+    project: orgJobProjectSchema.nullable(),
+  }),
+);
+export type OrgJobItem = Infer<typeof orgJobItemSchema>;
+
+export const orgJobListQueryPageSchema = myzod.object({
+  page: myzod.number(),
+  count: myzod.number(),
+  total: myzod.number(),
+  data: myzod.array(orgJobItemSchema),
+});
+export type OrgJobListQueryPage = Infer<typeof orgJobListQueryPageSchema>;

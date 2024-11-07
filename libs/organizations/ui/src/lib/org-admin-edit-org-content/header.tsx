@@ -1,6 +1,6 @@
 import { getLogoUrl } from '@jobstash/shared/utils';
 
-import { useManagedOrg } from '@jobstash/admin/state';
+import { useOrgDetails } from '@jobstash/organizations/state';
 
 import { DeleteOrgModal } from '@jobstash/admin/ui';
 import { LogoTitle } from '@jobstash/shared/ui';
@@ -10,11 +10,11 @@ interface Props {
 }
 
 export const OrgAdminEditOrgHeader = ({ orgId }: Props) => {
-  const { data } = useManagedOrg(orgId);
+  const { data } = useOrgDetails(orgId);
 
   if (!data) return null;
 
-  const { name, location, websites, logoUrl } = data;
+  const { name, location, website, logoUrl } = data;
 
   return (
     <div className="flex flex-col md:items-center md:flex-row gap-8 py-4">
@@ -24,7 +24,7 @@ export const OrgAdminEditOrgHeader = ({ orgId }: Props) => {
         location={location}
         avatarProps={{
           alt: name ?? '',
-          src: getLogoUrl(websites.length > 0 ? websites[0] : '', logoUrl),
+          src: getLogoUrl(website, logoUrl),
         }}
       />
 

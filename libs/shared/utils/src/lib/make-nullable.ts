@@ -1,2 +1,1 @@
-export const makeNullable = <T>(value: T) =>
-  typeof value !== 'boolean' && !value ? null : value;
+export const makeNullable = <T>(value: T) => value || null;

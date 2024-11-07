@@ -7,15 +7,17 @@ import { dispatchEvent } from '@jobstash/shared/utils';
 import { activeOrgJobAtom, useOrgJobList } from '@jobstash/organizations/state';
 
 import { JobCardNonLink } from '@jobstash/jobs/ui';
-import { ListErrorMessage } from '@jobstash/shared/ui';
+import { ListErrorMessage, Loader } from '@jobstash/shared/ui';
 
 import { OrgJobEditButton } from './edit-button';
+import { IsBlockedIndicator } from './is-blocked-indicator';
+import { IsOnlineIndicator } from './is-online-indicator';
 
 interface Props {
-  slug: string;
+  orgId: string;
 }
 
-export const OrgJobList = ({ slug }: Props) => {
+export const OrgJobList = ({ orgId }: Props) => {
   const [activeJob, setActiveJob] = useAtom(activeOrgJobAtom);
 
   const {
@@ -25,7 +27,7 @@ export const OrgJobList = ({ slug }: Props) => {
     isFetchingNextPage,
     hasNextPage,
     inViewRef,
-  } = useOrgJobList(slug);
+  } = useOrgJobList(orgId);
 
   const onClickCard = (jobPost: JobPost) => {
     setActiveJob(jobPost);
@@ -39,12 +41,21 @@ export const OrgJobList = ({ slug }: Props) => {
     // }
   };
 
-  if (isLoading) return <p>Loading ...</p>;
+  if (isLoading) {
+    return (
+      <div className="flex flex-col gap-y-4 lg:gap-y-8">
+        <div className="h-[150px] w-[calc(50%-48px)] flex items-center justify-center">
+          <Loader />
+        </div>
+      </div>
+    );
+  }
 
   if (jobPosts.length === 0 && !error) {
     return (
       <p>
-        TODO: Empty message. Should encourage to fillup jobsite to be crawled
+        This organization has no job posts at the moment. Add a job site URL to
+        gather listings.
       </p>
     );
   }
@@ -55,7 +66,13 @@ export const OrgJobList = ({ slug }: Props) => {
         <JobCardNonLink
           key={job.id}
           jobPost={job}
-          topRightAction={<OrgJobEditButton />}
+          topRightAction={
+            <div className="flex gap-2 items-center">
+              <IsBlockedIndicator isBlocked={job.isBlocked} />
+              <IsOnlineIndicator isOnline={job.isOnline} />
+              <OrgJobEditButton orgJob={job} />
+            </div>
+          }
           isActive={activeJob?.shortUUID === job.shortUUID}
           onClick={onClickCard}
         />

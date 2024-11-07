@@ -6,6 +6,7 @@ import { cn } from '@jobstash/shared/utils';
 import { activeOrgJobAtom } from '@jobstash/organizations/state';
 import { isOpenTopBannerAtom } from '@jobstash/shared/state';
 
+import { OrgJobEditModal } from './edit-modal';
 import { OrgJobList } from './org-job-list';
 import { OrgJobRightPanel } from './right-panel';
 
@@ -20,7 +21,7 @@ export const OrgAdminEditJobPostsContent = ({ org }: Props) => {
   return (
     <div className="flex gap-8">
       <div className="pt-8 w-[calc(50%-32px)]">
-        <OrgJobList slug={org.slug} />
+        <OrgJobList orgId={org.id} />
       </div>
       {activeJob && (
         <div
@@ -32,6 +33,8 @@ export const OrgAdminEditJobPostsContent = ({ org }: Props) => {
           <OrgJobRightPanel />
         </div>
       )}
+
+      <OrgJobEditModal />
     </div>
   );
 };

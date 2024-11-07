@@ -192,3 +192,14 @@ button:focus {
     background-position: 0% 50%;
   }
 }
+
+/* Target only the input with the specific class */
+.clean-number-input::-webkit-outer-spin-button,
+.clean-number-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.clean-number-input {
+  -moz-appearance: textfield; /* Firefox */
+}
