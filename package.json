@@ -11,7 +11,7 @@
     "lint:all": "nx run-many --target=lint --all --parallel=8",
     "test": "nx affected:test --codeCoverage",
     "test:all": "nx run-many --target=test --all --codeCoverage",
-    "prepare": "node .husky/install.mjs"
+    "prepare": "husky"
   },
   "private": true,
   "dependencies": {

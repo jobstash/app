@@ -40,6 +40,7 @@ WORKDIR /jobstash
 COPY --from=deps /jobstash/node_modules ./node_modules
 COPY . .
 
+ENV HUSKY=0
 ENV NODE_ENV=production
 ENV NEXT_PUBLIC_MW_URL=https://middleware.dev.jobstash.xyz
 ENV NEXT_PUBLIC_FRONTEND_URL=https://app.dev.jobstash.xyz
