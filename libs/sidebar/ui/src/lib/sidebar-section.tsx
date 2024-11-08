@@ -36,6 +36,8 @@ export const SidebarSection = ({
   isMountedWrapped,
   ...innerProps
 }: Props) => {
+  if (bartabs.length === 0) return null;
+
   const content = (
     <Content {...innerProps}>
       {bartabs.map((props) => (

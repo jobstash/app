@@ -7,6 +7,7 @@ import { LoadingPage, NotFoundPage } from '@jobstash/shared/pages';
 import { getUserOrgBySlug } from '@jobstash/auth/utils';
 
 import { useAffiliatedOrgs } from '@jobstash/auth/state';
+import { useAffiliationRequests } from '@jobstash/profile/state';
 import { useIsDesktop } from '@jobstash/shared/state';
 
 import { OrgAdminContent, OrgAdminTabs } from '@jobstash/organizations/ui';
@@ -23,13 +24,22 @@ const SideBar = dynamic(() =>
 export const OrgAdminPage = () => {
   const { query } = useRouter();
   const { data: orgs } = useAffiliatedOrgs();
-  const isDesktop = useIsDesktop();
+  const { data: approvedAffiliations } = useAffiliationRequests({
+    list: 'approved',
+  });
 
+  const isDesktop = useIsDesktop();
   if (!isDesktop) return <MobileSupportPage />;
+
   if (!orgs) return <LoadingPage />;
 
   const matchedOrg = getUserOrgBySlug(orgs, query.slug);
-  if (!matchedOrg) return <NotFoundPage />;
+  const approvedOrgIds = approvedAffiliations?.map((org) => org.orgId) ?? [];
+  const isApproved = matchedOrg && approvedOrgIds.includes(matchedOrg.id);
+
+  if (!isApproved) {
+    return <NotFoundPage />;
+  }
 
   return (
     <>
