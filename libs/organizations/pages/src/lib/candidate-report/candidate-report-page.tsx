@@ -1,27 +1,41 @@
-import { NotFoundPage } from '@jobstash/shared/pages';
-export const CandidateReportPage = () => <NotFoundPage />;
+import dynamic from 'next/dynamic';
+import Head from 'next/head';
 
-//
-// const { isLoading, role, flow } = useAuthContext();
+import { LoadingPage, NotFoundPage } from '@jobstash/shared/pages';
 
-// if (isLoading) return <LoadingPage />;
+import { PERMISSIONS } from '@jobstash/auth/core';
 
-// const isOrg = role === CHECK_WALLET_ROLES.ORG;
-// const isComplete = flow === CHECK_WALLET_FLOWS.ORG_COMPLETE;
+import { useAuthContext, useHasPermission } from '@jobstash/auth/state';
 
-// if (!isOrg || !isComplete) {
-//   return <NotFoundPage />;
-// }
+import { PageWrapper } from '@jobstash/shared/ui';
 
-// return (
-//   <>
-//     <Head>
-//       <title>Candidate Report</title>
-//     </Head>
+import { CandidateReportForm } from './candidate-report-form';
 
-//     <PageWrapper>
-//       <SideBar />
-//       <CandidateReportForm />
-//     </PageWrapper>
-//   </>
-// );
+const SideBar = dynamic(() =>
+  import('@jobstash/sidebar/feature').then((m) => m.SideBar),
+);
+
+export const CandidateReportPage = () => {
+  const { isLoading } = useAuthContext();
+  const hasPermission = useHasPermission([
+    PERMISSIONS.ORG_AFFILIATE,
+    PERMISSIONS.ORG_MANAGER,
+    PERMISSIONS.ADMIN,
+  ]);
+
+  if (isLoading) return <LoadingPage />;
+  if (!hasPermission) return <NotFoundPage />;
+
+  return (
+    <>
+      <Head>
+        <title>Candidate Report</title>
+      </Head>
+
+      <PageWrapper>
+        <SideBar />
+        <CandidateReportForm />
+      </PageWrapper>
+    </>
+  );
+};

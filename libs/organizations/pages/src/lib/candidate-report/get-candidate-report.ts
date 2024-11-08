@@ -11,7 +11,12 @@ export const getCandidateReport = async ({
   github,
   wallet,
 }: CandidateReportPayload) => {
-  const url = `${MW_URL}/scorer/user/report?user=${github}&wallet=${wallet}`;
+  const url = new URL(`${MW_URL}/scorer/user/report`);
+
+  url.searchParams.append('user', github);
+  if (wallet) {
+    url.searchParams.append('wallet', wallet);
+  }
 
   const options = {
     responseSchema: candidateReportResponseSchema,
@@ -20,5 +25,5 @@ export const getCandidateReport = async ({
     mode: 'cors' as RequestMode,
   };
 
-  return mwFetch<CandidateReportResponse>(url, options);
+  return mwFetch<CandidateReportResponse>(url.toString(), options);
 };
