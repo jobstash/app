@@ -155,6 +155,7 @@ export const useOrgInfoForm = (orgId: string) => {
   };
 
   const [tab, setTab] = useAtom(orgManageTabAtom);
+
   const onChangeTab = (key: React.Key) => {
     setTab(key as OrgManageTab);
   };
