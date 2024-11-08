@@ -1,26 +1,17 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { useCallback, useEffect, useMemo, useRef } from 'react';
+import { useCallback, useMemo, useRef } from 'react';
 
-import {
-  CellEditingStoppedEvent,
-  ColDef,
-  GetRowIdFunc,
-} from 'ag-grid-community';
+import { ColDef, GetRowIdFunc } from 'ag-grid-community';
 import { AgGridReact } from 'ag-grid-react';
-import { useSetAtom } from 'jotai';
 
 import { JobApplicant } from '@jobstash/jobs/core';
-import {
-  LinkedAccounts,
-  NOTE_UPDATE_UNDO_EVENT,
-  UserWorkHistory,
-} from '@jobstash/shared/core';
+import { UserWorkHistory } from '@jobstash/shared/core';
+import { getLinkedAccountsString } from '@jobstash/shared/utils';
 
 import {
   BooleanCell,
   EcosystemActivationsCell,
   JobCell,
-  NotesCell,
   ShowcaseCell,
   SkillsCell,
   SocialsCell,
@@ -28,7 +19,6 @@ import {
   WorkHistoryCell,
 } from '@jobstash/shared/ui';
 
-import { noteUpdatePayloadAtom } from './atoms';
 import { JobApplicantActionsCell } from './job-applicant-actions-cell';
 import { CellProps } from './types';
 
@@ -183,32 +173,32 @@ export const useApplicantsTable = (orgId: string) => {
         valueGetter: (p) => p.data?.user.skills,
         comparator: (skillsA, skillsB) => skillsA.length - skillsB.length,
       },
-      {
-        headerName: 'Notes',
-        width: 320,
-        valueGetter: (p) => p.data?.note,
-        valueSetter(p) {
-          p.data.note = p.newValue;
-          return true;
-        },
-        cellRenderer: (props: CellProps) => (
-          <NotesCell note={props.data?.note} />
-        ),
-        cellStyle: { whiteSpace: 'normal', lineHeight: '1.2' },
-        editable: true,
-        cellEditor: 'agLargeTextCellEditor',
-        cellEditorPopup: true,
-        cellEditorParams: {
-          maxLength: 20_000,
-          rows: 15,
-          cols: 50,
-        },
-        sortable: true,
-        comparator(noteA, noteB) {
-          if (noteA === noteB) return 0;
-          return (noteA || '').length - (noteB || '').length;
-        },
-      },
+      // {
+      //   headerName: 'Notes',
+      //   width: 320,
+      //   valueGetter: (p) => p.data?.note,
+      //   valueSetter(p) {
+      //     p.data.note = p.newValue;
+      //     return true;
+      //   },
+      //   cellRenderer: (props: CellProps) => (
+      //     <NotesCell note={props.data?.note} />
+      //   ),
+      //   cellStyle: { whiteSpace: 'normal', lineHeight: '1.2' },
+      //   editable: true,
+      //   cellEditor: 'agLargeTextCellEditor',
+      //   cellEditorPopup: true,
+      //   cellEditorParams: {
+      //     maxLength: 20_000,
+      //     rows: 15,
+      //     cols: 50,
+      //   },
+      //   sortable: true,
+      //   comparator(noteA, noteB) {
+      //     if (noteA === noteB) return 0;
+      //     return (noteA || '').length - (noteB || '').length;
+      //   },
+      // },
       {
         headerName: 'Crypto Native',
         cellRenderer: (props: CellProps) => (
@@ -262,34 +252,35 @@ export const useApplicantsTable = (orgId: string) => {
     [orgId],
   );
 
-  const setNotePayload = useSetAtom(noteUpdatePayloadAtom);
-  const onCellEditingStopped = useCallback(
-    (e: CellEditingStoppedEvent<JobApplicant>) => {
-      const {
-        node: { data },
-        oldValue,
-        newValue,
-      } = e;
+  //
+  // const setNotePayload = useSetAtom(noteUpdatePayloadAtom);
+  // const onCellEditingStopped = useCallback(
+  //   (e: CellEditingStoppedEvent<JobApplicant>) => {
+  //     const {
+  //       node: { data },
+  //       oldValue,
+  //       newValue,
+  //     } = e;
 
-      if (data && newValue && oldValue !== newValue) {
-        setNotePayload({ wallet: data.user.wallet, note: newValue });
-      }
-    },
-    [setNotePayload],
-  );
+  //     if (data && newValue && oldValue !== newValue) {
+  //       setNotePayload({ wallet: data.user.wallet, note: newValue });
+  //     }
+  //   },
+  //   [setNotePayload],
+  // );
 
-  // Handle revert edit
-  useEffect(() => {
-    const handleUndoEvent: EventListener = () => {
-      gridRef.current!.api.undoCellEditing();
-    };
+  // // Handle revert edit
+  // useEffect(() => {
+  //   const handleUndoEvent: EventListener = () => {
+  //     gridRef.current!.api.undoCellEditing();
+  //   };
 
-    window.addEventListener(NOTE_UPDATE_UNDO_EVENT, handleUndoEvent);
+  //   window.addEventListener(NOTE_UPDATE_UNDO_EVENT, handleUndoEvent);
 
-    return () => {
-      window.removeEventListener(NOTE_UPDATE_UNDO_EVENT, handleUndoEvent);
-    };
-  }, []);
+  //   return () => {
+  //     window.removeEventListener(NOTE_UPDATE_UNDO_EVENT, handleUndoEvent);
+  //   };
+  // }, []);
 
   const onChangeQuickFilter = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -302,25 +293,11 @@ export const useApplicantsTable = (orgId: string) => {
     gridRef,
     getRowId,
     columnDefs,
-    onCellEditingStopped,
     onChangeQuickFilter,
+    //
+    // onCellEditingStopped,
   };
 };
-
-const getLinkedAccountsString = (linkedAccounts: LinkedAccounts): string =>
-  [
-    linkedAccounts.github ?? '',
-    linkedAccounts.email ?? '',
-    linkedAccounts.google ?? '',
-    linkedAccounts.telegram ?? '',
-    linkedAccounts.farcaster ?? '',
-    linkedAccounts.discord ?? '',
-    linkedAccounts.twitter ?? '',
-    linkedAccounts.apple ?? '',
-    ...linkedAccounts.wallets,
-  ]
-    .filter(Boolean)
-    .join(' ');
 
 const getWorkHistoryRepoCount = (workHistory: UserWorkHistory[]) =>
   workHistory.reduce(

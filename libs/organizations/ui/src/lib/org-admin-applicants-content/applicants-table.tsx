@@ -18,7 +18,8 @@ export const ApplicantsTable = ({ orgId, rowData }: Props) => {
     getRowId,
     columnDefs,
     onChangeQuickFilter,
-    onCellEditingStopped,
+    //
+    // onCellEditingStopped,
   } = useApplicantsTable(orgId);
 
   return (
@@ -41,7 +42,8 @@ export const ApplicantsTable = ({ orgId, rowData }: Props) => {
             cellRenderer: EmptyCellPlaceholder,
             sortable: false,
           }}
-          onCellEditingStopped={onCellEditingStopped}
+          //
+          // onCellEditingStopped={onCellEditingStopped}
         />
       </div>
     </div>
