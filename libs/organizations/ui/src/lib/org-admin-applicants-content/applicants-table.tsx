@@ -28,7 +28,6 @@ export const ApplicantsTable = ({ orgId, rowData }: Props) => {
       <div className="ag-theme-quartz" style={{ height: 750 }}>
         <AgGridReact
           ref={gridRef}
-          debug
           undoRedoCellEditing
           enableCellTextSelection
           ensureDomOrder

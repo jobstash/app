@@ -9,27 +9,23 @@ import {
 import { AgGridReact, CustomCellRendererProps } from 'ag-grid-react';
 import { useSetAtom } from 'jotai';
 
-import {
-  NOTE_UPDATE_UNDO_EVENT,
-  noteUpdatePayloadAtom,
-  UserAvailableForWork,
-} from '@jobstash/profile/core';
+import { UserAvailableForWork } from '@jobstash/shared/core';
 import {
   getNameFromTalent,
   getWorkHistoryRepoCount,
 } from '@jobstash/profile/utils';
+import { getLinkedAccountsString } from '@jobstash/shared/utils';
 
 import {
   BooleanCell,
   EcosystemActivationsCell,
   NotesCell,
-  // NotesCell,
   ShowcaseCell,
   SkillsCell,
   SocialsCell,
   UserCell,
   WorkHistoryCell,
-} from '@jobstash/profile/ui';
+} from '@jobstash/shared/ui';
 
 type CellProps = CustomCellRendererProps<UserAvailableForWork>;
 
@@ -45,10 +41,10 @@ export const useTalentsTable = () => {
     () => [
       {
         headerName: 'User',
-        width: 280,
+        width: 320,
         cellRenderer(props: CellProps) {
           if (!props.data) return null;
-          return <UserCell data={props.data} />;
+          return <UserCell user={props.data} />;
         },
         valueGetter(p) {
           if (!p.data) return '';
@@ -58,46 +54,22 @@ export const useTalentsTable = () => {
           if (!p.data) return '';
           const {
             name,
-            alternateEmails,
+            wallet,
             location: { city, country },
-            linkedAccounts: {
-              github,
-              email,
-              google,
-              telegram,
-              farcaster,
-              wallets,
-              discord,
-              twitter,
-              apple,
-            },
+            linkedAccounts,
           } = p.data;
-
-          const names = [
-            name,
-            ...alternateEmails,
-            city,
-            country,
-            github,
-            email,
-            google,
-            telegram,
-            farcaster,
-            discord,
-            twitter,
-            apple,
-            ...wallets,
-          ];
-          return names.filter(Boolean).join(' ');
+          return `${name} ${wallet} ${city} ${country} ${getLinkedAccountsString(
+            linkedAccounts,
+          )}`;
         },
       },
       {
         headerName: 'Work History',
-        width: 320,
-        cellRenderer(props: CellProps) {
-          if (!props.data) return null;
-          return <WorkHistoryCell workHistory={props.data?.workHistory} />;
-        },
+        cellRenderer: (props: CellProps) => (
+          <WorkHistoryCell workHistory={props.data?.workHistory} />
+        ),
+        width: 420,
+        autoHeight: true,
         getQuickFilterText(p) {
           if (!p.data) return '';
           return p.data.workHistory
@@ -115,56 +87,23 @@ export const useTalentsTable = () => {
       },
       {
         headerName: 'Socials',
-        width: 240,
-        cellRenderer(props: CellProps) {
-          if (!props.data) return null;
-
-          return (
-            <SocialsCell
-              alternateEmails={props.data.alternateEmails}
-              linkedAccounts={props.data.linkedAccounts}
-            />
-          );
-        },
-        sortable: true,
+        width: 320,
+        autoHeight: true,
+        cellRenderer: (props: CellProps) => (
+          <SocialsCell
+            alternateEmails={props.data?.alternateEmails}
+            linkedAccounts={props.data?.linkedAccounts}
+          />
+        ),
         getQuickFilterText(p) {
           if (!p.data) return '';
-          const {
-            alternateEmails,
-            linkedAccounts: {
-              github,
-              email,
-              google,
-              telegram,
-              farcaster,
-              wallets,
-              discord,
-              twitter,
-              apple,
-            },
-          } = p.data;
-
-          const names = [
-            ...alternateEmails,
-            github,
-            email,
-            google,
-            telegram,
-            farcaster,
-            discord,
-            twitter,
-            apple,
-            ...wallets,
-          ];
-          return names.filter(Boolean).join(' ');
+          return Object.entries(p.data.linkedAccounts)
+            .filter(([_, value]) => value)
+            .map(([key, value]) => `${key} ${value}`)
+            .join(' ');
         },
-        valueGetter(p) {
-          if (!p.data) return '';
-          return getNameFromTalent(p.data);
-        },
-        //
-        // valueGetter: (p) =>
-        //   p.data ? { github: p.data.username, ...p.data.contact } : undefined,
+        sortable: true,
+        valueGetter: (p) => (p.data ? { ...p.data.linkedAccounts } : undefined),
         comparator(contactA, contactB) {
           const countA = Object.values(contactA).filter(Boolean).length;
           const countB = Object.values(contactB).filter(Boolean).length;
@@ -174,6 +113,7 @@ export const useTalentsTable = () => {
       {
         headerName: 'Showcase',
         width: 320,
+        autoHeight: true,
         cellRenderer: (props: CellProps) => (
           <ShowcaseCell showcases={props.data?.showcases} />
         ),
@@ -191,8 +131,9 @@ export const useTalentsTable = () => {
       {
         headerName: 'Skills',
         width: 320,
+        autoHeight: true,
         cellRenderer: (props: CellProps) => (
-          <SkillsCell isMatched={false} skills={props.data?.skills} />
+          <SkillsCell tags={[]} skills={props.data?.skills} />
         ),
         getQuickFilterText(p) {
           if (!p.data) return '';
@@ -202,32 +143,32 @@ export const useTalentsTable = () => {
         valueGetter: (p) => p.data?.skills,
         comparator: (skillsA, skillsB) => skillsA.length - skillsB.length,
       },
-      {
-        headerName: 'Notes',
-        width: 320,
-        valueGetter: (p) => p.data?.note,
-        valueSetter(p) {
-          p.data.note = p.newValue;
-          return true;
-        },
-        cellRenderer: (props: CellProps) => (
-          <NotesCell note={props.data?.note} />
-        ),
-        cellStyle: { whiteSpace: 'normal', lineHeight: '1.2' },
-        editable: true,
-        cellEditor: 'agLargeTextCellEditor',
-        cellEditorPopup: true,
-        cellEditorParams: {
-          maxLength: 20_000,
-          rows: 15,
-          cols: 50,
-        },
-        sortable: true,
-        comparator(noteA, noteB) {
-          if (noteA === noteB) return 0;
-          return (noteA || '').length - (noteB || '').length;
-        },
-      },
+      // {
+      //   headerName: 'Notes',
+      //   width: 320,
+      //   valueGetter: (p) => p.data?.note,
+      //   valueSetter(p) {
+      //     p.data.note = p.newValue;
+      //     return true;
+      //   },
+      //   cellRenderer: (props: CellProps) => (
+      //     <NotesCell note={props.data?.note} />
+      //   ),
+      //   cellStyle: { whiteSpace: 'normal', lineHeight: '1.2' },
+      //   editable: true,
+      //   cellEditor: 'agLargeTextCellEditor',
+      //   cellEditorPopup: true,
+      //   cellEditorParams: {
+      //     maxLength: 20_000,
+      //     rows: 15,
+      //     cols: 50,
+      //   },
+      //   sortable: true,
+      //   comparator(noteA, noteB) {
+      //     if (noteA === noteB) return 0;
+      //     return (noteA || '').length - (noteB || '').length;
+      //   },
+      // },
       {
         headerName: 'Crypto Native',
         cellRenderer: (props: CellProps) => (
@@ -287,34 +228,35 @@ export const useTalentsTable = () => {
     [],
   );
 
-  const setNotePayload = useSetAtom(noteUpdatePayloadAtom);
-  const onCellEditingStopped = useCallback(
-    (e: CellEditingStoppedEvent<UserAvailableForWork>) => {
-      const {
-        node: { data },
-        oldValue,
-        newValue,
-      } = e;
+  //
+  // const setNotePayload = useSetAtom(noteUpdatePayloadAtom);
+  // const onCellEditingStopped = useCallback(
+  //   (e: CellEditingStoppedEvent<UserAvailableForWork>) => {
+  //     const {
+  //       node: { data },
+  //       oldValue,
+  //       newValue,
+  //     } = e;
 
-      if (data && newValue && oldValue !== newValue) {
-        setNotePayload({ wallet: data.wallet, note: newValue });
-      }
-    },
-    [setNotePayload],
-  );
+  //     if (data && newValue && oldValue !== newValue) {
+  //       setNotePayload({ wallet: data.wallet, note: newValue });
+  //     }
+  //   },
+  //   [setNotePayload],
+  // );
 
-  // Handle revert edit
-  useEffect(() => {
-    const handleUndoEvent: EventListener = () => {
-      gridRef.current!.api.undoCellEditing();
-    };
+  // // Handle revert edit
+  // useEffect(() => {
+  //   const handleUndoEvent: EventListener = () => {
+  //     gridRef.current!.api.undoCellEditing();
+  //   };
 
-    window.addEventListener(NOTE_UPDATE_UNDO_EVENT, handleUndoEvent);
+  //   window.addEventListener(NOTE_UPDATE_UNDO_EVENT, handleUndoEvent);
 
-    return () => {
-      window.removeEventListener(NOTE_UPDATE_UNDO_EVENT, handleUndoEvent);
-    };
-  }, []);
+  //   return () => {
+  //     window.removeEventListener(NOTE_UPDATE_UNDO_EVENT, handleUndoEvent);
+  //   };
+  // }, []);
 
   const onChangeQuickFilter = useCallback(
     (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -327,7 +269,8 @@ export const useTalentsTable = () => {
     gridRef,
     getRowId,
     columnDefs,
-    onCellEditingStopped,
     onChangeQuickFilter,
+    //
+    // onCellEditingStopped,
   };
 };

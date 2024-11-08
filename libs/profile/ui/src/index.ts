@@ -19,15 +19,6 @@ export { ProfileRightPanelRepoHeader } from './lib/profile-right-panel/repo-head
 export * from './lib/ratings';
 export { default as ProfileShowcaseSection } from './lib/showcase-section';
 export { default as ProfileSkillsSection } from './lib/skills-section';
-export * from './lib/table-cells/boolean-cell';
-export * from './lib/table-cells/chips-cell';
-export * from './lib/table-cells/ecosystem-activations-cell';
-export * from './lib/table-cells/notes-cell';
-export * from './lib/table-cells/showcase-cell';
-export * from './lib/table-cells/skills-cell';
-export * from './lib/table-cells/socials-cell';
-export * from './lib/table-cells/user-cell';
-export * from './lib/table-cells/work-history-cell';
 export * from './lib/table-multi-select-action-button';
 export * from './lib/table-pagination';
 export * from './lib/table-search-input';

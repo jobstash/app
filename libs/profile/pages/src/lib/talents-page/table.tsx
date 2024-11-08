@@ -1,13 +1,11 @@
 import { AgGridReact } from 'ag-grid-react';
 
-import { UserAvailableForWork } from '@jobstash/profile/core';
+import { UserAvailableForWork } from '@jobstash/shared/core';
 
 import { EmptyCellPlaceholder } from '@jobstash/profile/ui';
 
-import { QuickFilterInput } from './quick-filter-input';
 import { useTalentsTable } from './use-talents-table';
-
-const QUICK_FILTER_PLACEHOLDER = 'Search available talents ...';
+import { SearchInput } from 'libs/profile/pages/src/lib/talents-page/search-input';
 
 interface Props {
   rowData: UserAvailableForWork[] | undefined;
@@ -18,19 +16,16 @@ export const DevTalentsTable = ({ rowData }: Props) => {
     gridRef,
     getRowId,
     columnDefs,
-    onCellEditingStopped,
     onChangeQuickFilter,
+    //
+    // onCellEditingStopped,
   } = useTalentsTable();
   return (
-    <div className="flex flex-col gap-4 px-12">
-      <QuickFilterInput
-        placeholder={QUICK_FILTER_PLACEHOLDER}
-        onChange={onChangeQuickFilter}
-      />
+    <div className="flex flex-col gap-4 p-8">
+      <SearchInput onChangeFilter={onChangeQuickFilter} />
       <div className="ag-theme-quartz w-full" style={{ height: 680 }}>
         <AgGridReact
           ref={gridRef}
-          debug
           undoRedoCellEditing
           enableCellTextSelection
           ensureDomOrder
@@ -39,13 +34,13 @@ export const DevTalentsTable = ({ rowData }: Props) => {
           getRowId={getRowId}
           rowData={rowData}
           rowSelection="multiple"
-          rowHeight={120}
           columnDefs={columnDefs}
           defaultColDef={{
             cellRenderer: EmptyCellPlaceholder,
             sortable: false,
           }}
-          onCellEditingStopped={onCellEditingStopped}
+          //
+          // onCellEditingStopped={onCellEditingStopped}
         />
       </div>
     </div>
