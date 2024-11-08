@@ -100,9 +100,17 @@ export { default as Spinner } from './lib/components/spinner';
 export { default as TopBanner } from './lib/components/top-banner';
 
 // Table Cells
+export * from './lib/components/table-cells/boolean-cell';
+export * from './lib/components/table-cells/chips-cell';
+export * from './lib/components/table-cells/ecosystem-activation-cell';
 export * from './lib/components/table-cells/empty-cell-placeholder';
 export * from './lib/components/table-cells/job-cell';
+export * from './lib/components/table-cells/notes-cell';
+export * from './lib/components/table-cells/showcase-cell';
+export * from './lib/components/table-cells/skills-cell';
+export * from './lib/components/table-cells/socials-cell';
 export * from './lib/components/table-cells/user-cell';
+export * from './lib/components/table-cells/work-history-cell';
 
 // Pages
 export { default as MobileSupportPage } from './lib/pages/mobile-support-page';
