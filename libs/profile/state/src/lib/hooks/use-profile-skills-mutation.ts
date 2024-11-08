@@ -2,7 +2,7 @@ import { notifications } from '@mantine/notifications';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useAtom } from 'jotai';
 
-import { ProfileSkillsPayload } from '@jobstash/profile/core';
+import { UserSkillsPayload } from '@jobstash/shared/core';
 import { notifError, notifLoading, notifSuccess } from '@jobstash/shared/utils';
 
 import { useMwVersionContext } from '@jobstash/shared/state';
@@ -19,7 +19,7 @@ export const useProfileSkillsMutation = () => {
   const [activeRepo, setActiveRepo] = useAtom(activeProfileRepoAtom);
 
   const { isPending: isLoading, mutate } = useMutation({
-    mutationFn: (payload: ProfileSkillsPayload) => postProfileSkills(payload),
+    mutationFn: (payload: UserSkillsPayload) => postProfileSkills(payload),
     onMutate() {
       notifications.hide(TOAST_ID);
       notifLoading({

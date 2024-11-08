@@ -10,7 +10,8 @@ import {
   ModalHeader,
 } from '@nextui-org/react';
 
-import { LOCATION_FIELDS, ProfileInfo } from '@jobstash/profile/core';
+import { LOCATION_FIELDS } from '@jobstash/profile/core';
+import { UserProfile } from '@jobstash/shared/core';
 import { capitalize } from '@jobstash/shared/utils';
 
 import {
@@ -20,7 +21,7 @@ import {
 
 import { Heading } from '@jobstash/shared/ui';
 
-type Location = ProfileInfo['location'];
+type Location = UserProfile['location'];
 interface Props {
   isOpen: boolean;
   onOpenChange: (isOpen: boolean) => void;
@@ -30,7 +31,7 @@ export const LocationModal = (props: Props) => {
   const { isOpen, onOpenChange } = props;
 
   const { profileInfoData } = useProfileInfoContext();
-  const [location, setLocation] = useState<ProfileInfo['location'] | undefined>(
+  const [location, setLocation] = useState<UserProfile['location'] | undefined>(
     profileInfoData?.location,
   );
 

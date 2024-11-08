@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { ProfileShowcase } from '@jobstash/profile/core';
+import { UserShowcase } from '@jobstash/shared/core';
 
 import { type ProfileShowcaseContextProps } from '../contexts/profile-showcase-context';
 
@@ -15,7 +15,7 @@ export const useProfileShowcase = (): ProfileShowcaseContextProps => {
     isFetching,
     data,
   } = useProfileShowcaseQuery();
-  const [showcases, setShowcases] = useState<ProfileShowcase[]>([]);
+  const [showcases, setShowcases] = useState<UserShowcase[]>([]);
 
   useEffect(() => {
     if (data) {
@@ -60,7 +60,7 @@ export const useProfileShowcase = (): ProfileShowcaseContextProps => {
     useProfileShowcaseMutation(clearForm);
 
   // Exec showcase mutation
-  const mutateShowcase = (showcase: ProfileShowcase[]) => {
+  const mutateShowcase = (showcase: UserShowcase[]) => {
     mutate({
       // Only label, url required in payload
       showcase: showcase.map(({ label, url }) => ({ label, url })),

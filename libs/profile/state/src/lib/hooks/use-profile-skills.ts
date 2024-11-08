@@ -1,6 +1,6 @@
 import { useEffect, useMemo, useReducer, useState } from 'react';
 
-import { ProfileSkill } from '@jobstash/profile/core';
+import { UserSkill } from '@jobstash/shared/core';
 
 import { usePopularSkills } from '@jobstash/shared/state';
 
@@ -20,7 +20,7 @@ export const useProfileSkills = (): ProfileSkillsContextProps => {
     data,
   } = useProfileSkillsQuery();
 
-  const [createdSkills, setCreatedSkills] = useState<ProfileSkill[]>([]);
+  const [createdSkills, setCreatedSkills] = useState<UserSkill[]>([]);
   const createdSkillsIdSet = useMemo(
     () => new Set(createdSkills.map((s) => s.id)),
     [createdSkills],
@@ -32,7 +32,7 @@ export const useProfileSkills = (): ProfileSkillsContextProps => {
     [removedSkills],
   );
 
-  const [filteredData, setFilteredData] = useState<ProfileSkill[]>([]);
+  const [filteredData, setFilteredData] = useState<UserSkill[]>([]);
   useEffect(() => {
     if (data) {
       setFilteredData(
@@ -64,11 +64,11 @@ export const useProfileSkills = (): ProfileSkillsContextProps => {
 
   const { isLoading: isLoadingMutation, mutate } = useProfileSkillsMutation();
 
-  const mutateSkills = (skills: ProfileSkill[]) => {
+  const mutateSkills = (skills: UserSkill[]) => {
     mutate({ skills });
   };
 
-  const addSkill = (skill: ProfileSkill) => {
+  const addSkill = (skill: UserSkill) => {
     if (!createdSkillsIdSet.has(skill.id)) {
       setCreatedSkills((prev) => [...prev, skill]);
     }

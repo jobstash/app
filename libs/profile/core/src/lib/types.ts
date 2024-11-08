@@ -1,23 +1,18 @@
 import { type UseMutateFunction } from '@tanstack/react-query';
 import { type Infer } from 'myzod';
 
-import { MessageResponse } from '@jobstash/shared/core';
+import { MessageResponse, UserShowcasePayload } from '@jobstash/shared/core';
 
 import { ATS_PROVIDERS, PROFILE_RIGHT_PANEL_TABS } from './constants';
 import {
   atsClientSchema,
   atsPreferenceSchema,
   atsTrackedNFTSchema,
-  devTalentResponseSchema,
-  devTalentSchema,
   legacyProfileInfoContactSchema,
   linkATSPlatformPayloadSchema,
-  linkedAccountsSchema,
   orgProfileInfoPayloadSchema,
   orgProfileInfoResponseSchema,
   orgProfileInfoSchema,
-  profileInfoResponseSchema,
-  profileInfoSchema,
   profileOrgRatingPayloadSchema,
   profileOrgRatingResponseSchema,
   profileOrgReviewListResponseSchema,
@@ -33,12 +28,6 @@ import {
   profileRepoTag,
   profileRepoTagPayloadSchema,
   profileRepoTagResponseSchema,
-  profileShowcasePayloadSchema,
-  profileShowcaseResponseSchema,
-  profileShowcaseSchema,
-  profileSkillResponseSchema,
-  profileSkillSchema,
-  profileSkillsPayloadSchema,
   registerATSClientPayloadSchema,
   registerATSResponseSchema,
   retryWebhooksPayloadSchema,
@@ -69,32 +58,14 @@ export type ProfileOrgReviewListResponse = Infer<
 
 export type UserEmail = Infer<typeof userEmailSchema>;
 
-export type ProfileInfo = Infer<typeof profileInfoSchema>;
-export type ProfileInfoResponse = Infer<typeof profileInfoResponseSchema>;
-
 export type OrgProfileInfo = Infer<typeof orgProfileInfoSchema>;
 export type OrgProfileInfoPayload = Infer<typeof orgProfileInfoPayloadSchema>;
 export type OrgProfileInfoResponse = Infer<typeof orgProfileInfoResponseSchema>;
 
-export type ProfileSkill = Infer<typeof profileSkillSchema>;
-export type ProfileSkillResponse = Infer<typeof profileSkillResponseSchema>;
-export type ProfileSkillsPayload = Infer<typeof profileSkillsPayloadSchema>;
-export type ProfileSkillsMutFn = UseMutateFunction<
-  MessageResponse,
-  unknown,
-  ProfileSkillsPayload,
-  unknown
->;
-
-export type ProfileShowcase = Infer<typeof profileShowcaseSchema>;
-export type ProfileShowcaseResponse = Infer<
-  typeof profileShowcaseResponseSchema
->;
-export type ProfileShowcasePayload = Infer<typeof profileShowcasePayloadSchema>;
 export type ProfileShowcaseMutFn = UseMutateFunction<
   MessageResponse,
   unknown,
-  ProfileShowcasePayload,
+  UserShowcasePayload,
   unknown
 >;
 
@@ -134,11 +105,6 @@ export type ProfileOrgReviewPayload = Infer<
 export type ProfileOrgReviewResponse = Infer<
   typeof profileOrgReviewResponseSchema
 >;
-
-export type LinkedAccounts = Infer<typeof linkedAccountsSchema>;
-
-export type DevTalent = Infer<typeof devTalentSchema>;
-export type DevTalentResponse = Infer<typeof devTalentResponseSchema>;
 
 export type TableListOption = 'all' | 'new' | 'shortlisted' | 'archived';
 export type UpdateTableListOption = 'shortlisted' | 'archived';

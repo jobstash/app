@@ -10,9 +10,9 @@ import { AgGridReact, CustomCellRendererProps } from 'ag-grid-react';
 import { useSetAtom } from 'jotai';
 
 import {
-  DevTalent,
   NOTE_UPDATE_UNDO_EVENT,
   noteUpdatePayloadAtom,
+  UserAvailableForWork,
 } from '@jobstash/profile/core';
 import {
   getNameFromTalent,
@@ -31,17 +31,17 @@ import {
   WorkHistoryCell,
 } from '@jobstash/profile/ui';
 
-type CellProps = CustomCellRendererProps<DevTalent>;
+type CellProps = CustomCellRendererProps<UserAvailableForWork>;
 
 export const useTalentsTable = () => {
   const gridRef = useRef<AgGridReact>(null);
 
-  const getRowId: GetRowIdFunc<DevTalent> = useCallback(
+  const getRowId: GetRowIdFunc<UserAvailableForWork> = useCallback(
     ({ data: { wallet } }) => wallet,
     [],
   );
 
-  const columnDefs: ColDef<DevTalent>[] = useMemo(
+  const columnDefs: ColDef<UserAvailableForWork>[] = useMemo(
     () => [
       {
         headerName: 'User',
@@ -289,7 +289,7 @@ export const useTalentsTable = () => {
 
   const setNotePayload = useSetAtom(noteUpdatePayloadAtom);
   const onCellEditingStopped = useCallback(
-    (e: CellEditingStoppedEvent<DevTalent>) => {
+    (e: CellEditingStoppedEvent<UserAvailableForWork>) => {
       const {
         node: { data },
         oldValue,

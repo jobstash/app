@@ -1,6 +1,6 @@
 import { AgGridReact } from 'ag-grid-react';
 
-import { DevTalent } from '@jobstash/profile/core';
+import { UserAvailableForWork } from '@jobstash/profile/core';
 
 import { EmptyCellPlaceholder } from '@jobstash/profile/ui';
 
@@ -10,7 +10,7 @@ import { useTalentsTable } from './use-talents-table';
 const QUICK_FILTER_PLACEHOLDER = 'Search available talents ...';
 
 interface Props {
-  rowData: DevTalent[] | undefined;
+  rowData: UserAvailableForWork[] | undefined;
 }
 
 export const DevTalentsTable = ({ rowData }: Props) => {

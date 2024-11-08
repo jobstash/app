@@ -1,8 +1,8 @@
 import {
-  ProfileSkillResponse,
-  profileSkillResponseSchema,
-} from '@jobstash/profile/core';
-import { MW_URL } from '@jobstash/shared/core';
+  MW_URL,
+  UserSkillResponse,
+  userSkillResponseSchema,
+} from '@jobstash/shared/core';
 
 import { mwFetch } from '@jobstash/shared/data';
 
@@ -10,13 +10,13 @@ export const getProfileSkills = async () => {
   const url = `${MW_URL}/profile/skills`;
 
   const options = {
-    responseSchema: profileSkillResponseSchema,
+    responseSchema: userSkillResponseSchema,
     sentryLabel: `getProfileSkills`,
     credentials: 'include' as RequestCredentials,
     mode: 'cors' as RequestMode,
   };
 
-  const response = await mwFetch<ProfileSkillResponse>(url, options);
+  const response = await mwFetch<UserSkillResponse>(url, options);
 
   return response.data;
 };

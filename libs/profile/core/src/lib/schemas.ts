@@ -13,6 +13,7 @@ import {
   messageResponseSchema,
   repositoryInfoSchema,
   tagSchema,
+  userSkillSchema,
 } from '@jobstash/shared/core';
 
 import { ATS_PROVIDERS } from './constants';
@@ -84,45 +85,10 @@ export const legacyProfileInfoContactSchema = myzod.object({
   value: myzod.string().nullable(),
 });
 
-export const profileInfoLocationSchema = myzod.object({
-  country: myzod.string().nullable(),
-  city: myzod.string().nullable(),
-});
-
 export const userEmailSchema = myzod.object({
   email: myzod.string(),
   main: myzod.boolean(),
 });
-
-export const linkedAccountsSchema = myzod.object({
-  discord: myzod.string().nullable(),
-  telegram: myzod.string().nullable(),
-  google: myzod.string().nullable(),
-  apple: myzod.string().nullable(),
-  github: myzod.string().nullable(),
-  farcaster: myzod.string().nullable(),
-  twitter: myzod.string().nullable(),
-  email: myzod.string().nullable(),
-  wallets: myzod.array(myzod.string()),
-});
-
-export const profileInfoSchema = myzod.object({
-  wallet: myzod.string().min(1),
-  githubAvatar: myzod.string().min(1).nullable(),
-  name: myzod.string().min(1).nullable(),
-  alternateEmails: myzod.array(myzod.string()),
-  location: profileInfoLocationSchema,
-  availableForWork: myzod.boolean().nullable(),
-  linkedAccounts: linkedAccountsSchema,
-});
-
-export const profileInfoResponseSchema = myzod
-  .object({
-    data: profileInfoSchema,
-    success: myzod.boolean(),
-    message: myzod.string(),
-  })
-  .allowUnknownKeys(true);
 
 const orgInternalReferenceSchema = myzod.object({
   referencePersonName: myzod.string().nullable(),
@@ -161,42 +127,8 @@ export const orgProfileInfoPayloadSchema = myzod.object({
   internalReference: orgInternalReferenceSchema,
 });
 
-export const profileSkillSchema = myzod
-  .object({
-    id: myzod.string().min(1),
-    name: myzod.string().min(1),
-    canTeach: myzod.boolean(),
-  })
-  .allowUnknownKeys(true);
-
-export const profileSkillResponseSchema = myzod.object({
-  data: myzod.array(profileSkillSchema),
-  success: myzod.boolean(),
-  message: myzod.string(),
-});
-
-export const profileSkillsPayloadSchema = myzod.object({
-  skills: myzod.array(profileSkillSchema),
-});
-
-export const profileShowcaseSchema = myzod.object({
-  id: myzod.string().min(1),
-  label: myzod.string().min(1),
-  url: myzod.string().min(1),
-});
-
-export const profileShowcaseResponseSchema = myzod.object({
-  data: myzod.array(profileShowcaseSchema),
-  success: myzod.boolean(),
-  message: myzod.string().min(1),
-});
-
-export const profileShowcasePayloadSchema = myzod.object({
-  showcase: myzod.array(myzod.omit(profileShowcaseSchema, ['id'])),
-});
-
 const profileTagsUsedSchema = myzod.intersection(
-  profileSkillSchema,
+  userSkillSchema,
   myzod.object({
     normalizedName: myzod.string().min(1),
   }),
@@ -280,54 +212,6 @@ export type UpdateApplicantListMutFn = UseMutateFunction<
   UpdateApplicantListPayload,
   unknown
 >;
-
-export const devTalentSchema = myzod.intersection(
-  profileInfoSchema,
-  myzod.object({
-    skills: myzod.array(profileSkillSchema),
-    showcases: myzod.array(profileShowcaseSchema),
-    cryptoNative: myzod.boolean(),
-    cryptoAdjacent: myzod.boolean(),
-    ecosystemActivations: myzod.array(myzod.string()),
-    workHistory: myzod.array(
-      myzod.object({
-        login: myzod.string(),
-        name: myzod.string().nullable(),
-        logoUrl: myzod.string().nullable(),
-        description: myzod.string().nullable(),
-        url: myzod.string().nullable(),
-        createdAt: myzod.number(),
-        firstContributedAt: myzod.number(),
-        lastContributedAt: myzod.number(),
-        commitsCount: myzod.number().nullable(),
-        tenure: myzod.number(),
-        cryptoNative: myzod.boolean(),
-        repositories: myzod.array(
-          myzod.object({
-            name: myzod.string().nullable(),
-            url: myzod.string(),
-            cryptoNative: myzod.boolean(),
-            firstContributedAt: myzod.number(),
-            lastContributedAt: myzod.number(),
-            description: myzod.string().nullable(),
-            commitsCount: myzod.number(),
-            skills: myzod.array(myzod.string()),
-            tenure: myzod.number(),
-            stars: myzod.number(),
-            createdAt: myzod.number(),
-          }),
-        ),
-      }),
-    ),
-    note: myzod.string().nullable(),
-    attestations: myzod.object({
-      upvotes: myzod.number().nullable(),
-      downvotes: myzod.number().nullable(),
-    }),
-  }),
-);
-
-export const devTalentResponseSchema = myzod.array(devTalentSchema);
 
 export const atsTrackedNFTSchema = myzod.object({
   id: myzod.string().nullable(),

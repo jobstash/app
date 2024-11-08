@@ -1,7 +1,7 @@
 import { notifications } from '@mantine/notifications';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { type ProfileShowcasePayload } from '@jobstash/profile/core';
+import { UserShowcasePayload } from '@jobstash/shared/core';
 import { notifError, notifLoading, notifSuccess } from '@jobstash/shared/utils';
 
 import { useMwVersionContext } from '@jobstash/shared/state';
@@ -14,8 +14,7 @@ export const useProfileShowcaseMutation = (onSuccessCb: () => void) => {
   const { mwVersion } = useMwVersionContext();
 
   const { isPending: isLoading, mutate } = useMutation({
-    mutationFn: (payload: ProfileShowcasePayload) =>
-      postProfileShowcase(payload),
+    mutationFn: (payload: UserShowcasePayload) => postProfileShowcase(payload),
 
     onMutate() {
       notifications.hide(TOAST_ID);

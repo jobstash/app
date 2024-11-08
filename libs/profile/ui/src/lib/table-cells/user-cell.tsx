@@ -1,4 +1,4 @@
-import { DevTalent } from '@jobstash/profile/core';
+import { UserAvailableForWork } from '@jobstash/shared/core';
 import { getNameFromTalent } from '@jobstash/profile/utils';
 import { formatWalletAddress, getAvatarSrc } from '@jobstash/shared/utils';
 
@@ -12,7 +12,7 @@ interface Location {
 }
 
 interface Props {
-  data: DevTalent;
+  data: UserAvailableForWork;
 }
 
 const getLocationText = (location: Location) => {

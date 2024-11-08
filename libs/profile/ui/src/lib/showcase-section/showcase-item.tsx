@@ -1,7 +1,7 @@
 import { Select, TextInput } from '@mantine/core';
 import { Button, Spinner } from '@nextui-org/react';
 
-import { ProfileShowcase } from '@jobstash/profile/core';
+import { UserShowcase } from '@jobstash/shared/core';
 import { cn } from '@jobstash/shared/utils';
 
 import { useProfileShowcaseContext } from '@jobstash/profile/state';
@@ -10,7 +10,7 @@ import DeleteItemIcon from './delete-item-icon';
 import ShowcaseItemLayout from './showcase-item-layout';
 
 interface Props {
-  showcase: ProfileShowcase;
+  showcase: UserShowcase;
 }
 
 const ShowcaseItem = ({ showcase }: Props) => {

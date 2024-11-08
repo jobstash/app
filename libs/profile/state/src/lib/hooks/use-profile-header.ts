@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { ProfileInfo } from '@jobstash/profile/core';
+import { UserProfile } from '@jobstash/shared/core';
 
 import { useProfileInfoContext } from '../contexts/profile-info-context';
 
@@ -10,7 +10,7 @@ export const useProfileHeader = () => {
   const { profileInfoData } = useProfileInfoContext();
 
   const { availableForWork, wallet, location, githubAvatar } =
-    profileInfoData ?? ({} as ProfileInfo);
+    profileInfoData ?? ({} as UserProfile);
 
   const [isAvailableForWork, setIsAvailableForWork] = useState<boolean>(false);
 

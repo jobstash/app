@@ -99,6 +99,11 @@ export { default as ShareMenuContent } from './lib/components/share-menu-content
 export { default as Spinner } from './lib/components/spinner';
 export { default as TopBanner } from './lib/components/top-banner';
 
+// Table Cells
+export * from './lib/components/table-cells/empty-cell-placeholder';
+export * from './lib/components/table-cells/job-cell';
+export * from './lib/components/table-cells/user-cell';
+
 // Pages
 export { default as MobileSupportPage } from './lib/pages/mobile-support-page';
 

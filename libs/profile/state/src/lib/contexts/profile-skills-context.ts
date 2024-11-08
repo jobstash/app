@@ -1,17 +1,17 @@
 import { createContext, useContext } from 'react';
 
-import { type ProfileSkill } from '@jobstash/profile/core';
+import { UserSkill } from '@jobstash/shared/core';
 
 export interface ProfileSkillsContextProps {
   isLoading: {
     query: boolean;
     mutation: boolean;
   };
-  skills: ProfileSkill[];
-  options: ProfileSkill[];
+  skills: UserSkill[];
+  options: UserSkill[];
   isEditing: boolean;
   toggleEdit: () => void;
-  addSkill: (skill: ProfileSkill) => void;
+  addSkill: (skill: UserSkill) => void;
   removeSkill: (id: string) => void;
   updateCanTeach: (id: string, canTeach: boolean) => void;
 }

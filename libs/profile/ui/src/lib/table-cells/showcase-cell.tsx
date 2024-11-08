@@ -1,6 +1,6 @@
 import { Link } from '@nextui-org/react';
 
-import { ProfileShowcase } from '@jobstash/profile/core';
+import { UserShowcase } from '@jobstash/shared/core';
 import { capitalize, getWebsiteText } from '@jobstash/shared/utils';
 
 import { Text } from '@jobstash/shared/ui';
@@ -8,7 +8,7 @@ import { Text } from '@jobstash/shared/ui';
 import { EmptyCellPlaceholder } from '../empty-cell-placeholder';
 
 interface Props {
-  showcases?: ProfileShowcase[];
+  showcases?: UserShowcase[];
 }
 
 export const ShowcaseCell = ({ showcases }: Props) => {

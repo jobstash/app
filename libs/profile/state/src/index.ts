@@ -11,7 +11,6 @@ export * from './lib/hooks/use-affiliation-requests';
 export * from './lib/hooks/use-all-jobs-query';
 export * from './lib/hooks/use-ats-client';
 export * from './lib/hooks/use-compensation-form';
-export * from './lib/hooks/use-dev-talents';
 export * from './lib/hooks/use-highlight-org-options';
 export * from './lib/hooks/use-link-ats-platform';
 export * from './lib/hooks/use-profile-delete-mutation';
@@ -36,6 +35,7 @@ export * from './lib/hooks/use-update-main-email';
 export * from './lib/hooks/use-update-note';
 export * from './lib/hooks/use-update-note';
 export * from './lib/hooks/use-user-review';
+export * from './lib/hooks/use-users-available-for-work';
 export * from './lib/hooks/use-work-history';
 export * from './lib/hooks/use-your-contribution-mutation';
 

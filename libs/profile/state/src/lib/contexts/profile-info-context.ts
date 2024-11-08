@@ -1,10 +1,10 @@
 import { createContext, useContext } from 'react';
 
-import { ProfileInfo } from '@jobstash/profile/core';
+import { UserProfile } from '@jobstash/shared/core';
 
 interface ProfileInfoContextProps {
   isLoading: boolean;
-  profileInfoData: ProfileInfo | undefined;
+  profileInfoData: UserProfile | undefined;
 }
 
 export const ProfileInfoContext = createContext<ProfileInfoContextProps | null>(

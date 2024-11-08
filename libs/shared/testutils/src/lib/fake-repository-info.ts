@@ -9,6 +9,4 @@ export const fakeRepositoryInfo = (): RepositoryInfo => ({
   name: faker.internet.domainName(),
   description: faker.lorem.sentences({ min: 1, max: 3 }),
   timestamp: fakeNullable(faker.date.past().getDate()),
-  projectName: fakeNullable(faker.commerce.product()),
-  committers: fakeNullable(faker.number.int({ min: 1, max: 50 })),
 });

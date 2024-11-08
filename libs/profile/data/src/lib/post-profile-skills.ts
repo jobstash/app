@@ -1,16 +1,14 @@
 import {
-  type ProfileSkillsPayload,
-  profileSkillsPayloadSchema,
-} from '@jobstash/profile/core';
-import {
   type MessageResponse,
   messageResponseSchema,
   MW_URL,
+  UserSkillsPayload,
+  userSkillsPayloadSchema,
 } from '@jobstash/shared/core';
 
 import { mwFetch } from '@jobstash/shared/data';
 
-export const postProfileSkills = async (payload: ProfileSkillsPayload) => {
+export const postProfileSkills = async (payload: UserSkillsPayload) => {
   const url = `${MW_URL}/profile/skills`;
 
   const options = {
@@ -20,7 +18,7 @@ export const postProfileSkills = async (payload: ProfileSkillsPayload) => {
     credentials: 'include' as RequestCredentials,
     mode: 'cors' as RequestMode,
     payload,
-    payloadSchema: profileSkillsPayloadSchema,
+    payloadSchema: userSkillsPayloadSchema,
     headers: {
       'Content-Type': 'application/json',
     },
@@ -28,7 +26,7 @@ export const postProfileSkills = async (payload: ProfileSkillsPayload) => {
 
   const { success, message } = await mwFetch<
     MessageResponse,
-    ProfileSkillsPayload
+    UserSkillsPayload
   >(url, options);
 
   if (!success) throw new Error(message);

@@ -2,7 +2,7 @@ import { useMemo } from 'react';
 
 import { Link } from '@nextui-org/react';
 
-import { LinkedAccounts } from '@jobstash/profile/core';
+import { LinkedAccounts } from '@jobstash/shared/core';
 import { getContactLink } from '@jobstash/profile/utils';
 import { capitalize } from '@jobstash/shared/utils';
 

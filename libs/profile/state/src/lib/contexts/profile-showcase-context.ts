@@ -5,7 +5,7 @@ import {
   useContext,
 } from 'react';
 
-import { type ProfileShowcase } from '@jobstash/profile/core';
+import { UserShowcase } from '@jobstash/shared/core';
 
 export interface ProfileShowcaseContextProps {
   isLoading: {
@@ -14,9 +14,9 @@ export interface ProfileShowcaseContextProps {
   };
   options: string[];
   addOption: (option: string) => void;
-  showcases: ProfileShowcase[];
-  editedShowcase: ProfileShowcase;
-  setEditedShowcase: Dispatch<SetStateAction<ProfileShowcase>>;
+  showcases: UserShowcase[];
+  editedShowcase: UserShowcase;
+  setEditedShowcase: Dispatch<SetStateAction<UserShowcase>>;
   displayForm: boolean;
   addShowcase: () => void;
   removeShowcase: (id: string) => void;

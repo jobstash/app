@@ -255,3 +255,137 @@ export const jobPostSchema = myzod
     }),
   )
   .allowUnknownKeys(true);
+
+export const linkedAccountsSchema = myzod.object({
+  discord: myzod.string().nullable(),
+  telegram: myzod.string().nullable(),
+  google: myzod.string().nullable(),
+  apple: myzod.string().nullable(),
+  github: myzod.string().nullable(),
+  farcaster: myzod.string().nullable(),
+  twitter: myzod.string().nullable(),
+  email: myzod.string().nullable(),
+  wallets: myzod.array(myzod.string()),
+});
+export type LinkedAccounts = Infer<typeof linkedAccountsSchema>;
+
+export const userLocationSchema = myzod.object({
+  country: myzod.string().nullable(),
+  city: myzod.string().nullable(),
+});
+export type UserProfileLocation = Infer<typeof userLocationSchema>;
+
+export const userProfileSchema = myzod.object({
+  wallet: myzod.string().min(1),
+  githubAvatar: myzod.string().min(1).nullable(),
+  name: myzod.string().min(1).nullable(),
+  alternateEmails: myzod.array(myzod.string()),
+  location: userLocationSchema,
+  availableForWork: myzod.boolean().nullable(),
+  linkedAccounts: linkedAccountsSchema,
+});
+export type UserProfile = Infer<typeof userProfileSchema>;
+
+export const userProfileResponseSchema = myzod
+  .object({
+    data: userProfileSchema,
+    success: myzod.boolean(),
+    message: myzod.string(),
+  })
+  .allowUnknownKeys(true);
+export type UserProfileResponse = Infer<typeof userProfileResponseSchema>;
+
+export const userWorkHistorySchema = myzod.object({
+  login: myzod.string(),
+  name: myzod.string().nullable(),
+  logoUrl: myzod.string().nullable(),
+  description: myzod.string().nullable(),
+  url: myzod.string().nullable(),
+  firstContributedAt: myzod.number(),
+  lastContributedAt: myzod.number(),
+  commitsCount: myzod.number().nullable(),
+  tenure: myzod.number(),
+  cryptoNative: myzod.boolean(),
+  repositories: myzod.array(
+    myzod.object({
+      name: myzod.string().nullable(),
+      url: myzod.string(),
+      cryptoNative: myzod.boolean(),
+      firstContributedAt: myzod.number(),
+      lastContributedAt: myzod.number(),
+      description: myzod.string().nullable(),
+      commitsCount: myzod.number(),
+      skills: myzod.array(myzod.string()),
+      tenure: myzod.number(),
+      stars: myzod.number(),
+      createdAt: myzod.number(),
+    }),
+  ),
+  createdAt: myzod.number(),
+});
+export type UserWorkHistory = Infer<typeof userWorkHistorySchema>;
+
+export const userSkillSchema = myzod
+  .object({
+    id: myzod.string().min(1),
+    name: myzod.string().min(1),
+    canTeach: myzod.boolean(),
+  })
+  .allowUnknownKeys(true);
+export type UserSkill = Infer<typeof userSkillSchema>;
+
+export const userSkillResponseSchema = myzod.object({
+  data: myzod.array(userSkillSchema),
+  success: myzod.boolean(),
+  message: myzod.string(),
+});
+export type UserSkillResponse = Infer<typeof userSkillResponseSchema>;
+
+export const userSkillsPayloadSchema = myzod.object({
+  skills: myzod.array(userSkillSchema),
+});
+export type UserSkillsPayload = Infer<typeof userSkillsPayloadSchema>;
+
+export const userShowcaseSchema = myzod.object({
+  id: myzod.string().min(1),
+  label: myzod.string().min(1),
+  url: myzod.string().min(1),
+});
+export type UserShowcase = Infer<typeof userShowcaseSchema>;
+
+export const userShowcaseResponseSchema = myzod.object({
+  data: myzod.array(userShowcaseSchema),
+  success: myzod.boolean(),
+  message: myzod.string().min(1),
+});
+export type UserShowcaseResponse = Infer<typeof userShowcaseResponseSchema>;
+
+export const userShowcasePayloadSchema = myzod.object({
+  showcase: myzod.array(myzod.omit(userShowcaseSchema, ['id'])),
+});
+export type UserShowcasePayload = Infer<typeof userShowcasePayloadSchema>;
+
+export const userAvailableForWorkSchema = myzod.intersection(
+  userProfileSchema,
+  myzod.object({
+    cryptoNative: myzod.boolean(),
+    cryptoAdjacent: myzod.boolean(),
+    attestations: myzod.object({
+      upvotes: myzod.number().nullable(),
+      downvotes: myzod.number().nullable(),
+    }),
+    note: myzod.string().nullable(),
+    ecosystemActivations: myzod.array(myzod.string()),
+    skills: myzod.array(userSkillSchema),
+    showcases: myzod.array(userShowcaseSchema),
+    workHistory: myzod.array(userWorkHistorySchema),
+  }),
+);
+export type UserAvailableForWork = Infer<typeof userAvailableForWorkSchema>;
+
+export const userAvailableForWorkResponseSchema = myzod.array(
+  userAvailableForWorkSchema,
+);
+export type UserAvailableForWorkResponse = Infer<
+  typeof userAvailableForWorkResponseSchema
+>;

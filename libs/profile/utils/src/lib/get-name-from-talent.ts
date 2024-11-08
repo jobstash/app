@@ -1,4 +1,4 @@
-import { LinkedAccounts } from '@jobstash/profile/core';
+import { LinkedAccounts } from '@jobstash/shared/core';
 import { formatWalletAddress } from '@jobstash/shared/utils';
 
 interface Props {

@@ -1,7 +1,7 @@
 import { Link, Tooltip } from '@nextui-org/react';
 
 import { JobApplicant } from '@jobstash/jobs/core';
-import { DevTalent } from '@jobstash/profile/core';
+import { UserAvailableForWork } from '@jobstash/shared/core';
 import { getLogoUrl, shortTimestamp2 } from '@jobstash/shared/utils';
 
 import { Avatar, GithubLogoOutlineIcon, Text } from '@jobstash/shared/ui';
@@ -115,7 +115,7 @@ const TooltipContent = ({
 };
 
 interface Props {
-  workHistory?: DevTalent['workHistory'];
+  workHistory?: UserAvailableForWork['workHistory'];
 }
 
 export const WorkHistoryCell = ({ workHistory }: Props) => {

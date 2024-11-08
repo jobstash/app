@@ -9,11 +9,14 @@ import { type UseMutateFunction } from '@tanstack/react-query';
 
 import {
   type ProfileRepo,
-  type ProfileSkill,
-  type ProfileSkillsPayload,
   type ProfileTabOptions,
 } from '@jobstash/profile/core';
-import { MessageResponse, Tag } from '@jobstash/shared/core';
+import {
+  MessageResponse,
+  Tag,
+  UserSkill,
+  UserSkillsPayload,
+} from '@jobstash/shared/core';
 
 interface ProfileRepoPageContextProps {
   profileRepoCount: number | null;
@@ -29,12 +32,8 @@ interface ProfileRepoPageContextProps {
   isLoadingCard: boolean;
   setIsLoadingCard: Dispatch<SetStateAction<boolean>>;
   isLoadingSkills: boolean;
-  userSkills: ProfileSkill[];
-  mutateSkills: UseMutateFunction<
-    MessageResponse,
-    unknown,
-    ProfileSkillsPayload
-  >;
+  userSkills: UserSkill[];
+  mutateSkills: UseMutateFunction<MessageResponse, unknown, UserSkillsPayload>;
 }
 
 export const ProfileRepoPageContext =

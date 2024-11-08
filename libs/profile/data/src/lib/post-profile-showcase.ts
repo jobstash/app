@@ -1,16 +1,14 @@
 import {
-  type ProfileShowcasePayload,
-  profileShowcasePayloadSchema,
-} from '@jobstash/profile/core';
-import {
   type MessageResponse,
   messageResponseSchema,
   MW_URL,
+  UserShowcasePayload,
+  userShowcasePayloadSchema,
 } from '@jobstash/shared/core';
 
 import { mwFetch } from '@jobstash/shared/data';
 
-export const postProfileShowcase = async (payload: ProfileShowcasePayload) => {
+export const postProfileShowcase = async (payload: UserShowcasePayload) => {
   const url = `${MW_URL}/profile/showcase`;
 
   const options = {
@@ -20,7 +18,7 @@ export const postProfileShowcase = async (payload: ProfileShowcasePayload) => {
     credentials: 'include' as RequestCredentials,
     mode: 'cors' as RequestMode,
     payload,
-    payloadSchema: profileShowcasePayloadSchema,
+    payloadSchema: userShowcasePayloadSchema,
     headers: {
       'Content-Type': 'application/json',
     },
@@ -28,7 +26,7 @@ export const postProfileShowcase = async (payload: ProfileShowcasePayload) => {
 
   const { success, message } = await mwFetch<
     MessageResponse,
-    ProfileShowcasePayload
+    UserShowcasePayload
   >(url, options);
 
   if (!success) throw new Error(message);
