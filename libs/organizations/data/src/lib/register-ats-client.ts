@@ -4,7 +4,7 @@ import {
   registerATSClientPayloadSchema,
   RegisterATSResponse,
   registerATSResponseSchema,
-} from '@jobstash/profile/core';
+} from '@jobstash/organizations/core';
 import { MW_URL } from '@jobstash/shared/core';
 
 import { mwFetch } from '@jobstash/shared/data';

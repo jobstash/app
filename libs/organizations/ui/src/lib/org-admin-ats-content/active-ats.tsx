@@ -1,4 +1,4 @@
-import { useATSClient } from '@jobstash/profile/state';
+import { useATSClient } from '@jobstash/organizations/state';
 
 import { ActiveATSForm } from './active-ats-form';
 import { Nfts } from './nfts';

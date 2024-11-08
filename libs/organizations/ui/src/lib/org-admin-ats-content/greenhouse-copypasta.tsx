@@ -3,11 +3,11 @@ import { useState } from 'react';
 
 import { Button } from '@nextui-org/react';
 
-import { ATS_PROVIDERS, ATSClient } from '@jobstash/profile/core';
+import { ATS_PROVIDERS, ATSClient } from '@jobstash/organizations/core';
 import { SCORER_URL } from '@jobstash/shared/core';
 import { notifSuccess } from '@jobstash/shared/utils';
 
-import { useRetryWebhooks } from '@jobstash/profile/state';
+import { useRetryWebhooks } from '@jobstash/organizations/state';
 
 import { Heading, ProfileWarningIcon, Text } from '@jobstash/shared/ui';
 

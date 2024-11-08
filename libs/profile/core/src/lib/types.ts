@@ -3,13 +3,8 @@ import { type Infer } from 'myzod';
 
 import { MessageResponse, UserShowcasePayload } from '@jobstash/shared/core';
 
-import { ATS_PROVIDERS, PROFILE_RIGHT_PANEL_TABS } from './constants';
+import { PROFILE_RIGHT_PANEL_TABS } from './constants';
 import {
-  atsClientSchema,
-  atsPreferenceSchema,
-  atsTrackedNFTSchema,
-  legacyProfileInfoContactSchema,
-  linkATSPlatformPayloadSchema,
   orgProfileInfoPayloadSchema,
   orgProfileInfoResponseSchema,
   orgProfileInfoSchema,
@@ -28,11 +23,6 @@ import {
   profileRepoTag,
   profileRepoTagPayloadSchema,
   profileRepoTagResponseSchema,
-  registerATSClientPayloadSchema,
-  registerATSResponseSchema,
-  retryWebhooksPayloadSchema,
-  retryWebhooksResponseSchema,
-  updateATSPreferencePayloadSchema,
   userEmailSchema,
 } from './schemas';
 import { profileRepoContributionPayloadSchema } from './schemas';
@@ -108,47 +98,8 @@ export type ProfileOrgReviewResponse = Infer<
 export type TableListOption = 'all' | 'new' | 'shortlisted' | 'archived';
 export type UpdateTableListOption = 'shortlisted' | 'archived';
 
-export type ATSTrackedNFT = Infer<typeof atsTrackedNFTSchema>;
-
-export type ATSSiteLabel =
-  typeof ATS_PROVIDERS[keyof typeof ATS_PROVIDERS]['siteLabel'];
-
-export type ATSPlatform =
-  typeof ATS_PROVIDERS[keyof typeof ATS_PROVIDERS]['platformName'];
-
-export type ATSPlatformName = Omit<
-  ATSPlatform,
-  typeof ATS_PROVIDERS['DEFAULT']['platformName']
->;
-
-export type ATSPreference = Infer<typeof atsPreferenceSchema>;
-
-export type ATSClient = Infer<typeof atsClientSchema>;
-
-export type LinkATSPlatformPayload = Infer<typeof linkATSPlatformPayloadSchema>;
-
-export type RegisterATSResponse = Infer<typeof registerATSResponseSchema>;
-export type RegisterATSClientPayload = Infer<
-  typeof registerATSClientPayloadSchema
->;
-
-export type ATSTrackedNFTItem = ATSTrackedNFT & {
-  key: string;
-};
-
-export type UpdateATSPreferencePayload = Infer<
-  typeof updateATSPreferencePayloadSchema
->;
-
-export type RetryWebhooksResponse = Infer<typeof retryWebhooksResponseSchema>;
-export type RetryWebhooksPayload = Infer<typeof retryWebhooksPayloadSchema>;
-
 export interface ProfileGotItCardStatus {
   profile: boolean;
   repositories: boolean;
   reviews: boolean;
 }
-
-export type LegacyProfileInfoContact = Infer<
-  typeof legacyProfileInfoContactSchema
->;

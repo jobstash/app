@@ -4,11 +4,11 @@ import {
   ATS_PROVIDERS,
   ATSPlatformName,
   RetryWebhooksPayload,
-} from '@jobstash/profile/core';
+} from '@jobstash/organizations/core';
 import { notifError, notifSuccess } from '@jobstash/shared/utils';
 
 import { useMwVersionContext } from '@jobstash/shared/state';
-import { retryWebhooks } from '@jobstash/profile/data';
+import { retryWebhooks } from '@jobstash/organizations/data';
 
 export const useRetryWebhooks = (platform: ATSPlatformName) => {
   const queryClient = useQueryClient();

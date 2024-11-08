@@ -9,13 +9,17 @@ import {
   useDisclosure,
 } from '@nextui-org/react';
 
-import { ATS_PROVIDERS, ATSClient, ATSPlatform } from '@jobstash/profile/core';
+import {
+  ATS_PROVIDERS,
+  ATSClient,
+  ATSPlatform,
+} from '@jobstash/organizations/core';
 import { MW_URL } from '@jobstash/shared/core';
 
 import {
   useLinkATSPlatform,
   useRegisterAtsClient,
-} from '@jobstash/profile/state';
+} from '@jobstash/organizations/state';
 
 import { Heading } from '@jobstash/shared/ui';
 
@@ -98,6 +102,7 @@ export const ActiveATSForm = ({ orgId, atsClient }: Props) => {
           async onSuccess({ id: clientId }) {
             if (clientId && orgId) {
               linkClient({
+                redirectPath: window?.location.pathname,
                 platform,
                 payload: { clientId, orgId },
               });
@@ -132,6 +137,14 @@ export const ActiveATSForm = ({ orgId, atsClient }: Props) => {
     isPendingRegister,
     isPendingLinkClient,
   ].includes(true);
+  console.log({
+    isLoading,
+    atsClient,
+    orgId,
+    isLoadingManual,
+    isPendingRegister,
+    isPendingLinkClient,
+  });
 
   const hasPreviousSelection =
     Boolean(atsClient?.name) &&

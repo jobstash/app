@@ -1,6 +1,6 @@
-import { ATS_PROVIDERS } from '@jobstash/profile/core';
+import { ATS_PROVIDERS } from '@jobstash/organizations/core';
 
-import RegisterAtsModal from './register-ats-modal';
+import { RegisterAtsModal } from './register-ats-modal';
 
 interface Props {
   orgId: string;

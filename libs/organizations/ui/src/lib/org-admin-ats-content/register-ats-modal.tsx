@@ -10,12 +10,12 @@ import {
   ModalHeader,
 } from '@nextui-org/react';
 
-import { RegisterATSClientPayload } from '@jobstash/profile/core';
+import { RegisterATSClientPayload } from '@jobstash/organizations/core';
 
 import {
   useLinkATSPlatform,
   useRegisterAtsClient,
-} from '@jobstash/profile/state';
+} from '@jobstash/organizations/state';
 
 import { Heading } from '@jobstash/shared/ui';
 
@@ -31,7 +31,7 @@ interface Props {
   headerText: string;
 }
 
-const RegisterAtsModal = ({
+export const RegisterAtsModal = ({
   orgId,
   isOpen,
   onOpenChange,
@@ -118,5 +118,3 @@ const RegisterAtsModal = ({
     </Modal>
   );
 };
-
-export default RegisterAtsModal;

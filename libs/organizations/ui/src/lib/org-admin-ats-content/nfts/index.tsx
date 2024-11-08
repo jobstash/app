@@ -8,9 +8,9 @@ import {
   ATSTrackedNFT,
   ATSTrackedNFTItem,
   UpdateATSPreferencePayload,
-} from '@jobstash/profile/core';
+} from '@jobstash/organizations/core';
 
-import { useUpdateATSPreference } from '@jobstash/profile/state';
+import { useUpdateATSPreference } from '@jobstash/organizations/state';
 
 import { Heading } from '@jobstash/shared/ui';
 

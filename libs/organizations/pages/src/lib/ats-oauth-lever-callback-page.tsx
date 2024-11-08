@@ -5,10 +5,10 @@ import { useEffect } from 'react';
 import { LoadingPage, NotFoundPage } from '@jobstash/shared/pages';
 
 import { PERMISSIONS } from '@jobstash/auth/core';
-import { ATS_PROVIDERS } from '@jobstash/profile/core';
+import { ATS_PROVIDERS } from '@jobstash/organizations/core';
 
 import { useAuthContext, useHasPermission } from '@jobstash/auth/state';
-import { useLinkATSPlatform } from '@jobstash/profile/state';
+import { useLinkATSPlatform } from '@jobstash/organizations/state';
 
 export const ATSOauthLeverCallbackPage = () => {
   const router = useRouter();

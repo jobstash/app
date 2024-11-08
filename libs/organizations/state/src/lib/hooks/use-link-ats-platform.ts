@@ -5,20 +5,19 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import {
   ATSPlatformName,
   LinkATSPlatformPayload,
-} from '@jobstash/profile/core';
+} from '@jobstash/organizations/core';
 import { notifError, notifSuccess } from '@jobstash/shared/utils';
 
 import { useMwVersionContext } from '@jobstash/shared/state';
-import { linkATSPlatform } from '@jobstash/profile/data';
-
-const ATS_SETTINGS_PAGE = '/profile/org/ats-settings';
+import { linkATSPlatform } from '@jobstash/organizations/data';
 
 interface MutationParams {
   platform: ATSPlatformName;
   payload: LinkATSPlatformPayload;
+  redirectPath?: string;
 }
 
-export const useLinkATSPlatform = (redirectPath = ATS_SETTINGS_PAGE) => {
+export const useLinkATSPlatform = () => {
   const router = useRouter();
   const queryClient = useQueryClient();
   const { mwVersion } = useMwVersionContext();
@@ -26,7 +25,7 @@ export const useLinkATSPlatform = (redirectPath = ATS_SETTINGS_PAGE) => {
   return useMutation({
     mutationFn: ({ platform, payload }: MutationParams) =>
       linkATSPlatform(platform, payload),
-    async onSuccess(_, { platform }) {
+    async onSuccess(_, { platform, redirectPath }) {
       notifSuccess({
         title: 'ATS Selection Successful!',
         message: `You have successfully linked your ${platform} account.`,

@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { useMwVersionContext } from '@jobstash/shared/state';
-import { getHighlightOrgOptions } from '@jobstash/profile/data';
+import { getHighlightOrgOptions } from '@jobstash/organizations/data';
 
 export const useHighlightOrgOptions = () => {
   const { mwVersion } = useMwVersionContext();

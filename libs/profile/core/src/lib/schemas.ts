@@ -1,6 +1,5 @@
 import { UseMutateFunction } from '@tanstack/react-query';
 import myzod, { Infer } from 'myzod';
-import { isAddress } from 'viem';
 
 import {
   orgCompensationSchema,
@@ -10,13 +9,10 @@ import {
 } from '@jobstash/organizations/core';
 import {
   MessageResponse,
-  messageResponseSchema,
   repositoryInfoSchema,
   tagSchema,
   userSkillSchema,
 } from '@jobstash/shared/core';
-
-import { ATS_PROVIDERS } from './constants';
 
 export const profileRepoTag = myzod.intersection(
   tagSchema,
@@ -212,90 +208,3 @@ export type UpdateApplicantListMutFn = UseMutateFunction<
   UpdateApplicantListPayload,
   unknown
 >;
-
-export const atsTrackedNFTSchema = myzod.object({
-  id: myzod.string().nullable(),
-  name: myzod.string(),
-  contractAddress: myzod
-    .string()
-    .withPredicate(
-      (address) => isAddress(address),
-      'Address is not a valid ethereum address',
-    ),
-  network: myzod
-    .literals(
-      'arbitrum',
-      'avalanche',
-      'base',
-      'blast',
-      'celo',
-      'ethereum',
-      'linea',
-      'optimism',
-      'palm',
-      'polygon',
-    )
-    .nullable(),
-});
-
-export const atsPreferenceSchema = myzod.object({
-  id: myzod.string().nullable(),
-  platformName: myzod.literals(
-    ATS_PROVIDERS.JOBSTASH.platformName,
-    ATS_PROVIDERS.LEVER.platformName,
-    ATS_PROVIDERS.GREENHOUSE.platformName,
-    ATS_PROVIDERS.WORKABLE.platformName,
-  ),
-  highlightOrgs: myzod.array(myzod.string()),
-  ecosystemActivations: myzod.array(atsTrackedNFTSchema),
-});
-
-export const atsClientSchema = myzod.object({
-  id: myzod.string().nullable(),
-  name: myzod.string().nullable(),
-  orgId: myzod.string().nullable(),
-  hasTags: myzod.boolean(),
-  hasWebhooks: myzod.boolean(),
-  preferences: atsPreferenceSchema.nullable(),
-  applicationCreatedSignatureToken: myzod.string().nullable().optional(),
-  candidateHiredSignatureToken: myzod.string().nullable().optional(),
-});
-
-export const linkATSPlatformPayloadSchema = myzod.object({
-  clientId: myzod.string(),
-  orgId: myzod.string(),
-});
-
-export const registerATSResponseSchema = myzod.object({
-  success: myzod.boolean(),
-  message: myzod.string(),
-  data: atsClientSchema,
-});
-
-export const registerATSClientPayloadSchema = myzod.object({
-  apiToken: myzod.string().optional(),
-  userId: myzod.string().optional(),
-  workableUrl: myzod.string().optional(),
-});
-
-export const updateATSPreferencePayloadSchema = myzod.object({
-  clientId: myzod.string(),
-  preferences: atsPreferenceSchema,
-});
-
-export const retryWebhooksResponseSchema = myzod.intersection(
-  messageResponseSchema,
-  myzod.object({
-    data: myzod
-      .object({
-        applicationCreatedSignatureToken: myzod.string(),
-        candidateHiredSignatureToken: myzod.string(),
-      })
-      .optional(),
-  }),
-);
-
-export const retryWebhooksPayloadSchema = myzod.object({
-  clientId: myzod.string(),
-  apiToken: myzod.string().nullable(),
-});

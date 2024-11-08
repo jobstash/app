@@ -6,7 +6,7 @@ import { Input } from '@nextui-org/input';
 import { Button, Chip, Select, SelectItem, Spinner } from '@nextui-org/react';
 import { isAddress } from 'viem';
 
-import { ATSTrackedNFTItem } from '@jobstash/profile/core';
+import { ATSTrackedNFTItem } from '@jobstash/organizations/core';
 
 import { useDebouncedValue } from '@jobstash/shared/state';
 

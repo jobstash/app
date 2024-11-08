@@ -1,1 +1,1 @@
-export { ATSProviderErrorPage as default } from '@jobstash/profile/pages';
+export { ATSProviderErrorPage as default } from '@jobstash/organizations/pages';

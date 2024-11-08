@@ -1,10 +1,10 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 
-import { UpdateATSPreferencePayload } from '@jobstash/profile/core';
+import { UpdateATSPreferencePayload } from '@jobstash/organizations/core';
 import { notifError, notifSuccess } from '@jobstash/shared/utils';
 
 import { useMwVersionContext } from '@jobstash/shared/state';
-import { updateATSPreference } from '@jobstash/profile/data';
+import { updateATSPreference } from '@jobstash/organizations/data';
 
 export const useUpdateATSPreference = () => {
   const queryClient = useQueryClient();

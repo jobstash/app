@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 
 import { useMwVersionContext } from '@jobstash/shared/state';
-import { getATSClient } from '@jobstash/profile/data';
+import { getATSClient } from '@jobstash/organizations/data';
 
 export const useATSClient = () => {
   const { mwVersion } = useMwVersionContext();

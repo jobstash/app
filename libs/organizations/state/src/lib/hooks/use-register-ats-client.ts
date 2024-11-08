@@ -3,10 +3,10 @@ import { useMutation } from '@tanstack/react-query';
 import {
   ATSPlatformName,
   RegisterATSClientPayload,
-} from '@jobstash/profile/core';
+} from '@jobstash/organizations/core';
 import { notifError } from '@jobstash/shared/utils';
 
-import { registerATSPlatform } from '@jobstash/profile/data';
+import { registerATSPlatform } from '@jobstash/organizations/data';
 
 interface MutationParams {
   platform: ATSPlatformName;

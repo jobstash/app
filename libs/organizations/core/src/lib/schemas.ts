@@ -1,4 +1,5 @@
 import myzod, { Infer } from 'myzod';
+import { isAddress } from 'viem';
 
 import {
   fundingRoundSchema,
@@ -13,6 +14,7 @@ import {
 } from '@jobstash/shared/core';
 
 import {
+  ATS_PROVIDERS,
   ORG_REVIEW_LOCATIONS,
   ORG_REVIEW_TIMEZONES,
   ORG_REVIEW_WORKING_HOURS,
@@ -263,3 +265,103 @@ export const orgJobListQueryPageSchema = myzod.object({
   data: myzod.array(orgJobItemSchema),
 });
 export type OrgJobListQueryPage = Infer<typeof orgJobListQueryPageSchema>;
+
+export const atsTrackedNFTSchema = myzod.object({
+  id: myzod.string().nullable(),
+  name: myzod.string(),
+  contractAddress: myzod
+    .string()
+    .withPredicate(
+      (address) => isAddress(address),
+      'Address is not a valid ethereum address',
+    ),
+  network: myzod
+    .literals(
+      'arbitrum',
+      'avalanche',
+      'base',
+      'blast',
+      'celo',
+      'ethereum',
+      'linea',
+      'optimism',
+      'palm',
+      'polygon',
+    )
+    .nullable(),
+});
+export type ATSTrackedNFT = Infer<typeof atsTrackedNFTSchema>;
+
+export const atsPreferenceSchema = myzod.object({
+  id: myzod.string().nullable(),
+  platformName: myzod.literals(
+    ATS_PROVIDERS.JOBSTASH.platformName,
+    ATS_PROVIDERS.LEVER.platformName,
+    ATS_PROVIDERS.GREENHOUSE.platformName,
+    ATS_PROVIDERS.WORKABLE.platformName,
+  ),
+  highlightOrgs: myzod.array(myzod.string()),
+  ecosystemActivations: myzod.array(atsTrackedNFTSchema),
+});
+export type ATSPreference = Infer<typeof atsPreferenceSchema>;
+
+export const atsClientSchema = myzod.object({
+  id: myzod.string().nullable(),
+  name: myzod.string().nullable(),
+  orgId: myzod.string().nullable(),
+  hasTags: myzod.boolean(),
+  hasWebhooks: myzod.boolean(),
+  preferences: atsPreferenceSchema.nullable(),
+  applicationCreatedSignatureToken: myzod.string().nullable().optional(),
+  candidateHiredSignatureToken: myzod.string().nullable().optional(),
+});
+export type ATSClient = Infer<typeof atsClientSchema>;
+
+export const linkATSPlatformPayloadSchema = myzod.object({
+  clientId: myzod.string(),
+  orgId: myzod.string(),
+});
+export type LinkATSPlatformPayload = Infer<typeof linkATSPlatformPayloadSchema>;
+
+export const registerATSResponseSchema = myzod.object({
+  success: myzod.boolean(),
+  message: myzod.string(),
+  data: atsClientSchema,
+});
+export type RegisterATSResponse = Infer<typeof registerATSResponseSchema>;
+
+export const registerATSClientPayloadSchema = myzod.object({
+  apiToken: myzod.string().optional(),
+  userId: myzod.string().optional(),
+  workableUrl: myzod.string().optional(),
+});
+export type RegisterATSClientPayload = Infer<
+  typeof registerATSClientPayloadSchema
+>;
+
+export const updateATSPreferencePayloadSchema = myzod.object({
+  clientId: myzod.string(),
+  preferences: atsPreferenceSchema,
+});
+export type UpdateATSPreferencePayload = Infer<
+  typeof updateATSPreferencePayloadSchema
+>;
+
+export const retryWebhooksResponseSchema = myzod.intersection(
+  messageResponseSchema,
+  myzod.object({
+    data: myzod
+      .object({
+        applicationCreatedSignatureToken: myzod.string(),
+        candidateHiredSignatureToken: myzod.string(),
+      })
+      .optional(),
+  }),
+);
+export type RetryWebhooksResponse = Infer<typeof retryWebhooksResponseSchema>;
+
+export const retryWebhooksPayloadSchema = myzod.object({
+  clientId: myzod.string(),
+  apiToken: myzod.string().nullable(),
+});
+export type RetryWebhooksPayload = Infer<typeof retryWebhooksPayloadSchema>;

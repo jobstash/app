@@ -1,5 +1,5 @@
 import { ATS_PROVIDERS } from './constants';
-import { ATSPreference } from './types';
+import { ATSPreference } from './schemas';
 
 export const DEFAULT_ATS_PREFERENCE: ATSPreference = {
   id: null,

@@ -2,7 +2,7 @@ import {
   ATSPlatformName,
   LinkATSPlatformPayload,
   linkATSPlatformPayloadSchema,
-} from '@jobstash/profile/core';
+} from '@jobstash/organizations/core';
 import {
   MessageResponse,
   messageResponseSchema,

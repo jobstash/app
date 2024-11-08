@@ -1,6 +1,6 @@
 import myzod, { Infer } from 'myzod';
 
-import { atsClientSchema } from '@jobstash/profile/core';
+import { atsClientSchema } from '@jobstash/organizations/core';
 import { MW_URL } from '@jobstash/shared/core';
 
 import { mwFetch } from '@jobstash/shared/data';

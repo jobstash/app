@@ -14,7 +14,6 @@ const SideBar = dynamic(() =>
   import('@jobstash/sidebar/feature').then((m) => m.SideBar),
 );
 
-const ATS_SETTINGS_PATH = '/profile/org/ats-settings';
 const DEFAULT_MESSAGE =
   'We failed to integrate with your ATS provider. Please try again.';
 
@@ -29,7 +28,7 @@ export const ATSProviderErrorPage = () => {
   const { title = ERR_INTERNAL, message = DEFAULT_MESSAGE } = router.query;
 
   const onClick = () => {
-    router.push(ATS_SETTINGS_PATH);
+    router.push('/profile');
   };
 
   return (
@@ -53,7 +52,7 @@ export const ATSProviderErrorPage = () => {
             size="md"
             onClick={onClick}
           >
-            Back to Settings
+            Back to Profile
           </Button>
         </div>
       </div>

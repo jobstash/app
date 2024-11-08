@@ -2,9 +2,9 @@ import React from 'react';
 
 import { Button, Input, Link } from '@nextui-org/react';
 
-import { ATSPlatformName } from '@jobstash/profile/core';
+import { ATSPlatformName } from '@jobstash/organizations/core';
 
-import { useRetryWebhooks } from '@jobstash/profile/state';
+import { useRetryWebhooks } from '@jobstash/organizations/state';
 
 import { ProfileWarningIcon, Text } from '@jobstash/shared/ui';
 

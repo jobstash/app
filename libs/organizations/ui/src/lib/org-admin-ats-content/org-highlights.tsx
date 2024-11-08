@@ -3,12 +3,15 @@ import { forwardRef, useEffect, useState } from 'react';
 import { Autocomplete, SelectItemProps } from '@mantine/core';
 import { Chip, Divider, Spinner } from '@nextui-org/react';
 
-import { ATSClient, DEFAULT_ATS_PREFERENCE } from '@jobstash/profile/core';
+import {
+  ATSClient,
+  DEFAULT_ATS_PREFERENCE,
+} from '@jobstash/organizations/core';
 
 import {
   useHighlightOrgOptions,
   useUpdateATSPreference,
-} from '@jobstash/profile/state';
+} from '@jobstash/organizations/state';
 
 import { Heading, Text } from '@jobstash/shared/ui';
 
