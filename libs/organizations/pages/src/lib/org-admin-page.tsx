@@ -39,7 +39,7 @@ export const OrgAdminPage = () => {
         <IsMountedWrapper>
           <OrgAdminTabs />
         </IsMountedWrapper>
-        <div className="relative pl-8">
+        <div className="pl-8">
           <OrgAdminContent org={matchedOrg} />
         </div>
       </PageWrapper>

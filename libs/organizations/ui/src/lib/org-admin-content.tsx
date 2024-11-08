@@ -7,6 +7,7 @@ import {
   orgAdminActiveTabAtom,
 } from '@jobstash/organizations/state';
 
+import { OrgAdminApplicantsContent } from './org-admin-applicants-content';
 import { OrgAdminEditOrgContent } from './org-admin-edit-org-content';
 import { OrgAdminEditJobPostsContent } from './org-admin-job-posts-content';
 interface Props {
@@ -22,6 +23,10 @@ export const OrgAdminContent = ({ org }: Props) => {
 
   if (activeTab === ORG_ADMIN_TABS.JOBS) {
     return <OrgAdminEditJobPostsContent org={org} />;
+  }
+
+  if (activeTab === ORG_ADMIN_TABS.APPLICANTS) {
+    return <OrgAdminApplicantsContent org={org} />;
   }
 
   //

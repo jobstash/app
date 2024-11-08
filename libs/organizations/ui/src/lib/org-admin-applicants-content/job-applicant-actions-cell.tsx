@@ -12,7 +12,7 @@ type Props = CellProps & {
   orgId: string;
 };
 
-export const ActionsCell = ({ data, orgId }: Props) => {
+export const JobApplicantActionsCell = ({ data, orgId }: Props) => {
   const { isPending, mutate } = useUpdateApplicantList({ orgId });
 
   const { data: shortListed, isFetching: isFetchingShortlisted } =
@@ -56,7 +56,7 @@ export const ActionsCell = ({ data, orgId }: Props) => {
           wallet={data.user.wallet}
           jobId={data.job.shortUUID}
           mutate={mutate}
-          icon={<HeartIcon className="h-8 w-8" />}
+          icon={<HeartIcon className="h-7 w-7 fill-red-500" />}
           list="shortlisted"
           isListed={isShortlisted}
           isPending={isPending}
@@ -67,7 +67,7 @@ export const ActionsCell = ({ data, orgId }: Props) => {
           wallet={data.user.wallet}
           jobId={data.job.shortUUID}
           mutate={mutate}
-          icon={<ArchiveBoxIcon className="h-8 w-8" />}
+          icon={<ArchiveBoxIcon className="h-7 w-7 fill-zinc-300" />}
           list="archived"
           isListed={isArchived}
           isPending={isPending}

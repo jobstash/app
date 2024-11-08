@@ -2,7 +2,8 @@
 	--ag-background-color: #121216;
 	--ag-foreground-color: white;
 	--ag-active-color: rgb(102, 61, 249);
-	--ag-odd-row-background-color: rgb(30,30,30);
+	--ag-row-border-color: #17161b;
+	--ag-odd-row-background-color: #17161b;
 	--ag-header-column-resize-handle-color: rgb(50,50,50);
 	--ag-font-size: 14px;
 	--ag-font-family: sans;
@@ -12,11 +13,18 @@
 	--ag-checkbox-checked-color: #2A7FC9
 }
 
-/* Note: height should match rowHeight prop */
 .ag-cell-value {
-	height: 120px;
+	/* height: 120px;
   display: flex;
   align-items: center;
 	max-height: 100px;
-	overflow-y: auto;
+	overflow-y: auto; */
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+.ag-cell {
+	display: flex;
+  align-items: center;
+	background-color: inherit;
 }

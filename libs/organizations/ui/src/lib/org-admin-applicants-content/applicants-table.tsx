@@ -4,11 +4,8 @@ import { JobApplicant } from '@jobstash/jobs/core';
 
 import { EmptyCellPlaceholder } from '@jobstash/profile/ui';
 
-import { QuickFilterInput } from '../talents-page/quick-filter-input';
-
+import { TableControls } from './table-controls';
 import { useApplicantsTable } from './use-applicants-table';
-
-const QUICK_FILTER_PLACEHOLDER = 'Search applicants ...';
 
 interface Props {
   orgId: string;
@@ -20,17 +17,14 @@ export const ApplicantsTable = ({ orgId, rowData }: Props) => {
     gridRef,
     getRowId,
     columnDefs,
-    onCellEditingStopped,
     onChangeQuickFilter,
+    onCellEditingStopped,
   } = useApplicantsTable(orgId);
 
   return (
-    <div className="flex flex-col gap-4 px-12">
-      <QuickFilterInput
-        placeholder={QUICK_FILTER_PLACEHOLDER}
-        onChange={onChangeQuickFilter}
-      />
-      <div className="ag-theme-quartz w-full" style={{ height: 700 }}>
+    <div className="flex flex-col gap-4 pr-8">
+      <TableControls onChangeFilter={onChangeQuickFilter} />
+      <div className="ag-theme-quartz" style={{ height: 750 }}>
         <AgGridReact
           ref={gridRef}
           debug
@@ -42,7 +36,6 @@ export const ApplicantsTable = ({ orgId, rowData }: Props) => {
           getRowId={getRowId}
           rowData={rowData}
           rowSelection="multiple"
-          rowHeight={120}
           columnDefs={columnDefs}
           defaultColDef={{
             cellRenderer: EmptyCellPlaceholder,

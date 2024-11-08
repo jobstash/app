@@ -161,3 +161,5 @@ export const CALENDLY_SCHEDULE_LINK =
 export const PORTAL_IDS = {
   TOP_NAV_MAIN: 'top-nav-main',
 };
+
+export const NOTE_UPDATE_UNDO_EVENT = 'note-update-undo-event';

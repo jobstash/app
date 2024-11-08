@@ -299,8 +299,3 @@ export const retryWebhooksPayloadSchema = myzod.object({
   clientId: myzod.string(),
   apiToken: myzod.string().nullable(),
 });
-
-export const updateNotePayloadSchema = myzod.object({
-  wallet: myzod.string(),
-  note: myzod.string(),
-});

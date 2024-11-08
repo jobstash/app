@@ -33,7 +33,6 @@ import {
   retryWebhooksPayloadSchema,
   retryWebhooksResponseSchema,
   updateATSPreferencePayloadSchema,
-  updateNotePayloadSchema,
   userEmailSchema,
 } from './schemas';
 import { profileRepoContributionPayloadSchema } from './schemas';
@@ -153,5 +152,3 @@ export interface ProfileGotItCardStatus {
 export type LegacyProfileInfoContact = Infer<
   typeof legacyProfileInfoContactSchema
 >;
-
-export type UpdateNotePayload = Infer<typeof updateNotePayloadSchema>;

@@ -2,7 +2,6 @@
 export * from './lib/account-card';
 export * from './lib/compensation-form';
 export * from './lib/empty-cell-placeholder';
-export * from './lib/note-update-payload-syncer';
 export * from './lib/profile-accordion';
 export { default as ProfileGotItCard } from './lib/profile-got-it-card';
 export * from './lib/profile-header';

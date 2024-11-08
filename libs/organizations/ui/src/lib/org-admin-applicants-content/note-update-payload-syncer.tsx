@@ -2,9 +2,9 @@ import { useEffect } from 'react';
 
 import { useAtom } from 'jotai';
 
-import { noteUpdatePayloadAtom } from '@jobstash/profile/core';
-
 import { useUpdateNote } from '@jobstash/profile/state';
+
+import { noteUpdatePayloadAtom } from './atoms';
 
 export const NoteUpdatePayloadSyncer = () => {
   const [payload, setPayload] = useAtom(noteUpdatePayloadAtom);

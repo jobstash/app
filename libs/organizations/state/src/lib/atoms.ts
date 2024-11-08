@@ -9,6 +9,7 @@ export const orgsPrevLinkAtom = atom<string | null>(null);
 export const ORG_ADMIN_TABS = {
   ORGANIZATION: 'Organization',
   JOBS: 'Job Posts',
+  APPLICANTS: 'Applicants',
   // PROJECTS: 'Related Projects',
 } as const;
 

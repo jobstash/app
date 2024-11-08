@@ -11,25 +11,25 @@ import { useSetAtom } from 'jotai';
 
 import { JobApplicant } from '@jobstash/jobs/core';
 import {
+  LinkedAccounts,
   NOTE_UPDATE_UNDO_EVENT,
-  noteUpdatePayloadAtom,
-} from '@jobstash/profile/core';
-import { getWorkHistoryRepoCount } from '@jobstash/profile/utils';
-import { convertFalseStringValuesToNull } from '@jobstash/shared/utils';
+  UserWorkHistory,
+} from '@jobstash/shared/core';
 
 import {
   BooleanCell,
   EcosystemActivationsCell,
+  JobCell,
   NotesCell,
   ShowcaseCell,
   SkillsCell,
   SocialsCell,
   UserCell,
   WorkHistoryCell,
-} from '@jobstash/profile/ui';
+} from '@jobstash/shared/ui';
 
-import { ActionsCell } from './actions-cell';
-import { JobCell } from './job-cell';
+import { noteUpdatePayloadAtom } from './atoms';
+import { JobApplicantActionsCell } from './job-applicant-actions-cell';
 import { CellProps } from './types';
 
 export const useApplicantsTable = (orgId: string) => {
@@ -44,6 +44,7 @@ export const useApplicantsTable = (orgId: string) => {
     () => [
       {
         headerName: 'Job',
+        width: 280,
         cellRenderer: JobCell,
         getQuickFilterText(p) {
           if (!p.data) return '';
@@ -55,82 +56,82 @@ export const useApplicantsTable = (orgId: string) => {
       },
       {
         headerName: 'User',
-        //
-        // cellRenderer: (props: CellProps) => (
-        //   <UserCell user={props.data?.user} />
-        // ),
-        // valueGetter: (p) => p.data?.user.username || p.data?.user.email,
-        // width: 280,
-        // getQuickFilterText(p) {
-        //   if (!p.data) return '';
-        //   const {
-        //     user: {
-        //       username,
-        //       email,
-        //       location: { city, country },
-        //     },
-        //   } = p.data;
-        //   return `${username} ${email} ${city} ${country}`;
-        // },
+        cellRenderer(props: CellProps) {
+          const user = props.data?.user;
+          if (!user) return null;
+
+          return <UserCell user={user} />;
+        },
+        valueGetter: (p) =>
+          p.data?.user.name || p.data?.user.linkedAccounts.email,
+        width: 320,
+        getQuickFilterText(p) {
+          if (!p.data) return '';
+          const {
+            user: {
+              name,
+              wallet,
+              location: { city, country },
+              linkedAccounts,
+            },
+          } = p.data;
+          return `${name} ${wallet} ${city} ${country} ${getLinkedAccountsString(
+            linkedAccounts,
+          )}`;
+        },
       },
       {
         headerName: 'Work History',
-        //
-        // cellRenderer: (props: CellProps) => (
-        //   <WorkHistoryCell
-        //     username={props.data?.user.username}
-        //     workHistory={props.data?.user.workHistory}
-        //   />
-        // ),
-        // width: 320,
-        // getQuickFilterText(p) {
-        //   if (!p.data) return '';
-        //   return p.data.user.workHistory
-        //     .flatMap((w) => [w.name, ...w.repositories.map((r) => r.name)])
-        //     .join(' ');
-        // },
-        // sortable: true,
-        // valueGetter: (p) => (p.data ? p.data.user.workHistory : []),
-        // comparator(workHistoryA, workHistoryB) {
-        //   const repoCountA = getWorkHistoryRepoCount(workHistoryA);
-        //   const repoCountB = getWorkHistoryRepoCount(workHistoryB);
-        //   if (repoCountA === repoCountB) return 0;
-        //   return repoCountA - repoCountB;
-        // },
+        cellRenderer: (props: CellProps) => (
+          <WorkHistoryCell workHistory={props.data?.user.workHistory} />
+        ),
+        width: 420,
+        autoHeight: true,
+        getQuickFilterText(p) {
+          if (!p.data) return '';
+          return p.data.user.workHistory
+            .flatMap((w) => [w.name, ...w.repositories.map((r) => r.name)])
+            .join(' ');
+        },
+        sortable: true,
+        valueGetter: (p) => (p.data ? p.data.user.workHistory : []),
+        comparator(workHistoryA, workHistoryB) {
+          const repoCountA = getWorkHistoryRepoCount(workHistoryA);
+          const repoCountB = getWorkHistoryRepoCount(workHistoryB);
+          if (repoCountA === repoCountB) return 0;
+          return repoCountA - repoCountB;
+        },
       },
       {
         headerName: 'Socials',
         width: 320,
-        //
-        // cellRenderer: (props: CellProps) => (
-        //   // <SocialsCell
-        //   //   socials={{
-        //   //     ...convertFalseStringValuesToNull(props.data?.user.contact),
-        //   //     github: props.data?.user.username ?? null,
-        //   //   }}
-        //   // />
-        // ),
-        // getQuickFilterText(p) {
-        //   if (!p.data) return '';
-        //   return Object.entries(p.data.user.contact)
-        //     .filter(([_, value]) => value)
-        //     .map(([key, value]) => `${key} ${value}`)
-        //     .join(' ');
-        // },
-        // sortable: true,
-        // valueGetter: (p) =>
-        //   p.data
-        //     ? { github: p.data.user.username, ...p.data.user.contact }
-        //     : undefined,
-        // comparator(contactA, contactB) {
-        //   const countA = Object.values(contactA).filter(Boolean).length;
-        //   const countB = Object.values(contactB).filter(Boolean).length;
-        //   return countA - countB;
-        // },
+        autoHeight: true,
+        cellRenderer: (props: CellProps) => (
+          <SocialsCell
+            alternateEmails={props.data?.user.alternateEmails}
+            linkedAccounts={props.data?.user.linkedAccounts}
+          />
+        ),
+        getQuickFilterText(p) {
+          if (!p.data) return '';
+          return Object.entries(p.data.user.linkedAccounts)
+            .filter(([_, value]) => value)
+            .map(([key, value]) => `${key} ${value}`)
+            .join(' ');
+        },
+        sortable: true,
+        valueGetter: (p) =>
+          p.data ? { ...p.data.user.linkedAccounts } : undefined,
+        comparator(contactA, contactB) {
+          const countA = Object.values(contactA).filter(Boolean).length;
+          const countB = Object.values(contactB).filter(Boolean).length;
+          return countA - countB;
+        },
       },
       {
         headerName: 'Showcase',
         width: 320,
+        autoHeight: true,
         cellRenderer: (props: CellProps) => (
           <ShowcaseCell showcases={props.data?.user.showcases} />
         ),
@@ -148,6 +149,25 @@ export const useApplicantsTable = (orgId: string) => {
       {
         headerName: 'Skills',
         width: 320,
+        autoHeight: true,
+        cellRenderer: (props: CellProps) => (
+          <SkillsCell
+            tags={props.data?.job.tags ?? []}
+            skills={props.data?.user.skills}
+          />
+        ),
+        getQuickFilterText(p) {
+          if (!p.data) return '';
+          return p.data.user.skills.map((s) => s.name).join(' ');
+        },
+        sortable: true,
+        valueGetter: (p) => p.data?.user.skills,
+        comparator: (skillsA, skillsB) => skillsA.length - skillsB.length,
+      },
+      {
+        headerName: 'Job Matched Skills',
+        width: 320,
+        autoHeight: true,
         cellRenderer: (props: CellProps) => (
           <SkillsCell
             isMatched
@@ -235,12 +255,8 @@ export const useApplicantsTable = (orgId: string) => {
       {
         headerName: 'Actions',
         cellRenderer: (props: CellProps) => (
-          <ActionsCell orgId={orgId} {...props} />
+          <JobApplicantActionsCell orgId={orgId} {...props} />
         ),
-        //
-        // width: 160,
-        // pinned: 'right',
-        // lockPinned: true,
       },
     ],
     [orgId],
@@ -290,3 +306,24 @@ export const useApplicantsTable = (orgId: string) => {
     onChangeQuickFilter,
   };
 };
+
+const getLinkedAccountsString = (linkedAccounts: LinkedAccounts): string =>
+  [
+    linkedAccounts.github ?? '',
+    linkedAccounts.email ?? '',
+    linkedAccounts.google ?? '',
+    linkedAccounts.telegram ?? '',
+    linkedAccounts.farcaster ?? '',
+    linkedAccounts.discord ?? '',
+    linkedAccounts.twitter ?? '',
+    linkedAccounts.apple ?? '',
+    ...linkedAccounts.wallets,
+  ]
+    .filter(Boolean)
+    .join(' ');
+
+const getWorkHistoryRepoCount = (workHistory: UserWorkHistory[]) =>
+  workHistory.reduce(
+    (sum, work) => sum + (work.repositories ? work.repositories.length : 0),
+    0,
+  );

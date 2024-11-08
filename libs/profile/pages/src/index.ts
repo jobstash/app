@@ -1,4 +1,3 @@
-export * from './lib/applicants-page';
 export * from './lib/ats-oath-lever-callback-page';
 export * from './lib/ats-provider-error-page';
 export * from './lib/ats-settings-page';

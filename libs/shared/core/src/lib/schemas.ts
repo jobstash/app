@@ -389,3 +389,9 @@ export const userAvailableForWorkResponseSchema = myzod.array(
 export type UserAvailableForWorkResponse = Infer<
   typeof userAvailableForWorkResponseSchema
 >;
+
+export const updateApplicantNotePayloadSchema = myzod.object({
+  wallet: myzod.string(),
+  note: myzod.string(),
+});
+export type UpdateApplicantNotePayload = Infer<typeof updateApplicantNotePayloadSchema>;

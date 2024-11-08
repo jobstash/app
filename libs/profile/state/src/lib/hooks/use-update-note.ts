@@ -2,14 +2,12 @@ import { notifications } from '@mantine/notifications';
 import { useMutation } from '@tanstack/react-query';
 
 import {
-  NOTE_UPDATE_UNDO_EVENT,
-  UpdateNotePayload,
-  updateNotePayloadSchema,
-} from '@jobstash/profile/core';
-import {
   MessageResponse,
   messageResponseSchema,
   MW_URL,
+  NOTE_UPDATE_UNDO_EVENT,
+  UpdateApplicantNotePayload,
+  updateApplicantNotePayloadSchema,
 } from '@jobstash/shared/core';
 import { notifError, notifLoading, notifSuccess } from '@jobstash/shared/utils';
 
@@ -17,7 +15,7 @@ import { mwFetch } from '@jobstash/shared/data';
 
 const TOAST_ID = 'update-notes-toast';
 
-const updateNote = async (payload: UpdateNotePayload) => {
+const updateNote = async (payload: UpdateApplicantNotePayload) => {
   const url = `${MW_URL}/users/note`;
 
   const options = {
@@ -27,7 +25,7 @@ const updateNote = async (payload: UpdateNotePayload) => {
     credentials: 'include' as RequestCredentials,
     mode: 'cors' as RequestMode,
     payload,
-    payloadSchema: updateNotePayloadSchema,
+    payloadSchema: updateApplicantNotePayloadSchema,
     headers: {
       'Content-Type': 'application/json',
     },
@@ -35,7 +33,7 @@ const updateNote = async (payload: UpdateNotePayload) => {
 
   const { success, message } = await mwFetch<
     MessageResponse,
-    UpdateNotePayload
+    UpdateApplicantNotePayload
   >(url, options);
 
   if (!success) throw new Error(message);
@@ -45,7 +43,7 @@ const updateNote = async (payload: UpdateNotePayload) => {
 
 export const useUpdateNote = () =>
   useMutation({
-    mutationFn: (payload: UpdateNotePayload) => updateNote(payload),
+    mutationFn: (payload: UpdateApplicantNotePayload) => updateNote(payload),
     onMutate() {
       notifications.clean();
       notifLoading({
