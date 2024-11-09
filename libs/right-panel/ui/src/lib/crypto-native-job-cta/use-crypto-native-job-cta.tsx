@@ -10,8 +10,8 @@ import { AnonTooltipContent } from './anon-tooltip-content';
 import { EligibleTooltipContent } from './eligible-tooltip-content';
 import { NotEligibleTooltipContent } from './not-eligible-tooltip-content';
 
-const ANON_TEXT = 'Check Jobs For Experts Access';
-const ELIGIBLE_TEXT = 'Get Job Concierge Access';
+const ANON_TEXT = 'Apply as Expert';
+const ELIGIBLE_TEXT = 'Get Expert Apply Link';
 const NOT_ELIGIBLE_TEXT = 'Not eligible for Job for Experts';
 const TOAST_ID = 'crypto-native-job-cta';
 const LOADING_MESSAGE = 'Analyzing your profile...';

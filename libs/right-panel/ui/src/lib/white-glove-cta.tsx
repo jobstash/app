@@ -8,7 +8,7 @@ import { Text } from '@jobstash/shared/ui';
 import { CTATooltip } from './right-panel-job-cta/cta-tooltip';
 import RightPanelCta from './right-panel-cta';
 
-const TEXT = 'White Glove Service';
+const TEXT = 'Ask Job Concierge for Advice';
 
 const TooltipContent = () => (
   <div className="flex flex-col gap-8 max-w-sm p-4 bg-darker-gray">

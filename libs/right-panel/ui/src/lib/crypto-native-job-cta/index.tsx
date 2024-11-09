@@ -38,7 +38,7 @@ export const CryptoNativeJobCTA = (props: Props) => {
         radius="sm"
         onClick={onClickLink}
       >
-        Job Concierge Apply
+        Apply as Expert
       </Button>
     );
   }
