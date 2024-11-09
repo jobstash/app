@@ -556,7 +556,8 @@ export const useOrgListTable = () => {
         newValue,
       } = e;
 
-      const hasChanged = Boolean(newValue) && oldValue !== newValue;
+      // Note: New value is undefined when aborting (presing esc) during edit
+      const hasChanged = newValue !== undefined && oldValue !== newValue;
 
       if (data && hasChanged) {
         // Using mutation directly here triggers a rerender on the table
