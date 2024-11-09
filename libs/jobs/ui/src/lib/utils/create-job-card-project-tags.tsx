@@ -28,7 +28,8 @@ export const createJobCardProjectTags = (project: ProjectInfo) => {
     monthlyFees,
     monthlyRevenue,
     category,
-    isMainnet,
+    //
+    // isMainnet,
   } = project;
 
   if (tokenSymbol)
@@ -47,12 +48,13 @@ export const createJobCardProjectTags = (project: ProjectInfo) => {
     });
   }
 
-  if (isMainnet)
-    projectInfoTags.push({
-      id: TAG_ELEMENT_ID.mainnet,
-      text: 'Mainnet',
-      icon: <MainnetIcon />,
-    });
+  //
+  // if (isMainnet)
+  //   projectInfoTags.push({
+  //     id: TAG_ELEMENT_ID.mainnet,
+  //     text: 'Mainnet',
+  //     icon: <MainnetIcon />,
+  //   });
 
   if (tvl)
     projectTvlTags.push({
