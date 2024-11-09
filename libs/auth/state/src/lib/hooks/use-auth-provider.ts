@@ -25,15 +25,6 @@ export const useAuthProvider = () => {
   const { cryptoNative, permissions } = checkWalletResponse;
   const hasPermission = permissions.length > 0;
 
-  useEffect(() => {
-    const localCheckWalletResponse = localStorage.getItem(
-      LOCAL_STORAGE_KEYS.CHECK_WALLET_RESPONSE,
-    );
-    if (localCheckWalletResponse && !hasPermission) {
-      setCheckWalletResponse(JSON.parse(localCheckWalletResponse));
-    }
-  }, [hasPermission]);
-
   const {
     authenticated: isLoggedIn,
     user,
@@ -56,6 +47,21 @@ export const useAuthProvider = () => {
       setCheckWalletResponse(response);
     },
   });
+
+  useEffect(() => {
+    const localCheckWalletResponse = localStorage.getItem(
+      LOCAL_STORAGE_KEYS.CHECK_WALLET_RESPONSE,
+    );
+
+    if (!localCheckWalletResponse) {
+      setupLocal();
+      return;
+    }
+
+    if (localCheckWalletResponse && !hasPermission) {
+      setCheckWalletResponse(JSON.parse(localCheckWalletResponse));
+    }
+  }, [hasPermission, setupLocal]);
 
   const [isCreatingWallet, setIsCreatingWallet] = useState(false);
 
