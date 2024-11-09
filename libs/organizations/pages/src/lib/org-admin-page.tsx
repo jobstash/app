@@ -15,14 +15,9 @@ import {
   orgAdminActiveTabAtom,
 } from '@jobstash/organizations/state';
 import { useAffiliationRequests } from '@jobstash/profile/state';
-import { useIsDesktop } from '@jobstash/shared/state';
 
 import { OrgAdminContent, OrgAdminTabs } from '@jobstash/organizations/ui';
-import {
-  IsMountedWrapper,
-  MobileSupportPage,
-  PageWrapper,
-} from '@jobstash/shared/ui';
+import { IsMountedWrapper, PageWrapper } from '@jobstash/shared/ui';
 
 const SideBar = dynamic(() =>
   import('@jobstash/sidebar/feature').then((m) => m.SideBar),
@@ -43,9 +38,6 @@ export const OrgAdminPage = () => {
     setFormTab('details');
   }, [setMainTab, query.slug, setFormTab]);
 
-  const isDesktop = useIsDesktop();
-  if (!isDesktop) return <MobileSupportPage />;
-
   if (!orgs) return <LoadingPage />;
 
   const matchedOrg = getUserOrgBySlug(orgs, query.slug);
@@ -64,7 +56,7 @@ export const OrgAdminPage = () => {
         <IsMountedWrapper>
           <OrgAdminTabs />
         </IsMountedWrapper>
-        <div className="pl-8">
+        <div className="pl-8 pt-32 lg:pt-0">
           <OrgAdminContent org={matchedOrg} />
         </div>
       </PageWrapper>
