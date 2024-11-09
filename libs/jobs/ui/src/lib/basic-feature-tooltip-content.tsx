@@ -9,7 +9,7 @@ const tier = {
   name: 'Basic',
   pricePerJob: '$200',
   description:
-    'Checkout our new feature! Enjoy featuring jobs at a discounted price for the next two weeks!',
+    'Promote your jobs for extra reach, and pay with any token on most EVM networks, secured by LlamaPay!',
   features: [
     'Feature this job for one week',
     '2x the applicants',
