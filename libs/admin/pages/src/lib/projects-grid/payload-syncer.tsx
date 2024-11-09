@@ -12,7 +12,7 @@ import {
 export const ProjectsGridPayloadSyncer = () => {
   const [atomValue, setAtomValue] = useAtom(projectsGridEditRowPayloadAtom);
 
-  const { mutate } = useUpdateProject(atomValue?.id ?? '');
+  const { mutate } = useUpdateProject(atomValue?.id ?? '', false);
 
   useEffect(() => {
     if (atomValue) {

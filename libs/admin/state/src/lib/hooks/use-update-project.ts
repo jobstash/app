@@ -9,7 +9,10 @@ import { updateProject } from '@jobstash/admin/data';
 
 const TOAST_ID = 'update-project-toast';
 
-export const useUpdateProject = (projectId: string) => {
+export const useUpdateProject = (
+  projectId: string,
+  shouldInvalidate = true,
+) => {
   const queryClient = useQueryClient();
   const { mwVersion } = useMwVersionContext();
 
@@ -33,13 +36,15 @@ export const useUpdateProject = (projectId: string) => {
         autoClose: 10_000,
       });
 
-      queryClient.invalidateQueries({
-        queryKey: [mwVersion, 'project-details', projectId, undefined],
-      });
+      if (shouldInvalidate) {
+        queryClient.invalidateQueries({
+          queryKey: [mwVersion, 'project-details', projectId, undefined],
+        });
 
-      queryClient.invalidateQueries({
-        queryKey: [mwVersion, 'all-projects'],
-      });
+        queryClient.invalidateQueries({
+          queryKey: [mwVersion, 'all-projects'],
+        });
+      }
     },
     onError(data) {
       notifError({

@@ -9,7 +9,7 @@ import { orgEditRowPayloadAtom, useUpdateOrg } from '@jobstash/admin/state';
 
 export const OrgUpdatePayloadSyncer = () => {
   const [dataPayload, setDataPayload] = useAtom(orgEditRowPayloadAtom);
-  const { mutate } = useUpdateOrg();
+  const { mutate } = useUpdateOrg(false);
 
   useEffect(() => {
     if (dataPayload) {
