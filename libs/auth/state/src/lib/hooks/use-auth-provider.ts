@@ -2,12 +2,13 @@ import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 
 import { useLogin, useLogout, usePrivy } from '@privy-io/react-auth';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { CheckWalletResponse } from '@jobstash/auth/core';
 import { LOCAL_STORAGE_KEYS } from '@jobstash/shared/core';
 import { sentryMessage } from '@jobstash/shared/utils';
 
+import { useMwVersionContext } from '@jobstash/shared/state';
 import { getCheckWallet } from '@jobstash/auth/data';
 
 import { useHasEmbeddedWallet } from './use-has-embedded-wallet';
@@ -24,6 +25,15 @@ export const useAuthProvider = () => {
   const { cryptoNative, permissions } = checkWalletResponse;
   const hasPermission = permissions.length > 0;
 
+  useEffect(() => {
+    const localCheckWalletResponse = localStorage.getItem(
+      LOCAL_STORAGE_KEYS.CHECK_WALLET_RESPONSE,
+    );
+    if (localCheckWalletResponse && !hasPermission) {
+      setCheckWalletResponse(JSON.parse(localCheckWalletResponse));
+    }
+  }, [hasPermission]);
+
   const {
     authenticated: isLoggedIn,
     user,
@@ -39,6 +49,10 @@ export const useAuthProvider = () => {
       const accessToken = await getAccessToken();
       const response = await getCheckWallet(accessToken);
       localStorage.setItem(LOCAL_STORAGE_KEYS.AUTH_JWT, response.token);
+      localStorage.setItem(
+        LOCAL_STORAGE_KEYS.CHECK_WALLET_RESPONSE,
+        JSON.stringify(response),
+      );
       setCheckWalletResponse(response);
     },
   });
@@ -71,6 +85,8 @@ export const useAuthProvider = () => {
     ready,
   ]);
 
+  const isLoading = isLoadingSetup || !ready || isCreatingWallet;
+
   // Setup local after privy login
   const { login } = useLogin({
     onComplete(_user) {
@@ -78,19 +94,21 @@ export const useAuthProvider = () => {
     },
   });
 
-  // Setup local on page blur
-  useEffect(() => {
-    if (isLoggedIn && !hasPermission) {
-      setupLocal();
-    }
-  }, [isLoggedIn, hasPermission, setupLocal]);
-
   const isAuthenticated = isLoggedIn && hasPermission && hasEmbeddedWallet;
+
+  const queryClient = useQueryClient();
+  const { mwVersion } = useMwVersionContext();
 
   const { logout: privyLogout } = useLogout({
     async onSuccess() {
       setCheckWalletResponse(DEFAULT_CHECK_WALLET_RESPONSE);
       localStorage.removeItem(LOCAL_STORAGE_KEYS.AUTH_JWT);
+      localStorage.removeItem(LOCAL_STORAGE_KEYS.CHECK_WALLET_RESPONSE);
+      queryClient.cancelQueries();
+      queryClient.clear();
+      await queryClient.invalidateQueries({
+        queryKey: [mwVersion],
+      });
     },
   });
 
@@ -107,7 +125,7 @@ export const useAuthProvider = () => {
     user,
     permissions,
     isCryptoNative: cryptoNative,
-    isLoading: isLoadingSetup || !ready || isCreatingWallet,
+    isLoading,
     isLoadingLogout,
     isLoggedIn,
     isAuthenticated,

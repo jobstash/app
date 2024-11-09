@@ -153,6 +153,7 @@ export const SESSION_STORAGE_KEYS = {
 
 export const LOCAL_STORAGE_KEYS = {
   AUTH_JWT: 'jobstash:jwt',
+  CHECK_WALLET_RESPONSE: 'jobstash:check-wallet-response',
 } as const;
 
 export const CALENDLY_SCHEDULE_LINK =
