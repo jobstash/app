@@ -4,8 +4,8 @@ import { UserAvailableForWork } from '@jobstash/shared/core';
 
 import { EmptyCellPlaceholder } from '@jobstash/profile/ui';
 
+import { SearchInput } from './search-input';
 import { useTalentsTable } from './use-talents-table';
-import { SearchInput } from 'libs/profile/pages/src/lib/talents-page/search-input';
 
 interface Props {
   rowData: UserAvailableForWork[] | undefined;

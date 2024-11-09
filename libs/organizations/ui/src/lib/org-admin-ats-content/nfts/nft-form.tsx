@@ -70,10 +70,10 @@ export const NFTForm = ({ isPending, nft, save, remove }: Props) => {
   };
 
   const debouncedAddress = useDebouncedValue(formState.contractAddress, 1000);
-  const isValidAddress = useMemo(() => {
-    console.log(debouncedAddress);
-    return isAddress(debouncedAddress);
-  }, [debouncedAddress]);
+  const isValidAddress = useMemo(
+    () => isAddress(debouncedAddress),
+    [debouncedAddress],
+  );
 
   const isUpdated = JSON.stringify(nft) !== JSON.stringify(formState);
   const isDisabledSave = [

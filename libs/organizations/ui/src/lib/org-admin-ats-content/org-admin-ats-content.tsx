@@ -6,12 +6,8 @@ interface Props {
   org: AffiliatedOrganization;
 }
 
-export const OrgAdminAtsContent = ({ org }: Props) => {
-  console.log('TODO');
-
-  return (
-    <div className="flex flex-col gap-16 p-12">
-      <ActiveATS />
-    </div>
-  );
-};
+export const OrgAdminAtsContent = ({ org }: Props) => (
+  <div className="flex flex-col gap-16 p-12">
+    <ActiveATS />
+  </div>
+);

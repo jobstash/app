@@ -137,14 +137,6 @@ export const ActiveATSForm = ({ orgId, atsClient }: Props) => {
     isPendingRegister,
     isPendingLinkClient,
   ].includes(true);
-  console.log({
-    isLoading,
-    atsClient,
-    orgId,
-    isLoadingManual,
-    isPendingRegister,
-    isPendingLinkClient,
-  });
 
   const hasPreviousSelection =
     Boolean(atsClient?.name) &&
