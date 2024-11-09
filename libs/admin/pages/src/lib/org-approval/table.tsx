@@ -16,7 +16,7 @@ import { prettyTimestamp } from '@jobstash/shared/utils';
 
 import { useAdminAffiliationRequests } from '@jobstash/admin/state';
 
-import { Text } from '@jobstash/shared/ui';
+import { EmptyCellPlaceholder, Text } from '@jobstash/shared/ui';
 
 import { ActionsCell } from './actions-cell';
 import { activeTabAtom } from './atoms';
@@ -48,10 +48,12 @@ export const OrgApprovalTable = () => {
         }
 
         case 'timestamp': {
+          if (!timestamp) return <EmptyCellPlaceholder />;
           return <span>{prettyTimestamp(timestamp)}</span>;
         }
 
         case 'status': {
+          if (!status) return <EmptyCellPlaceholder />;
           return <StatusCell status={status} />;
         }
 

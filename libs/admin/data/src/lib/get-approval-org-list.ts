@@ -8,7 +8,7 @@ export const getApprovalOrgList = async (status: 'pending' | 'approved') => {
 
   const options = {
     responseSchema: orgProfileListSchema,
-    sentryLabel: `getGodmodeBlockedTags`,
+    sentryLabel: `getApprovalOrgList`,
     credentials: 'include' as RequestCredentials,
     mode: 'cors' as RequestMode,
   };

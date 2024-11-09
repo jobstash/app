@@ -15,7 +15,7 @@ export const getAdminAffiliationRequests = async (
 
   const options = {
     responseSchema: affiliationRequestResponseSchema,
-    sentryLabel: `getGodmodeBlockedTags`,
+    sentryLabel: `getAdminAffiliationRequests`,
     credentials: 'include' as RequestCredentials,
     mode: 'cors' as RequestMode,
   };

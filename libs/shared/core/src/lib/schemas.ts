@@ -215,8 +215,8 @@ export const reportPayloadSchema = myzod.object({
 export const affiliationRequestItemSchema = myzod.object({
   wallet: myzod.string(),
   orgId: myzod.string(),
-  status: myzod.literals('pending', 'approved', 'rejected'),
-  timestamp: myzod.number(),
+  status: myzod.literals('pending', 'approved', 'rejected').nullable(),
+  timestamp: myzod.number().nullable(),
 });
 export type AffiliationRequestItem = Infer<typeof affiliationRequestItemSchema>;
 
@@ -394,4 +394,6 @@ export const updateApplicantNotePayloadSchema = myzod.object({
   wallet: myzod.string(),
   note: myzod.string(),
 });
-export type UpdateApplicantNotePayload = Infer<typeof updateApplicantNotePayloadSchema>;
+export type UpdateApplicantNotePayload = Infer<
+  typeof updateApplicantNotePayloadSchema
+>;
