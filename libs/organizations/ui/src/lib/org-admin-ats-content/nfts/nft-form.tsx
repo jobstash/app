@@ -3,7 +3,13 @@ import { useMemo, useState } from 'react';
 
 import { Card, CardBody, CardFooter, CardHeader } from '@nextui-org/card';
 import { Input } from '@nextui-org/input';
-import { Button, Chip, Select, SelectItem, Spinner } from '@nextui-org/react';
+import {
+  Autocomplete,
+  AutocompleteItem,
+  Button,
+  Chip,
+  Spinner,
+} from '@nextui-org/react';
 import { isAddress } from 'viem';
 
 import { ATSTrackedNFTItem } from '@jobstash/organizations/core';
@@ -49,8 +55,10 @@ export const NFTForm = ({ isPending, nft, save, remove }: Props) => {
     }));
   };
 
-  const onChangeNetwork = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const network = e.target.value as ATSTrackedNFTItem['network'];
+  const onSelectionChange = (key: React.Key | null) => {
+    if (!key) return;
+
+    const network = key as ATSTrackedNFTItem['network'];
     const chainId = NFT_NETWORKS.find((n) => n.value === network)?.chainId;
     if (chainId) {
       setChainId(chainId);
@@ -106,20 +114,20 @@ export const NFTForm = ({ isPending, nft, save, remove }: Props) => {
         {isPendingForm && <Spinner size="sm" color="white" />}
       </CardHeader>
       <CardBody className="flex flex-col gap-4">
-        <Select
+        <Autocomplete
           isRequired
           isDisabled={isPendingForm}
           label="Network"
-          selectedKeys={formState.network ? [formState.network] : []}
+          selectedKey={formState.network}
           name="network"
-          onChange={onChangeNetwork}
+          onSelectionChange={onSelectionChange}
         >
           {NFT_NETWORKS.map((network) => (
-            <SelectItem key={network.value} value={network.value}>
+            <AutocompleteItem key={network.value} value={network.value}>
               {network.label}
-            </SelectItem>
+            </AutocompleteItem>
           ))}
-        </Select>
+        </Autocomplete>
         <Input
           isRequired
           isDisabled={isPendingForm}
