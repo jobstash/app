@@ -99,9 +99,9 @@ export const useAuthProvider = () => {
     },
   });
 
-  const logout = () => {
+  const logout = async () => {
     setIsLoadingLogout(true);
-    privyLogout();
+    await privyLogout();
   };
 
   return {
