@@ -1,14 +1,12 @@
-import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 
 import { useLogin, useLogout, usePrivy } from '@privy-io/react-auth';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useMutation } from '@tanstack/react-query';
 
 import { CheckWalletResponse } from '@jobstash/auth/core';
 import { LOCAL_STORAGE_KEYS } from '@jobstash/shared/core';
 import { sentryMessage } from '@jobstash/shared/utils';
 
-import { useMwVersionContext } from '@jobstash/shared/state';
 import { getCheckWallet } from '@jobstash/auth/data';
 
 import { useHasEmbeddedWallet } from './use-has-embedded-wallet';
@@ -40,38 +38,9 @@ export const useAuthProvider = () => {
       const accessToken = await getAccessToken();
       const response = await getCheckWallet(accessToken);
       localStorage.setItem(LOCAL_STORAGE_KEYS.AUTH_JWT, response.token);
-      localStorage.setItem(
-        LOCAL_STORAGE_KEYS.CHECK_WALLET_RESPONSE,
-        JSON.stringify(response),
-      );
       setCheckWalletResponse(response);
     },
   });
-
-  useEffect(() => {
-    const localCheckWalletResponse = localStorage.getItem(
-      LOCAL_STORAGE_KEYS.CHECK_WALLET_RESPONSE,
-    );
-
-    if (!isLoggedIn && localCheckWalletResponse) {
-      localStorage.removeItem(LOCAL_STORAGE_KEYS.CHECK_WALLET_RESPONSE);
-    }
-  }, [isLoggedIn]);
-
-  useEffect(() => {
-    const localCheckWalletResponse = localStorage.getItem(
-      LOCAL_STORAGE_KEYS.CHECK_WALLET_RESPONSE,
-    );
-
-    if (!localCheckWalletResponse) {
-      setupLocal();
-      return;
-    }
-
-    if (localCheckWalletResponse && !hasPermission) {
-      setCheckWalletResponse(JSON.parse(localCheckWalletResponse));
-    }
-  }, [hasPermission, setupLocal]);
 
   const [isCreatingWallet, setIsCreatingWallet] = useState(false);
 
@@ -104,38 +73,36 @@ export const useAuthProvider = () => {
   const isLoading = isLoadingSetup || !ready || isCreatingWallet;
 
   // Setup local after privy login
+  const [hasLoggedIn, setHasLoggedIn] = useState(false);
   const { login } = useLogin({
-    onComplete(_user) {
+    async onComplete(_user) {
       setupLocal();
+      setHasLoggedIn(true);
     },
   });
 
+  // Setup local on page blur
+  useEffect(() => {
+    if (isLoggedIn && !hasPermission && hasLoggedIn && !isLoading) {
+      setupLocal();
+    }
+  }, [hasLoggedIn, hasPermission, isLoading, isLoggedIn, setupLocal]);
+
   const isAuthenticated = isLoggedIn && hasPermission && hasEmbeddedWallet;
 
-  const queryClient = useQueryClient();
-  const { mwVersion } = useMwVersionContext();
-
+  const [isLoadingLogout, setIsLoadingLogout] = useState(false);
   const { logout: privyLogout } = useLogout({
     async onSuccess() {
       setCheckWalletResponse(DEFAULT_CHECK_WALLET_RESPONSE);
       localStorage.removeItem(LOCAL_STORAGE_KEYS.AUTH_JWT);
-      localStorage.removeItem(LOCAL_STORAGE_KEYS.CHECK_WALLET_RESPONSE);
-      queryClient.cancelQueries();
-      queryClient.clear();
-      await queryClient.invalidateQueries({
-        queryKey: [mwVersion],
-      });
+      window.location.href = '/jobs';
     },
   });
 
-  const router = useRouter();
-  const { mutateAsync: logout, isPending: isLoadingLogout } = useMutation({
-    async mutationFn() {
-      setCheckWalletResponse(DEFAULT_CHECK_WALLET_RESPONSE);
-      await privyLogout();
-      router.push('/jobs');
-    },
-  });
+  const logout = () => {
+    setIsLoadingLogout(true);
+    privyLogout();
+  };
 
   return {
     user,
