@@ -53,6 +53,16 @@ export const useAuthProvider = () => {
       LOCAL_STORAGE_KEYS.CHECK_WALLET_RESPONSE,
     );
 
+    if (!isLoggedIn && localCheckWalletResponse) {
+      localStorage.removeItem(LOCAL_STORAGE_KEYS.CHECK_WALLET_RESPONSE);
+    }
+  }, [isLoggedIn]);
+
+  useEffect(() => {
+    const localCheckWalletResponse = localStorage.getItem(
+      LOCAL_STORAGE_KEYS.CHECK_WALLET_RESPONSE,
+    );
+
     if (!localCheckWalletResponse) {
       setupLocal();
       return;
