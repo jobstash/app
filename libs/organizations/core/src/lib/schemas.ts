@@ -129,7 +129,7 @@ export const candidateReportPayloadSchema = myzod.object({
 export type CandidateReportPayload = Infer<typeof candidateReportPayloadSchema>;
 
 const candidateReportUserSchema = myzod.object({
-  wallet: myzod.string(),
+  wallet: myzod.string().nullable(),
   github: myzod.string(),
   cryptoNative: myzod.boolean(),
   averageTenure: myzod.number().nullable(),
