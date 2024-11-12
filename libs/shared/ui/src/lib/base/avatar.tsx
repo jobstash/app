@@ -57,18 +57,20 @@ const Avatar = ({
   }
 
   if (isFallback) {
-    return identiconFallback ? (
+    return (
       <div className={cn(avatar({ size }), { 'rounded-full': isRounded })}>
-        <Image
-          fill
-          src={`https://api.dicebear.com/9.x/identicon/png?seed=${
-            name ?? alt ?? src
-          }`}
-          alt={alt}
-        />
+        {identiconFallback ? (
+          <Image
+            fill
+            src={`https://api.dicebear.com/9.x/identicon/png?seed=${
+              name ?? alt ?? src
+            }`}
+            alt={alt}
+          />
+        ) : (
+          <FallbackImage />
+        )}
       </div>
-    ) : (
-      <FallbackImage />
     );
   }
 
