@@ -11,7 +11,10 @@ import {
   useDisclosure,
 } from '@nextui-org/react';
 
+import { cn } from '@jobstash/shared/utils';
+
 import { useOrgImport } from '@jobstash/admin/state';
+import { useIsDesktop } from '@jobstash/shared/state';
 
 export const OrgImportModal = () => {
   const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
@@ -42,6 +45,8 @@ export const OrgImportModal = () => {
     );
   };
 
+  const isDesktop = useIsDesktop();
+
   return (
     <>
       <Button className="w-fit" onPress={onOpen}>
@@ -50,7 +55,8 @@ export const OrgImportModal = () => {
       <Modal
         hideCloseButton
         isOpen={isOpen}
-        className="text-white p-2"
+        placement={isDesktop ? 'auto' : 'top'}
+        className={cn('text-white p-2', { 'mt-2': !isDesktop })}
         backdrop="blur"
         size="md"
         onOpenChange={onOpenChange}
