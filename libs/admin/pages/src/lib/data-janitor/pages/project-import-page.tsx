@@ -25,12 +25,16 @@ export const ProjectImportPage = () => {
 
   return (
     <ManageLayout>
-      <div className="flex flex-col gap-8 pt-8">
-        <div className="flex items-center justify-between">
-          <span className="text-2xl font-bold">Tracked Queued Imports</span>
-          <ProjectImportModal />
+      <div className="flex flex-col gap-4 md:gap-8 pt-8">
+        <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-8">
+          <div className="order-2 md:order-1">
+            <span className="text-2xl font-bold">Tracked Queued Imports</span>
+          </div>
+          <div className="order-1 md:order-2">
+            <ProjectImportModal />
+          </div>
         </div>
-        <div className="flex flex-col gap-8 max-w-lg rounded-2xl">
+        <div className="flex flex-col gap-8 max-w-lg rounded-2xl md:-mt-4">
           <span className="text-md text-white/90">
             Track the progress of your pending imports. Once the AI finishes
             processing, you&#39;ll be able to manage the organization details

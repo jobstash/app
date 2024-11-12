@@ -148,7 +148,11 @@ const ProjectImportItem = ({ item }: ProjectImportItemProps) => {
         <LogoTitle
           size="sm"
           title={item.name}
-          location={item.url}
+          location={
+            <span className="text-sm text-white/60 block max-w-full break-all">
+              {item.url}
+            </span>
+          }
           avatarProps={{ alt: item.name, src: getLogoUrl(item.url) }}
         />
         <div className="flex items-center gap-2">
