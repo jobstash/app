@@ -83,7 +83,7 @@ export const useAuthProvider = () => {
 
   // Setup local on page blur
   useEffect(() => {
-    if (isLoggedIn && !hasPermission && hasLoggedIn && !isLoading) {
+    if ((isLoggedIn || hasLoggedIn) && !hasPermission && !isLoading) {
       setupLocal();
     }
   }, [hasLoggedIn, hasPermission, isLoading, isLoggedIn, setupLocal]);
