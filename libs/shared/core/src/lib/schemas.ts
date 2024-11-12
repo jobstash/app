@@ -150,7 +150,7 @@ export const projectInfoSchema = myzod.object(
     logo: myzod.string().nullable(),
 
     category: myzod.string().min(1).nullable(),
-    isMainnet: myzod.boolean().nullable(),
+    isMainnet: myzod.boolean().nullable().optional(),
     tokenSymbol: myzod.string().min(1).nullable(),
 
     tvl: myzod.number().nullable(),
