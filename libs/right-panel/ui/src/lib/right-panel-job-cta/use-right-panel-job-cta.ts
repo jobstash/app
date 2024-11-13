@@ -9,7 +9,6 @@ import {
   useJobsApplied,
   useSendJobApplyInteractionMutation,
 } from '@jobstash/jobs/state';
-import { isOpenDonateModalAtom } from '@jobstash/shared/state';
 
 interface Props {
   url: string;
@@ -45,13 +44,16 @@ export const useRightPanelJobCTA = (props: Props) => {
       appliedJobs,
     });
 
-  const [isOpenDonateModal, setIsOpenDonateModal] = useAtom(
-    isOpenDonateModalAtom,
-  );
+  // Temp: disable donate modal
+  // const [isOpenDonateModal, setIsOpenDonateModal] = useAtom(
+  //   isOpenDonateModalAtom,
+  // );
+
   const devApplyMutation = () => {
-    if (!isOpenDonateModal) {
-      setIsOpenDonateModal(true);
-    }
+    // Temp: disable donate modal
+    // if (!isOpenDonateModal) {
+    //   setIsOpenDonateModal(true);
+    // }
 
     mutateJobApply(shortUUID);
   };

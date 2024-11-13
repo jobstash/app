@@ -1,5 +1,4 @@
 import Link from 'next/link';
-import { useEffect } from 'react';
 
 import {
   Button,
@@ -7,7 +6,6 @@ import {
   ModalBody,
   ModalContent,
   ModalFooter,
-  ModalHeader,
 } from '@nextui-org/react';
 import { useAtom } from 'jotai';
 
