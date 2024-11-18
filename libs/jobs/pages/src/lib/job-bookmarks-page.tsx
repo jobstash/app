@@ -86,7 +86,7 @@ export const JobBookmarksPage = () => {
 
   const { push } = useRouter();
   const onClickBrowse = () => {
-    push('/', undefined, { scroll: false });
+    push('/jobs', undefined, { scroll: false });
   };
 
   if (isLoading) return <LoadingPage />;
