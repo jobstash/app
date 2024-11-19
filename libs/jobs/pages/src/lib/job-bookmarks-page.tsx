@@ -10,7 +10,7 @@ import { RIGHT_PANEL_WRAPPER_ID } from '@jobstash/right-panel/core';
 import { EVENT_CARD_CLICK, JobPost } from '@jobstash/shared/core';
 import { cn, dispatchEvent } from '@jobstash/shared/utils';
 
-import { activeJobBookmarkAtom, useJobBookmarks } from '@jobstash/jobs/state';
+import { activeJobBookmarkAtom, useSavedJobs } from '@jobstash/jobs/state';
 import {
   isDisabledPageScrollAtom,
   isOpenTopBannerAtom,
@@ -35,8 +35,7 @@ const JobBookmarksRightPanel = dynamic(() =>
 );
 
 export const JobBookmarksPage = () => {
-  const { isLoading, isError, data, bookmarkedJobs, isFetching } =
-    useJobBookmarks();
+  const { isLoading, isError, data, isFetching } = useSavedJobs();
 
   const [activeJobBookmark, setActiveJobBookmark] = useAtom(
     activeJobBookmarkAtom,
@@ -120,9 +119,11 @@ export const JobBookmarksPage = () => {
               jobPost={jobPost}
               topRightAction={
                 <JobBookmarkButton
-                  shortUUID={jobPost.shortUUID}
                   isFetching={isFetching}
-                  isBookmarked={bookmarkedJobs.has(jobPost.shortUUID)}
+                  jobPost={jobPost}
+                  //
+                  // shortUUID={jobPost.shortUUID}
+                  // isBookmarked={bookmarkedJobs.has(jobPost.shortUUID)}
                 />
               }
               isActive={jobPost.id === activeJobBookmark?.id}

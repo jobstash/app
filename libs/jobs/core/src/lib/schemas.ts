@@ -107,12 +107,14 @@ export const getJobFolderResponse = myzod.object({
 });
 export type GetJobFolderResponse = Infer<typeof getJobFolderResponse>;
 
-export const jobFolderPayload = myzod.object({
+export const jobFolderPayloadSchema = myzod.object({
   name: myzod.string(),
   jobs: myzod.array(myzod.string()),
   isPublic: myzod.boolean().nullable(),
 });
-export type JobFolderPayload = Infer<typeof jobFolderPayload>;
+export type JobFolderPayload = Infer<typeof jobFolderPayloadSchema>;
 
-export const updateJobFolderPayload = myzod.partial(jobFolderPayload);
-export type UpdateJobFolderPayload = Infer<typeof updateJobFolderPayload>;
+export const updateJobFolderPayloadSchema = myzod.partial(
+  jobFolderPayloadSchema,
+);
+export type UpdateJobFolderPayload = Infer<typeof updateJobFolderPayloadSchema>;

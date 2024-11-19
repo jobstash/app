@@ -23,6 +23,8 @@ const BookmarkButton = ({
   isDisabled,
   onClick,
 }: Props) => {
+  const [bookmarked, setBookmarked] = useState(isBookmarked);
+
   const callback = () => {
     if (onClick) {
       setBookmarked((prev) => !prev);
@@ -34,8 +36,6 @@ const BookmarkButton = ({
     allowed: PERMISSIONS.USER,
     callback,
   });
-
-  const [bookmarked, setBookmarked] = useState(isBookmarked);
 
   return (
     <div className="flex items-center justify-center h-6 w-6">

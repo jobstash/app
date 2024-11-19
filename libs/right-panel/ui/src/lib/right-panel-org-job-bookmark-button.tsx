@@ -8,7 +8,7 @@ import { PERMISSIONS } from '@jobstash/auth/core';
 import { useRoleClick } from '@jobstash/auth/state';
 import {
   lastJobBookmarkedAtom,
-  useJobBookmarkMutation,
+  useUpdateSavedJobs,
 } from '@jobstash/jobs/state';
 
 import { BookmarkedIcon, BookmarkIcon, Button } from '@jobstash/shared/ui';
@@ -30,7 +30,7 @@ export const RightPanelOrgJobBookmarkButton = (props: Props) => {
   );
 
   const { isLoading: isLoadingMutation, mutate } =
-    useJobBookmarkMutation(isBookmarked);
+    useUpdateSavedJobs(isBookmarked);
 
   const onClick = () => {
     // Show pending state until refetch - of a specific job instead of list

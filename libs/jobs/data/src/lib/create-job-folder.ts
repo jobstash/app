@@ -1,4 +1,4 @@
-import { JobFolderPayload } from '@jobstash/jobs/core';
+import { JobFolderPayload, jobFolderPayloadSchema } from '@jobstash/jobs/core';
 import {
   MessageResponse,
   messageResponseSchema,
@@ -17,6 +17,7 @@ export const createJobFolder = async (payload: JobFolderPayload) => {
     mode: 'cors' as RequestMode,
     responseSchema: messageResponseSchema,
     payload,
+    payloadSchema: jobFolderPayloadSchema,
     headers: {
       'Content-Type': 'application/json',
     },

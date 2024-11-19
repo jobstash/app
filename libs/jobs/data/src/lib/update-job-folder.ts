@@ -1,4 +1,7 @@
-import { UpdateJobFolderPayload } from '@jobstash/jobs/core';
+import {
+  UpdateJobFolderPayload,
+  updateJobFolderPayloadSchema,
+} from '@jobstash/jobs/core';
 import {
   MessageResponse,
   messageResponseSchema,
@@ -20,6 +23,7 @@ export const updateJobFolder = async (
     mode: 'cors' as RequestMode,
     responseSchema: messageResponseSchema,
     payload,
+    payloadSchema: updateJobFolderPayloadSchema,
     headers: {
       'Content-Type': 'application/json',
     },

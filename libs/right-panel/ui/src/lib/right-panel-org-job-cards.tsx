@@ -2,10 +2,11 @@ import { memo } from 'react';
 
 import { type OrgJob } from '@jobstash/organizations/core';
 
-import { useJobBookmarks } from '@jobstash/jobs/state';
-
-import { RightPanelOrgJobBookmarkButton } from './right-panel-org-job-bookmark-button';
 import RightPanelOrgJobCard from './right-panel-org-job-card';
+
+//
+// import { useJobBookmarks } from '@jobstash/jobs/state';
+// import { RightPanelOrgJobBookmarkButton } from './right-panel-org-job-bookmark-button';
 
 interface Props {
   orgName: string;
@@ -13,7 +14,8 @@ interface Props {
 }
 
 const RightPanelOrgJobCards = ({ orgName, orgJobs }: Props) => {
-  const { isLoading, bookmarkedJobs, isFetching } = useJobBookmarks();
+  //
+  // const { isLoading, bookmarkedJobs, isFetching } = useJobBookmarks();
 
   if (orgJobs.length === 0) return null;
 
@@ -25,11 +27,12 @@ const RightPanelOrgJobCards = ({ orgName, orgJobs }: Props) => {
           orgName={orgName}
           orgJob={orgJob}
           bookmarkButton={
-            <RightPanelOrgJobBookmarkButton
-              shortUUID={orgJob.shortUUID}
-              isBookmarked={bookmarkedJobs.has(orgJob.shortUUID)}
-              isLoadingFetch={isLoading || isFetching}
-            />
+            null
+            // <RightPanelOrgJobBookmarkButton
+            //   shortUUID={orgJob.shortUUID}
+            //   isBookmarked={bookmarkedJobs.has(orgJob.shortUUID)}
+            //   isLoadingFetch={isLoading || isFetching}
+            // />
           }
         />
       ))}

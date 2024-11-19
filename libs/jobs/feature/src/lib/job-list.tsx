@@ -1,14 +1,14 @@
-import { memo } from 'react';
-
+import { Spinner } from '@nextui-org/react';
 import { PrimitiveAtom, useAtomValue } from 'jotai';
 
 import { JobPost, ROUTE_SECTION } from '@jobstash/shared/core';
 import { checkJobIsFeatured } from '@jobstash/jobs/utils';
 
-import { useJobBookmarks, useJobList } from '@jobstash/jobs/state';
+import { useJobList, useSavedJobs } from '@jobstash/jobs/state';
 
 import {
   JobBookmarkButton,
+  JobBookmarkModal,
   JobCard,
   JobCardPromoteButton,
   JobListEmptyResult,
@@ -35,11 +35,9 @@ const JobList = ({ initJob, jobCountAtom, activeJobAtom }: Props) => {
     filterParamsObj,
   } = useJobList(initJob, jobCountAtom, activeJobAtom);
 
-  const {
-    isLoading: isLoadingBookmarks,
-    bookmarkedJobs,
-    isFetching: isFetchingBookmarks,
-  } = useJobBookmarks();
+  // Prefetch saved jobs
+  const { isLoading: isLoadingBookmarks, isFetching: isFetchingBookmarks } =
+    useSavedJobs();
 
   if (isLoading) {
     return (
@@ -50,7 +48,11 @@ const JobList = ({ initJob, jobCountAtom, activeJobAtom }: Props) => {
             isActive
             jobPost={initJob}
             filterParamsObj={filterParamsObj}
-            bookmarkButton={null}
+            bookmarkButton={
+              <div className="flex items-center justify-center h-6 w-6">
+                <Spinner size="sm" color="white" />
+              </div>
+            }
             promoteButton={null}
             routeSection={ROUTE_SECTION.JOBS}
             activeJobAtom={activeJobAtom}
@@ -69,6 +71,8 @@ const JobList = ({ initJob, jobCountAtom, activeJobAtom }: Props) => {
 
   return (
     <div className="flex flex-col pb-4 gap-y-4 lg:gap-y-8">
+      <JobBookmarkModal />
+
       {jobPosts.map((jobPost) => (
         <JobCard
           key={jobPost.shortUUID}
@@ -77,8 +81,10 @@ const JobList = ({ initJob, jobCountAtom, activeJobAtom }: Props) => {
           filterParamsObj={filterParamsObj}
           bookmarkButton={
             <JobBookmarkButton
-              shortUUID={jobPost.shortUUID}
-              isBookmarked={bookmarkedJobs.has(jobPost.shortUUID)}
+              jobPost={jobPost}
+              //
+              // shortUUID={jobPost.shortUUID}
+              // isBookmarked={bookmarkedJobs.has(jobPost.shortUUID)}
               isFetching={isFetchingBookmarks || isLoadingBookmarks}
             />
           }
@@ -111,4 +117,4 @@ const JobList = ({ initJob, jobCountAtom, activeJobAtom }: Props) => {
   );
 };
 
-export default memo(JobList);
+export default JobList;

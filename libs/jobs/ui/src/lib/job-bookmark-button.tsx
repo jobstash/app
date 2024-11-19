@@ -1,44 +1,64 @@
-import { useAtom } from 'jotai';
+import { useMemo, useRef } from 'react';
 
+import { useSetAtom } from 'jotai';
+
+import { PERMISSIONS } from '@jobstash/auth/core';
+import { JobPost } from '@jobstash/shared/core';
+
+import { useRoleClick } from '@jobstash/auth/state';
 import {
-  lastJobBookmarkedAtom,
-  useJobBookmarkMutation,
+  jobBookmarkAtom,
+  useAllJobFolders,
+  useSavedJobs,
+  useUpdateSavedJobs,
 } from '@jobstash/jobs/state';
 
-import { BookmarkButton } from '@jobstash/shared/ui';
+import { BookmarkedIcon, BookmarkIcon, CardSet } from '@jobstash/shared/ui';
 
 interface Props {
-  shortUUID: string;
-  isBookmarked: boolean;
+  jobPost: JobPost;
   isFetching: boolean;
 }
 
-const JobBookmarkButton = ({ shortUUID, isBookmarked, isFetching }: Props) => {
-  const { isLoading: isLoadingMutation, mutate } =
-    useJobBookmarkMutation(isBookmarked);
+const JobBookmarkButton = ({ jobPost, isFetching }: Props) => {
+  const { isLoading: isLoadingSavedJobs, data: savedJobs } = useSavedJobs();
+  const { isLoading: isLoadingJobFolders, data: jobFolders } =
+    useAllJobFolders();
 
-  const [lastJobBookmarked, setLastJobBookmarked] = useAtom(
-    lastJobBookmarkedAtom,
+  const bookmarkedJob = useMemo(
+    () =>
+      [
+        ...(savedJobs ?? []),
+        ...(jobFolders?.data ?? []).flatMap((folder) => folder.jobs),
+      ].find((job) => job.shortUUID === jobPost.shortUUID),
+    [jobFolders, savedJobs, jobPost],
   );
 
-  const onClick = () => {
-    // Show pending state until refetch - of a specific job instead of list
-    setLastJobBookmarked(shortUUID);
+  const isBookmarked = Boolean(bookmarkedJob);
 
-    mutate(shortUUID);
+  const setJobBookmarkState = useSetAtom(jobBookmarkAtom);
+
+  const onClick = () => {
+    setJobBookmarkState(() => ({
+      isOpen: true,
+      jobPost,
+      showNewListForm: false,
+    }));
   };
 
-  // Show spinner only when remove-bookmark until refetch done
-  const showSpinner =
-    isFetching && isBookmarked && shortUUID === lastJobBookmarked;
-  const isLoading = isLoadingMutation || showSpinner;
+  const { hasPermission: isAuthd, roleClick } = useRoleClick({
+    allowed: PERMISSIONS.USER,
+    callback: onClick,
+  });
 
   return (
-    <BookmarkButton
-      isLoading={isLoading}
-      isBookmarked={isBookmarked}
-      onClick={onClick}
-    />
+    <CardSet
+      icon={isAuthd && isBookmarked ? <BookmarkedIcon /> : <BookmarkIcon />}
+      className="px-[3px]"
+      onClick={roleClick}
+    >
+      {null}
+    </CardSet>
   );
 };
 

@@ -9,12 +9,17 @@ import { updateJobFolder } from '@jobstash/jobs/data';
 
 const TOAST_ID = 'update-job-folder-toast';
 
-export const useUpdateJobFolder = (id: string) => {
+interface MutationPayload {
+  id: string;
+  payload: UpdateJobFolderPayload;
+}
+
+export const useUpdateJobFolder = () => {
   const queryClient = useQueryClient();
   const { mwVersion } = useMwVersionContext();
 
   return useMutation({
-    mutationFn: (payload: UpdateJobFolderPayload) =>
+    mutationFn: ({ id, payload }: MutationPayload) =>
       updateJobFolder(id, payload),
     onMutate() {
       notifications.clean();
@@ -24,7 +29,7 @@ export const useUpdateJobFolder = (id: string) => {
         message: 'Please wait ...',
       });
     },
-    async onSuccess() {
+    async onSuccess(_data, { id }) {
       await queryClient.invalidateQueries({
         queryKey: [mwVersion, 'job-folders'],
       });
