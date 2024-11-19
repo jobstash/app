@@ -93,7 +93,11 @@ export const jobFolderSchema = myzod.object({
 });
 export type JobFolder = Infer<typeof jobFolderSchema>;
 
-export const getAllJobFoldersResponse = myzod.array(jobFolderSchema);
+export const getAllJobFoldersResponse = myzod.object({
+  data: myzod.array(jobFolderSchema),
+  success: myzod.boolean(),
+  message: myzod.string(),
+});
 export type GetAllJobFoldersResponse = Infer<typeof getAllJobFoldersResponse>;
 
 export const getJobFolderResponse = myzod.object({
