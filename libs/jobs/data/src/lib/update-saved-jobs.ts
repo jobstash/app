@@ -15,7 +15,7 @@ interface Params {
   shouldDelete?: boolean;
 }
 
-export const setJobBookmark = async ({
+export const updateSavedJobs = async ({
   payload,
   shouldDelete = false,
 }: Params) => {
