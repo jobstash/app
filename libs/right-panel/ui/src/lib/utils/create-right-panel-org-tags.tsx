@@ -1,6 +1,9 @@
 import { type RightPanelOrg } from '@jobstash/right-panel/core';
 import { TAG_ELEMENT_ID, type TagElement } from '@jobstash/shared/core';
-import { getWebsiteText } from '@jobstash/shared/utils';
+import {
+  createOrgFundingDateString,
+  getWebsiteText,
+} from '@jobstash/shared/utils';
 
 import {
   BankIcon,
@@ -8,8 +11,6 @@ import {
   LocationIcon,
   UsersThreeIcon,
 } from '@jobstash/shared/ui';
-
-import { createOrgFundingDateString } from './create-org-funding-date-string';
 
 export const createRightPanelOrgTags = (orgData: RightPanelOrg) => {
   const { website, location, headcountEstimate, fundingRounds } = orgData;

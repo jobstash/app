@@ -4,5 +4,9 @@ import { slugify } from '@jobstash/shared/utils';
 export const createJobKey = ({
   shortUUID,
   title,
-  organization: { name: orgName },
-}: JobPost) => `${slugify(`${orgName} ${title} `)}${shortUUID}`;
+  organization,
+  project,
+}: JobPost) =>
+  `${slugify(
+    `${organization?.name ?? project?.name ?? ''} ${title} `,
+  )}${shortUUID}`;

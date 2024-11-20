@@ -11,6 +11,7 @@ import {
 } from '@nextui-org/react';
 import { useAtom } from 'jotai';
 
+import { getJobLogoTitleProps } from '@jobstash/jobs/utils';
 import { getLogoUrl, prettyTimestamp } from '@jobstash/shared/utils';
 
 import {
@@ -136,6 +137,8 @@ export const JobBookmarkModal = () => {
 
   if (!jobPost) return null;
 
+  const { name, website, logo } = getJobLogoTitleProps(jobPost);
+
   return (
     <Modal
       isDismissable
@@ -148,25 +151,23 @@ export const JobBookmarkModal = () => {
       onOpenChange={onOpenChange}
     >
       <ModalContent className="flex flex-col gap-y-2">
-        <ModalHeader>
-          <div className="flex gap-3 items-center">
-            <Avatar
-              className="h-12 w-12"
-              name={jobPost.organization.name}
-              src={getLogoUrl(
-                jobPost.organization.website ?? '',
-                jobPost.organization.logoUrl,
-              )}
-            />
-            <div className="flex flex-col">
-              <Heading size="md">{jobPost.title}</Heading>
-              <Text size="md" className="text-white/80">
-                {jobPost.organization.name} |{' '}
-                {prettyTimestamp(jobPost.timestamp)}
-              </Text>
+        {name && (
+          <ModalHeader>
+            <div className="flex gap-3 items-center">
+              <Avatar
+                className="h-12 w-12"
+                name={name}
+                src={getLogoUrl(website ?? '', logo)}
+              />
+              <div className="flex flex-col">
+                <Heading size="md">{jobPost.title}</Heading>
+                <Text size="md" className="text-white/80">
+                  {name} | {prettyTimestamp(jobPost.timestamp)}
+                </Text>
+              </div>
             </div>
-          </div>
-        </ModalHeader>
+          </ModalHeader>
+        )}
         <ModalBody className="ml-2">
           {showNewListForm ? (
             <NewListForm

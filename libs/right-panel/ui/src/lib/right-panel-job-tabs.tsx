@@ -29,9 +29,7 @@ const RightPanelJobTabs = ({
   orgJobsCount,
   routeSection,
 }: Props) => {
-  const {
-    organization: { projects },
-  } = jobPost;
+  const { organization, project } = jobPost;
 
   const paramsStr = typeof window === 'undefined' ? '' : window.location.search;
   const partialRoute = `${FRONTEND_URL}${routeSection}/${createJobKey(
@@ -42,6 +40,17 @@ const RightPanelJobTabs = ({
     (tabSegment: string) => `${partialRoute}/${tabSegment}${paramsStr}`,
     [paramsStr, partialRoute],
   );
+
+  const projects = useMemo(() => {
+    if (!jobPost) return [];
+    if (organization) {
+      return organization.projects;
+    }
+
+    if (project) return [project];
+
+    return [];
+  }, [jobPost, organization, project]);
 
   const tabs: RightPanelTab[] = useMemo(() => {
     const tabs: RightPanelTab[] = [

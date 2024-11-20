@@ -15,9 +15,12 @@ export const createJobCardOgDetails = (jobPost?: JobPost) => {
     summary,
     tags,
     salaryCurrency = 'USD',
+    project,
   } = jobPost;
 
-  const title = createJobPageTitle(organization.name, jobTitle);
+  const name = organization?.name || project?.name;
+
+  const title = createJobPageTitle(name, jobTitle);
   let description = '';
 
   if (minimumSalary && maximumSalary) {

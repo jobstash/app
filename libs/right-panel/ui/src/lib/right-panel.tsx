@@ -1,22 +1,25 @@
 import { type ReactNode } from 'react';
 
-import { type RightPanelOrg } from '@jobstash/right-panel/core';
-
 import { HamburgerIcon } from '@jobstash/shared/ui';
 import { MobileMenuButton } from '@jobstash/sidebar/ui';
 
-import RightPanelHeader from './right-panel-header';
 import RightPanelWrapper from './right-panel-wrapper';
 
 interface Props {
-  org: RightPanelOrg | null;
+  header: ReactNode;
   tabs: ReactNode;
   children: ReactNode;
   backButton: ReactNode;
   hideMenu?: boolean;
 }
 
-const RightPanel = ({ org, tabs, children, backButton, hideMenu }: Props) => (
+const RightPanel = ({
+  header,
+  tabs,
+  children,
+  backButton,
+  hideMenu,
+}: Props) => (
   <RightPanelWrapper>
     {/* MOBILE NAV */}
     <div className="flex justify-between items-center lg:hidden">
@@ -28,9 +31,9 @@ const RightPanel = ({ org, tabs, children, backButton, hideMenu }: Props) => (
       )}
     </div>
 
-    {org && <RightPanelHeader org={org} />}
+    {header}
 
-    {org && tabs && <hr className="border-t border-white/10 -my-2" />}
+    {tabs && <hr className="border-t border-white/10 -my-2" />}
 
     {tabs}
 

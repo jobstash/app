@@ -1,5 +1,3 @@
-import { useAtom } from 'jotai';
-
 import { COMMUNITIES } from '@jobstash/shared/core';
 import { getCommunitySubdomain } from '@jobstash/shared/utils';
 
@@ -30,7 +28,7 @@ export const useRightPanelJobCTA = (props: Props) => {
     useJobsApplied();
   const isLoadingJobsApplied = isPendingJobsApplied || isFetchingJobsApplied;
 
-  const isJobastashATS = jobPost?.organization.atsClient === 'jobstash';
+  const isJobastashATS = jobPost?.organization?.atsClient === 'jobstash';
   const isOneClick = isJobastashATS || isEthdam;
 
   const hasApplied = appliedJobs

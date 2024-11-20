@@ -7,6 +7,8 @@ import {
 import { createFundingRoundsTags, UsersThreeIcon } from '@jobstash/shared/ui';
 
 export const createJobCardOrgTags = (org: JobPost['organization']) => {
+  if (!org) return [];
+
   const tags: TagElement[] = [];
 
   const { fundingRounds, headcountEstimate } = org;

@@ -25,9 +25,10 @@ import { WhiteGloveCTA } from './white-glove-cta';
 
 interface Props {
   orgName: string;
-  jobInfo: JobInfo & { organization: { hasUser?: boolean } };
+  jobInfo: JobInfo;
   tags: Tag[];
   showExploreJob?: boolean;
+  hasUser: boolean | undefined;
 }
 
 const RightPanelJobCard = ({
@@ -35,17 +36,11 @@ const RightPanelJobCard = ({
   jobInfo,
   tags,
   showExploreJob = true,
+  hasUser,
 }: Props) => {
   const { permissions } = useAuthContext();
 
-  const {
-    title,
-    url,
-    shortUUID,
-    classification,
-    access,
-    organization: { hasUser },
-  } = jobInfo;
+  const { title, url, shortUUID, classification, access } = jobInfo;
 
   const onClickExploreJob = () => {
     const link = encodeURI(

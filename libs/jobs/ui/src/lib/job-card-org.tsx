@@ -12,6 +12,8 @@ interface Props {
 }
 
 const JobCardOrg = ({ org }: Props) => {
+  if (!org) return null;
+
   const { name, website, logoUrl, community } = org;
 
   const tags = createJobCardOrgTags(org);

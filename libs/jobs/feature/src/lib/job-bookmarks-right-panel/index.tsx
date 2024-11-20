@@ -1,14 +1,19 @@
+import { useMemo } from 'react';
+
 import { useAtomValue } from 'jotai';
 
 import { JobPost, ROUTE_SECTION, TAB_SEGMENT } from '@jobstash/shared/core';
+import { getJobLogoTitleProps } from '@jobstash/jobs/utils';
 
 import { useCompetitors } from '@jobstash/competitors/state';
 import { activeJobBookmarkTabAtom } from '@jobstash/jobs/state';
 
 import {
+  createRightPanelOrgTags,
   RightPanel,
   RightPanelBackButton,
   RightPanelCompetitorCards,
+  RightPanelHeader,
   RightPanelJobCard,
   RightPanelOrgCard,
   RightPanelProjectCards,
@@ -22,20 +27,56 @@ interface Props {
 }
 
 const JobBookmarksRightPanel = ({ jobPost, onClickBack }: Props) => {
-  const { organization, tags } = jobPost;
-  const { projects, name: orgName } = organization;
+  const { organization, project, tags } = jobPost;
 
-  const projectId = projects[0]?.id;
+  const projectId = useMemo(() => {
+    if (!project && !organization) return null;
+
+    if (organization && organization.projects.length > 0) {
+      return organization.projects[0].id;
+    }
+
+    if (project) {
+      return project.id;
+    }
+
+    return null;
+  }, [organization, project]);
+
+  const projects = useMemo(() => {
+    if (organization) {
+      return organization.projects;
+    }
+
+    if (project) return [project];
+
+    return [];
+  }, [organization, project]);
+
   const { data: competitors, isLoading: isLoadingCompetitors } =
     useCompetitors(projectId);
   const competitorCount = competitors?.length ?? 0;
 
   const currentTab = useAtomValue(activeJobBookmarkTabAtom);
 
+  const { name, logo, website } = getJobLogoTitleProps(jobPost);
+
   return (
     <RightPanel
       hideMenu
-      org={organization}
+      header={
+        name ? (
+          <RightPanelHeader
+            name={name}
+            website={website}
+            logo={logo}
+            description={organization?.summary || project?.description || null}
+            socials={organization ?? project ?? null}
+            tags={organization ? createRightPanelOrgTags(organization) : []}
+            community={organization?.community || []}
+          />
+        ) : null
+      }
       tabs={
         <JobBookmarksRightPanelTabs
           jobPost={jobPost}
@@ -47,14 +88,17 @@ const JobBookmarksRightPanel = ({ jobPost, onClickBack }: Props) => {
     >
       {currentTab === TAB_SEGMENT.details && (
         <RightPanelJobCard
-          orgName={orgName}
+          orgName={
+            organization ? organization.name : project ? project.name : ''
+          }
           jobInfo={jobPost}
           tags={tags}
+          hasUser={organization?.hasUser || project?.hasUser}
           showExploreJob={false}
         />
       )}
 
-      {currentTab === TAB_SEGMENT.organization && (
+      {currentTab === TAB_SEGMENT.organization && organization && (
         <RightPanelOrgCard
           org={organization}
           routeSection={ROUTE_SECTION.JOBS}

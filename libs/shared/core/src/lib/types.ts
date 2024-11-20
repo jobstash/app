@@ -92,3 +92,11 @@ export interface JobPostPageSharedProps {
   fromSSR: boolean;
   notFoundInfo?: NotFoundInfo;
 }
+
+export interface Socials {
+  github: string | null;
+  twitter: string | null;
+  telegram: string | null;
+  discord: string | null;
+  docs: string | null;
+}

@@ -7,6 +7,7 @@
     "dev": "nx serve web --port=3000",
     "start": "nx serve web --prod --port=3000",
     "build": "nx build web",
+    "build:no-cache": "pnpm nx reset && pnpm nx clear-cache && pnpm build --skip-cache",
     "lint": "nx affected:lint --uncommitted --parallel=8",
     "lint:all": "nx run-many --target=lint --all --parallel=8",
     "test": "nx affected:test --codeCoverage",

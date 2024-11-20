@@ -46,11 +46,11 @@ export const useJobList = (
       const jobPosts = data.pages.flatMap((d) => d.data);
       for (const job of jobPosts) {
         queryClient.setQueryData([mwVersion, 'job-post', job.shortUUID], job);
-        if (job.organization.projects.length > 0) {
+        if (job.organization && job.organization.projects.length > 0) {
           const projectId = job.organization.projects[0].id;
           queryClient.prefetchQuery({
             queryKey: [mwVersion, 'competitors', projectId],
-            queryFn: () => getCompetitors(job.organization.projects[0].id),
+            queryFn: () => getCompetitors(projectId),
           });
         }
       }

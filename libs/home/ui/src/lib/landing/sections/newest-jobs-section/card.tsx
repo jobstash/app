@@ -7,7 +7,7 @@ import {
   JobPost,
   lato,
 } from '@jobstash/shared/core';
-import { checkJobIsFeatured } from '@jobstash/jobs/utils';
+import { checkJobIsFeatured, getJobLogoTitleProps } from '@jobstash/jobs/utils';
 import { openNewTab } from '@jobstash/shared/utils';
 import { getLogoUrl } from '@jobstash/shared/utils';
 
@@ -19,11 +19,12 @@ interface Props {
 }
 
 export const Card = ({ job }: Props) => {
-  const { title, summary, featureStartDate, featureEndDate, organization } =
-    job;
+  const { title, summary, featureStartDate, featureEndDate } = job;
   const tags = createJobTags(job);
 
   const isFeatured = checkJobIsFeatured(featureStartDate, featureEndDate);
+
+  const { name, website, logo } = getJobLogoTitleProps(job);
 
   return (
     <div className="w-full md:w-1/3 md:px-3">
@@ -44,10 +45,10 @@ export const Card = ({ job }: Props) => {
           )}
           <div className="w-full">
             <LogoTitle
-              title={organization.name}
+              title={name ?? ''}
               avatarProps={{
-                src: getLogoUrl(organization.website, organization.logoUrl),
-                alt: organization.name,
+                src: getLogoUrl(website ?? '', logo),
+                alt: name ?? '',
               }}
               size="sm"
             />

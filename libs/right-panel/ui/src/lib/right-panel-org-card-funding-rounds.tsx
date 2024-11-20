@@ -1,11 +1,12 @@
 import { memo } from 'react';
 
 import { type FundingRound } from '@jobstash/shared/core';
-import { numFormatter } from '@jobstash/shared/utils';
+import {
+  createOrgFundingDateString,
+  numFormatter,
+} from '@jobstash/shared/utils';
 
 import { BankIcon, CardSet, Heading, MoneyIcon } from '@jobstash/shared/ui';
-
-import { createOrgFundingDateString } from './utils/create-org-funding-date-string';
 
 interface Props {
   fundingRounds: FundingRound[];

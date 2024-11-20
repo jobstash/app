@@ -10,7 +10,12 @@ interface Props {
 }
 const FeaturedJob = (props: Props) => {
   const { job } = props;
-  const { title, timestamp, organization: org } = job;
+  const { title, timestamp, organization: org, project } = job;
+
+  const name = org?.name || project?.name;
+  const website = org?.website || project?.website;
+  const logo = org?.logoUrl || project?.logo;
+
   const tags = limitTagLength(createJobTags(job));
 
   return (
@@ -22,10 +27,10 @@ const FeaturedJob = (props: Props) => {
     >
       <LogoTitle
         title={title}
-        location={`${org.name} • ${prettyTimestamp(timestamp)}`}
+        location={`${name} • ${prettyTimestamp(timestamp)}`}
         avatarProps={{
-          src: getLogoUrl(org.website, org.logoUrl),
-          alt: org.name,
+          src: getLogoUrl(website ?? '', logo),
+          alt: name ?? 'Company Logo',
         }}
       />
 

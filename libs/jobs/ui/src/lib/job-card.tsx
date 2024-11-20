@@ -60,8 +60,8 @@ const JobCard = ({
     featureStartDate,
     featureEndDate,
     access,
+    project,
   } = jobPost;
-  const { projects, name: orgName } = organization;
 
   const { permissions } = useAuthContext();
 
@@ -77,7 +77,7 @@ const JobCard = ({
       event_category: 'job',
       job_shortuuid: shortUUID,
       job_classification: classification ?? '',
-      organization_name: orgName,
+      organization_name: organization?.name ?? '',
       user_role: JSON.stringify(permissions),
     });
   };
@@ -121,7 +121,11 @@ const JobCard = ({
       <JobCardTags jobPost={jobPost} promoteButton={promoteButton} />
       <JobCardOrg org={organization} />
       <JobCardTechs techs={tags} />
-      <JobCardProjects projects={projects} />
+      <JobCardProjects
+        projects={
+          organization ? organization.projects : project ? [project] : []
+        }
+      />
       <JobCardFooter
         isFeatured={isFeatured}
         timestampText={timestampText}

@@ -227,21 +227,23 @@ export type AffiliationRequestsResponse = Infer<
   typeof affiliationRequestResponseSchema
 >;
 
+const projectAllInfoSchema = myzod.intersection(
+  projectInfoSchema,
+  projectMoreInfoSchema,
+);
+
 export const jobPostSchema = myzod
   .intersection(
     jobInfoSchema,
     myzod.object({
+      tags: myzod.array(tagSchema),
       organization: myzod
         .intersection(
           orgInfoSchema,
           myzod.object({
             fundingRounds: myzod.array(fundingRoundSchema),
             investors: myzod.array(investorSchema),
-            projects: myzod.array(
-              myzod
-                .intersection(projectInfoSchema, projectMoreInfoSchema)
-                .allowUnknownKeys(true),
-            ),
+            projects: myzod.array(projectAllInfoSchema.allowUnknownKeys(true)),
             aggregateRating: myzod.number().min(0).max(5),
             reviewCount: myzod.number(),
             hasUser: myzod.boolean(),
@@ -250,8 +252,17 @@ export const jobPostSchema = myzod
               .nullable(),
           }),
         )
-        .allowUnknownKeys(true),
-      tags: myzod.array(tagSchema),
+        .allowUnknownKeys(true)
+        .nullable(),
+      project: myzod
+        .intersection(
+          projectAllInfoSchema,
+          myzod.object({
+            hasUser: myzod.boolean(),
+          }),
+        )
+        .allowUnknownKeys(true)
+        .nullable(),
     }),
   )
   .allowUnknownKeys(true);

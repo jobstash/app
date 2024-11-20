@@ -1,5 +1,8 @@
+/* eslint-disable complexity */
 import { EDGE_URL, JobPost } from '@jobstash/shared/core';
 import { getLogoUrl } from '@jobstash/shared/utils';
+
+import { getJobLogoTitleProps } from './get-job-logo-title-props';
 
 const getTextSectionString = (title: string, text: string) =>
   `<div><h3>${title}</h3><p>${text}</p></div>`;
@@ -29,6 +32,7 @@ export const createJobPostLdJson = (jobPost: JobPost) => {
     salary,
     shortUUID,
     salaryCurrency,
+    project,
   } = jobPost;
 
   const imageMetaData = `${EDGE_URL}/jobs/job-card?id=${shortUUID}`;
@@ -65,6 +69,8 @@ export const createJobPostLdJson = (jobPost: JobPost) => {
   const datePosted = new Date(timestamp);
   const validThrough = new Date(datePosted.setMonth(datePosted.getMonth() + 3));
 
+  const { name, logo, website } = getJobLogoTitleProps(jobPost);
+
   const jsonLd: Record<
     string,
     | string
@@ -80,13 +86,13 @@ export const createJobPostLdJson = (jobPost: JobPost) => {
     validThrough: validThrough.toISOString(),
     hiringOrganization: {
       '@type': 'Organization',
-      name: organization.name,
-      logo: getLogoUrl(organization.website, organization.logoUrl),
-      sameAs: organization.logoUrl ?? '',
+      name: name ?? '',
+      logo: getLogoUrl(website ?? '', logo),
+      sameAs: name ?? '',
     },
     image: imageMetaData,
     directApply: Boolean(url),
-    employerOverview: organization.description,
+    employerOverview: organization?.description ?? project?.description ?? '',
     employmentType: commitment ? commitment.toUpperCase() : 'FULL_TIME',
   };
 

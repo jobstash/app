@@ -16,8 +16,8 @@ export const generateJobSiteMapUrls = async (feUrl: string) => {
     fetchedJobs.map((job) => ({
       id: job.shortUUID,
       key: createJobKey(job),
-      orgId: job.organization.orgId,
-      projects: job.organization.projects,
+      orgId: job.organization?.orgId,
+      projects: job.organization?.projects,
       lastmod: new Date(job.timestamp).toISOString(),
     })))();
 
@@ -35,12 +35,14 @@ export const generateJobSiteMapUrls = async (feUrl: string) => {
       generateXmlUrl(`${prefix}/${key}/organization`, lastmod),
     );
 
-    if (projects.length > 0) {
+    if (projects && projects.length > 0) {
       // Include projects link if has-project
       urls.push(generateXmlUrl(`${prefix}/${key}/projects`, lastmod));
 
       // Add orgs to set (deduped) to generate /other-jobs urls later
-      orgIds.add(orgId);
+      if (orgId) {
+        orgIds.add(orgId);
+      }
 
       // Fetch competitor - if not empty, add to urls
       fetchPromises.push(

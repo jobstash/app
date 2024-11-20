@@ -35,8 +35,8 @@ const JobCardNonLink = ({
     featureStartDate,
     featureEndDate,
     access,
+    project,
   } = jobPost;
-  const { projects } = organization;
 
   const isForExperts = access === 'protected';
   const isFeatured = checkJobIsFeatured(featureStartDate, featureEndDate);
@@ -67,7 +67,11 @@ const JobCardNonLink = ({
       <JobCardTags jobPost={jobPost} promoteButton={null} />
       <JobCardOrg org={organization} />
       <JobCardTechs techs={tags} />
-      <JobCardProjects projects={projects} />
+      <JobCardProjects
+        projects={
+          organization ? organization.projects : project ? [project] : []
+        }
+      />
       <JobCardFooter
         isFeatured={isFeatured}
         timestampText={timestampText}

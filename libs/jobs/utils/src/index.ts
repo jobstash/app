@@ -5,3 +5,4 @@ export * from './lib/create-job-page-title';
 export * from './lib/create-job-post-ld-json';
 export * from './lib/create-jobs-filter-params-obj';
 export * from './lib/generate-job-sitemap-urls';
+export * from './lib/get-job-logo-title-props';

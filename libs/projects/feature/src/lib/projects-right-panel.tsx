@@ -10,6 +10,7 @@ import { ProjectRightPanelTabs } from '@jobstash/projects/ui';
 import {
   RightPanel,
   RightPanelBackButton,
+  RightPanelHeader,
   RightPanelOrgCards,
   RightPanelProjectCard,
 } from '@jobstash/right-panel/ui';
@@ -32,12 +33,24 @@ const ProjectsRightPanel = ({ projectId, currentTab, hasTitle }: Props) => {
     );
   }
 
-  const hasOrg = projectDetails.organizations.length > 0;
-  const org = hasOrg ? projectDetails.organizations[0] : null;
+  const { organizations, name, website, logo, description } = projectDetails;
+
+  const hasOrg = organizations.length > 0;
+  const org = hasOrg ? organizations[0] : null;
 
   return (
     <RightPanel
-      org={org}
+      header={
+        <RightPanelHeader
+          name={name}
+          website={website}
+          logo={logo}
+          description={description || null}
+          socials={projectDetails}
+          tags={[]}
+          community={[]}
+        />
+      }
       tabs={
         <ProjectRightPanelTabs
           currentTab={currentTab}
@@ -48,9 +61,7 @@ const ProjectsRightPanel = ({ projectId, currentTab, hasTitle }: Props) => {
     >
       {hasTitle && projectDetails && (
         <Head>
-          <title>
-            {createProjectPageTitle(projectDetails.name, currentTab)}
-          </title>
+          <title>{createProjectPageTitle(name, currentTab)}</title>
         </Head>
       )}
 
@@ -59,7 +70,7 @@ const ProjectsRightPanel = ({ projectId, currentTab, hasTitle }: Props) => {
       )}
       {currentTab === TAB_SEGMENT.organizations && org && (
         <RightPanelOrgCards
-          orgs={projectDetails.organizations}
+          orgs={organizations}
           routeSection={ROUTE_SECTION.PROJECTS}
         />
       )}

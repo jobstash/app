@@ -3,6 +3,7 @@ export * from './lib/capitalize';
 export * from './lib/cn';
 export * from './lib/convert-false-string-values-to-null';
 export * from './lib/create-fetch-deets';
+export * from './lib/create-org-funding-date-string';
 export * from './lib/dedupe';
 export * from './lib/disable-page-scroll';
 export * from './lib/dispatch-event';

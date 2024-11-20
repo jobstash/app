@@ -1,6 +1,4 @@
-import { memo } from 'react';
-
-import { type RightPanelOrg } from '@jobstash/right-panel/core';
+import { Socials, TagElement } from '@jobstash/shared/core';
 import { getLogoUrl } from '@jobstash/shared/utils';
 
 import { LogoTitle, Text } from '@jobstash/shared/ui';
@@ -9,31 +7,41 @@ import RightPanelHeaderSocials from './right-panel-header-socials';
 import RightPanelHeaderTags from './right-panel-header-tags';
 
 interface Props {
-  org: RightPanelOrg;
+  name: string;
+  website: string | null;
+  logo: string | null;
+  description: string | null;
+  socials: Socials | null;
+  tags: TagElement[];
+  community: string[];
 }
 
-const RightPanelHeader = ({ org }: Props) => (
+const RightPanelHeader = ({
+  name,
+  website,
+  logo,
+  description,
+  socials,
+  tags,
+  community,
+}: Props) => (
   <div className="flex flex-col gap-6 md:gap-4">
     <div className="flex h-10 items-center">
       <LogoTitle
-        title={org.name}
+        title={name}
         avatarProps={{
-          src: getLogoUrl(org.website, org.logoUrl),
-          alt: org.name,
+          src: getLogoUrl(website ?? '', logo),
+          alt: name,
         }}
       />
     </div>
-    <RightPanelHeaderTags org={org} />
 
-    <Text color="dimmed">{org.summary as string}</Text>
+    <RightPanelHeaderTags tags={tags} community={community} />
 
-    <RightPanelHeaderSocials org={org} />
+    {description && <Text color="dimmed">{description}</Text>}
+
+    {socials && <RightPanelHeaderSocials socials={socials} />}
   </div>
 );
 
-export default memo(
-  RightPanelHeader,
-  // Might be different org object reference e.g. from different job post
-  // but if IDs are the same, the contents would also be the same
-  (prev, next) => prev.org.id === next.org.id,
-);
+export default RightPanelHeader;

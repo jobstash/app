@@ -1,13 +1,16 @@
 import { useAtomValue } from 'jotai';
 
 import { RIGHT_PANEL_WRAPPER_ID } from '@jobstash/right-panel/core';
+import { getJobLogoTitleProps } from '@jobstash/jobs/utils';
 
 import { activeOrgJobAtom } from '@jobstash/organizations/state';
 
 import {
+  createRightPanelOrgTags,
   RightPanel,
   RightPanelCardBorder,
   RightPanelCta,
+  RightPanelHeader,
   RightPanelJobCardDescriptions,
   RightPanelJobCardSets,
   RightPanelJobCardSkills,
@@ -19,13 +22,28 @@ export const OrgJobRightPanel = () => {
 
   if (!activeJob) return null;
 
-  const { title, organization, tags } = activeJob;
+  const { title, organization, tags, project } = activeJob;
 
+  const { name, logo, website } = getJobLogoTitleProps(activeJob);
   return (
     <div id={RIGHT_PANEL_WRAPPER_ID}>
       <RightPanel
         hideMenu
-        org={organization}
+        header={
+          name ? (
+            <RightPanelHeader
+              name={name}
+              website={website}
+              logo={logo}
+              description={
+                organization?.summary || project?.description || null
+              }
+              socials={organization ?? project ?? null}
+              tags={organization ? createRightPanelOrgTags(organization) : []}
+              community={organization?.community || []}
+            />
+          ) : null
+        }
         tabs={
           <div className="pointer-events-none">
             <Button isActive variant="outline" size="md">

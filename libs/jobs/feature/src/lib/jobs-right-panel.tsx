@@ -1,4 +1,5 @@
-import { memo } from 'react';
+/* eslint-disable complexity */
+import { memo, useMemo } from 'react';
 
 import {
   JobPost,
@@ -6,15 +7,18 @@ import {
   ROUTE_SECTION,
   TAB_SEGMENT,
 } from '@jobstash/shared/core';
+import { getJobLogoTitleProps } from '@jobstash/jobs/utils';
 
 import { useCompetitors } from '@jobstash/competitors/state';
 import { useOrgDetails } from '@jobstash/organizations/state';
 import { usePageScrollDisableSyncer } from '@jobstash/shared/state';
 
 import {
+  createRightPanelOrgTags,
   RightPanel,
   RightPanelBackButton,
   RightPanelCompetitorCards,
+  RightPanelHeader,
   RightPanelJobCard,
   RightPanelJobTabs,
   RightPanelOrgCard,
@@ -30,13 +34,36 @@ interface Props {
 }
 
 const JobsRightPanel = ({ jobPost, currentTab, routeSection }: Props) => {
-  const { data: competitors, isLoading: isLoadingCompetitors } = useCompetitors(
-    jobPost && jobPost.organization.projects.length > 0
-      ? jobPost.organization.projects[0].id
-      : undefined,
-  );
+  const projectId = useMemo(() => {
+    if (!jobPost) return null;
+    if (!jobPost.project && !jobPost.organization) return null;
 
-  const orgId = jobPost?.organization.orgId ?? null;
+    if (jobPost.organization && jobPost.organization.projects.length > 0) {
+      return jobPost.organization.projects[0].id;
+    }
+
+    if (jobPost.project) {
+      return jobPost.project.id;
+    }
+
+    return null;
+  }, [jobPost]);
+
+  const projects = useMemo(() => {
+    if (!jobPost) return [];
+    if (jobPost.organization) {
+      return jobPost.organization.projects;
+    }
+
+    if (jobPost.project) return [jobPost.project];
+
+    return [];
+  }, [jobPost]);
+
+  const { data: competitors, isLoading: isLoadingCompetitors } =
+    useCompetitors(projectId);
+
+  const orgId = jobPost?.organization?.orgId ?? null;
   const { data: orgDetails, isLoading: isLoadingOrgDetails } =
     useOrgDetails(orgId);
 
@@ -53,8 +80,7 @@ const JobsRightPanel = ({ jobPost, currentTab, routeSection }: Props) => {
     );
   }
 
-  const { id, organization, tags } = jobPost;
-  const { projects, name: orgName, normalizedName } = organization;
+  const { id, organization, tags, project } = jobPost;
 
   const hasProject = projects.length > 0;
 
@@ -71,9 +97,23 @@ const JobsRightPanel = ({ jobPost, currentTab, routeSection }: Props) => {
     : [];
   const orgJobsCount = orgJobs.length;
 
+  const { name, logo, website } = getJobLogoTitleProps(jobPost);
+
   return (
     <RightPanel
-      org={organization}
+      header={
+        name ? (
+          <RightPanelHeader
+            name={name}
+            website={website}
+            logo={logo}
+            description={organization?.summary || project?.description || null}
+            socials={organization ?? project ?? null}
+            tags={organization ? createRightPanelOrgTags(organization) : []}
+            community={organization?.community || []}
+          />
+        ) : null
+      }
       tabs={
         <RightPanelJobTabs
           isLoading={isLoading}
@@ -88,14 +128,17 @@ const JobsRightPanel = ({ jobPost, currentTab, routeSection }: Props) => {
     >
       {currentTab === TAB_SEGMENT.details && (
         <RightPanelJobCard
-          orgName={orgName}
+          orgName={
+            organization ? organization.name : project ? project.name : ''
+          }
           jobInfo={jobPost}
           tags={tags}
           showExploreJob={false}
+          hasUser={organization?.hasUser || project?.hasUser}
         />
       )}
 
-      {currentTab === TAB_SEGMENT.organization && (
+      {currentTab === TAB_SEGMENT.organization && organization && (
         <RightPanelOrgCard
           org={organization}
           routeSection={ROUTE_SECTION.JOBS}

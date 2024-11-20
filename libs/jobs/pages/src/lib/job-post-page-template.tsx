@@ -54,17 +54,14 @@ const createCanonicalUrl = (
   tab: string,
   routeSection: JobsRouteSection,
 ) => {
-  const {
-    shortUUID,
-    organization: { orgId, projects },
-  } = job;
+  const { shortUUID, organization } = job;
 
-  if (tab === 'organization') {
-    return `${FRONTEND_URL}/organizations/${orgId}/details`;
+  if (tab === 'organization' && organization) {
+    return `${FRONTEND_URL}/organizations/${organization.orgId}/details`;
   }
 
-  if (tab === 'projects' && projects.length > 0) {
-    return `${FRONTEND_URL}/projects/${projects[0].id}/details`;
+  if (tab === 'projects' && organization && organization.projects.length > 0) {
+    return `${FRONTEND_URL}/projects/${organization.projects[0].id}/details`;
   }
 
   return `${FRONTEND_URL}${routeSection}/${shortUUID}/details`;
@@ -84,7 +81,6 @@ export const JobPostPageTemplate: React.FC<JobPostPageTemplateProps> = ({
   initJob,
   fromSSR,
   notFoundInfo,
-  access,
   jobCountAtom,
   activeJobAtom,
   routeSection = ROUTE_SECTION.JOBS,

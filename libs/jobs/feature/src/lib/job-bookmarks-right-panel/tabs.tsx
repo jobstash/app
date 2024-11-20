@@ -18,10 +18,13 @@ const JobBookmarksRightPanelTabs = ({
   showSpinner,
   competitorCount,
 }: Props) => {
-  const { organization } = jobPost;
+  const { organization, project } = jobPost;
 
-  const { projects } = organization;
-  const projectCount = projects.length;
+  const projectCount = organization
+    ? organization.projects.length
+    : project
+    ? 1
+    : 0;
 
   const [currentTab, setCurrentTab] = useAtom(activeJobBookmarkTabAtom);
   const onClickTab = (tabSegment: TabSegment) => {

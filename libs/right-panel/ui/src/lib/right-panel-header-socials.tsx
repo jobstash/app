@@ -1,22 +1,21 @@
 import { memo } from 'react';
 
-import { type RightPanelOrg } from '@jobstash/right-panel/core';
-import { type TagElement } from '@jobstash/shared/core';
+import { Socials, type TagElement } from '@jobstash/shared/core';
 
 import { CardSet } from '@jobstash/shared/ui';
 
 import { createRightPanelSocialTags } from './utils/create-right-panel-social-tags';
 
 interface Props {
-  org: RightPanelOrg;
+  socials: Socials;
 }
 
-const RightPanelHeaderSocials = ({ org }: Props) => {
-  const socials: TagElement[] = createRightPanelSocialTags(org);
+const RightPanelHeaderSocials = ({ socials }: Props) => {
+  const tags: TagElement[] = createRightPanelSocialTags(socials);
 
   return (
     <div className="flex flex-wrap items-center gap-4">
-      {socials.map(({ id, text, icon, link }) => (
+      {tags.map(({ id, text, icon, link }) => (
         <CardSet key={id} link={link} icon={icon}>
           {text}
         </CardSet>

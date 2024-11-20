@@ -10,8 +10,10 @@ import {
   OrgRightPanelTabs,
 } from '@jobstash/organizations/ui';
 import {
+  createRightPanelOrgTags,
   RightPanel,
   RightPanelBackButton,
+  RightPanelHeader,
   RightPanelOrgCard,
   RightPanelOrgJobCards,
   RightPanelProjectCards,
@@ -37,7 +39,17 @@ const OrgsRightPanel = ({ orgId, currentTab, hasTitle }: Props) => {
 
   return (
     <RightPanel
-      org={orgDetails}
+      header={
+        <RightPanelHeader
+          name={orgDetails.name}
+          website={orgDetails.website}
+          logo={orgDetails.logoUrl}
+          description={orgDetails.summary}
+          socials={orgDetails}
+          tags={createRightPanelOrgTags(orgDetails)}
+          community={orgDetails.community}
+        />
+      }
       tabs={
         <OrgRightPanelTabs currentTab={currentTab} orgDetails={orgDetails} />
       }
