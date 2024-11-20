@@ -15,6 +15,7 @@ import {
 import { JobFolder } from '@jobstash/jobs/core';
 
 import { useDeleteJobFolder } from '@jobstash/jobs/state';
+import { useIsDesktop } from '@jobstash/shared/state';
 
 import { Heading, ThrashIcon } from '@jobstash/shared/ui';
 
@@ -36,6 +37,8 @@ export const DeleteJobFolderModal = ({ jobFolder }: Props) => {
 
   const isDisabledDelete = inputValue !== name || isPending;
 
+  const isDesktop = useIsDesktop();
+
   return (
     <>
       <Tooltip content="Delete List">
@@ -53,6 +56,7 @@ export const DeleteJobFolderModal = ({ jobFolder }: Props) => {
         hideCloseButton
         backdrop="blur"
         className="p-4"
+        placement={isDesktop ? 'auto' : 'top'}
         isOpen={isOpen}
         onOpenChange={onOpenChange}
       >

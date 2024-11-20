@@ -15,6 +15,7 @@ import {
 import { EarthIcon } from 'lucide-react';
 
 import { useCreateJobFolder } from '@jobstash/jobs/state';
+import { useIsDesktop } from '@jobstash/shared/state';
 
 import { Heading } from '@jobstash/shared/ui';
 
@@ -49,6 +50,8 @@ export const CreateJobFolderModal = () => {
 
   const isDisabledCreate = !name || isPending;
 
+  const isDesktop = useIsDesktop();
+
   return (
     <>
       <Button className="w-fit rounded-lg" onPress={onOpen}>
@@ -58,6 +61,7 @@ export const CreateJobFolderModal = () => {
         hideCloseButton
         backdrop="blur"
         isOpen={isOpen}
+        placement={isDesktop ? 'auto' : 'top'}
         onOpenChange={onOpenChange}
       >
         <ModalContent>

@@ -19,6 +19,7 @@ import { EarthIcon } from 'lucide-react';
 import { JobFolder } from '@jobstash/jobs/core';
 
 import { useUpdateJobFolder } from '@jobstash/jobs/state';
+import { useIsDesktop } from '@jobstash/shared/state';
 
 import { Heading } from '@jobstash/shared/ui';
 
@@ -47,6 +48,8 @@ export const EditJobFolderModal = ({ jobFolder }: Props) => {
 
   const isDisabledUpdate = !name || isPending;
 
+  const isDesktop = useIsDesktop();
+
   return (
     <>
       <Tooltip content="Edit Bookmark Folder">
@@ -63,6 +66,7 @@ export const EditJobFolderModal = ({ jobFolder }: Props) => {
       <Modal
         hideCloseButton
         backdrop="blur"
+        placement={isDesktop ? 'auto' : 'top'}
         isOpen={isOpen}
         onOpenChange={onOpenChange}
       >
