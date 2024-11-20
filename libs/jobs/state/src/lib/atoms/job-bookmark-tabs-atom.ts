@@ -2,7 +2,7 @@ import { atom } from 'jotai';
 
 export const JOB_BOOKMARK_TABS = {
   SAVED_JOBS: 'Saved Jobs',
-  CUSTOM_LISTS: 'Custom Lists',
+  BOOKMARK_FOLDERS: 'Bookmark Folders',
 } as const;
 
 export type JobBookmarkTab =

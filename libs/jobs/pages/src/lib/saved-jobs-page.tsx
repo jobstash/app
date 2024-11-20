@@ -4,20 +4,24 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useRef } from 'react';
 
-import { PencilSquareIcon } from '@heroicons/react/16/solid';
 import { LoadingPage, NotFoundPage } from '@jobstash/shared/pages';
 import { Button, Tooltip } from '@nextui-org/react';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
-import { EarthIcon, LockIcon, Share2Icon } from 'lucide-react';
+import {
+  EarthIcon,
+  LockIcon,
+  Share2Icon,
+  SquareArrowOutUpRight,
+} from 'lucide-react';
 
 import { PERMISSIONS } from '@jobstash/auth/core';
 import { RIGHT_PANEL_WRAPPER_ID } from '@jobstash/right-panel/core';
-import { EVENT_CARD_CLICK, JobPost } from '@jobstash/shared/core';
+import { EVENT_CARD_CLICK, FRONTEND_URL, JobPost } from '@jobstash/shared/core';
 import {
   cn,
   dispatchEvent,
   getPluralText,
-  openNewTab,
+  notifSuccess,
 } from '@jobstash/shared/utils';
 
 import { useHasPermission } from '@jobstash/auth/state';
@@ -36,6 +40,8 @@ import {
 
 import {
   CreateJobFolderModal,
+  DeleteJobFolderModal,
+  EditJobFolderModal,
   JobBookmarkButton,
   JobBookmarkModal,
   JobBookmarkTabs,
@@ -49,7 +55,6 @@ import {
   IsMountedWrapper,
   Loader,
   PageWrapper,
-  Text,
 } from '@jobstash/shared/ui';
 
 const SideBar = dynamic(() =>
@@ -130,7 +135,8 @@ export const SavedJobsPage = () => {
   if (!hasPermission) return <NotFoundPage />;
 
   const isSavedJobs = activeTab === JOB_BOOKMARK_TABS.SAVED_JOBS;
-  const isCustomList = activeTab === JOB_BOOKMARK_TABS.CUSTOM_LISTS;
+  const isCustomList = activeTab === JOB_BOOKMARK_TABS.BOOKMARK_FOLDERS;
+
   return (
     <PageWrapper>
       <SideBar />
@@ -209,7 +215,7 @@ export const SavedJobsPage = () => {
       {isCustomList && (
         <div className="px-3.5 pt-[132px] lg:p-8 flex flex-col gap-8 [&>*]:w-full [&>*]:lg:max-w-xl">
           <div className="flex items-center gap-4 justify-between">
-            <Heading size="lg">Manage Custom Lists</Heading>
+            <Heading size="lg">Manage Bookmark Folders</Heading>
             <CreateJobFolderModal />
           </div>
 
@@ -224,21 +230,25 @@ export const SavedJobsPage = () => {
                   : `${itemCount} ${getPluralText('job post', itemCount)}`;
 
               const href = `/bookmarks/jobs/${id}`;
-              const onClick = () => {
-                openNewTab(href);
+
+              const onShare = () => {
+                if (navigator) {
+                  const link = `${FRONTEND_URL}${href}`;
+                  navigator.clipboard.writeText(link);
+                  notifSuccess({
+                    title: `Link copied to clipboard!`,
+                    message: `You can now share "${name}" folder with others`,
+                  });
+                }
               };
 
               return (
-                <Tooltip
+                <div
                   key={id}
-                  content="Open list in new tab"
-                  placement="top-start"
+                  className="rounded-lg p-4 bg-content2 flex justify-between items-center gap-4"
                 >
-                  <div
-                    className="rounded-lg p-4 bg-content2 flex justify-between items-center gap-4 hover:cursor-pointer"
-                    onClick={onClick}
-                  >
-                    <div className="flex flex-col gap-0">
+                  <div className="flex flex-col gap-0">
+                    <div className="flex items-center gap-1">
                       <Link
                         target="_blank"
                         rel="noreferrer"
@@ -247,45 +257,56 @@ export const SavedJobsPage = () => {
                       >
                         {name}
                       </Link>
-                      <div className="flex items-center gap-1.5">
-                        <Tooltip content={isPublic ? 'Public' : 'Private'}>
-                          {isPublic ? (
-                            <EarthIcon className="w-4 h-4" />
-                          ) : (
-                            <LockIcon className="w-4 h-4" />
-                          )}
-                        </Tooltip>
-                        <div className="pt-0.5">
-                          <Text size="sm" className="text-white/80">
-                            {countText}
-                          </Text>
-                        </div>
+                      <Tooltip content="Open list in new tab">
+                        <Button
+                          isIconOnly
+                          size="sm"
+                          className="text-white/90"
+                          as={Link}
+                          target="_blank"
+                          rel="noreferrer"
+                          href={href}
+                        >
+                          <SquareArrowOutUpRight className="w-4 h-4" />
+                        </Button>
+                      </Tooltip>
+                    </div>
+                    <div className="flex items-center gap-1.5">
+                      <Tooltip content={isPublic ? 'Public' : 'Private'}>
+                        {isPublic ? (
+                          <EarthIcon className="w-4 h-4" />
+                        ) : (
+                          <LockIcon className="w-4 h-4" />
+                        )}
+                      </Tooltip>
+                      <div className="pt-0.5">
+                        <Link
+                          target="_blank"
+                          rel="noreferrer"
+                          href={href}
+                          className="text-sm hover:underline text-white/80"
+                        >
+                          {countText}
+                        </Link>
                       </div>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <Tooltip content="Edit">
-                        <Button
-                          isIconOnly
-                          size="sm"
-                          className="text-white/90"
-                          variant="faded"
-                        >
-                          <PencilSquareIcon className="w-6 h-6" />
-                        </Button>
-                      </Tooltip>
-                      <Tooltip content="Share Link">
-                        <Button
-                          isIconOnly
-                          size="sm"
-                          className="text-white/90"
-                          variant="faded"
-                        >
-                          <Share2Icon className="w-5 h-5" />
-                        </Button>
-                      </Tooltip>
-                    </div>
                   </div>
-                </Tooltip>
+                  <div className="flex items-center gap-2">
+                    <DeleteJobFolderModal jobFolder={jobFolder} />
+                    <EditJobFolderModal jobFolder={jobFolder} />
+                    <Tooltip content="Share Link">
+                      <Button
+                        isIconOnly
+                        size="sm"
+                        className="text-white/90"
+                        variant="faded"
+                        onClick={onShare}
+                      >
+                        <Share2Icon className="w-5 h-5" />
+                      </Button>
+                    </Tooltip>
+                  </div>
+                </div>
               );
             })}
           </div>

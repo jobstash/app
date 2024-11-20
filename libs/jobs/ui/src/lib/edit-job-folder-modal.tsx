@@ -1,5 +1,6 @@
 import { useState } from 'react';
 
+import { PencilSquareIcon } from '@heroicons/react/16/solid';
 import {
   Button,
   cn,
@@ -10,44 +11,55 @@ import {
   ModalFooter,
   ModalHeader,
   Switch,
+  Tooltip,
   useDisclosure,
 } from '@nextui-org/react';
 import { EarthIcon } from 'lucide-react';
 
-import { useCreateJobFolder } from '@jobstash/jobs/state';
+import { JobFolder } from '@jobstash/jobs/core';
+
+import { useUpdateJobFolder } from '@jobstash/jobs/state';
 
 import { Heading } from '@jobstash/shared/ui';
 
-export const CreateJobFolderModal = () => {
-  const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
+interface Props {
+  jobFolder: JobFolder;
+}
 
-  const { mutate, isPending } = useCreateJobFolder();
+export const EditJobFolderModal = ({ jobFolder }: Props) => {
+  const { isOpen, onOpen, onOpenChange } = useDisclosure();
 
-  const [name, setName] = useState('');
-  const [isPublic, setIsPublic] = useState(false);
+  const { mutate, isPending } = useUpdateJobFolder();
 
-  const onCreate = () => {
-    mutate(
-      {
-        jobs: [],
+  const [name, setName] = useState(jobFolder.name);
+  const [isPublic, setIsPublic] = useState(jobFolder.isPublic);
+
+  const onUpdate = () => {
+    mutate({
+      id: jobFolder.id,
+      payload: {
+        jobs: jobFolder.jobs.map((job) => job.shortUUID),
         name,
         isPublic,
       },
-      {
-        onSuccess() {
-          onClose();
-        },
-      },
-    );
+    });
   };
 
-  const isDisabledCreate = !name || isPending;
+  const isDisabledUpdate = !name || isPending;
 
   return (
     <>
-      <Button className="w-fit rounded-lg" onPress={onOpen}>
-        New Folder
-      </Button>
+      <Tooltip content="Edit Bookmark Folder">
+        <Button
+          isIconOnly
+          size="sm"
+          className="text-white/90"
+          variant="faded"
+          onClick={onOpen}
+        >
+          <PencilSquareIcon className="w-5 h-5" />
+        </Button>
+      </Tooltip>
       <Modal
         hideCloseButton
         backdrop="blur"
@@ -58,7 +70,7 @@ export const CreateJobFolderModal = () => {
           {(onClose) => (
             <>
               <ModalHeader>
-                <Heading size="lg">Create Bookmark Folder</Heading>
+                <Heading size="lg">Update Bookmark Folder</Heading>
               </ModalHeader>
               <ModalBody className="flex flex-col gap-8 py-4">
                 <Input
@@ -106,8 +118,8 @@ export const CreateJobFolderModal = () => {
                 <Button variant="light" onPress={onClose}>
                   Close
                 </Button>
-                <Button isDisabled={isDisabledCreate} onClick={onCreate}>
-                  Create Folder
+                <Button isDisabled={isDisabledUpdate} onClick={onUpdate}>
+                  Submit
                 </Button>
               </ModalFooter>
             </>
