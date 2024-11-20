@@ -8,7 +8,11 @@ import { cn } from '@jobstash/shared/utils';
 import { isOpenTopBannerAtom } from '@jobstash/shared/state';
 import { SidebarProvider } from '@jobstash/sidebar/state';
 
-import { CloseIcon, HamburgerIcon } from '@jobstash/shared/ui';
+import {
+  CloseIcon,
+  HamburgerIcon,
+  IsMountedWrapper,
+} from '@jobstash/shared/ui';
 import {
   Brand,
   MobileMenuButton,
@@ -39,7 +43,7 @@ const Sidebar = ({ filtersRouteSection }: Props) => {
       <SidebarWrapper>
         <div
           className={cn(
-            'lg:z-[999] lg:w-screen shrink-0 lg:fixed lg:top-0 lg:left-0 lg:px-4 lg:bg-gradient-to-l lg:from-[#141317] lg:to-[#121216] lg:h-[100px] lg:border-b lg:border-white/5 lg:flex lg:items-center',
+            'lg:z-[999] lg:w-screen shrink-0 lg:fixed lg:top-0 lg:left-0 lg:px-4 lg:bg-gradient-to-l lg:from-[#141317] lg:to-[#121216] lg:h-[100px] lg:border-b lg:border-white/5 lg:flex lg:items-center pb-16 lg:pb-0',
             { 'lg:pt-10 lg:h-[140px]': isOpenTopBanner },
           )}
         >
@@ -79,7 +83,12 @@ const Sidebar = ({ filtersRouteSection }: Props) => {
           {filtersRouteSection && (
             <Filters routeSection={filtersRouteSection} />
           )}
-          <div id={PORTAL_IDS.TOP_NAV_MAIN} className="pl-4" />
+
+          <div
+            id={PORTAL_IDS.TOP_NAV_MAIN}
+            className="absolute lg:relative pt-4 lg:pl-4"
+          />
+          <div />
 
           <HeaderLinks />
         </div>
@@ -120,7 +129,9 @@ const Sidebar = ({ filtersRouteSection }: Props) => {
           </div>
 
           <SidebarDiscoverBartabs isMobile />
-          <SidebarBookmarksSection isMobile />
+          <IsMountedWrapper>
+            <SidebarBookmarksSection isMobile />
+          </IsMountedWrapper>
           <SidebarUserSection isMobile />
 
           <div className="grow" />
@@ -142,7 +153,9 @@ const Sidebar = ({ filtersRouteSection }: Props) => {
           })}
         >
           <SidebarDiscoverBartabs />
-          <SidebarBookmarksSection />
+          <IsMountedWrapper>
+            <SidebarBookmarksSection />
+          </IsMountedWrapper>
           <SidebarUserSection />
         </div>
       </SidebarWrapper>

@@ -3,6 +3,7 @@ export * from './lib/atoms/active-job-atom';
 export * from './lib/atoms/active-job-bookmark-atom';
 export * from './lib/atoms/active-job-bookmark-tab-atom';
 export * from './lib/atoms/job-bookmark-atom';
+export * from './lib/atoms/job-bookmark-tabs-atom';
 export * from './lib/atoms/job-count-atom';
 
 // Hooks

@@ -44,8 +44,6 @@ export const JobBookmarkModal = () => {
   const { isLoading: isLoadingJobFolders, data: jobFolders } =
     useAllJobFolders();
 
-  console.log({ jobFolders });
-
   const isSavedJob = savedJobs?.some(
     (job) => job.shortUUID === jobPost?.shortUUID,
   );

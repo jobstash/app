@@ -1,5 +1,7 @@
+export * from './lib/create-job-folder-modal';
 export { default as JobBookmarkButton } from './lib/job-bookmark-button';
 export * from './lib/job-bookmark-modal';
+export * from './lib/job-bookmark-tabs';
 export { default as JobCard } from './lib/job-card';
 export { default as JobCardNonLink } from './lib/job-card-non-link';
 export * from './lib/job-card-promote-button';
