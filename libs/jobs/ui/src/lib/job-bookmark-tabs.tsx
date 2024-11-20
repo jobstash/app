@@ -11,14 +11,24 @@ import {
   jobBookmarkTabsAtom,
 } from '@jobstash/jobs/state';
 
-export const JobBookmarkTabs = () => {
+import { Heading } from '@jobstash/shared/ui';
+
+interface Props {
+  folderName?: string;
+}
+
+export const JobBookmarkTabs = ({ folderName }: Props) => {
   const [activeTab, setActiveTab] = useAtom(jobBookmarkTabsAtom);
 
   // eslint-disable-next-line unicorn/prefer-query-selector
   const portal = document.getElementById(PORTAL_IDS.TOP_NAV_MAIN);
   if (!portal) return null;
 
-  return createPortal(
+  const content = folderName ? (
+    <div className="px-4">
+      <Heading size="lg">{folderName}</Heading>
+    </div>
+  ) : (
     <Tabs
       aria-label="Approval Status"
       size="lg"
@@ -33,7 +43,8 @@ export const JobBookmarkTabs = () => {
       {Object.values(JOB_BOOKMARK_TABS).map((tab) => (
         <Tab key={tab} title={tab} />
       ))}
-    </Tabs>,
-    portal,
+    </Tabs>
   );
+
+  return createPortal(content, portal);
 };

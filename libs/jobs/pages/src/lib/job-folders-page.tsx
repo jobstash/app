@@ -1,73 +1,71 @@
 /* eslint-disable @nx/enforce-module-boundaries */
 import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
-import { useEffect, useRef } from 'react';
 
-import { LoadingPage } from '@jobstash/shared/pages';
+import { LoadingPage, NotFoundPage } from '@jobstash/shared/pages';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 
 import { RIGHT_PANEL_WRAPPER_ID } from '@jobstash/right-panel/core';
-import { EVENT_CARD_CLICK, JobPost } from '@jobstash/shared/core';
+import {
+  ERR_NOT_FOUND,
+  EVENT_CARD_CLICK,
+  JobPost,
+} from '@jobstash/shared/core';
 import { cn, dispatchEvent } from '@jobstash/shared/utils';
 
-import { activeJobBookmarkAtom, useSavedJobs } from '@jobstash/jobs/state';
+import {
+  activeJobFolderBookmarkAtom,
+  useJobFolder,
+} from '@jobstash/jobs/state';
 import {
   isDisabledPageScrollAtom,
   isOpenTopBannerAtom,
   useIsDesktop,
 } from '@jobstash/shared/state';
 
-import { JobBookmarkButton, JobCardNonLink } from '@jobstash/jobs/ui';
 import {
-  Button,
+  JobBookmarkButton,
+  JobBookmarkModal,
+  JobBookmarkTabs,
+  JobCardNonLink,
+} from '@jobstash/jobs/ui';
+import {
   EmptyResult,
   InternalErrorResult,
+  IsMountedWrapper,
   Loader,
   PageWrapper,
 } from '@jobstash/shared/ui';
+import { Button as JobstashButton } from '@jobstash/shared/ui';
+import { JobBookmarksRightPanel } from '@jobstash/jobs/feature';
 
 const SideBar = dynamic(() =>
   import('@jobstash/sidebar/feature').then((m) => m.SideBar),
 );
 
-const JobBookmarksRightPanel = dynamic(() =>
-  import('@jobstash/jobs/feature').then((m) => m.JobBookmarksRightPanel),
-);
+interface Props {
+  id: string;
+}
 
-export const JobBookmarksPage = () => {
-  const { isLoading, isError, data, isFetching } = useSavedJobs();
+export const JobFoldersPage = ({ id }: Props) => {
+  const { push } = useRouter();
+
+  const { data: jobFolder, error, isError, isLoading } = useJobFolder(id);
 
   const [activeJobBookmark, setActiveJobBookmark] = useAtom(
-    activeJobBookmarkAtom,
+    activeJobFolderBookmarkAtom,
   );
 
-  const isDesktop = useIsDesktop();
-
-  // Set first item as active if null (on desktop)
-  const initRef = useRef(false);
-  useEffect(() => {
-    if (
-      !activeJobBookmark &&
-      data &&
-      data.length > 0 &&
-      isDesktop &&
-      !initRef.current
-    ) {
-      initRef.current = true;
-      setActiveJobBookmark(data[0]);
-    }
-  }, [activeJobBookmark, data, isDesktop, setActiveJobBookmark]);
-
-  const onClickBack = () => {
-    setActiveJobBookmark(null);
-
-    // Handle bookmarks (opening/closing cards for bookmark is not route-based)
-    if (!isDesktop) {
-      setIsDisabledScroll(false);
-    }
+  const onClickBrowse = () => {
+    push('/jobs', undefined, { scroll: false });
   };
 
+  const isDesktop = useIsDesktop();
   const setIsDisabledScroll = useSetAtom(isDisabledPageScrollAtom);
+  const isOpenTopBanner = useAtomValue(isOpenTopBannerAtom);
+
+  if (error && error.message === ERR_NOT_FOUND) return <NotFoundPage />;
+  if (!jobFolder) return <LoadingPage />;
 
   const onClickCard = (jobPost: JobPost) => {
     setActiveJobBookmark(jobPost);
@@ -81,50 +79,51 @@ export const JobBookmarksPage = () => {
     }
   };
 
-  const isOpenTopBanner = useAtomValue(isOpenTopBannerAtom);
+  const onClickBack = () => {
+    setActiveJobBookmark(null);
 
-  const { push } = useRouter();
-  const onClickBrowse = () => {
-    push('/jobs', undefined, { scroll: false });
+    // Handle bookmarks (opening/closing cards for bookmark is not route-based)
+    if (!isDesktop) {
+      setIsDisabledScroll(false);
+    }
   };
-
-  if (isLoading) return <LoadingPage />;
 
   return (
     <PageWrapper>
       <SideBar />
 
-      <div className="px-3.5 pt-[69px] lg:p-8 lg:pr-[calc(44vw)] flex flex-col gap-4">
-        {data && data.length === 0 && (
+      <IsMountedWrapper>
+        <JobBookmarkTabs folderName={jobFolder.name} />
+      </IsMountedWrapper>
+
+      <JobBookmarkModal />
+
+      <div className="px-3.5 pt-[132px] lg:p-8 lg:pr-[calc(44vw)] flex flex-col gap-4">
+        {jobFolder && jobFolder.jobs.length === 0 && (
           <EmptyResult
+            title={`"${jobFolder.name}" folder is empty`}
             description="You have not added any bookmarks yet."
             actionSection={
-              <Button
+              <JobstashButton
                 variant="primary"
                 textProps={{ fw: 'semibold' }}
                 size="md"
                 onClick={onClickBrowse}
               >
                 Browse Jobs
-              </Button>
+              </JobstashButton>
             }
           />
         )}
 
-        {data &&
-          data.length > 0 &&
-          data?.map((jobPost) => (
+        {jobFolder &&
+          jobFolder.jobs.length > 0 &&
+          jobFolder.jobs.map((jobPost) => (
             <JobCardNonLink
               key={jobPost.id}
               jobPost={jobPost}
               topRightAction={
-                <JobBookmarkButton
-                  isFetching={isFetching}
-                  jobPost={jobPost}
-                  //
-                  // shortUUID={jobPost.shortUUID}
-                  // isBookmarked={bookmarkedJobs.has(jobPost.shortUUID)}
-                />
+                <JobBookmarkButton isFetching={false} jobPost={jobPost} />
               }
               isActive={jobPost.id === activeJobBookmark?.id}
               onClick={onClickCard}

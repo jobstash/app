@@ -7,7 +7,7 @@ import { MW_URL } from '@jobstash/shared/core';
 import { mwFetch } from '@jobstash/shared/data';
 
 export const getJobFolder = async (id: string) => {
-  const url = `${MW_URL}/jobs/folder/${id}`;
+  const url = `${MW_URL}/jobs/folders/${id}`;
 
   const options = {
     responseSchema: getJobFolderResponse,

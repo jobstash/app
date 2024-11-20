@@ -13,5 +13,10 @@ export const useAllJobFolders = () => {
     queryFn: () => getAllJobFolders(),
     staleTime: 1000 * 60 * 60, // 1hr
     enabled: isAuthenticated,
+    select: ({ message, success, data }) => ({
+      message,
+      success,
+      data: data.sort((a, b) => b.jobs.length - a.jobs.length),
+    }),
   });
 };
