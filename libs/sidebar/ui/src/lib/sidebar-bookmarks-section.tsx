@@ -9,8 +9,6 @@ import { BookmarkSidebarIcon } from '@jobstash/shared/ui';
 
 import { SidebarSection } from './sidebar-section';
 
-const SAVED_JOBS_PATH = '/bookmarks/jobs';
-
 interface Props {
   isMobile?: boolean;
 }
@@ -18,17 +16,16 @@ interface Props {
 const SidebarBookmarksSection = ({ isMobile }: Props) => {
   const router = useRouter();
 
-  const hasIdParam = Boolean(router.query.id);
+  const hasParam = Boolean(router.query.slug);
   const hasUserPermission = useHasPermission(PERMISSIONS.USER);
-  const isAnonSavedJobs =
-    router.pathname === SAVED_JOBS_PATH && !hasIdParam && !hasUserPermission;
+  const isAnonSavedJobs = !hasParam && !hasUserPermission;
 
   const bookmarkedBartabs = useMemo(() => {
     if (!router.isReady) return [];
 
     // On anon, path is custom bookmark path
     const path =
-      !hasUserPermission && hasIdParam ? router.asPath : '/bookmarks/jobs';
+      !hasUserPermission && hasParam ? router.asPath : '/bookmarks/jobs';
 
     return [
       {
@@ -37,7 +34,7 @@ const SidebarBookmarksSection = ({ isMobile }: Props) => {
         icon: <BookmarkSidebarIcon />,
       },
     ];
-  }, [hasIdParam, hasUserPermission, router.asPath, router.isReady]);
+  }, [hasParam, hasUserPermission, router.asPath, router.isReady]);
 
   if (!router.isReady || isAnonSavedJobs) return null;
 
