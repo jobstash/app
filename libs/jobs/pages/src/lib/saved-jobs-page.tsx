@@ -294,16 +294,21 @@ export const SavedJobsPage = () => {
                   <div className="flex items-center gap-2">
                     <DeleteJobFolderModal jobFolder={jobFolder} />
                     <EditJobFolderModal jobFolder={jobFolder} />
-                    <Tooltip content="Share Link">
-                      <Button
-                        isIconOnly
-                        size="sm"
-                        className="text-white/90"
-                        variant="faded"
-                        onClick={onShare}
-                      >
-                        <Share2Icon className="w-5 h-5" />
-                      </Button>
+                    <Tooltip
+                      content={isPublic ? 'Share Link' : 'List is Private'}
+                    >
+                      <div>
+                        <Button
+                          isIconOnly
+                          size="sm"
+                          className="text-white/90"
+                          variant="faded"
+                          isDisabled={!isPublic}
+                          onClick={onShare}
+                        >
+                          <Share2Icon className="w-5 h-5" />
+                        </Button>
+                      </div>
                     </Tooltip>
                   </div>
                 </div>
