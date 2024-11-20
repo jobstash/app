@@ -44,13 +44,13 @@ const SideBar = dynamic(() =>
 );
 
 interface Props {
-  id: string;
+  slug: string;
 }
 
-export const JobFoldersPage = ({ id }: Props) => {
+export const JobFoldersPage = ({ slug }: Props) => {
   const { push } = useRouter();
 
-  const { data: jobFolder, error, isError, isLoading } = useJobFolder(id);
+  const { data: jobFolder, error, isError, isLoading } = useJobFolder(slug);
 
   const [activeJobBookmark, setActiveJobBookmark] = useAtom(
     activeJobFolderBookmarkAtom,

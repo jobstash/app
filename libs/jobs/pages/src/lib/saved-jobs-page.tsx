@@ -221,7 +221,7 @@ export const SavedJobsPage = () => {
 
           <div className="flex flex-col gap-8">
             {(jobFolders?.data ?? []).map((jobFolder) => {
-              const { id, name, jobs, isPublic } = jobFolder;
+              const { id, name, jobs, isPublic, slug } = jobFolder;
               const itemCount = jobs.length;
 
               const countText =
@@ -229,7 +229,7 @@ export const SavedJobsPage = () => {
                   ? 'No jobs on this list'
                   : `${itemCount} ${getPluralText('job post', itemCount)}`;
 
-              const href = `/bookmarks/jobs/${id}`;
+              const href = `/bookmarks/jobs/${slug}`;
 
               const onShare = () => {
                 if (navigator) {

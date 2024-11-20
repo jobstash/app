@@ -3,11 +3,11 @@ import { GetServerSideProps } from 'next';
 export { JobFoldersPage as default } from '@jobstash/jobs/pages';
 
 export const getServerSideProps: GetServerSideProps<{
-  id: string;
+  slug: string;
 }> = async (context) => {
-  const { id } = context.params as { id: string };
+  const { slug } = context.params as { slug: string };
 
-  if (!id) {
+  if (!slug) {
     return {
       notFound: true,
     };
@@ -15,7 +15,7 @@ export const getServerSideProps: GetServerSideProps<{
 
   return {
     props: {
-      id,
+      slug,
     },
   };
 };
