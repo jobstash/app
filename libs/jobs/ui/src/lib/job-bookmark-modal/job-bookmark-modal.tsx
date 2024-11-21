@@ -146,16 +146,16 @@ export const JobBookmarkModal = () => {
       isOpen={isOpen}
       backdrop="blur"
       size="lg"
-      className="p-4 z-50"
-      placement={!isDesktop && showNewListForm ? 'top' : 'auto'}
+      className="z-50 p-4"
+      // placement={!isDesktop && showNewListForm ? 'top' : 'auto'}
       onOpenChange={onOpenChange}
     >
       <ModalContent className="flex flex-col gap-y-2">
         {name && (
           <ModalHeader>
-            <div className="flex gap-3 items-center">
+            <div className="flex items-center gap-3">
               <Avatar
-                className="h-12 w-12"
+                className="w-12 h-12"
                 name={name}
                 src={getLogoUrl(website ?? '', logo)}
               />
