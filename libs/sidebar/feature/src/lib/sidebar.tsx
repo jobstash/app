@@ -84,7 +84,11 @@ const Sidebar = ({ filtersRouteSection }: Props) => {
             <Filters routeSection={filtersRouteSection} />
           )}
 
-          
+          <div
+            id={PORTAL_IDS.TOP_NAV_MAIN}
+            className="pt-4 lg:pl-4"
+          />
+          <div />
 
           <HeaderLinks />
         </div>
@@ -141,10 +145,6 @@ const Sidebar = ({ filtersRouteSection }: Props) => {
             <HamburgerIcon />
           </MobileMenuButton>
         </div>
-
-        {PORTAL_IDS.TOP_NAV_MAIN && (
-          <div id={PORTAL_IDS.TOP_NAV_MAIN} className='pt-4' />
-        )}
 
         {/* DESKTOP BARTABS */}
         <div
