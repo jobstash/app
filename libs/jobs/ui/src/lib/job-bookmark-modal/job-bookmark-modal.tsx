@@ -147,7 +147,7 @@ export const JobBookmarkModal = () => {
       backdrop="blur"
       size="lg"
       className="z-50 p-4"
-      // placement={!isDesktop && showNewListForm ? 'top' : 'auto'}
+      placement={!isDesktop && showNewListForm ? 'top' : 'auto'}
       onOpenChange={onOpenChange}
     >
       <ModalContent className="flex flex-col gap-y-2">
