@@ -43,7 +43,7 @@ const Sidebar = ({ filtersRouteSection }: Props) => {
       <SidebarWrapper>
         <div
           className={cn(
-            'lg:z-[999] lg:w-screen shrink-0 lg:fixed lg:top-0 lg:left-0 lg:px-4 lg:bg-gradient-to-l lg:from-[#141317] lg:to-[#121216] lg:h-[100px] lg:border-b lg:border-white/5 lg:flex lg:items-center pb-12 lg:pb-0',
+            'lg:z-[999] lg:w-screen lg:flex-nowrap shrink-0 lg:fixed lg:top-0 lg:left-0 lg:px-4 lg:bg-gradient-to-l lg:from-[#141317] lg:to-[#121216] lg:h-[100px] lg:border-b lg:border-white/5 lg:flex lg:items-center lg:pb-0',
             { 'lg:pt-10 lg:h-[140px]': isOpenTopBanner },
           )}
         >
@@ -84,14 +84,12 @@ const Sidebar = ({ filtersRouteSection }: Props) => {
             <Filters routeSection={filtersRouteSection} />
           )}
 
-          <div
-            id={PORTAL_IDS.TOP_NAV_MAIN}
-            className="absolute lg:relative pt-4 lg:pl-4"
-          />
-          <div />
-
           <HeaderLinks />
         </div>
+
+       
+        
+        <div />
         {/* MOBILE BARTABS */}
         <MobileNavbarWrapper>
           <div className="flex justify-between -mr-2">
@@ -139,6 +137,7 @@ const Sidebar = ({ filtersRouteSection }: Props) => {
           {/* MOBILE BOTTOM BARTABS */}
           <HeaderLinks isMobile />
         </MobileNavbarWrapper>
+
         <div className="flex ml-auto -mr-4 lg:hidden">
           <PrivyButton />
           <MobileMenuButton>
@@ -146,6 +145,11 @@ const Sidebar = ({ filtersRouteSection }: Props) => {
           </MobileMenuButton>
         </div>
 
+        {PORTAL_IDS.TOP_NAV_MAIN && (
+          <div id={PORTAL_IDS.TOP_NAV_MAIN} className='pt-4 lg:pt-0 lg:fixed lg:left-[239px] lg:top-0 lg:flex lg:flex-col lg:h-[100px] lg:justify-center lg:z-[9999]' />
+        )}
+
+        
         {/* DESKTOP BARTABS */}
         <div
           className={cn('flex-col hidden space-y-6 mt-28 lg:flex', {

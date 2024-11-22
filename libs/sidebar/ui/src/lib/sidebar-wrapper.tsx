@@ -19,7 +19,7 @@ const SidebarWrapper = ({ children }: Props) => {
   return (
     <nav
       className={cn(
-        'fixed left-0 z-50 flex  w-full justify-between bg-gradient-to-l from-[#141317] to-[#121216] p-4 lg:inset-y-0 lg:h-auto lg:min-h-screen lg:w-52 lg:flex-col lg:justify-start lg:border-r lg:border-white/5 lg:bg-transparent',
+        'fixed left-0 z-50 flex flex-wrap lg:flex-nowrap  w-full justify-between bg-gradient-to-l from-[#141317] to-[#121216] p-4 lg:inset-y-0 lg:h-auto lg:min-h-screen lg:w-52 lg:flex-col lg:justify-start lg:border-r lg:border-white/5 lg:bg-transparent',
         { 'z-[60]': sidebarOpen },
         { '': isOpenTopBanner },
       )}
