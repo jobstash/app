@@ -27,7 +27,7 @@ export const createPreferenceResponseSchema = myzod.object({
   success: myzod.boolean(),
   message: myzod.string().min(1),
   data: myzod.object({
-    preferredName: myzod.string().min(1),
+    tag: tagSchema,
     synonyms: myzod.array(tagSchema),
   }),
 });
