@@ -1,37 +1,80 @@
-import { useRef } from 'react';
+import { useEffect } from 'react';
+import { useInView } from 'react-intersection-observer';
+import { useAsyncList } from 'react-stately';
+
+import { Autocomplete, AutocompleteItem } from '@nextui-org/autocomplete';
 
 import {
   usePreferredTermsContext,
   usePreferredTermsFormContext,
 } from '@jobstash/admin/state';
 
-import AdminSelectInput from '../../admin-select-input';
+const ITEMS_PER_PAGE = 10;
 
-const PrimaryTermInput = () => {
-  const { primaryTermOptions } = usePreferredTermsContext();
-  const { primaryTerm, onChangePrimaryTerm, isExisting } =
+export const PrimaryTermInput = () => {
+  const { primaryTermOptions: options } = usePreferredTermsContext();
+
+  const { primaryTerm, onChangePrimaryTerm, initPrimaryTerm, isLoading } =
     usePreferredTermsFormContext();
 
-  const selectRef = useRef<HTMLInputElement | null>(null);
+  const list = useAsyncList<{ name: string }, number>({
+    async load({ cursor, filterText }) {
+      const filtered = options.filter((item) =>
+        item.name.toLowerCase().includes(filterText?.toLowerCase() ?? ''),
+      );
+      const start = cursor || 0;
+      const items = filtered.slice(start, start + ITEMS_PER_PAGE);
+      const nextCursor = start + ITEMS_PER_PAGE;
+      return {
+        items,
+        cursor: nextCursor,
+      };
+    },
+  });
 
-  const onChange = (v: string) => {
-    if (selectRef.current) {
-      (selectRef.current as HTMLInputElement).blur();
+  useEffect(() => {
+    if (!initPrimaryTerm && list.filterText !== primaryTerm) {
+      list.setFilterText(primaryTerm);
     }
+  }, [initPrimaryTerm, list, primaryTerm]);
 
-    onChangePrimaryTerm(v);
-  };
+  const { ref: inViewRef } = useInView({
+    threshold: 0.4,
+    onChange(inView) {
+      if (inView) {
+        list.loadMore();
+      }
+    },
+  });
 
   return (
-    <AdminSelectInput
-      ref={selectRef}
-      data={primaryTermOptions}
+    <Autocomplete
+      aria-label="Primary Term"
       placeholder="Select primary term"
-      value={primaryTerm}
-      isDisabled={isExisting}
-      onChange={onChange}
-    />
+      radius="sm"
+      shouldCloseOnBlur={false}
+      isLoading={list.isLoading}
+      inputProps={{
+        isDisabled: isLoading,
+      }}
+      items={list.items}
+      classNames={{
+        listboxWrapper: 'pb-8',
+      }}
+      isDisabled={Boolean(initPrimaryTerm)}
+      inputValue={primaryTerm ?? list.filterText}
+      onInputChange={onChangePrimaryTerm}
+    >
+      {list.items.map(({ name }, i) => (
+        <AutocompleteItem key={name} aria-label={name}>
+          <div
+            key={name}
+            ref={i === list.items.length - 1 ? inViewRef : undefined}
+          >
+            {name}
+          </div>
+        </AutocompleteItem>
+      ))}
+    </Autocomplete>
   );
 };
-
-export default PrimaryTermInput;

@@ -36,10 +36,7 @@ export const SynonymsPage = () => (
       <TagsProvider>
         <PreferredTermsProvider>
           <PreferredTermsContentWrapper>
-            <PreferredTermsFormProvider
-              initPrimaryTerm={null}
-              initSynonyms={null}
-            >
+            <PreferredTermsFormProvider>
               <PreferredTermsForm />
             </PreferredTermsFormProvider>
             <ExistingPreferredTerms />

@@ -1,88 +1,156 @@
-import { Modal } from '@mantine/core';
-import { useDisclosure } from '@mantine/hooks';
+import { Button } from '@nextui-org/button';
+import {
+  Modal,
+  ModalBody,
+  ModalContent,
+  ModalFooter,
+  ModalHeader,
+  useDisclosure,
+} from '@nextui-org/modal';
+import { useQueryClient } from '@tanstack/react-query';
 
 import { usePreferredTermsFormContext } from '@jobstash/admin/state';
-
-import { Button, Heading, Text } from '@jobstash/shared/ui';
+import { useMwVersionContext } from '@jobstash/shared/state';
 
 const PreferredTermsActions = () => {
+  const { mwVersion } = useMwVersionContext();
+  const queryClient = useQueryClient();
+
   const {
+    initPrimaryTerm,
+    initSynonyms,
     primaryTerm,
-    onSubmit,
-    onDelete,
-    isDisabledSubmit,
-    isExisting,
-    isLoadingMutation,
+    synonyms,
+    synonymsState: { created, deleted },
+    clearForm,
+    isLoading,
+    mutateAsyncDeletePreference,
+    mutateAsyncCreatePreference,
+    mutateAsyncDeleteSynonyms,
   } = usePreferredTermsFormContext();
 
-  const [
-    openedDeleteModal,
-    { open: openDeleteModal, close: closeDeleteModal },
-  ] = useDisclosure(false);
+  const { isOpen, onOpen, onClose, onOpenChange } = useDisclosure();
 
-  const onConfirmDelete = () => {
-    closeDeleteModal();
-    onDelete();
+  const invalidateQueries = async () => {
+    queryClient.invalidateQueries({
+      queryKey: [mwVersion, 'preferredTerms'],
+    });
   };
+
+  const onDelete = async () => {
+    await mutateAsyncDeletePreference(
+      {
+        preferredName: primaryTerm,
+      },
+      {
+        async onSuccess() {
+          await invalidateQueries();
+          onClose();
+        },
+      },
+    );
+  };
+
+  const onSubmit = async () => {
+    const promises = [];
+    if (created.length > 0) {
+      promises.push(
+        mutateAsyncCreatePreference({
+          preferredName: primaryTerm,
+          synonyms: created,
+        }),
+      );
+    }
+
+    if (deleted.length > 0) {
+      promises.push(
+        mutateAsyncDeleteSynonyms({
+          preferredName: primaryTerm,
+          synonyms: deleted,
+        }),
+      );
+    }
+
+    await Promise.allSettled(promises);
+
+    clearForm();
+
+    await queryClient.invalidateQueries({
+      queryKey: [mwVersion, 'preferredTerms'],
+    });
+  };
+
+  const isDisabledSubmit =
+    !primaryTerm || JSON.stringify(initSynonyms) === JSON.stringify(synonyms);
 
   return (
     <>
       <div className="w-full flex justify-end">
-        <div className="flex gap-4 items-center">
-          {isExisting && (
+        <div className="flex gap-4 items-end">
+          {primaryTerm && (
             <Button
-              className="px-6 bg-red-500"
-              isDisabled={isLoadingMutation}
-              onClick={openDeleteModal}
+              radius="sm"
+              variant="light"
+              className="text-red-600"
+              isDisabled={isLoading}
+              onClick={onOpen}
             >
               Delete
             </Button>
           )}
           <Button
-            variant="primary"
-            className="px-6"
+            radius="sm"
             isDisabled={isDisabledSubmit}
+            isLoading={isLoading}
             onClick={onSubmit}
           >
-            Submit
+            {initPrimaryTerm ? 'Save Changes' : 'Create Preference'}
           </Button>
         </div>
       </div>
-      <Modal.Root
-        centered
-        opened={openedDeleteModal}
-        title={`Delete "${primaryTerm}" preference`}
-        onClose={closeDeleteModal}
+      <Modal
+        hideCloseButton
+        backdrop="blur"
+        className="text-white p-1"
+        isOpen={isOpen}
+        onOpenChange={onOpenChange}
       >
-        <Modal.Overlay opacity={0.85} blur={0.5} />
-        <Modal.Content className="md:rounded-3xl">
-          <Modal.Header>
-            <Modal.CloseButton iconSize={32} />
-          </Modal.Header>
-          <Modal.Body className="flex flex-col p-8 gap-8">
-            <Heading size="lg" fw="bold">
-              Confirm Delete
-            </Heading>
-            <div className="flex flex-col gap-2 px-2">
-              <Text color="dimmed" size="lg">
-                You are about to delete preference for tag
-              </Text>
-              <Text color="dimmed" size="lg">
-                {`"${primaryTerm}"`}
-              </Text>
-            </div>
-            <div className="flex items-center justify-end w-full">
-              <Button
-                className="px-6 bg-red-500"
-                isDisabled={isLoadingMutation}
-                onClick={onConfirmDelete}
-              >
-                Delete
-              </Button>
-            </div>
-          </Modal.Body>
-        </Modal.Content>
-      </Modal.Root>
+        <ModalContent>
+          {(onClose) => (
+            <>
+              <ModalHeader>
+                <p>Confirm Delete</p>
+              </ModalHeader>
+              <ModalBody>
+                <div className="flex flex-col gap-4 px-2">
+                  <span className="text-lg text-white/80 pb-2">
+                    You are about to delete{' '}
+                    <span className="font-bold text-white">{`"${primaryTerm}"`}</span>{' '}
+                    tag
+                  </span>
+                  <span className="text-base text-red-500/80">
+                    This action cannot be undone and will remove all associated
+                    data permanently.
+                  </span>
+                </div>
+              </ModalBody>
+              <ModalFooter>
+                <Button variant="light" onPress={onClose}>
+                  Cancel
+                </Button>
+                <Button
+                  radius="sm"
+                  className="bg-red-700 font-bold"
+                  isLoading={isLoading}
+                  onClick={onDelete}
+                >
+                  Delete
+                </Button>
+              </ModalFooter>
+            </>
+          )}
+        </ModalContent>
+      </Modal>
     </>
   );
 };

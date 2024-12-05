@@ -4,13 +4,13 @@ import { PreferredTermsFormContext } from '../contexts/preferred-terms-form-cont
 import { usePreferredTermsForm } from '../hooks/use-preferred-terms-form';
 
 interface Props {
-  initPrimaryTerm: string | null;
-  initSynonyms: string[] | null;
+  initPrimaryTerm?: string;
+  initSynonyms?: string[];
   children: ReactNode;
 }
 
 export const PreferredTermsFormProvider = (props: Props) => {
-  const { initPrimaryTerm, initSynonyms, children } = props;
+  const { initPrimaryTerm = '', initSynonyms = [], children } = props;
 
   const value = usePreferredTermsForm(initPrimaryTerm, initSynonyms ?? []);
 

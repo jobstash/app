@@ -41,7 +41,7 @@ const AdminLayout = ({
       <hr className="border-t border-white/10 w-full" />
 
       {(breadCrumbs || tabsSection) && (
-        <div className="flex items-center justify-between">
+        <div className="flex items-center justify-between p-8">
           {breadCrumbs}
           {tabsSection}
         </div>

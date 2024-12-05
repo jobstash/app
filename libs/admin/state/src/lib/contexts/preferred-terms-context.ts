@@ -1,12 +1,13 @@
 import { createContext, useContext } from 'react';
 
 import { PreferredTerm } from '@jobstash/admin/core';
+import { Tag } from '@jobstash/shared/core';
 
 export interface PreferredTermsContextProps {
   isLoading: boolean;
   isFetching: boolean;
   preferredTerms: PreferredTerm[];
-  primaryTermOptions: string[];
+  primaryTermOptions: Tag[];
 }
 
 export const PreferredTermsContext =

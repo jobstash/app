@@ -1,66 +1,75 @@
-import { useState } from 'react';
+import { useMemo, useState } from 'react';
 
-import { useQueryClient } from '@tanstack/react-query';
-
-import { useMwVersionContext } from '@jobstash/shared/state';
-
-import { type PreferredTermsFormContextProps } from '../contexts/preferred-terms-form-context';
-import { useTagsContext } from '../contexts/tags-context';
+import { usePreferredTermsContext } from '../contexts/preferred-terms-context';
+import { PreferredTermsFormContextProps } from '../contexts/preferred-terms-form-context';
 
 import { useCreatePreferenceMutation } from './use-create-preference-mutation';
 import { useDeletePreferenceMutation } from './use-delete-preference-mutation';
 import { useDeleteSynonymsMutation } from './use-delete-synonyms-mutation';
 
-export const usePreferredTermsForm = (
-  initPrimaryTerm: string | null,
-  initSynonyms: string[] | null,
-): PreferredTermsFormContextProps => {
-  const isExisting = initPrimaryTerm !== null && initSynonyms !== null;
+interface SynonymsState {
+  created: string[];
+  deleted: string[];
+}
 
-  const { mappedTags: tags } = useTagsContext();
+const DEFAULT_SYNONYMS_STATE: SynonymsState = {
+  created: [],
+  deleted: [],
+};
+
+export const usePreferredTermsForm = (
+  initPrimaryTerm: string,
+  initSynonyms: string[],
+): PreferredTermsFormContextProps => {
+  const { primaryTermOptions } = usePreferredTermsContext();
 
   const [primaryTerm, setPrimaryTerm] = useState(initPrimaryTerm ?? '');
   const onChangePrimaryTerm = (v: string) => setPrimaryTerm(v);
 
-  const [currentSynonyms, setCurrentSynonyms] = useState<{
-    created: string[];
-    deleted: string[];
-  }>(defaultCurrentSynonyms);
+  const [synonymsState, setSynonymsState] = useState<SynonymsState>(
+    DEFAULT_SYNONYMS_STATE,
+  );
+  const { created, deleted } = synonymsState;
 
-  const synonyms = [...(initSynonyms ?? []), ...currentSynonyms.created].filter(
-    (s) => !currentSynonyms.deleted.includes(s),
+  const synonyms = useMemo(
+    () => [...initSynonyms, ...created].filter((s) => !deleted.includes(s)),
+    [created, deleted, initSynonyms],
   );
 
-  const synonymOptions = tags.filter(
-    (t) => !synonyms.includes(t) && t !== primaryTerm,
+  const synonymOptions = useMemo(
+    () =>
+      primaryTermOptions.filter(
+        (t) => !synonyms.includes(t.name) && t.name !== primaryTerm,
+      ),
+    [primaryTerm, primaryTermOptions, synonyms],
   );
 
   const addSynonym = (term: string) => {
-    setCurrentSynonyms((prev) => ({
+    setSynonymsState((prev) => ({
       created: [
         ...prev.created,
-        ...((initSynonyms ?? []).includes(term) ? [] : [term]),
+        ...(initSynonyms.includes(term) ? [] : [term]),
       ],
       deleted: prev.deleted.filter((s) => s !== term),
     }));
   };
 
   const removeSynonym = (term: string) => {
-    setCurrentSynonyms((prev) => ({
+    setSynonymsState((prev) => ({
       created: prev.created.filter((s) => s !== term),
-      deleted: (initSynonyms ?? []).includes(term)
+      deleted: initSynonyms.includes(term)
         ? [...prev.deleted, term]
         : prev.deleted,
     }));
   };
 
   const clearForm = () => {
-    if (!isExisting) {
-      setPrimaryTerm('');
-    }
-
-    setCurrentSynonyms(defaultCurrentSynonyms);
+    if (!initPrimaryTerm) setPrimaryTerm('');
+    setSynonymsState(DEFAULT_SYNONYMS_STATE);
   };
+
+  const { isLoadingDeletePreference, mutateAsyncDeletePreference } =
+    useDeletePreferenceMutation();
 
   const { isLoadingCreatePreference, mutateAsyncCreatePreference } =
     useCreatePreferenceMutation();
@@ -68,80 +77,26 @@ export const usePreferredTermsForm = (
   const { isLoadingDeleteSynonyms, mutateAsyncDeleteSynonyms } =
     useDeleteSynonymsMutation();
 
-  const { isLoadingDeletePreference, mutateAsyncDeletePreference } =
-    useDeletePreferenceMutation();
-
-  const { mwVersion } = useMwVersionContext();
-
-  const queryClient = useQueryClient();
-  const onSubmit = async () => {
-    const promises = [];
-    if (currentSynonyms.created.length > 0) {
-      promises.push(
-        mutateAsyncCreatePreference({
-          preferredName: primaryTerm,
-          synonyms: currentSynonyms.created,
-        }),
-      );
-    }
-
-    if (currentSynonyms.deleted.length > 0) {
-      promises.push(
-        mutateAsyncDeleteSynonyms({
-          preferredName: primaryTerm,
-          synonyms: currentSynonyms.deleted,
-        }),
-      );
-    }
-
-    await Promise.allSettled(promises);
-
-    clearForm();
-
-    await queryClient.invalidateQueries({
-      queryKey: [mwVersion, 'preferredTerms'],
-    });
-  };
-
-  const onDelete = async () => {
-    await mutateAsyncDeletePreference({
-      preferredName: primaryTerm,
-    });
-
-    await queryClient.invalidateQueries({
-      queryKey: [mwVersion, 'preferredTerms'],
-    });
-  };
-
-  const isLoadingMutation = [
+  const isLoading = [
+    isLoadingDeletePreference,
     isLoadingCreatePreference,
     isLoadingDeleteSynonyms,
-    isLoadingDeletePreference,
-  ].includes(true);
-
-  const isDisabledSubmit =
-    !primaryTerm ||
-    (!isExisting && currentSynonyms.created.length === 0) ||
-    JSON.stringify({ primaryTerm: initPrimaryTerm, synonyms: initSynonyms }) ===
-      JSON.stringify({ primaryTerm, synonyms });
+  ].some(Boolean);
 
   return {
     primaryTerm,
     onChangePrimaryTerm,
     synonyms,
     synonymOptions,
+    synonymsState,
     addSynonym,
     removeSynonym,
-    isLoadingMutation,
-    isExisting,
-    currentSynonyms,
-    isDisabledSubmit,
-    onSubmit,
-    onDelete,
+    clearForm,
+    initPrimaryTerm,
+    initSynonyms,
+    isLoading,
+    mutateAsyncDeletePreference,
+    mutateAsyncCreatePreference,
+    mutateAsyncDeleteSynonyms,
   };
-};
-
-const defaultCurrentSynonyms = {
-  created: [],
-  deleted: [],
 };

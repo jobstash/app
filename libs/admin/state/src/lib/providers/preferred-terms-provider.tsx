@@ -9,16 +9,18 @@ interface Props {
 }
 
 export const PreferredTermsProvider = ({ children }: Props) => {
-  const { mappedTags } = useTagsContext();
+  const { tags } = useTagsContext();
   const { isLoading, isFetching, data } = usePreferredTermsQuery();
 
-  const existingPrimaryTerms = new Set(
-    (data ?? []).map((preferredTerm) => preferredTerm.tag.name),
-  );
+  const primaryTermOptions = useMemo(() => {
+    if (tags.length === 0 || !data) return [];
 
-  const primaryTermOptions = mappedTags.filter(
-    (t) => !existingPrimaryTerms.has(t),
-  );
+    const existingPrimaryTerms = new Set(
+      data.map((preferredTerm) => preferredTerm.tag.name),
+    );
+
+    return tags.filter((t) => !existingPrimaryTerms.has(t.name));
+  }, [data, tags]);
 
   const value = useMemo(
     () => ({

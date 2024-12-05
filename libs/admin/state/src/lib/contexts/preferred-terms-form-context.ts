@@ -1,21 +1,43 @@
 import { createContext, useContext } from 'react';
 
+import { UseMutateAsyncFunction } from '@tanstack/react-query';
+
+import {
+  DeletePreferencePayload,
+  PreferredTermsPayload,
+} from '@jobstash/admin/core';
+import { MessageResponse, Tag } from '@jobstash/shared/core';
+
 export interface PreferredTermsFormContextProps {
   primaryTerm: string;
   onChangePrimaryTerm: (_: string) => void;
   synonyms: string[];
-  synonymOptions: string[];
-  addSynonym: (_: string) => void;
-  removeSynonym: (_: string) => void;
-  isLoadingMutation: boolean;
-  isExisting: boolean;
-  currentSynonyms: {
+  synonymOptions: Tag[];
+  synonymsState: {
     created: string[];
     deleted: string[];
   };
-  isDisabledSubmit: boolean;
-  onSubmit: () => void;
-  onDelete: () => void;
+  addSynonym: (_: string) => void;
+  removeSynonym: (_: string) => void;
+  clearForm: () => void;
+  initPrimaryTerm: string;
+  initSynonyms: string[];
+  isLoading: boolean;
+  mutateAsyncDeletePreference: UseMutateAsyncFunction<
+    MessageResponse,
+    Error,
+    DeletePreferencePayload
+  >;
+  mutateAsyncCreatePreference: UseMutateAsyncFunction<
+    MessageResponse,
+    Error,
+    PreferredTermsPayload
+  >;
+  mutateAsyncDeleteSynonyms: UseMutateAsyncFunction<
+    MessageResponse,
+    Error,
+    PreferredTermsPayload
+  >;
 }
 
 export const PreferredTermsFormContext =

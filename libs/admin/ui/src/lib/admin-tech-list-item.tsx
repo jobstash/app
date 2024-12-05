@@ -5,9 +5,10 @@ import RemoveIcon from './icons/remove-icon';
 interface Props {
   tech: string;
   onRemove: (tech: string) => void;
+  isDisabled?: boolean;
 }
 
-const AdminTechListItem = ({ tech, onRemove }: Props) => (
+const AdminTechListItem = ({ tech, onRemove, isDisabled }: Props) => (
   // <div className="w-fit">
   //   <Button right={<RemoveIcon />}>Javascript</Button>
   // </div>
@@ -22,6 +23,7 @@ const AdminTechListItem = ({ tech, onRemove }: Props) => (
         variant="translucent"
         size="sm"
         className="opacity-90"
+        isDisabled={isDisabled}
         onClick={() => onRemove(tech)}
       >
         <RemoveIcon />
