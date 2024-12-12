@@ -24,12 +24,7 @@ import {
   useDisableScrollListener,
 } from '@jobstash/shared/state';
 
-import {
-  DonateModal,
-  NewFeatureModal,
-  ReportModal,
-  TopBanner,
-} from '@jobstash/shared/ui';
+import { DonateModal, ReportModal, TopBanner } from '@jobstash/shared/ui';
 
 const NAME = 'JobStash';
 const DESCRIPTION = 'Crypto Native Jobs';
@@ -151,7 +146,7 @@ const App = ({ Component, pageProps }: AppProps) => {
                     </div>
 
                     <ReportModal />
-                    <NewFeatureModal />
+                    {/* <NewFeatureModal /> */}
                   </AuthProvider>
                 </PrivyProvider>
               </MwVersionProvider>
