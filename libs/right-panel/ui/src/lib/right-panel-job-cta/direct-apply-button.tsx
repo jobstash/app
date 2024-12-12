@@ -1,3 +1,7 @@
+import { PERMISSIONS } from '@jobstash/auth/core';
+
+import { useRoleClick } from '@jobstash/auth/state';
+
 import RightPanelCta from '../right-panel-cta';
 
 import { CTATooltip } from './cta-tooltip';
@@ -22,9 +26,14 @@ export const DirectApplyButton = ({
     }
   };
 
+  const { roleClick } = useRoleClick({
+    allowed: PERMISSIONS.USER,
+    callback: onClick,
+  });
+
   return (
     <CTATooltip content={<DirectApplyTooltipContent />} defaultOpen={false}>
-      <RightPanelCta text={TEXT} onClick={onClick} />
+      <RightPanelCta text={TEXT} onClick={roleClick} />
     </CTATooltip>
   );
 };
