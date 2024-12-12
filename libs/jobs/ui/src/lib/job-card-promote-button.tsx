@@ -63,7 +63,7 @@ export const JobCardPromoteButton = ({
   );
 
   return (
-    <Tooltip className="p-0" content={tooltipContent}>
+    <Tooltip className="p-0" content={tooltipContent} delay={500}>
       <Button
         size="sm"
         isDisabled={isLoading}
