@@ -13,11 +13,7 @@ interface Props {
   defaultOpen?: boolean;
 }
 
-export const CTATooltip = ({
-  children,
-  content,
-  defaultOpen = true,
-}: Props) => {
+export const CTATooltip = ({ children, content, defaultOpen }: Props) => {
   const [isOpen, setIsOpen] = useState(defaultOpen);
   const onOpenChange = (open: boolean) => setIsOpen(open);
 
@@ -65,7 +61,7 @@ export const CTATooltip = ({
       }}
       placement="top-start"
       content={content}
-      delay={0}
+      delay={500}
       closeDelay={0}
       isOpen={isOpen && !newFeatureModalIsOpen}
       onOpenChange={onOpenChange}
