@@ -77,6 +77,7 @@ export const createJobPostLdJson = (jobPost: JobPost) => {
     | number
     | boolean
     | Record<string, string | number | Record<string, string | number>>
+    | { '@type': string; name: string }[]
   > = {
     '@context': 'https://schema.org/',
     '@type': 'JobPosting',
@@ -112,6 +113,7 @@ export const createJobPostLdJson = (jobPost: JobPost) => {
     const isRemote = locationType?.toLowerCase().includes('remote');
     if (isRemote) {
       jsonLd['locationType'] = 'TELECOMMUTE';
+      jsonLd['applicantLocationRequirements'] = REMOTE_LOCATIONS;
     }
 
     const locationName = location
@@ -120,7 +122,17 @@ export const createJobPostLdJson = (jobPost: JobPost) => {
       .replaceAll('or', '')
       .trim();
 
-    if (locationName) {
+    if (!isRemote && locationName) {
+      // TODO: implement `JobLocation` interface for fixed-location jobs
+      /*
+			interface JobLocation {
+				addressLocality: string; // Required: City
+				addressRegion: string; // Required: State/Province/Region
+				addressCountry: string; // Required: Country
+				streetAddress?: string; // Optional: Full street address
+				postalCode?: string; // Optional: ZIP/Postal code
+			}
+			*/
       jsonLd['applicantLocationRequirements'] = {
         '@type': 'Country',
         name: locationName,
@@ -155,3 +167,40 @@ export const createJobPostLdJson = (jobPost: JobPost) => {
     __html: JSON.stringify(jsonLd),
   };
 };
+
+const REMOTE_LOCATIONS = [
+  // EU
+  { '@type': 'Country', name: 'DE' }, // Germany
+  { '@type': 'Country', name: 'ES' }, // Spain
+  { '@type': 'Country', name: 'PT' }, // Portugal
+  { '@type': 'Country', name: 'HR' }, // Croatia
+  { '@type': 'Country', name: 'IT' }, // Italy
+  { '@type': 'Country', name: 'RO' }, // Romania
+  { '@type': 'Country', name: 'PL' }, // Poland
+
+  // United States
+  { '@type': 'Country', name: 'US' }, // United States
+
+  // Latin American
+  { '@type': 'Country', name: 'AR' }, // Argentina
+  { '@type': 'Country', name: 'BR' }, // Brazil
+  { '@type': 'Country', name: 'CO' }, // Colombia
+  { '@type': 'Country', name: 'MX' }, // Mexico
+
+  // Africa
+  { '@type': 'Country', name: 'NG' }, // Nigeria
+  { '@type': 'Country', name: 'ZA' }, // South Africa
+
+  // Middle East
+  { '@type': 'Country', name: 'AE' }, // United Arab Emirates
+
+  // Southeast Asia & East Asia
+  { '@type': 'Country', name: 'PH' }, // Philippines
+  { '@type': 'Country', name: 'ID' }, // Indonesia
+  { '@type': 'Country', name: 'TW' }, // Taiwan
+  { '@type': 'Country', name: 'IN' }, // India
+  { '@type': 'Country', name: 'LK' }, // Sri Lanka
+  { '@type': 'Country', name: 'MY' }, // Malaysia
+  { '@type': 'Country', name: 'SG' }, // Singapore
+  { '@type': 'Country', name: 'HK' }, // Hong Kong
+];
