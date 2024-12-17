@@ -31,7 +31,7 @@ const FullscreenFilterModal = () => {
       }
       onClose={toggleFilters}
     >
-      <div className="pt-4">
+      <div className="pt-4 pb-20">
         <FilterInputs isMobile />
         <FilterActions isMobile />
       </div>
