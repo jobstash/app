@@ -67,7 +67,8 @@ export const createJobPostLdJson = (jobPost: JobPost) => {
   }
 
   const datePosted = new Date(timestamp);
-  const validThrough = new Date(datePosted.setMonth(datePosted.getMonth() + 3));
+  const validThrough = new Date(timestamp);
+  validThrough.setMonth(validThrough.getMonth() + 1);
 
   const { name, logo, website } = getJobLogoTitleProps(jobPost);
 
