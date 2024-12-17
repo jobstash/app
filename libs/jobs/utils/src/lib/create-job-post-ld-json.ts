@@ -120,17 +120,12 @@ export const createJobPostLdJson = (jobPost: JobPost) => {
       .replaceAll('or', '')
       .trim();
 
-    jsonLd['applicantLocationRequirements'] = {
-      '@type': 'Country',
-      name: locationName,
-    };
-
-    jsonLd['jobLocation'] = {
-      '@type': 'Place',
-      address: {
+    if (locationName) {
+      jsonLd['applicantLocationRequirements'] = {
+        '@type': 'Country',
         name: locationName,
-      },
-    };
+      };
+    }
   }
 
   if (minimumSalary && maximumSalary) {
