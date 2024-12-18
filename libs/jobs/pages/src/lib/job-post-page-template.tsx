@@ -22,6 +22,7 @@ import { cn, sentryMessage } from '@jobstash/shared/utils';
 
 import { showFiltersAtom } from '@jobstash/filters/state';
 import { useJobPost } from '@jobstash/jobs/state';
+import { useUserSkillsAtomSyncer } from '@jobstash/profile/state';
 import { isOpenTopBannerAtom } from '@jobstash/shared/state';
 import { useMobileDisableScrollSyncer } from '@jobstash/shared/state';
 
@@ -116,6 +117,9 @@ export const JobPostPageTemplate: React.FC<JobPostPageTemplateProps> = ({
   const showFilters = useAtomValue(showFiltersAtom);
 
   useMobileDisableScrollSyncer({ shouldDisable: true });
+
+  // // Sync profile user skills atom
+  // useUserSkillsAtomSyncer();
 
   if (notFoundInfo) {
     return <NotFoundPage {...notFoundInfo} />;

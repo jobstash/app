@@ -7,6 +7,7 @@ import { RIGHT_PANEL_WRAPPER_ID } from '@jobstash/right-panel/core';
 import { JobPost, JobsRouteSection } from '@jobstash/shared/core';
 import { cn } from '@jobstash/shared/utils';
 
+import { useUserSkillsAtomSyncer } from '@jobstash/profile/state';
 import { isOpenTopBannerAtom } from '@jobstash/shared/state';
 import { useIsDesktop } from '@jobstash/shared/state';
 
@@ -41,6 +42,9 @@ export const JobListPageTemplate: React.FC<JobsPageTemplateProps> = ({
   const activeJob = useAtomValue(activeJobAtom);
   const isDesktop = useIsDesktop();
   const isOpenTopBanner = useAtomValue(isOpenTopBannerAtom);
+
+  // Sync profile user skills atom
+  useUserSkillsAtomSyncer();
 
   return (
     <>

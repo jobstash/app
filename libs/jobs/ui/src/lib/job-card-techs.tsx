@@ -2,7 +2,7 @@ import { memo } from 'react';
 
 import { type Tag } from '@jobstash/shared/core';
 
-import { TechWrapper } from '@jobstash/shared/ui';
+import { JobCardTechWrapper } from './job-card-tech-wrapper';
 
 interface Props {
   techs: Tag[];
@@ -16,10 +16,8 @@ const JobCardTechs = ({ techs }: Props) => {
       <hr className="border-t border-white/10" />
       <div className="items-center justify-between lg:flex py-1">
         <div className="flex flex-wrap gap-2 max-h-[140px] overflow-hidden">
-          {techs.map(({ name, id }) => (
-            <TechWrapper key={id} id={id}>
-              {name}
-            </TechWrapper>
+          {techs.map((tag) => (
+            <JobCardTechWrapper key={tag.id} tag={tag} />
           ))}
         </div>
         {/* <div className="z-30 shrink-0 self-start">

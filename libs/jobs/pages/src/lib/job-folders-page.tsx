@@ -17,6 +17,7 @@ import {
   activeJobFolderBookmarkAtom,
   useJobFolder,
 } from '@jobstash/jobs/state';
+import { useUserSkillsAtomSyncer } from '@jobstash/profile/state';
 import {
   isDisabledPageScrollAtom,
   isOpenTopBannerAtom,
@@ -63,6 +64,9 @@ export const JobFoldersPage = ({ slug }: Props) => {
   const isDesktop = useIsDesktop();
   const setIsDisabledScroll = useSetAtom(isDisabledPageScrollAtom);
   const isOpenTopBanner = useAtomValue(isOpenTopBannerAtom);
+
+  // // Sync profile user skills atom
+  // useUserSkillsAtomSyncer();
 
   if (error && error.message === ERR_NOT_FOUND) return <NotFoundPage />;
   if (!jobFolder) return <LoadingPage />;

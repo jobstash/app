@@ -32,6 +32,7 @@ import {
   useAllJobFolders,
   useSavedJobs,
 } from '@jobstash/jobs/state';
+import { useUserSkillsAtomSyncer } from '@jobstash/profile/state';
 import {
   isDisabledPageScrollAtom,
   isOpenTopBannerAtom,
@@ -130,6 +131,9 @@ export const SavedJobsPage = () => {
 
   const hasPermission = useHasPermission(PERMISSIONS.USER);
   const isLoading = isLoadingSavedJobs || isLoadingJobFolders;
+
+  // // Sync profile user skills atom
+  // useUserSkillsAtomSyncer();
 
   if (isLoading) return <LoadingPage />;
   if (!hasPermission) return <NotFoundPage />;

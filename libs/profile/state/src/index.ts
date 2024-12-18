@@ -4,9 +4,11 @@ export * from './lib/atoms/active-profile-repo-atom';
 export * from './lib/atoms/profile-org-review-count-atom';
 export * from './lib/atoms/profile-repo-count-atom';
 export * from './lib/atoms/show-got-it-card-atom';
+export * from './lib/atoms/user-skills-atom';
 
 // Hooks
 export * from './lib/hooks/use-account-card';
+export * from './lib/hooks/use-add-tag-to-profile';
 export * from './lib/hooks/use-affiliation-requests';
 export * from './lib/hooks/use-all-jobs-query';
 export * from './lib/hooks/use-compensation-form';
@@ -29,6 +31,7 @@ export * from './lib/hooks/use-update-main-email';
 export * from './lib/hooks/use-update-note';
 export * from './lib/hooks/use-update-note';
 export * from './lib/hooks/use-user-review';
+export * from './lib/hooks/use-user-skills-atom-syncer';
 export * from './lib/hooks/use-users-available-for-work';
 export * from './lib/hooks/use-work-history';
 export * from './lib/hooks/use-your-contribution-mutation';
