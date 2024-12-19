@@ -18,22 +18,46 @@ const colorPool = [
   'skill12',
 ];
 
+const fontColorPool = [
+  'skill1fg',
+  'skill2fg',
+  'skill3fg',
+  'skill4fg',
+  'skill5fg',
+  'skill6fg',
+  'skill7fg',
+  'skill8fg',
+  'skill9fg',
+  'skill10fg',
+  'skill11fg',
+  'skill12fg',
+];
+
 interface Props {
   id: string;
   children: string;
+  isFilled?: boolean;
   isChecked?: boolean;
   canTeach?: boolean;
 }
 
-const TechWrapper = ({ id, children, isChecked, canTeach }: Props) => {
+const TechWrapper = ({
+  id,
+  children,
+  isFilled,
+  isChecked,
+  canTeach,
+}: Props) => {
   const colorIndex = getColorIndex(id, colorPool.length);
+  const skillColor = colorPool[colorIndex];
+  const filledFontColor = fontColorPool[colorIndex];
 
   return (
     <div className="relative flex items-center justify-center">
       {isChecked && (
         <>
           <div
-            className={`absolute right-0 top-0 -mt-2.5 -mr-2.5 w-5 h-5 bg-${colorPool[colorIndex]} rounded-full`}
+            className={`absolute right-0 top-0 -mt-2.5 -mr-2.5 w-5 h-5 bg-${skillColor} rounded-full`}
           />
           <div className="absolute right-0 top-0 -mt-[7px] -mr-2">
             {canTeach ? (
@@ -65,14 +89,13 @@ const TechWrapper = ({ id, children, isChecked, canTeach }: Props) => {
       <div
         className={cn(
           `flex items-center justify-center rounded-sm border ${
-            'border-' + colorPool[colorIndex]
-          } p-1 px-1.5`,
+            'border-' + skillColor
+          } ${'text-' + skillColor} p-1 px-1.5`,
+          { [`bg-${skillColor} text-${filledFontColor}`]: isFilled },
         )}
       >
         <span
-          className={`${lato.variable} font-lato text-sm font-bold ${
-            'text-' + colorPool[colorIndex]
-          } antialiased`}
+          className={`${lato.variable} font-lato text-sm font-bold antialiased`}
         >
           {children.toUpperCase()}
         </span>

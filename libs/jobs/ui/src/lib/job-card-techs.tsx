@@ -10,12 +10,11 @@ interface Props {
 
 const JobCardTechs = ({ techs }: Props) => {
   if (techs.length === 0) return null;
-
   return (
     <>
       <hr className="border-t border-white/10" />
       <div className="items-center justify-between lg:flex py-1">
-        <div className="flex flex-wrap gap-2 max-h-[140px] overflow-hidden">
+        <div className="flex flex-wrap gap-2 max-h-[116px] overflow-hidden pt-4 pr-4">
           {techs.map((tag) => (
             <JobCardTechWrapper key={tag.id} tag={tag} />
           ))}

@@ -8,7 +8,6 @@ export * from './lib/atoms/user-skills-atom';
 
 // Hooks
 export * from './lib/hooks/use-account-card';
-export * from './lib/hooks/use-add-tag-to-profile';
 export * from './lib/hooks/use-affiliation-requests';
 export * from './lib/hooks/use-all-jobs-query';
 export * from './lib/hooks/use-compensation-form';
@@ -19,6 +18,7 @@ export * from './lib/hooks/use-profile-org-review-list-query';
 export * from './lib/hooks/use-profile-repo-list';
 export * from './lib/hooks/use-profile-repo-page';
 export * from './lib/hooks/use-profile-reviews-page';
+export * from './lib/hooks/use-profile-skill-tag-action';
 export * from './lib/hooks/use-profile-skills-query';
 export * from './lib/hooks/use-rating-mutation';
 export * from './lib/hooks/use-remove-attached-email';

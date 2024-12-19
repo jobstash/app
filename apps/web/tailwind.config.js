@@ -14,7 +14,7 @@ module.exports = {
   ],
   safelist: [
     {
-      pattern: /(text|border|bg)-skill(1|2|3|4|5|6|7|8|9|10|11|12|13)/,
+      pattern: /^(text|border|bg)-skill(([1-9]|1[0-3]))(fg)?$/,
     },
   ],
   theme: {
@@ -51,6 +51,18 @@ module.exports = {
         skill10: '#ECC6F7',
         skill11: '#F3A5F2',
         skill12: '#EC88E1',
+        skill1fg: '#635C00',
+        skill2fg: '#374100',
+        skill3fg: '#4E4000',
+        skill4fg: '#694500',
+        skill5fg: '#803F36',
+        skill6fg: '#1B513F',
+        skill7fg: '#0A3F37',
+        skill8fg: '#6B2611',
+        skill9fg: '#5F2507',
+        skill10fg: '#4A1B54',
+        skill11fg: '#691C67',
+        skill12fg: '#591252',
       },
     },
     fontSize: {

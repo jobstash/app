@@ -17,7 +17,10 @@ import { Tag } from '@jobstash/shared/core';
 import { cn, normalizeString } from '@jobstash/shared/utils';
 
 import { useRoleClick } from '@jobstash/auth/state';
-import { useAddTagToProfile, userSkillsAtom } from '@jobstash/profile/state';
+import {
+  useProfileSkillTagAction,
+  userSkillsAtom,
+} from '@jobstash/profile/state';
 
 import { TechWrapper } from '@jobstash/shared/ui';
 
@@ -54,19 +57,6 @@ export const JobCardTechWrapper = ({ tag }: Props) => {
     router.push(url);
   }, [name, router]);
 
-  const { isPending, mutate: addToProfile } = useAddTagToProfile();
-
-  const onAddToProfile = () => {
-    addToProfile(tag);
-  };
-
-  const { roleClick } = useRoleClick({
-    allowed: PERMISSIONS.USER,
-    callback: onAddToProfile,
-  });
-
-  const userSkills = useAtomValue(userSkillsAtom);
-
   const isTagApplied = useMemo(() => {
     const url = new URL(window.location.href);
     const currentTags = url.searchParams.get('tags');
@@ -77,23 +67,7 @@ export const JobCardTechWrapper = ({ tag }: Props) => {
       : false;
   }, [name]);
 
-  const filterItem = useMemo(() => {
-    const label = isTagApplied ? FILTER_ITEM_LABEL : FILTER_ITEM_LABEL;
-
-    const description = isTagApplied
-      ? `Already showing "${name}" jobs`
-      : `Filter by "${name}"`;
-
-    const startContent = <SearchIcon className="size-6" />;
-
-    return {
-      label,
-      description,
-      startContent,
-      onClick: onSearchTag,
-    };
-  }, [isTagApplied, name, onSearchTag]);
-
+  const userSkills = useAtomValue(userSkillsAtom);
   const isInProfile = useMemo(() => {
     const normalizedName = normalizeString(name);
 
@@ -102,11 +76,37 @@ export const JobCardTechWrapper = ({ tag }: Props) => {
       .includes(normalizedName);
   }, [name, userSkills]);
 
+  const { isPending, mutate: addToProfile } = useProfileSkillTagAction();
+
+  const onProfileSkillAction = () => {
+    addToProfile({ userSkills, tag, isDelete: isInProfile });
+  };
+
+  const { roleClick } = useRoleClick({
+    allowed: PERMISSIONS.USER,
+    callback: onProfileSkillAction,
+  });
+
+  const filterItem = useMemo(() => {
+    const description = isTagApplied
+      ? `Already showing "${name}" jobs`
+      : `Filter by "${name}"`;
+
+    return {
+      label: FILTER_ITEM_LABEL,
+      description,
+      startContent: <SearchIcon className="size-6" />,
+      onClick: onSearchTag,
+    };
+  }, [isTagApplied, name, onSearchTag]);
+
   const skillItem = useMemo(() => {
-    const label = isInProfile ? PROFILE_ITEM_LABEL : PROFILE_ITEM_LABEL;
+    const label = isInProfile
+      ? REMOVE_FROM_PROFILE_ITEM_LABEL
+      : ADD_TO_PROFILE_ITEM_LABEL;
 
     const description = isInProfile
-      ? 'Already in your qualifications'
+      ? 'Remove item from qualifications'
       : 'Showcase qualification';
 
     const startContent = isPending ? (
@@ -128,7 +128,7 @@ export const JobCardTechWrapper = ({ tag }: Props) => {
 
     if (isPending) {
       keys.add(FILTER_ITEM_LABEL);
-      keys.add(PROFILE_ITEM_LABEL);
+      keys.add(ADD_TO_PROFILE_ITEM_LABEL);
     }
 
     if (isTagApplied) {
@@ -136,7 +136,7 @@ export const JobCardTechWrapper = ({ tag }: Props) => {
     }
 
     if (isInProfile) {
-      keys.add(PROFILE_ITEM_LABEL);
+      keys.add(ADD_TO_PROFILE_ITEM_LABEL);
     }
 
     return [...keys];
@@ -146,7 +146,9 @@ export const JobCardTechWrapper = ({ tag }: Props) => {
     <Dropdown showArrow radius="md" isOpen={isOpen} onOpenChange={setIsOpen}>
       <DropdownTrigger>
         <div className="cursor-pointer" onClick={onClick}>
-          <TechWrapper id={id}>{name}</TechWrapper>
+          <TechWrapper id={id} isChecked={isInProfile} isFilled={isTagApplied}>
+            {name}
+          </TechWrapper>
         </div>
       </DropdownTrigger>
       <DropdownMenu
@@ -179,4 +181,5 @@ export const JobCardTechWrapper = ({ tag }: Props) => {
 };
 
 const FILTER_ITEM_LABEL = 'Search similar jobs';
-const PROFILE_ITEM_LABEL = 'Add to profile';
+const ADD_TO_PROFILE_ITEM_LABEL = 'Add to profile';
+const REMOVE_FROM_PROFILE_ITEM_LABEL = 'Remove from profile';
