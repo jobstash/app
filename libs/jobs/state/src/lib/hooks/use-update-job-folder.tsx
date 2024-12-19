@@ -4,7 +4,8 @@ import { CheckIcon, Share2Icon } from 'lucide-react';
 import { toast } from 'sonner';
 
 import { UpdateJobFolderPayload } from '@jobstash/jobs/core';
-import { sonnerToast } from '@jobstash/shared/utils';
+import { FRONTEND_URL } from '@jobstash/shared/core';
+import { normalizeString, sonnerToast } from '@jobstash/shared/utils';
 
 import { useMwVersionContext } from '@jobstash/shared/state';
 import { updateJobFolder } from '@jobstash/jobs/data';
@@ -50,7 +51,11 @@ export const useUpdateJobFolder = () => {
           <Button
             size="sm"
             startContent={<Share2Icon size={14} />}
-            onClick={() => copyToClipboard(name)}
+            onClick={() =>
+              copyToClipboard(
+                `${FRONTEND_URL}/bookmarks/jobs/${normalizeString(name)}`,
+              )
+            }
           >
             Share
           </Button>
