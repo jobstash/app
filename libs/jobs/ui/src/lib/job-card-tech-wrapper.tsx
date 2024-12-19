@@ -14,15 +14,12 @@ import { SearchIcon, StarIcon } from 'lucide-react';
 
 import { PERMISSIONS } from '@jobstash/auth/core';
 import { Tag } from '@jobstash/shared/core';
-import { normalizeString } from '@jobstash/shared/utils';
+import { cn, normalizeString } from '@jobstash/shared/utils';
 
 import { useRoleClick } from '@jobstash/auth/state';
 import { useAddTagToProfile, userSkillsAtom } from '@jobstash/profile/state';
 
 import { TechWrapper } from '@jobstash/shared/ui';
-
-const FILTER_JOBS_LABEL = 'Search similar jobs';
-const ADD_TO_PROFILE_LABEL = 'Add to profile';
 
 interface Props {
   tag: Tag;
@@ -42,8 +39,18 @@ export const JobCardTechWrapper = ({ tag }: Props) => {
 
   const onSearchTag = useCallback(() => {
     const url = new URL(window.location.href);
-    const { searchParams } = url;
-    searchParams.append('tags', normalizeString(name));
+    const currentTags = url.searchParams.get('tags');
+    const normalizedNewTag = normalizeString(name);
+
+    const existingTags = currentTags
+      ? currentTags.split(',').filter(Boolean)
+      : [];
+
+    if (!existingTags.includes(normalizedNewTag)) {
+      existingTags.push(normalizedNewTag);
+    }
+
+    url.searchParams.set('tags', existingTags.join(','));
     router.push(url);
   }, [name, router]);
 
@@ -53,54 +60,87 @@ export const JobCardTechWrapper = ({ tag }: Props) => {
     addToProfile(tag);
   };
 
-  // TODO: check if skill is already in user profile
-  const { hasPermission, roleClick } = useRoleClick({
+  const { roleClick } = useRoleClick({
     allowed: PERMISSIONS.USER,
     callback: onAddToProfile,
   });
 
   const userSkills = useAtomValue(userSkillsAtom);
 
-  const dropdownItems: IDropdownItem[] = useMemo(() => {
+  const isTagApplied = useMemo(() => {
+    const url = new URL(window.location.href);
+    const currentTags = url.searchParams.get('tags');
     const normalizedName = normalizeString(name);
-    const normalizedUserSkills = userSkills.map((skill) =>
-      normalizeString(skill.name),
+
+    return currentTags
+      ? currentTags.split(',').includes(normalizedName)
+      : false;
+  }, [name]);
+
+  const filterItem = useMemo(() => {
+    const label = isTagApplied ? FILTER_ITEM_LABEL : FILTER_ITEM_LABEL;
+
+    const description = isTagApplied
+      ? `Already showing "${name}" jobs`
+      : `Filter by "${name}"`;
+
+    const startContent = <SearchIcon className="size-6" />;
+
+    return {
+      label,
+      description,
+      startContent,
+      onClick: onSearchTag,
+    };
+  }, [isTagApplied, name, onSearchTag]);
+
+  const isInProfile = useMemo(() => {
+    const normalizedName = normalizeString(name);
+
+    return userSkills
+      .map((skill) => normalizeString(skill.name))
+      .includes(normalizedName);
+  }, [name, userSkills]);
+
+  const skillItem = useMemo(() => {
+    const label = isInProfile ? PROFILE_ITEM_LABEL : PROFILE_ITEM_LABEL;
+
+    const description = isInProfile
+      ? 'Already in your qualifications'
+      : 'Showcase qualification';
+
+    const startContent = isPending ? (
+      <Spinner size="sm" color="white" />
+    ) : (
+      <StarIcon className="size-6" />
     );
 
-    const canBeAdded =
-      !hasPermission ||
-      !userSkills
-        .map((skill) => normalizeString(skill.name))
-        .includes(normalizeString(name));
+    return {
+      label,
+      description,
+      startContent,
+      onClick: roleClick,
+    };
+  }, [isInProfile, isPending, roleClick]);
 
-    console.log({ normalizedUserSkills, normalizedName, canBeAdded });
+  const disabledKeys = useMemo(() => {
+    const keys = new Set<string>();
 
-    const items = [
-      {
-        label: FILTER_JOBS_LABEL,
-        description: `Filter by "${name}"`,
-        startContent: <SearchIcon className="size-6" />,
-        onClick: onSearchTag,
-      },
-    ];
-
-    if (canBeAdded) {
-      items.push({
-        label: ADD_TO_PROFILE_LABEL,
-        description: 'Showcase qualification',
-        startContent: isPending ? (
-          <Spinner size="sm" color="white" />
-        ) : (
-          <StarIcon className="size-6" />
-        ),
-        onClick: roleClick,
-      });
+    if (isPending) {
+      keys.add(FILTER_ITEM_LABEL);
+      keys.add(PROFILE_ITEM_LABEL);
     }
 
-    return items;
-  }, [hasPermission, isPending, name, onSearchTag, roleClick, userSkills]);
+    if (isTagApplied) {
+      keys.add(FILTER_ITEM_LABEL);
+    }
 
-  const disabledKeys = isPending ? [ADD_TO_PROFILE_LABEL] : [];
+    if (isInProfile) {
+      keys.add(PROFILE_ITEM_LABEL);
+    }
+
+    return [...keys];
+  }, [isInProfile, isPending, isTagApplied]);
 
   return (
     <Dropdown showArrow radius="md" isOpen={isOpen} onOpenChange={setIsOpen}>
@@ -115,12 +155,17 @@ export const JobCardTechWrapper = ({ tag }: Props) => {
         disabledKeys={disabledKeys}
       >
         <DropdownSection title="Tag Actions">
-          {dropdownItems.map(
+          {[filterItem, skillItem].map(
             ({ label, description, startContent, onClick }) => (
               <DropdownItem
                 key={label}
                 description={description}
                 startContent={startContent}
+                classNames={{
+                  description: cn({
+                    'text-purple-400': disabledKeys.includes(label),
+                  }),
+                }}
                 onClick={onClick}
               >
                 {label}
@@ -133,9 +178,5 @@ export const JobCardTechWrapper = ({ tag }: Props) => {
   );
 };
 
-interface IDropdownItem {
-  label: string;
-  description: string;
-  startContent: React.ReactNode;
-  onClick: () => void;
-}
+const FILTER_ITEM_LABEL = 'Search similar jobs';
+const PROFILE_ITEM_LABEL = 'Add to profile';
