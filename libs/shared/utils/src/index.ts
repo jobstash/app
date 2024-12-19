@@ -34,6 +34,7 @@ export * from './lib/remove-object-props';
 export * from './lib/sentry-message';
 export * from './lib/short-timestamp';
 export * from './lib/slugify';
+export * from './lib/sonner-toast';
 export * from './lib/validate-payload';
 export * from './lib/validate-schema';
 export * from './lib/with-csr';

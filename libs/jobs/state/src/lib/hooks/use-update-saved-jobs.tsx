@@ -1,11 +1,12 @@
-import { notifications } from '@mantine/notifications';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { toast } from 'sonner';
 
-import { notifError, notifLoading, notifSuccess } from '@jobstash/shared/utils';
+import { sonnerToast } from '@jobstash/shared/utils';
 
 import { useMwVersionContext } from '@jobstash/shared/state';
 import { updateSavedJobs } from '@jobstash/jobs/data';
 
+const LOADING_TOAST_ID = 'update-saved-jobs-toast-loading';
 const TOAST_ID = 'update-saved-jobs-toast';
 
 interface MutationPayload {
@@ -21,9 +22,10 @@ export const useUpdateSavedJobs = () => {
     mutationFn: ({ shortUUID, shouldDelete }: MutationPayload) =>
       updateSavedJobs({ payload: { shortUUID }, shouldDelete }),
     onMutate() {
-      notifications.clean();
-      notifLoading({
-        id: TOAST_ID,
+      toast.dismiss(TOAST_ID);
+      sonnerToast({
+        id: LOADING_TOAST_ID,
+        isPending: true,
         title: 'Updating Saved Jobs',
         message: 'Please wait ...',
       });
@@ -33,7 +35,8 @@ export const useUpdateSavedJobs = () => {
         queryKey: [mwVersion, 'saved-jobs'],
       });
 
-      notifSuccess({
+      toast.dismiss(LOADING_TOAST_ID);
+      sonnerToast({
         id: TOAST_ID,
         title: `${shouldDelete ? 'Removed from' : 'Added to'} Saved Jobs!`,
         message: `Job has been ${
@@ -42,7 +45,7 @@ export const useUpdateSavedJobs = () => {
       });
     },
     onError(error) {
-      notifError({
+      sonnerToast({
         id: TOAST_ID,
         title: 'Something went wrong :(',
         message: (error as Error).message,

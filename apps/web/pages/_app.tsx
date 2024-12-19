@@ -10,6 +10,7 @@ import { LoadingPage } from '@jobstash/shared/pages';
 import { NextUIProvider } from '@nextui-org/react';
 import { useAtomValue } from 'jotai';
 import { Provider as JotaiProvider } from 'jotai';
+import { Toaster as SonnerToaster } from 'sonner';
 
 import { ANALYTICS_ID } from '@jobstash/shared/core';
 import { cn } from '@jobstash/shared/utils';
@@ -128,6 +129,12 @@ const App = ({ Component, pageProps }: AppProps) => {
       )}
       <NextUIProvider>
         <MantineProvider>
+          <SonnerToaster
+            expand
+            theme="dark"
+            position="top-right"
+            duration={Number.POSITIVE_INFINITY}
+          />
           <TopBanner />
           <WagmiProvider>
             <ReactQueryProvider dehydratedState={pageProps.dehydratedState}>
