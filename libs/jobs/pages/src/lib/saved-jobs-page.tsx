@@ -132,8 +132,8 @@ export const SavedJobsPage = () => {
   const hasPermission = useHasPermission(PERMISSIONS.USER);
   const isLoading = isLoadingSavedJobs || isLoadingJobFolders;
 
-  // // Sync profile user skills atom
-  // useUserSkillsAtomSyncer();
+  // Sync profile user skills atom
+  useUserSkillsAtomSyncer();
 
   if (isLoading) return <LoadingPage />;
   if (!hasPermission) return <NotFoundPage />;

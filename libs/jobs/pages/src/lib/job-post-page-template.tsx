@@ -118,8 +118,8 @@ export const JobPostPageTemplate: React.FC<JobPostPageTemplateProps> = ({
 
   useMobileDisableScrollSyncer({ shouldDisable: true });
 
-  // // Sync profile user skills atom
-  // useUserSkillsAtomSyncer();
+  // Sync profile user skills atom
+  useUserSkillsAtomSyncer();
 
   if (notFoundInfo) {
     return <NotFoundPage {...notFoundInfo} />;

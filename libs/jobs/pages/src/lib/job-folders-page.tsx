@@ -65,8 +65,8 @@ export const JobFoldersPage = ({ slug }: Props) => {
   const setIsDisabledScroll = useSetAtom(isDisabledPageScrollAtom);
   const isOpenTopBanner = useAtomValue(isOpenTopBannerAtom);
 
-  // // Sync profile user skills atom
-  // useUserSkillsAtomSyncer();
+  // Sync profile user skills atom
+  useUserSkillsAtomSyncer();
 
   if (error && error.message === ERR_NOT_FOUND) return <NotFoundPage />;
   if (!jobFolder) return <LoadingPage />;
