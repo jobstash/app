@@ -142,11 +142,21 @@ export const JobCardTechWrapper = ({ tag }: Props) => {
     return [...keys];
   }, [isInProfile, isPending, isTagApplied]);
 
+  const canTeach = useMemo(() => {
+    const skill = userSkills.find((skill) => skill.id === id);
+    return skill?.canTeach ?? false;
+  }, [id, userSkills]);
+
   return (
     <Dropdown showArrow radius="md" isOpen={isOpen} onOpenChange={setIsOpen}>
       <DropdownTrigger>
         <div className="cursor-pointer" onClick={onClick}>
-          <TechWrapper id={id} isChecked={isInProfile} isFilled={isTagApplied}>
+          <TechWrapper
+            id={id}
+            isChecked={isInProfile}
+            isFilled={isTagApplied}
+            canTeach={canTeach}
+          >
             {name}
           </TechWrapper>
         </div>
