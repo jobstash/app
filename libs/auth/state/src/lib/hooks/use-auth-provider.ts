@@ -73,20 +73,11 @@ export const useAuthProvider = () => {
   const isLoading = isLoadingSetup || !ready || isCreatingWallet;
 
   // Setup local after privy login
-  const [hasLoggedIn, setHasLoggedIn] = useState(false);
   const { login } = useLogin({
     async onComplete(_user) {
       setupLocal();
-      setHasLoggedIn(true);
     },
   });
-
-  // Setup local on page blur
-  useEffect(() => {
-    if ((isLoggedIn || hasLoggedIn) && !hasPermission && !isLoading) {
-      setupLocal();
-    }
-  }, [hasLoggedIn, hasPermission, isLoading, isLoggedIn, setupLocal]);
 
   const isAuthenticated = isLoggedIn && hasPermission && hasEmbeddedWallet;
 
