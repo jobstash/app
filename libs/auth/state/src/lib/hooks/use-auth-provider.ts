@@ -95,6 +95,12 @@ export const useAuthProvider = () => {
     await privyLogout();
   };
 
+  useEffect(() => {
+    if (isLoggedIn && hasEmbeddedWallet && !isLoading && !hasPermission) {
+      setupLocal();
+    }
+  }, [hasEmbeddedWallet, hasPermission, isLoading, isLoggedIn, setupLocal])
+
   return {
     user,
     permissions,
