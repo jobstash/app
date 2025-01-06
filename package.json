@@ -27,7 +27,7 @@
     "@mantine/next": "^6.0.11",
     "@mantine/notifications": "^6.0.19",
     "@nextui-org/react": "^2.4.8",
-    "@privy-io/react-auth": "^1.88.4",
+    "@privy-io/react-auth": "^1.99.0",
     "@reactour/tour": "^3.5.0",
     "@sentry/nextjs": "^7.53.1",
     "@spruceid/siwe-parser": "^2.0.0",
