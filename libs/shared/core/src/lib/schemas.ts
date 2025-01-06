@@ -119,7 +119,7 @@ export const orgInfoSchema = myzod.object(
   {
     id: myzod.string().min(1),
     name: myzod.string().min(1),
-    normalizedName: myzod.string().min(1),
+    normalizedName: myzod.string(),
     orgId: myzod.string().min(1),
     summary: myzod.string().min(1),
     location: myzod.string().min(1),
@@ -145,7 +145,7 @@ export const projectInfoSchema = myzod.object(
   {
     id: myzod.string().min(1),
     name: myzod.string().min(1),
-    normalizedName: myzod.string().min(1),
+    normalizedName: myzod.string(),
     website: myzod.string().min(1).nullable(),
     logo: myzod.string().nullable(),
 
