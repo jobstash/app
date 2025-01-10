@@ -31,7 +31,7 @@ export const OrgManagePage = () => {
 
   if (isError && !isNotFound) {
     return (
-      <div className="w-full h-screen flex items-center justify-center">
+      <div className="flex items-center justify-center w-full h-screen">
         <InternalErrorResult />
       </div>
     );
@@ -49,8 +49,8 @@ export const OrgManagePage = () => {
 
   return (
     <ManageLayout>
-      <div className="flex flex-col gap-4 pt-8 w-full">
-        <div className="flex flex-col md:flex-row md:items-center gap-4">
+      <div className="flex flex-col w-full gap-4">
+        <div className="flex flex-col gap-4 md:flex-row md:items-center">
           <span className="text-2xl font-bold">Manage Organization</span>
           <Tooltip content="Choose another organization">
             <Button
@@ -59,18 +59,18 @@ export const OrgManagePage = () => {
               href="/godmode/organizations/manage"
               size="sm"
             >
-              <ListStart className="h-5 w-5" />
+              <ListStart className="w-5 h-5" />
             </Button>
           </Tooltip>
         </div>
         <div className="flex flex-col gap-4 rounded-2xl">
-          <span className="text-md text-white/90 max-w-lg">
+          <span className="max-w-lg text-md text-white/90">
             Update and manage key details of your organization, including linked
             projects and critical information. Make sure data remains accurate
             and legitimate.
           </span>
 
-          <div className="flex flex-col md:items-center md:flex-row gap-8 py-4">
+          <div className="flex flex-col gap-8 py-4 md:items-center md:flex-row">
             <LogoTitle
               size="lg"
               title={data.name}

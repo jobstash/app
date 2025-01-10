@@ -30,7 +30,7 @@ export const ManageLayout = ({ children }: Props) => {
   return (
     <PageWrapper>
       <SideBar />
-      <div className="pt-20 xl:pt-2 p-4 md:p-8 space-y-8 h-screen text-white min-h-screen">
+      <div className="p-4 pt-20 space-y-8 text-white md:p-8">
         {children}
       </div>
     </PageWrapper>

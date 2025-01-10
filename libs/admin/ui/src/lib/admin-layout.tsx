@@ -33,21 +33,21 @@ const AdminLayout = ({
   if (!hasPermission) return <NotFoundPage />;
 
   return (
-    <div className="w-screen overflow-x-hidden lg:pl-52 lg:pt-[100px] z-20 relative">
+    <div className="w-screen px-4 pb-8 overflow-x-hidden lg:pl-60 lg:pr-8 lg:pt-[100px] z-20 relative xl:w-2/3">
       {sidebar}
 
       {!hideHeader && <AdminHeader />}
 
-      <hr className="border-t border-white/10 w-full" />
+      {/* <hr className="w-full border-t border-white/10" /> */}
 
       {(breadCrumbs || tabsSection) && (
-        <div className="flex items-center justify-between p-8">
-          {breadCrumbs}
-          {tabsSection}
+        <div className="-mr-4 md:mr-0">
+          <div className='pb-2'>{breadCrumbs}</div>
+          <div className='py-2 pr-4 overflow-auto'>{tabsSection}</div>
         </div>
       )}
 
-      <div className="flex w-full justify-center">{children}</div>
+      <div className="flex w-full pt-6">{children}</div>
     </div>
   );
 };

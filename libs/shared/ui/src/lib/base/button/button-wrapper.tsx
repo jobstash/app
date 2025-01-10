@@ -4,7 +4,7 @@ import { cva, type VariantProps } from 'class-variance-authority';
 
 const wrapper = cva(
   [
-    'rounded-lg w-fit cursor-pointer p-[1px]',
+    'rounded-lg w-fit cursor-pointer p-[1px] m-[1px]',
     'transition-color duration-200 ease-in-out',
   ],
   {

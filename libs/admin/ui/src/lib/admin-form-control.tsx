@@ -11,8 +11,8 @@ interface Props {
 }
 
 const AdminFormControl = ({ label, input, isDisabled }: Props) => (
-  <div className="flex items-center gap-6">
-    <div className={cn('w-1/3 flex justify-end', { 'opacity-40': isDisabled })}>
+  <div className="gap-6">
+    <div className={cn('pb-2', { 'opacity-40': isDisabled })}>
       <Heading size="sm" fw="semibold">
         {label}
       </Heading>

@@ -14,7 +14,7 @@ export const ProjectManagePage = () => {
 
   return (
     <ManageLayout>
-      <div className="flex flex-col gap-4 pt-8 w-full">
+      <div className="flex flex-col w-full gap-4">
         <ProjectInfo id={id} />
         <ProjectUpdateForm projectId={id} />
       </div>

@@ -35,9 +35,11 @@ export const OrgApprovalPage = () => {
 
       <PageWrapper>
         <SideBar />
-        <div className="pt-20 xl:pt-2 p-4 md:p-8 space-y-8 h-screen text-white min-h-screen">
+        <div className="h-screen min-h-screen p-4 pt-20 space-y-8 text-white xl:pt-2 md:p-8">
           <OrgApprovalTabs />
-          <OrgApprovalTable />
+          <div className='-mr-4 overflow-x-auto md:mr-0'>
+            <OrgApprovalTable />
+          </div>
           <ApproveOrgModal />
         </div>
       </PageWrapper>

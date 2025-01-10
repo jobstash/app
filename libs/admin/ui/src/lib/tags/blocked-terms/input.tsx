@@ -21,7 +21,7 @@ const BlockedTermsInput = () => {
 
   return (
     <div className="flex items-center gap-6">
-      <div className="w-1/3 flex justify-end">
+      <div className="flex justify-end w-1/3">
         <Heading size="sm" fw="semibold">
           Block Term
         </Heading>
