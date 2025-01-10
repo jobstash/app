@@ -17,7 +17,7 @@ export const OrgApprovalTabs = () => {
       variant="underlined"
       classNames={{
         cursor: 'bg-gradient-to-l from-primary to-tertiary',
-        tab: 'min-w-[120px]',
+        tab: 'lg:min-w-[120px]',
         tabContent: 'group-data-[selected=true]:font-bold',
       }}
       selectedKey={activeTab}

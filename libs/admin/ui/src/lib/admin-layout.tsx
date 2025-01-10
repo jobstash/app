@@ -41,13 +41,13 @@ const AdminLayout = ({
       {/* <hr className="w-full border-t border-white/10" /> */}
 
       {(breadCrumbs || tabsSection) && (
-        <div className="-mr-4 md:mr-0">
+        <div className="-mb-10 -mr-4 md:mr-0">
           <div className='pb-2'>{breadCrumbs}</div>
           <div className='py-2 pr-4 overflow-auto'>{tabsSection}</div>
         </div>
       )}
 
-      <div className="flex w-full pt-6">{children}</div>
+      <div className="flex w-full pt-20 lg:pt-6">{children}</div>
     </div>
   );
 };
