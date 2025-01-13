@@ -5,7 +5,7 @@ interface Props {
 }
 
 const AdminTechContentWrapper = ({ children }: Props) => (
-  <div className="relative flex flex-col p-12 pb-8 w-1/2 gap-8 border border-gray rounded-lg">
+  <div className="flex flex-col w-full gap-8 p-6 pb-8 border rounded-lg lg:p-10 border-gray">
     {children}
   </div>
 );

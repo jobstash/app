@@ -3,12 +3,12 @@ import { Input } from '@mantine/core';
 import { Heading, SearchIcon } from '@jobstash/shared/ui';
 
 const AdminHeader = () => (
-  <div className="top-0 z-50 w-full px-20 pt-12 pb-8">
-    <div className="flex items-center justify-between">
-      <div className="flex basis-4/12 flex-col space-y-6">
+  <div className="pt-20 pb-8 lg:pt-8">
+    <div className="">
+      <div className="flex flex-col space-y-6 basis-4/12">
         <Heading>Admin Panel</Heading>
       </div>
-      <div className="flex basis-8/12 items-center">
+      <div className="flex items-center pt-4 basis-8/12">
         <div className="w-full">
           <Input
             disabled

@@ -27,9 +27,9 @@ export const AllJobsPage = () => {
         tabsSection={null}
       >
         {isLoading ? (
-          <p>Fetching Data ...</p>
+          <p className="pt-6">Fetching Data ...</p>
         ) : (
-          <div className="w-full flex flex-col gap-12">
+          <div className="flex flex-col w-full gap-12">
             <AllJobsTable allJobs={allJobs} />
           </div>
         )}

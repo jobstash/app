@@ -20,7 +20,7 @@ const PreferredTermsContentWrapper = ({ children }: Props) => {
   if (isLoadingPage) return <AdminContentLoader />;
 
   return (
-    <div className="flex flex-col gap-8 w-full justify-center items-center">
+    <div className="flex flex-col w-full gap-8">
       {children}
     </div>
   );

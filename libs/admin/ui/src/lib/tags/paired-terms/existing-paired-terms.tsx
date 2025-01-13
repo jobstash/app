@@ -14,11 +14,11 @@ const ExistingPairedTermsX = () => {
   if (!hasPairedTerms) return <p>No Existing Paired Terms</p>;
 
   return (
-    <div className="flex flex-col w-full gap-8 pt-12">
-      <div className="flex w-full justify-center">
+    <div className="flex flex-col w-full gap-8 lg:pt-12">
+      <div className="flex justify-center w-full">
         <Heading size="md">Existing Paired Terms</Heading>
       </div>
-      <div className="flex flex-col gap-12 w-full justify-center">
+      <div className="flex flex-col justify-center w-full gap-12">
         {pairedTerms.map((pairedTerm) => (
           <PairedTermsFormProvider
             key={pairedTerm.tag.id}

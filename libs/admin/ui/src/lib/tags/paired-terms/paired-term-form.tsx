@@ -16,7 +16,7 @@ const PairedTermForm = () => {
   const showDestinationList = destination.length > 0;
 
   return (
-    <div className="flex w-full justify-center">
+    <div className="flex w-full">
       <AdminTechContentWrapper>
         <LoadingOverlay visible={isLoadingMutation} />
         <AdminFormControl label="Origin" input={<OriginInput />} />

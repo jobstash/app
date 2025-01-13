@@ -11,8 +11,8 @@ const PreferredTermsForm = () => {
   const { synonyms, primaryTerm } = usePreferredTermsFormContext();
 
   return (
-    <div className="flex w-full justify-center">
-      <div className="flex flex-col p-12 pb-8 w-1/2 gap-8 relative border border-gray rounded-lg">
+    <div className="flex w-full">
+      <div className="flex flex-col w-full gap-8 p-6 pb-8 border rounded-lg lg:p-10 border-gray">
         <AdminFormControl label="Primary Term" input={<PrimaryTermInput />} />
         <AdminFormControl
           label="List of Synonyms"

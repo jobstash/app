@@ -15,11 +15,11 @@ const ExistingPreferredTerms = () => {
   if (!hasPreferredTerms) return <p>No Existing Preferred Terms</p>;
 
   return (
-    <div className="flex flex-col w-full gap-8 pt-12">
-      <div className="flex w-full justify-center">
+    <div className="flex flex-col w-full gap-8 lg:pt-12">
+      <div className="flex justify-center w-full">
         <Heading size="md">Existing Preferred Terms</Heading>
       </div>
-      <div className="flex flex-col gap-12 w-full justify-center">
+      <div className="flex flex-col justify-center w-full gap-12">
         {preferredTerms.map((preferredTerm) => (
           <PreferredTermsFormProvider
             key={preferredTerm.tag.id}

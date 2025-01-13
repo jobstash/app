@@ -26,7 +26,7 @@ export const OrgAdminTabs = () => {
         variant="underlined"
         classNames={{
           cursor: 'bg-gradient-to-l from-primary to-tertiary',
-          tab: 'min-w-[120px]',
+          tab: 'lg:min-w-[120px]',
           tabContent: 'text-white/80 group-data-[selected=true]:font-bold',
         }}
         selectedKey={activeTab}
