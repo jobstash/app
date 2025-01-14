@@ -11,8 +11,6 @@ export const getUrlWithParams = (
         continue;
       }
 
-      console.log({ key });
-
       url.searchParams.set(key, value);
     }
   }
