@@ -99,7 +99,7 @@ export const useAuthProvider = () => {
     if (isLoggedIn && hasEmbeddedWallet && !isLoading && !hasPermission) {
       setupLocal();
     }
-  }, [hasEmbeddedWallet, hasPermission, isLoading, isLoggedIn, setupLocal])
+  }, [hasEmbeddedWallet, hasPermission, isLoading, isLoggedIn, setupLocal]);
 
   return {
     user,
