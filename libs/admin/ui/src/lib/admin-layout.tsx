@@ -33,7 +33,7 @@ const AdminLayout = ({
   if (!hasPermission) return <NotFoundPage />;
 
   return (
-    <div className="w-screen px-4 pb-8 overflow-x-hidden lg:pl-60 lg:pr-8 lg:pt-[100px] z-20 relative xl:w-2/3">
+    <div className="w-screen px-4 pb-8 overflow-x-hidden lg:pl-60 lg:pr-8 lg:pt-[100px] z-20 relative">
       {sidebar}
 
       {!hideHeader && <AdminHeader />}
