@@ -6,14 +6,15 @@ import { CheckIcon, MoveRightIcon } from 'lucide-react';
 import { cn } from '@jobstash/shared/utils';
 
 const tier = {
-  name: 'Basic',
+  name: '📌 to top',
   pricePerJob: '$200',
   description:
-    'Promote your jobs for extra reach, and pay with any token on most EVM networks, secured by LlamaPay!',
+    'Sticky your post so it stays 📌 to the top of the jobs page and on the homepage for 🗓 7 days. 5x more views! Pay with any token on most EVM networks, secured by LlamaPay!',
   features: [
-    'Feature this job for one week',
-    '2x the applicants',
-    'Featured on our homepage',
+    '5x the applicants',
+    'Feature this job for 🗓 7 days',
+    'Featured on our homepage for 🗓 7 days',
+    'Anyone can 📌 any job, permissionlessly!',
   ],
   featured: false,
 };

@@ -32,7 +32,7 @@ export const JobCardPromoteButton = ({
     endDate,
   });
 
-  const text = isFeatured ? 'Extend Promotion' : 'Promote';
+  const text = isFeatured ? 'Extend 📌' : '📌 to Top';
   const icon = (
     <div className="h-4 w-4 flex items-center justify-center">
       {isLoading ? (

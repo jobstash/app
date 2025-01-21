@@ -11,15 +11,15 @@ import { GradientText } from '@jobstash/shared/ui';
 
 const tiers = [
   {
-    name: 'Basic',
+    name: '📌 to top',
     id: 'tier-basic',
     pricePerJob: '$200',
     description:
-      'Feature your job for 7 days on our homepage and boost visibility to attract 2x the applicants. Perfect for getting more attention on your listing without the extras. Maximize exposure and ensure your job reaches the right candidates faster.',
+      'Sticky your post so it stays 📌 to the top of the jobs page and on the homepage for 🗓 7 days. 5x more views! Perfect for getting more attention on your listing without the extras. Maximize exposure and ensure your job reaches the right candidates faster.',
     features: [
-      '1 job featured for 7 days',
-      '2x the applicants',
-      'Featured on our homepage',
+      '5x the applicants',
+      'Feature this job for 🗓 7 days',
+      'Featured on our homepage for 🗓 7 days',
     ],
     featured: true,
   },
