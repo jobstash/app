@@ -57,7 +57,7 @@ const TechWrapper = ({
       {isChecked && (
         <>
           <div
-            className={`absolute right-0 top-0 -mt-2.5 -mr-2.5 w-5 h-5 bg-${skillColor} rounded-full`}
+            className={`absolute right-0 top-0 -mt-2.5 -mr-2.5 w-5 h-5 bg-${skillColor} hover:bg-${skillColor}-hover rounded-full`}
           />
           <div className="absolute right-0 top-0 -mt-[7px] -mr-2">
             {canTeach ? (
@@ -88,10 +88,14 @@ const TechWrapper = ({
       )}
       <div
         className={cn(
-          `flex items-center justify-center rounded-sm border ${
-            'border-' + skillColor
-          } ${'text-' + skillColor} p-1 px-1.5`,
+          'flex items-center justify-center rounded-sm p-1 px-1.5',
+          `border border-${skillColor} hover:border-${skillColor}-hover`,
+          `text-${skillColor} hover:text-${skillColor}-hover`,
           { [`bg-${skillColor} text-${filledFontColor}`]: isFilled },
+          {
+            [`hover:bg-${skillColor}-hover hover:text-${filledFontColor}-hover`]:
+              isFilled,
+          },
         )}
       >
         <span
