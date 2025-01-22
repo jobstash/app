@@ -1,5 +1,4 @@
 import { Button, Spinner, Tooltip } from '@nextui-org/react';
-import { Sparkles as SparklesIcon } from 'lucide-react';
 
 import { cn, getPluralText } from '@jobstash/shared/utils';
 
@@ -32,16 +31,18 @@ export const JobCardPromoteButton = ({
     endDate,
   });
 
-  const text = isFeatured ? 'Extend 📌' : '📌 to Top';
-  const icon = (
-    <div className="h-4 w-4 flex items-center justify-center">
-      {isLoading ? (
-        <Spinner size="sm" color="white" />
-      ) : (
-        <SparklesIcon className="h-4 w-4" />
-      )}
+  const text = (
+    <div className="flex items-center gap-2">
+      <span>{isFeatured ? 'Extend' : '📌'}</span>
+      <span>{isFeatured ? '📌' : 'to Top'}</span>
     </div>
   );
+
+  const icon = isLoading ? (
+    <div className="h-4 w-4 flex items-center justify-center">
+      <Spinner size="sm" color="white" />
+    </div>
+  ) : null;
 
   const timeLeft = getTimeLeftText(endDate);
   const oneWeekText = getOneWeekText(endDate);
