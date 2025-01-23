@@ -39,18 +39,17 @@ const LandingSection = () => (
           <div className="flex flex-col gap-0.5 max-w-3xl text-white/75">
             <span className="text-md">
               Posting your job on JobStash is completely free, giving you access
-              to a wide network of talented candidates at no cost. Simply verify
-              your organization and start listing your job openings right away.
-              If you want to increase visibility, you can choose to feature your
-              job for $300 per week, which includes homepage placement,
-              crossposting, and custom Telegram stories to attract more
-              applicants.
+              to candidates across the entire crypto ecosystem. Simply verify
+              your organization and start listing your job openings. If
+              you&#39;d like more visibility, you can choose to feature your
+              job, which includes homepage placement, crossposting, and custom
+              Telegram stories to attract more applicants.
             </span>
           </div>
         </div>
         <HomePageButton
           hasBorder
-          text="Post Your Job For FREE"
+          text="Get Started"
           url="/post-job"
           external={false}
         />
@@ -58,24 +57,22 @@ const LandingSection = () => (
       <GradientContainer className="flex flex-wrap w-full">
         <div className="flex flex-col flex-wrap w-full gap-3 text-white grow">
           <span className={`${lato.className} text-xl font-bold`}>
-            Services for Employers
+            Employer Services
           </span>
           <div className="flex flex-col gap-0.5 max-w-3xl text-white/75">
             <span className="text-md">
-              Use our promotional services to increase your reach up to 5x. We
-              also offer services for small teams which get buried in candidates
-              want to commit to a full-time recruiter. Our Applicant Tracking
-              Service (ATS) is designed to help you streamline your hiring
-              process and connect with verified, crypto-native talent.
-              Additionally, our candidate report service offers you insight into
-              the truthfulness of a technical candidate resume, within seconds,
-              at a price anyone can afford.
+              Reach up to 5x more candidates with our crypto-focused services.
+              We help small teams manage crypto talent without the need for a
+              full-time recruiter. Our ATS connects you with verified,
+              crypto-native candidates, and our candidate report service quickly
+              checks technical resumes for accuracy, all at a cost-effective
+              rate.
             </span>
           </div>
         </div>
         <HomePageButton
           hasBorder
-          text="Streamline Hiring Process"
+          text="Start Hiring"
           url="/employers"
           external={false}
         />

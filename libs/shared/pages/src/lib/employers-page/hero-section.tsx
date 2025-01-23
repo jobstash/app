@@ -1,8 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-// eslint-disable-next-line capitalized-comments
-// import { ChevronRightIcon } from '@heroicons/react/20/solid';
+// Import { ChevronRightIcon } from '@heroicons/react/20/solid';
 import { Button } from '@nextui-org/react';
 
 import { PDF_JOBSTASH_URL, SUPPORT_TELEGRAM_URL } from '@jobstash/shared/core';
@@ -26,16 +25,17 @@ export const HeroSection = () => (
       </div> */}
 
       <div className="flex flex-col gap-2">
-        <h1 className="bg-gradient-to-r from-white to-secondary quinary bg-clip-text text-8xl font-bold text-transparent">
-          Reduce Time To Hire and Cost Per Hire
+        <h1 className="bg-gradient-to-r from-white to-secondary quinary bg-clip-text text-8xl font-bold text-transparent flex flex-col">
+          <span>Faster Hiring,</span>
+          <span>Lower Costs</span>
         </h1>
       </div>
 
       <p className="text-xl leading-7 text-white/90">
-        Get more visibility for your job listings and identify the best talent,
-        at scale. Enhance your hiring process with our ATS integrations and our
-        candidate due diligence reports, designed specifically for the crypto
-        industry. No AI, no gimmicks, just pure data.
+        Increase the visibility of your job listings and discover top talent at
+        scale. Streamline your hiring with our ATS integrations and candidate
+        due diligence reports, built specifically for the crypto industry. No
+        AI, no gimmicks—just reliable data.
       </p>
 
       <div className="flex items-center gap-x-6">
