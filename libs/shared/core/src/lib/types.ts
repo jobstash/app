@@ -9,6 +9,7 @@ import {
   categorySchema,
   chainSchema,
   fundingRoundSchema,
+  grantFundingSchema,
   hackSchema,
   investorSchema,
   jobCardSetSchema,
@@ -45,6 +46,8 @@ export type AllTagsResponse = Infer<typeof allTagsResponseSchema>;
 export type Investor = Infer<typeof investorSchema>;
 
 export type FundingRound = Infer<typeof fundingRoundSchema>;
+
+export type GrantFunding = Infer<typeof grantFundingSchema>;
 
 export type Category = Infer<typeof categorySchema>;
 

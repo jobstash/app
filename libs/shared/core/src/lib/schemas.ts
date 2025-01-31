@@ -37,6 +37,18 @@ export const fundingRoundSchema = myzod.object(
   { allowUnknown: true },
 );
 
+export const grantFundingSchema = myzod.object(
+  {
+    id: myzod.string().min(1),
+    tokenAmount: myzod.number().nullable().optional(),
+    tokenUnit: myzod.string().min(1).nullable().optional(),
+    fundingDate: myzod.number().nullable().optional(),
+    amount: myzod.number().nullable().optional(),
+    programName: myzod.string().min(1).nullable().optional(),
+  },
+  { allowUnknown: true },
+);
+
 export const categorySchema = myzod.object({
   id: myzod.string().min(1),
   name: myzod.string().min(1),
@@ -241,6 +253,7 @@ export const jobPostSchema = myzod
         .intersection(
           orgInfoSchema,
           myzod.object({
+            grants: myzod.array(grantFundingSchema),
             fundingRounds: myzod.array(fundingRoundSchema),
             investors: myzod.array(investorSchema),
             projects: myzod.array(projectAllInfoSchema.allowUnknownKeys(true)),
@@ -259,13 +272,15 @@ export const jobPostSchema = myzod
           projectAllInfoSchema,
           myzod.object({
             hasUser: myzod.boolean(),
+            grants: myzod.array(grantFundingSchema),
           }),
         )
         .allowUnknownKeys(true)
         .nullable(),
     }),
   )
-  .allowUnknownKeys(true);
+  .allowUnknownKeys(true)
+  .nullable();
 
 export const linkedAccountsSchema = myzod.object({
   discord: myzod.string().nullable(),

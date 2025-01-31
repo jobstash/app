@@ -10,6 +10,7 @@ import { slugify } from '@jobstash/shared/utils';
 
 import RightPanelCardBorder from './right-panel-card-border';
 import RightPanelCta from './right-panel-cta';
+import { RightPanelGrantsFunding } from './right-panel-grants-funding';
 import RightPanelOrgCardFundingRounds from './right-panel-org-card-funding-rounds';
 import RightPanelOrgCardHeader from './right-panel-org-card-header';
 import RightPanelOrgCardInvestors from './right-panel-org-card-investors';
@@ -22,7 +23,7 @@ interface RightPanelOrgCardProps {
 
 export const RightPanelOrgCard = memo(
   ({ org, showCTA = true, routeSection }: RightPanelOrgCardProps) => {
-    const { name, description, fundingRounds, investors, orgId } = org;
+    const { name, description, fundingRounds, investors, grants, orgId } = org;
 
     const sortedFundingRounds = fundingRounds.sort((a, b) => a.date - b.date);
 
@@ -39,6 +40,7 @@ export const RightPanelOrgCard = memo(
       <RightPanelCardBorder>
         <div className="flex flex-col p-6">
           <div className="flex flex-col gap-4">
+            <pre>{JSON.stringify({ grants }, undefined, '\t')}</pre>
             <RightPanelOrgCardHeader name={name} description={description} />
             <RightPanelOrgCardFundingRounds
               fundingRounds={sortedFundingRounds}
@@ -47,6 +49,8 @@ export const RightPanelOrgCard = memo(
               investors={investors}
               routeSection={routeSection}
             />
+
+            <RightPanelGrantsFunding grants={grants} />
 
             {showCTA && (
               <RightPanelCta text="Explore Organization" onClick={onClick} />

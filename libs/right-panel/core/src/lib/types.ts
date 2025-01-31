@@ -1,5 +1,6 @@
 import {
   type FundingRound,
+  GrantFunding,
   type Investor,
   type OrgInfo,
   TAB_SEGMENT,
@@ -16,4 +17,5 @@ export interface RightPanelOrg extends OrgInfo {
   investors: Investor[];
   aggregateRating: number;
   reviewCount: number;
+  grants: GrantFunding[];
 }
