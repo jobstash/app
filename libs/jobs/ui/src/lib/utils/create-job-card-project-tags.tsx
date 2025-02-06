@@ -9,7 +9,6 @@ import {
   ActiveUsersIcon,
   CategoryIcon,
   CurrencyCircleDollarIcon,
-  MainnetIcon,
   MonthlyVolumeIcon,
   RevenueIcon,
   TvlIcon,
@@ -28,8 +27,6 @@ export const createJobCardProjectTags = (project: ProjectInfo) => {
     monthlyFees,
     monthlyRevenue,
     category,
-    //
-    // isMainnet,
   } = project;
 
   if (tokenSymbol)
@@ -47,14 +44,6 @@ export const createJobCardProjectTags = (project: ProjectInfo) => {
       icon: <CategoryIcon />,
     });
   }
-
-  //
-  // if (isMainnet)
-  //   projectInfoTags.push({
-  //     id: TAG_ELEMENT_ID.mainnet,
-  //     text: 'Mainnet',
-  //     icon: <MainnetIcon />,
-  //   });
 
   if (tvl)
     projectTvlTags.push({

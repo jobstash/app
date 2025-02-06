@@ -9,7 +9,6 @@ import {
   ActiveUsersIcon,
   CategoryIcon,
   CurrencyCircleDollarIcon,
-  MainnetIcon,
   MonthlyVolumeIcon,
   RevenueIcon,
   TvlIcon,
@@ -27,7 +26,6 @@ export const createRightPanelProjectTags = (project: ProjectInfo) => {
     monthlyFees,
     monthlyRevenue,
     category,
-    isMainnet,
   } = project;
 
   if (category) {
@@ -82,14 +80,6 @@ export const createRightPanelProjectTags = (project: ProjectInfo) => {
       text: `Token: $${tokenSymbol}`,
       icon: <CurrencyCircleDollarIcon />,
       link: website || undefined,
-    });
-  }
-
-  if (isMainnet) {
-    tags.push({
-      id: TAG_ELEMENT_ID.mainnet,
-      text: 'Mainnet',
-      icon: <MainnetIcon />,
     });
   }
 

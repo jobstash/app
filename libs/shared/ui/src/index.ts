@@ -46,7 +46,6 @@ export { default as LamaIcon } from './lib/icons/lama-icon';
 export { default as LevelIcon } from './lib/icons/level-icon';
 export { default as LinkedInIcon } from './lib/icons/linked-in-icon';
 export { default as LocationIcon } from './lib/icons/location-icon';
-export { default as MainnetIcon } from './lib/icons/mainnet-icon';
 export { default as MembershipStatusIcon } from './lib/icons/membership-status-icon';
 export { default as MoneyIcon } from './lib/icons/money-icon';
 export { default as MonthlyVolumeIcon } from './lib/icons/monthly-volume-icon';

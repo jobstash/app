@@ -8,7 +8,6 @@ export const projectItemToPayload = (
   description: makeNullable(item.description),
   category: item.category,
   logo: makeNullable(item.logoUrl),
-  isMainnet: makeNullable(item.isMainnet),
   tvl: makeNullable(item.tvl),
   monthlyFees: makeNullable(item.monthlyFees),
   monthlyVolume: makeNullable(item.monthlyVolume),

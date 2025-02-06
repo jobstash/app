@@ -215,11 +215,6 @@ export const useProjectsGrid = () => {
         editable: true,
       },
       {
-        headerName: 'Mainnet',
-        field: 'isMainnet',
-        editable: true,
-      },
-      {
         headerName: 'Jobsite Url',
         autoHeight: true,
         // We don't have support for creating jobsites
@@ -405,7 +400,6 @@ export const useProjectsGrid = () => {
             node.data!.defiLlamaId,
             node.data!.defiLlamaSlug,
             node.data!.defiLlamaParent,
-            node.data!.isMainnet,
           ].join('\t'),
         )
         .join(',');

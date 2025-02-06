@@ -96,6 +96,7 @@ const fakeFeaturedJobs: JobPost[] = [
     locationType: 'REMOTE',
     classification: 'ENGINEERING',
     organization: {
+      grants: [],
       hasUser: false,
       atsClient: null,
       summary:
@@ -110,7 +111,6 @@ const fakeFeaturedJobs: JobPost[] = [
         {
           github: null,
           website: 'https://oasisprotocol.org/',
-          isMainnet: true,
           chains: [],
           telegram: 'oasisprotocolcommunity',
           description:
@@ -310,6 +310,7 @@ const fakeFeaturedJobs: JobPost[] = [
     locationType: 'REMOTE',
     classification: 'DEVREL',
     organization: {
+      grants: [],
       hasUser: false,
       atsClient: null,
       summary:
@@ -324,7 +325,6 @@ const fakeFeaturedJobs: JobPost[] = [
         {
           github: null,
           website: 'https://oasisprotocol.org/',
-          isMainnet: true,
           chains: [],
           telegram: 'oasisprotocolcommunity',
           description:

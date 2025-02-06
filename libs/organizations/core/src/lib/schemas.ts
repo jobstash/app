@@ -3,6 +3,7 @@ import { isAddress } from 'viem';
 
 import {
   fundingRoundSchema,
+  grantFundingSchema,
   investorSchema,
   jobCardSetSchema,
   jobPostSchema,
@@ -111,6 +112,7 @@ export const orgDetailsSchema = myzod
       aggregateRatings: orgRatingSchema,
       reviewCount: myzod.number(),
       reviews: myzod.array(myzod.omit(orgReviewSchema, ['compensation'])),
+      grants: myzod.array(grantFundingSchema),
     }),
   )
   .allowUnknownKeys(true);

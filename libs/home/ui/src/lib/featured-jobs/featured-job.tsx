@@ -10,6 +10,7 @@ interface Props {
 }
 const FeaturedJob = (props: Props) => {
   const { job } = props;
+
   const { title, timestamp, organization: org, project } = job;
 
   const name = org?.name || project?.name;

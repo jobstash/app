@@ -1,4 +1,3 @@
-/* eslint-disable complexity */
 import {
   type ProjectInfo,
   TAG_ELEMENT_ID,
@@ -10,7 +9,6 @@ import {
   ActiveUsersIcon,
   CategoryIcon,
   CurrencyCircleDollarIcon,
-  MainnetIcon,
   MonthlyVolumeIcon,
   RevenueIcon,
   ShieldCheckIcon,
@@ -31,7 +29,6 @@ export const createProjectTags = (project: ProjectInfo) => {
     monthlyFees,
     monthlyRevenue,
     category,
-    isMainnet,
     audits,
     hacks,
   } = project;
@@ -88,14 +85,6 @@ export const createProjectTags = (project: ProjectInfo) => {
       text: `Token: $${tokenSymbol}`,
       icon: <CurrencyCircleDollarIcon />,
       link: website || undefined,
-    });
-  }
-
-  if (isMainnet) {
-    upperTags.push({
-      id: TAG_ELEMENT_ID.mainnet,
-      text: 'Mainnet',
-      icon: <MainnetIcon />,
     });
   }
 

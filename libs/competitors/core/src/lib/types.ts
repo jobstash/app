@@ -6,7 +6,6 @@ export interface Competitor {
   name: string;
   url: string;
   description: string;
-  isMainnet: boolean;
   telegram: string;
   orgId: string | null;
   twitter: string;

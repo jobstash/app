@@ -46,7 +46,6 @@ export const TAG_ELEMENT_ID = {
   fundingRounds: 'funding-rounds',
   token: 'token',
   defiLlama: 'defi-llama',
-  mainnet: 'mainnet',
   paysInCrypto: 'pays-in-cryto',
   offersTokenAllocation: 'offers-token-allocation',
   classification: 'classification',

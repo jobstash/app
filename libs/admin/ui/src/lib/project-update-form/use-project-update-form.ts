@@ -21,7 +21,6 @@ const DEFAULT_FORM_STATE: UpdateProjectPayload = {
   description: null,
   category: null,
   logo: null,
-  isMainnet: false,
   tvl: null,
   monthlyFees: null,
   monthlyVolume: null,
@@ -51,7 +50,6 @@ const inputSections = [
       { label: 'Category', key: 'category' },
       { label: 'Description', key: 'description', kind: 'textarea' },
       { label: 'Logo URL', key: 'logo' },
-      { label: 'Is Mainnet', key: 'isMainnet', kind: 'boolean' },
     ],
   },
   {

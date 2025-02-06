@@ -2,6 +2,7 @@ import myzod from 'myzod';
 
 import {
   fundingRoundSchema,
+  grantFundingSchema,
   investorSchema,
   orgInfoSchema,
   projectInfoSchema,
@@ -18,6 +19,7 @@ export const projectOrgSchema = myzod
   .intersection(
     orgInfoSchema,
     myzod.object({
+      grants: myzod.array(grantFundingSchema),
       fundingRounds: myzod.array(fundingRoundSchema),
       investors: myzod.array(investorSchema),
       tags: myzod.array(tagSchema),

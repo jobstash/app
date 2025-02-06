@@ -9,7 +9,6 @@ export const projectItemSchema = myzod
     normalizedName: myzod.string(),
     logoUrl: myzod.string().nullable(),
     tvl: myzod.number().nullable().optional(),
-    isMainnet: myzod.boolean().nullable().optional(),
     tokenSymbol: myzod.string().nullable().optional(),
     monthlyFees: myzod.number().nullable().optional(),
     monthlyVolume: myzod.number().nullable().optional(),
@@ -43,7 +42,6 @@ export const updateProjectPayloadSchema = myzod.object({
   description: myzod.string().nullable(),
   category: myzod.string().nullable(),
   logo: myzod.string().nullable(),
-  isMainnet: myzod.boolean().nullable(),
   tvl: myzod.number().nullable(),
   monthlyFees: myzod.number().nullable(),
   monthlyVolume: myzod.number().nullable(),
@@ -75,7 +73,6 @@ export const dataToProjectPayload = (
   description: nullable(data.description),
   category: data.category,
   logo: nullable(data.logoUrl),
-  isMainnet: nullable(data.isMainnet),
   tvl: nullable(data.tvl),
   monthlyFees: nullable(data.monthlyFees),
   monthlyVolume: nullable(data.monthlyVolume),
@@ -100,5 +97,4 @@ export const sanitizeProjectFormState = (
   formState: UpdateProjectPayload,
 ): UpdateProjectPayload => ({
   ...formState,
-  isMainnet: nullable(formState.isMainnet),
 });
