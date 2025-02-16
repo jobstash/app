@@ -42,7 +42,6 @@ export const RightPanelOrgCard = memo(
       <RightPanelCardBorder>
         <div className="flex flex-col p-6">
           <div className="flex flex-col gap-4">
-            <pre>{JSON.stringify({ grants }, undefined, '\t')}</pre>
             <RightPanelOrgCardHeader name={name} description={description} />
             <RightPanelOrgCardFundingRounds
               fundingRounds={sortedFundingRounds}
