@@ -7,21 +7,19 @@ interface Props {
   name: string;
 }
 
-const RightPanelProjectCardExploreButton = ({ name }: Props) => {
-  const router = useRouter();
-  const onClick = () => {
-    router.push(`/jobs?projects=${name},`);
-  };
+const RightPanelProjectCardExploreButton = ({ name }: Props) => (
+  //
+  // const router = useRouter();
+  // const onClick = () => {
+  //   router.push(`/jobs?projects=${name},`);
+  // };
 
-  return (
-    <>
-      <div className="flex h-4 flex-col justify-center">
-        <hr className="border-t border-white/10" />
-      </div>
+  <>
+    <div className="flex h-4 flex-col justify-center">
+      <hr className="border-t border-white/10" />
+    </div>
 
-      <RightPanelCta text="Explore Project" onClick={onClick} />
-    </>
-  );
-};
-
+    {/* <RightPanelCta text="Explore Project" onClick={onClick} /> */}
+  </>
+);
 export default memo(RightPanelProjectCardExploreButton);

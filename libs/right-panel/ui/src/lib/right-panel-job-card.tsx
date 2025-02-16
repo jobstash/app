@@ -7,7 +7,11 @@ import {
   REPORT_UI_CTX,
   type Tag,
 } from '@jobstash/shared/core';
-import { gaEvent, normalizeString, slugify } from '@jobstash/shared/utils';
+import {
+  gaEvent,
+  //
+  // normalizeString, slugify
+} from '@jobstash/shared/utils';
 
 import { useAuthContext } from '@jobstash/auth/state';
 
@@ -17,7 +21,7 @@ import { RightPanelJobCTA } from './right-panel-job-cta/right-panel-job-cta';
 import { CryptoNativeJobCTA } from './crypto-native-job-cta';
 import { JobShareMenuContent } from './job-share-menu-content';
 import RightPanelCardBorder from './right-panel-card-border';
-import RightPanelCta from './right-panel-cta';
+// Import RightPanelCta from './right-panel-cta';
 import RightPanelJobCardDescriptions from './right-panel-job-card-descriptions';
 import RightPanelJobCardSets from './right-panel-job-card-sets';
 import RightPanelJobCardSkills from './right-panel-job-card-skills';
@@ -42,16 +46,17 @@ const RightPanelJobCard = ({
 
   const { title, url, shortUUID, classification, access } = jobInfo;
 
-  const onClickExploreJob = () => {
-    const link = encodeURI(
-      `/jobs/${slugify(
-        `${orgName} ${title}`,
-      )}-${shortUUID}/details?organizations=${normalizeString(orgName)}`,
-    );
-    if (typeof window !== 'undefined') {
-      window.location.href = link;
-    }
-  };
+  //
+  // const onClickExploreJob = () => {
+  //   const link = encodeURI(
+  //     `/jobs/${slugify(
+  //       `${orgName} ${title}`,
+  //     )}-${shortUUID}/details?organizations=${normalizeString(orgName)}`,
+  //   );
+  //   if (typeof window !== 'undefined') {
+  //     window.location.href = link;
+  //   }
+  // };
 
   const sendAnalyticsEvent = () => {
     gaEvent(GA_EVENT_ACTION.JOB_APPLY, {
@@ -121,11 +126,11 @@ const RightPanelJobCard = ({
 
         <RightPanelJobCardSkills tags={tags} />
 
-        {showExploreJob && (
+        {/* {showExploreJob && (
           <div className="flex flex-col items-start py-4">
             <RightPanelCta text="Explore Job" onClick={onClickExploreJob} />
           </div>
-        )}
+        )} */}
       </div>
     </RightPanelCardBorder>
   );

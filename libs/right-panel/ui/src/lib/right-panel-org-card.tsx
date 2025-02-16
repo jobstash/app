@@ -9,8 +9,8 @@ import {
 import { slugify } from '@jobstash/shared/utils';
 
 import RightPanelCardBorder from './right-panel-card-border';
-import RightPanelCta from './right-panel-cta';
 import { RightPanelGrantsFunding } from './right-panel-grants-funding';
+// Import RightPanelCta from './right-panel-cta';
 import RightPanelOrgCardFundingRounds from './right-panel-org-card-funding-rounds';
 import RightPanelOrgCardHeader from './right-panel-org-card-header';
 import RightPanelOrgCardInvestors from './right-panel-org-card-investors';
@@ -27,14 +27,16 @@ export const RightPanelOrgCard = memo(
 
     const sortedFundingRounds = fundingRounds.sort((a, b) => a.date - b.date);
 
-    const slug = slugify(`${name} ${orgId}`);
-    const link = `${ROUTE_SECTION.ORGANIZATIONS}/${slug}/${TAB_SEGMENT.details}`;
+    //
+    // const slug = slugify(`${name} ${orgId}`);
+    // const link = `${ROUTE_SECTION.ORGANIZATIONS}/${slug}/${TAB_SEGMENT.details}`;
 
-    const onClick = () => {
-      if (typeof window !== 'undefined') {
-        window.location.href = link;
-      }
-    };
+    //
+    // const onClick = () => {
+    //   if (typeof window !== 'undefined') {
+    //     window.location.href = link;
+    //   }
+    // };
 
     return (
       <RightPanelCardBorder>
@@ -52,9 +54,9 @@ export const RightPanelOrgCard = memo(
 
             <RightPanelGrantsFunding grants={grants} />
 
-            {showCTA && (
+            {/* {showCTA && (
               <RightPanelCta text="Explore Organization" onClick={onClick} />
-            )}
+            )} */}
           </div>
         </div>
       </RightPanelCardBorder>

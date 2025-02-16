@@ -94,9 +94,9 @@ const RightPanelCompetitorCard = ({ competitor }: Props) => {
           </>
         )}
 
-        <hr className="border-t border-white/10" />
+        {/* <hr className="border-t border-white/10" /> */}
 
-        <RightPanelCta text="Explore Competitor" onClick={onClickExplore} />
+        {/* <RightPanelCta text="Explore Competitor" onClick={onClickExplore} /> */}
       </div>
     </RightPanelCardBorder>
   );
