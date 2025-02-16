@@ -28,14 +28,15 @@ const RightPanelProjectCard = ({ project, showCTA = true }: Props) => {
   const { projectSocialTags, projectTags, projectTvlTags, projectAuditTags } =
     createRightPanelProjectCardTags(project);
 
-  const slug = slugify(`${name} ${id}`);
-  const link = `${ROUTE_SECTION.PROJECTS}/${slug}/${TAB_SEGMENT.details}`;
+  //
+  // const slug = slugify(`${name} ${id}`);
+  // const link = `${ROUTE_SECTION.PROJECTS}/${slug}/${TAB_SEGMENT.details}`;
 
-  const onClickExploreProject = () => {
-    if (typeof window !== 'undefined') {
-      window.location.href = link;
-    }
-  };
+  // const onClickExploreProject = () => {
+  //   if (typeof window !== 'undefined') {
+  //     window.location.href = link;
+  //   }
+  // };
 
   return (
     <RightPanelCardBorder>
@@ -55,7 +56,7 @@ const RightPanelProjectCard = ({ project, showCTA = true }: Props) => {
         <RightPanelProjectCardAuditTags auditTags={projectAuditTags} />
         <RightPanelProjectCardChains chains={chains} />
 
-        {showCTA && (
+        {/* {showCTA && (
           <>
             <hr className="border-t border-white/10" />
             <RightPanelCta
@@ -63,7 +64,7 @@ const RightPanelProjectCard = ({ project, showCTA = true }: Props) => {
               onClick={onClickExploreProject}
             />
           </>
-        )}
+        )} */}
       </div>
     </RightPanelCardBorder>
   );
