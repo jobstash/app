@@ -14,7 +14,8 @@ interface Props {
 }
 
 const OrgRightPanelTabs = ({ currentTab, orgDetails }: Props) => {
-  const { jobs, projects } = orgDetails;
+  const { projects } = orgDetails;
+  const jobs = [];
 
   const paramsStr = typeof window === 'undefined' ? '' : window.location.search;
   const partialRoute = `${FRONTEND_URL}/organizations/${createOrgKey(

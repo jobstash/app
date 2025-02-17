@@ -72,24 +72,23 @@ export const generateJobSiteMapUrls = async (feUrl: string) => {
   // Fetch org details -> create /other-jobs url for each job
   for (const orgId of orgIds) {
     fetchPromises.push(
-      fetch(`${MW_URL}/organizations/details/${orgId}`)
-        .then(async (res) => {
-          const result = await res.json();
-          return result as OrgDetails;
-        })
-        .then((org) => {
-          if (org.jobs.length > 0) {
-            for (const job of org.jobs) {
-              urls.push(
-                generateXmlUrl(
-                  `${prefix}/${`${slugify(`${org.name} ${job.title} `)}${
-                    job.shortUUID
-                  }`}/other-jobs`,
-                ),
-              );
-            }
-          }
-        }),
+      fetch(`${MW_URL}/organizations/details/${orgId}`).then(async (res) => {
+        const result = await res.json();
+        return result as OrgDetails;
+      }),
+      // .then((org) => {
+      //   if (org.jobs.length > 0) {
+      //     for (const job of org.jobs) {
+      //       urls.push(
+      //         generateXmlUrl(
+      //           `${prefix}/${`${slugify(`${org.name} ${job.title} `)}${
+      //             job.shortUUID
+      //           }`}/other-jobs`,
+      //         ),
+      //       );
+      //     }
+      //   }
+      // }),
     );
   }
 

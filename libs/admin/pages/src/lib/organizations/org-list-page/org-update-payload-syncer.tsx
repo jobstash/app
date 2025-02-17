@@ -51,7 +51,9 @@ export const OrgUpdatePayloadSyncer = () => {
           discords,
           docs,
           telegrams,
-          grants,
+          grants: grants
+            .map((grant) => grant.programName)
+            .filter(Boolean) as string[],
           communities,
           jobsites,
           detectedJobsites,
