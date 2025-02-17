@@ -10,6 +10,10 @@ export const PERMISSIONS = {
   ADMIN: 'ADMIN' as const,
   // Has access to org related user functionality like talent list etc.
   ORG_AFFILIATE: 'ORG_AFFILIATE' as const,
+  // Has talentpool subscription
+  ORG_TALENTPOOL_USER: 'ORG_TALENTPOOL_USER' as const,
+  // Has veri subscription
+  ORG_VERI_USER: 'ORG_VERI_USER' as const,
   // Has access to project related admin functionality
   PROJECT_MANAGER: 'PROJECT_MANAGER' as const,
   // Has access to org related admin functionality
