@@ -1,13 +1,8 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { useCallback, useEffect, useMemo, useRef } from 'react';
+import { useCallback, useMemo, useRef } from 'react';
 
-import {
-  CellEditingStoppedEvent,
-  ColDef,
-  GetRowIdFunc,
-} from 'ag-grid-community';
+import { ColDef, GetRowIdFunc } from 'ag-grid-community';
 import { AgGridReact, CustomCellRendererProps } from 'ag-grid-react';
-import { useSetAtom } from 'jotai';
 
 import { UserAvailableForWork } from '@jobstash/shared/core';
 import {
@@ -19,7 +14,6 @@ import { getLinkedAccountsString } from '@jobstash/shared/utils';
 import {
   BooleanCell,
   EcosystemActivationsCell,
-  NotesCell,
   ShowcaseCell,
   SkillsCell,
   SocialsCell,

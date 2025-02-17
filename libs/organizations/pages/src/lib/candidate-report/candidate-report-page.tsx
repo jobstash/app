@@ -10,6 +10,7 @@ import { useAuthContext, useHasPermission } from '@jobstash/auth/state';
 import { PageWrapper } from '@jobstash/shared/ui';
 
 import { CandidateReportForm } from './candidate-report-form';
+import { PreCandidateReportPage } from './pre-candidate-report-page';
 
 const SideBar = dynamic(() =>
   import('@jobstash/sidebar/feature').then((m) => m.SideBar),
@@ -17,14 +18,17 @@ const SideBar = dynamic(() =>
 
 export const CandidateReportPage = () => {
   const { isLoading } = useAuthContext();
-  const hasPermission = useHasPermission([
+  const canViewPage = useHasPermission([
     PERMISSIONS.ORG_AFFILIATE,
     PERMISSIONS.ORG_MANAGER,
     PERMISSIONS.ADMIN,
   ]);
 
+  const hasSubscription = useHasPermission([PERMISSIONS.ORG_VERI_USER]);
+
   if (isLoading) return <LoadingPage />;
-  if (!hasPermission) return <NotFoundPage />;
+  if (!canViewPage) return <NotFoundPage />;
+  if (!hasSubscription) return <PreCandidateReportPage />;
 
   return (
     <>

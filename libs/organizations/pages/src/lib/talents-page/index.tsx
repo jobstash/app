@@ -14,6 +14,7 @@ import { useUsersAvailableForWork } from '@jobstash/profile/state';
 
 import { PageWrapper } from '@jobstash/shared/ui';
 
+import { PreTalentsPage } from './pre-talents-page';
 import { DevTalentsTable } from './table';
 
 const SideBar = dynamic(() =>
@@ -22,18 +23,21 @@ const SideBar = dynamic(() =>
 
 export const TalentsPage = () => {
   const { isLoading: isLoadingAuth } = useAuthContext();
-  const hasPermission = useHasPermission([
+  const canViewPage = useHasPermission([
     PERMISSIONS.ORG_AFFILIATE,
     PERMISSIONS.ORG_MANAGER,
     PERMISSIONS.ADMIN,
   ]);
+
+  const hasSubscription = useHasPermission([PERMISSIONS.ORG_TALENTPOOL_USER]);
 
   const { data: rowData, isPending } = useUsersAvailableForWork();
 
   const isLoading = isLoadingAuth || isPending;
 
   if (isLoading) return <LoadingPage />;
-  if (!hasPermission) return <NotFoundPage />;
+  if (!canViewPage) return <NotFoundPage />;
+  if (!hasSubscription) return <PreTalentsPage />;
 
   return (
     <>
