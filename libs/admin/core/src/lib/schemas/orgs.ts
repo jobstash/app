@@ -1,6 +1,10 @@
 import myzod, { Infer } from 'myzod';
 
-import { jobsiteSchema, messageResponseSchema } from '@jobstash/shared/core';
+import {
+  grantFundingSchema,
+  jobsiteSchema,
+  messageResponseSchema,
+} from '@jobstash/shared/core';
 
 export const orgItemSchema = myzod
   .object({
@@ -19,7 +23,7 @@ export const orgItemSchema = myzod
     telegrams: myzod.array(myzod.string()),
     githubs: myzod.array(myzod.string()),
     aliases: myzod.array(myzod.string()),
-    grants: myzod.array(myzod.string()),
+    grants: myzod.array(grantFundingSchema),
     twitters: myzod.array(myzod.string()),
     docs: myzod.array(myzod.string()),
     communities: myzod.array(myzod.string()),
