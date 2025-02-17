@@ -16,16 +16,11 @@ export const SupportSection = () => (
       </p>
     </div>
     <div className="flex items-center gap-x-6">
-      <Button
-        as={Link}
-        href={SUPPORT_TELEGRAM_URL}
-        className="bg-gradient-to-l from-primary to-tertiary font-bold"
-        radius="sm"
-      >
+      <Button as={Link} href={SUPPORT_TELEGRAM_URL} radius="sm">
         Contact Support
       </Button>
-      <Button variant="light" radius="sm" as={Link} href="/post-job">
-        Post a job for free <span aria-hidden="true">→</span>
+      <Button variant="light" radius="sm" as={Link} href="/employers">
+        Services <span aria-hidden="true">→</span>
       </Button>
     </div>
   </div>

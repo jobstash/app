@@ -14,12 +14,14 @@ import { useUsersAvailableForWork } from '@jobstash/profile/state';
 
 import { PageWrapper } from '@jobstash/shared/ui';
 
-import { PreTalentsPage } from './pre-talents-page';
-import { DevTalentsTable } from './table';
+import { PaywallPage } from '../paywall-page';
 
+import { DevTalentsTable } from './table';
 const SideBar = dynamic(() =>
   import('@jobstash/sidebar/feature').then((m) => m.SideBar),
 );
+
+const PAGE_TITLE = 'Available Talents';
 
 export const TalentsPage = () => {
   const { isLoading: isLoadingAuth } = useAuthContext();
@@ -37,12 +39,12 @@ export const TalentsPage = () => {
 
   if (isLoading) return <LoadingPage />;
   if (!canViewPage) return <NotFoundPage />;
-  if (!hasSubscription) return <PreTalentsPage />;
+  if (!hasSubscription) return <PaywallPage title={PAGE_TITLE} />;
 
   return (
     <>
       <Head>
-        <title>Available Talents</title>
+        <title>{PAGE_TITLE}</title>
       </Head>
       <PageWrapper>
         <SideBar />

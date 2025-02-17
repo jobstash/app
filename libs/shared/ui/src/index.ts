@@ -81,6 +81,7 @@ export { DonateModal } from './lib/components/donate-modal';
 export { default as DraggableWrapper } from './lib/components/draggable-wrapper';
 export { default as EmptyResult } from './lib/components/empty-result';
 export * from './lib/components/fox-svg';
+export * from './lib/components/gradient-background';
 export * from './lib/components/gradient-text';
 export { default as Hexagon } from './lib/components/hexagon';
 export { default as InternalErrorResult } from './lib/components/internal-error-result';

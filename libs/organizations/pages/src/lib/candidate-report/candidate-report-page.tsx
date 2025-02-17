@@ -9,12 +9,15 @@ import { useAuthContext, useHasPermission } from '@jobstash/auth/state';
 
 import { PageWrapper } from '@jobstash/shared/ui';
 
+import { PaywallPage } from '../paywall-page';
+
 import { CandidateReportForm } from './candidate-report-form';
-import { PreCandidateReportPage } from './pre-candidate-report-page';
 
 const SideBar = dynamic(() =>
   import('@jobstash/sidebar/feature').then((m) => m.SideBar),
 );
+
+const PAGE_TITLE = 'Candidate Report';
 
 export const CandidateReportPage = () => {
   const { isLoading } = useAuthContext();
@@ -28,12 +31,12 @@ export const CandidateReportPage = () => {
 
   if (isLoading) return <LoadingPage />;
   if (!canViewPage) return <NotFoundPage />;
-  if (!hasSubscription) return <PreCandidateReportPage />;
+  if (!hasSubscription) return <PaywallPage title={PAGE_TITLE} />;
 
   return (
     <>
       <Head>
-        <title>Candidate Report</title>
+        <title>{PAGE_TITLE}</title>
       </Head>
 
       <PageWrapper>

@@ -2,10 +2,8 @@ import Head from 'next/head';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 
-import { PageWrapper } from '@jobstash/shared/ui';
+import { GradientBackground, PageWrapper } from '@jobstash/shared/ui';
 import { SideBar } from '@jobstash/sidebar/feature';
-
-import { GradientBackground } from '../components/gradient-background';
 
 import { HeroSection } from './hero-section';
 import { JobFeaturePricing } from './job-feature-pricing';

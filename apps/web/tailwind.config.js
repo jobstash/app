@@ -160,6 +160,15 @@ module.exports = {
         '50%': { backgroundPosition: '100% 50%' },
         '100%': { backgroundPosition: '0% 50%' },
       },
+      shine: {
+        '0%': { 'background-position': '100%' },
+        '100%': { 'background-position': '-100%' },
+      },
+      gradient2: {
+        '0%': { backgroundPosition: '0% 50%' },
+        '50%': { backgroundPosition: '100% 50%' },
+        '100%': { backgroundPosition: '0% 50%' },
+      },
     },
     backgroundSize: {
       '300%': '300%',
@@ -173,6 +182,8 @@ module.exports = {
       shake: 'shake 0.82s cubic-bezier(.36,.07,.19,.97) both',
       'fade-in-left': 'fade-in-left 0.3s linear',
       gradient: 'animatedgradient 6s ease infinite alternate',
+      shine: 'shine 1s linear infinite',
+      gradient2: 'gradient2 8s linear infinite',
     },
   },
   darkMode: 'class',

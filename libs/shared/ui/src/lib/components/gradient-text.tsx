@@ -3,7 +3,7 @@ import { ClassValue } from 'clsx';
 import { cn } from '@jobstash/shared/utils';
 
 type Props = {
-  text: string;
+  text: React.ReactNode;
   className?: ClassValue;
 };
 

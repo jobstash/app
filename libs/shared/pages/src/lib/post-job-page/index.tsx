@@ -1,9 +1,7 @@
 import Head from 'next/head';
 
-import { PageWrapper } from '@jobstash/shared/ui';
+import { GradientBackground, PageWrapper } from '@jobstash/shared/ui';
 import { SideBar } from '@jobstash/sidebar/feature';
-
-import { GradientBackground } from '../components/gradient-background';
 
 import { BestPractices } from './best-practices';
 import { CareerPageCriteria } from './career-page-criteria';
