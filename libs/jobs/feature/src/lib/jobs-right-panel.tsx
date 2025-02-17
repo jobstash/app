@@ -92,10 +92,11 @@ const JobsRightPanel = ({ jobPost, currentTab, routeSection }: Props) => {
 
   const competitorCount = competitors?.length ?? 0;
 
-  const orgJobs = orgDetails
-    ? orgDetails.jobs.filter((job) => job.id !== id)
-    : [];
-  const orgJobsCount = orgJobs.length;
+  //
+  // const orgJobs = orgDetails
+  //   ? orgDetails.jobs.filter((job) => job.id !== id)
+  //   : [];
+  // const orgJobsCount = orgJobs.length;
 
   const { name, logo, website } = getJobLogoTitleProps(jobPost);
 
@@ -120,7 +121,8 @@ const JobsRightPanel = ({ jobPost, currentTab, routeSection }: Props) => {
           currentTab={currentTab}
           jobPost={jobPost}
           competitorCount={competitorCount}
-          orgJobsCount={orgJobsCount}
+          //
+          // orgJobsCount={orgJobsCount}
           routeSection={routeSection}
         />
       }
@@ -153,9 +155,9 @@ const JobsRightPanel = ({ jobPost, currentTab, routeSection }: Props) => {
         <RightPanelCompetitorCards competitors={competitors ?? []} />
       )}
 
-      {orgDetails && currentTab === TAB_SEGMENT.otherJobs && (
+      {/* {orgDetails && currentTab === TAB_SEGMENT.otherJobs && (
         <RightPanelOrgJobCards orgName={orgDetails.name} orgJobs={orgJobs} />
-      )}
+      )} */}
     </RightPanel>
   );
 };

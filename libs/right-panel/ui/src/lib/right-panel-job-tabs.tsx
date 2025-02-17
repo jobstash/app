@@ -17,7 +17,8 @@ interface Props {
   currentTab: string;
   jobPost: JobPost;
   competitorCount: number;
-  orgJobsCount: number;
+  //
+  // orgJobsCount: number;
   routeSection: JobsRouteSection;
 }
 
@@ -26,7 +27,8 @@ const RightPanelJobTabs = ({
   currentTab,
   jobPost,
   competitorCount,
-  orgJobsCount,
+  //
+  // orgJobsCount,
   routeSection,
 }: Props) => {
   const { organization, project } = jobPost;
@@ -88,16 +90,17 @@ const RightPanelJobTabs = ({
       });
     }
 
-    if (orgJobsCount) {
-      tabs.push({
-        text: `Other Jobs (${orgJobsCount})`,
-        tabSegment: TAB_SEGMENT.otherJobs,
-        href: createTabHref(TAB_SEGMENT.otherJobs),
-      });
-    }
+    //
+    // if (orgJobsCount) {
+    //   tabs.push({
+    //     text: `Other Jobs (${orgJobsCount})`,
+    //     tabSegment: TAB_SEGMENT.otherJobs,
+    //     href: createTabHref(TAB_SEGMENT.otherJobs),
+    //   });
+    // }
 
     return tabs;
-  }, [competitorCount, createTabHref, orgJobsCount, projects.length]);
+  }, [competitorCount, createTabHref, projects.length]);
 
   return (
     <RightPanelTabs isLoading={isLoading} currentTab={currentTab} tabs={tabs} />

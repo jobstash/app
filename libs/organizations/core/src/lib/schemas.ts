@@ -107,7 +107,8 @@ export const orgDetailsSchema = myzod
       projects: myzod.array(orgProjectSchema),
       fundingRounds: myzod.array(fundingRoundSchema),
       investors: myzod.array(investorSchema),
-      jobs: myzod.array(orgJobSchema),
+      //
+      // jobs: myzod.array(orgJobSchema),
       aggregateRating: myzod.number().min(0).max(5),
       aggregateRatings: orgRatingSchema,
       reviewCount: myzod.number(),
