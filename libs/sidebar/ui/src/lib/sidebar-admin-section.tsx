@@ -62,12 +62,31 @@ const SidebarAdminSection = ({ isMobile }: Props) => {
   }
 
   return (
-    <SidebarSection
-      isMountedWrapped
-      title="Admin Tasks"
-      isMobile={isMobile}
-      bartabs={tabs}
-    />
+    <>
+      {isSuperAdmin && (
+        <SidebarSection
+          isMountedWrapped
+          title="Org Features"
+          isMobile={isMobile}
+          bartabs={[
+            {
+              text: 'Available Talents',
+              path: '/profile/organizations/available-talents',
+            },
+            {
+              text: 'Candidate Report',
+              path: '/profile/organizations/candidate-report',
+            },
+          ]}
+        />
+      )}
+      <SidebarSection
+        isMountedWrapped
+        title="Admin Tasks"
+        isMobile={isMobile}
+        bartabs={tabs}
+      />
+    </>
   );
 };
 
