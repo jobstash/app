@@ -1,41 +1,44 @@
 import Image from 'next/image';
 
-import { BotMessageSquare, ListTodo, Rss } from 'lucide-react';
+import { Filter, Plug, UserCheck } from 'lucide-react';
 
-const features = [
+const TITLE = 'StashPool';
+const SUBTITLE = 'Curated Crypto Talent';
+const DESCRIPTION =
+  'StashPool connects you with a vetted pool of top crypto-native and adjacent talent. Backed by GitHub data, onchain signals, and ecosystem activations, it ensures fast and precise hiring.';
+
+const FEATURES = [
   {
-    name: 'Submit Your Career Page Link',
+    name: 'Vetted Crypto Talent',
     description:
-      'Fill out a simple form to register your organization on JobStash. Once verified, we will automatically import your job vacancies, no matter the source.',
-    icon: ListTodo,
+      'Access a curated pool of candidates with verified GitHub contributions, work history, and ecosystem presence.',
+    icon: UserCheck,
   },
   {
-    name: 'Let our AI and Data do the Heavy Lifting',
+    name: 'Targeted Matching',
     description:
-      "Enjoy enhancement of your job posts with essential data that candidates love, ensuring a consistent presentation format. It's fully automatic - no action required on your end.",
-    icon: BotMessageSquare,
+      'Filter by experience, past organizations, and technical contributions for precise talent selection.',
+    icon: Filter,
   },
   {
-    name: 'We Distribute Your Jobs to the Right Audience',
+    name: 'Seamless Integration',
     description:
-      'Interview top talent thanks to our unrivalled distribution across top channels, reaching thousands of expert crypto natives. ',
-    icon: Rss,
+      'Connect with Lever, Greenhouse, Workable, or use StashPool’s built-in ATS for streamlined hiring.',
+    icon: Plug,
   },
 ];
+
 export const StashPoolSection = () => (
   <div id="stash-pool" className="flex flex-col gap-8">
     <div className="mx-auto max-w-7xl px-6 lg:px-8">
       <div className="mx-auto max-w-2xl sm:text-center">
         <h2 className="text-base/7 font-semibold text-indigo-400">
-          Lorem Ipsum Dolor
+          {SUBTITLE}
         </h2>
         <p className="mt-2 text-pretty text-4xl font-semibold tracking-tight text-white sm:text-balance sm:text-5xl">
-          Dolor Sit Amet Lorem Ipsum
+          {TITLE}
         </p>
-        <p className="mt-6 text-lg/8 text-gray-300">
-          Lorem ipsum, dolor sit amet consectetur adipisicing elit. Maiores
-          impedit perferendis suscipit eaque, iste dolor cupiditate blanditiis.
-        </p>
+        <p className="mt-6 text-lg/8 text-gray-300">{DESCRIPTION}</p>
       </div>
     </div>
 
@@ -67,7 +70,7 @@ export const StashPoolSection = () => (
 
     <div className="max-w-7xl lg:max-w-[86rem] mx-auto px-2 lg:px-20">
       <dl className="grid grid-cols-1 gap-12 md:gap-y-16 lg:grid-cols-3">
-        {features.map((feature) => (
+        {FEATURES.map((feature) => (
           <div key={feature.name} className="flex flex-col">
             <dt className="flex items-start gap-x-3 font-semibold leading-7 text-white/90">
               <feature.icon

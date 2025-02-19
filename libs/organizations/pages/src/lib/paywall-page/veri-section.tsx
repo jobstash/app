@@ -2,45 +2,47 @@ import Image from 'next/image';
 
 import { ListCheck } from 'lucide-react';
 
+const TITLE = 'VERI Candidate Report';
+const SUBTITLE = 'Data-Driven Hiring Intelligence';
+const DESCRIPTION =
+  "VERI delivers an in-depth analysis of a candidate's background, skills, and real-world contributions. Leveraging GitHub, onchain data, and ecosystem signals, VERI helps you make informed, risk-free hiring decisions.";
+
 const FEATURES = [
   {
-    name: 'Clear and Specific Job Title',
+    name: 'Proven Work History Verification',
     description:
-      'Start with a clear job title that accurately reflects the position. Candidates should instantly understand the role and level.',
+      'Verify candidates’ past contributions using GitHub commit history and organizational membership. Ensure legitimacy at scale.',
   },
   {
-    name: 'Detailed Job Description',
+    name: 'Ecosystem Reputation',
     description:
-      'Provide a detailed overview of the role, responsibilities, and required skills. A clear and concise description helps candidates evaluate their fit for the job.',
+      'Assess candidates through onchain reputation signals, ecosystem activations, and NFT-based event participation.',
   },
   {
-    name: 'Company Culture and Benefits',
+    name: 'Crypto-Native Talent Insights',
     description:
-      "Highlight your company's culture and the benefits you offer. This helps candidates understand the value of working with you and makes your listing more attractive.",
+      'Distinguish between crypto-native developers, crypto-adjacent talent, and industry newcomers with potential.',
   },
   {
-    name: 'Include Location Flexibility',
+    name: 'Flexible ATS Integration',
     description:
-      'If the role offers remote work or flexible working options, make sure to highlight that. Flexibility is a major selling point for many candidates.',
+      'Seamlessly integrate with Lever, Greenhouse, Workable, or use VERI’s built-in ATS for optimized candidate tracking.',
   },
 ];
+
 export const VeriSection = () => (
   <div id="veri" className="max-w-7xl mx-auto md:px-6 lg:px-8">
     <div className="grid grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:grid-cols-2 lg:items-start">
       <div className="flex flex-col gap-6 px-6 lg:px-0 lg:pr-4 lg:pt-4">
         <div className="flex flex-col gap-2">
           <span className="text-base font-semibold text-indigo-400">
-            Lorem Ipsum Dolor
+            {SUBTITLE}
           </span>
           <h2 className="bg-gradient-to-r from-white to-secondary bg-clip-text text-4xl font-bold text-transparent">
-            Dolor Ipsum
+            {TITLE}
           </h2>
         </div>
-        <p className="text-lg leading-8 text-white/90">
-          A well-structured job post helps you stand out and reach the right
-          candidates. Here&#39;s how to create an engaging, informative listing
-          that brings in quality applicants.
-        </p>
+        <p className="text-lg leading-8 text-white/90">{DESCRIPTION}</p>
         <dl className="space-y-8 text-base leading-7 text-white/90">
           {FEATURES.map((feature) => (
             <div key={feature.name} className="relative pl-9">
