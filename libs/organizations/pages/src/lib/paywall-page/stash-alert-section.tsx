@@ -24,8 +24,8 @@ const FEATURES = [
       'If the role offers remote work or flexible working options, make sure to highlight that. Flexibility is a major selling point for many candidates.',
   },
 ];
-export const AtsSection = () => (
-  <div id="ats" className="max-w-7xl mx-auto md:px-6 lg:px-8">
+export const StashAlertSection = () => (
+  <div id="stash-alert" className="max-w-7xl mx-auto md:px-6 lg:px-8">
     <div className="grid grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:grid-cols-2 lg:items-start">
       <div className="flex flex-col gap-6 px-6 lg:px-0 lg:pr-4 lg:pt-4">
         <div className="flex flex-col gap-2">

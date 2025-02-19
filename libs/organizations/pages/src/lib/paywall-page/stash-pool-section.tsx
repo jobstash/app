@@ -22,8 +22,8 @@ const features = [
     icon: Rss,
   },
 ];
-export const TalentPoolSection = () => (
-  <div id="talent-pool" className="flex flex-col gap-8">
+export const StashPoolSection = () => (
+  <div id="stash-pool" className="flex flex-col gap-8">
     <div className="mx-auto max-w-7xl px-6 lg:px-8">
       <div className="mx-auto max-w-2xl sm:text-center">
         <h2 className="text-base/7 font-semibold text-indigo-400">

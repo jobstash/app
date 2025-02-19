@@ -15,7 +15,7 @@ interface Props {
   onEnd?: () => void;
 }
 
-export const Price = ({
+export const SpringText = ({
   to,
   from = 0,
   direction = 'up',

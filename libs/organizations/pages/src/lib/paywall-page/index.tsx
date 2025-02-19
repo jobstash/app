@@ -4,10 +4,10 @@ import Head from 'next/head';
 import { GradientBackground, PageWrapper } from '@jobstash/shared/ui';
 
 import { AssistSection } from './assist-section';
-import { AtsSection } from './ats-section';
 import { BuildYourPackage } from './build-your-package';
+import { StashAlertSection } from './stash-alert-section';
+import { StashPoolSection } from './stash-pool-section';
 import { SupportSection } from './support-section';
-import { TalentPoolSection } from './talent-pool-section';
 import { VeriSection } from './veri-section';
 
 const SideBar = dynamic(() =>
@@ -32,8 +32,8 @@ export const PaywallPage = ({ title }: Props) => (
         <BuildYourPackage />
         <AssistSection />
         <VeriSection />
-        <TalentPoolSection />
-        <AtsSection />
+        <StashPoolSection />
+        <StashAlertSection />
         <SupportSection />
       </div>
     </PageWrapper>

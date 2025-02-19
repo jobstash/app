@@ -1,11 +1,9 @@
-import React, { ReactNode } from 'react';
-
 interface GradientBorderProps {
-  children: ReactNode;
+  children: React.ReactNode;
   className?: string;
   colors?: string[];
   animationSpeed?: number;
-  isActive?: boolean;
+  isSelected?: boolean;
 }
 
 export const GradientBorder = ({
@@ -13,7 +11,7 @@ export const GradientBorder = ({
   className = '',
   colors = ['#ffaa40', '#9c40ff', '#ffaa40'],
   animationSpeed = 4,
-  isActive = false,
+  isSelected = false,
 }: GradientBorderProps) => {
   const gradientStyle = {
     backgroundImage: `linear-gradient(to right, ${colors.join(', ')})`,
@@ -22,7 +20,7 @@ export const GradientBorder = ({
 
   return (
     <div className={`relative rounded-[1.25rem] overflow-hidden ${className}`}>
-      {isActive && (
+      {isSelected && (
         <div
           className="absolute inset-0 bg-cover z-0 pointer-events-none animate-gradient2"
           style={{
