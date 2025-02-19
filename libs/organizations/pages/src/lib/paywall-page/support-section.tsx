@@ -16,7 +16,13 @@ export const SupportSection = () => (
       </p>
     </div>
     <div className="flex items-center gap-x-6">
-      <Button as={Link} href={SUPPORT_TELEGRAM_URL} radius="sm">
+      <Button
+        as={Link}
+        href={SUPPORT_TELEGRAM_URL}
+        radius="sm"
+        rel="noopener noreferrer"
+        target="_blank"
+      >
         Contact Support
       </Button>
       <Button variant="light" radius="sm" as={Link} href="/employers">

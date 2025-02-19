@@ -15,6 +15,8 @@ export const PricingButton = ({ ariaDescribedBy }: Props) => (
     aria-describedby={ariaDescribedBy}
     href={SUPPORT_TELEGRAM_URL}
     className="bg-white/5 mt-4 "
+    rel="noopener noreferrer"
+    target="_blank"
   >
     Buy plan
   </Button>
