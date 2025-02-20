@@ -12,7 +12,7 @@ interface Props {
   decimalPlaces?: number;
 }
 
-export const StatNumber = ({
+export const AnalyticsStatNumber = ({
   value,
   direction = 'up',
   delay = 0,

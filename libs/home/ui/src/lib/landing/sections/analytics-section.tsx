@@ -9,7 +9,7 @@ import { MoveDown, MoveUp } from 'lucide-react';
 
 import { GradientText } from '@jobstash/shared/ui';
 
-import { StatNumber } from './stat-number';
+import { AnalyticsStatNumber } from './analytics-stat-number';
 
 const stats = [
   { name: 'Platform Users', value: 3951, icon: UsersIcon, diff: 12 },
@@ -28,14 +28,11 @@ const stats = [
   { name: 'Experts', value: 1173, icon: CodeBracketIcon, diff: 11 },
 ];
 
-export const StatsSection = () => (
-  <div className="mx-auto w-full max-w-7xl px-6 lg:px-8">
+export const AnalyticsSection = () => (
+  <div className="mx-auto w-full max-w-7xl px-6 lg:px-8 pt-20">
     <div className="mx-auto lg:max-w-none flex flex-col gap-16">
       <div className="text-center flex flex-col gap-4">
         <div className="mx-auto max-w-4xl text-center">
-          <h2 className="text-base font-semibold leading-7 text-indigo-400 pb-4">
-            See How We’re Driving Talent Connections
-          </h2>
           <span className="bg-gradient-to-r from-white to-secondary bg-clip-text text-6xl font-bold text-transparent">
             Crypto Hiring Performance
           </span>
@@ -55,7 +52,7 @@ export const StatsSection = () => (
             <Icon className="w-7 stroke-2" />
 
             <div className="flex items-center justify-between">
-              <StatNumber value={value} />
+              <AnalyticsStatNumber value={value} />
               <Chip
                 variant="shadow"
                 className="bg-secondary/20 text-indigo-400"

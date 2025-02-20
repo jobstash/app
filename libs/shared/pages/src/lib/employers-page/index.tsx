@@ -7,7 +7,6 @@ import { SideBar } from '@jobstash/sidebar/feature';
 
 import { HeroSection } from './hero-section';
 import { JobFeaturePricing } from './job-feature-pricing';
-import { StatsSection } from './stats-section';
 import { SupportSection } from './support';
 import { VeriPricing } from './veri-pricing';
 import { WygFeaturedJobs } from './wyg-featured-jobs';
@@ -46,7 +45,6 @@ export const EmployersPage = () => {
         <div className="relative isolate overflow-hidden bg-gray-900 pb-20 flex flex-col gap-32 pt-10">
           <GradientBackground />
           <HeroSection />
-          <StatsSection />
           <JobFeaturePricing />
           <WygFeaturedJobs />
           <VeriPricing />

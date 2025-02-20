@@ -6,14 +6,14 @@ import { ExploreJobsButton } from './buttons/explore-jobs-button';
 import { HomePageButton } from './buttons/home-page-button';
 import { PostYourJobButton } from './buttons/post-your-job-button';
 import { SubscribeTelegram } from './buttons/subscribe-telegram';
+import { AnalyticsSection } from './analytics-section';
 import { GradientContainer } from './gradient-container';
 import { NewestJobsSection } from './newest-jobs-section';
-
 const LandingSection = () => (
   <section className="relative mx-auto lg:max-w-6xl">
     <div className="w-full pb-8 mx-auto md:pb-14">
       <div className={`${lato.className} text-center`}>
-        <h1 className="font-semibold leading-none text-white text-[60px] md:text-[80px] md:text-[120px]">
+        <h1 className="font-semibold leading-none text-white text-[60px] md:text-[80px]">
           Job<span className="text-secondary">Stash</span>
         </h1>
         <h2 className="text-xl text-white lg:text-3xl">
@@ -29,6 +29,7 @@ const LandingSection = () => (
     </div>
 
     <NewestJobsSection />
+    <AnalyticsSection />
 
     <div className="mt-16 space-y-6 md:flex md:gap-6 md:space-y-0">
       <GradientContainer className="flex flex-wrap w-full ">
