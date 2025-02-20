@@ -60,7 +60,20 @@ export const PricingProvider = ({ children }: React.PropsWithChildren) => {
           return newSelectedPrices;
         }
 
-        return [...newSelectedPrices, { id: feature.section, title, price }];
+        const isTier = Array.isArray(feature.price);
+        return [
+          ...newSelectedPrices,
+          {
+            id: feature.section,
+            title,
+            price,
+            description:
+              selectedTier?.description ??
+              (isTier
+                ? (feature.price as Tier[])[0].description
+                : feature.description),
+          },
+        ];
       });
     },
     [selectedPrices, currentPrice],

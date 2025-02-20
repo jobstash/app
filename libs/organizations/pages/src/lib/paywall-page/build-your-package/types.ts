@@ -7,11 +7,13 @@ export interface PriceSelection {
   id: string;
   title: string;
   price: number;
+  description: string;
 }
 
 export interface Tier {
   title: string;
   price: number;
+  description: string;
 }
 
 export interface Feature {
@@ -20,4 +22,6 @@ export interface Feature {
   description: string;
   section: string;
   price: number | Tier[];
+  concatTitle?: boolean;
+  defaultTierTitle?: string;
 }

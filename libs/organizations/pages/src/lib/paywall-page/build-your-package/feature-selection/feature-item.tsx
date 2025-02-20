@@ -12,12 +12,26 @@ interface Props {
 }
 
 export const FeatureItem = ({ feature }: Props) => {
-  const { icon, title, description } = feature;
+  const {
+    icon,
+    title,
+    description,
+    concatTitle = true,
+    defaultTierTitle = '',
+  } = feature;
 
-  const { isSelected, onToggle, onToggleTier, onLearnMore, selectedTierTitle } =
+  const { isSelected, onToggle, onToggleTier, onLearnMore, selectedTier } =
     useFeatureItem(feature);
 
   const mainButtonText = isSelected ? 'Remove' : 'Add to Package';
+
+  const itemTitle = selectedTier
+    ? concatTitle
+      ? `${title} ${selectedTier.title}`
+      : selectedTier.title
+    : `${title} ${defaultTierTitle}`;
+
+  const itemDescription = selectedTier ? selectedTier.description : description;
 
   return (
     <FeatureItemWrapper isSelected={isSelected} onToggle={onToggle}>
@@ -32,11 +46,15 @@ export const FeatureItem = ({ feature }: Props) => {
             />
           </div>
           <ShinyText
-            text={selectedTierTitle ? `${title} ${selectedTierTitle}` : title}
+            text={itemTitle}
             className="text-2xl font-semibold select-none"
           />
         </div>
-        <p className="text-gray-200 text-base select-none">{description}</p>
+        <div className="min-h-[80px]">
+          <p className="text-gray-200 text-base select-none">
+            {itemDescription}
+          </p>
+        </div>
         <div className="flex items-center gap-x-2">
           <Button
             variant={isSelected ? 'flat' : 'solid'}

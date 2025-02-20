@@ -48,16 +48,15 @@ export const useFeatureItem = (feature: Feature) => {
     [section],
   );
 
-  const selectedTierTitle =
-    (Array.isArray(price) &&
-      selectedPrices.find((price) => price.id === section)?.title) ??
-    null;
+  const selectedTier = Array.isArray(price)
+    ? selectedPrices.find((price) => price.id === section) ?? null
+    : null;
 
   return {
     isSelected,
     onToggle,
     onToggleTier,
     onLearnMore,
-    selectedTierTitle,
+    selectedTier,
   };
 };

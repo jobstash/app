@@ -11,28 +11,35 @@ import { usePricingContext } from '../context';
 import { SpringText } from './spring-text';
 
 export const DynamicPrice = () => {
-  const { currentPrice, prevPrice } = usePricingContext();
+  const { currentPrice, prevPrice, selectedPrices } = usePricingContext();
+
+  const hasSelectedPrice = selectedPrices.length > 0;
+  const isFree = hasSelectedPrice && currentPrice === 0;
+
+  const fromAmount = isFree ? 200 : prevPrice;
 
   return (
     <div className="flex flex-col items-center mt-4 min-h-[50px] justify-center">
       <div className="text-6xl font-bold text-white flex items-center gap-2">
-        {currentPrice ? (
+        {hasSelectedPrice ? (
           <>
             $
-            <SpringText to={currentPrice} from={prevPrice} duration={1} />
+            <SpringText to={currentPrice} from={fromAmount} duration={1} />
             <span className="text-3xl text-white/70">/month</span>
             <div className="pl-4 flex items-center">
-              <Button
-                size="sm"
-                variant="flat"
-                radius="sm"
-                as={Link}
-                href={SUPPORT_TELEGRAM_URL}
-                target="_blank"
-                rel="noreferrer"
-              >
-                Buy Package
-              </Button>
+              {!isFree && (
+                <Button
+                  size="sm"
+                  variant="flat"
+                  radius="sm"
+                  as={Link}
+                  href={SUPPORT_TELEGRAM_URL}
+                  target="_blank"
+                  rel="noreferrer"
+                >
+                  Buy Package
+                </Button>
+              )}
             </div>
           </>
         ) : (
