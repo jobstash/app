@@ -403,6 +403,7 @@ export const userAvailableForWorkSchema = myzod.intersection(
     skills: myzod.array(userSkillSchema),
     showcases: myzod.array(userShowcaseSchema),
     workHistory: myzod.array(userWorkHistorySchema),
+    jobCategoryInterests: myzod.array(myzod.string()),
   }),
 );
 export type UserAvailableForWork = Infer<typeof userAvailableForWorkSchema>;
