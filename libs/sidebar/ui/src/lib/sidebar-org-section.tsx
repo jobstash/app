@@ -1,8 +1,13 @@
 import { useMemo } from 'react';
 
+import { PERMISSIONS } from '@jobstash/auth/core';
 import { getPluralText, normalizeString } from '@jobstash/shared/utils';
 
-import { useAffiliatedOrgs, useAuthContext } from '@jobstash/auth/state';
+import {
+  useAffiliatedOrgs,
+  useAuthContext,
+  useHasPermission,
+} from '@jobstash/auth/state';
 import { useAffiliationRequests } from '@jobstash/profile/state';
 
 import { SidebarBartabProps } from './sidebar-bartab';
@@ -22,6 +27,11 @@ const SidebarOrgSection = ({ isMobile }: Props) => {
     list: 'approved',
   });
 
+  const hasTalentSubscription = useHasPermission([
+    PERMISSIONS.ORG_TALENTPOOL_USER,
+  ]);
+  const hasVeriSubscription = useHasPermission([PERMISSIONS.ORG_VERI_USER]);
+
   const tabs: SidebarBartabProps[] = useMemo(() => {
     if (!orgs) return [];
 
@@ -34,21 +44,23 @@ const SidebarOrgSection = ({ isMobile }: Props) => {
       path: `/profile/organizations/${normalizeString(name)}`,
     }));
 
-    if (result.length > 0) {
-      result.push(
-        {
-          text: 'Available Talents',
-          path: '/profile/organizations/available-talents',
-        },
-        {
-          text: 'Candidate Report',
-          path: '/profile/organizations/candidate-report',
-        },
-      );
+    const hasManagedOrg = result.length > 0;
+    if (hasManagedOrg && hasTalentSubscription) {
+      result.push({
+        text: 'Available Talents',
+        path: '/profile/organizations/available-talents',
+      });
+    }
+
+    if (hasVeriSubscription) {
+      result.push({
+        text: 'Candidate Report',
+        path: '/profile/organizations/candidate-report',
+      });
     }
 
     return result;
-  }, [approvedAffiliations, orgs]);
+  }, [approvedAffiliations, hasTalentSubscription, hasVeriSubscription, orgs]);
 
   if (isLoading) return <SidebarSectionSkeleton />;
 

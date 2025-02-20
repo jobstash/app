@@ -14,8 +14,6 @@ import { useUsersAvailableForWork } from '@jobstash/profile/state';
 
 import { PageWrapper } from '@jobstash/shared/ui';
 
-import { PaywallPage } from '../paywall-page';
-
 import { DevTalentsTable } from './table';
 const SideBar = dynamic(() =>
   import('@jobstash/sidebar/feature').then((m) => m.SideBar),
@@ -38,8 +36,7 @@ export const TalentsPage = () => {
   const isLoading = isLoadingAuth || isPending;
 
   if (isLoading) return <LoadingPage />;
-  if (!canViewPage) return <NotFoundPage />;
-  if (!hasSubscription) return <PaywallPage title={PAGE_TITLE} />;
+  if (!canViewPage || !hasSubscription) return <NotFoundPage />;
 
   return (
     <>
