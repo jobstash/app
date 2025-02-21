@@ -12,7 +12,7 @@ import { VeriPricing } from './veri-pricing';
 import { WygFeaturedJobs } from './wyg-featured-jobs';
 import { WygVeri } from './wyg-veri';
 
-export const EmployersPage = () => {
+export const FeaturesPage = () => {
   const router = useRouter();
 
   useEffect(() => {

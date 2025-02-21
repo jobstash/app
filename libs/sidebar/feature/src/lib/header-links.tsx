@@ -5,7 +5,7 @@ import { PrivyButton } from '@jobstash/auth/feature';
 
 const LINKS = [
   { text: 'Post Jobs for Free', link: '/post-job' },
-  { text: 'Employers', link: '/employers' },
+  { text: 'Features', link: '/features' },
   { text: 'Subscribe', link: TELEGRAM_URL, isExternal: true },
   { text: 'Help', link: SUPPORT_TELEGRAM_URL, isExternal: true },
 ];
