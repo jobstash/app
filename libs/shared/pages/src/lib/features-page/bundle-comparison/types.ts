@@ -1,4 +1,4 @@
-export type TierName = 'Basic' | 'Advanced' | 'Premium';
+export type TierName = 'Starter' | 'Growth' | 'Pro' | 'Max';
 
 export interface Tier {
   name: TierName;

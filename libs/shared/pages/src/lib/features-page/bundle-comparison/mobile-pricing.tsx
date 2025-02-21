@@ -11,8 +11,8 @@ interface Props {
 }
 
 export const MobilePricingTier = ({ tier, sections }: Props) => (
-  <section className="p-8 rounded-xl bg-white shadow-sm ring-1 ring-gray-200">
-    <h3 id={tier.id} className="text-sm/6 font-semibold text-gray-900">
+  <section className="p-8 rounded-3xl bg-black/10 shadow-sm ring-1 ring-neutral-800">
+    <h3 id={tier.id} className="text-sm/6 font-semibold text-white">
       {tier.name}
     </h3>
     <p className="mt-2 flex items-baseline gap-x-1 text-gray-900">
@@ -29,7 +29,7 @@ export const MobilePricingTier = ({ tier, sections }: Props) => (
                 <li key={feature.name} className="flex gap-x-3">
                   <CheckIcon
                     aria-hidden="true"
-                    className="h-6 w-5 flex-none text-indigo-600"
+                    className="h-6 w-5 flex-none text-indigo-400"
                   />
                   <span>
                     {feature.name}{' '}

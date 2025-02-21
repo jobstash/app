@@ -5,10 +5,11 @@ import { Button } from '@nextui-org/button';
 import { SUPPORT_TELEGRAM_URL } from '@jobstash/shared/core';
 
 interface Props {
+  isFree?: boolean;
   ariaDescribedBy?: string;
 }
 
-export const PricingButton = ({ ariaDescribedBy }: Props) => (
+export const PricingButton = ({ isFree, ariaDescribedBy }: Props) => (
   <Button
     fullWidth
     as={Link}
@@ -17,7 +18,8 @@ export const PricingButton = ({ ariaDescribedBy }: Props) => (
     className="bg-white/5 mt-4 "
     rel="noopener noreferrer"
     target="_blank"
+    isDisabled={isFree}
   >
-    Buy plan
+    {isFree ? 'FREE' : 'Buy plan'}
   </Button>
 );

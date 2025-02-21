@@ -2,8 +2,6 @@ import Image from 'next/image';
 
 import { ListCheck } from 'lucide-react';
 
-import { VeriPricing } from './veri-pricing';
-
 const TITLE = 'VERI Candidate Report';
 const SUBTITLE = 'Data-Driven Hiring Intelligence';
 const DESCRIPTION =
@@ -73,6 +71,5 @@ export const VeriSection = () => (
         />
       </div>
     </div>
-    <VeriPricing />
   </div>
 );

@@ -50,15 +50,15 @@ const features = [
 ];
 
 export const WygVeri = () => (
-  <div className="flex flex-col items-center px-6 gap-16 -mt-16">
-    <div className="max-w-2xl text-center flex flex-col gap-6">
+  <div className="flex flex-col items-center gap-16 -mt-24">
+    {/* <div className="max-w-2xl text-center flex flex-col gap-6">
       <div className="flex flex-col gap-4">
         <span className="bg-gradient-to-r from-white to-secondary bg-clip-text text-6xl font-bold text-transparent">
           What You&#39;re Getting
         </span>
       </div>
-    </div>
-    <div className="max-w-7xl mx-auto px-2 lg:px-20">
+    </div> */}
+    <div className="max-w-7xl mx-auto px-6 lg:px-10">
       <dl className="grid grid-cols-1 gap-x-8 gap-y-12 md:gap-y-16 lg:grid-cols-3">
         {features.map((feature) => (
           <div key={feature.name} className="flex flex-col">

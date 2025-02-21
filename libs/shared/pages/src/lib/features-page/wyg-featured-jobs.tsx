@@ -23,15 +23,15 @@ const features = [
 
 export const WygFeaturedJobs = () => (
   <div className="mx-auto max-w-7xl px-6 lg:px-8 -mt-16">
-    <div className="mx-auto max-w-2xl lg:text-center">
+    {/* <div className="mx-auto max-w-2xl lg:text-center">
       <div className="flex flex-col gap-4">
         <span className="bg-gradient-to-r from-white to-secondary bg-clip-text text-6xl font-bold text-transparent">
           What You&#39;re Getting
         </span>
       </div>
-    </div>
-    <div className="mx-auto mt-12 max-w-2xl lg:max-w-none">
-      <dl className="grid max-w-xl grid-cols-1 gap-x-8 gap-y-16 lg:max-w-none lg:grid-cols-3">
+    </div> */}
+    <div className="mx-auto max-w-2xl lg:max-w-none">
+      <dl className="grid max-w-xl grid-cols-1 gap-8 lg:max-w-none lg:grid-cols-3">
         {features.map((feature) => (
           <div key={feature.name} className="flex flex-col">
             <dt className="flex items-center gap-x-3 text-base font-semibold leading-7 text-white/90">

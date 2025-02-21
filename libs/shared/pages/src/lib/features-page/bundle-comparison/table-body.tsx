@@ -23,7 +23,7 @@ export const TableBody = ({ tiers, sections }: Props) => (
             <span className="text-4xl font-semibold">{tier.priceMonthly}</span>
             <span className="text-lg font-semibold">/month</span>
           </div>
-          <PricingButton />
+          <PricingButton isFree={tier.priceMonthly === '$0'} />
         </td>
       ))}
     </tr>

@@ -5,10 +5,15 @@ import { useEffect } from 'react';
 import { GradientBackground, PageWrapper } from '@jobstash/shared/ui';
 import { SideBar } from '@jobstash/sidebar/feature';
 
+import { BuildYourPackage } from './build-your-package';
+import { BundleComparison } from './bundle-comparison';
 import { HeroSection } from './hero-section';
 import { JobFeaturePricing } from './job-feature-pricing';
+import { StashAlertSection } from './stash-alert-section';
+import { StashPoolSection } from './stash-pool-section';
 import { SupportSection } from './support';
 import { VeriPricing } from './veri-pricing';
+import { VeriSection } from './veri-section';
 import { WygFeaturedJobs } from './wyg-featured-jobs';
 import { WygVeri } from './wyg-veri';
 
@@ -45,11 +50,17 @@ export const FeaturesPage = () => {
         <div className="relative isolate overflow-hidden bg-gray-900 pb-20 flex flex-col gap-32 pt-10">
           <GradientBackground />
           <HeroSection />
+          <BuildYourPackage />
+          <BundleComparison />
+          <VeriSection />
+          <WygVeri />
+          <StashPoolSection />
+          <StashAlertSection />
           <JobFeaturePricing />
           <WygFeaturedJobs />
-          <VeriPricing />
-          <WygVeri />
           <SupportSection />
+          {/* <VeriPricing /> */}
+          {/* <SupportSection /> */}
         </div>
       </PageWrapper>
     </>

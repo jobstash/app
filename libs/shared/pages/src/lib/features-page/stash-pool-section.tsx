@@ -68,7 +68,7 @@ export const StashPoolSection = () => (
       </div>
     </div>
 
-    <div className="max-w-7xl lg:max-w-[86rem] mx-auto px-2 lg:px-20">
+    <div className="max-w-7xl lg:max-w-[86rem] mx-auto px-8 lg:px-20">
       <dl className="grid grid-cols-1 gap-12 md:gap-y-16 lg:grid-cols-3">
         {FEATURES.map((feature) => (
           <div key={feature.name} className="flex flex-col">
