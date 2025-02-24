@@ -12,7 +12,6 @@ import { JobFeaturePricing } from './job-feature-pricing';
 import { StashAlertSection } from './stash-alert-section';
 import { StashPoolSection } from './stash-pool-section';
 import { SupportSection } from './support';
-import { VeriPricing } from './veri-pricing';
 import { VeriSection } from './veri-section';
 import { WygFeaturedJobs } from './wyg-featured-jobs';
 import { WygVeri } from './wyg-veri';
@@ -43,7 +42,7 @@ export const FeaturesPage = () => {
   return (
     <>
       <Head>
-        <title>Employers</title>
+        <title>Features</title>
       </Head>
       <PageWrapper>
         <SideBar />
@@ -60,7 +59,6 @@ export const FeaturesPage = () => {
           <WygFeaturedJobs />
           <SupportSection />
           {/* <VeriPricing /> */}
-          {/* <SupportSection /> */}
         </div>
       </PageWrapper>
     </>

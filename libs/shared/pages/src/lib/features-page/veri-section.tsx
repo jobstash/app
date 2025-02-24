@@ -26,7 +26,17 @@ const FEATURES = [
   {
     name: 'Flexible ATS Integration',
     description:
-      'Seamlessly integrate with Lever, Greenhouse, Workable, or use VERI’s built-in ATS for optimized candidate tracking.',
+      "Seamlessly integrate with Lever, Greenhouse, Workable, or use VERI's built-in ATS for optimized candidate tracking.",
+  },
+  {
+    name: 'Due Diligence Tools',
+    description:
+      "Access detailed reports on candidates, including work history, contributions, and affiliations, to ensure you're making informed hiring decisions.",
+  },
+  {
+    name: 'Ecosystem Data',
+    description:
+      'Leverage enriched data on organizations, projects, and ecosystems to better understand a candidate’s background and expertise in the crypto space.',
   },
 ];
 
@@ -64,7 +74,7 @@ export const VeriSection = () => (
       <div className="flex justify-center mt-4 md:mt-0">
         <Image
           alt="Job Details"
-          src="https://placehold.co/541x640/211A3D/white.png"
+          src="/veri-screenshot.png"
           width={541}
           height={640}
           className="rounded-md"

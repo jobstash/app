@@ -32,7 +32,7 @@ const FEATURES = [
 
 export const StashAlertSection = () => (
   <div id="stash-alert" className="max-w-7xl mx-auto md:px-6 lg:px-8">
-    <div className="grid grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:grid-cols-2 lg:items-start">
+    <div className="grid grid-cols-1 gap-x-8 gap-y-16 sm:gap-y-20 lg:grid-cols-2 lg:items-center">
       <div className="flex flex-col gap-6 px-6 lg:px-0 lg:pr-4 lg:pt-4">
         <div className="flex flex-col gap-2">
           <span className="text-base font-semibold text-indigo-400">
@@ -58,14 +58,17 @@ export const StashAlertSection = () => (
           ))}
         </dl>
       </div>
-      <div className="flex justify-center mt-4 md:mt-0">
-        <Image
-          alt="Job Details"
-          src="https://placehold.co/541x640/211A3D/white.png"
-          width={541}
-          height={640}
-          className="rounded-md"
-        />
+      <div className="flex justify-center mt-4 md:mt-0 lg:pt-12">
+        <div className="relative">
+          <div className="absolute inset-0 bg-gradient-to-t from-background/50 via-background/10 to-transparent rounded-md" />
+          <Image
+            alt="Job Details"
+            src="/stash-alert-screenshot.png"
+            width={541}
+            height={640}
+            className="rounded-md"
+          />
+        </div>
       </div>
     </div>
   </div>

@@ -29,24 +29,24 @@ const features = [
       'Spot and attract rising stars in the industry, even before they have substantial work history, based on their involvement and recognition within the community.',
     icon: Star,
   },
-  {
-    name: 'ATS Integration',
-    description:
-      'Seamlessly integrate Veri with your existing ATS, or use our built-in ATS, to track and manage applicants effortlessly.',
-    icon: Blocks,
-  },
-  {
-    name: 'Due Diligence Tools',
-    description:
-      "Access detailed reports on candidates, including work history, contributions, and affiliations, to ensure you're making informed hiring decisions.",
-    icon: TextSearch,
-  },
-  {
-    name: 'Ecosystem Data',
-    description:
-      'Leverage enriched data on organizations, projects, and ecosystems to better understand a candidate’s background and expertise in the crypto space.',
-    icon: Network,
-  },
+  // {
+  //   name: 'ATS Integration',
+  //   description:
+  //     'Seamlessly integrate Veri with your existing ATS, or use our built-in ATS, to track and manage applicants effortlessly.',
+  //   icon: Blocks,
+  // },
+  // {
+  //   name: 'Due Diligence Tools',
+  //   description:
+  //     "Access detailed reports on candidates, including work history, contributions, and affiliations, to ensure you're making informed hiring decisions.",
+  //   icon: TextSearch,
+  // },
+  // {
+  //   name: 'Ecosystem Data',
+  //   description:
+  //     'Leverage enriched data on organizations, projects, and ecosystems to better understand a candidate’s background and expertise in the crypto space.',
+  //   icon: Network,
+  // },
 ];
 
 export const WygVeri = () => (

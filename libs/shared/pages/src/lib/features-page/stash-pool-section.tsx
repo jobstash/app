@@ -47,7 +47,7 @@ export const StashPoolSection = () => (
         <div style={{ position: 'relative', display: 'inline-block' }}>
           <Image
             alt="App screenshot"
-            src="https://placehold.co/2432x1442/211A3D/white.png"
+            src="/stash-pool-screenshot.png"
             width={2432}
             height={1442}
             className="w-[76rem] rounded-md "
