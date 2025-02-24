@@ -2,9 +2,9 @@ import { Section, Tier } from './types';
 
 export const PRICING_TIERS: Tier[] = [
   { name: 'Starter', id: 'tier-starter', priceMonthly: '$0' },
-  { name: 'Growth', id: 'tier-growth', priceMonthly: '$99' },
-  { name: 'Pro', id: 'tier-scale', priceMonthly: '$179' },
-  { name: 'Max', id: 'tier-max', priceMonthly: '$299' },
+  { name: 'Growth', id: 'tier-growth', priceMonthly: '$199' },
+  { name: 'Pro', id: 'tier-scale', priceMonthly: '$399' },
+  { name: 'Max', id: 'tier-max', priceMonthly: '$599' },
 ];
 
 export const PRICING_SECTIONS: Section[] = [
