@@ -1,5 +1,5 @@
-import { Button } from '@nextui-org/button';
-import { Tooltip } from '@nextui-org/tooltip';
+import { Button } from "@heroui/button";
+import { Tooltip } from "@heroui/tooltip";
 
 interface Props {
   isLoading?: boolean;

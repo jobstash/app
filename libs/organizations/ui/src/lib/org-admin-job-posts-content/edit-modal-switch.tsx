@@ -1,4 +1,4 @@
-import { Switch, SwitchProps } from '@nextui-org/react';
+import { Switch, SwitchProps } from '@heroui/switch';
 
 import { cn } from '@jobstash/shared/utils';
 

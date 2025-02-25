@@ -1,12 +1,9 @@
 import { useRef, useState } from 'react';
 
-import {
-  Accordion,
-  AccordionItem,
-  Button,
-  ScrollShadow,
-  Textarea,
-} from '@nextui-org/react';
+import { Accordion, AccordionItem } from '@heroui/accordion';
+import { Button } from '@heroui/button';
+import { Textarea } from '@heroui/input';
+import { ScrollShadow } from '@heroui/scroll-shadow';
 import { Check, PencilOff, Plus } from 'lucide-react';
 
 import { UpdateOrgJobPayload } from '@jobstash/organizations/core';

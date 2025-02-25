@@ -1,6 +1,8 @@
 import { useMemo } from 'react';
 
-import { Input, Switch, Textarea, Tooltip } from '@nextui-org/react';
+import { Input, Textarea } from '@heroui/input';
+import { Switch } from '@heroui/switch';
+import { Tooltip } from '@heroui/tooltip';
 
 const TOOLTIP_TEXT =
   'This field is read-only and is currently locked for modification';

@@ -7,7 +7,7 @@ import {
   ModalContent,
   ModalFooter,
   useDisclosure,
-} from '@nextui-org/react';
+} from '@heroui/modal';
 import { ClassValue } from 'clsx';
 import { useAtom } from 'jotai';
 

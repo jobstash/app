@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
-import { Button, Input } from '@nextui-org/react';
+import { Button } from '@heroui/button';
+import { Input } from '@heroui/input';
 
 import { useSendMagicLink } from '@jobstash/auth/state';
 import { useProfileInfoContext } from '@jobstash/profile/state';
@@ -18,7 +19,7 @@ export const ConnectEmailForm = () => {
   const [email, setEmail] = useState('');
 
   if (!profileInfoData) return null;
-  if (profileInfoData.email.length >= 3) return null;
+  if (profileInfoData.alternateEmails.length >= 3) return null;
 
   const onChange = (e: React.ChangeEvent<HTMLInputElement>) =>
     setEmail(e.target.value);

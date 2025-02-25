@@ -1,6 +1,7 @@
 import { memo } from 'react';
 
-import { Button, Checkbox } from '@nextui-org/react';
+import { Button } from '@heroui/button';
+import { Checkbox } from '@heroui/checkbox';
 
 import Heading from '../base/heading';
 

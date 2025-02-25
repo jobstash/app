@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { Button } from '@nextui-org/react';
+import { Button } from '@heroui/button';
 
 import { SUPPORT_TELEGRAM_URL } from '@jobstash/shared/core';
 

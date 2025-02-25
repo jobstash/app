@@ -1,4 +1,5 @@
-import { Autocomplete, AutocompleteProps, SelectItem } from '@nextui-org/react';
+import { Autocomplete, AutocompleteProps } from '@heroui/autocomplete';
+import { SelectItem } from '@heroui/select';
 
 import { FormKey, FormValue, HandleFieldChange } from './types';
 

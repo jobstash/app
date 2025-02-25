@@ -1,16 +1,16 @@
 import { useState } from 'react';
 
+import { Button } from '@heroui/button';
+import { Input } from '@heroui/input';
 import {
-  Button,
-  Input,
   Modal,
   ModalBody,
   ModalContent,
   ModalFooter,
   ModalHeader,
-  Tooltip,
   useDisclosure,
-} from '@nextui-org/react';
+} from '@heroui/modal';
+import { Tooltip } from '@heroui/tooltip';
 
 import { JobFolder } from '@jobstash/jobs/core';
 

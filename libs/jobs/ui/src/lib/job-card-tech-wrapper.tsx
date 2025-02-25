@@ -7,8 +7,8 @@ import {
   DropdownMenu,
   DropdownSection,
   DropdownTrigger,
-} from '@nextui-org/dropdown';
-import { Spinner } from '@nextui-org/spinner';
+} from "@heroui/dropdown";
+import { Spinner } from "@heroui/spinner";
 import { useAtomValue } from 'jotai';
 import { SearchIcon, StarIcon } from 'lucide-react';
 

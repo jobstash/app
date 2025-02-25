@@ -1,5 +1,6 @@
 import { CheckIcon, XMarkIcon } from '@heroicons/react/16/solid';
-import { Button, Tooltip } from '@nextui-org/react';
+import { Button } from '@heroui/button';
+import { Tooltip } from '@heroui/tooltip';
 
 import { useAuthorizeOrgAffiliation } from '@jobstash/admin/state';
 

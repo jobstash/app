@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-import { Button } from '@nextui-org/react';
+import { Button } from '@heroui/button';
 
 interface Props {
   text: string;

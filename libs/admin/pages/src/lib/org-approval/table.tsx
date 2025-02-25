@@ -1,6 +1,5 @@
 import { useCallback } from 'react';
 
-import { LoadingPage } from '@jobstash/shared/pages';
 import {
   Table,
   TableBody,
@@ -8,7 +7,8 @@ import {
   TableColumn,
   TableHeader,
   TableRow,
-} from '@nextui-org/react';
+} from '@heroui/table';
+import { LoadingPage } from '@jobstash/shared/pages';
 import { useAtomValue } from 'jotai';
 
 import { AffiliationRequestItem } from '@jobstash/shared/core';

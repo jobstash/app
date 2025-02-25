@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { Button } from '@nextui-org/react';
+import { Button } from '@heroui/button';
 import { BotMessageSquare, ListTodo, Rss } from 'lucide-react';
 
 import { ORG_SIGNUP_FORM_URL } from '@jobstash/shared/core';

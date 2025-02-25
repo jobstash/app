@@ -1,4 +1,4 @@
-import { Button } from '@nextui-org/button';
+import { Button } from "@heroui/button";
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { CheckIcon, Share2Icon } from 'lucide-react';
 import { toast } from 'sonner';

@@ -1,4 +1,5 @@
-import { Chip, ScrollShadow } from '@nextui-org/react';
+import { Chip } from '@heroui/chip';
+import { ScrollShadow } from '@heroui/scroll-shadow';
 
 import { capitalize } from '@jobstash/shared/utils';
 

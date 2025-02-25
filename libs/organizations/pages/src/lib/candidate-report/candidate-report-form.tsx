@@ -1,4 +1,5 @@
-import { Button, Input } from '@nextui-org/react';
+import { Button } from '@heroui/button';
+import { Input } from '@heroui/input';
 
 import { Heading, Text } from '@jobstash/shared/ui';
 

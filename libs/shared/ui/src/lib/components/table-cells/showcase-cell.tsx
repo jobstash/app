@@ -1,4 +1,4 @@
-import { Link } from '@nextui-org/react';
+import { Link } from '@heroui/link';
 
 import { UserShowcase } from '@jobstash/shared/core';
 import { capitalize, getWebsiteText } from '@jobstash/shared/utils';

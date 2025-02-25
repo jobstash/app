@@ -1,14 +1,14 @@
 import Link from 'next/link';
 
+import { Button } from '@heroui/button';
 import {
-  Button,
   Modal,
   ModalBody,
   ModalContent,
   ModalFooter,
   ModalHeader,
   useDisclosure,
-} from '@nextui-org/react';
+} from '@heroui/modal';
 
 import { AffiliatedOrganization } from '@jobstash/auth/core';
 import { CALENDLY_SCHEDULE_LINK } from '@jobstash/shared/core';

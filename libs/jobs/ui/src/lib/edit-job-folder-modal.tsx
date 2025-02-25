@@ -1,22 +1,22 @@
 import { useState } from 'react';
 
 import { PencilSquareIcon } from '@heroicons/react/16/solid';
+import { Button } from '@heroui/button';
+import { Input } from '@heroui/input';
 import {
-  Button,
-  cn,
-  Input,
   Modal,
   ModalBody,
   ModalContent,
   ModalFooter,
   ModalHeader,
-  Switch,
-  Tooltip,
   useDisclosure,
-} from '@nextui-org/react';
+} from '@heroui/modal';
+import { Switch } from '@heroui/switch';
+import { Tooltip } from '@heroui/tooltip';
 import { EarthIcon } from 'lucide-react';
 
 import { JobFolder } from '@jobstash/jobs/core';
+import { cn } from '@jobstash/shared/utils';
 
 import { useUpdateJobFolder } from '@jobstash/jobs/state';
 import { useIsDesktop } from '@jobstash/shared/state';

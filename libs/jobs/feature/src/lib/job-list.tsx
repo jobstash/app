@@ -1,4 +1,4 @@
-import { Spinner } from '@nextui-org/react';
+import { Spinner } from '@heroui/spinner';
 import { PrimitiveAtom, useAtomValue } from 'jotai';
 
 import { JobPost, ROUTE_SECTION } from '@jobstash/shared/core';

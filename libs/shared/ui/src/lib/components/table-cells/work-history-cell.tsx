@@ -1,7 +1,8 @@
-import { Link, Tooltip } from '@nextui-org/react';
+import { Link } from '@heroui/link';
+import { Tooltip } from '@heroui/tooltip';
 
 import { JobApplicant } from '@jobstash/jobs/core';
-import { UserAvailableForWork, UserWorkHistory } from '@jobstash/shared/core';
+import { UserWorkHistory } from '@jobstash/shared/core';
 import { getLogoUrl, shortTimestamp2 } from '@jobstash/shared/utils';
 
 import Avatar from '../../base/avatar';

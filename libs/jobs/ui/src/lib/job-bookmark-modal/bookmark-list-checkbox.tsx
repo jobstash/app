@@ -1,4 +1,5 @@
-import { Checkbox, CheckboxProps, Tooltip } from '@nextui-org/react';
+import { Checkbox, CheckboxProps } from '@heroui/checkbox';
+import { Tooltip } from '@heroui/tooltip';
 import { EarthIcon, LockIcon } from 'lucide-react';
 
 import { cn, getPluralText } from '@jobstash/shared/utils';

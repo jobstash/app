@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { Button } from '@nextui-org/react';
+import { Button } from '@heroui/button';
 import { CheckIcon, MoveRightIcon } from 'lucide-react';
 
 import { cn } from '@jobstash/shared/utils';

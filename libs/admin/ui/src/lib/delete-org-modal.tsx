@@ -1,14 +1,14 @@
 import { useRouter } from 'next/router';
 
+import { Button } from '@heroui/button';
 import {
-  Button,
   Modal,
   ModalBody,
   ModalContent,
   ModalFooter,
   ModalHeader,
   useDisclosure,
-} from '@nextui-org/react';
+} from '@heroui/modal';
 import { Trash2 } from 'lucide-react';
 
 import { useDeleteOrg } from '@jobstash/admin/state';

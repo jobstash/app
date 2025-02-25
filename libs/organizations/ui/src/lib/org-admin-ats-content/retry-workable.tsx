@@ -1,6 +1,8 @@
 import React from 'react';
 
-import { Button, Input, Link } from '@nextui-org/react';
+import { Button } from '@heroui/button';
+import { Input } from '@heroui/input';
+import { Link } from '@heroui/link';
 
 import { ATSPlatformName } from '@jobstash/organizations/core';
 

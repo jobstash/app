@@ -1,6 +1,6 @@
 import { useRouter } from 'next/router';
 
-import { AutocompleteItem } from '@nextui-org/react';
+import { AutocompleteItem } from '@heroui/autocomplete';
 
 import { ProjectItem } from '@jobstash/admin/core';
 import { getLogoUrl } from '@jobstash/shared/utils';

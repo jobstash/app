@@ -1,6 +1,6 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 
-import { Tooltip } from '@nextui-org/tooltip';
+import { Tooltip } from "@heroui/tooltip";
 import { useAtomValue } from 'jotai';
 
 import { RIGHT_PANEL_WRAPPER_ID } from '@jobstash/right-panel/core';

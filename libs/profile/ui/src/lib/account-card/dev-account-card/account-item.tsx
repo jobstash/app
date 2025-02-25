@@ -1,6 +1,8 @@
 import { useState } from 'react';
 
-import { Avatar, Button, Tooltip } from '@nextui-org/react';
+import { Avatar } from '@heroui/avatar';
+import { Button } from '@heroui/button';
+import { Tooltip } from '@heroui/tooltip';
 import { User } from '@privy-io/react-auth';
 import { normalize } from 'viem/ens';
 import { useEnsAvatar, useEnsName } from 'wagmi';

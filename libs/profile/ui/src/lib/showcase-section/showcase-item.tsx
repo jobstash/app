@@ -1,5 +1,6 @@
+import { Button } from '@heroui/button';
+import { Spinner } from '@heroui/spinner';
 import { Select, TextInput } from '@mantine/core';
-import { Button, Spinner } from '@nextui-org/react';
 
 import { UserShowcase } from '@jobstash/shared/core';
 import { cn } from '@jobstash/shared/utils';

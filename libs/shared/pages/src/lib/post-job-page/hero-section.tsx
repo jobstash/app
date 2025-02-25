@@ -1,7 +1,7 @@
 import Image from 'next/image';
 import Link from 'next/link';
 
-import { Button } from '@nextui-org/react';
+import { Button } from '@heroui/button';
 
 import { ORG_SIGNUP_FORM_URL } from '@jobstash/shared/core';
 

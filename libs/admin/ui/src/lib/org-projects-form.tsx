@@ -2,7 +2,10 @@ import Link from 'next/link';
 import { useMemo } from 'react';
 
 import { useAutoAnimate } from '@formkit/auto-animate/react';
-import { Button, Divider, Spinner, Tooltip } from '@nextui-org/react';
+import { Button } from '@heroui/button';
+import { Divider } from '@heroui/divider';
+import { Spinner } from '@heroui/spinner';
+import { Tooltip } from '@heroui/tooltip';
 import { Unlink2 } from 'lucide-react';
 
 import { getLogoUrl } from '@jobstash/shared/utils';

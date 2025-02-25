@@ -1,4 +1,5 @@
-import { Button, Tooltip } from '@nextui-org/react';
+import { Button } from '@heroui/button';
+import { Tooltip } from '@heroui/tooltip';
 import { CopyIcon } from 'lucide-react';
 
 import { notifSuccess } from '@jobstash/shared/utils';

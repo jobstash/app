@@ -1,15 +1,12 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { useMemo, useState } from 'react';
 
-import { Card, CardBody, CardFooter, CardHeader } from '@nextui-org/card';
-import { Input } from '@nextui-org/input';
-import {
-  Autocomplete,
-  AutocompleteItem,
-  Button,
-  Chip,
-  Spinner,
-} from '@nextui-org/react';
+import { Autocomplete, AutocompleteItem } from '@heroui/autocomplete';
+import { Button } from '@heroui/button';
+import { Card, CardBody, CardFooter, CardHeader } from '@heroui/card';
+import { Chip } from '@heroui/chip';
+import { Input } from '@heroui/input';
+import { Spinner } from '@heroui/spinner';
 import { isAddress } from 'viem';
 
 import { ATSTrackedNFTItem } from '@jobstash/organizations/core';
@@ -123,7 +120,7 @@ export const NFTForm = ({ isPending, nft, save, remove }: Props) => {
           onSelectionChange={onSelectionChange}
         >
           {NFT_NETWORKS.map((network) => (
-            <AutocompleteItem key={network.value} value={network.value}>
+            <AutocompleteItem key={network.value}>
               {network.label}
             </AutocompleteItem>
           ))}

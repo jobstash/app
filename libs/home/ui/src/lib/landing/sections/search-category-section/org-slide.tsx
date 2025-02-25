@@ -1,4 +1,4 @@
-import { Spinner } from '@nextui-org/react';
+import { Spinner } from '@heroui/spinner';
 
 import { OrgListItem } from '@jobstash/organizations/core';
 import { getLogoUrl } from '@jobstash/shared/utils';

@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unused-prop-types */
-import { Spinner } from '@nextui-org/spinner';
+import { Spinner } from "@heroui/spinner";
 
 import { DirectApplyButton } from './direct-apply-button';
 import { OneClickApplyButton } from './one-click-apply-button';

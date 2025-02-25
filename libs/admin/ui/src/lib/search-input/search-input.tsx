@@ -1,6 +1,7 @@
 import { useMemo } from 'react';
 
-import { Autocomplete, AutocompleteProps, Spinner } from '@nextui-org/react';
+import { Autocomplete, AutocompleteProps } from '@heroui/autocomplete';
+import { Spinner } from '@heroui/spinner';
 
 import { useSearchInput } from './use-search-input';
 

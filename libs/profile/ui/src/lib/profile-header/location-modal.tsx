@@ -1,14 +1,14 @@
 import { useState } from 'react';
 
+import { Button } from '@heroui/button';
+import { Input } from '@heroui/input';
 import {
-  Button,
-  Input,
   Modal,
   ModalBody,
   ModalContent,
   ModalFooter,
   ModalHeader,
-} from '@nextui-org/react';
+} from '@heroui/modal';
 
 import { LOCATION_FIELDS } from '@jobstash/profile/core';
 import { UserProfile } from '@jobstash/shared/core';

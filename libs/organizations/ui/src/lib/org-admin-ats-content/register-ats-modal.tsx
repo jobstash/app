@@ -1,14 +1,14 @@
 import { useState } from 'react';
 
+import { Button } from '@heroui/button';
+import { Input } from '@heroui/input';
 import {
-  Button,
-  Input,
   Modal,
   ModalBody,
   ModalContent,
   ModalFooter,
   ModalHeader,
-} from '@nextui-org/react';
+} from '@heroui/modal';
 
 import { RegisterATSClientPayload } from '@jobstash/organizations/core';
 

@@ -1,4 +1,4 @@
-import { AutocompleteItem, AutocompleteProps } from '@nextui-org/react';
+import { AutocompleteItem, AutocompleteProps } from '@heroui/autocomplete';
 
 import { OrgItem } from '@jobstash/admin/core';
 import { getLogoUrl } from '@jobstash/shared/utils';

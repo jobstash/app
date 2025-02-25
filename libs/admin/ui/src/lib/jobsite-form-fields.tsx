@@ -1,6 +1,7 @@
 import { ChangeEventHandler } from 'react';
 
-import { Autocomplete, AutocompleteItem, Input } from '@nextui-org/react';
+import { Autocomplete, AutocompleteItem } from '@heroui/autocomplete';
+import { Input } from '@heroui/input';
 
 import { JOBSITE_TYPES } from '@jobstash/admin/core';
 import { Jobsite } from '@jobstash/shared/core';

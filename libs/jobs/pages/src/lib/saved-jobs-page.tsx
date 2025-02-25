@@ -4,8 +4,9 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useRef } from 'react';
 
+import { Button } from '@heroui/button';
+import { Tooltip } from '@heroui/tooltip';
 import { LoadingPage, NotFoundPage } from '@jobstash/shared/pages';
-import { Button, Tooltip } from '@nextui-org/react';
 import { useAtom, useAtomValue, useSetAtom } from 'jotai';
 import {
   EarthIcon,

@@ -1,6 +1,6 @@
 import { useCallback, useState } from 'react';
 
-import { Tab, Tabs } from '@nextui-org/tabs';
+import { Tab, Tabs } from "@heroui/tabs";
 
 import { cn } from '@jobstash/shared/utils';
 

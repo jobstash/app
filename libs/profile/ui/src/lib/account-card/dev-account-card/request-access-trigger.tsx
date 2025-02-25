@@ -1,6 +1,8 @@
 import Link from 'next/link';
 
-import { Button, Chip, Spinner } from '@nextui-org/react';
+import { Button } from '@heroui/button';
+import { Chip } from '@heroui/chip';
+import { Spinner } from '@heroui/spinner';
 
 import { CALENDLY_SCHEDULE_LINK } from '@jobstash/shared/core';
 import { openNewTab } from '@jobstash/shared/utils';

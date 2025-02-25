@@ -1,15 +1,15 @@
 import { useEffect, useState, useTransition } from 'react';
 
-import { Autocomplete, AutocompleteItem } from '@nextui-org/autocomplete';
-import { Button } from '@nextui-org/button';
+import { Autocomplete, AutocompleteItem } from "@heroui/autocomplete";
+import { Button } from "@heroui/button";
 import {
   Modal,
   ModalBody,
   ModalContent,
   ModalFooter,
   ModalHeader,
-} from '@nextui-org/modal';
-import { Tab, Tabs } from '@nextui-org/tabs';
+} from "@heroui/modal";
+import { Tab, Tabs } from "@heroui/tabs";
 import { useAtom } from 'jotai';
 
 import { OrgItem } from '@jobstash/admin/core';

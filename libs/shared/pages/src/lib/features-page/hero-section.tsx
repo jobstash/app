@@ -2,7 +2,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 // Import { ChevronRightIcon } from '@heroicons/react/20/solid';
-import { Button } from '@nextui-org/react';
+import { Button } from '@heroui/button';
 
 import { PDF_JOBSTASH_URL, SUPPORT_TELEGRAM_URL } from '@jobstash/shared/core';
 

@@ -1,4 +1,4 @@
-import { Modal, ModalContent } from '@nextui-org/react';
+import { Modal, ModalContent } from '@heroui/modal';
 import { useAtom, useSetAtom } from 'jotai';
 
 import { EDIT_ACTIVE_TABS, editActiveTabAtom, editModalAtom } from './atoms';

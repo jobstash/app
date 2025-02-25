@@ -1,7 +1,9 @@
 import { forwardRef, useEffect, useState } from 'react';
 
+import { Chip } from '@heroui/chip';
+import { Divider } from '@heroui/divider';
+import { Spinner } from '@heroui/spinner';
 import { Autocomplete, SelectItemProps } from '@mantine/core';
-import { Chip, Divider, Spinner } from '@nextui-org/react';
 
 import {
   ATSClient,

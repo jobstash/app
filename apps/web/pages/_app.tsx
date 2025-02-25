@@ -6,8 +6,8 @@ import { useRouter } from 'next/router';
 import Script from 'next/script';
 import { useEffect } from 'react';
 
+import { HeroUIProvider } from '@heroui/react';
 import { LoadingPage } from '@jobstash/shared/pages';
-import { NextUIProvider } from '@nextui-org/react';
 import { useAtomValue } from 'jotai';
 import { Provider as JotaiProvider } from 'jotai';
 import { Toaster as SonnerToaster } from 'sonner';
@@ -127,7 +127,7 @@ const App = ({ Component, pageProps }: AppProps) => {
           />
         </>
       )}
-      <NextUIProvider>
+      <HeroUIProvider>
         <MantineProvider>
           <SonnerToaster
             expand
@@ -160,7 +160,7 @@ const App = ({ Component, pageProps }: AppProps) => {
             </ReactQueryProvider>
           </WagmiProvider>
         </MantineProvider>
-      </NextUIProvider>
+      </HeroUIProvider>
     </>
   );
 };

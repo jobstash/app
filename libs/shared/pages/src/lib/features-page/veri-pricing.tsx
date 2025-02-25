@@ -1,7 +1,7 @@
 import Link from 'next/link';
 
 import { CheckIcon } from '@heroicons/react/20/solid';
-import { Button } from '@nextui-org/react';
+import { Button } from '@heroui/button';
 import { SettingsIcon } from 'lucide-react';
 
 import { SUPPORT_TELEGRAM_URL } from '@jobstash/shared/core';

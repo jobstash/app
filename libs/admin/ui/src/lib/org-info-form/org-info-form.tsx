@@ -1,6 +1,7 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
-import { Button, Tab, Tabs } from '@nextui-org/react';
+import { Button } from '@heroui/button';
+import { Tab, Tabs } from '@heroui/tabs';
 
 import { Jobsite } from '@jobstash/shared/core';
 

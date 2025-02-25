@@ -1,7 +1,7 @@
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { useState } from 'react';
 
-import { Button } from '@nextui-org/react';
+import { Button } from '@heroui/button';
 
 import { ATS_PROVIDERS, ATSClient } from '@jobstash/organizations/core';
 import { SCORER_URL } from '@jobstash/shared/core';

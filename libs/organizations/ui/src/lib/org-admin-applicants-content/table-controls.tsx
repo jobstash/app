@@ -1,6 +1,7 @@
 import { ChangeEvent } from 'react';
 
-import { Input, Tab, Tabs } from '@nextui-org/react';
+import { Input } from '@heroui/input';
+import { Tab, Tabs } from '@heroui/tabs';
 import { useAtom } from 'jotai';
 import { Search } from 'lucide-react';
 

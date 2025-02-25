@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-import { Button } from '@nextui-org/react';
+import { Button } from '@heroui/button';
 import { CheckIcon, MoveRightIcon } from 'lucide-react';
 
 const info = {

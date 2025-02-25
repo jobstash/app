@@ -1,13 +1,11 @@
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 
-import {
-  Button,
-  Chip,
-  RadioGroup,
-  Spinner,
-  useDisclosure,
-} from '@nextui-org/react';
+import { Button } from '@heroui/button';
+import { Chip } from '@heroui/chip';
+import { useDisclosure } from '@heroui/modal';
+import { RadioGroup } from '@heroui/radio';
+import { Spinner } from '@heroui/spinner';
 
 import {
   ATS_PROVIDERS,

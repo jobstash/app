@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { Link } from '@nextui-org/react';
+import { Link } from '@heroui/link';
 
 import { LinkedAccounts } from '@jobstash/shared/core';
 import { getContactLink } from '@jobstash/profile/utils';

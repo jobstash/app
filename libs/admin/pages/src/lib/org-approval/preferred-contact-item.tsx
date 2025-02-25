@@ -1,4 +1,4 @@
-import { Tooltip } from '@nextui-org/tooltip';
+import { Tooltip } from "@heroui/tooltip";
 
 import { OrgProfileInfo } from '@jobstash/profile/core';
 import { cn, notifSuccess } from '@jobstash/shared/utils';

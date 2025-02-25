@@ -1,4 +1,4 @@
-import { Button } from '@nextui-org/react';
+import { Button } from '@heroui/button';
 import { useSetAtom } from 'jotai';
 import { FilePenLine } from 'lucide-react';
 

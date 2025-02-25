@@ -1,12 +1,7 @@
 import Link from 'next/link';
 
-import {
-  Button,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalFooter,
-} from '@nextui-org/react';
+import { Button } from '@heroui/button';
+import { Modal, ModalBody, ModalContent, ModalFooter } from '@heroui/modal';
 import { useAtom } from 'jotai';
 
 import { isOpenDonateModalAtom, useIsMobile } from '@jobstash/shared/state';

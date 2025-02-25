@@ -1,4 +1,4 @@
-import { Skeleton } from '@nextui-org/react';
+import { Skeleton } from '@heroui/skeleton';
 
 import { cn } from '@jobstash/shared/utils';
 

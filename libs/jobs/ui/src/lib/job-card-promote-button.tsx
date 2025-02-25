@@ -1,4 +1,6 @@
-import { Button, Spinner, Tooltip } from '@nextui-org/react';
+import { Button } from '@heroui/button';
+import { Spinner } from '@heroui/spinner';
+import { Tooltip } from '@heroui/tooltip';
 
 import { cn, getPluralText } from '@jobstash/shared/utils';
 

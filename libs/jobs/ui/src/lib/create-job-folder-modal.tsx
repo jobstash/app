@@ -1,18 +1,19 @@
 import { useState } from 'react';
 
+import { Button } from '@heroui/button';
+import { Input } from '@heroui/input';
 import {
-  Button,
-  cn,
-  Input,
   Modal,
   ModalBody,
   ModalContent,
   ModalFooter,
   ModalHeader,
-  Switch,
   useDisclosure,
-} from '@nextui-org/react';
+} from '@heroui/modal';
+import { Switch } from '@heroui/switch';
 import { EarthIcon } from 'lucide-react';
+
+import { cn } from '@jobstash/shared/utils';
 
 import { useCreateJobFolder } from '@jobstash/jobs/state';
 import { useIsDesktop } from '@jobstash/shared/state';

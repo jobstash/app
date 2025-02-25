@@ -2,15 +2,15 @@ import { useRouter } from 'next/router';
 import { useCallback, useEffect, useMemo } from 'react';
 
 import { useAutoAnimate } from '@formkit/auto-animate/react';
+import { Button } from '@heroui/button';
 import {
-  Button,
   Dropdown,
   DropdownItem,
   DropdownMenu,
   DropdownTrigger,
-  Spinner,
-  Tooltip,
-} from '@nextui-org/react';
+} from '@heroui/dropdown';
+import { Spinner } from '@heroui/spinner';
+import { Tooltip } from '@heroui/tooltip';
 import { useQueryClient } from '@tanstack/react-query';
 import { useAtom, useAtomValue } from 'jotai';
 import { Check, EllipsisVertical, RefreshCcw } from 'lucide-react';

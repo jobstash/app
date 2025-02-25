@@ -1,5 +1,5 @@
-import { Chip } from '@nextui-org/chip';
-import { Tooltip } from '@nextui-org/tooltip';
+import { Chip } from "@heroui/chip";
+import { Tooltip } from "@heroui/tooltip";
 
 import { OrgProfileInfo } from '@jobstash/profile/core';
 import { shortTimestamp } from '@jobstash/shared/utils';

@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-import { Button } from '@nextui-org/button';
+import { Button } from "@heroui/button";
 import { CustomCellRendererProps } from 'ag-grid-react';
 
 import { OrgItem } from '@jobstash/admin/core';

@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from 'react';
 
-import { Input } from '@nextui-org/input';
+import { Input } from "@heroui/input";
 
 import { SearchInputIcon } from '@jobstash/shared/ui';
 

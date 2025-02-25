@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { Spinner } from '@nextui-org/spinner';
+import { Spinner } from "@heroui/spinner";
 import { useAtom } from 'jotai';
 
 import { PERMISSIONS } from '@jobstash/auth/core';

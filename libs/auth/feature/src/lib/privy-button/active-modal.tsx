@@ -7,20 +7,19 @@ import {
   UserCircleIcon,
   XMarkIcon,
 } from '@heroicons/react/24/outline';
+import { Button } from '@heroui/button';
 import {
-  Button,
-  cn,
   Modal,
   ModalBody,
   ModalContent,
   ModalFooter,
   ModalHeader,
-  Spinner,
-  Tooltip,
-} from '@nextui-org/react';
+} from '@heroui/modal';
+import { Spinner } from '@heroui/spinner';
+import { Tooltip } from '@heroui/tooltip';
 import { useQueryClient } from '@tanstack/react-query';
 
-import { notifSuccess } from '@jobstash/shared/utils';
+import { cn, notifSuccess } from '@jobstash/shared/utils';
 
 import { useAuthContext } from '@jobstash/auth/state';
 import { useMwVersionContext } from '@jobstash/shared/state';

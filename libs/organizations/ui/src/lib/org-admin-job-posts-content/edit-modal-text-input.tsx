@@ -1,4 +1,4 @@
-import { Input, InputProps } from '@nextui-org/react';
+import { Input, InputProps } from '@heroui/input';
 
 import { FormKey, FormValue, HandleFieldChange } from './types';
 

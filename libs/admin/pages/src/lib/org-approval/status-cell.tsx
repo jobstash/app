@@ -1,4 +1,4 @@
-import { Chip } from '@nextui-org/react';
+import { Chip } from '@heroui/chip';
 
 import { capitalize } from '@jobstash/shared/utils';
 

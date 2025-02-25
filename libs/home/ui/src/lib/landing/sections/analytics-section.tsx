@@ -4,7 +4,7 @@ import {
   EyeIcon,
   UsersIcon,
 } from '@heroicons/react/24/outline';
-import { Chip } from '@nextui-org/react';
+import { Chip } from '@heroui/chip';
 import { MoveDown, MoveUp } from 'lucide-react';
 
 import { GradientText } from '@jobstash/shared/ui';

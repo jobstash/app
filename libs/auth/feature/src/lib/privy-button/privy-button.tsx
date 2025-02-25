@@ -1,4 +1,6 @@
-import { Button, Spinner, useDisclosure } from '@nextui-org/react';
+import { Button } from '@heroui/button';
+import { useDisclosure } from '@heroui/modal';
+import { Spinner } from '@heroui/spinner';
 import { usePrivy } from '@privy-io/react-auth';
 
 import { useAuthContext, useSessionInfo } from '@jobstash/auth/state';

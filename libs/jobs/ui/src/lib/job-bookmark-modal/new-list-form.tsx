@@ -1,8 +1,11 @@
 import { useState } from 'react';
 
-import { Button, cn, Input, Switch } from '@nextui-org/react';
+import { Button } from '@heroui/button';
+import { Input } from '@heroui/input';
+import { Switch } from '@heroui/switch';
 import { EarthIcon } from 'lucide-react';
 
+import { cn } from '@jobstash/shared/utils';
 import { notifSuccess } from '@jobstash/shared/utils';
 
 import { useCreateJobFolder } from '@jobstash/jobs/state';

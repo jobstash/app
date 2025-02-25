@@ -1,5 +1,5 @@
 /* eslint-disable react/no-unused-prop-types */
-import { Button } from '@nextui-org/react';
+import { Button } from '@heroui/button';
 
 import { openNewTab } from '@jobstash/shared/utils';
 

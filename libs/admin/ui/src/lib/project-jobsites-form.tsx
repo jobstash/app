@@ -1,6 +1,8 @@
 import { ChangeEventHandler, useState } from 'react';
 
-import { Button, Chip, Divider } from '@nextui-org/react';
+import { Button } from '@heroui/button';
+import { Chip } from '@heroui/chip';
+import { Divider } from '@heroui/divider';
 
 import { JOBSITE_TYPES, OnChangeJobsite } from '@jobstash/admin/core';
 import { Jobsite } from '@jobstash/shared/core';

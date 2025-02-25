@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Avatar } from '@nextui-org/react';
+import { Avatar } from '@heroui/avatar';
 
 import { ProfileGotItCardStatus } from '@jobstash/profile/core';
 import { getAvatarSrc } from '@jobstash/shared/utils';

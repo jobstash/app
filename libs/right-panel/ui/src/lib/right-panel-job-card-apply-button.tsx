@@ -1,6 +1,6 @@
 /* eslint-disable camelcase */
 
-import { Spinner } from '@nextui-org/spinner';
+import { Spinner } from "@heroui/spinner";
 
 import { PERMISSIONS } from '@jobstash/auth/core';
 import { COMMUNITIES, GA_EVENT_ACTION } from '@jobstash/shared/core';

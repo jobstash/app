@@ -1,5 +1,5 @@
-import { Button } from '@nextui-org/button';
-import { Link } from '@nextui-org/link';
+import { Button } from "@heroui/button";
+import { Link } from "@heroui/link";
 
 import { HOME_PAGE_SKILL_COUNT } from '@jobstash/home/core';
 import { FRONTEND_URL, lato, ROUTE_SECTION } from '@jobstash/shared/core';

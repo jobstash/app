@@ -1,7 +1,7 @@
 import { useState } from 'react';
 
 import { useAutoAnimate } from '@formkit/auto-animate/react';
-import { Input, InputProps } from '@nextui-org/react';
+import { Input, InputProps } from '@heroui/input';
 
 import { UpdateOrgJobPayload } from '@jobstash/organizations/core';
 

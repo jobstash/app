@@ -1,8 +1,8 @@
-import React, { startTransition, useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { useAsyncList } from 'react-stately';
 
-import { Autocomplete, AutocompleteItem } from '@nextui-org/autocomplete';
+import { Autocomplete, AutocompleteItem } from '@heroui/autocomplete';
 
 import { usePreferredTermsFormContext } from '@jobstash/admin/state';
 

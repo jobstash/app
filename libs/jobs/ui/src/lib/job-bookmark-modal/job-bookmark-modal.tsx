@@ -1,14 +1,9 @@
 import { useMemo } from 'react';
 
-import {
-  Avatar,
-  Button,
-  Modal,
-  ModalBody,
-  ModalContent,
-  ModalHeader,
-  ScrollShadow,
-} from '@nextui-org/react';
+import { Avatar } from '@heroui/avatar';
+import { Button } from '@heroui/button';
+import { Modal, ModalBody, ModalContent, ModalHeader } from '@heroui/modal';
+import { ScrollShadow } from '@heroui/scroll-shadow';
 import { useAtom } from 'jotai';
 
 import { getJobLogoTitleProps } from '@jobstash/jobs/utils';

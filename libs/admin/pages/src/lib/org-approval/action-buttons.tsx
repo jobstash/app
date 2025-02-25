@@ -1,6 +1,6 @@
 import { CheckIcon, XMarkIcon } from '@heroicons/react/16/solid';
-import { Button } from '@nextui-org/button';
-import { Tooltip } from '@nextui-org/tooltip';
+import { Button } from "@heroui/button";
+import { Tooltip } from "@heroui/tooltip";
 import { useSetAtom } from 'jotai';
 
 import { OrgProfileInfo } from '@jobstash/profile/core';

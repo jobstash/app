@@ -1,4 +1,4 @@
-import { Link } from '@nextui-org/link';
+import { Link } from "@heroui/link";
 import { CustomCellRendererProps } from 'ag-grid-react';
 
 import { URL_DOMAINS } from '@jobstash/admin/core';
@@ -24,10 +24,10 @@ export const GridUrlStatusRenderer = <T,>(props: Props<T>) => {
       .map((v) => ({ url: v, status: 'pending', statusCode: undefined }));
 
   return (
-    <div className="text-sm">
+    (<div className="text-sm">
       {statuses.map(({ url, status, statusCode }, i) => (
         // eslint-disable-next-line react/no-array-index-key
-        <div key={`${url}${i}`} className="flex gap-2">
+        (<div key={`${url}${i}`} className="flex gap-2">
           <span>
             {status === 'pending' ? '⏳' : status === 'alive' ? '✅' : '❌'}
           </span>
@@ -39,8 +39,8 @@ export const GridUrlStatusRenderer = <T,>(props: Props<T>) => {
             target="_blank"
             rel="noopener noreferrer"
           >{`${url}${statusCode ? ` [${statusCode}]` : ''}`}</Link>
-        </div>
+        </div>)
       ))}
-    </div>
+    </div>)
   );
 };

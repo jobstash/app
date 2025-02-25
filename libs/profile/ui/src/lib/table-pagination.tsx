@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from 'react';
 
-import { Pagination } from '@nextui-org/pagination';
+import { Pagination } from "@heroui/pagination";
 
 interface Props {
   page: number;

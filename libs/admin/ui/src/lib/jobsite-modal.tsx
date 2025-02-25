@@ -1,15 +1,15 @@
 import { useState } from 'react';
 
+import { Button } from '@heroui/button';
+import { Chip } from '@heroui/chip';
 import {
-  Button,
-  Chip,
   Modal,
   ModalBody,
   ModalContent,
   ModalFooter,
   ModalHeader,
   useDisclosure,
-} from '@nextui-org/react';
+} from '@heroui/modal';
 import { UseMutationResult } from '@tanstack/react-query';
 
 import { Jobsite } from '@jobstash/shared/core';

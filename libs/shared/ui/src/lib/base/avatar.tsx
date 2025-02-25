@@ -1,8 +1,8 @@
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
-import { Avatar as NextUIAvatar } from '@nextui-org/avatar';
-import { Skeleton } from '@nextui-org/skeleton';
+import { Avatar as NextUIAvatar } from "@heroui/avatar";
+import { Skeleton } from "@heroui/skeleton";
 import { cva, type VariantProps } from 'class-variance-authority';
 
 import { cn, getLogoUrlHttpsAlternative } from '@jobstash/shared/utils';

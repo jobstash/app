@@ -1,5 +1,5 @@
-import { Link } from '@nextui-org/link';
-import { Button } from '@nextui-org/react';
+import { Button } from '@heroui/button';
+import { Link } from '@heroui/link';
 
 import { MultiSelectFilterConfig } from '@jobstash/filters/core';
 import { FRONTEND_URL, lato, ROUTE_SECTION } from '@jobstash/shared/core';

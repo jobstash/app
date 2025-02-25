@@ -1,6 +1,6 @@
 import { ChangeEvent } from 'react';
 
-import { Input } from '@nextui-org/react';
+import { Input } from '@heroui/input';
 import { Search } from 'lucide-react';
 
 interface Props {

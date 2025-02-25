@@ -1,13 +1,13 @@
 import { useMemo } from 'react';
 
 import { EllipsisVerticalIcon } from '@heroicons/react/16/solid';
+import { Button } from '@heroui/button';
 import {
-  Button,
   Dropdown,
   DropdownItem,
   DropdownMenu,
   DropdownTrigger,
-} from '@nextui-org/react';
+} from '@heroui/dropdown';
 
 import { getAvatarSrc } from '@jobstash/shared/utils';
 

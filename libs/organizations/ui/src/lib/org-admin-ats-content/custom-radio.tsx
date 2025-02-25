@@ -1,7 +1,8 @@
 import { useState } from 'react';
 
-import { RadioProps, useRadio } from '@nextui-org/radio';
-import { Link, VisuallyHidden } from '@nextui-org/react';
+import { Link } from '@heroui/link';
+import { RadioProps, useRadio } from '@heroui/radio';
+import { VisuallyHidden } from '@heroui/react';
 
 import { cn } from '@jobstash/shared/utils';
 

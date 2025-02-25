@@ -1,4 +1,4 @@
-import { Button } from '@nextui-org/button';
+import { Button } from "@heroui/button";
 import {
   Modal,
   ModalBody,
@@ -6,7 +6,7 @@ import {
   ModalFooter,
   ModalHeader,
   useDisclosure,
-} from '@nextui-org/modal';
+} from "@heroui/modal";
 import { useQueryClient } from '@tanstack/react-query';
 
 import { usePreferredTermsFormContext } from '@jobstash/admin/state';

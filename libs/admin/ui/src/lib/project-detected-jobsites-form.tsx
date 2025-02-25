@@ -1,10 +1,12 @@
 import { ChangeEventHandler, useState } from 'react';
 
-import { Button, Chip, cn, Divider } from '@nextui-org/react';
+import { Button } from '@heroui/button';
+import { Chip } from '@heroui/chip';
+import { Divider } from '@heroui/divider';
 
 import { JOBSITE_TYPES, OnChangeJobsite } from '@jobstash/admin/core';
 import { Jobsite } from '@jobstash/shared/core';
-import { capitalize } from '@jobstash/shared/utils';
+import { capitalize, cn } from '@jobstash/shared/utils';
 
 import { useActivateProjectJobsite } from '@jobstash/admin/state';
 

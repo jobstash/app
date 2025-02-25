@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { Tab, Tabs } from '@nextui-org/react';
+import { Tab, Tabs } from '@heroui/tabs';
 import { useAtom } from 'jotai';
 
 import { ImportStatus } from '@jobstash/admin/core';

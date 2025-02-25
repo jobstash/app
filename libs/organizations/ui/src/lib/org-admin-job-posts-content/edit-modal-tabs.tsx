@@ -1,4 +1,4 @@
-import { Tab, Tabs } from '@nextui-org/react';
+import { Tab, Tabs } from '@heroui/tabs';
 import { useAtom } from 'jotai';
 
 import { EDIT_ACTIVE_TABS, EditActiveTab, editActiveTabAtom } from './atoms';

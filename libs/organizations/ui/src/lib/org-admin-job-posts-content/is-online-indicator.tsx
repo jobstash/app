@@ -1,4 +1,4 @@
-import { Chip } from '@nextui-org/react';
+import { Chip } from '@heroui/chip';
 
 interface Props {
   isOnline: boolean;

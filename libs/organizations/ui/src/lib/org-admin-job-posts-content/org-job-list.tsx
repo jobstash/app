@@ -1,4 +1,4 @@
-import { Spinner } from '@nextui-org/react';
+import { Spinner } from '@heroui/spinner';
 import { useAtom } from 'jotai';
 
 import { EVENT_CARD_CLICK, JobPost } from '@jobstash/shared/core';

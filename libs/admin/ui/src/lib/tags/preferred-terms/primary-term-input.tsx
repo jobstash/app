@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
 import { useAsyncList } from 'react-stately';
 
-import { Autocomplete, AutocompleteItem } from '@nextui-org/autocomplete';
+import { Autocomplete, AutocompleteItem } from "@heroui/autocomplete";
 
 import {
   usePreferredTermsContext,
