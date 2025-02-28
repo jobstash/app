@@ -4,10 +4,7 @@ import { PERMISSIONS } from '@jobstash/auth/core';
 import { getPluralText, normalizeString } from '@jobstash/shared/utils';
 
 import { useAuthContext, useHasPermission } from '@jobstash/auth/state';
-import {
-  useAffiliationRequests,
-  useProfileVerifiedOrgs,
-} from '@jobstash/profile/state';
+import { useProfileAuthorizedOrgs } from '@jobstash/profile/state';
 
 import { SidebarBartabProps } from './sidebar-bartab';
 import { SidebarSection, SidebarSectionSkeleton } from './sidebar-section';
@@ -19,12 +16,10 @@ interface Props {
 const SidebarOrgSection = ({ isMobile }: Props) => {
   const { isLoading: isLoadingAuth } = useAuthContext();
   const { data: orgs, isLoading: isLoadingAffiliatedOrgs } =
-    useProfileVerifiedOrgs();
+    useProfileAuthorizedOrgs();
   const isLoading = isLoadingAuth || isLoadingAffiliatedOrgs;
 
-  const { data: approvedAffiliations } = useAffiliationRequests({
-    list: 'approved',
-  });
+  const { data: approvedAffiliations } = useProfileAuthorizedOrgs();
 
   const hasTalentSubscription = useHasPermission([
     PERMISSIONS.ORG_TALENTPOOL_USER,
@@ -35,7 +30,7 @@ const SidebarOrgSection = ({ isMobile }: Props) => {
     if (!orgs) return [];
 
     // Only allow approved orgs to be displayed
-    const approvedOrgIds = approvedAffiliations?.map((org) => org.orgId) ?? [];
+    const approvedOrgIds = approvedAffiliations?.map((org) => org.id) ?? [];
     const approvedOrgs = orgs.filter((org) => approvedOrgIds.includes(org.id));
 
     const result = approvedOrgs.map(({ name }) => ({

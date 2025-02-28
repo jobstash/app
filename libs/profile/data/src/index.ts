@@ -1,4 +1,5 @@
 export * from './lib/get-affiliation-requests';
+export * from './lib/get-profile-authorized-orgs';
 export * from './lib/get-profile-info';
 export * from './lib/get-profile-org-review-list';
 export * from './lib/get-profile-org-subscriptions';
