@@ -4,6 +4,7 @@ import { getGoogleLogoUrl } from '@jobstash/shared/utils';
 
 import { LogoTitle, Text } from '@jobstash/shared/ui';
 
+import { RequestAccessButton } from './request-access-button';
 import { useAffiliatedOrganizations } from './use-affiliated-organizations';
 
 const AFFILIATED_ORG_TITLE = 'Affiliated Organizations';
@@ -60,6 +61,7 @@ export const AffiliatedOrganizations = () => {
                 }}
                 location={org.account}
               />
+              <RequestAccessButton orgId={org.id} />
             </div>
           ))}
         </div>

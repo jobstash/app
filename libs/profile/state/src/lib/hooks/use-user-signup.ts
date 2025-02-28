@@ -12,7 +12,7 @@ import { notifError } from '@jobstash/shared/utils';
 import { useMwVersionContext } from '@jobstash/shared/state';
 import { mwFetch } from '@jobstash/shared/data';
 
-const signup = async (payload?: UserSignupPayload) => {
+const signup = async (payload: UserSignupPayload) => {
   const url = `${MW_URL}/users/signup`;
 
   const options = {
@@ -35,9 +35,9 @@ export const useUserSignup = () => {
   const queryClient = useQueryClient();
   const { mwVersion } = useMwVersionContext();
 
-  return useMutation({
-    mutationFn: (payload: UserSignupPayload) => signup(payload),
-    onSuccess(_data, { orgId }) {
+  return useMutation<UserSignupResponse, Error, UserSignupPayload>({
+    mutationFn: (payload) => signup(payload),
+    onSuccess(_data) {
       queryClient.invalidateQueries({
         queryKey: [mwVersion, 'profile-authorized-orgs'],
       });
