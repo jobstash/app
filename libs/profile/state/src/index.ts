@@ -8,7 +8,6 @@ export * from './lib/atoms/user-skills-atom';
 
 // Hooks
 export * from './lib/hooks/use-account-card';
-export * from './lib/hooks/use-affiliation-requests';
 export * from './lib/hooks/use-all-jobs-query';
 export * from './lib/hooks/use-compensation-form';
 export * from './lib/hooks/use-profile-authorized-orgs';

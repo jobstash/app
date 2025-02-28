@@ -14,7 +14,7 @@ import {
   orgAdminActiveTabAtom,
 } from '@jobstash/organizations/state';
 import {
-  useAffiliationRequests,
+  useProfileAuthorizedOrgs,
   useProfileVerifiedOrgs,
 } from '@jobstash/profile/state';
 
@@ -28,9 +28,7 @@ const SideBar = dynamic(() =>
 export const OrgAdminPage = () => {
   const { query } = useRouter();
   const { data: orgs } = useProfileVerifiedOrgs();
-  const { data: approvedAffiliations } = useAffiliationRequests({
-    list: 'approved',
-  });
+  const { data: approvedAffiliations } = useProfileAuthorizedOrgs();
 
   // Reset atom on client-side navigation
   const setMainTab = useSetAtom(orgAdminActiveTabAtom);
@@ -43,7 +41,7 @@ export const OrgAdminPage = () => {
   if (!orgs) return <LoadingPage />;
 
   const matchedOrg = getUserOrgBySlug(orgs, query.slug);
-  const approvedOrgIds = approvedAffiliations?.map((org) => org.orgId) ?? [];
+  const approvedOrgIds = approvedAffiliations?.map((org) => org.id) ?? [];
   const isApproved = matchedOrg && approvedOrgIds.includes(matchedOrg.id);
 
   if (!isApproved) {
