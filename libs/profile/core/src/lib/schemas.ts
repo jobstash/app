@@ -9,6 +9,7 @@ import {
 } from '@jobstash/organizations/core';
 import {
   MessageResponse,
+  messageResponseSchema,
   repositoryInfoSchema,
   tagSchema,
   userSkillSchema,
@@ -250,3 +251,21 @@ export const profileOrgSubscriptionSchema = myzod.object({
 });
 
 export type ProfileOrgSubscription = Infer<typeof profileOrgSubscriptionSchema>;
+
+export const userSignupPayloadSchema = myzod.object({
+  orgId: myzod.string().min(1),
+  jobstash: myzod.literals('starter', 'growth', 'pro', 'max').optional(),
+  veri: myzod.literals('lite', 'plus', 'elite', 'ultra').optional(),
+  stashAlert: myzod.boolean().optional(),
+  extraSeats: myzod.number().optional(),
+});
+
+export type UserSignupPayload = Infer<typeof userSignupPayloadSchema>;
+
+export const userSignupResponseSchema = messageResponseSchema.and(
+  myzod.object({
+    data: myzod.string().optional(),
+  }),
+);
+
+export type UserSignupResponse = Infer<typeof userSignupResponseSchema>;

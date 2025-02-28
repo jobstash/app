@@ -34,6 +34,7 @@ export * from './lib/hooks/use-update-main-email';
 export * from './lib/hooks/use-update-note';
 export * from './lib/hooks/use-update-note';
 export * from './lib/hooks/use-user-review';
+export * from './lib/hooks/use-user-signup';
 export * from './lib/hooks/use-user-skills-atom-syncer';
 export * from './lib/hooks/use-users-available-for-work';
 export * from './lib/hooks/use-work-history';
