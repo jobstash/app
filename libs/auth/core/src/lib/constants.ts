@@ -9,7 +9,9 @@ export const PERMISSIONS = {
   // Base tier admin, requires further perms to do anything
   ADMIN: 'ADMIN' as const,
   // Has access to org related user functionality like talent list etc.
-  ORG_AFFILIATE: 'ORG_AFFILIATE' as const,
+  ORG_MEMBER: 'ORG_MEMBER' as const,
+  // Has access to org billing and subscriptions
+  ORG_OWNER: 'ORG_OWNER' as const,
   // Has talentpool subscription
   ORG_TALENTPOOL_USER: 'ORG_TALENTPOOL_USER' as const,
   // Has veri subscription

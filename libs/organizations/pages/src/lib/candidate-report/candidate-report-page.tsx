@@ -20,7 +20,7 @@ const PAGE_TITLE = 'Candidate Report';
 export const CandidateReportPage = () => {
   const { isLoading } = useAuthContext();
   const canViewPage = useHasPermission([
-    PERMISSIONS.ORG_AFFILIATE,
+    PERMISSIONS.ORG_MEMBER,
     PERMISSIONS.ORG_MANAGER,
     PERMISSIONS.ADMIN,
   ]);

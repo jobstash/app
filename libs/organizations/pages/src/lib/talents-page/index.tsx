@@ -24,7 +24,7 @@ const PAGE_TITLE = 'Available Talents';
 export const TalentsPage = () => {
   const { isLoading: isLoadingAuth } = useAuthContext();
   const canViewPage = useHasPermission([
-    PERMISSIONS.ORG_AFFILIATE,
+    PERMISSIONS.ORG_MEMBER,
     PERMISSIONS.ORG_MANAGER,
     PERMISSIONS.ADMIN,
   ]);
