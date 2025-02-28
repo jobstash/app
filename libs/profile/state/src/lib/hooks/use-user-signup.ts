@@ -51,10 +51,10 @@ export const useUserSignup = () => {
       //   });
       // }
     },
-    onError(error) {
+    onError() {
       notifError({
         title: 'User signup failed',
-        message: error.message ?? ERR_INTERNAL,
+        message: ERR_INTERNAL,
       });
     },
   });

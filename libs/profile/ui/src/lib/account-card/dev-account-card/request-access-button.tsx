@@ -1,5 +1,7 @@
 import { Button } from '@heroui/button';
 
+import { UserSignupPayload } from '@jobstash/profile/core';
+
 import { useProfileVerifiedOrgs, useUserSignup } from '@jobstash/profile/state';
 
 interface Props {
@@ -17,7 +19,11 @@ export const RequestAccessButton = ({ orgId }: Props) => {
   if (isOwner || (!isEmailCredential && !hasOwner)) return null;
 
   const handleRequestAccess = () => {
-    mutate({ orgId });
+    // TODO: Implement pricing plan selection + payload
+    const bundle: Omit<UserSignupPayload, 'orgId'> = {
+      jobstash: 'starter' as const,
+    };
+    mutate({ orgId, ...bundle });
   };
 
   return (

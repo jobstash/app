@@ -256,7 +256,7 @@ export type ProfileOrgSubscription = Infer<typeof profileOrgSubscriptionSchema>;
 
 export const userSignupPayloadSchema = myzod.object({
   orgId: myzod.string().min(1),
-  jobstash: myzod.literals('starter', 'growth', 'pro', 'max').optional(),
+  jobstash: myzod.literals('starter', 'growth', 'pro', 'max'),
   veri: myzod.literals('lite', 'plus', 'elite', 'ultra').optional(),
   stashAlert: myzod.boolean().optional(),
   extraSeats: myzod.number().optional(),
