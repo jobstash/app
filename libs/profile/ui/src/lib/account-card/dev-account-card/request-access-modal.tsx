@@ -10,7 +10,7 @@ import {
   useDisclosure,
 } from '@heroui/modal';
 
-import { AffiliatedOrganization } from '@jobstash/auth/core';
+import { ProfileVerifiedOrg } from '@jobstash/profile/core';
 import { CALENDLY_SCHEDULE_LINK } from '@jobstash/shared/core';
 
 import { useRequestOrgAdminPermission } from '@jobstash/profile/state';
@@ -18,7 +18,7 @@ import { useRequestOrgAdminPermission } from '@jobstash/profile/state';
 import { RequestAccessTrigger } from './request-access-trigger';
 
 interface Props {
-  org: AffiliatedOrganization;
+  org: ProfileVerifiedOrg;
 }
 
 export const RequestAccessModal = ({ org }: Props) => {

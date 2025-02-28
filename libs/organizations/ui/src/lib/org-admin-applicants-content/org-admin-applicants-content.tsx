@@ -4,7 +4,7 @@ import './ag-grid-custom.css';
 
 import { useAtomValue } from 'jotai';
 
-import { AffiliatedOrganization } from '@jobstash/auth/core';
+import { ProfileVerifiedOrg } from '@jobstash/profile/core';
 import { cn } from '@jobstash/shared/utils';
 
 import { useJobApplicants } from '@jobstash/jobs/state';
@@ -14,7 +14,7 @@ import { ApplicantActiveList, applicantsActiveListAtom } from './atoms';
 import { NoteUpdatePayloadSyncer } from './note-update-payload-syncer';
 
 interface Props {
-  org: AffiliatedOrganization;
+  org: ProfileVerifiedOrg;
 }
 
 export const OrgAdminApplicantsContent = ({ org }: Props) => {

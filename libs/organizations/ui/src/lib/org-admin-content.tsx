@@ -1,6 +1,6 @@
 import { useAtomValue } from 'jotai';
 
-import { AffiliatedOrganization } from '@jobstash/auth/core';
+import { ProfileVerifiedOrg } from '@jobstash/profile/core';
 
 import {
   ORG_ADMIN_TABS,
@@ -11,8 +11,9 @@ import { OrgAdminApplicantsContent } from './org-admin-applicants-content';
 import { OrgAdminAtsContent } from './org-admin-ats-content';
 import { OrgAdminEditOrgContent } from './org-admin-edit-org-content';
 import { OrgAdminEditJobPostsContent } from './org-admin-job-posts-content';
+
 interface Props {
-  org: AffiliatedOrganization;
+  org: ProfileVerifiedOrg;
 }
 
 export const OrgAdminContent = ({ org }: Props) => {

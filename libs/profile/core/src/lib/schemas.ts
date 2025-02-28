@@ -208,3 +208,18 @@ export type UpdateApplicantListMutFn = UseMutateFunction<
   UpdateApplicantListPayload,
   unknown
 >;
+
+export const profileVerifiedOrgSchema = myzod.object({
+  id: myzod.string(),
+  name: myzod.string(),
+  slug: myzod.string(),
+  url: myzod.string(),
+  logo: myzod.string().nullable(),
+  account: myzod.string(),
+  credential: myzod.literals('email', 'github', 'ecosystemActivation'),
+});
+
+/**
+ * Org verified by Jobstash that matches user credentials
+ */
+export type ProfileVerifiedOrg = Infer<typeof profileVerifiedOrgSchema>;

@@ -1,9 +1,9 @@
-import { AffiliatedOrganization } from '@jobstash/auth/core';
+import { ProfileVerifiedOrg } from '@jobstash/profile/core';
 
 import { ActiveATS } from './active-ats';
 
 interface Props {
-  org: AffiliatedOrganization;
+  org: ProfileVerifiedOrg;
 }
 
 export const OrgAdminAtsContent = ({ org }: Props) => (

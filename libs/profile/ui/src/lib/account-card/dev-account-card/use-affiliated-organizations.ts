@@ -1,7 +1,7 @@
-import { useAffiliatedOrgs } from '@jobstash/auth/state';
+import { useProfileVerifiedOrgs } from '@jobstash/profile/state';
 
 export const useAffiliatedOrganizations = () => {
-  const { data, isRefetching } = useAffiliatedOrgs();
+  const { data, isRefetching } = useProfileVerifiedOrgs();
 
   const orgCount = (data ?? []).length;
   const hasOrg = orgCount > 0;

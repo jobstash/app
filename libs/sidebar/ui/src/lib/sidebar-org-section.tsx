@@ -3,12 +3,11 @@ import { useMemo } from 'react';
 import { PERMISSIONS } from '@jobstash/auth/core';
 import { getPluralText, normalizeString } from '@jobstash/shared/utils';
 
+import { useAuthContext, useHasPermission } from '@jobstash/auth/state';
 import {
-  useAffiliatedOrgs,
-  useAuthContext,
-  useHasPermission,
-} from '@jobstash/auth/state';
-import { useAffiliationRequests } from '@jobstash/profile/state';
+  useAffiliationRequests,
+  useProfileVerifiedOrgs,
+} from '@jobstash/profile/state';
 
 import { SidebarBartabProps } from './sidebar-bartab';
 import { SidebarSection, SidebarSectionSkeleton } from './sidebar-section';
@@ -20,7 +19,7 @@ interface Props {
 const SidebarOrgSection = ({ isMobile }: Props) => {
   const { isLoading: isLoadingAuth } = useAuthContext();
   const { data: orgs, isLoading: isLoadingAffiliatedOrgs } =
-    useAffiliatedOrgs();
+    useProfileVerifiedOrgs();
   const isLoading = isLoadingAuth || isLoadingAffiliatedOrgs;
 
   const { data: approvedAffiliations } = useAffiliationRequests({

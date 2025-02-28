@@ -1,17 +1,16 @@
 import { useQuery } from '@tanstack/react-query';
 
+import { useAuthContext } from '@jobstash/auth/state';
 import { useMwVersionContext } from '@jobstash/shared/state';
-import { getAffiliatedOrgs } from '@jobstash/auth/data';
+import { getProfileVerifiedOrgs } from '@jobstash/profile/data';
 
-import { useAuthContext } from './use-auth-context';
-
-export const useAffiliatedOrgs = () => {
+export const useProfileVerifiedOrgs = () => {
   const { mwVersion } = useMwVersionContext();
   const { isAuthenticated } = useAuthContext();
 
   return useQuery({
-    queryKey: [mwVersion, 'affiliated-orgs'],
-    queryFn: () => getAffiliatedOrgs(),
+    queryKey: [mwVersion, 'profile-verified-orgs'],
+    queryFn: () => getProfileVerifiedOrgs(),
     enabled: isAuthenticated,
     refetchOnWindowFocus: false,
   });

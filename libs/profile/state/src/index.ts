@@ -20,6 +20,7 @@ export * from './lib/hooks/use-profile-repo-page';
 export * from './lib/hooks/use-profile-reviews-page';
 export * from './lib/hooks/use-profile-skill-tag-action';
 export * from './lib/hooks/use-profile-skills-query';
+export * from './lib/hooks/use-profile-verified-orgs';
 export * from './lib/hooks/use-rating-mutation';
 export * from './lib/hooks/use-remove-attached-email';
 export * from './lib/hooks/use-request-org-admin-permission';

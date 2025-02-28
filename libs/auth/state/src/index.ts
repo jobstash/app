@@ -7,7 +7,6 @@ export * from './lib/providers/auth-provider';
 export * from './lib/providers/wagmi-provider';
 
 // Hooks
-export * from './lib/hooks/use-affiliated-orgs';
 export * from './lib/hooks/use-auth-context';
 export * from './lib/hooks/use-connect-dev-email';
 export * from './lib/hooks/use-connect-org-email';

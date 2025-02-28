@@ -1,4 +1,3 @@
-export * from './lib/get-affiliated-orgs';
 export * from './lib/get-check-wallet';
 export * from './lib/github-login';
 export * from './lib/send-magic-link';

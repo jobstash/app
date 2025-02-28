@@ -2,7 +2,6 @@ import { User as PrivyUser } from '@privy-io/react-auth';
 import { type Infer } from 'myzod';
 
 import {
-  affiliatedOrgSchema,
   checkWalletPermissionSchema,
   checkWalletResponseSchema,
   githubLoginPayloadSchema,
@@ -38,5 +37,3 @@ export type AuthCtx = {
 };
 
 export type GithubLoginPayload = Infer<typeof githubLoginPayloadSchema>;
-
-export type AffiliatedOrganization = Infer<typeof affiliatedOrgSchema>;

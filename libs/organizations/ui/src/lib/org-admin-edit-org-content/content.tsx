@@ -1,11 +1,11 @@
-import { AffiliatedOrganization } from '@jobstash/auth/core';
+import { ProfileVerifiedOrg } from '@jobstash/profile/core';
 
 import { OrgInfoForm } from '@jobstash/admin/ui';
 
 import { OrgAdminEditOrgHeader } from './header';
 
 interface Props {
-  org: AffiliatedOrganization;
+  org: ProfileVerifiedOrg;
 }
 
 export const OrgAdminEditOrgContent = ({ org }: Props) => (
