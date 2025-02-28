@@ -19,6 +19,7 @@ import {
   MobileNavbarWrapper,
   SidebarBookmarksSection,
   SidebarCloseButton,
+  SidebarCollapsibleSection,
   SidebarDiscoverBartabs,
   SidebarUserSection,
   SidebarWrapper,
@@ -87,8 +88,6 @@ const Sidebar = ({ filtersRouteSection }: Props) => {
           <HeaderLinks />
         </div>
 
-       
-        
         <div />
         {/* MOBILE BARTABS */}
         <MobileNavbarWrapper>
@@ -146,10 +145,12 @@ const Sidebar = ({ filtersRouteSection }: Props) => {
         </div>
 
         {PORTAL_IDS.TOP_NAV_MAIN && (
-          <div id={PORTAL_IDS.TOP_NAV_MAIN} className='pt-4 lg:pt-0 lg:fixed lg:left-[239px] lg:top-0 lg:flex lg:flex-col lg:h-[100px] lg:justify-center lg:z-[9999]' />
+          <div
+            id={PORTAL_IDS.TOP_NAV_MAIN}
+            className="pt-4 lg:pt-0 lg:fixed lg:left-[239px] lg:top-0 lg:flex lg:flex-col lg:h-[100px] lg:justify-center lg:z-[9999]"
+          />
         )}
 
-        
         {/* DESKTOP BARTABS */}
         <div
           className={cn('flex-col hidden space-y-6 mt-28 lg:flex', {
@@ -161,6 +162,10 @@ const Sidebar = ({ filtersRouteSection }: Props) => {
             <SidebarBookmarksSection />
           </IsMountedWrapper>
           <SidebarUserSection />
+          <SidebarCollapsibleSection
+            title="Your Organizations [WIP]"
+            items={[]}
+          />
         </div>
       </SidebarWrapper>
     </SidebarProvider>
