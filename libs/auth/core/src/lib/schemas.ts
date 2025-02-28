@@ -62,4 +62,5 @@ export const affiliatedOrgSchema = myzod.object({
   url: myzod.string(),
   logo: myzod.string().nullable(),
   account: myzod.string(),
+  credential: myzod.literals('email', 'github', 'ecosystemActivation'),
 });
