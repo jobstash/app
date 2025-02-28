@@ -15,6 +15,7 @@ export * from './lib/hooks/use-profile-delete-mutation';
 export * from './lib/hooks/use-profile-info';
 export * from './lib/hooks/use-profile-org-review-list';
 export * from './lib/hooks/use-profile-org-review-list-query';
+export * from './lib/hooks/use-profile-org-subscriptions';
 export * from './lib/hooks/use-profile-repo-list';
 export * from './lib/hooks/use-profile-repo-page';
 export * from './lib/hooks/use-profile-reviews-page';

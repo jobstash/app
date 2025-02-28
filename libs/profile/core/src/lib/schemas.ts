@@ -223,3 +223,25 @@ export const profileVerifiedOrgSchema = myzod.object({
  * Org verified by Jobstash that matches user credentials
  */
 export type ProfileVerifiedOrg = Infer<typeof profileVerifiedOrgSchema>;
+
+export const profileOrgSubscriptionSchema = myzod.object({
+  id: myzod.string(),
+  tier: myzod.string(),
+  veri: myzod.string(),
+  stashAlert: myzod.boolean(),
+  extraSeats: myzod.number(),
+  status: myzod.literals('active', 'inactive', 'expired'),
+  duration: myzod.literals('monthly', 'yearly'),
+  createdTimestamp: myzod.number(),
+  expiryTimestamp: myzod.number(),
+  quota: myzod.object({
+    veri: myzod.number(),
+    seats: myzod.number(),
+    stashPool: myzod.boolean(),
+    stashAlert: myzod.boolean(),
+    atsIntegration: myzod.boolean(),
+    boostedVacancyMultiplier: myzod.number(),
+  }),
+});
+
+export type ProfileOrgSubscription = Infer<typeof profileOrgSubscriptionSchema>;
