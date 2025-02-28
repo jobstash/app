@@ -223,6 +223,8 @@ export const profileVerifiedOrgSchema = myzod.object({
     'ecosystemActivation',
     'membership',
   ),
+  hasOwner: myzod.boolean(),
+  isOwner: myzod.boolean(),
 });
 
 /**
