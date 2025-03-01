@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
 
 import { useLogin, useLogout, usePrivy } from '@privy-io/react-auth';
@@ -18,6 +19,8 @@ const DEFAULT_CHECK_WALLET_RESPONSE: CheckWalletResponse = {
 };
 
 export const useAuthProvider = () => {
+  const router = useRouter();
+
   const [checkWalletResponse, setCheckWalletResponse] =
     useState<CheckWalletResponse>(DEFAULT_CHECK_WALLET_RESPONSE);
   const { cryptoNative, permissions } = checkWalletResponse;
@@ -76,6 +79,7 @@ export const useAuthProvider = () => {
   const { login } = useLogin({
     async onComplete(_user) {
       setupLocal();
+      router.push('/profile');
     },
   });
 
