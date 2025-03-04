@@ -50,7 +50,7 @@ export const ExtendPromotionTooltipContent = ({
         variant="light"
         radius="sm"
         as={Link}
-        href="/employers#pricing"
+        href="/features#pricing"
         className="font-bold pl-0"
       >
         Learn more
