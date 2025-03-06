@@ -25,8 +25,8 @@ export const PRICING_SECTIONS: Section[] = [
         tiers: {
           Starter: false,
           Growth: '30 days',
-          Pro: '60 days',
-          Max: '90 days',
+          Pro: '30 days',
+          Max: '30 days',
         },
       },
       {
