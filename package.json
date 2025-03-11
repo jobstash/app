@@ -6,6 +6,7 @@
     "nx": "nx",
     "dev": "nx serve web --port=3000",
     "start": "nx serve web --prod --port=3000",
+    "prebuild": "node tools/scripts/generate-sitemap.js",
     "build": "nx build web",
     "build:no-cache": "pnpm nx reset && pnpm nx clear-cache && pnpm build --skip-cache",
     "lint": "nx affected:lint --uncommitted --parallel=8",

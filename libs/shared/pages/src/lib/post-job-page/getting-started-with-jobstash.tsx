@@ -62,7 +62,7 @@ export const GettingStartedWithJobStash = () => (
       >
         Start Posting Jobs
       </Button>
-      <Button variant="light" radius="sm" as={Link} href="/employers">
+      <Button variant="light" radius="sm" as={Link} href="/features">
         Premium Services<span aria-hidden="true">→</span>
       </Button>
     </div>
