@@ -118,6 +118,7 @@ export const jobInfoSchema = myzod.intersection(
     featured: myzod.boolean(),
     featureStartDate: myzod.number().nullable(),
     featureEndDate: myzod.number().nullable(),
+    onboardIntoWeb3: myzod.boolean(),
   }),
 );
 

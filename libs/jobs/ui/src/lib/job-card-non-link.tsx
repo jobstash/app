@@ -36,10 +36,15 @@ const JobCardNonLink = ({
     featureEndDate,
     access,
     project,
+    onboardIntoWeb3,
   } = jobPost;
 
   const isForExperts = access === 'protected';
-  const isFeatured = checkJobIsFeatured(featureStartDate, featureEndDate);
+  const isFeatured = checkJobIsFeatured(
+    featureStartDate,
+    featureEndDate,
+    onboardIntoWeb3,
+  );
   const timestampText = isFeatured
     ? 'Urgently hiring'
     : prettyTimestamp(timestamp);

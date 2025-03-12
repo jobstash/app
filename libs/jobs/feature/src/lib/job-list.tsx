@@ -94,6 +94,7 @@ const JobList = ({ initJob, jobCountAtom, activeJobAtom }: Props) => {
               isFeatured={checkJobIsFeatured(
                 jobPost.featureStartDate,
                 jobPost.featureEndDate,
+                jobPost.onboardIntoWeb3,
               )}
               endDate={jobPost.featureEndDate}
               filterParams={filterParamsObj}
