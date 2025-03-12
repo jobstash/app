@@ -106,7 +106,7 @@ const WizardHat = () => (
   <svg
     viewBox="0 0 320 320"
     xmlns="http://www.w3.org/2000/svg"
-    shape-rendering="crispEdges"
+    shapeRendering="crispEdges"
     className="w-[28px] h-[28px] mt-1.5"
   >
     <rect width="100%" height="100%" fill="none" />
@@ -116,7 +116,7 @@ const WizardHat = () => (
       x="70"
       y="40"
       fill="#395ed1"
-      shape-rendering="crispEdges"
+      shapeRendering="crispEdges"
     />
     <rect
       width="60"
@@ -124,7 +124,7 @@ const WizardHat = () => (
       x="60"
       y="50"
       fill="#395ed1"
-      shape-rendering="crispEdges"
+      shapeRendering="crispEdges"
     />
     <rect
       width="10"
@@ -132,7 +132,7 @@ const WizardHat = () => (
       x="120"
       y="50"
       fill="#ffc925"
-      shape-rendering="crispEdges"
+      shapeRendering="crispEdges"
     />
     <rect
       width="40"
@@ -140,7 +140,7 @@ const WizardHat = () => (
       x="130"
       y="50"
       fill="#395ed1"
-      shape-rendering="crispEdges"
+      shapeRendering="crispEdges"
     />
     <rect
       width="10"
@@ -148,7 +148,7 @@ const WizardHat = () => (
       x="60"
       y="60"
       fill="#395ed1"
-      shape-rendering="crispEdges"
+      shapeRendering="crispEdges"
     />
     <rect
       width="20"
@@ -156,7 +156,7 @@ const WizardHat = () => (
       x="90"
       y="60"
       fill="#395ed1"
-      shape-rendering="crispEdges"
+      shapeRendering="crispEdges"
     />
     <rect
       width="30"
@@ -164,7 +164,7 @@ const WizardHat = () => (
       x="110"
       y="60"
       fill="#ffc925"
-      shape-rendering="crispEdges"
+      shapeRendering="crispEdges"
     />
     <rect
       width="40"
@@ -172,7 +172,7 @@ const WizardHat = () => (
       x="140"
       y="60"
       fill="#395ed1"
-      shape-rendering="crispEdges"
+      shapeRendering="crispEdges"
     />
     <rect
       width="10"
@@ -180,7 +180,7 @@ const WizardHat = () => (
       x="60"
       y="70"
       fill="#ffc925"
-      shape-rendering="crispEdges"
+      shapeRendering="crispEdges"
     />
     <rect
       width="20"
@@ -188,7 +188,7 @@ const WizardHat = () => (
       x="100"
       y="70"
       fill="#395ed1"
-      shape-rendering="crispEdges"
+      shapeRendering="crispEdges"
     />
     <rect
       width="10"
@@ -196,7 +196,7 @@ const WizardHat = () => (
       x="120"
       y="70"
       fill="#ffc925"
-      shape-rendering="crispEdges"
+      shapeRendering="crispEdges"
     />
     <rect
       width="60"
@@ -204,7 +204,7 @@ const WizardHat = () => (
       x="130"
       y="70"
       fill="#395ed1"
-      shape-rendering="crispEdges"
+      shapeRendering="crispEdges"
     />
     <rect
       width="50"
@@ -212,7 +212,7 @@ const WizardHat = () => (
       x="40"
       y="80"
       fill="#ffc925"
-      shape-rendering="crispEdges"
+      shapeRendering="crispEdges"
     />
     <rect
       width="40"
@@ -220,7 +220,7 @@ const WizardHat = () => (
       x="110"
       y="80"
       fill="#395ed1"
-      shape-rendering="crispEdges"
+      shapeRendering="crispEdges"
     />
     <rect
       width="10"
@@ -228,7 +228,7 @@ const WizardHat = () => (
       x="150"
       y="80"
       fill="#ffc925"
-      shape-rendering="crispEdges"
+      shapeRendering="crispEdges"
     />
     <rect
       width="40"
@@ -236,7 +236,7 @@ const WizardHat = () => (
       x="160"
       y="80"
       fill="#395ed1"
-      shape-rendering="crispEdges"
+      shapeRendering="crispEdges"
     />
     <rect
       width="30"
@@ -244,7 +244,7 @@ const WizardHat = () => (
       x="50"
       y="90"
       fill="#ffc925"
-      shape-rendering="crispEdges"
+      shapeRendering="crispEdges"
     />
     <rect
       width="20"
@@ -252,7 +252,7 @@ const WizardHat = () => (
       x="120"
       y="90"
       fill="#395ed1"
-      shape-rendering="crispEdges"
+      shapeRendering="crispEdges"
     />
     <rect
       width="10"
@@ -260,7 +260,7 @@ const WizardHat = () => (
       x="140"
       y="90"
       fill="#ffc925"
-      shape-rendering="crispEdges"
+      shapeRendering="crispEdges"
     />
     <rect
       width="10"
@@ -268,7 +268,7 @@ const WizardHat = () => (
       x="150"
       y="90"
       fill="#395ed1"
-      shape-rendering="crispEdges"
+      shapeRendering="crispEdges"
     />
     <rect
       width="10"
@@ -276,7 +276,7 @@ const WizardHat = () => (
       x="160"
       y="90"
       fill="#ffc925"
-      shape-rendering="crispEdges"
+      shapeRendering="crispEdges"
     />
     <rect
       width="10"
@@ -284,7 +284,7 @@ const WizardHat = () => (
       x="170"
       y="90"
       fill="#395ed1"
-      shape-rendering="crispEdges"
+      shapeRendering="crispEdges"
     />
     <rect
       width="10"
@@ -292,7 +292,7 @@ const WizardHat = () => (
       x="180"
       y="90"
       fill="#ffc925"
-      shape-rendering="crispEdges"
+      shapeRendering="crispEdges"
     />
     <rect
       width="20"
@@ -300,7 +300,7 @@ const WizardHat = () => (
       x="190"
       y="90"
       fill="#395ed1"
-      shape-rendering="crispEdges"
+      shapeRendering="crispEdges"
     />
     <rect
       width="10"
@@ -308,7 +308,7 @@ const WizardHat = () => (
       x="50"
       y="100"
       fill="#ffc925"
-      shape-rendering="crispEdges"
+      shapeRendering="crispEdges"
     />
     <rect
       width="10"
@@ -316,7 +316,7 @@ const WizardHat = () => (
       x="70"
       y="100"
       fill="#ffc925"
-      shape-rendering="crispEdges"
+      shapeRendering="crispEdges"
     />
     <rect
       width="20"
@@ -324,7 +324,7 @@ const WizardHat = () => (
       x="130"
       y="100"
       fill="#395ed1"
-      shape-rendering="crispEdges"
+      shapeRendering="crispEdges"
     />
     <rect
       width="10"
@@ -332,7 +332,7 @@ const WizardHat = () => (
       x="150"
       y="100"
       fill="#ffc925"
-      shape-rendering="crispEdges"
+      shapeRendering="crispEdges"
     />
     <rect
       width="60"
@@ -340,7 +340,7 @@ const WizardHat = () => (
       x="160"
       y="100"
       fill="#395ed1"
-      shape-rendering="crispEdges"
+      shapeRendering="crispEdges"
     />
     <rect
       width="100"
@@ -348,7 +348,7 @@ const WizardHat = () => (
       x="130"
       y="110"
       fill="#395ed1"
-      shape-rendering="crispEdges"
+      shapeRendering="crispEdges"
     />
     <rect
       width="80"
@@ -356,7 +356,7 @@ const WizardHat = () => (
       x="120"
       y="120"
       fill="#395ed1"
-      shape-rendering="crispEdges"
+      shapeRendering="crispEdges"
     />
     <rect
       width="10"
@@ -364,7 +364,7 @@ const WizardHat = () => (
       x="200"
       y="120"
       fill="#ffc925"
-      shape-rendering="crispEdges"
+      shapeRendering="crispEdges"
     />
     <rect
       width="20"
@@ -372,7 +372,7 @@ const WizardHat = () => (
       x="210"
       y="120"
       fill="#395ed1"
-      shape-rendering="crispEdges"
+      shapeRendering="crispEdges"
     />
     <rect
       width="10"
@@ -380,7 +380,7 @@ const WizardHat = () => (
       x="120"
       y="130"
       fill="#395ed1"
-      shape-rendering="crispEdges"
+      shapeRendering="crispEdges"
     />
     <rect
       width="10"
@@ -388,7 +388,7 @@ const WizardHat = () => (
       x="130"
       y="130"
       fill="#ffc925"
-      shape-rendering="crispEdges"
+      shapeRendering="crispEdges"
     />
     <rect
       width="50"
@@ -396,7 +396,7 @@ const WizardHat = () => (
       x="140"
       y="130"
       fill="#395ed1"
-      shape-rendering="crispEdges"
+      shapeRendering="crispEdges"
     />
     <rect
       width="30"
@@ -404,7 +404,7 @@ const WizardHat = () => (
       x="190"
       y="130"
       fill="#ffc925"
-      shape-rendering="crispEdges"
+      shapeRendering="crispEdges"
     />
     <rect
       width="20"
@@ -412,7 +412,7 @@ const WizardHat = () => (
       x="220"
       y="130"
       fill="#395ed1"
-      shape-rendering="crispEdges"
+      shapeRendering="crispEdges"
     />
     <rect
       width="80"
@@ -420,7 +420,7 @@ const WizardHat = () => (
       x="120"
       y="140"
       fill="#395ed1"
-      shape-rendering="crispEdges"
+      shapeRendering="crispEdges"
     />
     <rect
       width="10"
@@ -428,7 +428,7 @@ const WizardHat = () => (
       x="200"
       y="140"
       fill="#ffc925"
-      shape-rendering="crispEdges"
+      shapeRendering="crispEdges"
     />
     <rect
       width="30"
@@ -436,7 +436,7 @@ const WizardHat = () => (
       x="210"
       y="140"
       fill="#395ed1"
-      shape-rendering="crispEdges"
+      shapeRendering="crispEdges"
     />
     <rect
       width="40"
@@ -444,7 +444,7 @@ const WizardHat = () => (
       x="120"
       y="150"
       fill="#395ed1"
-      shape-rendering="crispEdges"
+      shapeRendering="crispEdges"
     />
     <rect
       width="10"
@@ -452,7 +452,7 @@ const WizardHat = () => (
       x="160"
       y="150"
       fill="#ffc925"
-      shape-rendering="crispEdges"
+      shapeRendering="crispEdges"
     />
     <rect
       width="70"
@@ -460,7 +460,7 @@ const WizardHat = () => (
       x="170"
       y="150"
       fill="#395ed1"
-      shape-rendering="crispEdges"
+      shapeRendering="crispEdges"
     />
     <rect
       width="130"
@@ -468,7 +468,7 @@ const WizardHat = () => (
       x="110"
       y="160"
       fill="#395ed1"
-      shape-rendering="crispEdges"
+      shapeRendering="crispEdges"
     />
     <rect
       width="140"
@@ -476,7 +476,7 @@ const WizardHat = () => (
       x="100"
       y="170"
       fill="#395ed1"
-      shape-rendering="crispEdges"
+      shapeRendering="crispEdges"
     />
     <rect
       width="70"
@@ -484,7 +484,7 @@ const WizardHat = () => (
       x="90"
       y="180"
       fill="#395ed1"
-      shape-rendering="crispEdges"
+      shapeRendering="crispEdges"
     />
     <rect
       width="50"
@@ -492,7 +492,7 @@ const WizardHat = () => (
       x="160"
       y="180"
       fill="#1f1d29"
-      shape-rendering="crispEdges"
+      shapeRendering="crispEdges"
     />
     <rect
       width="20"
@@ -500,7 +500,7 @@ const WizardHat = () => (
       x="210"
       y="180"
       fill="#395ed1"
-      shape-rendering="crispEdges"
+      shapeRendering="crispEdges"
     />
     <rect
       width="180"
@@ -508,7 +508,7 @@ const WizardHat = () => (
       x="70"
       y="190"
       fill="#00499c"
-      shape-rendering="crispEdges"
+      shapeRendering="crispEdges"
     />
     <rect
       width="220"
@@ -516,7 +516,7 @@ const WizardHat = () => (
       x="50"
       y="200"
       fill="#00499c"
-      shape-rendering="crispEdges"
+      shapeRendering="crispEdges"
     />
   </svg>
 );
