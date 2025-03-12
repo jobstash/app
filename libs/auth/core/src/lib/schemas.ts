@@ -4,9 +4,10 @@ import { mwMessageResponseSchema } from '@jobstash/shared/core';
 
 import { PERMISSIONS } from './constants';
 
-export const checkWalletPermissionSchema = myzod.literals(
-  ...Object.values(PERMISSIONS),
-);
+export const checkWalletPermissionSchema = myzod.union([
+  myzod.string(),
+  myzod.literals(...Object.values(PERMISSIONS)),
+]);
 
 export const checkWalletResponseSchema = myzod.object({
   token: myzod.string(),
