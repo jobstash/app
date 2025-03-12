@@ -61,6 +61,7 @@ const JobCard = ({
     featureEndDate,
     access,
     project,
+    onboardIntoWeb3,
   } = jobPost;
 
   const { permissions } = useAuthContext();
@@ -93,10 +94,15 @@ const JobCard = ({
   }, [filterParamsObj, jobPost, routeSection]);
 
   const isForExperts = access === 'protected';
-  const isFeatured = checkJobIsFeatured(featureStartDate, featureEndDate);
-  const timestampText = isFeatured
-    ? 'Urgently hiring'
-    : prettyTimestamp(timestamp);
+  const isFeatured = checkJobIsFeatured(
+    featureStartDate,
+    featureEndDate,
+    onboardIntoWeb3,
+  );
+  const timestampText =
+    isFeatured && !onboardIntoWeb3
+      ? 'Urgently hiring'
+      : prettyTimestamp(timestamp);
 
   return (
     <JobCardWrapper
@@ -111,6 +117,7 @@ const JobCard = ({
         timestampText={timestampText}
         isForExperts={isForExperts}
         isFeatured={isFeatured}
+        isOnboardIntoWeb3={onboardIntoWeb3}
         topRightAction={bookmarkButton}
       />
       {(isFeatured || isForExperts) && (

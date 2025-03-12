@@ -1,4 +1,4 @@
-import { Button } from "@heroui/button";
+import { Button } from '@heroui/button';
 
 import {
   featuredButtonStyle,
@@ -19,10 +19,15 @@ interface Props {
 }
 
 export const Card = ({ job }: Props) => {
-  const { title, summary, featureStartDate, featureEndDate } = job;
+  const { title, summary, featureStartDate, featureEndDate, onboardIntoWeb3 } =
+    job;
   const tags = createJobTags(job);
 
-  const isFeatured = checkJobIsFeatured(featureStartDate, featureEndDate);
+  const isFeatured = checkJobIsFeatured(
+    featureStartDate,
+    featureEndDate,
+    onboardIntoWeb3,
+  );
 
   const { name, website, logo } = getJobLogoTitleProps(job);
 
