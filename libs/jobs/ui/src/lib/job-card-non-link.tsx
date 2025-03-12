@@ -62,6 +62,7 @@ const JobCardNonLink = ({
         timestampText={timestampText}
         isForExperts={isForExperts}
         isFeatured={isFeatured}
+        isOnboardIntoWeb3={onboardIntoWeb3}
         topRightAction={topRightAction}
       />
       {(isFeatured || isForExperts) && (
