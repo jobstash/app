@@ -162,10 +162,10 @@ const Sidebar = ({ filtersRouteSection }: Props) => {
             <SidebarBookmarksSection />
           </IsMountedWrapper>
           <SidebarUserSection />
-          <SidebarCollapsibleSection
+          {/* <SidebarCollapsibleSection
             title="Your Organizations [WIP]"
             items={[]}
-          />
+          /> */}
         </div>
       </SidebarWrapper>
     </SidebarProvider>

@@ -27,7 +27,7 @@ export const DevAccountCard = () => {
           <div className="flex flex-col gap-6">
             <AvailableAccounts />
             <ConnectedAccounts />
-            <AffiliatedOrganizations />
+            {/* <AffiliatedOrganizations /> */}
           </div>
         </div>
 
