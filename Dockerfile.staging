@@ -1,30 +1,3 @@
-# FROM node:18-alpine AS base
-
-# FROM base as build-web
-# RUN yarn global add pnpm
-# RUN apk add --no-cache libc6-compat
-# WORKDIR /jobstash
-# COPY . .
-# RUN pnpm i --frozen-lockfile
-# RUN pnpm build
-
-# FROM base as run-prod
-# RUN yarn global add pnpm
-# RUN apk add --no-cache libc6-compat
-# WORKDIR /jobstash
-
-# RUN addgroup --system --gid 1001 nodejs
-# RUN adduser --system --uid 1001 nextjs
-
-# COPY --from=build-web --chown=nextjs:nodejs /jobstash/dist ./dist
-# WORKDIR /jobstash/dist/apps/web
-# RUN pnpm i
-# ENV NODE_ENV production
-
-# USER nextjs
-
-# CMD ["pnpm", "start"]
-
 FROM node:18-alpine AS base
 
 FROM base as deps
@@ -56,10 +29,8 @@ ENV NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID=d6b3203f9238276df2440599c3497e69
 
 ENV NEXT_PUBLIC_NEW_FEATURE_DIFF=2
 
-ENV NEXT_PUBLIC_PRIVY_APP_ID=clyr78r8l05a16wqnojin5hbz
-ENV NEXT_PUBLIC_PRIVY_CLIENT_ID=client-WY2o8bjWEos9v51Y8kW3NYA9JG5qTVPZSbQSQZePpPRBq
-
-ENV CYPRESS_INSTALL_BINARY=0
+ENV NEXT_PUBLIC_PRIVY_APP_ID=cm8d6eg6m003npt62tripx15v
+ENV NEXT_PUBLIC_PRIVY_CLIENT_ID=client-WY5i1EUZwG5yVgHWsYyUKDPRRCrMCcKUn8zQTSj5XGP3W
 
 RUN pnpm build
 # RUN yarn build
