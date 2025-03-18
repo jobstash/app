@@ -96,7 +96,6 @@ export const OrgDetailsPage = ({
         url: initOrgDetails.website,
         //
         // jobCount: initOrgDetails.jobs.length,
-        jobCount: 0,
         projectCount: initOrgDetails.projects.length,
         lastFundingAmount,
         lastFundingDate,

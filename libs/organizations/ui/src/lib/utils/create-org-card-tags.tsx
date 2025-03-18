@@ -20,7 +20,6 @@ export const createOrgCardTags = (orgListItem: OrgListItem): TagElement[] => {
     name,
     orgId,
     headcountEstimate,
-    jobCount,
     projectCount,
     lastFundingAmount,
     lastFundingDate,
@@ -31,15 +30,16 @@ export const createOrgCardTags = (orgListItem: OrgListItem): TagElement[] => {
   const slug = slugify(`${name} ${orgId}`);
   const baseRoute = `/organizations/${slug}`;
 
-  if (jobCount > 0) {
-    tags.push({
-      id: TAG_ELEMENT_ID.jobs,
-      text: `${getPluralText('Job', jobCount)}: ${jobCount}`,
-      icon: <SuitcaseIcon />,
-      link: `${baseRoute}/jobs`,
-      showLinkIcon: false,
-    });
-  }
+  //
+  // if (jobCount > 0) {
+  //   tags.push({
+  //     id: TAG_ELEMENT_ID.jobs,
+  //     text: `${getPluralText('Job', jobCount)}: ${jobCount}`,
+  //     icon: <SuitcaseIcon />,
+  //     link: `${baseRoute}/jobs`,
+  //     showLinkIcon: false,
+  //   });
+  // }
 
   if (projectCount > 0) {
     tags.push({

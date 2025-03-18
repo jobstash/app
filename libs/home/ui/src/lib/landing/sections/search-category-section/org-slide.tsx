@@ -18,9 +18,9 @@ export const OrgSlide = () => {
     );
   }
 
-  const orgs = data.data
-    .filter((org) => org.jobCount > 0)
-    .sort((a, b) => b.lastFundingAmount - a.lastFundingAmount);
+  const orgs = data.data.sort(
+    (a, b) => b.lastFundingAmount - a.lastFundingAmount,
+  );
 
   return (
     <div>

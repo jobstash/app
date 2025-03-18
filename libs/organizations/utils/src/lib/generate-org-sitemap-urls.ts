@@ -9,13 +9,16 @@ export const generateOrgSitemapUrls = async (feUrl: string) => {
     .then((orgs) => {
       const urls: string[] = [];
       for (const org of orgs) {
-        const { orgId, name, projectCount, jobCount } = org;
+        const { orgId, name, projectCount } = org;
         const prefix = `${feUrl}/organizations/${slugify(`${name} ${orgId}`)}`;
         urls.push(
           generateXmlUrl(`${prefix}/details`),
           generateXmlUrl(`${prefix}/reviews`),
         );
-        if (jobCount > 0) urls.push(generateXmlUrl(`${prefix}/jobs`));
+
+        //
+        // if (jobCount > 0) urls.push(generateXmlUrl(`${prefix}/jobs`));
+
         if (projectCount > 0) urls.push(generateXmlUrl(`${prefix}/projects`));
       }
 
