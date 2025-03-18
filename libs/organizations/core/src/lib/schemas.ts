@@ -27,7 +27,6 @@ export const orgListItemSchema = myzod
     url: myzod.string().min(1).nullable(),
     name: myzod.string().min(1),
     location: myzod.string().min(1),
-    jobCount: myzod.number(),
     projectCount: myzod.number(),
     lastFundingDate: myzod.number(),
     lastFundingAmount: myzod.number(),
