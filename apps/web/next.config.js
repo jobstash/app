@@ -10,6 +10,7 @@ const path = require('node:path');
 const nextConfig = {
   // // Nx + nextjs + docker
   output: 'standalone',
+  staticPageGenerationTimeout: 300,
 
   nx: {
     // Set this to true if you would like to use SVGR
