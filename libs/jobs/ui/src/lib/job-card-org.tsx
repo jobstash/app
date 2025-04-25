@@ -3,7 +3,7 @@ import { memo } from 'react';
 import { JobPost } from '@jobstash/shared/core';
 import { getLogoUrl } from '@jobstash/shared/utils';
 
-import { CardSet, LogoTitle, OrgCommunityTag } from '@jobstash/shared/ui';
+import { CardSet, LogoTitle } from '@jobstash/shared/ui';
 
 import { createJobCardOrgTags } from './utils/create-job-card-org-tags';
 
@@ -14,7 +14,7 @@ interface Props {
 const JobCardOrg = ({ org }: Props) => {
   if (!org) return null;
 
-  const { name, website, logoUrl, community } = org;
+  const { name, website, logoUrl } = org;
 
   const tags = createJobCardOrgTags(org);
 
@@ -38,7 +38,7 @@ const JobCardOrg = ({ org }: Props) => {
                   {text}
                 </CardSet>
               ))}
-            <OrgCommunityTag community={community} />
+            {/* <OrgCommunityTag community={community} /> */}
           </div>
         </div>
       </div>
