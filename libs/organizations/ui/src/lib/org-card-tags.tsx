@@ -2,7 +2,7 @@ import { memo } from 'react';
 
 import { type OrgListItem } from '@jobstash/organizations/core';
 
-import { CardSet, OrgCommunityTag } from '@jobstash/shared/ui';
+import { CardSet } from '@jobstash/shared/ui';
 
 import { createOrgCardTags } from './utils/create-org-card-tags';
 
@@ -25,7 +25,7 @@ const OrgCardTags = ({ orgListItem }: Props) => {
             {text}
           </CardSet>
         ))}
-        <OrgCommunityTag community={orgListItem.community} />
+        {/* <OrgCommunityTag community={orgListItem.community} /> */}
       </div>
     </>
   );

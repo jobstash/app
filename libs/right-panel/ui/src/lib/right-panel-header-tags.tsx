@@ -2,7 +2,7 @@ import { memo } from 'react';
 
 import { type TagElement } from '@jobstash/shared/core';
 
-import { CardSet, OrgCommunityTag } from '@jobstash/shared/ui';
+import { CardSet } from '@jobstash/shared/ui';
 
 interface Props {
   tags: TagElement[];
@@ -19,7 +19,7 @@ const RightPanelHeaderTags = ({ tags, community }: Props) => (
       </CardSet>
     ))}
 
-    <OrgCommunityTag isOneLine community={community} />
+    {/* <OrgCommunityTag isOneLine community={community} /> */}
   </div>
 );
 
