@@ -73,7 +73,7 @@ const JobBookmarksRightPanel = ({ jobPost, onClickBack }: Props) => {
             description={organization?.summary || project?.description || null}
             socials={organization ?? project ?? null}
             tags={organization ? createRightPanelOrgTags(organization) : []}
-            community={organization?.community || []}
+            // Community={organization?.community || []}
           />
         ) : null
       }

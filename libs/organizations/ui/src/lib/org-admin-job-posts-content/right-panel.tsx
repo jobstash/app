@@ -40,7 +40,7 @@ export const OrgJobRightPanel = () => {
               }
               socials={organization ?? project ?? null}
               tags={organization ? createRightPanelOrgTags(organization) : []}
-              community={organization?.community || []}
+              // Community={organization?.community || []}
             />
           ) : null
         }
