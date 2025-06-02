@@ -1,4 +1,3 @@
-/* eslint-disable complexity */
 import { memo, useMemo } from 'react';
 
 import {
@@ -111,7 +110,7 @@ const JobsRightPanel = ({ jobPost, currentTab, routeSection }: Props) => {
             description={organization?.summary || project?.description || null}
             socials={organization ?? project ?? null}
             tags={organization ? createRightPanelOrgTags(organization) : []}
-            community={organization?.community || []}
+            // Community={organization?.community || []}
           />
         ) : null
       }

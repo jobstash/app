@@ -6,10 +6,9 @@ import { CardSet } from '@jobstash/shared/ui';
 
 interface Props {
   tags: TagElement[];
-  community: string[];
 }
 
-const RightPanelHeaderTags = ({ tags, community }: Props) => (
+const RightPanelHeaderTags = ({ tags }: Props) => (
   <div className="flex flex-wrap gap-4">
     {/* <OrgReviewCardSets org={org} /> */}
 

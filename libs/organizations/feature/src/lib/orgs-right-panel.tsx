@@ -47,7 +47,7 @@ const OrgsRightPanel = ({ orgId, currentTab, hasTitle }: Props) => {
           description={orgDetails.summary}
           socials={orgDetails}
           tags={createRightPanelOrgTags(orgDetails)}
-          community={orgDetails.community}
+          // Community={orgDetails.community}
         />
       }
       tabs={

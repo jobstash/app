@@ -148,7 +148,6 @@ export const orgInfoSchema = myzod.object(
     aliases: myzod.array(myzod.string().min(1)),
     docs: myzod.string().min(1).nullable(),
     twitter: myzod.string().min(1).nullable(),
-    community: myzod.array(myzod.string()),
     ecosystems: myzod.array(myzod.string()),
   },
   { allowUnknown: true },

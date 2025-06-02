@@ -13,7 +13,6 @@ interface Props {
   description: string | null;
   socials: Socials | null;
   tags: TagElement[];
-  community: string[];
 }
 
 const RightPanelHeader = ({
@@ -23,7 +22,6 @@ const RightPanelHeader = ({
   description,
   socials,
   tags,
-  community,
 }: Props) => (
   <div className="flex flex-col gap-6 md:gap-4">
     <div className="flex h-10 items-center">
@@ -36,7 +34,7 @@ const RightPanelHeader = ({
       />
     </div>
 
-    <RightPanelHeaderTags tags={tags} community={community} />
+    <RightPanelHeaderTags tags={tags} />
 
     {description && <Text color="dimmed">{description}</Text>}
 
