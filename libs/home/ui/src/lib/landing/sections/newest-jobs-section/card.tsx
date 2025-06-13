@@ -23,11 +23,7 @@ export const Card = ({ job }: Props) => {
     job;
   const tags = createJobTags(job);
 
-  const isFeatured = checkJobIsFeatured(
-    featureStartDate,
-    featureEndDate,
-    onboardIntoWeb3,
-  );
+  const isFeatured = checkJobIsFeatured(featureStartDate, featureEndDate);
 
   const { name, website, logo } = getJobLogoTitleProps(job);
 

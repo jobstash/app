@@ -22,7 +22,7 @@ const JobCardHeader = ({
   isOnboardIntoWeb3,
   topRightAction,
 }: Props) => {
-  const isEmphasized = isForExperts || isFeatured;
+  const isEmphasized = isForExperts || isFeatured || isOnboardIntoWeb3;
 
   return (
     <div className="flex items-center justify-between">
