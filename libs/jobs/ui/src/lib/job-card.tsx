@@ -94,11 +94,7 @@ const JobCard = ({
   }, [filterParamsObj, jobPost, routeSection]);
 
   const isForExperts = access === 'protected';
-  const isFeatured = checkJobIsFeatured(
-    featureStartDate,
-    featureEndDate,
-    onboardIntoWeb3,
-  );
+  const isFeatured = checkJobIsFeatured(featureStartDate, featureEndDate);
   const timestampText =
     isFeatured && !onboardIntoWeb3
       ? 'Urgently hiring'
@@ -109,7 +105,7 @@ const JobCard = ({
       href={href}
       isActive={isActive}
       isForExperts={isForExperts}
-      isFeatured={isFeatured}
+      isFeatured={isFeatured || onboardIntoWeb3}
       onClick={onClick}
     >
       <JobCardHeader
