@@ -116,7 +116,7 @@ const JobCard = ({
         isOnboardIntoWeb3={onboardIntoWeb3}
         topRightAction={bookmarkButton}
       />
-      {(isFeatured || isForExperts) && (
+      {(isFeatured || isForExperts || onboardIntoWeb3) && (
         <Heading size="md" fw="semibold">
           {title}
         </Heading>
