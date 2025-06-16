@@ -12,4 +12,7 @@ export const AuthContext = createContext<AuthCtx>({
   showLoginModal: () => null,
   logout: () => Promise.resolve(),
   permissions: [],
+  apiError: null,
+  isApiUnavailable: false,
+  retryAuth: () => null,
 });
