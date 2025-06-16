@@ -6,11 +6,14 @@ import { ProfileInfoProvider } from '@jobstash/profile/state';
 import { ProfileDevPage } from './profile-dev-page';
 
 export const ProfilePage = () => {
-  const { permissions } = useAuthContext();
+  const { permissions, isLoading, isApiUnavailable } = useAuthContext();
   const hasPermission = permissions.length > 0;
-  const { isLoading } = useAuthContext();
 
   if (isLoading) return <LoadingPage />;
+
+  if (isApiUnavailable) {
+    return <LoadingPage />;
+  }
 
   if (!hasPermission) {
     return <NotFoundPage />;

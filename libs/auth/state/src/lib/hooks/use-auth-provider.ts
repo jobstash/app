@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { useLogin, useLogout, usePrivy } from '@privy-io/react-auth';
 import { useMutation } from '@tanstack/react-query';
@@ -18,13 +18,26 @@ const DEFAULT_CHECK_WALLET_RESPONSE: CheckWalletResponse = {
   permissions: [],
 };
 
+const INITIAL_RETRY_DELAY = 1000; // 1 second
+const MAX_RETRY_DELAY = 30_000; // 30 seconds
+const MAX_RETRY_ATTEMPTS = 5;
+
 export const useAuthProvider = () => {
   const router = useRouter();
+  const retryTimeoutRef = useRef<NodeJS.Timeout>();
 
   const [checkWalletResponse, setCheckWalletResponse] =
     useState<CheckWalletResponse>(DEFAULT_CHECK_WALLET_RESPONSE);
   const { cryptoNative, permissions } = checkWalletResponse;
   const hasPermission = permissions.length > 0;
+
+  const [apiError, setApiError] = useState<string | null>(null);
+  const [retryCount, setRetryCount] = useState(0);
+  const [lastRetryTime, setLastRetryTime] = useState(0);
+  const [isRetrying, setIsRetrying] = useState(false);
+
+  const isApiUnavailable =
+    retryCount >= MAX_RETRY_ATTEMPTS && Boolean(apiError);
 
   const {
     authenticated: isLoggedIn,
@@ -42,8 +55,60 @@ export const useAuthProvider = () => {
       const response = await getCheckWallet(accessToken);
       localStorage.setItem(LOCAL_STORAGE_KEYS.AUTH_JWT, response.token);
       setCheckWalletResponse(response);
+      return response;
+    },
+    onSuccess() {
+      // Reset error state on success
+      setApiError(null);
+      setRetryCount(0);
+      setLastRetryTime(0);
+      setIsRetrying(false);
+    },
+    onError(error) {
+      const errorMessage = (error as Error).message;
+      setApiError(errorMessage);
+
+      // Don't auto-retry if we've hit the max attempts
+      if (retryCount >= MAX_RETRY_ATTEMPTS) {
+        sentryMessage('setupLocal: Max retry attempts reached', errorMessage);
+        return;
+      }
+
+      // Schedule retry with exponential backoff
+      scheduleRetry();
     },
   });
+
+  const scheduleRetry = useCallback(() => {
+    if (retryTimeoutRef.current) {
+      clearTimeout(retryTimeoutRef.current);
+    }
+
+    const delay = Math.min(
+      INITIAL_RETRY_DELAY * 2 ** retryCount,
+      MAX_RETRY_DELAY,
+    );
+
+    setIsRetrying(true);
+    setLastRetryTime(Date.now());
+
+    retryTimeoutRef.current = setTimeout(() => {
+      setRetryCount((prev) => prev + 1);
+      setIsRetrying(false);
+      setupLocal();
+    }, delay);
+  }, [retryCount, setupLocal]);
+
+  const retryAuth = useCallback(() => {
+    if (retryTimeoutRef.current) {
+      clearTimeout(retryTimeoutRef.current);
+    }
+
+    setRetryCount(0);
+    setApiError(null);
+    setIsRetrying(false);
+    setupLocal();
+  }, [setupLocal]);
 
   const [isCreatingWallet, setIsCreatingWallet] = useState(false);
 
@@ -54,15 +119,24 @@ export const useAuthProvider = () => {
       setupLocal();
     } catch (error) {
       sentryMessage('createEmbedWallet', (error as Error).message);
-      window?.location.reload();
+      // Remove window.location.reload() to prevent loop
+      setApiError((error as Error).message);
     }
 
     setIsCreatingWallet(false);
   }, [createWallet, setupLocal]);
 
   // Create embedded wallet if user is logged in and doesn't have one
+  // Only if not in error state
   useEffect(() => {
-    if (!hasEmbeddedWallet && !isCreatingWallet && isLoggedIn && ready) {
+    if (
+      !hasEmbeddedWallet &&
+      !isCreatingWallet &&
+      isLoggedIn &&
+      ready &&
+      !isApiUnavailable &&
+      !isRetrying
+    ) {
       createEmbeddedWallet();
     }
   }, [
@@ -71,9 +145,11 @@ export const useAuthProvider = () => {
     isCreatingWallet,
     isLoggedIn,
     ready,
+    isApiUnavailable,
+    isRetrying,
   ]);
 
-  const isLoading = isLoadingSetup || !ready || isCreatingWallet;
+  const isLoading = isLoadingSetup || !ready || isCreatingWallet || isRetrying;
 
   // Setup local after privy login
   const { login } = useLogin({
@@ -90,6 +166,14 @@ export const useAuthProvider = () => {
     async onSuccess() {
       setCheckWalletResponse(DEFAULT_CHECK_WALLET_RESPONSE);
       localStorage.removeItem(LOCAL_STORAGE_KEYS.AUTH_JWT);
+      // Reset error state on logout
+      setApiError(null);
+      setRetryCount(0);
+      setIsRetrying(false);
+      if (retryTimeoutRef.current) {
+        clearTimeout(retryTimeoutRef.current);
+      }
+
       window.location.href = '/jobs';
     },
   });
@@ -99,11 +183,44 @@ export const useAuthProvider = () => {
     await privyLogout();
   };
 
+  // Setup local if logged in with wallet but no permissions
+  // Only if not in error state and not recently retried
   useEffect(() => {
-    if (isLoggedIn && hasEmbeddedWallet && !isLoading && !hasPermission) {
+    const now = Date.now();
+    const timeSinceLastRetry = now - lastRetryTime;
+    const shouldWait = timeSinceLastRetry < INITIAL_RETRY_DELAY;
+
+    if (
+      isLoggedIn &&
+      hasEmbeddedWallet &&
+      !isLoading &&
+      !hasPermission &&
+      !isApiUnavailable &&
+      !isRetrying &&
+      !shouldWait
+    ) {
       setupLocal();
     }
-  }, [hasEmbeddedWallet, hasPermission, isLoading, isLoggedIn, setupLocal]);
+  }, [
+    hasEmbeddedWallet,
+    hasPermission,
+    isLoading,
+    isLoggedIn,
+    setupLocal,
+    isApiUnavailable,
+    isRetrying,
+    lastRetryTime,
+  ]);
+
+  // Cleanup timeout on unmount
+  useEffect(
+    () => () => {
+      if (retryTimeoutRef.current) {
+        clearTimeout(retryTimeoutRef.current);
+      }
+    },
+    [],
+  );
 
   return {
     user,
@@ -115,5 +232,8 @@ export const useAuthProvider = () => {
     isAuthenticated,
     showLoginModal: login,
     logout,
+    apiError,
+    isApiUnavailable,
+    retryAuth,
   };
 };

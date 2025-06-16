@@ -34,6 +34,9 @@ export type AuthCtx = {
   isAuthenticated: boolean;
   showLoginModal: () => void;
   logout: () => Promise<void>;
+  apiError: string | null;
+  isApiUnavailable: boolean;
+  retryAuth: () => void;
 };
 
 export type GithubLoginPayload = Infer<typeof githubLoginPayloadSchema>;
