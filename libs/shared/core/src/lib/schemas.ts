@@ -307,8 +307,8 @@ export const userProfileSchema = myzod.object({
   location: userLocationSchema,
   availableForWork: myzod.boolean().nullable(),
   linkedAccounts: linkedAccountsSchema,
-  cryptoNative: myzod.boolean(),
-  cryptoAdjacent: myzod.boolean(),
+  cryptoNative: myzod.boolean().optional(),
+  cryptoAdjacent: myzod.boolean().optional(),
 });
 export type UserProfile = Infer<typeof userProfileSchema>;
 
