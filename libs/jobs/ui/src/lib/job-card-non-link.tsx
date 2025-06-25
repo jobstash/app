@@ -37,6 +37,7 @@ const JobCardNonLink = ({
     access,
     project,
     onboardIntoWeb3,
+    ethSeasonOfInternships,
   } = jobPost;
 
   const isForExperts = access === 'protected';
@@ -45,12 +46,17 @@ const JobCardNonLink = ({
     ? 'Urgently hiring'
     : prettyTimestamp(timestamp);
 
+  const isEmphasized =
+    isFeatured ||
+    isForExperts ||
+    onboardIntoWeb3 ||
+    Boolean(ethSeasonOfInternships);
+
   return (
     <JobCardWrapper
       href={null}
       isActive={isActive}
-      isForExperts={isForExperts}
-      isFeatured={isFeatured}
+      hasGradientBorder={isEmphasized}
       onClick={() => onClick(jobPost)}
     >
       <JobCardHeader
@@ -59,9 +65,10 @@ const JobCardNonLink = ({
         isForExperts={isForExperts}
         isFeatured={isFeatured}
         isOnboardIntoWeb3={onboardIntoWeb3}
+        isEthSeasonOfInternships={Boolean(ethSeasonOfInternships)}
         topRightAction={topRightAction}
       />
-      {(isFeatured || isForExperts) && (
+      {isEmphasized && (
         <Heading size="md" fw="semibold">
           {title}
         </Heading>
