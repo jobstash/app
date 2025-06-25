@@ -119,7 +119,7 @@ export const jobInfoSchema = myzod.intersection(
     featureStartDate: myzod.number().nullable(),
     featureEndDate: myzod.number().nullable(),
     onboardIntoWeb3: myzod.boolean(),
-    ethSeasonOfInternships: myzod.boolean().optional(),
+    ethSeasonOfInternships: myzod.boolean().default(false),
   }),
 );
 
