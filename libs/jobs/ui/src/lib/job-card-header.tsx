@@ -11,6 +11,7 @@ interface Props {
   isForExperts: boolean;
   isFeatured: boolean;
   isOnboardIntoWeb3: boolean;
+  isEthSeasonOfInternships: boolean;
   topRightAction: ReactNode;
 }
 
@@ -20,9 +21,11 @@ const JobCardHeader = ({
   isForExperts,
   isFeatured,
   isOnboardIntoWeb3,
+  isEthSeasonOfInternships,
   topRightAction,
 }: Props) => {
-  const isEmphasized = isForExperts || isFeatured || isOnboardIntoWeb3;
+  const isEmphasized =
+    isForExperts || isFeatured || isOnboardIntoWeb3 || isEthSeasonOfInternships;
 
   return (
     <div className="flex items-center justify-between">
@@ -33,6 +36,11 @@ const JobCardHeader = ({
               <div className="flex items-center gap-1">
                 Job for Web3 Beginners
                 <WizardHat />
+              </div>
+            ) : isEthSeasonOfInternships ? (
+              <div className="flex items-center gap-1">
+                Ethereum Season of Internships
+                <EthSeasonOfInternshipsIcon />
               </div>
             ) : isForExperts ? (
               <div className="flex items-center gap-1">
@@ -518,5 +526,25 @@ const WizardHat = () => (
       fill="#00499c"
       shapeRendering="crispEdges"
     />
+  </svg>
+);
+
+const EthSeasonOfInternshipsIcon = () => (
+  <svg
+    width="50"
+    height="60"
+    viewBox="0 0 50 60"
+    xmlns="http://www.w3.org/2000/svg"
+    shapeRendering="crispEdges"
+    className="ml-1 w-[12px] h-auto"
+  >
+    <rect width="10" height="10" x="20" y="0" fill="#0385eb" />
+    <rect width="10" height="10" x="20" y="10" fill="#0385eb" />
+    <rect width="10" height="10" x="10" y="20" fill="#0385eb" />
+    <rect width="10" height="10" x="20" y="20" fill="#00499c" />
+    <rect width="10" height="10" x="30" y="20" fill="#0385eb" />
+    <rect width="50" height="10" x="0" y="30" fill="#00499c" />
+    <rect width="30" height="10" x="10" y="40" fill="#0385eb" />
+    <rect width="10" height="10" x="20" y="50" fill="#0385eb" />
   </svg>
 );

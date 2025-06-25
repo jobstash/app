@@ -62,6 +62,7 @@ const JobCard = ({
     access,
     project,
     onboardIntoWeb3,
+    ethSeasonOfInternships,
   } = jobPost;
 
   const { permissions } = useAuthContext();
@@ -96,16 +97,21 @@ const JobCard = ({
   const isForExperts = access === 'protected';
   const isFeatured = checkJobIsFeatured(featureStartDate, featureEndDate);
   const timestampText =
-    isFeatured && !onboardIntoWeb3
+    (isFeatured || ethSeasonOfInternships) && !onboardIntoWeb3
       ? 'Urgently hiring'
       : prettyTimestamp(timestamp);
+
+  const isEmphasized =
+    isFeatured ||
+    isForExperts ||
+    onboardIntoWeb3 ||
+    Boolean(ethSeasonOfInternships);
 
   return (
     <JobCardWrapper
       href={href}
       isActive={isActive}
-      isForExperts={isForExperts}
-      isFeatured={isFeatured || onboardIntoWeb3}
+      hasGradientBorder={isEmphasized}
       onClick={onClick}
     >
       <JobCardHeader
@@ -114,9 +120,10 @@ const JobCard = ({
         isForExperts={isForExperts}
         isFeatured={isFeatured}
         isOnboardIntoWeb3={onboardIntoWeb3}
+        isEthSeasonOfInternships={Boolean(ethSeasonOfInternships)}
         topRightAction={bookmarkButton}
       />
-      {(isFeatured || isForExperts || onboardIntoWeb3) && (
+      {isEmphasized && (
         <Heading size="md" fw="semibold">
           {title}
         </Heading>
