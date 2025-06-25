@@ -10,6 +10,7 @@ interface Props {
   name: string;
   website: string | null;
   logo: string | null;
+  summary: string | null;
   description: string | null;
   socials: Socials | null;
   tags: TagElement[];
@@ -19,6 +20,7 @@ const RightPanelHeader = ({
   name,
   website,
   logo,
+  summary,
   description,
   socials,
   tags,
@@ -35,6 +37,8 @@ const RightPanelHeader = ({
     </div>
 
     <RightPanelHeaderTags tags={tags} />
+
+    {summary && <Text color="dimmed">{summary}</Text>}
 
     {description && <Text color="dimmed">{description}</Text>}
 

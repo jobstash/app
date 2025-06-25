@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 import { memo, useMemo } from 'react';
 
 import {
@@ -79,7 +80,8 @@ const JobsRightPanel = ({ jobPost, currentTab, routeSection }: Props) => {
     );
   }
 
-  const { id, organization, tags, project } = jobPost;
+  const { id, organization, tags, project, summary, ethSeasonOfInternships } =
+    jobPost;
 
   const hasProject = projects.length > 0;
 
@@ -107,6 +109,7 @@ const JobsRightPanel = ({ jobPost, currentTab, routeSection }: Props) => {
             name={name}
             website={website}
             logo={logo}
+            summary={ethSeasonOfInternships ? summary : null}
             description={organization?.summary || project?.description || null}
             socials={organization ?? project ?? null}
             tags={organization ? createRightPanelOrgTags(organization) : []}
