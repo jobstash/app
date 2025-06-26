@@ -27,7 +27,8 @@ interface Props {
 }
 
 const JobBookmarksRightPanel = ({ jobPost, onClickBack }: Props) => {
-  const { organization, project, tags } = jobPost;
+  const { organization, project, tags, summary, ethSeasonOfInternships } =
+    jobPost;
 
   const projectId = useMemo(() => {
     if (!project && !organization) return null;
@@ -70,6 +71,7 @@ const JobBookmarksRightPanel = ({ jobPost, onClickBack }: Props) => {
             name={name}
             website={website}
             logo={logo}
+            summary={ethSeasonOfInternships ? summary : null}
             description={organization?.summary || project?.description || null}
             socials={organization ?? project ?? null}
             tags={organization ? createRightPanelOrgTags(organization) : []}
