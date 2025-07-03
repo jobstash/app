@@ -32,20 +32,20 @@ const JobCardHeader = ({
       {isEmphasized ? (
         <div style={featuredButtonStyle}>
           <Text size="sm" fw="bold">
-            {isOnboardIntoWeb3 ? (
+            {isForExperts ? (
               <div className="flex items-center gap-1">
-                Job for Web3 Beginners
-                <WizardHat />
+                Job for Experts
+                <Glasses />
               </div>
             ) : isEthSeasonOfInternships ? (
               <div className="flex items-center gap-1">
                 Ethereum Season of Internships
                 <EthSeasonOfInternshipsIcon />
               </div>
-            ) : isForExperts ? (
+            ) : isOnboardIntoWeb3 ? (
               <div className="flex items-center gap-1">
-                Job for Experts
-                <Glasses />
+                Job for Web3 Beginners
+                <WizardHat />
               </div>
             ) : (
               'Featured'
