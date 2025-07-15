@@ -49,10 +49,37 @@ export const useAuthProvider = () => {
 
   const hasEmbeddedWallet = useHasEmbeddedWallet();
 
+  const [isLoadingLogout, setIsLoadingLogout] = useState(false);
+  const { logout: privyLogout } = useLogout({
+    async onSuccess() {
+      setCheckWalletResponse(DEFAULT_CHECK_WALLET_RESPONSE);
+      localStorage.removeItem(LOCAL_STORAGE_KEYS.AUTH_JWT);
+      // Reset error state on logout
+      setApiError(null);
+      setRetryCount(0);
+      setIsRetrying(false);
+      if (retryTimeoutRef.current) {
+        clearTimeout(retryTimeoutRef.current);
+      }
+
+      window.location.href = '/jobs';
+    },
+  });
+
+  const logout = async () => {
+    setIsLoadingLogout(true);
+    await privyLogout();
+  };
+
   const { mutate: setupLocal, isPending: isLoadingSetup } = useMutation({
     async mutationFn() {
       const accessToken = await getAccessToken();
       const response = await getCheckWallet(accessToken);
+
+      if (Boolean(response.token) && permissions.length === 0) {
+        await logout();
+      }
+
       localStorage.setItem(LOCAL_STORAGE_KEYS.AUTH_JWT, response.token);
       setCheckWalletResponse(response);
       return response;
@@ -160,28 +187,6 @@ export const useAuthProvider = () => {
   });
 
   const isAuthenticated = isLoggedIn && hasPermission && hasEmbeddedWallet;
-
-  const [isLoadingLogout, setIsLoadingLogout] = useState(false);
-  const { logout: privyLogout } = useLogout({
-    async onSuccess() {
-      setCheckWalletResponse(DEFAULT_CHECK_WALLET_RESPONSE);
-      localStorage.removeItem(LOCAL_STORAGE_KEYS.AUTH_JWT);
-      // Reset error state on logout
-      setApiError(null);
-      setRetryCount(0);
-      setIsRetrying(false);
-      if (retryTimeoutRef.current) {
-        clearTimeout(retryTimeoutRef.current);
-      }
-
-      window.location.href = '/jobs';
-    },
-  });
-
-  const logout = async () => {
-    setIsLoadingLogout(true);
-    await privyLogout();
-  };
 
   // Setup local if logged in with wallet but no permissions
   // Only if not in error state and not recently retried
