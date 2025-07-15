@@ -76,7 +76,7 @@ export const useAuthProvider = () => {
       const accessToken = await getAccessToken();
       const response = await getCheckWallet(accessToken);
 
-      if (Boolean(response.token) && permissions.length === 0) {
+      if (Boolean(response.token) && response.permissions.length === 0) {
         await logout();
       }
 
