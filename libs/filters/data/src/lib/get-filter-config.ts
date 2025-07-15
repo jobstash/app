@@ -10,9 +10,7 @@ import { mwFetch } from '@jobstash/shared/data';
 export const getFilterConfig = async (routeSection: RouteSection) => {
   // Crypto-native-jobs filter-configs are the same as jobs filter-configs
   const finalRouteSection =
-    routeSection === ROUTE_SECTION.JOBS_FOR_EXPERTS
-      ? ROUTE_SECTION.JOBS
-      : routeSection;
+    routeSection === ROUTE_SECTION.JOBS ? ROUTE_SECTION.JOBS : routeSection;
 
   const url = `${MW_URL}${finalRouteSection}/filters`;
 
