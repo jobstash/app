@@ -13,7 +13,7 @@ const tiers = [
   {
     name: '📌 to top',
     id: 'tier-basic',
-    pricePerJob: '$200',
+    pricePerJob: '$300',
     description:
       'Sticky your post so it stays 📌 to the top of the jobs page and on the homepage for 🗓 7 days. 5x more views! Perfect for getting more attention on your listing without the extras. Maximize exposure and ensure your job reaches the right candidates faster.',
     features: [
