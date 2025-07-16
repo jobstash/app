@@ -9,11 +9,13 @@ export const messageResponseSchema = myzod
   })
   .allowUnknownKeys(true);
 
-export const tagSchema = myzod.object({
-  id: myzod.string().min(1),
-  name: myzod.string().min(1),
-  normalizedName: myzod.string().min(1),
-});
+export const tagSchema = myzod
+  .object({
+    id: myzod.string().min(1),
+    name: myzod.string().min(1),
+    normalizedName: myzod.string().min(1),
+  })
+  .allowUnknownKeys(true);
 
 export const allTagsResponseSchema = myzod.object({
   success: myzod.boolean(),
