@@ -1,3 +1,5 @@
 onlyBuiltDependencies:
+  - '@reown/appkit'
   - bufferutil
+  - secp256k1
   - utf-8-validate
