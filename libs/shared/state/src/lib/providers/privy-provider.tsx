@@ -5,7 +5,6 @@ import { PRIVY_APP_ID, PRIVY_CLIENT_ID } from '@jobstash/shared/core';
 const THEME = 'dark';
 const ACCENT_COLOR = '#676FFF';
 const LOGO = 'https://jobstash.xyz/logo.png';
-const CREATE_ON_LOGIN = 'all-users';
 
 interface Props {
   screenLoader: React.ReactNode;
@@ -31,7 +30,9 @@ export const PrivyProvider = ({ screenLoader, children }: Props) => (
       },
       // Create embedded wallets for users who don't have a wallet
       embeddedWallets: {
-        createOnLogin: CREATE_ON_LOGIN,
+        ethereum: {
+          createOnLogin: 'off',
+        },
       },
     }}
   >
