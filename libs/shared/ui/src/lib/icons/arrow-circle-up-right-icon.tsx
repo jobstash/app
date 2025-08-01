@@ -1,12 +1,13 @@
 import { memo } from 'react';
 
-const ArrowCircleUpRightIcon = () => (
+const ArrowCircleUpRightIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     width="13"
     height="13"
     viewBox="0 0 13 13"
     fill="none"
     xmlns="http://www.w3.org/2000/svg"
+    {...props}
   >
     <path
       d="M11.375 6.5C11.375 9.19239 9.19239 11.375 6.5 11.375C3.80761 11.375 1.625 9.19239 1.625 6.5C1.625 3.80761 3.80761 1.625 6.5 1.625C9.19239 1.625 11.375 3.80761 11.375 6.5Z"
