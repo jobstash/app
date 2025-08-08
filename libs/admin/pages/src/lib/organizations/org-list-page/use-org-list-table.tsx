@@ -289,32 +289,32 @@ export const useOrgListTable = () => {
           return true;
         },
       },
-      {
-        headerName: 'Community',
-        autoHeight: true,
-        editable: true,
-        valueGetter: (p) => p.data?.communities.join(','),
-        valueSetter(p) {
-          p.data.communities = p.newValue
-            .split(',')
-            .map((s: string) => s.trim())
-            .filter(Boolean);
-          return true;
-        },
-      },
-      {
-        headerName: 'Grant',
-        autoHeight: true,
-        editable: true,
-        valueGetter: (p) => p.data?.grants.join(','),
-        valueSetter(p) {
-          p.data.grants = p.newValue
-            .split(',')
-            .map((s: string) => s.trim())
-            .filter(Boolean);
-          return true;
-        },
-      },
+      // {
+      //   headerName: 'Community',
+      //   autoHeight: true,
+      //   editable: true,
+      //   valueGetter: (p) => p.data?.communities.join(','),
+      //   valueSetter(p) {
+      //     p.data.communities = p.newValue
+      //       .split(',')
+      //       .map((s: string) => s.trim())
+      //       .filter(Boolean);
+      //     return true;
+      //   },
+      // },
+      // {
+      //   headerName: 'Grant',
+      //   autoHeight: true,
+      //   editable: true,
+      //   valueGetter: (p) => p.data?.grants.join(','),
+      //   valueSetter(p) {
+      //     p.data.grants = p.newValue
+      //       .split(',')
+      //       .map((s: string) => s.trim())
+      //       .filter(Boolean);
+      //     return true;
+      //   },
+      // },
       {
         headerName: 'Jobsite Url',
         autoHeight: true,
@@ -467,6 +467,19 @@ export const useOrgListTable = () => {
         headerName: 'Activate Jobsite',
         width: 144,
         cellRenderer: ActivateJobsiteRenderer,
+        comparator(_p1, _p2, nodeA, nodeB) {
+          const isNotApplicable1 =
+            (nodeA.data?.detectedJobsites ?? [])
+              .flatMap((j) => j.url)
+              .filter(Boolean).length === 0 ||
+            (nodeA.data?.jobsites ?? []).length > 0;
+          const isNotApplicable2 =
+            (nodeB.data?.detectedJobsites ?? [])
+              .flatMap((j) => j.url)
+              .filter(Boolean).length === 0 ||
+            (nodeB.data?.jobsites ?? []).length > 0;
+          return isNotApplicable1 ? 1 : isNotApplicable2 ? -1 : 0;
+        },
       },
     ],
     [],
@@ -498,7 +511,8 @@ export const useOrgListTable = () => {
               updatedTimestamp,
               projects,
               aliases,
-              communities,
+              //
+              // communities,
               grants,
               jobsites,
               detectedJobsites,
@@ -528,7 +542,8 @@ export const useOrgListTable = () => {
               updatedTimestamp,
               projects.flatMap((p) => p.name),
               aliases,
-              communities,
+              //
+              // communities,
               grants,
               jobsites.flatMap((j) => j.url),
               jobsites.flatMap((j) => j.type),

@@ -32,7 +32,8 @@ const DEFAULT_FORM_STATE: ManagedOrgFormState = {
   docs: '',
   twitter: '',
   grants: '',
-  communities: '',
+  //
+  // communities: '',
   jobsites: [],
   detectedJobsites: [],
   projects: '',
@@ -88,7 +89,7 @@ const inputSections = [
     title: 'Grants',
     fields: [
       { label: 'Grants', key: 'grants', kind: 'list' },
-      { label: 'Communities', key: 'communities', kind: 'list' },
+      // { label: 'Communities', key: 'communities', kind: 'list' },
     ],
   },
   {
