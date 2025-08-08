@@ -31,7 +31,8 @@ const DEFAULT_FORM_STATE: ManagedOrgFormState = {
   github: '',
   docs: '',
   twitter: '',
-  grants: '',
+  //
+  // grants: '',
   //
   // communities: '',
   jobsites: [],
@@ -84,14 +85,14 @@ const inputSections = [
       { label: 'Docs', key: 'docs', kind: 'list' },
     ],
   },
-  {
-    key: 'grants',
-    title: 'Grants',
-    fields: [
-      { label: 'Grants', key: 'grants', kind: 'list' },
-      // { label: 'Communities', key: 'communities', kind: 'list' },
-    ],
-  },
+  // {
+  //   key: 'grants',
+  //   title: 'Grants',
+  //   fields: [
+  //     { label: 'Grants', key: 'grants', kind: 'list' },
+  //     // { label: 'Communities', key: 'communities', kind: 'list' },
+  //   ],
+  // },
   {
     key: 'socials',
     title: 'Socials',

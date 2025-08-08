@@ -97,7 +97,8 @@ export const managedOrgSchema = myzod
     discords: myzod.array(myzod.string()),
     docs: myzod.array(myzod.string()),
     telegrams: myzod.array(myzod.string()),
-    grants: myzod.array(myzod.string()),
+    //
+    // grants: myzod.array(myzod.string()),
     //
     // communities: myzod.array(myzod.string()),
     jobsites: myzod.array(jobsiteSchema),
@@ -152,7 +153,8 @@ export const managedOrgFormStateSchema = myzod.object({
   discord: myzod.string(),
   docs: myzod.string(),
   telegram: myzod.string(),
-  grants: myzod.string(),
+  //
+  // grants: myzod.string(),
   //
   // communities: myzod.string(),
   jobsites: myzod.array(jobsiteSchema),
@@ -180,7 +182,8 @@ export const dataToFormState = (data: ManagedOrg): ManagedOrgFormState => ({
   github: data.githubs.join(', '),
   docs: data.docs.join(', '),
   twitter: data.twitters.join(', '),
-  grants: data.grants.join(', '),
+  //
+  // grants: data.grants.join(', '),
   //
   // communities: data.communities.join(', '),
   jobsites: data.jobsites,
@@ -216,7 +219,8 @@ export const formStateToOrgPayload = (
   githubs: parseList(formState.github),
   docs: parseList(formState.docs),
   twitters: parseList(formState.twitter),
-  grants: parseList(formState.grants),
+  //
+  // grants: parseList(formState.grants),
   //
   // communities: parseList(formState.communities),
   jobsites: formState.jobsites,
