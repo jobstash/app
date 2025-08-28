@@ -11,10 +11,8 @@ import {
   ModalHeader,
 } from '@heroui/modal';
 import { Spinner } from '@heroui/spinner';
-import { useQueryClient } from '@tanstack/react-query';
 
 import { useAuthContext } from '@jobstash/auth/state';
-import { useMwVersionContext } from '@jobstash/shared/state';
 
 import { Heading, Text } from '@jobstash/shared/ui';
 
@@ -33,19 +31,8 @@ export const LogoutConfirmModal = ({
 }: Props) => {
   const { logout, isLoadingLogout } = useAuthContext();
 
-  const { mwVersion } = useMwVersionContext();
-  const queryClient = useQueryClient();
-
   const onLogout = async () => {
     await logout();
-
-    await queryClient.invalidateQueries({
-      queryKey: [mwVersion, 'profile-info'],
-    });
-    await queryClient.invalidateQueries({
-      queryKey: [mwVersion, 'affiliated-orgs'],
-    });
-
     onClose();
   };
 
