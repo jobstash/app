@@ -11,7 +11,10 @@ interface Props {
 }
 
 export const ButtonWrapper = ({ children }: Props) => (
-  <div className={cn('h-8 lg:h-10 rounded-xl max-w-[10rem]')} style={wrapperStyle}>
+  <div
+    className={cn('h-8 lg:h-10 rounded-xl max-w-[10rem]')}
+    style={wrapperStyle}
+  >
     {children}
   </div>
 );
