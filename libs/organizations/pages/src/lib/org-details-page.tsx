@@ -109,38 +109,34 @@ export const OrgDetailsPage = ({
   // TODO: org meta data
 
   return (
-    <>
-      {/* TODO: metadata */}
+    <PageWrapper>
+      <SideBar filtersRouteSection={ROUTE_SECTION.ORGANIZATIONS} />
 
-      <PageWrapper>
-        <SideBar filtersRouteSection={ROUTE_SECTION.ORGANIZATIONS} />
-
+      <div
+        className={cn('px-3.5 pt-[212px] lg:px-8 lg:pt-8', {
+          'z-50': showFilters,
+          'lg:pr-[calc(44vw)]  ': !showFilters,
+        })}
+      >
         <div
-          className={cn('px-3.5 pt-[212px] lg:px-8 lg:pt-8', {
-            'z-50': showFilters,
-            'lg:pr-[calc(44vw)]  ': !showFilters,
+          className={cn({
+            'lg:pr-[calc(44vw)]  ': showFilters,
           })}
         >
-          <div
-            className={cn({
-              'lg:pr-[calc(44vw)]  ': showFilters,
-            })}
-          >
-            <OrgList initOrg={initOrgListItem} activeOrgId={activeOrgId} />
-          </div>
+          <OrgList initOrg={initOrgListItem} activeOrgId={activeOrgId} />
         </div>
+      </div>
 
-        <div
-          className={cn(
-            'hide-scrollbar fixed inset-0 h-dvh overflow-y-auto bg-dark px-4 transition-all lg:inset-auto lg:right-0 lg:top-0 lg:w-5/12 lg:px-6 lg:pr-10 lg:mt-[100px] lg:h-[calc(100vh-100px)]',
-            { 'z-50': !showFilters },
-            { '-z-50': showFilters },
-            { 'lg:mt-[140px] lg:h-[calc(100vh-140px)]': isOpenTopBanner },
-          )}
-        >
-          <OrgsRightPanel hasTitle orgId={orgId} currentTab={tab as string} />
-        </div>
-      </PageWrapper>
-    </>
+      <div
+        className={cn(
+          'hide-scrollbar fixed inset-0 h-dvh overflow-y-auto bg-dark px-4 transition-all lg:inset-auto lg:right-0 lg:top-0 lg:w-5/12 lg:px-6 lg:pr-10 lg:mt-[100px] lg:h-[calc(100vh-100px)]',
+          { 'z-50': !showFilters },
+          { '-z-50': showFilters },
+          { 'lg:mt-[140px] lg:h-[calc(100vh-140px)]': isOpenTopBanner },
+        )}
+      >
+        <OrgsRightPanel hasTitle orgId={orgId} currentTab={tab as string} />
+      </div>
+    </PageWrapper>
   );
 };
