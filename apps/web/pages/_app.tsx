@@ -148,11 +148,11 @@ const App = ({ Component, pageProps }: AppProps) => {
                     >
                       <JotaiProvider>
                         <DonateModal />
+                        <ReportModal />
                         <Component {...pageProps} />
                       </JotaiProvider>
                     </div>
-
-                    <ReportModal />
+                    
                     {/* <NewFeatureModal /> */}
                   </AuthProvider>
                 </PrivyProvider>
