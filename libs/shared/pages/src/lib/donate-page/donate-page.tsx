@@ -56,26 +56,17 @@ export const DonatePage = () => {
             </strong>
             <br />
             <br />
-            JobStash answers the question: <strong>&quot;How would the best job board for crypto be built?&quot;</strong>
-            <br />
-            We believe the perfect job board isn&apos;t built for recruiters—it&apos;s built for <strong>talent seekers</strong> who don&apos;t need a rent-seeking middleman.
+            For 3 years, we&apos;ve provided the richest crypto job data completely for free, helping over <strong>150k users</strong> discover unique roles noone else is incentivized to cover.
             <br />
             <br />
-            From day 0, we&apos;ve provided the richest data on opportunities, fundraising, and tech stacks—completely for free. We distribute jobs for companies that would otherwise receive no coverage, helping over 150k users discover unique roles across 8k+ indexed companies.
-            <br />
-            <br />
-            We did this with grant money for 3 years. But now money is out, and we need to keep the lights on.
-            <br />
-            <br />
-            <strong>Did your company get their jobs published by us for free? Time to donate.</strong><br/>
-            <strong>Did you hire via us? Time to donate.</strong><br/>
-            <strong>Do you want us to keep staying online? Time to donate.</strong>
+            We built this with grant money, but that funding is now exhausted. To keep the lights on and our data operations running, we need your help.
           </Text>
-          <img
-            src="/stats/stats-all-time.png"
-            alt="JobStash Stats: 1M Views"
-            className="rounded-xl border border-white/10 w-full max-w-2xl"
-          />
+          <ul className="pl-6 space-y-1 list-disc list-outside text-white/60 leading-relaxed">
+            <li>Did your company get free distribution? <strong>Time to donate.</strong></li>
+            <li>Did you hire via us? <strong>Time to donate.</strong></li>
+            <li>Do you want us to stay online? <strong>Time to donate.</strong></li>
+          </ul>
+          
         </div>
 
         <div className="flex flex-col gap-y-4">
@@ -144,18 +135,19 @@ export const DonatePage = () => {
             <HandIconSvg />
             <Heading className="md:text-3xl lg:text-4xl">Impact</Heading>
           </div>
+          <img
+            src="/stats/stats-all-time.png"
+            alt="JobStash Stats: 1M Views"
+            className="rounded-xl border border-white/10 w-full max-w-2xl"
+          />
           <Text color="dimmed" className="leading-relaxed">
-            Jobstash data and insights are used by developers, organizations,
-            and job seekers across the Web3 ecosystem. Our main focus is to
-            cater towards talented individuals seeking opportunities and
-            organizations looking to build exceptional teams in Web3. Therefore
-            we support everyone who helps us achieve this mission.
+            Over the past 3 years, we have provided 92k+ job applications to over 1.5K companies by 143k+ users, in 1M+ views.
           </Text>
         </div>
 
         <div className="flex flex-col gap-y-3">
           <Heading size="lg" fw="semibold">
-            Public use of our data and visualizations
+            Public use of our data
           </Heading>
           <Text color="dimmed" className="leading-relaxed">
             The following people and institutions mention us or use our data
@@ -186,7 +178,7 @@ export const DonatePage = () => {
           </Text>
           <div className="flex gap-12 items-center pl-4 py-4">
             <ArbitrumSvg />
-            <EthFoundationSvg />
+            {/* <EthFoundationSvg /> */}
             <OptimismSvg />
           </div>
         </div>
