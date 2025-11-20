@@ -113,7 +113,7 @@ export const DonatePage = () => {
             </div>
 
             <div className="flex flex-col gap-3 p-4 bg-white/5 border border-white/10 rounded-2xl flex-1">
-              <Text fw="medium">Donate on our Giveth page</Text>
+              <Text fw="medium">Donate to JobStash on our Giveth page</Text>
               <Text size="sm" className="text-white/70">
                 Support us through the Giveth platform for transparent
                 charitable giving.
