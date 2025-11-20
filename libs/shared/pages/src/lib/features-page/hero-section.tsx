@@ -4,7 +4,7 @@ import Link from 'next/link';
 // Import { ChevronRightIcon } from '@heroicons/react/20/solid';
 import { Button } from '@heroui/button';
 
-import { PDF_VERI_URL, SUPPORT_TELEGRAM_URL, VERI_URL } from '@jobstash/shared/core';
+import { PDF_VERI_URL, VERI_APP_URL } from '@jobstash/shared/core';
 
 export const HeroSection = () => (
   <div className="max-w-7xl px-6 pt-10 lg:flex lg:px-8">
@@ -40,7 +40,7 @@ export const HeroSection = () => (
       <div className="flex items-center gap-x-6">
         <Button
           as={Link}
-          href={VERI_URL}
+          href={VERI_APP_URL}
           className="bg-gradient-to-l from-primary to-tertiary font-bold"
           radius="sm"
         >
