@@ -13,7 +13,7 @@ const tiers = [
   {
     name: '📌 to top',
     id: 'tier-basic',
-    pricePerJob: '$300',
+    pricePerJob: '$69',
     description:
       'Sticky your post so it stays 📌 to the top of the jobs page and on the homepage for 🗓 7 days. 5x more views! Perfect for getting more attention on your listing without the extras. Maximize exposure and ensure your job reaches the right candidates faster.',
     features: [
@@ -26,7 +26,7 @@ const tiers = [
   {
     name: 'Advanced',
     id: 'tier-advanced',
-    pricePerJob: '$300',
+    pricePerJob: '$69',
     description:
       'Get everything in Basic and more! Perfect for increasing your chances of finding top talent with enhanced visibility',
     features: [
@@ -94,7 +94,7 @@ export const JobFeaturePricing = () => (
               </div> */}
 
               <span className="flex items-center gap-x-2">
-                <GradientText text="$200" className="text-6xl font-bold" />
+                <GradientText text="$69" className="text-6xl font-bold" />
                 <span className="text-2xl text-white/80">/ job</span>
               </span>
 
