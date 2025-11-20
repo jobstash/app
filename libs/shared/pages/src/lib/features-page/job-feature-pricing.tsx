@@ -24,16 +24,13 @@ const tiers = [
     featured: true,
   },
   {
-    name: 'Advanced',
+    name: 'Custom Story',
     id: 'tier-advanced',
-    pricePerJob: '$69',
+    pricePerJob: '$200',
     description:
-      'Get everything in Basic and more! Perfect for increasing your chances of finding top talent with enhanced visibility',
+      'Request a custom telegram Story for maximum reach to our audience of 12K subscribers. Perfect for increasing your chances of finding top talent with enhanced visibility',
     features: [
-      'Everything in Basic Plan',
-      'Telegram stories about org, project and job',
-      'Job Post bumping on Telegram',
-      'Crossposting',
+      'Telegram stories about org, project and job'
     ],
     featured: false,
   },
@@ -137,7 +134,7 @@ export const JobFeaturePricing = () => (
                 href="/jobs"
                 className="font-bold pl-0"
               >
-                Promote directly from the job feed
+                Promote directly from the job feed (hint: look for the 📌 on the job listing)
                 <span aria-hidden="true">
                   <MoveRightIcon className="w-4 h-4" />
                 </span>
@@ -153,7 +150,7 @@ export const JobFeaturePricing = () => (
                     tierIdx === 0,
                 })}
               >
-                Buy Plan
+                Chat with us about your custom story
               </Button>
             </div>
           )}

@@ -4,7 +4,7 @@ import { CheckIcon } from '@heroicons/react/20/solid';
 import { Button } from '@heroui/button';
 import { SettingsIcon } from 'lucide-react';
 
-import { SUPPORT_TELEGRAM_URL } from '@jobstash/shared/core';
+import { SUPPORT_TELEGRAM_URL, VERI_URL } from '@jobstash/shared/core';
 import { cn } from '@jobstash/shared/utils';
 
 import { GradientText } from '@jobstash/shared/ui';
@@ -142,13 +142,13 @@ export const VeriPricing = () => (
           <div className="w-full items-center flex justify-center pt-8">
             <Button
               as={Link}
-              href={SUPPORT_TELEGRAM_URL}
+              href={VERI_URL}
               className={cn('w-5/6', {
                 'bg-gradient-to-l from-primary to-tertiary font-bold':
                   tier.mostPopular,
               })}
             >
-              Buy Plan
+              Buy plan on Veri
             </Button>
           </div>
         </div>

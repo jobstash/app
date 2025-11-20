@@ -4,7 +4,7 @@ import Link from 'next/link';
 // Import { ChevronRightIcon } from '@heroicons/react/20/solid';
 import { Button } from '@heroui/button';
 
-import { PDF_JOBSTASH_URL, SUPPORT_TELEGRAM_URL } from '@jobstash/shared/core';
+import { PDF_VERI_URL, SUPPORT_TELEGRAM_URL, VERI_URL } from '@jobstash/shared/core';
 
 export const HeroSection = () => (
   <div className="max-w-7xl px-6 pt-10 lg:flex lg:px-8">
@@ -32,23 +32,22 @@ export const HeroSection = () => (
       </div>
 
       <p className="text-xl leading-7 text-white/90">
-        Increase the visibility of your job listings and discover top talent at
-        scale. Streamline your hiring with our ATS integrations and candidate
-        due diligence reports, built specifically for the crypto industry. No
-        AI, no gimmicks—just reliable data.
+        Meet Veri: it increases the visibility of your job listings and lets you discover verified top talent at
+        scale. Stay safe thanks to our candidate due diligence reports, built specifically for the crypto industry.
+        No AI, no gimmicks. Just reliable data.
       </p>
 
       <div className="flex items-center gap-x-6">
         <Button
           as={Link}
-          href={SUPPORT_TELEGRAM_URL}
+          href={VERI_URL}
           className="bg-gradient-to-l from-primary to-tertiary font-bold"
           radius="sm"
         >
-          Contact Sales
+          Start using Veri
         </Button>
-        <Button variant="light" radius="sm" as={Link} href={PDF_JOBSTASH_URL}>
-          Learn more <span aria-hidden="true">→</span>
+        <Button variant="light" radius="sm" as={Link} href={PDF_VERI_URL}>
+          Learn more about Veri <span aria-hidden="true">→</span>
         </Button>
       </div>
     </div>

@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 import { Button } from '@heroui/button';
 
-import { SUPPORT_TELEGRAM_URL } from '@jobstash/shared/core';
+import { VERI_URL } from '@jobstash/shared/core';
 
 import { GradientText } from '@jobstash/shared/ui';
 
@@ -33,7 +33,7 @@ export const DynamicPrice = () => {
                   variant="flat"
                   radius="sm"
                   as={Link}
-                  href={SUPPORT_TELEGRAM_URL}
+                  href={VERI_URL}
                   target="_blank"
                   rel="noreferrer"
                 >
