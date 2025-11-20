@@ -21,6 +21,8 @@ import { cn, getLocalStorageValue } from '@jobstash/shared/utils';
 
 import { newFeatureIsOpenAtom } from '@jobstash/shared/state';
 
+import LinkButton from '../base/button/link-button';
+import Button from '../base/button/button';
 import Text from '../base/text';
 
 const LS_KEY = 'new-feature-key';
@@ -100,89 +102,51 @@ export const NewFeatureModal = () => {
 
                 <div className="flex flex-col gap-4 max-w-fit">
                   <ContentText>
-                    JobStash answers the question: <strong>&quot;How would the best job board for crypto be built?&quot;</strong>
+                    For 3 years, JobStash has provided the richest crypto job data completely for free, helping over <strong>150k users</strong> discover unique roles noone else is incentivized to cover.
                   </ContentText>
 
-                  <div className="flex flex-col gap-2 pl-2">
-                    <ContentText>
-                      We believe the perfect job board isn&apos;t built for recruiters—it&apos;s built for <strong>talent seekers</strong> who don&apos;t need a rent-seeking middleman.
-                    </ContentText>
-                    <ContentText>
-                      From day 0, we&apos;ve provided the richest data on opportunities, fundraising, and tech stacks—completely for free. We distribute jobs for companies that would otherwise receive no coverage, helping over 150k users discover unique roles across 8k+ indexed companies.
-                    </ContentText>
-                  </div>
+                  <ContentText>
+                    We built this with grant money, but that funding is now exhausted.
+                  </ContentText>
 
-                  <div className="flex flex-col gap-2 pl-2">
-                    <ContentText className="font-bold">
-                      But now, we need your help.
-                    </ContentText>
-                    <ContentText>
-                      We built this with grant money and survived for 3 years. Now, that funding is exhausted, and we need support to keep the lights on and our data operations running.
-                    </ContentText>
-                  </div>
+                  <ContentText className="font-bold">
+                    To keep the lights on and our data operations running, we need your help.
+                  </ContentText>
 
-                  <div className="flex flex-col gap-2 pl-2">
-                    <ul className="pl-6 space-y-1 list-disc list-outside">
-                      <li>
-                        <ContentText>
-                          Did your company get free distribution? <strong>Time to donate.</strong>
-                        </ContentText>
-                      </li>
-                      <li>
-                        <ContentText>
-                          Did you hire via us? <strong>Time to donate.</strong>
-                        </ContentText>
-                      </li>
-                      <li>
-                        <ContentText>
-                          Do you want us to stay online? <strong>Time to donate.</strong>
-                        </ContentText>
-                      </li>
-                    </ul>
-                  </div>
-
-                  <ContentText className="mt-2">
-                    If you find JobStash useful, please consider supporting us from the{' '}
-                    <Link
-                      href={`https://jobstash.xyz/donate`}
-                      className="text-indigo-400 hover:underline"
+                  <div className="flex flex-col gap-3 pt-4 sm:flex-row">
+                    <LinkButton
+                      linkProps={{ href: 'https://jobstash.xyz/donate' }}
+                      variant="primary"
+                      className="w-full font-bold sm:w-auto"
+                      external
                     >
-                      @jobstashxyz
-                    </Link>
-                    {' '}page.
-                  </ContentText>
+                      Donate to JobStash
+                    </LinkButton>
+                    <Button
+                      variant="outline"
+                      className="w-full font-bold sm:w-auto"
+                      onClick={onClose}
+                    >
+                      Maybe later
+                    </Button>
+                  </div>
                 </div>
               </div>
             </ModalBody>
-            <ModalFooter className="flex items-center justify-center gap-4 p-0 pt-2">
+            <ModalFooter className="flex items-center justify-center gap-4 p-0 pt-6 pb-2">
               <div>
-                <span className="text-md text-white/80">
-                  Found any bugs? Let us know on telegram{' '}
+                <span className="text-sm text-white/60">
+                  Found a bug? Message us on{' '}
                   <Link
                     href={SUPPORT_TELEGRAM_URL}
                     className="text-indigo-400 hover:underline"
+                    target="_blank"
+                    rel="noopener noreferrer"
                   >
-                    {' '}
-                    @jobstashxyz
+                    Telegram
                   </Link>
                 </span>
               </div>
-              {/* {hasCTA && (
-                <Button
-                  size="md"
-                  className="font-bold md:w-1/5 bg-gradient-to-l from-primary to-tertiary"
-                  onClick={onClickCTA}
-                >
-                  {CTA_TEXT}
-                </Button>
-              )}
-              <Button
-                size="md"
-                className="font-bold md:w-1/5"
-                onClick={onClose}
-              >
-                OK
-              </Button> */}
             </ModalFooter>
           </>
         )}
