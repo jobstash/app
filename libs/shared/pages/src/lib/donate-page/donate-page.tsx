@@ -91,9 +91,17 @@ export const DonatePage = () => {
                 <div className="p-2 bg-white/10 rounded-lg">
                   <EthereumIcon className="w-6 h-6 stroke-2" />
                 </div>
-                <div>
-                  <Text fw="bold" size="lg">Direct Transfer</Text>
-                  <Text size="sm" color="dimmed">Donate to our wallet on any EVM chain</Text>
+                <div className="flex flex-col gap-1 text-left">
+                  <Text fw="bold" size="lg" className="block leading-tight">
+                    Direct Transfer
+                  </Text>
+                  <Text
+                    size="sm"
+                    color="dimmed"
+                    className="block leading-tight"
+                  >
+                    Donate to our wallet on any EVM chain
+                  </Text>
                 </div>
               </div>
               
@@ -134,9 +142,17 @@ export const DonatePage = () => {
                 <div className="p-2 bg-indigo-500/20 rounded-lg">
                   <HandsReachingSvg />
                 </div>
-                <div>
-                  <Text fw="bold" size="lg">JobStash Giveth Campaign</Text>
-                  <Text size="sm" color="dimmed">Support via transparent charitable giving</Text>
+                <div className="flex flex-col gap-1 text-left">
+                  <Text fw="bold" size="lg" className="block leading-tight">
+                    JobStash Giveth Campaign
+                  </Text>
+                  <Text
+                    size="sm"
+                    color="dimmed"
+                    className="block leading-tight"
+                  >
+                    Support via transparent charitable giving
+                  </Text>
                 </div>
               </div>
 
