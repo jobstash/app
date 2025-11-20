@@ -94,159 +94,159 @@ export const PRICING_SECTIONS: Section[] = [
       },
     ],
   },
-  {
-    name: 'ATS Integration',
-    features: [
-      {
-        name: 'Lever Integration',
-        tiers: {
-          Starter: false,
-          Growth: true,
-          Pro: true,
-          Max: true,
-        },
-      },
-      {
-        name: 'Workable Integration',
-        tiers: {
-          Starter: false,
-          Growth: true,
-          Pro: true,
-          Max: true,
-        },
-      },
-      {
-        name: 'Greenhouse Integration',
-        tiers: {
-          Starter: false,
-          Growth: false,
-          Pro: true,
-          Max: true,
-        },
-      },
-      {
-        name: 'Custom ATS Solution',
-        tiers: {
-          Starter: false,
-          Growth: false,
-          Pro: true,
-          Max: true,
-        },
-      },
-    ],
-  },
-  {
-    name: 'GitHub Integration',
-    features: [
-      {
-        name: 'GitHub Organization Verification',
-        tiers: {
-          Starter: false,
-          Growth: true,
-          Pro: true,
-          Max: true,
-        },
-      },
-      {
-        name: 'Internal Developer Detection',
-        tiers: {
-          Starter: false,
-          Growth: true,
-          Pro: true,
-          Max: true,
-        },
-      },
-      {
-        name: 'Commit History Analysis',
-        tiers: {
-          Starter: false,
-          Growth: true,
-          Pro: true,
-          Max: true,
-        },
-      },
-      {
-        name: 'Developer Ranking & Scoring',
-        tiers: {
-          Starter: false,
-          Growth: true,
-          Pro: true,
-          Max: true,
-        },
-      },
-    ],
-  },
-  {
-    name: 'Ecosystem Integration',
-    features: [
-      {
-        name: 'POAP Verification',
-        tiers: {
-          Starter: false,
-          Growth: true,
-          Pro: true,
-          Max: true,
-        },
-      },
-      {
-        name: 'NFT Wallet Analysis',
-        tiers: {
-          Starter: false,
-          Growth: true,
-          Pro: true,
-          Max: true,
-        },
-      },
-      {
-        name: 'DegenScore Integration',
-        tiers: {
-          Starter: false,
-          Growth: true,
-          Pro: true,
-          Max: true,
-        },
-      },
-      {
-        name: 'Custom Ecosystem Activations',
-        tiers: {
-          Starter: false,
-          Growth: true,
-          Pro: true,
-          Max: true,
-        },
-      },
-    ],
-  },
-  {
-    name: 'Data Coverage',
-    features: [
-      {
-        name: 'Organization Coverage',
-        tiers: {
-          Starter: false,
-          Growth: '3000+',
-          Pro: '6600+',
-          Max: '10000+',
-        },
-      },
-      {
-        name: 'Developer Database Access',
-        tiers: {
-          Starter: false,
-          Growth: '500K+',
-          Pro: '1M+',
-          Max: '2M+',
-        },
-      },
-      {
-        name: 'Custom Data Pipeline',
-        tiers: {
-          Starter: false,
-          Growth: false,
-          Pro: true,
-          Max: true,
-        },
-      },
-    ],
-  },
+  // {
+  //   name: 'ATS Integration',
+  //   features: [
+  //     {
+  //       name: 'Lever Integration',
+  //       tiers: {
+  //         Starter: false,
+  //         Growth: true,
+  //         Pro: true,
+  //         Max: true,
+  //       },
+  //     },
+  //     {
+  //       name: 'Workable Integration',
+  //       tiers: {
+  //         Starter: false,
+  //         Growth: true,
+  //         Pro: true,
+  //         Max: true,
+  //       },
+  //     },
+  //     {
+  //       name: 'Greenhouse Integration',
+  //       tiers: {
+  //         Starter: false,
+  //         Growth: false,
+  //         Pro: true,
+  //         Max: true,
+  //       },
+  //     },
+  //     {
+  //       name: 'Custom ATS Solution',
+  //       tiers: {
+  //         Starter: false,
+  //         Growth: false,
+  //         Pro: true,
+  //         Max: true,
+  //       },
+  //     },
+  //   ],
+  // },
+  // {
+  //   name: 'GitHub Integration',
+  //   features: [
+  //     {
+  //       name: 'GitHub Organization Verification',
+  //       tiers: {
+  //         Starter: false,
+  //         Growth: true,
+  //         Pro: true,
+  //         Max: true,
+  //       },
+  //     },
+  //     {
+  //       name: 'Internal Developer Detection',
+  //       tiers: {
+  //         Starter: false,
+  //         Growth: true,
+  //         Pro: true,
+  //         Max: true,
+  //       },
+  //     },
+  //     {
+  //       name: 'Commit History Analysis',
+  //       tiers: {
+  //         Starter: false,
+  //         Growth: true,
+  //         Pro: true,
+  //         Max: true,
+  //       },
+  //     },
+  //     {
+  //       name: 'Developer Ranking & Scoring',
+  //       tiers: {
+  //         Starter: false,
+  //         Growth: true,
+  //         Pro: true,
+  //         Max: true,
+  //       },
+  //     },
+  //   ],
+  // },
+  // {
+  //   name: 'Ecosystem Integration',
+  //   features: [
+  //     {
+  //       name: 'POAP Verification',
+  //       tiers: {
+  //         Starter: false,
+  //         Growth: true,
+  //         Pro: true,
+  //         Max: true,
+  //       },
+  //     },
+  //     {
+  //       name: 'NFT Wallet Analysis',
+  //       tiers: {
+  //         Starter: false,
+  //         Growth: true,
+  //         Pro: true,
+  //         Max: true,
+  //       },
+  //     },
+  //     {
+  //       name: 'DegenScore Integration',
+  //       tiers: {
+  //         Starter: false,
+  //         Growth: true,
+  //         Pro: true,
+  //         Max: true,
+  //       },
+  //     },
+  //     {
+  //       name: 'Custom Ecosystem Activations',
+  //       tiers: {
+  //         Starter: false,
+  //         Growth: true,
+  //         Pro: true,
+  //         Max: true,
+  //       },
+  //     },
+  //   ],
+  // },
+  // {
+  //   name: 'Data Coverage',
+  //   features: [
+  //     {
+  //       name: 'Organization Coverage',
+  //       tiers: {
+  //         Starter: false,
+  //         Growth: '3000+',
+  //         Pro: '6600+',
+  //         Max: '10000+',
+  //       },
+  //     },
+  //     {
+  //       name: 'Developer Database Access',
+  //       tiers: {
+  //         Starter: false,
+  //         Growth: '500K+',
+  //         Pro: '1M+',
+  //         Max: '2M+',
+  //       },
+  //     },
+  //     {
+  //       name: 'Custom Data Pipeline',
+  //       tiers: {
+  //         Starter: false,
+  //         Growth: false,
+  //         Pro: true,
+  //         Max: true,
+  //       },
+  //     },
+  //   ],
+  // },
 ];
