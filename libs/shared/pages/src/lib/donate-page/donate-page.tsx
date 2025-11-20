@@ -124,7 +124,7 @@ export const DonatePage = () => {
                 className="mt-auto"
                 onClick={() => window.open(givethLink, '_blank')}
               >
-                Contribute to Giveth
+                Donate to JobStash using Giveth
               </Button>
             </div>
           </div>
