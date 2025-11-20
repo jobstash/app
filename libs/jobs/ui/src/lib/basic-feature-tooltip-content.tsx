@@ -7,7 +7,7 @@ import { cn } from '@jobstash/shared/utils';
 
 const tier = {
   name: '📌 to top',
-  pricePerJob: '$300',
+  pricePerJob: '$69',
   description:
     'Sticky your post so it stays 📌 to the top of the jobs page and on the homepage for 🗓 7 days. 5x more views! Pay with any token on most EVM networks, secured by LlamaPay!',
   features: [
