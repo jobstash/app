@@ -9,7 +9,7 @@ import { BuildYourPackage } from './build-your-package';
 import { BundleComparison } from './bundle-comparison';
 import { HeroSection } from './hero-section';
 import { JobFeaturePricing } from './job-feature-pricing';
-import { StashAlertSection } from './stash-alert-section';
+
 import { StashPoolSection } from './stash-pool-section';
 import { SupportSection } from './support';
 import { VeriSection } from './veri-section';
@@ -54,7 +54,7 @@ export const FeaturesPage = () => {
           <VeriSection />
           <WygVeri />
           <StashPoolSection />
-          <StashAlertSection />
+
           <JobFeaturePricing />
           <WygFeaturedJobs />
           <SupportSection />

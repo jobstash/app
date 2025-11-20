@@ -1,4 +1,4 @@
-import { MegaphoneIcon, PackageOpenIcon, ShieldCheckIcon } from 'lucide-react';
+import { PackageOpenIcon, ShieldCheckIcon } from 'lucide-react';
 
 import { Feature } from '../types';
 
@@ -15,25 +15,25 @@ export const FEATURES: Feature[] = [
         title: 'Starter 🔥',
         price: 0,
         description:
-          'Idea for new projects in the crypto industry just starting out with talent acquisition. Completely FREE',
+          'Get to know JobStash & Veri. Completely FREE',
       },
       {
         title: 'Growth',
-        price: 199,
+        price: 29,
         description:
-          'Ideal for growing crypto orgs needing more checks and additional support for recruiting.',
+          'Access our Talent Pool to accelerate your recruiting.',
       },
       {
         title: 'Pro',
-        price: 399,
+        price: 150,
         description:
-          'Ideal for mid-sized crypto orgs looking to grow their teams with more recruiting flexibility and efficiency.',
+          'Get 2 free job promotions every month.Ideal for to kickstart your talent search',
       },
       {
         title: 'Max',
-        price: 599,
+        price: 299,
         description:
-          'Ideal for crypto projects or orgs in hyper-growth, requiring high-volume, rapid recruitment.',
+          'Get 5 free job promotions every month. Ideal for crypto projects or orgs in growth, requiring high-volume, rapid recruitment.',
       },
     ],
   },
@@ -47,36 +47,29 @@ export const FEATURES: Feature[] = [
     price: [
       {
         title: 'Lite',
-        price: 49,
+        price: 19,
         description:
           'Include this addon for additional 100 profile verifications.',
       },
       {
         title: 'Plus',
-        price: 99,
+        price: 29,
         description:
           'Include this addon for additional 250 profile verifications.',
       },
       {
         title: 'Elite',
-        price: 149,
+        price: 39,
         description:
           'Include this addon for additional 500 profile verifications.',
       },
       {
         title: 'Ultra',
-        price: 229,
+        price: 69,
         description:
           'Include this addon for additional 1000 profile verifications.',
       },
     ],
   },
-  {
-    icon: <MegaphoneIcon size={36} />,
-    title: 'StashAlert',
-    description:
-      "Stay ahead with real-time alerts that reveal your competitors' latest recruitment trends.",
-    section: 'stash-alert',
-    price: 99,
-  },
+  
 ];
