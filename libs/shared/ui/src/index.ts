@@ -28,6 +28,7 @@ export { default as ChainIcon } from './lib/icons/chain-icon';
 export { default as CloseIcon } from './lib/icons/close-icon';
 export { default as CodeIcon } from './lib/icons/code-icon';
 export { default as CommitIcon } from './lib/icons/commit-icon';
+export { default as CopyIcon } from './lib/icons/copy-icon';
 export { default as CurrencyCircleDollarIcon } from './lib/icons/currency-circle-dollar-icon';
 export { default as DiscordIcon } from './lib/icons/discord-icon';
 export { default as DocsIcon } from './lib/icons/docs-icon';

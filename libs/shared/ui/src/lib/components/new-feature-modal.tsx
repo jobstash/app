@@ -1,3 +1,4 @@
+/* eslint-disable react/iframe-missing-sandbox */
 import Link from 'next/link';
 import React, { useEffect } from 'react';
 
@@ -29,12 +30,13 @@ const TITLE = 'The New JobStash Experience';
 export const NewFeatureModal = () => {
   const [isOpenAtom, setIsOpenAtom] = useAtom(newFeatureIsOpenAtom);
 
-  const current = JSON.stringify({ diff: NEW_FEATURE_DIFF });
-  const lastSeen = getLocalStorageValue(LS_KEY);
-  const defaultOpen = current !== lastSeen || lastSeen === '{}';
+  //
+  // const current = JSON.stringify({ diff: NEW_FEATURE_DIFF });
+  // const lastSeen = getLocalStorageValue(LS_KEY);
+  // const defaultOpen = current !== lastSeen || lastSeen === '{}';
 
   const { isOpen, onClose, onOpen } = useDisclosure({
-    defaultOpen,
+    defaultOpen: true,
   });
 
   // Need to sync atom because it's used in multiple places
@@ -42,16 +44,18 @@ export const NewFeatureModal = () => {
     if (isOpen !== isOpenAtom) setIsOpenAtom(isOpen);
   }, [isOpen, isOpenAtom, setIsOpenAtom]);
 
-  useEffect(() => {
-    if (current !== lastSeen) {
-      onOpen();
-      localStorage.setItem(LS_KEY, current);
-    }
-  }, [current, lastSeen, onOpen]);
+  //
+  // useEffect(() => {
+  //   if (current !== lastSeen) {
+  //     onOpen();
+  //     localStorage.setItem(LS_KEY, current);
+  //   }
+  // }, [current, lastSeen, onOpen]);
 
   const handleClose = () => {
     onClose();
-    localStorage.setItem(LS_KEY, current);
+    //
+    // localStorage.setItem(LS_KEY, current);
   };
 
   const onOpenChange = (isOpen: boolean) => {
@@ -149,6 +153,8 @@ export const NewFeatureModal = () => {
                       </li>
                     </ul>
                   </div>
+
+                  <ArcadeEmbed />
                 </div>
               </div>
             </ModalBody>
@@ -196,3 +202,30 @@ const ContentText = ({
   children: React.ReactNode;
   className?: ClassValue;
 }) => <Text className={cn('text-sm sm:text-lg', className)}>{children}</Text>;
+export const ArcadeEmbed = () => (
+  <div
+    style={{
+      position: 'relative',
+      paddingBottom: 'calc(45.729166666666664% + 41px)',
+      height: 0,
+      width: '100%',
+    }}
+  >
+    <iframe
+      allowFullScreen
+      src="https://demo.arcade.software/Tk2J2EIYUrXTwfnzldFX?embed&embed_mobile=inline&embed_desktop=inline&show_copy_link=true"
+      title="JobStash"
+      frameBorder="0"
+      loading="lazy"
+      allow="clipboard-write"
+      style={{
+        position: 'absolute',
+        top: 0,
+        left: 0,
+        width: '100%',
+        height: '100%',
+        colorScheme: 'light',
+      }}
+    />
+  </div>
+);

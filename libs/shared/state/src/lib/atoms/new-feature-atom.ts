@@ -1,3 +1,3 @@
 import { atom } from 'jotai';
 
-export const newFeatureIsOpenAtom = atom(false);
+export const newFeatureIsOpenAtom = atom(true);
