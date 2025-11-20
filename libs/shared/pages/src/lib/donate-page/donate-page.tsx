@@ -56,16 +56,20 @@ export const DonatePage = () => {
             </strong>
             <br />
             <br />
-            We have proudly supported the community for free, delivering over 1M
-            pageviews, helping 150k users find unique and otherwise undiscoverable opportunities across 25k job
-            posts at over 1.5k companies.
-            This was built on 20k engineering hours and pure dedication to the
-            space.
+            JobStash answers the question: <strong>&quot;How would the best job board for crypto be built?&quot;</strong>
+            <br />
+            We believe the perfect job board isn&apos;t built for recruiters—it&apos;s built for <strong>talent seekers</strong> who don&apos;t need a rent-seeking middleman.
             <br />
             <br />
-            To continue this mission, we now urgently need your support. If
-            JobStash has brought value to you or your company, please consider
-            contributing to keep this public good alive.
+            From day 0, we&apos;ve provided the richest data on opportunities, fundraising, and tech stacks—completely for free. We distribute jobs for companies that would otherwise receive no coverage, helping over 150k users discover unique roles across 8k+ indexed companies.
+            <br />
+            <br />
+            We did this with grant money for 3 years. But now money is out, and we need to keep the lights on.
+            <br />
+            <br />
+            <strong>Did your company get their jobs published by us for free? Time to donate.</strong><br/>
+            <strong>Did you hire via us? Time to donate.</strong><br/>
+            <strong>Do you want us to keep staying online? Time to donate.</strong>
           </Text>
           <img
             src="/stats/stats-all-time.png"
@@ -207,32 +211,32 @@ const publicUseData = [
 export const platformUpdatesData = [
   {
     title: 'Pricing Structure Updates',
-    link: 'https://x.com/jobstash',
+    link: 'https://x.com/jobstashxyz',
     date: '2025/11/20',
   },
   {
     title: 'Profile Expert Status Section',
-    link: 'https://x.com/jobstash',
+    link: 'https://x.com/jobstashxyz',
     date: '2025/08/28',
   },
   {
     title: 'Ethereum Season of Internships Highlight',
-    link: 'https://x.com/jobstash',
+    link: 'https://x.com/jobstashxyz',
     date: '2025/06/25',
   },
   {
     title: 'Crypto-Native Profile Properties',
-    link: 'https://x.com/jobstash',
+    link: 'https://x.com/jobstashxyz',
     date: '2025/03/21',
   },
   {
     title: 'UI Framework Migration to HeroUI',
-    link: 'https://x.com/jobstash',
+    link: 'https://x.com/jobstashxyz',
     date: '2025/02/25',
   },
   {
     title: 'Veri Dynamic Pricing & Comparison',
-    link: 'https://x.com/jobstash',
+    link: 'https://x.com/jobstashxyz',
     date: '2025/02/19',
   },
 ];

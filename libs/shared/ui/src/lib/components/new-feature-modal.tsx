@@ -25,7 +25,7 @@ import Text from '../base/text';
 
 const LS_KEY = 'new-feature-key';
 
-const TITLE = 'The New JobStash Experience';
+const TITLE = 'We need your support';
 
 export const NewFeatureModal = () => {
   const [isOpenAtom, setIsOpenAtom] = useAtom(newFeatureIsOpenAtom);
@@ -100,68 +100,64 @@ export const NewFeatureModal = () => {
 
                 <div className="flex flex-col gap-4 max-w-fit">
                   <ContentText>
-                    We&#39;ve upgraded JobStash with new features to make your
-                    experience faster and easier.
+                    JobStash answers the question: <strong>&quot;How would the best job board for crypto be built?&quot;</strong>
                   </ContentText>
 
                   <div className="flex flex-col gap-2 pl-2">
-                    <ContentText className="font-bold">
-                      Improved Login Options:
+                    <ContentText>
+                      We believe the perfect job board isn&apos;t built for recruiters—it&apos;s built for <strong>talent seekers</strong> who don&apos;t need a rent-seeking middleman.
                     </ContentText>
-                    <ul className="pl-6 space-y-1 list-disc list-outside">
-                      <li>
-                        <ContentText>
-                          Log in with your wallet, Google account, Farcaster,
-                          and more, thanks to our integration with Privy.
-                        </ContentText>
-                      </li>
-                    </ul>
+                    <ContentText>
+                      From day 0, we&apos;ve provided the richest data on opportunities, fundraising, and tech stacks—completely for free. We distribute jobs for companies that would otherwise receive no coverage, helping over 150k users discover unique roles across 8k+ indexed companies.
+                    </ContentText>
                   </div>
 
                   <div className="flex flex-col gap-2 pl-2">
                     <ContentText className="font-bold">
-                      Job Promotion Made Easy:
+                      But now, we need your help.
                     </ContentText>
-                    <ul className="pl-6 space-y-1 list-disc list-outside">
-                      <li>
-                        <ContentText>
-                          Promote jobs permissionlessly with LlamaPay, no
-                          account needed.
-                        </ContentText>
-                      </li>
-                      <li>
-                        <ContentText>
-                          <span className="font-bold">October Special:</span>{' '}
-                          75% off basic job promotions—feature your listing on
-                          the homepage!
-                        </ContentText>
-                      </li>
-                    </ul>
+                    <ContentText>
+                      We built this with grant money and survived for 3 years. Now, that funding is exhausted, and we need support to keep the lights on and our data operations running.
+                    </ContentText>
                   </div>
 
                   <div className="flex flex-col gap-2 pl-2">
-                    <ContentText className="font-bold">
-                      Enhanced Profiles:
-                    </ContentText>
                     <ul className="pl-6 space-y-1 list-disc list-outside">
                       <li>
                         <ContentText>
-                          Streamlined profiles and filters, with clear
-                          indications of EXPERT status and organization
-                          affiliations.
+                          Did your company get free distribution? <strong>Time to donate.</strong>
+                        </ContentText>
+                      </li>
+                      <li>
+                        <ContentText>
+                          Did you hire via us? <strong>Time to donate.</strong>
+                        </ContentText>
+                      </li>
+                      <li>
+                        <ContentText>
+                          Do you want us to stay online? <strong>Time to donate.</strong>
                         </ContentText>
                       </li>
                     </ul>
                   </div>
 
-                  <ArcadeEmbed />
+                  <ContentText className="mt-2">
+                    If you find JobStash useful, please consider supporting us from the{' '}
+                    <Link
+                      href={`https://jobstash.xyz/donate`}
+                      className="text-indigo-400 hover:underline"
+                    >
+                      @jobstashxyz
+                    </Link>
+                    {' '}page.
+                  </ContentText>
                 </div>
               </div>
             </ModalBody>
             <ModalFooter className="flex items-center justify-center gap-4 p-0 pt-2">
               <div>
                 <span className="text-md text-white/80">
-                  Found any bugs? Let us know at{' '}
+                  Found any bugs? Let us know on telegram{' '}
                   <Link
                     href={SUPPORT_TELEGRAM_URL}
                     className="text-indigo-400 hover:underline"
@@ -202,30 +198,32 @@ const ContentText = ({
   children: React.ReactNode;
   className?: ClassValue;
 }) => <Text className={cn('text-sm sm:text-lg', className)}>{children}</Text>;
-export const ArcadeEmbed = () => (
-  <div
-    style={{
-      position: 'relative',
-      paddingBottom: 'calc(45.729166666666664% + 41px)',
-      height: 0,
-      width: '100%',
-    }}
-  >
-    <iframe
-      allowFullScreen
-      src="https://demo.arcade.software/Tk2J2EIYUrXTwfnzldFX?embed&embed_mobile=inline&embed_desktop=inline&show_copy_link=true"
-      title="JobStash"
-      frameBorder="0"
-      loading="lazy"
-      allow="clipboard-write"
-      style={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        width: '100%',
-        height: '100%',
-        colorScheme: 'light',
-      }}
-    />
-  </div>
-);
+
+
+// export const ArcadeEmbed = () => (
+//   <div
+//     style={{
+//       position: 'relative',
+//       paddingBottom: 'calc(45.729166666666664% + 41px)',
+//       height: 0,
+//       width: '100%',
+//     }}
+//   >
+//     <iframe
+//       allowFullScreen
+//       src="https://demo.arcade.software/Tk2J2EIYUrXTwfnzldFX?embed&embed_mobile=inline&embed_desktop=inline&show_copy_link=true"
+//       title="JobStash"
+//       frameBorder="0"
+//       loading="lazy"
+//       allow="clipboard-write"
+//       style={{
+//         position: 'absolute',
+//         top: 0,
+//         left: 0,
+//         width: '100%',
+//         height: '100%',
+//         colorScheme: 'light',
+//       }}
+//     />
+//   </div>
+// );
