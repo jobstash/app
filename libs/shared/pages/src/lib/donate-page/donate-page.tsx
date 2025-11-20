@@ -7,6 +7,7 @@ import {
   EthereumIcon,
   Heading,
   PageWrapper,
+  ShieldCheckIcon,
   Text,
 } from '@jobstash/shared/ui';
 import { SideBar } from '@jobstash/sidebar/feature';
@@ -61,71 +62,94 @@ export const DonatePage = () => {
             <br />
             We built this with grant money, but that funding is now exhausted. To keep the lights on and our data operations running, we need your help.
           </Text>
-          <ul className="pl-6 space-y-1 list-disc list-outside text-white/60 leading-relaxed">
-            <li>Did your company get free distribution? <strong>Time to donate.</strong></li>
-            <li>Did you hire via us? <strong>Time to donate.</strong></li>
-            <li>Do you want us to stay online? <strong>Time to donate.</strong></li>
-          </ul>
           
+          <div className="flex flex-col gap-3 pl-2 mt-2">
+            <div className="flex items-center gap-3 text-white/80">
+              <ShieldCheckIcon className="w-5 h-5 text-green-400 shrink-0" />
+              <span className="text-lg">Did your company get free distribution? <strong>Time to donate.</strong></span>
+            </div>
+            <div className="flex items-center gap-3 text-white/80">
+              <ShieldCheckIcon className="w-5 h-5 text-green-400 shrink-0" />
+              <span className="text-lg">Did you hire via us? <strong>Time to donate.</strong></span>
+            </div>
+            <div className="flex items-center gap-3 text-white/80">
+              <ShieldCheckIcon className="w-5 h-5 text-green-400 shrink-0" />
+              <span className="text-lg">Do you want us to stay online? <strong>Time to donate.</strong></span>
+            </div>
+          </div>
         </div>
 
-        <div className="flex flex-col gap-y-4">
+        <div className="flex flex-col gap-y-6">
           <Heading size="lg" fw="semibold">
             Ways to Donate to Us
           </Heading>
-          <Text color="dimmed" className="leading-relaxed">
-            You can donate anytime by sending tokens to one of our following
-            wallets:
-          </Text>
-
-          <div className="flex flex-col sm:flex-row gap-4 mt-2">
-            <div className="flex flex-col gap-3 p-4 bg-white/5 border border-white/10 rounded-2xl flex-1">
-              <div className="flex items-center gap-2">
-                <EthereumIcon className="stroke-2 h-5 w-5" />
-                <Text fw="medium">
-                  Donate to our wallet on any Ethereum compatible wallet.
-                </Text>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Ethereum Wallet Card */}
+            <div className="flex flex-col p-6 bg-white/5 border border-white/10 rounded-2xl gap-6 hover:bg-white/[0.07] transition-colors">
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-white/10 rounded-lg">
+                  <EthereumIcon className="w-6 h-6 stroke-2" />
+                </div>
+                <div>
+                  <Text fw="bold" size="lg">Direct Transfer</Text>
+                  <Text size="sm" color="dimmed">Donate to our wallet on any EVM chain</Text>
+                </div>
               </div>
-              <div className="flex flex-col gap-2">
-                <Text
-                  size="sm"
-                  className="pl-1 font-mono text-white/70 break-all"
-                >
-                  {walletAddress}
-                </Text>
-                <div className="flex gap-2">
+              
+              <div className="flex flex-col gap-3 mt-auto">
+                <div className="p-3 bg-black/30 rounded-lg border border-white/5">
+                  <Text size="sm" className="font-mono text-white/70 break-all text-center">
+                    {walletAddress}
+                  </Text>
+                </div>
+                <div className="grid grid-cols-2 gap-3">
                   <Button
                     variant="outline"
                     left={<CopyIcon className="w-4 h-4" />}
                     onClick={handleCopyWallet}
+                    className="w-full"
                   >
-                    Copy Address
+                    Copy
                   </Button>
                   <Button
                     variant="outline"
                     left={<ArrowCircleUpIcon className="w-4 h-4" />}
                     onClick={() => window.open(etherscanLink, '_blank')}
+                    className="w-full"
                   >
-                    View on Etherscan
+                    Etherscan
                   </Button>
                 </div>
               </div>
             </div>
 
-            <div className="flex flex-col gap-3 p-4 bg-white/5 border border-white/10 rounded-2xl flex-1">
-              <Text fw="medium">Donate to JobStash on our Giveth page</Text>
-              <Text size="sm" className="text-white/70">
-                Support us through the Giveth platform for transparent
-                charitable giving.
-              </Text>
-              <Button
-                variant="primary"
-                right={<ArrowCircleUpIcon className="w-4 h-4" />}
-                className="mt-auto"
-                onClick={() => window.open(givethLink, '_blank')}
-              >
-                Donate to JobStash using Giveth
-              </Button>
+            {/* Giveth Card */}
+            <div className="flex flex-col p-6 bg-gradient-to-br from-indigo-500/10 to-purple-500/10 border border-indigo-500/20 rounded-2xl gap-6 hover:border-indigo-500/40 transition-colors relative overflow-hidden">
+              <div className="absolute top-0 right-0 p-4 opacity-10">
+                <HandIconSvg />
+              </div>
+              
+              <div className="flex items-center gap-3 relative z-10">
+                <div className="p-2 bg-indigo-500/20 rounded-lg">
+                  <HandsReachingSvg />
+                </div>
+                <div>
+                  <Text fw="bold" size="lg">JobStash Giveth Campaign</Text>
+                  <Text size="sm" color="dimmed">Support via transparent charitable giving</Text>
+                </div>
+              </div>
+
+              <div className="mt-auto relative z-10">
+                <Button
+                  variant="primary"
+                  right={<ArrowCircleUpIcon className="w-4 h-4" />}
+                  className="w-full bg-indigo-600 hover:bg-indigo-500 border-0"
+                  onClick={() => window.open(givethLink, '_blank')}
+                >
+                  Donate on Giveth
+                </Button>
+              </div>
             </div>
           </div>
         </div>

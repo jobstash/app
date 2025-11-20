@@ -41,10 +41,10 @@ export const PRICING_SECTIONS: Section[] = [
       {
         name: 'Boosted Vacancy',
         tiers: {
-          Starter: false,
-          Growth: false,
-          Pro: 'Boosted Vacancy',
-          Max: '2x Boosted Vacancy',
+          Starter: `None included. 69$ Each`,
+          Growth: `None included. 69$ Each`,
+          Pro: '2x Boosted Vacancy, then 69$ Each',
+          Max: '5x Boosted Vacancy, then 69$ Each',
         },
       },
       {
