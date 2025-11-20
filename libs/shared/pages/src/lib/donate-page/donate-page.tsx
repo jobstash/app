@@ -150,7 +150,7 @@ export const DonatePage = () => {
             Public use of our data
           </Heading>
           <Text color="dimmed" className="leading-relaxed">
-            The following people and institutions mention us or use our data
+            The following projects use our job data
             regularly, free of charge:
           </Text>
           <DonateDataList data={publicUseData} />
