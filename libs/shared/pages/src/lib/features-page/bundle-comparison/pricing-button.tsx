@@ -2,7 +2,7 @@ import Link from 'next/link';
 
 import { Button } from "@heroui/button";
 
-import { SUPPORT_TELEGRAM_URL } from '@jobstash/shared/core';
+import { VERI_APP_URL } from '@jobstash/shared/core';
 
 interface Props {
   isFree?: boolean;
@@ -14,12 +14,11 @@ export const PricingButton = ({ isFree, ariaDescribedBy }: Props) => (
     fullWidth
     as={Link}
     aria-describedby={ariaDescribedBy}
-    href={SUPPORT_TELEGRAM_URL}
+    href={VERI_APP_URL}
     className="bg-white/5 mt-4 "
     rel="noopener noreferrer"
     target="_blank"
-    isDisabled={isFree}
   >
-    {isFree ? 'FREE' : 'Buy plan'}
+    {isFree ? 'Start for FREE on Veri' : 'Buy plan on Veri'}
   </Button>
 );
