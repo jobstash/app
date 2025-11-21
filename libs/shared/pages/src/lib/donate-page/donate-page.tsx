@@ -100,7 +100,7 @@ export const DonatePage = () => {
                     color="dimmed"
                     className="block leading-tight"
                   >
-                    Donate to our wallet on any EVM chain
+                    Donate to our wallet (jobstash.eth) on any EVM chain
                   </Text>
                 </div>
               </div>
@@ -187,10 +187,10 @@ export const DonatePage = () => {
 
         <div className="flex flex-col gap-y-3">
           <Heading size="lg" fw="semibold">
-            Public use of our data
+            Public use of our data 
           </Heading>
           <Text color="dimmed" className="leading-relaxed">
-            The following projects use our job data
+            The following projects use our job data APIs
             regularly, free of charge:
           </Text>
           <DonateDataList data={publicUseData} />
@@ -229,12 +229,12 @@ export const DonatePage = () => {
 
 const publicUseData = [
   {
-    title: 'Web3SecNews - Jobs',
+    title: 'Web3SecNews - Jobs Section',
     link: 'https://www.web3sec.news/jobs',
     date: '2023/01/01',
   },
   {
-    title: 'CryptoNomads - Jobs',
+    title: 'CryptoNomads - Jobs Section',
     link: 'https://cryptonomads.org/jobs',
     date: '2025/02/01',
   }
