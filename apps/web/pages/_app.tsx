@@ -27,7 +27,7 @@ import {
 
 import {
   DonateModal,
-  NewFeatureModal,
+  // NewFeatureModal,
   ReportModal,
   TopBanner,
 } from '@jobstash/shared/ui';
@@ -158,7 +158,7 @@ const App = ({ Component, pageProps }: AppProps) => {
                       </JotaiProvider>
                     </div>
 
-                    <NewFeatureModal />
+                    {/* <NewFeatureModal /> */}
                   </AuthProvider>
                 </PrivyProvider>
               </MwVersionProvider>
