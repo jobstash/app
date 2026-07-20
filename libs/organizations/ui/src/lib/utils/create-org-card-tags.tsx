@@ -62,9 +62,7 @@ export const createOrgCardTags = (orgListItem: OrgListItem): TagElement[] => {
   if (lastFundingAmount) {
     tags.push({
       id: TAG_ELEMENT_ID.lastFunding,
-      text: `Last Funding: $${numFormatter.format(
-        lastFundingAmount * 1_000_000,
-      )}`,
+      text: `Last Funding: $${numFormatter.format(lastFundingAmount)}`,
       icon: <MoneyIcon />,
     });
   }
