@@ -26,8 +26,6 @@ const ACCORDION_SECTIONS: AccordionSection[] = [
       'Edit Info',
       'Manage Jobs',
       'Applicants',
-      'ATS Settings',
-      'Candidate Report',
       'Talent Pool',
     ],
   },

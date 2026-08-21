@@ -10,7 +10,6 @@ export const ORG_ADMIN_TABS = {
   ORGANIZATION: 'Organization',
   JOBS: 'Job Posts',
   APPLICANTS: 'Applicants',
-  ATS: 'ATS Settings',
   // PROJECTS: 'Related Projects',
 } as const;
 

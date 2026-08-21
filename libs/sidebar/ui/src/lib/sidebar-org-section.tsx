@@ -24,8 +24,6 @@ const SidebarOrgSection = ({ isMobile }: Props) => {
   const hasTalentSubscription = useHasPermission([
     PERMISSIONS.ORG_TALENTPOOL_USER,
   ]);
-  const hasVeriSubscription = useHasPermission([PERMISSIONS.ORG_VERI_USER]);
-
   const tabs: SidebarBartabProps[] = useMemo(() => {
     if (!orgs) return [];
 
@@ -46,15 +44,8 @@ const SidebarOrgSection = ({ isMobile }: Props) => {
       });
     }
 
-    if (hasVeriSubscription) {
-      result.push({
-        text: 'Candidate Report',
-        path: '/profile/organizations/candidate-report',
-      });
-    }
-
     return result;
-  }, [approvedAffiliations, hasTalentSubscription, hasVeriSubscription, orgs]);
+  }, [approvedAffiliations, hasTalentSubscription, orgs]);
 
   if (isLoading) return <SidebarSectionSkeleton />;
 

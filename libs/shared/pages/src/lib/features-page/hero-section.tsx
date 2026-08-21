@@ -33,7 +33,7 @@ export const HeroSection = () => (
 
       <p className="text-xl leading-7 text-white/90">
         Increase the visibility of your job listings and discover top talent at
-        scale. Streamline your hiring with our ATS integrations and candidate
+        scale. Streamline your hiring with candidate
         due diligence reports, built specifically for the crypto industry. No
         AI, no gimmicks—just reliable data.
       </p>

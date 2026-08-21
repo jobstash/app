@@ -73,10 +73,6 @@ const SidebarAdminSection = ({ isMobile }: Props) => {
               text: 'Available Talents',
               path: '/profile/organizations/available-talents',
             },
-            {
-              text: 'Candidate Report',
-              path: '/profile/organizations/candidate-report',
-            },
           ]}
         />
       )}

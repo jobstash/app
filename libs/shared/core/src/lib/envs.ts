@@ -6,8 +6,6 @@ import { COMMUNITIES, COMMUNITY_SET } from './constants';
 export const MW_URL = process.env.NEXT_PUBLIC_MW_URL!;
 export const EDGE_URL = process.env.NEXT_PUBLIC_EDGE_URL!;
 export const JOB_FRAME_URL = process.env.NEXT_PUBLIC_JOB_FRAME_URL!;
-export const SCORER_URL = process.env.NEXT_PUBLIC_SCORER_URL!;
-export const VERI_URL = process.env.NEXT_PUBLIC_VERI_URL!;
 export const ANALYTICS_ID = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID!;
 export const PAGE_SIZE = process.env.NEXT_PUBLIC_PAGE_SIZE!;
 export const INFRURA_ID = process.env.NEXT_PUBLIC_INFURA_ID!;
@@ -24,8 +22,6 @@ export const PRIVY_CLIENT_ID = process.env.NEXT_PUBLIC_PRIVY_CLIENT_ID!;
 export const ORG_SIGNUP_FORM_URL = 'https://form.typeform.com/to/O44vKstu';
 export const TELEGRAM_URL = 'https://telegram.me/jobstash';
 export const SUPPORT_TELEGRAM_URL = 'https://t.me/+24r67MsBXT00ODE8';
-export const PDF_VERI_URL =
-  'https://drive.google.com/file/d/1VVoyR3vy9xrzy8hwzPUzxOAMvRQLZEQb/view';
 export const PDF_JOBSTASH_URL =
   'https://drive.google.com/file/d/1yuVMUrqBe6EgdB76ZVusSt5AWM_QaYxo/view';
 export const ENABLE_BASIC_AUTH = process.env.ENABLE_BASIC_AUTH;
