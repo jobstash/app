@@ -19,12 +19,10 @@ import {
   MobileNavbarWrapper,
   SidebarBookmarksSection,
   SidebarCloseButton,
-  SidebarCollapsibleSection,
   SidebarDiscoverBartabs,
   SidebarUserSection,
   SidebarWrapper,
 } from '@jobstash/sidebar/ui';
-import { PrivyButton } from '@jobstash/auth/feature';
 
 import { HeaderLinks } from './header-links';
 
@@ -138,7 +136,6 @@ const Sidebar = ({ filtersRouteSection }: Props) => {
         </MobileNavbarWrapper>
 
         <div className="flex ml-auto -mr-4 lg:hidden">
-          <PrivyButton />
           <MobileMenuButton>
             <HamburgerIcon />
           </MobileMenuButton>

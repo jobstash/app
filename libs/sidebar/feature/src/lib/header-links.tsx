@@ -1,5 +1,10 @@
+import { Divider } from '@mantine/core';
+
 import { SUPPORT_TELEGRAM_URL, TELEGRAM_URL } from '@jobstash/shared/core';
 
+import { useAuthContext } from '@jobstash/auth/state';
+
+import { Button, Text } from '@jobstash/shared/ui';
 import { HeaderLink } from '@jobstash/sidebar/ui';
 import { PrivyButton } from '@jobstash/auth/feature';
 
@@ -34,7 +39,27 @@ export const HeaderLinks = ({ isMobile = false }: Props) => {
           isExternal={isExternal}
         />
       ))}
+      {isMobile && (
+        <>
+          <Divider className="border-t border-white/30" />
+          <LogoutMobile />
+        </>
+      )}
       {!isMobile && <PrivyButton />}
     </div>
+  );
+};
+
+const LogoutMobile = () => {
+  const { logout } = useAuthContext();
+
+  const onClick = async () => {
+    await logout();
+  };
+
+  return (
+    <Button variant="transparent" className="px-0" onClick={onClick}>
+      <Text className="font-medium">Logout</Text>
+    </Button>
   );
 };

@@ -29,8 +29,10 @@ export const OrgUpdatePayloadSyncer = () => {
         docs,
         telegrams,
         aliases,
-        grants,
-        communities,
+        //
+        // grants,
+        //
+        // communities,
         jobsites,
         detectedJobsites,
       } = dataPayload;
@@ -51,10 +53,12 @@ export const OrgUpdatePayloadSyncer = () => {
           discords,
           docs,
           telegrams,
-          grants: grants
-            .map((grant) => grant.programName)
-            .filter(Boolean) as string[],
-          communities,
+          //
+          // grants: grants
+          //   .map((grant) => grant.programName)
+          //   .filter(Boolean) as string[],
+          //
+          // communities,
           jobsites,
           detectedJobsites,
           projects,

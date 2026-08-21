@@ -13,7 +13,7 @@ const tiers = [
   {
     name: '📌 to top',
     id: 'tier-basic',
-    pricePerJob: '$300',
+    pricePerJob: '$69',
     description:
       'Sticky your post so it stays 📌 to the top of the jobs page and on the homepage for 🗓 7 days. 5x more views! Perfect for getting more attention on your listing without the extras. Maximize exposure and ensure your job reaches the right candidates faster.',
     features: [
@@ -24,16 +24,13 @@ const tiers = [
     featured: true,
   },
   {
-    name: 'Advanced',
+    name: 'Custom Story',
     id: 'tier-advanced',
-    pricePerJob: '$300',
+    pricePerJob: '$200',
     description:
-      'Get everything in Basic and more! Perfect for increasing your chances of finding top talent with enhanced visibility',
+      'Request a custom telegram Story for maximum reach to our audience of 12K subscribers. Perfect for increasing your chances of finding top talent with enhanced visibility',
     features: [
-      'Everything in Basic Plan',
-      'Telegram stories about org, project and job',
-      'Job Post bumping on Telegram',
-      'Crossposting',
+      'Telegram stories about org, project and job'
     ],
     featured: false,
   },
@@ -94,7 +91,7 @@ export const JobFeaturePricing = () => (
               </div> */}
 
               <span className="flex items-center gap-x-2">
-                <GradientText text="$200" className="text-6xl font-bold" />
+                <GradientText text="$69" className="text-6xl font-bold" />
                 <span className="text-2xl text-white/80">/ job</span>
               </span>
 
@@ -137,7 +134,7 @@ export const JobFeaturePricing = () => (
                 href="/jobs"
                 className="font-bold pl-0"
               >
-                Promote directly from the job feed
+                Promote directly from the job feed (hint: look for the 📌 on the job listing)
                 <span aria-hidden="true">
                   <MoveRightIcon className="w-4 h-4" />
                 </span>
@@ -153,7 +150,7 @@ export const JobFeaturePricing = () => (
                     tierIdx === 0,
                 })}
               >
-                Buy Plan
+                Chat with us about your custom story
               </Button>
             </div>
           )}

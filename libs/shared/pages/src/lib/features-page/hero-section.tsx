@@ -33,9 +33,8 @@ export const HeroSection = () => (
 
       <p className="text-xl leading-7 text-white/90">
         Increase the visibility of your job listings and discover top talent at
-        scale. Streamline your hiring with candidate
-        due diligence reports, built specifically for the crypto industry. No
-        AI, no gimmicks—just reliable data.
+        scale. Explore opted-in talent signals and manage public jobs in one
+        workspace without sending candidate data to third-party hiring systems.
       </p>
 
       <div className="flex items-center gap-x-6">

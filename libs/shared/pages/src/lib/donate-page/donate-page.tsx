@@ -7,6 +7,7 @@ import {
   EthereumIcon,
   Heading,
   PageWrapper,
+  ShieldCheckIcon,
   Text,
 } from '@jobstash/shared/ui';
 import { SideBar } from '@jobstash/sidebar/feature';
@@ -49,71 +50,122 @@ export const DonatePage = () => {
             <Heading className="md:text-3xl lg:text-4xl">Donate</Heading>
           </div>
           <Text color="dimmed" className="leading-relaxed">
-            Jobstash started with a mission to democratize access to Web3
-            opportunities. We decided to build the platform as a public good,
-            because we want everyone to have free access to quality job
-            opportunities in the Web3 ecosystem, connecting talent with
-            innovative projects.
+            <strong className="text-red-500">
+              JobStash is facing a critical moment. After 3 years of serving the
+              ecosystem as a public good, our grant funding has been exhausted,
+              and we are at risk of shutting down.
+            </strong>
+            <br />
+            <br />
+            For 3 years, we&apos;ve provided the richest crypto job data completely for free, helping over <strong>150k users</strong> discover unique roles noone else is incentivized to cover.
+            <br />
+            <br />
+            We built this with grant money, but that funding is now exhausted. To keep the lights on and our data operations running, we need your help.
           </Text>
+
+          <div className="flex flex-col gap-3 pl-2 mt-2">
+            <div className="flex items-center gap-3 text-white/80">
+              <ShieldCheckIcon className="w-5 h-5 text-green-400 shrink-0" />
+              <span className="text-lg">Did your company get free distribution? <strong>Time to donate.</strong></span>
+            </div>
+            <div className="flex items-center gap-3 text-white/80">
+              <ShieldCheckIcon className="w-5 h-5 text-green-400 shrink-0" />
+              <span className="text-lg">Did you hire via us? <strong>Time to donate.</strong></span>
+            </div>
+            <div className="flex items-center gap-3 text-white/80">
+              <ShieldCheckIcon className="w-5 h-5 text-green-400 shrink-0" />
+              <span className="text-lg">Do you want us to stay online? <strong>Time to donate.</strong></span>
+            </div>
+          </div>
         </div>
 
-        <div className="flex flex-col gap-y-4">
+        <div className="flex flex-col gap-y-6">
           <Heading size="lg" fw="semibold">
             Ways to Donate to Us
           </Heading>
-          <Text color="dimmed" className="leading-relaxed">
-            You can donate anytime by sending tokens to one of our following
-            wallets:
-          </Text>
 
-          <div className="flex flex-col sm:flex-row gap-4 mt-2">
-            <div className="flex flex-col gap-3 p-4 bg-white/5 border border-white/10 rounded-2xl flex-1">
-              <div className="flex items-center gap-2">
-                <EthereumIcon className="stroke-2 h-5 w-5" />
-                <Text fw="medium">
-                  Donate to our wallet on any Ethereum compatible wallet.
-                </Text>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {/* Ethereum Wallet Card */}
+            <div className="flex flex-col p-6 bg-white/5 border border-white/10 rounded-2xl gap-6 hover:bg-white/[0.07] transition-colors">
+              <div className="flex items-center gap-3">
+                <div className="p-2 bg-white/10 rounded-lg">
+                  <EthereumIcon className="w-6 h-6 stroke-2" />
+                </div>
+                <div className="flex flex-col gap-1 text-left">
+                  <Text fw="bold" size="lg" className="block leading-tight">
+                    Direct Transfer
+                  </Text>
+                  <Text
+                    size="sm"
+                    color="dimmed"
+                    className="block leading-tight"
+                  >
+                    Donate to our wallet (jobstash.eth) on any EVM chain
+                  </Text>
+                </div>
               </div>
-              <div className="flex flex-col gap-2">
-                <Text
-                  size="sm"
-                  className="pl-1 font-mono text-white/70 break-all"
-                >
-                  {walletAddress}
-                </Text>
-                <div className="flex gap-2">
+
+              <div className="flex flex-col gap-3 mt-auto">
+                <div className="p-3 bg-black/30 rounded-lg border border-white/5">
+                  <Text size="sm" className="font-mono text-white/70 break-all text-center">
+                    {walletAddress}
+                  </Text>
+                </div>
+                <div className="grid grid-cols-2 gap-3">
                   <Button
                     variant="outline"
                     left={<CopyIcon className="w-4 h-4" />}
                     onClick={handleCopyWallet}
+                    className="w-full"
                   >
-                    Copy Address
+                    Copy
                   </Button>
                   <Button
                     variant="outline"
                     left={<ArrowCircleUpIcon className="w-4 h-4" />}
                     onClick={() => window.open(etherscanLink, '_blank')}
+                    className="w-full"
                   >
-                    View on Etherscan
+                    Etherscan
                   </Button>
                 </div>
               </div>
             </div>
 
-            <div className="flex flex-col gap-3 p-4 bg-white/5 border border-white/10 rounded-2xl flex-1">
-              <Text fw="medium">Donate on our Giveth page</Text>
-              <Text size="sm" className="text-white/70">
-                Support us through the Giveth platform for transparent
-                charitable giving.
-              </Text>
-              <Button
-                variant="primary"
-                right={<ArrowCircleUpIcon className="w-4 h-4" />}
-                className="mt-auto"
-                onClick={() => window.open(givethLink, '_blank')}
-              >
-                Contribute to Giveth
-              </Button>
+            {/* Giveth Card */}
+            <div className="flex flex-col p-6 bg-gradient-to-br from-indigo-500/10 to-purple-500/10 border border-indigo-500/20 rounded-2xl gap-6 hover:border-indigo-500/40 transition-colors relative overflow-hidden">
+              <div className="absolute top-0 right-0 p-4 opacity-10">
+                <HandIconSvg />
+              </div>
+
+              <div className="flex items-center gap-3 relative z-10">
+                <div className="p-2 bg-indigo-500/20 rounded-lg">
+                  <HandsReachingSvg />
+                </div>
+                <div className="flex flex-col gap-1 text-left">
+                  <Text fw="bold" size="lg" className="block leading-tight">
+                    JobStash Giveth Campaign
+                  </Text>
+                  <Text
+                    size="sm"
+                    color="dimmed"
+                    className="block leading-tight"
+                  >
+                    Support via transparent charitable giving
+                  </Text>
+                </div>
+              </div>
+
+              <div className="mt-auto relative z-10">
+                <Button
+                  variant="primary"
+                  right={<ArrowCircleUpIcon className="w-4 h-4" />}
+                  className="w-full bg-indigo-600 hover:bg-indigo-500 border-0"
+                  onClick={() => window.open(givethLink, '_blank')}
+                >
+                  Donate on Giveth
+                </Button>
+              </div>
             </div>
           </div>
         </div>
@@ -123,21 +175,22 @@ export const DonatePage = () => {
             <HandIconSvg />
             <Heading className="md:text-3xl lg:text-4xl">Impact</Heading>
           </div>
+          <img
+            src="/stats/stats-all-time.png"
+            alt="JobStash Stats: 1M Views"
+            className="rounded-xl border border-white/10 w-full max-w-2xl"
+          />
           <Text color="dimmed" className="leading-relaxed">
-            Jobstash data and insights are used by developers, organizations,
-            and job seekers across the Web3 ecosystem. Our main focus is to
-            cater towards talented individuals seeking opportunities and
-            organizations looking to build exceptional teams in Web3. Therefore
-            we support everyone who helps us achieve this mission.
+            Over the past 3 years, we have provided 92k+ job applications to over 1.5K companies by 143k+ users, in 1M+ views.
           </Text>
         </div>
 
         <div className="flex flex-col gap-y-3">
           <Heading size="lg" fw="semibold">
-            Public use of our data and visualizations
+            Public use of our data
           </Heading>
           <Text color="dimmed" className="leading-relaxed">
-            The following people and institutions mention us or use our data
+            The following projects use our job data APIs
             regularly, free of charge:
           </Text>
           <DonateDataList data={publicUseData} />
@@ -165,7 +218,7 @@ export const DonatePage = () => {
           </Text>
           <div className="flex gap-12 items-center pl-4 py-4">
             <ArbitrumSvg />
-            <EthFoundationSvg />
+            {/* <EthFoundationSvg /> */}
             <OptimismSvg />
           </div>
         </div>
@@ -176,92 +229,46 @@ export const DonatePage = () => {
 
 const publicUseData = [
   {
-    title: 'Vitalik Buterin - Scaling Ethereum L1 and L2s in 2025 and beyond',
-    link: 'vitalik.eth.limo/general/2025/01/23/l1l2future.html',
-    date: '2025/01/23',
+    title: 'Web3SecNews - Jobs Section',
+    link: 'https://www.web3sec.news/jobs',
+    date: '2023/01/01',
   },
   {
-    title: 'Vitalik Buterin - Layer 2 Fees',
-    link: 'x.com/VitalikButerin/status/1835470870221124065',
-    date: '2024/09/16',
-  },
-  {
-    title: 'Bankless - Ethereum L2 Token Thesis',
-    link: 'youtube.com/watch?v=cd4yUnX3fnw',
-    date: '2024/01/17',
-  },
-  {
-    title: 'The Daily Gwei - Contract Labeling',
-    link: 'youtube.com/watch?v=yRjsyh27E1k?si=HJX-3qV8Yq0ZlMXE&t=1689',
-    date: '2024/08/02',
-  },
-  {
-    title: 'Bankless Episode',
-    link: 'youtube.com/watch?v=Fs3gLOcqxco?si=kYvQRCW3k8pNlPvm&t=745',
-    date: '2024/10/04',
-  },
-  {
-    title: 'Blockworks - ZKsync Elastic Chain Rebrand',
-    link: 'blockworks.co/news/zk-sync-elastic-chain-rebrand-seeks-to-carve-out-scaling-niche',
-    date: '2024/07/04',
-  },
-  {
-    title: 'Coinbase Institutional - ETH and the Rise of L2s',
-    link: 'coinbase.com/en-de/institutional/research-insights/research/market-intelligence/e...',
-    date: '2023/08/13',
-  },
-  {
-    title:
-      'Cointelegraph - Ethereum L2 ecosystem processes a record 12.4M transac...',
-    link: 'cointelegraph.com/news/ethereum-l2-ecosystem-processes-a-record-12-4-m-trans...',
-    date: '2024/08/14',
-  },
+    title: 'CryptoNomads - Jobs Section',
+    link: 'https://cryptonomads.org/jobs',
+    date: '2025/02/01',
+  }
 ];
 
 export const platformUpdatesData = [
   {
-    title: 'Enhanced job matching algorithm for Web3 roles',
-    link: 'x.com/jobstash/status/1879903540090687608',
-    date: '2025/01/16',
+    title: 'Pricing Structure Updates',
+    link: 'https://x.com/jobstashxyz',
+    date: '2025/11/20',
   },
   {
-    title: 'Integration with major L2 ecosystem job boards',
-    link: 'x.com/jobstash/status/1879162621435446463',
-    date: '2025/01/14',
+    title: 'Profile Expert Status Section',
+    link: 'https://x.com/jobstashxyz',
+    date: '2025/08/28',
   },
   {
-    title: 'Launch of developer profile verification system',
-    link: 'x.com/jobstash/status/1869728221018952190',
-    date: '2024/12/19',
+    title: 'Ethereum Season of Internships Highlight',
+    link: 'https://x.com/jobstashxyz',
+    date: '2025/06/25',
   },
   {
-    title: 'New salary transparency features',
-    link: 'x.com/jobstash/status/1851991565272563766',
-    date: '2024/10/31',
+    title: 'Crypto-Native Profile Properties',
+    link: 'https://x.com/jobstashxyz',
+    date: '2025/03/21',
   },
   {
-    title: 'Job seeker dashboard improvements',
-    link: 'x.com/jobstash/status/1849088312775854669',
-    date: '2024/10/22',
+    title: 'UI Framework Migration to HeroUI',
+    link: 'https://x.com/jobstashxyz',
+    date: '2025/02/25',
   },
   {
-    title: 'Partnership with leading Web3 organizations',
-    link: 'x.com/jobstash/status/1848368866776244368',
-    date: '2024/10/21',
-  },
-  {
-    title: 'Launch of remote work filter features',
-    link: 'x.com/jobstash/status/1845801743491190899',
-    date: '2024/10/14',
-  },
-  {
-    title: 'Introduction of skill-based job recommendations',
-    link: 'x.com/jobstash/status/1841456858256527665',
-    date: '2024/10/02',
-  },
-  {
-    title: 'Improved application tracking system',
-    link: 'x.com/jobstash/status/1831327443440380603',
-    date: '2024/09/04',
+    title: 'Veri Dynamic Pricing & Comparison',
+    link: 'https://x.com/jobstashxyz',
+    date: '2025/02/19',
   },
 ];

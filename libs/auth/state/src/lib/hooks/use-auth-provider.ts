@@ -2,12 +2,13 @@ import { useRouter } from 'next/router';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
 import { useLogin, useLogout, usePrivy } from '@privy-io/react-auth';
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQueryClient } from '@tanstack/react-query';
 
 import { CheckWalletResponse } from '@jobstash/auth/core';
 import { LOCAL_STORAGE_KEYS } from '@jobstash/shared/core';
 import { sentryMessage } from '@jobstash/shared/utils';
 
+import { useMwVersionContext } from '@jobstash/shared/state';
 import { getCheckWallet } from '@jobstash/auth/data';
 
 import { useHasEmbeddedWallet } from './use-has-embedded-wallet';
@@ -49,6 +50,8 @@ export const useAuthProvider = () => {
 
   const hasEmbeddedWallet = useHasEmbeddedWallet();
 
+  const { mwVersion } = useMwVersionContext();
+  const queryClient = useQueryClient();
   const [isLoadingLogout, setIsLoadingLogout] = useState(false);
   const { logout: privyLogout } = useLogout({
     async onSuccess() {
@@ -61,6 +64,13 @@ export const useAuthProvider = () => {
       if (retryTimeoutRef.current) {
         clearTimeout(retryTimeoutRef.current);
       }
+
+      await queryClient.invalidateQueries({
+        queryKey: [mwVersion, 'profile-info'],
+      });
+      await queryClient.invalidateQueries({
+        queryKey: [mwVersion, 'affiliated-orgs'],
+      });
 
       window.location.href = '/jobs';
     },

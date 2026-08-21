@@ -1,11 +1,12 @@
 import { memo } from 'react';
 
-const ShieldCheckIcon = () => (
+const ShieldCheckIcon = (props: React.SVGProps<SVGSVGElement>) => (
   <svg
     width="13"
     height="13"
     viewBox="0 0 13 13"
     fill="none"
+    {...props}
     xmlns="http://www.w3.org/2000/svg"
   >
     <path
