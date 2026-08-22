@@ -22,6 +22,13 @@ const nextConfig = {
     outputFileTracingRoot: path.join(__dirname, '../../'),
   },
 
+  async rewrites() {
+    return [
+      { source: '/health/live', destination: '/api/health/live' },
+      { source: '/health/ready', destination: '/api/health/ready' },
+    ];
+  },
+
   images: {
     remotePatterns: [
       {

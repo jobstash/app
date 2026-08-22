@@ -39,7 +39,7 @@ const RightPanelOrgCardFundingRounds = ({ fundingRounds }: Props) => {
               >{`Funding Date: ${createOrgFundingDateString(date)}`}</CardSet>
               {raisedAmount && (
                 <CardSet icon={<MoneyIcon />}>
-                  {`Last Amount: $${numFormatter.format(raisedAmount)}M`}
+                  {`Last Amount: $${numFormatter.format(raisedAmount)}`}
                 </CardSet>
               )}
             </div>

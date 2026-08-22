@@ -62,7 +62,7 @@ export const DonatePage = () => {
             <br />
             We built this with grant money, but that funding is now exhausted. To keep the lights on and our data operations running, we need your help.
           </Text>
-          
+
           <div className="flex flex-col gap-3 pl-2 mt-2">
             <div className="flex items-center gap-3 text-white/80">
               <ShieldCheckIcon className="w-5 h-5 text-green-400 shrink-0" />
@@ -83,7 +83,7 @@ export const DonatePage = () => {
           <Heading size="lg" fw="semibold">
             Ways to Donate to Us
           </Heading>
-          
+
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             {/* Ethereum Wallet Card */}
             <div className="flex flex-col p-6 bg-white/5 border border-white/10 rounded-2xl gap-6 hover:bg-white/[0.07] transition-colors">
@@ -104,7 +104,7 @@ export const DonatePage = () => {
                   </Text>
                 </div>
               </div>
-              
+
               <div className="flex flex-col gap-3 mt-auto">
                 <div className="p-3 bg-black/30 rounded-lg border border-white/5">
                   <Text size="sm" className="font-mono text-white/70 break-all text-center">
@@ -137,7 +137,7 @@ export const DonatePage = () => {
               <div className="absolute top-0 right-0 p-4 opacity-10">
                 <HandIconSvg />
               </div>
-              
+
               <div className="flex items-center gap-3 relative z-10">
                 <div className="p-2 bg-indigo-500/20 rounded-lg">
                   <HandsReachingSvg />
@@ -187,7 +187,7 @@ export const DonatePage = () => {
 
         <div className="flex flex-col gap-y-3">
           <Heading size="lg" fw="semibold">
-            Public use of our data 
+            Public use of our data
           </Heading>
           <Text color="dimmed" className="leading-relaxed">
             The following projects use our job data APIs

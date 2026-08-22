@@ -44,9 +44,9 @@ const features = [
     icon: RssIcon,
   },
   {
-    name: 'ATS Integration',
+    name: 'Hosted Career Pages',
     description:
-      'If your career page is hosted on an ATS, simply provide us with the job listing link. We are compatible with all major ATS platforms for seamless integration.',
+      'If a hiring platform hosts your public career page, provide the listing link. JobStash indexes supported public pages without access to your private hiring system.',
     icon: LinkIcon,
   },
 ];

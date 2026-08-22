@@ -64,10 +64,8 @@ const LandingSection = () => (
             <span className="text-md">
               Reach up to 5x more candidates with our crypto-focused services.
               We help small teams manage crypto talent without the need for a
-              full-time recruiter. Our ATS connects you with verified,
-              crypto-native candidates, and our candidate report service quickly
-              checks technical resumes for accuracy, all at a cost-effective
-              rate.
+              full-time recruiter. Publish roles, review applicants, and find
+              opted-in crypto-native talent from one workspace.
             </span>
           </div>
         </div>

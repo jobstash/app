@@ -1,5 +1,4 @@
 import myzod, { Infer } from 'myzod';
-import { isAddress } from 'viem';
 
 import {
   fundingRoundSchema,
@@ -15,7 +14,6 @@ import {
 } from '@jobstash/shared/core';
 
 import {
-  ATS_PROVIDERS,
   ORG_REVIEW_LOCATIONS,
   ORG_REVIEW_TIMEZONES,
   ORG_REVIEW_WORKING_HOURS,
@@ -123,95 +121,6 @@ export const orgListQueryPageSchema = myzod.object({
   data: myzod.array(orgListItemSchema),
 });
 
-export const candidateReportPayloadSchema = myzod.object({
-  github: myzod.string(),
-  wallet: myzod.string(),
-});
-export type CandidateReportPayload = Infer<typeof candidateReportPayloadSchema>;
-
-const candidateReportUserSchema = myzod.object({
-  wallet: myzod.string().nullable(),
-  github: myzod.string(),
-  cryptoNative: myzod.boolean(),
-  averageTenure: myzod.number().nullable(),
-  stars: myzod.number().nullable(),
-  tags: myzod.array(myzod.string()),
-  avatar: myzod.string().nullable(),
-});
-export type CandidateReportUser = Infer<typeof candidateReportUserSchema>;
-
-const candidateNftSchema = myzod.object({
-  name: myzod.string(),
-  previewUrl: myzod.string().nullable(),
-  timestamp: myzod.number().nullable(),
-});
-export type CandidateNft = Infer<typeof candidateNftSchema>;
-
-const candidateReportRepositorySchema = myzod.object({
-  name: myzod.string(), // Maybe unslugified repo-name e.g. github.com/jobstash/job-frame -> "Job Frame"
-  url: myzod.string(), // > e.g. https://github.com/some-user/repo-name or gitlab etc
-  tenure: myzod.number(),
-  stars: myzod.number(),
-  commitCount: myzod.number(),
-  timeFirstCommit: myzod.number(),
-  timeLastCommit: myzod.number(),
-  skills: myzod.array(myzod.string()),
-});
-export type CandidateReportRepository = Infer<
-  typeof candidateReportRepositorySchema
->;
-
-const candidateReportAdjacentRepoSchema = myzod.object({
-  name: myzod.string(),
-  stars: myzod.number(),
-});
-export type CandidateReportAdjacentRepo = Infer<
-  typeof candidateReportAdjacentRepoSchema
->;
-
-const candidateReportOrganizationSchema = myzod.object({
-  name: myzod.string().nullable(),
-  avatar: myzod.string(),
-  tenure: myzod.number(),
-  commits: myzod.number(),
-  url: myzod.string().nullable(),
-  github: myzod.string(),
-  repositories: myzod.array(candidateReportRepositorySchema),
-  cryptoNative: myzod.boolean(),
-});
-export type CandidateReportOrganization = Infer<
-  typeof candidateReportOrganizationSchema
->;
-
-export const candidateTopOrgItemSchema = myzod.object({
-  name: myzod.string().nullable(),
-  github: myzod.string(),
-  avatar: myzod.string(),
-  tenure: myzod.number(),
-  commits: myzod.number(),
-  cryptoNative: myzod.boolean(),
-});
-export type CandidateTopOrgItem = Infer<typeof candidateTopOrgItemSchema>;
-
-const candidateReportSchema = myzod.object({
-  user: candidateReportUserSchema,
-  topOrganizations: myzod.array(candidateTopOrgItemSchema),
-  nfts: myzod.array(candidateNftSchema),
-  orgs: myzod.array(candidateReportOrganizationSchema),
-  adjacentRepos: myzod.array(candidateReportAdjacentRepoSchema),
-});
-export type CandidateReport = Infer<typeof candidateReportSchema>;
-
-export const candidateReportResponseSchema = myzod.intersection(
-  messageResponseSchema,
-  myzod.object({
-    data: candidateReportSchema,
-  }),
-);
-export type CandidateReportResponse = Infer<
-  typeof candidateReportResponseSchema
->;
-
 export const updateOrgJobPayloadSchema = myzod.object({
   title: myzod.string().nullable(),
   url: myzod.string(),
@@ -266,103 +175,3 @@ export const orgJobListQueryPageSchema = myzod.object({
   data: myzod.array(orgJobItemSchema),
 });
 export type OrgJobListQueryPage = Infer<typeof orgJobListQueryPageSchema>;
-
-export const atsTrackedNFTSchema = myzod.object({
-  id: myzod.string().nullable(),
-  name: myzod.string(),
-  contractAddress: myzod
-    .string()
-    .withPredicate(
-      (address) => isAddress(address),
-      'Address is not a valid ethereum address',
-    ),
-  network: myzod
-    .literals(
-      'arbitrum',
-      'avalanche',
-      'base',
-      'blast',
-      'celo',
-      'ethereum',
-      'linea',
-      'optimism',
-      'palm',
-      'polygon',
-    )
-    .nullable(),
-});
-export type ATSTrackedNFT = Infer<typeof atsTrackedNFTSchema>;
-
-export const atsPreferenceSchema = myzod.object({
-  id: myzod.string().nullable(),
-  platformName: myzod.literals(
-    ATS_PROVIDERS.JOBSTASH.platformName,
-    ATS_PROVIDERS.LEVER.platformName,
-    ATS_PROVIDERS.GREENHOUSE.platformName,
-    ATS_PROVIDERS.WORKABLE.platformName,
-  ),
-  highlightOrgs: myzod.array(myzod.string()),
-  ecosystemActivations: myzod.array(atsTrackedNFTSchema),
-});
-export type ATSPreference = Infer<typeof atsPreferenceSchema>;
-
-export const atsClientSchema = myzod.object({
-  id: myzod.string().nullable(),
-  name: myzod.string().nullable(),
-  orgId: myzod.string().nullable(),
-  hasTags: myzod.boolean(),
-  hasWebhooks: myzod.boolean(),
-  preferences: atsPreferenceSchema.nullable(),
-  applicationCreatedSignatureToken: myzod.string().nullable().optional(),
-  candidateHiredSignatureToken: myzod.string().nullable().optional(),
-});
-export type ATSClient = Infer<typeof atsClientSchema>;
-
-export const linkATSPlatformPayloadSchema = myzod.object({
-  clientId: myzod.string(),
-  orgId: myzod.string(),
-});
-export type LinkATSPlatformPayload = Infer<typeof linkATSPlatformPayloadSchema>;
-
-export const registerATSResponseSchema = myzod.object({
-  success: myzod.boolean(),
-  message: myzod.string(),
-  data: atsClientSchema,
-});
-export type RegisterATSResponse = Infer<typeof registerATSResponseSchema>;
-
-export const registerATSClientPayloadSchema = myzod.object({
-  apiToken: myzod.string().optional(),
-  userId: myzod.string().optional(),
-  workableUrl: myzod.string().optional(),
-});
-export type RegisterATSClientPayload = Infer<
-  typeof registerATSClientPayloadSchema
->;
-
-export const updateATSPreferencePayloadSchema = myzod.object({
-  clientId: myzod.string(),
-  preferences: atsPreferenceSchema,
-});
-export type UpdateATSPreferencePayload = Infer<
-  typeof updateATSPreferencePayloadSchema
->;
-
-export const retryWebhooksResponseSchema = myzod.intersection(
-  messageResponseSchema,
-  myzod.object({
-    data: myzod
-      .object({
-        applicationCreatedSignatureToken: myzod.string(),
-        candidateHiredSignatureToken: myzod.string(),
-      })
-      .optional(),
-  }),
-);
-export type RetryWebhooksResponse = Infer<typeof retryWebhooksResponseSchema>;
-
-export const retryWebhooksPayloadSchema = myzod.object({
-  clientId: myzod.string(),
-  apiToken: myzod.string().nullable(),
-});
-export type RetryWebhooksPayload = Infer<typeof retryWebhooksPayloadSchema>;
